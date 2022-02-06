@@ -16,7 +16,7 @@
 
 package com.perl5.lang.mojolicious.idea.editor.smartkeys;
 
-import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegate;
+import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegateAdapter;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
@@ -28,22 +28,25 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.MOJO_LINE_OPENER;
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.MOJO_OUTER_ELEMENT_TYPE;
+import static com.perl5.lang.mojolicious.MojoliciousSyntaxElements.KEYWORD_MOJO_BLOCK_CLOSER;
+import static com.perl5.lang.mojolicious.MojoliciousSyntaxElements.KEYWORD_MOJO_LINE_OPENER;
 
-public class MojoliciousEnterHandlerDelegate implements EnterHandlerDelegate, MojoliciousElementTypes {
+
+public class MojoliciousEnterHandlerDelegate extends EnterHandlerDelegateAdapter {
   @Override
-  public Result preprocessEnter(
-    @NotNull PsiFile file,
-    @NotNull Editor editor,
-    @NotNull Ref<Integer> caretOffset,
-    @NotNull Ref<Integer> caretAdvance,
-    @NotNull DataContext dataContext,
-    @Nullable EditorActionHandler originalHandler) {
+  public Result preprocessEnter(@NotNull PsiFile file,
+                                @NotNull Editor editor,
+                                @NotNull Ref<Integer> caretOffset,
+                                @NotNull Ref<Integer> caretAdvance,
+                                @NotNull DataContext dataContext,
+                                @Nullable EditorActionHandler originalHandler) {
     FileViewProvider viewProvider = file.getViewProvider();
     if (viewProvider instanceof MojoliciousFileViewProvider) {
       if (!(MojoliciousSmartKeysUtil.addCloseMarker(editor, file, "\n" + KEYWORD_MOJO_BLOCK_CLOSER) ||
@@ -54,9 +57,8 @@ public class MojoliciousEnterHandlerDelegate implements EnterHandlerDelegate, Mo
     return Result.Continue;
   }
 
-  protected void addOutlineMarkerIfNeeded(
-    @NotNull MojoliciousFileViewProvider viewProvider,
-    int offset
+  protected void addOutlineMarkerIfNeeded(@NotNull MojoliciousFileViewProvider viewProvider,
+                                          int offset
   ) {
     PsiElement element = viewProvider.findElementAt(offset, MojoliciousLanguage.INSTANCE);
     while (element instanceof PsiWhiteSpace) {
@@ -87,10 +89,5 @@ public class MojoliciousEnterHandlerDelegate implements EnterHandlerDelegate, Mo
     if (tokenType == MOJO_LINE_OPENER && element.getNode().getStartOffset() < offset) {
       document.insertString(offset, KEYWORD_MOJO_LINE_OPENER + " ");
     }
-  }
-
-  @Override
-  public Result postProcessEnter(@NotNull PsiFile file, @NotNull Editor editor, @NotNull DataContext dataContext) {
-    return Result.Continue;
   }
 }
