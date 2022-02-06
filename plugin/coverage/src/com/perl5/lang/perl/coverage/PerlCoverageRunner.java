@@ -88,6 +88,18 @@ public class PerlCoverageRunner extends CoverageRunner {
       return null;
     }
 
+    PerlHostData<?, ?> hostData = PerlHostData.from(effectiveSdk);
+    if (hostData == null) {
+      LOG.warn("No host data for " + effectiveSdk);
+      return null;
+    }
+    try {
+      hostData.fixPermissionsRecursively(sessionDataFile.getAbsolutePath(), project);
+    }
+    catch (ExecutionException e) {
+      LOG.warn("Error fixing permissions for " + sessionDataFile);
+    }
+
     PerlCommandLine perlCommandLine = ReadAction.compute(() -> {
       if (project.isDisposed()) {
         LOG.debug("Project disposed");
@@ -100,7 +112,6 @@ public class PerlCoverageRunner extends CoverageRunner {
         return null;
       }
 
-      PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(effectiveSdk);
       PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
         project, effectiveSdk, coverFile,
         Collections.singletonList(PerlRunUtil.PERL_I + hostData.getRemotePath(PerlPluginUtil.getHelpersLibPath())),
