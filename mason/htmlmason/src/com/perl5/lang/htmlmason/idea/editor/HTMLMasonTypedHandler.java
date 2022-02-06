@@ -17,6 +17,7 @@
 package com.perl5.lang.htmlmason.idea.editor;
 
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.project.Project;
@@ -37,56 +38,66 @@ import java.util.Map;
 
 public class HTMLMasonTypedHandler extends TypedHandlerDelegate
   implements HTMLMasonElementTypes, XmlTokenType, PerlElementTypes, HTMLMasonElementPatterns {
+  private static final Logger LOG = Logger.getInstance(HTMLMasonTypedHandler.class);
   @Override
   public @NotNull Result charTyped(char c, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
-    if (file.getViewProvider() instanceof HTMLMasonFileViewProvider) {
-      if (c == '>') {
-        PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-        if (HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element) || HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN.accepts(element)) {
-          assert element != null;
-          String elementText = element.getText();
-          String closeTag;
-          if (elementText.equals(KEYWORD_FLAGS)) {
-            EditorModificationUtil.insertStringAtCaret(editor, "\ninherit => ''\n" + KEYWORD_FLAGS_CLOSER, false, true, 13);
-          }
-          else {
-            if ((closeTag = getCloseTag(project, "<%" + elementText + ">")) != null) {
-              EditorModificationUtil.insertStringAtCaret(editor, closeTag, false, false);
-            }
-          }
-        }
-      }
-      else if (c == ' ') {
-        PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-        if (element != null) {
-          IElementType elementType = element.getNode().getElementType();
-          if (elementType == HTML_MASON_BLOCK_OPENER && !isNextElement(element, HTML_MASON_BLOCK_CLOSER)) {
-            EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_BLOCK_CLOSER, false, false);
-          }
-          else if (elementType == HTML_MASON_CALL_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER)) {
-            EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER, false, false);
-          }
-          else if (elementType == HTML_MASON_CALL_FILTERING_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER)) {
-            EditorModificationUtil
-              .insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER + KEYWORD_CALL_CLOSE_TAG_START + KEYWORD_TAG_CLOSER, false, false);
-          }
-          else if (elementType == HTML_MASON_METHOD_OPENER) {
-            String closeTag = getCloseTag(project, element.getText());
-            if (closeTag != null) {
-              EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
-            }
-          }
-          else if (elementType == HTML_MASON_DEF_OPENER) {
-            String closeTag = getCloseTag(project, element.getText());
-            if (closeTag != null) {
-              EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
-            }
-          }
-        }
-      }
+    if (!(file.getViewProvider() instanceof HTMLMasonFileViewProvider)) {
+      return super.charTyped(c, project, editor, file);
+    }
+    if (c == '>') {
+      handleRightAngle(project, editor, file);
+    }
+    else if (c == ' ') {
+      handleSpace(project, editor, file);
     }
 
     return super.charTyped(c, project, editor, file);
+  }
+
+  private void handleSpace(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+    PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
+    if (element == null) {
+      return;
+    }
+    IElementType elementType = element.getNode().getElementType();
+    if (elementType == HTML_MASON_BLOCK_OPENER && !isNextElement(element, HTML_MASON_BLOCK_CLOSER)) {
+      EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_BLOCK_CLOSER, false, false);
+    }
+    else if (elementType == HTML_MASON_CALL_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER)) {
+      EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER, false, false);
+    }
+    else if (elementType == HTML_MASON_CALL_FILTERING_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER)) {
+      EditorModificationUtil
+        .insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER + KEYWORD_CALL_CLOSE_TAG_START + KEYWORD_TAG_CLOSER, false, false);
+    }
+    else if (elementType == HTML_MASON_METHOD_OPENER) {
+      String closeTag = getCloseTag(project, element.getText());
+      if (closeTag != null) {
+        EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
+      }
+    }
+    else if (elementType == HTML_MASON_DEF_OPENER) {
+      String closeTag = getCloseTag(project, element.getText());
+      if (closeTag != null) {
+        EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
+      }
+    }
+  }
+
+  private void handleRightAngle(@NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+    PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
+    if (!HTML_MASON_TEMPLATE_CONTEXT_PATTERN.accepts(element) && !HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN.accepts(element)) {
+      return;
+    }
+    LOG.assertTrue(element != null);
+    String elementText = element.getText();
+    String closeTag;
+    if (elementText.equals(KEYWORD_FLAGS)) {
+      EditorModificationUtil.insertStringAtCaret(editor, "\ninherit => ''\n" + KEYWORD_FLAGS_CLOSER, false, true, 13);
+    }
+    else if ((closeTag = getCloseTag(project, "<%" + elementText + ">")) != null) {
+      EditorModificationUtil.insertStringAtCaret(editor, closeTag, false, false);
+    }
   }
 
   protected String getCloseTag(Project project, String openTag) {
