@@ -1,6 +1,5 @@
 package base;
 
-import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvTestUtil;
@@ -15,8 +14,8 @@ public class PlenvLocalInterpreterConfigurator extends PerlInterpreterConfigurat
   }
 
   @Override
-  void setUpPerlInterpreter(@NotNull Project project, @NotNull Disposable testDisposable) {
-    addSdk(FileUtil.expandUserHome(PLENV_HOME), DISTRIBUTION_ID, PlenvTestUtil.getVersionManagerHandler(), project, testDisposable);
+  void setUpPerlInterpreter(@NotNull Project project) {
+    addSdk(FileUtil.expandUserHome(PLENV_HOME), DISTRIBUTION_ID, PlenvTestUtil.getVersionManagerHandler(), project);
   }
 
   @Override

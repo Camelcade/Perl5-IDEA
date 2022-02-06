@@ -1,10 +1,6 @@
 package base;
 
-import com.intellij.openapi.Disposable;
-import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
-import com.intellij.openapi.util.Disposer;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -27,10 +23,9 @@ public class PerlSystemDockerInterpreterConfigurator extends PerlInterpreterConf
   }
 
   @Override
-  void setUpPerlInterpreter(@NotNull Project project, @NotNull Disposable testDisposable) {
+  void setUpPerlInterpreter(@NotNull Project project) {
     PerlVersionManagerData<?, ?> versionManagerData = PerlVersionManagerHandler.getDefaultHandler().createData();
     PerlSdkType.createAndAddSdk(PERL_HOME, getHostData(), versionManagerData, sdk -> {
-      Disposer.register(testDisposable, () -> WriteAction.run(() -> PerlSdkTable.getInstance().removeJdk(sdk)));
       PerlProjectManager.getInstance(project).setProjectSdk(sdk);
     }, project);
   }
@@ -38,5 +33,10 @@ public class PerlSystemDockerInterpreterConfigurator extends PerlInterpreterConf
   @Override
   public String toString() {
     return "docker: " + PERL_HOME + "@" + DOCKER_IMAGE;
+  }
+
+  @Override
+  public boolean isStateful() {
+    return false;
   }
 }

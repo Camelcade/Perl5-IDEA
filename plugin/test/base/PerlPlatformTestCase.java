@@ -117,7 +117,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    myInterpreterConfigurator.setUpPerlInterpreter(myProject, myPerlLightTestCaseDisposable);
+    myInterpreterConfigurator.setUpPerlInterpreter(myProject);
+    PerlRunUtil.setUpForTests(myPerlLightTestCaseDisposable);
   }
 
   protected void disposeOnPerlTearDown(@NotNull Disposable disposable) {
@@ -144,6 +145,11 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
         PerlProjectManager projectManager = PerlProjectManager.getInstance(getProject());
         projectManager.setProjectSdk(null);
         projectManager.setExternalLibraries(Collections.emptyList());
+
+        var sdkTable = PerlSdkTable.getInstance();
+        for (Sdk sdk : sdkTable.getAllJdks()) {
+          sdkTable.removeJdk(sdk);
+        }
       });
       Disposer.dispose(myPerlLightTestCaseDisposable);
       PerlRunUtil.dropTestConsoleDescriptors();
