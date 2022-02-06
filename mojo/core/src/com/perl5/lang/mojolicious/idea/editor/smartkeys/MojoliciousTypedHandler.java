@@ -31,7 +31,7 @@ public class MojoliciousTypedHandler extends TypedHandlerDelegate {
   public @NotNull Result charTyped(char c, final @NotNull Project project, final @NotNull Editor editor, @NotNull PsiFile file) {
     if (file.getViewProvider() instanceof MojoliciousFileViewProvider) {
       if (c == ' ') {
-        MojoliciousSmartKeysUtil.addCloseMarker(editor, file, " " + KEYWORD_MOJO_BLOCK_CLOSER);
+        MojoliciousSmartKeysUtil.addCloseMarker(editor, " " + KEYWORD_MOJO_BLOCK_CLOSER);
       }
     }
     return super.charTyped(c, project, editor, file);

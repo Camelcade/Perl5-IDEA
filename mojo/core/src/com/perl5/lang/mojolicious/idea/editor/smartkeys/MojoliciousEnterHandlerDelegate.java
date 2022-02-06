@@ -49,7 +49,7 @@ public class MojoliciousEnterHandlerDelegate extends EnterHandlerDelegateAdapter
                                 @Nullable EditorActionHandler originalHandler) {
     FileViewProvider viewProvider = file.getViewProvider();
     if (viewProvider instanceof MojoliciousFileViewProvider) {
-      if (!(MojoliciousSmartKeysUtil.addCloseMarker(editor, file, "\n" + KEYWORD_MOJO_BLOCK_CLOSER) ||
+      if (!(MojoliciousSmartKeysUtil.addCloseMarker(editor, "\n" + KEYWORD_MOJO_BLOCK_CLOSER) ||
             MojoliciousSmartKeysUtil.addEndMarker(editor, file, "\n% end\n"))) {
         addOutlineMarkerIfNeeded((MojoliciousFileViewProvider)viewProvider, caretOffset.get());
       }

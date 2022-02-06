@@ -19,6 +19,7 @@ package com.perl5.lang.mojolicious.idea.editor.smartkeys;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
@@ -38,18 +39,44 @@ public class MojoliciousSmartKeysUtil implements MojoliciousElementTypes, PerlEl
     MOJO_BLOCK_EXPR_NOSPACE_CLOSER
   );
 
-  public static boolean addCloseMarker(final @NotNull Editor editor, @NotNull PsiFile file, @NotNull String marker) {
-    PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
-    IElementType elementType = PsiUtilCore.getElementType(element);
-    if (elementType == MOJO_BLOCK_OPENER || elementType == MOJO_BLOCK_EXPR_OPENER || elementType == MOJO_BLOCK_EXPR_ESCAPED_OPENER) {
-      ASTNode nextSibling = PerlPsiUtil.getNextSignificantSibling(element.getNode());
-      if (nextSibling == null || !CLOSE_TOKENS.contains(nextSibling.getElementType())) {
-        EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
+  public static boolean addCloseMarker(final @NotNull Editor editor, @NotNull String marker) {
+    var caretOffset = editor.getCaretModel().getOffset();
+    if (caretOffset < 2) {
+      return false;
+    }
+    var highlighterIterator = editor.getHighlighter().createIterator(caretOffset - 2);
+    var tokenType = highlighterIterator.getTokenType();
+    if (tokenType != MOJO_BLOCK_OPENER && tokenType != MOJO_BLOCK_EXPR_OPENER && tokenType != MOJO_BLOCK_EXPR_ESCAPED_OPENER) {
+      return false;
+    }
+
+    if (hasCloseMarkerAhead(highlighterIterator)) {
+      return false;
+    }
+    EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
+    return true;
+  }
+
+  private static boolean hasCloseMarkerAhead(@NotNull HighlighterIterator highlighterIterator) {
+    while (true) {
+      highlighterIterator.advance();
+      if (highlighterIterator.atEnd()) {
+        return false;
+      }
+      var currentToken = highlighterIterator.getTokenType();
+      if (CLOSE_TOKENS.contains(currentToken)) {
         return true;
       }
+      else if (currentToken == OPERATOR_LT_NUMERIC) {
+        highlighterIterator.advance();
+        if (!highlighterIterator.atEnd() &&
+            (highlighterIterator.getTokenType() == SIGIL_HASH || highlighterIterator.getTokenType() == OPERATOR_MOD)) {
+          return false;
+        }
+      }
     }
-    return false;
   }
+
 
   public static boolean addEndMarker(final @NotNull Editor editor, @NotNull PsiFile file, @NotNull String marker) {
     PsiElement element = file.findElementAt(editor.getCaretModel().getOffset() - 2);
