@@ -50,73 +50,95 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
       return true;
     }, sourceElement);
 
-    // add shadowed variables declaration
-    if (sourceElement instanceof PerlVariableNameElement) {
-      PsiElement variable = sourceElement.getParent();
+    addShadowedVariable(sourceElement, result);
+    addSubAlternatives(sourceElement, result);
+    addStringFileTargets(sourceElement, result);
 
-      if (variable instanceof PerlVariable) {
-        PsiElement variableContainer = variable.getParent();
+    return result.isEmpty() ? null : result.toArray(PsiElement.EMPTY_ARRAY);
+  }
 
-        if (variableContainer instanceof PerlVariableDeclarationElement) {
+  /**
+   * Adds files references by {@link sourceElement} string content element
+   */
+  private void addStringFileTargets(@NotNull PsiElement sourceElement, ArrayList<PsiElement> result) {
+    if (!(sourceElement instanceof PerlStringContentElement)) {
+      return;
+    }
+    String continuosText = ((PerlStringContentElement)sourceElement).getContinuosText();
+    if (!PerlString.looksLikePath(continuosText)) {
+      return;
+    }
+    String tokenText = continuosText.replaceAll("\\\\", "/").replaceAll("/+", "/");
+    Project project = sourceElement.getProject();
 
-          PerlVariableDeclarationElement shadowedVariable = PerlResolveUtil.getLexicalDeclaration((PerlVariable)variable);
-          if (shadowedVariable != null && !result.contains(shadowedVariable)) {
-            result.add(shadowedVariable);
+    String fileName = Objects.requireNonNull(PerlString.getContentFileName(continuosText));
+
+    for (String file : FilenameIndex.getAllFilenames(project)) {
+      if (file.contains(fileName)) {
+        for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project))) {
+          String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
+          if (canonicalPath != null) {
+            if (canonicalPath.contains(tokenText + "."))    // higher priority
+            {
+              result.add(0, fileItem);
+            }
+            else if (canonicalPath.contains(tokenText)) {
+              result.add(fileItem);
+            }
           }
         }
-      }
-    }
-    // additional procesing for subname
-    else if (sourceElement instanceof PerlSubNameElement) {
-      PsiElement elementParent = sourceElement.getParent();
-
-      // suppress declaration if there is a definition and declaration
-      if (result.size() == 2 &&
-          !(elementParent instanceof PerlSubDefinitionElement || elementParent instanceof PerlSubDeclarationElement)) {
-        if (result.get(0).getOriginalElement() instanceof PerlSubDeclarationElement &&
-            result.get(1).getOriginalElement() instanceof PerlSubDefinitionElement) {
-          result.remove(0);
-        }
-      }
-    }
-    // string content to file jump fixme change to string
-    else if (sourceElement instanceof PerlStringContentElement) {
-      String continuosText = ((PerlStringContentElement)sourceElement).getContinuosText();
-      if (PerlString.looksLikePath(continuosText)) {
-        String tokenText = continuosText.replaceAll("\\\\", "/").replaceAll("/+", "/");
-        Project project = sourceElement.getProject();
-
-        String fileName = Objects.requireNonNull(PerlString.getContentFileName(continuosText));
-
-        for (String file : FilenameIndex.getAllFilenames(project)) {
-          if (file.contains(fileName)) {
-            // fixme somehow if includeDirectories is true - no files found
-            for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project))) {
-              String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
-              if (canonicalPath != null) {
-                if (canonicalPath.contains(tokenText + "."))    // higher priority
-                {
-                  result.add(0, fileItem);
-                }
-                else if (canonicalPath.contains(tokenText)) {
-                  result.add(fileItem);
-                }
-              }
-            }
-            for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true)) {
-              String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
-              if (canonicalPath != null) {
-                if (canonicalPath.contains(tokenText)) {
-                  result.add(fileItem);
-                }
-              }
+        for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true)) {
+          String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
+          if (canonicalPath != null) {
+            if (canonicalPath.contains(tokenText)) {
+              result.add(fileItem);
             }
           }
         }
       }
     }
+  }
 
-    return result.isEmpty() ? null : result.toArray(new PsiElement[result.size()]);
+  /**
+   * Adds alternative definitions/declarations of the same sub.
+   */
+  private void addSubAlternatives(@NotNull PsiElement sourceElement, ArrayList<PsiElement> result) {
+    if (!(sourceElement instanceof PerlSubNameElement)) {
+      return;
+    }
+    PsiElement elementParent = sourceElement.getParent();
+
+    // suppress declaration if there is a definition and declaration
+    if (result.size() == 2 &&
+        !(elementParent instanceof PerlSubDefinitionElement || elementParent instanceof PerlSubDeclarationElement)) {
+      if (result.get(0).getOriginalElement() instanceof PerlSubDeclarationElement &&
+          result.get(1).getOriginalElement() instanceof PerlSubDefinitionElement) {
+        result.remove(0);
+      }
+    }
+  }
+
+  /**
+   * Adds a variable declaration that current one shadows
+   */
+  private void addShadowedVariable(@NotNull PsiElement sourceElement, ArrayList<PsiElement> result) {
+    if (!(sourceElement instanceof PerlVariableNameElement)) {
+      return;
+    }
+    PsiElement variable = sourceElement.getParent();
+
+    if (!(variable instanceof PerlVariable)) {
+      return;
+    }
+    PsiElement variableContainer = variable.getParent();
+
+    if (!(variableContainer instanceof PerlVariableDeclarationElement)) {
+      return;
+    }
+    PerlVariableDeclarationElement shadowedVariable = PerlResolveUtil.getLexicalDeclaration((PerlVariable)variable);
+    if (shadowedVariable != null && !result.contains(shadowedVariable)) {
+      result.add(shadowedVariable);
+    }
   }
 
   @Override
