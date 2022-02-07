@@ -224,25 +224,25 @@ public class HTMLMasonLexer extends HTMLMasonBaseLexer {
 
   private static final String ZZ_ACTION_PACKED_0 =
     "\45\0\1\1\1\2\2\3\1\4\2\1\1\5\1\6"+
-    "\1\5\1\7\2\10\2\7\1\11\1\12\1\13\1\11"+
-    "\1\14\13\15\3\16\13\17\3\16\2\20\3\21\1\0"+
-    "\1\22\1\7\1\20\1\23\1\24\1\23\1\25\1\26"+
-    "\3\21\1\27\1\30\1\31\1\32\1\33\4\7\1\34"+
-    "\1\35\2\36\1\7\2\37\6\7\2\40\2\21\2\41"+
-    "\1\21\1\42\1\0\1\43\1\44\1\0\1\44\1\45"+
-    "\21\0\1\46\15\17\1\0\1\47\2\0\1\50\1\51"+
-    "\1\52\17\0\1\53\1\54\1\55\2\0\1\56\16\0"+
-    "\1\56\14\17\21\0\1\57\1\60\13\0\1\61\1\0"+
-    "\13\17\23\0\1\62\1\63\1\64\1\0\1\65\1\66"+
-    "\1\67\2\0\5\17\11\0\1\70\1\0\1\71\5\0"+
-    "\1\72\1\73\3\0\1\17\1\73\2\17\16\0\1\74"+
-    "\1\0\1\75\1\76\1\17\11\0\1\77\1\100\2\0"+
-    "\1\101\1\102\1\0\1\103\2\0\1\104\1\0\1\105"+
-    "\1\106\1\107\1\110\2\0\1\111\2\0\1\112\1\113"+
-    "\1\114";
+    "\1\5\1\7\1\10\2\11\2\10\1\12\1\13\1\7"+
+    "\1\14\13\15\3\16\13\17\3\16\2\20\3\21\1\22"+
+    "\1\23\1\10\1\20\1\24\1\25\1\24\1\26\1\27"+
+    "\3\21\1\30\1\31\1\32\1\33\1\34\4\10\1\35"+
+    "\1\36\2\37\1\10\2\40\6\10\2\41\2\21\2\42"+
+    "\1\21\1\43\1\0\1\44\1\45\1\0\1\45\1\46"+
+    "\21\0\1\47\15\17\1\0\1\50\2\0\1\51\1\0"+
+    "\1\52\1\53\17\0\1\54\1\55\1\56\2\0\1\57"+
+    "\16\0\1\57\14\17\21\0\1\60\1\61\13\0\1\62"+
+    "\1\0\13\17\23\0\1\63\1\64\1\65\1\0\1\66"+
+    "\1\67\1\70\2\0\5\17\11\0\1\71\1\0\1\72"+
+    "\5\0\1\73\1\74\3\0\1\17\1\74\2\17\16\0"+
+    "\1\75\1\0\1\76\1\77\1\17\11\0\1\100\1\101"+
+    "\2\0\1\102\1\103\1\0\1\104\2\0\1\105\1\0"+
+    "\1\106\1\107\1\110\1\111\2\0\1\112\2\0\1\113"+
+    "\1\114\1\115";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[378];
+    int [] result = new int[379];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -272,52 +272,52 @@ public class HTMLMasonLexer extends HTMLMasonBaseLexer {
     "\0\u0230\0\u0253\0\u0276\0\u0299\0\u02bc\0\u02df\0\u0302\0\u0325"+
     "\0\u0348\0\u036b\0\u038e\0\u03b1\0\u03d4\0\u03f7\0\u041a\0\u043d"+
     "\0\u0460\0\u0483\0\u04a6\0\u04c9\0\u04ec\0\u050f\0\u0532\0\u0555"+
-    "\0\u0532\0\214\0\u0578\0\214\0\214\0\214\0\u059b\0\214"+
-    "\0\214\0\u05be\0\u05e1\0\u0604\0\214\0\u0627\0\u064a\0\u05e1"+
-    "\0\214\0\214\0\u066d\0\u0690\0\u06b3\0\u06d6\0\u06f9\0\u071c"+
-    "\0\u073f\0\u0762\0\u0785\0\u07a8\0\214\0\u07cb\0\u07ee\0\u0811"+
-    "\0\u0834\0\u0857\0\u087a\0\u089d\0\u08c0\0\u08e3\0\u0906\0\u0929"+
-    "\0\u094c\0\u096f\0\u0992\0\u09b5\0\u09d8\0\214\0\u09fb\0\u0a1e"+
-    "\0\u0a41\0\u01c7\0\u0a64\0\214\0\u0a87\0\u0aaa\0\214\0\214"+
-    "\0\u0a87\0\214\0\214\0\u0acd\0\u0af0\0\u0276\0\214\0\214"+
-    "\0\u0b13\0\u0b13\0\214\0\u0b36\0\u0b59\0\u0b7c\0\u0b9f\0\u0bc2"+
-    "\0\214\0\214\0\u0be5\0\u0c08\0\214\0\u0c2b\0\u0c4e\0\u0c71"+
-    "\0\u0c94\0\u0cb7\0\u0cda\0\u0cfd\0\214\0\u0d20\0\u0d43\0\u0d66"+
-    "\0\214\0\u0d89\0\u0dac\0\214\0\u0dcf\0\u0df2\0\214\0\u0e15"+
-    "\0\u0e38\0\214\0\u0e5b\0\u0604\0\u0e7e\0\u0ea1\0\u0ec4\0\u0ee7"+
-    "\0\u0f0a\0\u0f2d\0\u0f50\0\u0f73\0\u0f96\0\u0fb9\0\u0fdc\0\u0fff"+
-    "\0\u1022\0\u1045\0\u1068\0\214\0\u108b\0\u10ae\0\u10d1\0\u10f4"+
-    "\0\u1117\0\u113a\0\u115d\0\u1180\0\u11a3\0\u11c6\0\u11e9\0\u120c"+
-    "\0\u122f\0\u0992\0\214\0\u1252\0\u1275\0\214\0\214\0\214"+
-    "\0\u1298\0\u12bb\0\u12de\0\u1301\0\u1324\0\u1347\0\u136a\0\u138d"+
-    "\0\u13b0\0\u13d3\0\u13f6\0\u1419\0\u143c\0\u145f\0\u1482\0\214"+
-    "\0\214\0\214\0\u14a5\0\u14c8\0\214\0\u14eb\0\u150e\0\u1531"+
-    "\0\u1554\0\u1577\0\u159a\0\u15bd\0\u15e0\0\u1603\0\u1626\0\u1649"+
-    "\0\u166c\0\u168f\0\u16b2\0\u0811\0\u16d5\0\u16f8\0\u171b\0\u173e"+
-    "\0\u1761\0\u1784\0\u17a7\0\u17ca\0\u17ed\0\u1810\0\u1833\0\u1856"+
-    "\0\u1879\0\u189c\0\u18bf\0\u18e2\0\u1905\0\u1928\0\u194b\0\u196e"+
-    "\0\u1991\0\u19b4\0\u19d7\0\u19fa\0\u1a1d\0\u1a40\0\u1a63\0\u1a86"+
-    "\0\u1aa9\0\214\0\214\0\u1acc\0\u1aef\0\u1b12\0\u1b35\0\u1b58"+
-    "\0\u1b7b\0\u1b9e\0\u1bc1\0\u1be4\0\u1c07\0\u1c2a\0\214\0\u1c4d"+
-    "\0\u1c70\0\u1c93\0\u1cb6\0\u1cd9\0\u1cfc\0\u1d1f\0\u1d42\0\u1d65"+
-    "\0\u1d88\0\u1dab\0\u1dce\0\u1df1\0\u1e14\0\u1e37\0\u1e5a\0\u1e7d"+
-    "\0\u1ea0\0\u1ec3\0\u1ee6\0\u1f09\0\u1f2c\0\u1f4f\0\u1f72\0\u1f95"+
-    "\0\u1fb8\0\u1fdb\0\u1ffe\0\u2021\0\u2044\0\u2067\0\214\0\214"+
-    "\0\214\0\u208a\0\214\0\214\0\214\0\u20ad\0\u20d0\0\u20f3"+
-    "\0\u2116\0\u2139\0\u215c\0\u217f\0\u21a2\0\u21c5\0\u21e8\0\u220b"+
-    "\0\u222e\0\u2251\0\u2274\0\u2297\0\u22ba\0\214\0\u22dd\0\214"+
-    "\0\u2300\0\u2323\0\u2346\0\u2369\0\u238c\0\214\0\214\0\u23af"+
-    "\0\u23d2\0\u23f5\0\u2418\0\u0811\0\u243b\0\u245e\0\u2481\0\u24a4"+
-    "\0\u24c7\0\u24ea\0\u250d\0\u2530\0\u2553\0\u2576\0\u2599\0\u25bc"+
-    "\0\u25df\0\u2602\0\u2625\0\u2648\0\214\0\u266b\0\214\0\214"+
-    "\0\u268e\0\u26b1\0\u26d4\0\u26f7\0\u271a\0\u273d\0\u2760\0\u2783"+
-    "\0\u27a6\0\u27c9\0\214\0\214\0\u27ec\0\u280f\0\214\0\214"+
-    "\0\u2832\0\214\0\u2855\0\u2878\0\214\0\u289b\0\214\0\214"+
-    "\0\214\0\214\0\u28be\0\u28e1\0\214\0\u2904\0\u2927\0\214"+
-    "\0\214\0\214";
+    "\0\u0532\0\u0578\0\u059b\0\u0578\0\u0578\0\u0578\0\u05be\0\u0578"+
+    "\0\u0578\0\u0578\0\u05e1\0\u0604\0\u0627\0\u064a\0\u066d\0\u0604"+
+    "\0\u0578\0\u0578\0\u0690\0\u06b3\0\u06d6\0\u06f9\0\u071c\0\u073f"+
+    "\0\u0762\0\u0785\0\u07a8\0\u07cb\0\u0578\0\u07ee\0\u0811\0\u0834"+
+    "\0\u0857\0\u087a\0\u089d\0\u08c0\0\u08e3\0\u0906\0\u0929\0\u094c"+
+    "\0\u096f\0\u0992\0\u09b5\0\u09d8\0\u09fb\0\u0578\0\u0a1e\0\u0a41"+
+    "\0\u0a64\0\u0a87\0\u0aaa\0\u0578\0\u0acd\0\u0af0\0\u0578\0\u0578"+
+    "\0\u0acd\0\u0578\0\u0578\0\u0b13\0\u0b36\0\u0276\0\u0578\0\u0578"+
+    "\0\u0b59\0\u0b59\0\u0578\0\u0b7c\0\u0b9f\0\u0bc2\0\u0be5\0\u0c08"+
+    "\0\u0578\0\u0578\0\u0c2b\0\u0c4e\0\u0578\0\u0c71\0\u0c94\0\u0cb7"+
+    "\0\u0cda\0\u0cfd\0\u0d20\0\u0d43\0\u0578\0\u0d66\0\u0d89\0\u0dac"+
+    "\0\u0578\0\u0dcf\0\u0df2\0\u0578\0\u0e15\0\u0e38\0\u0578\0\u0e5b"+
+    "\0\u0e7e\0\u0578\0\u0ea1\0\u0627\0\u0ec4\0\u0ee7\0\u0f0a\0\u0f2d"+
+    "\0\u0f50\0\u0f73\0\u0f96\0\u0fb9\0\u0fdc\0\u0fff\0\u1022\0\u1045"+
+    "\0\u1068\0\u108b\0\u10ae\0\u0578\0\u10d1\0\u10f4\0\u1117\0\u113a"+
+    "\0\u115d\0\u1180\0\u11a3\0\u11c6\0\u11e9\0\u120c\0\u122f\0\u1252"+
+    "\0\u1275\0\u09b5\0\u0578\0\u1298\0\u12bb\0\u0578\0\u0aaa\0\u0578"+
+    "\0\u0578\0\u12de\0\u1301\0\u1324\0\u1347\0\u136a\0\u138d\0\u13b0"+
+    "\0\u13d3\0\u13f6\0\u1419\0\u143c\0\u145f\0\u1482\0\u14a5\0\u14c8"+
+    "\0\u0578\0\u0578\0\u0578\0\u14eb\0\u150e\0\u0578\0\u1531\0\u1554"+
+    "\0\u1577\0\u159a\0\u15bd\0\u15e0\0\u1603\0\u1626\0\u1649\0\u166c"+
+    "\0\u168f\0\u16b2\0\u16d5\0\u16f8\0\u0834\0\u171b\0\u173e\0\u1761"+
+    "\0\u1784\0\u17a7\0\u17ca\0\u17ed\0\u1810\0\u1833\0\u1856\0\u1879"+
+    "\0\u189c\0\u18bf\0\u18e2\0\u1905\0\u1928\0\u194b\0\u196e\0\u1991"+
+    "\0\u19b4\0\u19d7\0\u19fa\0\u1a1d\0\u1a40\0\u1a63\0\u1a86\0\u1aa9"+
+    "\0\u1acc\0\u1aef\0\u0578\0\u0578\0\u1b12\0\u1b35\0\u1b58\0\u1b7b"+
+    "\0\u1b9e\0\u1bc1\0\u1be4\0\u1c07\0\u1c2a\0\u1c4d\0\u1c70\0\u0578"+
+    "\0\u1c93\0\u1cb6\0\u1cd9\0\u1cfc\0\u1d1f\0\u1d42\0\u1d65\0\u1d88"+
+    "\0\u1dab\0\u1dce\0\u1df1\0\u1e14\0\u1e37\0\u1e5a\0\u1e7d\0\u1ea0"+
+    "\0\u1ec3\0\u1ee6\0\u1f09\0\u1f2c\0\u1f4f\0\u1f72\0\u1f95\0\u1fb8"+
+    "\0\u1fdb\0\u1ffe\0\u2021\0\u2044\0\u2067\0\u208a\0\u20ad\0\u0578"+
+    "\0\u0578\0\u0578\0\u20d0\0\u0578\0\u0578\0\u0578\0\u20f3\0\u2116"+
+    "\0\u2139\0\u215c\0\u217f\0\u21a2\0\u21c5\0\u21e8\0\u220b\0\u222e"+
+    "\0\u2251\0\u2274\0\u2297\0\u22ba\0\u22dd\0\u2300\0\u0578\0\u2323"+
+    "\0\u0578\0\u2346\0\u2369\0\u238c\0\u23af\0\u23d2\0\u0578\0\u0578"+
+    "\0\u23f5\0\u2418\0\u243b\0\u245e\0\u0834\0\u2481\0\u24a4\0\u24c7"+
+    "\0\u24ea\0\u250d\0\u2530\0\u2553\0\u2576\0\u2599\0\u25bc\0\u25df"+
+    "\0\u2602\0\u2625\0\u2648\0\u266b\0\u268e\0\u0578\0\u26b1\0\u0578"+
+    "\0\u0578\0\u26d4\0\u26f7\0\u271a\0\u273d\0\u2760\0\u2783\0\u27a6"+
+    "\0\u27c9\0\u27ec\0\u280f\0\u0578\0\u0578\0\u2832\0\u2855\0\u0578"+
+    "\0\u0578\0\u2878\0\u0578\0\u289b\0\u28be\0\u0578\0\u28e1\0\u0578"+
+    "\0\u0578\0\u0578\0\u0578\0\u2904\0\u2927\0\u0578\0\u294a\0\u296d"+
+    "\0\u0578\0\u0578\0\u0578";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[378];
+    int [] result = new int[379];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -342,9 +342,9 @@ public class HTMLMasonLexer extends HTMLMasonBaseLexer {
   private static final String ZZ_TRANS_PACKED_0 =
     "\3\46\1\47\1\50\3\51\1\52\1\46\1\53\33\46"+
     "\1\47\1\50\3\51\1\54\1\46\1\53\30\46\10\55"+
-    "\1\56\1\55\1\57\42\55\1\57\30\55\43\0\4\60"+
-    "\3\61\1\62\43\60\1\63\4\60\1\64\25\60\1\65"+
-    "\1\66\1\65\5\67\1\70\7\65\1\71\22\66\21\72"+
+    "\1\56\1\55\1\57\42\55\1\57\30\55\43\60\4\61"+
+    "\3\62\1\63\43\61\1\64\4\61\1\65\25\61\1\60"+
+    "\1\66\1\60\5\67\1\70\7\60\1\71\22\66\21\72"+
     "\1\73\1\72\1\74\1\75\1\76\1\72\1\77\1\100"+
     "\1\72\1\101\1\72\1\102\1\72\1\103\1\104\3\72"+
     "\21\105\1\106\2\105\1\107\16\105\1\72\1\110\17\72"+
@@ -352,22 +352,22 @@ public class HTMLMasonLexer extends HTMLMasonBaseLexer {
     "\1\110\1\117\1\110\1\120\1\110\1\121\1\122\3\110"+
     "\1\105\1\123\17\105\1\124\2\123\1\125\16\123\14\126"+
     "\1\127\26\126\3\130\1\131\1\132\3\131\4\130\1\133"+
-    "\3\130\1\134\22\130\14\60\1\135\26\60\14\126\1\136"+
+    "\3\130\1\134\22\130\14\61\1\135\26\61\14\126\1\136"+
     "\26\126\1\137\2\140\5\67\3\137\1\140\1\141\1\137"+
     "\1\140\2\137\22\140\3\142\5\67\1\142\1\143\31\142"+
     "\3\144\1\145\1\146\3\145\1\144\1\147\31\144\3\150"+
-    "\1\151\4\152\33\150\3\153\1\151\4\152\33\153\12\60"+
-    "\1\154\42\60\1\155\42\60\1\156\42\60\1\157\30\60"+
-    "\1\65\2\160\5\67\1\65\1\161\4\65\2\160\1\65"+
-    "\22\160\4\60\3\162\1\163\2\60\1\164\34\60\3\165"+
-    "\1\166\2\60\1\167\42\60\1\170\42\60\1\171\42\60"+
-    "\1\172\34\60\3\165\1\166\2\60\1\173\34\60\3\165"+
-    "\1\166\2\60\1\174\30\60\12\175\1\176\30\175\12\177"+
+    "\1\151\4\152\33\150\3\153\1\151\4\152\33\153\12\61"+
+    "\1\154\42\61\1\155\42\61\1\156\42\61\1\157\30\61"+
+    "\1\60\2\160\5\67\1\60\1\161\4\60\2\160\1\60"+
+    "\22\160\4\61\3\162\1\163\2\61\1\164\34\61\3\165"+
+    "\1\166\2\61\1\167\42\61\1\170\42\61\1\171\42\61"+
+    "\1\172\34\61\3\165\1\166\2\61\1\173\34\61\3\165"+
+    "\1\166\2\61\1\174\30\61\12\175\1\176\30\175\12\177"+
     "\1\200\30\177\12\201\1\202\30\201\12\177\1\203\30\177"+
     "\3\46\1\0\1\46\4\0\1\46\1\0\30\46\3\0"+
     "\1\47\4\51\33\0\3\46\1\47\1\50\3\51\1\0"+
-    "\1\46\1\0\30\46\10\0\1\204\2\0\1\205\1\206"+
-    "\36\0\1\207\2\0\1\210\1\211\34\0\1\61\45\0"+
+    "\1\46\1\0\30\46\53\0\1\204\2\0\1\205\1\206"+
+    "\36\0\1\207\2\0\1\210\1\211\34\0\1\62\45\0"+
     "\1\212\32\0\1\213\1\0\5\214\11\0\22\213\1\0"+
     "\2\66\16\0\22\66\3\0\5\67\55\0\1\215\4\0"+
     "\1\216\43\0\1\217\2\0\1\220\31\0\1\221\42\0"+
@@ -389,107 +389,108 @@ public class HTMLMasonLexer extends HTMLMasonBaseLexer {
     "\1\253\7\0\1\252\1\254\20\252\1\0\2\252\6\0"+
     "\1\253\7\0\1\252\1\255\20\252\11\0\1\256\31\0"+
     "\3\130\1\0\1\130\3\0\4\130\1\0\3\130\1\0"+
-    "\22\130\3\0\5\131\4\0\1\133\3\0\1\134\33\0"+
-    "\1\134\42\0\1\257\42\0\1\260\31\0\3\144\1\0"+
-    "\1\144\3\0\1\144\1\0\31\144\3\0\5\145\1\0"+
-    "\1\147\34\0\1\151\4\152\46\0\1\261\42\0\1\262"+
-    "\42\0\1\263\42\0\1\264\30\0\2\160\13\0\2\160"+
-    "\1\0\22\160\6\0\1\162\47\0\1\265\35\0\1\165"+
-    "\47\0\1\266\42\0\1\267\42\0\1\270\42\0\1\271"+
-    "\42\0\1\272\42\0\1\273\42\0\1\274\27\0\12\177"+
-    "\1\0\30\177\13\0\1\275\42\0\1\276\42\0\1\277"+
-    "\37\0\1\300\3\0\1\301\43\0\1\302\35\0\1\207"+
-    "\3\0\1\207\43\0\1\207\26\0\2\213\5\303\1\304"+
-    "\7\0\1\214\22\213\23\0\1\305\51\0\1\306\43\0"+
-    "\1\307\43\0\1\310\33\0\1\311\57\0\1\312\32\0"+
-    "\1\313\40\0\1\314\34\0\1\315\45\0\1\316\56\0"+
-    "\1\317\41\0\1\320\36\0\1\321\31\0\1\322\44\0"+
-    "\1\323\16\0\2\110\6\0\1\234\7\0\2\110\1\324"+
-    "\17\110\1\0\2\110\6\0\1\234\7\0\11\110\1\325"+
-    "\10\110\1\0\2\110\6\0\1\234\7\0\12\110\1\326"+
-    "\7\110\1\0\2\110\6\0\1\234\7\0\13\110\1\327"+
-    "\6\110\1\0\2\110\6\0\1\234\7\0\4\110\1\330"+
-    "\15\110\1\0\2\110\6\0\1\234\7\0\21\110\1\331"+
-    "\1\0\2\110\6\0\1\234\7\0\11\110\1\332\10\110"+
-    "\1\0\2\110\6\0\1\234\7\0\7\110\1\333\12\110"+
-    "\1\0\2\110\6\0\1\234\7\0\1\110\1\334\20\110"+
-    "\1\0\2\110\6\0\1\234\7\0\4\110\1\335\15\110"+
-    "\1\0\2\110\6\0\1\234\7\0\20\110\1\336\1\110"+
-    "\1\0\2\110\6\0\1\234\7\0\17\110\1\337\2\110"+
-    "\1\0\2\110\6\0\1\234\7\0\13\110\1\340\6\110"+
-    "\1\0\2\252\6\0\1\253\7\0\2\252\1\341\17\252"+
-    "\1\0\2\252\6\0\1\253\7\0\4\252\1\342\15\252"+
-    "\10\0\1\343\42\0\1\344\42\0\1\345\42\0\1\346"+
+    "\22\130\3\0\5\131\4\0\1\257\3\0\1\134\22\0"+
+    "\3\130\1\131\1\132\3\131\4\130\1\257\3\130\1\134"+
+    "\22\130\11\0\1\134\42\0\1\260\42\0\1\261\31\0"+
+    "\3\144\1\0\1\144\3\0\1\144\1\0\31\144\3\0"+
+    "\5\145\1\0\1\147\34\0\1\151\4\152\46\0\1\262"+
+    "\42\0\1\263\42\0\1\264\42\0\1\265\30\0\2\160"+
+    "\13\0\2\160\1\0\22\160\6\0\1\162\47\0\1\266"+
+    "\35\0\1\165\47\0\1\267\42\0\1\270\42\0\1\271"+
+    "\42\0\1\272\42\0\1\273\42\0\1\274\42\0\1\275"+
+    "\27\0\12\177\1\0\30\177\13\0\1\276\42\0\1\277"+
+    "\42\0\1\300\37\0\1\301\3\0\1\302\43\0\1\303"+
+    "\35\0\1\207\3\0\1\207\43\0\1\207\26\0\2\213"+
+    "\5\304\1\305\7\0\1\214\22\213\23\0\1\306\51\0"+
+    "\1\307\43\0\1\310\43\0\1\311\33\0\1\312\57\0"+
+    "\1\313\32\0\1\314\40\0\1\315\34\0\1\316\45\0"+
+    "\1\317\56\0\1\320\41\0\1\321\36\0\1\322\31\0"+
+    "\1\323\44\0\1\324\16\0\2\110\6\0\1\234\7\0"+
+    "\2\110\1\325\17\110\1\0\2\110\6\0\1\234\7\0"+
+    "\11\110\1\326\10\110\1\0\2\110\6\0\1\234\7\0"+
+    "\12\110\1\327\7\110\1\0\2\110\6\0\1\234\7\0"+
+    "\13\110\1\330\6\110\1\0\2\110\6\0\1\234\7\0"+
+    "\4\110\1\331\15\110\1\0\2\110\6\0\1\234\7\0"+
+    "\21\110\1\332\1\0\2\110\6\0\1\234\7\0\11\110"+
+    "\1\333\10\110\1\0\2\110\6\0\1\234\7\0\7\110"+
+    "\1\334\12\110\1\0\2\110\6\0\1\234\7\0\1\110"+
+    "\1\335\20\110\1\0\2\110\6\0\1\234\7\0\4\110"+
+    "\1\336\15\110\1\0\2\110\6\0\1\234\7\0\20\110"+
+    "\1\337\1\110\1\0\2\110\6\0\1\234\7\0\17\110"+
+    "\1\340\2\110\1\0\2\110\6\0\1\234\7\0\13\110"+
+    "\1\341\6\110\1\0\2\252\6\0\1\253\7\0\2\252"+
+    "\1\342\17\252\1\0\2\252\6\0\1\253\7\0\4\252"+
+    "\1\343\15\252\10\0\1\344\42\0\1\345\42\0\1\346"+
     "\42\0\1\347\42\0\1\350\42\0\1\351\42\0\1\352"+
     "\42\0\1\353\42\0\1\354\42\0\1\355\42\0\1\356"+
-    "\42\0\1\357\42\0\1\360\42\0\1\361\35\0\5\303"+
-    "\1\304\43\0\1\362\42\0\1\363\56\0\1\364\56\0"+
-    "\1\365\27\0\1\366\41\0\1\367\37\0\1\370\45\0"+
-    "\1\371\51\0\1\372\46\0\1\373\41\0\1\374\36\0"+
-    "\1\375\47\0\1\376\13\0\1\377\57\0\1\u0100\15\0"+
-    "\2\110\6\0\1\363\7\0\22\110\1\0\2\110\6\0"+
-    "\1\234\7\0\4\110\1\u0101\15\110\1\0\2\110\6\0"+
-    "\1\234\7\0\20\110\1\u0102\1\110\1\0\2\110\6\0"+
-    "\1\234\7\0\5\110\1\u0103\14\110\1\0\2\110\6\0"+
-    "\1\234\7\0\4\110\1\u0104\15\110\1\0\2\110\6\0"+
-    "\1\234\7\0\1\110\1\u0105\20\110\1\0\2\110\6\0"+
-    "\1\234\7\0\4\110\1\u0106\15\110\1\0\2\110\6\0"+
-    "\1\234\7\0\13\110\1\u0107\6\110\1\0\2\110\6\0"+
-    "\1\234\7\0\17\110\1\u0108\2\110\1\0\2\110\6\0"+
-    "\1\234\7\0\16\110\1\u0109\3\110\1\0\2\110\6\0"+
-    "\1\234\7\0\12\110\1\u010a\7\110\1\0\2\110\6\0"+
-    "\1\234\7\0\17\110\1\u010b\2\110\1\0\2\252\6\0"+
-    "\1\377\7\0\22\252\1\0\2\252\6\0\1\253\7\0"+
-    "\5\252\1\u010c\14\252\30\0\1\u010d\44\0\1\u010e\37\0"+
-    "\1\u010f\52\0\1\u0110\26\0\1\u0111\53\0\1\u0112\31\0"+
-    "\1\u0113\55\0\1\u0114\5\0\1\u0115\17\0\22\u0115\34\0"+
-    "\1\u0116\7\0\1\u0117\17\0\22\u0117\21\0\1\u0118\42\0"+
-    "\1\u0119\46\0\1\u011a\42\0\1\u011b\37\0\1\u011c\57\0"+
-    "\1\u011d\32\0\1\u011e\24\0\1\u011f\42\0\1\u0120\42\0"+
-    "\1\u0121\62\0\1\u0122\22\0\1\u0123\42\0\1\u0124\42\0"+
-    "\1\u0125\53\0\1\u0126\47\0\1\u0127\14\0\2\110\6\0"+
-    "\1\234\7\0\1\110\1\u0128\20\110\1\0\2\110\6\0"+
-    "\1\234\7\0\16\110\1\u0129\3\110\1\0\2\110\6\0"+
-    "\1\234\7\0\6\110\1\u012a\13\110\1\0\2\110\6\0"+
-    "\1\u011f\7\0\22\110\1\0\2\110\6\0\1\u0120\7\0"+
-    "\22\110\1\0\2\110\6\0\1\u0121\7\0\22\110\1\0"+
-    "\2\110\6\0\1\234\7\0\10\110\1\u012b\11\110\1\0"+
-    "\2\110\6\0\1\u0123\7\0\22\110\1\0\2\110\6\0"+
-    "\1\u0124\7\0\22\110\1\0\2\110\6\0\1\u0125\7\0"+
-    "\22\110\1\0\2\110\6\0\1\234\7\0\1\110\1\u012c"+
-    "\20\110\1\0\2\252\6\0\1\253\7\0\6\252\1\u012d"+
-    "\13\252\31\0\1\u012e\44\0\1\u012f\40\0\1\u0130\37\0"+
-    "\1\u0131\47\0\1\u0132\34\0\1\u0133\45\0\1\u0134\34\0"+
-    "\1\u0135\21\0\2\u0115\6\0\1\u0136\7\0\22\u0115\40\0"+
-    "\1\u0137\3\0\2\u0117\6\0\1\u0138\7\0\22\u0117\27\0"+
-    "\1\u0139\42\0\1\u013a\35\0\1\u013b\42\0\1\u013c\60\0"+
-    "\1\u013d\13\0\1\u013e\52\0\1\u013f\56\0\1\u0140\26\0"+
-    "\1\u0141\42\0\1\u0142\22\0\2\110\6\0\1\234\7\0"+
-    "\17\110\1\u0143\2\110\1\0\2\110\6\0\1\u013e\7\0"+
-    "\22\110\1\0\2\110\6\0\1\234\7\0\1\u0144\21\110"+
-    "\1\0\2\110\6\0\1\234\7\0\14\110\1\u0145\5\110"+
-    "\1\0\2\110\6\0\1\234\7\0\1\u0146\21\110\1\0"+
-    "\2\252\6\0\1\253\7\0\1\u0147\21\252\30\0\1\u0148"+
-    "\34\0\1\u0149\52\0\1\u014a\44\0\1\u014b\42\0\1\u014c"+
-    "\33\0\1\u014d\50\0\1\u014e\47\0\1\u014f\43\0\1\u0150"+
-    "\33\0\1\u0151\42\0\1\u0152\52\0\1\u0153\42\0\1\u0154"+
-    "\11\0\1\u0155\67\0\1\u0156\15\0\1\u0157\42\0\1\u0158"+
-    "\32\0\2\110\6\0\1\u0155\7\0\22\110\1\0\2\110"+
-    "\6\0\1\234\7\0\15\110\1\u0159\4\110\1\0\2\110"+
-    "\6\0\1\u0157\7\0\22\110\1\0\2\252\6\0\1\u0158"+
-    "\7\0\22\252\25\0\1\u015a\51\0\1\u015b\30\0\1\u015c"+
-    "\60\0\1\u015d\43\0\1\u015e\41\0\1\u015f\27\0\1\u0160"+
-    "\50\0\1\u0161\46\0\1\u0162\14\0\1\u0163\42\0\1\u0164"+
-    "\56\0\1\u0165\42\0\1\u0166\26\0\1\u0167\32\0\2\110"+
-    "\6\0\1\u0167\7\0\22\110\11\0\1\u0168\62\0\1\u0169"+
-    "\22\0\1\u016a\53\0\1\u016b\57\0\1\u016c\14\0\1\u016d"+
-    "\53\0\1\u016e\31\0\1\u016f\42\0\1\u0170\42\0\1\u0171"+
-    "\42\0\1\u0172\66\0\1\u0173\26\0\1\u0174\32\0\1\u0175"+
-    "\71\0\1\u0176\40\0\1\u0177\15\0\1\u0178\42\0\1\u0179"+
-    "\42\0\1\u017a\31\0";
+    "\42\0\1\357\42\0\1\360\42\0\1\361\42\0\1\362"+
+    "\35\0\5\304\1\305\43\0\1\363\42\0\1\364\56\0"+
+    "\1\365\56\0\1\366\27\0\1\367\41\0\1\370\37\0"+
+    "\1\371\45\0\1\372\51\0\1\373\46\0\1\374\41\0"+
+    "\1\375\36\0\1\376\47\0\1\377\13\0\1\u0100\57\0"+
+    "\1\u0101\15\0\2\110\6\0\1\364\7\0\22\110\1\0"+
+    "\2\110\6\0\1\234\7\0\4\110\1\u0102\15\110\1\0"+
+    "\2\110\6\0\1\234\7\0\20\110\1\u0103\1\110\1\0"+
+    "\2\110\6\0\1\234\7\0\5\110\1\u0104\14\110\1\0"+
+    "\2\110\6\0\1\234\7\0\4\110\1\u0105\15\110\1\0"+
+    "\2\110\6\0\1\234\7\0\1\110\1\u0106\20\110\1\0"+
+    "\2\110\6\0\1\234\7\0\4\110\1\u0107\15\110\1\0"+
+    "\2\110\6\0\1\234\7\0\13\110\1\u0108\6\110\1\0"+
+    "\2\110\6\0\1\234\7\0\17\110\1\u0109\2\110\1\0"+
+    "\2\110\6\0\1\234\7\0\16\110\1\u010a\3\110\1\0"+
+    "\2\110\6\0\1\234\7\0\12\110\1\u010b\7\110\1\0"+
+    "\2\110\6\0\1\234\7\0\17\110\1\u010c\2\110\1\0"+
+    "\2\252\6\0\1\u0100\7\0\22\252\1\0\2\252\6\0"+
+    "\1\253\7\0\5\252\1\u010d\14\252\30\0\1\u010e\44\0"+
+    "\1\u010f\37\0\1\u0110\52\0\1\u0111\26\0\1\u0112\53\0"+
+    "\1\u0113\31\0\1\u0114\55\0\1\u0115\5\0\1\u0116\17\0"+
+    "\22\u0116\34\0\1\u0117\7\0\1\u0118\17\0\22\u0118\21\0"+
+    "\1\u0119\42\0\1\u011a\46\0\1\u011b\42\0\1\u011c\37\0"+
+    "\1\u011d\57\0\1\u011e\32\0\1\u011f\24\0\1\u0120\42\0"+
+    "\1\u0121\42\0\1\u0122\62\0\1\u0123\22\0\1\u0124\42\0"+
+    "\1\u0125\42\0\1\u0126\53\0\1\u0127\47\0\1\u0128\14\0"+
+    "\2\110\6\0\1\234\7\0\1\110\1\u0129\20\110\1\0"+
+    "\2\110\6\0\1\234\7\0\16\110\1\u012a\3\110\1\0"+
+    "\2\110\6\0\1\234\7\0\6\110\1\u012b\13\110\1\0"+
+    "\2\110\6\0\1\u0120\7\0\22\110\1\0\2\110\6\0"+
+    "\1\u0121\7\0\22\110\1\0\2\110\6\0\1\u0122\7\0"+
+    "\22\110\1\0\2\110\6\0\1\234\7\0\10\110\1\u012c"+
+    "\11\110\1\0\2\110\6\0\1\u0124\7\0\22\110\1\0"+
+    "\2\110\6\0\1\u0125\7\0\22\110\1\0\2\110\6\0"+
+    "\1\u0126\7\0\22\110\1\0\2\110\6\0\1\234\7\0"+
+    "\1\110\1\u012d\20\110\1\0\2\252\6\0\1\253\7\0"+
+    "\6\252\1\u012e\13\252\31\0\1\u012f\44\0\1\u0130\40\0"+
+    "\1\u0131\37\0\1\u0132\47\0\1\u0133\34\0\1\u0134\45\0"+
+    "\1\u0135\34\0\1\u0136\21\0\2\u0116\6\0\1\u0137\7\0"+
+    "\22\u0116\40\0\1\u0138\3\0\2\u0118\6\0\1\u0139\7\0"+
+    "\22\u0118\27\0\1\u013a\42\0\1\u013b\35\0\1\u013c\42\0"+
+    "\1\u013d\60\0\1\u013e\13\0\1\u013f\52\0\1\u0140\56\0"+
+    "\1\u0141\26\0\1\u0142\42\0\1\u0143\22\0\2\110\6\0"+
+    "\1\234\7\0\17\110\1\u0144\2\110\1\0\2\110\6\0"+
+    "\1\u013f\7\0\22\110\1\0\2\110\6\0\1\234\7\0"+
+    "\1\u0145\21\110\1\0\2\110\6\0\1\234\7\0\14\110"+
+    "\1\u0146\5\110\1\0\2\110\6\0\1\234\7\0\1\u0147"+
+    "\21\110\1\0\2\252\6\0\1\253\7\0\1\u0148\21\252"+
+    "\30\0\1\u0149\34\0\1\u014a\52\0\1\u014b\44\0\1\u014c"+
+    "\42\0\1\u014d\33\0\1\u014e\50\0\1\u014f\47\0\1\u0150"+
+    "\43\0\1\u0151\33\0\1\u0152\42\0\1\u0153\52\0\1\u0154"+
+    "\42\0\1\u0155\11\0\1\u0156\67\0\1\u0157\15\0\1\u0158"+
+    "\42\0\1\u0159\32\0\2\110\6\0\1\u0156\7\0\22\110"+
+    "\1\0\2\110\6\0\1\234\7\0\15\110\1\u015a\4\110"+
+    "\1\0\2\110\6\0\1\u0158\7\0\22\110\1\0\2\252"+
+    "\6\0\1\u0159\7\0\22\252\25\0\1\u015b\51\0\1\u015c"+
+    "\30\0\1\u015d\60\0\1\u015e\43\0\1\u015f\41\0\1\u0160"+
+    "\27\0\1\u0161\50\0\1\u0162\46\0\1\u0163\14\0\1\u0164"+
+    "\42\0\1\u0165\56\0\1\u0166\42\0\1\u0167\26\0\1\u0168"+
+    "\32\0\2\110\6\0\1\u0168\7\0\22\110\11\0\1\u0169"+
+    "\62\0\1\u016a\22\0\1\u016b\53\0\1\u016c\57\0\1\u016d"+
+    "\14\0\1\u016e\53\0\1\u016f\31\0\1\u0170\42\0\1\u0171"+
+    "\42\0\1\u0172\42\0\1\u0173\66\0\1\u0174\26\0\1\u0175"+
+    "\32\0\1\u0176\71\0\1\u0177\40\0\1\u0178\15\0\1\u0179"+
+    "\42\0\1\u017a\42\0\1\u017b\31\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[10570];
+    int [] result = new int[10640];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -527,21 +528,21 @@ public class HTMLMasonLexer extends HTMLMasonBaseLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\4\0\1\10\40\0\4\1\1\11\1\1\3\11\1\1"+
-    "\2\11\3\1\1\11\3\1\2\11\12\1\1\11\20\1"+
-    "\1\11\4\1\1\0\1\11\2\1\2\11\1\1\2\11"+
-    "\3\1\2\11\2\1\1\11\5\1\2\11\2\1\1\11"+
-    "\7\1\1\11\3\1\1\11\2\1\1\11\1\0\1\1"+
-    "\1\11\1\0\1\1\1\11\21\0\1\11\15\1\1\0"+
-    "\1\11\2\0\3\11\17\0\3\11\2\0\1\11\16\0"+
-    "\15\1\21\0\2\11\13\0\1\11\1\0\13\1\23\0"+
-    "\3\11\1\0\3\11\2\0\5\1\11\0\1\11\1\0"+
-    "\1\11\5\0\2\11\3\0\4\1\16\0\1\11\1\0"+
-    "\2\11\1\1\11\0\2\11\2\0\2\11\1\0\1\11"+
-    "\2\0\1\11\1\0\4\11\2\0\1\11\2\0\3\11";
+    "\45\0\4\1\1\11\1\1\3\11\1\1\3\11\6\1"+
+    "\2\11\12\1\1\11\20\1\1\11\5\1\1\11\2\1"+
+    "\2\11\1\1\2\11\3\1\2\11\2\1\1\11\5\1"+
+    "\2\11\2\1\1\11\7\1\1\11\3\1\1\11\2\1"+
+    "\1\11\1\0\1\1\1\11\1\0\1\1\1\11\21\0"+
+    "\1\11\15\1\1\0\1\11\2\0\1\11\1\0\2\11"+
+    "\17\0\3\11\2\0\1\11\16\0\15\1\21\0\2\11"+
+    "\13\0\1\11\1\0\13\1\23\0\3\11\1\0\3\11"+
+    "\2\0\5\1\11\0\1\11\1\0\1\11\5\0\2\11"+
+    "\3\0\4\1\16\0\1\11\1\0\2\11\1\1\11\0"+
+    "\2\11\2\0\2\11\1\0\1\11\2\0\1\11\1\0"+
+    "\4\11\2\0\1\11\2\0\3\11";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[378];
+    int [] result = new int[379];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -863,43 +864,43 @@ public class HTMLMasonLexer extends HTMLMasonBaseLexer {
             case CHECK_SPACE_CLEAR_LINE: {
               yybegin(YYINITIAL);return HTML_MASON_TEMPLATE_BLOCK_HTML;
             }  // fall though
-            case 379: break;
+            case 380: break;
             case CHECK_SPACE: {
               yybegin(YYINITIAL);return HTML_MASON_TEMPLATE_BLOCK_HTML;
             }  // fall though
-            case 380: break;
+            case 381: break;
             case SELECT_OPEN_TAG: {
               yybegin(YYINITIAL);return HTML_MASON_BLOCK_OPENER;
             }  // fall though
-            case 381: break;
+            case 382: break;
             case SELECT_CLOSE_TAG: {
               return processCloseTagFallback();
             }  // fall though
-            case 382: break;
+            case 383: break;
             case SELECT_OPEN_TAG_WITH_CUSTOM_TAGS: {
               yybegin(YYINITIAL);return HTML_MASON_BLOCK_OPENER;
             }  // fall though
-            case 383: break;
+            case 384: break;
             case SELECT_CLOSE_TAG_WITH_CUSTOM_TAGS: {
               return processCloseTagFallback();
             }  // fall though
-            case 384: break;
+            case 385: break;
             case CALL_PATH: {
               popState();yybegin(YYINITIAL);return STRING_CONTENT;
             }  // fall though
-            case 385: break;
+            case 386: break;
             case CALL_CLOSER_NAME: {
               yybegin(YYINITIAL);return STRING_CONTENT;
             }  // fall though
-            case 386: break;
+            case 387: break;
             case NON_EMPTY_DOC: {
               yybegin(YYINITIAL);return COMMENT_BLOCK;
             }  // fall though
-            case 387: break;
+            case 388: break;
             case NON_EMPTY_TEXT: {
               yybegin(YYINITIAL);return STRING_CONTENT;
             }  // fall though
-            case 388: break;
+            case 389: break;
             default:
         return null;
         }
@@ -910,168 +911,173 @@ public class HTMLMasonLexer extends HTMLMasonBaseLexer {
             { yybegin(NON_CLEAR_LINE);return HTML_MASON_TEMPLATE_BLOCK_HTML;
             } 
             // fall through
-          case 77: break;
+          case 78: break;
           case 2: 
             { yybegin(CHECK_SPACE);
             } 
             // fall through
-          case 78: break;
+          case 79: break;
           case 3: 
             { yybegin(CHECK_SPACE_CLEAR_LINE);
             } 
             // fall through
-          case 79: break;
+          case 80: break;
           case 4: 
             { yybegin(PERL_LINE);return HTML_MASON_LINE_OPENER;
             } 
             // fall through
-          case 80: break;
+          case 81: break;
           case 5: 
             { pushback();yybegin(NON_CLEAR_LINE);return HTML_MASON_TEMPLATE_BLOCK_HTML;
             } 
             // fall through
-          case 81: break;
+          case 82: break;
           case 6: 
             { pushback();yybegin(YYINITIAL);return TokenType.WHITE_SPACE;
             } 
             // fall through
-          case 82: break;
-          case 7: 
-            { return delegateLexing();
-            } 
-            // fall through
           case 83: break;
-          case 8: 
-            { yybegin(AFTER_PERL_LINE);return TokenType.WHITE_SPACE;
-            } 
-            // fall through
-          case 84: break;
-          case 9: 
+          case 7: 
             { return TokenType.BAD_CHARACTER;
             } 
             // fall through
+          case 84: break;
+          case 8: 
+            { return delegateLexing();
+            } 
+            // fall through
           case 85: break;
+          case 9: 
+            { yybegin(AFTER_PERL_LINE);return TokenType.WHITE_SPACE;
+            } 
+            // fall through
+          case 86: break;
           case 10: 
             { return HTML_MASON_ESCAPER_NAME;
             } 
             // fall through
-          case 86: break;
+          case 87: break;
           case 11: 
             { return TokenType.WHITE_SPACE;
             } 
             // fall through
-          case 87: break;
+          case 88: break;
           case 12: 
             { return COMMA;
             } 
             // fall through
-          case 88: break;
+          case 89: break;
           case 13: 
             { return processOpenTagFallback();
             } 
             // fall through
-          case 89: break;
+          case 90: break;
           case 14: 
             { return processCloseTagFallback();
             } 
             // fall through
-          case 90: break;
+          case 91: break;
           case 15: 
             { return processCustomComplexOpenTag();
             } 
             // fall through
-          case 91: break;
+          case 92: break;
           case 16: 
             { pushback();pushStateAndBegin(CALL_OPENER_COMMON);
             } 
             // fall through
-          case 92: break;
+          case 93: break;
           case 17: 
             { 
             } 
             // fall through
-          case 93: break;
-          case 18: 
-            { pushback();yybegin(CALL_OPENER_DELEGATED);return STRING_CONTENT;
-            } 
-            // fall through
           case 94: break;
-          case 19: 
-            { pushback();yybegin(CALL_OPENER_DELEGATED);
+          case 18: 
+            { popState();yybegin(YYINITIAL);return STRING_CONTENT;
             } 
             // fall through
           case 95: break;
-          case 20: 
-            { yybegin(CALL_PATH);
+          case 19: 
+            { pushback();yybegin(CALL_OPENER_DELEGATED);return STRING_CONTENT;
             } 
             // fall through
           case 96: break;
-          case 21: 
-            { pushback();yybegin(CALL_CLOSER_NAME);
+          case 20: 
+            { pushback();yybegin(CALL_OPENER_DELEGATED);
             } 
             // fall through
           case 97: break;
-          case 22: 
-            { yybegin(AFTER_PERL_BLOCK);return HTML_MASON_TAG_CLOSER;
+          case 21: 
+            { yybegin(CALL_PATH);
             } 
             // fall through
           case 98: break;
-          case 23: 
-            { pushback();yybegin(CALL_CLOSER);return STRING_CONTENT;
+          case 22: 
+            { pushback();yybegin(CALL_CLOSER_NAME);
             } 
             // fall through
           case 99: break;
-          case 24: 
-            { pushback();yybegin(YYINITIAL);
+          case 23: 
+            { yybegin(AFTER_PERL_BLOCK);return HTML_MASON_TAG_CLOSER;
             } 
             // fall through
           case 100: break;
-          case 25: 
-            { yybegin(NON_CLEAR_LINE);return TokenType.WHITE_SPACE;
+          case 24: 
+            { pushback();yybegin(CALL_CLOSER);return STRING_CONTENT;
             } 
             // fall through
           case 101: break;
-          case 26: 
-            { yybegin(YYINITIAL);return TokenType.WHITE_SPACE;
+          case 25: 
+            { pushback();yybegin(YYINITIAL);
             } 
             // fall through
           case 102: break;
-          case 27: 
-            { pushback();yybegin(NON_CLEAR_LINE);
+          case 26: 
+            { yybegin(NON_CLEAR_LINE);return TokenType.WHITE_SPACE;
             } 
             // fall through
           case 103: break;
-          case 28: 
-            { return IDENTIFIER;
+          case 27: 
+            { yybegin(YYINITIAL);return TokenType.WHITE_SPACE;
             } 
             // fall through
           case 104: break;
-          case 29: 
-            { yybegin(AFTER_PERL_BLOCK);setPerlToInitial();return HTML_MASON_TAG_CLOSER;
+          case 28: 
+            { pushback();yybegin(NON_CLEAR_LINE);
             } 
             // fall through
           case 105: break;
-          case 30: 
-            { setPerlToInitial();return TokenType.WHITE_SPACE;
+          case 29: 
+            { return IDENTIFIER;
             } 
             // fall through
           case 106: break;
-          case 31: 
-            { setPerlToInitial();return HTML_MASON_HARD_NEWLINE;
+          case 30: 
+            { yybegin(AFTER_PERL_BLOCK);setPerlToInitial();return HTML_MASON_TAG_CLOSER;
             } 
             // fall through
           case 107: break;
-          case 32: 
-            { yybegin(NON_EMPTY_DOC);
+          case 31: 
+            { setPerlToInitial();return TokenType.WHITE_SPACE;
             } 
             // fall through
           case 108: break;
-          case 33: 
-            { yybegin(NON_EMPTY_TEXT);
+          case 32: 
+            { setPerlToInitial();return HTML_MASON_HARD_NEWLINE;
             } 
             // fall through
           case 109: break;
+          case 33: 
+            { yybegin(NON_EMPTY_DOC);
+            } 
+            // fall through
+          case 110: break;
           case 34: 
+            { yybegin(NON_EMPTY_TEXT);
+            } 
+            // fall through
+          case 111: break;
+          case 35: 
             { if( myCustomTagsMap == null ){
 				yybegin(SELECT_OPEN_TAG);
 			}
@@ -1081,48 +1087,48 @@ public class HTMLMasonLexer extends HTMLMasonBaseLexer {
 			}
             } 
             // fall through
-          case 110: break;
-          case 35: 
+          case 112: break;
+          case 36: 
             { yybegin(CALL_OPENER);startPerlExpression();return HTML_MASON_CALL_OPENER;
             } 
             // fall through
-          case 111: break;
-          case 36: 
+          case 113: break;
+          case 37: 
             { pushback();yybegin(NON_CLEAR_LINE);return TokenType.WHITE_SPACE;
             } 
             // fall through
-          case 112: break;
-          case 37: 
+          case 114: break;
+          case 38: 
             { yybegin(AFTER_PERL_BLOCK);endPerlExpression();return HTML_MASON_BLOCK_CLOSER;
             } 
             // fall through
-          case 113: break;
-          case 38: 
+          case 115: break;
+          case 39: 
             { return processCustomSimpleOpenTag();
             } 
             // fall through
-          case 114: break;
-          case 39: 
+          case 116: break;
+          case 40: 
             { return processCustomCloseTag();
             } 
             // fall through
-          case 115: break;
-          case 40: 
+          case 117: break;
+          case 41: 
             { endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_CALL_CLOSER;
             } 
             // fall through
-          case 116: break;
-          case 41: 
+          case 118: break;
+          case 42: 
             { pushback();popState();
             } 
             // fall through
-          case 117: break;
-          case 42: 
+          case 119: break;
+          case 43: 
             { endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_CALL_CLOSER_UNMATCHED;
             } 
             // fall through
-          case 118: break;
-          case 43: 
+          case 120: break;
+          case 44: 
             { if( myCustomTagsMap == null ){
 				yybegin(SELECT_CLOSE_TAG);
 			}
@@ -1132,175 +1138,175 @@ public class HTMLMasonLexer extends HTMLMasonBaseLexer {
 			}
             } 
             // fall through
-          case 119: break;
-          case 44: 
+          case 121: break;
+          case 45: 
             { yybegin(CALL_CLOSER); return HTML_MASON_CALL_CLOSE_TAG_START;
             } 
             // fall through
-          case 120: break;
-          case 45: 
+          case 122: break;
+          case 46: 
             { yybegin(CALL_OPENER_FILTERING);startPerlExpression();return HTML_MASON_CALL_FILTERING_OPENER;
             } 
             // fall through
-          case 121: break;
-          case 46: 
+          case 123: break;
+          case 47: 
             { return processDefOpenTag();
             } 
             // fall through
-          case 122: break;
-          case 47: 
+          case 124: break;
+          case 48: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 1);
             { yybegin(PERL_EXPR_FILTER);return HTML_MASON_EXPR_FILTER_PIPE;
             } 
             // fall through
-          case 123: break;
-          case 48: 
+          case 125: break;
+          case 49: 
             { yybegin(DOC);return HTML_MASON_DOC_OPENER;
             } 
             // fall through
-          case 124: break;
-          case 49: 
+          case 126: break;
+          case 50: 
             { return processDefCloseTag();
             } 
             // fall through
-          case 125: break;
-          case 50: 
+          case 127: break;
+          case 51: 
             { yybegin(TEXT);return HTML_MASON_TEXT_OPENER;
             } 
             // fall through
-          case 126: break;
-          case 51: 
+          case 128: break;
+          case 52: 
             { yybegin(ONCE);startPerlExpression();return HTML_MASON_ONCE_OPENER;
             } 
             // fall through
-          case 127: break;
-          case 52: 
+          case 129: break;
+          case 53: 
             { yybegin(INIT);startPerlExpression();return HTML_MASON_INIT_OPENER;
             } 
             // fall through
-          case 128: break;
-          case 53: 
+          case 130: break;
+          case 54: 
             { yybegin(ATTR);startPerlExpression();return HTML_MASON_ATTR_OPENER;
             } 
             // fall through
-          case 129: break;
-          case 54: 
+          case 131: break;
+          case 55: 
             { return processArgsOpenTag(ARGS);
             } 
             // fall through
-          case 130: break;
-          case 55: 
+          case 132: break;
+          case 56: 
             { return processPerlOpenTag(PERL);
             } 
             // fall through
-          case 131: break;
-          case 56: 
+          case 133: break;
+          case 57: 
             { return processCustomPerlCloser();
             } 
             // fall through
-          case 132: break;
-          case 57: 
+          case 134: break;
+          case 58: 
             { return processCustomArgsCloser();
             } 
             // fall through
-          case 133: break;
-          case 58: 
+          case 135: break;
+          case 59: 
             { yybegin(FLAGS);startPerlExpression();return HTML_MASON_FLAGS_OPENER;
             } 
             // fall through
-          case 134: break;
-          case 59: 
+          case 136: break;
+          case 60: 
             { return processMethodOpenTag();
             } 
             // fall through
-          case 135: break;
-          case 60: 
+          case 137: break;
+          case 61: 
             { yybegin(FILTER);startPerlExpression();return HTML_MASON_FILTER_OPENER;
             } 
             // fall through
-          case 136: break;
-          case 61: 
+          case 138: break;
+          case 62: 
             { yybegin(SHARED);startPerlExpression();return HTML_MASON_SHARED_OPENER;
             } 
             // fall through
-          case 137: break;
-          case 62: 
+          case 139: break;
+          case 63: 
             { return processMethodCloseTag();
             } 
             // fall through
-          case 138: break;
-          case 63: 
+          case 140: break;
+          case 64: 
             { yybegin(AFTER_PERL_BLOCK);return HTML_MASON_DOC_CLOSER;
             } 
             // fall through
-          case 139: break;
-          case 64: 
+          case 141: break;
+          case 65: 
             { yybegin(DOC);pushback();return COMMENT_BLOCK;
             } 
             // fall through
-          case 140: break;
-          case 65: 
+          case 142: break;
+          case 66: 
             { yybegin(CLEANUP);startPerlExpression();return HTML_MASON_CLEANUP_OPENER;
             } 
             // fall through
-          case 141: break;
-          case 66: 
+          case 143: break;
+          case 67: 
             { endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_INIT_CLOSER;
             } 
             // fall through
-          case 142: break;
-          case 67: 
+          case 144: break;
+          case 68: 
             { endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_ONCE_CLOSER;
             } 
             // fall through
-          case 143: break;
-          case 68: 
+          case 145: break;
+          case 69: 
             { endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_ATTR_CLOSER;
             } 
             // fall through
-          case 144: break;
-          case 69: 
+          case 146: break;
+          case 70: 
             { return processPerlCloser();
             } 
             // fall through
-          case 145: break;
-          case 70: 
+          case 147: break;
+          case 71: 
             { return processArgsCloser();
             } 
             // fall through
-          case 146: break;
-          case 71: 
+          case 148: break;
+          case 72: 
             { yybegin(AFTER_PERL_BLOCK);return HTML_MASON_TEXT_CLOSER;
             } 
             // fall through
-          case 147: break;
-          case 72: 
+          case 149: break;
+          case 73: 
             { yybegin(TEXT);pushback();return STRING_CONTENT;
             } 
             // fall through
-          case 148: break;
-          case 73: 
+          case 150: break;
+          case 74: 
             { endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_FLAGS_CLOSER;
             } 
             // fall through
-          case 149: break;
-          case 74: 
+          case 151: break;
+          case 75: 
             { endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_SHARED_CLOSER;
             } 
             // fall through
-          case 150: break;
-          case 75: 
+          case 152: break;
+          case 76: 
             { endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_FILTER_CLOSER;
             } 
             // fall through
-          case 151: break;
-          case 76: 
+          case 153: break;
+          case 77: 
             { endPerlExpression();yybegin(AFTER_PERL_BLOCK);return HTML_MASON_CLEANUP_CLOSER;
             } 
             // fall through
-          case 152: break;
+          case 154: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

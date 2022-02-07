@@ -103,6 +103,7 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 	{ANY_SPACES}?{CALL_OPEN_TAG_END}	{pushback();yybegin(CALL_OPENER_DELEGATED);return STRING_CONTENT;}
 	[^ \t\f\n\r,&]+						{}
 	{ANY_SPACES}						{}
+        [^]								{popState();yybegin(YYINITIAL);return STRING_CONTENT;}
 	<<EOF>>								{popState();yybegin(YYINITIAL);return STRING_CONTENT;}
 }
 
@@ -325,3 +326,5 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 		[<%]							{yybegin(NON_CLEAR_LINE);return HTML_MASON_TEMPLATE_BLOCK_HTML;}
 	}
 }
+
+[^]     {return TokenType.BAD_CHARACTER;}
