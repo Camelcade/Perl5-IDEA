@@ -20,6 +20,7 @@ import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegateAdapter;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.FileViewProvider;
@@ -51,13 +52,14 @@ public class MojoliciousEnterHandlerDelegate extends EnterHandlerDelegateAdapter
     if (viewProvider instanceof MojoliciousFileViewProvider) {
       if (!(MojoliciousSmartKeysUtil.addCloseMarker(editor, "\n" + KEYWORD_MOJO_BLOCK_CLOSER) ||
             MojoliciousSmartKeysUtil.addEndMarker(editor, "\n% end\n"))) {
-        addOutlineMarkerIfNeeded((MojoliciousFileViewProvider)viewProvider, caretOffset.get());
+        addOutlineMarkerIfNeeded(editor, (MojoliciousFileViewProvider)viewProvider, caretOffset.get());
       }
     }
     return Result.Continue;
   }
 
-  protected void addOutlineMarkerIfNeeded(@NotNull MojoliciousFileViewProvider viewProvider,
+  protected void addOutlineMarkerIfNeeded(@NotNull Editor editor,
+                                          @NotNull MojoliciousFileViewProvider viewProvider,
                                           int offset
   ) {
     PsiElement element = viewProvider.findElementAt(offset, MojoliciousLanguage.INSTANCE);
@@ -87,7 +89,7 @@ public class MojoliciousEnterHandlerDelegate extends EnterHandlerDelegateAdapter
 
     IElementType tokenType = PsiUtilCore.getElementType(element);
     if (tokenType == MOJO_LINE_OPENER && element.getNode().getStartOffset() < offset) {
-      document.insertString(offset, KEYWORD_MOJO_LINE_OPENER + " ");
+      EditorModificationUtil.insertStringAtCaret(editor, KEYWORD_MOJO_LINE_OPENER + " ", false, true);
     }
   }
 }

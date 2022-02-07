@@ -19,8 +19,10 @@ package com.perl5.lang.mojolicious.idea.editor.smartkeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mojolicious.MojoliciousElementTypes;
+import com.perl5.lang.perl.idea.editor.smartkeys.PerlEditorUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
@@ -77,7 +79,9 @@ public class MojoliciousSmartKeysUtil implements MojoliciousElementTypes, PerlEl
       return false;
     }
     var highlighterIterator = editor.getHighlighter().createIterator(caretOffset - 2);
-    if (highlighterIterator.getTokenType() != MOJO_BEGIN || hasEndMarkerAhead(highlighterIterator)) {
+    var tokenType = highlighterIterator.getTokenType();
+    if (tokenType != MOJO_BEGIN && !(tokenType == SUB_NAME && StringUtil.equals("begin", PerlEditorUtil.getTokenChars(highlighterIterator)))
+        || hasEndMarkerAhead(highlighterIterator)) {
       return false;
     }
 
