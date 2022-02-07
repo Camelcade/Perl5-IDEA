@@ -21,7 +21,7 @@ import base.TemplateToolkitLightTestCase;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 import org.junit.Test;
 
-public class TemplateToolkitEditorTest extends TemplateToolkitLightTestCase {
+public class TemplateToolkitTypedHandlerTestTest extends TemplateToolkitLightTestCase {
 
   @Test
   public void testAutocloseTag() {
