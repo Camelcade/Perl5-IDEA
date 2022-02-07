@@ -470,12 +470,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   public abstract String getFileExtension();
 
-  protected void testSmartKey(String original, char typed, String expected) {
-    initWithTextSmart(original);
-    myFixture.type(typed);
-    myFixture.checkResult(expected);
-  }
-
   public void initWithFileSmart() {
     initWithFileSmart(getTestName(true));
   }
@@ -1137,7 +1131,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     myFixture.performEditorAction(IdeActions.ACTION_EDITOR_BACKSPACE);
     myFixture.checkResult(expected);
   }
-
 
   protected void doTestEnter(@NotNull String fileName) {
     initWithFileSmart(fileName);

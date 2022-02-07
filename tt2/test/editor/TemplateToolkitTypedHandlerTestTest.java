@@ -25,7 +25,7 @@ public class TemplateToolkitTypedHandlerTestTest extends TemplateToolkitLightTes
 
   @Test
   public void testAutocloseTag() {
-    testSmartKey("[<caret>", '%', "[%  %]");
+    doTestTypingWithoutFiles("[<caret>", "%", "[%  %]");
   }
 
   @Test
@@ -34,32 +34,32 @@ public class TemplateToolkitTypedHandlerTestTest extends TemplateToolkitLightTes
     TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(getProject());
     settings.START_TAG = "%SOME%=";
     settings.END_TAG = "/ENDTAG$";
-    testSmartKey("%SOME%<caret>", '=', "%SOME%=  /ENDTAG$");
+    doTestTypingWithoutFiles("%SOME%<caret>", "=", "%SOME%=  /ENDTAG$");
     restoreSettings();
   }
 
   @Test
   public void testBraces() {
-    testSmartKey("[% <caret> %]", '{', "[% {} %]");
+    doTestTypingWithoutFiles("[% <caret> %]", "{", "[% {} %]");
   }
 
   @Test
   public void testBrakets() {
-    testSmartKey("[% <caret> %]", '[', "[% [] %]");
+    doTestTypingWithoutFiles("[% <caret> %]", "[", "[% [] %]");
   }
 
   @Test
   public void testParens() {
-    testSmartKey("[% <caret> %]", '(', "[% () %]");
+    doTestTypingWithoutFiles("[% <caret> %]", "(", "[% () %]");
   }
 
   @Test
   public void testDQ() {
-    testSmartKey("[% <caret> %]", '"', "[% \"\" %]");
+    doTestTypingWithoutFiles("[% <caret> %]", "\"", "[% \"\" %]");
   }
 
   @Test
   public void testSQ() {
-    testSmartKey("[% <caret> %]", '\'', "[% '' %]");
+    doTestTypingWithoutFiles("[% <caret> %]", "'", "[% '' %]");
   }
 }
