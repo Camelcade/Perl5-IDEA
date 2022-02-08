@@ -73,26 +73,25 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
     String fileName = Objects.requireNonNull(PerlString.getContentFileName(continuosText));
 
     for (String file : FilenameIndex.getAllFilenames(project)) {
-      if (file.contains(fileName)) {
-        for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project))) {
-          String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
-          if (canonicalPath != null) {
-            if (canonicalPath.contains(tokenText + "."))    // higher priority
-            {
-              result.add(0, fileItem);
-            }
-            else if (canonicalPath.contains(tokenText)) {
-              result.add(fileItem);
-            }
-          }
+      if (!file.contains(fileName)) {
+        continue;
+      }
+      for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project))) {
+        String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
+        if (canonicalPath == null) {
+          continue;
         }
-        for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true)) {
-          String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
-          if (canonicalPath != null) {
-            if (canonicalPath.contains(tokenText)) {
-              result.add(fileItem);
-            }
-          }
+        if (canonicalPath.contains(tokenText + ".")) {
+          result.add(0, fileItem);
+        }
+        else if (canonicalPath.contains(tokenText)) {
+          result.add(fileItem);
+        }
+      }
+      for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true)) {
+        String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
+        if (canonicalPath != null && canonicalPath.contains(tokenText)) {
+          result.add(fileItem);
         }
       }
     }
