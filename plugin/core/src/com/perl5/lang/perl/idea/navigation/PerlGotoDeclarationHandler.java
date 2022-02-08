@@ -51,7 +51,6 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
     }, sourceElement);
 
     addShadowedVariable(sourceElement, result);
-    addSubAlternatives(sourceElement, result);
     addStringFileTargets(sourceElement, result);
 
     return result.isEmpty() ? null : result.toArray(PsiElement.EMPTY_ARRAY);
@@ -95,25 +94,6 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
             }
           }
         }
-      }
-    }
-  }
-
-  /**
-   * Adds alternative definitions/declarations of the same sub.
-   */
-  private void addSubAlternatives(@NotNull PsiElement sourceElement, ArrayList<PsiElement> result) {
-    if (!(sourceElement instanceof PerlSubNameElement)) {
-      return;
-    }
-    PsiElement elementParent = sourceElement.getParent();
-
-    // suppress declaration if there is a definition and declaration
-    if (result.size() == 2 &&
-        !(elementParent instanceof PerlSubDefinitionElement || elementParent instanceof PerlSubDeclarationElement)) {
-      if (result.get(0).getOriginalElement() instanceof PerlSubDeclarationElement &&
-          result.get(1).getOriginalElement() instanceof PerlSubDefinitionElement) {
-        result.remove(0);
       }
     }
   }
