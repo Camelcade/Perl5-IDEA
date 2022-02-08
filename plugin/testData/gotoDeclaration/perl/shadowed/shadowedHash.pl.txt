@@ -1,0 +1,3 @@
+Total elements: 1
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 3 in shadowedHash.pl
+		hash in shadowedHash.pl; /hash_gutter_icon.png; null

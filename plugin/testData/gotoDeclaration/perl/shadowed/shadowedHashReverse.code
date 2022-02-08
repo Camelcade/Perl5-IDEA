@@ -1,0 +1,5 @@
+my %ha<caret>sh = (key => 42);
+
+{
+  my %hash = ();
+}

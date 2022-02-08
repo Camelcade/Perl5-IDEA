@@ -1,0 +1,3 @@
+Total elements: 1
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 4 in shadowedScalarOurMy.pl
+		scalar in shadowedScalarOurMy.pl; /scalar_gutter_icon.png; null

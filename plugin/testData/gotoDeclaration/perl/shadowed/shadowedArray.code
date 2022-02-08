@@ -1,0 +1,5 @@
+my @array = (42);
+
+{
+  my @ar<caret>ray = (42);
+}

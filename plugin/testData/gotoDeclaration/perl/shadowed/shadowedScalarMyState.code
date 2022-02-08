@@ -1,0 +1,5 @@
+my $scalar = 42;
+
+{
+  state $sca<caret>lar = 69;
+}

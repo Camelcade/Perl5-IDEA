@@ -1,0 +1,5 @@
+my $scalar = 42;
+
+{
+  our $sca<caret>lar = 69;
+}
