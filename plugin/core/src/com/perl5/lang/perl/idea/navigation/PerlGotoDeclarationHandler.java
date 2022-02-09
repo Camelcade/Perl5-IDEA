@@ -115,7 +115,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
       return;
     }
     PerlVariableDeclarationElement shadowedVariable = PerlResolveUtil.getLexicalDeclaration((PerlVariable)variable);
-    if (shadowedVariable != null && !result.contains(shadowedVariable)) {
+    if (shadowedVariable != null) {
       result.add(shadowedVariable);
     }
   }
