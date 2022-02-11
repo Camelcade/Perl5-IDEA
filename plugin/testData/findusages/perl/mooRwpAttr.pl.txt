@@ -1,7 +1,7 @@
 Target: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::_set_test($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooRwpAttr.pl
 Total usages: 2
-	PerlSubNameElementImpl(Perl5: subname) at 96 in mooRwpAttr.pl, via: PerlSubReference at (96,105); text in range: '_set_test' => 1 results:
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::_set_test($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooRwpAttr.pl
-
 	PerlSubNameElementImpl(Perl5: subname) at 81 in mooRwpAttr.pl, via: PerlSubReference at (81,85); text in range: 'test' => 1 results:
 	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooRwpAttr.pl
+
+	PerlSubNameElementImpl(Perl5: subname) at 96 in mooRwpAttr.pl, via: PerlSubReference at (96,105); text in range: '_set_test' => 1 results:
+	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@MySomePackage::_set_test($self, $new_value); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooRwpAttr.pl
