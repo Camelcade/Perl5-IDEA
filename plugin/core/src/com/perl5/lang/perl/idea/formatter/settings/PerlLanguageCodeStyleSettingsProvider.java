@@ -129,6 +129,11 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 customizableOptions.SPACES_AROUND_OPERATORS);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "SPACE_AROUND_DEREFERENCE",
+                                PerlBundle.message("perl.formatting.dereference.operator"),
+                                customizableOptions.SPACES_AROUND_OPERATORS);
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD",
                                 PerlBundle.message("perl.formatting.after.my"),
                                 customizableOptions.SPACES_OTHER);

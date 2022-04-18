@@ -33,13 +33,25 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   public void testUseVars() {doFormatTest();}
 
   @Test
-  public void testReplaceRegexWithComments() {doFormatTest();}
+  public void testReplaceRegexWithComments() { doFormatTest(); }
 
   @Test
-  public void testRegexExtended() {doFormatTest();}
+  public void testRegexExtended() { doFormatTest(); }
 
   @Test
-  public void testStringBitwiseOperators() {doFormatTest();}
+  public void testStringBitwiseOperators() { doFormatTest(); }
+
+  @Test
+  public void testDerefSpacingTrue() {
+    getCustomSettings().SPACE_AROUND_DEREFERENCE = true;
+    doTestSingleSource("derefSpacing");
+  }
+
+  @Test
+  public void testDerefSpacingFalse() {
+    getCustomSettings().SPACE_AROUND_DEREFERENCE = false;
+    doTestSingleSource("derefSpacing");
+  }
 
   @Test
   public void testFunctionLikeExprTrue() {

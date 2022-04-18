@@ -1,6 +1,7 @@
 my ($var1, $var2);
 $var1 = 100;
 $var2 = 200;
+Foo::Bar->new($aref->[0], $href->{key});
 
 if ($var1 == $var2) {
     my $arrayref = [ 1, 1, 2, 3, 5, { key => 'val' } ];

@@ -223,9 +223,9 @@ public class PerlSpacingBuilderFactory {
       .afterInside(LEFT_BRACKET, ANON_ARRAY).spaceIf(perlSettings.SPACES_WITHIN_ANON_ARRAY)
       .beforeInside(RIGHT_BRACKET, ANON_ARRAY).spaceIf(perlSettings.SPACES_WITHIN_ANON_ARRAY)
 
+      .around(OPERATOR_DEREFERENCE).spaceIf(perlSettings.SPACE_AROUND_DEREFERENCE)
       .around(ARRAY_INDEX).spaces(0)
       .around(HASH_INDEX).spaces(0)
-      .around(OPERATOR_DEREFERENCE).spaces(0)
 
       .before(CALL_ARGUMENTS).spaces(1)
       .before(PARENTHESISED_CALL_ARGUMENTS).spaces(0)
