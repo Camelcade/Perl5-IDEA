@@ -1334,13 +1334,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void assertInjected() {
     assertInstanceOf(getEditor(), EditorWindow.class);
-    //noinspection UnstableApiUsage
     assertInstanceOf(getFile().getViewProvider(), InjectedFileViewProvider.class);
   }
 
   protected void assertNotInjected() {
     assertFalse("Editor is EditorWindow, looks like injected to me", getEditor() instanceof EditorWindow);
-    //noinspection UnstableApiUsage
     assertFalse("File is injected", getFile() instanceof InjectedFileViewProvider);
   }
 

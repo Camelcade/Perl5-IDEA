@@ -1,0 +1,5 @@
+say 'hi';
+
+#@inject HTML
+__DATA__
+<div> This is html<caret> injected text </div>

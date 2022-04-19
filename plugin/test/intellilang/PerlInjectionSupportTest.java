@@ -35,13 +35,16 @@ public class PerlInjectionSupportTest extends PerlLightTestCase {
   public void testHtmlQX() {doFileTest();}
 
   @Test
-  public void testHtmlHeredocQ() {doFileTest();}
+  public void testHtmlHeredocQ() { doFileTest(); }
 
   @Test
-  public void testHtmlHeredocQQ() {doFileTest();}
+  public void testHtmlHeredocQQ() { doFileTest(); }
 
   @Test
-  public void testHtmlHeredocQX() {doFileTest();}
+  public void testHtmlHeredocQX() { doFileTest(); }
+
+  @Test
+  public void testHtmlData() { doFileTest(); }
 
   private void doFileTest() {
     initWithFileSmartWithoutErrors();
