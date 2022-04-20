@@ -45,6 +45,8 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
 
   public boolean SPACE_AFTER_VARIABLE_DECLARATION_KEYWORD = true;
 
+  public boolean SPACE_AFTER_HEREDOC_OPERATOR = false;
+
   public boolean SPACES_WITHIN_ANON_HASH = true;
   public boolean SPACES_WITHIN_ANON_ARRAY = true;
 

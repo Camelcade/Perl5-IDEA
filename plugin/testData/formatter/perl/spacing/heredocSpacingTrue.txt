@@ -1,0 +1,32 @@
+<<TEST;
+    test
+TEST
+
+<< "TEST";
+    test
+TEST
+
+<< 'TEST';
+    test
+TEST
+
+<< `TEST`;
+    test
+TEST
+
+<<~TEST;
+    test
+TEST
+
+<<~ "TEST";
+    test
+TEST
+
+<<~ 'TEST';
+    test
+TEST
+
+<<~ `TEST`;
+    test
+TEST
+

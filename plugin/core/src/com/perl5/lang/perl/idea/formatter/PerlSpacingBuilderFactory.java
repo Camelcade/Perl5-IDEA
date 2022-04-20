@@ -306,7 +306,8 @@ public class PerlSpacingBuilderFactory {
       .after(CUSTOM_EXPR_KEYWORDS).spaces(1)
       .after(MOOSE_RESERVED_TOKENSET).spaces(1)
 
-      .after(OPERATOR_HEREDOC).spaces(0)
+      .between(OPERATOR_HEREDOC, STRING_BARE).spaces(0)
+      .after(OPERATOR_HEREDOC).spaceIf(perlSettings.SPACE_AFTER_HEREDOC_OPERATOR)
 
       .betweenInside(PACKAGE, SEMICOLON, USE_STATEMENT).spaces(0)
       .betweenInside(VERSION_ELEMENT, SEMICOLON, USE_STATEMENT).spaces(0)

@@ -119,6 +119,12 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "SPACE_AFTER_HEREDOC_OPERATOR",
+                                PerlBundle.message("perl.formatting.after.heredoc.operator"),
+                                customizableOptions.SPACES_OTHER
+      );
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "SPACE_AROUND_CONCAT_OPERATOR",
                                 PerlBundle.message("perl.formatting.concatenation"),
                                 customizableOptions.SPACES_AROUND_OPERATORS);

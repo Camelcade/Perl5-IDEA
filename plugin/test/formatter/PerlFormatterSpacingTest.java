@@ -27,10 +27,22 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   }
 
   @Test
-  public void testPrintArguments() {doFormatTest();}
+  public void testHeredocSpacingTrue() {
+    getCustomSettings().SPACE_AFTER_HEREDOC_OPERATOR = true;
+    doTestSingleSource("heredocSpacing");
+  }
 
   @Test
-  public void testUseVars() {doFormatTest();}
+  public void testHeredocSpacingFalse() {
+    getCustomSettings().SPACE_AFTER_HEREDOC_OPERATOR = false;
+    doTestSingleSource("heredocSpacing");
+  }
+
+  @Test
+  public void testPrintArguments() { doFormatTest(); }
+
+  @Test
+  public void testUseVars() { doFormatTest(); }
 
   @Test
   public void testReplaceRegexWithComments() { doFormatTest(); }
