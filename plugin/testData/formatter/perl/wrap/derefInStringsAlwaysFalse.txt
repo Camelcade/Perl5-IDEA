@@ -1,0 +1,71 @@
+####################
+"this is a $someth->{var}";
+"this is a $$somethi{var}";
+"this is a longer $someth->{var}";
+"this is a longer $$somethi{var}";
+qx/this is a $someth->{var}/;
+qx/this is a $$somethi{var}/;
+qx/this is a longer $someth->{var}/;
+qx/this is a longer $$somethi{var}/;
+
+`this is a $someth->{var}`;
+`this is a $$somethi{var}`;
+`this is a longer $someth->{var}`;
+`this is a longer $$somethi{var}`;
+qx/this is a $someth->{var}/;
+qx/this is a $$somethi{var}/;
+qx/this is a longer $someth->{var}/;
+qx/this is a longer $$somethi{var}/;
+
+'this is a $someth->{var}';
+'this is a $$somethi{var}';
+'this is a longer $someth->{var}';
+'this is a longer $$somethi{var}';
+q/this is a $someth->{var}/;
+q/this is a $$somethi{var}/;
+q/this is a longer $someth->{var}/;
+q/this is a longer $$somethi{var}/;
+
+<<EOT;
+"this is a $someth->{var}";
+"this is a $$somethi{var}";
+"this is a longer $someth->{var}";
+"this is a longer $$somethi{var}";
+qx/this is a $someth->{var}/;
+qx/this is a $$somethi{var}/;
+qx/this is a longer $someth->{var}/;
+qx/this is a longer $$somethi{var}/;
+EOT
+
+<<"EOT";
+"this is a $someth->{var}";
+"this is a $$somethi{var}";
+"this is a longer $someth->{var}";
+"this is a longer $$somethi{var}";
+qx/this is a $someth->{var}/;
+qx/this is a $$somethi{var}/;
+qx/this is a longer $someth->{var}/;
+qx/this is a longer $$somethi{var}/;
+EOT
+
+<<'EOT';
+"this is a $someth->{var}";
+"this is a $$somethi{var}";
+"this is a longer $someth->{var}";
+"this is a longer $$somethi{var}";
+qx/this is a $someth->{var}/;
+qx/this is a $$somethi{var}/;
+qx/this is a longer $someth->{var}/;
+qx/this is a longer $$somethi{var}/;
+EOT
+
+<<`EOT`;
+"this is a $someth->{var}";
+"this is a $$somethi{var}";
+"this is a longer $someth->{var}";
+"this is a longer $$somethi{var}";
+qx/this is a $someth->{var}/;
+qx/this is a $$somethi{var}/;
+qx/this is a longer $someth->{var}/;
+qx/this is a longer $$somethi{var}/;
+EOT

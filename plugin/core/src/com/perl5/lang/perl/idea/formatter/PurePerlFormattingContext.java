@@ -522,7 +522,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext impleme
              (childNodeType == UNDEF_EXPR && PerlTokenSets.VARIABLE_DECLARATIONS.contains(parentNodeType))) {
       return getWrapBySettings(parentNode, perlCodeStyleSettings.VARIABLE_DECLARATION_WRAP, false);
     }
-    else if (parentNodeType == DEREF_EXPR) {
+    else if (parentNodeType == DEREF_EXPR && !QUOTED_STRINGS.contains(PsiUtilCore.getElementType(parentNode.getTreeParent()))) {
       if (perlCodeStyleSettings.METHOD_CALL_CHAIN_SIGN_NEXT_LINE) {
         if (childNodeType == OPERATOR_DEREFERENCE) {
           return getWrapBySettings(parentNode, commonCodeStyleSettings.METHOD_CALL_CHAIN_WRAP, true);

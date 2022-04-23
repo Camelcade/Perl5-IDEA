@@ -27,6 +27,42 @@ public class PerlFormatterWrapTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testDerefInStringsAlwaysTrue() {
+    doTestDerefInStrings(WRAP_ALWAYS, true);
+  }
+
+  @Test
+  public void testDerefInStringsAlwaysFalse() {
+    doTestDerefInStrings(WRAP_ALWAYS, false);
+  }
+
+  @Test
+  public void testDerefInStringsChopTrue() {
+    doTestDerefInStrings(WRAP_ON_EVERY_ITEM, true);
+  }
+
+  @Test
+  public void testDerefInStringsChopFalse() {
+    doTestDerefInStrings(WRAP_ON_EVERY_ITEM, false);
+  }
+
+  @Test
+  public void testDerefInStringsNeverTrue() {
+    doTestDerefInStrings(DO_NOT_WRAP, true);
+  }
+
+  @Test
+  public void testDerefInStringsNeverFalse() {
+    doTestDerefInStrings(DO_NOT_WRAP, false);
+  }
+
+  private void doTestDerefInStrings(int wrapType, boolean signNextLine) {
+    getCustomSettings().METHOD_CALL_CHAIN_SIGN_NEXT_LINE = signNextLine;
+    getSettings().METHOD_CALL_CHAIN_WRAP = wrapType;
+    doWrappingTestSingleSource("derefInStrings");
+  }
+
+  @Test
   public void testAssignmentsNever() {
     doTestAssignments(DO_NOT_WRAP, false);
   }
