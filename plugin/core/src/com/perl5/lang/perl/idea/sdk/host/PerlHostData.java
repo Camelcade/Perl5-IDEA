@@ -23,7 +23,6 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFileSystem;
@@ -119,7 +118,6 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
         };
       }
     };
-    processHandler.setShouldKillProcessSoftlyWithWinP(SystemInfo.isWin10OrNewer);
     return processHandler;
   }
 
