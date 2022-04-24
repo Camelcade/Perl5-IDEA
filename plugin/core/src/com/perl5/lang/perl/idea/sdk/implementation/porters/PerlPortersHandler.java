@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 class PerlPortersHandler
   extends PerlImplementationHandler<PerlPortersData, PerlPortersHandler> {
 
+  @SuppressWarnings("NonDefaultConstructor")
   public PerlPortersHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }

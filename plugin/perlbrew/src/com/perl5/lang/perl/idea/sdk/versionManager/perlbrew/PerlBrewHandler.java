@@ -38,6 +38,7 @@ import java.util.regex.Pattern;
 class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBrewHandler> {
   private static final Pattern KEY_VAL_PATTERN = Pattern.compile("\\s+([\\w_]+):\\s*(\\S+)");
 
+  @SuppressWarnings("NonDefaultConstructor")
   public PerlBrewHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }

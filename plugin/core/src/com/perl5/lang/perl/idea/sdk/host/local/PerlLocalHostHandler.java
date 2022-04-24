@@ -31,6 +31,7 @@ import static com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers.*;
 class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalHostHandler> {
   private final PerlLocalHostData DATA_INSTANCE = new PerlLocalHostData(this);
 
+  @SuppressWarnings("NonDefaultConstructor")
   public PerlLocalHostHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }

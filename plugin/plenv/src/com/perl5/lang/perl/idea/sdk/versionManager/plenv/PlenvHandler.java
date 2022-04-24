@@ -32,6 +32,7 @@ import javax.swing.*;
 
 class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler> {
 
+  @SuppressWarnings("NonDefaultConstructor")
   public PlenvHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }

@@ -30,6 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, BerryBrewHandler> {
+  @SuppressWarnings("NonDefaultConstructor")
   public BerryBrewHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }

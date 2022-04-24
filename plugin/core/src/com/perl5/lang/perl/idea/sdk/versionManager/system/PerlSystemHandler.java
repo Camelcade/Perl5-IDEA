@@ -36,6 +36,7 @@ import java.util.function.Consumer;
 class PerlSystemHandler
   extends PerlVersionManagerHandler<PerlSystemData, PerlSystemHandler> {
 
+  @SuppressWarnings("NonDefaultConstructor")
   public PerlSystemHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }

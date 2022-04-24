@@ -34,6 +34,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslHandler> {
+  @SuppressWarnings("NonDefaultConstructor")
   public PerlWslHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }
