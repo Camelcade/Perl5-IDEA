@@ -62,7 +62,7 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
       String name = StringUtil.notNullize(((PerlSubDefinitionElement)structuralParentElement).getCanonicalName());
       return new PsiNamedElementUsageGroupBase<>((PerlSubDefinitionElement)structuralParentElement) {
         @Override
-        public @NotNull String getText(UsageView view) {
+        public @NotNull String getPresentableGroupText() {
           return name;
         }
       };
@@ -75,7 +75,7 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
     if (structuralParentElement instanceof PerlMethodModifier) {
       return new PsiElementUsageGroupBase<>((PerlMethodModifier)structuralParentElement) {
         @Override
-        public @NotNull String getText(UsageView view) {
+        public @NotNull String getPresentableGroupText() {
           PerlMethodModifier modifier = getElement();
           if (modifier != null) {
             ItemPresentation presentation = modifier.getPresentation();
@@ -83,7 +83,7 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
               return StringUtil.notNullize(presentation.getPresentableText());
             }
           }
-          return super.getText(view);
+          return super.getPresentableGroupText();
         }
       };
     }
