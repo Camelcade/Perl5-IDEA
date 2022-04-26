@@ -63,6 +63,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
   public int ALIGN_CONSECUTIVE_ASSIGNMENTS = 0;
 
   public boolean ALIGN_FAT_COMMA = true;
+  public boolean ALIGN_RIGHTWARD_CALLS = false;
 
   public int QW_LIST_WRAP = DO_NOT_WRAP;
   public boolean ALIGN_QW_ELEMENTS = false;

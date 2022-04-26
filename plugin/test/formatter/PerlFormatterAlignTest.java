@@ -22,6 +22,7 @@ import org.junit.Test;
 
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.WRAP_AS_NEEDED;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
+
 public class PerlFormatterAlignTest extends PerlFormatterTestCase {
   @Override
   protected String getBaseDataPath() {
@@ -45,6 +46,17 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
 
   private void doTestAlignListElements() {
     doWrappingTestSingleSource("alignListElements");
+  }
+
+  @Test
+  public void testRightwardCallsTrue() { doTestRightwardCalls(true); }
+
+  @Test
+  public void testRightwardCallsFalse() { doTestRightwardCalls(false); }
+
+  private void doTestRightwardCalls(boolean value) {
+    getCustomSettings().ALIGN_RIGHTWARD_CALLS = value;
+    doTestSingleSource("rightwardCalls");
   }
 
   @Test
@@ -257,5 +269,4 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     getCustomSettings().ALIGN_ATTRIBUTES = value;
     doTestSingleSource("attributes");
   }
-  
 }

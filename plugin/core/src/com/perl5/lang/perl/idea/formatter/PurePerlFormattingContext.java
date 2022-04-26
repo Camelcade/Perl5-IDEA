@@ -47,6 +47,7 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import gnu.trove.THashMap;
 import gnu.trove.TIntIntHashMap;
 import gnu.trove.TIntObjectHashMap;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,6 +64,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext impleme
   private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
   private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new THashMap<>();
   private final TIntObjectHashMap<Alignment> myCommentsAlignmentMap = new TIntObjectHashMap<>();
+  private final Map<ASTNode, Alignment> myRightwardCallsAlignmentMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myElementsALignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myAssignmentsElementAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
@@ -383,6 +385,14 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext impleme
     IElementType childNodeType = PsiUtilCore.getElementType(childNode);
     PerlCodeStyleSettings perlCodeStyleSettings = getPerlSettings();
     var commonCodeStyleSettings = getSettings();
+
+    if (perlCodeStyleSettings.ALIGN_RIGHTWARD_CALLS && isRightwardCall(childNode)) {
+      var alignment = getRightwardCallAlignment(childNode, false);
+      if (alignment != null) {
+        return alignment;
+      }
+    }
+
     if (childNodeType == FAT_COMMA &&
         parentNodeType == COMMA_SEQUENCE_EXPR &&
         perlCodeStyleSettings.ALIGN_FAT_COMMA) {
@@ -446,6 +456,60 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext impleme
       return myElementsALignmentsMap.get(parentNode);
     }
     return null;
+  }
+
+  private static boolean isRightwardCall(@NotNull ASTNode node) {
+    var elementType = node.getElementType();
+    if (elementType == SUB_CALL && PsiUtilCore.getElementType(node.getLastChildNode()) != PARENTHESISED_CALL_ARGUMENTS) {
+      return true;
+    }
+    return RIGHTWARD_CALL_EXPRESSIONS.contains(elementType);
+  }
+
+  private @Nullable ASTNode getWrappingCallSkippingArgs(@NotNull ASTNode node) {
+    var parentNode = node.getTreeParent();
+    if (parentNode == null) {
+      return null;
+    }
+    var parentNodeType = PsiUtilCore.getElementType(parentNode);
+    if (parentNodeType == COMMA_SEQUENCE_EXPR || parentNodeType == CALL_ARGUMENTS) {
+      return getWrappingCallSkippingArgs(parentNode);
+    }
+    return isRightwardCall(parentNode) ? parentNode : null;
+  }
+
+  @Contract("null, _ -> null")
+  private @Nullable Alignment getRightwardCallAlignment(@Nullable ASTNode node, boolean skipNonAlignable) {
+    if (node == null) {
+      return null;
+    }
+
+    boolean shouldBeAligned = isShouldBeAligned(node);
+    if (!skipNonAlignable && !shouldBeAligned) {
+      return null;
+    }
+
+    var wrappingCall = getWrappingCallSkippingArgs(node);
+    if (shouldBeAligned) {
+      var wrappingCallAlignment = getRightwardCallAlignment(wrappingCall, true);
+      return wrappingCallAlignment != null ? wrappingCallAlignment : myRightwardCallsAlignmentMap.get(node);
+    }
+    return getRightwardCallAlignment(wrappingCall, true);
+  }
+
+  private static boolean isShouldBeAligned(@NotNull ASTNode node) {
+    var prevNode = node.getTreePrev();
+    if (prevNode == null) {
+      ASTNode anchor = node;
+      if (PsiUtilCore.getElementType(anchor.getTreeParent()) == COMMA_SEQUENCE_EXPR) {
+        anchor = anchor.getTreeParent();
+      }
+      if (PsiUtilCore.getElementType(anchor.getTreeParent()) == CALL_ARGUMENTS) {
+        anchor = anchor.getTreeParent();
+      }
+      prevNode = anchor.getTreePrev();
+    }
+    return prevNode != null && StringUtil.containsLineBreak(prevNode.getChars());
   }
 
   /**

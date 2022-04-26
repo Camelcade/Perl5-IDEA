@@ -279,6 +279,10 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 PerlBundle.message("perl.formatting.align.qw.elements"),
                                 GROUP_QW);
 
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_RIGHTWARD_CALLS",
+                                PerlBundle.message("perl.formatting.align.rightward.calls"),
+                                CodeStyleSettingsCustomizableOptions.getInstance().WRAPPING_METHOD_ARGUMENTS_WRAPPING);
     }
     else if (settingsType == LANGUAGE_SPECIFIC) {
 

@@ -1,0 +1,100 @@
+my @prime_twins = map {[ $_ - 2, $_ ]}
+        grep {is_prime($_)}
+        map {$_ + 2}
+        grep {is_prime($_)} (3 .. 100);
+
+method1 {}
+        method2 $var1,
+                $var2,
+        method3 {something}
+        grep {...}
+        map {...}
+        method4
+                $var3, $var4,
+        method5 @ARGV;
+
+grep {}
+        sort {}
+        map {}
+                @ARGV;
+
+my @arr = grep {}
+        sort {}
+        map {}
+                @ARGV;
+
+
+sub array_fn(@) {
+
+}
+
+grep {}
+        array_fn
+        sort {}
+                @ARGV;
+
+grep {}
+        sort {}
+        array_fn
+                @ARGV;
+
+sub block_array_fn(&@) {
+
+}
+
+grep {}
+        block_array_fn {}
+        sort {}
+                @ARGV;
+
+grep {}
+        sort {}
+        block_array_fn {}
+                @ARGV;
+
+my @array =
+        grep {}
+        sort {}
+        block_array_fn {}
+                @ARGV;
+
+my @array =
+        block_array_fn {}
+        grep {}
+        sort {}
+                @ARGV;
+
+my @array = block_array_fn {}
+        grep {}
+        sort {}
+                @ARGV;
+
+my @array = array_fn
+        grep {}
+        sort {}
+                @ARGV;
+
+my @array = array_fn grep {}
+        sort {}
+                @ARGV;
+
+my @array = grep {}
+        array_fn sort {}
+                @ARGV;
+
+my @array =
+        map {}
+        grep {}
+                something(
+                        map {}
+                        grep {}
+                        values
+                        each
+                        splice
+                                @argv),
+        map {}
+        grep {}
+        values
+        each
+        splice
+                @argv;
