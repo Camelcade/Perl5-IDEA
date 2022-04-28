@@ -636,7 +636,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext impleme
     return getWrap(parentNode, getWrapType(settingsOption), wrapFirst);
   }
 
-  private @NotNull WrapType getWrapType(int settingsOption) {
+  public @NotNull WrapType getWrapType(int settingsOption) {
     if ((settingsOption & WRAP_ON_EVERY_ITEM) != 0) {
       return CHOP_DOWN_IF_LONG;
     }
