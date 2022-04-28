@@ -8,6 +8,11 @@ my $hashref = {
     third    => 4 # final comment
 };
 
+my @list = map { ... }
+grep { ... }
+sort {...}
+@ARGV;
+
 sub somesub{
 say 'hi';
 }
