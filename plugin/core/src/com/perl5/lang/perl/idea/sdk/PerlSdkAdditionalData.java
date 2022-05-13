@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class PerlSdkAdditionalData implements SdkAdditionalData {
+public class PerlSdkAdditionalData implements SaveAwareSdkAdditionalData {
   private final @NotNull PerlHostData<?, ?> myHostData;
   private final @NotNull PerlVersionManagerData<?, ?> myVersionManagerData;
   private final @NotNull PerlImplementationData<?, ?> myImplementationData;
@@ -68,14 +68,14 @@ public class PerlSdkAdditionalData implements SdkAdditionalData {
     return Objects.requireNonNull(from(sdk), () -> "No additional data in " + sdk);
   }
 
-  void save(@NotNull Element target) {
+  @Override
+  public void save(@NotNull Element target) {
     myHostData.save(target);
     myImplementationData.save(target);
     myVersionManagerData.save(target);
   }
 
   static @NotNull SdkAdditionalData load(@NotNull Element source) {
-    // fixme shouldn't we handle data corruption?
     PerlHostData<?, ?> hostData = PerlHostHandler.load(source);
     PerlVersionManagerData<?, ?> versionManagerData = PerlVersionManagerHandler.load(source);
     PerlImplementationData<?, ?> implementationData = PerlImplementationHandler.load(source);
@@ -88,14 +88,15 @@ public class PerlSdkAdditionalData implements SdkAdditionalData {
     return new UnknownSdkAdditionalData(source);
   }
 
-  private static class UnknownSdkAdditionalData implements SdkAdditionalData {
+  private static class UnknownSdkAdditionalData implements SaveAwareSdkAdditionalData {
     private final @NotNull Element myAdditionalElement;
 
     UnknownSdkAdditionalData(@NotNull Element element) {
       myAdditionalElement = element.clone();
     }
 
-    void save(@NotNull Element additional) {
+    @Override
+    public void save(@NotNull Element additional) {
       JDOMUtil.copyMissingContent(myAdditionalElement, additional);
     }
   }
