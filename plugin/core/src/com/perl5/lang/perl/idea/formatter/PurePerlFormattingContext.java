@@ -51,6 +51,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +63,7 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 public class PurePerlFormattingContext extends PerlBaseFormattingContext implements PerlFormattingTokenSets {
   private static final Logger LOG = Logger.getInstance(PurePerlFormattingContext.class);
   private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
+  private final Map<ASTNode, Wrap> mySyntheticBlocksWrapMap = new HashMap<>();
   private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new THashMap<>();
   private final TIntObjectHashMap<Alignment> myCommentsAlignmentMap = new TIntObjectHashMap<>();
   private final Map<ASTNode, Alignment> myRightwardCallsAlignmentMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
@@ -571,13 +573,8 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext impleme
       return getWrapBySettings(parentNode, commonCodeStyleSettings.METHOD_PARAMETERS_WRAP, false);
     }
     else if (parentNodeType == COMMA_SEQUENCE_EXPR && childNodeType != COMMA && childNodeType != FAT_COMMA) {
-      IElementType grandParentNodeType = PsiUtilCore.getElementType(parentNode.getTreeParent());
-      if (grandParentNodeType == CALL_ARGUMENTS || grandParentNodeType == PARENTHESISED_CALL_ARGUMENTS) {
-        return getWrapBySettings(parentNode, commonCodeStyleSettings.CALL_PARAMETERS_WRAP, false);
-      }
-      else {
-        return getWrapBySettings(parentNode, commonCodeStyleSettings.ARRAY_INITIALIZER_WRAP, false);
-      }
+      myWrapMap.computeIfAbsent(parentNode, node ->
+        Wrap.createChildWrap(getCommaSequenceSyntheticsWrap(parentNode), getWrapTypeForCommaSequence(parentNode), false));
     }
     else if (parentNodeType == STRING_LIST && (childNodeType == STRING_BARE || childNodeType == QUOTE_SINGLE_CLOSE)) {
       return getWrapBySettings(parentNode, perlCodeStyleSettings.QW_LIST_WRAP, false);
@@ -624,6 +621,9 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext impleme
     else if (parentNodeType == ATTRIBUTES && (childNodeType == COLON || isAttributeWithoutColon(childNode))) {
       return getWrapBySettings(parentNode, perlCodeStyleSettings.ATTRIBUTES_WRAP, false);
     }
+    else if (childNodeType == COMMA_SEQUENCE_EXPR) {
+      return getWrap(parentNode, WrapType.NORMAL, true);
+    }
     return null;
   }
 
@@ -636,7 +636,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext impleme
     return getWrap(parentNode, getWrapType(settingsOption), wrapFirst);
   }
 
-  public @NotNull WrapType getWrapType(int settingsOption) {
+  private @NotNull WrapType getWrapType(int settingsOption) {
     if ((settingsOption & WRAP_ON_EVERY_ITEM) != 0) {
       return CHOP_DOWN_IF_LONG;
     }
@@ -774,5 +774,22 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext impleme
   private boolean isFirst(@NotNull Block block) {
     var astNode = ASTBlock.getNode(block);
     return astNode != null && FormatterUtil.getPreviousNonWhitespaceSibling(astNode) == null;
+  }
+
+  public @Nullable Wrap getCommaSequenceSyntheticsWrap(@NotNull ASTNode commaSequenceNode) {
+    return mySyntheticBlocksWrapMap.computeIfAbsent(commaSequenceNode, node ->
+      Wrap.createChildWrap(myWrapMap.get(commaSequenceNode.getTreeParent()), getWrapTypeForCommaSequence(node), true));
+  }
+
+  private @NotNull WrapType getWrapTypeForCommaSequence(ASTNode node) {
+    var parentNodeType = PsiUtilCore.getElementType(node.getTreeParent());
+    int wrapSetting;
+    if (parentNodeType == CALL_ARGUMENTS || parentNodeType == PARENTHESISED_CALL_ARGUMENTS) {
+      wrapSetting = getSettings().CALL_PARAMETERS_WRAP;
+    }
+    else {
+      wrapSetting = getSettings().ARRAY_INITIALIZER_WRAP;
+    }
+    return getWrapType(wrapSetting);
   }
 }

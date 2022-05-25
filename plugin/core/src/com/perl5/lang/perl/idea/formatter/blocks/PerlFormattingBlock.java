@@ -183,15 +183,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     List<Block> blocksToGroup = new ArrayList<>();
     boolean[] hasFatComma = new boolean[]{false};
 
-    var parentNodeType = PsiUtilCore.getElementType(getNode().getTreeParent());
-    int wrapSetting;
-    if (parentNodeType == CALL_ARGUMENTS || parentNodeType == PARENTHESISED_CALL_ARGUMENTS) {
-      wrapSetting = getContext().getSettings().CALL_PARAMETERS_WRAP;
-    }
-    else {
-      wrapSetting = getContext().getSettings().ARRAY_INITIALIZER_WRAP;
-    }
-    Wrap wrap = Wrap.createWrap(getContext().getWrapType(wrapSetting), false);
+    Wrap wrap = getContext().getCommaSequenceSyntheticsWrap(getNode());
 
     Runnable blocksDispatcher = () -> {
       if (blocksToGroup.isEmpty()) {
