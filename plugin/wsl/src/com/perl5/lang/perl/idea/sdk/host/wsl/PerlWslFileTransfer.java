@@ -16,30 +16,14 @@
 
 package com.perl5.lang.perl.idea.sdk.host.wsl;
 
-import com.intellij.execution.ExecutionException;
-import com.intellij.execution.process.ProcessAdapter;
-import com.intellij.execution.process.ProcessEvent;
-import com.intellij.execution.wsl.WSLDistribution;
-import com.intellij.notification.Notification;
-import com.intellij.notification.NotificationType;
-import com.intellij.notification.Notifications;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.ex.ActionManagerEx;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.project.DumbAwareAction;
-import com.intellij.openapi.util.Key;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.ui.update.MergingUpdateQueue;
-import com.intellij.util.ui.update.Update;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
-import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -47,80 +31,32 @@ import java.util.List;
 class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
   private static final Logger LOG = Logger.getInstance(PerlWslFileTransfer.class);
 
-  private static final MergingUpdateQueue NOTIFICATIONS_QUEUE = new MergingUpdateQueue(
-    "notifications.queue", 3000, true, null);
-
   public PerlWslFileTransfer(@NotNull PerlWslData hostData) {
     super(hostData);
   }
 
   @Override
   protected void doSyncPath(@NotNull String remotePath, String localPath) throws IOException {
-    if (true) {
-      LOG.info(myHostData + " file directly available: " + remotePath + " => " + localPath);
-      return;
-    }
-
-    WSLDistribution distribution = myHostData.getDistribution();
-    remotePath = FileUtil.toSystemIndependentName(remotePath);
-
-    try {
-      distribution.copyFromWsl(
-        remotePath, localPath, ContainerUtil.newArrayList("--verbose", "--delete-before", "--exclude", "'*.so'", "--delete"),
-        it -> it.addProcessListener(
-          new ProcessAdapter() {
-            @Override
-            public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
-              String text = event.getText();
-              if (StringUtil.isNotEmpty(text)) {
-                PerlRunUtil.setProgressText2(text);
-              }
-            }
-          }));
-    }
-    catch (ExecutionException e) {
-      LOG.warn("Error while copying: " + remotePath + "; message: " + e.getMessage());
-      NOTIFICATIONS_QUEUE.queue(Update.create(this, () -> {
-        AnAction action = ActionManagerEx.getInstanceEx().getAction("perl5.sync.interpreter");
-        Notification notification = new Notification(
-          PerlWslBundle.message("perl.host.handler.wsl.notification.group"),
-          PerlWslBundle.message("perl.host.handler.wsl.missing.rsync.title"),
-          PerlWslBundle.message("perl.host.handler.wsl.missing.rsync.message"),
-          NotificationType.ERROR
-        );
-        Notifications.Bus.notify(notification.addAction(
-          new DumbAwareAction(action.getTemplatePresentation().getText()) {
-            @Override
-            public void actionPerformed(@NotNull AnActionEvent e) {
-              notification.expire();
-              action.update(e);
-              if (e.getPresentation().isEnabled()) {
-                action.actionPerformed(e);
-              }
-            }
-          }));
-      }));
-    }
   }
 
   @Override
   protected void doStubFiles(@NotNull String remoteDir, String localDir) throws IOException {
-    if (true) {
-      LOG.info(myHostData + " directory directly available: " + remoteDir + " => " + localDir);
-      return;
-    }
-    super.doStubFiles(remoteDir, localDir);
   }
 
   @Override
   public @NotNull List<VirtualFile> listFiles(@NotNull String remotePath) throws IOException {
-    if (true) {
-      LOG.debug(myHostData + " file directly available: " + remotePath);
+    var localPath = myHostData.getLocalPath(remotePath);
+    if (localPath == null) {
+      LOG.info("Unable to get local path for: " + remotePath + " in " + myHostData);
       return Collections.emptyList();
     }
-    PerlWslFileSystem wslFileSystem = PerlWslFileSystem.create(myHostData.getDistribution());
-    VirtualFile root = wslFileSystem.refreshAndFindFileByPath(remotePath);
-    return root == null ? Collections.emptyList() : Collections.unmodifiableList(Arrays.asList(root.getChildren()));
+
+    var localVirtualFile = VfsUtil.findFile(Path.of(localPath), true);
+    if (localVirtualFile == null) {
+      LOG.info("Unable to find local virtual file for: " + localPath);
+      return Collections.emptyList();
+    }
+    return Arrays.asList(localVirtualFile.getChildren());
   }
 
   @Override
