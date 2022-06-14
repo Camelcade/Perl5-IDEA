@@ -24,7 +24,7 @@ import com.perl5.lang.mason2.MasonPluginUtil;
 import com.perl5.lang.mason2.idea.vfs.MasonVirtualFileListener;
 import org.jetbrains.annotations.NotNull;
 
-public class MasonPostStartupActivity implements StartupActivity {
+public class MasonPostStartupActivity implements StartupActivity.Background {
   @Override
   public void runActivity(@NotNull Project project) {
     MasonVirtualFileListener listener = new MasonVirtualFileListener(project);
