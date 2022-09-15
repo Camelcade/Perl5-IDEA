@@ -38,14 +38,14 @@ task generatePodParser(type: GenerateParserTask) {
 task generatePerlLexer(type: GenerateLexerTask) {
   dependsOn generatePerl5Parser
   source = "grammar/Perl.flex"
-  targetDir = "gen/com/perl5/lang/perl/lexer/"
+  targetDir = "src/main/gen/com/perl5/lang/perl/lexer/"
   targetClass = "PerlLexer"
 }
 
 task generatePodLexer(type: GenerateLexerTask) {
   dependsOn generatePodParser
   source = "grammar/Pod.flex"
-  targetDir = "gen/com/perl5/lang/pod/lexer/"
+  targetDir = "src/main/gen/com/perl5/lang/pod/lexer/"
   targetClass = "PodLexerGenerated"
 }
 

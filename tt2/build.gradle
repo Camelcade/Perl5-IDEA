@@ -39,7 +39,7 @@ task generateTT2Parser(type: GenerateParserTask) {
 task generateTT2Lexer(type: GenerateLexerTask) {
   dependsOn generateTT2Parser
   source = "grammar/TemplateToolkit.flex"
-  targetDir = "gen/com/perl5/lang/tt2/lexer/"
+  targetDir = "src/main/gen/com/perl5/lang/tt2/lexer/"
   targetClass = "TemplateToolkitLexerGenerated"
   skeleton = rootProject.file(lexer_skeleton)
   purgeOldFiles = true

@@ -62,17 +62,12 @@ allprojects {
   tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
 
   project.ext {
-    genRoot = project.file('gen')
+    genRoot = project.file('src/main/gen')
   }
 
   sourceSets {
     main {
-      java.srcDirs files(project.file('src'), project.genRoot)
-      resources.srcDir project.file('resources')
-    }
-    test {
-      java.srcDir project.file('test')
-      resources.srcDirs project.file('testData')
+      java.srcDirs += project.genRoot
     }
   }
 

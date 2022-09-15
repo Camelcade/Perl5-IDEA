@@ -35,7 +35,7 @@ dependencies{
 
 task generateMason2Lexer(type: GenerateLexerTask) {
   source = "grammar/Mason2.flex"
-  targetDir = "gen/com/perl5/lang/mason2/lexer/"
+  targetDir = "src/main/gen/com/perl5/lang/mason2/lexer/"
   targetClass = "Mason2TemplatingLexer"
   skeleton = rootProject.file(templating_lexer_skeleton)
   purgeOldFiles = true

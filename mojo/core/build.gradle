@@ -28,7 +28,7 @@ dependencies{
 
 task generateMojoliciousLexer(type: GenerateLexerTask) {
   source = "grammar/Mojolicious.flex"
-  targetDir = "gen/com/perl5/lang/mojolicious/lexer/"
+  targetDir = "src/main/gen/com/perl5/lang/mojolicious/lexer/"
   targetClass = "MojoliciousLexer"
   skeleton = rootProject.file(templating_lexer_skeleton)
   purgeOldFiles = true
