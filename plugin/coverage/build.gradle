@@ -20,6 +20,6 @@ dependencies{
 
 intellij {
   type.set('IC')
-  intellij.plugins = ['coverage']
+  intellij.plugins = [coveragePlugin]
 }
 

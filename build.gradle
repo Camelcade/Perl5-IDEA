@@ -253,11 +253,11 @@ intellij {
   else if( runWith == 'PY') {
     type.set('PY')
     version.set(pycharmVersion)
-    pluginList.addAll(['Docker', 'remote-run'])
+    pluginList.addAll(['Docker', remoteRunPlugin])
   }
   else{
     type.set('IU')
-    pluginList.addAll(['coverage', 'Docker', 'remote-run'])
+    pluginList.addAll([coveragePlugin, 'Docker', remoteRunPlugin])
   }
   if (project.hasProperty('idea_path')) {
     alternativeIdePath = project.idea_path

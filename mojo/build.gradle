@@ -23,5 +23,5 @@ dependencies{
 
 intellij{
   type.set('IU')
-  plugins = [project(':plugin'), 'java', 'remote-run']
+  plugins = [project(':plugin'), 'java', remoteRunPlugin]
 }

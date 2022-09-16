@@ -16,7 +16,7 @@
 
 intellij{
   type.set('IU')
-  plugins = ['Docker', 'remote-run', 'java']
+  plugins = ['Docker', remoteRunPlugin, 'java']
 }
 
 dependencies{
