@@ -12,7 +12,7 @@ Usage: "ref"; (34,37); reading; writing; PerlVariableNameElementImpl(Perl5: SCAL
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: blessExpr.pl; /perl5classic.png
@@ -35,7 +35,7 @@ Usage: "ref"; (40,43); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: blessExpr.pl; /perl5classic.png

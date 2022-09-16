@@ -12,7 +12,7 @@ Usage: "array"; (18,23); reading; writing; PerlVariableNameElementImpl(Perl5: AR
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -35,7 +35,7 @@ Usage: "array"; (34,39); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME)
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -58,7 +58,7 @@ Usage: "array"; (46,51); reading; writing; PerlVariableNameElementImpl(Perl5: AR
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -81,7 +81,7 @@ Usage: "array"; (62,67); reading; writing; PerlVariableNameElementImpl(Perl5: AR
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -104,7 +104,7 @@ Usage: "array"; (78,83); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME)
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -127,7 +127,7 @@ Usage: "array"; (92,97); reading; writing; PerlVariableNameElementImpl(Perl5: AR
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -150,7 +150,7 @@ Usage: "array"; (107,112); reading; writing; PerlVariableNameElementImpl(Perl5: 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -173,7 +173,7 @@ Usage: "array"; (129,134); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAM
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -196,7 +196,7 @@ Usage: "array"; (145,150); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAM
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -219,7 +219,7 @@ Usage: "array"; (159,164); reading; writing; PerlVariableNameElementImpl(Perl5: 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -242,7 +242,7 @@ Usage: "array"; (175,180); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAM
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -265,7 +265,7 @@ Usage: "array"; (188,193); reading; writing; PerlVariableNameElementImpl(Perl5: 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -288,7 +288,7 @@ Usage: "array"; (205,210); reading; writing; PerlVariableNameElementImpl(Perl5: 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -311,7 +311,7 @@ Usage: "array"; (221,226); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAM
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -334,7 +334,7 @@ Usage: "array"; (236,241); reading; writing; PerlVariableNameElementImpl(Perl5: 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -357,7 +357,7 @@ Usage: "array"; (252,257); reading; writing; PerlVariableNameElementImpl(Perl5: 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -380,7 +380,7 @@ Usage: "array"; (274,279); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAM
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png
@@ -403,7 +403,7 @@ Usage: "array"; (291,296); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAM
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: arrayArguments.pl; /perl5classic.png

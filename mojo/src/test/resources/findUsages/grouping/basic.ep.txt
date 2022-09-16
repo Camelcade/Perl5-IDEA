@@ -12,7 +12,7 @@ Usage: "var"; (18,21); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -35,7 +35,7 @@ Usage: "var"; (32,35); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -58,7 +58,7 @@ Usage: "var"; (39,42); reading; writing; PerlVariableNameElementImpl(Perl5: SCAL
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -81,7 +81,7 @@ Usage: "var"; (125,128); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -104,7 +104,7 @@ Usage: "var"; (143,146); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -127,7 +127,7 @@ Usage: "var"; (154,157); reading; writing; PerlVariableNameElementImpl(Perl5: SC
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -150,7 +150,7 @@ Usage: "var"; (185,188); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -173,7 +173,7 @@ Usage: "var"; (203,206); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -196,7 +196,7 @@ Usage: "var"; (214,217); reading; writing; PerlVariableNameElementImpl(Perl5: SC
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -219,7 +219,7 @@ Usage: "var"; (245,248); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -242,7 +242,7 @@ Usage: "var"; (259,262); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -265,7 +265,7 @@ Usage: "var"; (266,269); reading; writing; PerlVariableNameElementImpl(Perl5: SC
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -288,7 +288,7 @@ Usage: "var"; (293,296); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -311,7 +311,7 @@ Usage: "var"; (311,314); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png
@@ -334,7 +334,7 @@ Usage: "var"; (322,325); reading; writing; PerlVariableNameElementImpl(Perl5: SC
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: basic.ep; /mojolicious.png

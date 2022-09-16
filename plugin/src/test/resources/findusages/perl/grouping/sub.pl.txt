@@ -12,7 +12,7 @@ Usage: "somesub"; (10,17); reading; PerlSubNameElementImpl(Perl5: subname) at 10
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: sub.pl; /perl5classic.png
@@ -35,7 +35,7 @@ Usage: "somesub"; (54,61); reading; PerlSubNameElementImpl(Perl5: subname) at 54
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: sub.pl; /perl5classic.png
@@ -58,7 +58,7 @@ Usage: "somesub"; (69,76); reading; PerlSubNameElementImpl(Perl5: subname) at 69
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: sub.pl; /perl5classic.png
@@ -81,7 +81,7 @@ Usage: "somesub"; (111,118); reading; PerlSubNameElementImpl(Perl5: subname) at 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: sub.pl; /perl5classic.png
@@ -104,7 +104,7 @@ Usage: "somesub"; (157,164); reading; PerlSubNameElementImpl(Perl5: subname) at 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: sub.pl; /perl5classic.png
@@ -127,7 +127,7 @@ Usage: "somesub"; (209,216); reading; PerlSubNameElementImpl(Perl5: subname) at 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: sub.pl; /perl5classic.png
@@ -150,7 +150,7 @@ Usage: "somesub"; (254,261); reading; PerlSubNameElementImpl(Perl5: subname) at 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: sub.pl; /perl5classic.png
@@ -173,7 +173,7 @@ Usage: "somesub"; (323,330); reading; PodIdentifierImpl(Perl5 POD: identifier) a
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: sub.pl; /perl5classic.png

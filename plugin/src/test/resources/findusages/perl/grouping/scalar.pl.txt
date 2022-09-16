@@ -12,7 +12,7 @@ Usage: "var"; (15,18); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -35,7 +35,7 @@ Usage: "var"; (29,32); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -58,7 +58,7 @@ Usage: "var"; (36,39); reading; writing; PerlVariableNameElementImpl(Perl5: SCAL
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -81,7 +81,7 @@ Usage: "var"; (122,125); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -104,7 +104,7 @@ Usage: "var"; (140,143); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -127,7 +127,7 @@ Usage: "var"; (151,154); reading; writing; PerlVariableNameElementImpl(Perl5: SC
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -150,7 +150,7 @@ Usage: "var"; (182,185); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -173,7 +173,7 @@ Usage: "var"; (200,203); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -196,7 +196,7 @@ Usage: "var"; (211,214); reading; writing; PerlVariableNameElementImpl(Perl5: SC
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -219,7 +219,7 @@ Usage: "var"; (242,245); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -242,7 +242,7 @@ Usage: "var"; (256,259); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -265,7 +265,7 @@ Usage: "var"; (263,266); reading; writing; PerlVariableNameElementImpl(Perl5: SC
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -288,7 +288,7 @@ Usage: "var"; (290,293); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -311,7 +311,7 @@ Usage: "var"; (308,311); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png
@@ -334,7 +334,7 @@ Usage: "var"; (319,322); reading; writing; PerlVariableNameElementImpl(Perl5: SC
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: scalar.pl; /perl5classic.png

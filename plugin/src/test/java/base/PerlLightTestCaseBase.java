@@ -778,7 +778,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       iconString = icon.toString();
     }
     assertNotNull("Could not find an icon string in " + icon, iconString);
-    return iconString.substring(iconString.lastIndexOf('/'));
+    return iconString.contains("/") ? iconString.substring(iconString.lastIndexOf('/')): iconString;
   }
 
   protected @Nullable PsiFile getTopLevelFile() {

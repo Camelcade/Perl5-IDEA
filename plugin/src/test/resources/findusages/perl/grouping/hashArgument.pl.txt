@@ -12,7 +12,7 @@ Usage: "hash"; (29,33); reading; writing; PerlVariableNameElementImpl(Perl5: ARR
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: hashArgument.pl; /perl5classic.png
@@ -35,7 +35,7 @@ Usage: "hash"; (46,50); reading; writing; PerlVariableNameElementImpl(Perl5: ARR
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: hashArgument.pl; /perl5classic.png
@@ -58,7 +58,7 @@ Usage: "hash"; (68,72); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME) 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: hashArgument.pl; /perl5classic.png
@@ -81,7 +81,7 @@ Usage: "hash"; (86,90); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME) 
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: hashArgument.pl; /perl5classic.png
@@ -104,7 +104,7 @@ Usage: "hash"; (107,111); reading; writing; PerlVariableNameElementImpl(Perl5: A
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: hashArgument.pl; /perl5classic.png
@@ -127,7 +127,7 @@ Usage: "hash"; (125,129); reading; writing; PerlVariableNameElementImpl(Perl5: A
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: hashArgument.pl; /perl5classic.png
@@ -150,7 +150,7 @@ Usage: "hash"; (148,152); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: hashArgument.pl; /perl5classic.png
@@ -173,7 +173,7 @@ Usage: "hash"; (167,171); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
  - Rule: PackageGroupingRule
-    PackageGroup: ; /nodePlaceholder.svg
+    PackageGroup: ; NodePlaceholder
 
  - Rule: NonJavaFileGroupingRule
     FileUsageGroup: hashArgument.pl; /perl5classic.png
