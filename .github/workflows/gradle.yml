@@ -27,8 +27,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: Set up JDK 17
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v3
         with:
+          distribution: 'corretto'
           java-version: 17
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
@@ -103,6 +104,7 @@ jobs:
           docker pull hurricup/camelcade-test:perl5
       - name: Test with Gradle
         run: |
+          java --version
           ./gradlew test -PincludeHeavy=1 -Pyoutrack.token=${{ secrets.YOUTRACK_TOKEN }}
       - name: Uploading test results artifact
         uses: actions/upload-artifact@v2
