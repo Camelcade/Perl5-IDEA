@@ -120,6 +120,11 @@ allprojects {
       systemProperty "youtrack.token", project.getProperty("youtrack.token")
     }
 
+    if (project.hasProperty("idea.split.test.logs")) {
+      systemProperty "idea.split.test.logs", "true"
+      systemProperty "idea.single.test.log.max.length", "100_000_000"
+    }
+
     useJUnit {
       if (project.hasProperty("runtest")) {
         include '**/' + project.property('runtest') + '.class'
