@@ -47,6 +47,7 @@
       <option name="m_requireAnnotationsFirst" value="true" />
       <option name="typeUseWithType" value="true" />
     </inspection_tool>
+    <inspection_tool class="PluginXmlI18n" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="StatefulEp" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="SystemOutErr" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="TruthinessInspection" enabled="false" level="WARNING" enabled_by_default="false" />
