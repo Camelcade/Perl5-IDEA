@@ -50,6 +50,7 @@ import org.jetbrains.annotations.TestOnly;
 import javax.annotation.concurrent.Immutable;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.function.BooleanSupplier;
 
 import static com.perl5.lang.mojolicious.model.MojoProjectListener.MOJO_PROJECT_TOPIC;
 
@@ -299,7 +300,8 @@ public class MojoProjectManager implements Disposable {
   }
 
   @TestOnly
-  public void updateInTestMode() {
+  public BooleanSupplier updateInTestMode() {
     updateModel();
+    return ()-> myUpdateQueue.isEmpty() && !myUpdatingModel.get();
   }
 }

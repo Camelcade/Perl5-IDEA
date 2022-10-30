@@ -79,7 +79,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     getModuleRoot().refresh(false, true);
     PlatformTestUtil.dispatchAllInvocationEventsInIdeEventQueue();
     MojoProjectManager mojoProjectManager = MojoProjectManager.getInstance(getProject());
-    mojoProjectManager.updateInTestMode();
+    waitWithEventsDispatching("Model updated has not finished in time", mojoProjectManager.updateInTestMode());
     return mojoProjectManager;
   }
 
