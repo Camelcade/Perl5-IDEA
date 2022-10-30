@@ -226,7 +226,6 @@
 
     <editorNotificationProvider
         implementation="com.perl5.lang.perl.idea.editor.notification.PerlInterpreterEditorNotification"/>
-    <editorNotificationProvider implementation="com.perl5.lang.perl.idea.editor.notification.PerlAssociationEditorNotification"/>
     <notificationGroup displayType="STICKY_BALLOON" id="perl5.plugin.update.notification.group" bundle="messages.PerlBundle"
                        key="plugin.update.baloon.group" isLogByDefault="true"/>
 

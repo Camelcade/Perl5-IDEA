@@ -19,10 +19,9 @@ package com.perl5.lang.tt2.idea.editor;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.EditorNotificationPanel;
-import com.intellij.ui.EditorNotifications;
+import com.intellij.ui.EditorNotificationProvider;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.tt2.TemplateToolkitBundle;
 import com.perl5.lang.tt2.filetypes.TemplateToolkitFileType;
@@ -30,9 +29,11 @@ import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
+import java.util.function.Function;
 
-public class TemplateToolkitEditorNotificationsProvider extends EditorNotifications.Provider<EditorNotificationPanel> implements DumbAware {
-  private static final Key<EditorNotificationPanel> KEY = Key.create("perl.tt2.roots.not.set.panel");
+
+public class TemplateToolkitEditorNotificationsProvider implements EditorNotificationProvider, DumbAware {
   private final Project myProject;
 
   public TemplateToolkitEditorNotificationsProvider(Project project) {
@@ -40,24 +41,22 @@ public class TemplateToolkitEditorNotificationsProvider extends EditorNotificati
   }
 
   @Override
-  public @NotNull Key<EditorNotificationPanel> getKey() {
-    return KEY;
+  public @Nullable Function<? super @NotNull FileEditor, ? extends @Nullable JComponent> collectNotificationData(@NotNull Project project,
+                                                                                                                 @NotNull VirtualFile file) {
+    return fileEditor -> createNotificationPanel(file);
   }
 
-  @Override
-  public @Nullable EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file,
-                                                                   @NotNull FileEditor fileEditor,
-                                                                   @NotNull Project project) {
-    if (file.getFileType() == TemplateToolkitFileType.INSTANCE) {
-      TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(myProject);
-      if (!settings.isVirtualFileUnderRoot(file)) {
-        EditorNotificationPanel panel = new EditorNotificationPanel();
-        panel.setText(TemplateToolkitBundle.message("tt2.error.file.not.in.root"));
-        panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
-        return panel;
-      }
+  private @Nullable EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file) {
+    if (file.getFileType() != TemplateToolkitFileType.INSTANCE) {
+      return null;
     }
-
-    return null;
+    TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(myProject);
+    if (settings.isVirtualFileUnderRoot(file)) {
+      return null;
+    }
+    EditorNotificationPanel panel = new EditorNotificationPanel();
+    panel.setText(TemplateToolkitBundle.message("tt2.error.file.not.in.root"));
+    panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
+    return panel;
   }
 }

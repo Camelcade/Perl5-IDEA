@@ -19,12 +19,11 @@ package com.perl5.lang.mason2.idea.editor.notification;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.ui.EditorNotificationPanel;
-import com.intellij.ui.EditorNotifications;
+import com.intellij.ui.EditorNotificationProvider;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
@@ -32,9 +31,11 @@ import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigur
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import javax.swing.*;
+import java.util.function.Function;
 
-public class MasonPathsNotification extends EditorNotifications.Provider<EditorNotificationPanel> implements DumbAware {
-  private static final Key<EditorNotificationPanel> KEY = Key.create("perl.mason2.roots.not.set.panel");
+
+public class MasonPathsNotification implements EditorNotificationProvider, DumbAware {
   private final Project myProject;
 
   public MasonPathsNotification(Project myProject) {
@@ -42,35 +43,33 @@ public class MasonPathsNotification extends EditorNotifications.Provider<EditorN
   }
 
   @Override
-  public @NotNull Key<EditorNotificationPanel> getKey() {
-    return KEY;
+  public @Nullable Function<? super @NotNull FileEditor, ? extends @Nullable JComponent> collectNotificationData(@NotNull Project project,
+                                                                                                                 @NotNull VirtualFile file) {
+    return fileEditor -> createNotificationPanel(file);
   }
 
-  @Override
-  public @Nullable EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file,
-                                                                   @NotNull FileEditor fileEditor,
-                                                                   @NotNull Project project) {
-    if (file.getFileType() instanceof MasonPurePerlComponentFileType) {
-      String message = null;
+  private @Nullable EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file) {
+    if (!(file.getFileType() instanceof MasonPurePerlComponentFileType)) {
+      return null;
+    }
+    String message = null;
 
-      if (MasonSettings.getInstance(myProject).getComponentsRoots().isEmpty()) {
-        message = "Mason2 components roots are not configured";
-      }
-      else {
-        PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
-        if (psiFile instanceof MasonFileImpl && ((MasonFileImpl)psiFile).getComponentRoot() == null) {
-          message = "Component is not under one of configured roots";
-        }
-      }
-
-      if (message != null) {
-        EditorNotificationPanel panel = new EditorNotificationPanel();
-        panel.setText(message);
-        panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
-        return panel;
+    if (MasonSettings.getInstance(myProject).getComponentsRoots().isEmpty()) {
+      message = "Mason2 components roots are not configured";
+    }
+    else {
+      PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
+      if (psiFile instanceof MasonFileImpl && ((MasonFileImpl)psiFile).getComponentRoot() == null) {
+        message = "Component is not under one of configured roots";
       }
     }
 
-    return null;
+    if (message == null) {
+      return null;
+    }
+    EditorNotificationPanel panel = new EditorNotificationPanel();
+    panel.setText(message);
+    panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
+    return panel;
   }
 }
