@@ -16,17 +16,14 @@
 
 package com.perl5.lang.perl.internals;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Represents internal %^H
  */
 public class PerlFeaturesTable implements Cloneable {
-  public static final HashMap<String, String> AVAILABLE_FEATURES = new HashMap<>();
-  public static final HashMap<String, List<String>> AVAILABLE_FEATURES_BUNDLES = new HashMap<>();
+  public static final Map<String, String> AVAILABLE_FEATURES = new HashMap<>();
+  public static final Map<String, List<String>> AVAILABLE_FEATURES_BUNDLES = new HashMap<>();
 
   static {
     AVAILABLE_FEATURES.put("bareword_filehandles",

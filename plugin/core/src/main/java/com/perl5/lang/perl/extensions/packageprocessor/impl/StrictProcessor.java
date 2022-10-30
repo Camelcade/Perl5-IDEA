@@ -27,7 +27,7 @@ import java.util.Map;
 
 
 public class StrictProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlStrictProvider {
-  protected static final HashMap<String, String> OPTIONS = new HashMap<>();
+  protected static final Map<String, String> OPTIONS = new HashMap<>();
 
   static {
     OPTIONS.put("vars", "generates a compile-time error if you access a variable that was neither explicitly declared");

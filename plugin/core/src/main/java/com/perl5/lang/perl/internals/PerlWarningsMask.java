@@ -26,7 +26,7 @@ import java.util.Map;
  * Represents ${^WARNING_BITS}
  */
 public class PerlWarningsMask implements Cloneable {
-  protected final HashMap<String, Boolean> currentMask;
+  protected final Map<String, Boolean> currentMask;
 
   public PerlWarningsMask() {
     currentMask = new HashMap<>();

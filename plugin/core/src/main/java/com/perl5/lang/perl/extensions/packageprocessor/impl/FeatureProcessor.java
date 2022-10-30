@@ -30,8 +30,8 @@ import java.util.Map;
 
 
 public class FeatureProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlFeaturesProvider {
-  protected static final HashMap<String, String> OPTIONS = new HashMap<>();
-  protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<>();
+  protected static final Map<String, String> OPTIONS = new HashMap<>();
+  protected static final Map<String, String> OPTIONS_BUNDLES = new HashMap<>();
 
   static {
     OPTIONS.putAll(PerlFeaturesTable.AVAILABLE_FEATURES);

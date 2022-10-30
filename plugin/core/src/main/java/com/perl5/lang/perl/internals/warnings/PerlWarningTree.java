@@ -19,6 +19,7 @@ package com.perl5.lang.perl.internals.warnings;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * taken from regen/warnings.pl, up to date with origin/maint-5.22
@@ -112,8 +113,8 @@ public class PerlWarningTree {
     new PerlWarningTreeLeaf(5.021, "locale", true)
   )));
 
-  public static final HashMap<String, PerlWarningTreeLeaf> LEAF_OPTIONS;
-  public static final HashMap<String, PerlWarningTreeNode> NODE_OPTIONS;
+  public static final Map<String, PerlWarningTreeLeaf> LEAF_OPTIONS;
+  public static final Map<String, PerlWarningTreeNode> NODE_OPTIONS;
 
   static {
     LEAF_OPTIONS = new HashMap<>();

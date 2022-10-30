@@ -32,8 +32,8 @@ import java.util.Map;
 
 
 public class WarningsProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlWarningsProvider {
-  protected static final HashMap<String, String> OPTIONS = new HashMap<>();
-  protected static final HashMap<String, String> OPTIONS_BUNDLES = new HashMap<>();
+  protected static final Map<String, String> OPTIONS = new HashMap<>();
+  protected static final Map<String, String> OPTIONS_BUNDLES = new HashMap<>();
 
   static {
     OPTIONS.put("FATAL", "FATALITY!");
