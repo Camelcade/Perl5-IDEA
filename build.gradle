@@ -36,6 +36,7 @@ repositories {
 }
 
 def isCI = System.getenv("CI")
+def withCoverage = Boolean.valueOf(System.getenv('WITH_COVERAGE')) || project.hasProperty("with_coverage")
 
 Set pluginProjectsNames = [
   "plugin",
@@ -146,7 +147,7 @@ allprojects {
       showStandardStreams = true
     }
     jacoco {
-      enabled = isCI || project.hasProperty("with_coverage")
+      enabled = withCoverage
     }
     if( isCI ){
       testLogging {
