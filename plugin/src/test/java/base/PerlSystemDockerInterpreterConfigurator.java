@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlSystemDockerInterpreterConfigurator extends PerlInterpreterConfigurator {
   public static final PerlInterpreterConfigurator INSTANCE = new PerlSystemDockerInterpreterConfigurator();
   private static final String PERL_HOME = "/usr/local/bin/perl";
-  private static final String DOCKER_IMAGE = "hurricup/camelcade-test:perl5";
+  private static final String DOCKER_IMAGE = "hurricup/camelcade-test:perl5-" + PerlPlatformTestCase.PERL_TEST_VERSION;
 
   private PerlSystemDockerInterpreterConfigurator() {
   }

@@ -102,7 +102,7 @@ jobs:
       - name: Pre-pull test images
         run: |
           docker --version
-          docker pull hurricup/camelcade-test:perl5
+          docker pull hurricup/camelcade-test:perl5-${{ env.PERL_TEST_VERSION }}
       - name: Test with Gradle
         env:
           PERL_MM_USE_DEFAULT: 1

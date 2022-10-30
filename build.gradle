@@ -121,6 +121,10 @@ allprojects {
       systemProperty "youtrack.token", project.getProperty("youtrack.token")
     }
 
+
+    def envPerlVersion = System.getenv("PERL_TEST_VERSION")
+    systemProperty("perl.test.version", envPerlVersion != null ? envPerlVersion: project.getProperty("perl.test.version"))
+
     if (project.hasProperty("idea.split.test.logs")) {
       systemProperty "idea.split.test.logs", "true"
       systemProperty "idea.single.test.log.max.length", "100_000_000"

@@ -59,6 +59,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.*;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.intellij.util.ObjectUtils;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
@@ -96,6 +97,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   private static final int MAX_WAIT_TIME = 10_000;
   protected static final Logger LOG = Logger.getInstance(PerlPlatformTestCase.class);
   private static final Key<CapturingProcessAdapter> ADAPTER_KEY = Key.create("process.adapter");
+  static final @NotNull String PERL_TEST_VERSION =
+    ObjectUtils.notNull(System.getenv("PERL_TEST_VERSION"), System.getProperty("perl.test.version"));
 
   protected final Disposable myPerlTestCaseDisposable = Disposer.newDisposable();
 
