@@ -73,7 +73,7 @@ public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementI
       references.add(new TemplateToolkitBlockReference(TemplateToolkitStringMixin.this));
     }
 
-    return references.toArray(new PsiReference[references.size()]);
+    return references.toArray(PsiReference.EMPTY_ARRAY);
   }
 
   @Override

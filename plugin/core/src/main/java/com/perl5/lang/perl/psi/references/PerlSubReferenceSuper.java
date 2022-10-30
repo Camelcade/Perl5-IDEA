@@ -37,13 +37,12 @@ public class PerlSubReferenceSuper extends PerlSubReferenceSimple {
   protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     // fixme not dry with simple resolver, need some generics fix
     PsiElement element = getElement();
-    List<PsiElement> relatedItems = new ArrayList<>();
 
     String packageName = PerlPackageUtil.getContextNamespaceName(element);
     String subName = element.getNode().getText();
     Project project = element.getProject();
 
-    relatedItems.addAll(PerlMroDfs.resolveSub(
+    List<PsiElement> relatedItems = new ArrayList<>(PerlMroDfs.resolveSub(
       project, element.getResolveScope(),
       packageName,
       subName,
@@ -52,6 +51,6 @@ public class PerlSubReferenceSuper extends PerlSubReferenceSimple {
 
     List<ResolveResult> result = getResolveResults(relatedItems);
 
-    return result.toArray(new ResolveResult[result.size()]);
+    return result.toArray(ResolveResult.EMPTY_ARRAY);
   }
 }

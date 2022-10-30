@@ -143,7 +143,7 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
     KEYWORDS.put("off", TT2_OFF);
     KEYWORDS.put("format", TT2_FORMAT);
 
-    KEYWORDS_TOKENSET = TokenSet.create(KEYWORDS.values().toArray(new IElementType[KEYWORDS.values().size()]));
+    KEYWORDS_TOKENSET = TokenSet.create(KEYWORDS.values().toArray(IElementType.EMPTY_ARRAY));
 
     // see https://github.com/abw/Template2/blob/master/parser/Grammar.pm.skel
     TEXT_OPERATORS.put("div", TT2_DIV_TEXT);
@@ -158,7 +158,7 @@ public class TemplateToolkitSyntaxElements implements TemplateToolkitElementType
     TEXT_OPERATORS.put("NOT", TT2_NOT_TEXT);
     TEXT_OPERATORS.put("MOD", TT2_MOD_TEXT);
 
-    TEXT_OPERATORS_TOKENSET = TokenSet.create(TEXT_OPERATORS.values().toArray(new IElementType[TEXT_OPERATORS.values().size()]));
+    TEXT_OPERATORS_TOKENSET = TokenSet.create(TEXT_OPERATORS.values().toArray(IElementType.EMPTY_ARRAY));
 
     KEYWORDS_OR_TEXT_OPERATORS_TOKENSET = TokenSet.orSet(
       KEYWORDS_TOKENSET, TEXT_OPERATORS_TOKENSET

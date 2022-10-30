@@ -201,7 +201,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
     }
 
     final MemberChooser<PerlMethodMember> chooser =
-      new MemberChooser<>(subDefinitions.toArray(new PerlMethodMember[0]), false, true,
+      new MemberChooser<>(subDefinitions.toArray(PerlMethodMember.EMPTY_ARRAY), false, true,
                           anchor.getProject()) {
         @Override
         protected SpeedSearchComparator getSpeedSearchComparator() {

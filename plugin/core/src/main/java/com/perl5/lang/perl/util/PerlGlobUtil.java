@@ -31,23 +31,19 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public class PerlGlobUtil implements PerlElementTypes {
-  public static final Set<String> BUILT_IN = Set.of(
-    "ARGV",
-    "STDERR",
-    "STDOUT",
-    "ARGVOUT",
-    "STDIN"
-  );
-
-  static {
-    BUILT_IN.addAll(PerlBuiltInScalars.BUILT_IN);
-    //BUILT_IN.addAll(PerlBuiltInSubs.BUILT_IN);
-    BUILT_IN.addAll(PerlArrayUtil.BUILT_IN);
-    BUILT_IN.addAll(PerlHashUtil.BUILT_IN);
-  }
+  public static final Set<String> BUILT_IN = Stream.of(
+      Set.of("ARGV", "STDERR", "STDOUT", "ARGVOUT", "STDIN"),
+      PerlBuiltInScalars.BUILT_IN,
+      //PerlBuiltInSubs.BUILT_IN,
+      PerlArrayUtil.BUILT_IN,
+      PerlHashUtil.BUILT_IN)
+    .flatMap(Set::stream)
+    .collect(Collectors.toUnmodifiableSet());
 
   /**
    * Searching project files for sub definitions by specific package and function name

@@ -165,6 +165,6 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
       }
     }
 
-    return result == null ? ResolveResult.EMPTY_ARRAY : result.toArray(new ResolveResult[result.size()]);
+    return result == null ? ResolveResult.EMPTY_ARRAY : result.toArray(ResolveResult.EMPTY_ARRAY);
   }
 }

@@ -75,7 +75,7 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
       }
     }
 
-    return result.toArray(new ResolveResult[result.size()]);
+    return result.toArray(ResolveResult.EMPTY_ARRAY);
   }
 
   protected void collectNamespaceMethodsAugmentations(@NotNull PerlNamespaceDefinitionElement namespaceDefinition,

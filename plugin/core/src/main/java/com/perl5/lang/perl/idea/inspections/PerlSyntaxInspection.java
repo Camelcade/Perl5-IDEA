@@ -305,7 +305,7 @@ public class PerlSyntaxInspection extends PerlInspection {
           }
         }));
 
-        return result.toArray(new LocalQuickFix[0]);
+        return result.toArray(LocalQuickFix.EMPTY_ARRAY);
       }
     };
   }

@@ -59,7 +59,7 @@ public class PerlStringContentElementImpl extends PerlLeafPsiElementWithReferenc
       }
     }
     result.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(PerlStringContentElementImpl.this)));
-    return result.toArray(new PsiReference[0]);
+    return result.toArray(PsiReference.EMPTY_ARRAY);
   }
 
   @Override

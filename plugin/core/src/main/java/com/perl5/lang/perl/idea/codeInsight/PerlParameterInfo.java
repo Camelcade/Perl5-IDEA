@@ -25,6 +25,8 @@ import java.util.List;
 
 
 public class PerlParameterInfo {
+  public static final PerlParameterInfo[] EMPTY_ARRAY = {};
+
   private final PerlSubArgument myArgument;
   private boolean myIsSelected;
 
@@ -69,6 +71,6 @@ public class PerlParameterInfo {
 
   public static PerlParameterInfo[] wrapArguments(List<PerlSubArgument> arguments) {
     List<PerlParameterInfo> parameterInfos = ContainerUtil.map(arguments, perlSubArgument -> new PerlParameterInfo(perlSubArgument));
-    return parameterInfos.toArray(new PerlParameterInfo[parameterInfos.size()]);
+    return parameterInfos.toArray(EMPTY_ARRAY);
   }
 }

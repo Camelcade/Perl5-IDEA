@@ -65,7 +65,7 @@ public class Mason2ParserImpl extends PerlParserImpl implements MasonParser {
     RESERVED_OPENER_TO_CLOSER_MAP.put(MASON_BEFORE_OPENER, MASON_BEFORE_CLOSER);
 
     SIMPLE_MASON_NAMED_BLOCKS = TokenSet.create(
-      RESERVED_TO_STATEMENT_MAP.keySet().toArray(new IElementType[RESERVED_TO_STATEMENT_MAP.keySet().size()])
+      RESERVED_TO_STATEMENT_MAP.keySet().toArray(IElementType.EMPTY_ARRAY)
     );
   }
 

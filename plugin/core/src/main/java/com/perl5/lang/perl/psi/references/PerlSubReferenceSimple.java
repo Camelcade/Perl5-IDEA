@@ -78,7 +78,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
 
     List<ResolveResult> result = getResolveResults(relatedItems);
 
-    return result.toArray(new ResolveResult[result.size()]);
+    return result.toArray(ResolveResult.EMPTY_ARRAY);
   }
 
   public boolean isAutoloaded() {

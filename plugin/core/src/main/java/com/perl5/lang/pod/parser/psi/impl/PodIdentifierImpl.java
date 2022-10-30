@@ -45,6 +45,6 @@ public class PodIdentifierImpl extends PerlLeafPsiElementWithReferences {
 
     references.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(element)));
 
-    return references.toArray(new PsiReference[references.size()]);
+    return references.toArray(PsiReference.EMPTY_ARRAY);
   }
 }

@@ -29,6 +29,8 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerlMethodMember extends PsiElementMemberChooserObject implements ClassMember {
+  public static final PerlMethodMember[] EMPTY_ARRAY = {};
+
   public PerlMethodMember(@NotNull PsiElement psiElement) {
     super(psiElement, ((PerlIdentifierOwner)psiElement).getPresentableName(), psiElement.getIcon(0));
   }

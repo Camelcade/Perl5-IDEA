@@ -64,7 +64,7 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder impleme
     List<FoldingDescriptor> masonDescriptors =
       new ArrayList<>(Arrays.asList(super.buildFoldRegions(root, document, quick)));
     root.accept(new HTMLMasonFoldingRegionsCollector(document, masonDescriptors));
-    return masonDescriptors.toArray(new FoldingDescriptor[masonDescriptors.size()]);
+    return masonDescriptors.toArray(FoldingDescriptor.EMPTY);
   }
 
   @Override

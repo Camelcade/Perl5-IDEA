@@ -79,7 +79,7 @@ public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider i
         {
           result.add(new HTMLMasonComponentReference((PerlString)element, range));
         }
-        return result.toArray(new PsiReference[result.size()]);
+        return result.toArray(PsiReference.EMPTY_ARRAY);
       }
     }
 

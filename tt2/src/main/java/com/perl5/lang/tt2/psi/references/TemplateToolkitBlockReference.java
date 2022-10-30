@@ -57,6 +57,6 @@ public class TemplateToolkitBlockReference extends PerlCachingReference<PsiEleme
       return true;
     });
 
-    return result.toArray(new ResolveResult[result.size()]);
+    return result.toArray(ResolveResult.EMPTY_ARRAY);
   }
 }
