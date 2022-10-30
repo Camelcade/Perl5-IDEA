@@ -22,13 +22,12 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
-import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 import org.jetbrains.annotations.NotNull;
 
 
 public class HTMLMasonTemplateContextType extends TemplateContextType implements HTMLMasonElementPatterns {
   public HTMLMasonTemplateContextType() {
-    super("PERL5_HTML_MASON", HtmlMasonBundle.message("label.html.mason.template"), PerlTemplateContextType.Generic.class);
+    super(HtmlMasonBundle.message("label.html.mason.template"));
   }
 
   @Override
