@@ -59,7 +59,6 @@ import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceReverseIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceReverseIndex;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.*;
 
 import java.io.File;
@@ -102,7 +101,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
   public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + NAMESPACE_SEPARATOR + "|" +
                                                                           NAMESPACE_SEPARATOR_LEGACY + ")$");
 
-  public static final Set<String> CORE_PACKAGES_ALL = new THashSet<>();
+  public static final Set<String> CORE_PACKAGES_ALL = new HashSet<>();
 
   public static final String SUPER_NAMESPACE = "SUPER";
   public static final String SUPER_NAMESPACE_FULL = SUPER_NAMESPACE + NAMESPACE_SEPARATOR;
@@ -460,7 +459,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
         return;
       }
 
-      Set<String> namesSet = new THashSet<>();
+      Set<String> namesSet = new HashSet<>();
       // collecting overrided
       for (PerlSubDefinitionElement subDefinitionBase : PsiTreeUtil.findChildrenOfType(containingFile, PerlSubDefinitionElement.class)) {
         if (subDefinitionBase.isValid() && StringUtil.equals(packageName, subDefinitionBase.getNamespaceName())) {
@@ -471,7 +470,7 @@ public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
       processParentClassesSubs(
         namespaceDefinition,
         namesSet,
-        new THashSet<>(),
+        new HashSet<>(),
         processor
       );
     }

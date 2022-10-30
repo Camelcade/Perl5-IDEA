@@ -29,20 +29,18 @@ import com.perl5.lang.mason2.Mason2Language;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodLanguage;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Set;
 
 
 public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
   implements TemplateLanguageFileViewProvider, Mason2ElementTypes, PerlElementTypes {
-  private static final Set<Language> myLanguages = new THashSet<>(Arrays.asList(
+  private static final Set<Language> myLanguages = Set.of(
     Mason2Language.INSTANCE,
     PodLanguage.INSTANCE
-  ));
+  );
 
   public Mason2FileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled) {
     super(manager, virtualFile, eventSystemEnabled);

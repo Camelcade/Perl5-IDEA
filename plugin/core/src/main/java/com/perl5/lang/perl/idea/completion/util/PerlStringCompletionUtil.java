@@ -38,7 +38,6 @@ import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -163,7 +162,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
     }
 
     List<String> typedParameters = useStatement.getImportParameters();
-    Set<String> typedStringsSet = typedParameters == null ? Collections.emptySet() : new THashSet<>(typedParameters);
+    Set<String> typedStringsSet = typedParameters == null ? Collections.emptySet() : new HashSet<>(typedParameters);
 
     PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
     // fixme we should allow lookup elements customization by package processor

@@ -23,9 +23,9 @@ import com.intellij.util.indexing.FileBasedIndex;
 import com.perl5.lang.mason2.Mason2Util;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -62,7 +62,7 @@ public class MasonVirtualFileListener implements VirtualFileListener {
     }
 
 
-    Set<VirtualFile> rootsSet = new THashSet<>(componentsRoots);
+    Set<VirtualFile> rootsSet = new HashSet<>(componentsRoots);
     if (changedFile.isDirectory()) {
       if (changedFile.getUserData(FORCE_REINDEX) != null ||
           VfsUtil.isUnder(changedFile, rootsSet) ||        // moved to component root
@@ -133,7 +133,7 @@ public class MasonVirtualFileListener implements VirtualFileListener {
 
     VirtualFile movedFile = event.getFile();
 
-    Set<VirtualFile> rootsSet = new THashSet<>(componentsRoots);
+    Set<VirtualFile> rootsSet = new HashSet<>(componentsRoots);
     if (movedFile.isDirectory()) {
       if (VfsUtil.isUnder(movedFile, rootsSet) ||    // moved from component root
           containsAtLeastOneFile(movedFile, componentsRoots) // contains component root

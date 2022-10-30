@@ -41,7 +41,7 @@ import static com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex.KEY
 
 
 public class PerlHashUtil implements PerlElementTypes {
-  public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
+  public static final Set<String> BUILT_IN = Set.of(
     "!",
     "+",
     "-",
@@ -54,7 +54,7 @@ public class PerlHashUtil implements PerlElementTypes {
     "^CAPTURE_ALL",
     "OS_ERROR",
     "ERRNO"
-  ));
+  );
   /**
    * Elements that should be iterated to collect hashes
    */

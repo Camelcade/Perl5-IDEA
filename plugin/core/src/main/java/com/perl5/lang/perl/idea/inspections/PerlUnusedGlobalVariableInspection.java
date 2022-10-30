@@ -22,12 +22,11 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Set;
 
 
 public class PerlUnusedGlobalVariableInspection extends PerlVariableInspectionBase {
-  public static final HashSet<String> EXCLUSIONS = new HashSet<>(Arrays.asList(
+  public static final Set<String> EXCLUSIONS = Set.of(
     "@ISA",
     "@EXPORT_OK",
     "@EXPORT",
@@ -35,7 +34,7 @@ public class PerlUnusedGlobalVariableInspection extends PerlVariableInspectionBa
     "%EXPORT_TAGS",
 
     "$VERSION"
-  ));
+  );
 
   @Override
   public void checkDeclaration(ProblemsHolder holder, PerlVariableDeclarationElement variableDeclarationWrapper) {

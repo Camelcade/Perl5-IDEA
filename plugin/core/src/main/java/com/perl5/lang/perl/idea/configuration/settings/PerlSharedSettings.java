@@ -27,14 +27,10 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.internals.PerlVersion;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
 
@@ -98,7 +94,7 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 
   public boolean isSelfName(String name) {
     if (SELF_NAMES_SET == null) {
-      SELF_NAMES_SET = new THashSet<>(selfNames);
+      SELF_NAMES_SET = new HashSet<>(selfNames);
     }
     return SELF_NAMES_SET.contains(name);
   }

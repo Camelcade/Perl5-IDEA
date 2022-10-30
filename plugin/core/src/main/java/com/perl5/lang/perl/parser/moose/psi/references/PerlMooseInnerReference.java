@@ -29,10 +29,10 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -68,7 +68,7 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
 
     if (subName != null) {
       PerlNamespaceDefinitionElement namespaceDefinition = PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionElement.class);
-      Set<PerlNamespaceDefinitionElement> recursionSet = new THashSet<>();
+      Set<PerlNamespaceDefinitionElement> recursionSet = new HashSet<>();
 
       if (StringUtil.isNotEmpty(subName) && namespaceDefinition != null) {
         collectNamespaceMethodsAugmentations(namespaceDefinition, subName, recursionSet, result);

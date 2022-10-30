@@ -23,9 +23,9 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -52,7 +52,7 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
           return;
         }
 
-        if (hasRecursiveInheritance(o, new THashSet<>())) {
+        if (hasRecursiveInheritance(o, new HashSet<>())) {
           registerError(holder, o.getContainingFile(), "Namespace " + packageName + " has recursive inheritance");
           registerError(holder, nameIdentifier, "Namespace " + packageName + " has recursive inheritance");
         }
@@ -67,7 +67,7 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
       if (passedWay.contains(element.getNamespaceName())) {
         return true;
       }
-      if (hasRecursiveInheritance(element, new THashSet<>(passedWay))) {
+      if (hasRecursiveInheritance(element, new HashSet<>(passedWay))) {
         return true;
       }
     }

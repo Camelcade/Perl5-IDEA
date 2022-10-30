@@ -30,11 +30,9 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodLanguage;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -42,10 +40,10 @@ import java.util.Set;
 
 public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
   implements TemplateLanguageFileViewProvider, PerlElementTypes {
-  private static final Set<Language> myLanguages = new THashSet<>(Arrays.asList(
+  private static final Set<Language> myLanguages = Set.of(
     PerlLanguage.INSTANCE,
     PodLanguage.INSTANCE
-  ));
+  );
   private boolean myActAsSingleFile = false;
 
   public PerlFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled) {

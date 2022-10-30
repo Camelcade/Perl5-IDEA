@@ -34,11 +34,11 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlImplicitSubDefinition;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 
 
@@ -151,7 +151,7 @@ public class PerlSubCompletionUtil {
       return completionProcessor.result();
     }
 
-    final Set<String> namesSet = new THashSet<>();
+    final Set<String> namesSet = new HashSet<>();
     PsiFile containingFile = subDefinition.getContainingFile();
     containingFile.accept(new PerlCompletionRecursiveVisitor(completionProcessor) {
       @Override

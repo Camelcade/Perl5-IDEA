@@ -42,7 +42,6 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -393,7 +392,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
    */
   public @NotNull List<HTMLMasonMethodDefinition> findMethodDefinitionByNameInChildComponents(String name) {
     List<HTMLMasonMethodDefinition> result = new ArrayList<>();
-    Set<HTMLMasonFileImpl> recursionSet = new THashSet<>();
+    Set<HTMLMasonFileImpl> recursionSet = new HashSet<>();
 
     collectMethodDefinitionByNameInChildComponents(name, result, recursionSet);
 
@@ -441,7 +440,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   }
 
   public boolean processMethodDefinitionsInThisOrParents(Processor<HTMLMasonMethodDefinition> processor) {
-    return processMethodDefinitionsInThisOrParents(processor, new THashSet<>());
+    return processMethodDefinitionsInThisOrParents(processor, new HashSet<>());
   }
 
   protected boolean processMethodDefinitionsInThisOrParents(Processor<HTMLMasonMethodDefinition> processor,

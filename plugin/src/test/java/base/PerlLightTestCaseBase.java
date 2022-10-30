@@ -202,7 +202,6 @@ import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.pod.PodLanguage;
-import gnu.trove.THashSet;
 import gnu.trove.TIntHashSet;
 import junit.framework.AssertionFailedError;
 import kotlin.collections.CollectionsKt;
@@ -1491,7 +1490,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
     StructureViewModel structureViewModel = structureView.getTreeModel();
     StringBuilder sb = new StringBuilder();
-    serializeTree(structureViewModel.getRoot(), structureViewModel, sb, null, "", new THashSet<>());
+    serializeTree(structureViewModel.getRoot(), structureViewModel, sb, null, "", new HashSet<>());
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
@@ -1567,7 +1566,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
           sb,
           groupingResults.get(childElement),
           prefix + "  ",
-          new THashSet<>(recursionSet)
+          new HashSet<>(recursionSet)
         );
       }
     }
@@ -1653,7 +1652,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
                                            }
                                          },
                                          "",
-                                         new THashSet<>()));
+                                         new HashSet<>()));
       }
     }
     catch (Exception e) {

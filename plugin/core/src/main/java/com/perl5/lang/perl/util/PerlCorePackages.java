@@ -16,15 +16,12 @@
 
 package com.perl5.lang.perl.util;
 
-import gnu.trove.THashSet;
-
-import java.util.Arrays;
 import java.util.Set;
 
 
 // @todo this interface should be auto-generated from Module::CoreList and has same functionality, like version and deprecation control
 public interface PerlCorePackages {
-  Set<String> CORE_PACKAGES = new THashSet<>(Arrays.asList(
+  Set<String> CORE_PACKAGES = Set.of(
     "AnyDBM_File",
     "App::Prove",
     "App::Prove::State",
@@ -444,9 +441,9 @@ public interface PerlCorePackages {
     "XSLoader",
     PerlPackageUtil.MAIN_NAMESPACE_NAME,
     PerlPackageUtil.CORE_NAMESPACE
-  ));
+  );
 
-  Set<String> CORE_PACKAGES_PRAGMAS = new THashSet<>(Arrays.asList(
+  Set<String> CORE_PACKAGES_PRAGMAS = Set.of(
     "attributes",
     "autodie",
     "autouse",
@@ -486,13 +483,13 @@ public interface PerlCorePackages {
     "vmsish",
     "warnings",
     "warnings::register"
-  ));
+  );
 
-  Set<String> CORE_PACKAGES_DEPRECATED = new THashSet<>(Arrays.asList(
+  Set<String> CORE_PACKAGES_DEPRECATED = Set.of(
     "Locale::Maketext::Guts",
     "Locale::Maketext::GutsLoader",
     "Module::Build::ModuleInfo",
     "Module::Build::Version",
     "Module::Build::YAML"
-  ));
+  );
 }

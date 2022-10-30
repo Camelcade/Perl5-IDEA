@@ -24,7 +24,6 @@ import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,7 +51,7 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
   }
 
   default @NotNull PerlSubElement getTopmostSuperMethod() {
-    Set<String> classRecursion = new THashSet<>();
+    Set<String> classRecursion = new HashSet<>();
 
     PerlSubElement run = this;
     while (true) {
@@ -85,7 +84,7 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
     if (packageName == null || subName == null) {
       return true;
     }
-    Set<String> recursionSet = new THashSet<>();
+    Set<String> recursionSet = new HashSet<>();
     Project project = getProject();
     Queue<String> packagesToProcess = new ArrayDeque<>(5);
     packagesToProcess.add(packageName);

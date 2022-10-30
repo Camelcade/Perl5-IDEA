@@ -6,7 +6,9 @@
       <name>com.google.errorprone.annotations.Immutable</name>
       <name>com.intellij.util.Function</name>
       <name>com.intellij.util.containers.HashMap</name>
+      <name>com.intellij.util.containers.HashSet</name>
       <name>com.intellij.util.containers.hash.HashMap</name>
+      <name>com.intellij.util.containers.hash.HashSet</name>
       <name>com.twelvemonkeys.lang.StringUtil</name>
       <name>groovy.transform.Immutable</name>
       <name>io.netty.util.internal.StringUtil</name>

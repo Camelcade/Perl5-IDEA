@@ -39,7 +39,7 @@ import static com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex.KEY
 
 
 public class PerlArrayUtil implements PerlElementTypes {
-  public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
+  public static final Set<String> BUILT_IN = Set.of(
     "+",
     "-",
     "_",
@@ -50,7 +50,7 @@ public class PerlArrayUtil implements PerlElementTypes {
     "INC",
     "^CAPTURE",
     "LAST_MATCH_START"
-  ));
+  );
 
 
   /**

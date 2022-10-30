@@ -24,10 +24,10 @@ import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -61,7 +61,7 @@ public final class PerlVariableUtil {
                                                @NotNull Processor<PerlVariableDeclarationElement> processor,
                                                @NotNull String textKey,
                                                boolean onePerName) {
-    Set<String> uniqueNames = onePerName ? new THashSet<>() : null;
+    Set<String> uniqueNames = onePerName ? new HashSet<>() : null;
     return StubIndex.getInstance().processElements(indexKey, textKey, project, scope, PerlVariableDeclarationElement.class, element -> {
       ProgressManager.checkCanceled();
       if (!onePerName || uniqueNames.add(element.getCanonicalName())) {

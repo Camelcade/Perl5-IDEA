@@ -58,7 +58,6 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -109,7 +108,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     GlobalSearchScope classRootsScope =
       GlobalSearchScopesCore.directoriesScope(myProject, true, classesRoots.toArray(VirtualFile.EMPTY_ARRAY));
 
-    Set<VirtualFile> result = new THashSet<>();
+    Set<VirtualFile> result = new HashSet<>();
     for (VirtualFile virtualFile : FilenameIndex.getAllFilesByExt(project, getXSBinaryExtension(), classRootsScope)) {
       if (virtualFile.isValid() && !virtualFile.isDirectory() && !(virtualFile instanceof LightVirtualFile)) {
         String path = virtualFile.getCanonicalPath();

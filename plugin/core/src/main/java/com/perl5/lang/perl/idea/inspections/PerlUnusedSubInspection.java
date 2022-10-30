@@ -25,24 +25,22 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.Set;
 
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
 
 
 public class PerlUnusedSubInspection extends PerlInspection {
-  public static final Set<String> EXCLUSIONS = new THashSet<>(Arrays.asList(
+  public static final Set<String> EXCLUSIONS = Set.of(
     "BEGIN",
     "UNITCHECK",
     "CHECK",
     "INIT",
     "END",
     SUB_DESTROY
-  ));
+  );
 
   @Override
   public @NotNull PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {

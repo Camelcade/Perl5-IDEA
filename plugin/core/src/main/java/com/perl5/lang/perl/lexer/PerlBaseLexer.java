@@ -34,7 +34,6 @@ import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlPluginUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -130,7 +129,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   private AtomicNotNullLazyValue<Set<String>> mySubNamesProvider;
   private AtomicNotNullLazyValue<Set<String>> myNamespaceNamesProvider;
   private PerlImplicitDeclarationsService myImplicitSubsService;
-  private final Set<String> myLocalPackages = new THashSet<>();
+  private final Set<String> myLocalPackages = new HashSet<>();
 
   public PerlBaseLexer withProject(@Nullable Project project) {
     myProject = project;

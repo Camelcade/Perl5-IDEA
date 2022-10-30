@@ -26,7 +26,6 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,13 +34,13 @@ import java.util.function.Predicate;
 
 
 public class PerlGlobUtil implements PerlElementTypes {
-  public static final HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
+  public static final Set<String> BUILT_IN = Set.of(
     "ARGV",
     "STDERR",
     "STDOUT",
     "ARGVOUT",
     "STDIN"
-  ));
+  );
 
   static {
     BUILT_IN.addAll(PerlBuiltInScalars.BUILT_IN);
@@ -105,7 +104,7 @@ public class PerlGlobUtil implements PerlElementTypes {
       namesToProcess = Collections.singletonList("*" + namespaceName);
     }
 
-    Set<String> processedNames = processAll ? null : new THashSet<>();
+    Set<String> processedNames = processAll ? null : new HashSet<>();
     StubIndex stubIndex = StubIndex.getInstance();
     for (String key : namesToProcess) {
       if (!stubIndex.processElements(PerlGlobsStubIndex.KEY, key, project, scope, PsiPerlGlobVariable.class, it -> {

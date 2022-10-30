@@ -32,22 +32,20 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 public class PodFileUtil {
   public static final String PM_OR_POD_EXTENSION_PATTERN = ".(" + PodFileType.EXTENSION + "|" + PerlFileTypePackage.EXTENSION + ")$";
 
-  private static final Set<String> myClassLikeExtensions = new THashSet<>(Arrays.asList(
+  private static final Set<String> myClassLikeExtensions = Set.of(
     PodFileType.EXTENSION,
     PerlFileTypePackage.EXTENSION
-  ));
+  );
 
   public static @Nullable String getPackageName(PsiFile file) {
     VirtualFile virtualFile = file.getVirtualFile();

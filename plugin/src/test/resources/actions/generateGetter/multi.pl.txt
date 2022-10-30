@@ -1,11 +1,11 @@
 package Foo::Bar;
 
-<caret>sub get_three {
-    return $_[0]->{three};
-}
-sub get_one {
+<caret>sub get_one {
     return $_[0]->{one};
 }
 sub get_two {
     return $_[0]->{two};
+}
+sub get_three {
+    return $_[0]->{three};
 }

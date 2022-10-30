@@ -36,7 +36,6 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsReve
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -236,7 +235,7 @@ public class PerlSubUtil implements PerlElementTypes {
 
 
   public static @NotNull List<PerlSubElement> collectOverridingSubs(PerlSubElement subBase) {
-    return collectOverridingSubs(subBase, new THashSet<>());
+    return collectOverridingSubs(subBase, new HashSet<>());
   }
 
   public static @NotNull List<PerlSubElement> collectOverridingSubs(@NotNull PerlSubElement subBase, @NotNull Set<String> recursionSet) {

@@ -19,10 +19,10 @@ package com.perl5.lang.htmlmason.idea.hierarchy;
 import com.intellij.ide.hierarchy.HierarchyNodeDescriptor;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -53,7 +53,7 @@ public class HTMLMasonTypeHierarchyTreeStructure extends HTMLMasonSubTypeHierarc
   protected static List<PsiElement> getLinearParents(PsiElement element) {
     assert element instanceof HTMLMasonFileImpl;
     List<PsiElement> result = new ArrayList<>();
-    Set<PsiElement> recursionMap = new THashSet<>();
+    Set<PsiElement> recursionMap = new HashSet<>();
     HTMLMasonFileImpl run = (HTMLMasonFileImpl)element;
 
     while (run != null) {

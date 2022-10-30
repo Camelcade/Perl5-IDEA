@@ -46,15 +46,11 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.UnaryOperator;
 
 
@@ -283,7 +279,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
     String promptText,
     String promptTitle
   ) {
-    Set<String> result = new THashSet<>();
+    Set<String> result = new HashSet<>();
     String name = Messages.showInputDialog(project, promptText, promptTitle, Messages.getQuestionIcon(), "", null);
 
     if (!StringUtil.isEmpty(name)) {

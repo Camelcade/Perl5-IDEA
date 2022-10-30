@@ -1,14 +1,6 @@
 package Foo::Bar;
 
-<caret>sub get_three {
-    return $_[0]->{three};
-}
-sub set_three {
-    my ($self, $new_value) = @_;
-    $$self{three} = $new_value;
-    return $self;
-}
-sub get_one {
+<caret>sub get_one {
     return $_[0]->{one};
 }
 sub set_one {
@@ -22,5 +14,13 @@ sub get_two {
 sub set_two {
     my ($self, $new_value) = @_;
     $$self{two} = $new_value;
+    return $self;
+}
+sub get_three {
+    return $_[0]->{three};
+}
+sub set_three {
+    my ($self, $new_value) = @_;
+    $$self{three} = $new_value;
     return $self;
 }

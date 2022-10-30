@@ -23,10 +23,10 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.intellij.util.Processor;
 import com.intellij.util.Processors;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 public final class PerlStubUtil {
@@ -37,14 +37,14 @@ public final class PerlStubUtil {
    * @return all names from the index with {@code indexKey} limited with {@code scope}
    */
   public static @NotNull Collection<String> getAllKeys(@NotNull StubIndexKey<String, ?> indexKey, @NotNull GlobalSearchScope scope) {
-    Set<String> allKeys = new THashSet<>();
+    Set<String> allKeys = new HashSet<>();
     StubIndex.getInstance().processAllKeys(indexKey, Processors.cancelableCollectProcessor(allKeys), scope, null);
     return allKeys;
   }
 
   @Deprecated // make reverse index and use it
   public static Collection<String> getIndexKeysWithoutInternals(@NotNull StubIndexKey<String, ?> key, @NotNull Project project) {
-    final Set<String> result = new THashSet<>();
+    final Set<String> result = new HashSet<>();
 
     // safe for getElements
     StubIndex.getInstance().processAllKeys(key, project, new PerlInternalIndexKeysProcessor() {

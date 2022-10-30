@@ -38,7 +38,6 @@ import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.util.PerlConfigurationUtil;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -140,10 +139,10 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
 
   protected Set<String> getDiff(List<String> first, List<String> second) {
-    Set<String> diff = new THashSet<>(first);
+    Set<String> diff = new HashSet<>(first);
     diff.removeAll(second);
 
-    Set<String> temp = new THashSet<>(second);
+    Set<String> temp = new HashSet<>(second);
     temp.removeAll(first);
     diff.addAll(temp);
 
@@ -245,7 +244,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   }
 
   public static class myTagNameColumnInfo extends ColumnInfo<HTMLMasonCustomTag, String> implements HTMLMasonSyntaxElements {
-    protected static final Set<String> BUILTIN_TAGS = new THashSet<>();
+    protected static final Set<String> BUILTIN_TAGS = new HashSet<>();
 
     static {
       BUILTIN_TAGS.addAll(BUILTIN_TAGS_SIMPLE);

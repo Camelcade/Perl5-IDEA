@@ -45,11 +45,11 @@ import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
 import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
-import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -166,7 +166,7 @@ public class PerlVariableCompletionUtil {
     PsiElement variableNameElement = completionProcessor.getLeafElement();
     final PerlLexicalScope lexicalScope = PsiTreeUtil.getParentOfType(variableNameElement, PerlLexicalScope.class);
     PsiElement perlVariable = variableNameElement.getParent();
-    final Set<String> collectedNames = new THashSet<>();
+    final Set<String> collectedNames = new HashSet<>();
 
     if (lexicalScope != null && perlVariable instanceof PerlVariable) {
       final int minOffset = variableNameElement.getTextOffset();

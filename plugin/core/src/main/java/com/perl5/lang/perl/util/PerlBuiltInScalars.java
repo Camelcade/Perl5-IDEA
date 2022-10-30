@@ -16,14 +16,13 @@
 
 package com.perl5.lang.perl.util;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.Set;
 
 import static com.perl5.lang.perl.psi.utils.PerlPsiUtil.DOUBLE_QUOTE;
 
 
 public interface PerlBuiltInScalars {
-  HashSet<String> BUILT_IN = new HashSet<>(Arrays.asList(
+  Set<String> BUILT_IN = Set.of(
     "OLD_PERL_VERSION",
     "^WIN32_SLOPPY_STAT",
     "^MATCH",
@@ -147,5 +146,5 @@ public interface PerlBuiltInScalars {
     "^R",
     "^RE_DEBUG_FLAGS",
     "LAST_PAREN_MATCH"
-  ));
+  );
 }
