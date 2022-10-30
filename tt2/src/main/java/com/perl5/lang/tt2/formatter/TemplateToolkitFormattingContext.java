@@ -26,10 +26,10 @@ import com.perl5.lang.perl.idea.formatter.PurePerlFormattingContext;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.psi.impl.PsiExprImpl;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes.TT2_PERL_CODE;
@@ -40,7 +40,7 @@ import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.ALL_OPERATO
 import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.KEYWORDS_TOKENSET;
 
 final class TemplateToolkitFormattingContext extends PerlBaseFormattingContext {
-  private final Map<ASTNode, Alignment> myAssignAlignmentMap = new THashMap<>();
+  private final Map<ASTNode, Alignment> myAssignAlignmentMap = new HashMap<>();
   private final NotNullLazyValue<PurePerlFormattingContext> myPurePerlContextProvider = NotNullLazyValue.createValue(
     () -> new PurePerlFormattingContext(getFormattingContext()) {
       @Override

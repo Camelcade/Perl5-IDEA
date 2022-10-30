@@ -20,8 +20,9 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
 
 
 public class Mason2ParserImpl extends PerlParserImpl implements MasonParser {
@@ -48,8 +49,8 @@ public class Mason2ParserImpl extends PerlParserImpl implements MasonParser {
 
   protected static final TokenSet SIMPLE_MASON_NAMED_BLOCKS;
 
-  protected static final THashMap<IElementType, IElementType> RESERVED_OPENER_TO_CLOSER_MAP = new THashMap<>();
-  protected static final THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<>();
+  protected static final HashMap<IElementType, IElementType> RESERVED_OPENER_TO_CLOSER_MAP = new HashMap<>();
+  protected static final HashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new HashMap<>();
 
   static {
     RESERVED_TO_STATEMENT_MAP.put(MASON_AROUND_OPENER, MASON_AROUND_MODIFIER);

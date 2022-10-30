@@ -35,9 +35,9 @@ import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.util.PerlSubUtil;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -45,7 +45,7 @@ import java.util.function.Consumer;
 import static com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter.*;
 
 public class PerlAnnotator extends PerlBaseAnnotator {
-  private static final Map<Class<? extends PerlVariable>, TextAttributesKey> VARIABLE_KEYS_MAP = new THashMap<>();
+  private static final Map<Class<? extends PerlVariable>, TextAttributesKey> VARIABLE_KEYS_MAP = new HashMap<>();
 
   static {
     VARIABLE_KEYS_MAP.put(PsiPerlScalarVariableImpl.class, PERL_SCALAR_BUILTIN);

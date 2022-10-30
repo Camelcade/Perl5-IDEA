@@ -19,16 +19,16 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TestMoreProcessor extends PerlPackageProcessorBase implements PerlPackageOptionsProvider {
-  private static final Map<String, String> OPTIONS = new THashMap<>();
+  private static final Map<String, String> OPTIONS = new HashMap<>();
 
   static {
     OPTIONS.put("no_plan", "");

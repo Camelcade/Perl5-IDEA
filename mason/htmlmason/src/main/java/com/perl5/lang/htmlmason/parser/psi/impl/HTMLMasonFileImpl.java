@@ -42,7 +42,6 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import gnu.trove.THashMap;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -527,7 +526,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   private Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> getBlocksMap() {
     return CachedValuesManager.getCachedValue(this, () ->
     {
-      Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> result = new THashMap<>();
+      Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> result = new HashMap<>();
 
       final List<HTMLMasonCompositeElement> cleanupResult = new ArrayList<>();
       final List<HTMLMasonCompositeElement> initResult = new ArrayList<>();

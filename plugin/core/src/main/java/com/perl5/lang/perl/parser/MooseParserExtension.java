@@ -25,19 +25,16 @@ import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
 
 
 public class MooseParserExtension extends PerlParserExtension implements MooseElementTypes, PerlElementTypes {
-  protected static final THashMap<String, IElementType> TOKENS_MAP = new THashMap<>();
-  protected static final THashMap<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new THashMap<>();
+  protected static final Map<String, IElementType> TOKENS_MAP = new HashMap<>();
+  protected static final Map<IElementType, IElementType> RESERVED_TO_STATEMENT_MAP = new HashMap<>();
   @SuppressWarnings("unchecked")
   protected static final List<Pair<IElementType, TokenSet>> EXTENSION_SET = new ArrayList<>();
   static final GeneratedParserUtilBase.Parser SUPER_PARSER = (builder_, level_) -> consumeToken(builder_, RESERVED_SUPER);

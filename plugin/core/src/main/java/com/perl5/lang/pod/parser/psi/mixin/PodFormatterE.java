@@ -21,15 +21,15 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.pod.parser.psi.PodFormatter;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PodFormatterE extends PodSectionMixin implements PodFormatter {
-  public static final Map<String, String> HTML_NAMES_MAP = new THashMap<>();
+  public static final Map<String, String> HTML_NAMES_MAP = new HashMap<>();
   public static final Pattern OCTAL_NUMBER_PATTERN = Pattern.compile("^(0[0-7]*)$");
   public static final Pattern HEX_NUMBER_PATTERN = Pattern.compile("^0?x([0-9a-fA-F]+)$");
   public static final Pattern NUMBER_PATTERN = Pattern.compile("^\\d+$");

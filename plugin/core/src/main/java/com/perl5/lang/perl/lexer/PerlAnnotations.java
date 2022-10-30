@@ -20,14 +20,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationNoInject;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 
 public class PerlAnnotations implements PerlElementTypes {
-  public static final Map<String, IElementType> TOKENS_MAP = new THashMap<>();
+  public static final Map<String, IElementType> TOKENS_MAP = new HashMap<>();
 
   static {
     TOKENS_MAP.put("deprecated", ANNOTATION_DEPRECATED_KEY);

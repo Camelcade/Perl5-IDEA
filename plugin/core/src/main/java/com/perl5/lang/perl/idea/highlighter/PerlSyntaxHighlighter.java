@@ -33,9 +33,9 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.moose.MooseElementTypes;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
@@ -112,7 +112,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
   public static final TextAttributesKey PERL_HASH = createTextAttributesKey("PERL_HASH", DefaultLanguageHighlighterColors.IDENTIFIER);
   public static final TextAttributesKey PERL_HASH_BUILTIN = createTextAttributesKey("PERL_HASH_BUILTIN", PERL_HASH);
   public static final TextAttributesKey PERL_CONSTANT = createTextAttributesKey("PERL_CONSTANT", DefaultLanguageHighlighterColors.CONSTANT);
-  private static final Map<IElementType, TextAttributesKey> COLORS_MAP = new THashMap<>();
+  private static final Map<IElementType, TextAttributesKey> COLORS_MAP = new HashMap<>();
   public static TextAttributesKey UNUSED_DEPRECATED;
 
   static {

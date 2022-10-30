@@ -58,7 +58,6 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
-import gnu.trove.THashMap;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -66,10 +65,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @State(
   name = "Perl5XSubsState",
@@ -80,7 +76,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   @Transient
   public static final String DEPARSED_FILE_NAME = "_Deparsed_XSubs.pm";
   public boolean isActual = true;
-  public Map<String, Long> myFilesMap = new THashMap<>();
+  public Map<String, Long> myFilesMap = new HashMap<>();
   @Transient
   private Task.Backgroundable myParserTask = null;
   @Transient
@@ -229,7 +225,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
           if (project.isDisposed()) {
             return null;
           }
-          final Map<String, Long> result = new THashMap<>();
+          final Map<String, Long> result = new HashMap<>();
           for (VirtualFile virtualFile : getAllXSFiles(project)) {
             if (virtualFile.isValid()) {
               String filePath = virtualFile.getCanonicalPath();

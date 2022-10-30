@@ -34,7 +34,6 @@ import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlPluginUtil;
-import gnu.trove.THashMap;
 import gnu.trove.THashSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -57,7 +56,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   private char mySingleOpenQuoteChar = 0;
   private char mySingleCloseQuoteChar = 0;
 
-  public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new THashMap<>();
+  public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new HashMap<>();
   public static final String ALLOWED_TR_MODIFIERS = "cdsr";
   private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE, STRING_CONTENT_QQ);
   private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_Q, QUOTE_SINGLE_CLOSE, STRING_CONTENT);

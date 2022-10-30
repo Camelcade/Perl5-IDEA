@@ -24,15 +24,11 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
@@ -117,7 +113,7 @@ public class PerlParsingPerformanceTest extends PerlParserTestBase {
   }
 
   private void analyzeFile(PsiFile psiFile) {
-    final Map<IElementType, Integer> tokensMap = new THashMap<>();
+    final Map<IElementType, Integer> tokensMap = new HashMap<>();
     final int[] totalTokens = new int[]{0};
 
     psiFile.accept(new PsiElementVisitor() {

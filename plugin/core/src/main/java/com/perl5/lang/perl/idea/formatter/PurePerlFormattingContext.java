@@ -44,13 +44,13 @@ import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PerlSignatureElement;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import gnu.trove.THashMap;
 import gnu.trove.TIntIntHashMap;
 import gnu.trove.TIntObjectHashMap;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -61,8 +61,8 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 public class PurePerlFormattingContext extends PerlBaseFormattingContext implements PerlFormattingTokenSets {
   private static final Logger LOG = Logger.getInstance(PurePerlFormattingContext.class);
-  private final Map<ASTNode, Wrap> myWrapMap = new THashMap<>();
-  private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new THashMap<>();
+  private final Map<ASTNode, Wrap> myWrapMap = new HashMap<>();
+  private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new HashMap<>();
   private final TIntObjectHashMap<Alignment> myCommentsAlignmentMap = new TIntObjectHashMap<>();
   private final Map<ASTNode, Alignment> myRightwardCallsAlignmentMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
@@ -72,7 +72,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext impleme
     Map<Integer, Alignment> generatingMap = FactoryMap.create(key -> Alignment.createAlignment(true));
 
     int column = 0;
-    Map<ASTNode, Alignment> itemsMap = new THashMap<>();
+    Map<ASTNode, Alignment> itemsMap = new HashMap<>();
     ASTNode run = listNode.getFirstChildNode();
     while (run != null) {
       if (PsiUtilCore.getElementType(run) == STRING_BARE) {

@@ -28,19 +28,19 @@ import com.perl5.lang.perl.util.PerlArrayUtil;
 import com.perl5.lang.perl.util.PerlBuiltInScalars;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlHashUtil;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class PerlBuiltInVariablesService {
   private final PsiManager myPsiManager;
-  private final Map<String, PerlBuiltInVariable> myScalars = new THashMap<>();
-  private final Map<String, PerlBuiltInVariable> myArrays = new THashMap<>();
-  private final Map<String, PerlBuiltInVariable> myHashes = new THashMap<>();
-  private final Map<String, PerlBuiltInVariable> myGlobs = new THashMap<>();
+  private final Map<String, PerlBuiltInVariable> myScalars = new HashMap<>();
+  private final Map<String, PerlBuiltInVariable> myArrays = new HashMap<>();
+  private final Map<String, PerlBuiltInVariable> myHashes = new HashMap<>();
+  private final Map<String, PerlBuiltInVariable> myGlobs = new HashMap<>();
 
   public PerlBuiltInVariablesService(Project project) {
     myPsiManager = PsiManager.getInstance(project);

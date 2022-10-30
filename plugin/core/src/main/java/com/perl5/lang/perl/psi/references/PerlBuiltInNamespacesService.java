@@ -22,16 +22,16 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.*;
 
 public class PerlBuiltInNamespacesService {
-  private final Map<String, PerlBuiltInNamespaceDefinition> myNamespacesMap = new THashMap<>();
+  private final Map<String, PerlBuiltInNamespaceDefinition> myNamespacesMap = new HashMap<>();
 
   public PerlBuiltInNamespacesService(@NotNull Project project) {
     PsiManager psiManager = PsiManager.getInstance(project);

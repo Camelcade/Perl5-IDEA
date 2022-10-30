@@ -25,11 +25,11 @@ import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.htmlmason.parser.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlBlockImpl;
-import gnu.trove.THashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -115,7 +115,7 @@ public class HTMLMasonBlockImpl extends PsiPerlBlockImpl implements HTMLMasonBlo
   private Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> getBlocksMap() {
     return CachedValuesManager.getCachedValue(this, () ->
     {
-      Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> result = new THashMap<>();
+      Map<Class<? extends HTMLMasonCompositeElement>, List<HTMLMasonCompositeElement>> result = new HashMap<>();
 
       final List<HTMLMasonCompositeElement> initResult = new ArrayList<>();
       final List<HTMLMasonCompositeElement> argsResult = new ArrayList<>();
