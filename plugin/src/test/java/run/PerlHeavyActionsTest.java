@@ -23,6 +23,7 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -92,6 +93,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
   }
 
   @Test
+  @Ignore
   public void testReformatWithPerlTidy() {
     copyDirToModule("formatWithPerlTidy");
     VirtualFile openedVirtualFile = openAndGetModuleFileInEditor("./test.pl");
