@@ -95,7 +95,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
 
     Trinity<ExecutionEnvironment, RunContentDescriptor, XDebugSession> trinity = runConfigurationWithDebugger(testRunConfiguration);
     XDebugSession debugSession = trinity.third;
-    assertStoppedAtLine(debugSession, 93);
+    assertStoppedAtLine(debugSession, 133);
     debugSession.resume();
     assertStoppedAtLine(debugSession, 5);
     debugSession.resume();
