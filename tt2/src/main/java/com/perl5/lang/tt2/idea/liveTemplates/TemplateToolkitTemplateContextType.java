@@ -16,7 +16,6 @@
 
 package com.perl5.lang.tt2.idea.liveTemplates;
 
-import com.intellij.codeInsight.template.EverywhereContextType;
 import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.psi.FileViewProvider;
@@ -32,16 +31,12 @@ import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 import com.perl5.lang.tt2.psi.PsiElsifBranch;
 import com.perl5.lang.tt2.psi.impl.*;
 import com.perl5.lang.tt2.utils.TemplateToolkitPsiUtil;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 
 public abstract class TemplateToolkitTemplateContextType extends TemplateContextType implements TemplateToolkitElementTypes {
-  public TemplateToolkitTemplateContextType(@NotNull @NonNls String id,
-                                            @NotNull String presentableName,
-                                            @Nullable Class<? extends TemplateContextType> baseContextType) {
-    super(id, presentableName, baseContextType);
+  public TemplateToolkitTemplateContextType(@NotNull String presentableName) {
+    super(presentableName);
   }
 
   protected abstract boolean isInContext(@NotNull PsiElement element);
@@ -66,11 +61,11 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class Generic extends TemplateToolkitTemplateContextType {
     public Generic() {
-      super(TemplateToolkitLanguage.NAME, TemplateToolkitLanguage.NAME, EverywhereContextType.class);
+      this(TemplateToolkitLanguage.NAME);
     }
 
-    public Generic(String id, String presentableName) {
-      super(id, presentableName, TemplateToolkitTemplateContextType.Generic.class);
+    public Generic(String presentableName) {
+      super(presentableName);
     }
 
     @Override
@@ -81,11 +76,11 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class Postfix extends TemplateToolkitTemplateContextType.Generic {
     public Postfix() {
-      this(TemplateToolkitLanguage.NAME + ".postfix", "Postfix");
+      super("Postfix");
     }
 
-    public Postfix(String id, String presentableName) {
-      super(id, presentableName);
+    public Postfix(String presentableName) {
+      super(presentableName);
     }
 
     @Override
@@ -107,11 +102,11 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class CommandPosition extends TemplateToolkitTemplateContextType.Generic {
     public CommandPosition() {
-      this(TemplateToolkitLanguage.NAME + ".command", "Directive");
+      this("Directive");
     }
 
-    public CommandPosition(String id, String presentableName) {
-      super(id, presentableName);
+    public CommandPosition(String presentableName) {
+      super(presentableName);
     }
 
     @Override
@@ -122,11 +117,11 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class CommandPositionElsif extends TemplateToolkitTemplateContextType.CommandPosition {
     public CommandPositionElsif() {
-      this(TemplateToolkitLanguage.NAME + ".command.elsif", "ELSIF/ELSE branch");
+      this("ELSIF/ELSE branch");
     }
 
-    public CommandPositionElsif(String id, String presentableName) {
-      super(id, presentableName);
+    public CommandPositionElsif(String presentableName) {
+      super(presentableName);
     }
 
     @Override
@@ -140,11 +135,11 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class CommandPositionCase extends TemplateToolkitTemplateContextType.CommandPosition {
     public CommandPositionCase() {
-      this(TemplateToolkitLanguage.NAME + ".command.case", "CASE branch");
+      this("CASE branch");
     }
 
-    public CommandPositionCase(String id, String presentableName) {
-      super(id, presentableName);
+    public CommandPositionCase(String presentableName) {
+      super(presentableName);
     }
 
     @Override
@@ -155,11 +150,11 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class CommandPositionCatch extends TemplateToolkitTemplateContextType.CommandPosition {
     public CommandPositionCatch() {
-      this(TemplateToolkitLanguage.NAME + ".command.catch", "CATCH/FINAL branch");
+      this("CATCH/FINAL branch");
     }
 
-    public CommandPositionCatch(String id, String presentableName) {
-      super(id, presentableName);
+    public CommandPositionCatch(String presentableName) {
+      super(presentableName);
     }
 
     @Override
