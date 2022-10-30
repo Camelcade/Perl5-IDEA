@@ -24,7 +24,7 @@ import com.perl5.lang.perl.parser.trycatch.TryCatchElementPatterns;
 
 public class TryCatchTemplateContextType extends PerlTemplateContextType.Prefix implements TryCatchElementPatterns {
   public TryCatchTemplateContextType() {
-    super("PERL5_TRY_CATCH_CATCH", PerlBundle.message("perl.template.context.catch"));
+    super(PerlBundle.message("perl.template.context.catch"));
     }
 
     @Override

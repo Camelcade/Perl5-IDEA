@@ -24,7 +24,7 @@ import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementPatterns;
 
 public class PerlInSwitchAfterCaseTemplateContextType extends PerlTemplateContextType.Prefix {
   public PerlInSwitchAfterCaseTemplateContextType() {
-    super("PERL5_INSIDE_SWITCH_AFTER_CASE", PerlBundle.message("perl.template.context.switch.after.case"));
+    super(PerlBundle.message("perl.template.context.switch.after.case"));
   }
 
   @Override

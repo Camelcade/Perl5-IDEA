@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.livetemplates;
 
-import com.intellij.codeInsight.template.EverywhereContextType;
 import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.psi.PsiComment;
@@ -38,10 +37,8 @@ import org.jetbrains.annotations.NotNull;
 
 
 public abstract class PerlTemplateContextType extends TemplateContextType {
-  protected PerlTemplateContextType(@NotNull String id,
-                                    @NotNull String presentableName,
-                                    Class<? extends TemplateContextType> baseContextType) {
-    super(id, presentableName, baseContextType);
+  protected PerlTemplateContextType(@NotNull String presentableName) {
+    super(presentableName);
   }
 
   @Override
@@ -74,7 +71,7 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
 
   public static class Generic extends PerlTemplateContextType {
     public Generic() {
-      super("PERL5", PerlLanguage.NAME, EverywhereContextType.class);
+      super(PerlLanguage.NAME);
     }
 
     @Override
@@ -85,7 +82,7 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
 
   public static class Postfix extends PerlTemplateContextType {
     public Postfix() {
-      super("PERL5_POSTFIX", PerlBundle.message("perl.template.context.postfix"), Generic.class);
+      super(PerlBundle.message("perl.template.context.postfix"));
     }
 
     @Override
@@ -98,11 +95,11 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
 
   public static class Prefix extends PerlTemplateContextType {
     public Prefix() {
-      this("PERL5_PREFIX", PerlBundle.message("perl.template.context.prefix"));
+      this(PerlBundle.message("perl.template.context.prefix"));
     }
 
-    public Prefix(@NotNull String id, @NotNull String presentableName) {
-      super(id, presentableName, Generic.class);
+    public Prefix(@NotNull String presentableName) {
+      super(presentableName);
     }
 
     @Override
@@ -115,7 +112,7 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
 
   public static class UnfinishedIf extends PerlTemplateContextType.Prefix {
     public UnfinishedIf() {
-      super("PERL5_UNFINISHED_IF", PerlBundle.message("perl.template.context.incomplete.if"));
+      super(PerlBundle.message("perl.template.context.incomplete.if"));
     }
 
     @Override
@@ -135,7 +132,7 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
 
   public static class Continue extends PerlTemplateContextType.Prefix {
     public Continue() {
-      super("PERL5_CONTINUE", PerlBundle.message("perl.template.context.continue"));
+      super(PerlBundle.message("perl.template.context.continue"));
     }
 
     @Override
@@ -158,7 +155,7 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
 
   public static class TestFile extends PerlTemplateContextType.Prefix {
     public TestFile() {
-      super("PERL5_TEST_FILE", PerlBundle.message("perl.template.context.test.file"));
+      super(PerlBundle.message("perl.template.context.test.file"));
     }
 
     @Override

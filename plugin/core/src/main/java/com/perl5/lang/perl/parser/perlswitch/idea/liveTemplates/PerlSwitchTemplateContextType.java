@@ -24,7 +24,7 @@ import com.perl5.lang.perl.parser.perlswitch.PerlSwitchElementPatterns;
 
 public class PerlSwitchTemplateContextType extends PerlTemplateContextType.Prefix {
   public PerlSwitchTemplateContextType() {
-    super("PERL5_INSIDE_SWITCH", PerlBundle.message("perl.template.context.switch"));
+    super(PerlBundle.message("perl.template.context.switch"));
   }
 
   @Override
