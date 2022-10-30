@@ -19,12 +19,11 @@ package com.perl5.lang.mason2.idea.livetemplates;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.htmlmason.idea.livetemplates.AbstractMasonTemplateContextType;
 import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
-import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 
 
 public class MasonTemplateContextType extends AbstractMasonTemplateContextType {
   public MasonTemplateContextType() {
-    super("PERL5_MASON", "&Mason2 template", PerlTemplateContextType.Generic.class);
+    super("&Mason2 template");
   }
 
   @Override

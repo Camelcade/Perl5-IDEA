@@ -24,16 +24,12 @@ import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.lang.xhtml.XHTMLLanguage;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 
 public abstract class AbstractMasonTemplateContextType extends TemplateContextType {
-  public AbstractMasonTemplateContextType(@NotNull @NonNls String id,
-                                          @NotNull String presentableName,
-                                          @Nullable Class<? extends TemplateContextType> baseContextType) {
-    super(id, presentableName, baseContextType);
+  public AbstractMasonTemplateContextType(@NotNull String presentableName) {
+    super(presentableName);
   }
 
   protected abstract boolean isMyFile(PsiFile file);
