@@ -103,6 +103,8 @@ jobs:
           docker --version
           docker pull hurricup/camelcade-test:perl5
       - name: Test with Gradle
+        env:
+          PERL_MM_USE_DEFAULT: 1
         run: |
           java --version
           ./gradlew test -PincludeHeavy=1 -Pyoutrack.token=${{ secrets.YOUTRACK_TOKEN }}
