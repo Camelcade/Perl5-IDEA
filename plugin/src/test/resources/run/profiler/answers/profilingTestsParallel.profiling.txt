@@ -5,6 +5,7 @@ Test2::API::END; Test2::API::Instance::set_exit; Test2::API::Breakage::BEGIN@2
 Test2::API::END; Test2::API::Instance::set_exit; Test2::API::Breakage::BEGIN@2; strict::import
 Test2::API::END; Test2::API::Instance::set_exit; Test2::API::Breakage::BEGIN@3
 Test2::API::END; Test2::API::Instance::set_exit; Test2::API::Breakage::BEGIN@3; warnings::import
+Test2::API::END; Test2::API::Instance::set_exit; Test2::API::Breakage::BEGIN@3; warnings::import; CORE::match
 Test2::API::END; Test2::API::Instance::set_exit; Test2::API::Breakage::BEGIN@3; warnings::import; warnings::_bits
 Test2::API::END; Test2::API::Instance::set_exit; Test2::API::Breakage::BEGIN@3; warnings::import; warnings::_bits; warnings::_expand_bits
 Test2::API::END; Test2::API::Instance::set_exit; Test2::API::Breakage::BEGIN@8
@@ -24,53 +25,53 @@ Test2::API::END; Test2::API::Instance::set_exit; Test2::Util::HashBase::__ANON__
 Test2::API::END; Test2::API::Instance::set_exit; Test2::Util::HashBase::_new
 Test2::API::END; Test2::API::Instance::set_exit; Test2::Util::HashBase::_new; Test2::API::Context::init
 Test2::API::END; Test2::API::Instance::set_exit; Test2::Util::HashBase::_new; Test2::EventFacet::Trace::init
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test2::Hub::is_passing
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test2::Hub::is_passing; CORE::match
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test2::Hub::plan
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test2::Util::ExternalMeta::meta
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test2::Util::ExternalMeta::meta; Test2::Util::ExternalMeta::validate_key
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::DESTROY
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Event::eid
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Event::eid; Test2::Util::gen_uid
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Event::meta_facet_data
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::terminate
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::EventFacet::Trace::snapshot
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Event::add_hub
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Event::eid
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Event::Diag::facet_data
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Event::meta_facet_data
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; CORE::match
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; CORE::print
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap; CORE::subst
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Diag::init
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::release
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::test2_in_preload
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test2::API::test2_in_preload; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test::Builder::ctx
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test::Builder::ctx; Test2::API::context
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:116]; Test::Builder::_ending; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test2::Hub::is_passing
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test2::Hub::is_passing; CORE::match
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test2::Hub::plan
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test2::Util::ExternalMeta::meta
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test2::Util::ExternalMeta::meta; Test2::Util::ExternalMeta::validate_key
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::DESTROY
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Event::eid
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Event::eid; Test2::Util::gen_uid
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Event::meta_facet_data
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Event::terminate
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::EventFacet::Trace::snapshot
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Event::add_hub
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Event::eid
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Event::Diag::facet_data
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Event::meta_facet_data
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; CORE::match
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; CORE::print
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap; CORE::subst
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Diag::init
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::Context::release
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::test2_in_preload
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test2::API::test2_in_preload; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test::Builder::ctx
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test::Builder::ctx; Test2::API::context
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
+Test2::API::END; Test2::API::Instance::set_exit; Test::Builder::__ANON__[/Builder.pm:156]; Test::Builder::_ending; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test2::API::END; Test2::API::test2_set_is_end
 Test2::API::END; Test2::API::test2_set_is_end; Test2::API::Context::DESTROY
 Test2::API::END; Test2::API::test2_set_is_end; Test2::API::Context::send_ev2
@@ -88,7 +89,7 @@ Test2::API::END; Test2::API::test2_set_is_end; Test2::API::Context::send_ev2; Te
 Test2::API::END; Test2::API::test2_set_is_end; Test2::API::Context::send_ev2; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap
 Test2::API::END; Test2::API::test2_set_is_end; Test2::API::Context::send_ev2; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::summary_tap
 Test2::API::END; Test2::API::test2_set_is_end; Test2::API::Context::send_ev2; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test2::API::END; Test2::API::test2_set_is_end; Test2::API::Context::send_ev2; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test2::API::END; Test2::API::test2_set_is_end; Test2::API::Context::send_ev2; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test2::API::END; Test2::API::test2_set_is_end; Test2::API::Context::send_ev2; Test2::Util::HashBase::_new
 Test2::API::END; Test2::API::test2_set_is_end; Test2::API::Context::send_ev2; Test2::Util::HashBase::_new; Test2::Event::V2::init
 Test2::API::END; Test2::API::test2_set_is_end; Test2::API::Context::send_ev2; Test2::Util::HashBase::_new; Test2::Event::V2::init; Test2::Util::HashBase::_new
@@ -142,7 +143,7 @@ Test::More::done_testing; Test::Builder::done_testing; Test2::Hub::finalize; Tes
 Test::More::done_testing; Test::Builder::done_testing; Test2::Hub::finalize; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
 Test::More::done_testing; Test::Builder::done_testing; Test2::Hub::finalize; Test2::Hub::send; Test2::Hub::process; Test2::Hub::plan
 Test::More::done_testing; Test::Builder::done_testing; Test2::Hub::finalize; Test2::Hub::send; Test2::Hub::process; Test2::Hub::plan; CORE::match
-Test::More::done_testing; Test::Builder::done_testing; Test2::Hub::finalize; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::done_testing; Test::Builder::done_testing; Test2::Hub::finalize; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::done_testing; Test::Builder::done_testing; Test2::Hub::finalize; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::done_testing; Test::Builder::done_testing; Test2::Hub::finalize; Test2::Util::HashBase::_new
 Test::More::done_testing; Test::Builder::done_testing; Test2::Hub::finalize; Test2::Util::HashBase::_new; Test2::Event::Plan::init
@@ -156,7 +157,7 @@ Test::More::done_testing; Test::Builder::done_testing; Test::Builder::ctx
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::ctx; Test2::API::context
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::done_testing; Test::Builder::done_testing; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::done_testing; Test::Builder::done_testing; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::current_test
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::current_test; Test2::API::Context::DESTROY
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::current_test; Test2::API::release
@@ -164,7 +165,7 @@ Test::More::done_testing; Test::Builder::done_testing; Test::Builder::current_te
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::current_test; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::current_test; Test::Builder::ctx
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::current_test; Test::Builder::ctx; Test2::API::context
-Test::More::done_testing; Test::Builder::done_testing; Test::Builder::current_test; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::done_testing; Test::Builder::done_testing; Test::Builder::current_test; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::expected_tests
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::expected_tests; Test2::API::Context::DESTROY
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::expected_tests; Test2::API::Context::release
@@ -172,7 +173,7 @@ Test::More::done_testing; Test::Builder::done_testing; Test::Builder::expected_t
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::expected_tests; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::expected_tests; Test::Builder::ctx
 Test::More::done_testing; Test::Builder::done_testing; Test::Builder::expected_tests; Test::Builder::ctx; Test2::API::context
-Test::More::done_testing; Test::Builder::done_testing; Test::Builder::expected_tests; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::done_testing; Test::Builder::done_testing; Test::Builder::expected_tests; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::fail
 Test::More::fail; Test::Builder::Module::builder
 Test::More::fail; Test::Builder::Module::builder; Test::Builder::new
@@ -196,16 +197,16 @@ Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test
 Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap; CORE::sort
 Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap; Test::Builder::Formatter::no_subtest_space
 Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
-Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Event::Ok::set_todo
-Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Event::add_amnesty
-Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Event::add_amnesty; Test2::Util::HashBase::_new
-Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Event::add_amnesty; Test2::Util::HashBase::_new; UNIVERSAL::can
-Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Util::ExternalMeta::get_meta
-Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Util::ExternalMeta::get_meta; Test2::Util::ExternalMeta::validate_key
-Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Util::HashBase::__ANON__[/HashBase.pm:85]
-Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; UNIVERSAL::can
-Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; UNIVERSAL::isa
+Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
+Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Event::Ok::set_todo
+Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Event::add_amnesty
+Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Event::add_amnesty; Test2::Util::HashBase::_new
+Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Event::add_amnesty; Test2::Util::HashBase::_new; UNIVERSAL::can
+Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Util::ExternalMeta::get_meta
+Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Util::ExternalMeta::get_meta; Test2::Util::ExternalMeta::validate_key
+Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Util::HashBase::__ANON__[/HashBase.pm:85]
+Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; UNIVERSAL::can
+Test::More::fail; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; UNIVERSAL::isa
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test2::EventFacet::Trace::call
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag
@@ -237,10 +238,10 @@ Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::di
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test::Builder::TodoDiag::facet_data; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test::Builder::TodoDiag::facet_data; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Event::meta_facet_data
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test::Builder::TodoDiag::facet_data; Test2::Event::Diag::facet_data; Test2::Event::common_facet_data; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
-Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
-Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Util::HashBase::_new
-Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Util::HashBase::_new; Test2::Event::Diag::init
-Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Util::HashBase::_new; UNIVERSAL::can
+Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
+Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Util::HashBase::_new
+Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Util::HashBase::_new; Test2::Event::Diag::init
+Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Util::HashBase::_new; UNIVERSAL::can
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Diag::init
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; UNIVERSAL::can
@@ -249,7 +250,7 @@ Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::di
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::test2_in_preload; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context
-Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::API::Context::DESTROY
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::API::Context::release
@@ -259,12 +260,12 @@ Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx
 Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context
-Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::fail; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::fail; Test::Builder::ok; Test::Builder::ctx
 Test::More::fail; Test::Builder::ok; Test::Builder::ctx; Test2::API::context
 Test::More::fail; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::fail; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::fail; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::fail; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::is
 Test::More::is; Test::Builder::Module::builder
 Test::More::is; Test::Builder::Module::builder; Test::Builder::new
@@ -278,7 +279,9 @@ Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::API::Context
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::API::release
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::API::release; Test2::API::Context::release
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::EventFacet::Trace::call
+Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::EventFacet::Trace::warning_bits
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
+Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::BEGIN@2
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::_diag_fmt
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag
@@ -308,7 +311,7 @@ Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap; CORE::subst
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Diag::init
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::release
@@ -316,12 +319,12 @@ Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::test2_in_preload; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx; Test2::API::context
-Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_unoverload_str
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_unoverload_str; Test::Builder::_unoverload
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context
-Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::API::Context::DESTROY
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::API::Context::release
@@ -342,7 +345,7 @@ Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; 
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap; Test::Builder::Formatter::no_subtest_space
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass; CORE::print
-Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test2::EventFacet::Trace::call
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag
@@ -373,7 +376,7 @@ Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; 
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap; CORE::subst
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Diag::init
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; UNIVERSAL::can
@@ -382,7 +385,7 @@ Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; 
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::test2_in_preload; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context
-Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::API::Context::DESTROY
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::API::Context::release
@@ -392,15 +395,15 @@ Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; 
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context
-Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx
 Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context
-Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::is; Test::Builder::is_eq; Test::Builder::ctx
 Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context
 Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::pass
 Test::More::pass; Test::Builder::Module::builder
 Test::More::pass; Test::Builder::Module::builder; Test::Builder::new
@@ -425,20 +428,20 @@ Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test
 Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap; Test::Builder::Formatter::no_subtest_space
 Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
 Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass; CORE::print
-Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
-Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Event::Ok::set_todo
-Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Event::add_amnesty
-Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Event::add_amnesty; Test2::Util::HashBase::_new
-Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Util::ExternalMeta::get_meta
-Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Util::ExternalMeta::get_meta; Test2::Util::ExternalMeta::validate_key
-Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; Test2::Util::HashBase::__ANON__[/HashBase.pm:85]
-Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; UNIVERSAL::can
-Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]; UNIVERSAL::isa
+Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
+Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Event::Ok::set_todo
+Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Event::add_amnesty
+Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Event::add_amnesty; Test2::Util::HashBase::_new
+Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Util::ExternalMeta::get_meta
+Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Util::ExternalMeta::get_meta; Test2::Util::ExternalMeta::validate_key
+Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; Test2::Util::HashBase::__ANON__[/HashBase.pm:85]
+Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; UNIVERSAL::can
+Test::More::pass; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]; UNIVERSAL::isa
 Test::More::pass; Test::Builder::ok; Test::Builder::ctx
 Test::More::pass; Test::Builder::ok; Test::Builder::ctx; Test2::API::context
 Test::More::pass; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::pass; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::pass; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::pass; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::skip
 Test::More::skip; CORE::match
 Test::More::skip; Test::Builder::Module::builder
@@ -466,7 +469,7 @@ Test::More::skip; Test::Builder::skip; Test2::API::Context::skip; Test2::API::Co
 Test::More::skip; Test::Builder::skip; Test2::API::Context::skip; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap; CORE::sort
 Test::More::skip; Test::Builder::skip; Test2::API::Context::skip; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap; Test::Builder::Formatter::no_subtest_space
 Test::More::skip; Test::Builder::skip; Test2::API::Context::skip; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::skip; Test::Builder::skip; Test2::API::Context::skip; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::skip; Test::Builder::skip; Test2::API::Context::skip; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::skip; Test::Builder::skip; Test2::API::Context::skip; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::skip; Test::Builder::skip; Test2::API::Context::skip; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Skip::init
 Test::More::skip; Test::Builder::skip; Test2::API::Context::skip; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Skip::init; Test2::Event::Ok::init
@@ -483,7 +486,7 @@ Test::More::skip; Test::Builder::skip; Test::Builder::ctx
 Test::More::skip; Test::Builder::skip; Test::Builder::ctx; Test2::API::context
 Test::More::skip; Test::Builder::skip; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::skip; Test::Builder::skip; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::skip; Test::Builder::skip; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::skip; Test::Builder::skip; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest
 Test::More::subtest; Test::Builder::Module::builder
 Test::More::subtest; Test::Builder::Module::builder; Test::Builder::new
@@ -516,7 +519,7 @@ Test::More::subtest; Test::Builder::subtest; Test2::API::Context::note; Test2::A
 Test::More::subtest; Test::Builder::subtest; Test2::API::Context::note; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap
 Test::More::subtest; Test::Builder::subtest; Test2::API::Context::note; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap; CORE::subst
 Test::More::subtest; Test::Builder::subtest; Test2::API::Context::note; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::subtest; Test::Builder::subtest; Test2::API::Context::note; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; Test2::API::Context::note; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; Test2::API::Context::note; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::subtest; Test::Builder::subtest; Test2::API::Context::note; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Note::init
 Test::More::subtest; Test::Builder::subtest; Test2::API::Context::note; Test2::API::Context::send_event; Test2::Util::HashBase::_new; UNIVERSAL::can
@@ -553,7 +556,7 @@ Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder
 Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::_add_ts_hooks; Test2::Hub::pre_filter
 Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::find_TODO
 Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::find_TODO; Test2::API::Context::DESTROY
 Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::find_TODO; Test2::API::Context::release
@@ -561,12 +564,12 @@ Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder
 Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::find_TODO; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::find_TODO; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::find_TODO; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::find_TODO; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::child; Test::Builder::find_TODO; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; Test::Builder::ctx; Test2::API::context
 Test::More::subtest; Test::Builder::subtest; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::subtest; Test::Builder::subtest; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::subtest; Test::Builder::subtest; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; CORE::match
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API::Context::DESTROY
@@ -602,8 +605,8 @@ Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap; CORE::subst
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:207]
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:247]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Diag::init
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::API::Context::release
@@ -635,8 +638,8 @@ Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::Hub
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::Hub::finalize; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::Hub::finalize; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Hub::plan
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::Hub::finalize; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Hub::plan; CORE::match
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::Hub::finalize; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:207]
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::Hub::finalize; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::Hub::finalize; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:247]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::Hub::finalize; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::Hub::finalize; Test2::Hub::cull
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::Hub::finalize; Test2::Hub::is_passing
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test2::Hub::finalize; Test2::Hub::is_passing; CORE::match
@@ -655,13 +658,13 @@ Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Buil
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ctx; Test2::API::context
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::find_TODO
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::find_TODO; Test2::API::Context::DESTROY
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::find_TODO; Test2::API::Context::release
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::find_TODO; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::find_TODO; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::find_TODO; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::find_TODO; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test2::API::Context::DESTROY
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test2::API::Context::release
@@ -691,7 +694,7 @@ Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Buil
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap; Test::Builder::Formatter::no_subtest_space
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test2::EventFacet::Trace::call
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag
@@ -722,7 +725,7 @@ Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Buil
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap; CORE::subst
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Diag::init
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::release
@@ -730,7 +733,7 @@ Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Buil
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::test2_in_preload; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::API::Context::DESTROY
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::API::Context::release
@@ -740,10 +743,10 @@ Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Buil
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::parent
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::parent; Scalar::Util::blessed
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::parent; Test2::API::Context::DESTROY
@@ -752,7 +755,7 @@ Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Buil
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::parent; Test2::Util::ExternalMeta::meta; Test2::Util::ExternalMeta::validate_key
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::parent; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::parent; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::parent; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; Test::Builder::finalize; Test::Builder::parent; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::Module::builder
@@ -767,7 +770,9 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_n
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::API::release
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::API::release; Test2::API::Context::release
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::EventFacet::Trace::call
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::EventFacet::Trace::warning_bits
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::BEGIN@2
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::_diag_fmt
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag
@@ -803,8 +808,8 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_n
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap; CORE::subst
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:207]
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:247]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Diag::init
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::release
@@ -812,12 +817,12 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_n
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::test2_in_preload; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_unoverload_str
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_unoverload_str; Test::Builder::_unoverload
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::API::Context::DESTROY
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::API::Context::release
@@ -844,8 +849,8 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_n
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap; Test::Builder::Formatter::no_subtest_space
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:207]
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:247]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test2::EventFacet::Trace::call
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag
@@ -882,8 +887,8 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_n
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap; CORE::subst
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:207]
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:247]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Diag::init
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; UNIVERSAL::can
@@ -892,7 +897,7 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_n
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::test2_in_preload; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::API::Context::DESTROY
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::API::Context::release
@@ -902,15 +907,15 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_n
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::Module::builder
@@ -925,7 +930,9 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_u
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::API::release
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::API::release; Test2::API::Context::release
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::EventFacet::Trace::call
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::EventFacet::Trace::warning_bits
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::BEGIN@2
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::_diag_fmt
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag
@@ -961,8 +968,8 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_u
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap; CORE::subst
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:207]
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:247]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Diag::init
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::Context::release
@@ -970,12 +977,12 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_u
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test2::API::test2_in_preload; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_is_diag; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_unoverload_str
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::_unoverload_str; Test::Builder::_unoverload
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::API::Context::DESTROY
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::API::Context::release
@@ -1002,8 +1009,8 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_u
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap; Test::Builder::Formatter::no_subtest_space
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:207]
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:247]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test2::EventFacet::Trace::call
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag
@@ -1040,8 +1047,8 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_u
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test::Builder::Formatter::info_tap; Test2::Formatter::TAP::info_tap; CORE::subst
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:207]
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:247]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Diag::init
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::Context::diag; Test2::API::Context::send_event; Test2::Util::HashBase::_new; UNIVERSAL::can
@@ -1050,7 +1057,7 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_u
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test2::API::test2_in_preload; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::diag; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::API::Context::DESTROY
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::API::Context::release
@@ -1060,15 +1067,15 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_u
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::_ok_debug; Test::Builder::in_todo; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_failed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::Module::builder
@@ -1082,10 +1089,12 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_n
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::API::release
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::API::release; Test2::API::Context::release
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::EventFacet::Trace::call
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::EventFacet::Trace::warning_bits
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::BEGIN@2
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::API::Context::DESTROY
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::API::Context::release
@@ -1103,16 +1112,16 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_n
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass; CORE::print
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:207]
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:247]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_named.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::Module::builder
@@ -1126,10 +1135,12 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_u
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::API::release
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::API::release; Test2::API::Context::release
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::EventFacet::Trace::call
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::EventFacet::Trace::warning_bits
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test2::Util::HashBase::__ANON__[/HashBase.pm:84]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::BEGIN@2
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::API::Context::DESTROY
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::API::Context::release
@@ -1147,16 +1158,16 @@ Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_u
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass; CORE::print
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:207]
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test2::Hub::process; Test::Builder::__ANON__[/Builder.pm:247]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test2::Hub::Subtest::send; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::cmp_ok; Test::Builder::ok; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::subtest; Test::Builder::subtest; main::__ANON__[/subtest_is_passed_unnamed.t:7]; Test::More::is; Test::Builder::is_eq; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
 Test::More::todo_skip
 Test::More::todo_skip; Test::Builder::Module::builder
 Test::More::todo_skip; Test::Builder::Module::builder; Test::Builder::new
@@ -1182,7 +1193,7 @@ Test::More::todo_skip; Test::Builder::todo_skip; Test2::API::Context::send_event
 Test::More::todo_skip; Test::Builder::todo_skip; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap; CORE::sort
 Test::More::todo_skip; Test::Builder::todo_skip; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::event_tap; Test2::Formatter::TAP::assert_tap; Test::Builder::Formatter::no_subtest_space
 Test::More::todo_skip; Test::Builder::todo_skip; Test2::API::Context::send_event; Test2::Hub::send; Test2::Hub::process; Test2::Formatter::TAP::write; Test2::Formatter::TAP::print_optimal_pass
-Test::More::todo_skip; Test::Builder::todo_skip; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:87]
+Test::More::todo_skip; Test::Builder::todo_skip; Test2::API::Context::send_event; Test2::Hub::send; Test::Builder::__ANON__[/Builder.pm:88]
 Test::More::todo_skip; Test::Builder::todo_skip; Test2::API::Context::send_event; Test2::Util::HashBase::_new
 Test::More::todo_skip; Test::Builder::todo_skip; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Skip::init
 Test::More::todo_skip; Test::Builder::todo_skip; Test2::API::Context::send_event; Test2::Util::HashBase::_new; Test2::Event::Skip::init; Test2::Event::Ok::init
@@ -1197,4 +1208,4 @@ Test::More::todo_skip; Test::Builder::todo_skip; Test::Builder::ctx
 Test::More::todo_skip; Test::Builder::todo_skip; Test::Builder::ctx; Test2::API::context
 Test::More::todo_skip; Test::Builder::todo_skip; Test::Builder::ctx; Test2::API::context; Scalar::Util::weaken
 Test::More::todo_skip; Test::Builder::todo_skip; Test::Builder::ctx; Test2::API::context; Test2::Util::gen_uid
-Test::More::todo_skip; Test::Builder::todo_skip; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:114]
+Test::More::todo_skip; Test::Builder::todo_skip; Test::Builder::ctx; Test2::API::context; Test::Builder::__ANON__[/Builder.pm:154]
