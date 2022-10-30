@@ -16,7 +16,6 @@
 
 package com.perl5.lang.pod.idea.livetemplates;
 
-import com.intellij.codeInsight.template.EverywhereContextType;
 import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.openapi.util.text.StringUtil;
@@ -27,25 +26,17 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.mixin.PodOverSectionContent;
 import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
-import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PodTemplateContextType extends TemplateContextType implements PodElementTypes {
 
-  public PodTemplateContextType(@NotNull @NonNls String id, @NotNull String presentableName) {
-    this(id, presentableName, PerlTemplateContextType.class);
-  }
-
-  public PodTemplateContextType(@NotNull @NonNls String id,
-                                @NotNull String presentableName,
-                                @Nullable Class<? extends TemplateContextType> baseContextType) {
-    super(id, presentableName, baseContextType);
+  public PodTemplateContextType(@NotNull String presentableName) {
+    super(presentableName);
   }
 
   @Override
@@ -75,11 +66,11 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
 
   public static class Generic extends PodTemplateContextType {
     public Generic() {
-      super("POD", PodLanguage.NAME, EverywhereContextType.class);
+      this(PodLanguage.NAME);
     }
 
-    public Generic(String id, String presentableName) {
-      super(id, presentableName, PodTemplateContextType.Generic.class);
+    public Generic(String presentableName) {
+      super(presentableName);
     }
 
     @Override
@@ -90,11 +81,11 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
 
   public static class CommandPosition extends PodTemplateContextType.Generic {
     public CommandPosition() {
-      super("POD_COMMAND", "Command position");
+      this("Command position");
     }
 
-    public CommandPosition(String id, String presentableName) {
-      super(id, presentableName);
+    public CommandPosition(String presentableName) {
+      super(presentableName);
     }
 
     @Override
@@ -139,8 +130,8 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
   }
 
   public static class InsideOver extends CommandPosition {
-    public InsideOver(String id, String presentableName) {
-      super(id, presentableName);
+    public InsideOver(String presentableName) {
+      super(presentableName);
     }
 
     @Override
@@ -156,7 +147,7 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
 
   public static class InsideOverBulleted extends InsideOver {
     public InsideOverBulleted() {
-      super("POD_OVER_BULLETED", "Inside =over block, bulleted");
+      super("Inside =over block, bulleted");
     }
 
     @Override
@@ -172,7 +163,7 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
 
   public static class InsideOverNotBulleted extends InsideOver {
     public InsideOverNotBulleted() {
-      super("POD_OVER_NOT_BULLETED", "Inside =over block, not bulleted");
+      super("Inside =over block, not bulleted");
     }
 
     @Override

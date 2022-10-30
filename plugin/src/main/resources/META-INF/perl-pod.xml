@@ -31,13 +31,14 @@
     <lang.ast.factory language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodAstFactory"/>
     <breadcrumbsInfoProvider implementation="com.perl5.lang.pod.idea.ui.breadcrumbs.PodBreadCrumbsProvider"/>
 
-    <liveTemplateContext implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$Generic"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$CommandPosition"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverBulleted"/>
-    <liveTemplateContext
-        implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverNotBulleted"/>
+    <liveTemplateContext contextId="POD"
+                         implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$Generic"/>
+    <liveTemplateContext contextId="POD_COMMAND" baseContextId="POD"
+                         implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$CommandPosition"/>
+    <liveTemplateContext contextId="POD_OVER_BULLETED" baseContextId="POD"
+                         implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverBulleted"/>
+    <liveTemplateContext contextId="POD_OVER_NOT_BULLETED" baseContextId="POD"
+                         implementation="com.perl5.lang.pod.idea.livetemplates.PodTemplateContextType$InsideOverNotBulleted"/>
     <defaultLiveTemplates file="liveTemplates/Perl5POD.xml"/>
     <liveTemplatePreprocessor id="pod.newlines"
                               implementation="com.perl5.lang.pod.idea.livetemplates.PodLiveTemplatesNewLinesPreprocessor"/>
