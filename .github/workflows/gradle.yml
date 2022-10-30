@@ -22,7 +22,7 @@ jobs:
       CI: GitHub
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      PERL_TEST_VERSION: 5.32.0
+      PERL_TEST_VERSION: 5.36.0
     steps:
       - uses: actions/checkout@v2
         with:
