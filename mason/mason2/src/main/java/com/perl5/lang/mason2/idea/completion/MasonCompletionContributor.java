@@ -19,8 +19,11 @@ package com.perl5.lang.mason2.idea.completion;
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionType;
 
+import static com.perl5.lang.mason2.idea.completion.MasonElementPatterns.MASON_CALL_TEMPLATE_PATTERN;
+import static com.perl5.lang.mason2.idea.completion.MasonElementPatterns.MASON_EXTENDS_VALUE_TEXT_PATTERN;
 
-public class MasonCompletionContributor extends CompletionContributor implements MasonElementPatterns {
+
+public class MasonCompletionContributor extends CompletionContributor {
   public MasonCompletionContributor() {
     extend(
       CompletionType.BASIC,

@@ -27,18 +27,21 @@ import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
 
-public interface MasonElementPatterns {
-  PsiElementPattern.Capture<PerlString> MASON_EXTENDS_VALUE_PATTERN =
+public final class MasonElementPatterns {
+  private MasonElementPatterns() {
+  }
+
+  public static final PsiElementPattern.Capture<PerlString> MASON_EXTENDS_VALUE_PATTERN =
     psiElement(PerlString.class)
       .inside(MasonFlagsStatement.class)
       .withParent(PsiPerlCommaSequenceExpr.class)
       .afterLeaf(psiElement(PsiElement.class));
 
-  PsiElementPattern.Capture<PsiElement> MASON_EXTENDS_VALUE_TEXT_PATTERN =
+  public static final PsiElementPattern.Capture<PsiElement> MASON_EXTENDS_VALUE_TEXT_PATTERN =
     psiElement(PsiElement.class)
       .withParent(MASON_EXTENDS_VALUE_PATTERN);
 
-  PsiElementPattern.Capture<PerlStringContentElement> MASON_CALL_TEMPLATE_PATTERN =
+  public static final PsiElementPattern.Capture<PerlStringContentElement> MASON_CALL_TEMPLATE_PATTERN =
     psiElement(PerlStringContentElement.class)
       .withParent(psiElement(PerlString.class).andOr(
         psiElement().withParent(MasonCallStatement.class),
