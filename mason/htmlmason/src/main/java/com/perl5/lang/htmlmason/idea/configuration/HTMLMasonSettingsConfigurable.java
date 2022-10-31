@@ -16,6 +16,7 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
+import com.google.common.collect.Sets;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.fileTypes.ex.FileTypeManagerEx;
 import com.intellij.openapi.project.Project;
@@ -54,15 +55,15 @@ import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.BUILTIN_TAGS_SIMP
 public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigurable {
   final HTMLMasonSettings mySettings;
 
-  protected CollectionListModel<String> substitutedExtensionsModel;
-  protected JBList<String> substitutedExtensionsList;
-  protected JPanel substitutedExtensionsPanel;
+  protected CollectionListModel<String> mySubstitutedExtensionsModel;
+  protected JBList<String> mySubstitutedExtensionsList;
+  protected JPanel mySubstitutedExtensionsPanel;
 
-  protected JTextField autohandlerName;
-  protected JTextField defaulthandlerName;
+  protected JTextField myAutohandlerName;
+  protected JTextField myDefaulthandlerName;
 
-  protected ListTableModel<HTMLMasonCustomTag> customTagsModel;
-  protected JBTable customTagsTable;
+  protected ListTableModel<HTMLMasonCustomTag> myCustomTagsModel;
+  protected JBTable myCustomTagsTable;
 
   public HTMLMasonSettingsConfigurable(Project myProject) {
     this(myProject, "HTML::Mason");
@@ -78,11 +79,11 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     FormBuilder builder = FormBuilder.createFormBuilder();
     builder.getPanel().setLayout(new VerticalFlowLayout());
 
-    defaulthandlerName = new JTextField();
-    builder.addLabeledComponent(new JLabel(HtmlMasonBundle.message("default.handler.name")), defaulthandlerName);
+    myDefaulthandlerName = new JTextField();
+    builder.addLabeledComponent(new JLabel(HtmlMasonBundle.message("default.handler.name")), myDefaulthandlerName);
 
-    autohandlerName = new JTextField();
-    builder.addLabeledComponent(new JLabel(HtmlMasonBundle.message("auto.handler.name")), autohandlerName);
+    myAutohandlerName = new JTextField();
+    builder.addLabeledComponent(new JLabel(HtmlMasonBundle.message("auto.handler.name")), myAutohandlerName);
 
     createGlobalsComponent(builder);
     createSubstitutedExtensionsComponent(builder);
@@ -94,16 +95,16 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   @Override
   public boolean isModified() {
     return
-      !mySettings.globalVariables.equals(globalsModel.getItems()) ||
-      !mySettings.substitutedExtensions.equals(substitutedExtensionsModel.getItems()) ||
+      !mySettings.globalVariables.equals(myGlobalsModel.getItems()) ||
+      !mySettings.substitutedExtensions.equals(mySubstitutedExtensionsModel.getItems()) ||
       isStructureModified()
       ;
   }
 
   protected boolean isStructureModified() {
-    return !Objects.equals(mySettings.autoHandlerName, autohandlerName.getText()) ||
-           !Objects.equals(mySettings.defaultHandlerName, defaulthandlerName.getText()) ||
-           !mySettings.customTags.equals(customTagsModel.getItems())
+    return !Objects.equals(mySettings.autoHandlerName, myAutohandlerName.getText()) ||
+           !Objects.equals(mySettings.defaultHandlerName, myDefaulthandlerName.getText()) ||
+           !mySettings.customTags.equals(myCustomTagsModel.getItems())
       ;
   }
 
@@ -111,25 +112,25 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   public void apply() {
     boolean forceReparse = isStructureModified();
 
-    Set<String> extDiff = getDiff(mySettings.substitutedExtensions, substitutedExtensionsModel.getItems());
+    Set<String> extDiff = getDiff(mySettings.substitutedExtensions, mySubstitutedExtensionsModel.getItems());
     mySettings.substitutedExtensions.clear();
-    mySettings.substitutedExtensions.addAll(substitutedExtensionsModel.getItems());
+    mySettings.substitutedExtensions.addAll(mySubstitutedExtensionsModel.getItems());
 
-    mySettings.autoHandlerName = autohandlerName.getText();
-    mySettings.defaultHandlerName = defaulthandlerName.getText();
+    mySettings.autoHandlerName = myAutohandlerName.getText();
+    mySettings.defaultHandlerName = myDefaulthandlerName.getText();
 
     mySettings.globalVariables.clear();
-    for (VariableDescription variableDescription : new ArrayList<>(globalsModel.getItems())) {
+    for (VariableDescription variableDescription : new ArrayList<>(myGlobalsModel.getItems())) {
       if (StringUtil.isNotEmpty(variableDescription.variableName)) {
         mySettings.globalVariables.add(variableDescription);
       }
       else {
-        globalsModel.removeRow(globalsModel.indexOf(variableDescription));
+        myGlobalsModel.removeRow(myGlobalsModel.indexOf(variableDescription));
       }
     }
 
     mySettings.customTags.clear();
-    mySettings.customTags.addAll(customTagsModel.getItems());
+    mySettings.customTags.addAll(myCustomTagsModel.getItems());
 
     mySettings.settingsUpdated();
 
@@ -141,57 +142,55 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
 
   protected Set<String> getDiff(List<String> first, List<String> second) {
-    Set<String> diff = new HashSet<>(first);
-    diff.removeAll(second);
-
-    Set<String> temp = new HashSet<>(second);
-    temp.removeAll(first);
-    diff.addAll(temp);
-
-    return diff;
+    Set<String> secondSet = Set.copyOf(second);
+    Set<String> firstSet = Set.copyOf(first);
+    return Sets.union(
+      Sets.difference(firstSet, secondSet),
+      Sets.difference(secondSet, firstSet)
+    );
   }
 
   @Override
   public void reset() {
-    substitutedExtensionsModel.removeAll();
-    substitutedExtensionsModel.add(mySettings.substitutedExtensions);
+    mySubstitutedExtensionsModel.removeAll();
+    mySubstitutedExtensionsModel.add(mySettings.substitutedExtensions);
 
-    autohandlerName.setText(mySettings.autoHandlerName);
-    defaulthandlerName.setText(mySettings.defaultHandlerName);
+    myAutohandlerName.setText(mySettings.autoHandlerName);
+    myDefaulthandlerName.setText(mySettings.defaultHandlerName);
 
-    customTagsModel.setItems(new ArrayList<>());
+    myCustomTagsModel.setItems(new ArrayList<>());
     for (HTMLMasonCustomTag htmlMasonCustomTag : mySettings.customTags) {
-      customTagsModel.addRow(htmlMasonCustomTag.clone());
+      myCustomTagsModel.addRow(htmlMasonCustomTag.clone());
     }
 
-    globalsModel.setItems(new ArrayList<>());
+    myGlobalsModel.setItems(new ArrayList<>());
     for (VariableDescription variableDescription : mySettings.globalVariables) {
-      globalsModel.addRow(variableDescription.clone());
+      myGlobalsModel.addRow(variableDescription.clone());
     }
   }
 
   protected void createSubstitutedExtensionsComponent(FormBuilder builder) {
-    substitutedExtensionsModel = new CollectionListModel<>();
-    substitutedExtensionsList = new JBList<>(substitutedExtensionsModel);
-    substitutedExtensionsPanel =
-      PerlConfigurationUtil.createSubstituteExtensionPanel(substitutedExtensionsModel, substitutedExtensionsList);
+    mySubstitutedExtensionsModel = new CollectionListModel<>();
+    mySubstitutedExtensionsList = new JBList<>(mySubstitutedExtensionsModel);
+    mySubstitutedExtensionsPanel =
+      PerlConfigurationUtil.createSubstituteExtensionPanel(mySubstitutedExtensionsModel, mySubstitutedExtensionsList);
     builder.addLabeledComponent(
       new JLabel(HtmlMasonBundle.message("extensions.that.should.be.handled.as.html.mason.components.except.mas.only.in.component.roots")),
-      substitutedExtensionsPanel);
+      mySubstitutedExtensionsPanel);
   }
 
   protected void createCustomTagsComponent(FormBuilder builder) {
-    myTagNameColumnInfo myTagNameColumnInfo = new myTagNameColumnInfo();
-    customTagsModel = new ListTableModel<>(
-      myTagNameColumnInfo,
-      new myTagRoleColumInfo()
+    MyTagNameColumnInfo tagNameColumnInfo = new MyTagNameColumnInfo();
+    myCustomTagsModel = new ListTableModel<>(
+      tagNameColumnInfo,
+      new MyTagRoleColumInfo()
     );
 
-    myTagNameColumnInfo.setCustomTagsModel(customTagsModel);
+    tagNameColumnInfo.setCustomTagsModel(myCustomTagsModel);
 
-    customTagsTable = new JBTable(customTagsModel);
+    myCustomTagsTable = new JBTable(myCustomTagsModel);
 
-    final TableColumn secondColumn = customTagsTable.getColumnModel().getColumn(1);
+    final TableColumn secondColumn = myCustomTagsTable.getColumnModel().getColumn(1);
 
     ComboBoxTableRenderer<HTMLMasonCustomTagRole> roleComboBoxTableRenderer =
       new ComboBoxTableRenderer<>(HTMLMasonCustomTagRole.values()) {
@@ -214,29 +213,29 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
 
     builder.addLabeledComponent(new JLabel(HtmlMasonBundle.message("custom.tags.that.mimics.built.in.html.mason.tags")), ToolbarDecorator
-      .createDecorator(customTagsTable)
+      .createDecorator(myCustomTagsTable)
       .setAddAction(anActionButton -> {
-        final TableCellEditor cellEditor = customTagsTable.getCellEditor();
+        final TableCellEditor cellEditor = myCustomTagsTable.getCellEditor();
         if (cellEditor != null) {
           cellEditor.stopCellEditing();
         }
-        final TableModel model = customTagsTable.getModel();
+        final TableModel model = myCustomTagsTable.getModel();
 
         int indexToEdit = -1;
 
-        for (HTMLMasonCustomTag entry : customTagsModel.getItems()) {
+        for (HTMLMasonCustomTag entry : myCustomTagsModel.getItems()) {
           if (StringUtil.isEmpty(entry.getText())) {
-            indexToEdit = customTagsModel.indexOf(entry);
+            indexToEdit = myCustomTagsModel.indexOf(entry);
             break;
           }
         }
 
         if (indexToEdit == -1) {
-          customTagsModel.addRow(new HTMLMasonCustomTag("customTag" + customTagsModel.getItems().size(), HTMLMasonCustomTagRole.PERL));
+          myCustomTagsModel.addRow(new HTMLMasonCustomTag("customTag" + myCustomTagsModel.getItems().size(), HTMLMasonCustomTagRole.PERL));
           indexToEdit = model.getRowCount() - 1;
         }
 
-        TableUtil.editCellAt(customTagsTable, indexToEdit, 0);
+        TableUtil.editCellAt(myCustomTagsTable, indexToEdit, 0);
       })
       .disableDownAction()
       .disableUpAction()
@@ -245,22 +244,20 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     );
   }
 
-  public static class myTagNameColumnInfo extends ColumnInfo<HTMLMasonCustomTag, String> {
-    protected static final Set<String> BUILTIN_TAGS = new HashSet<>();
+  private final class MyTagNameColumnInfo extends ColumnInfo<HTMLMasonCustomTag, String> {
+    private static final Set<String> BUILTIN_TAGS = new HashSet<>();
 
     static {
       BUILTIN_TAGS.addAll(BUILTIN_TAGS_SIMPLE);
       BUILTIN_TAGS.addAll(BUILTIN_TAGS_COMPLEX);
     }
 
-    protected ListTableModel<HTMLMasonCustomTag> myCustomTagsModel;
-
-    public myTagNameColumnInfo() {
+    public MyTagNameColumnInfo() {
       super(HtmlMasonBundle.message("column.name.tag.text.without.surrounding"));
     }
 
-    public void setCustomTagsModel(ListTableModel<HTMLMasonCustomTag> myCustomTagsModel) {
-      this.myCustomTagsModel = myCustomTagsModel;
+    public void setCustomTagsModel(ListTableModel<HTMLMasonCustomTag> customTagsModel) {
+      myCustomTagsModel = customTagsModel;
     }
 
     @Override
@@ -295,8 +292,8 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     }
   }
 
-  public static class myTagRoleColumInfo extends ColumnInfo<HTMLMasonCustomTag, HTMLMasonCustomTagRole> {
-    public myTagRoleColumInfo() {
+  private static class MyTagRoleColumInfo extends ColumnInfo<HTMLMasonCustomTag, HTMLMasonCustomTagRole> {
+    public MyTagRoleColumInfo() {
       super(HtmlMasonBundle.message("column.name.parse"));
     }
 

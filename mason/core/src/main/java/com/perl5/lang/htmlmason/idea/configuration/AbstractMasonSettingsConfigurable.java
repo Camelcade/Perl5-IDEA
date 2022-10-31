@@ -41,19 +41,19 @@ import javax.swing.table.TableModel;
 public abstract class AbstractMasonSettingsConfigurable implements Configurable {
 
   protected final Project myProject;
-  protected final String windowTitle;
+  protected final String myWindowTitle;
 
-  protected ListTableModel<VariableDescription> globalsModel;
-  protected JBTable globalsTable;
+  protected ListTableModel<VariableDescription> myGlobalsModel;
+  protected JBTable myGlobalsTable;
 
-  public AbstractMasonSettingsConfigurable(Project myProject, String windowTitle) {
-    this.myProject = myProject;
-    this.windowTitle = windowTitle;
+  public AbstractMasonSettingsConfigurable(Project project, String windowTitle) {
+    myProject = project;
+    myWindowTitle = windowTitle;
   }
 
   @Override
   public @Nls String getDisplayName() {
-    return windowTitle;
+    return myWindowTitle;
   }
 
   @Override
@@ -62,36 +62,36 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
   }
 
   public void createGlobalsComponent(FormBuilder builder) {
-    globalsModel = new ListTableModel<>(
-      new myVariableNameColumnInfo(),
-      new myVariableTypeColumnInfo()
+    myGlobalsModel = new ListTableModel<>(
+      new MyVariableNameColumnInfo(),
+      new MyVariableTypeColumnInfo()
     );
-    globalsTable = new JBTable(globalsModel);
+    myGlobalsTable = new JBTable(myGlobalsModel);
 
     builder.addLabeledComponent(new JLabel("Components global variables (allow_globals option):"), ToolbarDecorator
-      .createDecorator(globalsTable)
+      .createDecorator(myGlobalsTable)
       .setAddAction(anActionButton -> {
-        final TableCellEditor cellEditor = globalsTable.getCellEditor();
+        final TableCellEditor cellEditor = myGlobalsTable.getCellEditor();
         if (cellEditor != null) {
           cellEditor.stopCellEditing();
         }
-        final TableModel model = globalsTable.getModel();
+        final TableModel model = myGlobalsTable.getModel();
 
         int indexToEdit = -1;
 
-        for (VariableDescription variableDescription : globalsModel.getItems()) {
+        for (VariableDescription variableDescription : myGlobalsModel.getItems()) {
           if (StringUtil.isEmpty(variableDescription.variableName)) {
-            indexToEdit = globalsModel.indexOf(variableDescription);
+            indexToEdit = myGlobalsModel.indexOf(variableDescription);
             break;
           }
         }
 
         if (indexToEdit == -1) {
-          globalsModel.addRow(new VariableDescription());
+          myGlobalsModel.addRow(new VariableDescription());
           indexToEdit = model.getRowCount() - 1;
         }
 
-        TableUtil.editCellAt(globalsTable, indexToEdit, 0);
+        TableUtil.editCellAt(myGlobalsTable, indexToEdit, 0);
       })
       .disableDownAction()
       .disableUpAction()
@@ -105,8 +105,8 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
   public void disposeUIResources() {
   }
 
-  public abstract static class myStringColumnInfo extends ColumnInfo<VariableDescription, String> {
-    public myStringColumnInfo(String name) {
+  private abstract static class MyStringColumnInfo extends ColumnInfo<VariableDescription, String> {
+    public MyStringColumnInfo(String name) {
       super(name);
     }
 
@@ -116,8 +116,8 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
     }
   }
 
-  public class myVariableNameColumnInfo extends myStringColumnInfo {
-    public myVariableNameColumnInfo() {
+  private final class MyVariableNameColumnInfo extends MyStringColumnInfo {
+    public MyVariableNameColumnInfo() {
       super("Variable name");
     }
 
@@ -141,8 +141,8 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
       }
     }
 
-    protected boolean containsVariableName(String variableName) {
-      for (VariableDescription variableDescription : globalsModel.getItems()) {
+    private boolean containsVariableName(String variableName) {
+      for (VariableDescription variableDescription : myGlobalsModel.getItems()) {
         if (variableName.equals(variableDescription.variableName)) {
           return true;
         }
@@ -151,8 +151,8 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
     }
   }
 
-  public class myVariableTypeColumnInfo extends myStringColumnInfo {
-    public myVariableTypeColumnInfo() {
+  private static final class MyVariableTypeColumnInfo extends MyStringColumnInfo {
+    public MyVariableTypeColumnInfo() {
       super("Variable type");
     }
 

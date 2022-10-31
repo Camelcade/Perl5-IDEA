@@ -36,8 +36,8 @@ import java.util.ArrayList;
 public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable {
   protected final MasonSettings mySettings;
 
-  protected CollectionListModel<String> autobaseModel;
-  protected JBList<String> autobaseList;
+  protected CollectionListModel<String> myAutobaseModel;
+  protected JBList<String> myAutobaseList;
 
   public MasonSettingsConfigurable(Project myProject) {
     this(myProject, "Mason2");
@@ -63,23 +63,23 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
   @Override
   public boolean isModified() {
     return
-      !mySettings.globalVariables.equals(globalsModel.getItems()) ||
-      !mySettings.autobaseNames.equals(autobaseModel.getItems())
+      !mySettings.globalVariables.equals(myGlobalsModel.getItems()) ||
+      !mySettings.autobaseNames.equals(myAutobaseModel.getItems())
       ;
   }
 
   @Override
   public void apply() {
     mySettings.autobaseNames.clear();
-    mySettings.autobaseNames.addAll(autobaseModel.getItems());
+    mySettings.autobaseNames.addAll(myAutobaseModel.getItems());
 
     mySettings.globalVariables.clear();
-    for (VariableDescription variableDescription : new ArrayList<>(globalsModel.getItems())) {
+    for (VariableDescription variableDescription : new ArrayList<>(myGlobalsModel.getItems())) {
       if (StringUtil.isNotEmpty(variableDescription.variableName)) {
         mySettings.globalVariables.add(variableDescription);
       }
       else {
-        globalsModel.removeRow(globalsModel.indexOf(variableDescription));
+        myGlobalsModel.removeRow(myGlobalsModel.indexOf(variableDescription));
       }
     }
     mySettings.settingsUpdated();
@@ -88,12 +88,12 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
 
   @Override
   public void reset() {
-    autobaseModel.removeAll();
-    autobaseModel.add(mySettings.autobaseNames);
+    myAutobaseModel.removeAll();
+    myAutobaseModel.add(mySettings.autobaseNames);
 
-    globalsModel.setItems(new ArrayList<>());
+    myGlobalsModel.setItems(new ArrayList<>());
     for (VariableDescription variableDescription : mySettings.globalVariables) {
-      globalsModel.addRow(variableDescription.clone());
+      myGlobalsModel.addRow(variableDescription.clone());
     }
   }
 
@@ -102,12 +102,12 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
   }
 
   protected void createAutobaseNamesComponent(FormBuilder builder) {
-    autobaseModel = new CollectionListModel<>();
-    autobaseList = new JBList<>(autobaseModel);
+    myAutobaseModel = new CollectionListModel<>();
+    myAutobaseList = new JBList<>(myAutobaseModel);
     builder.addLabeledComponent(
       new JLabel("Autobase names (autobase_names option. Order is important, later components may be inherited from early):"),
       ToolbarDecorator
-        .createDecorator(autobaseList)
+        .createDecorator(myAutobaseList)
         .setAddAction(anActionButton -> {
           String fileName = Messages.showInputDialog(
             myProject,
@@ -116,8 +116,8 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
             Messages.getQuestionIcon(),
             "",
             null);
-          if (StringUtil.isNotEmpty(fileName) && !autobaseModel.getItems().contains(fileName)) {
-            autobaseModel.add(fileName);
+          if (StringUtil.isNotEmpty(fileName) && !myAutobaseModel.getItems().contains(fileName)) {
+            myAutobaseModel.add(fileName);
           }
         })
         .setPreferredSize(JBUI.size(0, PerlConfigurationUtil.WIDGET_HEIGHT))
