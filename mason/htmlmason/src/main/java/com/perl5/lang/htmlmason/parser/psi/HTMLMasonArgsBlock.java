@@ -18,7 +18,6 @@ package com.perl5.lang.htmlmason.parser.psi;
 
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlLexicalVariableDeclarationMarker;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +27,6 @@ import java.util.List;
 
 public interface HTMLMasonArgsBlock extends HTMLMasonCompositeElement,
                                             StubBasedPsiElement<HTMLMasonArgsBlockStub>,
-                                            PerlElementTypes,
                                             PerlLexicalVariableDeclarationMarker {
   /**
    * Returns list of accepted arguments

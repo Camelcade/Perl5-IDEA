@@ -24,10 +24,12 @@ import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.parser.PerlParserTokenSets.BAD_CHARACTER_FORBIDDEN_TOKENS;
+
 
 public class MojoliciousParser extends PerlParserImpl implements MojoliciousElementTypes, PerlElementTypes {
   public static final TokenSet BAD_CAHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(
-    PerlParserImpl.BAD_CHARACTER_FORBIDDEN_TOKENS,
+    BAD_CHARACTER_FORBIDDEN_TOKENS,
     TokenSet.create(
       MOJO_BLOCK_EXPR_CLOSER,
       MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
@@ -35,13 +37,13 @@ public class MojoliciousParser extends PerlParserImpl implements MojoliciousElem
       MOJO_END
     ));
   public static final TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.orSet(
-    PerlParserImpl.CONSUMABLE_SEMI_TOKENS, TokenSet.create(
+    PerlParserTokenSets.CONSUMABLE_SEMI_TOKENS, TokenSet.create(
       MOJO_BLOCK_EXPR_CLOSER,
       MOJO_BLOCK_CLOSER_SEMI,
       MOJO_BLOCK_EXPR_NOSPACE_CLOSER
     ));
   public static final TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.orSet(
-    PerlParserImpl.UNCONSUMABLE_SEMI_TOKENS, TokenSet.create(
+    PerlParserTokenSets.UNCONSUMABLE_SEMI_TOKENS, TokenSet.create(
       MOJO_END
     ));
 

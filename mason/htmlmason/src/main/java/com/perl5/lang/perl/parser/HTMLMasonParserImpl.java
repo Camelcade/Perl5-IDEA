@@ -25,12 +25,13 @@ import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 
 @SuppressWarnings("Duplicates")
 public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonParser {
   protected static final TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(
-    PerlParserImpl.BAD_CHARACTER_FORBIDDEN_TOKENS, TokenSet.create(
+    PerlParserTokenSets.BAD_CHARACTER_FORBIDDEN_TOKENS, TokenSet.create(
       HTML_MASON_ONCE_CLOSER,
       HTML_MASON_SHARED_CLOSER,
       HTML_MASON_CLEANUP_CLOSER,
@@ -47,7 +48,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
     ));
 
   protected static final TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.orSet(
-    PerlParserImpl.UNCONSUMABLE_SEMI_TOKENS,
+    PerlParserTokenSets.UNCONSUMABLE_SEMI_TOKENS,
     TokenSet.create(
       HTML_MASON_FILTER_CLOSER
     )

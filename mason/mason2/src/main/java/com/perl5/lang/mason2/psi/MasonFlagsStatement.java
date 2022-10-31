@@ -18,9 +18,8 @@ package com.perl5.lang.mason2.psi;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 
 
-public interface MasonFlagsStatement extends PsiElement, PerlElementTypes, PerlRuntimeParentsProvider {
+public interface MasonFlagsStatement extends PsiElement, PerlRuntimeParentsProvider {
 
 }

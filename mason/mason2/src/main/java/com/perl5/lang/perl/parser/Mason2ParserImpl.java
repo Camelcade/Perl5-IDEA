@@ -25,10 +25,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.NAMESPACE_CONTENT;
+
 
 public class Mason2ParserImpl extends PerlParserImpl implements MasonParser {
   protected static final TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(
-    PerlParserImpl.BAD_CHARACTER_FORBIDDEN_TOKENS, TokenSet.create(
+    PerlParserTokenSets.BAD_CHARACTER_FORBIDDEN_TOKENS, TokenSet.create(
       MASON_CLASS_CLOSER,
       MASON_INIT_CLOSER,
       MASON_PERL_CLOSER,

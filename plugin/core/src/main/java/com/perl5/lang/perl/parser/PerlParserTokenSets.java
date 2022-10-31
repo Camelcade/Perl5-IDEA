@@ -17,14 +17,14 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
 
-public interface PerlParser extends PerlElementTypes {
+public final class PerlParserTokenSets {
   // these tokens are not being marked as bad characters
-  TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
+  public static final TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
     RESERVED_PACKAGE,
     RIGHT_BRACE,
     RIGHT_BRACE_SCALAR,
@@ -37,7 +37,7 @@ public interface PerlParser extends PerlElementTypes {
   );
 
   // Contains tokens that can be freely consumed during statement recovery
-  TokenSet STATEMENT_RECOVERY_CONSUMABLE_TOKENS = TokenSet.orSet(
+  public static final TokenSet STATEMENT_RECOVERY_CONSUMABLE_TOKENS = TokenSet.orSet(
     HEREDOC_BODIES_TOKENSET,
     TokenSet.create(
       COLON,
@@ -112,12 +112,12 @@ public interface PerlParser extends PerlElementTypes {
 
 
   // Tokens which consumed and counted as semicolon
-  TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.create(
+  public static final TokenSet CONSUMABLE_SEMI_TOKENS = TokenSet.create(
     SEMICOLON
   );
 
   // Tokens which makes semicolon optional, like block close brace
-  TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.create(
+  public static final TokenSet UNCONSUMABLE_SEMI_TOKENS = TokenSet.create(
     RIGHT_BRACE,
     REGEX_QUOTE_CLOSE,
     RIGHT_BRACE_SCALAR,
