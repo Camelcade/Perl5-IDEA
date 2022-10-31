@@ -35,7 +35,10 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 
-public class PerlGlobUtil implements PerlElementTypes {
+public final class PerlGlobUtil implements PerlElementTypes {
+  private PerlGlobUtil() {
+  }
+
   public static final Set<String> BUILT_IN = Stream.of(
       Set.of("ARGV", "STDERR", "STDOUT", "ARGVOUT", "STDIN"),
       PerlBuiltInScalars.BUILT_IN,
