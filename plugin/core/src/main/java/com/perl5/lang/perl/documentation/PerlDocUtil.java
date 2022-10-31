@@ -49,6 +49,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.util.PerlCorePackages.PACKAGE_EXPORTER;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
 
@@ -64,7 +65,8 @@ public final class PerlDocUtil implements PerlElementTypes {
   private static final PodLinkDescriptor COMPOUND_DOC_LINK = PodLinkDescriptor.create("perlsyn", "Compound Statements");
   private static final PodLinkDescriptor BLOCK_NAMES_LINK = PodLinkDescriptor.create("perlmod", "BEGIN, UNITCHECK, CHECK, INIT and END");
   private static final PodLinkDescriptor AUTOLOAD_LINK = PodLinkDescriptor.create("perlsub", "Autoloading");
-  private static final PodLinkDescriptor DESTROY_LINK = PodLinkDescriptor.create("perlobj", "Destructors");
+  private static final String PERLDOC_PERLOBJ = "perlobj";
+  private static final PodLinkDescriptor DESTROY_LINK = PodLinkDescriptor.create(PERLDOC_PERLOBJ, "Destructors");
 
   private static final Map<String, PodLinkDescriptor> OPERATORS_LINKS = Map.of(
     "~~", PodLinkDescriptor.create(PERL_OP, "Smartmatch Operator"),
@@ -75,11 +77,11 @@ public final class PerlDocUtil implements PerlElementTypes {
     "isa", PodLinkDescriptor.create(PERL_OP, "isa operator")
   );
   private static final Map<String, PodLinkDescriptor> VARIABLES_LINKS = Map.of(
-    "@ISA", PodLinkDescriptor.create("perlobj", "A Class is Simply a Package"),
-    "@EXPORT", PodLinkDescriptor.create("Exporter", "How to Export"),
-    "@EXPORT_OK", PodLinkDescriptor.create("Exporter", "How to Export"),
-    "%EXPORT_TAGS", PodLinkDescriptor.create("Exporter", "Specialised Import Lists"),
-    "$VERSION", PodLinkDescriptor.create("perlobj", "VERSION")
+    "@ISA", PodLinkDescriptor.create(PERLDOC_PERLOBJ, "A Class is Simply a Package"),
+    "@EXPORT", PodLinkDescriptor.create(PACKAGE_EXPORTER, "How to Export"),
+    "@EXPORT_OK", PodLinkDescriptor.create(PACKAGE_EXPORTER, "How to Export"),
+    "%EXPORT_TAGS", PodLinkDescriptor.create(PACKAGE_EXPORTER, "Specialised Import Lists"),
+    "$VERSION", PodLinkDescriptor.create(PERLDOC_PERLOBJ, "VERSION")
   );
 
 

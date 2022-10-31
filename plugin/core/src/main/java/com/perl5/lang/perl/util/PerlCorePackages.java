@@ -21,9 +21,11 @@ import java.util.Set;
 
 // @todo this interface should be auto-generated from Module::CoreList and has same functionality, like version and deprecation control
 public final class PerlCorePackages {
+
   public PerlCorePackages() {
   }
 
+  public static final String PACKAGE_EXPORTER = "Exporter";
   public static final Set<String> CORE_PACKAGES = Set.of(
     "AnyDBM_File",
     "App::Prove",
@@ -116,7 +118,7 @@ public final class PerlCorePackages {
     "English",
     "Env",
     "Errno",
-    "Exporter",
+    PACKAGE_EXPORTER,
     "Exporter::Heavy",
     "ExtUtils::CBuilder",
     "ExtUtils::CBuilder::Platform::Windows",
