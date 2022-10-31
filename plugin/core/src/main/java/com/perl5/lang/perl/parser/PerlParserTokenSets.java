@@ -23,6 +23,9 @@ import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
 
 public final class PerlParserTokenSets {
+  private PerlParserTokenSets() {
+  }
+
   // these tokens are not being marked as bad characters
   public static final TokenSet BAD_CHARACTER_FORBIDDEN_TOKENS = TokenSet.create(
     RESERVED_PACKAGE,
