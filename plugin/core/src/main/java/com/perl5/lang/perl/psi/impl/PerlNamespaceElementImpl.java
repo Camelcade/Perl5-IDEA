@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.TAG_PACKAGE;
+import static com.perl5.lang.perl.util.PerlCorePackages.CORE_PACKAGES_PRAGMAS;
 
 
 public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences implements PerlNamespaceElement {
@@ -78,7 +79,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
 
   @Override
   public boolean isPragma() {
-    return PerlPackageUtil.CORE_PACKAGES_PRAGMAS.contains(getCanonicalName());
+    return CORE_PACKAGES_PRAGMAS.contains(getCanonicalName());
   }
 
   @Override

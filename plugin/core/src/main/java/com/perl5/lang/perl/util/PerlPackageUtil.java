@@ -67,8 +67,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 
+import static com.perl5.lang.perl.util.PerlCorePackages.*;
 
-public class PerlPackageUtil implements PerlElementTypes, PerlCorePackages {
+
+public class PerlPackageUtil implements PerlElementTypes {
   public static final String NAMESPACE_SEPARATOR = "::";
   public static final String DEREFERENCE_OPERATOR = "->";
   public static final char NAMESPACE_SEPARATOR_LEGACY = '\'';
