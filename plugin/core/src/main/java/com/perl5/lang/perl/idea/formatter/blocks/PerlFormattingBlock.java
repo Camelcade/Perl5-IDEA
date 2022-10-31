@@ -197,7 +197,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     };
 
     for (Block block : rawBlocks) {
-      IElementType blockType = block instanceof ASTBlock ? PsiUtilCore.getElementType(((ASTBlock)block).getNode()) : null;
+      IElementType blockType = ASTBlock.getElementType(block);
       if ((blockType == null || blockType == COMMA)) {
         blocksToGroup.add(block);
         blocksDispatcher.run();

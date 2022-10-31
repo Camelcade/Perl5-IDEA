@@ -209,7 +209,7 @@ public class PerlIndentProcessor implements PerlElementTypes {
     List<Block> subBlocks = block.getSubBlocks();
     if (subBlocks.size() > newChildIndex) {
       Block nextBlock = subBlocks.get(newChildIndex);
-      if (nextBlock instanceof ASTBlock && BLOCK_LIKE_CONTAINERS.contains(PsiUtilCore.getElementType(((ASTBlock)nextBlock).getNode()))) {
+      if (BLOCK_LIKE_CONTAINERS.contains(ASTBlock.getElementType(nextBlock))) {
         return Indent.getNormalIndent();
       }
     }
