@@ -70,7 +70,10 @@ import java.util.regex.Pattern;
 import static com.perl5.lang.perl.util.PerlCorePackages.*;
 
 
-public class PerlPackageUtil implements PerlElementTypes {
+public final class PerlPackageUtil implements PerlElementTypes {
+  private PerlPackageUtil() {
+  }
+
   public static final String NAMESPACE_SEPARATOR = "::";
   public static final String DEREFERENCE_OPERATOR = "->";
   public static final char NAMESPACE_SEPARATOR_LEGACY = '\'';
@@ -81,8 +84,8 @@ public class PerlPackageUtil implements PerlElementTypes {
   public static final String __PACKAGE__ = "__PACKAGE__";
   public static final String PACKAGE_CARP = "Carp";
   public static final String PACKAGE_SCALAR_UTIL = "Scalar::Util";
-  @NonNls public static final String PACKAGE_MOO = "Moo";
-  @NonNls public static final String MOO_ROLE = PACKAGE_MOO + NAMESPACE_SEPARATOR + "Role";
+  public static final @NonNls String PACKAGE_MOO = "Moo";
+  public static final @NonNls String MOO_ROLE = PACKAGE_MOO + NAMESPACE_SEPARATOR + "Role";
   public static final String PACKAGE_CLASS_MOP_MIXIN = "Class::MOP::Mixin";
   public static final String PACKAGE_MOOSE = "Moose";
   public static final String PACKAGE_MOOSE_BASE = "Moose" + NAMESPACE_SEPARATOR;
