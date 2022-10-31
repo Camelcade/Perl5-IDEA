@@ -26,7 +26,7 @@ import java.util.Set;
 
 
 public class PerlUnusedGlobalVariableInspection extends PerlVariableInspectionBase {
-  public static final Set<String> EXCLUSIONS = Set.of(
+  static final Set<String> EXCLUSIONS = Set.of(
     "@ISA",
     "@EXPORT_OK",
     "@EXPORT",
