@@ -22,7 +22,7 @@ import java.util.Set;
 // @todo this interface should be auto-generated from Module::CoreList and has same functionality, like version and deprecation control
 public final class PerlCorePackages {
 
-  public PerlCorePackages() {
+  private PerlCorePackages() {
   }
 
   public static final String PACKAGE_EXPORTER = "Exporter";
