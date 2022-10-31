@@ -33,7 +33,7 @@ import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
 
 
 public class PerlUnusedSubInspection extends PerlInspection {
-  public static final Set<String> EXCLUSIONS = Set.of(
+  private static final Set<String> EXCLUSIONS = Set.of(
     "BEGIN",
     "UNITCHECK",
     "CHECK",
