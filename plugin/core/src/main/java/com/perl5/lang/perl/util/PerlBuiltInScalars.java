@@ -21,8 +21,11 @@ import java.util.Set;
 import static com.perl5.lang.perl.psi.utils.PerlPsiUtil.DOUBLE_QUOTE;
 
 
-public interface PerlBuiltInScalars {
-  Set<String> BUILT_IN = Set.of(
+public final class PerlBuiltInScalars {
+  private PerlBuiltInScalars() {
+  }
+
+  public static final Set<String> BUILT_IN = Set.of(
     "OLD_PERL_VERSION",
     "^WIN32_SLOPPY_STAT",
     "^MATCH",
