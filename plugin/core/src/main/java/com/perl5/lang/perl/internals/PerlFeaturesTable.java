@@ -16,95 +16,109 @@
 
 package com.perl5.lang.perl.internals;
 
+import org.apache.groovy.util.Maps;
+
 import java.util.*;
 
 /**
  * Represents internal %^H
  */
-public class PerlFeaturesTable implements Cloneable {
-  public static final Map<String, String> AVAILABLE_FEATURES = new HashMap<>();
-  public static final Map<String, List<String>> AVAILABLE_FEATURES_BUNDLES = new HashMap<>();
+public final class PerlFeaturesTable implements Cloneable {
 
-  static {
-    AVAILABLE_FEATURES.put("bareword_filehandles",
-                           "v5.34, enables bareword filehandles for builtin functions operations, a generally discouraged practice.");
-    AVAILABLE_FEATURES.put("bitwise",
-                           "v5.22, makes the four standard bitwise operators treat their operands consistently as numbers, and introduces four new dotted operators that treat their operands consistently as strings. The same applies to the assignment variants. Requires no warnings \"experimental::bitwise\"");
-    AVAILABLE_FEATURES.put("current_sub",
-                           "v5.16, provides the __SUB__ token that returns a reference to the current subroutine or undef outside of a subroutine");
-    AVAILABLE_FEATURES.put("declared_refs",
-                           "v5.26, allows a reference to a variable to be declared with my, state, our our, or localized with local. Requires no warnings \"experimental::declared_refs\"");
-    AVAILABLE_FEATURES.put("evalbytes", "v5.16, force eval to treat string argument as a string of bytes");
-    AVAILABLE_FEATURES.put("fc", "v5.16, enables the fc function, which implements Unicode casefolding");
-    AVAILABLE_FEATURES.put("indirect", "v5.32, allows the use of indirect object syntax for method calls, e.g. new Foo 1, 2;");
-    AVAILABLE_FEATURES.put("isa",
-                           "v5.32, allows the use of the isa infix operator, which tests whether the scalar given by the left operand is an object of the class given by the right operand. Requires no warnings \"experimental::isa\"");
-    AVAILABLE_FEATURES.put("multidimensional", "v5.34, enables multidimensional array emulation like $foo{$x, $y}");
-    AVAILABLE_FEATURES.put("postderef_qq",
-                           "v5.20, allows the use of postfix dereference syntax in within interpolated strings. Requires no warnings \"experimental::postderef\"");
-    AVAILABLE_FEATURES
-      .put("refaliasing", "v5.22, enables aliasing via assignment to references. Requires  no warnings \"experimental::refaliasing\"");
-    AVAILABLE_FEATURES.put("say", "v5.10, enables the Perl 6 style say function");
-    AVAILABLE_FEATURES.put("signatures",
-                           "v5.20, enables unpacking of subroutine arguments into lexical variables. Requires  no warnings \"experimental::signatures\"");
-    AVAILABLE_FEATURES.put("state", "v5.10, enables state variables");
-    AVAILABLE_FEATURES.put("switch", "v5.10, enables the Perl 6 given/when construct. Requires no warnings \"experimental::smartmatch\"");
-    AVAILABLE_FEATURES
-      .put("try", "v5.34, enables the try and catch syntax, which allows exception handling. Requires no warnings \"experimental::try\"");
-    AVAILABLE_FEATURES
-      .put("unicode_eval", "v5.16, force eval to treat string argument as a string of characters ignoring any use utf8 declarations");
-    AVAILABLE_FEATURES.put("unicode_strings",
-                           "v5.16, use Unicode rules in all string operations executed within its scope (unless they are also within the scope of either use locale or use bytes)");
-  }
+  private static final String FEATURE_BAREWORD_FILEHANDLES = "bareword_filehandles";
+  private static final String FEATURE_INDIRECT = "indirect";
+  private static final String FEATURE_MULTIDIMENSIONAL = "multidimensional";
+  private static final String FEATURE_SAY = "say";
+  private static final String FEATURE_STATE = "state";
+  private static final String FEATURE_SWITCH = "switch";
+  private static final String FEATURE_BITWISE = "bitwise";
+  private static final String FEATURE_CURRENT_SUB = "current_sub";
+  private static final String FEATURE_EVALBYTES = "evalbytes";
+  private static final String FEATURE_FC = "fc";
+  private static final String FEATURE_POSTDEREF_QQ = "postderef_qq";
+  private static final String FEATURE_UNICODE_EVAL = "unicode_eval";
+  private static final String FEATURE_UNICODE_STRINGS = "unicode_strings";
+  public static final Map<String, String> AVAILABLE_FEATURES = Maps.of(
+    FEATURE_BAREWORD_FILEHANDLES, "v5.34, enables bareword filehandles for builtin functions operations, a generally discouraged practice.",
+    FEATURE_BITWISE,
+    "v5.22, makes the four standard bitwise operators treat their operands consistently as numbers, and introduces four new dotted operators that treat their operands consistently as strings. The same applies to the assignment variants. Requires no warnings \"experimental::bitwise\"",
+    FEATURE_CURRENT_SUB,
+    "v5.16, provides the __SUB__ token that returns a reference to the current subroutine or undef outside of a subroutine",
+    "declared_refs",
+    "v5.26, allows a reference to a variable to be declared with my, state, our our, or localized with local. Requires no warnings \"experimental::declared_refs\"",
+    FEATURE_EVALBYTES, "v5.16, force eval to treat string argument as a string of bytes",
+    FEATURE_FC, "v5.16, enables the fc function, which implements Unicode casefolding",
+    FEATURE_INDIRECT, "v5.32, allows the use of indirect object syntax for method calls, e.g. new Foo 1, 2;",
+    "isa",
+    "v5.32, allows the use of the isa infix operator, which tests whether the scalar given by the left operand is an object of the class given by the right operand. Requires no warnings \"experimental::isa\"",
+    FEATURE_MULTIDIMENSIONAL, "v5.34, enables multidimensional array emulation like $foo{$x, $y}",
+    FEATURE_POSTDEREF_QQ,
+    "v5.20, allows the use of postfix dereference syntax in within interpolated strings. Requires no warnings \"experimental::postderef\"",
+    "refaliasing", "v5.22, enables aliasing via assignment to references. Requires  no warnings \"experimental::refaliasing\"",
+    FEATURE_SAY, "v5.10, enables the Perl 6 style say function",
+    "signatures",
+    "v5.20, enables unpacking of subroutine arguments into lexical variables. Requires  no warnings \"experimental::signatures\"",
+    FEATURE_STATE, "v5.10, enables state variables",
+    FEATURE_SWITCH, "v5.10, enables the Perl 6 given/when construct. Requires no warnings \"experimental::smartmatch\"",
+    "try", "v5.34, enables the try and catch syntax, which allows exception handling. Requires no warnings \"experimental::try\"",
+    FEATURE_UNICODE_EVAL, "v5.16, force eval to treat string argument as a string of characters ignoring any use utf8 declarations",
+    FEATURE_UNICODE_STRINGS,
+    "v5.16, use Unicode rules in all string operations executed within its scope (unless they are also within the scope of either use locale or use bytes)"
+  );
 
-  static {
-    AVAILABLE_FEATURES_BUNDLES.put("all", new ArrayList<>(AVAILABLE_FEATURES.keySet()));
-    AVAILABLE_FEATURES_BUNDLES.put("default", Arrays.asList("bareword_filehandles", "indirect", "multidimensional"));
+  private static final List<String> FEATURES_5_9_5 = List.of(
+    FEATURE_BAREWORD_FILEHANDLES, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL, FEATURE_SAY, FEATURE_STATE, FEATURE_SWITCH);
+  private static final List<String> FEATURES_5_27 = List.of(
+    FEATURE_BAREWORD_FILEHANDLES, FEATURE_BITWISE, FEATURE_CURRENT_SUB, FEATURE_EVALBYTES, FEATURE_FC, FEATURE_INDIRECT,
+    FEATURE_MULTIDIMENSIONAL, FEATURE_POSTDEREF_QQ, FEATURE_SAY, FEATURE_STATE, FEATURE_SWITCH, FEATURE_UNICODE_EVAL,
+    FEATURE_UNICODE_STRINGS);
+  private static final List<String> FEATURES_5_23 = List.of(
+    FEATURE_BAREWORD_FILEHANDLES, FEATURE_CURRENT_SUB, FEATURE_EVALBYTES, FEATURE_FC, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL,
+    FEATURE_POSTDEREF_QQ, FEATURE_SAY, FEATURE_STATE, FEATURE_SWITCH, FEATURE_UNICODE_EVAL, FEATURE_UNICODE_STRINGS);
+  private static final List<String> FEATURES_5_15 = List.of(
+    FEATURE_BAREWORD_FILEHANDLES, FEATURE_CURRENT_SUB, FEATURE_EVALBYTES, FEATURE_FC, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL,
+    FEATURE_SAY, FEATURE_STATE, FEATURE_SWITCH, FEATURE_UNICODE_EVAL, FEATURE_UNICODE_STRINGS);
+  private static final List<String> FEATURES_5_11 = List.of(
+    FEATURE_BAREWORD_FILEHANDLES, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL, FEATURE_SAY, FEATURE_STATE, FEATURE_SWITCH,
+    FEATURE_UNICODE_STRINGS);
 
-    List<String> features = Arrays.asList("bareword_filehandles", "indirect", "multidimensional", "say", "state", "switch");
-    AVAILABLE_FEATURES_BUNDLES.put("5.9.5", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.10", features);
+  public static final Map<String, List<String>> AVAILABLE_FEATURES_BUNDLES = Maps.of(
+    "all", new ArrayList<>(AVAILABLE_FEATURES.keySet()),
+    "default", Arrays.asList(FEATURE_BAREWORD_FILEHANDLES, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL),
 
-    features = Arrays.asList("bareword_filehandles", "indirect", "multidimensional", "say", "state", "switch", "unicode_strings");
-    AVAILABLE_FEATURES_BUNDLES.put("5.11", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.12", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.13", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.14", features);
+    "5.9.5", FEATURES_5_9_5,
+    "5.10", FEATURES_5_9_5,
 
-    features = Arrays
-      .asList("bareword_filehandles", "current_sub", "evalbytes", "fc", "indirect", "multidimensional", "say", "state", "switch",
-              "unicode_eval", "unicode_strings");
-    AVAILABLE_FEATURES_BUNDLES.put("5.15", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.16", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.17", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.18", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.19", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.20", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.21", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.22", features);
+    "5.11", FEATURES_5_11,
+    "5.12", FEATURES_5_11,
+    "5.13", FEATURES_5_11,
+    "5.14", FEATURES_5_11,
 
-    features = Arrays
-      .asList("bareword_filehandles", "current_sub", "evalbytes", "fc", "indirect", "multidimensional", "postderef_qq", "say", "state",
-              "switch", "unicode_eval", "unicode_strings");
-    AVAILABLE_FEATURES_BUNDLES.put("5.23", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.24", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.25", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.26", features);
+    "5.15", FEATURES_5_15,
+    "5.16", FEATURES_5_15,
+    "5.17", FEATURES_5_15,
+    "5.18", FEATURES_5_15,
+    "5.19", FEATURES_5_15,
+    "5.20", FEATURES_5_15,
+    "5.21", FEATURES_5_15,
+    "5.22", FEATURES_5_15,
 
-    features = Arrays
-      .asList("bareword_filehandles", "bitwise", "current_sub", "evalbytes", "fc", "indirect", "multidimensional", "postderef_qq", "say",
-              "state", "switch", "unicode_eval", "unicode_strings");
-    AVAILABLE_FEATURES_BUNDLES.put("5.27", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.28", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.29", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.30", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.31", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.32", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.33", features);
-    AVAILABLE_FEATURES_BUNDLES.put("5.34", features);
-  }
+    "5.23", FEATURES_5_23,
+    "5.24", FEATURES_5_23,
+    "5.25", FEATURES_5_23,
+    "5.26", FEATURES_5_23,
 
-  protected HashMap<String, Boolean> featuresMap;
+    "5.27", FEATURES_5_27,
+    "5.28", FEATURES_5_27,
+    "5.29", FEATURES_5_27,
+    "5.30", FEATURES_5_27,
+    "5.31", FEATURES_5_27,
+    "5.32", FEATURES_5_27,
+    "5.33", FEATURES_5_27,
+    "5.34", FEATURES_5_27
+  );
+
+  private Map<String, Boolean> featuresMap;
 
   public PerlFeaturesTable() {
     featuresMap = new HashMap<>();
@@ -117,7 +131,7 @@ public class PerlFeaturesTable implements Cloneable {
   public PerlFeaturesTable clone() {
     try {
       PerlFeaturesTable newTable = (PerlFeaturesTable)super.clone();
-      newTable.featuresMap = (HashMap<String, Boolean>)featuresMap.clone();
+      newTable.featuresMap = Map.copyOf(featuresMap);
       return newTable;
     }
     catch (CloneNotSupportedException e) {
