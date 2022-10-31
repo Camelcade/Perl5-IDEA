@@ -28,7 +28,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 
 public final class PerlElementPatterns {
-  public PerlElementPatterns() {
+  private PerlElementPatterns() {
   }
 
   public static final PsiElementPattern.Capture<PsiElement> WHITE_SPACE_AND_COMMENTS = psiElement().whitespaceCommentOrError();
