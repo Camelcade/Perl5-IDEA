@@ -18,34 +18,39 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
 
-public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
+public final class PerlTokenSets {
+  private PerlTokenSets() {
+  }
+
   /**
    * Quote openers with three or four quotes
    */
-  TokenSet COMPLEX_QUOTE_OPENERS = TokenSet.create(RESERVED_S, RESERVED_TR, RESERVED_Y);
+  public static final TokenSet COMPLEX_QUOTE_OPENERS = TokenSet.create(RESERVED_S, RESERVED_TR, RESERVED_Y);
 
-  TokenSet SIMPLE_QUOTE_OPENERS = TokenSet.create(RESERVED_Q, RESERVED_QQ, RESERVED_QX, RESERVED_QW, RESERVED_QR, RESERVED_M);
+  public static final TokenSet SIMPLE_QUOTE_OPENERS =
+    TokenSet.create(RESERVED_Q, RESERVED_QQ, RESERVED_QX, RESERVED_QW, RESERVED_QR, RESERVED_M);
 
-  TokenSet ALL_QUOTE_OPENERS = TokenSet.orSet(SIMPLE_QUOTE_OPENERS, COMPLEX_QUOTE_OPENERS);
+  public static final TokenSet ALL_QUOTE_OPENERS = TokenSet.orSet(SIMPLE_QUOTE_OPENERS, COMPLEX_QUOTE_OPENERS);
 
-  TokenSet BITWISE_BINARY_OPERATORS_TOKENSET = TokenSet.create(OPERATOR_BITWISE_OR, OPERATOR_BITWISE_XOR, OPERATOR_BITWISE_AND);
+  public static final TokenSet BITWISE_BINARY_OPERATORS_TOKENSET =
+    TokenSet.create(OPERATOR_BITWISE_OR, OPERATOR_BITWISE_XOR, OPERATOR_BITWISE_AND);
 
-  TokenSet BITWISE_OPERATORS_TOKENSET = TokenSet.orSet(
+  public static final TokenSet BITWISE_OPERATORS_TOKENSET = TokenSet.orSet(
     BITWISE_BINARY_OPERATORS_TOKENSET,
     TokenSet.create(OPERATOR_BITWISE_NOT)
   );
 
-  TokenSet BITWISE_ASSIGN_OPERATORS_TOKENSET = TokenSet.create(
+  public static final TokenSet BITWISE_ASSIGN_OPERATORS_TOKENSET = TokenSet.create(
     OPERATOR_BITWISE_AND_ASSIGN, OPERATOR_BITWISE_OR_ASSIGN, OPERATOR_BITWISE_XOR_ASSIGN);
 
-  TokenSet OPERATORS_TOKENSET = TokenSet.orSet(
+  public static final TokenSet OPERATORS_TOKENSET = TokenSet.orSet(
     BITWISE_OPERATORS_TOKENSET,
     BITWISE_ASSIGN_OPERATORS_TOKENSET,
     TokenSet.create(
@@ -132,7 +137,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
       OPERATOR_SMARTMATCH
     ));
 
-  TokenSet FUNCTION_LIKE_EXPR = TokenSet.create(
+  public static final TokenSet FUNCTION_LIKE_EXPR = TokenSet.create(
     GREP_EXPR,
     MAP_EXPR,
     SORT_EXPR,
@@ -154,7 +159,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     ARRAY_POP_EXPR
   );
 
-  TokenSet CUSTOM_EXPR_KEYWORDS = TokenSet.create(
+  public static final TokenSet CUSTOM_EXPR_KEYWORDS = TokenSet.create(
     RESERVED_GREP,
     RESERVED_MAP,
     RESERVED_SORT,
@@ -187,7 +192,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_BLESS
   );
 
-  TokenSet MODIFIERS_KEYWORDS_TOKENSET = TokenSet.create(
+  public static final TokenSet MODIFIERS_KEYWORDS_TOKENSET = TokenSet.create(
     RESERVED_IF,
     RESERVED_UNTIL,
     RESERVED_UNLESS,
@@ -197,18 +202,18 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_WHILE
   );
 
-  TokenSet TAGS_TOKEN_SET = TokenSet.create(TAG_DATA, TAG_END, TAG, TAG_PACKAGE);
+  public static final TokenSet TAGS_TOKEN_SET = TokenSet.create(TAG_DATA, TAG_END, TAG, TAG_PACKAGE);
 
-  TokenSet COMPOUND_KEYWORDS_TOKENSET = TokenSet.orSet(
+  public static final TokenSet COMPOUND_KEYWORDS_TOKENSET = TokenSet.orSet(
     MODIFIERS_KEYWORDS_TOKENSET,
     TokenSet.create(RESERVED_ELSIF, RESERVED_ELSE, RESERVED_GIVEN)
   );
 
-  TokenSet SWITCH_KEYWORDS_TOKENSET = TokenSet.create(RESERVED_GIVEN, RESERVED_WHEN, RESERVED_DEFAULT);
+  public static final TokenSet SWITCH_KEYWORDS_TOKENSET = TokenSet.create(RESERVED_GIVEN, RESERVED_WHEN, RESERVED_DEFAULT);
 
-  TokenSet SUB_MODIFIERS = TokenSet.create(RESERVED_MY, RESERVED_OUR, RESERVED_STATE, RESERVED_ASYNC);
+  public static final TokenSet SUB_MODIFIERS = TokenSet.create(RESERVED_MY, RESERVED_OUR, RESERVED_STATE, RESERVED_ASYNC);
 
-  TokenSet DEFAULT_KEYWORDS_TOKENSET = TokenSet.orSet(
+  public static final TokenSet DEFAULT_KEYWORDS_TOKENSET = TokenSet.orSet(
     ALL_QUOTE_OPENERS,
     CUSTOM_EXPR_KEYWORDS,
     COMPOUND_KEYWORDS_TOKENSET,
@@ -234,7 +239,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
       RESERVED_EXIT
     ));
 
-  TokenSet TRY_CATCH_KEYWORDS_TOKENSET = TokenSet.create(
+  public static final TokenSet TRY_CATCH_KEYWORDS_TOKENSET = TokenSet.create(
     RESERVED_TRY,
     RESERVED_CATCH,
     RESERVED_FINALLY,
@@ -244,9 +249,9 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_CONTINUATION
   );
 
-  TokenSet METHOD_SIGNATURES_KEYWORDS_TOKENSET = TokenSet.create(RESERVED_METHOD, RESERVED_FUNC);
+  public static final TokenSet METHOD_SIGNATURES_KEYWORDS_TOKENSET = TokenSet.create(RESERVED_METHOD, RESERVED_FUNC);
 
-  TokenSet FUNCTION_PARAMETERS_KEYWORDS_TOKENSET = TokenSet.create(
+  public static final TokenSet FUNCTION_PARAMETERS_KEYWORDS_TOKENSET = TokenSet.create(
     RESERVED_AFTER_FP,
     RESERVED_BEFORE_FP,
     RESERVED_AROUND_FP,
@@ -256,7 +261,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     RESERVED_FUN
   );
 
-  TokenSet KEYWORDS_TOKENSET = TokenSet.orSet(
+  public static final TokenSet KEYWORDS_TOKENSET = TokenSet.orSet(
     DEFAULT_KEYWORDS_TOKENSET,
     MOOSE_RESERVED_TOKENSET,
     METHOD_SIGNATURES_KEYWORDS_TOKENSET,
@@ -264,76 +269,80 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     TRY_CATCH_KEYWORDS_TOKENSET
   );
 
-  TokenSet ANNOTATIONS_KEYS = TokenSet.create(PerlAnnotations.TOKENS_MAP.values().toArray(IElementType.EMPTY_ARRAY));
+  public static final TokenSet ANNOTATIONS_KEYS = TokenSet.create(PerlAnnotations.TOKENS_MAP.values().toArray(IElementType.EMPTY_ARRAY));
 
-  TokenSet STRING_CONTENT_TOKENSET = TokenSet.create(STRING_CONTENT, STRING_CONTENT_XQ, STRING_CONTENT_QQ);
+  public static final TokenSet STRING_CONTENT_TOKENSET = TokenSet.create(STRING_CONTENT, STRING_CONTENT_XQ, STRING_CONTENT_QQ);
 
-  TokenSet HEREDOC_BODIES_TOKENSET = TokenSet.create(HEREDOC, HEREDOC_QQ, HEREDOC_QX);
+  public static final TokenSet HEREDOC_BODIES_TOKENSET = TokenSet.create(HEREDOC, HEREDOC_QQ, HEREDOC_QX);
 
-  TokenSet QUOTE_MIDDLE = TokenSet.create(REGEX_QUOTE, REGEX_QUOTE_E);
+  public static final TokenSet QUOTE_MIDDLE = TokenSet.create(REGEX_QUOTE, REGEX_QUOTE_E);
 
-  TokenSet REGEX_QUOTE_OPEN = TokenSet.create(PerlElementTypesGenerated.REGEX_QUOTE_OPEN, REGEX_QUOTE_OPEN_E);
+  public static final TokenSet REGEX_QUOTE_OPEN = TokenSet.create(PerlElementTypesGenerated.REGEX_QUOTE_OPEN, REGEX_QUOTE_OPEN_E);
 
-  TokenSet OPEN_QUOTES = TokenSet.create(QUOTE_DOUBLE_OPEN, QUOTE_TICK_OPEN, QUOTE_SINGLE_OPEN);
+  public static final TokenSet OPEN_QUOTES = TokenSet.create(QUOTE_DOUBLE_OPEN, QUOTE_TICK_OPEN, QUOTE_SINGLE_OPEN);
 
-  TokenSet QUOTE_OPEN_ANY = TokenSet.orSet(REGEX_QUOTE_OPEN, OPEN_QUOTES, QUOTE_MIDDLE);
+  public static final TokenSet QUOTE_OPEN_ANY = TokenSet.orSet(REGEX_QUOTE_OPEN, OPEN_QUOTES, QUOTE_MIDDLE);
 
-  TokenSet CLOSE_QUOTES = TokenSet.create(QUOTE_DOUBLE_CLOSE, QUOTE_TICK_CLOSE, QUOTE_SINGLE_CLOSE);
+  public static final TokenSet CLOSE_QUOTES = TokenSet.create(QUOTE_DOUBLE_CLOSE, QUOTE_TICK_CLOSE, QUOTE_SINGLE_CLOSE);
 
-  TokenSet QUOTE_CLOSE_FIRST_ANY = TokenSet.orSet(
+  public static final TokenSet QUOTE_CLOSE_FIRST_ANY = TokenSet.orSet(
     TokenSet.create(REGEX_QUOTE_CLOSE),
     QUOTE_MIDDLE,
     CLOSE_QUOTES
   );
 
-  TokenSet QUOTE_CLOSE_PAIRED = TokenSet.orSet(
+  public static final TokenSet QUOTE_CLOSE_PAIRED = TokenSet.orSet(
     CLOSE_QUOTES,
     TokenSet.create(REGEX_QUOTE_CLOSE)
   );
 
-  TokenSet SIGILS = TokenSet.create(SIGIL_SCALAR, SIGIL_ARRAY, SIGIL_HASH, SIGIL_GLOB, SIGIL_CODE, SIGIL_SCALAR_INDEX);
+  public static final TokenSet SIGILS = TokenSet.create(SIGIL_SCALAR, SIGIL_ARRAY, SIGIL_HASH, SIGIL_GLOB, SIGIL_CODE, SIGIL_SCALAR_INDEX);
 
-  TokenSet STATEMENTS = TokenSet.create(STATEMENT, USE_STATEMENT, NO_STATEMENT);
+  public static final TokenSet STATEMENTS = TokenSet.create(STATEMENT, USE_STATEMENT, NO_STATEMENT);
 
-  TokenSet TRANSPARENT_ELEMENT_TYPES = TokenSet.create(PARSABLE_STRING_USE_VARS);
+  public static final TokenSet TRANSPARENT_ELEMENT_TYPES = TokenSet.create(PARSABLE_STRING_USE_VARS);
 
-  TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
+  public static final TokenSet BLOCK_LIKE_CONTAINERS = TokenSet.create(
     BLOCK, BLOCK_SCALAR, BLOCK_ARRAY, BLOCK_HASH, BLOCK_GLOB, BLOCK_CODE, BLOCK_BRACELESS
   );
 
-  TokenSet HEREDOC_ENDS = TokenSet.create(HEREDOC_END, HEREDOC_END_INDENTABLE);
+  public static final TokenSet HEREDOC_ENDS = TokenSet.create(HEREDOC_END, HEREDOC_END_INDENTABLE);
 
-  TokenSet LOOP_CONTROL_KEYWORDS = TokenSet.create(RESERVED_NEXT, RESERVED_LAST, RESERVED_REDO);
+  public static final TokenSet LOOP_CONTROL_KEYWORDS = TokenSet.create(RESERVED_NEXT, RESERVED_LAST, RESERVED_REDO);
 
-  TokenSet CAST_EXPRESSIONS = TokenSet.create(
+  public static final TokenSet CAST_EXPRESSIONS = TokenSet.create(
     ARRAY_CAST_EXPR, CODE_CAST_EXPR, GLOB_CAST_EXPR, HASH_CAST_EXPR, SCALAR_INDEX_CAST_EXPR, SCALAR_CAST_EXPR);
 
-  TokenSet SLICES = TokenSet.create(HASH_SLICE, ARRAY_SLICE);
+  public static final TokenSet SLICES = TokenSet.create(HASH_SLICE, ARRAY_SLICE);
 
-  TokenSet REGEX_OPERATIONS = TokenSet.create(REPLACEMENT_REGEX, COMPILE_REGEX, MATCH_REGEX);
+  public static final TokenSet REGEX_OPERATIONS = TokenSet.create(REPLACEMENT_REGEX, COMPILE_REGEX, MATCH_REGEX);
 
-  TokenSet VARIABLES = TokenSet.create(SCALAR_VARIABLE, ARRAY_VARIABLE, HASH_VARIABLE, CODE_VARIABLE, GLOB_VARIABLE, ARRAY_INDEX_VARIABLE);
+  public static final TokenSet VARIABLES =
+    TokenSet.create(SCALAR_VARIABLE, ARRAY_VARIABLE, HASH_VARIABLE, CODE_VARIABLE, GLOB_VARIABLE, ARRAY_INDEX_VARIABLE);
 
-  TokenSet QUOTED_STRINGS = TokenSet.create(STRING_DQ, STRING_XQ, STRING_SQ);
+  public static final TokenSet QUOTED_STRINGS = TokenSet.create(STRING_DQ, STRING_XQ, STRING_SQ);
 
-  TokenSet STRINGS = TokenSet.orSet(QUOTED_STRINGS, TokenSet.create(STRING_BARE));
+  public static final TokenSet STRINGS = TokenSet.orSet(QUOTED_STRINGS, TokenSet.create(STRING_BARE));
 
-  TokenSet VARIABLE_DECLARATIONS = TokenSet.create(VARIABLE_DECLARATION_GLOBAL, VARIABLE_DECLARATION_LEXICAL, VARIABLE_DECLARATION_LOCAL);
+  public static final TokenSet VARIABLE_DECLARATIONS =
+    TokenSet.create(VARIABLE_DECLARATION_GLOBAL, VARIABLE_DECLARATION_LEXICAL, VARIABLE_DECLARATION_LOCAL);
 
-  TokenSet MODIFIER_DECLARATIONS_TOKENSET = TokenSet.create(AFTER_MODIFIER, BEFORE_MODIFIER, AROUND_MODIFIER, AUGMENT_MODIFIER);
+  public static final TokenSet MODIFIER_DECLARATIONS_TOKENSET =
+    TokenSet.create(AFTER_MODIFIER, BEFORE_MODIFIER, AROUND_MODIFIER, AUGMENT_MODIFIER);
 
-  TokenSet VARIABLE_NAMES = TokenSet.create(SCALAR_NAME, ARRAY_NAME, HASH_NAME, GLOB_NAME);
+  public static final TokenSet VARIABLE_NAMES = TokenSet.create(SCALAR_NAME, ARRAY_NAME, HASH_NAME, GLOB_NAME);
 
-  TokenSet VARIABLE_OPEN_BRACES = TokenSet.create(LEFT_BRACE_SCALAR, LEFT_BRACE_ARRAY, LEFT_BRACE_HASH, LEFT_BRACE_GLOB, LEFT_BRACE_CODE);
+  public static final TokenSet VARIABLE_OPEN_BRACES =
+    TokenSet.create(LEFT_BRACE_SCALAR, LEFT_BRACE_ARRAY, LEFT_BRACE_HASH, LEFT_BRACE_GLOB, LEFT_BRACE_CODE);
 
-  TokenSet VARIABLE_CLOSE_BRACES = TokenSet.create(
+  public static final TokenSet VARIABLE_CLOSE_BRACES = TokenSet.create(
     RIGHT_BRACE_SCALAR, RIGHT_BRACE_ARRAY, RIGHT_BRACE_HASH, RIGHT_BRACE_GLOB, RIGHT_BRACE_CODE);
 
-  TokenSet PRE_VARIABLE_NAME_TOKENS = TokenSet.orSet(SIGILS, VARIABLE_OPEN_BRACES);
+  public static final TokenSet PRE_VARIABLE_NAME_TOKENS = TokenSet.orSet(SIGILS, VARIABLE_OPEN_BRACES);
 
-  TokenSet UNCHAINABLE_OPERATORS = TokenSet.create(OPERATOR_CMP_NUMERIC, OPERATOR_CMP_STR, OPERATOR_SMARTMATCH);
+  public static final TokenSet UNCHAINABLE_OPERATORS = TokenSet.create(OPERATOR_CMP_NUMERIC, OPERATOR_CMP_STR, OPERATOR_SMARTMATCH);
 
-  TokenSet STRING_CHAR_UNRENDERABLE_ALIASES = TokenSet.create(
+  public static final TokenSet STRING_CHAR_UNRENDERABLE_ALIASES = TokenSet.create(
     STRING_SPECIAL_FORMFEED,
     STRING_SPECIAL_BACKSPACE,
     STRING_SPECIAL_ALARM,
@@ -341,13 +350,13 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     STRING_SPECIAL_RANGE
   );
 
-  TokenSet STRING_CHAR_SIMPLE_ALIASES = TokenSet.orSet(STRING_CHAR_UNRENDERABLE_ALIASES, TokenSet.create(
+  public static final TokenSet STRING_CHAR_SIMPLE_ALIASES = TokenSet.orSet(STRING_CHAR_UNRENDERABLE_ALIASES, TokenSet.create(
     STRING_SPECIAL_TAB,
     STRING_SPECIAL_NEWLINE,
     STRING_SPECIAL_RETURN
   ));
 
-  TokenSet STRING_CHAR_OPERATORS = TokenSet.create(
+  public static final TokenSet STRING_CHAR_OPERATORS = TokenSet.create(
     STRING_SPECIAL_LCFIRST,
     STRING_SPECIAL_TCFIRST,
     STRING_SPECIAL_LOWERCASE_START,
@@ -358,7 +367,7 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
   );
 
   // these tokens are highlighted as special chars. Missing some stuff, like back-references, highlighted separately
-  TokenSet SPECIAL_STRING_TOKENS = TokenSet.orSet(
+  public static final TokenSet SPECIAL_STRING_TOKENS = TokenSet.orSet(
     STRING_CHAR_SIMPLE_ALIASES,
     STRING_CHAR_OPERATORS,
     TokenSet.create(
@@ -376,13 +385,11 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
       STRING_SPECIAL_RIGHT_BRACE
     ));
 
-  TokenSet PERL_NUMBERS = TokenSet.create(NUMBER, NUMBER_BIN, NUMBER_HEX, NUMBER_OCT);
+  public static final TokenSet PERL_PARAMETRIZED_STRING_SUBSTITUTIONS = TokenSet.create(UNICODE_CHAR, HEX_CHAR, OCT_CHAR);
 
-  TokenSet PERL_PARAMETRIZED_STRING_SUBSTITUTIONS = TokenSet.create(UNICODE_CHAR, HEX_CHAR, OCT_CHAR);
+  public static final TokenSet SUB_DEFINITIONS_TOKENSET = TokenSet.create(METHOD_DEFINITION, FUNC_DEFINITION, SUB_DEFINITION);
 
-  TokenSet SUB_DEFINITIONS_TOKENSET = TokenSet.create(METHOD_DEFINITION, FUNC_DEFINITION, SUB_DEFINITION);
-
-  TokenSet COMPOUND_STATEMENTS = TokenSet.orSet(
+  public static final TokenSet COMPOUND_STATEMENTS = TokenSet.orSet(
     MODIFIER_DECLARATIONS_TOKENSET,
     SUB_DEFINITIONS_TOKENSET,
     TokenSet.create(
@@ -397,17 +404,12 @@ public interface PerlTokenSets extends PerlElementTypes, MooseElementTypes {
     )
   );
 
-  TokenSet LAZY_PARSABLE_REGEX = TokenSet.create(LP_REGEX, LP_REGEX_X, LP_REGEX_XX, LP_REGEX_SQ, LP_REGEX_X_SQ, LP_REGEX_XX_SQ);
+  public static final TokenSet LAZY_PARSABLE_REGEX =
+    TokenSet.create(LP_REGEX, LP_REGEX_X, LP_REGEX_XX, LP_REGEX_SQ, LP_REGEX_X_SQ, LP_REGEX_XX_SQ);
 
-  TokenSet LAZY_TR_STRINGS = TokenSet.create(LP_STRING_TR, LP_STRING_QQ_RESTRICTED);
-
-  TokenSet LAZY_REGEX_STRINGS = TokenSet.create(LP_STRING_QQ_RESTRICTED, LP_STRING_RE);
-
-  TokenSet LAZY_CODE_BLOCKS = TokenSet.create(LP_CODE_BLOCK, LP_CODE_BLOCK_WITH_TRYCATCH);
-
-  TokenSet ELEMENTS_WITH_CUSTOM_DELIMITERS = TokenSet.orSet(
+  public static final TokenSet ELEMENTS_WITH_CUSTOM_DELIMITERS = TokenSet.orSet(
     REGEX_OPERATIONS, QUOTED_STRINGS, TokenSet.create(STRING_LIST, TR_REGEX)
   );
 
-  TokenSet PACKAGE_LIKE_TOKENS = TokenSet.create(PACKAGE, QUALIFYING_PACKAGE);
+  public static final TokenSet PACKAGE_LIKE_TOKENS = TokenSet.create(PACKAGE, QUALIFYING_PACKAGE);
 }
