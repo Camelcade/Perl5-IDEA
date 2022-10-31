@@ -17,24 +17,27 @@
 package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 
-public interface PerlFormattingTokenSets extends PerlElementTypes {
-  TokenSet FOR_OR_FOREACH = TokenSet.create(
+public final class PerlFormattingTokenSets {
+  private PerlFormattingTokenSets() {
+  }
+
+  public static final TokenSet FOR_OR_FOREACH = TokenSet.create(
     RESERVED_FOR, RESERVED_FOREACH
   );
 
-  TokenSet CONDITION_LIKE_ELEMENTS = TokenSet.create(
+  public static final TokenSet CONDITION_LIKE_ELEMENTS = TokenSet.create(
     CONDITION_EXPR,
     FOR_COMPOUND
   );
 
-  TokenSet SUB_DEFINITIONS_TOKENSET = TokenSet.create(
+  public static final TokenSet SUB_DEFINITIONS_TOKENSET = TokenSet.create(
     METHOD_DEFINITION,
     FUNC_DEFINITION,
     SUB_EXPR,
@@ -44,15 +47,15 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     METHOD_EXPR
   );
 
-  TokenSet INVOCANTS_TOKENSET = TokenSet.create(
+  public static final TokenSet INVOCANTS_TOKENSET = TokenSet.create(
     METHOD_SIGNATURE_INVOCANT, AROUND_SIGNATURE_INVOCANTS
   );
 
-  TokenSet SUB_OR_MODIFIER_DEFINITIONS_TOKENSET = TokenSet.orSet(
+  public static final TokenSet SUB_OR_MODIFIER_DEFINITIONS_TOKENSET = TokenSet.orSet(
     SUB_DEFINITIONS_TOKENSET, MODIFIER_DECLARATIONS_TOKENSET
   );
 
-  TokenSet SECONDARY_COMPOUND_TOKENSET = TokenSet.create(
+  public static final TokenSet SECONDARY_COMPOUND_TOKENSET = TokenSet.create(
     CONTINUE_BLOCK,
     RESERVED_ELSE,
     RESERVED_ELSIF,
@@ -68,7 +71,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
    * @deprecated looks like {@link PerlTokenSets#COMPOUND_STATEMENTS}
    */
   @Deprecated
-  TokenSet COMPOUND_STATEMENTS_TOKENSET = TokenSet.create(
+  public static final TokenSet COMPOUND_STATEMENTS_TOKENSET = TokenSet.create(
     IF_COMPOUND,
     UNLESS_COMPOUND,
     UNTIL_COMPOUND,
@@ -82,7 +85,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
 
 
   // fixme doesn't duplicate BlockOwner interface?
-  TokenSet BLOCK_CONTAINERS_TOKENSET = TokenSet.orSet(
+  public static final TokenSet BLOCK_CONTAINERS_TOKENSET = TokenSet.orSet(
     COMPOUND_STATEMENTS_TOKENSET,
     TokenSet.create(
       CONDITIONAL_BLOCK,
@@ -98,7 +101,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
       CONTINUATION_EXPR
     ));
 
-  TokenSet STATEMENT_MODIFIERS = TokenSet.create(
+  public static final TokenSet STATEMENT_MODIFIERS = TokenSet.create(
     IF_STATEMENT_MODIFIER,
     UNLESS_STATEMENT_MODIFIER,
     WHILE_STATEMENT_MODIFIER,
@@ -107,13 +110,13 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     WHEN_STATEMENT_MODIFIER
   );
 
-  TokenSet RESERVED_CONDITIONAL_BRANCH_KEYWORDS = TokenSet.create(
+  public static final TokenSet RESERVED_CONDITIONAL_BRANCH_KEYWORDS = TokenSet.create(
     RESERVED_IF,
     RESERVED_UNLESS,
     RESERVED_ELSIF
   );
 
-  TokenSet RESERVED_COMPOUND_CONDITIONAL = TokenSet.create(
+  public static final TokenSet RESERVED_COMPOUND_CONDITIONAL = TokenSet.create(
     RESERVED_GIVEN,
     RESERVED_WHILE,
     RESERVED_UNTIL,
@@ -125,7 +128,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     RESERVED_FOREACH
   );
 
-  TokenSet RESERVED_TERMS_BLOCKS = TokenSet.create(
+  public static final TokenSet RESERVED_TERMS_BLOCKS = TokenSet.create(
     RESERVED_DO,
     RESERVED_EVAL,
     RESERVED_SUB,
@@ -135,49 +138,49 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
   );
 
 
-  TokenSet OPERATORS_ADDITIVE = TokenSet.create(
+  public static final TokenSet OPERATORS_ADDITIVE = TokenSet.create(
     OPERATOR_PLUS,
     OPERATOR_MINUS
   );
 
-  TokenSet OPERATORS_MULTIPLICATIVE = TokenSet.create(
+  public static final TokenSet OPERATORS_MULTIPLICATIVE = TokenSet.create(
     OPERATOR_MUL,
     OPERATOR_DIV,
     OPERATOR_POW,
     OPERATOR_MOD
   );
 
-  TokenSet OPERATORS_SHIFT = TokenSet.create(
+  public static final TokenSet OPERATORS_SHIFT = TokenSet.create(
     OPERATOR_SHIFT_LEFT,
     OPERATOR_SHIFT_RIGHT
   );
 
-  TokenSet OPERATORS_RANGE = TokenSet.create(
+  public static final TokenSet OPERATORS_RANGE = TokenSet.create(
     OPERATOR_FLIP_FLOP,
     OPERATOR_HELLIP
   );
 
-  TokenSet OPERATORS_UNARY = TokenSet.create(
+  public static final TokenSet OPERATORS_UNARY = TokenSet.create(
     OPERATOR_PLUS_PLUS,
     OPERATOR_NOT,
     OPERATOR_MINUS_MINUS,
     OPERATOR_BITWISE_NOT
   );
 
-  TokenSet OPERATORS_LOGICAL = TokenSet.create(
+  public static final TokenSet OPERATORS_LOGICAL = TokenSet.create(
     OPERATOR_AND,
     OPERATOR_OR,
     OPERATOR_OR_DEFINED
   );
 
-  TokenSet OPERATORS_EQUALITY = TokenSet.create(
+  public static final TokenSet OPERATORS_EQUALITY = TokenSet.create(
     OPERATOR_EQ_NUMERIC,
     OPERATOR_NE_NUMERIC,
     OPERATOR_RE,
     OPERATOR_NOT_RE
   );
 
-  TokenSet OPERATORS_RELATIONAL = TokenSet.create(
+  public static final TokenSet OPERATORS_RELATIONAL = TokenSet.create(
     OPERATOR_GE_NUMERIC,
     OPERATOR_LE_NUMERIC,
     OPERATOR_SMARTMATCH,
@@ -186,7 +189,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     OPERATOR_CMP_NUMERIC
   );
 
-  TokenSet OPERATORS_ALPHABETICAL = TokenSet.create(
+  public static final TokenSet OPERATORS_ALPHABETICAL = TokenSet.create(
     OPERATOR_GE_STR,
     OPERATOR_LE_STR,
     OPERATOR_GT_STR,
@@ -201,7 +204,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     OPERATOR_ISA
   );
 
-  TokenSet BINARY_EXPRESSIONS = TokenSet.create(
+  public static final TokenSet BINARY_EXPRESSIONS = TokenSet.create(
     LP_OR_XOR_EXPR,
     LP_AND_EXPR,
     FLIPFLOP_EXPR,
@@ -218,12 +221,12 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     REGEX_EXPR
   );
 
-  TokenSet PARENTHESISED_LIKE_EXPRESSIONS = TokenSet.orSet(
+  public static final TokenSet PARENTHESISED_LIKE_EXPRESSIONS = TokenSet.orSet(
     TokenSet.create(PARENTHESISED_EXPR),
     PerlTokenSets.VARIABLE_DECLARATIONS
   );
 
-  TokenSet OPERATORS_ASSIGNMENT = TokenSet.orSet(
+  public static final TokenSet OPERATORS_ASSIGNMENT = TokenSet.orSet(
     BITWISE_ASSIGN_OPERATORS_TOKENSET,
     TokenSet.create(
       OPERATOR_ASSIGN,
@@ -243,7 +246,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     ));
 
 
-  TokenSet BINARY_OPERATORS = TokenSet.orSet(
+  public static final TokenSet BINARY_OPERATORS = TokenSet.orSet(
     OPERATORS_ADDITIVE,
     BITWISE_BINARY_OPERATORS_TOKENSET,
     OPERATORS_EQUALITY,
@@ -255,16 +258,16 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     OPERATORS_SHIFT
   );
 
-  TokenSet RESERVED_VARIABLE_DECLARATION = TokenSet.create(
+  public static final TokenSet RESERVED_VARIABLE_DECLARATION = TokenSet.create(
     RESERVED_MY,
     RESERVED_OUR,
     RESERVED_LOCAL,
     RESERVED_STATE
   );
 
-  TokenSet LABEL_KEYWORDS = TokenSet.orSet(PerlTokenSets.LOOP_CONTROL_KEYWORDS, TokenSet.create(RESERVED_GOTO));
+  public static final TokenSet LABEL_KEYWORDS = TokenSet.orSet(PerlTokenSets.LOOP_CONTROL_KEYWORDS, TokenSet.create(RESERVED_GOTO));
 
-  TokenSet VARIABLE_LEFT_BRACES = TokenSet.create(
+  public static final TokenSet VARIABLE_LEFT_BRACES = TokenSet.create(
     LEFT_BRACE_SCALAR,
     LEFT_BRACE_ARRAY,
     LEFT_BRACE_HASH,
@@ -272,12 +275,12 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     LEFT_BRACE_CODE
   );
 
-  TokenSet BLOCK_LEFT_BRACES = TokenSet.orSet(
+  public static final TokenSet BLOCK_LEFT_BRACES = TokenSet.orSet(
     VARIABLE_LEFT_BRACES,
     TokenSet.create(LEFT_BRACE)
   );
 
-  TokenSet VARIABLE_RIGHT_BRACES = TokenSet.create(
+  public static final TokenSet VARIABLE_RIGHT_BRACES = TokenSet.create(
     RIGHT_BRACE_SCALAR,
     RIGHT_BRACE_ARRAY,
     RIGHT_BRACE_HASH,
@@ -285,18 +288,18 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     RIGHT_BRACE_CODE
   );
 
-  TokenSet BLOCK_RIGHT_BRACES = TokenSet.orSet(
+  public static final TokenSet BLOCK_RIGHT_BRACES = TokenSet.orSet(
     VARIABLE_RIGHT_BRACES,
     TokenSet.create(RIGHT_BRACE)
   );
 
-  TokenSet BLOCK_OPENERS = TokenSet.create(
+  public static final TokenSet BLOCK_OPENERS = TokenSet.create(
     LEFT_BRACE,
     LEFT_BRACKET,
     LEFT_PAREN
   );
 
-  TokenSet BLOCK_CLOSERS = TokenSet.create(
+  public static final TokenSet BLOCK_CLOSERS = TokenSet.create(
     RIGHT_BRACE,
     RIGHT_BRACKET,
     RIGHT_PAREN,
@@ -304,19 +307,19 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
     SEMICOLON
   );
 
-  TokenSet COMMA_LIKE_SEQUENCES = TokenSet.create(SIGNATURE_CONTENT, COMMA_SEQUENCE_EXPR);
+  public static final TokenSet COMMA_LIKE_SEQUENCES = TokenSet.create(SIGNATURE_CONTENT, COMMA_SEQUENCE_EXPR);
 
   /**
    * Elements that must have LF between them
    */
-  TokenSet LF_ELEMENTS = TokenSet.orSet(
+  public static final TokenSet LF_ELEMENTS = TokenSet.orSet(
     STATEMENTS,
     COMPOUND_STATEMENTS_TOKENSET,
     TokenSet.create(LABEL_DECLARATION));
 
 
   // containers which has none indentation
-  TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
+  public static final TokenSet UNINDENTABLE_CONTAINERS = TokenSet.orSet(
     SUB_OR_MODIFIER_DEFINITIONS_TOKENSET,
     COMPOUND_STATEMENTS_TOKENSET,
     TokenSet.create(
@@ -348,7 +351,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
       PerlStubElementTypes.FILE
     ));
 
-  TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
+  public static final TokenSet UNINDENTABLE_TOKENS = TokenSet.orSet(
     TokenSet.create(
       COMMA_SEQUENCE_EXPR,
       CALL_ARGUMENTS,
@@ -356,18 +359,18 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
       ATTRIBUTES
     ));
 
-  TokenSet FORMATTING_BLOCK_LIKE_CONTAINERS = TokenSet.orSet(BLOCK_LIKE_CONTAINERS, TokenSet.create(SIGNATURE_CONTENT));
+  public static final TokenSet FORMATTING_BLOCK_LIKE_CONTAINERS = TokenSet.orSet(BLOCK_LIKE_CONTAINERS, TokenSet.create(SIGNATURE_CONTENT));
 
-  TokenSet MULTI_PARAM_BLOCK_CONTAINERS = TokenSet.create(
+  public static final TokenSet MULTI_PARAM_BLOCK_CONTAINERS = TokenSet.create(
     GREP_EXPR, MAP_EXPR, SORT_EXPR, REPLACEMENT_REGEX
   );
-  TokenSet FOR_ELEMENTS_TOKENSET = TokenSet.create(
+  public static final TokenSet FOR_ELEMENTS_TOKENSET = TokenSet.create(
     FOR_INIT, FOR_CONDITION, FOR_MUTATOR
   );
   /**
    * Tokens that must be suppressed for indentation
    */
-  TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.create(
+  public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.create(
     HEREDOC_END,
     POD,
     FORMAT,
@@ -379,7 +382,7 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
   /**
    * These are minimal blocks we need formatting model for to compute indent, alignment properly.
    */
-  TokenSet FORMATTING_SUFFICIENT_BLOCKS = TokenSet.orSet(
+  public static final TokenSet FORMATTING_SUFFICIENT_BLOCKS = TokenSet.orSet(
     TRANSPARENT_ELEMENT_TYPES,
     HEREDOC_BODIES_TOKENSET,
     COMPOUND_STATEMENTS,
@@ -407,17 +410,17 @@ public interface PerlFormattingTokenSets extends PerlElementTypes {
    * </pre>
    * We don't need if compounds for proper formatting and therefore don't need to include them to the model.
    */
-  TokenSet FORMATTING_RANGE_EDGE_ELEMENTS = TokenSet.orSet(
+  public static final TokenSet FORMATTING_RANGE_EDGE_ELEMENTS = TokenSet.orSet(
     COMPOUND_STATEMENTS, TokenSet.create(NAMESPACE_DEFINITION)
   );
 
   /**
    * Pre-formatter may insert trailing comma to the comma sequence inside these containers
    */
-  TokenSet COMMA_SEQUENCE_CONTAINERS_WITH_POSSIBLE_TRAILING_COMMA = TokenSet.create(
+  public static final TokenSet COMMA_SEQUENCE_CONTAINERS_WITH_POSSIBLE_TRAILING_COMMA = TokenSet.create(
     PARENTHESISED_EXPR, PARENTHESISED_CALL_ARGUMENTS, ANON_HASH, ANON_ARRAY
   );
 
-  TokenSet RIGHTWARD_CALL_EXPRESSIONS = TokenSet.create(
+  public static final TokenSet RIGHTWARD_CALL_EXPRESSIONS = TokenSet.create(
     MAP_EXPR, GREP_EXPR, SORT_EXPR, KEYS_EXPR, VALUES_EXPR, EACH_EXPR, SPLICE_EXPR);
 }

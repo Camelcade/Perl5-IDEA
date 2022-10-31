@@ -39,7 +39,6 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PerlSignatureElement;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
@@ -56,10 +55,12 @@ import java.util.Map;
 
 import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
+import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
-public class PurePerlFormattingContext extends PerlBaseFormattingContext implements PerlFormattingTokenSets {
+public class PurePerlFormattingContext extends PerlBaseFormattingContext {
   private static final Logger LOG = Logger.getInstance(PurePerlFormattingContext.class);
   private final Map<ASTNode, Wrap> myWrapMap = new HashMap<>();
   private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new HashMap<>();
@@ -696,7 +697,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext impleme
     // this is default algorythm from AbstractBlock#getFirstChildAlignment()
     List<Block> subBlocks = block.getSubBlocks();
     for (final Block subBlock : subBlocks) {
-      if (subBlock instanceof ASTBlock && PsiUtilCore.getElementType(((ASTBlock)subBlock).getNode()) == PerlElementTypes.COMMENT_LINE) {
+      if (subBlock instanceof ASTBlock && PsiUtilCore.getElementType(((ASTBlock)subBlock).getNode()) == COMMENT_LINE) {
         continue;
       }
       Alignment alignment = subBlock.getAlignment();
