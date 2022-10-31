@@ -45,7 +45,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -54,7 +53,7 @@ import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
 
 
-public class PerlDocUtil implements PerlElementTypes {
+public final class PerlDocUtil implements PerlElementTypes {
   public static final String PERL_VAR_FILE_NAME = "perlvar.pod";
   public static final String PERL_FUNC_FILE_NAME = "perlfunc.pod";
   static final String PERL_OP = "perlop";
@@ -67,23 +66,24 @@ public class PerlDocUtil implements PerlElementTypes {
   private static final PodLinkDescriptor AUTOLOAD_LINK = PodLinkDescriptor.create("perlsub", "Autoloading");
   private static final PodLinkDescriptor DESTROY_LINK = PodLinkDescriptor.create("perlobj", "Destructors");
 
-  private static final Map<String, PodLinkDescriptor> OPERATORS_LINKS = new HashMap<>();
-  private static final Map<String, PodLinkDescriptor> VARIABLES_LINKS = new HashMap<>();
+  private static final Map<String, PodLinkDescriptor> OPERATORS_LINKS = Map.of(
+    "~~", PodLinkDescriptor.create(PERL_OP, "Smartmatch Operator"),
+    "qr", PodLinkDescriptor.create(PERL_OP, "qr/STRING/"),
+    "s", PodLinkDescriptor.create(PERL_OP, "s/PATTERN/"),
+    "m", PodLinkDescriptor.create(PERL_OP, "m/PATTERN/"),
+    "=>", PodLinkDescriptor.create(PERL_OP, "Comma Operator"),
+    "isa", PodLinkDescriptor.create(PERL_OP, "isa operator")
+  );
+  private static final Map<String, PodLinkDescriptor> VARIABLES_LINKS = Map.of(
+    "@ISA", PodLinkDescriptor.create("perlobj", "A Class is Simply a Package"),
+    "@EXPORT", PodLinkDescriptor.create("Exporter", "How to Export"),
+    "@EXPORT_OK", PodLinkDescriptor.create("Exporter", "How to Export"),
+    "%EXPORT_TAGS", PodLinkDescriptor.create("Exporter", "Specialised Import Lists"),
+    "$VERSION", PodLinkDescriptor.create("perlobj", "VERSION")
+  );
 
 
-  static {
-    OPERATORS_LINKS.put("~~", PodLinkDescriptor.create(PERL_OP, "Smartmatch Operator"));
-    OPERATORS_LINKS.put("qr", PodLinkDescriptor.create(PERL_OP, "qr/STRING/"));
-    OPERATORS_LINKS.put("s", PodLinkDescriptor.create(PERL_OP, "s/PATTERN/"));
-    OPERATORS_LINKS.put("m", PodLinkDescriptor.create(PERL_OP, "m/PATTERN/"));
-    OPERATORS_LINKS.put("=>", PodLinkDescriptor.create(PERL_OP, "Comma Operator"));
-    OPERATORS_LINKS.put("isa", PodLinkDescriptor.create(PERL_OP, "isa operator"));
-
-    VARIABLES_LINKS.put("@ISA", PodLinkDescriptor.create("perlobj", "A Class is Simply a Package"));
-    VARIABLES_LINKS.put("@EXPORT", PodLinkDescriptor.create("Exporter", "How to Export"));
-    VARIABLES_LINKS.put("@EXPORT_OK", PodLinkDescriptor.create("Exporter", "How to Export"));
-    VARIABLES_LINKS.put("%EXPORT_TAGS", PodLinkDescriptor.create("Exporter", "Specialised Import Lists"));
-    VARIABLES_LINKS.put("$VERSION", PodLinkDescriptor.create("perlobj", "VERSION"));
+  private PerlDocUtil() {
   }
 
   public static @Nullable PsiElement resolveDoc(@NotNull String file,
