@@ -18,8 +18,8 @@ package com.perl5.lang.perl.internals;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
+import org.apache.groovy.util.Maps;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -49,29 +49,25 @@ public final class PerlVersion implements Comparable<PerlVersion> {
   public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V520 = version -> !version.lesserThan(V5_20);
   public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V522 = version -> !version.lesserThan(V5_22);
   public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V532 = version -> !version.lesserThan(V5_32);
-  public static final List<PerlVersion> ALL_VERSIONS = ContainerUtil.immutableList(
+  public static final List<PerlVersion> ALL_VERSIONS = List.of(
     V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26, V5_28, V5_30, V5_32, V5_34
   );
 
-  public static final Map<PerlVersion, String> PERL_VERSION_DESCRIPTIONS;
-
-  static {
-    ContainerUtil.ImmutableMapBuilder<PerlVersion, String> versionsMapBuilder = ContainerUtil.immutableMapBuilder();
-    versionsMapBuilder.put(V5_10, PerlBundle.message("perl.version.description.5.10"));
-    versionsMapBuilder.put(V5_12, PerlBundle.message("perl.version.description.5.12"));
-    versionsMapBuilder.put(V5_14, PerlBundle.message("perl.version.description.5.14"));
-    versionsMapBuilder.put(V5_16, PerlBundle.message("perl.version.description.5.16"));
-    versionsMapBuilder.put(V5_18, PerlBundle.message("perl.version.description.5.18"));
-    versionsMapBuilder.put(V5_20, PerlBundle.message("perl.version.description.5.20"));
-    versionsMapBuilder.put(V5_22, PerlBundle.message("perl.version.description.5.22"));
-    versionsMapBuilder.put(V5_24, PerlBundle.message("perl.version.description.5.24"));
-    versionsMapBuilder.put(V5_26, PerlBundle.message("perl.version.description.5.26"));
-    versionsMapBuilder.put(V5_28, PerlBundle.message("perl.version.description.5.28"));
-    versionsMapBuilder.put(V5_30, PerlBundle.message("perl.version.description.5.30"));
-    versionsMapBuilder.put(V5_32, PerlBundle.message("perl.version.description.5.32"));
-    versionsMapBuilder.put(V5_34, PerlBundle.message("perl.version.description.5.34"));
-    PERL_VERSION_DESCRIPTIONS = versionsMapBuilder.build();
-  }
+  public static final Map<PerlVersion, String> PERL_VERSION_DESCRIPTIONS = Maps.of(
+    V5_10, PerlBundle.message("perl.version.description.5.10"),
+    V5_12, PerlBundle.message("perl.version.description.5.12"),
+    V5_14, PerlBundle.message("perl.version.description.5.14"),
+    V5_16, PerlBundle.message("perl.version.description.5.16"),
+    V5_18, PerlBundle.message("perl.version.description.5.18"),
+    V5_20, PerlBundle.message("perl.version.description.5.20"),
+    V5_22, PerlBundle.message("perl.version.description.5.22"),
+    V5_24, PerlBundle.message("perl.version.description.5.24"),
+    V5_26, PerlBundle.message("perl.version.description.5.26"),
+    V5_28, PerlBundle.message("perl.version.description.5.28"),
+    V5_30, PerlBundle.message("perl.version.description.5.30"),
+    V5_32, PerlBundle.message("perl.version.description.5.32"),
+    V5_34, PerlBundle.message("perl.version.description.5.34")
+  );
 
   private boolean myIsAlpha;
   private boolean myIsStrict;
