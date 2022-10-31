@@ -38,7 +38,9 @@ import static com.intellij.lang.WhitespacesBinders.GREEDY_LEFT_BINDER;
 import static com.intellij.lang.WhitespacesBinders.GREEDY_RIGHT_BINDER;
 
 
-public class PerlParserUtil extends GeneratedParserUtilBase implements PerlElementTypes {
+public final class PerlParserUtil extends GeneratedParserUtilBase implements PerlElementTypes {
+  private PerlParserUtil() {
+  }
 
   public static final TokenSet VERSION_TOKENS = TokenSet.create(
     NUMBER,
