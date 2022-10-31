@@ -38,7 +38,10 @@ import java.util.*;
 import static com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex.KEY_ARRAY;
 
 
-public class PerlArrayUtil implements PerlElementTypes {
+public final class PerlArrayUtil implements PerlElementTypes {
+  private PerlArrayUtil() {
+  }
+
   public static final Set<String> BUILT_IN = Set.of(
     "+",
     "-",
