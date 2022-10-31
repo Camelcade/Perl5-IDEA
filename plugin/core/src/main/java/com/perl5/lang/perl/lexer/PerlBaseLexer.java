@@ -55,7 +55,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   private char mySingleOpenQuoteChar = 0;
   private char mySingleCloseQuoteChar = 0;
 
-  public static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = new HashMap<>();
+  private static final Map<IElementType, String> ALLOWED_REGEXP_MODIFIERS = Map.of(
+    RESERVED_S, "nmsixpodualgcer",
+    RESERVED_M, "nmsixpodualgc",
+    RESERVED_QR, "nmsixpodual"
+  );
   public static final String ALLOWED_TR_MODIFIERS = "cdsr";
   private static final List<IElementType> DQ_TOKENS = Arrays.asList(QUOTE_DOUBLE_OPEN, LP_STRING_QQ, QUOTE_DOUBLE_CLOSE, STRING_CONTENT_QQ);
   private static final List<IElementType> SQ_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_Q, QUOTE_SINGLE_CLOSE, STRING_CONTENT);
@@ -63,24 +67,16 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   private static final List<IElementType> QW_TOKENS = Arrays.asList(QUOTE_SINGLE_OPEN, LP_STRING_QW, QUOTE_SINGLE_CLOSE);
   private static final List<IElementType> GLOB_TOKENS = Arrays.asList(LEFT_ANGLE, LP_STRING_QQ, RIGHT_ANGLE, STRING_CONTENT_QQ);
 
-  private static final Map<IElementType, Trinity<IElementType, IElementType, IElementType>> SIGILS_TO_TOKENS_MAP = new HashMap<>();
+  private static final Map<IElementType, Trinity<IElementType, IElementType, IElementType>> SIGILS_TO_TOKENS_MAP = Map.of(
+    SIGIL_SCALAR, Trinity.create(LEFT_BRACE_SCALAR, SCALAR_NAME, RIGHT_BRACE_SCALAR),
+    SIGIL_SCALAR_INDEX, Trinity.create(LEFT_BRACE_SCALAR, SCALAR_NAME, RIGHT_BRACE_SCALAR),
+    SIGIL_ARRAY, Trinity.create(LEFT_BRACE_ARRAY, ARRAY_NAME, RIGHT_BRACE_ARRAY),
+    SIGIL_HASH, Trinity.create(LEFT_BRACE_HASH, HASH_NAME, RIGHT_BRACE_HASH),
+    SIGIL_CODE, Trinity.create(LEFT_BRACE_CODE, SUB_NAME, RIGHT_BRACE_CODE),
+    SIGIL_GLOB, Trinity.create(LEFT_BRACE_GLOB, GLOB_NAME, RIGHT_BRACE_GLOB)
+  );
 
   protected static final String SUB_SIGNATURE = "Sub.Signature";
-
-  static {
-    ALLOWED_REGEXP_MODIFIERS.put(RESERVED_S, "nmsixpodualgcer");
-    ALLOWED_REGEXP_MODIFIERS.put(RESERVED_M, "nmsixpodualgc");
-    ALLOWED_REGEXP_MODIFIERS.put(RESERVED_QR, "nmsixpodual");
-  }
-
-  static {
-    SIGILS_TO_TOKENS_MAP.put(SIGIL_SCALAR, Trinity.create(LEFT_BRACE_SCALAR, SCALAR_NAME, RIGHT_BRACE_SCALAR));
-    SIGILS_TO_TOKENS_MAP.put(SIGIL_SCALAR_INDEX, Trinity.create(LEFT_BRACE_SCALAR, SCALAR_NAME, RIGHT_BRACE_SCALAR));
-    SIGILS_TO_TOKENS_MAP.put(SIGIL_ARRAY, Trinity.create(LEFT_BRACE_ARRAY, ARRAY_NAME, RIGHT_BRACE_ARRAY));
-    SIGILS_TO_TOKENS_MAP.put(SIGIL_HASH, Trinity.create(LEFT_BRACE_HASH, HASH_NAME, RIGHT_BRACE_HASH));
-    SIGILS_TO_TOKENS_MAP.put(SIGIL_CODE, Trinity.create(LEFT_BRACE_CODE, SUB_NAME, RIGHT_BRACE_CODE));
-    SIGILS_TO_TOKENS_MAP.put(SIGIL_GLOB, Trinity.create(LEFT_BRACE_GLOB, GLOB_NAME, RIGHT_BRACE_GLOB));
-  }
 
   static {
     PerlParserExtension.EP_NAME.addChangeListener(PerlBaseLexer::refreshExtensions, PerlPluginUtil.getUnloadAwareDisposable());
