@@ -16,26 +16,26 @@
 
 package com.perl5.lang.perl.idea.run.debugger;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
  * fixme this need to be fixed with run configuration extension
  */
-public class PerlDebugOptionsSets {
-  public static final Map<String, String> STARTUP_OPTIONS = new HashMap<>();
-  public static final Map<String, String> ROLE_OPTIONS = new HashMap<>();
+public final class PerlDebugOptionsSets {
+  private PerlDebugOptionsSets() {
+  }
 
   public static final String DEBUGGER_STARTUP_COMPILE = "COMPILE";
   public static final String DEBUGGER_STARTUP_RUN = "RUN";
   public static final String DEBUGGER_STARTUP_BREAKPOINT = "BREAKPOINT";
 
-  static {
-    STARTUP_OPTIONS.put(DEBUGGER_STARTUP_COMPILE, "Stop as soon as possible");
-    STARTUP_OPTIONS.put(DEBUGGER_STARTUP_RUN, "Stop after compilation (use and BEGIN blocks are done)");
-    STARTUP_OPTIONS.put(DEBUGGER_STARTUP_BREAKPOINT, "Stop at first breakpoint");
-
-    ROLE_OPTIONS.put(PerlDebugOptions.ROLE_SERVER, "IDE connects to the perl process");
-    ROLE_OPTIONS.put(PerlDebugOptions.ROLE_CLIENT, "Perl process connects to the IDE");
-  }
+  public static final Map<String, String> STARTUP_OPTIONS = Map.of(
+    DEBUGGER_STARTUP_COMPILE, "Stop as soon as possible",
+    DEBUGGER_STARTUP_RUN, "Stop after compilation (use and BEGIN blocks are done)",
+    DEBUGGER_STARTUP_BREAKPOINT, "Stop at first breakpoint"
+  );
+  public static final Map<String, String> ROLE_OPTIONS = Map.of(
+    PerlDebugOptions.ROLE_SERVER, "IDE connects to the perl process",
+    PerlDebugOptions.ROLE_CLIENT, "Perl process connects to the IDE"
+  );
 }
