@@ -26,7 +26,9 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Misc helper methods
  */
-public class PerlUtil implements PerlElementTypes {
+public final class PerlUtil implements PerlElementTypes {
+  private PerlUtil() {
+  }
 
   public static @NotNull String getParentsChain(@Nullable PsiElement element) {
     if (element == null) {
