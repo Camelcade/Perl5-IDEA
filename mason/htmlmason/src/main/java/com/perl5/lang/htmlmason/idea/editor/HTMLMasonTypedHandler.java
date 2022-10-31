@@ -25,9 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlTokenType;
-import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 import com.perl5.lang.htmlmason.HTMLMasonFileViewProvider;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -35,10 +33,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
+import static com.perl5.lang.htmlmason.HTMLMasonElementPatterns.HTML_MASON_TEMPLATE_CONTEXT_PATTERN;
+import static com.perl5.lang.htmlmason.HTMLMasonElementPatterns.HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN;
+import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.*;
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
+
 
 public class HTMLMasonTypedHandler extends TypedHandlerDelegate
-  implements HTMLMasonElementTypes, XmlTokenType, PerlElementTypes, HTMLMasonElementPatterns {
+  implements XmlTokenType, PerlElementTypes {
   private static final Logger LOG = Logger.getInstance(HTMLMasonTypedHandler.class);
+
   @Override
   public @NotNull Result charTyped(char c, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
     if (!(file.getViewProvider() instanceof HTMLMasonFileViewProvider)) {

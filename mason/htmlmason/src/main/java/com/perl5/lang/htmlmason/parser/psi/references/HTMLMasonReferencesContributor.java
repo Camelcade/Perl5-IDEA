@@ -18,11 +18,13 @@ package com.perl5.lang.htmlmason.parser.psi.references;
 
 import com.intellij.psi.PsiReferenceContributor;
 import com.intellij.psi.PsiReferenceRegistrar;
-import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.htmlmason.HTMLMasonElementPatterns.HTML_MASON_COMPONENT_CALLEE;
+import static com.perl5.lang.htmlmason.HTMLMasonElementPatterns.HTML_MASON_FLAGS_PARENT;
 
-public class HTMLMasonReferencesContributor extends PsiReferenceContributor implements HTMLMasonElementPatterns {
+
+public class HTMLMasonReferencesContributor extends PsiReferenceContributor {
   @Override
   public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar) {
     registrar.registerReferenceProvider(

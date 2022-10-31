@@ -17,10 +17,11 @@
 package com.perl5.lang.htmlmason.idea.configuration;
 
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
+
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 
 
-public enum HTMLMasonCustomTagRole implements HTMLMasonElementTypes {
+public enum HTMLMasonCustomTagRole {
   PERL("as <%perl>", true, HTML_MASON_PERL_OPENER, HTML_MASON_PERL_CLOSER),
   METHOD("as <%method>", false, HTML_MASON_METHOD_OPENER, HTML_MASON_METHOD_CLOSER),
   DEF("as <%def>", false, HTML_MASON_DEF_OPENER, HTML_MASON_DEF_CLOSER),

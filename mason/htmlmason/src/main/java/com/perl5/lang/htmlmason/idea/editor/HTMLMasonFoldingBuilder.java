@@ -24,7 +24,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonRecursiveVisitor;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
 import org.jetbrains.annotations.NotNull;
@@ -34,8 +33,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 
-public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder implements HTMLMasonElementTypes {
+
+public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder {
   protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
     PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
     TokenSet.create(

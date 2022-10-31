@@ -18,7 +18,6 @@ package com.perl5.lang.htmlmason;
 
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
@@ -27,15 +26,19 @@ import com.perl5.lang.perl.psi.*;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 import static com.intellij.patterns.PlatformPatterns.psiFile;
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 
 
-public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlElementTypes {
-  PsiElementPattern.Capture<PsiElement> ATTR_OR_ARG_ELEMENT_PATTERN = psiElement().andOr(
+public final class HTMLMasonElementPatterns implements PerlElementTypes {
+  private HTMLMasonElementPatterns() {
+  }
+
+  public static final PsiElementPattern.Capture<PsiElement> ATTR_OR_ARG_ELEMENT_PATTERN = psiElement().andOr(
     psiElement().inside(psiElement(HTML_MASON_ATTR_BLOCK)),
     psiElement().inside(psiElement(HTML_MASON_ARGS_BLOCK))
   );
 
-  PsiElementPattern.Capture<PerlSubNameElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN =
+  public static final PsiElementPattern.Capture<PerlSubNameElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN =
     psiElement(PerlSubNameElement.class).withParent(
       psiElement(PsiPerlMethod.class)
         .withParent(
@@ -44,11 +47,11 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlEle
     );
 
   // this is for corrupted <%identifier
-  PsiElementPattern.Capture<PsiElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN =
+  public static final PsiElementPattern.Capture<PsiElement> HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN =
     psiElement(IDENTIFIER).afterLeaf(psiElement(HTML_MASON_BLOCK_OPENER)
     );
 
-  PsiElementPattern.Capture<PerlString> HTML_MASON_COMPONENT_CALLEE =
+  public static final PsiElementPattern.Capture<PerlString> HTML_MASON_COMPONENT_CALLEE =
     psiElement(PerlString.class)
       .inFile(psiFile(HTMLMasonFileImpl.class))
       .withParent(psiElement(HTML_MASON_CALL_STATEMENT))
@@ -58,7 +61,7 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlEle
       ));
 
 
-  PsiElementPattern.Capture<PerlString> HTML_MASON_FLAGS_PARENT =
+  public static final PsiElementPattern.Capture<PerlString> HTML_MASON_FLAGS_PARENT =
     psiElement(PerlString.class)
       .inFile(psiFile(HTMLMasonFileImpl.class))
       .withParent(
@@ -67,7 +70,7 @@ public interface HTMLMasonElementPatterns extends HTMLMasonElementTypes, PerlEle
       .afterLeafSkipping(PerlElementPatterns.WHITE_SPACE_AND_COMMENTS, psiElement(FAT_COMMA));
 
 
-  PsiElementPattern.Capture<PerlStringContentElement> HTML_MASON_COMPONENT_COMPLETION =
+  public static final PsiElementPattern.Capture<PerlStringContentElement> HTML_MASON_COMPONENT_COMPLETION =
     psiElement(PerlStringContentElement.class).andOr(
       psiElement().withParent(HTML_MASON_COMPONENT_CALLEE),
       psiElement().withParent(HTML_MASON_FLAGS_PARENT)

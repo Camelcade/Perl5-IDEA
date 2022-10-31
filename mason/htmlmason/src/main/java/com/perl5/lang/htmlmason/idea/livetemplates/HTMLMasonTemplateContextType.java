@@ -19,13 +19,15 @@ package com.perl5.lang.htmlmason.idea.livetemplates;
 import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.htmlmason.HTMLMasonElementPatterns.HTML_MASON_TEMPLATE_CONTEXT_PATTERN;
+import static com.perl5.lang.htmlmason.HTMLMasonElementPatterns.HTML_MASON_TEMPLATE_CONTEXT_PATTERN_BROKEN;
 
-public class HTMLMasonTemplateContextType extends TemplateContextType implements HTMLMasonElementPatterns {
+
+public class HTMLMasonTemplateContextType extends TemplateContextType {
   public HTMLMasonTemplateContextType() {
     super(HtmlMasonBundle.message("label.html.mason.template"));
   }

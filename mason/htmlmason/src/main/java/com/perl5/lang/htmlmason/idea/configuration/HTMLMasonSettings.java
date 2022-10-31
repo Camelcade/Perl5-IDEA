@@ -27,7 +27,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.xmlb.XmlSerializerUtil;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
@@ -36,6 +35,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.*;
+
 
 @State(
   name = "HTMLMasonSettings",
@@ -43,7 +44,7 @@ import java.util.*;
 
 )
 
-public class HTMLMasonSettings extends AbstractMasonSettings implements PersistentStateComponent<HTMLMasonSettings>, HTMLMasonElementTypes {
+public class HTMLMasonSettings extends AbstractMasonSettings implements PersistentStateComponent<HTMLMasonSettings> {
 
   public String autoHandlerName = "autohandler";
   public String defaultHandlerName = "dhandler";

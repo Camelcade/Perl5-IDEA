@@ -20,12 +20,14 @@ import com.intellij.lang.Language;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.perl.psi.PerlMultiplePsiFilesPerDocumentFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.HTML_MASON_HTML_TEMPLATE_DATA;
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.HTML_MASON_POD_TEMPLATE_DATA;
 
-public class HTMLMasonFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider implements HTMLMasonElementTypes {
+
+public class HTMLMasonFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider {
   public HTMLMasonFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical) {
     super(manager, virtualFile, physical);
   }

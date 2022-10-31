@@ -33,7 +33,6 @@ import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.FormBuilder;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.ListTableModel;
-import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
 import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.parser.PerlParserUtil;
@@ -47,6 +46,9 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.awt.event.MouseEvent;
 import java.util.*;
+
+import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.BUILTIN_TAGS_COMPLEX;
+import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.BUILTIN_TAGS_SIMPLE;
 
 
 public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigurable {
@@ -243,7 +245,7 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
     );
   }
 
-  public static class myTagNameColumnInfo extends ColumnInfo<HTMLMasonCustomTag, String> implements HTMLMasonSyntaxElements {
+  public static class myTagNameColumnInfo extends ColumnInfo<HTMLMasonCustomTag, String> {
     protected static final Set<String> BUILTIN_TAGS = new HashSet<>();
 
     static {

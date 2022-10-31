@@ -18,10 +18,11 @@ package com.perl5.lang.htmlmason.idea.completion;
 
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionType;
-import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
+
+import static com.perl5.lang.htmlmason.HTMLMasonElementPatterns.HTML_MASON_COMPONENT_COMPLETION;
 
 
-public class HTMLMasonCompletionContributor extends CompletionContributor implements HTMLMasonElementPatterns {
+public class HTMLMasonCompletionContributor extends CompletionContributor {
   public HTMLMasonCompletionContributor() {
     extend(
       CompletionType.BASIC,

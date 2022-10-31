@@ -24,6 +24,8 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
+
 
 @SuppressWarnings("Duplicates")
 public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonParser {

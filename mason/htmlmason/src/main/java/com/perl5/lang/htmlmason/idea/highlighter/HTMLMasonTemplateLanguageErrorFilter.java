@@ -20,10 +20,11 @@ import com.intellij.codeInsight.highlighting.TemplateLanguageErrorFilter;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.htmlmason.HTMLMasonFileViewProvider;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
+
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 
 
-public class HTMLMasonTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements HTMLMasonElementTypes {
+public class HTMLMasonTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter {
   private static final TokenSet START_TOKENS = TokenSet.create(
     HTML_MASON_BLOCK_OPENER,
     HTML_MASON_PERL_OPENER,

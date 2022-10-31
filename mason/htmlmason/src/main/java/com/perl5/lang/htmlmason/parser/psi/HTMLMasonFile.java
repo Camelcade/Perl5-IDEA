@@ -16,10 +16,9 @@
 
 package com.perl5.lang.htmlmason.parser.psi;
 
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 
 
 public interface HTMLMasonFile
-  extends HTMLMasonElementTypes, PerlImplicitVariablesProvider, HTMLMasonArgsContainer, HTMLMasonParametrizedEntity {
+  extends PerlImplicitVariablesProvider, HTMLMasonArgsContainer, HTMLMasonParametrizedEntity {
 }

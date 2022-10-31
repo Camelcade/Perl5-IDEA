@@ -19,7 +19,6 @@ package com.perl5.lang.htmlmason.lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTag;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTagRole;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
@@ -29,10 +28,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
+import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.KEYWORD_BLOCK_CLOSER;
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 import static com.perl5.lang.htmlmason.lexer.HTMLMasonLexer.*;
 
 
-public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements HTMLMasonElementTypes, PerlElementTypes {
+public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements PerlElementTypes {
   private final CommentEndCalculator COMMENT_END_CALCULATOR = commentText ->
   {
     int realLexicalState = getRealLexicalState();

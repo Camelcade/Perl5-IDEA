@@ -26,8 +26,10 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 
-public class HTMLMasonIndentProcessor extends PerlIndentProcessor implements HTMLMasonElementTypes {
+
+public class HTMLMasonIndentProcessor extends PerlIndentProcessor {
   public static final HTMLMasonIndentProcessor INSTANCE = new HTMLMasonIndentProcessor();
 
   public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(

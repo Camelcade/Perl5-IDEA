@@ -25,7 +25,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.Processor;
-import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
 import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
@@ -35,8 +34,13 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.*;
 
-public class HTMLMasonCompletionUtil implements HTMLMasonSyntaxElements {
+
+public final class HTMLMasonCompletionUtil {
+  private HTMLMasonCompletionUtil() {
+  }
+
   public static void fillWithComponentSlugs(@NotNull CompletionResultSet resultSet) {
     resultSet.addElement(LookupElementBuilder.create(COMPONENT_SLUG_PARENT));
     resultSet.addElement(LookupElementBuilder.create(COMPONENT_SLUG_SELF));

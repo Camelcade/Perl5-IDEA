@@ -16,8 +16,5 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
-
-
-public interface HTMLMasonParser extends HTMLMasonElementTypes {
+public interface HTMLMasonParser {
 }

@@ -20,11 +20,12 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 
-public class HTMLMasonBraceMatcher implements PairedBraceMatcher, HTMLMasonElementTypes {
+
+public class HTMLMasonBraceMatcher implements PairedBraceMatcher {
   private static final BracePair[] PAIRS = new BracePair[]{
     new BracePair(HTML_MASON_BLOCK_OPENER, HTML_MASON_BLOCK_CLOSER, false),
     new BracePair(HTML_MASON_CALL_OPENER, HTML_MASON_CALL_CLOSER, false),

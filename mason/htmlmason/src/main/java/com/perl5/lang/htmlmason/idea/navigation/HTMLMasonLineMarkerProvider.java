@@ -24,7 +24,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.htmlmason.HtmlMasonBundle;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +32,7 @@ import java.util.Collection;
 import java.util.List;
 
 
-public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider implements HTMLMasonElementTypes {
+public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider {
   @Override
   protected void collectNavigationMarkers(@NotNull PsiElement element, @NotNull Collection<? super RelatedItemLineMarkerInfo<?>> result) {
     if (element instanceof HTMLMasonFileImpl) {

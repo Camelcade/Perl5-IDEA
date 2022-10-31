@@ -19,13 +19,14 @@ package com.perl5.lang.htmlmason.idea.highlighter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes;
 import com.perl5.lang.htmlmason.lexer.HTMLMasonLexerAdapter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterEmbedded;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 
-public class HTMLMasonSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implements HTMLMasonElementTypes {
+
+public class HTMLMasonSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded {
   public static final TokenSet MARKER_TOKENS = TokenSet.create(
     HTML_MASON_LINE_OPENER,
     HTML_MASON_EXPR_FILTER_PIPE,

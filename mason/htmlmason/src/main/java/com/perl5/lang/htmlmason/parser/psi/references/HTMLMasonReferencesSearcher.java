@@ -21,13 +21,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
-import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.*;
 
-public class HTMLMasonReferencesSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters>
-  implements HTMLMasonSyntaxElements {
+
+public class HTMLMasonReferencesSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters> {
   public HTMLMasonReferencesSearcher() {
     super(true);
   }

@@ -23,7 +23,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceProvider;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.htmlmason.HTMLMasonSyntaxElements;
 import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,8 +31,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.*;
 
-public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider implements HTMLMasonSyntaxElements {
+
+public class HTMLMasonComponentReferencesProvider extends PsiReferenceProvider {
   public static final Pattern METHOD_CALL_PATTERN = Pattern.compile("(.+?):([\\w._-]+\\s*)?");
 
   @Override
