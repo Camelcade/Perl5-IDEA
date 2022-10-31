@@ -697,7 +697,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
     // this is default algorythm from AbstractBlock#getFirstChildAlignment()
     List<Block> subBlocks = block.getSubBlocks();
     for (final Block subBlock : subBlocks) {
-      if (subBlock instanceof ASTBlock && PsiUtilCore.getElementType(((ASTBlock)subBlock).getNode()) == COMMENT_LINE) {
+      if (subBlock instanceof ASTBlock astSubBlock && PsiUtilCore.getElementType(astSubBlock.getNode()) == COMMENT_LINE) {
         continue;
       }
       Alignment alignment = subBlock.getAlignment();
