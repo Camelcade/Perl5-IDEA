@@ -40,7 +40,7 @@ import java.util.*;
 import static com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex.KEY_HASH;
 
 
-public class PerlHashUtil implements PerlElementTypes {
+public final class PerlHashUtil implements PerlElementTypes {
   public static final Set<String> BUILT_IN = Set.of(
     "!",
     "+",
@@ -55,6 +55,10 @@ public class PerlHashUtil implements PerlElementTypes {
     "OS_ERROR",
     "ERRNO"
   );
+
+  private PerlHashUtil() {
+  }
+
   /**
    * Elements that should be iterated to collect hashes
    */
