@@ -42,35 +42,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 
-public class PerlSubUtil implements PerlElementTypes {
+public final class PerlSubUtil implements PerlElementTypes {
+  private PerlSubUtil() {
+  }
+
   public static final String SUB_AUTOLOAD = "AUTOLOAD";
   public static final String SUB_DESTROY = "DESTROY";
-  public static final String SUB_AUTOLOAD_WITH_PREFIX = PerlPackageUtil.NAMESPACE_SEPARATOR + SUB_AUTOLOAD;
-
-
-  /**
-   * Checks if sub defined as unary with ($) proto
-   *
-   * @param packageName package name
-   * @param subName     sub name
-   * @return check result
-   */
-  public static boolean isUnary(@Nullable String packageName, @NotNull String subName) {
-    // todo implement checking
-    return false;
-  }
-
-  /**
-   * Checks if sub defined as unary with () proto
-   *
-   * @param packageName package name
-   * @param subName     sub name
-   * @return check result
-   */
-  public static boolean isArgumentless(@Nullable String packageName, @NotNull String subName) {
-    // todo implement checking
-    return false;
-  }
 
   /**
    * Searching project files for sub definitions by specific package and function name
@@ -170,17 +147,6 @@ public class PerlSubUtil implements PerlElementTypes {
       return Collections.emptyList();
     }
     return StubIndex.getElements(PerlSubDeclarationIndex.KEY, canonicalName, project, scope, PerlSubDeclarationElement.class);
-  }
-
-  /**
-   * Processes all declared subs names with given processor
-   *
-   * @param project   project to search in
-   * @param processor string processor for suitable strings
-   * @return collection of constants names
-   */
-  public static boolean processDeclaredSubsNames(Project project, Processor<String> processor) {
-    return StubIndex.getInstance().processAllKeys(PerlSubDeclarationIndex.KEY, project, processor);
   }
 
   /**
