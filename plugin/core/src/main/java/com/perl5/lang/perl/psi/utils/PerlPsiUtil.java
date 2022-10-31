@@ -63,7 +63,10 @@ import static com.intellij.psi.TokenType.WHITE_SPACE;
 import static com.perl5.lang.perl.PerlParserDefinition.MEANINGLESS_TOKENS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
-public class PerlPsiUtil implements PerlElementTypes {
+public final class PerlPsiUtil implements PerlElementTypes {
+  private PerlPsiUtil() {
+  }
+
   private static final TokenSet IGNORE_WHEN_COMPARING = TokenSet.orSet(
     HEREDOC_BODIES_TOKENSET,
     HEREDOC_ENDS,
