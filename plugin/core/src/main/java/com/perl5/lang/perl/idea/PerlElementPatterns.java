@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea;
 
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
@@ -99,7 +98,7 @@ public final class PerlElementPatterns {
     NAMESPACE_NAME_PATTERN.withParent(psiElement(PerlVariableDeclarationExpr.class));
 
   public static final PsiElementPattern.Capture<PerlSubNameElement> SUB_NAME_PATTERN = psiElement(PerlSubNameElement.class);
-  public static final PsiElementPattern.Capture<PsiElement> HANDLE_PATTERN = psiElement(PerlElementTypes.HANDLE);
+  public static final PsiElementPattern.Capture<PsiElement> HANDLE_PATTERN = psiElement(HANDLE);
 
   public static final PsiElementPattern.Capture<PsiPerlMethod> METHOD_PATTERN = psiElement(PsiPerlMethod.class);
   public static final PsiElementPattern.Capture<PsiElement> IN_OBJECT_CALL_PATTERN = psiElement().withParent(
