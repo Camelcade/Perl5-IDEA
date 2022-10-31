@@ -21,15 +21,17 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.providers.*;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.idea.PerlElementPatterns.*;
 
-public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes, PerlElementPatterns {
+
+public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes {
   private static final Logger LOG = Logger.getInstance(PerlCompletionContributor.class);
+
   public PerlCompletionContributor() {
     extend(
       CompletionType.BASIC,

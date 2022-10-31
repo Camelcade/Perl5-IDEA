@@ -28,7 +28,6 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.mojo.MojoLightDelegatingSubDefinition;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
@@ -48,7 +47,7 @@ import static com.perl5.lang.perl.parser.MooseParserExtension.*;
 import static com.perl5.lang.perl.util.PerlPackageUtil.FUNCTION_PARAMETERS;
 import static com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER;
 
-public class PerlDocumentationProvider extends PerlDocumentationProviderBase implements PerlElementTypes, PerlElementPatterns {
+public class PerlDocumentationProvider extends PerlDocumentationProviderBase implements PerlElementTypes {
   private static final TokenSet FORCE_AS_OPERATORS_TOKENSET = TokenSet.orSet(
     HEREDOC_BODIES_TOKENSET,
     SPECIAL_STRING_TOKENS,

@@ -22,7 +22,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
@@ -36,8 +35,10 @@ import com.perl5.lang.perl.util.PerlInjectionUtil;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.idea.PerlElementPatterns.*;
 
-public class PerlStringContentCompletionProvider extends PerlCompletionProvider implements PerlElementPatterns {
+
+public class PerlStringContentCompletionProvider extends PerlCompletionProvider {
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,

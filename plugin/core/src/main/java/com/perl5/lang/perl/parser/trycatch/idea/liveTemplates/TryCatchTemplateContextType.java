@@ -19,16 +19,17 @@ package com.perl5.lang.perl.parser.trycatch.idea.liveTemplates;
 import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.livetemplates.PerlTemplateContextType;
-import com.perl5.lang.perl.parser.trycatch.TryCatchElementPatterns;
+
+import static com.perl5.lang.perl.parser.trycatch.TryCatchElementPatterns.ELEMENT_AFTER_TRY_CATCH;
 
 
-public class TryCatchTemplateContextType extends PerlTemplateContextType.Prefix implements TryCatchElementPatterns {
+public class TryCatchTemplateContextType extends PerlTemplateContextType.Prefix {
   public TryCatchTemplateContextType() {
     super(PerlBundle.message("perl.template.context.catch"));
-    }
+  }
 
-    @Override
-    public boolean isInContext(PsiElement element) {
-      return super.isInContext(element) && ELEMENT_AFTER_TRY_CATCH.accepts(element);
-    }
+  @Override
+  public boolean isInContext(PsiElement element) {
+    return super.isInContext(element) && ELEMENT_AFTER_TRY_CATCH.accepts(element);
+  }
 }

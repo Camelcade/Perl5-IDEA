@@ -18,15 +18,16 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
 import com.perl5.lang.perl.psi.references.providers.PerlSimpleSubReferenceProvider;
 import com.perl5.lang.perl.psi.references.providers.PerlSubReferenceProvider;
 import com.perl5.lang.perl.psi.references.providers.PerlVariableReferencesProvider;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.idea.PerlElementPatterns.*;
 
-public class PerlReferencesContributor extends PsiReferenceContributor implements PerlElementPatterns {
+
+public class PerlReferencesContributor extends PsiReferenceContributor {
   @Override
   public void registerReferenceProviders(@NotNull PsiReferenceRegistrar registrar) {
     registrar.registerReferenceProvider(

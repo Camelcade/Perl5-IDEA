@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.utils;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlCallArgumentsImpl;
 import com.perl5.lang.perl.util.PerlArrayUtil;
@@ -27,8 +26,11 @@ import com.perl5.lang.perl.util.PerlArrayUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement>, PerlElementPatterns {
-  private List<PerlSubArgument> myArguments = new ArrayList<>();
+import static com.perl5.lang.perl.idea.PerlElementPatterns.*;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.UNDEF_EXPR;
+
+public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement> {
+  private final List<PerlSubArgument> myArguments = new ArrayList<>();
 
   @Override
   public boolean process(PsiPerlStatement statement) {

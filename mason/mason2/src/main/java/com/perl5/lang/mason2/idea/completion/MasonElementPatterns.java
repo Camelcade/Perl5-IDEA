@@ -20,7 +20,6 @@ import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason2.psi.MasonCallStatement;
 import com.perl5.lang.mason2.psi.MasonFlagsStatement;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
@@ -28,7 +27,7 @@ import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 
 
-public interface MasonElementPatterns extends PerlElementPatterns {
+public interface MasonElementPatterns {
   PsiElementPattern.Capture<PerlString> MASON_EXTENDS_VALUE_PATTERN =
     psiElement(PerlString.class)
       .inside(MasonFlagsStatement.class)

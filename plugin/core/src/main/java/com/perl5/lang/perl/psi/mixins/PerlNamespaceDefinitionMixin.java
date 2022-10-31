@@ -29,7 +29,6 @@ import com.intellij.util.Processor;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
@@ -47,11 +46,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static com.perl5.lang.perl.idea.PerlElementPatterns.*;
+
 
 public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiElementBase<PerlNamespaceDefinitionStub>
   implements StubBasedPsiElement<PerlNamespaceDefinitionStub>,
              PerlNamespaceDefinitionWithIdentifier,
-             PerlElementPatterns,
              PerlCompositeElement {
   private final ClearableLazyValue<ExporterInfo> myExporterInfo = ClearableLazyValue.create(this::computeExporterInfo);
   private final ClearableLazyValue<PerlMroType> myMroType = ClearableLazyValue.create(this::computeMroType);

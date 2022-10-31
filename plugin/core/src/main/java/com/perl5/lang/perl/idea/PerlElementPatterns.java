@@ -24,43 +24,50 @@ import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 
-public interface PerlElementPatterns extends PerlElementTypes {
-  PsiElementPattern.Capture<PsiElement> WHITE_SPACE_AND_COMMENTS = psiElement().whitespaceCommentOrError();
+public final class PerlElementPatterns {
+  public PerlElementPatterns() {
+  }
 
-  PsiElementPattern.Capture<PsiElement> LABEL_EXPR_PATTERN = psiElement(LABEL_EXPR);
-  PsiElementPattern.Capture<PsiElement> LABEL_PATTERN = psiElement().withParent(LABEL_EXPR_PATTERN);
-  PsiElementPattern.Capture<PsiElement> LABEL_DECLARATION_PATTERN = psiElement().withParent(PerlLabelDeclaration.class);
-  PsiElementPattern.Capture<PsiElement> LABEL_IN_GOTO_PATTERN = LABEL_PATTERN.withSuperParent(2, PsiPerlGotoExpr.class);
-  PsiElementPattern.Capture<PsiElement> LABEL_IN_NEXT_LAST_REDO_PATTERN = LABEL_PATTERN.andOr(
+  public static final PsiElementPattern.Capture<PsiElement> WHITE_SPACE_AND_COMMENTS = psiElement().whitespaceCommentOrError();
+
+  public static final PsiElementPattern.Capture<PsiElement> LABEL_EXPR_PATTERN = psiElement(LABEL_EXPR);
+  public static final PsiElementPattern.Capture<PsiElement> LABEL_PATTERN = psiElement().withParent(LABEL_EXPR_PATTERN);
+  public static final PsiElementPattern.Capture<PsiElement> LABEL_DECLARATION_PATTERN = psiElement().withParent(PerlLabelDeclaration.class);
+  public static final PsiElementPattern.Capture<PsiElement> LABEL_IN_GOTO_PATTERN = LABEL_PATTERN.withSuperParent(2, PsiPerlGotoExpr.class);
+  public static final PsiElementPattern.Capture<PsiElement> LABEL_IN_NEXT_LAST_REDO_PATTERN = LABEL_PATTERN.andOr(
     psiElement().withSuperParent(2, PsiPerlNextExpr.class),
     psiElement().withSuperParent(2, PsiPerlLastExpr.class),
     psiElement().withSuperParent(2, PsiPerlRedoExpr.class)
   );
 
-  PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_PATTERN = psiElement(PerlStringContentElement.class);
+  public static final PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_PATTERN =
+    psiElement(PerlStringContentElement.class);
 
-  PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_STRING_BARE =
+  public static final PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_STRING_BARE =
     STRING_CONTENT_PATTERN.inside(PsiPerlStringBare.class);
-  PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_SQ_STRING_BEGIN =
+  public static final PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_SQ_STRING_BEGIN =
     STRING_CONTENT_PATTERN.afterLeaf(psiElement(QUOTE_SINGLE_OPEN)).inside(PsiPerlStringSq.class);
-  PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_DQ_STRING_BEGIN =
+  public static final PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_DQ_STRING_BEGIN =
     STRING_CONTENT_PATTERN.afterLeaf(psiElement(QUOTE_DOUBLE_OPEN)).inside(PsiPerlStringDq.class);
-  PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_QW_STRING_LIST =
+  public static final PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_QW_STRING_LIST =
     STRING_CONTENT_PATTERN.inside(PsiPerlStringList.class);
 
-  PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_LIST_OR_STRING_START = STRING_CONTENT_PATTERN.andOr(
-    STRING_CONTENT_IN_QW_STRING_LIST,
-    STRING_CONTENT_IN_SQ_STRING_BEGIN,
-    STRING_CONTENT_IN_DQ_STRING_BEGIN
-  );
+  public static final PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_LIST_OR_STRING_START =
+    STRING_CONTENT_PATTERN.andOr(
+      STRING_CONTENT_IN_QW_STRING_LIST,
+      STRING_CONTENT_IN_SQ_STRING_BEGIN,
+      STRING_CONTENT_IN_DQ_STRING_BEGIN
+    );
 
-  PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN = STRING_CONTENT_PATTERN.withParent(
-    psiElement(PerlString.class).withParent(psiElement(PerlHeredocOpener.class))
-  );
+  public static final PsiElementPattern.Capture<PerlStringContentElement> STRING_CONTENT_IN_HEREDOC_OPENER_PATTERN =
+    STRING_CONTENT_PATTERN.withParent(
+      psiElement(PerlString.class).withParent(psiElement(PerlHeredocOpener.class))
+    );
 
-  PsiElementPattern.Capture<PerlStringContentElement> SIMPLE_HASH_INDEX =
+  public static final PsiElementPattern.Capture<PerlStringContentElement> SIMPLE_HASH_INDEX =
     STRING_CONTENT_PATTERN.withSuperParent(2, PsiPerlHashIndex.class).andOr(
       STRING_CONTENT_IN_STRING_BARE,
       STRING_CONTENT_IN_SQ_STRING_BEGIN,
@@ -68,60 +75,65 @@ public interface PerlElementPatterns extends PerlElementTypes {
       STRING_CONTENT_IN_QW_STRING_LIST
     );
 
-  PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_NAME_PATTERN = psiElement(PerlNamespaceElement.class);
-  PsiElementPattern.Capture<PerlUseStatementElement> USE_STATEMENT_PATTERN = psiElement(PerlUseStatementElement.class);
-  PsiElementPattern.Capture<PerlNoStatementElement> NO_STATEMENT_PATTERN = psiElement(PerlNoStatementElement.class);
-  PsiElementPattern.Capture<PsiPerlRequireExpr> REQUIRE_EXPR_PATTERN = psiElement(PsiPerlRequireExpr.class);
-  PsiElementPattern.Capture<PerlNamespaceDefinitionElement> NAMESPACE_DEFINITION_PATTERN = psiElement(PerlNamespaceDefinitionElement.class);
+  public static final PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_NAME_PATTERN = psiElement(PerlNamespaceElement.class);
+  public static final PsiElementPattern.Capture<PerlUseStatementElement> USE_STATEMENT_PATTERN = psiElement(PerlUseStatementElement.class);
+  public static final PsiElementPattern.Capture<PerlNoStatementElement> NO_STATEMENT_PATTERN = psiElement(PerlNoStatementElement.class);
+  public static final PsiElementPattern.Capture<PsiPerlRequireExpr> REQUIRE_EXPR_PATTERN = psiElement(PsiPerlRequireExpr.class);
+  public static final PsiElementPattern.Capture<PerlNamespaceDefinitionElement> NAMESPACE_DEFINITION_PATTERN =
+    psiElement(PerlNamespaceDefinitionElement.class);
 
-  PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_USE_PATTERN =
+  public static final PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_USE_PATTERN =
     NAMESPACE_NAME_PATTERN.andOr(
       psiElement().withParent(USE_STATEMENT_PATTERN),
       psiElement().withParent(NO_STATEMENT_PATTERN),
       psiElement().withParent(REQUIRE_EXPR_PATTERN)
     );
 
-  PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_ANNOTATION_PATTERN =
+  public static final PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_ANNOTATION_PATTERN =
     NAMESPACE_NAME_PATTERN.inside(psiElement(PerlAnnotationWithValue.class));
 
-  PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_DEFINITION_PATTERN =
+  public static final PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_DEFINITION_PATTERN =
     NAMESPACE_NAME_PATTERN.withParent(NAMESPACE_DEFINITION_PATTERN);
 
-  PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_VARIABLE_DECLARATION_PATTERN =
+  public static final PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_VARIABLE_DECLARATION_PATTERN =
     NAMESPACE_NAME_PATTERN.withParent(psiElement(PerlVariableDeclarationExpr.class));
 
-  PsiElementPattern.Capture<PerlSubNameElement> SUB_NAME_PATTERN = psiElement(PerlSubNameElement.class);
-  PsiElementPattern.Capture<PsiElement> HANDLE_PATTERN = psiElement(PerlElementTypes.HANDLE);
+  public static final PsiElementPattern.Capture<PerlSubNameElement> SUB_NAME_PATTERN = psiElement(PerlSubNameElement.class);
+  public static final PsiElementPattern.Capture<PsiElement> HANDLE_PATTERN = psiElement(PerlElementTypes.HANDLE);
 
-  PsiElementPattern.Capture<PsiPerlMethod> METHOD_PATTERN = psiElement(PsiPerlMethod.class);
-  PsiElementPattern.Capture<PsiElement> IN_OBJECT_CALL_PATTERN = psiElement().withParent(
+  public static final PsiElementPattern.Capture<PsiPerlMethod> METHOD_PATTERN = psiElement(PsiPerlMethod.class);
+  public static final PsiElementPattern.Capture<PsiElement> IN_OBJECT_CALL_PATTERN = psiElement().withParent(
     psiElement(SUB_CALL).withParent(psiElement(DEREF_EXPR))
   );
 
-  PsiElementPattern.Capture<PsiElement> IN_STATIC_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.andNot(IN_OBJECT_CALL_PATTERN));
-  PsiElementPattern.Capture<PsiElement> IN_OBJECT_METHOD_PATTERN = psiElement().withParent(METHOD_PATTERN.and(IN_OBJECT_CALL_PATTERN));
+  public static final PsiElementPattern.Capture<PsiElement> IN_STATIC_METHOD_PATTERN =
+    psiElement().withParent(METHOD_PATTERN.andNot(IN_OBJECT_CALL_PATTERN));
+  public static final PsiElementPattern.Capture<PsiElement> IN_OBJECT_METHOD_PATTERN =
+    psiElement().withParent(METHOD_PATTERN.and(IN_OBJECT_CALL_PATTERN));
 
-  PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = psiElement(PerlVariable.class);
+  public static final PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = psiElement(PerlVariable.class);
 
-  PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = psiElement(PerlVariableNameElement.class);
-  PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_IN_DECLARATION_PATTERN = VARIABLE_NAME_PATTERN.withParent(
-    VARIABLE_PATTERN.withParent(psiElement(PerlVariableDeclarationElement.class))
-  );
-  PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN =
+  public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = psiElement(PerlVariableNameElement.class);
+  public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_IN_DECLARATION_PATTERN =
+    VARIABLE_NAME_PATTERN.withParent(
+      VARIABLE_PATTERN.withParent(psiElement(PerlVariableDeclarationElement.class))
+    );
+  public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_IN_LOCAL_DECLARATION_PATTERN =
     VARIABLE_NAME_PATTERN.inside(true, psiElement(PsiPerlVariableDeclarationLocal.class));
 
-  PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(ANNOTATION_UNKNOWN_KEY);
-  PsiElementPattern.Capture<PsiElement> STRING_CHAR_NAME_PATTERN = psiElement(STRING_CHAR_NAME);
+  public static final PsiElementPattern.Capture<PsiElement> UNKNOWN_ANNOTATION_PATTERN = psiElement(ANNOTATION_UNKNOWN_KEY);
+  public static final PsiElementPattern.Capture<PsiElement> STRING_CHAR_NAME_PATTERN = psiElement(STRING_CHAR_NAME);
 
 
   // @ISA = ()
-  PsiElementPattern.Capture<PsiPerlArrayVariable> ISA_VARIABLE = psiElement(PsiPerlArrayVariable.class);
-  PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> ISA_DECLARATION = psiElement(PsiPerlVariableDeclarationGlobal.class)
-    .withChild(
-      psiElement(PerlVariableDeclarationElement.class).withFirstChild(ISA_VARIABLE)
-    );
+  public static final PsiElementPattern.Capture<PsiPerlArrayVariable> ISA_VARIABLE = psiElement(PsiPerlArrayVariable.class);
+  public static final PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> ISA_DECLARATION =
+    psiElement(PsiPerlVariableDeclarationGlobal.class)
+      .withChild(
+        psiElement(PerlVariableDeclarationElement.class).withFirstChild(ISA_VARIABLE)
+      );
 
-  PsiElementPattern.Capture<PsiPerlStatement> ISA_ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
+  public static final PsiElementPattern.Capture<PsiPerlStatement> ISA_ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
     psiElement(PsiPerlAssignExpr.class).andOr(
       psiElement().withFirstChild(ISA_VARIABLE),
       psiElement().withFirstChild(ISA_DECLARATION)
@@ -130,49 +142,55 @@ public interface PerlElementPatterns extends PerlElementTypes {
 
   // @EXPORTER scanner
   // this one is to speed up the scanning
-  PsiElementPattern.Capture<PsiPerlStatement> ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
+  public static final PsiElementPattern.Capture<PsiPerlStatement> ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
     psiElement(PsiPerlAssignExpr.class)
   );
 
-  PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_VARIABLE = psiElement(PsiPerlArrayVariable.class).withText("@EXPORT");
-  PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_DECLARATION = psiElement(PsiPerlVariableDeclarationGlobal.class)
-    .withChild(
-      psiElement(PerlVariableDeclarationElement.class).withFirstChild(EXPORT_VARIABLE)
-    );
-  PsiElementPattern.Capture<PsiPerlStatement> EXPORT_ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
-    psiElement(PsiPerlAssignExpr.class).andOr(
-      psiElement().withFirstChild(EXPORT_VARIABLE),
-      psiElement().withFirstChild(EXPORT_DECLARATION)
-    )
-  );
-
-  PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_OK_VARIABLE = psiElement(PsiPerlArrayVariable.class).withText("@EXPORT_OK");
-  PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_OK_DECLARATION = psiElement(PsiPerlVariableDeclarationGlobal.class)
-    .withChild(
-      psiElement(PerlVariableDeclarationElement.class).withFirstChild(EXPORT_OK_VARIABLE)
+  public static final PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_VARIABLE =
+    psiElement(PsiPerlArrayVariable.class).withText("@EXPORT");
+  public static final PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_DECLARATION =
+    psiElement(PsiPerlVariableDeclarationGlobal.class)
+      .withChild(
+        psiElement(PerlVariableDeclarationElement.class).withFirstChild(EXPORT_VARIABLE)
+      );
+  public static final PsiElementPattern.Capture<PsiPerlStatement> EXPORT_ASSIGN_STATEMENT =
+    psiElement(PsiPerlStatement.class).withFirstChild(
+      psiElement(PsiPerlAssignExpr.class).andOr(
+        psiElement().withFirstChild(EXPORT_VARIABLE),
+        psiElement().withFirstChild(EXPORT_DECLARATION)
+      )
     );
 
-  PsiElementPattern.Capture<PsiPerlStatement> EXPORT_OK_ASSIGN_STATEMENT = psiElement(PsiPerlStatement.class).withFirstChild(
-    psiElement(PsiPerlAssignExpr.class).andOr(
-      psiElement().withFirstChild(EXPORT_OK_VARIABLE),
-      psiElement().withFirstChild(EXPORT_OK_DECLARATION)
-    )
-  );
+  public static final PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_OK_VARIABLE =
+    psiElement(PsiPerlArrayVariable.class).withText("@EXPORT_OK");
+  public static final PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_OK_DECLARATION =
+    psiElement(PsiPerlVariableDeclarationGlobal.class)
+      .withChild(
+        psiElement(PerlVariableDeclarationElement.class).withFirstChild(EXPORT_OK_VARIABLE)
+      );
+
+  public static final PsiElementPattern.Capture<PsiPerlStatement> EXPORT_OK_ASSIGN_STATEMENT =
+    psiElement(PsiPerlStatement.class).withFirstChild(
+      psiElement(PsiPerlAssignExpr.class).andOr(
+        psiElement().withFirstChild(EXPORT_OK_VARIABLE),
+        psiElement().withFirstChild(EXPORT_OK_DECLARATION)
+      )
+    );
 
   // @EXPORT = ();
-  PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_ARRAY_VARIABLE_PATTERN =
+  public static final PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_ARRAY_VARIABLE_PATTERN =
     psiElement(PsiPerlArrayVariable.class).andOr(
       psiElement().withText("@EXPORT"),
       psiElement().withText("@EXPORT_OK")
     );
 
-  PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_ARRAY_VARIABLE_DECLARATION =
+  public static final PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_ARRAY_VARIABLE_DECLARATION =
     psiElement(PsiPerlVariableDeclarationGlobal.class).withChild(
       psiElement(PerlVariableDeclarationElement.class).withChild(EXPORT_ARRAY_VARIABLE_PATTERN)
     );
 
 
-  PsiElementPattern.Capture<PsiElement> EXPORT_ASSIGNMENT =
+  public static final PsiElementPattern.Capture<PsiElement> EXPORT_ASSIGNMENT =
     psiElement()
       .afterLeafSkipping(WHITE_SPACE_AND_COMMENTS, psiElement(OPERATOR_ASSIGN))
       .withParent(
@@ -184,10 +202,10 @@ public interface PerlElementPatterns extends PerlElementTypes {
         )
       );
 
-  PsiElementPattern.Capture<PsiPerlParenthesisedExpr> EXPORT_ASSIGNMENT_PARENTHESISED =
+  public static final PsiElementPattern.Capture<PsiPerlParenthesisedExpr> EXPORT_ASSIGNMENT_PARENTHESISED =
     psiElement(PsiPerlParenthesisedExpr.class).and(EXPORT_ASSIGNMENT);
 
-  PsiElementPattern.Capture<PsiElement> EXPORT_ASSIGNED_STRING_CONTENT = psiElement().andOr(
+  public static final PsiElementPattern.Capture<PsiElement> EXPORT_ASSIGNED_STRING_CONTENT = psiElement().andOr(
     STRING_CONTENT_IN_QW_STRING_LIST.andOr(
       psiElement().withSuperParent(2, EXPORT_ASSIGNMENT),
       psiElement().withSuperParent(3, EXPORT_ASSIGNMENT_PARENTHESISED)
@@ -201,27 +219,28 @@ public interface PerlElementPatterns extends PerlElementTypes {
     )
   );
 
-  PsiElementPattern.Capture<PerlStringContentElement> USE_PARAMETERS_PATTERN = STRING_CONTENT_PATTERN.andOr(
+  public static final PsiElementPattern.Capture<PerlStringContentElement> USE_PARAMETERS_PATTERN = STRING_CONTENT_PATTERN.andOr(
     psiElement().inside(USE_STATEMENT_PATTERN),
     psiElement().inside(NO_STATEMENT_PATTERN)
   );
 
   // pattern for shift;
-  PsiElementPattern.Capture<PsiElement> SHIFT_PATTERN = psiElement(ARRAY_SHIFT_EXPR);
+  public static final PsiElementPattern.Capture<PsiElement> SHIFT_PATTERN = psiElement(ARRAY_SHIFT_EXPR);
 
-  PsiElementPattern.Capture<PsiPerlArrayVariable> ALL_ARGUMENTS_PATTERN = psiElement(PsiPerlArrayVariable.class).withText("@_");
-  PsiElementPattern.Capture<PsiPerlArrayElement> ALL_ARGUMENTS_ELEMENT_PATTERN =
+  public static final PsiElementPattern.Capture<PsiPerlArrayVariable> ALL_ARGUMENTS_PATTERN =
+    psiElement(PsiPerlArrayVariable.class).withText("@_");
+  public static final PsiElementPattern.Capture<PsiPerlArrayElement> ALL_ARGUMENTS_ELEMENT_PATTERN =
     psiElement(PsiPerlArrayElement.class)
       .withFirstChild(psiElement(PsiPerlScalarVariable.class).withText("$_"));
 
-  PsiElementPattern.Capture<PsiElement> TAILING_SHIFT_PATTERN = SHIFT_PATTERN.beforeLeaf(psiElement(SEMICOLON));
+  public static final PsiElementPattern.Capture<PsiElement> TAILING_SHIFT_PATTERN = SHIFT_PATTERN.beforeLeaf(psiElement(SEMICOLON));
 
 
-  PsiElementPattern.Capture<PsiPerlStatement> EMPTY_SHIFT_STATEMENT_PATTERN =
+  public static final PsiElementPattern.Capture<PsiPerlStatement> EMPTY_SHIFT_STATEMENT_PATTERN =
     psiElement(PsiPerlStatement.class).withFirstChild(TAILING_SHIFT_PATTERN);
 
 
-  PsiElementPattern.Capture<PsiPerlStatement> DECLARATION_ASSIGNING_PATTERN =
+  public static final PsiElementPattern.Capture<PsiPerlStatement> DECLARATION_ASSIGNING_PATTERN =
     psiElement(PsiPerlStatement.class).withFirstChild(
       psiElement(PerlAssignExpression.class).withFirstChild(
         psiElement(PerlVariableDeclarationExpr.class)

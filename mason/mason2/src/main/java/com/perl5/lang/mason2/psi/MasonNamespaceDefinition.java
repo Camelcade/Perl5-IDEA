@@ -20,7 +20,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import com.perl5.lang.mason2.Mason2Constants;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
@@ -36,7 +35,6 @@ public interface MasonNamespaceDefinition extends PsiElement,
                                                   PerlNamespaceDefinitionElement,
                                                   PerlNamespaceElementContainer,
                                                   PerlIdentifierOwner,
-                                                  PerlElementPatterns,
                                                   PerlCompositeElement {
   /**
    * Returns file path relative to project root

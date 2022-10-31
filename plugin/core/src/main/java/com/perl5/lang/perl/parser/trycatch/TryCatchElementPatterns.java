@@ -18,14 +18,18 @@ package com.perl5.lang.perl.parser.trycatch;
 
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
+import static com.perl5.lang.perl.idea.PerlElementPatterns.WHITE_SPACE_AND_COMMENTS;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 
 
-public interface TryCatchElementPatterns extends PerlElementPatterns {
-  PsiElementPattern.Capture<PsiElement> ELEMENT_AFTER_TRY_CATCH =
+public final class TryCatchElementPatterns {
+  private TryCatchElementPatterns() {
+  }
+
+  public static final PsiElementPattern.Capture<PsiElement> ELEMENT_AFTER_TRY_CATCH =
     psiElement().inside(
       psiElement(PsiPerlStatement.class).afterSiblingSkipping(
         WHITE_SPACE_AND_COMMENTS,
@@ -35,7 +39,7 @@ public interface TryCatchElementPatterns extends PerlElementPatterns {
 
       ));
 
-  PsiElementPattern.Capture<PsiElement> PACKAGE_IN_CATCH =
+  public static final PsiElementPattern.Capture<PsiElement> PACKAGE_IN_CATCH =
     psiElement(IDENTIFIER).withParent(
       psiElement(CATCH_CONDITION)
     );

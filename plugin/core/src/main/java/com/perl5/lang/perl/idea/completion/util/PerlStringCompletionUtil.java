@@ -29,7 +29,6 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
-import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProcessor;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
@@ -42,11 +41,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
+import static com.perl5.lang.perl.idea.PerlElementPatterns.SIMPLE_HASH_INDEX;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMA;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.FAT_COMMA;
 import static com.perl5.lang.perl.parser.PerlParserUtil.isIdentifier;
 
 
-public class PerlStringCompletionUtil implements PerlElementPatterns {
-  public static final String[] REF_TYPES = new String[]{
+public final class PerlStringCompletionUtil {
+  private static final List<String> REF_TYPES = List.of(
     "SCALAR",
     "ARRAY",
     "HASH",
@@ -58,7 +60,10 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
     "IO",
     "VSTRING",
     "Regexp"
-  };
+  );
+
+  private PerlStringCompletionUtil() {
+  }
 
   public static void fillWithHashIndexes(@NotNull PerlCompletionProcessor completionProcessor) {
     Set<String> hashIndexesCache = PerlStringCompletionCache.getInstance(completionProcessor.getProject()).getHashIndexesCache();
@@ -106,7 +111,7 @@ public class PerlStringCompletionUtil implements PerlElementPatterns {
           super.visitCommaSequenceExpr(o);
         }
 
-        protected void processStringElement(PerlStringContentElement stringContentElement) {
+        void processStringElement(PerlStringContentElement stringContentElement) {
           String text = stringContentElement.getText();
           if (StringUtil.isNotEmpty(text) && hashIndexesCache.add(text) &&
               completionProcessor.matches(text) && isIdentifier(text)) {
