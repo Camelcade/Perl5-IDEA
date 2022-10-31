@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.*;
 
 public final class HTMLMasonElementTypes {
-  public HTMLMasonElementTypes() {
+  private HTMLMasonElementTypes() {
   }
 
   public static final IElementType HTML_MASON_TEMPLATE_BLOCK_HTML = new HTMLMasonTemplateTokenType();
