@@ -37,7 +37,10 @@ import java.util.List;
 import static com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex.KEY_SCALAR;
 
 
-public class PerlScalarUtil implements PerlElementTypes {
+public final class PerlScalarUtil implements PerlElementTypes {
+  private PerlScalarUtil() {
+  }
+
   public static final String DEFAULT_SELF_NAME = "self";
   public static final String DEFAULT_SELF_SCALAR_NAME = "$" + DEFAULT_SELF_NAME;
 
