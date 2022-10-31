@@ -19,12 +19,18 @@ package com.perl5.lang.embedded.idea.editor.smartkeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_CLOSE;
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_OPEN;
 
-public class EmbeddedPerlSmartKeysUtil implements EmbeddedPerlElementTypes, PerlElementTypes {
+
+public final class EmbeddedPerlSmartKeysUtil implements PerlElementTypes {
+
+  private EmbeddedPerlSmartKeysUtil() {
+  }
+
   public static void addCloseMarker(final @NotNull Editor editor, @NotNull String marker) {
     int offset = editor.getCaretModel().getOffset();
 

@@ -20,12 +20,14 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterEmbedded;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_CLOSE;
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_OPEN;
 
-public class EmbeddedPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implements EmbeddedPerlElementTypes {
+
+public class EmbeddedPerlSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded {
   public static final TokenSet MARKER_TOKENS = TokenSet.create(
     EMBED_MARKER_OPEN,
     EMBED_MARKER_CLOSE

@@ -18,12 +18,13 @@ package com.perl5.lang.embedded.lexer;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.lexer.adapters.PerlTemplatingMergingLexerAdapter;
 
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_TEMPLATE_BLOCK_HTML;
 
-public class EmbeddedPerlLexerAdapter extends PerlTemplatingMergingLexerAdapter implements EmbeddedPerlElementTypes {
+
+public class EmbeddedPerlLexerAdapter extends PerlTemplatingMergingLexerAdapter {
   private static final TokenSet TOKENS_TO_MERGE = TokenSet.orSet(
     PerlMergingLexerAdapter.TOKENS_TO_MERGE,
     TokenSet.create(EMBED_TEMPLATE_BLOCK_HTML)

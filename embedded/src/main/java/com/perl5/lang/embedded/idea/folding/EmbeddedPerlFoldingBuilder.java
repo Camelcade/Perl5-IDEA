@@ -18,13 +18,14 @@ package com.perl5.lang.embedded.idea.folding;
 
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.*;
 
-public class EmbeddedPerlFoldingBuilder extends PerlFoldingBuilder implements EmbeddedPerlElementTypes {
+
+public class EmbeddedPerlFoldingBuilder extends PerlFoldingBuilder {
   protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
     PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
     TokenSet.create(

@@ -4,7 +4,7 @@ package com.perl5.lang.embedded.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.*;
 
 
 /**
@@ -12,7 +12,7 @@ import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
  * <a href="http://www.jflex.de/">JFlex</a> 1.7.0-1
  * from the specification file <tt>/home/hurricup/Projects/IDEA-Perl5/embedded/grammar/EmbeddedPerl.flex</tt>
  */
-public class EmbeddedPerlLexer extends EmbeddedPerlBaseLexer implements EmbeddedPerlElementTypes {
+public class EmbeddedPerlLexer extends EmbeddedPerlBaseLexer {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;

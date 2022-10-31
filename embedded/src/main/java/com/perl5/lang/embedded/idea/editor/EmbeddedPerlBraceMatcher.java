@@ -20,12 +20,14 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_CLOSE;
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_OPEN;
 
-public class EmbeddedPerlBraceMatcher implements PairedBraceMatcher, EmbeddedPerlElementTypes {
+
+public class EmbeddedPerlBraceMatcher implements PairedBraceMatcher {
   private static final BracePair[] PAIRS = new BracePair[]{
     new BracePair(EMBED_MARKER_OPEN, EMBED_MARKER_CLOSE, false),
   };

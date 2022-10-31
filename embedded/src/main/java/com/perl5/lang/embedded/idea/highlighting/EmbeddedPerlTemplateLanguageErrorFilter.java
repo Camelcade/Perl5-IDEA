@@ -19,11 +19,12 @@ package com.perl5.lang.embedded.idea.highlighting;
 import com.intellij.codeInsight.highlighting.TemplateLanguageErrorFilter;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProvider;
 
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_OPEN;
 
-public class EmbeddedPerlTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements EmbeddedPerlElementTypes {
+
+public class EmbeddedPerlTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter {
   private static final TokenSet START_TOKENS = TokenSet.create(
     EMBED_MARKER_OPEN,
     TokenType.WHITE_SPACE
