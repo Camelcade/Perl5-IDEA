@@ -152,19 +152,13 @@ public final class PerlPackageUtil implements PerlElementTypes {
   }
 
   /**
-   * Checks if package is deprecated
-   *
-   * @param packageName package name
-   * @return result
+   * Checks if package is deprecated in the core or somewhere in the {@code scope}
    */
-  public static boolean isDeprecated(Project project, String packageName) {
-    for (PerlNamespaceDefinitionElement definition : getNamespaceDefinitions(project, packageName)) {
-      if (definition.isDeprecated()) {
-        return true;
-      }
-    }
-
-    return CORE_PACKAGES_DEPRECATED.contains(getCanonicalNamespaceName(packageName));
+  public static boolean isDeprecated(@NotNull Project project,
+                                     @NotNull GlobalSearchScope searchScope,
+                                     @NotNull String packageCanonicalName) {
+    return CORE_PACKAGES_DEPRECATED.contains(packageCanonicalName) ||
+           !processNamespaces(packageCanonicalName, project, searchScope, it -> !it.isDeprecated());
   }
 
   @Contract("null->false")

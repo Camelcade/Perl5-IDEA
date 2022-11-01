@@ -20,6 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
+import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlNamespaceFileReference;
@@ -108,7 +109,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
     if (parent instanceof PerlNamespaceDefinitionWithIdentifier) {
       return ((PerlNamespaceDefinitionElement)parent).isDeprecated();
     }
-    return PerlPackageUtil.isDeprecated(getProject(), getCanonicalName());
+    return PerlPackageUtil.isDeprecated(getProject(), GlobalSearchScope.allScope(getProject()), getCanonicalName());
   }
 
   @Override
