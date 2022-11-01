@@ -42,7 +42,7 @@ import com.perl5.lang.perl.debugger.ui.PerlScriptsPanel;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.util.PerlRunUtil;
-import gnu.trove.TByteArrayList;
+import it.unimi.dsi.fastutil.bytes.ByteArrayList;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.PropertyKey;
@@ -189,7 +189,7 @@ public class PerlDebugThread extends Thread {
       myOutputStream = mySocket.getOutputStream();
       myInputStream = mySocket.getInputStream();
 
-      TByteArrayList response = new TByteArrayList();
+      ByteArrayList response = new ByteArrayList();
 
       while (!myStop) {
         response.clear();
@@ -240,8 +240,8 @@ public class PerlDebugThread extends Thread {
     }
   }
 
-  private void processResponse(TByteArrayList responseBytes) {
-    final String response = new String(responseBytes.toNativeArray(), StandardCharsets.UTF_8);
+  private void processResponse(ByteArrayList responseBytes) {
+    final String response = new String(responseBytes.toByteArray(), StandardCharsets.UTF_8);
     LOG.debug("Got response: ", response);
 
     try {
