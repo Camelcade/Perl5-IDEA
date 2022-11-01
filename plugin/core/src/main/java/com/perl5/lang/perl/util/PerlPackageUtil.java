@@ -304,16 +304,8 @@ public final class PerlPackageUtil implements PerlElementTypes {
   /**
    * Searching project files for namespace definitions by specific package name
    *
-   * @param project     project to search in
-   * @param packageName canonical package name (without tailing ::)
-   * @return collection of found definitions
-   * @deprecated use {@link #getNamespaceDefinitions(Project, GlobalSearchScope, String)}
+   * @see #processNamespaces(String, Project, GlobalSearchScope, Processor)
    */
-  @Deprecated
-  public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(@NotNull Project project, @NotNull String packageName) {
-    return getNamespaceDefinitions(project, GlobalSearchScope.allScope(project), packageName);
-  }
-
   public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(@NotNull Project project,
                                                                                    @NotNull GlobalSearchScope scope,
                                                                                    @NotNull String canonicalPackageName) {
