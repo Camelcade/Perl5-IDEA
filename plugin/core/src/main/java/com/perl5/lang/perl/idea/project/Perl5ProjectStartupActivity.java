@@ -17,7 +17,10 @@
 package com.perl5.lang.perl.idea.project;
 
 import com.intellij.ide.startup.ServiceNotReadyException;
-import com.intellij.notification.*;
+import com.intellij.notification.BrowseNotificationAction;
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.DumbService;
@@ -47,8 +50,7 @@ public class Perl5ProjectStartupActivity implements StartupActivity {
           "perl5.plugin.update.notification.group",
           PerlBundle.message("plugin.update.baloon.title", PerlPluginUtil.getPluginVersion()),
           PerlBundle.message("plugin.update.baloon.text"),
-          NotificationType.INFORMATION,
-          new NotificationListener.UrlOpeningListener(false)
+          NotificationType.INFORMATION
         ).setImportant(true)
           .addAction(
             new BrowseNotificationAction(PerlBundle.message("plugin.update.baloon.changes"), "https://plugins.jetbrains.com/plugin/7796"))
