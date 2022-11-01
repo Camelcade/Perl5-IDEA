@@ -316,12 +316,12 @@ public final class PerlPackageUtil implements PerlElementTypes {
    * @deprecated use {@link #getNamespaceDefinitions(Project, GlobalSearchScope, String)}
    */
   @Deprecated
-  public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(Project project, @NotNull String packageName) {
+  public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(@NotNull Project project, @NotNull String packageName) {
     return getNamespaceDefinitions(project, GlobalSearchScope.allScope(project), packageName);
   }
 
-  public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(Project project,
-                                                                                   GlobalSearchScope scope,
+  public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(@NotNull Project project,
+                                                                                   @NotNull GlobalSearchScope scope,
                                                                                    @NotNull String packageName) {
     List<PerlNamespaceDefinitionElement> result = new ArrayList<>();
     processNamespaces(packageName, project, scope, result::add);
