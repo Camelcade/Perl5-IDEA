@@ -21,8 +21,6 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
-import com.intellij.openapi.util.Pair;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.tt2.TemplateToolkitIcons;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import org.jetbrains.annotations.NotNull;
@@ -66,13 +64,12 @@ public class TemplateToolkitColorSettingsPage implements ColorSettingsPage {
 
   @Override
   public @Nullable Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
-    //noinspection unchecked
-    return ContainerUtil.newHashMap(
-      Pair.create("kw", TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY),
-      Pair.create("id", TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY),
-      Pair.create("op", TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY),
-      Pair.create("sqs", TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY),
-      Pair.create("dqs", TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY)
+    return Map.of(
+      "kw", TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY,
+      "id", TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY,
+      "op", TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY,
+      "sqs", TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY,
+      "dqs", TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY
     );
   }
 

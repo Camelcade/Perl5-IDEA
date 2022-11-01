@@ -19,14 +19,13 @@ package intellilang;
 
 import base.PerlLightTestCase;
 import com.intellij.lang.html.HTMLLanguage;
-import com.intellij.openapi.util.Pair;
 import com.intellij.util.FileContentUtil;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import org.junit.Test;
 
 import java.util.Collections;
+import java.util.Map;
 
 import static com.perl5.lang.perl.idea.intellilang.PerlDefaultInjectionMarkers.PERL5_MARKER;
 public class PerlInjectionMarkersTest extends PerlLightTestCase {
@@ -41,7 +40,7 @@ public class PerlInjectionMarkersTest extends PerlLightTestCase {
   public void testCustomMarkerAddition() {
     PerlInjectionMarkersService markersService = PerlInjectionMarkersService.getInstance(getProject());
     assertNull(markersService.getLanguageByMarker(TEST_MARKER));
-    markersService.setCustomMarkersMap(ContainerUtil.newHashMap(Pair.create(TEST_MARKER, HTMLLanguage.INSTANCE.getID())));
+    markersService.setCustomMarkersMap(Map.of(TEST_MARKER, HTMLLanguage.INSTANCE.getID()));
     assertEquals(HTMLLanguage.INSTANCE, markersService.getLanguageByMarker(TEST_MARKER));
   }
 
@@ -49,7 +48,7 @@ public class PerlInjectionMarkersTest extends PerlLightTestCase {
   public void testMarkerOverride() {
     PerlInjectionMarkersService markersService = PerlInjectionMarkersService.getInstance(getProject());
     assertEquals(PerlLanguage.INSTANCE, markersService.getLanguageByMarker(PERL5_MARKER));
-    markersService.setCustomMarkersMap(ContainerUtil.newHashMap(Pair.create(PERL5_MARKER, HTMLLanguage.INSTANCE.getID())));
+    markersService.setCustomMarkersMap(Map.of(PERL5_MARKER, HTMLLanguage.INSTANCE.getID()));
     assertEquals(HTMLLanguage.INSTANCE, markersService.getLanguageByMarker(PERL5_MARKER));
     markersService.setCustomMarkersMap(Collections.emptyMap());
     assertEquals(PerlLanguage.INSTANCE, markersService.getLanguageByMarker(PERL5_MARKER));
@@ -58,7 +57,7 @@ public class PerlInjectionMarkersTest extends PerlLightTestCase {
   @Test
   public void testMarkerCompletion() {
     PerlInjectionMarkersService markersService = PerlInjectionMarkersService.getInstance(getProject());
-    markersService.setCustomMarkersMap(ContainerUtil.newHashMap(Pair.create(TEST_MARKER, HTMLLanguage.INSTANCE.getID())));
+    markersService.setCustomMarkersMap(Map.of(TEST_MARKER, HTMLLanguage.INSTANCE.getID()));
     doTestCompletion();
   }
 
@@ -78,7 +77,7 @@ public class PerlInjectionMarkersTest extends PerlLightTestCase {
     PerlInjectionMarkersService markersService = PerlInjectionMarkersService.getInstance(getProject());
     initWithFileSmartWithoutErrors();
     assertNotInjected();
-    markersService.setCustomMarkersMap(ContainerUtil.newHashMap(Pair.create(TEST_MARKER, HTMLLanguage.INSTANCE.getID())));
+    markersService.setCustomMarkersMap(Map.of(TEST_MARKER, HTMLLanguage.INSTANCE.getID()));
     FileContentUtil.reparseOpenedFiles();
     initWithFileSmartWithoutErrors();
     assertInjected();

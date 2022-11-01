@@ -21,11 +21,10 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
-import com.intellij.openapi.util.Pair;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
+import org.apache.groovy.util.Maps;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -153,40 +152,40 @@ public class PerlColorSettingsPage implements ColorSettingsPage {
 
   @Override
   public @Nullable Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
-    return ContainerUtil.newHashMap(
-      Pair.create("package", PerlSyntaxHighlighter.PERL_PACKAGE),
-      Pair.create("package_core", PerlSyntaxHighlighter.PERL_PACKAGE_CORE),
-      Pair.create("pragma", PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA),
-      Pair.create("package_def", PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION),
-      Pair.create("angle", PerlSyntaxHighlighter.PERL_ANGLE),
-      Pair.create("scalar", PerlSyntaxHighlighter.PERL_SCALAR),
-      Pair.create("scalar_builtin", PerlSyntaxHighlighter.PERL_SCALAR_BUILTIN),
-      Pair.create("array", PerlSyntaxHighlighter.PERL_ARRAY),
-      Pair.create("array_builtin", PerlSyntaxHighlighter.PERL_ARRAY_BUILTIN),
-      Pair.create("hash", PerlSyntaxHighlighter.PERL_HASH),
-      Pair.create("hash_builtin", PerlSyntaxHighlighter.PERL_HASH_BUILTIN),
-      Pair.create("glob", PerlSyntaxHighlighter.PERL_GLOB),
-      Pair.create("glob_builtin", PerlSyntaxHighlighter.PERL_GLOB_BUILTIN),
-      Pair.create("handle", PerlSyntaxHighlighter.PERL_HANDLE),
-      Pair.create("handle_builtin", PerlSyntaxHighlighter.PERL_HANDLE_BUILTIN),
-      Pair.create("autoload", PerlSyntaxHighlighter.PERL_AUTOLOAD),
-      Pair.create(PerlPsiUtil.QUOTE_Q, PerlSyntaxHighlighter.PERL_SQ_STRING),
-      Pair.create(PerlPsiUtil.QUOTE_QX, PerlSyntaxHighlighter.PERL_DX_STRING),
-      Pair.create(PerlPsiUtil.QUOTE_QQ, PerlSyntaxHighlighter.PERL_DQ_STRING),
-      Pair.create("rx", PerlSyntaxHighlighter.PERL_REGEX_TOKEN),
-      Pair.create("block", PerlSyntaxHighlighter.PERL_BLOCK_NAME),
-      Pair.create("const", PerlSyntaxHighlighter.PERL_CONSTANT),
-      Pair.create("em", PerlSyntaxHighlighter.EMBED_MARKER_KEY),
-      Pair.create("kw", PerlSyntaxHighlighter.PERL_KEYWORD),
-      Pair.create("label", PerlSyntaxHighlighter.PERL_LABEL),
-      Pair.create("sub", PerlSyntaxHighlighter.PERL_SUB),
-      Pair.create("sub_builtin", PerlSyntaxHighlighter.PERL_SUB_BUILTIN),
-      Pair.create("xsub", PerlSyntaxHighlighter.PERL_XSUB),
-      Pair.create("sub_attr", PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE),
-      Pair.create("sub_proto", PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN),
-      Pair.create("sub_declaration", PerlSyntaxHighlighter.PERL_SUB_DECLARATION),
-      Pair.create("sub_definition", PerlSyntaxHighlighter.PERL_SUB_DEFINITION),
-      Pair.create("ann", PerlSyntaxHighlighter.PERL_ANNOTATION)
+    return Maps.of(
+      "package", PerlSyntaxHighlighter.PERL_PACKAGE,
+      "package_core", PerlSyntaxHighlighter.PERL_PACKAGE_CORE,
+      "pragma", PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA,
+      "package_def", PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION,
+      "angle", PerlSyntaxHighlighter.PERL_ANGLE,
+      "scalar", PerlSyntaxHighlighter.PERL_SCALAR,
+      "scalar_builtin", PerlSyntaxHighlighter.PERL_SCALAR_BUILTIN,
+      "array", PerlSyntaxHighlighter.PERL_ARRAY,
+      "array_builtin", PerlSyntaxHighlighter.PERL_ARRAY_BUILTIN,
+      "hash", PerlSyntaxHighlighter.PERL_HASH,
+      "hash_builtin", PerlSyntaxHighlighter.PERL_HASH_BUILTIN,
+      "glob", PerlSyntaxHighlighter.PERL_GLOB,
+      "glob_builtin", PerlSyntaxHighlighter.PERL_GLOB_BUILTIN,
+      "handle", PerlSyntaxHighlighter.PERL_HANDLE,
+      "handle_builtin", PerlSyntaxHighlighter.PERL_HANDLE_BUILTIN,
+      "autoload", PerlSyntaxHighlighter.PERL_AUTOLOAD,
+      PerlPsiUtil.QUOTE_Q, PerlSyntaxHighlighter.PERL_SQ_STRING,
+      PerlPsiUtil.QUOTE_QX, PerlSyntaxHighlighter.PERL_DX_STRING,
+      PerlPsiUtil.QUOTE_QQ, PerlSyntaxHighlighter.PERL_DQ_STRING,
+      "rx", PerlSyntaxHighlighter.PERL_REGEX_TOKEN,
+      "block", PerlSyntaxHighlighter.PERL_BLOCK_NAME,
+      "const", PerlSyntaxHighlighter.PERL_CONSTANT,
+      "em", PerlSyntaxHighlighter.EMBED_MARKER_KEY,
+      "kw", PerlSyntaxHighlighter.PERL_KEYWORD,
+      "label", PerlSyntaxHighlighter.PERL_LABEL,
+      "sub", PerlSyntaxHighlighter.PERL_SUB,
+      "sub_builtin", PerlSyntaxHighlighter.PERL_SUB_BUILTIN,
+      "xsub", PerlSyntaxHighlighter.PERL_XSUB,
+      "sub_attr", PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE,
+      "sub_proto", PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN,
+      "sub_declaration", PerlSyntaxHighlighter.PERL_SUB_DECLARATION,
+      "sub_definition", PerlSyntaxHighlighter.PERL_SUB_DEFINITION,
+      "ann", PerlSyntaxHighlighter.PERL_ANNOTATION
     );
   }
 

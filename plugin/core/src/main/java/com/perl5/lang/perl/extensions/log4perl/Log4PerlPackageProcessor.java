@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.extensions.log4perl;
 
-import com.intellij.openapi.util.Pair;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
@@ -34,12 +33,12 @@ public class Log4PerlPackageProcessor extends PerlPackageProcessorBase implement
   private static final String LOG4PERL_LOGGER = "Log::Log4perl::Logger";
   private static final String LOG4PERL_LEVELS = "Log::Log4perl::Levels";
 
-  private static final Map<String, String> OPTIONS = ContainerUtil.newHashMap(
-    Pair.create(LEVELS, "Exports log levels from Log4perl::Level"),
-    Pair.create(":nowarn", "No warnings about non-initialized usage"),
-    Pair.create(":nostrict", "Put Log4perl in a more permissive mode"),
-    Pair.create(":resurrect", "Resurrects buried statements before running"),
-    Pair.create(":no_extra_logdie_message", "Suppresses extra LOGDIE message")
+  private static final Map<String, String> OPTIONS = Map.of(
+    LEVELS, "Exports log levels from Log4perl::Level",
+    ":nowarn", "No warnings about non-initialized usage",
+    ":nostrict", "Put Log4perl in a more permissive mode",
+    ":resurrect", "Resurrects buried statements before running",
+    ":no_extra_logdie_message", "Suppresses extra LOGDIE message"
   );
 
   private static final List<String> LOG_METHODS = ContainerUtil.newArrayList(
