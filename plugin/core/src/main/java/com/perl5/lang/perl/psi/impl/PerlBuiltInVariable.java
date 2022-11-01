@@ -21,10 +21,12 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
+
 public class PerlBuiltInVariable extends PerlImplicitVariableDeclaration {
   public PerlBuiltInVariable(@NotNull PsiManager manager,
                              @NotNull String variableName) {
-    super(manager, variableName, PerlPackageUtil.MAIN_NAMESPACE_NAME, null, false, false, false, null);
+    super(manager, variableName, PerlPackageUtil.MAIN_NAMESPACE_NAME, UNKNOWN_VALUE, false, false, false, null);
   }
 
   @Override

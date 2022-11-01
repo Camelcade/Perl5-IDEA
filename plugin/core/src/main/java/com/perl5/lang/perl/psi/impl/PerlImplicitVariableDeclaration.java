@@ -51,14 +51,10 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   protected final boolean myIsLocal;
   protected final boolean myIsInvocant;
 
-  /**
-   * @deprecated use constructor with value
-   */
-  @Deprecated
   protected PerlImplicitVariableDeclaration(@NotNull PsiManager manager,
                                             @NotNull String variableNameWithSigil,
                                             @Nullable String namespaceName,
-                                            @Nullable String variableClass,
+                                            @NotNull PerlValue variableValue,
                                             boolean isLexical,
                                             boolean isLocal,
                                             boolean isInvocant,
@@ -67,7 +63,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
          computeTypeFromNameWithSigil(variableNameWithSigil),
          variableNameWithSigil.substring(1),
          namespaceName,
-         PerlScalarValue.create(variableClass),
+         variableValue,
          isLexical,
          isLocal,
          isInvocant,
@@ -393,7 +389,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
                                                                  @Nullable PsiElement parent
   ) {
     return new PerlImplicitVariableDeclaration(
-      psiManager, variableNameWithSigil, packageName, variableClass, isLexical, isLocal, isInvocant, parent);
+      psiManager, variableNameWithSigil, packageName, PerlScalarValue.create(variableClass), isLexical, isLocal, isInvocant, parent);
   }
 
   public @NotNull List<PsiPerlExpr> getExprList() {
