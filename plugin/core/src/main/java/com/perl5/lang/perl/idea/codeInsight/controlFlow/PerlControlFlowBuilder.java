@@ -126,7 +126,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     processGotos();
     checkPending(exitInstruction);
 
-    return getCompleteControlFlow();
+    return completeControlFlow();
   }
 
   /**
