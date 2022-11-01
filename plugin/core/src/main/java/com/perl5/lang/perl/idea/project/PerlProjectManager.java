@@ -40,8 +40,8 @@ import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.SyntheticLibrary;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.*;
@@ -69,7 +69,7 @@ public class PerlProjectManager implements Disposable {
   private final @NotNull Project myProject;
   private final PerlLocalSettings myPerlSettings;
   private final Map<PerlSourceRootType, List<VirtualFile>> myModulesRootsProvider;
-  private volatile AtomicNullableLazyValue<Sdk> mySdkProvider;
+  private volatile NullableLazyValue<Sdk> mySdkProvider;
   private volatile AtomicNotNullLazyValue<Map<VirtualFile, PerlSourceRootType>> myAllModulesMapProvider;
   private volatile AtomicNotNullLazyValue<List<VirtualFile>> myExternalLibraryRootsProvider;
   private volatile AtomicNotNullLazyValue<List<VirtualFile>> mySdkLibraryRootsProvider;
@@ -138,7 +138,7 @@ public class PerlProjectManager implements Disposable {
 
       return builder.build();
     });
-    mySdkProvider = AtomicNullableLazyValue.createValue(() -> PerlSdkTable.getInstance().findJdk(myPerlSettings.getPerlInterpreter()));
+    mySdkProvider = NullableLazyValue.atomicLazyNullable(() -> PerlSdkTable.getInstance().findJdk(myPerlSettings.getPerlInterpreter()));
     myExternalLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
       List<VirtualFile> result = new ArrayList<>();
 

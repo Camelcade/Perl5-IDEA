@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.formatter;
 
 import com.intellij.formatting.*;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.openapi.util.AtomicNullableLazyValue;
+import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.util.ReflectionUtil;
 import org.jetbrains.annotations.NotNull;
@@ -28,17 +28,19 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.intellij.openapi.util.NullableLazyValue.atomicLazyNullable;
+
 public class PerlInjectedLanguageBlockWrapper implements Block {
   private static final @Nullable Method IS_ABSOLUTE = ReflectionUtil.getDeclaredMethod(IndentImpl.class, "isAbsolute");
   protected final PerlInjectedLanguageBlocksBuilder myBuilder;
   private final Block myOriginal;
-  private final AtomicNullableLazyValue<TextRange> myRangeProvider;
+  private final NullableLazyValue<TextRange> myRangeProvider;
   private final AtomicNotNullLazyValue<List<Block>> myChildBlocksProvider;
 
   public PerlInjectedLanguageBlockWrapper(@NotNull Block original, @NotNull PerlInjectedLanguageBlocksBuilder builder) {
     myOriginal = original;
     myBuilder = builder;
-    myRangeProvider = AtomicNullableLazyValue.createValue(() -> myBuilder.getRangeInHostDocument(myOriginal.getTextRange()));
+    myRangeProvider = atomicLazyNullable(() -> myBuilder.getRangeInHostDocument(myOriginal.getTextRange()));
     myChildBlocksProvider = AtomicNotNullLazyValue.createValue(() -> myOriginal.getSubBlocks().stream()
       .map(block -> new PerlInjectedLanguageBlockWrapper(block, myBuilder))
       .filter(wrapper -> wrapper.getTextRangeInner() != null)

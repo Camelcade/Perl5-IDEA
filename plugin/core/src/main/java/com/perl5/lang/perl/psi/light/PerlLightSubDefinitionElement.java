@@ -18,8 +18,9 @@ package com.perl5.lang.perl.psi.light;
 
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.openapi.util.AtomicNullableLazyValue;
 import com.intellij.openapi.util.NotNullFactory;
+import com.intellij.openapi.util.NotNullLazyValue;
+import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
@@ -42,12 +43,14 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.List;
 
+import static com.intellij.openapi.util.NullableLazyValue.atomicLazyNullable;
+
 public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement<?>> extends PerlDelegatingLightNamedElement<Delegate>
   implements PerlSubDefinitionElement {
   private final @Nullable String myNamespaceName;
-  private final @NotNull AtomicNullableLazyValue<PerlSubAnnotations> myAnnotationsProvider;
-  private @NotNull AtomicNotNullLazyValue<List<PerlSubArgument>> mySubArgumentsProvider;
-  private @NotNull AtomicNotNullLazyValue<PerlValue> myReturnValueFromCodeProvider;
+  private final @NotNull NullableLazyValue<PerlSubAnnotations> myAnnotationsProvider;
+  private @NotNull NotNullLazyValue<List<PerlSubArgument>> mySubArgumentsProvider;
+  private @NotNull NotNullLazyValue<PerlValue> myReturnValueFromCodeProvider;
   // fixme should we actualize this on fly, like identifier?
   private @Nullable PsiPerlBlock mySubDefinitionBody;
 
@@ -58,11 +61,11 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @Nullable String namespaceName,
                                        @NotNull List<PerlSubArgument> subArguments,
                                        @Nullable PerlSubAnnotations annotations,
-                                       @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProvider,
+                                       @NotNull NotNullLazyValue<PerlValue> returnValueFromCodeProvider,
                                        @Nullable PsiPerlBlock subDefinitionBody) {
     super(delegate, name, elementType, nameIdentifier);
     myNamespaceName = namespaceName;
-    myAnnotationsProvider = AtomicNullableLazyValue.createValue(() -> annotations);
+    myAnnotationsProvider = atomicLazyNullable(() -> annotations);
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(() -> subArguments);
     myReturnValueFromCodeProvider = returnValueFromCodeProvider;
     mySubDefinitionBody = subDefinitionBody;
@@ -77,7 +80,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     super(delegate, name, elementType, nameIdentifier);
     myNamespaceName = namespaceName;
     mySubDefinitionBody = elementSub.getBlock();
-    myAnnotationsProvider = AtomicNullableLazyValue.createValue(
+    myAnnotationsProvider = atomicLazyNullable(
       () -> PerlSubAnnotations.computeForLightElement(delegate, nameIdentifier));
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(
       () -> PerlSubDefinitionElement.getPerlSubArgumentsFromBody(mySubDefinitionBody));
@@ -88,7 +91,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     super(delegate, stub.getSubName(), stub.getStubType());
     myNamespaceName = stub.getNamespaceName();
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(stub::getSubArgumentsList);
-    myAnnotationsProvider = AtomicNullableLazyValue.createValue(stub::getAnnotations);
+    myAnnotationsProvider = atomicLazyNullable(stub::getAnnotations);
     myReturnValueFromCodeProvider = AtomicNotNullLazyValue.createValue(stub::getReturnValueFromCode);
   }
 

@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.sdk.host.docker;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.openapi.util.AtomicNullableLazyValue;
+import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import org.jetbrains.annotations.NotNull;
@@ -27,6 +27,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static com.intellij.openapi.util.NullableLazyValue.atomicLazyNullable;
+
 class PerlDockerFileTransfer extends PerlHostFileTransfer<PerlDockerData> {
   private final @NotNull PerlDockerAdapter myAdapter;
 
@@ -34,7 +36,7 @@ class PerlDockerFileTransfer extends PerlHostFileTransfer<PerlDockerData> {
   private volatile Throwable closedThrowable;
   private volatile ExecutionException myCreationError;
 
-  private final AtomicNullableLazyValue<String> myContainerNameProvider = AtomicNullableLazyValue.createValue(() -> {
+  private final NullableLazyValue<String> myContainerNameProvider = atomicLazyNullable(() -> {
     try {
       String containerName = getAdapter().createRunningContainer("copying_" + myHostData.getSafeImageName());
       isOpened = true;

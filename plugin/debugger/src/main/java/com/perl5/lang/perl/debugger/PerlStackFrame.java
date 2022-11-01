@@ -19,7 +19,7 @@ package com.perl5.lang.perl.debugger;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.intellij.icons.AllIcons;
-import com.intellij.openapi.util.AtomicNullableLazyValue;
+import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -47,14 +47,14 @@ public class PerlStackFrame extends XStackFrame {
   private final PerlStackFrameDescriptor myFrameDescriptor;
   private final PerlExecutionStack myPerlExecutionStack;
   private final PerlDebugThread myDebugThread;
-  private final AtomicNullableLazyValue<VirtualFile> myVirtualFile;
+  private final NullableLazyValue<VirtualFile> myVirtualFile;
 
   public PerlStackFrame(PerlStackFrameDescriptor frameDescriptor, PerlExecutionStack stack) {
     myFrameDescriptor = frameDescriptor;
     myPerlExecutionStack = stack;
     myDebugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
 
-    myVirtualFile = AtomicNullableLazyValue.createValue(() -> {
+    myVirtualFile = NullableLazyValue.atomicLazyNullable(() -> {
       String remoteFilePath = myFrameDescriptor.getFileDescriptor().getPath();
       String localFilePath = myDebugThread.getDebugProfileState().mapPathToLocal(remoteFilePath);
       VirtualFile result = VfsUtil.findFileByIoFile(new File(localFilePath), false);
