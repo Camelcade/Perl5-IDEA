@@ -105,7 +105,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     }
 
     if (parentsNamespaces.isEmpty()) {
-      parentsNamespaces.addAll(PerlPackageUtil.getNamespaceDefinitions(getProject(), MASON_DEFAULT_COMPONENT_PARENT));
+      parentsNamespaces.addAll(PerlPackageUtil.getNamespaceDefinitions(getProject(), getResolveScope(), MASON_DEFAULT_COMPONENT_PARENT));
     }
 
     return parentsNamespaces;
