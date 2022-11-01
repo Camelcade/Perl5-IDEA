@@ -19,6 +19,7 @@ package com.perl5.lang.perl.psi.light;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.AtomicNullableLazyValue;
+import com.intellij.openapi.util.NotNullFactory;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.stubs.IStubElementType;
@@ -91,9 +92,8 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     myReturnValueFromCodeProvider = AtomicNotNullLazyValue.createValue(stub::getReturnValueFromCode);
   }
 
-  @Deprecated
-  protected void setSubArguments(@NotNull List<PerlSubArgument> subArguments) {
-    mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(() -> subArguments);
+  protected final void setSubArgumentsProvider(@NotNull NotNullFactory<List<PerlSubArgument>> provider) {
+    mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(provider);
   }
 
   @Override

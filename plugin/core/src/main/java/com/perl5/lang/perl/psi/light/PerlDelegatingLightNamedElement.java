@@ -71,9 +71,8 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
     return (IStubElementType<?, PerlDelegatingLightNamedElement<?>>)super.getElementType();
   }
 
-  public PerlDelegatingLightNamedElement<Delegate> withNameComputation(@NotNull Function<String, String> nameComputation) {
+  protected final void setNameComputation(@NotNull Function<String, String> nameComputation) {
     myNameComputation = nameComputation;
-    return this;
   }
 
   @Override

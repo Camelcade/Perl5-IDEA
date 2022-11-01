@@ -30,8 +30,8 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<PerlSubCallElement>
   implements PerlRenameUsagesHelper {
@@ -57,28 +57,31 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
           Collections.emptyList(),
           annotations
     );
-    withNameComputation(nameComputation);
-    if (isFollowBestPractice()) {
-      if (hasSetterName()) {
-        setSubArguments(Arrays.asList(PerlSubArgument.self(), PerlSubArgument.mandatoryScalar(PerlSubArgument.NEW_VALUE_VALUE)));
+    setNameComputation(nameComputation);
+    setSubArgumentsProvider(() -> {
+      if (isFollowBestPractice()) {
+        if (hasSetterName()) {
+          return List.of(PerlSubArgument.self(), PerlSubArgument.mandatoryScalar(PerlSubArgument.NEW_VALUE_VALUE));
+        }
       }
-    }
-    else {
-      setSubArguments(Arrays.asList(PerlSubArgument.self(), PerlSubArgument.optionalScalar(PerlSubArgument.NEW_VALUE_VALUE)));
-    }
+      else {
+        return List.of(PerlSubArgument.self(), PerlSubArgument.optionalScalar(PerlSubArgument.NEW_VALUE_VALUE));
+      }
+      return Collections.emptyList();
+    });
   }
 
   public PerlClassAccessorMethod(@NotNull PerlSubCallElement delegate,
                                  @NotNull PerlSubDefinitionStub stub) {
     super(delegate, stub);
     if (hasGetterName()) {
-      withNameComputation(GETTER_COMPUTATION);
+      setNameComputation(GETTER_COMPUTATION);
     }
     else if (hasSetterName()) {
-      withNameComputation(SETTER_COMPUTATION);
+      setNameComputation(SETTER_COMPUTATION);
     }
     else {
-      withNameComputation(SIMPLE_COMPUTATION);
+      setNameComputation(SIMPLE_COMPUTATION);
     }
   }
 
