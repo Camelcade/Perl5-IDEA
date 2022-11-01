@@ -24,6 +24,6 @@ import org.jetbrains.annotations.NotNull;
 public class PerlXSubsStartupActivity implements StartupActivity {
   @Override
   public void runActivity(@NotNull Project project) {
-    StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> PerlXSubsState.getInstance(project).rescanFiles(null));
+    StartupManager.getInstance(project).runAfterOpened(() -> PerlXSubsState.getInstance(project).rescanFiles(null));
   }
 }

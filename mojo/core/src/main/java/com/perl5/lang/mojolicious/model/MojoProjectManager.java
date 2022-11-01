@@ -271,7 +271,7 @@ public class MojoProjectManager implements Disposable {
       if (project.isDefault()) {
         return;
       }
-      StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> ReadAction.run(() -> {
+      StartupManager.getInstance(project).runAfterOpened(() -> ReadAction.run(() -> {
         if (!project.isDisposed()) {
           LOG.debug("Project is initialized");
           getInstance(project).scheduleUpdate();

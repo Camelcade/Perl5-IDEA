@@ -41,7 +41,7 @@ public class Perl5ProjectStartupActivity implements StartupActivity {
     }
     PerlApplicationSettings settings = PerlApplicationSettings.getInstance();
     if (settings.shouldShowAnnounce()) {
-      StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> {
+      StartupManager.getInstance(project).runAfterOpened(() -> {
         settings.setAnnounceShown();
         Notification notification = new Notification(
           "perl5.plugin.update.notification.group",
@@ -62,7 +62,7 @@ public class Perl5ProjectStartupActivity implements StartupActivity {
         Notifications.Bus.notify(notification);
       });
     }
-    StartupManager.getInstance(project).runWhenProjectIsInitialized(() -> scheduleNamesUpdateWithReparse(project));
+    StartupManager.getInstance(project).runAfterOpened(() -> scheduleNamesUpdateWithReparse(project));
   }
 
   private static void scheduleNamesUpdateWithReparse(@NotNull Project project) {
