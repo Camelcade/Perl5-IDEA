@@ -27,9 +27,6 @@ import com.perl5.lang.perl.psi.impl.PerlBuiltInNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
   public PerlNamespaceReference(PsiElement psiElement) {
     super(psiElement);
@@ -60,10 +57,9 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
       return PsiElementResolveResult.createResults(builtInNamespaceDefinition);
     }
 
-    List<PsiElement> result = new ArrayList<>();
-    result.addAll(PerlPackageUtil.getNamespaceDefinitions(project, PerlPackageUtil.getCanonicalNamespaceName(namespaceName)));
-
-    return PsiElementResolveResult.createResults(result);
+    return PsiElementResolveResult.createResults(
+      PerlPackageUtil.getNamespaceDefinitions(project, myElement.getResolveScope(),
+                                              PerlPackageUtil.getCanonicalNamespaceName(namespaceName)));
   }
 
   @Override

@@ -316,9 +316,9 @@ public final class PerlPackageUtil implements PerlElementTypes {
 
   public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(@NotNull Project project,
                                                                                    @NotNull GlobalSearchScope scope,
-                                                                                   @NotNull String packageName) {
+                                                                                   @NotNull String canonicalPackageName) {
     List<PerlNamespaceDefinitionElement> result = new ArrayList<>();
-    processNamespaces(packageName, project, scope, result::add);
+    processNamespaces(canonicalPackageName, project, scope, result::add);
     return result;
   }
 
