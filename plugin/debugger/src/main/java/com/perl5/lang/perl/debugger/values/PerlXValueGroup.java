@@ -28,7 +28,7 @@ import javax.swing.*;
 
 
 public class PerlXValueGroup extends XValueGroup {
-  private final PerlStackFrame myStackFrame;
+  private final @NotNull PerlStackFrame myStackFrame;
   private final String myComment;
   private final Icon myIcon;
   private final PerlValueDescriptor[] myVariables;
@@ -38,7 +38,7 @@ public class PerlXValueGroup extends XValueGroup {
                          String comment,
                          Icon icon,
                          PerlValueDescriptor[] variables,
-                         PerlStackFrame stackFrame,
+                         @NotNull PerlStackFrame stackFrame,
                          boolean isAutoExpand) {
     super(name);
     myComment = comment;
@@ -78,7 +78,7 @@ public class PerlXValueGroup extends XValueGroup {
     return myComment;
   }
 
-  public PerlStackFrame getStackFrame() {
+  public final @NotNull PerlStackFrame getStackFrame() {
     return myStackFrame;
   }
 

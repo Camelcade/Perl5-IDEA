@@ -33,6 +33,7 @@ import com.perl5.lang.perl.debugger.protocol.PerlDebuggingEventBreakpoint;
 import com.perl5.lang.perl.debugger.protocol.PerlDebuggingTransactionHandler;
 import com.perl5.lang.perl.debugger.protocol.PerlValueDescriptor;
 import com.perl5.lang.perl.debugger.protocol.PerlValueRequestDescriptor;
+import com.perl5.lang.perl.debugger.values.PerlLoadableXValueContainer;
 import com.perl5.lang.perl.debugger.values.PerlXNamedValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -72,17 +73,15 @@ public class PerlDebugUtil {
     return result[0];
   }
 
-  public static void requestAndComputeChildren(final @NotNull XCompositeNode node,
-                                               final PerlStackFrame perlStackFrame,
-                                               final int[] offset,
-                                               final int size,
-                                               String key) {
+  public static void requestAndComputeChildren(@NotNull XCompositeNode node,
+                                               @NotNull PerlLoadableXValueContainer container) {
+    PerlStackFrame perlStackFrame = container.getStackFrame();
     PerlDebugThread thread = perlStackFrame.getPerlExecutionStack().getSuspendContext().getDebugThread();
 
     final int frameSize = XCompositeNode.MAX_CHILDREN_TO_SHOW;
     thread.sendCommandAndGetResponse(
       "getchildren",
-      new PerlValueRequestDescriptor(offset[0], frameSize, key),
+      new PerlValueRequestDescriptor(container.getCurrentOffset(), frameSize, container.getDataKey()),
       new PerlDebuggingTransactionHandler() {
         @Override
         public void run(JsonObject jsonObject, JsonDeserializationContext jsonDeserializationContext) {
@@ -93,13 +92,12 @@ public class PerlDebugUtil {
           XValueChildrenList list = new XValueChildrenList();
           for (PerlValueDescriptor descriptor : descriptors) {
             list.add(new PerlXNamedValue(descriptor, perlStackFrame));
-
-            offset[0]++;
+            container.incCurrentOffset();
           }
-          boolean isLast = offset[0] >= size;
+          boolean isLast = container.isLast();
           node.addChildren(list, isLast);
           if (!isLast) {
-            node.tooManyChildren(size - offset[0]);
+            node.tooManyChildren(container.getRemaining(), () -> requestAndComputeChildren(node, container));
           }
         }
       });

@@ -45,10 +45,10 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 
-public class PerlXNamedValue extends XNamedValue {
+public class PerlXNamedValue extends XNamedValue implements PerlLoadableXValueContainer {
   private final PerlStackFrame myStackFrame;
   private final PerlValueDescriptor myPerlValueDescriptor;
-  private final int[] offset = new int[]{0};
+  private int myOffset = 0;
 
   public PerlXNamedValue(@NotNull PerlValueDescriptor descriptor, PerlStackFrame stackFrame) {
     super(descriptor.getName());
@@ -77,10 +77,34 @@ public class PerlXNamedValue extends XNamedValue {
     node.addChildren(childrenList, !isExpandable);
 
     if (isExpandable) {
-      PerlDebugUtil.requestAndComputeChildren(node, myStackFrame, offset, myPerlValueDescriptor.getSize(), myPerlValueDescriptor.getKey());
+      PerlDebugUtil.requestAndComputeChildren(node, this);
     }
   }
 
+  @Override
+  public @NotNull PerlStackFrame getStackFrame() {
+    return myStackFrame;
+  }
+
+  @Override
+  public @NotNull String getDataKey() {
+    return myPerlValueDescriptor.getKey();
+  }
+
+  @Override
+  public int getCurrentOffset() {
+    return myOffset;
+  }
+
+  @Override
+  public int getSize() {
+    return myPerlValueDescriptor.getSize();
+  }
+
+  @Override
+  public void incCurrentOffset() {
+    myOffset++;
+  }
 
   @Override
   public void computePresentation(@NotNull XValueNode node, @NotNull XValuePlace place) {

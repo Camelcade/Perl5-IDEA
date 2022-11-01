@@ -23,22 +23,33 @@ import com.perl5.lang.perl.debugger.PerlStackFrame;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlXMainGroup extends PerlXValueGroup {
+public class PerlXMainGroup extends PerlXValueGroup implements PerlLoadableXValueContainer {
   private final int mySize;
-  private final int[] offset = new int[]{0};
+  private int myOffset = 0;
 
-  public PerlXMainGroup(PerlStackFrame stackFrame, int size) {
+  public PerlXMainGroup(@NotNull PerlStackFrame stackFrame, int size) {
     super("%main::", "Symbol Table", PerlIcons.MAIN_GUTTER_ICON, null, stackFrame, false);
     mySize = size;
   }
 
   @Override
   public void computeChildren(@NotNull XCompositeNode node) {
-    PerlDebugUtil.requestAndComputeChildren(node, getStackFrame(), offset, getSize(), "*main::{HASH}");
+    PerlDebugUtil.requestAndComputeChildren(node, this);
   }
 
-  public int getOffset() {
-    return offset[0];
+  @Override
+  public @NotNull String getDataKey() {
+    return "*main::{HASH}";
+  }
+
+  @Override
+  public int getCurrentOffset() {
+    return myOffset;
+  }
+
+  @Override
+  public void incCurrentOffset() {
+    myOffset++;
   }
 
   @Override
