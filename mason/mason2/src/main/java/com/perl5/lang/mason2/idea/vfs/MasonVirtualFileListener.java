@@ -30,12 +30,12 @@ import java.util.List;
 import java.util.Set;
 
 
-public class MasonVirtualFileListener implements VirtualFileListener {
+public final class MasonVirtualFileListener implements VirtualFileListener {
   public static final Key<Boolean> FORCE_REINDEX = new Key<>("Force re-indexing");
 
-  private final Project myProject;
+  private final @NotNull Project myProject;
 
-  public MasonVirtualFileListener(Project project) {
+  public MasonVirtualFileListener(@NotNull Project project) {
     myProject = project;
   }
 
@@ -55,8 +55,7 @@ public class MasonVirtualFileListener implements VirtualFileListener {
   }
 
   private void processFileChange(VirtualFile changedFile) {
-    MasonSettings masonSettings = MasonSettings.getInstance(getProject());
-    List<VirtualFile> componentsRoots = masonSettings.getComponentsRoots();
+    List<VirtualFile> componentsRoots = getComponentsRoots();
     if (componentsRoots.isEmpty()) {
       return;
     }
@@ -81,6 +80,10 @@ public class MasonVirtualFileListener implements VirtualFileListener {
     }
   }
 
+  private @NotNull MasonSettings getSettings() {
+    return MasonSettings.getInstance(getProject());
+  }
+
   /**
    * Fired when a virtual file is moved from within IDEA.
    *
@@ -102,8 +105,7 @@ public class MasonVirtualFileListener implements VirtualFileListener {
       return;
     }
 
-    MasonSettings masonSettings = MasonSettings.getInstance(getProject());
-    List<VirtualFile> componentsRoots = masonSettings.getComponentsRoots();
+    List<VirtualFile> componentsRoots = getComponentsRoots();
     if (componentsRoots.isEmpty()) {
       return;
     }
@@ -118,6 +120,10 @@ public class MasonVirtualFileListener implements VirtualFileListener {
     }
   }
 
+  private @NotNull List<VirtualFile> getComponentsRoots() {
+    return getSettings().getComponentsRoots();
+  }
+
   /**
    * Fired before the movement of a file is processed.
    *
@@ -125,8 +131,7 @@ public class MasonVirtualFileListener implements VirtualFileListener {
    */
   @Override
   public void beforeFileMovement(@NotNull VirtualFileMoveEvent event) {
-    MasonSettings masonSettings = MasonSettings.getInstance(getProject());
-    List<VirtualFile> componentsRoots = masonSettings.getComponentsRoots();
+    List<VirtualFile> componentsRoots = getComponentsRoots();
     if (componentsRoots.isEmpty()) {
       return;
     }
@@ -149,7 +154,7 @@ public class MasonVirtualFileListener implements VirtualFileListener {
     }
   }
 
-  public Project getProject() {
+  private @NotNull Project getProject() {
     return myProject;
   }
 

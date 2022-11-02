@@ -72,7 +72,7 @@ public class MasonSettings extends AbstractMasonSettings implements PersistentSt
     changeCounter++;
   }
 
-  public static MasonSettings getInstance(@NotNull Project project) {
+  public static @NotNull MasonSettings getInstance(@NotNull Project project) {
     return project.getService(MasonSettings.class);
   }
 
