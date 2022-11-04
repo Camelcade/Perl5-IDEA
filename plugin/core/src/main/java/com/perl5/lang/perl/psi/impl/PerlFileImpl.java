@@ -168,7 +168,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     if (parentFile == null) {
       return null;
     }
-    ProjectFileIndex index = ProjectFileIndex.SERVICE.getInstance(getProject());
+    ProjectFileIndex index = ProjectFileIndex.getInstance(getProject());
     DirectoryInfo fileInfo = ((ProjectFileIndexImpl)index).getInfoForFileOrDirectory(virtualFile);
     VirtualFile contentRoot = ObjectUtils.coalesce(fileInfo.getContentRoot(), fileInfo.getLibraryClassRoot(), fileInfo.getSourceRoot());
     if (contentRoot == null) {
