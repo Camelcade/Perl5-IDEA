@@ -202,7 +202,6 @@ import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.pod.PodLanguage;
-import gnu.trove.TIntHashSet;
 import junit.framework.AssertionFailedError;
 import kotlin.collections.CollectionsKt;
 import org.intellij.lang.annotations.MagicConstant;
@@ -1221,7 +1220,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     CharSequence charsSequence = editor.getDocument().getCharsSequence();
     HighlighterIterator highlighterIterator = highlighter.createIterator(0);
     int counter = 0;
-    TIntHashSet matchedRights = new TIntHashSet();
+
+    Set<Integer> matchedRights = new HashSet<>();
     List<Pair<Integer, String>> markers = new ArrayList<>();
 
     while (!highlighterIterator.atEnd()) {
