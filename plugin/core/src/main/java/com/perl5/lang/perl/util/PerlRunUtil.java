@@ -42,6 +42,7 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.RootsChangeRescanningInfo;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.roots.OrderRootType;
@@ -611,7 +612,8 @@ public class PerlRunUtil {
         if (project != null) {
           WriteAction.runAndWait(() -> {
             if (!project.isDisposed()) {
-              ProjectRootManagerEx.getInstanceEx(project).makeRootsChange(EmptyRunnable.getInstance(), false, true);
+              ProjectRootManagerEx.getInstanceEx(project)
+                .makeRootsChange(EmptyRunnable.getInstance(), RootsChangeRescanningInfo.TOTAL_RESCAN);
               DaemonCodeAnalyzer.getInstance(project).restart();
             }
           });

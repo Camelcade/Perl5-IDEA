@@ -29,6 +29,7 @@ import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.project.RootsChangeRescanningInfo;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkModificator;
@@ -48,6 +49,7 @@ import com.intellij.openapi.vfs.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.ContainerUtil.ImmutableMapBuilder;
 import com.intellij.util.containers.FactoryMap;
+import com.intellij.util.indexing.BuildableRootsChangeRescanningInfo;
 import com.intellij.util.messages.MessageBusConnection;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
@@ -214,7 +216,7 @@ public class PerlProjectManager implements Disposable {
   public void setProjectSdk(@Nullable Sdk sdk) {
     WriteAction.run(
       () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
-        () -> myPerlSettings.setPerlInterpreter(sdk == null ? null : sdk.getName()), false, true)
+        () -> myPerlSettings.setPerlInterpreter(sdk == null ? null : sdk.getName()), RootsChangeRescanningInfo.TOTAL_RESCAN)
     );
   }
 
@@ -253,7 +255,8 @@ public class PerlProjectManager implements Disposable {
           return;
         }
 
-        ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(() -> myPerlSettings.setExternalLibrariesPaths(paths), false, true);
+        ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
+          () -> myPerlSettings.setExternalLibrariesPaths(paths), RootsChangeRescanningInfo.RESCAN_DEPENDENCIES_IF_NEEDED);
       }
     );
   }

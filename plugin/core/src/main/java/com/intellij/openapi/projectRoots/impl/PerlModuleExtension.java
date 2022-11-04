@@ -22,6 +22,7 @@ import com.intellij.openapi.components.PersistentStateComponentWithModificationT
 import com.intellij.openapi.components.impl.ModulePathMacroManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.RootsChangeRescanningInfo;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleExtension;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -30,6 +31,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
+import com.intellij.util.indexing.BuildableRootsChangeRescanningInfo;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jdom.Element;
 import org.jetbrains.annotations.ApiStatus;
@@ -80,7 +82,6 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     return new PerlModuleExtension(this, writable);
   }
 
-  @ApiStatus.OverrideOnly
   @Override
   public void commit() {
     LOG.assertTrue(myOriginal != null, "Attempt to commit non-modifiable model");
@@ -90,7 +91,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
           () -> ProjectRootManagerEx.getInstanceEx(myModule.getProject()).makeRootsChange(() -> {
             myOriginal.myRoots = new LinkedHashMap<>(myRoots);
             myOriginal.myModificationTracker++;
-          }, false, true)
+          }, BuildableRootsChangeRescanningInfo.newInstance().addModule(myModule))
         );
       }
     }

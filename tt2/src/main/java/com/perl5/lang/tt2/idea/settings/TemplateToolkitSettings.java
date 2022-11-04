@@ -27,6 +27,7 @@ import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
+import com.intellij.openapi.project.RootsChangeRescanningInfo;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.EmptyRunnable;
@@ -84,7 +85,8 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   public void settingsUpdated() {
     createLazyObjects();
     ApplicationManager.getApplication().invokeLater(() -> WriteAction.run(
-      () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(EmptyRunnable.getInstance(), true, true)));
+      () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
+        EmptyRunnable.getInstance(), RootsChangeRescanningInfo.TOTAL_RESCAN)));
   }
 
   private void createLazyObjects() {
