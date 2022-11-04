@@ -404,7 +404,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
     String result = PATH_TO_PACKAGE_NAME_MAP.get(packagePath);
 
     if (result == null) {
-      String path = packagePath.replaceAll("\\\\", "/");
+      String path = packagePath.replace("\\", "/");
       result = getCanonicalNamespaceName(StringUtil.join(path.replaceFirst("\\.pm$", "").split("/"), NAMESPACE_SEPARATOR));
       PATH_TO_PACKAGE_NAME_MAP.put(packagePath, result);
     }

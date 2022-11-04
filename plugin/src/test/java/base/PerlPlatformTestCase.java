@@ -460,7 +460,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       var remoteRoot = hostData.getRemotePath(localRoot);
       assertNotNull("No remote root for local root: " + localRoot, remoteRoot);
       sb.append(PerlLightTestCaseBase.SEPARATOR_NEWLINES)
-        .append(stacktrace.replaceAll(remoteRoot, "/DATA_PATH"))
+        .append(stacktrace.replace(remoteRoot, "/DATA_PATH"))
         .append(PerlLightTestCaseBase.SEPARATOR_NEWLINES);
     }
     else {

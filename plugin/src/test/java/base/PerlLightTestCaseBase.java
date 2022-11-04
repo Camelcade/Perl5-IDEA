@@ -1583,7 +1583,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     StringBuilder sb = new StringBuilder();
     sb.append(presentation.getPresentableText())
       .append(" in ")
-      .append(locationString == null ? null : locationString.replaceAll("\\\\", "/"))
+      .append(locationString == null ? null : locationString.replace("\\", "/"))
       .append("; ")
       .append(getIconText(presentation.getIcon(true)));
 

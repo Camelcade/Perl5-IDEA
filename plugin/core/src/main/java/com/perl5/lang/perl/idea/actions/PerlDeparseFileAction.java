@@ -107,7 +107,7 @@ public class PerlDeparseFileAction extends PurePerlActionBase {
               Notifications.Bus.notify(new Notification(
                 PERL_DEPARSE_GROUP,
                 PerlBundle.message("perl.action.error.notification.title"),
-                error.replaceAll("\\n", "<br/>"),
+                error.replace("\n", "<br/>"),
                 NotificationType.ERROR
               ));
             }
@@ -115,7 +115,7 @@ public class PerlDeparseFileAction extends PurePerlActionBase {
               Notifications.Bus.notify(new Notification(
                 PERL_DEPARSE_GROUP,
                 PerlBundle.message("perl.action.success.notification.title"),
-                PerlBundle.message("perl.action.success.notification.message", error.replaceAll("\\n", "<br/>")),
+                PerlBundle.message("perl.action.success.notification.message", error.replace("\n", "<br/>")),
                 NotificationType.INFORMATION
               ));
             }
@@ -132,7 +132,7 @@ public class PerlDeparseFileAction extends PurePerlActionBase {
           Notifications.Bus.notify(new Notification(
             PERL_DEPARSE_GROUP,
             PerlBundle.message("perl.execution.error.notification.title"),
-            e.getMessage().replaceAll("\\n", "<br/>"),
+            e.getMessage().replace("\n", "<br/>"),
             NotificationType.ERROR
           ));
         }

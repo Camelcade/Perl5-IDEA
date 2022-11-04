@@ -20,7 +20,6 @@ import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.ElementManipulator;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
@@ -70,7 +69,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
     if (!PerlString.looksLikePath(valueText)) {
       return;
     }
-    String tokenText = valueText.replaceAll("\\\\", "/").replaceAll("/+", "/");
+    String tokenText = valueText.replace("\\", "/").replaceAll("/+", "/");
     Project project = sourceElement.getProject();
 
     String fileName = Objects.requireNonNull(PerlString.getContentFileName(valueText));
