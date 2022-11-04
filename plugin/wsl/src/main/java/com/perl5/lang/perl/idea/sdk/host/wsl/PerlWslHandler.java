@@ -20,7 +20,7 @@ import com.intellij.execution.wsl.WSLDistribution;
 import com.intellij.execution.wsl.WSLUtil;
 import com.intellij.execution.wsl.WslDistributionManager;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.messages.MessagesService;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlIcons;
@@ -48,7 +48,8 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
     }
     int[] result = new int[]{-1};
     ApplicationManager.getApplication().invokeAndWait(
-      () -> result[0] = Messages.showChooseDialog(
+      () -> result[0] = MessagesService.getInstance().showChooseDialog(
+        null, null,
         PerlWslBundle.message("perl.host.handler.wsl.choose.distro.message"),
         PerlWslBundle.message("perl.host.handler.wsl.choose.distro.title"),
         ids, ids[0], null));

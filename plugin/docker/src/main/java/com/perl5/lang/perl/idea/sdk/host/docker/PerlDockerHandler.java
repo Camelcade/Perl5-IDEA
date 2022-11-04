@@ -23,6 +23,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.messages.MessagesService;
 import com.intellij.util.ArrayUtil;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
@@ -64,7 +65,8 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
     String[] imagesArray = ArrayUtil.toStringArray(images);
     int[] resultIndex = new int[]{-1};
     ApplicationManager.getApplication().invokeAndWait(
-      () -> resultIndex[0] = Messages.showChooseDialog(
+      () -> resultIndex[0] = MessagesService.getInstance().showChooseDialog(
+        null, null,
         PerlDockerBundle.message("perl.host.handler.docker.choose.distro.message"),
         PerlDockerBundle.message("perl.host.handler.docker.choose.distro.title"),
         imagesArray, imagesArray[0], null));
