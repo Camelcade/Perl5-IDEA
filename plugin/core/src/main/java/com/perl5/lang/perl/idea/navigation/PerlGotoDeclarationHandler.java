@@ -20,6 +20,8 @@ import com.intellij.codeInsight.navigation.actions.GotoDeclarationHandler;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.psi.ElementManipulator;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FilenameIndex;
@@ -64,14 +66,14 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
     if (!(sourceElement instanceof PerlStringContentElement)) {
       return;
     }
-    String continuosText = ((PerlStringContentElement)sourceElement).getContinuosText();
-    if (!PerlString.looksLikePath(continuosText)) {
+    String valueText = ElementManipulators.getValueText(sourceElement);
+    if (!PerlString.looksLikePath(valueText)) {
       return;
     }
-    String tokenText = continuosText.replaceAll("\\\\", "/").replaceAll("/+", "/");
+    String tokenText = valueText.replaceAll("\\\\", "/").replaceAll("/+", "/");
     Project project = sourceElement.getProject();
 
-    String fileName = Objects.requireNonNull(PerlString.getContentFileName(continuosText));
+    String fileName = Objects.requireNonNull(PerlString.getContentFileName(valueText));
     var psiManager = PsiManager.getInstance(project);
 
     for (String file : FilenameIndex.getAllFilenames(project)) {

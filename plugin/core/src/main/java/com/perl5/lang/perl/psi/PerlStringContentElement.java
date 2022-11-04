@@ -20,13 +20,4 @@ import com.intellij.psi.PsiElement;
 
 
 public interface PerlStringContentElement extends PsiElement {
-
-  /**
-   * Returns continuous string for this element
-   *
-   * @return text till space or end before and after this element
-   * @deprecated use {@link com.intellij.psi.ElementManipulators#getValueText(PsiElement)} instead
-   */
-  @Deprecated
-  String getContinuosText();
 }

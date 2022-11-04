@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.impl;
 
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
@@ -43,8 +44,8 @@ public class PerlStringContentElementImpl extends PerlLeafPsiElementWithReferenc
   @Override
   public PsiReference[] computeReferences() {
     List<PsiReference> result = new ArrayList<>();
-    String continuosText = getContinuosText();
-    if (PerlString.looksLikePackage(continuosText)) {
+    String valueText = ElementManipulators.getValueText(this);
+    if (PerlString.looksLikePackage(valueText)) {
       result.add(new PerlNamespaceReference(PerlStringContentElementImpl.this));
     }
     else {
@@ -70,25 +71,6 @@ public class PerlStringContentElementImpl extends PerlLeafPsiElementWithReferenc
     else {
       super.accept(visitor);
     }
-  }
-
-  @Override
-  public String getContinuosText()    // fixme some caching here would be nice; Also we now could implement smarter logic
-  {
-    StringBuilder builder = new StringBuilder("");
-
-    PsiElement currentElement = this;
-
-    while (currentElement.getPrevSibling() instanceof PerlStringContentElement) {
-      currentElement = currentElement.getPrevSibling();
-    }
-
-    while (currentElement instanceof PerlStringContentElement) {
-      builder.append(currentElement.getNode().getText());
-      currentElement = currentElement.getNextSibling();
-    }
-
-    return builder.toString();
   }
 }
 
