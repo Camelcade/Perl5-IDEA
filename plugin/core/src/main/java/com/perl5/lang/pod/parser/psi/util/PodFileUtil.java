@@ -134,42 +134,43 @@ public class PodFileUtil {
     return result.isEmpty() ? null : result.get(0);
   }
 
-  public static void processPodFilesByDescriptor(Project project, PodLinkDescriptor descriptor, Processor<PsiFile> processor) {
-    if (descriptor.getName() != null) {
-      // seek file
-      String fileId = descriptor.getName();
+  public static void processPodFilesByDescriptor(@NotNull Project project,
+                                                 @NotNull PodLinkDescriptor descriptor,
+                                                 @NotNull Processor<PsiFile> processor) {
+    if (descriptor.getName() == null) {
+      return;
+    }
+    // seek file
+    String fileId = descriptor.getName();
 
-      if (fileId.contains(PerlPackageUtil.NAMESPACE_SEPARATOR) ||
-          !StringUtil.startsWith(fileId, "perl")) // can be Foo/Bar.pod or Foo/Bar.pm
-      {
-        final PsiManager psiManager = PsiManager.getInstance(project);
-        String podRelativePath = PodFileUtil.getFilenameFromPackage(fileId);
-        String packageRelativePath = PerlPackageUtil.getPackagePathByName(fileId);
+    final PsiManager psiManager = PsiManager.getInstance(project);
+    if (fileId.contains(PerlPackageUtil.NAMESPACE_SEPARATOR) ||
+        !StringUtil.startsWith(fileId, "perl")) { // can be Foo/Bar.pod or Foo/Bar.pm
+      String podRelativePath = PodFileUtil.getFilenameFromPackage(fileId);
+      String packageRelativePath = PerlPackageUtil.getPackagePathByName(fileId);
 
-        for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
-          VirtualFile targetVirtualFile = classRoot.findFileByRelativePath(podRelativePath);
-          if (targetVirtualFile != null) {
-            if (!processor.process(psiManager.findFile(targetVirtualFile))) {
-              return;
-            }
+      for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
+        VirtualFile targetVirtualFile = classRoot.findFileByRelativePath(podRelativePath);
+        if (targetVirtualFile != null) {
+          if (!processor.process(psiManager.findFile(targetVirtualFile))) {
+            return;
           }
+        }
 
-          targetVirtualFile = classRoot.findFileByRelativePath(packageRelativePath);
-          if (targetVirtualFile != null) {
-            if (!processor.process(psiManager.findFile(targetVirtualFile))) {
-              return;
-            }
+        targetVirtualFile = classRoot.findFileByRelativePath(packageRelativePath);
+        if (targetVirtualFile != null) {
+          if (!processor.process(psiManager.findFile(targetVirtualFile))) {
+            return;
           }
         }
       }
-      else // top level file perl.*
-      {
-        fileId += "." + PodFileType.EXTENSION;
+    }
+    else { // top level file perl.*
+      fileId += "." + PodFileType.EXTENSION;
 
-        for (PsiFile podFile : FilenameIndex.getFilesByName(project, fileId, GlobalSearchScope.allScope(project))) {
-          if (!processor.process(podFile)) {
-            return;
-          }
+      for (var podFile : FilenameIndex.getVirtualFilesByName(fileId, GlobalSearchScope.allScope(project))) {
+        if (!processor.process(psiManager.findFile(podFile))) {
+          return;
         }
       }
     }

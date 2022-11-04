@@ -21,9 +21,10 @@ import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFileSystemItem;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
@@ -71,27 +72,25 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
     Project project = sourceElement.getProject();
 
     String fileName = Objects.requireNonNull(PerlString.getContentFileName(continuosText));
+    var psiManager = PsiManager.getInstance(project);
 
     for (String file : FilenameIndex.getAllFilenames(project)) {
       if (!file.contains(fileName)) {
         continue;
       }
-      for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project))) {
-        String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
+      for (var fileItem : FilenameIndex.getVirtualFilesByName(file, GlobalSearchScope.allScope(project))) {
+        String canonicalPath = fileItem.getCanonicalPath();
         if (canonicalPath == null) {
           continue;
         }
         if (canonicalPath.contains(tokenText + ".")) {
-          result.add(0, fileItem);
+          var psiFile = psiManager.findFile(fileItem);
+          if (psiFile != null) {
+            result.add(0, psiFile);
+          }
         }
         else if (canonicalPath.contains(tokenText)) {
-          result.add(fileItem);
-        }
-      }
-      for (PsiFileSystemItem fileItem : FilenameIndex.getFilesByName(project, file, GlobalSearchScope.allScope(project), true)) {
-        String canonicalPath = fileItem.getVirtualFile().getCanonicalPath();
-        if (canonicalPath != null && canonicalPath.contains(tokenText)) {
-          result.add(fileItem);
+          ContainerUtil.addIfNotNull(result, psiManager.findFile(fileItem));
         }
       }
     }

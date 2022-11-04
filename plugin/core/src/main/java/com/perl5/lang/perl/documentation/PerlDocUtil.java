@@ -17,9 +17,11 @@
 package com.perl5.lang.perl.documentation;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Predicates;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -269,15 +271,19 @@ public final class PerlDocUtil implements PerlElementTypes {
     return searchPodElementInFile(project, PERL_OP_FILE_NAME, pattern);
   }
 
-  protected static PodCompositeElement searchPodElementInFile(Project project, String fileName, PodDocumentPattern pattern) {
-    PsiFile[] psiFiles = FilenameIndex.getFilesByName(project, fileName, GlobalSearchScope.allScope(project));
-    if (psiFiles.length > 0) {
-      return searchPodElement(psiFiles[0], pattern);
-    }
-    return null;
+  private static PodCompositeElement searchPodElementInFile(@NotNull Project project,
+                                                            @NotNull String fileName,
+                                                            @NotNull PodDocumentPattern pattern) {
+    var psiManager = PsiManager.getInstance(project);
+    return FilenameIndex.getVirtualFilesByName(fileName, GlobalSearchScope.allScope(project)).stream()
+      .map(psiManager::findFile)
+      .map(it -> searchPodElement(it, pattern))
+      .filter(Predicates.nonNull())
+      .findFirst().orElse(null);
   }
 
-  public static @Nullable PodCompositeElement searchPodElement(@Nullable PsiFile psiFile, final PodDocumentPattern pattern) {
+  @Contract("null, _ -> null")
+  public static @Nullable PodCompositeElement searchPodElement(@Nullable PsiFile psiFile, @NotNull PodDocumentPattern pattern) {
     if (psiFile == null) {
       return null;
     }
