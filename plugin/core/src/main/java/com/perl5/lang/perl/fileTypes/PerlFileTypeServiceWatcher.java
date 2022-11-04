@@ -42,8 +42,9 @@ class PerlFileTypeServiceWatcher implements StartupActivity, ModuleListener, Mod
     reset();
   }
 
+
   @Override
-  public void moduleAdded(@NotNull Project project, @NotNull Module module) {
+  public void modulesAdded(@NotNull Project project, @NotNull List<Module> modules) {
     reset();
   }
 
