@@ -17,7 +17,6 @@
 package unit.perl;
 
 
-import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;

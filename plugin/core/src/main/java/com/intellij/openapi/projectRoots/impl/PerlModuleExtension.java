@@ -22,7 +22,6 @@ import com.intellij.openapi.components.PersistentStateComponentWithModificationT
 import com.intellij.openapi.components.impl.ModulePathMacroManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.RootsChangeRescanningInfo;
 import com.intellij.openapi.roots.ModifiableRootModel;
 import com.intellij.openapi.roots.ModuleExtension;
 import com.intellij.openapi.roots.ModuleRootManager;

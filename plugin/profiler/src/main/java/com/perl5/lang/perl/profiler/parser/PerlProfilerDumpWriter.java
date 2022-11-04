@@ -25,11 +25,13 @@ import com.intellij.profiler.Stack;
 import com.intellij.profiler.api.*;
 import com.intellij.util.containers.ContainerUtil;
 import kotlin.text.Charsets;
-import org.codehaus.plexus.util.StringOutputStream;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.zip.GZIPOutputStream;
 
 @SuppressWarnings("UnstableApiUsage")

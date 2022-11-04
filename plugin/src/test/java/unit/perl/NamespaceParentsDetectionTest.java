@@ -17,7 +17,6 @@
 package unit.perl;
 
 
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;

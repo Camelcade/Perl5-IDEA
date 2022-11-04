@@ -49,7 +49,6 @@ import com.intellij.openapi.vfs.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.ContainerUtil.ImmutableMapBuilder;
 import com.intellij.util.containers.FactoryMap;
-import com.intellij.util.indexing.BuildableRootsChangeRescanningInfo;
 import com.intellij.util.messages.MessageBusConnection;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;

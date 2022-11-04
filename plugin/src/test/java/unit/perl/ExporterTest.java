@@ -17,7 +17,6 @@
 package unit.perl;
 
 
-import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
