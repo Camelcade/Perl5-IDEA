@@ -471,8 +471,6 @@
 
     extends("heredoc_opener|anon_array|anon_hash")=expr
 
-    mixin("package_expr")="com.perl5.lang.perl.psi.mixins.PerlPackageExpression"
-
     extends("string_list")=expr
     mixin("string_list")="com.perl5.lang.perl.psi.mixins.PerlStringListMixin"
 

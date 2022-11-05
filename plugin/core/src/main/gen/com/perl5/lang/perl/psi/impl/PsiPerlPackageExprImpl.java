@@ -8,15 +8,15 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
-import com.perl5.lang.perl.psi.mixins.PerlPackageExpression;
 import com.perl5.lang.perl.psi.*;
 
-public class PsiPerlPackageExprImpl extends PerlPackageExpression implements PsiPerlPackageExpr {
+public class PsiPerlPackageExprImpl extends PsiPerlExprImpl implements PsiPerlPackageExpr {
 
   public PsiPerlPackageExprImpl(ASTNode node) {
     super(node);
   }
 
+  @Override
   public void accept(@NotNull PsiPerlVisitor visitor) {
     visitor.visitPackageExpr(this);
   }

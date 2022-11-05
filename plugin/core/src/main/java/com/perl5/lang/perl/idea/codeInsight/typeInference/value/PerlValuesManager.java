@@ -204,6 +204,12 @@ public final class PerlValuesManager {
     else if (elementType == PARENTHESISED_EXPR) {
       return PerlValuesManager.from(((PsiPerlParenthesisedExpr)element).getExpr());
     }
+    else if (elementType == PACKAGE_EXPR) {
+      String elementText = element.getText();
+      return PerlPackageUtil.__PACKAGE__.equals(elementText)
+             ? PerlPackageUtil.getContextType(element)
+             : PerlScalarValue.create(PerlPackageUtil.getCanonicalName(elementText));
+    }
     else if (elementType == SCALAR_EXPR) {
       PsiElement[] children = element.getChildren();
       return children.length == 0 ? UNKNOWN_VALUE : PerlScalarContextValue.create(from(children[0]));
