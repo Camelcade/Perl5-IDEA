@@ -19,18 +19,11 @@ package com.perl5.lang.perl.parser.moose.psi.impl;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseKeywordElement;
 import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 
 public class PerlMooseKeywordElementImpl extends PerlSubNameElementImpl implements PerlMooseKeywordElement {
   public PerlMooseKeywordElementImpl(@NotNull IElementType type, CharSequence text) {
     super(type, text);
-  }
-
-  @Override
-  public @Nullable String getNamespaceName() {
-    return PerlPackageUtil.getContextNamespaceName(this);
   }
 }

@@ -22,25 +22,6 @@ import org.jetbrains.annotations.NotNull;
 
 public interface PerlSubNameElement extends PsiElement {
   /**
-   * Trying to get the namespace name from explicit specification or by traversing
-   *
-   * @return package name for current element
-   * @deprecated containing method should be used
-   */
-  @Deprecated
-  String getNamespaceName();
-
-  /**
-   * Returns fullname package::element
-   *
-   * @return name
-   * @deprecated containing method should be used
-   */
-  @Deprecated
-  String getCanonicalName();
-
-
-  /**
    * Checks if this sub name is built in
    *
    * @return checking result

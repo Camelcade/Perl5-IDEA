@@ -22,10 +22,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 
 public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences implements PerlSubNameElement {
@@ -41,23 +38,6 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences imp
     else {
       super.accept(visitor);
     }
-  }
-
-  @Override
-  public @Nullable String getNamespaceName() {
-    PsiElement parent = getParent();
-
-    if (parent instanceof PerlPackageMember) {
-      return ((PerlPackageMember)parent).getNamespaceName();
-    }
-    else {
-      return PerlPackageUtil.getContextNamespaceName(this);
-    }
-  }
-
-  @Override
-  public @NotNull String getCanonicalName() {
-    return getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + getName();
   }
 
   @Override

@@ -19,9 +19,7 @@ package com.perl5.lang.perl.parser.moose.psi.impl;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 
 public class PerlMooseKeywordSubNameElementImpl extends PerlSubNameElementImpl implements PerlSubNameElement {
@@ -32,10 +30,5 @@ public class PerlMooseKeywordSubNameElementImpl extends PerlSubNameElementImpl i
   @Override
   public boolean isBuiltIn() {
     return false;
-  }
-
-  @Override
-  public @Nullable String getNamespaceName() {
-    return PerlPackageUtil.getContextNamespaceName(this);
   }
 }
