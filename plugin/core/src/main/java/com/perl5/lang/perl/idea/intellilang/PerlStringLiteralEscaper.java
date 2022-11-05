@@ -25,7 +25,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.PerlCharSubstitution;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
-import gnu.trove.TIntArrayList;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -46,7 +46,7 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
   );
 
 
-  private final TIntArrayList myHostOffsets = new TIntArrayList();
+  private final IntArrayList myHostOffsets = new IntArrayList();
 
   public PerlStringLiteralEscaper(@NotNull PerlStringMixin host) {
     super(host);
