@@ -155,7 +155,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
         projectManager.setExternalLibraries(Collections.emptyList());
 
         var sdkTable = PerlSdkTable.getInstance();
-        for (Sdk sdk : sdkTable.getAllJdks()) {
+        for (Sdk sdk : sdkTable.getInterpreters()) {
           sdkTable.removeJdk(sdk);
         }
       });

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="JavaProjectCodeInsightSettings">
     <excluded-names>
+      <name>com.github.markusbernhardt.proxy.util.Logger</name>
       <name>com.google.common.base.Function</name>
       <name>com.google.errorprone.annotations.Immutable</name>
       <name>com.intellij.util.Function</name>

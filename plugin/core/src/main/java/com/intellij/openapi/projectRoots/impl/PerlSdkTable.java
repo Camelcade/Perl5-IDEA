@@ -21,6 +21,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkTypeId;
@@ -45,6 +46,7 @@ import java.util.List;
   storages = @Storage(PerlPathMacros.PERL5_APP_SETTINGS_FILE)
 )
 public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComponent<Element> {
+  private static final Logger LOG = Logger.getInstance(PerlSdkTable.class);
   public static final Topic<Listener> PERL_TABLE_TOPIC = Topic.create("Perl Interpreters table", Listener.class);
 
   private static final String PERL = "perl";
@@ -99,7 +101,8 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
   @Deprecated
   @Override
   public @NotNull Sdk[] getAllJdks() {
-    return myInterpretersList.toArray(new Sdk[0]);
+    LOG.error("Not expected to be invoked");
+    throw new AbstractMethodError();
   }
 
   public @NotNull List<Sdk> getInterpreters() {
