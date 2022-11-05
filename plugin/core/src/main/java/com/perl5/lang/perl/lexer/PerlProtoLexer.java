@@ -21,7 +21,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.containers.IntStack;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
@@ -32,8 +32,8 @@ import java.util.List;
 
 public abstract class PerlProtoLexer implements FlexLexer {
   private static final Logger LOG = Logger.getInstance(PerlProtoLexer.class);
-  protected final LinkedList<CustomToken> preparsedTokensList = new LinkedList<>();
-  protected final IntStack stateStack = new IntStack();
+  protected final LinkedList<CustomToken> myPreparsedTokensList = new LinkedList<>();
+  protected final IntArrayList myStateStack = new IntArrayList();
   private IElementType myLastTokenType = null;
 
   public abstract void setTokenStart(int position);
@@ -57,7 +57,7 @@ public abstract class PerlProtoLexer implements FlexLexer {
   public abstract int yylength();
 
   public boolean hasPreparsedTokens() {
-    return !preparsedTokensList.isEmpty();
+    return !myPreparsedTokensList.isEmpty();
   }
 
   /**
@@ -66,14 +66,14 @@ public abstract class PerlProtoLexer implements FlexLexer {
    * @return true if it's safe to return YYINITIAL from yystate
    */
   public boolean isInitialState() {
-    return preparsedTokensList.isEmpty() && stateStack.empty();
+    return myPreparsedTokensList.isEmpty() && myStateStack.isEmpty();
   }
 
   @Override
   public IElementType advance() throws IOException {
     IElementType tokenType;
 
-    if (!preparsedTokensList.isEmpty()) {
+    if (!myPreparsedTokensList.isEmpty()) {
       tokenType = getPreParsedToken();
     }
     else {
@@ -104,7 +104,7 @@ public abstract class PerlProtoLexer implements FlexLexer {
    * @return token type or null if queue is empty
    */
   public IElementType getPreParsedToken() {
-    return restoreToken(preparsedTokensList.removeFirst());
+    return restoreToken(myPreparsedTokensList.removeFirst());
   }
 
   private IElementType restoreToken(CustomToken token) {
@@ -124,17 +124,17 @@ public abstract class PerlProtoLexer implements FlexLexer {
   }
 
   public void pushState() {
-    stateStack.push(getRealLexicalState());
+    myStateStack.push(getRealLexicalState());
   }
 
   public void popState() {
-    if (stateStack.empty()) {
+    if (myStateStack.isEmpty()) {
       LOG.error("Empty stack at " + getRealLexicalState() + "-" + yystate() +
                 "; tokenText: '" + yytext() + "'"
       );
       return;
     }
-    yybegin(stateStack.pop());
+    yybegin(myStateStack.pop());
   }
 
   /**
@@ -200,17 +200,17 @@ public abstract class PerlProtoLexer implements FlexLexer {
    * @param token token to add
    */
   protected void pushPreparsedToken(CustomToken token) {
-    assert preparsedTokensList.isEmpty() ||
-           preparsedTokensList.getLast().getTokenEnd() == token.getTokenStart() :
+    assert myPreparsedTokensList.isEmpty() ||
+           myPreparsedTokensList.getLast().getTokenEnd() == token.getTokenStart() :
       "Tokens size is " +
-      preparsedTokensList.size() +
+      myPreparsedTokensList.size() +
       " new token start is " +
       token.getTokenStart() +
-      (preparsedTokensList.isEmpty() ? "" :
+      (myPreparsedTokensList.isEmpty() ? "" :
        " last token end is " +
-       preparsedTokensList.getLast().getTokenEnd());
+       myPreparsedTokensList.getLast().getTokenEnd());
 
-    preparsedTokensList.add(token);
+    myPreparsedTokensList.add(token);
   }
 
   /**
@@ -219,23 +219,23 @@ public abstract class PerlProtoLexer implements FlexLexer {
    * @param token token to add
    */
   protected void unshiftPreparsedToken(CustomToken token) {
-    assert preparsedTokensList.isEmpty() ||
-           preparsedTokensList.getFirst().getTokenStart() == token.getTokenEnd() :
+    assert myPreparsedTokensList.isEmpty() ||
+           myPreparsedTokensList.getFirst().getTokenStart() == token.getTokenEnd() :
       "Tokens size is " +
-      preparsedTokensList.size() +
+      myPreparsedTokensList.size() +
       " new token end is " +
       token.getTokenEnd() +
-      (preparsedTokensList.isEmpty() ? "" :
+      (myPreparsedTokensList.isEmpty() ? "" :
        " first start end is " +
-       preparsedTokensList.getFirst().getTokenStart());
+       myPreparsedTokensList.getFirst().getTokenStart());
 
-    preparsedTokensList.addFirst(token);
+    myPreparsedTokensList.addFirst(token);
   }
 
   protected void resetInternals() {
     myLastTokenType = null;
-    preparsedTokensList.clear();
-    stateStack.clear();
+    myPreparsedTokensList.clear();
+    myStateStack.clear();
   }
 
   /**

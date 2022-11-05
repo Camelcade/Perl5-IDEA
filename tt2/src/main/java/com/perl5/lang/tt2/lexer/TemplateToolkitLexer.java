@@ -91,7 +91,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
         setCustomState(LEX_TEMPLATE_LINE);
       }
 
-      assert !preparsedTokensList.isEmpty();
+      assert !myPreparsedTokensList.isEmpty();
       return getPreParsedToken();
     }
     else if (currentCustomState == LEX_TEMPLATE_BLOCK) {

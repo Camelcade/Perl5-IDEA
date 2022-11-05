@@ -60,7 +60,7 @@ public class PodLexer extends PodLexerGenerated {
 
   @Override
   public int yystate() {
-    return preparsedTokensList.isEmpty() && myOpenedAngles.empty() ? super.yystate() : LEX_PREPARSED_ITEMS;
+    return myPreparsedTokensList.isEmpty() && myOpenedAngles.empty() ? super.yystate() : LEX_PREPARSED_ITEMS;
   }
 
   @Override
