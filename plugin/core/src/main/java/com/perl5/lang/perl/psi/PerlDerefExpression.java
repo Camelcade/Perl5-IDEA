@@ -17,12 +17,11 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
 
 
-public interface PerlDerefExpression extends PsiPerlExpr, PerlValuableEntity {
+public interface PerlDerefExpression extends PsiPerlExpr {
   /**
    * @return previous meaningful element of dereference chain. Returns null if this is a first element
    */

@@ -21,11 +21,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.PsiPerlDerefExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_DEREFERENCE;
@@ -48,10 +45,5 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
       currentElement = currentElement.getPrevSibling();
     }
     return currentElement;
-  }
-
-  @Override
-  public @NotNull PerlValue computePerlValue() {
-    return PerlValuesManager.from(getLastChild());
   }
 }

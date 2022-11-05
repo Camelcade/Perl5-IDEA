@@ -143,6 +143,10 @@ public final class PerlValuesManager {
       LOG.error("Attempt to compute value from invalid element");
       return UNKNOWN_VALUE;
     }
+    else if (finalElement instanceof PerlDerefExpression) {
+      return from(finalElement.getLastChild());
+    }
+
     IElementType elementType = PsiUtilCore.getElementType(finalElement);
     if (TRANSPARENT_VALUES.contains(elementType)) {
       PsiElement[] children = finalElement.getChildren();
