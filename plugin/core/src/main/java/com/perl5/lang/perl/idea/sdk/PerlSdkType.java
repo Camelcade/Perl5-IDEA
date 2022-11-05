@@ -247,11 +247,6 @@ public class PerlSdkType extends SdkType {
     return PerlIcons.PERL_LANGUAGE_ICON;
   }
 
-  @Override
-  public @NotNull Icon getIconForAddAction() {
-    return getIcon();
-  }
-
   private static @NotNull String suggestSdkName(@Nullable VersionDescriptor descriptor,
                                                 @NotNull PerlHostData<?, ?> hostData,
                                                 @NotNull PerlVersionManagerData<?, ?> versionManagerData) {
