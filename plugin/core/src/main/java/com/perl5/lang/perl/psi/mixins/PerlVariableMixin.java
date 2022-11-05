@@ -28,7 +28,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -46,7 +45,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_NAMESPACE_NAME;
 
 
@@ -78,17 +76,6 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   @Override
   public @Nullable PerlVariableNameElement getVariableNameElement() {
     return findChildByClass(PerlVariableNameElement.class);
-  }
-
-  @Override
-  public @NotNull PerlValue computePerlValue() {
-    PerlVariableNameElement variableNameElement = getVariableNameElement();
-
-    if (variableNameElement == null) {
-      return UNKNOWN_VALUE;
-    }
-
-    return PerlResolveUtil.inferVariableValue(this);
   }
 
   @Override

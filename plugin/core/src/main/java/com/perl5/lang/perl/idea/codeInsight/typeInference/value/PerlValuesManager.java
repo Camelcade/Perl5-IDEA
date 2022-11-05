@@ -30,6 +30,8 @@ import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.Interner;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
+import com.perl5.lang.perl.psi.mixins.PerlVariableMixin;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -175,6 +177,13 @@ public final class PerlValuesManager {
     if (element instanceof PerlReturnExpr) {
       PsiPerlExpr expr = ((PerlReturnExpr)element).getReturnValueExpr();
       return expr == null ? UNDEF_VALUE : from(expr);
+    }
+    else if (element instanceof PerlVariableMixin) {
+      PerlVariableNameElement variableNameElement = ((PerlVariableMixin)element).getVariableNameElement();
+      return variableNameElement == null ? UNKNOWN_VALUE : PerlResolveUtil.inferVariableValue((PerlVariable)element);
+    }
+    else if (element instanceof PerlImplicitVariableDeclaration) {
+      return ((PerlImplicitVariableDeclaration)element).getDeclaredValue();
     }
     else if (element instanceof PerlValuableEntity) {
       return ((PerlValuableEntity)element).computePerlValue();

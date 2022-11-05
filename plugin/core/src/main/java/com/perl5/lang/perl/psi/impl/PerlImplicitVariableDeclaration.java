@@ -137,11 +137,6 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
   @Override
-  public @NotNull PerlValue computePerlValue() {
-    return getDeclaredValue();
-  }
-
-  @Override
   public PerlVariableType getActualType() {
     return getVariableType();
   }
