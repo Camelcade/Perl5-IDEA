@@ -34,7 +34,6 @@ import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import org.jetbrains.annotations.Contract;
@@ -80,10 +79,8 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     if (originalElement instanceof PerlVariableNameElement) {
       return getQuickNavigateInfo(element, originalElement.getParent());
     }
-    if (originalElement instanceof PerlValuableEntity) {
-      return PerlValuesManager.from(originalElement.getOriginalElement()).getPresentableText();
-    }
-    return super.getQuickNavigateInfo(element, originalElement);
+    var perlValue = PerlValuesManager.from(originalElement.getOriginalElement());
+    return !perlValue.isUnknown() ? perlValue.getPresentableText() : super.getQuickNavigateInfo(element, originalElement);
   }
 
   @Override

@@ -18,6 +18,7 @@ package unit.perl;
 
 
 import base.PerlLightTestCase;
+import com.perl5.lang.perl.psi.mixins.PerlVariableMixin;
 import org.junit.Test;
 
 public class PerlValuesMojoTest extends PerlLightTestCase {
@@ -110,9 +111,9 @@ public class PerlValuesMojoTest extends PerlLightTestCase {
   private void doTest() {
     initWithTextSmartWithoutErrors("use Mojolicious::Lite;\n" +
                                    "\n" +
-                                   "my $var = "+getTestName(true)+";\n" +
+                                   "my $var = " + getTestName(true) + ";\n" +
                                    "\n" +
                                    "$v<caret>ar;");
-    doTestPerlValueWithoutInit();
+    doTestPerlValueWithoutInit(PerlVariableMixin.class);
   }
 }

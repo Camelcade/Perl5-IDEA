@@ -196,7 +196,6 @@ import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -2252,17 +2251,29 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
-  protected void doTestPerlValue() {
+  protected void doTestScalarVariableValue() {
+    doTestPerlValue(PsiPerlScalarVariable.class);
+  }
+
+  protected void doTestArrayVariableValue() {
+    doTestPerlValue(PsiPerlArrayVariable.class);
+  }
+
+  protected void doTestHashVariableValue() {
+    doTestPerlValue(PsiPerlHashVariable.class);
+  }
+
+  protected void doTestPerlValue(@NotNull Class<? extends PsiElement> clazz) {
     initWithFileSmart(getTestName(true));
-    doTestPerlValueWithoutInit();
+    doTestPerlValueWithoutInit(clazz);
   }
 
-  protected void doTestPerlValueWithoutInit(){
+  protected void doTestPerlValueWithoutInit(@NotNull Class<? extends PsiElement> clazz) {
     addVirtualFileFilter();
-    doTestPerlValueWithoutInit(getElementAtCaret(PerlValuableEntity.class));
+    doTestPerlValueWithoutInit(getElementAtCaret(clazz));
   }
 
-  protected void doTestPerlValueWithoutInit(@NotNull PerlValuableEntity element) {
+  protected void doTestPerlValueWithoutInit(@NotNull PsiElement element) {
     StringBuilder sb = new StringBuilder();
     PerlValue elementValue = PerlValuesManager.from(element);
     sb.append(getEditorTextWithCaretsAndSelections().trim())

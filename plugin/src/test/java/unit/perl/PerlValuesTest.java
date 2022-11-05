@@ -34,875 +34,1317 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testReturnScalarToList() {doTest();}
+  public void testReturnScalarToList() { doTestArrayVariableValue(); }
 
   @Test
-  public void testReturnScalarToScalar() {doTest();}
-
-  @Test
-  public void testReturnSingleElementListToList() {doTest();}
-
-  @Test
-  public void testReturnSingleElementListToScalar() {doTest();}
-
-  @Test
-  public void testAssignmentInPlace() {doTest();}
-
-  @Test
-  public void testAssignmentInPlaceChained() {doTest();}
-
-  @Test
-  public void testAssignmentInPlaceChainedSecond() {doTest();}
-
-  @Test
-  public void testAssignmentInPlaceMulti() {doTest();}
-
-  @Test
-  public void testAssignmentInPlaceMultiSecond() {doTest();}
-
-  @Test
-  public void testMyVariable() {doTest();}
-
-  @Test
-  public void testOurVariable() {doTest();}
-
-  @Test
-  public void testLocalVariable() {doTest();}
-
-  @Test
-  public void testStateVariable() {doTest();}
-
-  @Test
-  public void testMyVariableDeclaration() {doTest();}
-
-  @Test
-  public void testOurVariableDeclaration() {doTest();}
-
-  @Test
-  public void testLocalVariableDeclaration() {doTest();}
-
-  @Test
-  public void testStateVariableDeclaration() {doTest();}
-
-  @Test
-  public void testMyVariableDeclarationChainSecond() {doTest();}
-
-  @Test
-  public void testOurVariableDeclarationChainSecond() {doTest();}
-
-  @Test
-  public void testLocalVariableDeclarationChainSecond() {doTest();}
-
-  @Test
-  public void testStateVariableDeclarationChainSecond() {doTest();}
-
-  @Test
-  public void testMyVariableDeclarationMulti() {doTest();}
-
-  @Test
-  public void testOurVariableDeclarationMulti() {doTest();}
-
-  @Test
-  public void testLocalVariableDeclarationMulti() {doTest();}
-
-  @Test
-  public void testStateVariableDeclarationMulti() {doTest();}
-
-  @Test
-  public void testMyVariableDeclarationMultiSecond() {doTest();}
-
-  @Test
-  public void testOurVariableDeclarationMultiSecond() {doTest();}
-
-  @Test
-  public void testLocalVariableDeclarationMultiSecond() {doTest();}
-
-  @Test
-  public void testStateVariableDeclarationMultiSecond() {doTest();}
-
-  @Test
-  public void testMyVariableSecond() {doTest();}
-
-  @Test
-  public void testOurVariableSecond() {doTest();}
-
-  @Test
-  public void testLocalVariableSecond() {doTest();}
-
-  @Test
-  public void testStateVariableSecond() {doTest();}
-
-  @Test
-  public void testDefinedWithComment() {doTest();}
-
-  @Test
-  public void testIssue2115() {
-    PerlResolveUtil.runWithoutErrors(this::doTest);
+  public void testReturnScalarToScalar() {
+    doTestScalarVariableValue();
   }
 
   @Test
-  public void testBareLpCodeBlock() {doTest();}
+  public void testReturnSingleElementListToList() { doTestArrayVariableValue(); }
 
   @Test
-  public void testIssue2109a() {doTest();}
+  public void testReturnSingleElementListToScalar() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testIssue2109b() {doTest();}
+  public void testAssignmentInPlace() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testIssue2092First() {doTest();}
+  public void testAssignmentInPlaceChained() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testIssue2092Second() {doTest();}
+  public void testAssignmentInPlaceChainedSecond() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testAnnotatedSub() {doTest();}
+  public void testAssignmentInPlaceMulti() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testAnnotatedSubIndirect() {doTest();}
+  public void testAssignmentInPlaceMultiSecond() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testAnnotatedSubNot() {doTest();}
+  public void testMyVariable() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testVariableInAnonSub() {doTest();}
+  public void testOurVariable() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testVariableInAnonSubAfter() {doTest();}
+  public void testLocalVariable() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testVariableInAnonSubAround() {doTest();}
+  public void testStateVariable() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testVariableInAnonSubAugment() {doTest();}
+  public void testMyVariableDeclaration() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testVariableInAnonSubBefore() {doTest();}
+  public void testOurVariableDeclaration() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testVariableInAnonSubOverride() {doTest();}
+  public void testLocalVariableDeclaration() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testRecursiveCall() {doTest();}
+  public void testStateVariableDeclaration() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testInterpolationString() {doTest();}
+  public void testMyVariableDeclarationChainSecond() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testInterpolationHeredoc() {doTest();}
+  public void testOurVariableDeclarationChainSecond() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testInterpolationConstantHeredocSecond() {doTest();}
+  public void testLocalVariableDeclarationChainSecond() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testInterpolationHeredocArray() {doTest();}
+  public void testStateVariableDeclarationChainSecond() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testOuterVariable() {doTest();}
+  public void testMyVariableDeclarationMulti() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testOurVariableDeclarationMulti() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testLocalVariableDeclarationMulti() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testStateVariableDeclarationMulti() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testMyVariableDeclarationMultiSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testOurVariableDeclarationMultiSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testLocalVariableDeclarationMultiSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testStateVariableDeclarationMultiSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testMyVariableSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testOurVariableSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testLocalVariableSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testStateVariableSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testDefinedWithComment() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testIssue2115() {
+    PerlResolveUtil.runWithoutErrors(this::doTestScalarVariableValue);
+  }
+
+  @Test
+  public void testBareLpCodeBlock() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testIssue2109a() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testIssue2109b() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testIssue2092First() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testIssue2092Second() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedSub() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedSubIndirect() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedSubNot() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testVariableInAnonSub() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testVariableInAnonSubAfter() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testVariableInAnonSubAround() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testVariableInAnonSubAugment() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testVariableInAnonSubBefore() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testVariableInAnonSubOverride() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testRecursiveCall() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testInterpolationString() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testInterpolationHeredoc() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testInterpolationConstantHeredocSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testInterpolationHeredocArray() {
+    doTestArrayVariableValue();
+  }
+
+  @Test
+  public void testOuterVariable() {
+    doTestScalarVariableValue();
+  }
 
   @Test
   public void testContextSimple() {doTestFileWithContext();}
 
   @Test
-  public void testIssue2073Second() {doTest();}
+  public void testIssue2073Second() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testIssue2073Third() {doTest();}
+  public void testIssue2073Third() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testMethodImplicitInvocant() {doTest();}
+  public void testMethodImplicitInvocant() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubSignatureFirst() {doTest();}
+  public void testSubSignatureFirst() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubSignatureFirstDefault() {doTest();}
+  public void testSubSignatureFirstDefault() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubSignatureFirstDefaultMissing() {doTest();}
+  public void testSubSignatureFirstDefaultMissing() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubSignatureSecond() {doTest();}
+  public void testSubSignatureSecond() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubSignatureSecondDefault() {doTest();}
+  public void testSubSignatureSecondDefault() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubSignatureSecondDefaultMissing() {doTest();}
+  public void testSubSignatureSecondDefaultMissing() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubSignatureSecondDefaultUndef() {doTest();}
+  public void testSubSignatureSecondDefaultUndef() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubSignatureSecondDefaultUnknown() {doTest();}
+  public void testSubSignatureSecondDefaultUnknown() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubSignatureSecondIgnored() {doTest();}
+  public void testSubSignatureSecondIgnored() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubSignatureSecondIgnoredDefault() {doTest();}
+  public void testSubSignatureSecondIgnoredDefault() {
+    doTestScalarVariableValue();
+  }
 
   @Test
   public void testMojoAttr() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrDefault() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrDefaultArgs() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrDefaultObject() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrDefaultObjectArgs() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrEmpty() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrEmptyArgs() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrEmptyObject() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrEmptyObjectArgs() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrNoArgs() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrSub() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrSubArgs() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrSubObject() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testMojoAttrSubObjectArgs() {
     withMojo();
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
-  public void testSuperCall() {doTest();}
+  public void testSuperCall() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSuperCallParent() {doTest();}
+  public void testSuperCallParent() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testPushValueMultiOneOfs() {doTest();}
+  public void testPushValueMultiOneOfs() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArraySliceDeferred() {doTest();}
+  public void testArraySliceDeferred() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testReturnArray() {doTest();}
+  public void testReturnArray() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testReturnArraySingleElement() {doTest();}
+  public void testReturnArraySingleElement() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testHashRefElement() {doTest();}
+  public void testHashRefElement() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayRefElement() {doTest();}
+  public void testArrayRefElement() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashDerefToHash() {doTest();}
+  public void testHashDerefToHash() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testHashDerefToHashInvalid() {doTest();}
+  public void testHashDerefToHashInvalid() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testHashDerefToScalar() {doTest();}
+  public void testHashDerefToScalar() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayDerefToArray() {doTest();}
+  public void testArrayDerefToArray() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArrayDerefToArrayInvalid() {doTest();}
+  public void testArrayDerefToArrayInvalid() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArrayDerefToScalar() {doTest();}
+  public void testArrayDerefToScalar() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testShiftPopInSub() {doTest();}
+  public void testShiftPopInSub() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testShiftInSub() {doTest();}
+  public void testShiftInSub() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPopInSub() {doTest();}
+  public void testPopInSub() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testShiftInSubProxy() {doTest();}
+  public void testShiftInSubProxy() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPopInSubProxy() {doTest();}
+  public void testPopInSubProxy() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testShiftInSubReturn() {doTest();}
+  public void testShiftInSubReturn() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPopInSubReturn() {doTest();}
+  public void testPopInSubReturn() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testShiftInSubDelegate() {doTest();}
+  public void testShiftInSubDelegate() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPopInSubDelegate() {doTest();}
+  public void testPopInSubDelegate() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testShiftOnce() {doTest();}
+  public void testShiftOnce() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testShiftTwice() {doTest();}
+  public void testShiftTwice() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testShiftAll() {doTest();}
+  public void testShiftAll() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testShiftMissing() {doTest();}
+  public void testShiftMissing() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPopOnce() {doTest();}
+  public void testPopOnce() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPopTwice() {doTest();}
+  public void testPopTwice() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPopAll() {doTest();}
+  public void testPopAll() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPopMissing() {doTest();}
+  public void testPopMissing() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testShiftArray() {doTest();}
+  public void testShiftArray() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testPopArray() {doTest();}
+  public void testPopArray() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testShiftArrayReturn() {doTest();}
+  public void testShiftArrayReturn() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testPopArrayReturn() {doTest();}
+  public void testPopArrayReturn() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testPushValue() {doTest();}
+  public void testPushValue() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPushValueArrayEmpty() {doTest();}
+  public void testPushValueArrayEmpty() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPushValueArray() {doTest();}
+  public void testPushValueArray() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPushValueArrayResult() {doTest();}
+  public void testPushValueArrayResult() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testPushValueMulti() {doTest();}
+  public void testPushValueMulti() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPushValueNonEmpty() {doTest();}
+  public void testPushValueNonEmpty() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPushValueArrayNonEmpty() {doTest();}
+  public void testPushValueArrayNonEmpty() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testPushValueMultiNonEmpty() {doTest();}
+  public void testPushValueMultiNonEmpty() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testUnshiftValue() {doTest();}
+  public void testUnshiftValue() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testUnshiftValueArrayEmpty() {doTest();}
+  public void testUnshiftValueArrayEmpty() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testUnshiftValueArray() {doTest();}
+  public void testUnshiftValueArray() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testUnshiftValueArrayResult() {doTest();}
+  public void testUnshiftValueArrayResult() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testUnshiftValueMulti() {doTest();}
+  public void testUnshiftValueMulti() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testUnshiftValueNonEmpty() {doTest();}
+  public void testUnshiftValueNonEmpty() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testUnshiftValueArrayNonEmpty() {doTest();}
+  public void testUnshiftValueArrayNonEmpty() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testUnshiftValueMultiNonEmpty() {doTest();}
+  public void testUnshiftValueMultiNonEmpty() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArgumentResolve() {doTest();}
+  public void testArgumentResolve() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArgumentAnnotated() {doTest();}
+  public void testArgumentAnnotated() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArgumentFirst() {doTest();}
+  public void testArgumentFirst() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArgumentSelf() {doTest();}
+  public void testArgumentSelf() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArgumentTyped() {doTest();}
+  public void testArgumentTyped() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testBlessContext() {doTest();}
+  public void testBlessContext() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testBlessContextDeferred() {doTest();}
+  public void testBlessContextDeferred() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testBlessSimple() {doTest();}
+  public void testBlessSimple() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testBlessSimpleDeferred() {doTest();}
+  public void testBlessSimpleDeferred() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testScalarDerefInplace() {doTest();}
+  public void testScalarDerefInplace() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testScalarDerefInplaceDeep() {doTest();}
+  public void testScalarDerefInplaceDeep() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testScalarDerefInplaceIndirect() {doTest();}
+  public void testScalarDerefInplaceIndirect() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testScalarDerefResolve() {doTest();}
+  public void testScalarDerefResolve() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testScalarDerefResolveIndirect() {doTest();}
+  public void testScalarDerefResolveIndirect() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayAppendOneOf() {doTest();}
+  public void testArrayAppendOneOf() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArrayAppendOneOfUnknown() {doTest();}
+  public void testArrayAppendOneOfUnknown() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArrayPrependOneOf() {doTest();}
+  public void testArrayPrependOneOf() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArrayInsertOneOf() {doTest();}
+  public void testArrayInsertOneOf() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArrayElementFromSliceMultiOneOf() {doTest();}
+  public void testArrayElementFromSliceMultiOneOf() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashSlice() {doTest();}
+  public void testHashSlice() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testHashSliceMulti() {doTest();}
+  public void testHashSliceMulti() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testHashSliceMultiOneOf() {doTest();}
+  public void testHashSliceMultiOneOf() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testHashSliceMultiOneOfDeferred() {doTest();}
+  public void testHashSliceMultiOneOfDeferred() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArraySlice() {doTest();}
+  public void testArraySlice() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArraySliceMulti() {doTest();}
+  public void testArraySliceMulti() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArraySliceMultiAll() {doTest();}
+  public void testArraySliceMultiAll() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArraySliceMultiAllDeferred() {doTest();}
+  public void testArraySliceMultiAllDeferred() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArraySliceMultiOneOf() {doTest();}
+  public void testArraySliceMultiOneOf() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArraySliceMultiOneOfDeferred() {doTest();}
+  public void testArraySliceMultiOneOfDeferred() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArithmeticNegation() {doTest();}
+  public void testArithmeticNegation() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArithmeticNegationDouble() {doTest();}
+  public void testArithmeticNegationDouble() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArithmeticNegationString() {doTest();}
+  public void testArithmeticNegationString() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArithmeticNegationStringMinus() {doTest();}
+  public void testArithmeticNegationStringMinus() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArithmeticNegationStringPlus() {doTest();}
+  public void testArithmeticNegationStringPlus() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArithmeticNegationUndef() {doTest();}
+  public void testArithmeticNegationUndef() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testScalarOneOf() {doTest();}
+  public void testScalarOneOf() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayElementOneOf() { doTest(); }
+  public void testArrayElementOneOf() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayElementOneOfDeferred() { doTest(); }
+  public void testArrayElementOneOfDeferred() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayElement() { doTest(); }
+  public void testArrayElement() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayElementUndef() { doTest(); }
+  public void testArrayElementUndef() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayElementUnknown() { doTest(); }
+  public void testArrayElementUnknown() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayElementFirst() { doTest(); }
+  public void testArrayElementFirst() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayElementFirstNegative() { doTest(); }
+  public void testArrayElementFirstNegative() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayElementNegative() { doTest(); }
+  public void testArrayElementNegative() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayElementOOB() { doTest(); }
+  public void testArrayElementOOB() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayElementOOBNegative() { doTest(); }
+  public void testArrayElementOOBNegative() {
+    doTestScalarVariableValue();
+  }
 
   @Test
   public void testVariableAnnotationVariant() {
     // fixme this behviour is questionable, see commit message
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
-  public void testVariableDeclarationVariant() {doTest();}
+  public void testVariableDeclarationVariant() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testVariableAnnotationVariantTransient() {doTest();}
+  public void testVariableAnnotationVariantTransient() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testVariableAnnotationVariantTransientMixed() {doTest();}
+  public void testVariableAnnotationVariantTransientMixed() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArbitraryConstructor() {doTest();}
+  public void testArbitraryConstructor() {
+    doTestScalarVariableValue();
+  }
 
   @Test
   public void testArbitraryConstructorStatic() {
     // fixme this behaviour is questionable, see commit message
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
-  public void testArbitraryConstructors() {doTest();}
+  public void testArbitraryConstructors() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testConstantSingle() {doTest();}
+  public void testConstantSingle() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testConstantMulti() {doTest();}
+  public void testConstantMulti() {
+    doTestScalarVariableValue();
+  }
 
   @Test
   public void testConstantMultiImport() {
     myFixture.copyFileToProject("constantMultiImportFile.pl");
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
-  public void testShadowedValue() {doTest();}
+  public void testShadowedValue() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testShadowedValues() {doTest();}
+  public void testShadowedValues() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubExtractorDirect() {doTest();}
+  public void testSubExtractorDirect() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubExtractorDirectObject() {doTest();}
+  public void testSubExtractorDirectObject() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testSubExtractorIndirect() {doTest();}
+  public void testSubExtractorIndirect() {
+    doTestScalarVariableValue();
+  }
 
   @Test
   public void testSubExtractorIndirectOtherFile() {
     PerlSharedSettings.getInstance(getProject()).SIMPLE_MAIN_RESOLUTION = false;
     myFixture.copyFileToProject("extractorFunctions.pl");
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
-  public void testCrossSubVariable() {doTest();}
+  public void testCrossSubVariable() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testCrossSubVariableDynamic() {doTest();}
+  public void testCrossSubVariableDynamic() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testCrossSubVariableDynamicClosure() {doTest();}
+  public void testCrossSubVariableDynamicClosure() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testCrossSubVariableBuiltIn() {doTest();}
+  public void testCrossSubVariableBuiltIn() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testScalarExpr() {doTest();}
+  public void testScalarExpr() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testScalarExprTransparent() {doTest();}
+  public void testScalarExprTransparent() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testCallScalar() {doTest();}
+  public void testCallScalar() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testCallArray() {doTest();}
+  public void testCallArray() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testCallHash() {doTest();}
+  public void testCallHash() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testCallScalarFancy() {doTest();}
+  public void testCallScalarFancy() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testCallArrayFancy() {doTest();}
+  public void testCallArrayFancy() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testCallHashFancy() {doTest();}
+  public void testCallHashFancy() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testScalarOtherScope() {doTest();}
+  public void testScalarOtherScope() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashToScalar() {doTest();}
+  public void testHashToScalar() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayToScalar() {doTest();}
+  public void testArrayToScalar() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayToHashAmbiguous() {doTest();}
+  public void testArrayToHashAmbiguous() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testArrayToHashAmbiguousDeferred() {doTest();}
+  public void testArrayToHashAmbiguousDeferred() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testArrayToScalarAmbiguous() {doTest();}
+  public void testArrayToScalarAmbiguous() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayToScalarAmbiguousDeferred() {doTest();}
+  public void testArrayToScalarAmbiguousDeferred() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testScalarToArray() {doTest();}
+  public void testScalarToArray() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testHashElement() {doTest();}
+  public void testHashElement() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashElementDeferredKey() {doTest();}
+  public void testHashElementDeferredKey() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashElementAmbiguousBoth() {doTest();}
+  public void testHashElementAmbiguousBoth() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashElementAmbiguousBothDeferred() {doTest();}
+  public void testHashElementAmbiguousBothDeferred() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashElementAmbiguousKey() {doTest();}
+  public void testHashElementAmbiguousKey() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashElementAmbiguousKeyOneMissing() {doTest();}
+  public void testHashElementAmbiguousKeyOneMissing() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashElementAmbiguousHashOneMissing() {doTest();}
+  public void testHashElementAmbiguousHashOneMissing() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashElementVariable() {doTest();}
+  public void testHashElementVariable() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashElementDeferredFailed() {doTest();}
+  public void testHashElementDeferredFailed() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashElementDeferredSuccess() {doTest();}
+  public void testHashElementDeferredSuccess() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashMerge() {doTest();}
+  public void testHashMerge() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testHashUnmerged() {doTest();}
+  public void testHashUnmerged() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testArrayMerge() {doTest();}
+  public void testArrayMerge() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArrayUnmerged() {doTest();}
+  public void testArrayUnmerged() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testScalarRef() {doTest();}
+  public void testScalarRef() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testScalarRefStatic() {doTest();}
+  public void testScalarRefStatic() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashRef() {doTest();}
+  public void testHashRef() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testHashRefFromHash() {doTest();}
+  public void testHashRefFromHash() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayRef() {doTest();}
+  public void testArrayRef() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayRefFromArray() {doTest();}
+  public void testArrayRefFromArray() {
+    doTestScalarVariableValue();
+  }
 
   @Test
-  public void testArrayList() {doTest();}
+  public void testArrayList() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArrayListJoin() {doTest();}
+  public void testArrayListJoin() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testArrayFromHash() {doTest();}
+  public void testArrayFromHash() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testHashList() {doTest();}
+  public void testHashList() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testHashListJoin() {doTest();}
+  public void testHashListJoin() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testHashFromArray() {doTest();}
+  public void testHashFromArray() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testArrayStringList() {doTest();}
+  public void testArrayStringList() {
+    doTestArrayVariableValue();
+  }
 
   @Test
-  public void testHashStringList() {doTest();}
+  public void testHashStringList() {
+    doTestHashVariableValue();
+  }
 
   @Test
-  public void testBuiltIn() {doTest();}
+  public void testBuiltIn() {
+    doTestScalarVariableValue();
+  }
 
   @Test
   public void testDeclarationSingle() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testDeclarationMulti() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testDeclarationAssignmentNew() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testVariableBeforeAssignment() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testVariableAfterAssignment() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testAnnotatedSingleInside() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testAnnotatedSingle() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testAnnotatedMulti() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testAnnotatedMultiNonFirst() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testAnnotatedConcurrentStatement() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testAnnotatedConcurrentStatementOuter() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testAnnotatedConcurrentRealTypeInside() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testAnnotatedConcurrentRealTypeMulti() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testAnnotatedConcurrentRealTypeSingle() {
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testAnnotatedConcurrentRealTypeWins() {
-    doTest();
-  }
-
-  private void doTest() {
-    doTestPerlValue();
+    doTestScalarVariableValue();
   }
 
   private void doTestFileWithContext() {

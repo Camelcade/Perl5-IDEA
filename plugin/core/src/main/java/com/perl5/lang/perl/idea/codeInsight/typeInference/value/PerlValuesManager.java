@@ -35,7 +35,6 @@ import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.mixins.PerlVariableMixin;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
@@ -198,9 +197,6 @@ public final class PerlValuesManager {
     }
     else if (element instanceof PerlMethod) {
       return computeValue((PerlMethod)element);
-    }
-    else if (element instanceof PerlValuableEntity) {
-      return ((PerlValuableEntity)element).computePerlValue();
     }
 
     IElementType elementType = PsiUtilCore.getElementType(element);

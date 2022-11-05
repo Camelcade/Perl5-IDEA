@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -156,7 +157,7 @@ public abstract class PerlValue {
   /**
    * @return presentable text for tooltips
    */
-  public @NotNull String getPresentableText() {
+  public @NotNull @NlsSafe String getPresentableText() {
     return toString();
   }
 

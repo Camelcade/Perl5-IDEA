@@ -43,16 +43,12 @@ public class MojoPerlValuesTest extends PerlLightTestCase {
 
   private void doTestMojoAttr() {
     myFixture.copyFileToProject("attributeDeclarations.pl");
-    doTest();
+    doTestScalarVariableValue();
   }
 
   @Test
   public void testHelperValue() {
     myFixture.copyFileToProject("helperValueDeclaration.pl");
-    doTest();
-  }
-
-  private void doTest() {
-    doTestPerlValue();
+    doTestScalarVariableValue();
   }
 }
