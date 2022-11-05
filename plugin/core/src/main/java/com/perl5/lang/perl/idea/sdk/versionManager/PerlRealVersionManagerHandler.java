@@ -25,6 +25,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.ui.messages.MessagesService;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFileSystem;
@@ -152,7 +153,8 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
     if (distributions.size() > 1) {
       Ref<Integer> selectionRef = Ref.create(-1);
       ApplicationManager.getApplication().invokeAndWait(
-        () -> selectionRef.set(Messages.showChooseDialog(
+        () -> selectionRef.set(MessagesService.getInstance().showChooseDialog(
+          null, null,
           "",
           PerlBundle.message("perl.vm.perlbrew.choose.installation"),
           ArrayUtil.toStringArray(distributions),
