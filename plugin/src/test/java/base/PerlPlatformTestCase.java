@@ -33,10 +33,7 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.notification.Notification;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.Disposable;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.CommonDataKeys;
-import com.intellij.openapi.actionSystem.DataContext;
-import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.impl.NonBlockingReadActionImpl;
 import com.intellij.openapi.diagnostic.Logger;
@@ -274,7 +271,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     VirtualFile virtualFile = getModuleFile(relativePath);
     PsiElement psiElement = getPsiElement(virtualFile);
     ConfigurationContext configurationContext = ConfigurationContext.getFromContext(createDataContext(
-      it -> LangDataKeys.PSI_ELEMENT_ARRAY.is(it) ? new PsiElement[]{psiElement} : null));
+      it -> LangDataKeys.PSI_ELEMENT_ARRAY.is(it) ? new PsiElement[]{psiElement} : null), ActionPlaces.UNKNOWN);
     List<ConfigurationFromContext> configurationsFromContext = configurationContext.getConfigurationsFromContext();
     assertNotNull(configurationsFromContext);
     return configurationsFromContext;
