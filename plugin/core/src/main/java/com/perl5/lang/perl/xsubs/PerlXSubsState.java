@@ -31,6 +31,8 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
@@ -38,6 +40,8 @@ import com.intellij.openapi.progress.util.ProgressIndicatorUtils;
 import com.intellij.openapi.progress.util.ReadTask;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
+import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
@@ -153,7 +157,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
           }
         }
 
-        isActual = isActual && (filesCounter == 0 || myProject.getBaseDir().findFileByRelativePath(DEPARSED_FILE_NAME) != null);
+        isActual = isActual && (filesCounter == 0 || getDeparsedSubsFile() != null);
 
         if (!isActual) {
           showNotification(
@@ -181,7 +185,39 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     });
   }
 
-  private boolean isFileUpToDate(VirtualFile virtualFile) {
+  private @Nullable VirtualFile getDeparsedSubsFile() {
+    for (VirtualFile contentRoot : ProjectRootManager.getInstance(myProject).getContentRoots()) {
+      var deparsedFile = contentRoot.findFileByRelativePath(DEPARSED_FILE_NAME);
+      if (deparsedFile != null && deparsedFile.isValid()) {
+        return deparsedFile;
+      }
+    }
+
+    return null;
+  }
+
+  private @NotNull VirtualFile getOrCreateDeparsedSubsFile() throws IOException {
+    var deparsedSubsFile = getDeparsedSubsFile();
+    if (deparsedSubsFile != null) {
+      return deparsedSubsFile;
+    }
+
+    for (Module module : ModuleManager.getInstance(myProject).getSortedModules()) {
+      for (VirtualFile moduleContentRoot : ModuleRootManager.getInstance(module).getContentRoots()) {
+        try {
+          return moduleContentRoot.findOrCreateChildData(this, DEPARSED_FILE_NAME);
+        }
+        catch (IOException e) {
+          LOG.warn("Unable to create " + DEPARSED_FILE_NAME + " in the content root " + moduleContentRoot + " of the module " + module +
+                   "cause: " + e.getMessage());
+        }
+      }
+    }
+
+    throw new IOException("Could not find suitable content root for creating a file: " + DEPARSED_FILE_NAME);
+  }
+
+  private boolean isFileUpToDate(@NotNull VirtualFile virtualFile) {
     String path = virtualFile.getCanonicalPath();
 
     if (path != null) {
@@ -277,13 +313,13 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
                 return;
               }
               try {
-                VirtualFile newFile = project.getBaseDir().findOrCreateChildData(this, DEPARSED_FILE_NAME);
-                newFile.setWritable(true);
-                OutputStream outputStream = newFile.getOutputStream(null);
+                VirtualFile deparsedFile = getOrCreateDeparsedSubsFile();
+                deparsedFile.setWritable(true);
+                OutputStream outputStream = deparsedFile.getOutputStream(null);
                 outputStream.write(stdout.getBytes());
                 outputStream.close();
-                newFile.setWritable(false);
-                FileContentUtilCore.reparseFiles(newFile);
+                deparsedFile.setWritable(false);
+                FileContentUtilCore.reparseFiles(deparsedFile);
 
                 myFilesMap = newFilesMap;
                 isActual = true;
