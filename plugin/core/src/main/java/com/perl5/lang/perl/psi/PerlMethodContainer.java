@@ -18,10 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.mixins.PerlCallArguments;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -31,14 +28,9 @@ import java.util.List;
 /**
  * fixme find a better name. This is a basically PerlCallExpression
  */
-public interface PerlMethodContainer extends PsiElement, PerlValuableEntity {
+public interface PerlMethodContainer extends PsiElement {
   @Nullable
   PsiPerlMethod getMethod();
-
-  @Override
-  default @NotNull PerlValue computePerlValue() {
-    return PerlValuesManager.from(getMethod());
-  }
 
   default @Nullable PsiPerlCallArguments getCallArguments() {
     return PsiTreeUtil.getChildOfType(this, PsiPerlCallArguments.class);

@@ -32,6 +32,7 @@ import com.intellij.util.containers.Interner;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.mixins.PerlVariableMixin;
 import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
@@ -209,6 +210,9 @@ public final class PerlValuesManager {
       return PerlPackageUtil.__PACKAGE__.equals(elementText)
              ? PerlPackageUtil.getContextType(element)
              : PerlScalarValue.create(PerlPackageUtil.getCanonicalName(elementText));
+    }
+    else if (elementType == SUB_CALL) {
+      return PerlValuesManager.from(((PerlSubCallElement)element).getMethod());
     }
     else if (elementType == SCALAR_EXPR) {
       PsiElement[] children = element.getChildren();
