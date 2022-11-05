@@ -52,7 +52,7 @@ public class TemplateToolkitFileReferenceHelper extends FileReferenceHelper {
   }
 
   @Override
-  public @NotNull Collection<PsiFileSystemItem> getRoots(@NotNull Module module) {
+  public @NotNull Collection<PsiFileSystemItem> getRoots(@NotNull Module module, @NotNull VirtualFile file) {
     Collection<PsiFileSystemItem> result = new ArrayList<>();
     PsiManager psiManager = PsiManager.getInstance(module.getProject());
     for (VirtualFile root : ManagingFS.getInstance().getLocalRoots()) {
