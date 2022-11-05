@@ -134,7 +134,7 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   }
 
   private static int getSerializationId(@NotNull StubElement<?> stubElement) {
-    int id = DIRECT_MAP.get(stubElement.getStubType());
+    int id = DIRECT_MAP.getInt(stubElement.getStubType());
     if (id > 0) {
       return id;
     }

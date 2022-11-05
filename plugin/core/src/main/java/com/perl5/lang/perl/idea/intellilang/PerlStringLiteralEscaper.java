@@ -73,7 +73,7 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
     while (run != null && run.getTextRangeInParent().getEndOffset() <= endOffset) {
       int startOffsetInParent = run.getStartOffsetInParent();
       IElementType runType = PsiUtilCore.getElementType(run);
-      CharSequence runChars = null;
+      CharSequence runChars;
       if (run instanceof PerlCharSubstitution) {
         int point = ((PerlCharSubstitution)run).getCodePoint();
         runChars = Character.isValidCodePoint(point) ? String.valueOf(Character.toChars(point)) : run.getText();
@@ -103,7 +103,7 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
 
   @Override
   public int getOffsetInHost(int offsetInDecoded, @NotNull TextRange rangeInsideHost) {
-    return myHostOffsets.get(offsetInDecoded);
+    return myHostOffsets.getInt(offsetInDecoded);
   }
 
   @Override

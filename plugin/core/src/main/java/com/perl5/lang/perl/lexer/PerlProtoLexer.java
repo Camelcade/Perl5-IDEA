@@ -134,7 +134,7 @@ public abstract class PerlProtoLexer implements FlexLexer {
       );
       return;
     }
-    yybegin(myStateStack.pop());
+    yybegin(myStateStack.popInt());
   }
 
   /**
