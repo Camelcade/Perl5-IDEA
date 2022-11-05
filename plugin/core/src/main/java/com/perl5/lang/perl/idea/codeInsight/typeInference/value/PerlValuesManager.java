@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.RecursionManager;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
@@ -46,6 +47,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.*;
@@ -194,6 +196,9 @@ public final class PerlValuesManager {
     else if (element instanceof PerlImplicitVariableDeclaration) {
       return ((PerlImplicitVariableDeclaration)element).getDeclaredValue();
     }
+    else if (element instanceof PerlMethod) {
+      return computeValue((PerlMethod)element);
+    }
     else if (element instanceof PerlValuableEntity) {
       return ((PerlValuableEntity)element).computePerlValue();
     }
@@ -320,13 +325,63 @@ public final class PerlValuesManager {
     else if (element instanceof PsiPerlArrayPushExpr) {
       return PerlScalarContextValue.create(PerlPushValue.create((PsiPerlArrayPushExpr)element));
     }
-    else if( element instanceof PsiPerlArrayShiftExpr){
+    else if (element instanceof PsiPerlArrayShiftExpr) {
       return createShiftPopValue((PsiPerlArrayShiftExpr)element, FIRST_ELEMENT_INDEX_VALUE);
     }
-    else if( element instanceof PsiPerlArrayPopExpr){
+    else if (element instanceof PsiPerlArrayPopExpr) {
       return createShiftPopValue((PsiPerlArrayPopExpr)element, LAST_ELEMENT_INDEX_VALUE);
     }
     return UNKNOWN_VALUE;
+  }
+
+  private static @NotNull PerlValue computeValue(@NotNull PerlMethod perlMethod) {
+    PerlValue subNameValue = PerlScalarValue.create(perlMethod.getName());
+    if (subNameValue == UNKNOWN_VALUE) {
+      return UNKNOWN_VALUE;
+    }
+
+    String explicitNamespaceName = perlMethod.getExplicitNamespaceName();
+    boolean hasExplicitNamespace = StringUtil.isNotEmpty(explicitNamespaceName);
+    PsiElement parentElement = perlMethod.getParent();
+    boolean isNestedCall = PerlSubCallElement.isNestedCall(parentElement);
+
+    List<PerlValue> callArguments;
+    if (parentElement instanceof PerlMethodContainer) {
+      callArguments = ContainerUtil.map(((PerlMethodContainer)parentElement).getCallArgumentsList(), PerlValuesManager::from);
+    }
+    else {
+      // these are sort and code variable
+      LOG.debug("Non-method container container: " + parentElement.getClass().getSimpleName());
+      callArguments = Collections.emptyList();
+    }
+
+    PsiElement derefExpression = parentElement.getParent();
+    if (isNestedCall && parentElement.getPrevSibling() != null) {
+      boolean isSuper = PerlPackageUtil.isSUPER(explicitNamespaceName);
+      if (hasExplicitNamespace && !isSuper) { // awkward $var->Foo::Bar::method->
+        return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, true);
+      }
+      String superContext = isSuper ? PerlPackageUtil.getContextNamespaceName(perlMethod) : null;
+      if (!(derefExpression instanceof PerlDerefExpression)) {
+        LOG.warn("Expected deref expression, got " + derefExpression);
+        return UNKNOWN_VALUE;
+      }
+
+      PsiElement previousValue = ((PerlDerefExpression)derefExpression).getPreviousElement(parentElement);
+      if (previousValue == null) { // first in chain
+        return new PerlCallStaticValue(
+          PerlScalarValue.create(PerlPackageUtil.getContextNamespaceName(perlMethod)), subNameValue, callArguments, false);
+      }
+      return PerlCallObjectValue.create(PerlValuesManager.from(previousValue), subNameValue, callArguments, superContext);
+    }
+    else if (perlMethod.isObjectMethod() && hasExplicitNamespace) { // this is for a fancy call new Foo::Bar
+      return PerlCallObjectValue.create(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, null);
+    }
+    else if (hasExplicitNamespace) {
+      return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, true);
+    }
+    return new PerlCallStaticValue(
+      PerlScalarValue.create(PerlPackageUtil.getContextNamespaceName(perlMethod)), subNameValue, callArguments, false);
   }
 
   private static @NotNull PerlValue createShiftPopValue(@NotNull PerlShiftPopExpr shiftPopExpr, @NotNull PerlValue indexValue) {

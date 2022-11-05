@@ -16,15 +16,15 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.navigation.NavigationItem;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.properties.PerlSubNameElementContainer;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.Nullable;
 
 /**
  * Invocable method class
  */
-public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameElementContainer, PerlValuableEntity {
+public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameElementContainer, NavigationItem {
   /**
    * @return explicit namespace name if any
    */
@@ -33,8 +33,6 @@ public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameEl
 
   /**
    * Checks if explicit namespace defined - got object or namespace element
-   *
-   * @return checking result
    */
   default boolean hasExplicitNamespace() {
     return getExplicitNamespaceName() != null;
@@ -42,8 +40,6 @@ public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameEl
 
   /**
    * Check if this is an object method invocation
-   *
-   * @return result
    */
   boolean isObjectMethod();
 }

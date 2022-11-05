@@ -44,7 +44,6 @@ import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -502,20 +501,20 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return recommendation;
   }
 
-  private static @NotNull Collection<String> getVariantsFromEntityValueNamespaces(@Nullable PerlValuableEntity valuableEntity) {
-    if (valuableEntity == null) {
+  private static @NotNull Collection<String> getVariantsFromEntityValueNamespaces(@Nullable PsiElement contextElement) {
+    if (contextElement == null) {
       return Collections.emptyList();
     }
-    return getVariantsFromPerlValueNamespaces(valuableEntity, PerlValuesManager.from(valuableEntity));
+    return getVariantsFromPerlValueNamespaces(contextElement, PerlValuesManager.from(contextElement));
   }
 
-  private static @NotNull Collection<String> getVariantsFromPerlValueNamespaces(@NotNull PerlValuableEntity valuableEntity,
+  private static @NotNull Collection<String> getVariantsFromPerlValueNamespaces(@NotNull PsiElement contextElement,
                                                                                 @Nullable PerlValue perlValue) {
     if (PerlValuesManager.isUnknown(perlValue)) {
       return Collections.emptyList();
     }
     Set<String> result = new LinkedHashSet<>();
-    perlValue.resolve(valuableEntity).getNamespaceNames().forEach(it -> result.addAll(getVariantsFromNamespaceName(it)));
+    perlValue.resolve(contextElement).getNamespaceNames().forEach(it -> result.addAll(getVariantsFromNamespaceName(it)));
     return result;
   }
 
