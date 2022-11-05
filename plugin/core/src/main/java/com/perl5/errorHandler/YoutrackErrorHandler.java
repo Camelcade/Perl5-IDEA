@@ -23,8 +23,9 @@ import com.intellij.diagnostic.IdeErrorsDialog;
 import com.intellij.ide.BrowserUtil;
 import com.intellij.ide.DataManager;
 import com.intellij.notification.NotificationGroupManager;
-import com.intellij.notification.NotificationListener;
 import com.intellij.notification.NotificationType;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.application.ApplicationInfo;
@@ -32,6 +33,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.*;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
+import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.SystemInfo;
@@ -282,21 +284,20 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
   private static void popupResultInfo(@NotNull SubmittedReportInfo reportInfo, final @Nullable Project project) {
     ApplicationManager.getApplication().invokeLater(() -> {
       StringBuilder text = new StringBuilder("<html>");
-      final String url = reportInfo.getStatus() == SubmittedReportInfo.SubmissionStatus.FAILED || reportInfo.getLinkText() == null
-                         ? null
-                         : reportInfo.getURL();
-      IdeErrorsDialog.appendSubmissionInformation(reportInfo, text);
-      text.append(".");
+      var urlOpener = appendSubmissionInformationAndGetAction(reportInfo, text);
       final SubmittedReportInfo.SubmissionStatus status = reportInfo.getStatus();
+
+      var notificationTitle = DiagnosticBundle.message("error.report.submitted");
       if (status == SubmittedReportInfo.SubmissionStatus.NEW_ISSUE) {
-        text.append("<br/>").append(DiagnosticBundle.message("error.report.gratitude"));
+        text.append(DiagnosticBundle.message("error.report.gratitude"));
       }
       else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE) {
-        text.append("<br/>Possible duplicate report");
+        text.append("Possible duplicate report");
       }
       text.append("</html>");
       NotificationType type;
       if (status == SubmittedReportInfo.SubmissionStatus.FAILED) {
+        notificationTitle = DiagnosticBundle.message("error.report.failed.title");
         type = NotificationType.ERROR;
       }
       else if (status == SubmittedReportInfo.SubmissionStatus.DUPLICATE) {
@@ -305,12 +306,44 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       else {
         type = NotificationType.INFORMATION;
       }
-      NotificationListener listener = url != null ? (notification, event) -> {
-        BrowserUtil.browse(url);
-        notification.expire();
-      } : null;
-      NotificationGroupManager.getInstance().getNotificationGroup("Error Report")
-        .createNotification(DiagnosticBundle.message("error.report.title"), text.toString(), type, listener).notify(project);
+      @NonNls var notificationText = text.toString();
+      var notification = NotificationGroupManager.getInstance()
+        .getNotificationGroup("Error Report")
+        .createNotification(notificationTitle, notificationText, type);
+      if (urlOpener != null) {
+        notification.addAction(new DumbAwareAction(urlOpener.getTemplateText()) {
+          @Override
+          public void actionPerformed(@NotNull AnActionEvent e) {
+            urlOpener.actionPerformed(e);
+            notification.expire();
+          }
+        });
+      }
+      notification.notify(project);
     });
+  }
+
+  /**
+   * Inspired by {@link IdeErrorsDialog#appendSubmissionInformation(SubmittedReportInfo, StringBuilder)}
+   *
+   * @return action to open url in browser if applicable
+   * @implSpec the main difference is that method does not append url, but returns opening action instead.
+   */
+  private static @Nullable AnAction appendSubmissionInformationAndGetAction(@NotNull SubmittedReportInfo info, @NotNull StringBuilder out) {
+    @NonNls var linkText = info.getLinkText();
+    var linkUrl = info.getURL();
+    if (info.getStatus() == SubmittedReportInfo.SubmissionStatus.FAILED) {
+      out.append(linkText != null ? DiagnosticBundle.message("error.list.message.submission.failed.details", linkText)
+                                  : DiagnosticBundle.message("error.list.message.submission.failed"));
+    }
+    else if (linkUrl != null && linkText != null) {
+      return new DumbAwareAction(linkText) {
+        @Override
+        public void actionPerformed(@NotNull AnActionEvent e) {
+          BrowserUtil.browse(linkUrl);
+        }
+      };
+    }
+    return null;
   }
 }
