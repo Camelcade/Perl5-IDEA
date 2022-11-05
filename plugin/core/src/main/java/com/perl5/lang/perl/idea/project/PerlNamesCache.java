@@ -168,6 +168,7 @@ public class PerlNamesCache implements Disposable {
       myKnownNamespaces = Collections.unmodifiableSet(namespacesSet);
 
       logger.debug("Names cache updated");
+      return null;
     }).inSmartMode(myProject).expireWhen(myProject::isDisposed).executeSynchronously();
   }
 
