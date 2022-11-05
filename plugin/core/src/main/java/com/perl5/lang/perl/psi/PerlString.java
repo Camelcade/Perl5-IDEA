@@ -18,12 +18,8 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.parser.PerlParserUtil;
-import com.perl5.lang.perl.psi.properties.PerlValuableEntity;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +30,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public interface PerlString extends PerlQuoted, PerlValuableEntity {
+public interface PerlString extends PerlQuoted {
   String FILE_NAME_PATTERN = "[^<>:;,?\"*|/\\\\]+";
   String FILE_DELIMITER_PATTERN = "[\\\\/]+";
   String OPTIONAL_ROOT_PATTERN = "(?:/+|[a-zA-Z]:[/\\\\]+)?";
@@ -69,11 +65,6 @@ public interface PerlString extends PerlQuoted, PerlValuableEntity {
       run = run.getNextSibling();
     }
     return result;
-  }
-
-  @Override
-  default @NotNull PerlValue computePerlValue() {
-    return PerlScalarValue.create(ElementManipulators.getValueText(this));
   }
 
   @Contract(value = "null -> false", pure = true)

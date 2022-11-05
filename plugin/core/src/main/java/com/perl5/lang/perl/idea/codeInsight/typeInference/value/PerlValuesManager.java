@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.RecursionManager;
+import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.tree.IElementType;
@@ -185,6 +186,9 @@ public final class PerlValuesManager {
     else if (element instanceof PerlVariableMixin) {
       PerlVariableNameElement variableNameElement = ((PerlVariableMixin)element).getVariableNameElement();
       return variableNameElement == null ? UNKNOWN_VALUE : PerlResolveUtil.inferVariableValue((PerlVariable)element);
+    }
+    else if (element instanceof PerlString) {
+      return PerlScalarValue.create(ElementManipulators.getValueText(element));
     }
     else if (element instanceof PerlImplicitVariableDeclaration) {
       return ((PerlImplicitVariableDeclaration)element).getDeclaredValue();
