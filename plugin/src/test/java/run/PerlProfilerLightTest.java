@@ -107,7 +107,7 @@ public class PerlProfilerLightTest extends PerlLightTestCase {
 
   private @NotNull VirtualFile getSubExprFile() {
     var virtualFiles =
-      new ArrayList<>(FilenameIndex.getVirtualFilesByName(getProject(), "SubExpr.pm", GlobalSearchScope.allScope(getProject())));
+      new ArrayList<>(FilenameIndex.getVirtualFilesByName("SubExpr.pm", GlobalSearchScope.allScope(getProject())));
     assertSize(1, virtualFiles);
     return virtualFiles.get(0);
   }
