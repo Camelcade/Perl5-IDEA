@@ -43,8 +43,8 @@ import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PerlSignatureElement;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import gnu.trove.TIntIntHashMap;
-import gnu.trove.TIntObjectHashMap;
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -64,7 +64,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
   private static final Logger LOG = Logger.getInstance(PurePerlFormattingContext.class);
   private final Map<ASTNode, Wrap> myWrapMap = new HashMap<>();
   private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new HashMap<>();
-  private final TIntObjectHashMap<Alignment> myCommentsAlignmentMap = new TIntObjectHashMap<>();
+  private final Int2ObjectOpenHashMap<Alignment> myCommentsAlignmentMap = new Int2ObjectOpenHashMap<>();
   private final Map<ASTNode, Alignment> myRightwardCallsAlignmentMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myElementsALignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
@@ -99,7 +99,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
     }
 
     int commentLine = getNodeLine(commentNode);
-    if (myCommentsAlignmentMap.contains(commentLine)) {
+    if (myCommentsAlignmentMap.containsKey(commentLine)) {
       return myCommentsAlignmentMap.get(commentLine);
     }
     if (LOG.isDebugEnabled()) {
@@ -140,7 +140,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
   /**
    * Maps line numbers to the offset of first here-doc openers. Or {@link Integer.MAX_VALUE} if there is none
    */
-  private final TIntIntHashMap myHeredocForbiddenOffsets = new TIntIntHashMap();
+  private final Int2IntOpenHashMap myHeredocForbiddenOffsets = new Int2IntOpenHashMap();
 
   private static final MultiMap<IElementType, IElementType> OPERATOR_COLLISIONS_MAP = new MultiMap<>();
 
@@ -205,7 +205,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
       return true;
     }
     int nodeLine = getNodeLine(node);
-    if (myHeredocForbiddenOffsets.contains(nodeLine)) {
+    if (myHeredocForbiddenOffsets.containsKey(nodeLine)) {
       return node.getStartOffset() > myHeredocForbiddenOffsets.get(nodeLine);
     }
 

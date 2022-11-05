@@ -17,14 +17,15 @@
 package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
-import gnu.trove.TIntObjectHashMap;
-import gnu.trove.TObjectIntHashMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -36,8 +37,9 @@ import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.*;
 
 public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElementStub<Psi>, Psi extends PerlPolyNamedElement<Stub>>
   extends IStubElementType<Stub, Psi> implements PsiElementProvider {
-  private static final TObjectIntHashMap<IStubElementType<?, ?>> DIRECT_MAP = new TObjectIntHashMap<>();
-  private static final TIntObjectHashMap<IStubElementType<?, ?>> REVERSE_MAP = new TIntObjectHashMap<>();
+  private static final Logger LOG = Logger.getInstance(PerlPolyNamedElementType.class);
+  private static final Object2IntOpenHashMap<IStubElementType<?, ?>> DIRECT_MAP = new Object2IntOpenHashMap<>();
+  private static final Int2ObjectOpenHashMap<IStubElementType<?, ?>> REVERSE_MAP = new Int2ObjectOpenHashMap<>();
 
   static {
     // 0 is reserved for n/a
@@ -46,12 +48,9 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     DIRECT_MAP.put(LIGHT_METHOD_DEFINITION, 3);
     DIRECT_MAP.put(CLASS_ACCESSOR_METHOD, 4);
     DIRECT_MAP.put(LIGHT_ATTRIBUTE_DEFINITION, 5);
-    assert DIRECT_MAP.size() == 5;
+    LOG.assertTrue(DIRECT_MAP.size() == 5);
 
-    DIRECT_MAP.forEachEntry((type, id) -> {
-      REVERSE_MAP.put(id, type);
-      return true;
-    });
+    DIRECT_MAP.forEach((type, id) -> REVERSE_MAP.put(id.intValue(), type));
   }
 
   public PerlPolyNamedElementType(@NotNull String debugName) {

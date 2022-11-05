@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubOutputStream;
-import gnu.trove.TObjectIntHashMap;
+import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +26,7 @@ import java.util.Collection;
 
 final class PerlValueSerializer {
   private final @NotNull StubOutputStream myOutputStream;
-  private final TObjectIntHashMap<PerlValue> myDryMap = new TObjectIntHashMap<>();
+  private final Object2IntOpenHashMap<PerlValue> myDryMap = new Object2IntOpenHashMap<>();
 
   public PerlValueSerializer(@NotNull StubOutputStream outputStream) {
     myOutputStream = outputStream;
@@ -37,7 +37,7 @@ final class PerlValueSerializer {
       writeVarInt(value.getSerializationId());
       return;
     }
-    int duplicateId = myDryMap.get(value);
+    int duplicateId = myDryMap.getInt(value);
     if (duplicateId > 0) {
       writeVarInt(PerlValuesManager.DUPLICATE_ID);
       writeVarInt(duplicateId);

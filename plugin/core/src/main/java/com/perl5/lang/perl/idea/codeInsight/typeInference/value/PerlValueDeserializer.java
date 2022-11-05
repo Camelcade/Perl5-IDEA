@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
-import gnu.trove.TIntObjectHashMap;
+import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -30,7 +30,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 public class PerlValueDeserializer {
 
   private final @NotNull StubInputStream myInputStream;
-  private final TIntObjectHashMap<PerlValue> myDryMap = new TIntObjectHashMap<>();
+  private final Int2ObjectOpenHashMap<PerlValue> myDryMap = new Int2ObjectOpenHashMap<>();
 
   public PerlValueDeserializer(@NotNull StubInputStream inputStream) {
     myInputStream = inputStream;
