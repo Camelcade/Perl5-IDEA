@@ -201,6 +201,9 @@ public final class PerlValuesManager {
     if (elementType == UNDEF_EXPR) {
       return UNDEF_VALUE;
     }
+    else if (elementType == PARENTHESISED_EXPR) {
+      return PerlValuesManager.from(((PsiPerlParenthesisedExpr)element).getExpr());
+    }
     else if (elementType == SCALAR_EXPR) {
       PsiElement[] children = element.getChildren();
       return children.length == 0 ? UNKNOWN_VALUE : PerlScalarContextValue.create(from(children[0]));

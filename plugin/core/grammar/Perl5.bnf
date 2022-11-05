@@ -528,8 +528,6 @@
     implements("deref_expr")="com.perl5.lang.perl.psi.PerlDerefExpression"
     mixin("deref_expr")="com.perl5.lang.perl.psi.mixins.PerlDerefExpressionMixin"
 
-    mixin("parenthesised_expr")="com.perl5.lang.perl.psi.mixins.PerlParenthesizedExpressionMixin"
-
     extends("variable_declaration_global|variable_declaration_lexical|variable_declaration_local")=expr
     implements("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.PerlVariableDeclarationExpr"
     mixin("variable_declaration_lexical|variable_declaration_local|variable_declaration_global")="com.perl5.lang.perl.psi.mixins.PerlVariableDeclarationExprMixin"
