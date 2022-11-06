@@ -491,7 +491,8 @@ Caret offset: 93
 
 
 say 'hi'
-async sub <selection>subname<caret></selection> {
+async
+sub <selection>subname<caret></selection> {
     my ($self) = @_;
     
 };

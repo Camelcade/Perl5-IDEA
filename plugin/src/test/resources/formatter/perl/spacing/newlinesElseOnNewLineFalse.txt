@@ -16,7 +16,8 @@ package Foo::Bar {
 
         when (/^xyz/) {
             $xyz = 1
-        } default {$nothing = 1}
+        }
+        default {$nothing = 1}
 
     }
 
@@ -45,8 +46,6 @@ package Foo::Bar {
         say 'dunno';
     }
 
-
-
     {
         say 'do';
     } continue {
@@ -55,7 +54,8 @@ package Foo::Bar {
 
     when ($a) {
         say 42;
-    } default {
+    }
+    default {
         say 42;
     }
 
@@ -121,7 +121,6 @@ func something {
     say 'this  is  a  long  sub';
 }
 
-
 try {
     say 'hi';
 } catch {
@@ -153,4 +152,3 @@ try {
 } finally {
     say 'hi';
 };
-

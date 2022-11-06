@@ -67,22 +67,6 @@ public final class PerlFormattingTokenSets {
     CONTINUATION_EXPR
   );
 
-  /**
-   * @deprecated looks like {@link PerlTokenSets#COMPOUND_STATEMENTS}
-   */
-  @Deprecated
-  public static final TokenSet COMPOUND_STATEMENTS_TOKENSET = TokenSet.create(
-    IF_COMPOUND,
-    UNLESS_COMPOUND,
-    UNTIL_COMPOUND,
-    WHILE_COMPOUND,
-    GIVEN_COMPOUND,
-    WHEN_COMPOUND,
-    TRYCATCH_COMPOUND,
-    FOR_COMPOUND,
-    FOREACH_COMPOUND
-  );
-
 
   // fixme doesn't duplicate BlockOwner interface?
   public static final TokenSet BLOCK_CONTAINERS_TOKENSET = TokenSet.orSet(
@@ -385,7 +369,7 @@ public final class PerlFormattingTokenSets {
   public static final TokenSet FORMATTING_SUFFICIENT_BLOCKS = TokenSet.orSet(
     TRANSPARENT_ELEMENT_TYPES,
     HEREDOC_BODIES_TOKENSET,
-    COMPOUND_STATEMENTS,
+    COMPOUND_STATEMENTS_TOKENSET,
     BLOCK_LIKE_CONTAINERS,
     TokenSet.create(
       ANON_HASH, ANON_ARRAY,
@@ -411,7 +395,7 @@ public final class PerlFormattingTokenSets {
    * We don't need if compounds for proper formatting and therefore don't need to include them to the model.
    */
   public static final TokenSet FORMATTING_RANGE_EDGE_ELEMENTS = TokenSet.orSet(
-    COMPOUND_STATEMENTS, TokenSet.create(NAMESPACE_DEFINITION)
+    COMPOUND_STATEMENTS_TOKENSET, TokenSet.create(NAMESPACE_DEFINITION)
   );
 
   /**

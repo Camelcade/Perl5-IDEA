@@ -195,7 +195,6 @@ Caret offset: 49
 }
 say STDERR "<caret>";
 
-
 {
   say 'hi';
   
@@ -2400,5 +2399,6 @@ given($a){
 given($a){
   when($b){}
     say STDERR "<caret>";
+
     default{}
 }

@@ -63,8 +63,6 @@ package Foo::Bar {
         say 'dunno';
     }
 
-
-
     {
         say 'do';
     }
@@ -143,7 +141,6 @@ func something {
     say 'this  is  a  long  sub';
     say 'this  is  a  long  sub';
 }
-
 
 try
 {

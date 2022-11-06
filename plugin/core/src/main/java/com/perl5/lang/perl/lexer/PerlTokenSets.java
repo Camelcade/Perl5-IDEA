@@ -389,7 +389,7 @@ public final class PerlTokenSets {
 
   public static final TokenSet SUB_DEFINITIONS_TOKENSET = TokenSet.create(METHOD_DEFINITION, FUNC_DEFINITION, SUB_DEFINITION);
 
-  public static final TokenSet COMPOUND_STATEMENTS = TokenSet.orSet(
+  public static final TokenSet COMPOUND_STATEMENTS_TOKENSET = TokenSet.orSet(
     MODIFIER_DECLARATIONS_TOKENSET,
     SUB_DEFINITIONS_TOKENSET,
     TokenSet.create(
@@ -398,8 +398,7 @@ public final class PerlTokenSets {
       GIVEN_COMPOUND, WHEN_COMPOUND, DEFAULT_COMPOUND,
       TRYCATCH_COMPOUND,
       SWITCH_COMPOUND, CASE_COMPOUND, CASE_DEFAULT,
-      WHILE_COMPOUND,
-      UNTIL_COMPOUND,
+      WHILE_COMPOUND, UNTIL_COMPOUND,
       FOR_COMPOUND, FOREACH_COMPOUND
     )
   );

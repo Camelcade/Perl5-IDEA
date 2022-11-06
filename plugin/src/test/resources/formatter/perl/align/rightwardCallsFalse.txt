@@ -23,7 +23,6 @@ my @arr = grep {}
                 map {}
                         @ARGV;
 
-
 sub array_fn(@) {
 
 }

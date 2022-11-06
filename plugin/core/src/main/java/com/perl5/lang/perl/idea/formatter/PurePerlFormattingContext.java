@@ -299,7 +299,8 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
       }
 
       // LF after opening brace and before closing need to check if here-doc opener is in the line
-      if (LF_ELEMENTS.contains(child1Type) && LF_ELEMENTS.contains(child2Type)) {
+      if (LF_ELEMENTS.contains(child1Type) && LF_ELEMENTS.contains(child2Type) &&
+          !(child1Type == LABEL_DECLARATION && child2Type == BLOCK_COMPOUND)) {
         if (!isNewLineForbiddenAt(child2Node)) {
           return Spacing.createSpacing(0, 0, 1, true, 1);
         }

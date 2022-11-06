@@ -46,7 +46,6 @@ my ($v1, $v2, $v3) :me
         :ot
         :so;
 
-
 sub something()
         :method
         :other

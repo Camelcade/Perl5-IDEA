@@ -49,8 +49,6 @@ package Foo::Bar {
         say 'dunno';
     }
 
-
-
     {
         say 'do';
     }
@@ -127,7 +125,6 @@ func something {
     say 'this  is  a  long  sub';
 }
 
-
 try {
     say 'hi';
 }
@@ -167,4 +164,3 @@ catch {
 finally {
     say 'hi';
 };
-

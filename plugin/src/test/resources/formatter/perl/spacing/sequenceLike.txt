@@ -30,7 +30,6 @@ $a
         ? $b
         : 42);
 
-
 sub subname($a, $b, $c) {}
 
 sub subname($a,
