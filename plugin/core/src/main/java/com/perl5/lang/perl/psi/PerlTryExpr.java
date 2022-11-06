@@ -17,8 +17,18 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
-import com.perl5.lang.perl.psi.properties.PerlSubOwner;
+import com.perl5.lang.perl.psi.properties.PerlDieScope;
+import org.jetbrains.annotations.Nullable;
 
-public interface PerlTryExpr extends PsiElement, PerlBlockOwner, PerlSubOwner {
+public interface PerlTryExpr extends PsiElement, PerlBlockOwner, PerlDieScope {
+  default @Nullable PsiPerlSubExpr getSub() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlSubExpr.class);
+  }
+
+  @Override
+  default boolean includeInControlFlow() {
+    return true;
+  }
 }
