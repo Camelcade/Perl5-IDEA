@@ -1,4 +1,4 @@
-package Foo;
+package F<caret>oo;
 
 @Foo::ISA = ();
 @Bar::ISA = qw/superfoo1 superbar1/;

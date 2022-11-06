@@ -1,4 +1,4 @@
-package Foo;
+package F<caret>oo;
 
 extends print 123;
 extends 'someparent';

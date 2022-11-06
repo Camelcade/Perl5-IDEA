@@ -159,8 +159,11 @@
     <inspection_tool class="DeprecatedIsStillUsed" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DeprecatedMavenDependency" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="Deprecation" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="IGNORE_INSIDE_DEPRECATED" value="false" />
       <option name="IGNORE_ABSTRACT_DEPRECATED_OVERRIDES" value="false" />
+      <option name="IGNORE_IMPORT_STATEMENTS" value="false" />
       <option name="IGNORE_METHODS_OF_DEPRECATED" value="false" />
+      <option name="IGNORE_IN_SAME_OUTERMOST_CLASS" value="false" />
     </inspection_tool>
     <inspection_tool class="Deprecations" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="Destructure" enabled="false" level="INFORMATION" enabled_by_default="false" />

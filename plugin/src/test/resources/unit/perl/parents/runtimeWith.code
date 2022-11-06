@@ -1,4 +1,4 @@
-package Foo;
+package F<caret>oo;
 
 with print 42;
 with 'someparent1', 'someparent2';

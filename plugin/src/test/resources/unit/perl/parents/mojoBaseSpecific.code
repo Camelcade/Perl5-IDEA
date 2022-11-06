@@ -1,4 +1,4 @@
-package Foo;
+package Fo<caret>o;
 
 use Mojo::Base qw/somebase1/;
 

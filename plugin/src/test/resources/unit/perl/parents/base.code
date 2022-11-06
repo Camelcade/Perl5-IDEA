@@ -1,4 +1,4 @@
-package Foo;
+package F<caret>oo;
 
 use base;
 use base qw/superbase superbase2/;

@@ -1,4 +1,4 @@
-package Foo;
+package F<caret>oo;
 
 use parent;
 use parent "superparent::duperparent";

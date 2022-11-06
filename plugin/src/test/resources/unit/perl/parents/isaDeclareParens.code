@@ -1,4 +1,4 @@
-package Foo;
+package F<caret>o;
 
 our (@ISA) = qw//;
 our (@ISA) = qw/superfoo3 superbar3/;
