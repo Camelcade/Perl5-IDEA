@@ -185,18 +185,18 @@ public final class PerlValuesManager {
       PsiPerlExpr expr = ((PerlReturnExpr)element).getReturnValueExpr();
       return expr == null ? UNDEF_VALUE : from(expr);
     }
-    else if (element instanceof PerlVariableMixin) {
-      PerlVariableNameElement variableNameElement = ((PerlVariableMixin)element).getVariableNameElement();
-      return variableNameElement == null ? UNKNOWN_VALUE : PerlResolveUtil.inferVariableValue((PerlVariable)element);
+    else if (element instanceof PerlVariableMixin variableMixin) {
+      PerlVariableNameElement variableNameElement = variableMixin.getVariableNameElement();
+      return variableNameElement == null ? UNKNOWN_VALUE : PerlResolveUtil.inferVariableValue(variableMixin);
     }
     else if (element instanceof PerlString) {
       return PerlScalarValue.create(ElementManipulators.getValueText(element));
     }
-    else if (element instanceof PerlImplicitVariableDeclaration) {
-      return ((PerlImplicitVariableDeclaration)element).getDeclaredValue();
+    else if (element instanceof PerlImplicitVariableDeclaration implicitVariableDeclaration) {
+      return implicitVariableDeclaration.getDeclaredValue();
     }
-    else if (element instanceof PerlMethod) {
-      return computeValue((PerlMethod)element);
+    else if (element instanceof PerlMethod method) {
+      return computeValue(method);
     }
 
     IElementType elementType = PsiUtilCore.getElementType(element);
@@ -342,8 +342,8 @@ public final class PerlValuesManager {
     boolean isNestedCall = PerlSubCallElement.isNestedCall(parentElement);
 
     List<PerlValue> callArguments;
-    if (parentElement instanceof PerlMethodContainer) {
-      callArguments = ContainerUtil.map(((PerlMethodContainer)parentElement).getCallArgumentsList(), PerlValuesManager::from);
+    if (parentElement instanceof PerlMethodContainer parentMethodContainer) {
+      callArguments = ContainerUtil.map(parentMethodContainer.getCallArgumentsList(), PerlValuesManager::from);
     }
     else {
       // these are sort and code variable
