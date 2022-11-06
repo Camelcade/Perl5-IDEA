@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
@@ -32,8 +31,6 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.QUALIFYING_PAC
 
 
 public abstract class PerlMethodMixin extends PerlCompositeElementImpl implements PerlMethod {
-  private static final Logger LOG = Logger.getInstance(PerlMethodMixin.class);
-
   public PerlMethodMixin(@NotNull ASTNode node) {
     super(node);
   }
