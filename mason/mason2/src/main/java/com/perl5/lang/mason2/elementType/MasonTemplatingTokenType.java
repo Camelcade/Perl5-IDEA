@@ -27,6 +27,7 @@ public class MasonTemplatingTokenType extends IElementType {
     super(debugName, Mason2TemplatingLanguage.INSTANCE);
   }
 
+  @Override
   public String toString() {
     return "Mason2: " + super.toString();
   }

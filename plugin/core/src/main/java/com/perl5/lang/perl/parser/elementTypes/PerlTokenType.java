@@ -32,6 +32,7 @@ public class PerlTokenType extends IElementType {
     super(debugName, language);
   }
 
+  @Override
   public String toString() {
     return "Perl5: " + super.toString();
   }

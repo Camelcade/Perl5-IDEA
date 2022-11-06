@@ -606,7 +606,7 @@
     <inspection_tool class="MissingActionUpdateThread" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="MissingFinalNewline" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="MissingMnemonic" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="MissingOverrideAnnotation" enabled="false" level="WARNING" enabled_by_default="false">
+    <inspection_tool class="MissingOverrideAnnotation" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="ignoreObjectMethods" value="true" />
       <option name="ignoreAnonymousClassMethods" value="false" />
     </inspection_tool>

@@ -27,6 +27,7 @@ public class EmbeddedPerlTokenType extends IElementType {
     super(debugName, EmbeddedPerlLanguage.INSTANCE);
   }
 
+  @Override
   public String toString() {
     return "Embedded Perl5: " + super.toString();
   }

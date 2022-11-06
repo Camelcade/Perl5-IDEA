@@ -33,6 +33,7 @@ public class MojoliciousTokenType extends IElementType implements ILeafElementTy
     super(debugName, MojoliciousLanguage.INSTANCE);
   }
 
+  @Override
   public String toString() {
     return "Mojolicious: " + super.toString();
   }

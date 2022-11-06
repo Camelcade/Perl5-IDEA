@@ -27,6 +27,7 @@ public class HTMLMasonTokenType extends IElementType {
     super(debugName, HTMLMasonLanguage.INSTANCE);
   }
 
+  @Override
   public String toString() {
     return "HTML::Mason: " + super.toString();
   }
