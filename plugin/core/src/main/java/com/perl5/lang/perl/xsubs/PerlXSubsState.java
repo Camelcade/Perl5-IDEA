@@ -64,6 +64,7 @@ import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -185,7 +186,8 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     });
   }
 
-  private @Nullable VirtualFile getDeparsedSubsFile() {
+  @VisibleForTesting
+  public @Nullable VirtualFile getDeparsedSubsFile() {
     for (VirtualFile contentRoot : ProjectRootManager.getInstance(myProject).getContentRoots()) {
       var deparsedFile = contentRoot.findFileByRelativePath(DEPARSED_FILE_NAME);
       if (deparsedFile != null && deparsedFile.isValid()) {

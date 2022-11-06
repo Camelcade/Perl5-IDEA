@@ -69,14 +69,13 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
     assertEquals("XSubs declarations file is absent or outdated.", notification.getContent());
     assertSize(1, notification.getActions());
 
+    assertEmpty(PerlSubUtil.getSubDeclarations(getProject(), "Hash::StoredIterator::hash_get_iterator"));
     runActionWithTestEvent(new PerlRegenerateXSubsAction());
 
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
-    assertEmpty(PerlSubUtil.getSubDeclarations(getProject(), "Hash::StoredIterator::hash_get_iterator"));
+    assertNotEmpty(PerlSubUtil.getSubDeclarations(getProject(), "Hash::StoredIterator::hash_get_iterator"));
 
-    var deparsedFileRoot = getProject().getBaseDir();
-    deparsedFileRoot.refresh(false, false);
-    var deparsedFile = deparsedFileRoot.findFileByRelativePath(PerlXSubsState.DEPARSED_FILE_NAME);
+    var deparsedFile = PerlXSubsState.getInstance(getProject()).getDeparsedSubsFile();
     assertNotNull(deparsedFile);
 
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
