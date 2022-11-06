@@ -18,15 +18,29 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.psi.PerlAnnotationWithValue;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationNoInject;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY;
+import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY_VALUE;
 
-public class PerlAnnotations implements PerlElementTypes {
+
+public final class PerlAnnotations implements PerlElementTypes {
+  private PerlAnnotations() {
+  }
+
   public static final Map<String, IElementType> TOKENS_MAP = new HashMap<>();
 
   static {
@@ -48,5 +62,31 @@ public class PerlAnnotations implements PerlElementTypes {
    */
   public static boolean isInjectionSuppressed(@NotNull PsiElement host) {
     return PerlPsiUtil.getAnyAnnotationByClass(host, PsiPerlAnnotationNoInject.class) != null;
+  }
+
+  private static @Nullable String getReturnClass(@NotNull PerlAnnotationWithValue annotation) {
+    PerlNamespaceElement namespaceElement = PsiTreeUtil.getChildOfType(annotation, PerlNamespaceElement.class);
+    if (namespaceElement != null) {
+      return namespaceElement.getCanonicalName();
+    }
+
+    PsiElement run = annotation.getFirstChild();
+    while (run != null) {
+      if (PsiUtilCore.getElementType(run) == OPERATOR_MUL) {
+        return NAMESPACE_ANY;
+      }
+      run = run.getNextSibling();
+    }
+
+    return null;
+  }
+
+  /**
+   * @return value desscribing annotation parameter: classname, wildcard, etc.
+   */
+  public static PerlValue getParameterValue(@NotNull PerlAnnotationWithValue annotation) {
+    String returnClass = getReturnClass(annotation);
+    return returnClass == null ? UNKNOWN_VALUE :
+           returnClass.equals(NAMESPACE_ANY) ? NAMESPACE_ANY_VALUE : PerlScalarValue.create(returnClass);
   }
 }

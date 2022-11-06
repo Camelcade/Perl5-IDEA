@@ -9,7 +9,9 @@
     </inspection_tool>
     <inspection_tool class="Deprecation" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="IGNORE_ABSTRACT_DEPRECATED_OVERRIDES" value="false" />
+      <option name="IGNORE_IMPORT_STATEMENTS" value="false" />
       <option name="IGNORE_METHODS_OF_DEPRECATED" value="false" />
+      <option name="IGNORE_IN_SAME_OUTERMOST_CLASS" value="false" />
     </inspection_tool>
     <inspection_tool class="HardCodedStringLiteral" enabled="true" level="INFORMATION" enabled_by_default="false">
       <scope name="Production" level="WARNING" enabled="true">

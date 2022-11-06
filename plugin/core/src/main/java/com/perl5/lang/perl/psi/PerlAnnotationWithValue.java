@@ -17,59 +17,16 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.lexer.PerlAnnotations;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_MUL;
-import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY;
-import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY_VALUE;
 
 
 public interface PerlAnnotationWithValue extends PsiElement, PerlAnnotation {
   /**
-   * Trying to search for netsted NamespaceElement
-   * fixme this is raw, should be a type
-   *
-   * @return psi element or null
-   * @deprecated use {@link com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue}
-   */
-  @Deprecated
-  default @Nullable PerlNamespaceElement getType() {
-    return PsiTreeUtil.getChildOfType(this, PerlNamespaceElement.class);
-  }
-
-  /**
-   * @deprecated use {@link com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue}
-   */
-  @Deprecated
-  default @Nullable String getReturnClass() {
-    PerlNamespaceElement namespaceElement = getType();
-    if (namespaceElement != null) {
-      return namespaceElement.getCanonicalName();
-    }
-
-    PsiElement run = getFirstChild();
-    while (run != null) {
-      if (PsiUtilCore.getElementType(run) == OPERATOR_MUL) {
-        return NAMESPACE_ANY;
-      }
-      run = run.getNextSibling();
-    }
-
-    return null;
-  }
-
-  /**
    * @return a value described in this annotation
    */
   default @NotNull PerlValue getValue() {
-    String returnClass = getReturnClass();
-    return returnClass == null ? UNKNOWN_VALUE :
-           returnClass.equals(NAMESPACE_ANY) ? NAMESPACE_ANY_VALUE : PerlScalarValue.create(returnClass);
+    return PerlAnnotations.getParameterValue(this);
   }
 }
