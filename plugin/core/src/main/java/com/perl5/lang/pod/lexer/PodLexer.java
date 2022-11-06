@@ -19,7 +19,7 @@ package com.perl5.lang.pod.lexer;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.containers.IntStack;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ import java.io.Reader;
 @SuppressWarnings("ALL")
 public class PodLexer extends PodLexerGenerated {
   private static final Logger LOG = Logger.getInstance(PodLexer.class);
-  private final IntStack myOpenedAngles = new IntStack();
+  private final IntArrayList myOpenedAngles = new IntArrayList();
 
   public PodLexer(Reader in) {
     super(in);
@@ -60,7 +60,7 @@ public class PodLexer extends PodLexerGenerated {
 
   @Override
   public int yystate() {
-    return myPreparsedTokensList.isEmpty() && myOpenedAngles.empty() ? super.yystate() : LEX_PREPARSED_ITEMS;
+    return myPreparsedTokensList.isEmpty() && myOpenedAngles.isEmpty() ? super.yystate() : LEX_PREPARSED_ITEMS;
   }
 
   @Override
@@ -147,7 +147,7 @@ public class PodLexer extends PodLexerGenerated {
    * Invoked on spaces following spaced angle.
    */
   protected void checkPendingSpacedAngles() {
-    if (!myOpenedAngles.empty() && myOpenedAngles.peek() > 1) {
+    if (!myOpenedAngles.isEmpty() && myOpenedAngles.getInt(myOpenedAngles.size() - 1) > 1) {
       yybegin(CLOSING_SPACED_ANGLE);
     }
   }
@@ -160,11 +160,11 @@ public class PodLexer extends PodLexerGenerated {
   @NotNull
   protected IElementType popAngle() {
     int tokenLength = yylength();
-    if (myOpenedAngles.empty()) {
+    if (myOpenedAngles.isEmpty()) {
       // not counting
       return processAsSingleSymbol(tokenLength);
     }
-    int openerLength = myOpenedAngles.peek();
+    int openerLength = myOpenedAngles.getInt(myOpenedAngles.size() - 1);
     if (openerLength > tokenLength) {
       // unbalanced closing angle, seems we can handle this
       return processAsSingleSymbol(tokenLength);
@@ -189,6 +189,6 @@ public class PodLexer extends PodLexerGenerated {
    */
   @NotNull
   protected IElementType lexOptional(@NotNull IElementType type) {
-    return myOpenedAngles.empty() ? POD_SYMBOL : type;
+    return myOpenedAngles.isEmpty() ? POD_SYMBOL : type;
   }
 }
