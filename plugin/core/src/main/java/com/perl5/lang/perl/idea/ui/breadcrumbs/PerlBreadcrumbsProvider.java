@@ -27,7 +27,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.properties.PerlSubOwner;
+import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,7 +46,7 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
     return element instanceof PerlFile ||
            element instanceof PerlMethodModifier ||
            element instanceof PerlSubDefinitionElement && ((PerlSubDefinitionElement)element).getSubName() != null ||
-           element instanceof PerlSubExpr && (!(element.getParent() instanceof PerlSubOwner)) ||
+           element instanceof PerlSubExpr && (!(element.getParent() instanceof PerlBlockOwner)) ||
            element instanceof PerlNamespaceDefinitionElement && ((PerlNamespaceDefinitionElement)element).getNamespaceName() != null;
   }
 
@@ -78,10 +78,6 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
         nearestParent instanceof PerlSubDefinitionElement ||
         nearestParent instanceof PerlNamespaceDefinitionElement) {
       return nearestParent;
-    }
-
-    if (nearestParent.getParent() instanceof PerlSubOwner) {
-      return getStructuralParentElement(nearestParent.getParent());
     }
 
     PsiPerlBlock exprBlock = ((PerlSubExpr)nearestParent).getBlock();
