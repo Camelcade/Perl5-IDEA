@@ -169,7 +169,7 @@ public class PodLexer extends PodLexerGenerated {
       // unbalanced closing angle, seems we can handle this
       return processAsSingleSymbol(tokenLength);
     }
-    myOpenedAngles.pop();
+    myOpenedAngles.popInt();
     if (openerLength < tokenLength) {
       yypushback(tokenLength - openerLength);
     }
