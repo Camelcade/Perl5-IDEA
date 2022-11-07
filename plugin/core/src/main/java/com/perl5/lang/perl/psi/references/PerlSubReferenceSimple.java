@@ -35,6 +35,7 @@ import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -63,20 +64,17 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
   protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     // fixme not dry with super resolver, need some generics fix
     PsiElement element = getElement();
-    List<PsiElement> relatedItems = new ArrayList<>();
 
     String packageName = PerlPackageUtil.getContextNamespaceName(element);
     String subName = element.getNode().getText();
     Project project = element.getProject();
 
-    relatedItems.addAll(PerlMroDfs.resolveSub(
+    var result = getResolveResults(PerlMroDfs.collectTargetSubs(
       project, element.getResolveScope(),
       packageName,
       subName,
       false
     ));
-
-    List<ResolveResult> result = getResolveResults(relatedItems);
 
     return result.toArray(ResolveResult.EMPTY_ARRAY);
   }
@@ -145,7 +143,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
     FLAGS |= FLAG_IMPORTED;
   }
 
-  public @NotNull List<ResolveResult> getResolveResults(List<PsiElement> relatedItems) {
+  public @NotNull List<ResolveResult> getResolveResults(Collection<PsiElement> relatedItems) {
     List<ResolveResult> result = new ArrayList<>();
 
     resetFlags();

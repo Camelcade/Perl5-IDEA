@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -57,40 +58,43 @@ public abstract class PerlMro {
    * Resolving method with current MRO;
    *
    * @return collection of first encountered super subs declarations, definitions, constants and typeglobs
-   * @deprecated use {@link #processTargets(Project, GlobalSearchScope, String, Set, boolean, Processor)}
    */
-  @Deprecated
-  public static @NotNull Collection<PsiElement> resolveSub(@NotNull Project project,
-                                                           @NotNull GlobalSearchScope searchScope,
-                                                           @Nullable String namespaceName,
-                                                           @Nullable String subName,
-                                                           boolean isSuper) {
+  public static @NotNull Collection<PsiElement> collectTargetSubs(@NotNull Project project,
+                                                                  @NotNull GlobalSearchScope searchScope,
+                                                                  @Nullable String namespaceName,
+                                                                  @Nullable String subName,
+                                                                  boolean isSuper) {
     if (subName == null) {
       return Collections.emptyList();
     }
-    if (namespaceName == null) {
-      namespaceName = PerlPackageUtil.UNIVERSAL_NAMESPACE;
-    }
-    Collection<PsiElement> result = new ArrayList<>();
-    processTargets(project, searchScope, namespaceName, Collections.singleton(subName), isSuper, result::add);
+    var result = new ArrayList<PsiElement>();
+    processTargetSubs(project, searchScope, namespaceName, Collections.singleton(subName), isSuper, result::add);
     return result;
   }
 
-  public static boolean processTargets(@NotNull Project project,
-                                       @NotNull GlobalSearchScope searchScope,
-                                       @NotNull String baseNamespaceName,
-                                       @NotNull Set<String> subNames,
-                                       boolean isSuper,
-                                       @NotNull Processor<? super PsiNamedElement> processor) {
+  public static boolean processTargetSubs(@NotNull Project project,
+                                          @NotNull GlobalSearchScope searchScope,
+                                          @Nullable String baseNamespaceName,
+                                          @NotNull Set<String> subNames,
+                                          boolean isSuper,
+                                          @NotNull Processor<? super PsiNamedElement> processor) {
+    if (subNames.isEmpty()) {
+      return true;
+    }
+    if (baseNamespaceName == null) {
+      baseNamespaceName = PerlPackageUtil.UNIVERSAL_NAMESPACE;
+    }
     Collection<String> linearISA = getLinearISA(project, searchScope, baseNamespaceName, isSuper);
 
     Ref<String> stopFlag = Ref.create();
     for (String currentNamespaceName : linearISA) {
       for (String subName : subNames) {
-        if (!PerlSubUtil.processRelatedItems(project, searchScope, PerlPackageUtil.join(currentNamespaceName, subName), it -> {
-          stopFlag.set("");
-          return processor.process(it);
-        })) {
+        if (StringUtil.isNotEmpty(subName) && !PerlSubUtil.processRelatedItems(
+          project, searchScope, PerlPackageUtil.join(currentNamespaceName, subName),
+          it -> {
+            stopFlag.set("");
+            return processor.process(it);
+          })) {
           return false;
         }
       }

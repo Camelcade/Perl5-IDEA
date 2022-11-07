@@ -28,9 +28,6 @@ import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class PerlMooseSuperReference extends PerlCachingReference<PsiElement> {
 
@@ -41,28 +38,25 @@ public class PerlMooseSuperReference extends PerlCachingReference<PsiElement> {
   @Override
   protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     // fixme not really dry with simpleresolver and superresolver. Need some generics magic
-    List<ResolveResult> result = new ArrayList<>();
     PsiElement element = getElement();
 
     PerlMooseOverrideStatement overrideStatement = PsiTreeUtil.getParentOfType(element, PerlMooseOverrideStatement.class);
 
-    if (overrideStatement != null) {
-      String packageName = PerlPackageUtil.getContextNamespaceName(element);
-      String subName = overrideStatement.getSubName();
-      Project project = element.getProject();
-
-
-      for (PsiElement targetElement : PerlMro.resolveSub(
-        project, element.getResolveScope(),
-        packageName,
-        subName,
-        true
-      )) {
-        result.add(new PsiElementResolveResult(targetElement));
-      }
+    if (overrideStatement == null) {
+      return ResolveResult.EMPTY_ARRAY;
     }
+    String packageName = PerlPackageUtil.getContextNamespaceName(element);
+    String subName = overrideStatement.getSubName();
+    Project project = element.getProject();
 
-    return result.toArray(ResolveResult.EMPTY_ARRAY);
+
+    var targetSubs = PerlMro.collectTargetSubs(
+      project, element.getResolveScope(),
+      packageName,
+      subName,
+      true
+    );
+    return PsiElementResolveResult.createResults(targetSubs);
   }
 
   @Override

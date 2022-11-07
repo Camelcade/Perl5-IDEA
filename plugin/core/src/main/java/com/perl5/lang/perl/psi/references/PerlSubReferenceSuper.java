@@ -23,7 +23,6 @@ import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -42,14 +41,12 @@ public class PerlSubReferenceSuper extends PerlSubReferenceSimple {
     String subName = element.getNode().getText();
     Project project = element.getProject();
 
-    List<PsiElement> relatedItems = new ArrayList<>(PerlMroDfs.resolveSub(
+    List<ResolveResult> result = getResolveResults(PerlMroDfs.collectTargetSubs(
       project, element.getResolveScope(),
       packageName,
       subName,
       true
     ));
-
-    List<ResolveResult> result = getResolveResults(relatedItems);
 
     return result.toArray(ResolveResult.EMPTY_ARRAY);
   }

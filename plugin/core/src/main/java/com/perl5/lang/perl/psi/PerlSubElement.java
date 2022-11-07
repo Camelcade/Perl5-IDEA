@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.Processor;
@@ -35,19 +36,19 @@ public interface PerlSubElement extends PerlSub, PsiElement, PerlIdentifierOwner
       return null;
     }
 
-    Collection<PsiElement> resolveTargets = PerlMro.resolveSub(
-      getProject(), getResolveScope(),
-      getNamespaceName(),
-      getSubName(),
-      true
+    Ref<PerlSubElement> resultRef = Ref.create();
+    PerlMro.processTargetSubs(
+      getProject(), getResolveScope(), getNamespaceName(), Collections.singleton(getSubName()), true,
+      it -> {
+        if (it instanceof PerlSubElement subElement) {
+          resultRef.set(subElement);
+          return false;
+        }
+        return true;
+      }
     );
 
-    for (PsiElement resolveTarget : resolveTargets) {
-      if (resolveTarget instanceof PerlSubElement) {
-        return (PerlSubElement)resolveTarget;
-      }
-    }
-    return null;
+    return resultRef.get();
   }
 
   default @NotNull PerlSubElement getTopmostSuperMethod() {
