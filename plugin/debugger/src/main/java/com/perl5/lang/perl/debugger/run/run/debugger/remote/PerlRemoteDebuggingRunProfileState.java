@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,10 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.xdebugger.DefaultDebugProcessHandler;
 import com.perl5.lang.perl.debugger.run.run.debugger.PerlDebugProfileStateBase;
+import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunConsole;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -43,10 +45,19 @@ public class PerlRemoteDebuggingRunProfileState extends PerlDebugProfileStateBas
   public PerlRemoteDebuggingRunProfileState(ExecutionEnvironment environment) {
     super(environment);
     PerlRemoteDebuggingConfiguration debuggingConfiguration = (PerlRemoteDebuggingConfiguration)environment.getRunProfile();
-    Project project = environment.getProject();
-    String projectPath = project.getBaseDir().getCanonicalPath();
-    myLocalProjectPath = new File(projectPath == null ? "" : projectPath);
+    myLocalProjectPath = computeLocalProjectPath(debuggingConfiguration);
     myRemoteProjectPath = new File(debuggingConfiguration.getRemoteProjectRoot());
+  }
+
+  /**
+   * @see GenericPerlRunConfiguration#computeWorkingDirectory(Project)
+   */
+  private static @NotNull File computeLocalProjectPath(@NotNull PerlRemoteDebuggingConfiguration debuggingConfiguration) {
+    var userSpecifiedRoot = debuggingConfiguration.getLocalProjectRoot();
+    if (StringUtil.isEmptyOrSpaces(userSpecifiedRoot)) {
+      return new File(StringUtil.notNullize(debuggingConfiguration.getProject().getBasePath()));
+    }
+    return new File(userSpecifiedRoot).getAbsoluteFile();
   }
 
   @Override

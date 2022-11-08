@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -364,6 +364,9 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     }
   }
 
+  /**
+   * @see PerlRemoteDebuggingRunProfileState#computeLocalProjectPath(PerlRemoteDebuggingConfiguration)
+   */
   protected @Nullable String computeWorkingDirectory(@NotNull Project project) throws ExecutionException {
     String workDirectory = getWorkingDirectory();
     if (StringUtil.isNotEmpty(workDirectory)) {

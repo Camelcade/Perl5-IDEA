@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAc
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.util.xmlb.XmlSerializer;
 import com.intellij.util.xmlb.annotations.Tag;
@@ -41,6 +42,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
 
   public int debugPort = 12345;
   public String remoteProjectRoot = "/home/";
+  public String localProjectRoot = "";
   public String scriptCharset = "utf8";
   public String perlRole = "client";
   public String startMode = "RUN";
@@ -103,12 +105,20 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
   }
 
   @Override
-  public String getRemoteProjectRoot() {
+  public @NlsSafe String getRemoteProjectRoot() {
     return remoteProjectRoot;
   }
 
   public void setRemoteProjectRoot(String remoteWorkingDirectory) {
     this.remoteProjectRoot = remoteWorkingDirectory;
+  }
+
+  public @NotNull @NlsSafe String getLocalProjectRoot() {
+    return localProjectRoot;
+  }
+
+  public void setLocalProjectRoot(@NotNull String localProjectRoot) {
+    this.localProjectRoot = localProjectRoot;
   }
 
   @Override
@@ -132,7 +142,7 @@ public class PerlRemoteDebuggingConfiguration extends RunConfigurationBase
   }
 
   @Override
-  public String getPerlRole() {
+  public @NlsSafe String getPerlRole() {
     return perlRole;
   }
 

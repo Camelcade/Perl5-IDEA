@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,13 @@
 
 package com.perl5.lang.perl.debugger.run.run.debugger.remote;
 
+import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.LabeledComponent;
+import com.intellij.openapi.ui.TextComponentAccessor;
+import com.intellij.openapi.ui.TextFieldWithBrowseButton;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
@@ -46,7 +49,8 @@ import static com.perl5.lang.perl.debugger.run.run.debugger.PerlDebugProfileStat
 class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase<PerlRemoteDebuggingConfiguration> {
 
 
-  private JTextField myWorkingDirectoryComponent;
+  private JTextField myRemoteProjectRootComponent;
+  private TextFieldWithBrowseButton myLocalProjectRootComponent;
   private ComboBox<String> myPerlRole;
   private JTextField myDebuggingHost;
   private JFormattedTextField myDebuggingPort;
@@ -59,7 +63,8 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
 
   @Override
   protected void resetEditorFrom(@NotNull PerlRemoteDebuggingConfiguration perlConfiguration) {
-    myWorkingDirectoryComponent.setText(perlConfiguration.getRemoteProjectRoot());
+    myRemoteProjectRootComponent.setText(perlConfiguration.getRemoteProjectRoot());
+    myLocalProjectRootComponent.setText(perlConfiguration.getLocalProjectRoot());
     myPerlRole.setSelectedItem(perlConfiguration.getPerlRole());
     myDebuggingHost.setText(perlConfiguration.getHostToBind());
     myDebuggingPort.setText(String.valueOf(perlConfiguration.getDebugPort()));
@@ -70,7 +75,8 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
 
   @Override
   protected void applyEditorTo(@NotNull PerlRemoteDebuggingConfiguration perlConfiguration) throws ConfigurationException {
-    perlConfiguration.setRemoteProjectRoot(myWorkingDirectoryComponent.getText());
+    perlConfiguration.setRemoteProjectRoot(myRemoteProjectRootComponent.getText());
+    perlConfiguration.setLocalProjectRoot(myLocalProjectRootComponent.getText());
     Object selectedItem = myPerlRole.getSelectedItem();
     assert selectedItem != null;
     perlConfiguration.setPerlRole(selectedItem.toString());
@@ -91,11 +97,19 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
       return null;
     }
 
-    myWorkingDirectoryComponent = new JTextField();
-    LabeledComponent<JTextField> workingDirectory =
-      LabeledComponent.create(myWorkingDirectoryComponent, PerlBundle.message("perl.run.option.remote.root"));
-    workingDirectory.setLabelLocation(BorderLayout.WEST);
-    debugPanel.add(workingDirectory);
+    myLocalProjectRootComponent = new TextFieldWithBrowseButton();
+    myLocalProjectRootComponent.addBrowseFolderListener(PerlBundle.message("perl.run.option.select.local.root"), null,
+                                                        myProject,
+                                                        FileChooserDescriptorFactory.createSingleFolderDescriptor(),
+                                                        TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
+    var localRoot = LabeledComponent.create(myLocalProjectRootComponent, PerlBundle.message("perl.run.option.local.root"));
+    localRoot.setLabelLocation(BorderLayout.WEST);
+    debugPanel.add(localRoot);
+
+    myRemoteProjectRootComponent = new JTextField();
+    var remoteRoot = LabeledComponent.create(myRemoteProjectRootComponent, PerlBundle.message("perl.run.option.remote.root"));
+    remoteRoot.setLabelLocation(BorderLayout.WEST);
+    debugPanel.add(remoteRoot);
 
     myPerlRole = new ComboBox<String>(new CollectionComboBoxModel<>(new ArrayList<>(PerlDebugOptionsSets.ROLE_OPTIONS.keySet()))) {
       @Override
