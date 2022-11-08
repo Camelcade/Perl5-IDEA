@@ -1,3 +1,7 @@
 <component name="CopyrightManager">
-  <settings default="Perl5-Plugin" />
+  <settings>
+    <module2copyright>
+      <element module="Project sources" copyright="Perl5-Plugin" />
+    </module2copyright>
+  </settings>
 </component>
