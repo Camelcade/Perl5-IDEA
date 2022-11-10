@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ORG_GRADLE_PROJECT_downloadIdeaSources: false
-      WITH_COVERAGE: false
+      WITH_COVERAGE: true
       COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       CI: GitHub
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
@@ -126,6 +126,25 @@ jobs:
             ./mojo/build/reports/tests/*
             ./tt2/build/test-results/*
             ./tt2/build/reports/tests/*
+      - name: Generating root coverage reports
+        run: |
+          ./gradlew jacocoRootReport
+      - name: Uploading coverage results artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: coverage
+          path: |
+            ./build/jacoco/test.exec
+            ./build/reports/jacoco/jacocoRootReport/*
+            ./plugin/build/jacoco/test.exec
+            ./mason/mason2/build/jacoco/test.exec
+            ./mason/htmlmason/build/jacoco/test.exec
+            ./embedded/build/jacoco/test.exec
+            ./mojo/build/jacoco/test.exec
+            ./tt2/build/jacoco/test.exec
+      - name: Upload coveralls data
+        run: |
+          ./gradlew coveralls
       - name: SonarCube analysis
         run: |
           ./gradlew sonarqube --info
