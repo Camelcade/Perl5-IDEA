@@ -152,6 +152,8 @@ allprojects {
     }
     jacoco {
       enabled = withCoverage
+      includeNoLocationClasses = true
+      jacoco.excludes = ['jdk.internal.*']
     }
     if( isCI ){
       testLogging {
