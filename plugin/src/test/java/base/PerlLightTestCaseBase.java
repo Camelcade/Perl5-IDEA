@@ -24,6 +24,7 @@ import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.codeInsight.daemon.GutterMark;
 import com.intellij.codeInsight.daemon.LineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
+import com.intellij.codeInsight.documentation.DocumentationComponent;
 import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.codeInsight.editorActions.SelectWordHandler;
 import com.intellij.codeInsight.generation.surroundWith.SurroundWithHandler;
@@ -2724,7 +2725,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
 
   /**
-   * Part of {@link DocumentationManager#navigateByLink(com.intellij.codeInsight.documentation.DocumentationComponent, java.lang.String)}
+   * Part of {@link DocumentationManager#navigateByLink(DocumentationComponent, PsiElement, String)}
    */
   private @Nullable PsiElement getLinkTarget(@NotNull PsiElement psiElement, @NotNull String refText) {
     PsiManager manager = psiElement.getManager();
