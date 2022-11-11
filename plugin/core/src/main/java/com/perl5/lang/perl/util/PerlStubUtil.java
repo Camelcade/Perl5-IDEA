@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,9 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
-import com.intellij.util.Processor;
 import com.intellij.util.Processors;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,34 +37,5 @@ public final class PerlStubUtil {
     Set<String> allKeys = new HashSet<>();
     StubIndex.getInstance().processAllKeys(indexKey, Processors.cancelableCollectProcessor(allKeys), scope, null);
     return allKeys;
-  }
-
-  @Deprecated // make reverse index and use it
-  public static Collection<String> getIndexKeysWithoutInternals(@NotNull StubIndexKey<String, ?> key, @NotNull Project project) {
-    final Set<String> result = new HashSet<>();
-
-    // safe for getElements
-    StubIndex.getInstance().processAllKeys(key, project, new PerlInternalIndexKeysProcessor() {
-      @Override
-      public boolean process(String name) {
-        if (super.process(name)) {
-          result.add(name);
-        }
-        return true;
-      }
-    });
-
-    return result;
-  }
-
-  public static class PerlInternalIndexKeysProcessor implements Processor<String> {
-    @Override
-    public boolean process(String string) {
-      if (StringUtil.isEmpty(string)) {
-        return false;
-      }
-      char firstChar = string.charAt(0);
-      return firstChar == '_' || Character.isLetterOrDigit(firstChar);
-    }
   }
 }

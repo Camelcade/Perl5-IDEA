@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ public final class PerlScalarUtil implements PerlElementTypes {
    * @return collection of variable canonical names
    */
   public static Collection<String> getDefinedGlobalScalarNames(Project project) {
-    return PerlStubUtil.getIndexKeysWithoutInternals(KEY_SCALAR, project);
+    return PerlStubUtil.getAllKeys(KEY_SCALAR, GlobalSearchScope.allScope(project));
   }
 
   /**

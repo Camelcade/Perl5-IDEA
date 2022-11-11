@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,7 +73,7 @@ public final class PerlGlobUtil implements PerlElementTypes {
    * @return collection of globs names
    */
   public static Collection<String> getDefinedGlobsNames(Project project) {
-    return PerlStubUtil.getIndexKeysWithoutInternals(PerlGlobsStubIndex.KEY, project);
+    return PerlStubUtil.getAllKeys(PerlGlobsStubIndex.KEY, GlobalSearchScope.allScope(project));
   }
 
   /**
