@@ -84,13 +84,13 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
 
   public StubIndexKey<String, PerlVariableDeclarationElement> getIndexKey() {
     if (myVariableType == PerlVariableType.ARRAY) {
-      return PerlArraysStubIndex.KEY_ARRAY;
+      return PerlArrayStubIndex.KEY_ARRAY;
     }
     else if (myVariableType == PerlVariableType.SCALAR) {
-      return PerlScalarsStubIndex.KEY_SCALAR;
+      return PerlScalarStubIndex.KEY_SCALAR;
     }
     else if (myVariableType == PerlVariableType.HASH) {
-      return PerlHashesStubIndex.KEY_HASH;
+      return PerlHashStubIndex.KEY_HASH;
     }
     throw new RuntimeException("Don't have key for " + myVariableType);
   }

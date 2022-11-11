@@ -37,7 +37,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-import static com.perl5.lang.perl.psi.stubs.variables.PerlHashesStubIndex.KEY_HASH;
+import static com.perl5.lang.perl.psi.stubs.variables.PerlHashStubIndex.KEY_HASH;
 
 
 public final class PerlHashUtil implements PerlElementTypes {

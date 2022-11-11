@@ -473,9 +473,9 @@
     <runAnything.helpGroup implementation="com.perl5.lang.perl.idea.actions.runAnything.PerlRunAnythingHelpGroup"/>
     <runAnything.executionProvider implementation="com.perl5.lang.perl.idea.actions.runAnything.PerlRunAnythingProvider"/>
 
-    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlScalarsStubIndex"/>
-    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlArraysStubIndex"/>
-    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlHashesStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlScalarStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlArrayStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.variables.PerlHashStubIndex"/>
 
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex"/>

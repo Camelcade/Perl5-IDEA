@@ -22,15 +22,15 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlArraysStubIndex extends PerlVariablesStubIndex {
-  public static final StubIndexKey<String, PerlVariableDeclarationElement> KEY_ARRAY = StubIndexKey.createIndexKey("perl.global.array");
+public class PerlHashStubIndex extends PerlVariableStubIndex {
+  public static final StubIndexKey<String, PerlVariableDeclarationElement> KEY_HASH = StubIndexKey.createIndexKey("perl.global.hash");
 
   @Override
   public @NotNull StubIndexKey<String, PerlVariableDeclarationElement> getKey() {
-    return KEY_ARRAY;
+    return KEY_HASH;
   }
 
-  public static @NotNull PerlArraysStubIndex getInstance() {
-    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlArraysStubIndex.class);
+  public static @NotNull PerlHashStubIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlHashStubIndex.class);
   }
 }

@@ -35,7 +35,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-import static com.perl5.lang.perl.psi.stubs.variables.PerlArraysStubIndex.KEY_ARRAY;
+import static com.perl5.lang.perl.psi.stubs.variables.PerlArrayStubIndex.KEY_ARRAY;
 
 
 public final class PerlArrayUtil implements PerlElementTypes {
