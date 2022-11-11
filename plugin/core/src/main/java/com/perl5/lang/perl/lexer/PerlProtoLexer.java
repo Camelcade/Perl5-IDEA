@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,7 @@ import it.unimi.dsi.fastutil.ints.IntArrayList;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 
 public abstract class PerlProtoLexer implements FlexLexer {
@@ -167,8 +165,8 @@ public abstract class PerlProtoLexer implements FlexLexer {
    * @return check result
    */
   protected boolean isWhiteSpacesOnly(int start, int end) {
-    assert end <= getBufferEnd();
-    assert start >= 0;
+    LOG.assertTrue(end <= getBufferEnd());
+    LOG.assertTrue(start >= 0);
     CharSequence buffer = getBuffer();
 
     while (start < end) {
@@ -200,15 +198,11 @@ public abstract class PerlProtoLexer implements FlexLexer {
    * @param token token to add
    */
   protected void pushPreparsedToken(CustomToken token) {
-    assert myPreparsedTokensList.isEmpty() ||
-           myPreparsedTokensList.getLast().getTokenEnd() == token.getTokenStart() :
-      "Tokens size is " +
-      myPreparsedTokensList.size() +
-      " new token start is " +
-      token.getTokenStart() +
-      (myPreparsedTokensList.isEmpty() ? "" :
-       " last token end is " +
-       myPreparsedTokensList.getLast().getTokenEnd());
+    if (!myPreparsedTokensList.isEmpty() && myPreparsedTokensList.getLast().getTokenEnd() != token.getTokenStart()) {
+      LOG.error("Tokens list size=" + myPreparsedTokensList.size() +
+                "; new token start=" + token.getTokenStart() +
+                (myPreparsedTokensList.isEmpty() ? "" : " last token end=" + myPreparsedTokensList.getLast().getTokenEnd()));
+    }
 
     myPreparsedTokensList.add(token);
   }
@@ -219,15 +213,11 @@ public abstract class PerlProtoLexer implements FlexLexer {
    * @param token token to add
    */
   protected void unshiftPreparsedToken(CustomToken token) {
-    assert myPreparsedTokensList.isEmpty() ||
-           myPreparsedTokensList.getFirst().getTokenStart() == token.getTokenEnd() :
-      "Tokens size is " +
-      myPreparsedTokensList.size() +
-      " new token end is " +
-      token.getTokenEnd() +
-      (myPreparsedTokensList.isEmpty() ? "" :
-       " first start end is " +
-       myPreparsedTokensList.getFirst().getTokenStart());
+    if (!myPreparsedTokensList.isEmpty() && myPreparsedTokensList.getFirst().getTokenStart() != token.getTokenEnd()) {
+      LOG.error("Tokens list size=" + myPreparsedTokensList.size() +
+                "; new token end=" + token.getTokenEnd() +
+                (myPreparsedTokensList.isEmpty() ? "" : " first token start=" + myPreparsedTokensList.getFirst().getTokenStart()));
+    }
 
     myPreparsedTokensList.addFirst(token);
   }
@@ -249,71 +239,5 @@ public abstract class PerlProtoLexer implements FlexLexer {
   public boolean isBufferAtString(CharSequence buffer, int offset, CharSequence pattern) {
     int patternEnd = offset + pattern.length();
     return getBufferEnd() >= patternEnd && StringUtil.equals(buffer.subSequence(offset, patternEnd), pattern);
-  }
-
-  /**
-   * Lexes block cut off heading and tailing spaces/newlines and put them in the beginning of preparsed tokens
-   *
-   * @param blockStart                  block start offset
-   * @param blockEnd                    block end offset
-   * @param lastNonspaceCharacterOffset last non space char in the block, should be -1 if no non-whitespace elements found
-   * @param templateElementType         template element type to assign
-   */
-  protected void reLexHTMLBLock(int blockStart, int blockEnd, int lastNonspaceCharacterOffset, IElementType templateElementType) {
-    List<CustomToken> tokens = new ArrayList<>();
-    int myOffset = lexSpacesInRange(blockStart, blockEnd, tokens);
-
-    // real template
-    if (myOffset <= lastNonspaceCharacterOffset) {
-      tokens.add(new CustomToken(myOffset, lastNonspaceCharacterOffset + 1, templateElementType));
-    }
-
-    if (lastNonspaceCharacterOffset > -1) {
-      lexSpacesInRange(lastNonspaceCharacterOffset + 1, blockEnd, tokens);
-    }
-
-    for (int i = tokens.size() - 1; i >= 0; i--) {
-      unshiftPreparsedToken(tokens.get(i));
-    }
-  }
-
-  /**
-   * lex spaces and new lines in the given range until first nonspace char
-   *
-   * @param blockStart start offset
-   * @param blockEnd   end offset
-   * @param tokens     result tokens list
-   * @return offset of the blockEnd or first non-space character
-   */
-  protected int lexSpacesInRange(int blockStart, int blockEnd, List<CustomToken> tokens) {
-    int whiteSpaceTokenStart = -1;
-    CharSequence buffer = getBuffer();
-    while (blockStart < blockEnd) {
-      char currentChar = buffer.charAt(blockStart);
-      if (currentChar == '\n') {
-        if (whiteSpaceTokenStart != -1) {
-          tokens.add(new CustomToken(whiteSpaceTokenStart, blockStart, TokenType.WHITE_SPACE));
-          whiteSpaceTokenStart = -1;
-        }
-        tokens.add(new CustomToken(blockStart, blockStart + 1, TokenType.WHITE_SPACE));
-      }
-      else if (Character.isWhitespace(currentChar)) {
-        if (whiteSpaceTokenStart == -1) {
-          whiteSpaceTokenStart = blockStart;
-        }
-      }
-      else {
-        if (whiteSpaceTokenStart != -1) {
-          tokens.add(new CustomToken(whiteSpaceTokenStart, blockStart, TokenType.WHITE_SPACE));
-          whiteSpaceTokenStart = -1;
-        }
-        break;
-      }
-      blockStart++;
-    }
-    if (whiteSpaceTokenStart != -1) {
-      tokens.add(new CustomToken(whiteSpaceTokenStart, blockStart, TokenType.WHITE_SPACE));
-    }
-    return blockStart;
   }
 }
