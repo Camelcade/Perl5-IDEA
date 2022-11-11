@@ -2326,7 +2326,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected FilteringGotoByModel<?> getGoToSymbolModel() {
-    return new GotoSymbolModel2(getProject());
+    return new GotoSymbolModel2(getProject(), getTestRootDisposable());
   }
 
   protected FilteringGotoByModel<?> getGoToFileModel() {
