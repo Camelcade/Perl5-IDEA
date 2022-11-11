@@ -35,6 +35,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+import static com.perl5.lang.perl.psi.stubs.variables.PerlArrayNamespaceStubIndex.KEY_ARRAY_IN_NAMESPACE;
 import static com.perl5.lang.perl.psi.stubs.variables.PerlArrayStubIndex.KEY_ARRAY;
 
 
@@ -109,7 +110,7 @@ public final class PerlArrayUtil implements PerlElementTypes {
     }
     return namespaceName == null ?
            PerlVariableUtil.processGlobalVariables(KEY_ARRAY, project, scope, processor, processAll) :
-           PerlVariableUtil.processGlobalVariables(KEY_ARRAY, project, scope, processor, "*" + namespaceName, !processAll);
+           PerlVariableUtil.processGlobalVariables(KEY_ARRAY_IN_NAMESPACE, project, scope, processor, namespaceName, !processAll);
   }
 
   /**

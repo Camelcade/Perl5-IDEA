@@ -37,6 +37,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
+import static com.perl5.lang.perl.psi.stubs.variables.PerlHashNamespaceStubIndex.KEY_HASH_IN_NAMESPACE;
 import static com.perl5.lang.perl.psi.stubs.variables.PerlHashStubIndex.KEY_HASH;
 
 
@@ -129,7 +130,7 @@ public final class PerlHashUtil implements PerlElementTypes {
     }
     return namespaceName == null ?
            PerlVariableUtil.processGlobalVariables(KEY_HASH, project, scope, processor, processAll) :
-           PerlVariableUtil.processGlobalVariables(KEY_HASH, project, scope, processor, "*" + namespaceName, !processAll);
+           PerlVariableUtil.processGlobalVariables(KEY_HASH_IN_NAMESPACE, project, scope, processor, namespaceName, !processAll);
   }
 
   /**

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
+import static com.perl5.lang.perl.psi.utils.PerlVariableType.*;
+
 
 public class PerlGotoVariableContributor extends PerlChooseByNameContributor {
   @Override
@@ -36,19 +38,19 @@ public class PerlGotoVariableContributor extends PerlChooseByNameContributor {
     Collection<String> result = new ArrayList<>();
 
     for (String name : PerlScalarUtil.getDefinedGlobalScalarNames(project)) {
-      result.add("$" + name);
+      result.add(SCALAR.withSigil(name));
     }
 
     for (String name : PerlArrayUtil.getDefinedGlobalArrayNames(project)) {
-      result.add("@" + name);
+      result.add(ARRAY.withSigil(name));
     }
 
     for (String name : PerlHashUtil.getDefinedGlobalHashNames(project)) {
-      result.add("%" + name);
+      result.add(HASH.withSigil(name));
     }
 
     for (String name : PerlGlobUtil.getDefinedGlobsNames(project)) {
-      result.add("*" + name);
+      result.add(GLOB.withSigil(name));
     }
 
     return result;

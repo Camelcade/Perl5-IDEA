@@ -16,14 +16,19 @@
 
 package com.perl5.lang.perl.psi.stubs.variables;
 
+import com.intellij.openapi.util.Pair;
 import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.psi.stubs.variables.PerlHashNamespaceStubIndex.KEY_HASH_IN_NAMESPACE;
+
 
 public class PerlHashStubIndex extends PerlVariableStubIndex {
   public static final StubIndexKey<String, PerlVariableDeclarationElement> KEY_HASH = StubIndexKey.createIndexKey("perl.global.hash");
+  static final Pair<StubIndexKey<String, PerlVariableDeclarationElement>, StubIndexKey<String, PerlVariableDeclarationElement>>
+    HASH_KEYS = Pair.create(KEY_HASH, KEY_HASH_IN_NAMESPACE);
 
   @Override
   public @NotNull StubIndexKey<String, PerlVariableDeclarationElement> getKey() {

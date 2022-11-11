@@ -16,14 +16,19 @@
 
 package com.perl5.lang.perl.psi.stubs.variables;
 
+import com.intellij.openapi.util.Pair;
 import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.psi.stubs.variables.PerlScalarNamespaceStubIndex.KEY_SCALAR_IN_NAMESPACE;
+
 
 public class PerlScalarStubIndex extends PerlVariableStubIndex {
   public static final StubIndexKey<String, PerlVariableDeclarationElement> KEY_SCALAR = StubIndexKey.createIndexKey("perl.global.scalar");
+  static final Pair<StubIndexKey<String, PerlVariableDeclarationElement>, StubIndexKey<String, PerlVariableDeclarationElement>>
+    SCALAR_KEYS = Pair.create(KEY_SCALAR, KEY_SCALAR_IN_NAMESPACE);
 
   @Override
   public @NotNull StubIndexKey<String, PerlVariableDeclarationElement> getKey() {

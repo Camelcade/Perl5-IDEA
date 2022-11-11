@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.stubs.variables;
 
+import com.intellij.openapi.util.Pair;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
@@ -82,15 +83,15 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
     return myPerlVariableAnnotations;
   }
 
-  public StubIndexKey<String, PerlVariableDeclarationElement> getIndexKey() {
+  public Pair<StubIndexKey<String, PerlVariableDeclarationElement>, StubIndexKey<String, PerlVariableDeclarationElement>> getIndexKey() {
     if (myVariableType == PerlVariableType.ARRAY) {
-      return PerlArrayStubIndex.KEY_ARRAY;
+      return PerlArrayStubIndex.ARRAY_KEYS;
     }
     else if (myVariableType == PerlVariableType.SCALAR) {
-      return PerlScalarStubIndex.KEY_SCALAR;
+      return PerlScalarStubIndex.SCALAR_KEYS;
     }
     else if (myVariableType == PerlVariableType.HASH) {
-      return PerlHashStubIndex.KEY_HASH;
+      return PerlHashStubIndex.HASH_KEYS;
     }
     throw new RuntimeException("Don't have key for " + myVariableType);
   }

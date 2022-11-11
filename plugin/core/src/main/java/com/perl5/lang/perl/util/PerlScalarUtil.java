@@ -34,6 +34,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import static com.perl5.lang.perl.psi.stubs.variables.PerlScalarNamespaceStubIndex.KEY_SCALAR_IN_NAMESPACE;
 import static com.perl5.lang.perl.psi.stubs.variables.PerlScalarStubIndex.KEY_SCALAR;
 
 
@@ -98,7 +99,7 @@ public final class PerlScalarUtil implements PerlElementTypes {
     }
     return namespaceName == null ?
            PerlVariableUtil.processGlobalVariables(KEY_SCALAR, project, scope, processor, processAll) :
-           PerlVariableUtil.processGlobalVariables(KEY_SCALAR, project, scope, processor, "*" + namespaceName, !processAll);
+           PerlVariableUtil.processGlobalVariables(KEY_SCALAR_IN_NAMESPACE, project, scope, processor, namespaceName, !processAll);
   }
 
   /**

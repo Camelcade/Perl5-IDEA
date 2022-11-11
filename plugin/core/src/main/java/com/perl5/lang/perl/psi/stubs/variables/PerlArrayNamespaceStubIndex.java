@@ -16,22 +16,22 @@
 
 package com.perl5.lang.perl.psi.stubs.variables;
 
+import com.intellij.psi.stubs.StubIndexExtension;
+import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 
-abstract class PerlVariableStubIndex extends PerlStubIndexBase<PerlVariableDeclarationElement> {
-
-  public static final int VERSION = 2;
+public class PerlArrayNamespaceStubIndex extends PerlVariableStubIndex {
+  public static final StubIndexKey<String, PerlVariableDeclarationElement> KEY_ARRAY_IN_NAMESPACE =
+    StubIndexKey.createIndexKey("perl.global.array.in.namespace");
 
   @Override
-  protected @NotNull Class<PerlVariableDeclarationElement> getPsiClass() {
-    return PerlVariableDeclarationElement.class;
+  public @NotNull StubIndexKey<String, PerlVariableDeclarationElement> getKey() {
+    return KEY_ARRAY_IN_NAMESPACE;
   }
 
-  @Override
-  public int getVersion() {
-    return super.getVersion() + VERSION;
+  public static @NotNull PerlArrayNamespaceStubIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlArrayNamespaceStubIndex.class);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static com.perl5.lang.perl.psi.utils.PerlVariableType.*;
+
 public class PerlBuiltInVariablesService {
   private final PsiManager myPsiManager;
   private final Map<String, PerlBuiltInVariable> myScalars = new HashMap<>();
@@ -49,10 +51,10 @@ public class PerlBuiltInVariablesService {
       String variableName = Integer.toString(i);
       myScalars.put(variableName, new PerlBuiltInVariable(myPsiManager, "$" + variableName));
     }
-    PerlBuiltInScalars.BUILT_IN.forEach(name -> myScalars.put(name, new PerlBuiltInVariable(myPsiManager, "$" + name)));
-    PerlArrayUtil.BUILT_IN.forEach(name -> myArrays.put(name, new PerlBuiltInVariable(myPsiManager, "@" + name)));
-    PerlHashUtil.BUILT_IN.forEach(name -> myHashes.put(name, new PerlBuiltInVariable(myPsiManager, "%" + name)));
-    PerlGlobUtil.BUILT_IN.forEach(name -> myGlobs.put(name, new PerlBuiltInVariable(myPsiManager, "*" + name)));
+    PerlBuiltInScalars.BUILT_IN.forEach(name -> myScalars.put(name, new PerlBuiltInVariable(myPsiManager, SCALAR.withSigil(name))));
+    PerlArrayUtil.BUILT_IN.forEach(name -> myArrays.put(name, new PerlBuiltInVariable(myPsiManager, ARRAY.withSigil(name))));
+    PerlHashUtil.BUILT_IN.forEach(name -> myHashes.put(name, new PerlBuiltInVariable(myPsiManager, HASH.withSigil(name))));
+    PerlGlobUtil.BUILT_IN.forEach(name -> myGlobs.put(name, new PerlBuiltInVariable(myPsiManager, GLOB.withSigil(name))));
   }
 
   public @Nullable PerlBuiltInVariable getScalar(@Nullable String name) {
@@ -96,7 +98,7 @@ public class PerlBuiltInVariablesService {
       return null;
     }
 
-    if (type == PerlVariableType.SCALAR) {
+    if (type == SCALAR) {
       return getScalar(variableName);
     }
     else if (type == PerlVariableType.ARRAY) {
