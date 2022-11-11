@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
-import com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex;
+import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsIndex;
@@ -250,6 +250,6 @@ public final class PerlSubUtil implements PerlElementTypes {
                                                      @NotNull String packageName,
                                                      @NotNull Processor<? super PsiNamedElement> processor) {
     return processRelatedSubsInPackage(project, searchScope, packageName, processor) &&
-           PerlGlobsStubIndex.getInstance().processElements(project, "*" + packageName, searchScope, processor);
+           PerlGlobStubIndex.getInstance().processElements(project, "*" + packageName, searchScope, processor);
   }
 }

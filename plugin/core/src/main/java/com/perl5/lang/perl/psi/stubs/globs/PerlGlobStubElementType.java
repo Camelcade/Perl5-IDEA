@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,8 +61,8 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
   @Override
   public void indexStub(@NotNull PerlGlobStub stub, @NotNull IndexSink sink) {
     String name = stub.getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + stub.getName();
-    sink.occurrence(PerlGlobsStubIndex.KEY, name);
-    sink.occurrence(PerlGlobsStubIndex.KEY, "*" + stub.getNamespaceName());
+    sink.occurrence(PerlGlobStubIndex.KEY, name);
+    sink.occurrence(PerlGlobStubIndex.KEY, "*" + stub.getNamespaceName());
   }
 
   @Override

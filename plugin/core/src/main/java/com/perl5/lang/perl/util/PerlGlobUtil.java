@@ -25,7 +25,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
-import com.perl5.lang.perl.psi.stubs.globs.PerlGlobsStubIndex;
+import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubIndex;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -63,7 +63,7 @@ public final class PerlGlobUtil implements PerlElementTypes {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
-    return StubIndex.getElements(PerlGlobsStubIndex.KEY, canonicalName, project, scope, PsiPerlGlobVariable.class);
+    return StubIndex.getElements(PerlGlobStubIndex.KEY, canonicalName, project, scope, PsiPerlGlobVariable.class);
   }
 
   /**
@@ -73,7 +73,7 @@ public final class PerlGlobUtil implements PerlElementTypes {
    * @return collection of globs names
    */
   public static Collection<String> getDefinedGlobsNames(Project project) {
-    return PerlStubUtil.getAllKeys(PerlGlobsStubIndex.KEY, GlobalSearchScope.allScope(project));
+    return PerlStubUtil.getAllKeys(PerlGlobStubIndex.KEY, GlobalSearchScope.allScope(project));
   }
 
   /**
@@ -92,7 +92,7 @@ public final class PerlGlobUtil implements PerlElementTypes {
     List<String> namesToProcess;
     if (namespaceName == null) {
       namesToProcess = new ArrayList<>();
-      for (String globName : PerlStubUtil.getAllKeys(PerlGlobsStubIndex.KEY, scope)) {
+      for (String globName : PerlStubUtil.getAllKeys(PerlGlobStubIndex.KEY, scope)) {
         if (StringUtil.isEmpty(globName) || namesFilter != null && !namesFilter.test(globName)) {
           continue;
         }
@@ -106,7 +106,7 @@ public final class PerlGlobUtil implements PerlElementTypes {
     Set<String> processedNames = processAll ? null : new HashSet<>();
     StubIndex stubIndex = StubIndex.getInstance();
     for (String key : namesToProcess) {
-      if (!stubIndex.processElements(PerlGlobsStubIndex.KEY, key, project, scope, PsiPerlGlobVariable.class, it -> {
+      if (!stubIndex.processElements(PerlGlobStubIndex.KEY, key, project, scope, PsiPerlGlobVariable.class, it -> {
         ProgressManager.checkCanceled();
         String canonicalName = it.getCanonicalName();
         if ((namesFilter == null || namesFilter.test(canonicalName)) &&
