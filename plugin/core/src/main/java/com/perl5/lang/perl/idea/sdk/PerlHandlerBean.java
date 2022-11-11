@@ -16,12 +16,9 @@
 
 package com.perl5.lang.perl.idea.sdk;
 
-import com.intellij.ide.plugins.cl.PluginAwareClassLoader;
 import com.intellij.openapi.components.ComponentManager;
 import com.intellij.openapi.extensions.PluginDescriptor;
-import com.intellij.serviceContainer.ComponentManagerImplKt;
 import com.intellij.util.KeyedLazyInstanceEP;
-import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
@@ -33,7 +30,9 @@ public final class PerlHandlerBean extends KeyedLazyInstanceEP<AbstractPerlHandl
   public @NotNull AbstractPerlHandler<?, ?> createInstance(@NotNull ComponentManager componentManager,
                                                            @NotNull PluginDescriptor pluginDescriptor) {
     try {
-      Class<AbstractPerlHandler<?, ?>> extensionClass = getHandlerClass(componentManager, pluginDescriptor);
+      var implementationClassName =
+        Objects.requireNonNull(getImplementationClassName(), () -> "Class name is not specified for extension: " + getKey());
+      Class<AbstractPerlHandler<?, ?>> extensionClass = componentManager.loadClass(implementationClassName, pluginDescriptor);
       Constructor<AbstractPerlHandler<?, ?>> constructor = extensionClass.getConstructor(PerlHandlerBean.class);
       constructor.setAccessible(true);
       return constructor.newInstance(PerlHandlerBean.this);
@@ -41,29 +40,5 @@ public final class PerlHandlerBean extends KeyedLazyInstanceEP<AbstractPerlHandl
     catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException | ClassNotFoundException e) {
       throw new RuntimeException(e);
     }
-  }
-
-  /**
-   * Copy-paste from {@link ComponentManagerImplKt#doLoadClass(String, PluginDescriptor)}
-   */
-  private @NotNull Class<AbstractPerlHandler<?, ?>> getHandlerClass(@NotNull ComponentManager componentManager,
-                                                                    @NotNull PluginDescriptor pluginDescriptor)
-    throws ClassNotFoundException {
-    var classLoader = ObjectUtils.coalesce(pluginDescriptor.getClassLoader(), componentManager.getClass().getClassLoader());
-    var implementationClassName =
-      Objects.requireNonNull(getImplementationClassName(), () -> "Class name is not specified for extension: " + getKey());
-    Class<AbstractPerlHandler<?, ?>> extensionClass;
-    if (classLoader instanceof PluginAwareClassLoader pluginAwareClassLoader) {
-      //noinspection unchecked
-      extensionClass = (Class<AbstractPerlHandler<?, ?>>)pluginAwareClassLoader.tryLoadingClass(implementationClassName, true);
-    }
-    else {
-      //noinspection unchecked
-      extensionClass = (Class<AbstractPerlHandler<?, ?>>)classLoader.loadClass(implementationClassName);
-    }
-    if (extensionClass == null) {
-      throw new ClassNotFoundException("Unable to load extension class: " + implementationClassName);
-    }
-    return extensionClass;
   }
 }
