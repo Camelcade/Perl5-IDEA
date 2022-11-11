@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 
-public class PerlRunUtil {
+public final class PerlRunUtil {
   public static final String PERL_I = "-I";
   public static final String PERL_LE = "-le";
   public static final String PERL_CTRL_X = "print eval chr(0x24).q{^X}";
@@ -109,6 +109,9 @@ public class PerlRunUtil {
     "TAP::Formatter::Camelcade",
     "Test::Harness"
   ));
+
+  private PerlRunUtil() {
+  }
 
   /**
    * Builds non-patched perl command line for {@code project}'s sdk (without patching by version manager)
