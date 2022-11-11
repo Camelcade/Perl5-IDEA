@@ -34,7 +34,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.psi.stubs.variables.PerlVariablesStubIndex.KEY_SCALAR;
+import static com.perl5.lang.perl.psi.stubs.variables.PerlScalarsStubIndex.KEY_SCALAR;
 
 
 public final class PerlScalarUtil implements PerlElementTypes {

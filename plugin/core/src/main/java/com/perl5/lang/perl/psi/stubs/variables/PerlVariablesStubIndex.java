@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,12 @@
 
 package com.perl5.lang.perl.psi.stubs.variables;
 
-import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 
-public abstract class PerlVariablesStubIndex extends PerlStubIndexBase<PerlVariableDeclarationElement> {
-  public static final StubIndexKey<String, PerlVariableDeclarationElement> KEY_SCALAR = StubIndexKey.createIndexKey("perl.global.scalar");
-  public static final StubIndexKey<String, PerlVariableDeclarationElement> KEY_ARRAY = StubIndexKey.createIndexKey("perl.global.array");
-  public static final StubIndexKey<String, PerlVariableDeclarationElement> KEY_HASH = StubIndexKey.createIndexKey("perl.global.hash");
+abstract class PerlVariablesStubIndex extends PerlStubIndexBase<PerlVariableDeclarationElement> {
 
   public static final int VERSION = 1;
 

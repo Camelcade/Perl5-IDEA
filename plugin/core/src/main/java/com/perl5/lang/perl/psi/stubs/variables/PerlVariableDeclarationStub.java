@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,13 +84,13 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
 
   public StubIndexKey<String, PerlVariableDeclarationElement> getIndexKey() {
     if (myVariableType == PerlVariableType.ARRAY) {
-      return PerlVariablesStubIndex.KEY_ARRAY;
+      return PerlArraysStubIndex.KEY_ARRAY;
     }
     else if (myVariableType == PerlVariableType.SCALAR) {
-      return PerlVariablesStubIndex.KEY_SCALAR;
+      return PerlScalarsStubIndex.KEY_SCALAR;
     }
     else if (myVariableType == PerlVariableType.HASH) {
-      return PerlVariablesStubIndex.KEY_HASH;
+      return PerlHashesStubIndex.KEY_HASH;
     }
     throw new RuntimeException("Don't have key for " + myVariableType);
   }
