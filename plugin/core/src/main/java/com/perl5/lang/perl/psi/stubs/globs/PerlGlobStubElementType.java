@@ -31,6 +31,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
+import static com.perl5.lang.perl.psi.stubs.globs.PerlGlobNamespaceStubIndex.KEY_GLOB_NAMESPACE;
+import static com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubIndex.KEY_GLOB;
+
 
 public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiPerlGlobVariable> implements PsiElementProvider {
 
@@ -61,8 +64,8 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
   @Override
   public void indexStub(@NotNull PerlGlobStub stub, @NotNull IndexSink sink) {
     String name = stub.getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + stub.getName();
-    sink.occurrence(PerlGlobStubIndex.KEY, name);
-    sink.occurrence(PerlGlobStubIndex.KEY, "*" + stub.getNamespaceName());
+    sink.occurrence(KEY_GLOB, name);
+    sink.occurrence(KEY_GLOB_NAMESPACE, stub.getNamespaceName());
   }
 
   @Override

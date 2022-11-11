@@ -28,7 +28,7 @@ import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
-import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubIndex;
+import com.perl5.lang.perl.psi.stubs.globs.PerlGlobNamespaceStubIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsIndex;
@@ -250,6 +250,6 @@ public final class PerlSubUtil implements PerlElementTypes {
                                                      @NotNull String packageName,
                                                      @NotNull Processor<? super PsiNamedElement> processor) {
     return processRelatedSubsInPackage(project, searchScope, packageName, processor) &&
-           PerlGlobStubIndex.getInstance().processElements(project, "*" + packageName, searchScope, processor);
+           PerlGlobNamespaceStubIndex.getInstance().processElements(project, packageName, searchScope, processor);
   }
 }

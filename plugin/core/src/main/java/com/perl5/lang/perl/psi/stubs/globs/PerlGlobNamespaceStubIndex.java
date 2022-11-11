@@ -23,9 +23,9 @@ import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlGlobStubIndex extends PerlStubIndexBase<PsiPerlGlobVariable> {
-  public static final int VERSION = 5;
-  public static final StubIndexKey<String, PsiPerlGlobVariable> KEY_GLOB = StubIndexKey.createIndexKey("perl.glob");
+public class PerlGlobNamespaceStubIndex extends PerlStubIndexBase<PsiPerlGlobVariable> {
+  public static final int VERSION = 1;
+  public static final StubIndexKey<String, PsiPerlGlobVariable> KEY_GLOB_NAMESPACE = StubIndexKey.createIndexKey("perl.glob.in.namespace");
 
   @Override
   public int getVersion() {
@@ -34,7 +34,7 @@ public class PerlGlobStubIndex extends PerlStubIndexBase<PsiPerlGlobVariable> {
 
   @Override
   public @NotNull StubIndexKey<String, PsiPerlGlobVariable> getKey() {
-    return KEY_GLOB;
+    return KEY_GLOB_NAMESPACE;
   }
 
   @Override
@@ -42,7 +42,7 @@ public class PerlGlobStubIndex extends PerlStubIndexBase<PsiPerlGlobVariable> {
     return PsiPerlGlobVariable.class;
   }
 
-  public static @NotNull PerlGlobStubIndex getInstance() {
-    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlGlobStubIndex.class);
+  public static @NotNull PerlGlobNamespaceStubIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlGlobNamespaceStubIndex.class);
   }
 }
