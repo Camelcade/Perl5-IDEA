@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,47 +16,54 @@
 
 package com.perl5.lang.perl.idea.sdk;
 
-import com.intellij.openapi.extensions.AbstractExtensionPointBean;
-import com.intellij.openapi.util.NotNullLazyValue;
-import com.intellij.util.KeyedLazyInstance;
+import com.intellij.ide.plugins.cl.PluginAwareClassLoader;
+import com.intellij.openapi.components.ComponentManager;
+import com.intellij.openapi.extensions.PluginDescriptor;
+import com.intellij.serviceContainer.ComponentManagerImplKt;
 import com.intellij.util.KeyedLazyInstanceEP;
-import com.intellij.util.xmlb.annotations.Attribute;
+import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
-/**
- * Copypaste from {@link KeyedLazyInstanceEP}
- */
-public final class PerlHandlerBean extends AbstractExtensionPointBean
-  implements KeyedLazyInstance<AbstractPerlHandler<?, ?>> {
-  // these must be public for scrambling compatibility
-  @Attribute("key")
-  public String key;
-
-  @Attribute("implementationClass")
-  public String implementationClass;
-
-  private final NotNullLazyValue<AbstractPerlHandler<?, ?>> myHandler = NotNullLazyValue.createValue(() -> {
+public final class PerlHandlerBean extends KeyedLazyInstanceEP<AbstractPerlHandler<?, ?>> {
+  @Override
+  public @NotNull AbstractPerlHandler<?, ?> createInstance(@NotNull ComponentManager componentManager,
+                                                           @NotNull PluginDescriptor pluginDescriptor) {
     try {
-      Class<AbstractPerlHandler<?, ?>> extensionClass = findExtensionClass(implementationClass);
+      Class<AbstractPerlHandler<?, ?>> extensionClass = getHandlerClass(componentManager, pluginDescriptor);
       Constructor<AbstractPerlHandler<?, ?>> constructor = extensionClass.getConstructor(PerlHandlerBean.class);
       constructor.setAccessible(true);
       return constructor.newInstance(PerlHandlerBean.this);
     }
-    catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException e) {
+    catch (NoSuchMethodException | InstantiationException | InvocationTargetException | IllegalAccessException | ClassNotFoundException e) {
       throw new RuntimeException(e);
     }
-  });
-
-  @Override
-  public @NotNull AbstractPerlHandler<?, ?> getInstance() {
-    return myHandler.getValue();
   }
 
-  @Override
-  public String getKey() {
-    return key;
+  /**
+   * Copy-paste from {@link ComponentManagerImplKt#doLoadClass(String, PluginDescriptor)}
+   */
+  private @NotNull Class<AbstractPerlHandler<?, ?>> getHandlerClass(@NotNull ComponentManager componentManager,
+                                                                    @NotNull PluginDescriptor pluginDescriptor)
+    throws ClassNotFoundException {
+    var classLoader = ObjectUtils.coalesce(pluginDescriptor.getClassLoader(), componentManager.getClass().getClassLoader());
+    var implementationClassName =
+      Objects.requireNonNull(getImplementationClassName(), () -> "Class name is not specified for extension: " + getKey());
+    Class<AbstractPerlHandler<?, ?>> extensionClass;
+    if (classLoader instanceof PluginAwareClassLoader pluginAwareClassLoader) {
+      //noinspection unchecked
+      extensionClass = (Class<AbstractPerlHandler<?, ?>>)pluginAwareClassLoader.tryLoadingClass(implementationClassName, true);
+    }
+    else {
+      //noinspection unchecked
+      extensionClass = (Class<AbstractPerlHandler<?, ?>>)classLoader.loadClass(implementationClassName);
+    }
+    if (extensionClass == null) {
+      throw new ClassNotFoundException("Unable to load extension class: " + implementationClassName);
+    }
+    return extensionClass;
   }
 }
