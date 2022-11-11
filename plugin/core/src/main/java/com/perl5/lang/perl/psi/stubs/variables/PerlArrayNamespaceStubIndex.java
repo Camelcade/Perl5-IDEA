@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.stubs.variables;
 
-import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +30,4 @@ public class PerlArrayNamespaceStubIndex extends PerlVariableStubIndex {
     return KEY_ARRAY_IN_NAMESPACE;
   }
 
-  public static @NotNull PerlArrayNamespaceStubIndex getInstance() {
-    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlArrayNamespaceStubIndex.class);
-  }
 }

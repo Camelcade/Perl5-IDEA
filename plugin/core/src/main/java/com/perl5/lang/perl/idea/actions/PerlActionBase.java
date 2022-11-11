@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,10 +44,6 @@ public abstract class PerlActionBase extends AnAction {
 
   public PerlActionBase(@Nls(capitalization = Nls.Capitalization.Title) @Nullable String text) {
     this(text, null, null);
-  }
-
-  public PerlActionBase(Icon icon) {
-    super(icon);
   }
 
   protected boolean isEnabled(@NotNull AnActionEvent event) {

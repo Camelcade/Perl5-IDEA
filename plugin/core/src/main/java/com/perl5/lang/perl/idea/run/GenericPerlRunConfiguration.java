@@ -117,7 +117,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
       LOG.error("GenericPerlProgramRunner expected, got " + runner);
       throw new ExecutionException("Wrong runner used to run perl configuration, please report to Perl plugin developers");
     }
-    return ((GenericPerlProgramRunner)runner).createState(executor, executionEnvironment);
+    return ((GenericPerlProgramRunner)runner).createState(executionEnvironment);
   }
 
   /**
@@ -459,8 +459,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
    *
    * @return patched process handler
    */
-  protected @NotNull ProcessHandler doPatchProcessHandler(@NotNull ProcessHandler processHandler,
-                                                          @NotNull PerlRunProfileState runProfileState) {
+  protected @NotNull ProcessHandler doPatchProcessHandler(@NotNull ProcessHandler processHandler) {
     return processHandler;
   }
 
@@ -491,7 +490,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
 
   /**
    * If profileState was build with {@link GenericPerlRunConfiguration}, patches {@code processHandler} using
-   * {@link #doPatchProcessHandler(ProcessHandler, PerlRunProfileState)}
+   * {@link #doPatchProcessHandler(ProcessHandler)}
    *
    * @return patched process handler
    */
@@ -503,7 +502,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     }
     RunProfile runConfiguration = runProfileState.getEnvironment().getRunProfile();
     return runConfiguration instanceof GenericPerlRunConfiguration ?
-           ((GenericPerlRunConfiguration)runConfiguration).doPatchProcessHandler(processHandler, runProfileState) :
+           ((GenericPerlRunConfiguration)runConfiguration).doPatchProcessHandler(processHandler) :
            processHandler;
   }
 }

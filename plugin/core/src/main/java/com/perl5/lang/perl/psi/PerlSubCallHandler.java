@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import com.intellij.openapi.util.KeyedExtensionCollector;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.util.KeyedLazyInstance;
-import com.intellij.util.KeyedLazyInstanceEP;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementData;
 import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementStub;
@@ -37,12 +36,12 @@ import java.util.Objects;
 public abstract class PerlSubCallHandler<CallData extends PerlSubCallElementData>
   implements PerlLightElementProvider<PerlSubCallElement, PerlSubCallElementStub>,
              PerlSelfHinter {
-  public static final KeyedExtensionCollector<PerlSubCallHandler<?>, String> EP =
+  private static final KeyedExtensionCollector<PerlSubCallHandler<?>, String> EP =
     new KeyedExtensionCollector<>("com.perl5.subCallHandler");
   private static final ClearableLazyValue<Integer> VERSION_PROVIDER = AtomicClearableLazyValue.createAtomic(() -> {
     int version = 0;
     //noinspection UnstableApiUsage
-    for (KeyedLazyInstance<PerlSubCallHandler<?>> instance : Objects.requireNonNull(EP.getPoint()).getExtensionList()) {
+    for (KeyedLazyInstance<PerlSubCallHandler<?>> instance : EP.getPoint().getExtensions()) {
       version += instance.getInstance().getVersion();
     }
     return version;
@@ -78,9 +77,6 @@ public abstract class PerlSubCallHandler<CallData extends PerlSubCallElementData
     if (subName == null) {
       return null;
     }
-    return PerlSubCallHandler.EP.findSingle(subName);
-  }
-
-  static class Bean extends KeyedLazyInstanceEP<PerlSubCallHandler<?>> {
+    return EP.findSingle(subName);
   }
 }

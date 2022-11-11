@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -139,7 +139,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     builder.addLabeledComponent(
       PerlBundle.message("perl.settings.external.libs"),
       ToolbarDecorator.createDecorator(myLibsList)
-        .setAddAction(this::doAddExternalLibrary)
+        .setAddAction(button -> doAddExternalLibrary())
         .createPanel()
     );
 
@@ -168,15 +168,13 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     perlCriticArgsInputField = new RawCommandLineEditor();
     builder.addComponent(
       copyDialogCaption(
-        LabeledComponent.create(perlCriticArgsInputField, PerlBundle.message("perl.config.critic.cmd.arguments")),
-        PerlBundle.message("perl.config.critic.cmd.arguments")
+        LabeledComponent.create(perlCriticArgsInputField, PerlBundle.message("perl.config.critic.cmd.arguments"))
       )
     );
     perlTidyArgsInputField = new RawCommandLineEditor();
     builder.addComponent(
       copyDialogCaption(
-        LabeledComponent.create(perlTidyArgsInputField, PerlBundle.message("perl.config.tidy.options.label")),
-        PerlBundle.message("perl.config.tidy.options.label.short")
+        LabeledComponent.create(perlTidyArgsInputField, PerlBundle.message("perl.config.tidy.options.label"))
       ));
 
     deparseArgumentsTextField = new JTextField();
@@ -215,7 +213,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     return PerlBundle.message("perl.perl5");
   }
 
-  private void doAddExternalLibrary(AnActionButton button) {
+  private void doAddExternalLibrary() {
     FileChooserFactory.getInstance().createPathChooser(
       FileChooserDescriptorFactory.
         createMultipleFoldersDescriptor().
@@ -407,8 +405,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     return projectSdk == null ? DISABLE_PERL_ITEM : new Perl5RealSdkWrapper(projectSdk);
   }
 
-  private static LabeledComponent<RawCommandLineEditor> copyDialogCaption(final LabeledComponent<RawCommandLineEditor> component,
-                                                                          String text) {
+  private static LabeledComponent<RawCommandLineEditor> copyDialogCaption(final LabeledComponent<RawCommandLineEditor> component) {
     final RawCommandLineEditor rawCommandLineEditor = component.getComponent();
     component.getLabel().setLabelFor(rawCommandLineEditor.getTextField());
     return component;

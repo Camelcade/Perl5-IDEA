@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
-import java.util.Objects;
 
 public class CpanAdapter extends PackageManagerAdapter {
   private static final String PACKAGE_NAME = "CPAN";
@@ -57,7 +56,7 @@ public class CpanAdapter extends PackageManagerAdapter {
                                                       @Nullable Project project,
                                                       @NotNull Collection<String> libraryNames,
                                                       @Nullable Runnable actionCallback) {
-    return new DumbAwareAction(createInstallActionTitle(libraryNames, SCRIPT_NAME)) {
+    return new DumbAwareAction(createInstallActionTitle(SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
         installModules(sdk, project, libraryNames, actionCallback);
@@ -81,7 +80,7 @@ public class CpanAdapter extends PackageManagerAdapter {
   /**
    * @return action title for installing {@code libraryNames} with tool identified by {@code toolName}
    */
-  public static @NotNull String createInstallActionTitle(@NotNull Collection<String> libraryNames, @NotNull String toolName) {
+  public static @NotNull String createInstallActionTitle(@NotNull String toolName) {
     return PerlBundle.message("perl.quickfix.install.family", toolName);
   }
 
@@ -90,9 +89,4 @@ public class CpanAdapter extends PackageManagerAdapter {
     Sdk sdk = PerlProjectManager.getSdk(project);
     return sdk == null ? null : new CpanAdapter(sdk, project);
   }
-
-  public static @NotNull CpanAdapter createNonNull(@NotNull Project project) {
-    return Objects.requireNonNull(create(project));
-  }
-
 }

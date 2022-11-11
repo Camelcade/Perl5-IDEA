@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,10 +96,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
   public static final String PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS = PACKAGE_MOOSE_BASE + "Util::TypeConstraints";
   public static final String PACKAGE_MOOSE_X_TYPES_CHECKEDUTILEXPORTS = PACKAGE_MOOSE_X_BASE + "Types::CheckedUtilExports";
   public static final String PACKAGE_MOOSE_X_CLASSATTRIBUTE = PACKAGE_MOOSE_X_BASE + "ClassAttribute";
-  public static final String PACKAGE_MOOSE_X_METHODATTRIBUTES_ROLE = PACKAGE_MOOSE_X_BASE + "MethodAttributes::Role";
   public static final String PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED = PACKAGE_MOOSE_X_BASE + "Role::Parameterized";
-  public static final String PACKAGE_MOOSE_X_ROLE_WITHOVERLOADING = PACKAGE_MOOSE_X_BASE + "Role::WithOverloading";
-  public static final String PACKAGE_MOOSE_X_METHODATTRIBUTES = PACKAGE_MOOSE_X_BASE + "MethodAttributes";
   public static final String PACKAGE_VARS = "vars";
 
   public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(NAMESPACE_SEPARATOR + "|" + NAMESPACE_SEPARATOR_LEGACY);

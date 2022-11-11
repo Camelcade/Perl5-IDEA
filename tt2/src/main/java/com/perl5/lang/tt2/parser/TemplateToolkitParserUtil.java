@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -128,7 +128,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return gotItem;
   }
 
-  public static boolean parseBlockComment(PsiBuilder b, int l) {
+  public static boolean parseBlockComment(PsiBuilder b, int i) {
     if (b.getTokenType() == TT2_OPEN_TAG && b.rawLookup(1) == LINE_COMMENT) {
       PsiBuilder.Marker m = b.mark();
       b.advanceLexer(); // open

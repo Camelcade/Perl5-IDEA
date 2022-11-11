@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.sdk.host.local;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
@@ -28,7 +27,6 @@ import java.util.Collections;
 import java.util.List;
 
 class PerlLocalFileTransfer extends PerlHostFileTransfer<PerlLocalHostData> {
-  private static final Logger LOG = Logger.getInstance(PerlLocalFileTransfer.class);
 
   public PerlLocalFileTransfer(@NotNull PerlLocalHostData hostData) {
     super(hostData);

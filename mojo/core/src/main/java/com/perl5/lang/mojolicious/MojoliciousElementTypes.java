@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,11 @@
 
 package com.perl5.lang.mojolicious;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
-import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
 import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
-import org.jetbrains.annotations.NotNull;
 
 
 public interface MojoliciousElementTypes extends MojoliciousSyntaxElements {
@@ -33,12 +30,6 @@ public interface MojoliciousElementTypes extends MojoliciousSyntaxElements {
     new TemplateDataElementType("MOJO_HTML_TEMPLATE_DATA", MojoliciousLanguage.INSTANCE, MOJO_TEMPLATE_BLOCK_HTML, MOJO_OUTER_ELEMENT_TYPE);
   IElementType MOJO_POD_TEMPLATE_DATA = new PodTemplatingElementType("MOJO_POD_TEMPLATE_DATA", MojoliciousLanguage.INSTANCE);
 
-  IElementType MOJO_HELPER_METHOD = new MojoliciousTokenType(KEYWORD_MOJO_HELPER_METHOD) {
-    @Override
-    public @NotNull ASTNode createLeafNode(@NotNull CharSequence leafText) {
-      return new PerlSubNameElementImpl(this, leafText);
-    }
-  };
   IElementType MOJO_BLOCK_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_OPENER);
   IElementType MOJO_BLOCK_EXPR_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_EXPR_OPENER);
   IElementType MOJO_BLOCK_EXPR_ESCAPED_OPENER = new MojoliciousTokenType(KEYWORD_MOJO_BLOCK_EXPR_ESCAPED_OPENER);

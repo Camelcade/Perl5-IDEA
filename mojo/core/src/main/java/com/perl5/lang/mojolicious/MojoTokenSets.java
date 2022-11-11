@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,6 @@ import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;
 public final class MojoTokenSets {
   private MojoTokenSets() {
   }
-
-  public static final TokenSet BLOCK_OPENERS = TokenSet.create(MOJO_BLOCK_OPENER, MOJO_BLOCK_EXPR_OPENER, MOJO_BLOCK_EXPR_ESCAPED_OPENER);
 
   public static final TokenSet LINE_OPENERS = TokenSet.create(MOJO_LINE_OPENER, MOJO_LINE_EXPR_OPENER, MOJO_LINE_EXPR_ESCAPED_OPENER);
 }

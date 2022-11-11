@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,13 +34,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import static com.perl5.lang.perl.util.PerlPackageUtil.DEREFERENCE_OPERATOR;
+
 public final class PerlCallObjectValue extends PerlCallValue {
   private final @Nullable String mySuperContext;
 
   private PerlCallObjectValue(@NotNull PerlValue namespaceNameValue,
-                             @NotNull PerlValue subNameValue,
-                             @NotNull List<PerlValue> arguments,
-                             @Nullable String superContext) {
+                              @NotNull PerlValue subNameValue,
+                              @NotNull List<PerlValue> arguments,
+                              @Nullable String superContext) {
     super(namespaceNameValue, subNameValue, arguments);
     mySuperContext = superContext;
   }
@@ -157,7 +159,11 @@ public final class PerlCallObjectValue extends PerlCallValue {
 
   @Override
   public String toString() {
-    return getNamespaceNameValue() + "->" + (isSuper() ? mySuperContext + "::SUPER::" : "") + getSubNameValue() + getArgumentsAsString();
+    return getNamespaceNameValue() +
+           DEREFERENCE_OPERATOR +
+           (isSuper() ? mySuperContext + "::SUPER::" : "") +
+           getSubNameValue() +
+           getArgumentsAsString();
   }
 
   @Override

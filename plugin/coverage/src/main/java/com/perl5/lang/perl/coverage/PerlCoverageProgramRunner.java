@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import com.intellij.coverage.CoverageExecutor;
 import com.intellij.coverage.CoverageRunnerData;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionManager;
-import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.ConfigurationInfoProvider;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.configurations.RunnerSettings;
@@ -47,7 +46,7 @@ public class PerlCoverageProgramRunner extends GenericPerlProgramRunner {
   }
 
   @Override
-  protected @Nullable PerlRunProfileState createState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment)
+  protected @Nullable PerlRunProfileState createState(@NotNull ExecutionEnvironment executionEnvironment)
     throws ExecutionException {
     return new PerlCoverageProfileState(executionEnvironment);
   }

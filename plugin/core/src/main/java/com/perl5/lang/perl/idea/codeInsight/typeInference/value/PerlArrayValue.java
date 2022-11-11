@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -198,15 +198,6 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
           myFoundValues.addAll(it.myFoundValues);
         });
       }
-    }
-
-    public @NotNull Set<Integer> getOffsets() {
-      return Collections.unmodifiableSet(myReachedOffsets);
-    }
-
-    public void setOffsets(@NotNull Collection<Integer> offsets) {
-      myReachedOffsets.clear();
-      myReachedOffsets.addAll(offsets);
     }
 
     public void addValue(@NotNull PerlValue value) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.lang.Language;
 import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.roots.impl.DirectoryInfo;
@@ -33,7 +32,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
@@ -61,8 +59,6 @@ import java.util.Map;
 
 
 public class PerlFileImpl extends PsiFileBase implements PerlFile {
-  private static final Logger LOG = Logger.getInstance(PerlFileImpl.class);
-  protected GlobalSearchScope myElementsResolveScope;
   protected PsiElement fileContext;
 
   private final ClearableLazyValue<List<String>> myParentNamespaces = ClearableLazyValue.create(
@@ -119,7 +115,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   @Override
   public void subtreeChanged() {
     super.subtreeChanged();
-    myElementsResolveScope = null;
     myParentNamespaces.drop();
     myControlFlow.drop();
   }

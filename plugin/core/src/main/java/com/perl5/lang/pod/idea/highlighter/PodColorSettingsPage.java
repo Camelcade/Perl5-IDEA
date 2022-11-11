@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public class PodColorSettingsPage implements ColorSettingsPage {
 
   @Override
   public @NotNull SyntaxHighlighter getHighlighter() {
-    return new PodSyntaxHighlighter(null);
+    return new PodSyntaxHighlighter();
   }
 
   @Override

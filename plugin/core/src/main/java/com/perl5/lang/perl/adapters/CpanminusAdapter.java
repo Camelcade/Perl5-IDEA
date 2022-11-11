@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +34,6 @@ import java.util.List;
 
 public class CpanminusAdapter extends PackageManagerAdapter {
   public static final String PACKAGE_NAME = "App::cpanminus";
-  private static final String PACKAGE_PATH = PerlPackageUtil.getPackagePathByName(PACKAGE_NAME);
   public static final String SCRIPT_NAME = "cpanm";
 
   public CpanminusAdapter(@NotNull Sdk sdk, @Nullable Project project) {
@@ -92,7 +90,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
                                                        @NotNull Collection<String> libraryNames,
                                                        @Nullable Runnable actionCallback) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return !isAvailable(sdk) ? null : new DumbAwareAction(CpanAdapter.createInstallActionTitle(libraryNames, SCRIPT_NAME)) {
+    return !isAvailable(sdk) ? null : new DumbAwareAction(CpanAdapter.createInstallActionTitle(SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
         new CpanminusAdapter(sdk, project).install(libraryNames);

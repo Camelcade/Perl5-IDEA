@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,7 +84,6 @@ public final class PerlPsiUtil implements PerlElementTypes {
   public static final String QUOTE_Q = "q";
   public static final String QUOTE_QQ = "qq";
   public static final String QUOTE_QX = "qx";
-  public static final String QUOTE_QW = "qw";
 
   /**
    * @return list of all meaningful children of the {@code psiElement} inside the {@code rangeInElement} skipping spaces, comments and so on

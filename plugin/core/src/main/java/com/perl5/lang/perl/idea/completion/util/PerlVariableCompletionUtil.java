@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,15 +52,10 @@ import javax.swing.*;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Predicate;
 
 import static com.perl5.PerlIcons.GLOB_GUTTER_ICON;
 
 public class PerlVariableCompletionUtil {
-  public static final Predicate<PerlVariableType> ARRAY_OR_HASH_PREDICATE =
-    it -> it.equals(PerlVariableType.ARRAY) || it.equals(PerlVariableType.HASH);
-  public static final Predicate<PerlVariableType> SCALAR_ARRAY_OR_HASH_PREDICATE =
-    it -> it.equals(PerlVariableType.SCALAR) || ARRAY_OR_HASH_PREDICATE.test(it);
 
   public static @NotNull LookupElementBuilder processVariableLookupElement(@NotNull String name, @NotNull PerlVariableType variableType) {
     return LookupElementBuilder.create(PerlVariable.braceName(name)).withIcon(PerlIconProvider.getIcon(variableType));

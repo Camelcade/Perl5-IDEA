@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.options.ShowSettingsUtil;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -54,10 +53,6 @@ public class Perl5SettingsConfigurable extends ModuleAwareProjectConfigurable<Un
   @Override
   protected @Nullable Icon getProjectConfigurableItemIcon() {
     return AllIcons.General.GearPlain;
-  }
-
-  public static void open(@NotNull PsiElement element) {
-    open(element.getProject());
   }
 
   public static void open(@NotNull Project project) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.profiler.parser;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.profiler.DummyCallTreeBuilder;
 import com.intellij.profiler.LineByLineParser;
@@ -30,7 +29,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PerlCollapsedDumpParser extends LineByLineParser {
-  private static final Logger LOG = Logger.getInstance(PerlCollapsedDumpParser.class);
   private final DummyCallTreeBuilder<BaseCallStackElement> myCallTreeBuilder = new DummyCallTreeBuilder<>();
   private final Map<String, PerlCallStackElement> myCachedFrames = new ConcurrentHashMap<>();
 

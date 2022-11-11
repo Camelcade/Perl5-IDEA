@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,6 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
   private final @NotNull String myCommand;
   private final @NotNull String myHelpGroupName;
   private final @NotNull String myCompletionGroupName;
-  private final @NotNull Set<String> myOptions;
   private final @NotNull Set<String> myCommands;
   private final @NotNull Set<OptionDescriptor> myOptionDescriptors;
   private final @NotNull Set<CommandDescriptor> myCommandDescriptors;
@@ -105,7 +104,7 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
 
     Map<String, OptionDescriptor> allOptionsMap = new HashMap<>();
 
-    myOptions = readOptions(xmlElement.getChild(OPTIONS_KEY), allOptionsMap);
+    readOptions(xmlElement.getChild(OPTIONS_KEY), allOptionsMap);
     myOptionDescriptors = allOptionsMap.values().isEmpty() ? Collections.emptySet() :
                           Collections.unmodifiableSet(new HashSet<>(allOptionsMap.values()));
     LOG.debug("Found " + myOptionDescriptors.size() + " options");
@@ -366,12 +365,11 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
     throw new RuntimeException("NYI");
   }
 
-  private static @NotNull Set<String> readOptions(@Nullable Element optionsElement,
-                                                  @NotNull Map<String, OptionDescriptor> allOptionsMap) {
+  private static void readOptions(@Nullable Element optionsElement,
+                                  @NotNull Map<String, OptionDescriptor> allOptionsMap) {
     if (optionsElement == null) {
-      return Collections.emptySet();
+      return;
     }
-    Set<String> optionsNames = new HashSet<>();
     for (Element optionElement : optionsElement.getChildren(OPTION_KEY)) {
       String value = optionElement.getAttributeValue(VALUE_KEY);
       String description = optionElement.getAttributeValue(DESCRIPTION_KEY);
@@ -385,20 +383,17 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
       }
       else {
         OptionDescriptor optionDescriptor = new OptionDescriptor(value, parameterPlaceholder, description, alias);
-        optionsNames.add(value);
         allOptionsMap.put(value, optionDescriptor);
         if (optionDescriptor.alias != null) {
           if (allOptionsMap.containsKey(optionDescriptor.alias)) {
             LOG.warn("Alias already in use: " + optionElement.getText());
           }
           else {
-            optionsNames.add(optionDescriptor.alias);
             allOptionsMap.put(optionDescriptor.alias, optionDescriptor);
           }
         }
       }
     }
-    return optionsNames.isEmpty() ? Collections.emptySet() : Collections.unmodifiableSet(optionsNames);
   }
 
   private static @NotNull Set<String> readCommands(@Nullable Element commandsElement,

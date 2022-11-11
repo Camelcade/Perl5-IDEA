@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.perl5.lang.mason2.elementType;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason2.psi.impl.MasonAugmentMethodModifierImpl;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
@@ -25,16 +24,11 @@ import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementE
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 
 public class MasonAugmentMethodModifierElementType extends PerlMooseAugmentStatementElementType {
   public MasonAugmentMethodModifierElementType(@NotNull @NonNls String debugName) {
     super(debugName);
-  }
-
-  public MasonAugmentMethodModifierElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
-    super(debugName, language);
   }
 
   @Override

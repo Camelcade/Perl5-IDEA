@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,7 +75,7 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
       LOG.warn("No mojo script; project: " + project + " sdk: " + perlSdk);
       return;
     }
-    List<String> generationParameters = computeGenerationParameters(e, mojoScript);
+    List<String> generationParameters = computeGenerationParameters(e);
     if (generationParameters == null) {
       return;
     }
@@ -127,7 +127,7 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
   /**
    * Should return generation parameters or null if generation should not be performed
    */
-  protected @Nullable List<String> computeGenerationParameters(@NotNull AnActionEvent e, @NotNull VirtualFile mojoScript) {
+  protected @Nullable List<String> computeGenerationParameters(@NotNull AnActionEvent e) {
     String entityName = Messages.showInputDialog(
       e.getProject(), getPromptMessage(), getPromptTitle(), getPromptIcon(), getDefaultName(), getNameValidator());
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,9 +47,6 @@ import static com.perl5.PerlIcons.PERLBREW_ICON;
 @VisibleForTesting
 public class PerlBrewAdapter extends PerlVersionManagerAdapter {
   static final String PERLBREW_ROOT = "PERLBREW_ROOT";
-  static final String PERLBREW_HOME = "PERLBREW_HOME";
-  static final String PERLBREW_PATH = "PERLBREW_PATH";
-  static final String PERLBREW_MANPATH = "PERLBREW_MANPATH";
   static final String PERLBREW_EXEC = "exec";
   static final String PERLBREW_INSTALL = "install";
   static final String PERLBREW_LIST = "list";

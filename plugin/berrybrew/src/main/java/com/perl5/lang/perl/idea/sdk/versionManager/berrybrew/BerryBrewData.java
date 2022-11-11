@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,9 @@
 package com.perl5.lang.perl.idea.sdk.versionManager.berrybrew;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -53,9 +50,5 @@ class BerryBrewData extends PerlRealVersionManagerData<BerryBrewData, BerryBrewH
   @Override
   protected @NotNull BerryBrewData self() {
     return this;
-  }
-
-  public static @Nullable BerryBrewData from(@Nullable Sdk sdk) {
-    return ObjectUtils.tryCast(PerlVersionManagerData.from(sdk), BerryBrewData.class);
   }
 }

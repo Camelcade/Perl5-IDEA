@@ -50,7 +50,7 @@
       <with attribute="implementationClass"
             implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
     </extensionPoint>
-    <extensionPoint name="subCallHandler" beanClass="com.perl5.lang.perl.psi.PerlSubCallHandler$Bean" dynamic="true">
+    <extensionPoint name="subCallHandler" beanClass="com.intellij.util.KeyedLazyInstanceEP" dynamic="true">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.psi.PerlSubCallHandler"/>
     </extensionPoint>
     <extensionPoint name="hostHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean" dynamic="true">

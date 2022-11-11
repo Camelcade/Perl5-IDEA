@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@ package com.perl5.lang.perl.debugger.protocol;
 
 
 public class PerlValueRequestDescriptor {
-  private final int offset;
-  private final int limit;
-  private final String key;
+  @SuppressWarnings("unused") private final int offset;
+  @SuppressWarnings("unused") private final int limit;
+  @SuppressWarnings("unused") private final String key;
 
   public PerlValueRequestDescriptor(int offset, int limit, String key) {
     this.offset = offset;

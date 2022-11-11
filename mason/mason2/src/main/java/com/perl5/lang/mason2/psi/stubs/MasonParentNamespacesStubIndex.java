@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.mason2.psi.stubs;
 
-import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
 import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
@@ -42,7 +41,4 @@ public class MasonParentNamespacesStubIndex extends PerlStubIndexBase<MasonNames
     return KEY;
   }
 
-  public static @NotNull MasonParentNamespacesStubIndex getInstance() {
-    return StubIndexExtension.EP_NAME.findExtensionOrFail(MasonParentNamespacesStubIndex.class);
-  }
 }

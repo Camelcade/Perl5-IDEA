@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,9 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.LiteralTextEscaper;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.regexp.Perl5RegexpLiteralEscaper;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
-import com.perl5.lang.perl.psi.PsiPerlReplacementRegex;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -47,17 +44,5 @@ public class Perl5RegexpMixin extends PerlCompositeElementImpl implements PsiLan
   @Override
   public @NotNull LiteralTextEscaper<? extends PsiLanguageInjectionHost> createLiteralTextEscaper() {
     return new Perl5RegexpLiteralEscaper(this);
-  }
-
-  /**
-   * @return true if it's a match part, false if replace one
-   */
-  public boolean isMatchRegexp() {
-    PsiElement parent = getParent();
-    if (!(parent instanceof PsiPerlReplacementRegex)) {
-      return true;
-    }
-    Perl5RegexpMixin[] regexps = PsiTreeUtil.getChildrenOfType(parent, Perl5RegexpMixin.class);
-    return regexps != null && regexps.length > 0 && regexps[0] == this;
   }
 }

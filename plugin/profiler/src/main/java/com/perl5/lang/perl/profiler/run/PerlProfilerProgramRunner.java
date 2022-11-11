@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.perl5.lang.perl.profiler.run;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.ExecutionManager;
-import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.runners.DefaultProgramRunnerKt;
 import com.intellij.execution.runners.ExecutionEnvironment;
@@ -63,7 +62,7 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
   }
 
   @Override
-  protected @Nullable PerlRunProfileState createState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment)
+  protected @Nullable PerlRunProfileState createState(@NotNull ExecutionEnvironment executionEnvironment)
     throws ExecutionException {
 
     var executorSettings = getExecutorSettings(executionEnvironment.getExecutor().getId());

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,6 @@ import javax.swing.*;
 
 public class TemplateToolkitSettingsConfigurable implements Configurable {
   private final TemplateToolkitSettings mySettings;
-  private final Project myProject;
   @SuppressWarnings("Since15")
   protected CollectionListModel<String> substitutedExtensionsModel;
   protected JBList<String> substitutedExtensionsList;
@@ -47,7 +46,6 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
 
   public TemplateToolkitSettingsConfigurable(Project project) {
     mySettings = TemplateToolkitSettings.getInstance(project);
-    myProject = project;
   }
 
   @Override

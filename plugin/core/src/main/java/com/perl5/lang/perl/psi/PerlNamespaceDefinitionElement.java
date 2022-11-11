@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,6 @@ import java.util.Set;
 
 public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition, PsiNamedElement, NavigationItem {
   Logger LOG_STUBS = Logger.getInstance("#perl5.namespce.stubs");
-  Logger LOG_AST = Logger.getInstance("#perl5.namespce.ast");
 
   @Override
   @NotNull

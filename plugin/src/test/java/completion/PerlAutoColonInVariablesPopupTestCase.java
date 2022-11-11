@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -150,41 +150,49 @@ public abstract class PerlAutoColonInVariablesPopupTestCase extends PerlCompleti
     }
 
     @Override
+    @Test
     public void testHashStartFirst() {
       skipTest();
     }
 
     @Override
+    @Test
     public void testHashStartSecond() {
       skipTest();
     }
 
     @Override
+    @Test
     public void testHashEndFirst() {
       skipTest();
     }
 
     @Override
+    @Test
     public void testHashEndSecond() {
       skipTest();
     }
 
     @Override
+    @Test
     public void testGlobStartFirst() {
       skipTest();
     }
 
     @Override
+    @Test
     public void testGlobStartSecond() {
       skipTest();
     }
 
     @Override
+    @Test
     public void testGlobEndFirst() {
       skipTest();
     }
 
     @Override
+    @Test
     public void testGlobEndSecond() {
       skipTest();
     }

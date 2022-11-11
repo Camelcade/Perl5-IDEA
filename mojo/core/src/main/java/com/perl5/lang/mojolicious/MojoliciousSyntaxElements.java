@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,5 +33,4 @@ public interface MojoliciousSyntaxElements {
 
   String KEYWORD_MOJO_BEGIN = "begin";
   String KEYWORD_MOJO_END = "end";
-  String KEYWORD_MOJO_HELPER_METHOD = "helper";
 }

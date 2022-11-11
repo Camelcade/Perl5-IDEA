@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.perl5.lang.perl.profiler.parser;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
-import com.intellij.openapi.project.Project;
 import com.intellij.profiler.api.*;
 import com.intellij.profiler.ui.NativeCallStackElementRenderer;
 import org.jetbrains.annotations.NotNull;
@@ -34,11 +33,6 @@ import java.util.zip.GZIPInputStream;
  */
 public class PerlProfilerCollapsedDumpFileParser implements ProfilerDumpFileParser {
   private static final Logger LOG = Logger.getInstance(PerlProfilerCollapsedDumpFileParser.class);
-  private final @NotNull Project myProject;
-
-  public PerlProfilerCollapsedDumpFileParser(Project project) {
-    myProject = project;
-  }
 
   @Override
   public @Nullable String getHelpId() {

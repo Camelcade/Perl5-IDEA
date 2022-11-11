@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,6 @@ import java.util.List;
 public interface Perl5SdkManipulator {
   /**
    * @return list of SDK items, wrapped into {@link Perl5SdkWrapper}, may contain text items and parent item.
-   * @see com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5ParentSdkWrapper
    * @see com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5TextSdkWrapper
    */
   default @NotNull List<Perl5SdkWrapper> getAllSdkWrappers() {

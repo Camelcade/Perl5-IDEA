@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ import javax.swing.*;
 
 public final class PerlIcons {
   public static final Icon PERL_LANGUAGE_ICON = load("/icons/perl5language.png");
-  public static final Icon PERL_MODIFIER = load("/icons/perl_modifier.png");
   public static final Icon PERLBREW_ICON = load("/icons/perlbrew.png");
   public static final Icon STRAWBERRY_ICON = load("/icons/strawberry.png");
   public static final Icon WINDOWS10_ICON = load("/icons/windows.svg");

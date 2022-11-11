@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,12 @@ import java.util.Arrays;
 public class PerlStackFrameDescriptor {
   public static final transient String EVAL_PREFIX = "(eval ";
 
-  PerlLoadedFileDescriptor file;
-  private int line;
-  private int main_size;
-  private PerlValueDescriptor[] lexicals;
-  private PerlValueDescriptor[] globals;
-  private PerlValueDescriptor[] args;
+  @SuppressWarnings("unused") PerlLoadedFileDescriptor file;
+  @SuppressWarnings("unused") private int line;
+  @SuppressWarnings("unused") private int main_size;
+  @SuppressWarnings("unused") private PerlValueDescriptor[] lexicals;
+  @SuppressWarnings("unused") private PerlValueDescriptor[] globals;
+  @SuppressWarnings("unused") private PerlValueDescriptor[] args;
 
   public PerlLoadedFileDescriptor getFileDescriptor() {
     return file;

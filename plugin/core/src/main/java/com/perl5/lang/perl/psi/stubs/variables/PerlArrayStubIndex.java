@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi.stubs.variables;
 
 import com.intellij.openapi.util.Pair;
-import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +34,4 @@ public class PerlArrayStubIndex extends PerlVariableStubIndex {
     return KEY_ARRAY;
   }
 
-  public static @NotNull PerlArrayStubIndex getInstance() {
-    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlArrayStubIndex.class);
-  }
 }

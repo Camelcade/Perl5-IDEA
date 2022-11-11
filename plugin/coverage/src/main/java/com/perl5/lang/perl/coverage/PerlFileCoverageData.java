@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,6 @@ package com.perl5.lang.perl.coverage;
 import java.util.Map;
 
 class PerlFileCoverageData {
-  public String name;
-  public Map<Integer, PerlLineData> lines;
+  @SuppressWarnings("unused") public String name;
+  @SuppressWarnings("unused") public Map<Integer, PerlLineData> lines;
 }

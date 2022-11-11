@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ import java.util.List;
 
 
 public class PerlDebuggingEventLoadedFiles extends PerlDebuggingEventBase {
-  PerlLoadedFileDescriptor[] add;     // list of filenames
-  PerlLoadedFileDescriptor[] remove; // list of filenames
+  @SuppressWarnings("unused") PerlLoadedFileDescriptor[] add;     // list of filenames
+  @SuppressWarnings("unused") PerlLoadedFileDescriptor[] remove; // list of filenames
 
   @Override
   public void run() {

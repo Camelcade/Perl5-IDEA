@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,14 +81,10 @@ public final class PerlValuesManager {
   static final int SCALAR_ID = id++;
   static final int SCALAR_DEREFERENCE_ID = id++;
   static final int SCALAR_CONTEXT_ID = id++;
-  static final int STRINGIFY_ID = id++;
-  static final int NUMIFY_ID = id++;
-
   static final int ARRAY_ID = id++;
   static final int ARRAY_ELEMENT_ID = id++;
   static final int ARRAY_SLICE_ID = id++;
   static final int ARRAY_DEREFERENCE_ID = id++;
-  static final int SPLICE_ID = id++;
   static final int UNSHIFT_ID = id++;
   static final int PUSH_ID = id++;
   static final int SUBLIST_ID = id++;
@@ -97,16 +93,8 @@ public final class PerlValuesManager {
   static final int HASH_ELEMENT_VALUE = id++;
   static final int DEFERRED_HASH_ID = id++;
   static final int HASH_SLICE_ID = id++;
-  static final int KEYS_ID = id++;
-  static final int VALUES_ID = id++;
-  static final int EACH_ID = id++;
   static final int HASH_DEREFERENCE_ID = id++;
-  static final int DELETE_ID = id++;
-
   static final int ARITHMETIC_NEGATION = id++;
-  static final int LOGICAL_NEGATION = id++;
-  static final int BITWISE_NEGATION = id++;
-
   static final int REFERENCE_ID = id++;
   static final int BLESSED_ID = id++;
 
@@ -114,14 +102,11 @@ public final class PerlValuesManager {
   static final int CALL_STATIC_ID = id++;
   static final int CALL_OBJECT_ID = id++;
   static final int ONE_OF_ID = id++;
-  static final int CONDITION_ID = id++;
-  static final int DEFINED_ID = id++;
-  static final int WANTARRAY_ID = id++;
   static final int DEFAULT_ARGUMENT_ID = id++;
   static final int SMART_GETTER_ID = id++;
 
   // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id + 5;
+  public static final int VERSION = id;
 
   private static final Interner<PerlValue> INTERNER = Interner.createWeakInterner();
 

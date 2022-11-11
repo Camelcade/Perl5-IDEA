@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import javax.swing.*;
 
 
 public class XSFileType extends PerlPluginBaseFileType {
-  public static final XSFileType INSTANCE = new XSFileType();
+  @SuppressWarnings("unused") public static final XSFileType INSTANCE = new XSFileType();
 
   private XSFileType() {
     super(XSLanguage.INSTANCE);

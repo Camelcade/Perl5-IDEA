@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,8 +59,6 @@ import java.util.stream.Collectors;
 
 public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTable.Listener {
   public static final Perl5SdkWrapper DISABLE_PERL_ITEM = new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.disable.perl.support"));
-  public static final Perl5SdkWrapper NOT_SELECTED_ITEM = new Perl5TextSdkWrapper(PerlBundle.message("perl.settings.sdk.not.selected"));
-
   private Perl5SdkPanel myPanel;
   private final @NotNull MessageBusConnection myConnection;
   private final @NotNull Perl5SdkManipulator mySdkManipulator;
@@ -169,7 +167,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
 
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
-        renameSdk(e);
+        renameSdk();
       }
     });
     panelActionGroup.add(new DumbAwareAction(PerlBundle.message("perl.interpreter.delete")) {
@@ -180,7 +178,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
 
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
-        removeSdk(e);
+        removeSdk();
       }
     });
     myPanel.getSdkComboBox().registerKeyboardAction(e -> {
@@ -210,14 +208,14 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     return sdkComboBox == null ? null : (Perl5SdkWrapper)sdkComboBox.getSelectedItem();
   }
 
-  private void removeSdk(AnActionEvent e) {
+  private void removeSdk() {
     Sdk selectedSdk = getSelectedSdk();
     if (selectedSdk != null) {
       PerlSdkTable.getInstance().removeJdk(selectedSdk);
     }
   }
 
-  private void renameSdk(AnActionEvent e) {
+  private void renameSdk() {
     Sdk selectedSdk = getSelectedSdk();
     if (selectedSdk == null) {
       return;

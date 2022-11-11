@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,8 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class PerlLoadedFileDescriptor {
-  private String path;
-  private String name;
+  @SuppressWarnings("unused") private String path;
+  @SuppressWarnings("unused") private String name;
 
   public @NotNull String getPath() {
     return path;

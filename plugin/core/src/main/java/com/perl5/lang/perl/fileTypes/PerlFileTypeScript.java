@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,10 +28,6 @@ public class PerlFileTypeScript extends PurePerlFileType {
   public static final PerlFileType INSTANCE = new PerlFileTypeScript();
 
   public static final String EXTENSION_PL = "pl";
-  public static final String EXTENSION_PH = "ph";
-  public static final String EXTENSION_AL = "al";
-  public static final String EXTENSION_CGI = "cgi";
-
   @Override
   public @NotNull String getDefaultExtension() {
     return EXTENSION_PL;

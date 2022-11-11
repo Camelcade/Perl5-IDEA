@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.pod.parser.psi;
 
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
@@ -32,8 +31,6 @@ import org.jetbrains.annotations.Nullable;
  * Builds pod link from the string
  */
 public class PodLinkDescriptor {
-  private static final Logger LOG = Logger.getInstance(PodLinkDescriptor.class);
-
   private final @Nullable String myName;
   private final @Nullable String mySection;
   private final @Nullable String myText;

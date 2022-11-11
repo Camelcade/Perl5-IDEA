@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,9 +51,9 @@ public class PerlLayerDescriptor {
   }
 
 
-  private @Nullable String name;
-  private @Nullable String param;
-  private @Nullable String flags;
+  @SuppressWarnings("unused") private @Nullable String name;
+  @SuppressWarnings("unused") private @Nullable String param;
+  @SuppressWarnings("unused") private @Nullable String flags;
 
   public @NotNull String getName() {
     return name == null ? "UNKNOWN" : name;

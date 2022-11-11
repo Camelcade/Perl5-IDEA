@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,10 +44,6 @@ public class MojoPerlRenameTest extends MojoLightTestCase {
   @Override
   protected void doRenameAtCaret(@NotNull String newName) {
     myFixture.renameElementAtCaret(newName);
-  }
-
-  protected void doTest() {
-    doTest("NewName");
   }
 
   protected void doTest(@NotNull String newName) {

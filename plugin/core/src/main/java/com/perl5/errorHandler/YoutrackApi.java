@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.perl5.errorHandler;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ public final class YoutrackApi {
   }
 
   static final class YoutrackCustomFieldValue {
-    @Expose
+    @SuppressWarnings("unused") @Expose
     public final String name;
 
     public YoutrackCustomFieldValue(String name) {
@@ -48,9 +47,9 @@ public final class YoutrackApi {
   }
 
   private abstract static class YoutrackCustomField {
-    @Expose
+    @SuppressWarnings("unused") @Expose
     public final String name;
-    @Expose
+    @SuppressWarnings("unused") @Expose
     @SerializedName("$type")
     public final String type;
 
@@ -61,7 +60,7 @@ public final class YoutrackApi {
   }
 
   static final class YoutrackSingleCustomField extends YoutrackCustomField {
-    @Expose
+    @SuppressWarnings("unused") @Expose
     public final YoutrackCustomFieldValue value;
 
     public YoutrackSingleCustomField(String name, String type, String value) {
@@ -70,18 +69,9 @@ public final class YoutrackApi {
     }
   }
 
-  static final class YoutrackMultiCustomField extends YoutrackCustomField {
-    @Expose
-    public final List<YoutrackCustomFieldValue> value;
-
-    public YoutrackMultiCustomField(String name, String type, String... value) {
-      super(name, type);
-      this.value = ContainerUtil.map(value, YoutrackCustomFieldValue::new);
-    }
-  }
 
   static final class YoutrackProject {
-    @Expose
+    @SuppressWarnings("unused") @Expose
     public final String id;
 
     public YoutrackProject(String id) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,14 +59,6 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
   @Override
   protected int getSerializationId() {
     return ARRAY_ELEMENT_ID;
-  }
-
-  public @NotNull PerlValue getArray() {
-    return getBaseValue();
-  }
-
-  public @NotNull PerlValue getIndex() {
-    return getParameter();
   }
 
   @Override

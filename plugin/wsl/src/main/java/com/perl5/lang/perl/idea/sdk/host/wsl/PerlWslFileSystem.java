@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.sdk.host.wsl;
 
 import com.intellij.execution.wsl.WSLDistribution;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -41,8 +40,6 @@ import java.util.Objects;
  * - listeners not supported
  */
 class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
-  private static final Logger LOG = Logger.getInstance(PerlWslFileSystem.class);
-
   private final @NotNull WSLDistribution myDistribution;
 
   private PerlWslFileSystem(@NotNull WSLDistribution distribution) {

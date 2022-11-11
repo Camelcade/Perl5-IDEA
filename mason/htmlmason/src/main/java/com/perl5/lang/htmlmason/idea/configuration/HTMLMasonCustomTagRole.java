@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,26 +16,18 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
-import com.intellij.psi.tree.IElementType;
-
-import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
-
 
 public enum HTMLMasonCustomTagRole {
-  PERL("as <%perl>", true, HTML_MASON_PERL_OPENER, HTML_MASON_PERL_CLOSER),
-  METHOD("as <%method>", false, HTML_MASON_METHOD_OPENER, HTML_MASON_METHOD_CLOSER),
-  DEF("as <%def>", false, HTML_MASON_DEF_OPENER, HTML_MASON_DEF_CLOSER),
-  ARGS("as <%args>", true, HTML_MASON_ARGS_OPENER, HTML_MASON_ARGS_CLOSER);
+  PERL("as <%perl>", true),
+  METHOD("as <%method>", false),
+  DEF("as <%def>", false),
+  ARGS("as <%args>", true);
 
   private final String myTitle;
-  private final IElementType myOpenToken;
-  private final IElementType myCloseToken;
   private final boolean myIsSimple;
 
-  HTMLMasonCustomTagRole(String title, boolean isSimple, IElementType openToken, IElementType closeToken) {
+  HTMLMasonCustomTagRole(String title, boolean isSimple) {
     myTitle = title;
-    myOpenToken = openToken;
-    myCloseToken = closeToken;
     myIsSimple = isSimple;
   }
 
@@ -43,13 +35,6 @@ public enum HTMLMasonCustomTagRole {
     return myTitle;
   }
 
-  public IElementType getOpenToken() {
-    return myOpenToken;
-  }
-
-  public IElementType getCloseToken() {
-    return myCloseToken;
-  }
 
   public boolean isSimple() {
     return myIsSimple;

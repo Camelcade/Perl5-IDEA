@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.ide.projectView.actions.MarkRootActionBase;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ContentEntry;
 import com.intellij.openapi.roots.ContentFolder;
@@ -30,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class PerlSourceRootAction extends MarkRootActionBase {
-  private static final Logger LOG = Logger.getInstance(PerlSourceRootAction.class);
 
   @Override
   protected final boolean isEnabled(@NotNull RootsSelection selection, @NotNull Module module) {

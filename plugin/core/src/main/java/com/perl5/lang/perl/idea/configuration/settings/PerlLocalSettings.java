@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,6 @@ import java.util.List;
 )
 public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSettings> {
   public boolean DISABLE_NO_INTERPRETER_WARNING = false;
-  public boolean DISABLE_ASSOCIATIONS_CHECKING = false;
   public boolean ENABLE_REGEX_INJECTIONS = false;
   private String myPerlInterpreter;
   private List<String> myExternalLibrariesPaths = new ArrayList<>();

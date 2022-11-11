@@ -53,10 +53,6 @@ public class TemplateToolkitParserDefinition implements ParserDefinition, Templa
     TT2_STRING_CONTENT
   );
 
-  public static final TokenSet IDENTIFIERS = TokenSet.create(
-    TT2_IDENTIFIER
-  );
-
   @Override
   public @NotNull Lexer createLexer(Project project) {
     return new TemplateToolkitLexerAdapter(project);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,20 +21,20 @@ import org.jetbrains.annotations.TestOnly;
 
 
 public class PerlValueDescriptor {
-  private String name;
-  private String type;
-  private String value;
-  private String rendered;
-  private boolean render_error;
-  private int ref_depth; // how many references been skipped
-  private String key;        // key to fetch additional elements, basically text representation of reference
-  private int size;        // size used for arrays/hashes elements
-  private boolean expandable;
-  private boolean blessed;
-  private boolean is_utf;
-  private @Nullable String fileno;
-  private @Nullable PerlLayersDescriptor layers;
-  private @Nullable PerlValueDescriptor tied_with;
+  @SuppressWarnings("unused") private String name;
+  @SuppressWarnings("unused") private String type;
+  @SuppressWarnings("unused") private String value;
+  @SuppressWarnings("unused") private String rendered;
+  @SuppressWarnings("unused") private boolean render_error;
+  @SuppressWarnings("unused") private int ref_depth; // how many references been skipped
+  @SuppressWarnings("unused") private String key;        // key to fetch additional elements, basically text representation of reference
+  @SuppressWarnings("unused") private int size;        // size used for arrays/hashes elements
+  @SuppressWarnings("unused") private boolean expandable;
+  @SuppressWarnings("unused") private boolean blessed;
+  @SuppressWarnings("unused") private boolean is_utf;
+  @SuppressWarnings("unused") private @Nullable String fileno;
+  @SuppressWarnings("unused") private @Nullable PerlLayersDescriptor layers;
+  @SuppressWarnings("unused") private @Nullable PerlValueDescriptor tied_with;
 
   public @Nullable String getFileno() {
     return fileno;
