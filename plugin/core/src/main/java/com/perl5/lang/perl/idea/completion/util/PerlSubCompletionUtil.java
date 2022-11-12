@@ -85,14 +85,14 @@ public class PerlSubCompletionUtil {
   public static boolean processImportedEntityLookupElement(@NotNull PsiElement element,
                                                            @NotNull PerlExportDescriptor exportDescriptor,
                                                            @NotNull PerlCompletionProcessor completionProcessor) {
-    if (element instanceof PerlSubDefinitionElement) {
-      return processSubDefinitionLookupElement((PerlSubDefinitionElement)element, exportDescriptor, completionProcessor);
+    if (element instanceof PerlSubDefinitionElement subDefinitionElement) {
+      return processSubDefinitionLookupElement(subDefinitionElement, exportDescriptor, completionProcessor);
     }
-    else if (element instanceof PerlSubDeclarationElement) {
-      return processSubDeclarationLookupElement((PerlSubDeclarationElement)element, exportDescriptor, completionProcessor);
+    else if (element instanceof PerlSubDeclarationElement subDeclarationElement) {
+      return processSubDeclarationLookupElement(subDeclarationElement, exportDescriptor, completionProcessor);
     }
-    else if (element instanceof PerlGlobVariableElement) {
-      return processGlobLookupElement((PerlGlobVariableElement)element, exportDescriptor, completionProcessor);
+    else if (element instanceof PerlGlobVariableElement globVariableElement) {
+      return processGlobLookupElement(globVariableElement, exportDescriptor, completionProcessor);
     }
     throw new RuntimeException("Don't know how to make lookup element for " + element.getClass());
   }
@@ -226,20 +226,20 @@ public class PerlSubCompletionUtil {
       completionProcessor.getLeafElement(), new PerlNamespaceItemProcessor<>() {
         @Override
         public boolean processItem(@NotNull PsiNamedElement element) {
-          if (element instanceof PerlImplicitSubDefinition && ((PerlImplicitSubDefinition)element).isAnonymous()) {
+          if (element instanceof PerlImplicitSubDefinition implicitSubDefinition && implicitSubDefinition.isAnonymous()) {
             return completionProcessor.result();
           }
-          if (element instanceof PerlSubDefinitionElement && !((PerlSubDefinitionElement)element).isAnonymous() &&
-              (isStatic && ((PerlSubDefinitionElement)element).isStatic() || ((PerlSubDefinitionElement)element).isMethod())) {
-            return processSubDefinitionLookupElement((PerlSubDefinitionElement)element, completionProcessor);
+          if (element instanceof PerlSubDefinitionElement subDefinitionElement &&
+              !subDefinitionElement.isAnonymous() && (isStatic && subDefinitionElement.isStatic() || subDefinitionElement.isMethod())) {
+            return processSubDefinitionLookupElement(subDefinitionElement, completionProcessor);
           }
-          if (element instanceof PerlSubDeclarationElement &&
-              (isStatic && ((PerlSubDeclarationElement)element).isStatic() || ((PerlSubDeclarationElement)element).isMethod())) {
-            return processSubDeclarationLookupElement((PerlSubDeclarationElement)element, completionProcessor);
+          if (element instanceof PerlSubDeclarationElement subDeclarationElement &&
+              (isStatic && subDeclarationElement.isStatic() || subDeclarationElement.isMethod())) {
+            return processSubDeclarationLookupElement(subDeclarationElement, completionProcessor);
           }
-          if (element instanceof PerlGlobVariableElement && ((PerlGlobVariableElement)element).isLeftSideOfAssignment()) {
+          if (element instanceof PerlGlobVariableElement perlGlobVariableElement && perlGlobVariableElement.isLeftSideOfAssignment()) {
             if (StringUtil.isNotEmpty(element.getName())) {
-              return processGlobLookupElement((PerlGlobVariableElement)element, completionProcessor);
+              return processGlobLookupElement(perlGlobVariableElement, completionProcessor);
             }
           }
           return completionProcessor.result();

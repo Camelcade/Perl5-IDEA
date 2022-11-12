@@ -35,6 +35,7 @@ import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
 import com.perl5.lang.perl.util.PerlSubUtil;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -63,10 +64,10 @@ public class PerlAnnotator extends PerlBaseAnnotator {
     if (elementType == NYI_STATEMENT) {
       defaultAnnotationProducer.accept("Unimplemented statement", CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
     }
-    else if (element instanceof PerlGlobVariableElement && ((PerlGlobVariableElement)element).isBuiltIn()) {
+    else if (element instanceof PerlGlobVariableElement globalVariableElement && globalVariableElement.isBuiltIn()) {
       defaultSilentProducer.accept(PERL_GLOB_BUILTIN);
     }
-    else if (element instanceof PerlVariable && ((PerlVariable)element).isBuiltIn()) {
+    else if (element instanceof PerlVariable perlVariable && perlVariable.isBuiltIn()) {
       defaultSilentProducer.accept(VARIABLE_KEYS_MAP.get(element.getClass()));
     }
     else if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR) {
@@ -90,11 +91,11 @@ public class PerlAnnotator extends PerlBaseAnnotator {
         }
       }
     }
-    else if (element instanceof PerlCharSubstitution) {
-      int codePoint = ((PerlCharSubstitution)element).getCodePoint();
+    else if (element instanceof PerlCharSubstitution charSubstitution) {
+      int codePoint = charSubstitution.getCodePoint();
       if (codePoint >= 0) {
         StringBuilder sb = new StringBuilder("<ul>");
-        String chars = ((PerlCharSubstitution)element).getNonIgnorableChars();
+        @NonNls String chars = charSubstitution.getNonIgnorableChars();
         if (StringUtil.isEmptyOrSpaces(chars)) {
           chars = PerlBundle.message("perl.annotator.char.non.printable");
         }
@@ -140,10 +141,10 @@ public class PerlAnnotator extends PerlBaseAnnotator {
           defaultSilentProducer.accept(PerlSyntaxHighlighter.PERL_SUB_DEFINITION);
         }
       }
-      else if (parent instanceof PerlMethod) {
+      else if (parent instanceof PerlMethod perlMethod) {
         // fixme don't we need to take multiple references here?
-        PsiElement grandParent = parent.getParent();
-        PerlNamespaceElement methodNamespace = ((PerlMethod)parent).getNamespaceElement();
+        PsiElement grandParent = perlMethod.getParent();
+        PerlNamespaceElement methodNamespace = perlMethod.getNamespaceElement();
 
         if (
           !PerlSubCallElement.isNestedCall(grandParent) /// not ...->method fixme shouldn't we use isObjectMethod here?
@@ -156,16 +157,16 @@ public class PerlAnnotator extends PerlBaseAnnotator {
 
           PsiReference reference = element.getReference();
 
-          if (reference instanceof PerlSubReference) {
-            ((PerlSubReference)reference).multiResolve(false);
+          if (reference instanceof PerlSubReference perlSubReference) {
+            perlSubReference.multiResolve(false);
 
-            if (((PerlSubReference)reference).isConstant()) {
+            if (perlSubReference.isConstant()) {
               defaultAnnotationProducer.accept("Constant", PerlSyntaxHighlighter.PERL_CONSTANT);
             }
-            else if (((PerlSubReference)reference).isAutoloaded()) {
+            else if (perlSubReference.isAutoloaded()) {
               defaultAnnotationProducer.accept("Auto-loaded sub", PerlSyntaxHighlighter.PERL_AUTOLOAD);
             }
-            else if (((PerlSubReference)reference).isXSub()) {
+            else if (perlSubReference.isXSub()) {
               defaultAnnotationProducer.accept("XSub", PerlSyntaxHighlighter.PERL_XSUB);
             }
           }

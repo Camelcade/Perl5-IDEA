@@ -92,9 +92,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 
   @Override
   public boolean shouldCreateStub(ASTNode node) {
-    PsiElement psi = node.getPsi();
-    return psi instanceof PerlGlobVariableElement &&
-           psi.isValid() &&
-           StringUtil.isNotEmpty(((PerlGlobVariableElement)psi).getCanonicalName());
+    return node.getPsi() instanceof PerlGlobVariableElement perlGlobVariableElement &&
+           perlGlobVariableElement.isValid() && StringUtil.isNotEmpty(perlGlobVariableElement.getCanonicalName());
   }
 }

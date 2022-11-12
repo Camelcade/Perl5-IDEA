@@ -330,20 +330,19 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
 
       if (packageName != null) {
         for (PsiElement element : PerlMro.getVariants(psiElement, packageName, true)) {
-          if (element instanceof PerlIdentifierOwner && !implementedMethods.contains(((PerlIdentifierOwner)element).getName())) {
-            if (element instanceof PerlLightConstantDefinitionElement) {
-              inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionElement)element).setInherited());
+          if (element instanceof PerlIdentifierOwner identifierOwner && !implementedMethods.contains((identifierOwner).getName())) {
+            if (element instanceof PerlLightConstantDefinitionElement perlLightConstantDefinitionElement) {
+              inheritedResult.add(new PerlSubStructureViewElement(perlLightConstantDefinitionElement).setInherited());
             }
-            else if (element instanceof PerlSubDefinitionElement) {
-              inheritedResult.add(new PerlSubStructureViewElement((PerlSubDefinitionElement)element).setInherited());
+            else if (element instanceof PerlSubDefinitionElement subDefinitionElement) {
+              inheritedResult.add(new PerlSubStructureViewElement(subDefinitionElement).setInherited());
             }
-            else if (element instanceof PerlSubDeclarationElement) {
-              inheritedResult.add(new PerlSubStructureViewElement((PerlSubDeclarationElement)element).setInherited());
+            else if (element instanceof PerlSubDeclarationElement subDeclarationElement) {
+              inheritedResult.add(new PerlSubStructureViewElement(subDeclarationElement).setInherited());
             }
-            else if (element instanceof PerlGlobVariableElement &&
-                     ((PerlGlobVariableElement)element).isLeftSideOfAssignment() &&
-                     ((PerlGlobVariableElement)element).getName() != null) {
-              inheritedResult.add(new PerlGlobStructureViewElement((PerlGlobVariableElement)element).setInherited());
+            else if (element instanceof PerlGlobVariableElement globVariableElement &&
+                     globVariableElement.isLeftSideOfAssignment() && globVariableElement.getName() != null) {
+              inheritedResult.add(new PerlGlobStructureViewElement(globVariableElement).setInherited());
             }
           }
         }
