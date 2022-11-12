@@ -23,7 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -141,7 +141,7 @@ public abstract class PerlMro {
         methods.putIfAbsent(it.getName(), it);
         return true;
       });
-      for (PerlGlobVariable globVariable : PerlGlobUtil.getGlobsDefinitionsInPackage(project, packageName)) {
+      for (PerlGlobVariableElement globVariable : PerlGlobUtil.getGlobsDefinitionsInPackage(project, packageName)) {
         if (globVariable.isLeftSideOfAssignment() && !methods.containsKey(globVariable.getName())) {
           methods.putIfAbsent(globVariable.getName(), globVariable);
         }

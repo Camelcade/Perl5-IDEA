@@ -23,7 +23,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubIndex;
 import org.jetbrains.annotations.NotNull;
@@ -106,7 +106,7 @@ public final class PerlGlobUtil implements PerlElementTypes {
   public static boolean processDefinedGlobs(@NotNull Project project,
                                             @NotNull GlobalSearchScope scope,
                                             @Nullable Predicate<String> namesFilter,
-                                            @NotNull Processor<PerlGlobVariable> processor,
+                                            @NotNull Processor<PerlGlobVariableElement> processor,
                                             boolean processAll,
                                             @Nullable String namespaceName) {
     return namespaceName == null
@@ -117,7 +117,7 @@ public final class PerlGlobUtil implements PerlElementTypes {
   private static boolean processDefinedGlobsByNamespace(@NotNull Project project,
                                                         @NotNull GlobalSearchScope scope,
                                                         @Nullable Predicate<String> namesFilter,
-                                                        @NotNull Processor<PerlGlobVariable> processor,
+                                                        @NotNull Processor<PerlGlobVariableElement> processor,
                                                         boolean processAll,
                                                         @NotNull String namespaceName) {
     Set<String> processedNames = processAll ? null : new HashSet<>();
@@ -135,7 +135,7 @@ public final class PerlGlobUtil implements PerlElementTypes {
   private static boolean processDefinedGlobsByNames(@NotNull Project project,
                                                     @NotNull GlobalSearchScope scope,
                                                     @Nullable Predicate<String> namesFilter,
-                                                    @NotNull Processor<PerlGlobVariable> processor,
+                                                    @NotNull Processor<PerlGlobVariableElement> processor,
                                                     boolean processAll) {
     var namesToProcess = new HashSet<String>();
     for (String globName : PerlStubUtil.getAllKeys(PerlGlobStubIndex.KEY_GLOB, scope)) {

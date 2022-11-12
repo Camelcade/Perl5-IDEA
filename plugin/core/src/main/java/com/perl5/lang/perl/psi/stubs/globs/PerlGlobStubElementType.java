@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.impl.PsiPerlGlobVariableImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
@@ -63,7 +63,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 
   @Override
   public void indexStub(@NotNull PerlGlobStub stub, @NotNull IndexSink sink) {
-    String name = stub.getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + stub.getName();
+    String name = stub.getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + stub.getGlobName();
     sink.occurrence(KEY_GLOB, name);
     sink.occurrence(KEY_GLOB_NAMESPACE, stub.getNamespaceName());
   }
@@ -71,7 +71,7 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
   @Override
   public void serialize(@NotNull PerlGlobStub stub, @NotNull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getNamespaceName());
-    dataStream.writeName(stub.getName());
+    dataStream.writeName(stub.getGlobName());
     dataStream.writeBoolean(stub.isLeftSideOfAssignment());
   }
 
@@ -84,8 +84,8 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
-    return psi instanceof PerlGlobVariable &&
+    return psi instanceof PerlGlobVariableElement &&
            psi.isValid() &&
-           StringUtil.isNotEmpty(((PerlGlobVariable)psi).getCanonicalName());
+           StringUtil.isNotEmpty(((PerlGlobVariableElement)psi).getCanonicalName());
   }
 }

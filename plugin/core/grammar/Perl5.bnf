@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -567,7 +567,7 @@
 
     stubClass("glob_variable")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub"
     mixin("glob_variable")="com.perl5.lang.perl.psi.mixins.PerlGlobVariableMixin"
-    implements("glob_variable")="com.perl5.lang.perl.psi.PerlGlobVariable"
+    implements("glob_variable")="com.perl5.lang.perl.psi.PerlGlobVariableElement"
 
     mixin("require_expr")="com.perl5.lang.perl.psi.mixins.PerlRequireExprMixin"
     implements("require_expr")="com.perl5.lang.perl.psi.PerlRequireExpr"

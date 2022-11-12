@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.PsiReferenceProvider;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
 import com.perl5.lang.perl.psi.references.PerlVariableReference;
@@ -49,7 +49,7 @@ public class PerlVariableReferencesProvider extends PsiReferenceProvider {
         return new PsiReference[]{new PerlVariableReference(element, TextRange.allOf(elementText))};
       }
     }
-    else if (parent instanceof PerlGlobVariable) {
+    else if (parent instanceof PerlGlobVariableElement) {
       String elementText = element.getText();
       if (PerlPackageUtil.isFullQualifiedName(elementText)) {
         Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(elementText);

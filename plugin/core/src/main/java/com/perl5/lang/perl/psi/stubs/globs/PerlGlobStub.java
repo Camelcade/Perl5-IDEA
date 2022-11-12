@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,8 @@
 package com.perl5.lang.perl.psi.stubs.globs;
 
 import com.intellij.psi.stubs.StubElement;
+import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 
-public interface PerlGlobStub extends StubElement<PsiPerlGlobVariable> {
-  String getNamespaceName();
-
-  String getName();
-
-  boolean isLeftSideOfAssignment();
+public interface PerlGlobStub extends StubElement<PsiPerlGlobVariable>, PerlGlobVariable {
 }

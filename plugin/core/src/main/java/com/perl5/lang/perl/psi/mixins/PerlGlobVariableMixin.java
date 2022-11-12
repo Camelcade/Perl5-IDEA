@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,9 +67,14 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
 
   @Override
   public String getName() {
+    return getGlobName();
+  }
+
+  @Override
+  public String getGlobName() {
     PerlGlobStub stub = getGreenStub();
     if (stub != null) {
-      return stub.getName();
+      return stub.getGlobName();
     }
 
     PerlVariableNameElement variableNameElement = getVariableNameElement();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -205,7 +205,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
           items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
         }
 
-        for (PerlGlobVariable item : items) {
+        for (PerlGlobVariableElement item : items) {
           result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
         }
       }
@@ -226,7 +226,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
           items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
         }
 
-        for (PerlGlobVariable item : items) {
+        for (PerlGlobVariableElement item : items) {
           result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
         }
       }
@@ -247,7 +247,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
           items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
         }
 
-        for (PerlGlobVariable item : items) {
+        for (PerlGlobVariableElement item : items) {
           result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
         }
       }
@@ -282,7 +282,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
           items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
         }
 
-        for (PerlGlobVariable item : items) {
+        for (PerlGlobVariableElement item : items) {
           result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
         }
       }
@@ -340,10 +340,10 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
             else if (element instanceof PerlSubDeclarationElement) {
               inheritedResult.add(new PerlSubStructureViewElement((PerlSubDeclarationElement)element).setInherited());
             }
-            else if (element instanceof PerlGlobVariable &&
-                     ((PerlGlobVariable)element).isLeftSideOfAssignment() &&
-                     ((PerlGlobVariable)element).getName() != null) {
-              inheritedResult.add(new PerlGlobStructureViewElement((PerlGlobVariable)element).setInherited());
+            else if (element instanceof PerlGlobVariableElement &&
+                     ((PerlGlobVariableElement)element).isLeftSideOfAssignment() &&
+                     ((PerlGlobVariableElement)element).getName() != null) {
+              inheritedResult.add(new PerlGlobStructureViewElement((PerlGlobVariableElement)element).setInherited());
             }
           }
         }

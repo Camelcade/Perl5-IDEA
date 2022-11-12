@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
 import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
@@ -171,7 +171,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
         setXSub();
       }
 
-      if (!isAliased() && element instanceof PerlGlobVariable) {
+      if (!isAliased() && element instanceof PerlGlobVariableElement) {
         setAliased();
       }
 

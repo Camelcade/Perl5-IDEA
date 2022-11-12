@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
@@ -219,7 +219,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   }
 
   @Override
-  public @NotNull List<PerlGlobVariable> getRelatedGlobs() {
+  public @NotNull List<PerlGlobVariableElement> getRelatedGlobs() {
     String variableName = getName();
     if (variableName == null) {
       return Collections.emptyList();
@@ -227,7 +227,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     String namespaceName = ObjectUtils.notNull(getExplicitNamespaceName(), PerlPackageUtil.getContextNamespaceName(this));
     String fullQualifiedName = PerlPackageUtil.join(namespaceName, variableName);
 
-    List<PerlGlobVariable> result = new ArrayList<>();
+    List<PerlGlobVariableElement> result = new ArrayList<>();
     PerlGlobUtil.processDefinedGlobs(getProject(), getResolveScope(), fullQualifiedName::equals, result::add, true, namespaceName);
     return result;
   }

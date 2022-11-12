@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,8 +91,8 @@ public class PerlSubCompletionUtil {
     else if (element instanceof PerlSubDeclarationElement) {
       return processSubDeclarationLookupElement((PerlSubDeclarationElement)element, exportDescriptor, completionProcessor);
     }
-    else if (element instanceof PerlGlobVariable) {
-      return processGlobLookupElement((PerlGlobVariable)element, exportDescriptor, completionProcessor);
+    else if (element instanceof PerlGlobVariableElement) {
+      return processGlobLookupElement((PerlGlobVariableElement)element, exportDescriptor, completionProcessor);
     }
     throw new RuntimeException("Don't know how to make lookup element for " + element.getClass());
   }
@@ -120,15 +120,15 @@ public class PerlSubCompletionUtil {
     );
   }
 
-  public static boolean processGlobLookupElement(@NotNull PerlGlobVariable globVariable,
+  public static boolean processGlobLookupElement(@NotNull PerlGlobVariableElement globVariable,
                                                  @NotNull PerlCompletionProcessor completionProcessor) {
     return processGlobLookupElement(globVariable, null, completionProcessor);
   }
 
   /**
-   * Probably duplicate of {@link PerlVariableCompletionUtil#processVariableLookupElement(PerlGlobVariable, boolean, PerlVariableCompletionProcessor)}
+   * Probably duplicate of {@link PerlVariableCompletionUtil#processVariableLookupElement(PerlGlobVariableElement, boolean, PerlVariableCompletionProcessor)}
    */
-  public static boolean processGlobLookupElement(@NotNull PerlGlobVariable globVariable,
+  public static boolean processGlobLookupElement(@NotNull PerlGlobVariableElement globVariable,
                                                  @Nullable PerlExportDescriptor exportDescriptor,
                                                  @NotNull PerlCompletionProcessor completionProcessor) {
     String lookupString = exportDescriptor == null ? globVariable.getName() : exportDescriptor.getImportedName();
@@ -237,9 +237,9 @@ public class PerlSubCompletionUtil {
               (isStatic && ((PerlSubDeclarationElement)element).isStatic() || ((PerlSubDeclarationElement)element).isMethod())) {
             return processSubDeclarationLookupElement((PerlSubDeclarationElement)element, completionProcessor);
           }
-          if (element instanceof PerlGlobVariable && ((PerlGlobVariable)element).isLeftSideOfAssignment()) {
+          if (element instanceof PerlGlobVariableElement && ((PerlGlobVariableElement)element).isLeftSideOfAssignment()) {
             if (StringUtil.isNotEmpty(element.getName())) {
-              return processGlobLookupElement((PerlGlobVariable)element, completionProcessor);
+              return processGlobLookupElement((PerlGlobVariableElement)element, completionProcessor);
             }
           }
           return completionProcessor.result();

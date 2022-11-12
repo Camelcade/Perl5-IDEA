@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.refactoring.rename;
+package com.perl5.lang.perl.psi;
 
+import com.intellij.navigation.NavigationItem;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlGlobVariableElement;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import org.jetbrains.annotations.NotNull;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
+import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
 
 
-public class PerlDefaultRenameProcessor extends PerlRenamePolyReferencedElementProcessor {
-  @Override
-  public boolean canProcessElement(@NotNull PsiElement element) {
-    return element instanceof PerlGlobVariableElement
-           || element instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)element).isGlobalDeclaration()
-      ;
-  }
+public interface PerlGlobVariableElement extends PsiElement,
+                                                 PerlVariableNameElementContainer,
+                                                 PerlIdentifierOwner,
+                                                 NavigationItem,
+                                                 PerlGlobVariable {
 }

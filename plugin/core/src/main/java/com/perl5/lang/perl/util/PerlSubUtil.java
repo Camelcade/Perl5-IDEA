@@ -23,7 +23,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
@@ -229,7 +229,7 @@ public final class PerlSubUtil implements PerlElementTypes {
     if (!PerlSubUtil.processSubDeclarations(project, canonicalName, searchScope, processor::process)) {
       return false;
     }
-    for (PerlGlobVariable target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope)) {
+    for (PerlGlobVariableElement target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope)) {
       if (!processor.process(target)) {
         return false;
       }

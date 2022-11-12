@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
+import org.jetbrains.annotations.Nullable;
 
 public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements PerlGlobStub {
   private final String myNamespaceName;
@@ -39,7 +40,12 @@ public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements P
   }
 
   @Override
-  public String getName() {
+  public @Nullable String getExplicitNamespaceName() {
+    return getNamespaceName();
+  }
+
+  @Override
+  public String getGlobName() {
     return myVariableName;
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.refactoring.rename.PsiElementRenameHandler;
 import com.intellij.refactoring.rename.RenamePsiElementProcessor;
-import com.perl5.lang.perl.psi.PerlGlobVariable;
+import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,7 +39,7 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
     final String currentBaseName = ((PsiNameIdentifierOwner)element).getName();
 
     if (currentBaseName != null && StringUtil.isNotEmpty(newName)) {
-      boolean globScanned = element instanceof PerlGlobVariable;
+      boolean globScanned = element instanceof PerlGlobVariableElement;
 
       for (PsiReference reference : ReferencesSearch.search(element, element.getUseScope()).findAll()) {
         if (reference instanceof PsiPolyVariantReference) {
@@ -47,7 +47,7 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
             PsiElement resolveResultElement = resolveResult.getElement();
             if (!allRenames.containsKey(resolveResultElement)) {
               allRenames.put(resolveResultElement, newName);
-              if (!globScanned && resolveResultElement instanceof PerlGlobVariable) {
+              if (!globScanned && resolveResultElement instanceof PerlGlobVariableElement) {
                 globScanned = true;
                 prepareRenaming(resolveResultElement, newName, allRenames, scope);
               }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,7 +63,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
     if (elementType == NYI_STATEMENT) {
       defaultAnnotationProducer.accept("Unimplemented statement", CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
     }
-    else if (element instanceof PerlGlobVariable && ((PerlGlobVariable)element).isBuiltIn()) {
+    else if (element instanceof PerlGlobVariableElement && ((PerlGlobVariableElement)element).isBuiltIn()) {
       defaultSilentProducer.accept(PERL_GLOB_BUILTIN);
     }
     else if (element instanceof PerlVariable && ((PerlVariable)element).isBuiltIn()) {

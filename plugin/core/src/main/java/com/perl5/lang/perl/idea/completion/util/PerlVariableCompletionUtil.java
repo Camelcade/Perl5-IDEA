@@ -138,7 +138,7 @@ public class PerlVariableCompletionUtil {
         completionProcessor.isFullQualified() ? StringUtil.notNullize(element.getCanonicalName()) : variableName));
   }
 
-  public static @Nullable LookupElementBuilder processVariableLookupElement(@NotNull PerlGlobVariable typeGlob,
+  public static @Nullable LookupElementBuilder processVariableLookupElement(@NotNull PerlGlobVariableElement typeGlob,
                                                                             boolean withSigil,
                                                                             @NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     String variableName = StringUtil.notNullize(typeGlob.getCanonicalName());
@@ -333,7 +333,7 @@ public class PerlVariableCompletionUtil {
         return completionProcessor.result();
       };
     }
-    else if (perlVariable instanceof PerlGlobVariable) {
+    else if (perlVariable instanceof PerlGlobVariableElement) {
       return variable -> processVariableLookupElement(variable, '_', completionProcessor);
     }
     return variable -> {
@@ -409,7 +409,7 @@ public class PerlVariableCompletionUtil {
               PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, namespaceName));
     }
     else {
-      Processor<PerlGlobVariable> typeGlobProcessor = typeglob -> variableCompletionProcessor.process(
+      Processor<PerlGlobVariableElement> typeGlobProcessor = typeglob -> variableCompletionProcessor.process(
         processVariableLookupElement(typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor));
       return PerlScalarUtil.processDefinedGlobalScalars(project, resolveScope, lookupGenerator, false, namespaceName) &&
              PerlArrayUtil.processDefinedGlobalArrays(project, resolveScope, lookupGenerator, false, namespaceName) &&

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,7 +88,7 @@ public class PerlElementDescriptionProvider extends PerlElementDescriptionProvid
     else if (element instanceof PsiDirectoryContainer) {
       return PerlBundle.message("perl.type.directory");
     }
-    else if (element instanceof PerlGlobVariable) {
+    else if (element instanceof PerlGlobVariableElement) {
       return PerlBundle.message("perl.type.typeglob");
     }
     else if (element instanceof PerlVariableDeclarationElement) {
