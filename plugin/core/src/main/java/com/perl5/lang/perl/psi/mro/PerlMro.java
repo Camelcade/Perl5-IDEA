@@ -68,7 +68,7 @@ public abstract class PerlMro {
       return Collections.emptyList();
     }
     var result = new ArrayList<PsiElement>();
-    processCallables(project, searchScope, namespaceName, Collections.singleton(subName), isSuper, result::add);
+    processCallables(project, searchScope, namespaceName, Collections.singleton(subName), isSuper, result::add, true);
     return result;
   }
 
@@ -77,7 +77,8 @@ public abstract class PerlMro {
                                          @Nullable String namespaceName,
                                          @NotNull Set<String> callableNames,
                                          boolean isSuper,
-                                         @NotNull Processor<? super PerlCallableElement> processor) {
+                                         @NotNull Processor<? super PerlCallableElement> processor,
+                                         boolean includeAutoload) {
     if (callableNames.isEmpty()) {
       return true;
     }
@@ -101,6 +102,10 @@ public abstract class PerlMro {
       if (!stopFlag.isNull()) {
         return true;
       }
+    }
+
+    if (!includeAutoload) {
+      return true;
     }
 
     for (String currentNamespaceName : linearISA) {

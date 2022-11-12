@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -132,6 +132,9 @@ public class PerlValueDeserializer {
     }
     else if (valueId == DEFAULT_ARGUMENT_ID) {
       return new PerlDefaultArgumentValue(this);
+    }
+    else if (valueId == DUCK_TYPE_ID) {
+      return new PerlDuckValue(this);
     }
     throw new IOException("Don't know how to deserialize a value: " + valueId);
   }

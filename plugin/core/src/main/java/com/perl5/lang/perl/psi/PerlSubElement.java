@@ -43,8 +43,8 @@ public interface PerlSubElement extends PerlSub, PerlCallableElement {
           return false;
         }
         return true;
-      }
-    );
+      },
+      true);
 
     return resultRef.get();
   }
