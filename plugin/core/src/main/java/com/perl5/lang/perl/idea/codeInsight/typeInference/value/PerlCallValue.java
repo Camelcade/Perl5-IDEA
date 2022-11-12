@@ -232,7 +232,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
                                                           @Nullable PsiElement contextElement) {
     GlobalSearchScope effectiveScope = getEffectiveScope(project, searchScope, currentNamespaceName, contextElement);
 
-    if (!PerlSubUtil.processRelatedItemsInPackage(project, effectiveScope, currentNamespaceName, processor::processItem)) {
+    if (!PerlSubUtil.processCallablesInNamespace(project, effectiveScope, currentNamespaceName, processor::processItem)) {
       return false;
     }
 

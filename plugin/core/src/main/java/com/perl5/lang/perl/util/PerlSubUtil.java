@@ -18,11 +18,11 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.psi.PerlCallableElement;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
@@ -221,15 +221,15 @@ public final class PerlSubUtil implements PerlElementTypes {
   public static boolean processRelatedSubsInPackage(@NotNull Project project,
                                                     @NotNull GlobalSearchScope searchScope,
                                                     @NotNull String packageName,
-                                                    @NotNull Processor<? super PsiNamedElement> processor) {
+                                                    @NotNull Processor<? super PerlCallableElement> processor) {
     return processSubDefinitionsInPackage(project, packageName, searchScope, processor::process) &&
            processSubDeclarationsInPackage(project, packageName, searchScope, processor::process);
   }
 
-  public static boolean processRelatedItemsInPackage(@NotNull Project project,
-                                                     @NotNull GlobalSearchScope searchScope,
-                                                     @NotNull String packageName,
-                                                     @NotNull Processor<? super PsiNamedElement> processor) {
+  public static boolean processCallablesInNamespace(@NotNull Project project,
+                                                    @NotNull GlobalSearchScope searchScope,
+                                                    @NotNull String packageName,
+                                                    @NotNull Processor<? super PerlCallableElement> processor) {
     return processRelatedSubsInPackage(project, searchScope, packageName, processor) &&
            PerlGlobNamespaceStubIndex.getInstance().processElements(project, packageName, searchScope, processor);
   }
