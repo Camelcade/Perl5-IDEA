@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,6 +84,10 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
     if (packageName != null) {
       sink.occurrence(getReverseKey(), packageName);
     }
+    var callableName = stub.getCallableName();
+    if (StringUtil.isNotEmpty(callableName)) {
+      sink.occurrence(getCallableNameKey(), callableName);
+    }
   }
 
   protected StubIndexKey<String, ? extends PsiElement> getDirectKey() {
@@ -92,6 +96,10 @@ public class PerlSubDefinitionElementType extends IStubElementType<PerlSubDefini
 
   protected StubIndexKey<String, ? extends PsiElement> getReverseKey() {
     return PerlSubDefinitionReverseIndex.KEY;
+  }
+
+  protected StubIndexKey<String, ? extends PsiElement> getCallableNameKey() {
+    return PerlCallableNamesIndex.KEY;
   }
 
   @Override

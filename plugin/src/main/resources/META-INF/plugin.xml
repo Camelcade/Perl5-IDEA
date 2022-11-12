@@ -483,6 +483,8 @@
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.globs.PerlGlobNamespaceStubIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlCallableNamesIndex"/>
+    <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightCallableNamesIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionReverseIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsIndex"/>
     <stubIndex implementation="com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsReverseIndex"/>

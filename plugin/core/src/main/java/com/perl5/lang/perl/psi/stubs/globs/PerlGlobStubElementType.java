@@ -26,7 +26,7 @@ import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.impl.PsiPerlGlobVariableImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlCallableNamesIndex;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -63,9 +63,18 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiP
 
   @Override
   public void indexStub(@NotNull PerlGlobStub stub, @NotNull IndexSink sink) {
-    String name = stub.getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + stub.getGlobName();
-    sink.occurrence(KEY_GLOB, name);
-    sink.occurrence(KEY_GLOB_NAMESPACE, stub.getNamespaceName());
+    String canonicalName = stub.getCanonicalName();
+    if (StringUtil.isNotEmpty(canonicalName)) {
+      sink.occurrence(KEY_GLOB, canonicalName);
+    }
+    var namespaceName = stub.getNamespaceName();
+    if (StringUtil.isNotEmpty(namespaceName)) {
+      sink.occurrence(KEY_GLOB_NAMESPACE, namespaceName);
+    }
+    var callableName = stub.getCallableName();
+    if (StringUtil.isNotEmpty(callableName)) {
+      sink.occurrence(PerlCallableNamesIndex.KEY, callableName);
+    }
   }
 
   @Override
