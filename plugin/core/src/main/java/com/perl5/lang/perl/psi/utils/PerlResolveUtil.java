@@ -252,86 +252,23 @@ public final class PerlResolveUtil {
                                                             @Nullable PsiElement stopElement) {
     PsiElement controlFlowScope = PerlControlFlowBuilder.getControlFlowScope(element);
     if (controlFlowScope == null) {
-      VirtualFile virtualFile = PsiUtilCore.getVirtualFile(element);
-      if (!(element instanceof PsiFile) || !(virtualFile instanceof VirtualFileWindow)) {
-        LOG.error("Unable to find control flow scope for:" +
-                  element.getClass() +
-                  " at " +
-                  element.getTextOffset() +
-                  " in " +
-                  virtualFile + "; " +
-                  PerlUtil.getParentsChain(element));
-      }
-      return UNKNOWN_VALUE;
+      return noControlFlowScopeError(element);
     }
     Instruction[] instructions = PerlControlFlowBuilder.getFor(controlFlowScope);
     PsiElement elementToFind = element instanceof PerlFile ? element.getContext() : element;
     int elementInstructionIndex = findElementInstruction(elementToFind, instructions, element);
     if (elementInstructionIndex < 0) {
-      String message = "Unable to find an instruction for " +
-                       element.getClass() + "; " +
-                       element.getText() + "; " +
-                       element.getTextRange() + "; " +
-                       PsiUtilCore.getVirtualFile(element) + "; " +
-                       controlFlowScope.getClass() + "; " +
-                       PerlUtil.getParentsChain(element);
-      Application application = ApplicationManager.getApplication();
-      if (!SUPPRESS_ERRORS && (application.isUnitTestMode() || application.isInternal())) {
-        LOG.error(message);
-      }
-      else {
-        LOG.warn(message);
-      }
-      return UNKNOWN_VALUE;
+      return noElementInstructionError(element, controlFlowScope);
     }
     PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
     ControlFlowUtil.iteratePrev(elementInstructionIndex, instructions, currentInstruction -> {
-      if (!(currentInstruction instanceof PerlMutationInstruction)) {
-        PsiElement instructionElement = currentInstruction.getElement();
-        if ((instructionElement instanceof PerlSubDefinitionElement || instructionElement instanceof PerlSubExpr) &&
-            lexicalDeclaration instanceof PerlBuiltInVariable && "_".equals(variableName) && actualType == PerlVariableType.ARRAY) {
-          valueBuilder.addVariant(PerlValues.ARGUMENTS_VALUE);
-          return CONTINUE;
-        }
-        if (Objects.equals(stopElement, instructionElement)) {
-          return CONTINUE;
-        }
-        if (currentInstruction.num() == 1 && instructionElement != null && instructionElement.getContext() != null) {
-          valueBuilder.addVariant(
-            getValueFromControlFlow(instructionElement, namespaceName, variableName, actualType, lexicalDeclaration, stopElement));
-        }
-        return NEXT;
+      if (currentInstruction instanceof PerlMutationInstruction mutationInstruction) {
+        return processMutationInstruction(
+          element, namespaceName, variableName, actualType, lexicalDeclaration, elementInstructionIndex, valueBuilder, mutationInstruction);
       }
-      if (currentInstruction.num() > elementInstructionIndex) {
-        return NEXT;
-      }
-      // fixme pop instruction should be decomposed
-      if (currentInstruction.num() == elementInstructionIndex && !(currentInstruction instanceof PerlAssignInstruction)) {
-        return NEXT;
-      }
-      PsiElement assignee = ((PerlMutationInstruction)currentInstruction).getLeftSide();
-      if (!(assignee instanceof PerlVariable) || ((PerlVariable)assignee).getActualType() != actualType) {
-        return NEXT;
-      }
-      if (!Objects.equals(variableName, ((PerlVariable)assignee).getName())) {
-        return NEXT;
-      }
-      String explicitNamespaceName = ((PerlVariable)assignee).getExplicitNamespaceName();
-      if ((explicitNamespaceName != null || namespaceName != null) && !Objects.equals(namespaceName, explicitNamespaceName)) {
-        return NEXT;
-      }
-      PerlVariableDeclarationElement assigneeDeclaration = getLexicalDeclaration((PerlVariable)assignee);
-      if (element == assignee ||
-          lexicalDeclaration == null && assigneeDeclaration == null && !(assignee.getParent() instanceof PerlVariableDeclarationElement) ||
-          lexicalDeclaration != null && (
-            Objects.equals(lexicalDeclaration, assigneeDeclaration) ||
-            Objects.equals(lexicalDeclaration, assignee.getParent()))
-      ) {
-        valueBuilder.addVariant(((PerlMutationInstruction)currentInstruction).createValue());
-      }
-      return CONTINUE;
+      return processAccessInstruction(namespaceName, variableName, actualType, lexicalDeclaration, stopElement, valueBuilder,
+                                      currentInstruction);
     });
-
 
     if (lexicalDeclaration != null) {
       PerlValue declaredValue = lexicalDeclaration.getDeclaredValue();
@@ -340,6 +277,99 @@ public final class PerlResolveUtil {
       }
     }
     return valueBuilder.build();
+  }
+
+  private static PerlValue noElementInstructionError(@NotNull PsiElement element, @NotNull PsiElement controlFlowScope) {
+    String message = "Unable to find an instruction for " +
+                     element.getClass() + "; " +
+                     element.getText() + "; " +
+                     element.getTextRange() + "; " +
+                     PsiUtilCore.getVirtualFile(element) + "; " +
+                     controlFlowScope.getClass() + "; " +
+                     PerlUtil.getParentsChain(element);
+    Application application = ApplicationManager.getApplication();
+    if (!SUPPRESS_ERRORS && (application.isUnitTestMode() || application.isInternal())) {
+      LOG.error(message);
+    }
+    else {
+      LOG.warn(message);
+    }
+    return UNKNOWN_VALUE;
+  }
+
+  private static PerlValue noControlFlowScopeError(@NotNull PsiElement element) {
+    VirtualFile virtualFile = PsiUtilCore.getVirtualFile(element);
+    if (!(element instanceof PsiFile) || !(virtualFile instanceof VirtualFileWindow)) {
+      LOG.error("Unable to find control flow scope for:" +
+                element.getClass() +
+                " at " +
+                element.getTextOffset() +
+                " in " +
+                virtualFile + "; " +
+                PerlUtil.getParentsChain(element));
+    }
+    return UNKNOWN_VALUE;
+  }
+
+  private static @NotNull ControlFlowUtil.Operation processAccessInstruction(@Nullable String namespaceName,
+                                                                             @NotNull String variableName,
+                                                                             @NotNull PerlVariableType actualType,
+                                                                             @Nullable PerlVariableDeclarationElement lexicalDeclaration,
+                                                                             @Nullable PsiElement stopElement,
+                                                                             @NotNull PerlOneOfValue.Builder valueBuilder,
+                                                                             @NotNull Instruction currentInstruction) {
+    PsiElement instructionElement = currentInstruction.getElement();
+    if ((instructionElement instanceof PerlSubDefinitionElement || instructionElement instanceof PerlSubExpr) &&
+        lexicalDeclaration instanceof PerlBuiltInVariable && "_".equals(variableName) && actualType == PerlVariableType.ARRAY) {
+      valueBuilder.addVariant(PerlValues.ARGUMENTS_VALUE);
+      return CONTINUE;
+    }
+    if (Objects.equals(stopElement, instructionElement)) {
+      return CONTINUE;
+    }
+    if (currentInstruction.num() == 1 && instructionElement != null && instructionElement.getContext() != null) {
+      valueBuilder.addVariant(
+        getValueFromControlFlow(instructionElement, namespaceName, variableName, actualType, lexicalDeclaration, stopElement));
+    }
+    return NEXT;
+  }
+
+  private static @NotNull ControlFlowUtil.Operation processMutationInstruction(@NotNull PsiElement element,
+                                                                               @Nullable String namespaceName,
+                                                                               @NotNull String variableName,
+                                                                               @NotNull PerlVariableType actualType,
+                                                                               @Nullable PerlVariableDeclarationElement lexicalDeclaration,
+                                                                               int elementInstructionIndex,
+                                                                               @NotNull PerlOneOfValue.Builder valueBuilder,
+                                                                               @NotNull PerlMutationInstruction currentInstruction) {
+    if (currentInstruction.num() > elementInstructionIndex) {
+      return NEXT;
+    }
+    // fixme pop instruction should be decomposed
+    if (currentInstruction.num() == elementInstructionIndex && !(currentInstruction instanceof PerlAssignInstruction)) {
+      return NEXT;
+    }
+    PsiElement assignee = currentInstruction.getLeftSide();
+    if (!(assignee instanceof PerlVariable) || ((PerlVariable)assignee).getActualType() != actualType) {
+      return NEXT;
+    }
+    if (!Objects.equals(variableName, ((PerlVariable)assignee).getName())) {
+      return NEXT;
+    }
+    String explicitNamespaceName = ((PerlVariable)assignee).getExplicitNamespaceName();
+    if ((explicitNamespaceName != null || namespaceName != null) && !Objects.equals(namespaceName, explicitNamespaceName)) {
+      return NEXT;
+    }
+    PerlVariableDeclarationElement assigneeDeclaration = getLexicalDeclaration((PerlVariable)assignee);
+    if (element == assignee ||
+        lexicalDeclaration == null && assigneeDeclaration == null && !(assignee.getParent() instanceof PerlVariableDeclarationElement) ||
+        lexicalDeclaration != null && (
+          Objects.equals(lexicalDeclaration, assigneeDeclaration) ||
+          Objects.equals(lexicalDeclaration, assignee.getParent()))
+    ) {
+      valueBuilder.addVariant(currentInstruction.createValue());
+    }
+    return CONTINUE;
   }
 
   private static int findElementInstruction(@Nullable PsiElement elementToFind,
