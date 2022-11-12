@@ -95,7 +95,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
 
   @Override
   public String toString() {
-    return "Array: " + getElements().toString();
+    return "Array: " + getElements();
   }
 
   @Override
