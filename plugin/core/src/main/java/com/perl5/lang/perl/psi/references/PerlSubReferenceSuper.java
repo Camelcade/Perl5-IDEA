@@ -19,11 +19,12 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
+
+import static com.perl5.lang.perl.psi.mro.PerlMro.collectCallables;
 
 
 public class PerlSubReferenceSuper extends PerlSubReferenceSimple {
@@ -41,7 +42,7 @@ public class PerlSubReferenceSuper extends PerlSubReferenceSimple {
     String subName = element.getNode().getText();
     Project project = element.getProject();
 
-    List<ResolveResult> result = getResolveResults(PerlMroDfs.collectCallables(
+    List<ResolveResult> result = getResolveResults(collectCallables(
       project, element.getResolveScope(),
       packageName,
       subName,

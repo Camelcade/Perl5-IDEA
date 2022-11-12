@@ -28,7 +28,6 @@ import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
-import com.perl5.lang.perl.psi.mro.PerlMroDfs;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
@@ -37,6 +36,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import static com.perl5.lang.perl.psi.mro.PerlMro.collectCallables;
 
 /**
  * Basic class for sub reference. Uses context package to resolve. Used in string contents, moose, etc.
@@ -69,7 +70,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
     String subName = element.getNode().getText();
     Project project = element.getProject();
 
-    var result = getResolveResults(PerlMroDfs.collectCallables(
+    var result = getResolveResults(collectCallables(
       project, element.getResolveScope(),
       packageName,
       subName,
