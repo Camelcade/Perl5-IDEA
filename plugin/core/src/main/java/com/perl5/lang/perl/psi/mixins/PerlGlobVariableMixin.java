@@ -29,7 +29,7 @@ import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PsiPerlAssignExpr;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
-import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubImpl;
+import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -39,19 +39,19 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 
-public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<PerlGlobStubImpl>
+public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<PerlGlobStub>
   implements PsiPerlGlobVariable, PerlElementTypes {
   public PerlGlobVariableMixin(@NotNull ASTNode node) {
     super(node);
   }
 
-  public PerlGlobVariableMixin(@NotNull PerlGlobStubImpl stub, @NotNull IStubElementType nodeType) {
+  public PerlGlobVariableMixin(@NotNull PerlGlobStub stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
 
   @Override
   public @Nullable String getNamespaceName() {
-    PerlGlobStubImpl stub = getGreenStub();
+    PerlGlobStub stub = getGreenStub();
     if (stub != null) {
       return stub.getNamespaceName();
     }
@@ -72,7 +72,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
 
   @Override
   public String getGlobName() {
-    PerlGlobStubImpl stub = getGreenStub();
+    PerlGlobStub stub = getGreenStub();
     if (stub != null) {
       return stub.getGlobName();
     }
@@ -150,7 +150,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
 
   @Override
   public boolean isLeftSideOfAssignment() {
-    PerlGlobStubImpl stub = getGreenStub();
+    PerlGlobStub stub = getGreenStub();
     if (stub != null) {
       return stub.isLeftSideOfAssignment();
     }

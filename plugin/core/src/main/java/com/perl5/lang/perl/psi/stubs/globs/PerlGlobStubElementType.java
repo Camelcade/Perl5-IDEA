@@ -35,14 +35,14 @@ import static com.perl5.lang.perl.psi.stubs.globs.PerlGlobNamespaceStubIndex.KEY
 import static com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubIndex.KEY_GLOB;
 
 
-public class PerlGlobStubElementType extends IStubElementType<PerlGlobStubImpl, PsiPerlGlobVariable> implements PsiElementProvider {
+public class PerlGlobStubElementType extends IStubElementType<PerlGlobStub, PsiPerlGlobVariable> implements PsiElementProvider {
 
   public PerlGlobStubElementType(String name) {
     super(name, PerlLanguage.INSTANCE);
   }
 
   @Override
-  public PsiPerlGlobVariable createPsi(@NotNull PerlGlobStubImpl stub) {
+  public PsiPerlGlobVariable createPsi(@NotNull PerlGlobStub stub) {
     return new PsiPerlGlobVariableImpl(stub, this);
   }
 
@@ -52,8 +52,8 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStubImpl, 
   }
 
   @Override
-  public @NotNull PerlGlobStubImpl createStub(@NotNull PsiPerlGlobVariable psi, StubElement parentStub) {
-    return new PerlGlobStubImpl(parentStub, psi.getNamespaceName(), psi.getName(), psi.isLeftSideOfAssignment());
+  public @NotNull PerlGlobStub createStub(@NotNull PsiPerlGlobVariable psi, StubElement parentStub) {
+    return new PerlGlobStub(parentStub, psi.getNamespaceName(), psi.getName(), psi.isLeftSideOfAssignment());
   }
 
   @Override
@@ -62,23 +62,23 @@ public class PerlGlobStubElementType extends IStubElementType<PerlGlobStubImpl, 
   }
 
   @Override
-  public void indexStub(@NotNull PerlGlobStubImpl stub, @NotNull IndexSink sink) {
+  public void indexStub(@NotNull PerlGlobStub stub, @NotNull IndexSink sink) {
     String name = stub.getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + stub.getGlobName();
     sink.occurrence(KEY_GLOB, name);
     sink.occurrence(KEY_GLOB_NAMESPACE, stub.getNamespaceName());
   }
 
   @Override
-  public void serialize(@NotNull PerlGlobStubImpl stub, @NotNull StubOutputStream dataStream) throws IOException {
+  public void serialize(@NotNull PerlGlobStub stub, @NotNull StubOutputStream dataStream) throws IOException {
     dataStream.writeName(stub.getNamespaceName());
     dataStream.writeName(stub.getGlobName());
     dataStream.writeBoolean(stub.isLeftSideOfAssignment());
   }
 
   @Override
-  public @NotNull PerlGlobStubImpl deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    return new PerlGlobStubImpl(parentStub, PerlStubSerializationUtil.readString(dataStream),
-                                PerlStubSerializationUtil.readString(dataStream), dataStream.readBoolean());
+  public @NotNull PerlGlobStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
+    return new PerlGlobStub(parentStub, PerlStubSerializationUtil.readString(dataStream),
+                            PerlStubSerializationUtil.readString(dataStream), dataStream.readBoolean());
   }
 
   @Override

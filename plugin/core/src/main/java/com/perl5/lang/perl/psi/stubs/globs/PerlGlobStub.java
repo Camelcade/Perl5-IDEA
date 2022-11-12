@@ -23,12 +23,12 @@ import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.Nullable;
 
-public class PerlGlobStubImpl extends StubBase<PsiPerlGlobVariable> implements StubElement<PsiPerlGlobVariable>, PerlGlobVariable {
+public class PerlGlobStub extends StubBase<PsiPerlGlobVariable> implements StubElement<PsiPerlGlobVariable>, PerlGlobVariable {
   private final String myNamespaceName;
   private final String myVariableName;
   private final boolean myIsLeftSideOfAssignment;
 
-  public PerlGlobStubImpl(final StubElement parent, final String namespaceName, final String variableName, boolean isLeftSideOfAssignment) {
+  public PerlGlobStub(final StubElement parent, final String namespaceName, final String variableName, boolean isLeftSideOfAssignment) {
     super(parent, PerlStubElementTypes.PERL_GLOB);
     myNamespaceName = namespaceName;
     myVariableName = variableName;

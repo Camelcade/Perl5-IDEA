@@ -16,27 +16,27 @@ PerlFileStub
 	@EXPORT_OK: []
 	@EXPORT_TAGS: {}
 	Annotations: null
-    *:PerlGlobStubImpl
+    *:PerlGlobStub
 	Namespace name: Foo::Bar
 	Variable name: someglob
 	Is left side: true
-    *:PerlGlobStubImpl
+    *:PerlGlobStub
 	Namespace name: main
 	Variable name: someglob
 	Is left side: true
-    *:PerlGlobStubImpl
+    *:PerlGlobStub
 	Namespace name: Foo::Bar
 	Variable name: otherglob
 	Is left side: false
-    *:PerlGlobStubImpl
+    *:PerlGlobStub
 	Namespace name: Foo::Bar
 	Variable name: thirdglob
 	Is left side: true
-    *:PerlGlobStubImpl
+    *:PerlGlobStub
 	Namespace name: Foo::Bar
 	Variable name: blaglob
 	Is left side: true
-    *:PerlGlobStubImpl
+    *:PerlGlobStub
 	Namespace name: Foo::Bar
 	Variable name: lastglob
 	Is left side: false
