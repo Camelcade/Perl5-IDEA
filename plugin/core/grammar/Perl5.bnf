@@ -565,7 +565,7 @@
     implements("sub_declaration")="com.perl5.lang.perl.psi.PerlSubDeclarationElement"
     extends("sub_declaration")=statement
 
-    stubClass("glob_variable")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub"
+    stubClass("glob_variable")="com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubImpl"
     mixin("glob_variable")="com.perl5.lang.perl.psi.mixins.PerlGlobVariableMixin"
     implements("glob_variable")="com.perl5.lang.perl.psi.PerlGlobVariableElement"
 

@@ -5,8 +5,8 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
-import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
+import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubImpl;
 
-public interface PsiPerlGlobVariable extends PsiPerlExpr, PerlGlobVariableElement, StubBasedPsiElement<PerlGlobStub> {
+public interface PsiPerlGlobVariable extends PsiPerlExpr, PerlGlobVariableElement, StubBasedPsiElement<PerlGlobStubImpl> {
 
 }

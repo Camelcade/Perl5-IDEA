@@ -11,7 +11,7 @@ import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import com.perl5.lang.perl.psi.mixins.PerlGlobVariableMixin;
 import com.perl5.lang.perl.psi.*;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
+import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubImpl;
 
 public class PsiPerlGlobVariableImpl extends PerlGlobVariableMixin implements PsiPerlGlobVariable {
 
@@ -19,7 +19,7 @@ public class PsiPerlGlobVariableImpl extends PerlGlobVariableMixin implements Ps
     super(node);
   }
 
-  public PsiPerlGlobVariableImpl(PerlGlobStub stub, IStubElementType stubType) {
+  public PsiPerlGlobVariableImpl(PerlGlobStubImpl stub, IStubElementType stubType) {
     super(stub, stubType);
   }
 
