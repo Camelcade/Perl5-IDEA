@@ -28,7 +28,7 @@ public class PerlGlobStub extends StubBase<PsiPerlGlobVariable> implements StubE
   private final String myVariableName;
   private final boolean myIsLeftSideOfAssignment;
 
-  public PerlGlobStub(final StubElement parent, final String namespaceName, final String variableName, boolean isLeftSideOfAssignment) {
+  public PerlGlobStub(final StubElement<?> parent, final String namespaceName, final String variableName, boolean isLeftSideOfAssignment) {
     super(parent, PerlStubElementTypes.PERL_GLOB);
     myNamespaceName = namespaceName;
     myVariableName = variableName;
