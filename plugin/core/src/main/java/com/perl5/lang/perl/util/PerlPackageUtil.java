@@ -45,6 +45,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueResolver;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator;
 import com.perl5.lang.perl.idea.project.PerlDirectoryIndex;
@@ -59,6 +60,8 @@ import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceReverseIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceReverseIndex;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlCallableNamesIndex;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightCallableNamesIndex;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.*;
 
@@ -749,6 +752,15 @@ public final class PerlPackageUtil implements PerlElementTypes {
                                                     @NotNull Processor<? super PerlCallableElement> processor) {
     return PerlSubUtil.processRelatedSubsInPackage(project, searchScope, packageName, processor) &&
            PerlGlobNamespaceStubIndex.getInstance().processElements(project, packageName, searchScope, processor);
+  }
+
+  public static boolean processCallablesNamespaceNames(@NotNull PerlValueResolver resolver,
+                                                       @NotNull String callableName,
+                                                       @NotNull Processor<? super PerlCallableElement> processor) {
+    var project = resolver.getProject();
+    return
+      PerlCallableNamesIndex.getInstance().processElements(project, callableName, resolver.getResolveScope(), processor) &&
+      PerlLightCallableNamesIndex.getInstance().processLightElements(project, callableName, resolver.getResolveScope(), processor);
   }
 
   public interface ClassRootVirtualFileProcessor {
