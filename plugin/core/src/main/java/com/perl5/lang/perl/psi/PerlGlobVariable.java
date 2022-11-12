@@ -16,10 +16,9 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
-public interface PerlGlobVariable extends PerlPackageMember {
+public interface PerlGlobVariable extends PerlCallable {
   /**
    * Checks if this typeglob is left part of assignment
    *
@@ -28,6 +27,14 @@ public interface PerlGlobVariable extends PerlPackageMember {
   boolean isLeftSideOfAssignment();
 
   String getGlobName();
+
+  @Override
+  default String getCallableName() {
+    return getGlobName();
+  }
+
+  @Override
+  default boolean isDeprecated() { return false; }
 
   /**
    * Returns canonical name PackageName::SubName

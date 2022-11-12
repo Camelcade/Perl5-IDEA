@@ -16,12 +16,9 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.navigation.NavigationItem;
-import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 
-
-public interface PerlGlobVariableElement extends PerlCallableElement,
-                                                 PerlVariableNameElementContainer,
-                                                 NavigationItem,
-                                                 PerlGlobVariable {
+public interface PerlCallableElement extends PsiElement, PerlPackageMember, PerlIdentifierOwner, PerlCallable {
 }

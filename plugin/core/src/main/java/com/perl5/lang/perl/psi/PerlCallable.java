@@ -16,12 +16,27 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.navigation.NavigationItem;
-import com.perl5.lang.perl.psi.properties.PerlVariableNameElementContainer;
+import com.perl5.lang.perl.psi.properties.PerlPackageMember;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 
+public interface PerlCallable extends PerlDeprecatable, PerlPackageMember {
+  /**
+   * Returns canonical name PackageName::SubName
+   *
+   * @return name
+   */
+  @Override
+  default String getCanonicalName() {
+    String packageName = getNamespaceName();
+    if (packageName == null) {
+      return null;
+    }
 
-public interface PerlGlobVariableElement extends PerlCallableElement,
-                                                 PerlVariableNameElementContainer,
-                                                 NavigationItem,
-                                                 PerlGlobVariable {
+    return packageName + PerlPackageUtil.NAMESPACE_SEPARATOR + getCallableName();
+  }
+
+  /**
+   * @return a callable name. Sub or typeglob.
+   */
+  String getCallableName();
 }

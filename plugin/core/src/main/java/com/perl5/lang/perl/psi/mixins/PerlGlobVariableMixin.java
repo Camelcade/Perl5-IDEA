@@ -118,11 +118,6 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
   }
 
   @Override
-  public boolean isDeprecated() {
-    return false;
-  }
-
-  @Override
   public @Nullable PsiElement getNameIdentifier() {
     return getVariableNameElement();
   }

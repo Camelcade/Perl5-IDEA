@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
-import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 
-public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
+public interface PerlSub extends PerlCallable {
 
   /**
    * Returns function name for current function definition
@@ -37,6 +36,11 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
    */
   String getSubName();
 
+  @Override
+  default String getCallableName() {
+    return getSubName();
+  }
+
   /**
    * Checks PSI tree before a sub definition for annotations and builds annotations object
    *
@@ -44,21 +48,6 @@ public interface PerlSub extends PerlDeprecatable, PerlPackageMember {
    */
   @Nullable
   PerlSubAnnotations getAnnotations();
-
-  /**
-   * Returns canonical name PackageName::SubName
-   *
-   * @return name
-   */
-  @Override
-  default String getCanonicalName() {
-    String packageName = getNamespaceName();
-    if (packageName == null) {
-      return null;
-    }
-
-    return packageName + PerlPackageUtil.NAMESPACE_SEPARATOR + getSubName();
-  }
 
   /**
    * @return true iff this is an anonymous declaration
