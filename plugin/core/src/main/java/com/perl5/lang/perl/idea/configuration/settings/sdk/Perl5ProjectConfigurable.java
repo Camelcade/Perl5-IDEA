@@ -221,39 +221,41 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
         withTitle(PerlBundle.message("perl.settings.select.libs")),
       myProject,
       myLibsList
-    ).choose(null, virtualFiles -> {
-      Ref<Boolean> notifyInternals = new Ref<>(false);
+    ).choose(null, this::processChosenFiles);
+  }
 
-      List<VirtualFile> rootsToAdd = new ArrayList<>();
+  private void processChosenFiles(@NotNull List<VirtualFile> virtualFiles) {
+    Ref<Boolean> notifyInternals = new Ref<>(false);
 
-      for (VirtualFile virtualFile : virtualFiles) {
-        if (!virtualFile.isValid()) {
+    List<VirtualFile> rootsToAdd = new ArrayList<>();
+
+    for (VirtualFile virtualFile : virtualFiles) {
+      if (!virtualFile.isValid()) {
+        continue;
+      }
+      if (!virtualFile.isDirectory()) {
+        virtualFile = virtualFile.getParent();
+        if (virtualFile == null || !virtualFile.isValid()) {
           continue;
         }
-        if (!virtualFile.isDirectory()) {
-          virtualFile = virtualFile.getParent();
-          if (virtualFile == null || !virtualFile.isValid()) {
-            continue;
-          }
-        }
-
-        if (ModuleUtilCore.findModuleForFile(virtualFile, myProject) != null) {
-          notifyInternals.set(true);
-          continue;
-        }
-        rootsToAdd.add(virtualFile);
       }
 
-      myLibsModel.add(rootsToAdd);
-
-      if (notifyInternals.get()) {
-        Messages.showErrorDialog(
-          myLibsList,
-          PerlBundle.message("perl.settings.external.libs.internal.text"),
-          PerlBundle.message("perl.settings.external.libs.internal.title")
-        );
+      if (ModuleUtilCore.findModuleForFile(virtualFile, myProject) != null) {
+        notifyInternals.set(true);
+        continue;
       }
-    });
+      rootsToAdd.add(virtualFile);
+    }
+
+    myLibsModel.add(rootsToAdd);
+
+    if (notifyInternals.get()) {
+      Messages.showErrorDialog(
+        myLibsList,
+        PerlBundle.message("perl.settings.external.libs.internal.text"),
+        PerlBundle.message("perl.settings.external.libs.internal.title")
+      );
+    }
   }
 
   @Override
