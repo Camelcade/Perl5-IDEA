@@ -141,7 +141,7 @@ public final class PerlResolveUtil {
   @SuppressWarnings("UnusedReturnValue")
   public static boolean processResolveTargets(@NotNull PairProcessor<PsiElement, PsiReference> processor,
                                               PsiElement... sourceElements) {
-    if (sourceElements == null || sourceElements.length == 0) {
+    if (sourceElements == null) {
       return true;
     }
 
@@ -160,7 +160,7 @@ public final class PerlResolveUtil {
    */
   public static boolean processResolveTargets(@NotNull PairProcessor<PsiElement, PsiReference> processor,
                                               @Nullable PsiReference... references) {
-    if (references == null || references.length == 0) {
+    if (references == null) {
       return true;
     }
 
@@ -217,8 +217,8 @@ public final class PerlResolveUtil {
   }
 
   /**
-   * Computes stop element for resolving a built in variable. For {@code @_} it's a wrapping sub. For {@code $_} it may vary: wrapping
-   * iterator or smth.
+   * Computes the stop element for resolving a built-in variable. For {@code @_} it's a wrapping sub. For {@code $_} it may vary: wrapping
+   * iterator or something.
    */
   private static @Nullable PsiElement computeStopElement(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
     if (!variable.getName().equals("_")) {
@@ -240,7 +240,7 @@ public final class PerlResolveUtil {
    * @param variableName       name of the variable
    * @param actualType         actual type of the variable
    * @param lexicalDeclaration variable declaration element
-   * @param stopElement        stop element, lexical declaration or it's context for the light elements
+   * @param stopElement        stop element, lexical declaration or its context for the light elements
    * @return a value of found variable or {@link PerlValues#UNKNOWN_VALUE}
    * @see PerlControlFlowBuilder#getControlFlowScope(com.intellij.psi.PsiElement)
    */
