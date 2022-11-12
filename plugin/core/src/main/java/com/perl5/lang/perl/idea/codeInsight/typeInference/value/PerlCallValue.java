@@ -35,7 +35,6 @@ import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -232,7 +231,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
                                                           @Nullable PsiElement contextElement) {
     GlobalSearchScope effectiveScope = getEffectiveScope(project, searchScope, currentNamespaceName, contextElement);
 
-    if (!PerlSubUtil.processCallablesInNamespace(project, effectiveScope, currentNamespaceName, processor::processItem)) {
+    if (!PerlPackageUtil.processCallablesInNamespace(project, effectiveScope, currentNamespaceName, processor::processItem)) {
       return false;
     }
 

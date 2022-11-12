@@ -54,6 +54,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.psi.stubs.globs.PerlGlobNamespaceStubIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceReverseIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
@@ -740,6 +741,14 @@ public final class PerlPackageUtil implements PerlElementTypes {
       }
     }
     return true;
+  }
+
+  public static boolean processCallablesInNamespace(@NotNull Project project,
+                                                    @NotNull GlobalSearchScope searchScope,
+                                                    @NotNull String packageName,
+                                                    @NotNull Processor<? super PerlCallableElement> processor) {
+    return PerlSubUtil.processRelatedSubsInPackage(project, searchScope, packageName, processor) &&
+           PerlGlobNamespaceStubIndex.getInstance().processElements(project, packageName, searchScope, processor);
   }
 
   public interface ClassRootVirtualFileProcessor {
