@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,10 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE_PROVIDER;
 
 
-public class PerlResolveUtil {
+public final class PerlResolveUtil {
+  private PerlResolveUtil() {
+  }
+
   private static final Logger LOG = Logger.getInstance(PerlResolveUtil.class);
   private static boolean SUPPRESS_ERRORS = false;
 
