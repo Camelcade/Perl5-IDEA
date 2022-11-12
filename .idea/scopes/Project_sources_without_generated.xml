@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Project sources without generated" pattern="(file:*.java||file:*.bnf||file:*.kt||file[perl5.plugin]:scripts//*||file:*.gradle||file:*.flex)&amp;&amp;!file:gen//*" />
+</component>
