@@ -53,10 +53,6 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase {
     safeMap(ATTRIBUTES_MAP, PodTokenSets.POD_FORMATTERS_TOKENSET, POD_FORMATTER_TAG_KEY);
   }
 
-  public PodSyntaxHighlighter() {
-
-  }
-
   @Override
   public @NotNull Lexer getHighlightingLexer() {
     return new PodLexerAdapter();
