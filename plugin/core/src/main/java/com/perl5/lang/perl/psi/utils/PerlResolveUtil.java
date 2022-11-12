@@ -42,7 +42,6 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
-import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
@@ -191,36 +190,18 @@ public final class PerlResolveUtil {
    * @see PerlValue
    */
   public static @NotNull PerlValue inferVariableValue(@NotNull PerlVariable variable) {
-    PerlVariableDeclarationElement lexicalDeclaration = getLexicalDeclaration(variable);
-
-    PsiElement stopElement = lexicalDeclaration;
-    if (lexicalDeclaration instanceof PerlImplicitVariableDeclaration) {
-      stopElement = lexicalDeclaration.getContext();
-    }
-
-    String variableName = variable.getName();
-    String namespaceName = variable.getExplicitNamespaceName();
-    PerlVariableType actualType = variable.getActualType();
-
-    return getValueFromControlFlow(variable, namespaceName, variableName, actualType, lexicalDeclaration, stopElement);
+        return getValueFromControlFlow(new TypeInferringContext(variable));
   }
 
   public static @NotNull PerlValue inferVariableValue(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
-    return getValueFromControlFlow(
-      contextElement,
-      null,
-      variable.getVariableName(),
-      variable.getActualType(),
-      variable,
-      computeStopElement(variable, contextElement)
-    );
+    return getValueFromControlFlow(new TypeInferringContext(variable, contextElement));
   }
 
   /**
    * Computes the stop element for resolving a built-in variable. For {@code @_} it's a wrapping sub. For {@code $_} it may vary: wrapping
    * iterator or something.
    */
-  private static @Nullable PsiElement computeStopElement(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
+  static @Nullable PsiElement computeStopElement(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
     if (!variable.getName().equals("_")) {
       return null;
     }
@@ -244,12 +225,8 @@ public final class PerlResolveUtil {
    * @return a value of found variable or {@link PerlValues#UNKNOWN_VALUE}
    * @see PerlControlFlowBuilder#getControlFlowScope(com.intellij.psi.PsiElement)
    */
-  private static @NotNull PerlValue getValueFromControlFlow(@NotNull PsiElement element,
-                                                            @Nullable String namespaceName,
-                                                            @NotNull String variableName,
-                                                            @NotNull PerlVariableType actualType,
-                                                            @Nullable PerlVariableDeclarationElement lexicalDeclaration,
-                                                            @Nullable PsiElement stopElement) {
+  private static @NotNull PerlValue getValueFromControlFlow(@NotNull TypeInferringContext inferringContext) {
+    var element = inferringContext.getContextElement();
     PsiElement controlFlowScope = PerlControlFlowBuilder.getControlFlowScope(element);
     if (controlFlowScope == null) {
       return noControlFlowScopeError(element);
@@ -260,23 +237,21 @@ public final class PerlResolveUtil {
     if (elementInstructionIndex < 0) {
       return noElementInstructionError(element, controlFlowScope);
     }
-    PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
     ControlFlowUtil.iteratePrev(elementInstructionIndex, instructions, currentInstruction -> {
       if (currentInstruction instanceof PerlMutationInstruction mutationInstruction) {
-        return processMutationInstruction(
-          element, namespaceName, variableName, actualType, lexicalDeclaration, elementInstructionIndex, valueBuilder, mutationInstruction);
+        return processMutationInstruction(inferringContext, elementInstructionIndex, mutationInstruction);
       }
-      return processAccessInstruction(namespaceName, variableName, actualType, lexicalDeclaration, stopElement, valueBuilder,
-                                      currentInstruction);
+      return processAccessInstruction(inferringContext, currentInstruction);
     });
 
+    var lexicalDeclaration = inferringContext.getLexicalDeclaration();
     if (lexicalDeclaration != null) {
       PerlValue declaredValue = lexicalDeclaration.getDeclaredValue();
       if (!declaredValue.isUnknown()) {
-        valueBuilder.addVariant(declaredValue);
+        inferringContext.addVariant(declaredValue);
       }
     }
-    return valueBuilder.build();
+    return inferringContext.buildValue();
   }
 
   private static PerlValue noElementInstructionError(@NotNull PsiElement element, @NotNull PsiElement controlFlowScope) {
@@ -311,36 +286,27 @@ public final class PerlResolveUtil {
     return UNKNOWN_VALUE;
   }
 
-  private static @NotNull ControlFlowUtil.Operation processAccessInstruction(@Nullable String namespaceName,
-                                                                             @NotNull String variableName,
-                                                                             @NotNull PerlVariableType actualType,
-                                                                             @Nullable PerlVariableDeclarationElement lexicalDeclaration,
-                                                                             @Nullable PsiElement stopElement,
-                                                                             @NotNull PerlOneOfValue.Builder valueBuilder,
+  private static @NotNull ControlFlowUtil.Operation processAccessInstruction(@NotNull TypeInferringContext inferringContext,
                                                                              @NotNull Instruction currentInstruction) {
     PsiElement instructionElement = currentInstruction.getElement();
     if ((instructionElement instanceof PerlSubDefinitionElement || instructionElement instanceof PerlSubExpr) &&
-        lexicalDeclaration instanceof PerlBuiltInVariable && "_".equals(variableName) && actualType == PerlVariableType.ARRAY) {
-      valueBuilder.addVariant(PerlValues.ARGUMENTS_VALUE);
+        inferringContext.getLexicalDeclaration() instanceof PerlBuiltInVariable &&
+        "_".equals(inferringContext.getVariableName()) &&
+        inferringContext.getActualType() == PerlVariableType.ARRAY) {
+      inferringContext.addVariant(PerlValues.ARGUMENTS_VALUE);
       return CONTINUE;
     }
-    if (Objects.equals(stopElement, instructionElement)) {
+    if (Objects.equals(inferringContext.getStopElement(), instructionElement)) {
       return CONTINUE;
     }
     if (currentInstruction.num() == 1 && instructionElement != null && instructionElement.getContext() != null) {
-      valueBuilder.addVariant(
-        getValueFromControlFlow(instructionElement, namespaceName, variableName, actualType, lexicalDeclaration, stopElement));
+      inferringContext.addVariant(getValueFromControlFlow(inferringContext.withContext(instructionElement)));
     }
     return NEXT;
   }
 
-  private static @NotNull ControlFlowUtil.Operation processMutationInstruction(@NotNull PsiElement element,
-                                                                               @Nullable String namespaceName,
-                                                                               @NotNull String variableName,
-                                                                               @NotNull PerlVariableType actualType,
-                                                                               @Nullable PerlVariableDeclarationElement lexicalDeclaration,
+  private static @NotNull ControlFlowUtil.Operation processMutationInstruction(@NotNull TypeInferringContext inferringContext,
                                                                                int elementInstructionIndex,
-                                                                               @NotNull PerlOneOfValue.Builder valueBuilder,
                                                                                @NotNull PerlMutationInstruction currentInstruction) {
     if (currentInstruction.num() > elementInstructionIndex) {
       return NEXT;
@@ -350,24 +316,26 @@ public final class PerlResolveUtil {
       return NEXT;
     }
     PsiElement assignee = currentInstruction.getLeftSide();
-    if (!(assignee instanceof PerlVariable) || ((PerlVariable)assignee).getActualType() != actualType) {
+    if (!(assignee instanceof PerlVariable) || ((PerlVariable)assignee).getActualType() != inferringContext.getActualType()) {
       return NEXT;
     }
-    if (!Objects.equals(variableName, ((PerlVariable)assignee).getName())) {
+    if (!Objects.equals(inferringContext.getVariableName(), ((PerlVariable)assignee).getName())) {
       return NEXT;
     }
     String explicitNamespaceName = ((PerlVariable)assignee).getExplicitNamespaceName();
+    var namespaceName = inferringContext.getNamespaceName();
     if ((explicitNamespaceName != null || namespaceName != null) && !Objects.equals(namespaceName, explicitNamespaceName)) {
       return NEXT;
     }
     PerlVariableDeclarationElement assigneeDeclaration = getLexicalDeclaration((PerlVariable)assignee);
-    if (element == assignee ||
+    var lexicalDeclaration = inferringContext.getLexicalDeclaration();
+    if (inferringContext.getContextElement() == assignee ||
         lexicalDeclaration == null && assigneeDeclaration == null && !(assignee.getParent() instanceof PerlVariableDeclarationElement) ||
         lexicalDeclaration != null && (
           Objects.equals(lexicalDeclaration, assigneeDeclaration) ||
           Objects.equals(lexicalDeclaration, assignee.getParent()))
     ) {
-      valueBuilder.addVariant(currentInstruction.createValue());
+      inferringContext.addVariant(currentInstruction.createValue());
     }
     return CONTINUE;
   }
