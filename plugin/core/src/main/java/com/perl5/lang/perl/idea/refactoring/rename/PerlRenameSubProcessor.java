@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -97,7 +97,7 @@ public class PerlRenameSubProcessor extends RenamePsiElementProcessor {
     }
     Set<PsiElement> relatedItems = new HashSet<>();
     PerlSubUtil
-      .processRelatedItems(subElement.getProject(), GlobalSearchScope.allScope(subElement.getProject()), canonicalName, relatedItems::add);
+      .processCallables(subElement.getProject(), GlobalSearchScope.allScope(subElement.getProject()), canonicalName, relatedItems::add);
 
     for (PsiElement relatedItem : new ArrayList<>(relatedItems)) {
       if (relatedItem instanceof PerlSubElement && ((PerlSubElement)relatedItem).isMethod()) {

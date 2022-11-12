@@ -35,7 +35,7 @@ public interface PerlSubElement extends PerlSub, PerlCallableElement {
     }
 
     Ref<PerlSubElement> resultRef = Ref.create();
-    PerlMro.processTargetSubs(
+    PerlMro.processCallables(
       getProject(), getResolveScope(), getNamespaceName(), Collections.singleton(getSubName()), true,
       it -> {
         if (it instanceof PerlSubElement subElement) {

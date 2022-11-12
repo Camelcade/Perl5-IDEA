@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ public class PerlSubReferenceSuper extends PerlSubReferenceSimple {
     String subName = element.getNode().getText();
     Project project = element.getProject();
 
-    List<ResolveResult> result = getResolveResults(PerlMroDfs.collectTargetSubs(
+    List<ResolveResult> result = getResolveResults(PerlMroDfs.collectCallables(
       project, element.getResolveScope(),
       packageName,
       subName,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -209,7 +209,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     boolean[] foundOne = new boolean[]{false};
     for (PerlExportDescriptor exportDescriptor : exportDescriptors) {
       foundOne[0] = false;
-      if (!PerlSubUtil.processRelatedItems(project, searchScope, exportDescriptor.getTargetCanonicalName(), it -> {
+      if (!PerlSubUtil.processCallables(project, searchScope, exportDescriptor.getTargetCanonicalName(), it -> {
         foundOne[0] = true;
         return processor.processImportedItem(it, exportDescriptor);
       })) {
@@ -267,7 +267,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
 
     GlobalSearchScope subsEffectiveScope = getEffectiveScope(project, searchScope, namespaceName, contextElement);
     for (String subName : subNames) {
-      if (!PerlSubUtil.processRelatedItems(project, subsEffectiveScope, PerlPackageUtil.join(namespaceName, subName), processorWrapper)) {
+      if (!PerlSubUtil.processCallables(project, subsEffectiveScope, PerlPackageUtil.join(namespaceName, subName), processorWrapper)) {
         return false;
       }
     }
@@ -292,7 +292,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     // AUTOLOAD
     return !processingContext.processAutoload ||
            PerlPackageUtil.isUNIVERSAL(namespaceName) || PerlPackageUtil.isCORE(namespaceName) ||
-           PerlSubUtil.processRelatedItems(project, searchScope, PerlPackageUtil.join(namespaceName, SUB_AUTOLOAD), processorWrapper);
+           PerlSubUtil.processCallables(project, searchScope, PerlPackageUtil.join(namespaceName, SUB_AUTOLOAD), processorWrapper);
   }
 
   /**
@@ -319,7 +319,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
                                                          @NotNull Set<PerlExportDescriptor> exportDescriptors) {
     for (PerlExportDescriptor exportDescriptor : exportDescriptors) {
       if (subNames.contains(exportDescriptor.getImportedName()) &&
-          !PerlSubUtil.processRelatedItems(project, searchScope, exportDescriptor.getTargetCanonicalName(), processorWrapper)) {
+          !PerlSubUtil.processCallables(project, searchScope, exportDescriptor.getTargetCanonicalName(), processorWrapper)) {
         return false;
       }
     }

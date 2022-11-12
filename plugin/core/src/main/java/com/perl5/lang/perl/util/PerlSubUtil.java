@@ -23,10 +23,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlGlobVariableElement;
-import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobNamespaceStubIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
@@ -219,10 +216,10 @@ public final class PerlSubUtil implements PerlElementTypes {
     return result;
   }
 
-  public static boolean processRelatedItems(@NotNull Project project,
-                                            @NotNull GlobalSearchScope searchScope,
-                                            @NotNull String canonicalName,
-                                            @NotNull Processor<? super PsiNamedElement> processor) {
+  public static boolean processCallables(@NotNull Project project,
+                                         @NotNull GlobalSearchScope searchScope,
+                                         @NotNull String canonicalName,
+                                         @NotNull Processor<? super PerlCallableElement> processor) {
     if (!PerlSubUtil.processSubDefinitions(project, canonicalName, searchScope, processor::process)) {
       return false;
     }

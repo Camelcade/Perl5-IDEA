@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ public class PerlMooseSuperReference extends PerlCachingReference<PsiElement> {
     Project project = element.getProject();
 
 
-    var targetSubs = PerlMro.collectTargetSubs(
+    var targetSubs = PerlMro.collectCallables(
       project, element.getResolveScope(),
       packageName,
       subName,

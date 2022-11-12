@@ -20,9 +20,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
+import com.perl5.lang.perl.psi.PerlCallableElement;
 import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlGlobUtil;
@@ -59,37 +59,37 @@ public abstract class PerlMro {
    *
    * @return collection of first encountered super subs declarations, definitions, constants and typeglobs
    */
-  public static @NotNull Collection<PsiElement> collectTargetSubs(@NotNull Project project,
-                                                                  @NotNull GlobalSearchScope searchScope,
-                                                                  @Nullable String namespaceName,
-                                                                  @Nullable String subName,
-                                                                  boolean isSuper) {
+  public static @NotNull Collection<PsiElement> collectCallables(@NotNull Project project,
+                                                                 @NotNull GlobalSearchScope searchScope,
+                                                                 @Nullable String namespaceName,
+                                                                 @Nullable String subName,
+                                                                 boolean isSuper) {
     if (subName == null) {
       return Collections.emptyList();
     }
     var result = new ArrayList<PsiElement>();
-    processTargetSubs(project, searchScope, namespaceName, Collections.singleton(subName), isSuper, result::add);
+    processCallables(project, searchScope, namespaceName, Collections.singleton(subName), isSuper, result::add);
     return result;
   }
 
-  public static boolean processTargetSubs(@NotNull Project project,
-                                          @NotNull GlobalSearchScope searchScope,
-                                          @Nullable String baseNamespaceName,
-                                          @NotNull Set<String> subNames,
-                                          boolean isSuper,
-                                          @NotNull Processor<? super PsiNamedElement> processor) {
-    if (subNames.isEmpty()) {
+  public static boolean processCallables(@NotNull Project project,
+                                         @NotNull GlobalSearchScope searchScope,
+                                         @Nullable String namespaceName,
+                                         @NotNull Set<String> callableNames,
+                                         boolean isSuper,
+                                         @NotNull Processor<? super PerlCallableElement> processor) {
+    if (callableNames.isEmpty()) {
       return true;
     }
-    if (baseNamespaceName == null) {
-      baseNamespaceName = PerlPackageUtil.UNIVERSAL_NAMESPACE;
+    if (namespaceName == null) {
+      namespaceName = PerlPackageUtil.UNIVERSAL_NAMESPACE;
     }
-    Collection<String> linearISA = getLinearISA(project, searchScope, baseNamespaceName, isSuper);
+    Collection<String> linearISA = getLinearISA(project, searchScope, namespaceName, isSuper);
 
     Ref<String> stopFlag = Ref.create();
     for (String currentNamespaceName : linearISA) {
-      for (String subName : subNames) {
-        if (StringUtil.isNotEmpty(subName) && !PerlSubUtil.processRelatedItems(
+      for (String subName : callableNames) {
+        if (StringUtil.isNotEmpty(subName) && !PerlSubUtil.processCallables(
           project, searchScope, PerlPackageUtil.join(currentNamespaceName, subName),
           it -> {
             stopFlag.set("");
@@ -107,7 +107,7 @@ public abstract class PerlMro {
       if (PerlPackageUtil.isUNIVERSAL(currentNamespaceName)) {
         continue;
       }
-      if (!PerlSubUtil.processRelatedItems(project, searchScope, PerlPackageUtil.join(currentNamespaceName, SUB_AUTOLOAD), it -> {
+      if (!PerlSubUtil.processCallables(project, searchScope, PerlPackageUtil.join(currentNamespaceName, SUB_AUTOLOAD), it -> {
         processor.process(it);
         return false;
       })) {

@@ -69,7 +69,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
     String subName = element.getNode().getText();
     Project project = element.getProject();
 
-    var result = getResolveResults(PerlMroDfs.collectTargetSubs(
+    var result = getResolveResults(PerlMroDfs.collectCallables(
       project, element.getResolveScope(),
       packageName,
       subName,
