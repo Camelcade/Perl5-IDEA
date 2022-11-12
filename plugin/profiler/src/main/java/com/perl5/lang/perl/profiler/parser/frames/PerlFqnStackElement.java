@@ -20,7 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.psi.NavigatablePsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.perl5.lang.perl.util.PerlSubUtil;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -37,7 +37,7 @@ class PerlFqnStackElement extends PerlCallStackElement {
   @Override
   protected @NotNull List<NavigatablePsiElement> computeNavigatables(@NotNull Project project, @NotNull Sdk perlSdk) {
     List<NavigatablePsiElement> result = new ArrayList<>();
-    PerlSubUtil.processCallables(project, GlobalSearchScope.allScope(project), getFrameText(), it -> {
+    PerlPackageUtil.processCallables(project, GlobalSearchScope.allScope(project), getFrameText(), it -> {
       if (it instanceof NavigatablePsiElement) {
         result.add((NavigatablePsiElement)it);
       }

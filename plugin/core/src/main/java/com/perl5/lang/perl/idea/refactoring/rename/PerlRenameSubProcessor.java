@@ -29,6 +29,7 @@ import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod;
 import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -96,7 +97,7 @@ public class PerlRenameSubProcessor extends RenamePsiElementProcessor {
       return Collections.emptySet();
     }
     Set<PsiElement> relatedItems = new HashSet<>();
-    PerlSubUtil
+    PerlPackageUtil
       .processCallables(subElement.getProject(), GlobalSearchScope.allScope(subElement.getProject()), canonicalName, relatedItems::add);
 
     for (PsiElement relatedItem : new ArrayList<>(relatedItems)) {

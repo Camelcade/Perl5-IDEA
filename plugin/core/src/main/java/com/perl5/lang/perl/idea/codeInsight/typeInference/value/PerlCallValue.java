@@ -209,7 +209,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     boolean[] foundOne = new boolean[]{false};
     for (PerlExportDescriptor exportDescriptor : exportDescriptors) {
       foundOne[0] = false;
-      if (!PerlSubUtil.processCallables(project, searchScope, exportDescriptor.getTargetCanonicalName(), it -> {
+      if (!PerlPackageUtil.processCallables(project, searchScope, exportDescriptor.getTargetCanonicalName(), it -> {
         foundOne[0] = true;
         return processor.processImportedItem(it, exportDescriptor);
       })) {
@@ -267,7 +267,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
 
     GlobalSearchScope subsEffectiveScope = getEffectiveScope(project, searchScope, namespaceName, contextElement);
     for (String subName : subNames) {
-      if (!PerlSubUtil.processCallables(project, subsEffectiveScope, PerlPackageUtil.join(namespaceName, subName), processorWrapper)) {
+      if (!PerlPackageUtil.processCallables(project, subsEffectiveScope, PerlPackageUtil.join(namespaceName, subName), processorWrapper)) {
         return false;
       }
     }
@@ -292,7 +292,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     // AUTOLOAD
     return !processingContext.processAutoload ||
            PerlPackageUtil.isUNIVERSAL(namespaceName) || PerlPackageUtil.isCORE(namespaceName) ||
-           PerlSubUtil.processCallables(project, searchScope, PerlPackageUtil.join(namespaceName, SUB_AUTOLOAD), processorWrapper);
+           PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtil.join(namespaceName, SUB_AUTOLOAD), processorWrapper);
   }
 
   /**
@@ -319,7 +319,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
                                                          @NotNull Set<PerlExportDescriptor> exportDescriptors) {
     for (PerlExportDescriptor exportDescriptor : exportDescriptors) {
       if (subNames.contains(exportDescriptor.getImportedName()) &&
-          !PerlSubUtil.processCallables(project, searchScope, exportDescriptor.getTargetCanonicalName(), processorWrapper)) {
+          !PerlPackageUtil.processCallables(project, searchScope, exportDescriptor.getTargetCanonicalName(), processorWrapper)) {
         return false;
       }
     }

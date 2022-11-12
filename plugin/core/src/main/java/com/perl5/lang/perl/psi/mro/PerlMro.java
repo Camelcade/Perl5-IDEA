@@ -89,7 +89,7 @@ public abstract class PerlMro {
     Ref<String> stopFlag = Ref.create();
     for (String currentNamespaceName : linearISA) {
       for (String subName : callableNames) {
-        if (StringUtil.isNotEmpty(subName) && !PerlSubUtil.processCallables(
+        if (StringUtil.isNotEmpty(subName) && !PerlPackageUtil.processCallables(
           project, searchScope, PerlPackageUtil.join(currentNamespaceName, subName),
           it -> {
             stopFlag.set("");
@@ -107,7 +107,7 @@ public abstract class PerlMro {
       if (PerlPackageUtil.isUNIVERSAL(currentNamespaceName)) {
         continue;
       }
-      if (!PerlSubUtil.processCallables(project, searchScope, PerlPackageUtil.join(currentNamespaceName, SUB_AUTOLOAD), it -> {
+      if (!PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtil.join(currentNamespaceName, SUB_AUTOLOAD), it -> {
         processor.process(it);
         return false;
       })) {

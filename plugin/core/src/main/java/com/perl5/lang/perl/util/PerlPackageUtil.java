@@ -724,6 +724,24 @@ public final class PerlPackageUtil implements PerlElementTypes {
     return getClosestIncRoot(project, VfsUtil.findFileByIoFile(new File(filePath), false));
   }
 
+  public static boolean processCallables(@NotNull Project project,
+                                         @NotNull GlobalSearchScope searchScope,
+                                         @NotNull String canonicalName,
+                                         @NotNull Processor<? super PerlCallableElement> processor) {
+    if (!PerlSubUtil.processSubDefinitions(project, canonicalName, searchScope, processor::process)) {
+      return false;
+    }
+    if (!PerlSubUtil.processSubDeclarations(project, canonicalName, searchScope, processor::process)) {
+      return false;
+    }
+    for (PerlGlobVariableElement target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope)) {
+      if (!processor.process(target)) {
+        return false;
+      }
+    }
+    return true;
+  }
+
   public interface ClassRootVirtualFileProcessor {
     boolean process(VirtualFile file, VirtualFile classRoot);
   }
