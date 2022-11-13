@@ -50,7 +50,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     }
     int index;
     try {
-      index = Integer.valueOf(((PerlScalarValue)indexValue).getValue());
+      index = Integer.parseInt(((PerlScalarValue)indexValue).getValue());
     }
     catch (NumberFormatException ignore) {
       return UNKNOWN_VALUE;
