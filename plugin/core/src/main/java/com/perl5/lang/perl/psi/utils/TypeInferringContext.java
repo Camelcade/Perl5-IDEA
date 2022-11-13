@@ -27,6 +27,7 @@ import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue.isDuckTypingEnabled;
 import static com.perl5.lang.perl.psi.utils.PerlResolveUtil.computeStopElement;
 
 class TypeInferringContext {
@@ -119,13 +120,14 @@ class TypeInferringContext {
   }
 
   public @NotNull PerlValue buildValue() {
-    return PerlOneOfValue.builder()
-      .addVariant(myValueBuilder.build())
-      .addVariant(myDuckValueBuilder.build())
-      .build();
+    return !isDuckTypingEnabled() ? myValueBuilder.build() :
+           PerlOneOfValue.builder()
+             .addVariant(myValueBuilder.build())
+             .addVariant(myDuckValueBuilder.build())
+             .build();
   }
 
-  public @NotNull TypeInferringContext withContext(@NotNull PsiElement newContextElement) {
+  @NotNull TypeInferringContext withContext(@NotNull PsiElement newContextElement) {
     return new TypeInferringContext(newContextElement, myNamespaceName, myVariableName, myActualType, myLexicalDeclaration, myStopElement,
                                     myValueBuilder, myDuckValueBuilder);
   }

@@ -106,8 +106,9 @@ public final class PerlValuesManager {
   static final int SMART_GETTER_ID = id++;
   static final int DUCK_TYPE_ID = id++;
 
-  // MUST stay here. Automatically changes on new element creation
-  public static final int VERSION = id;
+  public static int getVersion() {
+    return id + (PerlDuckValue.isDuckTypingEnabled() ? 100 : 0);
+  }
 
   private static final Interner<PerlValue> INTERNER = Interner.createWeakInterner();
 

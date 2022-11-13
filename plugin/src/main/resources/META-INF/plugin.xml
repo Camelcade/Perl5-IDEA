@@ -708,6 +708,8 @@
 
     <registryKey defaultValue="true" description="Enables completion of variables without a sigil"
                  key="perl5.completion.var.without.sigil"/>
+    <registryKey defaultValue="true" description="Enables duck typing support (performance impact)"
+                 key="perl5.duck.typing.support"/>
   </extensions>
 
   <actions>
