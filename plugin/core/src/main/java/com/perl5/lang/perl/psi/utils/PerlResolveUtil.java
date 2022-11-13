@@ -300,7 +300,7 @@ public final class PerlResolveUtil {
       return CONTINUE;
     }
     if (currentInstruction.num() == 1 && instructionElement != null && instructionElement.getContext() != null) {
-      inferringContext.addVariant(getValueFromControlFlow(inferringContext.withContext(instructionElement)));
+      getValueFromControlFlow(inferringContext.withContext(instructionElement));
     }
     return NEXT;
   }

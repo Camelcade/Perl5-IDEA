@@ -35,20 +35,22 @@ class TypeInferringContext {
   private final @NotNull PerlVariableType myActualType;
   private final @Nullable PerlVariableDeclarationElement myLexicalDeclaration;
   private final @Nullable PsiElement myStopElement;
-  private final @NotNull PerlOneOfValue.Builder myValueBuilder = PerlOneOfValue.builder();
+  private final @NotNull PerlOneOfValue.Builder myValueBuilder;
 
   private TypeInferringContext(@NotNull PsiElement contextElement,
                                @Nullable String namespaceName,
                                @NotNull String variableName,
                                @NotNull PerlVariableType actualType,
                                @Nullable PerlVariableDeclarationElement lexicalDeclaration,
-                               @Nullable PsiElement stopElement) {
+                               @Nullable PsiElement stopElement,
+                               @NotNull PerlOneOfValue.Builder valueBuilder) {
     myContextElement = contextElement;
     myNamespaceName = namespaceName;
     myVariableName = variableName;
     myActualType = actualType;
     myLexicalDeclaration = lexicalDeclaration;
     myStopElement = stopElement;
+    myValueBuilder = valueBuilder;
   }
 
   public TypeInferringContext(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
@@ -57,7 +59,8 @@ class TypeInferringContext {
          variable.getVariableName(),
          variable.getActualType(),
          variable,
-         computeStopElement(variable, contextElement)
+         computeStopElement(variable, contextElement),
+         PerlOneOfValue.builder()
     );
   }
 
@@ -74,6 +77,7 @@ class TypeInferringContext {
     myVariableName = variable.getName();
     myNamespaceName = variable.getExplicitNamespaceName();
     myActualType = variable.getActualType();
+    myValueBuilder = PerlOneOfValue.builder();
   }
 
   public @NotNull PsiElement getContextElement() {
@@ -109,6 +113,7 @@ class TypeInferringContext {
   }
 
   public @NotNull TypeInferringContext withContext(@NotNull PsiElement newContextElement) {
-    return new TypeInferringContext(newContextElement, myNamespaceName, myVariableName, myActualType, myLexicalDeclaration, myStopElement);
+    return new TypeInferringContext(newContextElement, myNamespaceName, myVariableName, myActualType, myLexicalDeclaration, myStopElement,
+                                    myValueBuilder);
   }
 }
