@@ -12,8 +12,6 @@
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 
-[Support with Yandex.Money](https://money.yandex.ru/to/41001227135087)
-
 This repo contains a bundle of Perl5-related plugins for [JetBrains IDEs](https://www.jetbrains.com/).
 
 Current versions of plugins may be found in [JetBrains repo](https://plugins.jetbrains.com/).
