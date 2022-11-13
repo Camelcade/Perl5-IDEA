@@ -105,7 +105,7 @@ public class PerlDuckValue extends PerlListValue {
 
   @Override
   public String toString() {
-    return "DuckType: " + getElements();
+    return "DuckType: " + getElements().stream().map(Object::toString).sorted().toList();
   }
 
   @Override
