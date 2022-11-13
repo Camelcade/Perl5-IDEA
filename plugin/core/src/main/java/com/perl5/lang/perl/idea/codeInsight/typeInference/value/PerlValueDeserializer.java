@@ -136,6 +136,9 @@ public class PerlValueDeserializer {
     else if (valueId == DUCK_TYPE_ID) {
       return new PerlDuckValue(this);
     }
+    else if (valueId == VALUE_WITH_FALLBACK) {
+      return new PerlValueWithFallback(this);
+    }
     throw new IOException("Don't know how to deserialize a value: " + valueId);
   }
 

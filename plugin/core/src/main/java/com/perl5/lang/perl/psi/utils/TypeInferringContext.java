@@ -20,6 +20,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueWithFallback;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
@@ -120,11 +121,8 @@ class TypeInferringContext {
   }
 
   public @NotNull PerlValue buildValue() {
-    return !isDuckTypingEnabled() ? myValueBuilder.build() :
-           PerlOneOfValue.builder()
-             .addVariant(myValueBuilder.build())
-             .addVariant(myDuckValueBuilder.build())
-             .build();
+    return isDuckTypingEnabled() ? PerlValueWithFallback.create(myValueBuilder.build(), myDuckValueBuilder.build())
+                                 : myValueBuilder.build();
   }
 
   @NotNull TypeInferringContext withContext(@NotNull PsiElement newContextElement) {

@@ -105,6 +105,7 @@ public final class PerlValuesManager {
   static final int DEFAULT_ARGUMENT_ID = id++;
   static final int SMART_GETTER_ID = id++;
   static final int DUCK_TYPE_ID = id++;
+  static final int VALUE_WITH_FALLBACK = id++;
 
   public static int getVersion() {
     return id + (PerlDuckValue.isDuckTypingEnabled() ? 100 : 0);
