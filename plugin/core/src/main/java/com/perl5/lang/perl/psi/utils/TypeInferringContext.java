@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
@@ -126,8 +127,10 @@ class TypeInferringContext {
     myValueBuilder.addVariant(perlValue);
   }
 
-  public void addDuckCall(@NotNull String callableName) {
-    myDuckValueBuilder.addElement(callableName);
+  public void addDuckCall(@Nullable String callableName) {
+    if (StringUtil.isNotEmpty(callableName)) {
+      myDuckValueBuilder.addElement(callableName);
+    }
   }
 
   public @NotNull PerlValue buildValue() {
