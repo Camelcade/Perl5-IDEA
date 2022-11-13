@@ -2266,6 +2266,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doTestPerlValue(@NotNull Class<? extends PsiElement> clazz) {
     initWithFileSmart(getTestName(true));
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     doTestPerlValueWithoutInit(clazz);
   }
 
