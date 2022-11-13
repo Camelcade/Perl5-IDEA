@@ -35,7 +35,14 @@ public class PerlValueWithFallback extends PerlParametrizedOperationValue {
 
   @Override
   protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue, @NotNull PerlValueResolver resolver) {
-    return resolvedBaseValue.isUnknown() ? super.computeResolve(resolvedBaseValue, resolver) : resolvedBaseValue;
+    if (resolvedBaseValue.isUnknown()) {
+      return super.computeResolve(resolvedBaseValue, resolver);
+    }
+    if (resolvedBaseValue.isUndef()) {
+      var fallBackValue = super.computeResolve(resolvedBaseValue, resolver);
+      return fallBackValue.isUnknown() ? resolvedBaseValue : fallBackValue;
+    }
+    return resolvedBaseValue;
   }
 
   @Override
