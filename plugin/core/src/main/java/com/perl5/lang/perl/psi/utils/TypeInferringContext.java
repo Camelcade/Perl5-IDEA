@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -36,6 +37,7 @@ class TypeInferringContext {
   private final @Nullable PerlVariableDeclarationElement myLexicalDeclaration;
   private final @Nullable PsiElement myStopElement;
   private final @NotNull PerlOneOfValue.Builder myValueBuilder;
+  private final @NotNull PerlDuckValue.Builder myDuckValueBuilder;
 
   private TypeInferringContext(@NotNull PsiElement contextElement,
                                @Nullable String namespaceName,
@@ -43,7 +45,8 @@ class TypeInferringContext {
                                @NotNull PerlVariableType actualType,
                                @Nullable PerlVariableDeclarationElement lexicalDeclaration,
                                @Nullable PsiElement stopElement,
-                               @NotNull PerlOneOfValue.Builder valueBuilder) {
+                               @NotNull PerlOneOfValue.Builder valueBuilder,
+                               @NotNull PerlDuckValue.Builder duckValueBuilder) {
     myContextElement = contextElement;
     myNamespaceName = namespaceName;
     myVariableName = variableName;
@@ -51,6 +54,7 @@ class TypeInferringContext {
     myLexicalDeclaration = lexicalDeclaration;
     myStopElement = stopElement;
     myValueBuilder = valueBuilder;
+    myDuckValueBuilder = duckValueBuilder;
   }
 
   public TypeInferringContext(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
@@ -60,7 +64,8 @@ class TypeInferringContext {
          variable.getActualType(),
          variable,
          computeStopElement(variable, contextElement),
-         PerlOneOfValue.builder()
+         PerlOneOfValue.builder(),
+         PerlDuckValue.builder()
     );
   }
 
@@ -78,6 +83,7 @@ class TypeInferringContext {
     myNamespaceName = variable.getExplicitNamespaceName();
     myActualType = variable.getActualType();
     myValueBuilder = PerlOneOfValue.builder();
+    myDuckValueBuilder = PerlDuckValue.builder();
   }
 
   public @NotNull PsiElement getContextElement() {
@@ -108,12 +114,19 @@ class TypeInferringContext {
     myValueBuilder.addVariant(perlValue);
   }
 
+  public void addDuckCall(@NotNull String callableName) {
+    myDuckValueBuilder.addElement(callableName);
+  }
+
   public @NotNull PerlValue buildValue() {
-    return myValueBuilder.build();
+    return PerlOneOfValue.builder()
+      .addVariant(myValueBuilder.build())
+      .addVariant(myDuckValueBuilder.build())
+      .build();
   }
 
   public @NotNull TypeInferringContext withContext(@NotNull PsiElement newContextElement) {
     return new TypeInferringContext(newContextElement, myNamespaceName, myVariableName, myActualType, myLexicalDeclaration, myStopElement,
-                                    myValueBuilder);
+                                    myValueBuilder, myDuckValueBuilder);
   }
 }
