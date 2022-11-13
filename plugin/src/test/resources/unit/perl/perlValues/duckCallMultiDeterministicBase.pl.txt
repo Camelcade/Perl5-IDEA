@@ -1,0 +1,12 @@
+my $var = 42;
+$var->somemethod;
+$var->othermethod;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 51 in duckCallMultiDeterministicBase.pl
+42
+----------
+Resolved
+----------
+42

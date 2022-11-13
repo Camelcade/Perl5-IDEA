@@ -18,9 +18,7 @@ $otherv<caret>ar;
 ----------
 $othervar
 PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 163 in variableAnnotationVariantTransientMixed.pl
-OneOf[Bla::Bla,
-Foo::Baz,
-scalar main::some_unknown_sub()]
+Value with fallback: OneOf: [Bla::Bla, Foo::Baz, scalar main::some_unknown_sub()] -> DuckType: [something]
 ----------
 Resolved
 ----------

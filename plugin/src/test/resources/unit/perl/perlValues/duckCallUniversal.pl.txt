@@ -1,0 +1,16 @@
+my $var;
+$var->somemethod;
+$var->new;
+$var->isa;
+$var->DOES;
+$var->can;
+$var->VERSION;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 87 in duckCallUniversal.pl
+DuckType: [somemethod]
+----------
+Resolved
+----------
+Value unknown

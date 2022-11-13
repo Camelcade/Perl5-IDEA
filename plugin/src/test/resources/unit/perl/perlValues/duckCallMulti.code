@@ -1,0 +1,4 @@
+my $var;
+$var->somemethod;
+$var->othermethod;
+$v<caret>ar;

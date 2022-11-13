@@ -1,0 +1,4 @@
+#@type Foo::Bar
+my $var;
+$var->somemethod;
+$v<caret>ar;

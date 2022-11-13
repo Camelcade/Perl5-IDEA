@@ -1,0 +1,11 @@
+my Foo::Bar $var;
+$var->somemethod;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 36 in duckCallTyped.pl
+Foo::Bar
+----------
+Resolved
+----------
+Foo::Bar

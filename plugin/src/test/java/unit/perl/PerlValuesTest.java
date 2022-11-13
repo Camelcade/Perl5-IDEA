@@ -34,6 +34,24 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testDuckCall() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallAnnotated() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallTyped() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallUniversal() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallMulti() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallMultiDeterministicBase() { doTestScalarVariableValue(); }
+
+  @Test
   public void testOverwriteScalar() { doTestScalarVariableValue(); }
 
   @Test

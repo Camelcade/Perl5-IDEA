@@ -1,0 +1,8 @@
+my $var;
+$var->somemethod;
+$var->new;
+$var->isa;
+$var->DOES;
+$var->can;
+$var->VERSION;
+$v<caret>ar;

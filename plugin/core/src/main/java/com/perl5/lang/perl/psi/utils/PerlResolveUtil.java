@@ -296,6 +296,14 @@ public final class PerlResolveUtil {
       inferringContext.addVariant(PerlValues.ARGUMENTS_VALUE);
       return CONTINUE;
     }
+    if (inferringContext.isMyVariable(instructionElement) &&
+        instructionElement.getParent() instanceof PerlDerefExpression derefExpression &&
+        instructionElement.getPrevSibling() == null) {
+      var children = derefExpression.getChildren();
+      if (children.length > 1 && children[1] instanceof PerlSubCallElement subCallElement) {
+        inferringContext.addDuckCall(subCallElement.getSubName());
+      }
+    }
     if (Objects.equals(inferringContext.getStopElement(), instructionElement)) {
       return CONTINUE;
     }
