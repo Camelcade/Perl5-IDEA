@@ -316,10 +316,7 @@ public final class PerlResolveUtil {
       return NEXT;
     }
     PsiElement assignee = currentInstruction.getLeftSide();
-    if (!(assignee instanceof PerlVariable) || ((PerlVariable)assignee).getActualType() != inferringContext.getActualType()) {
-      return NEXT;
-    }
-    if (!Objects.equals(inferringContext.getVariableName(), ((PerlVariable)assignee).getName())) {
+    if (!inferringContext.isMyVariable(assignee)) {
       return NEXT;
     }
     String explicitNamespaceName = ((PerlVariable)assignee).getExplicitNamespaceName();

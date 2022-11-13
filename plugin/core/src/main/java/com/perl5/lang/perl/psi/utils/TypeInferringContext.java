@@ -25,8 +25,11 @@ import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue.isDuckTypingEnabled;
 import static com.perl5.lang.perl.psi.utils.PerlResolveUtil.computeStopElement;
@@ -102,6 +105,13 @@ class TypeInferringContext {
 
   public @NotNull PerlVariableType getActualType() {
     return myActualType;
+  }
+
+  @Contract("null->false")
+  public boolean isMyVariable(@Nullable PsiElement psiElement) {
+    return psiElement instanceof PerlVariable perlVariable &&
+           perlVariable.getActualType() == myActualType &&
+           Objects.equals(perlVariable.getName(), myVariableName);
   }
 
   public @Nullable PerlVariableDeclarationElement getLexicalDeclaration() {
