@@ -1,0 +1,13 @@
+<caret>sub somemethod{
+  my($self, $otherthing) = @_;
+  $otherthing->something;
+  if( $self->getter ){
+    $otherthing->method1;
+  }
+  else{
+    $otherthing->method2;
+  }
+  $otherthing;
+}
+----------
+Value with fallback: ArrayItem: SUB_ARGUMENTS[1] -> DuckType: [method1, method2, something]

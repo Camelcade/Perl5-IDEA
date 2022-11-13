@@ -37,6 +37,75 @@ public class PerlValuesTest extends PerlLightTestCase {
   public void testDuckCall() { doTestScalarVariableValue(); }
 
   @Test
+  public void testDuckCallResolve() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveSubCall() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveSubCallWithArgument() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveSubCallFirstArg() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveSubCallFirstArgWithArgument() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveDistinct() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveDistinctLonger() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveDistinctInherited() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveDistinctInheritedDifferentParents() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveDistinctInheritedLonger() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveDistinctPartial() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveMulti() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveInSub() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveMultiInSub() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveInSubSecond() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallResolveMultiInSubSecond() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSubArgument() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSubArgumentSignature() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSubArgumentSecond() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSubArgumentSecondSignature() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallEnd() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallFancy() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallMiddle() { doTestScalarVariableValue(); }
+
+  @Test
   public void testDuckCallAnnotated() { doTestScalarVariableValue(); }
 
   @Test
@@ -47,6 +116,36 @@ public class PerlValuesTest extends PerlLightTestCase {
 
   @Test
   public void testDuckCallMulti() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSeveralPaths() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSeveralPathsCommonAfter() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSeveralPathsCommonBefore() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSeveralPathsCommons() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSeveralPathsWithOtherGetter() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSeveralPathsSame() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSeveralPathsSameCommonAfter() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSeveralPathsSameCommonBefore() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSeveralPathsSameCommons() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testDuckCallSeveralPathsSameWithOtherGetter() { doTestScalarVariableValue(); }
 
   @Test
   public void testDuckCallMultiDeterministicBase() { doTestScalarVariableValue(); }

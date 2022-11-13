@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,9 @@ public class PerlResolveTest extends PerlLightTestCase {
   protected String getBaseDataPath() {
     return "resolve/perl";
   }
+
+  @Test
+  public void testDuckCallResolveMultiInSubSecond() { doTest(); }
 
   @Test
   public void testScalarUtil() {

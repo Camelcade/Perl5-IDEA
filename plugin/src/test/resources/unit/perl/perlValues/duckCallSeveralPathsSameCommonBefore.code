@@ -1,0 +1,9 @@
+my $var;
+$var->pre_common;
+if( $a ){
+  $var->somemethod;
+}
+else{
+  $var->somemethod;
+}
+$v<caret>ar;

@@ -20,7 +20,7 @@ $var1->method1;
 $var2->method1;
 $var3->method1;
 $var4->method1;
-$var5->method1; # just for test, unresolved
+$var5->method1; # just for test, unresolved. Now it is resolved, because var5 is inferred from the context
 
 package main;
 

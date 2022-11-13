@@ -1,0 +1,13 @@
+sub somesub{
+  my $var = shift;
+  $var->somemethod;
+  $v<caret>ar;
+}
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 54 in duckCallSubArgument.pl
+Value with fallback: ArrayItem: SUB_ARGUMENTS[0] -> DuckType: [somemethod]
+----------
+Resolved
+----------
+main

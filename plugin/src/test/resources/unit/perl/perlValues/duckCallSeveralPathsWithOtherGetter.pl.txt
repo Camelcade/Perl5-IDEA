@@ -1,0 +1,16 @@
+my $var = some_getter();
+if( $a ){
+  $var->somemethod;
+}
+else{
+  $var->othermeethod;
+}
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 87 in duckCallSeveralPathsWithOtherGetter.pl
+Value with fallback: scalar main::some_getter() -> DuckType: [othermeethod, somemethod]
+----------
+Resolved
+----------
+Value unknown

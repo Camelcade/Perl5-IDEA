@@ -1,0 +1,15 @@
+package TestPackage1;
+
+sub somemethod;
+
+package TestPackage2;
+
+sub somemethod;
+sub othermethod{}
+
+package main;
+my $var;
+$var->somemethod;
+$var->othermethod;
+
+$v<caret>ar;

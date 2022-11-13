@@ -1,0 +1,8 @@
+my $var = some_getter();
+if( $a ){
+  $var->somemethod;
+}
+else{
+  $var->somemethod;
+}
+$v<caret>ar;

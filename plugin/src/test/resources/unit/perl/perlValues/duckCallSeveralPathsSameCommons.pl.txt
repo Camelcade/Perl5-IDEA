@@ -1,0 +1,18 @@
+my $var;
+$var->pre_common;
+if( $a ){
+  $var->somemethod;
+}
+else{
+  $var->somemethod;
+}
+$var->post_common;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 106 in duckCallSeveralPathsSameCommons.pl
+DuckType: [post_common, pre_common, somemethod]
+----------
+Resolved
+----------
+Value unknown

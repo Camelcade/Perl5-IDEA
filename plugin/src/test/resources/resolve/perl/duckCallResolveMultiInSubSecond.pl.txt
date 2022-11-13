@@ -1,0 +1,16 @@
+PerlVariableReference at (269,270); text in range: '_' => 1 results:
+	Built-in: @_
+
+PerlVariableReference at (275,278); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 260 in duckCallResolveMultiInSubSecond.pl
+
+PerlSubReference at (280,290); text in range: 'somemethod' => 5 results:
+	PsiPerlFuncDefinitionImpl(FUNC_DEFINITION)@TestPackage4::somemethod at 150 in duckCallResolveMultiInSubSecond.pl
+	PsiPerlGlobVariableImpl(*) at 193 in duckCallResolveMultiInSubSecond.pl
+	PsiPerlSubDeclarationImpl(SUB_DECLARATION)@TestPackage1::somemethod at 23 in duckCallResolveMultiInSubSecond.pl
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@TestPackage2::somemethod at 63 in duckCallResolveMultiInSubSecond.pl
+	PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@TestPackage3::somemethod at 105 in duckCallResolveMultiInSubSecond.pl
+
+PerlVariableReference at (295,298); text in range: 'var' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 260 in duckCallResolveMultiInSubSecond.pl
+

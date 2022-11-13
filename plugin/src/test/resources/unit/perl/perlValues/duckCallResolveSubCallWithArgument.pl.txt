@@ -1,0 +1,26 @@
+package WrongPackage;
+
+sub new{}
+
+package TestPackage;
+
+sub somemethod;
+
+package main;
+
+sub mygetter{
+  my($var, $var2) = @_;
+  $var2->somemethod;
+  $var2;
+}
+
+my $var = main::->mygetter(WrongPackage->new());
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 208 in duckCallResolveSubCallWithArgument.pl
+scalar main->mygetter(WrongPackage->new())
+----------
+Resolved
+----------
+WrongPackage

@@ -10,4 +10,4 @@ scalar main::del()
 ----------
 Resolved
 ----------
-Value unknown
+Mojolicious::Routes::Route

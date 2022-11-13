@@ -1,0 +1,11 @@
+my $var;
+something->()->$var();
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 32 in duckCallEnd.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown

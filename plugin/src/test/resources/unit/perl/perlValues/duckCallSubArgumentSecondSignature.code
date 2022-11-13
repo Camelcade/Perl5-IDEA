@@ -1,0 +1,4 @@
+sub somesub($firstvar, $var){
+  $var->somemethod;
+  $v<caret>ar;
+}

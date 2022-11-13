@@ -1,0 +1,19 @@
+package TestPackage1;
+
+sub somemethod;
+
+package TestPackage2;
+
+sub somemethod;
+
+package TestPackage3;
+use parent qw/TestPackage1/;
+
+sub othermethod{}
+
+package main;
+my $var;
+$var->somemethod;
+$var->othermethod;
+
+$v<caret>ar;

@@ -10,4 +10,4 @@ scalar main::put()
 ----------
 Resolved
 ----------
-Value unknown
+Mojolicious::Routes::Route

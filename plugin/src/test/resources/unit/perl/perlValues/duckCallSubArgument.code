@@ -1,0 +1,5 @@
+sub somesub{
+  my $var = shift;
+  $var->somemethod;
+  $v<caret>ar;
+}

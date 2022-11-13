@@ -1,0 +1,27 @@
+package TestPackage1;
+
+sub othermethod{}
+
+package TestPackage2;
+
+sub somemethod;
+
+package TestPackage3;
+use parent qw/TestPackage1/;
+
+sub somemethod;
+
+package main;
+my $var;
+$var->somemethod;
+$var->othermethod;
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 212 in duckCallResolveDistinctInheritedLonger.pl
+DuckType: [othermethod, somemethod]
+----------
+Resolved
+----------
+TestPackage3

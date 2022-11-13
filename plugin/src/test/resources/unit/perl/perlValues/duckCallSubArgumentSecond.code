@@ -1,0 +1,5 @@
+sub somesub{
+  my ($firstvar, $var) = @_;
+  $var->somemethod;
+  $v<caret>ar;
+}

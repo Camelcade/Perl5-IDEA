@@ -1,0 +1,11 @@
+package TestPackage;
+
+sub somemethod;
+
+package main;
+
+sub something{
+  my $var = shift;
+  $var->somemethod;
+  $v<caret>ar;
+}

@@ -10,4 +10,4 @@ scalar main::under()
 ----------
 Resolved
 ----------
-Value unknown
+Mojolicious::Routes::Route

@@ -1,0 +1,18 @@
+package WrongPackage;
+
+sub new{}
+
+package TestPackage;
+
+sub somemethod;
+
+package main;
+
+sub mygetter{
+  my($var) = @_;
+  $var->somemethod;
+  $var;
+}
+
+my $var = mygetter;
+$v<caret>ar;

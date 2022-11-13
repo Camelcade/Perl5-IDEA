@@ -1,0 +1,12 @@
+sub somesub($firstvar, $var){
+  $var->somemethod;
+  $v<caret>ar;
+}
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 52 in duckCallSubArgumentSecondSignature.pl
+Value with fallback: ArrayItem: SUB_ARGUMENTS[1] -> DuckType: [somemethod]
+----------
+Resolved
+----------
+undef

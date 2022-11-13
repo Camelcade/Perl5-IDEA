@@ -10,4 +10,4 @@ scalar main::options()
 ----------
 Resolved
 ----------
-Value unknown
+Mojolicious::Routes::Route

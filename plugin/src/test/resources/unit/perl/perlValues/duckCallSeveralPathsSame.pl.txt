@@ -1,0 +1,16 @@
+my $var;
+if( $a ){
+  $var->somemethod;
+}
+else{
+  $var->somemethod;
+}
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 69 in duckCallSeveralPathsSame.pl
+DuckType: [somemethod]
+----------
+Resolved
+----------
+Value unknown

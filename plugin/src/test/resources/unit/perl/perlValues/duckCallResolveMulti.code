@@ -1,0 +1,27 @@
+package TestPackage1;
+
+sub somemethod;
+
+package TestPackage2;
+
+sub somemethod{
+}
+
+package TestPackage3;
+
+method somemethod{
+}
+
+package TestPackage4;
+
+func somemethod{
+}
+
+package TestPackage5;
+
+*somemethod = sub{};
+
+package main;
+my $var;
+$var->somemethod;
+$v<caret>ar;

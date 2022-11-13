@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,16 +26,19 @@ public class PerlReturnValuesTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testFunctionParametersFun() {doTest();}
+  public void testDuckType() { doTest(); }
 
   @Test
-  public void testMyVariable() {doTest();}
+  public void testFunctionParametersFun() { doTest(); }
 
   @Test
-  public void testOurVariable() {doTest();}
+  public void testMyVariable() { doTest(); }
 
   @Test
-  public void testLocalVariable() {doTest();}
+  public void testOurVariable() { doTest(); }
+
+  @Test
+  public void testLocalVariable() { doTest(); }
 
   @Test
   public void testStateVariable() {doTest();}

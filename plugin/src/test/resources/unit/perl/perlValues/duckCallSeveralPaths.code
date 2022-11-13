@@ -1,0 +1,8 @@
+my $var;
+if( $a ){
+  $var->somemethod;
+}
+else{
+  $var->othermeethod;
+}
+$v<caret>ar;

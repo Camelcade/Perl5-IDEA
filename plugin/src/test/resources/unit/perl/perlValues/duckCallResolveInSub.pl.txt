@@ -1,0 +1,19 @@
+package TestPackage;
+
+sub somemethod;
+
+package main;
+
+sub something{
+  my $var = shift;
+  $var->somemethod;
+  $v<caret>ar;
+}
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 110 in duckCallResolveInSub.pl
+Value with fallback: ArrayItem: SUB_ARGUMENTS[0] -> DuckType: [somemethod]
+----------
+Resolved
+----------
+main
