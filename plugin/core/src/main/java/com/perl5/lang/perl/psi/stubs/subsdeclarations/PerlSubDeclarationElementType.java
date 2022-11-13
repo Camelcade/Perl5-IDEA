@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDeclarationImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlCallableNamesIndex;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import org.jetbrains.annotations.NotNull;
 
@@ -92,6 +93,10 @@ public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDecla
     String packageName = stub.getNamespaceName();
     if (packageName != null) {
       sink.occurrence(PerlSubDeclarationReverseIndex.KEY, packageName);
+    }
+    var callableName = stub.getCallableName();
+    if (StringUtil.isNotEmpty(callableName)) {
+      sink.occurrence(PerlCallableNamesIndex.KEY, callableName);
     }
   }
 
