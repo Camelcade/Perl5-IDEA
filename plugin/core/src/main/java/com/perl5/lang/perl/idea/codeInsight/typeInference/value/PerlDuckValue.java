@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public class PerlDuckValue extends PerlListValue {
-  private static final Set<String> GENERIC_NAMES = Set.of("new", "isa", "DOES", "can", "VERSION");
+  private static final Set<String> GENERIC_NAMES = Set.of("new", "isa", "DOES", "can", "VERSION", "IntellijIdeaRulezzz");
   private PerlDuckValue(@NotNull List<PerlValue> elements) {
     super(elements);
   }

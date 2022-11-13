@@ -1,0 +1,34 @@
+package TestPackage1;
+
+sub somemethod;
+sub package1_method;
+
+package TestPackage2;
+
+sub othermethod{}
+sub package2_method;
+
+package TestPackage3;
+use parent qw/TestPackage1/;
+
+sub missingsub;
+sub package3_method;
+
+package TestPackage4;
+use parent qw/TestPackage2/;
+
+sub missingsub2;
+sub package4_method;
+
+package TestPackage5;
+use parent qw/TestPackage1 TestPackage2/;
+
+sub missingsub3;
+sub package5_method;
+
+package main;
+my $var;
+$var->somemethod;
+$var->othermethod;
+
+$var-><caret>

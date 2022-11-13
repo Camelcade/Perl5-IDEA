@@ -1,0 +1,18 @@
+Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
+	Lookups: SUPER::
+	String: SUPER::
+Text: missingsub3; Tail: null; Type: TestPackage5; Icon: /sub_declaration_gutter_icon.png; Type Icon: null
+	Lookups: missingsub3
+	PsiElement: PsiPerlSubDeclarationImpl(SUB_DECLARATION)@TestPackage5::missingsub3 at 370 in duckCallResolveDistinctInheritedDifferentParents.pl
+Text: package1_method; Tail: null; Type: TestPackage1; Icon: /sub_declaration_gutter_icon.png; Type Icon: null
+	Lookups: package1_method
+	PsiElement: PsiPerlSubDeclarationImpl(SUB_DECLARATION)@TestPackage1::package1_method at 39 in duckCallResolveDistinctInheritedDifferentParents.pl
+Text: package2_method; Tail: null; Type: TestPackage2; Icon: /sub_declaration_gutter_icon.png; Type Icon: null
+	Lookups: package2_method
+	PsiElement: PsiPerlSubDeclarationImpl(SUB_DECLARATION)@TestPackage2::package2_method at 102 in duckCallResolveDistinctInheritedDifferentParents.pl
+Text: package5_method; Tail: null; Type: TestPackage5; Icon: /sub_declaration_gutter_icon.png; Type Icon: null
+	Lookups: package5_method
+	PsiElement: PsiPerlSubDeclarationImpl(SUB_DECLARATION)@TestPackage5::package5_method at 387 in duckCallResolveDistinctInheritedDifferentParents.pl
+Text: somemethod; Tail: null; Type: TestPackage1; Icon: /sub_declaration_gutter_icon.png; Type Icon: null
+	Lookups: somemethod
+	PsiElement: PsiPerlSubDeclarationImpl(SUB_DECLARATION)@TestPackage1::somemethod at 23 in duckCallResolveDistinctInheritedDifferentParents.pl
