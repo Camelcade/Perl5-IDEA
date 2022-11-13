@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,8 +56,6 @@ public class Perl5ProjectStartupActivity implements StartupActivity {
             new BrowseNotificationAction(PerlBundle.message("plugin.update.baloon.changes"), "https://plugins.jetbrains.com/plugin/7796"))
           .addAction(new BrowseNotificationAction(PerlBundle.message("plugin.update.baloon.tracker"),
                                                   "https://github.com/hurricup/Perl5-IDEA/issues"))
-          .addAction(new BrowseNotificationAction(PerlBundle.message("plugin.update.baloon.support"),
-                                                  "https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=HJCUADZKY5G7E"))
           .addAction(new BrowseNotificationAction(PerlBundle.message("plugin.update.baloon.support.ym"),
                                                   "https://money.yandex.ru/to/41001227135087"));
 
