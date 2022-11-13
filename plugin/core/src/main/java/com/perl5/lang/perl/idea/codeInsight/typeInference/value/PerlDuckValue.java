@@ -69,8 +69,14 @@ public class PerlDuckValue extends PerlListValue {
     }
 
     var valueBuilder = PerlOneOfValue.builder();
-    baseNamespaces.forEach(namespaceName -> processNamespacesWithAllCallables(
-      namespaceName, usedCallableNames, resolver, new HashSet<>(), it -> valueBuilder.addVariant(PerlScalarValue.create(it))));
+    Consumer<String> namespaceNameProcessor = it -> valueBuilder.addVariant(PerlScalarValue.create(it));
+    if (usedCallableNames.isEmpty()) {
+      baseNamespaces.forEach(namespaceNameProcessor);
+    }
+    else {
+      baseNamespaces.forEach(namespaceName -> processNamespacesWithAllCallables(
+        namespaceName, usedCallableNames, resolver, new HashSet<>(), namespaceNameProcessor));
+    }
     return valueBuilder.build();
   }
 
@@ -79,9 +85,10 @@ public class PerlDuckValue extends PerlListValue {
                                                         @NotNull PerlValueResolver resolver,
                                                         @NotNull Set<String> recursionControlSet,
                                                         @NotNull Consumer<String> namespaceNameConsumer) {
-    if (StringUtil.isEmpty(namespaceName) || !recursionControlSet.add(namespaceName) || callableNames.isEmpty()) {
+    if (StringUtil.isEmpty(namespaceName) || !recursionControlSet.add(namespaceName)) {
       return;
     }
+
     ProgressManager.checkCanceled();
     var callablesLeft = new HashSet<>(callableNames);
     var project = resolver.getProject();
