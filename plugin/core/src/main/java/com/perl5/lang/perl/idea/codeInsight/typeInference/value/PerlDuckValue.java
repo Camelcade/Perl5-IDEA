@@ -128,6 +128,10 @@ public class PerlDuckValue extends PerlListValue {
     private Builder() {
     }
 
+    public void clear() {
+      myElements.clear();
+    }
+
     public @NotNull PerlValue build() {
       return isEmpty() ? UNKNOWN_VALUE : new PerlDuckValue(List.copyOf(myElements));
     }
