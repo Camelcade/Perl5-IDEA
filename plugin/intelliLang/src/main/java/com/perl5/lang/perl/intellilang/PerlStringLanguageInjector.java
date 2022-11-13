@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +19,9 @@ package com.perl5.lang.perl.intellilang;
 import com.intellij.codeInsight.completion.CompletionUtil;
 import com.intellij.lang.Language;
 import com.intellij.lang.injection.MultiHostRegistrar;
-import com.intellij.openapi.application.Experiments;
 import com.intellij.openapi.util.RecursionManager;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
@@ -64,7 +64,7 @@ public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
     }
 
     // program context
-    if (Experiments.getInstance().isFeatureEnabled("perl5.eval.auto.injection")) {
+    if (Registry.is("perl5.eval.auto.injection", true)) {
       PsiElement context = getPerlInjectionContext(perlString);
       if (context != null) {
         injectLanguage(perlString, registrar, PerlLanguage.INSTANCE);

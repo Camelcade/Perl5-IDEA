@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.completion.providers;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.openapi.application.Experiments;
+import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.ProcessingContext;
@@ -58,7 +58,7 @@ public class PerlHandleCompletionProvider extends PerlCompletionProvider {
     PerlSubCompletionUtil.processContextSubsLookupElements(completionProcessor);
     logger.debug("Processed context subs lookups");
 
-    if (Experiments.getInstance().isFeatureEnabled("perl5.completion.var.without.sigil")) {
+    if (Registry.is("perl5.completion.var.without.sigil", true)) {
       PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(
         completionProcessor, null, false, false, false);
       PerlVariableCompletionUtil.processVariables(variableCompletionProcessor, logger);

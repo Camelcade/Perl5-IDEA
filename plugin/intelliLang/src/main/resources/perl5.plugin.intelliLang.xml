@@ -34,9 +34,7 @@
     <applicationService serviceInterface="com.perl5.lang.perl.psi.references.PerlFileContextSubstitutor"
                         serviceImplementation="com.perl5.lang.perl.intellilang.PerlInjectionFileContextSubstitutor"/>
 
-    <experimentalFeature percentOfUsers="100" id="perl5.eval.auto.injection">
-      <description>Enables automatic perl injections into eval arguments</description>
-    </experimentalFeature>
+    <registryKey defaultValue="true" description="Enables automatic perl injections into eval arguments" key="perl5.eval.auto.injection"/>
 
   </extensions>
 </idea-plugin>
