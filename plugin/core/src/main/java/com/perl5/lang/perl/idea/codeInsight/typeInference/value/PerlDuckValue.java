@@ -33,6 +33,7 @@ import java.util.stream.Collectors;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public class PerlDuckValue extends PerlListValue {
+  private static final Set<String> GENERIC_NAMES = Set.of("new", "isa", "DOES", "can", "VERSION");
   private PerlDuckValue(@NotNull List<PerlValue> elements) {
     super(elements);
   }
@@ -131,13 +132,11 @@ public class PerlDuckValue extends PerlListValue {
       return isEmpty() ? UNKNOWN_VALUE : new PerlDuckValue(List.copyOf(myElements));
     }
 
-    public @NotNull Builder addElement(@NotNull PerlValue callableNameValue) {
-      myElements.add(callableNameValue);
-      return this;
-    }
-
     public @NotNull Builder addElement(@NotNull String callableName) {
-      return addElement(PerlScalarValue.create(callableName));
+      if (!GENERIC_NAMES.contains(callableName)) {
+        myElements.add(PerlScalarValue.create(callableName));
+      }
+      return this;
     }
 
     public boolean isEmpty() {
