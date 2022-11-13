@@ -190,11 +190,11 @@ public final class PerlResolveUtil {
    * @see PerlValue
    */
   public static @NotNull PerlValue inferVariableValue(@NotNull PerlVariable variable) {
-        return getValueFromControlFlow(new TypeInferringContext(variable));
+        return getValueFromControlFlow(new TypeInferringContext(variable)).buildValue();
   }
 
   public static @NotNull PerlValue inferVariableValue(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
-    return getValueFromControlFlow(new TypeInferringContext(variable, contextElement));
+    return getValueFromControlFlow(new TypeInferringContext(variable, contextElement)).buildValue();
   }
 
   /**
@@ -225,17 +225,19 @@ public final class PerlResolveUtil {
    * @return a value of found variable or {@link PerlValues#UNKNOWN_VALUE}
    * @see PerlControlFlowBuilder#getControlFlowScope(com.intellij.psi.PsiElement)
    */
-  private static @NotNull PerlValue getValueFromControlFlow(@NotNull TypeInferringContext inferringContext) {
+  private static @NotNull TypeInferringContext getValueFromControlFlow(@NotNull TypeInferringContext inferringContext) {
     var element = inferringContext.getContextElement();
     PsiElement controlFlowScope = PerlControlFlowBuilder.getControlFlowScope(element);
     if (controlFlowScope == null) {
-      return noControlFlowScopeError(element);
+      noControlFlowScopeError(element);
+      return inferringContext;
     }
     Instruction[] instructions = PerlControlFlowBuilder.getFor(controlFlowScope);
     PsiElement elementToFind = element instanceof PerlFile ? element.getContext() : element;
     int elementInstructionIndex = findElementInstruction(elementToFind, instructions, element);
     if (elementInstructionIndex < 0) {
-      return noElementInstructionError(element, controlFlowScope);
+      noElementInstructionError(element, controlFlowScope);
+      return inferringContext;
     }
     ControlFlowUtil.iteratePrev(elementInstructionIndex, instructions, currentInstruction -> {
       if (currentInstruction instanceof PerlMutationInstruction mutationInstruction) {
@@ -251,10 +253,10 @@ public final class PerlResolveUtil {
         inferringContext.addVariant(declaredValue);
       }
     }
-    return inferringContext.buildValue();
+    return inferringContext;
   }
 
-  private static PerlValue noElementInstructionError(@NotNull PsiElement element, @NotNull PsiElement controlFlowScope) {
+  private static void noElementInstructionError(@NotNull PsiElement element, @NotNull PsiElement controlFlowScope) {
     String message = "Unable to find an instruction for " +
                      element.getClass() + "; " +
                      element.getText() + "; " +
@@ -269,10 +271,9 @@ public final class PerlResolveUtil {
     else {
       LOG.warn(message);
     }
-    return UNKNOWN_VALUE;
   }
 
-  private static PerlValue noControlFlowScopeError(@NotNull PsiElement element) {
+  private static void noControlFlowScopeError(@NotNull PsiElement element) {
     VirtualFile virtualFile = PsiUtilCore.getVirtualFile(element);
     if (!(element instanceof PsiFile) || !(virtualFile instanceof VirtualFileWindow)) {
       LOG.error("Unable to find control flow scope for:" +
@@ -283,7 +284,6 @@ public final class PerlResolveUtil {
                 virtualFile + "; " +
                 PerlUtil.getParentsChain(element));
     }
-    return UNKNOWN_VALUE;
   }
 
   private static @NotNull ControlFlowUtil.Operation processAccessInstruction(@NotNull TypeInferringContext inferringContext,
