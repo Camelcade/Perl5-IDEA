@@ -1,0 +1,12 @@
+my $var;
+$var = 1;
+$var = 2;
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 29 in overwriteScalar.pl
+2
+----------
+Resolved
+----------
+2

@@ -1,0 +1,4 @@
+my $var;
+$var = 1;
+$var = 2;
+$v<caret>ar;
