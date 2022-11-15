@@ -27,6 +27,9 @@ public abstract class PerlParserLikeTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testAnnotationTypedWithTrailingComment() { doTest(); }
+
+  @Test
   public void testAnnotatedScalars() { doTest(); }
 
   @Test

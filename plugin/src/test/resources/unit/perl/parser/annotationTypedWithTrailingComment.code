@@ -1,0 +1,31 @@
+#@type $something Foo::Bar this is a comment
+#@type $something * this is a comment
+#@type $something __PACKAGE__ this is a comment
+#@type $something ArrayRef[Foo::Bar] this is a comment
+#@type $something HashRef[Foo::Bar] this is a comment
+#@type $something ArrayRef[ArrayRef[Foo::Bar]] this is a comment
+#@type $something HashRef[ArrayRef[Foo::Bar]] this is a comment
+
+#@type $1 Foo::Bar this is a comment
+#@type $:: Foo::Bar this is a comment
+#@type $^M Foo::Bar this is a comment
+#@type $= Foo::Bar this is a comment
+
+#@type Foo::Bar this is a comment
+#@type * this is a comment
+#@type __PACKAGE__ this is a comment
+#@type ArrayRef[Foo::Bar] this is a comment
+#@type HashRef[Foo::Bar] this is a comment
+#@type ArrayRef[ArrayRef[Foo::Bar]] this is a comment
+#@type HashRef[ArrayRef[Foo::Bar]] this is a comment
+
+#@returns Foo::Bar this is a comment
+#@returns * this is a comment
+#@returns __PACKAGE__ this is a comment
+#@returns ArrayRef[Foo::Bar] this is a comment
+#@returns HashRef[Foo::Bar] this is a comment
+#@returns ArrayRef[HashRef[Foo::Bar]] this is a comment
+#@returns HashRef[HashRef[Foo::Bar]] this is a comment
+
+
+

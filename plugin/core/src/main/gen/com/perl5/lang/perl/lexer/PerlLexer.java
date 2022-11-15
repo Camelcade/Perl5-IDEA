@@ -580,47 +580,47 @@ public class PerlLexer extends PerlBaseLexer {
     "\1\u01a0\6\71\2\0\1\u01a2\11\71\1\u0197\1\101\1\u0197"+
     "\1\354\1\u0197\1\104\1\u0197\1\107\13\0\1\u0197\1\154"+
     "\1\u0197\2\161\1\u0197\1\152\2\210\1\u01a4\3\210\2\211"+
-    "\1\u01a5\2\213\1\u01a5\1\u0197\1\221\1\u0197\1\0\1\u0197"+
-    "\1\233\4\10\3\0\1\u0197\1\251\1\u01a0\1\0\1\u01a6"+
+    "\1\u01a5\2\213\1\u01a6\1\u0197\1\221\1\u0197\1\0\1\u0197"+
+    "\1\233\4\10\3\0\1\u0197\1\251\1\u01a0\1\0\1\u01a7"+
     "\6\0\7\10\1\315\1\316\1\317\1\320\1\321\3\10"+
     "\1\323\4\10\1\326\10\10\1\327\6\10\1\332\7\10"+
-    "\1\u013e\1\u01a7\2\10\5\0\1\u01a8\5\0\1\u01a9\3\0"+
-    "\1\10\1\u01aa\1\0\1\u0135\1\10\1\u01ab\2\0\7\10"+
-    "\1\u01a7\7\0\1\315\1\316\1\317\1\320\1\321\3\0"+
+    "\1\u013e\1\u01a8\2\10\5\0\1\u01a9\5\0\1\u01aa\3\0"+
+    "\1\10\1\u01ab\1\0\1\u0135\1\10\1\u01ac\2\0\7\10"+
+    "\1\u01a8\7\0\1\315\1\316\1\317\1\320\1\321\3\0"+
     "\1\323\4\0\1\326\10\0\1\327\6\0\1\332\6\0"+
-    "\1\67\1\u013e\1\u01a7\4\0\1\67\1\u01aa\1\0\1\u0135"+
-    "\1\67\1\u01ab\7\67\1\71\1\u013e\1\u01a7\4\0\1\71"+
-    "\1\u01aa\1\71\1\u01ab\7\71\4\u01a7\1\0\2\u01a7\1\161"+
-    "\1\u01a7\1\u01ac\1\210\1\u01ad\1\210\1\u01ae\1\211\1\u01af"+
-    "\1\213\1\u01af\3\u01a7\2\10\2\0\1\u01a7\3\0\1\u01b0"+
+    "\1\67\1\u013e\1\u01a8\4\0\1\67\1\u01ab\1\0\1\u0135"+
+    "\1\67\1\u01ac\7\67\1\71\1\u013e\1\u01a8\4\0\1\71"+
+    "\1\u01ab\1\71\1\u01ac\7\71\4\u01a8\1\0\2\u01a8\1\161"+
+    "\1\u01a8\1\u01ad\1\210\1\u01ae\1\210\1\u01af\1\211\1\u01b0"+
+    "\1\213\1\u01b1\3\u01a8\2\10\2\0\1\u01a8\3\0\1\u01b2"+
     "\1\0\15\10\1\u0136\4\10\1\u0137\1\u0138\1\10\1\u013a"+
     "\1\10\1\u013b\4\10\1\u013c\5\10\1\u013d\10\10\3\0"+
-    "\1\u01b1\1\0\1\u01b2\3\0\1\u01b3\1\u01b4\1\10\3\0"+
-    "\1\u01b5\4\10\1\u01b6\15\0\1\u0136\4\0\1\u0137\1\u0138"+
+    "\1\u01b3\1\0\1\u01b4\3\0\1\u01b5\1\u01b6\1\10\3\0"+
+    "\1\u01b7\4\10\1\u01b8\15\0\1\u0136\4\0\1\u0137\1\u0138"+
     "\1\0\1\u013a\1\0\1\u013b\4\0\1\u013c\5\0\1\u013d"+
-    "\7\0\1\67\2\0\4\67\1\u01b6\1\71\2\0\4\71"+
-    "\1\u01b6\1\161\2\210\1\211\1\213\2\u0137\2\0\1\10"+
+    "\7\0\1\67\2\0\4\67\1\u01b8\1\71\2\0\4\71"+
+    "\1\u01b8\1\161\2\210\1\211\1\213\2\u0137\2\0\1\10"+
     "\1\u0154\1\u0155\1\u0156\1\u0157\13\10\1\u015c\4\10\1\u0160"+
     "\2\10\1\u0161\2\10\1\u0163\2\10\1\u0164\1\10\1\u0165"+
-    "\1\u0166\1\u0167\2\10\1\u0169\2\10\2\0\1\u01b7\4\0"+
+    "\1\u0166\1\u0167\2\10\1\u0169\2\10\2\0\1\u01b9\4\0"+
     "\4\10\1\0\1\u0154\1\u0155\1\u0156\1\u0157\13\0\1\u015c"+
     "\4\0\1\u0160\2\0\1\u0161\2\0\1\u0163\2\0\1\u0164"+
     "\1\0\1\u0165\1\u0166\1\u0167\2\0\1\u0169\1\0\4\67"+
-    "\4\71\1\161\1\u01b8\1\210\1\211\1\213\2\0\1\u01b9"+
+    "\4\71\1\161\1\u01ba\1\210\1\211\1\213\2\0\1\u01bb"+
     "\1\10\1\u0175\1\u0177\4\10\1\u0179\1\u017a\10\10\1\u017c"+
     "\1\10\1\u017e\1\u017f\1\10\1\u0180\1\u0182\1\10\1\u0183"+
-    "\1\u01ba\4\0\1\u01bb\2\10\1\0\1\u0175\1\u0177\4\0"+
+    "\1\u01bc\4\0\1\u01bd\2\10\1\0\1\u0175\1\u0177\4\0"+
     "\1\u0179\1\u017a\10\0\1\u017c\1\0\1\u017e\1\u017f\1\0"+
-    "\1\u0180\1\u0182\1\0\1\u0183\2\67\2\71\1\u01bc\1\210"+
-    "\2\u01bd\1\0\1\u0184\2\10\1\u0187\2\10\1\u0188\2\10"+
-    "\1\u0189\1\10\1\u018b\1\u018c\1\u018d\1\10\1\u0190\1\10"+
-    "\1\0\1\10\1\u0184\2\0\1\u0187\2\0\1\u0188\2\0"+
-    "\1\u0189\1\0\1\u018b\1\u018c\1\u018d\1\0\1\u0190\1\0"+
-    "\1\67\1\71\1\u01be\1\0\1\u019b\1\u019c\1\10\1\u019d"+
-    "\1\u019e\1\u019f\1\u01a0\1\u01a2\2\10\1\u019b\1\u019c\1\0"+
-    "\1\u019d\1\u019e\1\u019f\1\u01a0\1\u01a2\1\0\1\67\1\71"+
-    "\1\0\1\u01bf\2\0\1\u01aa\2\10\1\u01aa\1\0\1\67"+
-    "\1\71\2\u01b6";
+    "\1\u0180\1\u0182\1\0\1\u0183\2\67\2\71\1\u01be\1\210"+
+    "\1\u01bf\1\u01c0\1\0\1\u0184\2\10\1\u0187\2\10\1\u0188"+
+    "\2\10\1\u0189\1\10\1\u018b\1\u018c\1\u018d\1\10\1\u0190"+
+    "\1\10\1\0\1\10\1\u0184\2\0\1\u0187\2\0\1\u0188"+
+    "\2\0\1\u0189\1\0\1\u018b\1\u018c\1\u018d\1\0\1\u0190"+
+    "\1\0\1\67\1\71\1\u01c1\1\0\1\u019b\1\u019c\1\10"+
+    "\1\u019d\1\u019e\1\u019f\1\u01a0\1\u01a2\2\10\1\u019b\1\u019c"+
+    "\1\0\1\u019d\1\u019e\1\u019f\1\u01a0\1\u01a2\1\0\1\67"+
+    "\1\71\1\0\1\u01c2\2\0\1\u01ab\2\10\1\u01ab\1\0"+
+    "\1\67\1\71\2\u01b8";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[4906];
@@ -15222,97 +15222,97 @@ public class PerlLexer extends PerlBaseLexer {
             { return TokenType.BAD_CHARACTER;
             } 
             // fall through
-          case 448: break;
+          case 451: break;
           case 2: 
             { return getNewLineToken();
             } 
             // fall through
-          case 449: break;
+          case 452: break;
           case 3: 
             { return TokenType.WHITE_SPACE;
             } 
             // fall through
-          case 450: break;
+          case 453: break;
           case 4: 
             { return COMMENT_LINE;
             } 
             // fall through
-          case 451: break;
+          case 454: break;
           case 5: 
             { return startUnbracedVariable(AFTER_VARIABLE, SIGIL_ARRAY);
             } 
             // fall through
-          case 452: break;
+          case 455: break;
           case 6: 
             { return getLeftParen(YYINITIAL);
             } 
             // fall through
-          case 453: break;
+          case 456: break;
           case 7: 
             { yybegin(YYINITIAL);return OPERATOR_REFERENCE;
             } 
             // fall through
-          case 454: break;
+          case 457: break;
           case 8: 
             { return getIdentifierToken();
             } 
             // fall through
-          case 455: break;
+          case 458: break;
           case 9: 
             { yybegin(YYINITIAL);return OPERATOR_ASSIGN;
             } 
             // fall through
-          case 456: break;
+          case 459: break;
           case 10: 
             { yybegin(YYINITIAL);return OPERATOR_GT_NUMERIC;
             } 
             // fall through
-          case 457: break;
+          case 460: break;
           case 11: 
             { yybegin(YYINITIAL);return OPERATOR_MINUS;
             } 
             // fall through
-          case 458: break;
+          case 461: break;
           case 12: 
             { yybegin(YYINITIAL);return COLON;
             } 
             // fall through
-          case 459: break;
+          case 462: break;
           case 13: 
             { pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_Q);return captureString();
             } 
             // fall through
-          case 460: break;
+          case 463: break;
           case 14: 
             { pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QQ);return captureString();
             } 
             // fall through
-          case 461: break;
+          case 464: break;
           case 15: 
             { pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QX);return captureString();
             } 
             // fall through
-          case 462: break;
+          case 465: break;
           case 16: 
             { yybegin(AFTER_VALUE);return NUMBER;
             } 
             // fall through
-          case 463: break;
+          case 466: break;
           case 17: 
             { yybegin(YYINITIAL);return OPERATOR_CONCAT;
             } 
             // fall through
-          case 464: break;
+          case 467: break;
           case 18: 
             { yybegin(YYINITIAL);return OPERATOR_PLUS;
             } 
             // fall through
-          case 465: break;
+          case 468: break;
           case 19: 
             { return getRightParen(AFTER_VALUE);
             } 
             // fall through
-          case 466: break;
+          case 469: break;
           case 20: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -15320,32 +15320,32 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL); return OPERATOR_X;
             } 
             // fall through
-          case 467: break;
+          case 470: break;
           case 21: 
             { return startUnbracedVariable(AFTER_VARIABLE, SIGIL_GLOB);
             } 
             // fall through
-          case 468: break;
+          case 471: break;
           case 22: 
             { yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR;
             } 
             // fall through
-          case 469: break;
+          case 472: break;
           case 23: 
             { yybegin(YYINITIAL);return QUESTION;
             } 
             // fall through
-          case 470: break;
+          case 473: break;
           case 24: 
             { return getLeftBrace(YYINITIAL);
             } 
             // fall through
-          case 471: break;
+          case 474: break;
           case 25: 
             { yybegin(YYINITIAL);return OPERATOR_NOT;
             } 
             // fall through
-          case 472: break;
+          case 475: break;
           case 26: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 186;
@@ -15375,17 +15375,17 @@ public class PerlLexer extends PerlBaseLexer {
             { pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_Q);return RESERVED_Q;
             } 
             // fall through
-          case 473: break;
+          case 476: break;
           case 27: 
             { return getRightBracket(AFTER_VALUE);
             } 
             // fall through
-          case 474: break;
+          case 477: break;
           case 28: 
             { yybegin(YYINITIAL);return SEMICOLON;
             } 
             // fall through
-          case 475: break;
+          case 478: break;
           case 29: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 180;
@@ -15415,7 +15415,7 @@ public class PerlLexer extends PerlBaseLexer {
             { pushStateAndBegin(TRANS_OPENER);return RESERVED_Y;
             } 
             // fall through
-          case 476: break;
+          case 479: break;
           case 30: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 189;
@@ -15445,7 +15445,7 @@ public class PerlLexer extends PerlBaseLexer {
             { regexCommand=RESERVED_S; sectionsNumber=2; pushStateAndBegin(REGEX_OPENER); return regexCommand;
             } 
             // fall through
-          case 477: break;
+          case 480: break;
           case 31: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 188;
@@ -15475,212 +15475,212 @@ public class PerlLexer extends PerlBaseLexer {
             { regexCommand=RESERVED_M; sectionsNumber=1; pushStateAndBegin(REGEX_OPENER); return regexCommand;
             } 
             // fall through
-          case 478: break;
+          case 481: break;
           case 32: 
             { return getRightBrace(AFTER_RIGHT_BRACE);
             } 
             // fall through
-          case 479: break;
+          case 482: break;
           case 33: 
             { yybegin(YYINITIAL);return COMMA;
             } 
             // fall through
-          case 480: break;
+          case 483: break;
           case 34: 
             { return getLeftBracket(YYINITIAL);
             } 
             // fall through
-          case 481: break;
+          case 484: break;
           case 35: 
             { return startUnbracedVariable(AFTER_VARIABLE, SIGIL_CODE);
             } 
             // fall through
-          case 482: break;
+          case 485: break;
           case 36: 
             { yybegin(YYINITIAL);return OPERATOR_BITWISE_OR;
             } 
             // fall through
-          case 483: break;
+          case 486: break;
           case 37: 
             { return startUnbracedVariable(AFTER_VARIABLE, SIGIL_SCALAR);
             } 
             // fall through
-          case 484: break;
+          case 487: break;
           case 38: 
             { return startUnbracedVariable(AFTER_VARIABLE, SIGIL_HASH);
             } 
             // fall through
-          case 485: break;
+          case 488: break;
           case 39: 
             { pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_GLOB);return captureString();
             } 
             // fall through
-          case 486: break;
+          case 489: break;
           case 40: 
             { yybegin(YYINITIAL);return OPERATOR_BITWISE_NOT;
             } 
             // fall through
-          case 487: break;
+          case 490: break;
           case 41: 
             { regexCommand=RESERVED_M; sectionsNumber=1; pushStateAndBegin(AFTER_VALUE,AFTER_VALUE); return captureRegex();
             } 
             // fall through
-          case 488: break;
+          case 491: break;
           case 42: 
             { popState();yypushback(1);
             } 
             // fall through
-          case 489: break;
+          case 492: break;
           case 43: 
             { yybegin(SUBSTITUTION_CODE_OCT);return STRING_SPECIAL_LEFT_BRACE;
             } 
             // fall through
-          case 490: break;
+          case 493: break;
           case 44: 
             { yypushback(1);yybegin(SUBSTITUTION_CLOSE_BRACE);
             } 
             // fall through
-          case 491: break;
+          case 494: break;
           case 45: 
             { yybegin(SUBSTITUTION_CLOSE_BRACE);return NUMBER_OCT;
             } 
             // fall through
-          case 492: break;
+          case 495: break;
           case 46: 
             { popState();return NUMBER_OCT;
             } 
             // fall through
-          case 493: break;
+          case 496: break;
           case 47: 
             { popState();return NUMBER_HEX;
             } 
             // fall through
-          case 494: break;
+          case 497: break;
           case 48: 
             { yybegin(SUBSTITUTION_CODE);return STRING_SPECIAL_LEFT_BRACE;
             } 
             // fall through
-          case 495: break;
+          case 498: break;
           case 49: 
             { yypushback(1);popState();
             } 
             // fall through
-          case 496: break;
+          case 499: break;
           case 50: 
             { yybegin(UNICODE_SUBSTITUTION_IN_BRACE);return STRING_SPECIAL_LEFT_BRACE;
             } 
             // fall through
-          case 497: break;
+          case 500: break;
           case 51: 
             { yybegin(SUBSTITUTION_CLOSE_BRACE);return NUMBER_HEX;
             } 
             // fall through
-          case 498: break;
+          case 501: break;
           case 52: 
             { popState();return STRING_SPECIAL_RIGHT_BRACE;
             } 
             // fall through
-          case 499: break;
+          case 502: break;
           case 53: 
             { pushback();yybegin(YYINITIAL);
             } 
             // fall through
-          case 500: break;
+          case 503: break;
           case 54: 
             { return getLeftParen(LEX_HANDLE_STRICT);
             } 
             // fall through
-          case 501: break;
+          case 504: break;
           case 55: 
             { yybegin(AFTER_IDENTIFIER);return HANDLE;
             } 
             // fall through
-          case 502: break;
+          case 505: break;
           case 56: 
             { return getLeftParen(LEX_PRINT_HANDLE_STRICT);
             } 
             // fall through
-          case 503: break;
+          case 506: break;
           case 57: 
             { yybegin(YYINITIAL);return HANDLE;
             } 
             // fall through
-          case 504: break;
+          case 507: break;
           case 58: 
             { return COMMENT_BLOCK;
             } 
             // fall through
-          case 505: break;
+          case 508: break;
           case 59: 
             { 
             } 
             // fall through
-          case 506: break;
+          case 509: break;
           case 60: 
             { return captureString();
             } 
             // fall through
-          case 507: break;
+          case 510: break;
           case 61: 
             { setNoSharpState(); return TokenType.WHITE_SPACE;
             } 
             // fall through
-          case 508: break;
+          case 511: break;
           case 62: 
             { return captureTr();
             } 
             // fall through
-          case 509: break;
+          case 512: break;
           case 63: 
             { return captureRegex();
             } 
             // fall through
-          case 510: break;
+          case 513: break;
           case 64: 
             { yybegin(YYINITIAL);pushback();
             } 
             // fall through
-          case 511: break;
+          case 514: break;
           case 65: 
             { yybegin(VERSION_OR_OPERAND_USE);return registerUse();
             } 
             // fall through
-          case 512: break;
+          case 515: break;
           case 66: 
             { yybegin(YYINITIAL);return NUMBER_VERSION;
             } 
             // fall through
-          case 513: break;
+          case 516: break;
           case 67: 
             { yypushback(1);yybegin(YYINITIAL);
             } 
             // fall through
-          case 514: break;
+          case 517: break;
           case 68: 
             { return STRING_CONTENT;
             } 
             // fall through
-          case 515: break;
+          case 518: break;
           case 69: 
             { return getRightBrace(AFTER_VARIABLE);
             } 
             // fall through
-          case 516: break;
+          case 519: break;
           case 70: 
             { yybegin(BAREWORD_USE);return NUMBER_VERSION;
             } 
             // fall through
-          case 517: break;
+          case 520: break;
           case 71: 
             { yybegin(VERSION_OR_OPERAND);return registerPackage(PACKAGE);
             } 
             // fall through
-          case 518: break;
+          case 521: break;
           case 72: 
             { yybegin(STRING_Q_CONTINUE);
             } 
             // fall through
-          case 519: break;
+          case 522: break;
           case 73: 
             { IElementType tokenType = getSQBackSlashTokenType();
         if( tokenType == STRING_CONTENT){
@@ -15692,12 +15692,12 @@ public class PerlLexer extends PerlBaseLexer {
         }
             } 
             // fall through
-          case 520: break;
+          case 523: break;
           case 74: 
             { yybegin(STRING_Q_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;
             } 
             // fall through
-          case 521: break;
+          case 524: break;
           case 75: 
             { IElementType tokenType = getSQBackSlashTokenType();
           if( tokenType == STRING_SPECIAL_ESCAPE_CHAR){
@@ -15707,7 +15707,7 @@ public class PerlLexer extends PerlBaseLexer {
           }
             } 
             // fall through
-          case 522: break;
+          case 525: break;
           case 76: 
             { IElementType tokenType = getSQBackSlashTokenType();
     if( tokenType == STRING_SPECIAL_ESCAPE_CHAR){
@@ -15716,433 +15716,433 @@ public class PerlLexer extends PerlBaseLexer {
     return tokenType;
             } 
             // fall through
-          case 523: break;
+          case 526: break;
           case 77: 
             { yybegin(STRING_LIST);return STRING_CONTENT;
             } 
             // fall through
-          case 524: break;
+          case 527: break;
           case 78: 
             { return STRING_CONTENT_QQ;
             } 
             // fall through
-          case 525: break;
+          case 528: break;
           case 79: 
             { yybegin(STRING_QQ_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;
             } 
             // fall through
-          case 526: break;
+          case 529: break;
           case 80: 
             { yybegin(STRING_QQ);return STRING_CONTENT_QQ;
             } 
             // fall through
-          case 527: break;
+          case 530: break;
           case 81: 
             { yybegin(STRING_QQ_RESTRICTED);return STRING_CONTENT_QQ;
             } 
             // fall through
-          case 528: break;
+          case 531: break;
           case 82: 
             { yybegin(STRING_RE_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;
             } 
             // fall through
-          case 529: break;
+          case 532: break;
           case 83: 
             { yybegin(STRING_RE);return STRING_CONTENT_QQ;
             } 
             // fall through
-          case 530: break;
+          case 533: break;
           case 84: 
             { return STRING_CONTENT_XQ;
             } 
             // fall through
-          case 531: break;
+          case 534: break;
           case 85: 
             { yybegin(STRING_QX_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;
             } 
             // fall through
-          case 532: break;
+          case 535: break;
           case 86: 
             { yybegin(STRING_QX);return STRING_CONTENT_XQ;
             } 
             // fall through
-          case 533: break;
+          case 536: break;
           case 87: 
             { yybegin(STRING_QX_RESTRICTED);return STRING_CONTENT_XQ;
             } 
             // fall through
-          case 534: break;
+          case 537: break;
           case 88: 
             { yypushback(1);yybegin(STRING_TR);
             } 
             // fall through
-          case 535: break;
+          case 538: break;
           case 89: 
             { yybegin(STRING_TR);return STRING_CONTENT_QQ;
             } 
             // fall through
-          case 536: break;
+          case 539: break;
           case 90: 
             { yybegin(STRING_TR_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;
             } 
             // fall through
-          case 537: break;
+          case 540: break;
           case 91: 
             { return REGEX_TOKEN;
             } 
             // fall through
-          case 538: break;
+          case 541: break;
           case 92: 
             { pushStateAndBegin(REGEX_CHARCLASS_X);return REGEX_TOKEN;
             } 
             // fall through
-          case 539: break;
+          case 542: break;
           case 93: 
             { pushStateAndBegin(REGEX_CHARCLASS_XX);return REGEX_TOKEN;
             } 
             // fall through
-          case 540: break;
+          case 543: break;
           case 94: 
             { popState();return REGEX_TOKEN;
             } 
             // fall through
-          case 541: break;
+          case 544: break;
           case 95: 
             { popState();
               return startBracedBlock();
             } 
             // fall through
-          case 542: break;
+          case 545: break;
           case 96: 
             { yybegin(YYINITIAL); return getLeftBrace();
             } 
             // fall through
-          case 543: break;
+          case 546: break;
           case 97: 
             { pushStateAndBegin(AFTER_VALUE, SUB_DECLARATION_CONTENT);yypushback(1);
             } 
             // fall through
-          case 544: break;
+          case 547: break;
           case 98: 
             { pushStateAndBegin(YYINITIAL, SUB_DECLARATION_CONTENT);return getIdentifierTokenWithoutIndex();
             } 
             // fall through
-          case 545: break;
+          case 548: break;
           case 99: 
             { pushStateAndBegin(YYINITIAL,METHOD_DECLARATION_CONTENT);return getIdentifierTokenWithoutIndex();
             } 
             // fall through
-          case 546: break;
+          case 549: break;
           case 100: 
             { popState();yypushback(1);yybegin(YYINITIAL);
             } 
             // fall through
-          case 547: break;
+          case 550: break;
           case 101: 
             { return startParethesizedBlock(SUB_ATTRIBUTES, YYINITIAL, SUB_SIGNATURE);
             } 
             // fall through
-          case 548: break;
+          case 551: break;
           case 102: 
             { yybegin(SUB_ATTRIBUTES);pushState();yybegin(SUB_ATTRIBUTE);return COLON;
             } 
             // fall through
-          case 549: break;
+          case 552: break;
           case 103: 
             { popState(); return getLeftBrace();
             } 
             // fall through
-          case 550: break;
+          case 553: break;
           case 104: 
             { return SUB_PROTOTYPE_TOKEN;
             } 
             // fall through
-          case 551: break;
+          case 554: break;
           case 105: 
             { return getRightParen(SUB_ATTRIBUTES);
             } 
             // fall through
-          case 552: break;
+          case 555: break;
           case 106: 
             { return ATTRIBUTE_IDENTIFIER;
             } 
             // fall through
-          case 553: break;
+          case 556: break;
           case 107: 
             { yybegin(YYINITIAL);yypushback(1);break;
             } 
             // fall through
-          case 554: break;
+          case 557: break;
           case 108: 
             { return HANDLE;
             } 
             // fall through
-          case 555: break;
+          case 558: break;
           case 109: 
             { yybegin(AFTER_IDENTIFIER);return RIGHT_ANGLE;
             } 
             // fall through
-          case 556: break;
+          case 559: break;
           case 110: 
             { yypushback(1);yybegin(AFTER_VARIABLE);
             } 
             // fall through
-          case 557: break;
+          case 560: break;
           case 111: 
             { return startUnbracedVariable(VAR_ATTRIBUTES_START, SIGIL_ARRAY);
             } 
             // fall through
-          case 558: break;
+          case 561: break;
           case 112: 
             { return startParethesizedBlock(VAR_ATTRIBUTES_START, YYINITIAL);
             } 
             // fall through
-          case 559: break;
+          case 562: break;
           case 113: 
             { yybegin(VARIABLE_DECLARATION_STRICT);return PACKAGE;
             } 
             // fall through
-          case 560: break;
+          case 563: break;
           case 114: 
             { return startUnbracedVariable(VAR_ATTRIBUTES_START, SIGIL_SCALAR);
             } 
             // fall through
-          case 561: break;
+          case 564: break;
           case 115: 
             { return startUnbracedVariable(VAR_ATTRIBUTES_START, SIGIL_HASH);
             } 
             // fall through
-          case 562: break;
+          case 565: break;
           case 116: 
             { return COLON;
             } 
             // fall through
-          case 563: break;
+          case 566: break;
           case 117: 
             { yybegin(VAR_ATTRIBUTES); return COLON;
             } 
             // fall through
-          case 564: break;
+          case 567: break;
           case 118: 
             { return captureQuotedHeredocMarker(HEREDOC, QUOTE_LIKE_OPENER_Q, false);
             } 
             // fall through
-          case 565: break;
+          case 568: break;
           case 119: 
             { return captureQuotedHeredocMarker(HEREDOC_QQ, QUOTE_LIKE_OPENER_QQ, false);
             } 
             // fall through
-          case 566: break;
+          case 569: break;
           case 120: 
             { return captureQuotedHeredocMarker(HEREDOC_QX, QUOTE_LIKE_OPENER_QX, false);
             } 
             // fall through
-          case 567: break;
+          case 570: break;
           case 121: 
             { yybegin(BACKREF_HEREDOC_OPENER);return OPERATOR_REFERENCE;
             } 
             // fall through
-          case 568: break;
+          case 571: break;
           case 122: 
             { return captureBareHeredocMarker(HEREDOC_QQ, false);
             } 
             // fall through
-          case 569: break;
+          case 572: break;
           case 123: 
             { return captureBareHeredocMarker(HEREDOC, false);
             } 
             // fall through
-          case 570: break;
+          case 573: break;
           case 124: 
             { return captureQuotedHeredocMarker(HEREDOC, QUOTE_LIKE_OPENER_Q, true);
             } 
             // fall through
-          case 571: break;
+          case 574: break;
           case 125: 
             { return captureQuotedHeredocMarker(HEREDOC_QQ, QUOTE_LIKE_OPENER_QQ, true);
             } 
             // fall through
-          case 572: break;
+          case 575: break;
           case 126: 
             { return captureQuotedHeredocMarker(HEREDOC_QX, QUOTE_LIKE_OPENER_QX, true);
             } 
             // fall through
-          case 573: break;
+          case 576: break;
           case 127: 
             { yybegin(BACKREF_HEREDOC_OPENER_INDENTABLE);return OPERATOR_REFERENCE;
             } 
             // fall through
-          case 574: break;
+          case 577: break;
           case 128: 
             { return captureBareHeredocMarker(HEREDOC_QQ, true);
             } 
             // fall through
-          case 575: break;
+          case 578: break;
           case 129: 
             { return captureBareHeredocMarker(HEREDOC, true);
             } 
             // fall through
-          case 576: break;
+          case 579: break;
           case 130: 
             { return startUnbracedVariable(SIGIL_ARRAY);
             } 
             // fall through
-          case 577: break;
+          case 580: break;
           case 131: 
             { return startUnbracedVariable(SIGIL_GLOB);
             } 
             // fall through
-          case 578: break;
+          case 581: break;
           case 132: 
             { return startUnbracedVariable(SIGIL_CODE);
             } 
             // fall through
-          case 579: break;
+          case 582: break;
           case 133: 
             { return startUnbracedVariable(SIGIL_SCALAR);
             } 
             // fall through
-          case 580: break;
+          case 583: break;
           case 134: 
             { return startUnbracedVariable(SIGIL_HASH);
             } 
             // fall through
-          case 581: break;
+          case 584: break;
           case 135: 
             { yypushback(1);yybegin(ANNOTATION_FALLBACK);
             } 
             // fall through
-          case 582: break;
+          case 585: break;
           case 136: 
             { yybegin(ANNOTATION_FALLBACK);return ANNOTATION_UNKNOWN_KEY;
             } 
             // fall through
-          case 583: break;
+          case 586: break;
           case 137: 
             { yybegin(ANNOTATION_FALLBACK);return PACKAGE;
             } 
             // fall through
-          case 584: break;
+          case 587: break;
           case 138: 
             { yybegin(ANNOTATION_FALLBACK);return OPERATOR_MUL;
             } 
             // fall through
-          case 585: break;
+          case 588: break;
           case 139: 
             { return PACKAGE;
             } 
             // fall through
-          case 586: break;
+          case 589: break;
           case 140: 
             { return OPERATOR_MUL;
             } 
             // fall through
-          case 587: break;
+          case 590: break;
           case 141: 
             { popState();return RIGHT_BRACKET;
             } 
             // fall through
-          case 588: break;
+          case 591: break;
           case 142: 
             { return LEFT_BRACKET;
             } 
             // fall through
-          case 589: break;
+          case 592: break;
           case 143: 
             { yybegin(ANNOTATION_FALLBACK);return STRING_CONTENT;
             } 
             // fall through
-          case 590: break;
+          case 593: break;
           case 144: 
             { yybegin(YYINITIAL);return COMMENT_LINE;
             } 
             // fall through
-          case 591: break;
+          case 594: break;
           case 145: 
             { return getUnbracedVariableNameToken();
             } 
             // fall through
-          case 592: break;
+          case 595: break;
           case 146: 
             { return startBracedVariable();
             } 
             // fall through
-          case 593: break;
+          case 596: break;
           case 147: 
             { yybegin(AFTER_POSSIBLE_SIGIL);return OPERATOR_MUL;
             } 
             // fall through
-          case 594: break;
+          case 597: break;
           case 148: 
             { return startBracedBlock(AFTER_VARIABLE);
             } 
             // fall through
-          case 595: break;
+          case 598: break;
           case 149: 
             { return startBracketedBlock(AFTER_VARIABLE);
             } 
             // fall through
-          case 596: break;
+          case 599: break;
           case 150: 
             { yybegin(AFTER_POSSIBLE_SIGIL);return OPERATOR_BITWISE_AND;
             } 
             // fall through
-          case 597: break;
+          case 600: break;
           case 151: 
             { yybegin(AFTER_POSSIBLE_SIGIL);return OPERATOR_MOD;
             } 
             // fall through
-          case 598: break;
+          case 601: break;
           case 152: 
             { yybegin(YYINITIAL);return OPERATOR_LT_NUMERIC;
             } 
             // fall through
-          case 599: break;
+          case 602: break;
           case 153: 
             { yybegin(YYINITIAL);return OPERATOR_DIV;
             } 
             // fall through
-          case 600: break;
+          case 603: break;
           case 154: 
             { yybegin(AFTER_VARIABLE); return SIGIL_ARRAY;
             } 
             // fall through
-          case 601: break;
+          case 604: break;
           case 155: 
             { yybegin(AFTER_VALUE);return getIdentifierTokenWithoutIndex();
             } 
             // fall through
-          case 602: break;
+          case 605: break;
           case 156: 
             { yybegin(AFTER_VARIABLE); return SIGIL_GLOB;
             } 
             // fall through
-          case 603: break;
+          case 606: break;
           case 157: 
             { yybegin(AFTER_VARIABLE); return SIGIL_CODE;
             } 
             // fall through
-          case 604: break;
+          case 607: break;
           case 158: 
             { yybegin(AFTER_VARIABLE); return SIGIL_HASH;
             } 
             // fall through
-          case 605: break;
+          case 608: break;
           case 159: 
             { yybegin(CAPTURE_FORMAT_NON_EMPTY);
             } 
             // fall through
-          case 606: break;
+          case 609: break;
           case 160: 
             { yybegin(YYINITIAL);return FORMAT_TERMINATOR;
             } 
             // fall through
-          case 607: break;
+          case 610: break;
           case 161: 
             { yypushback(1);yybegin(CAPTURE_FORMAT);return FORMAT;
             } 
             // fall through
-          case 608: break;
+          case 611: break;
           case 162: 
             { if( isCloseMarker()){
 			PerlHeredocQueueElement currentHeredoc = heredocQueue.poll();
@@ -16161,12 +16161,12 @@ public class PerlLexer extends PerlBaseLexer {
 		}
             } 
             // fall through
-          case 609: break;
+          case 612: break;
           case 163: 
             { yybegin(CAPTURE_NON_EMPTY_HEREDOC);
             } 
             // fall through
-          case 610: break;
+          case 613: break;
           case 164: 
             { if( isCloseMarker())
 		{
@@ -16176,17 +16176,17 @@ public class PerlLexer extends PerlBaseLexer {
 		}
             } 
             // fall through
-          case 611: break;
+          case 614: break;
           case 165: 
             { popState();return HEREDOC_END_INDENTABLE;
             } 
             // fall through
-          case 612: break;
+          case 615: break;
           case 166: 
             { yybegin(CAPTURE_NON_EMPTY_HEREDOC_WITH_EMPTY_MARKER);
             } 
             // fall through
-          case 613: break;
+          case 616: break;
           case 167: 
             { heredocQueue.poll();
 		popState();
@@ -16198,22 +16198,22 @@ public class PerlLexer extends PerlBaseLexer {
 		return HEREDOC_END;
             } 
             // fall through
-          case 614: break;
+          case 617: break;
           case 168: 
             { yypushback(1);yybegin(CAPTURE_HEREDOC_WITH_EMPTY_MARKER);return heredocQueue.peek().getTargetElement();
             } 
             // fall through
-          case 615: break;
+          case 618: break;
           case 169: 
             { yybegin(YYINITIAL);return IDENTIFIER;
             } 
             // fall through
-          case 616: break;
+          case 619: break;
           case 170: 
             { popState();return SUB_NAME;
             } 
             // fall through
-          case 617: break;
+          case 620: break;
           case 171: 
             { if( isLastChar()){
                       pushback();popState();
@@ -16223,7 +16223,7 @@ public class PerlLexer extends PerlBaseLexer {
                     }
             } 
             // fall through
-          case 618: break;
+          case 621: break;
           case 172: 
             { if( isLastChar()){
                       pushback();popState();
@@ -16233,122 +16233,122 @@ public class PerlLexer extends PerlBaseLexer {
                     }
             } 
             // fall through
-          case 619: break;
+          case 622: break;
           case 173: 
             { return startBracedBlock(AFTER_TRY_BLOCK);
             } 
             // fall through
-          case 620: break;
+          case 623: break;
           case 174: 
             { yypushback(1);yybegin(AFTER_VALUE);
             } 
             // fall through
-          case 621: break;
+          case 624: break;
           case 175: 
             { return startBracedBlock(AFTER_TRY_TRYCATCH_BLOCK);
             } 
             // fall through
-          case 622: break;
+          case 625: break;
           case 176: 
             { return startBracedBlock(YYINITIAL);
             } 
             // fall through
-          case 623: break;
+          case 626: break;
           case 177: 
             { return startBracedBlock(AFTER_EXCEPT_BLOCK);
             } 
             // fall through
-          case 624: break;
+          case 627: break;
           case 178: 
             { return startBracedBlock(AFTER_OTHERWISE_BLOCK);
             } 
             // fall through
-          case 625: break;
+          case 628: break;
           case 179: 
             { return startBracedBlock(AFTER_CONTINUATION_BLOCK);
             } 
             // fall through
-          case 626: break;
+          case 629: break;
           case 180: 
             { return startParethesizedBlock(BEFORE_CATCH_BLOCK, CATCH_PACKAGE);
             } 
             // fall through
-          case 627: break;
+          case 630: break;
           case 181: 
             { return startBracedBlock(AFTER_CATCH_BLOCK);
             } 
             // fall through
-          case 628: break;
+          case 631: break;
           case 182: 
             { yybegin(YYINITIAL);return PACKAGE;
             } 
             // fall through
-          case 629: break;
+          case 632: break;
           case 183: 
             { return startBracedBlock(AFTER_FINALLY_BLOCK);
             } 
             // fall through
-          case 630: break;
+          case 633: break;
           case 184: 
             { popState();return PACKAGE;
             } 
             // fall through
-          case 631: break;
+          case 634: break;
           case 185: 
             { yybegin(YYINITIAL);return OPERATOR_EQ_NUMERIC;
             } 
             // fall through
-          case 632: break;
+          case 635: break;
           case 186: 
             { yybegin(YYINITIAL);return FAT_COMMA;
             } 
             // fall through
-          case 633: break;
+          case 636: break;
           case 187: 
             { yybegin(YYINITIAL);return OPERATOR_RE;
             } 
             // fall through
-          case 634: break;
+          case 637: break;
           case 188: 
             { yybegin(YYINITIAL);return OPERATOR_GE_NUMERIC;
             } 
             // fall through
-          case 635: break;
+          case 638: break;
           case 189: 
             { yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT;
             } 
             // fall through
-          case 636: break;
+          case 639: break;
           case 190: 
             { yybegin(YYINITIAL);return OPERATOR_MINUS_ASSIGN;
             } 
             // fall through
-          case 637: break;
+          case 640: break;
           case 191: 
             { yybegin(AFTER_DEREFERENCE); return OPERATOR_DEREFERENCE;
             } 
             // fall through
-          case 638: break;
+          case 641: break;
           case 192: 
             { yybegin(YYINITIAL);return OPERATOR_MINUS_MINUS;
             } 
             // fall through
-          case 639: break;
+          case 642: break;
           case 193: 
             { yybegin(AFTER_VALUE);return NUMBER_VERSION;
             } 
             // fall through
-          case 640: break;
+          case 643: break;
           case 194: 
             { yybegin(YYINITIAL);return OPERATOR_CONCAT_ASSIGN;
             } 
             // fall through
-          case 641: break;
+          case 644: break;
           case 195: 
             { yybegin(YYINITIAL);return OPERATOR_FLIP_FLOP;
             } 
             // fall through
-          case 642: break;
+          case 645: break;
           case 196: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16356,27 +16356,27 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL); return OPERATOR_EQ_STR;
             } 
             // fall through
-          case 643: break;
+          case 646: break;
           case 197: 
             { yybegin(YYINITIAL);return OPERATOR_PLUS_ASSIGN;
             } 
             // fall through
-          case 644: break;
+          case 647: break;
           case 198: 
             { yybegin(YYINITIAL);return OPERATOR_PLUS_PLUS;
             } 
             // fall through
-          case 645: break;
+          case 648: break;
           case 199: 
             { yybegin(AFTER_VALUE);return NUMBER_OCT;
             } 
             // fall through
-          case 646: break;
+          case 649: break;
           case 200: 
             { yybegin(YYINITIAL);return OPERATOR_X_ASSIGN;
             } 
             // fall through
-          case 647: break;
+          case 650: break;
           case 201: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 172;
@@ -16406,27 +16406,27 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL); return IDENTIFIER;
             } 
             // fall through
-          case 648: break;
+          case 651: break;
           case 202: 
             { yybegin(YYINITIAL);return OPERATOR_BITWISE_XOR_ASSIGN;
             } 
             // fall through
-          case 649: break;
+          case 652: break;
           case 203: 
             { yybegin(YYINITIAL);return OPERATOR_NE_NUMERIC;
             } 
             // fall through
-          case 650: break;
+          case 653: break;
           case 204: 
             { yybegin(YYINITIAL);return OPERATOR_NOT_RE;
             } 
             // fall through
-          case 651: break;
+          case 654: break;
           case 205: 
             { yybegin(YYINITIAL); return RESERVED_DO;
             } 
             // fall through
-          case 652: break;
+          case 655: break;
           case 206: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 185;
@@ -16456,7 +16456,7 @@ public class PerlLexer extends PerlBaseLexer {
             { pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QX);return RESERVED_QX;
             } 
             // fall through
-          case 653: break;
+          case 656: break;
           case 207: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 184;
@@ -16486,7 +16486,7 @@ public class PerlLexer extends PerlBaseLexer {
             { pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QQ);return RESERVED_QQ;
             } 
             // fall through
-          case 654: break;
+          case 657: break;
           case 208: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 187;
@@ -16516,7 +16516,7 @@ public class PerlLexer extends PerlBaseLexer {
             { regexCommand=RESERVED_QR; sectionsNumber=1; pushStateAndBegin(REGEX_OPENER); return regexCommand;
             } 
             // fall through
-          case 655: break;
+          case 658: break;
           case 209: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 183;
@@ -16546,12 +16546,12 @@ public class PerlLexer extends PerlBaseLexer {
             { pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QW);return RESERVED_QW;
             } 
             // fall through
-          case 656: break;
+          case 659: break;
           case 210: 
             { yybegin(AFTER_IDENTIFIER);return BUILTIN_UNARY;
             } 
             // fall through
-          case 657: break;
+          case 660: break;
           case 211: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 182;
@@ -16581,12 +16581,12 @@ public class PerlLexer extends PerlBaseLexer {
             { pushStateAndBegin(TRANS_OPENER);return RESERVED_TR;
             } 
             // fall through
-          case 658: break;
+          case 661: break;
           case 212: 
             { yybegin(YYINITIAL); return OPERATOR_OR_LP;
             } 
             // fall through
-          case 659: break;
+          case 662: break;
           case 213: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16594,17 +16594,17 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL); return OPERATOR_NE_STR;
             } 
             // fall through
-          case 660: break;
+          case 663: break;
           case 214: 
             { yybegin(PACKAGE_ARGUMENTS); return RESERVED_NO;
             } 
             // fall through
-          case 661: break;
+          case 664: break;
           case 215: 
             { yybegin(VARIABLE_DECLARATION); return RESERVED_MY;
             } 
             // fall through
-          case 662: break;
+          case 665: break;
           case 216: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16612,7 +16612,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL); return OPERATOR_LE_STR;
             } 
             // fall through
-          case 663: break;
+          case 666: break;
           case 217: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16620,12 +16620,12 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL); return OPERATOR_LT_STR;
             } 
             // fall through
-          case 664: break;
+          case 667: break;
           case 218: 
             { yybegin(YYINITIAL); return RESERVED_IF;
             } 
             // fall through
-          case 665: break;
+          case 668: break;
           case 219: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16633,7 +16633,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL); return OPERATOR_GE_STR;
             } 
             // fall through
-          case 666: break;
+          case 669: break;
           case 220: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16641,37 +16641,37 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL); return OPERATOR_GT_STR;
             } 
             // fall through
-          case 667: break;
+          case 670: break;
           case 221: 
             { yybegin(YYINITIAL);return OPERATOR_BITWISE_AND;
             } 
             // fall through
-          case 668: break;
+          case 671: break;
           case 222: 
             { yybegin(YYINITIAL);return OPERATOR_AND;
             } 
             // fall through
-          case 669: break;
+          case 672: break;
           case 223: 
             { yybegin(YYINITIAL);return OPERATOR_BITWISE_OR_ASSIGN;
             } 
             // fall through
-          case 670: break;
+          case 673: break;
           case 224: 
             { yybegin(YYINITIAL);return OPERATOR_OR;
             } 
             // fall through
-          case 671: break;
+          case 674: break;
           case 225: 
             { return startUnbracedVariable(AFTER_VARIABLE, SIGIL_SCALAR_INDEX);
             } 
             // fall through
-          case 672: break;
+          case 675: break;
           case 226: 
             { yybegin(YYINITIAL);return OPERATOR_LE_NUMERIC;
             } 
             // fall through
-          case 673: break;
+          case 676: break;
           case 227: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16679,27 +16679,27 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(HANDLE_WITH_ANGLE);return LEFT_ANGLE;
             } 
             // fall through
-          case 674: break;
+          case 677: break;
           case 228: 
             { yybegin(YYINITIAL);setHeredocLike(true);return OPERATOR_SHIFT_LEFT;
             } 
             // fall through
-          case 675: break;
+          case 678: break;
           case 229: 
             { yybegin(POD_STATE);
             } 
             // fall through
-          case 676: break;
+          case 679: break;
           case 230: 
             { yybegin(SUBSTITUTION_CLOSE_BRACE);return STRING_CHAR_NAME;
             } 
             // fall through
-          case 677: break;
+          case 680: break;
           case 231: 
             { yybegin(SUBSTITUTION_CODE);return STRING_SPECIAL_UNICODE_CODE_PREFIX;
             } 
             // fall through
-          case 678: break;
+          case 681: break;
           case 232: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 174;
@@ -16729,7 +16729,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL);pushback();
             } 
             // fall through
-          case 679: break;
+          case 682: break;
           case 233: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 174;
@@ -16759,12 +16759,12 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL);pushback();
             } 
             // fall through
-          case 680: break;
+          case 683: break;
           case 234: 
             { yybegin(ENDLESS_POD_STATE);
             } 
             // fall through
-          case 681: break;
+          case 684: break;
           case 235: 
             // lookahead expression with fixed lookahead length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16772,17 +16772,17 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL);return getIdentifierToken();
             } 
             // fall through
-          case 682: break;
+          case 685: break;
           case 236: 
             { yybegin(AFTER_IDENTIFIER);return PACKAGE;
             } 
             // fall through
-          case 683: break;
+          case 686: break;
           case 237: 
             { yybegin(YYINITIAL); return STRING_CONTENT;
             } 
             // fall through
-          case 684: break;
+          case 687: break;
           case 238: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16790,22 +16790,22 @@ public class PerlLexer extends PerlBaseLexer {
             { pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_ARRAY);
             } 
             // fall through
-          case 685: break;
+          case 688: break;
           case 239: 
             { return STRING_SPECIAL_MODIFIER_END;
             } 
             // fall through
-          case 686: break;
+          case 689: break;
           case 240: 
             { return STRING_SPECIAL_ESCAPE;
             } 
             // fall through
-          case 687: break;
+          case 690: break;
           case 241: 
             { return STRING_SPECIAL_ALARM;
             } 
             // fall through
-          case 688: break;
+          case 691: break;
           case 242: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16813,82 +16813,82 @@ public class PerlLexer extends PerlBaseLexer {
             { pushState();yybegin(OCT_SUBSTITUTION_AMBIGUOUS);return STRING_SPECIAL_OCT_AMBIGUOUS;
             } 
             // fall through
-          case 689: break;
+          case 692: break;
           case 243: 
             { pushState();yybegin(HEX_SUBSTITUTION);return STRING_SPECIAL_HEX;
             } 
             // fall through
-          case 690: break;
+          case 693: break;
           case 244: 
             { return STRING_SPECIAL_BACKSPACE;
             } 
             // fall through
-          case 691: break;
+          case 694: break;
           case 245: 
             { return STRING_SPECIAL_FOLDCASE_START;
             } 
             // fall through
-          case 692: break;
+          case 695: break;
           case 246: 
             { pushState();yybegin(UNICODE_SUBSTITUTION);return STRING_SPECIAL_UNICODE;
             } 
             // fall through
-          case 693: break;
+          case 696: break;
           case 247: 
             { return STRING_SPECIAL_SUBST;
             } 
             // fall through
-          case 694: break;
+          case 697: break;
           case 248: 
             { return STRING_SPECIAL_TCFIRST;
             } 
             // fall through
-          case 695: break;
+          case 698: break;
           case 249: 
             { return STRING_SPECIAL_TAB;
             } 
             // fall through
-          case 696: break;
+          case 699: break;
           case 250: 
             { return STRING_SPECIAL_UPPERCASE_START;
             } 
             // fall through
-          case 697: break;
+          case 700: break;
           case 251: 
             { return STRING_SPECIAL_LOWERCASE_START;
             } 
             // fall through
-          case 698: break;
+          case 701: break;
           case 252: 
             { return STRING_SPECIAL_RETURN;
             } 
             // fall through
-          case 699: break;
+          case 702: break;
           case 253: 
             { return STRING_SPECIAL_FORMFEED;
             } 
             // fall through
-          case 700: break;
+          case 703: break;
           case 254: 
             { pushState();yybegin(OCT_SUBSTITUTION);return STRING_SPECIAL_OCT;
             } 
             // fall through
-          case 701: break;
+          case 704: break;
           case 255: 
             { return STRING_SPECIAL_NEWLINE;
             } 
             // fall through
-          case 702: break;
+          case 705: break;
           case 256: 
             { return STRING_SPECIAL_LCFIRST;
             } 
             // fall through
-          case 703: break;
+          case 706: break;
           case 257: 
             { return STRING_SPECIAL_QUOTE_START;
             } 
             // fall through
-          case 704: break;
+          case 707: break;
           case 258: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16896,7 +16896,7 @@ public class PerlLexer extends PerlBaseLexer {
             { pushState();yybegin(INTERPOLATED_VARIABLE_SUFFIX);return startUnbracedVariable(SIGIL_SCALAR);
             } 
             // fall through
-          case 705: break;
+          case 708: break;
           case 259: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16904,12 +16904,12 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(STRING_QQ_RESTRICTED_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;
             } 
             // fall through
-          case 706: break;
+          case 709: break;
           case 260: 
             { return STRING_SPECIAL_BACKREF;
             } 
             // fall through
-          case 707: break;
+          case 710: break;
           case 261: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16917,7 +16917,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(STRING_QX_RESTRICTED_CHAR);return STRING_SPECIAL_ESCAPE_CHAR;
             } 
             // fall through
-          case 708: break;
+          case 711: break;
           case 262: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16925,7 +16925,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(STRING_TR_NOT_MINUS);return STRING_SPECIAL_RANGE;
             } 
             // fall through
-          case 709: break;
+          case 712: break;
           case 263: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16933,12 +16933,12 @@ public class PerlLexer extends PerlBaseLexer {
             { return REGEX_TOKEN;
             } 
             // fall through
-          case 710: break;
+          case 713: break;
           case 264: 
             { pushStateAndBegin(REGEX_QUOTED_X);return REGEX_TOKEN;
             } 
             // fall through
-          case 711: break;
+          case 714: break;
           case 265: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16946,7 +16946,7 @@ public class PerlLexer extends PerlBaseLexer {
             { return startParethesizedBlock(SUB_ATTRIBUTES, SUB_PROTOTYPE);
             } 
             // fall through
-          case 712: break;
+          case 715: break;
           case 266: 
             // lookahead expression with fixed lookahead length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16954,32 +16954,32 @@ public class PerlLexer extends PerlBaseLexer {
             { pushState();yybegin(QUOTE_LIKE_OPENER_Q);return ATTRIBUTE_IDENTIFIER;
             } 
             // fall through
-          case 713: break;
+          case 716: break;
           case 267: 
             { return startUnbracedVariable(SIGIL_SCALAR_INDEX);
             } 
             // fall through
-          case 714: break;
+          case 717: break;
           case 268: 
             { yybegin(ANNOTATION_KEY);
             } 
             // fall through
-          case 715: break;
+          case 718: break;
           case 269: 
             { yybegin(ANNOTATION_TYPE_AFTER_VAR);return ANNOTATION_ARRAY;
             } 
             // fall through
-          case 716: break;
+          case 719: break;
           case 270: 
             { yybegin(ANNOTATION_TYPE_AFTER_VAR);return ANNOTATION_SCALAR;
             } 
             // fall through
-          case 717: break;
+          case 720: break;
           case 271: 
             { yybegin(ANNOTATION_TYPE_AFTER_VAR);return ANNOTATION_HASH;
             } 
             // fall through
-          case 718: break;
+          case 721: break;
           case 272: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16987,7 +16987,7 @@ public class PerlLexer extends PerlBaseLexer {
             { return processUnbracedScalarSigil();
             } 
             // fall through
-          case 719: break;
+          case 722: break;
           case 273: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -16995,7 +16995,7 @@ public class PerlLexer extends PerlBaseLexer {
             { return getUnbracedVariableNameToken();
             } 
             // fall through
-          case 720: break;
+          case 723: break;
           case 274: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 169;
@@ -17025,12 +17025,12 @@ public class PerlLexer extends PerlBaseLexer {
             { return getBracedVariableNameToken();
             } 
             // fall through
-          case 721: break;
+          case 724: break;
           case 275: 
             { yybegin(AFTER_VALUE);return OPERATOR_MINUS_MINUS;
             } 
             // fall through
-          case 722: break;
+          case 725: break;
           case 276: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17038,47 +17038,47 @@ public class PerlLexer extends PerlBaseLexer {
             { return OPERATOR_CONCAT;
             } 
             // fall through
-          case 723: break;
+          case 726: break;
           case 277: 
             { yybegin(AFTER_VALUE);return OPERATOR_PLUS_PLUS;
             } 
             // fall through
-          case 724: break;
+          case 727: break;
           case 278: 
             { yybegin(YYINITIAL);return OPERATOR_MUL_ASSIGN;
             } 
             // fall through
-          case 725: break;
+          case 728: break;
           case 279: 
             { yybegin(YYINITIAL);return OPERATOR_POW;
             } 
             // fall through
-          case 726: break;
+          case 729: break;
           case 280: 
             { yybegin(YYINITIAL);return OPERATOR_BITWISE_AND_ASSIGN;
             } 
             // fall through
-          case 727: break;
+          case 730: break;
           case 281: 
             { yybegin(YYINITIAL);return OPERATOR_MOD_ASSIGN;
             } 
             // fall through
-          case 728: break;
+          case 731: break;
           case 282: 
             { yybegin(YYINITIAL);return OPERATOR_SMARTMATCH;
             } 
             // fall through
-          case 729: break;
+          case 732: break;
           case 283: 
             { yybegin(YYINITIAL);return OPERATOR_DIV_ASSIGN;
             } 
             // fall through
-          case 730: break;
+          case 733: break;
           case 284: 
             { yybegin(YYINITIAL);return OPERATOR_OR_DEFINED;
             } 
             // fall through
-          case 731: break;
+          case 734: break;
           case 285: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17086,7 +17086,7 @@ public class PerlLexer extends PerlBaseLexer {
             { return startUnbracedVariable(AFTER_VARIABLE, SIGIL_GLOB);
             } 
             // fall through
-          case 732: break;
+          case 735: break;
           case 286: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17094,7 +17094,7 @@ public class PerlLexer extends PerlBaseLexer {
             { return startUnbracedVariable(AFTER_VARIABLE, SIGIL_CODE);
             } 
             // fall through
-          case 733: break;
+          case 736: break;
           case 287: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17102,7 +17102,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(AFTER_POSSIBLE_SIGIL);return OPERATOR_BITWISE_AND;
             } 
             // fall through
-          case 734: break;
+          case 737: break;
           case 288: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17110,32 +17110,32 @@ public class PerlLexer extends PerlBaseLexer {
             { return startUnbracedVariable(AFTER_VARIABLE, SIGIL_HASH);
             } 
             // fall through
-          case 735: break;
+          case 738: break;
           case 289: 
             { yybegin(AFTER_VALUE);return DEREF_ARRAY;
             } 
             // fall through
-          case 736: break;
+          case 739: break;
           case 290: 
             { yybegin(AFTER_VALUE);return DEREF_GLOB;
             } 
             // fall through
-          case 737: break;
+          case 740: break;
           case 291: 
             { yybegin(AFTER_VALUE);return DEREF_CODE;
             } 
             // fall through
-          case 738: break;
+          case 741: break;
           case 292: 
             { yybegin(AFTER_VALUE);return DEREF_SCALAR;
             } 
             // fall through
-          case 739: break;
+          case 742: break;
           case 293: 
             { yybegin(AFTER_VALUE);return DEREF_HASH;
             } 
             // fall through
-          case 740: break;
+          case 743: break;
           case 294: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 174;
@@ -17165,7 +17165,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL);pushback();
             } 
             // fall through
-          case 741: break;
+          case 744: break;
           case 295: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17173,12 +17173,12 @@ public class PerlLexer extends PerlBaseLexer {
             { pushback();popState();
             } 
             // fall through
-          case 742: break;
+          case 745: break;
           case 296: 
             { return COMMENT_ANNOTATION;
             } 
             // fall through
-          case 743: break;
+          case 746: break;
           case 297: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 190;
@@ -17208,12 +17208,12 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(AFTER_VALUE);return STRING_CONTENT;
             } 
             // fall through
-          case 744: break;
+          case 747: break;
           case 298: 
             { yybegin(YYINITIAL);return OPERATOR_SHIFT_RIGHT_ASSIGN;
             } 
             // fall through
-          case 745: break;
+          case 748: break;
           case 299: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17221,12 +17221,12 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(LEX_HANDLE);return OPERATOR_FILETEST;
             } 
             // fall through
-          case 746: break;
+          case 749: break;
           case 300: 
             { yybegin(AFTER_IDENTIFIER);return CUSTOM_UNARY;
             } 
             // fall through
-          case 747: break;
+          case 750: break;
           case 301: 
             // lookahead expression with fixed lookahead length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17234,42 +17234,42 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(AFTER_VALUE);return NUMBER;
             } 
             // fall through
-          case 748: break;
+          case 751: break;
           case 302: 
             { yybegin(YYINITIAL);return BUILTIN_LIST;
             } 
             // fall through
-          case 749: break;
+          case 752: break;
           case 303: 
             { yybegin(YYINITIAL);return OPERATOR_NYI;
             } 
             // fall through
-          case 750: break;
+          case 753: break;
           case 304: 
             { yybegin(LEX_HANDLE); return BUILTIN_UNARY;
             } 
             // fall through
-          case 751: break;
+          case 754: break;
           case 305: 
             { yybegin(YYINITIAL); return OPERATOR_AND_LP;
             } 
             // fall through
-          case 752: break;
+          case 755: break;
           case 306: 
             { yybegin(AFTER_VALUE);return NUMBER_HEX;
             } 
             // fall through
-          case 753: break;
+          case 756: break;
           case 307: 
             { yybegin(AFTER_VALUE);return NUMBER_BIN;
             } 
             // fall through
-          case 754: break;
+          case 757: break;
           case 308: 
             { yybegin(YYINITIAL); return OPERATOR_XOR_LP;
             } 
             // fall through
-          case 755: break;
+          case 758: break;
           case 309: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17277,72 +17277,72 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL); return OPERATOR_CMP_STR;
             } 
             // fall through
-          case 756: break;
+          case 759: break;
           case 310: 
             { yybegin(PACKAGE_ARGUMENTS); return RESERVED_USE;
             } 
             // fall through
-          case 757: break;
+          case 760: break;
           case 311: 
             { yybegin(YYINITIAL); return RESERVED_FOR;
             } 
             // fall through
-          case 758: break;
+          case 761: break;
           case 312: 
             { yybegin(VARIABLE_DECLARATION); return RESERVED_OUR;
             } 
             // fall through
-          case 759: break;
+          case 762: break;
           case 313: 
             { yybegin(YYINITIAL); return OPERATOR_NOT_LP;
             } 
             // fall through
-          case 760: break;
+          case 763: break;
           case 314: 
             { yybegin(LEX_PRINT_HANDLE); return RESERVED_SAY;
             } 
             // fall through
-          case 761: break;
+          case 764: break;
           case 315: 
             { yybegin(SUB_DECLARATION);return  RESERVED_SUB;
             } 
             // fall through
-          case 762: break;
+          case 765: break;
           case 316: 
             { yybegin(YYINITIAL); return RESERVED_MAP;
             } 
             // fall through
-          case 763: break;
+          case 766: break;
           case 317: 
             { yybegin(AFTER_IDENTIFIER); return RESERVED_POP;
             } 
             // fall through
-          case 764: break;
+          case 767: break;
           case 318: 
             { yybegin(AFTER_IDENTIFIER);return SUB_NAME;
             } 
             // fall through
-          case 765: break;
+          case 768: break;
           case 319: 
             { yybegin(YYINITIAL); return RESERVED_HAS;
             } 
             // fall through
-          case 766: break;
+          case 769: break;
           case 320: 
             { yybegin(YYINITIAL);return OPERATOR_OR_ASSIGN;
             } 
             // fall through
-          case 767: break;
+          case 770: break;
           case 321: 
             { yybegin(YYINITIAL);return OPERATOR_CMP_NUMERIC;
             } 
             // fall through
-          case 768: break;
+          case 771: break;
           case 322: 
             { yybegin(YYINITIAL);return OPERATOR_SHIFT_LEFT_ASSIGN;
             } 
             // fall through
-          case 769: break;
+          case 772: break;
           case 323: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17350,12 +17350,12 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(BARE_HEREDOC_OPENER);return OPERATOR_HEREDOC;
             } 
             // fall through
-          case 770: break;
+          case 773: break;
           case 324: 
             { yybegin(YYINITIAL); return OPERATOR_ISA;
             } 
             // fall through
-          case 771: break;
+          case 774: break;
           case 325: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17363,7 +17363,7 @@ public class PerlLexer extends PerlBaseLexer {
             { return startUnbracedVariable(SIGIL_SCALAR_INDEX);
             } 
             // fall through
-          case 772: break;
+          case 775: break;
           case 326: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17371,7 +17371,7 @@ public class PerlLexer extends PerlBaseLexer {
             { pushStateAndBegin(BLOCK_IN_MATCH_REGEX);return REGEX_TOKEN;
             } 
             // fall through
-          case 773: break;
+          case 776: break;
           case 327: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17379,7 +17379,7 @@ public class PerlLexer extends PerlBaseLexer {
             { return REGEX_TOKEN;
             } 
             // fall through
-          case 774: break;
+          case 777: break;
           case 328: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17387,17 +17387,17 @@ public class PerlLexer extends PerlBaseLexer {
             { return startUnbracedVariable(SIGIL_SCALAR);
             } 
             // fall through
-          case 775: break;
+          case 778: break;
           case 329: 
             { yybegin(YYINITIAL);return OPERATOR_HELLIP;
             } 
             // fall through
-          case 776: break;
+          case 779: break;
           case 330: 
             { yybegin(YYINITIAL);return OPERATOR_POW_ASSIGN;
             } 
             // fall through
-          case 777: break;
+          case 780: break;
           case 331: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17405,22 +17405,22 @@ public class PerlLexer extends PerlBaseLexer {
             { return getLeftBrace(BRACED_STRING);
             } 
             // fall through
-          case 778: break;
+          case 781: break;
           case 332: 
             { yybegin(YYINITIAL);return OPERATOR_AND_ASSIGN;
             } 
             // fall through
-          case 779: break;
+          case 782: break;
           case 333: 
             { yybegin(YYINITIAL);return OPERATOR_OR_DEFINED_ASSIGN;
             } 
             // fall through
-          case 780: break;
+          case 783: break;
           case 334: 
             { yybegin(AFTER_VALUE);return DEREF_SCALAR_INDEX;
             } 
             // fall through
-          case 781: break;
+          case 784: break;
           case 335: 
             // lookahead expression with fixed lookahead length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17428,7 +17428,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL);pushback();
             } 
             // fall through
-          case 782: break;
+          case 785: break;
           case 336: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17436,7 +17436,7 @@ public class PerlLexer extends PerlBaseLexer {
             { return OPERATOR_DEREFERENCE;
             } 
             // fall through
-          case 783: break;
+          case 786: break;
           case 337: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17444,12 +17444,12 @@ public class PerlLexer extends PerlBaseLexer {
             { return startBracedBlockWithState(BRACED_STRING);
             } 
             // fall through
-          case 784: break;
+          case 787: break;
           case 338: 
             { yybegin(AFTER_TRY_TRYCATCH);return RESERVED_TRY;
             } 
             // fall through
-          case 785: break;
+          case 788: break;
           case 339: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 178;
@@ -17479,32 +17479,32 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(BLOCK_DECLARATION);return BLOCK_NAME;
             } 
             // fall through
-          case 786: break;
+          case 789: break;
           case 340: 
             { yybegin(YYINITIAL); return RESERVED_EVAL;
             } 
             // fall through
-          case 787: break;
+          case 790: break;
           case 341: 
             { yybegin(YYINITIAL); return RESERVED_EACH;
             } 
             // fall through
-          case 788: break;
+          case 791: break;
           case 342: 
             { yybegin(AFTER_IDENTIFIER); return RESERVED_EXIT;
             } 
             // fall through
-          case 789: break;
+          case 792: break;
           case 343: 
             { yybegin(YYINITIAL); return RESERVED_ELSE;
             } 
             // fall through
-          case 790: break;
+          case 793: break;
           case 344: 
             { return getPerlSwitchToken(RESERVED_CASE);
             } 
             // fall through
-          case 791: break;
+          case 794: break;
           case 345: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17512,27 +17512,27 @@ public class PerlLexer extends PerlBaseLexer {
             { return handleTry();
             } 
             // fall through
-          case 792: break;
+          case 795: break;
           case 346: 
             { yybegin(AFTER_VALUE);return BUILTIN_ARGUMENTLESS;
             } 
             // fall through
-          case 793: break;
+          case 796: break;
           case 347: 
             { yybegin(LEX_HANDLE);return BUILTIN_LIST;
             } 
             // fall through
-          case 794: break;
+          case 797: break;
           case 348: 
             { yybegin(AFTER_IDENTIFIER_WITH_LABEL); return RESERVED_REDO;
             } 
             // fall through
-          case 795: break;
+          case 798: break;
           case 349: 
             { yybegin(AFTER_IDENTIFIER); return BUILTIN_UNARY;
             } 
             // fall through
-          case 796: break;
+          case 799: break;
           case 350: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17540,62 +17540,62 @@ public class PerlLexer extends PerlBaseLexer {
             { pushStateAndBegin(YYINITIAL,METHOD_DECLARATION_CONTENT); return RESERVED_FUN;
             } 
             // fall through
-          case 797: break;
+          case 800: break;
           case 351: 
             { yybegin(METHOD_DECLARATION); return RESERVED_FUNC;
             } 
             // fall through
-          case 798: break;
+          case 801: break;
           case 352: 
             { yybegin(AFTER_IDENTIFIER_WITH_LABEL); return RESERVED_NEXT;
             } 
             // fall through
-          case 799: break;
+          case 802: break;
           case 353: 
             { yybegin(YYINITIAL); return RESERVED_SORT;
             } 
             // fall through
-          case 800: break;
+          case 803: break;
           case 354: 
             { yybegin(YYINITIAL); return RESERVED_META;
             } 
             // fall through
-          case 801: break;
+          case 804: break;
           case 355: 
             { yybegin(AFTER_IDENTIFIER_WITH_LABEL); return RESERVED_LAST;
             } 
             // fall through
-          case 802: break;
+          case 805: break;
           case 356: 
             { yybegin(YYINITIAL); return RESERVED_PUSH;
             } 
             // fall through
-          case 803: break;
+          case 806: break;
           case 357: 
             { yybegin(YYINITIAL); return RESERVED_KEYS;
             } 
             // fall through
-          case 804: break;
+          case 807: break;
           case 358: 
             { yybegin(YYINITIAL); return RESERVED_GREP;
             } 
             // fall through
-          case 805: break;
+          case 808: break;
           case 359: 
             { yybegin(AFTER_IDENTIFIER_WITH_LABEL); return RESERVED_GOTO;
             } 
             // fall through
-          case 806: break;
+          case 809: break;
           case 360: 
             { yybegin(YYINITIAL); return RESERVED_WITH;
             } 
             // fall through
-          case 807: break;
+          case 810: break;
           case 361: 
             { yybegin(YYINITIAL); return RESERVED_WHEN;
             } 
             // fall through
-          case 808: break;
+          case 811: break;
           case 362: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17603,7 +17603,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(YYINITIAL);setHeredocLike(true);return OPERATOR_SHIFT_LEFT;
             } 
             // fall through
-          case 809: break;
+          case 812: break;
           case 363: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17611,7 +17611,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(DOUBLE_ANGLE_CLOSE);return LEFT_ANGLE;
             } 
             // fall through
-          case 810: break;
+          case 813: break;
           case 364: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17619,7 +17619,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(QUOTED_HEREDOC_OPENER);return OPERATOR_HEREDOC;
             } 
             // fall through
-          case 811: break;
+          case 814: break;
           case 365: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17627,12 +17627,12 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(BARE_HEREDOC_OPENER_INDENTABLE);return OPERATOR_HEREDOC;
             } 
             // fall through
-          case 812: break;
+          case 815: break;
           case 366: 
             { yybegin(YYINITIAL);return POD;
             } 
             // fall through
-          case 813: break;
+          case 816: break;
           case 367: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17640,7 +17640,7 @@ public class PerlLexer extends PerlBaseLexer {
             { pushStateAndBegin(BLOCK_IN_MATCH_REGEX);return REGEX_TOKEN;
             } 
             // fall through
-          case 814: break;
+          case 817: break;
           case 368: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 167;
@@ -17670,12 +17670,12 @@ public class PerlLexer extends PerlBaseLexer {
             { return QUALIFYING_PACKAGE;
             } 
             // fall through
-          case 815: break;
+          case 818: break;
           case 369: 
             { yybegin(ANNOTATION_TYPE);return ANNOTATION_TYPE_KEY;
             } 
             // fall through
-          case 816: break;
+          case 819: break;
           case 370: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 171;
@@ -17705,7 +17705,7 @@ public class PerlLexer extends PerlBaseLexer {
             { return getBracedVariableNameToken();
             } 
             // fall through
-          case 817: break;
+          case 820: break;
           case 371: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17713,27 +17713,27 @@ public class PerlLexer extends PerlBaseLexer {
             { pushback();popState();
             } 
             // fall through
-          case 818: break;
+          case 821: break;
           case 372: 
             { yybegin(BEFORE_CATCH_BLOCK);return RESERVED_CATCH_WITH;
             } 
             // fall through
-          case 819: break;
+          case 822: break;
           case 373: 
             { yybegin(YYINITIAL); return RESERVED_ELSIF;
             } 
             // fall through
-          case 820: break;
+          case 823: break;
           case 374: 
             { yybegin(YYINITIAL); return RESERVED_AFTER;
             } 
             // fall through
-          case 821: break;
+          case 824: break;
           case 375: 
             { yybegin(YYINITIAL); return RESERVED_BLESS;
             } 
             // fall through
-          case 822: break;
+          case 825: break;
           case 376: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 194;
@@ -17763,92 +17763,92 @@ public class PerlLexer extends PerlBaseLexer {
             { return SUB_NAME;
             } 
             // fall through
-          case 823: break;
+          case 826: break;
           case 377: 
             { yybegin(AFTER_IDENTIFIER); return RESERVED_UNDEF;
             } 
             // fall through
-          case 824: break;
+          case 827: break;
           case 378: 
             { yybegin(YYINITIAL); return RESERVED_UNTIL;
             } 
             // fall through
-          case 825: break;
+          case 828: break;
           case 379: 
             { yybegin(YYINITIAL); return RESERVED_SUPER;
             } 
             // fall through
-          case 826: break;
+          case 829: break;
           case 380: 
             { yybegin(VARIABLE_DECLARATION); return RESERVED_STATE;
             } 
             // fall through
-          case 827: break;
+          case 830: break;
           case 381: 
             { yybegin(YYINITIAL); return BUILTIN_LIST;
             } 
             // fall through
-          case 828: break;
+          case 831: break;
           case 382: 
             { yybegin(AFTER_IDENTIFIER); return RESERVED_SHIFT;
             } 
             // fall through
-          case 829: break;
+          case 832: break;
           case 383: 
             { yybegin(YYINITIAL); return RESERVED_LOCAL;
             } 
             // fall through
-          case 830: break;
+          case 833: break;
           case 384: 
             { yybegin(LEX_PRINT_HANDLE); return RESERVED_PRINT;
             } 
             // fall through
-          case 831: break;
+          case 834: break;
           case 385: 
             { yybegin(YYINITIAL); return RESERVED_INNER;
             } 
             // fall through
-          case 832: break;
+          case 835: break;
           case 386: 
             { yybegin(YYINITIAL); return RESERVED_GIVEN;
             } 
             // fall through
-          case 833: break;
+          case 836: break;
           case 387: 
             { yybegin(YYINITIAL); return RESERVED_WHILE;
             } 
             // fall through
-          case 834: break;
+          case 837: break;
           case 388: 
             { yybegin(YYINITIAL); return RESERVED_VALUES;
             } 
             // fall through
-          case 835: break;
+          case 838: break;
           case 389: 
             { yybegin(YYINITIAL); return RESERVED_AROUND;
             } 
             // fall through
-          case 836: break;
+          case 839: break;
           case 390: 
             { yybegin(YYINITIAL); return RESERVED_BEFORE;
             } 
             // fall through
-          case 837: break;
+          case 840: break;
           case 391: 
             { yybegin(YYINITIAL); return RESERVED_DELETE;
             } 
             // fall through
-          case 838: break;
+          case 841: break;
           case 392: 
             { yybegin(YYINITIAL); return RESERVED_UNLESS;
             } 
             // fall through
-          case 839: break;
+          case 842: break;
           case 393: 
             { yybegin(YYINITIAL); return RESERVED_RETURN;
             } 
             // fall through
-          case 840: break;
+          case 843: break;
           case 394: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17856,37 +17856,37 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(METHOD_DECLARATION); return RESERVED_FUN;
             } 
             // fall through
-          case 841: break;
+          case 844: break;
           case 395: 
             { myFormatWaiting = true; yybegin(AFTER_IDENTIFIER); return RESERVED_FORMAT;
             } 
             // fall through
-          case 842: break;
+          case 845: break;
           case 396: 
             { yybegin(YYINITIAL); return RESERVED_SCALAR;
             } 
             // fall through
-          case 843: break;
+          case 846: break;
           case 397: 
             { yybegin(YYINITIAL); return RESERVED_SPLICE;
             } 
             // fall through
-          case 844: break;
+          case 847: break;
           case 398: 
             { return getPerlSwitchToken(RESERVED_SWITCH);
             } 
             // fall through
-          case 845: break;
+          case 848: break;
           case 399: 
             { yybegin(METHOD_DECLARATION); return RESERVED_METHOD;
             } 
             // fall through
-          case 846: break;
+          case 849: break;
           case 400: 
             { yybegin(LEX_PRINT_HANDLE); return RESERVED_PRINTF;
             } 
             // fall through
-          case 847: break;
+          case 850: break;
           case 401: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17894,17 +17894,17 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(QUOTED_HEREDOC_OPENER_INDENTABLE);return OPERATOR_HEREDOC;
             } 
             // fall through
-          case 848: break;
+          case 851: break;
           case 402: 
             { yybegin(ANNOTATION_FALLBACK);return ANNOTATION_METHOD_KEY;
             } 
             // fall through
-          case 849: break;
+          case 852: break;
           case 403: 
             { yybegin(ANNOTATION_STRING);return ANNOTATION_INJECT_KEY;
             } 
             // fall through
-          case 850: break;
+          case 853: break;
           case 404: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17912,7 +17912,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(AFTER_CATCH); return RESERVED_CATCH;
             } 
             // fall through
-          case 851: break;
+          case 854: break;
           case 405: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -17920,7 +17920,7 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(AFTER_CATCH_TRYCATCH); return RESERVED_CATCH;
             } 
             // fall through
-          case 852: break;
+          case 855: break;
           case 406: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 165;
@@ -17950,57 +17950,57 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(BEFORE_WITH);return PACKAGE;
             } 
             // fall through
-          case 853: break;
+          case 856: break;
           case 407: 
             { yybegin(END_BLOCK);yypushback(yylength()-7);return TAG_END;
             } 
             // fall through
-          case 854: break;
+          case 857: break;
           case 408: 
             { yybegin(AFTER_VALUE); return TAG;
             } 
             // fall through
-          case 855: break;
+          case 858: break;
           case 409: 
             { yybegin(YYINITIAL); return RESERVED_EXTENDS;
             } 
             // fall through
-          case 856: break;
+          case 859: break;
           case 410: 
             { yybegin(YYINITIAL); return RESERVED_AUGMENT;
             } 
             // fall through
-          case 857: break;
+          case 860: break;
           case 411: 
             { yybegin(YYINITIAL); return RESERVED_DEFAULT;
             } 
             // fall through
-          case 858: break;
+          case 861: break;
           case 412: 
             { yybegin(YYINITIAL); return RESERVED_DEFINED;
             } 
             // fall through
-          case 859: break;
+          case 862: break;
           case 413: 
             { yybegin(YYINITIAL); return RESERVED_UNSHIFT;
             } 
             // fall through
-          case 860: break;
+          case 863: break;
           case 414: 
             { yybegin(YYINITIAL); return BUILTIN_UNARY;
             } 
             // fall through
-          case 861: break;
+          case 864: break;
           case 415: 
             { yybegin(REQUIRE_ARGUMENTS); return RESERVED_REQUIRE;
             } 
             // fall through
-          case 862: break;
+          case 865: break;
           case 416: 
             { yybegin(YYINITIAL); return RESERVED_FOREACH;
             } 
             // fall through
-          case 863: break;
+          case 866: break;
           case 417: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -18008,12 +18008,12 @@ public class PerlLexer extends PerlBaseLexer {
             { pushStateAndBegin(YYINITIAL,METHOD_DECLARATION_CONTENT); return RESERVED_METHOD_FP;
             } 
             // fall through
-          case 864: break;
+          case 867: break;
           case 418: 
             { yybegin(PACKAGE_DECLARATION_ARGUMENTS); return RESERVED_PACKAGE;
             } 
             // fall through
-          case 865: break;
+          case 868: break;
           case 419: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
@@ -18021,109 +18021,119 @@ public class PerlLexer extends PerlBaseLexer {
             { return SUB_NAME;
             } 
             // fall through
-          case 866: break;
+          case 869: break;
           case 420: 
             { yybegin(ANNOTATION_PACKAGE_RETURNS);return ANNOTATION_RETURNS_KEY;
             } 
             // fall through
-          case 867: break;
+          case 870: break;
           case 421: 
+            { yybegin(ANNOTATION_FALLBACK);pushStateAndBegin(ANNOTATION_TYPE_NESTED);return TYPE_HASHREF;
+            } 
+            // fall through
+          case 871: break;
+          case 422: 
             { pushStateAndBegin(ANNOTATION_TYPE_NESTED);return TYPE_HASHREF;
             } 
             // fall through
-          case 868: break;
-          case 422: 
+          case 872: break;
+          case 423: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 6);
             { yybegin(AFTER_EXCEPT); return RESERVED_EXCEPT;
             } 
             // fall through
-          case 869: break;
-          case 423: 
+          case 873: break;
+          case 424: 
             { yybegin(END_BLOCK);yypushback(yylength()-8);return TAG_DATA;
             } 
             // fall through
-          case 870: break;
-          case 424: 
+          case 874: break;
+          case 425: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 5);
             { yybegin(METHOD_DECLARATION); return RESERVED_AFTER_FP;
             } 
             // fall through
-          case 871: break;
-          case 425: 
+          case 875: break;
+          case 426: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 7);
             { return SUB_NAME;
             } 
             // fall through
-          case 872: break;
-          case 426: 
+          case 876: break;
+          case 427: 
             { yybegin(YYINITIAL); return RESERVED_CONTINUE;
             } 
             // fall through
-          case 873: break;
-          case 427: 
+          case 877: break;
+          case 428: 
             { yybegin(YYINITIAL); return RESERVED_OVERRIDE;
             } 
             // fall through
-          case 874: break;
-          case 428: 
+          case 878: break;
+          case 429: 
             { yybegin(ANNOTATION_FALLBACK);return ANNOTATION_ABSTRACT_KEY;
             } 
             // fall through
-          case 875: break;
-          case 429: 
+          case 879: break;
+          case 430: 
             { yybegin(ANNOTATION_FALLBACK);return ANNOTATION_OVERRIDE_KEY;
             } 
             // fall through
-          case 876: break;
-          case 430: 
+          case 880: break;
+          case 431: 
             { yybegin(ANNOTATION_FALLBACK);return ANNOTATION_NO_INJECT_KEY;
             } 
             // fall through
-          case 877: break;
-          case 431: 
+          case 881: break;
+          case 432: 
+            { yybegin(ANNOTATION_FALLBACK);pushStateAndBegin(ANNOTATION_TYPE_NESTED);return TYPE_ARRAYREF;
+            } 
+            // fall through
+          case 882: break;
+          case 433: 
             { pushStateAndBegin(ANNOTATION_TYPE_NESTED);return TYPE_ARRAYREF;
             } 
             // fall through
-          case 878: break;
-          case 432: 
+          case 883: break;
+          case 434: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 7);
             { yybegin(AFTER_FINALLY); return RESERVED_FINALLY;
             } 
             // fall through
-          case 879: break;
-          case 433: 
+          case 884: break;
+          case 435: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 6);
             { yybegin(METHOD_DECLARATION); return RESERVED_AROUND_FP;
             } 
             // fall through
-          case 880: break;
-          case 434: 
+          case 885: break;
+          case 436: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 5);
             { return RESERVED_ASYNC;
             } 
             // fall through
-          case 881: break;
-          case 435: 
+          case 886: break;
+          case 437: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 6);
             { yybegin(METHOD_DECLARATION); return RESERVED_BEFORE_FP;
             } 
             // fall through
-          case 882: break;
-          case 436: 
+          case 887: break;
+          case 438: 
             // general lookahead, find correct zzMarkedPos
             { int zzFState = 176;
               int zzFPos = zzStartRead;
@@ -18152,77 +18162,82 @@ public class PerlLexer extends PerlBaseLexer {
             { yybegin(AFTER_IDENTIFIER); return RESERVED_DEFINED;
             } 
             // fall through
-          case 883: break;
-          case 437: 
+          case 888: break;
+          case 439: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 3);
             { pushStateAndBegin(FORCE_PACKAGE_TOKEN);return SUB_NAME;
             } 
             // fall through
-          case 884: break;
-          case 438: 
+          case 889: break;
+          case 440: 
             { yybegin(AFTER_VALUE); return RESERVED_WANTARRAY;
             } 
             // fall through
-          case 885: break;
-          case 439: 
+          case 890: break;
+          case 441: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 7);
             { yybegin(METHOD_DECLARATION); return RESERVED_AUGMENT_FP;
             } 
             // fall through
-          case 886: break;
-          case 440: 
+          case 891: break;
+          case 442: 
             { yybegin(ANNOTATION_FALLBACK);return ANNOTATION_DEPRECATED_KEY;
             } 
             // fall through
-          case 887: break;
-          case 441: 
+          case 892: break;
+          case 443: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 9);
             { yybegin(AFTER_OTHERWISE); return RESERVED_OTHERWISE;
             } 
             // fall through
-          case 888: break;
-          case 442: 
+          case 893: break;
+          case 444: 
             { yybegin(AFTER_IDENTIFIER);return TAG_PACKAGE;
             } 
             // fall through
-          case 889: break;
-          case 443: 
+          case 894: break;
+          case 445: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 8);
             { yybegin(METHOD_DECLARATION); return RESERVED_OVERRIDE_FP;
             } 
             // fall through
-          case 890: break;
-          case 444: 
+          case 895: break;
+          case 446: 
             { yybegin(VARIABLE_DECLARATION_STRICT);return TAG_PACKAGE;
             } 
             // fall through
-          case 891: break;
-          case 445: 
+          case 896: break;
+          case 447: 
+            { yybegin(ANNOTATION_FALLBACK);return TAG_PACKAGE;
+            } 
+            // fall through
+          case 897: break;
+          case 448: 
             { return TAG_PACKAGE;
             } 
             // fall through
-          case 892: break;
-          case 446: 
+          case 898: break;
+          case 449: 
             { yybegin(ANNOTATION_STRING);return ANNOTATION_NOINSPECTION_KEY;
             } 
             // fall through
-          case 893: break;
-          case 447: 
+          case 899: break;
+          case 450: 
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL/*, zzStartRead, zzEndRead - zzStartRead*/, zzStartRead, 12);
             { yybegin(AFTER_CONTINUATION); return RESERVED_CONTINUATION;
             } 
             // fall through
-          case 894: break;
+          case 900: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }
