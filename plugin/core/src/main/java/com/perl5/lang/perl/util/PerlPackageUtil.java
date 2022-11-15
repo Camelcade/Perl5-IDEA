@@ -56,10 +56,10 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobNamespaceStubIndex;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceDescendantsIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceIndex;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceReverseIndex;
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDescendantsIndex;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlCallableNamesIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightCallableNamesIndex;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -354,8 +354,8 @@ public final class PerlPackageUtil implements PerlElementTypes {
                                                @NotNull Project project,
                                                @NotNull GlobalSearchScope scope,
                                                @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
-    return PerlNamespaceReverseIndex.getInstance().processElements(project, parentPackageName, scope, processor) &&
-           PerlLightNamespaceReverseIndex.getInstance().processLightElements(project, parentPackageName, scope, processor);
+    return PerlNamespaceDescendantsIndex.getInstance().processElements(project, parentPackageName, scope, processor) &&
+           PerlLightNamespaceDescendantsIndex.getInstance().processLightElements(project, parentPackageName, scope, processor);
   }
 
 

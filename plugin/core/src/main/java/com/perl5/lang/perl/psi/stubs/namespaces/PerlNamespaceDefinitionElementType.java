@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+
+import static com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDescendantsIndex.NAMESPACE_DESCENDANTS_KEY;
 
 
 public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinitionElement>
@@ -73,7 +75,7 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
 
     for (String parent : stub.getParentNamespacesNames()) {
       if (parent != null && !parent.isEmpty()) {
-        sink.occurrence(getReverseKey(), parent);
+        sink.occurrence(getDescendantsIndexKey(), parent);
       }
     }
   }
@@ -82,8 +84,8 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
     return PerlNamespaceIndex.KEY;
   }
 
-  protected StubIndexKey<String, ? extends PsiElement> getReverseKey() {
-    return PerlNamespaceReverseIndex.KEY;
+  protected StubIndexKey<String, ? extends PsiElement> getDescendantsIndexKey() {
+    return NAMESPACE_DESCENDANTS_KEY;
   }
 
   @Override

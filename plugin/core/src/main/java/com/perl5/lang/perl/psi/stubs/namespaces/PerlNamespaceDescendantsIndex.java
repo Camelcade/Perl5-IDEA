@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,15 @@ import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PerlNamespaceReverseIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
-  public static final int VERSION = 3;
-  public static final StubIndexKey<String, PerlNamespaceDefinitionElement> KEY = StubIndexKey.createIndexKey("perl.package.parent");
+/**
+ * Contains index: namespace_name -> descendant namespace
+ *
+ * @see PerlLightNamespaceDescendantsIndex
+ */
+public class PerlNamespaceDescendantsIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
+  public static final int VERSION = 4;
+  public static final StubIndexKey<String, PerlNamespaceDefinitionElement>
+    NAMESPACE_DESCENDANTS_KEY = StubIndexKey.createIndexKey("perl.package.descendants");
 
   @Override
   public int getVersion() {
@@ -34,7 +40,7 @@ public class PerlNamespaceReverseIndex extends PerlStubIndexBase<PerlNamespaceDe
 
   @Override
   public @NotNull StubIndexKey<String, PerlNamespaceDefinitionElement> getKey() {
-    return KEY;
+    return NAMESPACE_DESCENDANTS_KEY;
   }
 
   @Override
@@ -42,7 +48,7 @@ public class PerlNamespaceReverseIndex extends PerlStubIndexBase<PerlNamespaceDe
     return PerlNamespaceDefinitionElement.class;
   }
 
-  public static @NotNull PerlNamespaceReverseIndex getInstance() {
-    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlNamespaceReverseIndex.class);
+  public static @NotNull PerlNamespaceDescendantsIndex getInstance() {
+    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlNamespaceDescendantsIndex.class);
   }
 }

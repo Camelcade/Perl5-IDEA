@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,8 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceDescendantsIndex.LIGHT_NAMESPACE_DESCENDANTS_KEY;
+
 public class PerlLightNamespaceDefinitionElementType extends PerlNamespaceDefinitionElementType {
   public PerlLightNamespaceDefinitionElementType(String name) {
     super(name);
@@ -40,8 +42,8 @@ public class PerlLightNamespaceDefinitionElementType extends PerlNamespaceDefini
   }
 
   @Override
-  protected StubIndexKey<String, ? extends PsiElement> getReverseKey() {
-    return PerlLightNamespaceReverseIndex.KEY;
+  protected StubIndexKey<String, ? extends PsiElement> getDescendantsIndexKey() {
+    return LIGHT_NAMESPACE_DESCENDANTS_KEY;
   }
 
   @Override
