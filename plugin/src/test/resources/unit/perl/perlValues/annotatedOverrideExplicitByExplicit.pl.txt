@@ -1,0 +1,13 @@
+#@type $var1 Foo::Bar
+#@type $var1 Foo::Override
+my($var1, $var2);
+
+$v<caret>ar1;
+----------
+$var1
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 68 in annotatedOverrideExplicitByExplicit.pl
+Foo::Bar
+----------
+Resolved
+----------
+Foo::Bar

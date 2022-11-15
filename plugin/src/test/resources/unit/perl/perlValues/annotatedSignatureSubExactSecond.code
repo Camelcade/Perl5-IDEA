@@ -1,0 +1,4 @@
+#@type $var2 Foo::Bar
+sub something($var1, $var2){
+  $v<caret>ar2;
+}

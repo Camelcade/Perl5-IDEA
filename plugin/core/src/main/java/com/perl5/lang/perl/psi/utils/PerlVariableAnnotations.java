@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.PerlAnnotation;
+import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationDeprecated;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationType;
 import org.jetbrains.annotations.NotNull;
@@ -74,19 +75,27 @@ public class PerlVariableAnnotations {
     );
   }
 
-  public static @Nullable PerlVariableAnnotations createFromAnnotationsList(List<PerlAnnotation> annotations) {
+  public static @Nullable PerlVariableAnnotations createFromAnnotationsList(@NotNull List<PerlAnnotation> annotations,
+                                                                            @NotNull PerlVariable perlVariable) {
     if (annotations.isEmpty()) {
       return null;
     }
 
     PerlVariableAnnotations myAnnotations = new PerlVariableAnnotations();
 
+    boolean valueSet = false;
+    boolean valueSetExplicitly = false;
     for (PerlAnnotation annotation : annotations) {
       if (annotation instanceof PsiPerlAnnotationDeprecated) {
         myAnnotations.setIsDeprecated();
       }
-      else if (annotation instanceof PsiPerlAnnotationType) {
-        myAnnotations.setValue(((PsiPerlAnnotationType)annotation).getValue());
+      else if (!valueSetExplicitly && annotation instanceof PsiPerlAnnotationType typeAnnotation && typeAnnotation.accept(perlVariable)) {
+        var isWildCard = typeAnnotation.isWildCard();
+        if (!valueSet || !isWildCard) {
+          valueSet = true;
+          valueSetExplicitly = !isWildCard;
+          myAnnotations.setValue(((PsiPerlAnnotationType)annotation).getValue());
+        }
       }
     }
 

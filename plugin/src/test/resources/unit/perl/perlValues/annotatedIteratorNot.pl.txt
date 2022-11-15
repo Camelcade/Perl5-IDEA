@@ -1,0 +1,12 @@
+#@type @something Foo::Bar
+for my $var (@something){
+  say $v<caret>ar;
+}
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 59 in annotatedIteratorNot.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown

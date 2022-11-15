@@ -1,0 +1,12 @@
+#@type @something Foo::Bar
+for my $var (@something){
+  say @som<caret>ething;
+}
+----------
+@something
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 59 in annotatedIterable.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown

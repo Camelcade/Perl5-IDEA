@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PsiPerlAnnotationType extends PerlAnnotationWithValue, PerlAnnotation {
+public interface PsiPerlAnnotationType extends PerlAnnotationType, PerlAnnotation {
 
   @Nullable
   PsiPerlAnnotationVariable getAnnotationVariable();

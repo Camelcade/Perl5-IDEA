@@ -1433,6 +1433,111 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testAnnotatedOverrideExplicitByExplicit() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedOverrideExplicitByWildcard() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedOverrideWildcardByExplicit() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedOverrideWildcardByWildcard() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedWithNamesFirst() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedIterable() {
+    doTestArrayVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedIterableNot() {
+    doTestArrayVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedIterableWildcard() {
+    doTestArrayVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedIterator() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedIteratorNot() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedIteratorWildcard() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedSignatureSubMultiFirst() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedSignatureSubMultiSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedSignatureSubExactFirst() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedSignatureSubExactSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedSignatureSubWildcardFirst() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedSignatureSubWildcardSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedWithNamesSecond() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedWithNamesThird() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedWithName() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testAnnotatedWithWrongName() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
   public void testAnnotatedMultiNonFirst() {
     doTestScalarVariableValue();
   }

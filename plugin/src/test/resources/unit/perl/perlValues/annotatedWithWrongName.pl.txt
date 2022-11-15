@@ -1,0 +1,12 @@
+#@type $var2 Foo::Bar
+my($var1, $var2);
+
+$v<caret>ar1;
+----------
+$var1
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 41 in annotatedWithWrongName.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown

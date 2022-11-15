@@ -1,0 +1,13 @@
+#@type $var1 Foo::Bar
+#@type $var2 Foo::Bazzz
+sub something($var1, $var2){
+  $v<caret>ar2;
+}
+----------
+$var2
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 77 in annotatedSignatureSubMultiSecond.pl
+Foo::Bazzz
+----------
+Resolved
+----------
+Foo::Bazzz

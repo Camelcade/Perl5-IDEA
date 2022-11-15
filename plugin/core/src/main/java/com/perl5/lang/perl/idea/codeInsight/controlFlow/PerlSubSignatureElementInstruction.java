@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,12 @@ import com.intellij.codeInsight.controlflow.ControlFlowBuilder;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public class PerlSubSignatureElementInstruction extends PerlMutationInstruction {
   private final int myIndex;
@@ -45,6 +48,17 @@ public class PerlSubSignatureElementInstruction extends PerlMutationInstruction 
 
   @Override
   public @NotNull PerlValue createValue() {
+    var parentElement = Objects.requireNonNull(myElement).getParent();
+    if (parentElement instanceof PerlVariableDeclarationElement variableDeclarationElement) {
+      var annotations = variableDeclarationElement.getVariableAnnotations();
+      if (annotations != null) {
+        var annotatedValue = annotations.getAnnotatedValue();
+        if (!annotatedValue.isUnknown()) {
+          return annotatedValue;
+        }
+      }
+    }
+
     PerlValue mainValue = PerlContextType.isScalar(myElement) ?
                           PerlArrayElementValue.create(PerlValues.ARGUMENTS_VALUE, PerlScalarValue.create(myIndex)) :
                           PerlSublistValue.create(PerlValues.ARGUMENTS_VALUE, myIndex, 0);

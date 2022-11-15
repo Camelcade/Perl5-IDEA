@@ -1,0 +1,5 @@
+#@type $var1 Foo::Bar
+#@type Foo::Override
+my($var1, $var2);
+
+$v<caret>ar1;

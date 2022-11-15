@@ -1,0 +1,6 @@
+#@type $var2 Boo::Baz
+#@type Foo::Fallback
+#@type $var1 Foo::Bar
+my($var1, $var2, $var3);
+
+$v<caret>ar2;

@@ -56,7 +56,7 @@ public class PsiPerlVisitor extends PsiElementVisitor {
   }
 
   public void visitAnnotationType(@NotNull PsiPerlAnnotationType o) {
-    visitPerlAnnotationWithValue(o);
+    visitPerlAnnotationType(o);
     // visitPerlAnnotation(o);
   }
 
@@ -906,6 +906,10 @@ public class PsiPerlVisitor extends PsiElementVisitor {
   }
 
   public void visitPerlAnnotation(@NotNull PerlAnnotation o) {
+    visitElement(o);
+  }
+
+  public void visitPerlAnnotationType(@NotNull PerlAnnotationType o) {
     visitElement(o);
   }
 
