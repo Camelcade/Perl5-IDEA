@@ -24,8 +24,8 @@ import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
-import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.PerlAnnotationInject;
+import com.perl5.lang.perl.psi.utils.PerlAnnotations;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;

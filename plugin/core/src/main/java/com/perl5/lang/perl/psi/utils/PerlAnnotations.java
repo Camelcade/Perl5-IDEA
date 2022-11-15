@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.lexer;
+package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
@@ -26,6 +26,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

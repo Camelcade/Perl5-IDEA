@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.util.Consumer;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
+import com.perl5.lang.perl.psi.utils.PerlAnnotations;
 import org.intellij.plugins.intelliLang.inject.AbstractLanguageInjectionSupport;
 import org.intellij.plugins.intelliLang.inject.config.BaseInjection;
 import org.jetbrains.annotations.NotNull;

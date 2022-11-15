@@ -23,7 +23,6 @@ import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
-import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

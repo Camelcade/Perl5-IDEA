@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.lexer.PerlAnnotations;
+import com.perl5.lang.perl.psi.utils.PerlAnnotations;
 import org.jetbrains.annotations.NotNull;
 
 
