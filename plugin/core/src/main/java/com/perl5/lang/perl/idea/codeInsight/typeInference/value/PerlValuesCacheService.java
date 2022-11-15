@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -68,7 +68,7 @@ public class PerlValuesCacheService implements PsiModificationTracker.Listener, 
   public void modificationCountChanged() {
     myResolveMap.clear();
 
-    if (myResolveRequests.get() > 0) {
+    if (myResolveRequests.get() > 0 && LOG.isDebugEnabled()) {
       LOG.debug(String.format("Value resolve effectiveness: %d, %d, %d", myResolveRequests.get(), myResolveBuilds.get(),
                               (myResolveRequests.get() - myResolveBuilds.get()) * 100 / myResolveRequests.get()));
     }
