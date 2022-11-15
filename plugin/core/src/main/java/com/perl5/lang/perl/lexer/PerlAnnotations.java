@@ -30,7 +30,10 @@ import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY;
@@ -41,21 +44,19 @@ public final class PerlAnnotations implements PerlElementTypes {
   private PerlAnnotations() {
   }
 
-  public static final Map<String, IElementType> TOKENS_MAP = new HashMap<>();
-
-  static {
-    TOKENS_MAP.put("deprecated", ANNOTATION_DEPRECATED_KEY);
-    TOKENS_MAP.put("returns", ANNOTATION_RETURNS_KEY);
-    TOKENS_MAP.put("type", ANNOTATION_TYPE_KEY);
-    TOKENS_MAP.put("method", ANNOTATION_METHOD_KEY);
-    TOKENS_MAP.put("inject", ANNOTATION_INJECT_KEY);
-    TOKENS_MAP.put("noinject", ANNOTATION_NO_INJECT_KEY);
+  public static final Map<String, IElementType> TOKENS_MAP = Map.of(
+    "deprecated", ANNOTATION_DEPRECATED_KEY,
+    "returns", ANNOTATION_RETURNS_KEY,
+    "type", ANNOTATION_TYPE_KEY,
+    "method", ANNOTATION_METHOD_KEY,
+    "inject", ANNOTATION_INJECT_KEY,
+    "noinject", ANNOTATION_NO_INJECT_KEY,
 
     // these are parsed but not used
-    TOKENS_MAP.put("override", ANNOTATION_OVERRIDE_KEY);
-    TOKENS_MAP.put("abstract", ANNOTATION_ABSTRACT_KEY);
-    TOKENS_MAP.put("noinspection", ANNOTATION_NOINSPECTION_KEY);
-  }
+    "override", ANNOTATION_OVERRIDE_KEY,
+    "abstract", ANNOTATION_ABSTRACT_KEY,
+    "noinspection", ANNOTATION_NOINSPECTION_KEY
+  );
 
   /**
    * @return true iff injection for {@code host} is suppressed with {@code #@noinject} annotations
