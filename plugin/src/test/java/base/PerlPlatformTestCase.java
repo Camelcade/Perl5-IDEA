@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -410,7 +410,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   protected void waitForProcessFinish(ProcessHandler processHandler) {
-    waitWithEventsDispatching("Process failed to finish in time", processHandler::isProcessTerminated);
+    waitWithEventsDispatching("Process failed to finish in time", () -> processHandler.waitFor(10));
   }
 
   protected @NotNull String serializeOutput(@Nullable ProcessOutput processOutput) {
