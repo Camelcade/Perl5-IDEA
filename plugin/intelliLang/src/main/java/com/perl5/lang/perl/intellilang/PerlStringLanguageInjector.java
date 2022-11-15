@@ -37,7 +37,6 @@ import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,7 +57,7 @@ public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
     PerlStringMixin perlString = (PerlStringMixin)host;
 
     // before element
-    PerlAnnotationInject injectAnnotation = PerlPsiUtil.getAnyAnnotationByClass(perlString, PerlAnnotationInject.class);
+    PerlAnnotationInject injectAnnotation = PerlAnnotations.getAnyAnnotationByClass(perlString, PerlAnnotationInject.class);
     if (injectAnnotation != null) {
       injectByAnnotation(perlString, registrar, injectAnnotation);
     }

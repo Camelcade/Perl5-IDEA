@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation;
+import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
@@ -219,9 +220,9 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
 
   @Override
   public @Nullable PerlVariableAnnotations getLocalVariableAnnotations() {
-    List<PerlAnnotation> perlAnnotations = PerlPsiUtil.collectAnnotations(this);
+    List<PerlAnnotation> perlAnnotations = PerlAnnotations.collectAnnotations(this);
     if (perlAnnotations.isEmpty()) {
-      perlAnnotations = PerlPsiUtil.collectAnnotations(getPerlDeclaration());
+      perlAnnotations = PerlAnnotations.collectAnnotations(getPerlDeclaration());
     }
     return PerlVariableAnnotations.createFromAnnotationsList(perlAnnotations);
   }

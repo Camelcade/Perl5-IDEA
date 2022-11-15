@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.lexer.PerlAnnotations;
 import com.perl5.lang.perl.psi.PerlDeprecatable;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
@@ -118,7 +119,7 @@ public abstract class PerlSubBase<Stub extends PerlSubStub<?>> extends PerlStubB
     if (stub != null) {
       return stub.getAnnotations();
     }
-    return PerlSubAnnotations.createFromAnnotationsList(PerlPsiUtil.collectAnnotations(this));
+    return PerlSubAnnotations.createFromAnnotationsList(PerlAnnotations.collectAnnotations(this));
   }
 
   @Override
