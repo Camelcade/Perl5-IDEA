@@ -21,6 +21,7 @@ public interface PerlElementTypesGenerated {
   IElementType ANNOTATION_OVERRIDE = PerlElementTypeFactory.getElementType("ANNOTATION_OVERRIDE");
   IElementType ANNOTATION_RETURNS = PerlElementTypeFactory.getElementType("ANNOTATION_RETURNS");
   IElementType ANNOTATION_TYPE = PerlElementTypeFactory.getElementType("ANNOTATION_TYPE");
+  IElementType ANNOTATION_VARIABLE = PerlElementTypeFactory.getElementType("ANNOTATION_VARIABLE");
   IElementType ANON_ARRAY = PerlElementTypeFactory.getElementType("ANON_ARRAY");
   IElementType ANON_HASH = PerlElementTypeFactory.getElementType("ANON_HASH");
   IElementType AROUND_MODIFIER = PerlElementTypeFactory.getElementType("AROUND_MODIFIER");
@@ -220,13 +221,16 @@ public interface PerlElementTypesGenerated {
   IElementType WHILE_STATEMENT_MODIFIER = PerlElementTypeFactory.getElementType("WHILE_STATEMENT_MODIFIER");
 
   IElementType ANNOTATION_ABSTRACT_KEY = PerlElementTypeFactory.getTokenType("#@abstract");
+  IElementType ANNOTATION_ARRAY = PerlElementTypeFactory.getTokenType("@annotated");
   IElementType ANNOTATION_DEPRECATED_KEY = PerlElementTypeFactory.getTokenType("#@deprecated");
+  IElementType ANNOTATION_HASH = PerlElementTypeFactory.getTokenType("%annotated");
   IElementType ANNOTATION_INJECT_KEY = PerlElementTypeFactory.getTokenType("#@inject");
   IElementType ANNOTATION_METHOD_KEY = PerlElementTypeFactory.getTokenType("#@method");
   IElementType ANNOTATION_NOINSPECTION_KEY = PerlElementTypeFactory.getTokenType("#@noinspection");
   IElementType ANNOTATION_NO_INJECT_KEY = PerlElementTypeFactory.getTokenType("#@noinject");
   IElementType ANNOTATION_OVERRIDE_KEY = PerlElementTypeFactory.getTokenType("#@override");
   IElementType ANNOTATION_RETURNS_KEY = PerlElementTypeFactory.getTokenType("#@returns");
+  IElementType ANNOTATION_SCALAR = PerlElementTypeFactory.getTokenType("$annotated");
   IElementType ANNOTATION_TYPE_KEY = PerlElementTypeFactory.getTokenType("#@type");
   IElementType ANNOTATION_UNKNOWN_KEY = PerlElementTypeFactory.getTokenType("#@unknown");
   IElementType ARRAY_NAME = PerlElementTypeFactory.getTokenType("ARRAY_NAME");

@@ -8,6 +8,9 @@ import com.intellij.psi.PsiElement;
 public interface PsiPerlAnnotationType extends PerlAnnotationWithValue, PerlAnnotation {
 
   @Nullable
+  PsiPerlAnnotationVariable getAnnotationVariable();
+
+  @Nullable
   PsiPerlArrayrefType getArrayrefType();
 
   @Nullable

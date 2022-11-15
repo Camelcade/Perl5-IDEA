@@ -419,6 +419,9 @@
     ANNOTATION_TYPE_KEY='#@type'
     ANNOTATION_NOINSPECTION_KEY='#@noinspection'
     ANNOTATION_UNKNOWN_KEY='#@unknown'
+    ANNOTATION_SCALAR='$annotated'
+    ANNOTATION_ARRAY='@annotated'
+    ANNOTATION_HASH='%annotated'
 
     // lazy parsable tokens parsed in-place
     LP_CODE_BLOCK = "LP_CODE_BLOCK"
@@ -1398,7 +1401,8 @@ private annotation_type_param ::=
 arrayref_type ::= 'ArrayRef' '[' annotation_type_param ']' {pin=1}
 hashref_type ::= 'HashRef' '[' annotation_type_param ']' {pin=1}
 
-annotation_type ::=  '#@type' annotation_type_param {pin=1}
+annotation_type ::=  '#@type' [annotation_variable] annotation_type_param {pin=1}
+annotation_variable ::= '$annotated'|'@annotated'|'%annotated'
 annotation_inject ::=  '#@inject' string_bare {pin=1}
 annotation_noinspection ::=  '#@noinspection' string_bare {pin=1}
 /******************************************* End of annotations *******************************************************/

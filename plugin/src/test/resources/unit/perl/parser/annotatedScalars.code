@@ -1,0 +1,15 @@
+#@type $something Foo::Bar
+#@type $something *
+#@type $something __PACKAGE__
+#@type $something ArrayRef[Foo::Bar]
+#@type $something HashRef[Foo::Bar]
+
+#@type $1 Foo::Bar
+#@type $:: Foo::Bar
+#@type $^M Foo::Bar
+#@type $= Foo::Bar
+
+
+
+
+

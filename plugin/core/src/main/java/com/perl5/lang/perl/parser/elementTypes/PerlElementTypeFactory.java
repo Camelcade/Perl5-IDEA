@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -515,6 +515,8 @@ public class PerlElementTypeFactory {
         return new PerlElementTypeEx(name, PsiPerlCustomAtomExprImpl.class);
       case "COMPOSITE_ATOM_EXPR":
         return new PerlElementTypeEx(name, PsiPerlCompositeAtomExprImpl.class);
+      case "ANNOTATION_VARIABLE":
+        return new PerlElementTypeEx(name, PsiPerlAnnotationVariableImpl.class);
       default: {
         LOG.error("Unknown token:" + name);
         throw new RuntimeException("Unknown token:" + name);

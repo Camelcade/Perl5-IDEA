@@ -274,7 +274,7 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '#@type' annotation_type_param
+  // '#@type' [annotation_variable] annotation_type_param
   public static boolean annotation_type(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "annotation_type")) return false;
     if (!nextTokenIs(builder_, ANNOTATION_TYPE_KEY)) return false;
@@ -282,9 +282,17 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     Marker marker_ = enter_section_(builder_, level_, _NONE_, ANNOTATION_TYPE, null);
     result_ = consumeToken(builder_, ANNOTATION_TYPE_KEY);
     pinned_ = result_; // pin = 1
-    result_ = result_ && annotation_type_param(builder_, level_ + 1);
+    result_ = result_ && report_error_(builder_, annotation_type_1(builder_, level_ + 1));
+    result_ = pinned_ && annotation_type_param(builder_, level_ + 1) && result_;
     exit_section_(builder_, level_, marker_, result_, pinned_, null);
     return result_ || pinned_;
+  }
+
+  // [annotation_variable]
+  private static boolean annotation_type_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "annotation_type_1")) return false;
+    annotation_variable(builder_, level_ + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -299,6 +307,19 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     if (!result_) result_ = arrayref_type(builder_, level_ + 1);
     if (!result_) result_ = hashref_type(builder_, level_ + 1);
     if (!result_) result_ = any_package(builder_, level_ + 1);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // '$annotated'|'@annotated'|'%annotated'
+  public static boolean annotation_variable(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "annotation_variable")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, ANNOTATION_VARIABLE, "<annotation variable>");
+    result_ = consumeToken(builder_, ANNOTATION_SCALAR);
+    if (!result_) result_ = consumeToken(builder_, ANNOTATION_ARRAY);
+    if (!result_) result_ = consumeToken(builder_, ANNOTATION_HASH);
+    exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
   }
 

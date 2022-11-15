@@ -10,38 +10,20 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import com.perl5.lang.perl.psi.*;
 
-public class PsiPerlAnnotationTypeImpl extends PerlCompositeElementImpl implements PsiPerlAnnotationType {
+public class PsiPerlAnnotationVariableImpl extends PerlCompositeElementImpl implements PsiPerlAnnotationVariable {
 
-  public PsiPerlAnnotationTypeImpl(ASTNode node) {
+  public PsiPerlAnnotationVariableImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiPerlVisitor visitor) {
-    visitor.visitAnnotationType(this);
+    visitor.visitAnnotationVariable(this);
   }
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
     if (visitor instanceof PsiPerlVisitor) accept((PsiPerlVisitor)visitor);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public PsiPerlAnnotationVariable getAnnotationVariable() {
-    return PsiTreeUtil.getChildOfType(this, PsiPerlAnnotationVariable.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiPerlArrayrefType getArrayrefType() {
-    return PsiTreeUtil.getChildOfType(this, PsiPerlArrayrefType.class);
-  }
-
-  @Override
-  @Nullable
-  public PsiPerlHashrefType getHashrefType() {
-    return PsiTreeUtil.getChildOfType(this, PsiPerlHashrefType.class);
   }
 
 }

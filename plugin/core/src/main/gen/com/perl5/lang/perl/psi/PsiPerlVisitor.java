@@ -60,6 +60,10 @@ public class PsiPerlVisitor extends PsiElementVisitor {
     // visitPerlAnnotation(o);
   }
 
+  public void visitAnnotationVariable(@NotNull PsiPerlAnnotationVariable o) {
+    visitPerlAnnotation(o);
+  }
+
   public void visitAnonArray(@NotNull PsiPerlAnonArray o) {
     visitExpr(o);
   }
