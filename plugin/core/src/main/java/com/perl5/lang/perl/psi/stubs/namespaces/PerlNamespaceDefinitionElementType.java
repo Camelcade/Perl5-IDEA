@@ -32,6 +32,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 
 import static com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDescendantsIndex.NAMESPACE_DESCENDANTS_KEY;
+import static com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex.NAMESPACE_KEY;
 
 
 public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNamespaceDefinitionStub, PerlNamespaceDefinitionElement>
@@ -71,7 +72,7 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
   @Override
   public void indexStub(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IndexSink sink) {
     String name = stub.getNamespaceName();
-    sink.occurrence(getDirectKey(), name);
+    sink.occurrence(getNamespacesIndexKey(), name);
 
     for (String parent : stub.getParentNamespacesNames()) {
       if (parent != null && !parent.isEmpty()) {
@@ -80,8 +81,8 @@ public class PerlNamespaceDefinitionElementType extends IStubElementType<PerlNam
     }
   }
 
-  protected StubIndexKey<String, ? extends PsiElement> getDirectKey() {
-    return PerlNamespaceIndex.KEY;
+  protected StubIndexKey<String, ? extends PsiElement> getNamespacesIndexKey() {
+    return NAMESPACE_KEY;
   }
 
   protected StubIndexKey<String, ? extends PsiElement> getDescendantsIndexKey() {

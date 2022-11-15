@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceDescendantsIndex.LIGHT_NAMESPACE_DESCENDANTS_KEY;
+import static com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceIndex.LIGHT_NAMESPACE_KEY;
 
 public class PerlLightNamespaceDefinitionElementType extends PerlNamespaceDefinitionElementType {
   public PerlLightNamespaceDefinitionElementType(String name) {
@@ -37,8 +38,8 @@ public class PerlLightNamespaceDefinitionElementType extends PerlNamespaceDefini
   }
 
   @Override
-  protected StubIndexKey<String, ? extends PsiElement> getDirectKey() {
-    return PerlLightNamespaceIndex.KEY;
+  protected StubIndexKey<String, ? extends PsiElement> getNamespacesIndexKey() {
+    return LIGHT_NAMESPACE_KEY;
   }
 
   @Override

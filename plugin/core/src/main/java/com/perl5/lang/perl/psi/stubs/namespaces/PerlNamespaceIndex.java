@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,15 @@ import com.perl5.lang.perl.psi.stubs.PerlStubIndexBase;
 import org.jetbrains.annotations.NotNull;
 
 
+/**
+ * Index for namespace_name => namespace
+ *
+ * @see PerlLightNamespaceIndex
+ */
 public class PerlNamespaceIndex extends PerlStubIndexBase<PerlNamespaceDefinitionElement> {
   public static final int VERSION = 1;
-  public static final StubIndexKey<String, PerlNamespaceDefinitionElement> KEY = StubIndexKey.createIndexKey("perl.package.definition");
+  public static final StubIndexKey<String, PerlNamespaceDefinitionElement>
+    NAMESPACE_KEY = StubIndexKey.createIndexKey("perl.package.definition");
 
   @Override
   public int getVersion() {
@@ -34,7 +40,7 @@ public class PerlNamespaceIndex extends PerlStubIndexBase<PerlNamespaceDefinitio
 
   @Override
   public @NotNull StubIndexKey<String, PerlNamespaceDefinitionElement> getKey() {
-    return KEY;
+    return NAMESPACE_KEY;
   }
 
   @Override

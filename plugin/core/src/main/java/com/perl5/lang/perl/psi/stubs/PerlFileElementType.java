@@ -29,12 +29,13 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManage
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlSubCallHandler;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+
+import static com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex.NAMESPACE_KEY;
 
 public final class PerlFileElementType extends IStubFileElementType<PerlFileStub> {
   private static final int VERSION = 3;
@@ -95,7 +96,7 @@ public final class PerlFileElementType extends IStubFileElementType<PerlFileStub
     if (stub.isEmpty() && stub.getNamespaceName().equals(PerlPackageUtil.MAIN_NAMESPACE_NAME)) {
       return;
     }
-    sink.occurrence(PerlNamespaceIndex.KEY, stub.getNamespaceName());
+    sink.occurrence(NAMESPACE_KEY, stub.getNamespaceName());
   }
 
   @Override
