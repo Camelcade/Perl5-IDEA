@@ -163,25 +163,28 @@ public abstract class PerlMro {
    * @param isSuper     if false - we include current package into the list, true - otherwise
    * @return list of linear @ISA
    */
-  public static ArrayList<String> getLinearISA(@NotNull Project project,
-                                               @NotNull GlobalSearchScope searchScope,
-                                               @NotNull String packageName,
-                                               boolean isSuper) {
-    HashSet<String> recursionMap = new HashSet<>();
-    ArrayList<String> result = new ArrayList<>();
+  public static List<String> getLinearISA(@NotNull Project project,
+                                          @NotNull GlobalSearchScope searchScope,
+                                          @NotNull String packageName,
+                                          boolean isSuper) {
+    var isaCache = PerlIsaCache.getInstance(project);
+    var result = isaCache.get(packageName);
+    if (result == null) {
+      HashSet<String> recursionMap = new HashSet<>();
+      result = new ArrayList<>();
 
-    if (!isSuper) {
       recursionMap.add(packageName);
       result.add(packageName);
+
+      getPackageParents(project, searchScope, packageName, recursionMap, result);
+
+      if (!recursionMap.contains(PerlPackageUtil.UNIVERSAL_NAMESPACE)) {
+        result.add(PerlPackageUtil.UNIVERSAL_NAMESPACE);
+      }
+
+      result = isaCache.put(packageName, result);
     }
-
-    getPackageParents(project, searchScope, packageName, recursionMap, result);
-
-    if (!recursionMap.contains(PerlPackageUtil.UNIVERSAL_NAMESPACE)) {
-      result.add(PerlPackageUtil.UNIVERSAL_NAMESPACE);
-    }
-
-    return result;
+    return isSuper ? result.subList(1, result.size()) : result;
   }
 
   public static void getPackageParents(@NotNull Project project,
@@ -190,7 +193,7 @@ public abstract class PerlMro {
                                        @NotNull Set<String> recursionMap,
                                        @NotNull List<String> result) {
     // at the moment we are checking all definitions available
-    // fixme we should check only those, which are used in currrent file
+    // fixme we should check only those, which are used in current file
     for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil.getNamespaceDefinitions(project, searchScope, packageName)) {
       namespaceDefinition.getLinearISA(recursionMap, result);
     }
