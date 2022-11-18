@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ import java.util.List;
 @Deprecated
 public class PerlInjectedFileChangesHandlerFactory implements InjectedFileChangesHandlerProvider {
   @Override
-  public InjectedFileChangesHandler createFileChangesHandler(List<PsiLanguageInjectionHost.Shred> shreds,
+  public InjectedFileChangesHandler createFileChangesHandler(List<? extends PsiLanguageInjectionHost.Shred> shreds,
                                                              Editor hostEditor,
                                                              Document newDocument,
                                                              PsiFile injectedFile) {
