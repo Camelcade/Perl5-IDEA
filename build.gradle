@@ -184,27 +184,22 @@ idea {
   }
 }
 
-task jacocoMerge(type: JacocoMerge) {
+tasks.register('jacocoRootReport', JacocoReport) {
+  group = 'verification'
+  description = 'Generates an aggregate report from all projects'
+
   dependsOn(allprojects.jacocoTestReport.dependsOn)
   mustRunAfter(allprojects.jacocoTestReport.mustRunAfter)
-  destinationFile = file("${buildDir}/jacoco/test.exec")
-  executionData = files(allprojects.jacocoTestReport.executionData)
-    .filter { f -> f.exists() }
-}
-
-task jacocoRootReport(type: JacocoReport, group: 'Coverage reports') {
-  description = 'Generates an aggregate report from all projects'
-  dependsOn jacocoMerge
+  executionData(files(allprojects.jacocoTestReport.executionData).filter { f -> f.exists() })
 
   additionalSourceDirs.setFrom files(allprojects.sourceSets.main.allSource.srcDirs)
   sourceDirectories.setFrom files(allprojects.sourceSets.main.allSource.srcDirs)
   classDirectories.setFrom files(allprojects.sourceSets.main.output)
-  executionData jacocoMerge.destinationFile
 
   reports {
-    html.enabled = true // human readable
-    xml.enabled = true // required by coveralls
-    csv.enabled = false
+    html.getRequired().set(true) // human readable
+    xml.getRequired().set(true) // required by coveralls
+    csv.getRequired().set(false)
   }
 }
 
@@ -225,7 +220,7 @@ coveralls {
 }
 
 tasks.coveralls {
-  group = 'Coverage reports'
+  group = 'verification'
   description = 'Uploads the aggregated coverage report to Coveralls'
   dependsOn jacocoRootReport
 }
@@ -285,6 +280,8 @@ runIde {
   jvmArgs("-Xmx2048m")
 }
 
-task publishAllPlugins {
+tasks.register('publishAllPlugins') {
+  group = 'intellij'
+  description = 'Publish all plugins to the Marketplace'
   pluginProjects.each { dependsOn("${it.name}:publishPlugin") }
 }
