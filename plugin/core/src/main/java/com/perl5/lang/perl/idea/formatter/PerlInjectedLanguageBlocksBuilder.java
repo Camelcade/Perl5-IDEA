@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -146,8 +146,9 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     return myInjectedPsiFile == null ? null : LanguageFormatting.INSTANCE.forContext(myInjectedPsiFile);
   }
 
+
   @Override
-  public void visit(@NotNull PsiFile injectedPsi, @NotNull List<Shred> places) {
+  public void visit(@NotNull PsiFile injectedPsi, @NotNull List<? extends Shred> places) {
     PsiElement hostPsi = getHostPsi();
     for (Shred shred : places) {
       if (hostPsi != shred.getHost()) {
