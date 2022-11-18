@@ -23,6 +23,7 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
@@ -337,7 +338,7 @@ public class PerlProjectManager implements Disposable {
     if (virtualFile == null) {
       return getSdk(project);
     }
-    Module module = ModuleUtilCore.findModuleForFile(virtualFile, project);
+    Module module = ReadAction.compute(() -> ModuleUtilCore.findModuleForFile(virtualFile, project));
     return module == null ? getSdk(project) : getSdk(module);
   }
 
