@@ -14,7 +14,12 @@
 
 This repo contains a bundle of Perl5-related plugins for [JetBrains IDEs](https://www.jetbrains.com/).
 
-Current versions of plugins may be found in [JetBrains repo](https://plugins.jetbrains.com/).
+Current versions of plugins may be found in the JetBrains
+repo: [Stable builds](https://plugins.jetbrains.com/plugin/7796-perl/versions/stable)
+or [EAP Builds](https://plugins.jetbrains.com/plugin/7796-perl/versions/eap).
+
+In order to get updates to EAP builds from the IDE, you need to add the EAP repository to the list of plugin
+repositories: `https://plugins.jetbrains.com/plugins/eap/list`
 
 #### This repository contains following plugins:
 
@@ -23,8 +28,8 @@ Current versions of plugins may be found in [JetBrains repo](https://plugins.jet
 - [Template Toolkit](http://www.template-toolkit.org/) Support (`lang.tt2`)
 - [Mojolicious](https://mojolicious.org/) Support (`lang.mojo`)
 - Mason framework (`lang.mason.framework`) - core plugin of Mason plugins:
-  - [HTML::Mason](https://metacpan.org/pod/HTML::Mason) Support (`lang.mason.htmlmason`) 
-  - [Mason2](https://metacpan.org/pod/Mason) Support (`lang.mason.mason2`) 
+  - [HTML::Mason](https://metacpan.org/pod/HTML::Mason) Support (`lang.mason.htmlmason`)
+  - [Mason2](https://metacpan.org/pod/Mason) Support (`lang.mason.mason2`)
 - Embedded Perl Support (`lang.embedded`) - adds support for php-like perl syntax with `<?` and `?>` markers.
 
 You can always build and install current development version of any plugin:
