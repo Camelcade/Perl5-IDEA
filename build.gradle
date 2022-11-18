@@ -97,6 +97,9 @@ allprojects {
   buildSearchableOptions { onlyIf { isPlugin } }
   publishPlugin {
     onlyIf { isPlugin }
+    if (project.hasProperty('eap')) {
+      channels = ['EAP']
+    }
     token = project.findProperty('jbToken') ?: ''
   }
   verifyPlugin {
