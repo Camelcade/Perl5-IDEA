@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,6 +111,9 @@ public final class PerlElementPatterns {
     psiElement().withParent(METHOD_PATTERN.and(IN_OBJECT_CALL_PATTERN));
 
   public static final PsiElementPattern.Capture<PerlVariable> VARIABLE_PATTERN = psiElement(PerlVariable.class);
+
+  public static final PsiElementPattern.Capture<PerlAnnotationVariableElement> ANNOTATION_VARIABLE_PATTERN =
+    psiElement(PerlAnnotationVariableElement.class);
 
   public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = psiElement(PerlVariableNameElement.class);
   public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_IN_DECLARATION_PATTERN =

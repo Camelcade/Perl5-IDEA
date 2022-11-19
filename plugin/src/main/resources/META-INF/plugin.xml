@@ -402,6 +402,8 @@
                              implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringManipulator"/>
     <lang.elementManipulator forClass="com.perl5.lang.perl.psi.mixins.PerlStringBareMixin" order="after QuotedString"
                              implementationClass="com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlAnnotationVariableElement"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlAnnotationVariableElementManipulator"/>
 
     <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlStringContentElement" order="first"
                              implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator"/>
