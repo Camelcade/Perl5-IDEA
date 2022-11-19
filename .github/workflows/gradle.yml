@@ -145,9 +145,6 @@ jobs:
       - name: Upload coveralls data
         run: |
           ./gradlew coveralls
-      - name: SonarCube analysis
-        run: |
-          ./gradlew sonarqube --info
       - name: Building plugins
         run: |
           ./gradlew buildPlugin
