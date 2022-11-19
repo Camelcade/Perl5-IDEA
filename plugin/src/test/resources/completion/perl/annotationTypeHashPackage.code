@@ -1,0 +1,2 @@
+#@type %var <caret>
+my %var;

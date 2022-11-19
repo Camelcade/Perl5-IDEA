@@ -530,6 +530,21 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   }
 
   @Test
+  public void testAnnotationTypeArrayPackage() {
+    doTest();
+  }
+
+  @Test
+  public void testAnnotationTypeHashPackage() {
+    doTest();
+  }
+
+  @Test
+  public void testAnnotationTypeScalarPackage() {
+    doTest();
+  }
+
+  @Test
   public void testImportSubsParam() {
     doTest();
   }
