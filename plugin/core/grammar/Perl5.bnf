@@ -485,6 +485,8 @@
 
     extends("heredoc_opener|tag_scalar")=expr
 
+    implements("annotation_variable")="com.perl5.lang.perl.psi.PerlAnnotationVariableElement"
+
     mixin("unicode_char")="com.perl5.lang.perl.psi.mixins.PerlUnicodeSubstitutionMixin"
     mixin("hex_char")="com.perl5.lang.perl.psi.mixins.PerlHexSubstitutionMixin"
     mixin("oct_char")="com.perl5.lang.perl.psi.mixins.PerlOctSubstitutionMixin"
