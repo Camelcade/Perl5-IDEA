@@ -41,3 +41,4 @@
 #@returns       ArrayRef      [   HashRef     [      Foo::Bar ]     ]
 #@returns          HashRef    [     HashRef       [     Foo::Bar      ]    ]
 
+#@type Checking::End

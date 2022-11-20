@@ -366,15 +366,16 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 /////////////////////////////////// annotations ////////////////////////////////////////////////////////////////////////
 <ANNOTATION_FALLBACK>{
-	[^]+			{yybegin(YYINITIAL);return COMMENT_LINE;}
+        {WHITE_SPACE}+		{return TokenType.WHITE_SPACE;}
+	[\S].*			{yybegin(YYINITIAL);return COMMENT_LINE;}
+        [^]                     {yypushback(1);yybegin(YYINITIAL);}
 }
+
 <ANNOTATION> "#@"			{yybegin(ANNOTATION_KEY);}
 
-<ANNOTATION_STRING,ANNOTATION_TYPE,ANNOTATION_TYPE_AFTER_VAR,ANNOTATION_PACKAGE_RETURNS,ANNOTATION_TYPE_NESTED>
-{
+<ANNOTATION_STRING,ANNOTATION_TYPE,ANNOTATION_TYPE_AFTER_VAR,ANNOTATION_PACKAGE_RETURNS,ANNOTATION_TYPE_NESTED>{
 	{WHITE_SPACE}+			{return TokenType.WHITE_SPACE;}
 }
-
 
 <ANNOTATION_TYPE,ANNOTATION_TYPE_AFTER_VAR,ANNOTATION_PACKAGE_RETURNS>{
         "ArrayRef"              {yybegin(ANNOTATION_FALLBACK);pushStateAndBegin(ANNOTATION_TYPE_NESTED);return TYPE_ARRAYREF;}

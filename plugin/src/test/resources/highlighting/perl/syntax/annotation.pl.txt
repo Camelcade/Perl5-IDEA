@@ -1,18 +1,18 @@
 #@deprecated
     PERL_ANNOTATION => DEFAULT_METADATA => TEXT
- this is the end!
+this is the end!
     PERL_COMMENT => DEFAULT_LINE_COMMENT
 #@override
     PERL_ANNOTATION => DEFAULT_METADATA => TEXT
- this is the end!
+this is the end!
     PERL_COMMENT => DEFAULT_LINE_COMMENT
 #@method
     PERL_ANNOTATION => DEFAULT_METADATA => TEXT
- this is the end!
+this is the end!
     PERL_COMMENT => DEFAULT_LINE_COMMENT
 #@abstract
     PERL_ANNOTATION => DEFAULT_METADATA => TEXT
- this is t he  end!
+this is t he  end!
     PERL_COMMENT => DEFAULT_LINE_COMMENT
 #@in
     PERL_COMMENT => DEFAULT_LINE_COMMENT
@@ -20,13 +20,13 @@
     PERL_ANNOTATION => DEFAULT_METADATA => TEXT
 Foo::Bar
     PERL_PACKAGE => DEFAULT_CLASS_NAME => DEFAULT_IDENTIFIER => TEXT
- this is t  he end!
+this is t  he end!
     PERL_COMMENT => DEFAULT_LINE_COMMENT
 #@returns
     PERL_ANNOTATION => DEFAULT_METADATA => TEXT
 Foo
     PERL_PACKAGE => DEFAULT_CLASS_NAME => DEFAULT_IDENTIFIER => TEXT
- this is t he end!
+this is t he end!
     PERL_COMMENT => DEFAULT_LINE_COMMENT
 #@returns
     PERL_ANNOTATION => DEFAULT_METADATA => TEXT
@@ -34,7 +34,7 @@ Foo
     PERL_ANNOTATION => DEFAULT_METADATA => TEXT
 MYSQL
     PERL_SQ_STRING => DEFAULT_STRING
- this is the end!
+this is the end!
     PERL_COMMENT => DEFAULT_LINE_COMMENT
 #@inject
     PERL_ANNOTATION => DEFAULT_METADATA => TEXT
@@ -44,7 +44,7 @@ PERL5
     PERL_ANNOTATION => DEFAULT_METADATA => TEXT
 this
     PERL_SQ_STRING => DEFAULT_STRING
- is the end!
+is the end!
     PERL_COMMENT => DEFAULT_LINE_COMMENT
 #@noinspection
     PERL_ANNOTATION => DEFAULT_METADATA => TEXT

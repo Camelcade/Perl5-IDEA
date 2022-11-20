@@ -8763,7 +8763,7 @@ sub print_line {
             $val1 = main::row_defaults('disk-data');
             @data = ({ main::key($num++, 0, 1, $key1) => $val1, });
         }
-        #@rows  = (@rows,@data);
+        #@rows = (@rows,@data);
         @data = ();
         if ($show{'optical'} || $show{'optical-basic'}) {
             @data = OpticalData::get();
@@ -10779,7 +10779,7 @@ sub print_line {
             my ($screen_id, $screen, @working);
             my ($res_x, $res_x_i, $res_y, $res_y_i, $size_x, $size_x_i, $size_y, $size_y_i);
             my @xdpyinfo = main::grabber("$program $display_opt 2>/dev/null", "\n", 'strip');
-            #@xdpyinfo  = map {s/^\s+//;$_} @xdpyinfo if @xdpyinfo;
+            #@xdpyinfo = map {s/^\s+//;$_} @xdpyinfo if @xdpyinfo;
             #print join "\n",@xdpyinfo, "\n";
             foreach (@xdpyinfo) {
                 @working = split /:\s+/, $_;
@@ -11182,7 +11182,7 @@ sub print_line {
                     voodoo);
             # it's much cheaper to grab the simple pattern match then do the expensive one
             # in the main loop.
-            #@xorg  = grep {/Failed|Unload|Loading/} @xorg;
+            #@xorg = grep {/Failed|Unload|Loading/} @xorg;
             foreach (@xorg) {
                 next if !/Failed|Unload|Loading/;
                 # print "$_\n";
@@ -12589,7 +12589,7 @@ sub print_line {
         my (@data, @rows, $key1, $val1);
         my $num = 0;
         if ($bsd_type) {
-            #@data  = optical_data_bsd();
+            #@data = optical_data_bsd();
             $key1 = 'Optical Report';
             $val1 = main::row_defaults('optical-data-bsd');
             @data = ({ main::key($num++, 0, 1, $key1) => $val1, });
@@ -14375,7 +14375,7 @@ sub print_line {
             #$file = "$ENV{'HOME'}/bin/scripts/inxi/data/raid/zpool-status-1-mirror-main-solestar.txt";
             #$file = "$ENV{'HOME'}/bin/scripts/inxi/data/raid/zpool-status-2-mirror-main-solestar.txt";
             #$file = "$ENV{'HOME'}/bin/scripts/inxi/data/raid/zpool-status-tank-1.txt";
-            #@pool_status  = main::reader($file,'strip');
+            #@pool_status = main::reader($file,'strip');
             $cmd = "$zpool status $row{'id'} 2>/dev/null";
             @pool_status = main::grabber($cmd, "\n", 'strip');
             main::log_data('cmd', $cmd) if $b_log;
@@ -14384,7 +14384,7 @@ sub print_line {
             #print "$row{'id'} rs:$row{'status'}\n";
             $status = ($row{'status'} && $row{'status'} eq 'no-status') ? check_status($row{'id'}, @pool_status) : $row{'status'};
             $zfs[$j]{'status'} = $status if $status;
-            #@arrays  = grep {defined $_} @arrays;
+            #@arrays = grep {defined $_} @arrays;
             #print "$row{id} $#arrays\n";
             #print Data::Dumper::Dumper \@arrays;
             foreach my $array (@arrays) {
@@ -15098,7 +15098,7 @@ sub print_line {
                 @data = repo_builder($_, 'apt', '^\s*(deb|rpm)') if -r $_;
                 @rows = (@rows, @data);
             }
-            #@files  = main::globber("$ENV{'HOME'}/bin/scripts/inxi/data/repo/apt/*.sources");
+            #@files = main::globber("$ENV{'HOME'}/bin/scripts/inxi/data/repo/apt/*.sources");
             @files = main::globber('/etc/apt/sources.list.d/*.sources');
             main::log_data('data', "apt deb822 repo files:\n" . main::joiner(\@files, "\n", 'unset')) if $b_log;
             foreach $file (@files) {
@@ -15512,7 +15512,7 @@ sub print_line {
             my $which = ($path =~ /pisi$/) ? 'pisi' : 'eopkg';
             my $cmd = ($which eq 'pisi') ? "$path list-repo" : "$path lr";
             #my $file = "$ENV{HOME}/bin/scripts/inxi/data/repo/solus/eopkg-2.txt";
-            #@data2  = main::reader($file,'strip');
+            #@data2 = main::reader($file,'strip');
             @data2 = main::grabber("$cmd 2>/dev/null", "\n", 'strip');
             main::writer("$debugger_dir/system-repo-data-$which.txt", @data2) if $debugger_dir;
             # now we need to create the structure: repo info: repo path
@@ -16003,7 +16003,7 @@ sub print_line {
         #$file = "$ENV{'HOME'}/bin/scripts/inxi/data/ipmitool/ipmi-sensors-crazy-epyc-1.txt";
         #$file = "$ENV{'HOME'}/bin/scripts/inxi/data/ipmitool/ipmi-sensors-lathander.txt";
         #$file = "$ENV{'HOME'}/bin/scripts/inxi/data/ipmitool/ipmi-sensors-zwerg.txt";
-        #@data  = main::reader($file);
+        #@data = main::reader($file);
         if ($program =~ /ipmi-sensors$/) {
             $cmd = $program;
             ($b_ipmitool, $i_key, $i_value, $i_unit) = (0, 1, 3, 4);
@@ -20410,7 +20410,7 @@ sub get_uptime {
         #my $file = "$ENV{'HOME'}/bin/scripts/inxi/data/pcidump/pci-openbsd-6.1-vm.txt";
         #my $file = "$ENV{HOME}/bin/scripts/inxi/data/lspci/racermach-1-knnv.txt";
         #my $file = "$ENV{HOME}/bin/scripts/inxi/data/lspci/rk016013-knnv.txt";
-        #@data  = main::reader($file,'strip');
+        #@data = main::reader($file,'strip');
         if (@data) {
             $b_pci_tool = 1 if scalar @data > 10;
             foreach (@data) {
@@ -21024,7 +21024,7 @@ sub set_ps_aux {
         @split = @split[$ps_cols .. $final];
         join " ", @split;
     } @ps_aux;
-    #@ps_cmd  = grep {!/^\[/} @ps_cmd;
+    #@ps_cmd = grep {!/^\[/} @ps_cmd;
     # never, because ps loaded before option handler
     print Dumper \@ps_cmd if $test[5];
     eval $end if $b_log;
