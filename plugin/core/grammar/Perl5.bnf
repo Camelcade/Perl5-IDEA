@@ -486,6 +486,7 @@
     extends("heredoc_opener|tag_scalar")=expr
 
     implements("annotation_variable")="com.perl5.lang.perl.psi.PerlAnnotationVariableElement"
+    mixin("annotation_variable")="com.perl5.lang.perl.psi.impl.PerlCompositeElementWithReference"
 
     mixin("unicode_char")="com.perl5.lang.perl.psi.mixins.PerlUnicodeSubstitutionMixin"
     mixin("hex_char")="com.perl5.lang.perl.psi.mixins.PerlHexSubstitutionMixin"
@@ -547,7 +548,7 @@
     mixin("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.mixins.PerlVariableMixin"
     implements("code_variable|scalar_variable|array_variable|hash_variable|array_index_variable")="com.perl5.lang.perl.psi.PerlVariable"
 
-	mixin("label_expr")="com.perl5.lang.perl.psi.impl.PerlCompositeElementWithReference"
+    mixin("label_expr")="com.perl5.lang.perl.psi.impl.PerlCompositeElementWithReference"
 
     stubClass("namespace_definition")="com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub"
     mixin("namespace_definition")="com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin"

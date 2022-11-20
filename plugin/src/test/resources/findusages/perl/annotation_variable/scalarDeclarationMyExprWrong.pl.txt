@@ -1,0 +1,2 @@
+Target: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 33 in scalarDeclarationMyExprWrong.pl
+Total usages: 0

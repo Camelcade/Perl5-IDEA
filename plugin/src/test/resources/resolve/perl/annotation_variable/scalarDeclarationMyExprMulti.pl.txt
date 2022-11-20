@@ -1,0 +1,15 @@
+PerlAnnotationVariableReference at (13,22); text in range: 'something' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 33 in scalarDeclarationMyExprMulti.pl
+
+PerlNamespaceReference at (23,31); text in range: 'Foo::Bar' => 0 results:
+
+PerlAnnotationVariableReference at (67,77); text in range: 'otherthing' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 88 in scalarDeclarationMyExprMulti.pl
+
+PerlNamespaceReference at (78,86); text in range: 'Foo::Bar' => 0 results:
+
+PerlAnnotationVariableReference at (110,120); text in range: 'otherthing' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 131 in scalarDeclarationMyExprMulti.pl
+
+PerlNamespaceReference at (121,129); text in range: 'Foo::Baz' => 0 results:
+

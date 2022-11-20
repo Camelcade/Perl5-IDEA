@@ -1,0 +1,6 @@
+my(
+ #@type $NewName Foo::Bar comment in there
+ $NewName,
+ $something,
+ $otherthing
+);

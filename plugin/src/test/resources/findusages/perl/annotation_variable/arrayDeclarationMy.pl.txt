@@ -1,0 +1,5 @@
+Target: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 30 in arrayDeclarationMy.pl
+Total usages: 1
+	PsiPerlAnnotationVariableImpl(Perl5: ANNOTATION_VARIABLE) at 7 in arrayDeclarationMy.pl, via: PerlAnnotationVariableReference at (8,17); text in range: 'something' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 30 in arrayDeclarationMy.pl
+

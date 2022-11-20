@@ -1,0 +1,2 @@
+#@type $<READ>something</READ> Foo::Bar
+my $<WRITE>something</WRITE>;

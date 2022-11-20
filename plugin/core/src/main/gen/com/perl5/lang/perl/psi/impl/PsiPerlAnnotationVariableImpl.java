@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import com.perl5.lang.perl.psi.*;
 
-public class PsiPerlAnnotationVariableImpl extends PerlCompositeElementImpl implements PsiPerlAnnotationVariable {
+public class PsiPerlAnnotationVariableImpl extends PerlCompositeElementWithReference implements PsiPerlAnnotationVariable {
 
   public PsiPerlAnnotationVariableImpl(ASTNode node) {
     super(node);

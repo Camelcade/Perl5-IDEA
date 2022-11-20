@@ -1,0 +1,15 @@
+PerlAnnotationVariableReference at (8,18); text in range: 'thirdthing' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 135 in scalarDeclarationSubSignatureMultiline.pl
+
+PerlNamespaceReference at (19,27); text in range: 'Foo::Bar' => 0 results:
+
+PerlAnnotationVariableReference at (36,45); text in range: 'something' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 92 in scalarDeclarationSubSignatureMultiline.pl
+
+PerlNamespaceReference at (46,54); text in range: 'Foo::Bar' => 0 results:
+
+PerlAnnotationVariableReference at (63,73); text in range: 'otherthing' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 113 in scalarDeclarationSubSignatureMultiline.pl
+
+PerlNamespaceReference at (74,82); text in range: 'Foo::Bar' => 0 results:
+

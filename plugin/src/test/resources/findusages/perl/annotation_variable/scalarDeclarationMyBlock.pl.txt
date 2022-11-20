@@ -1,0 +1,2 @@
+Target: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 35 in scalarDeclarationMyBlock.pl
+Total usages: 0

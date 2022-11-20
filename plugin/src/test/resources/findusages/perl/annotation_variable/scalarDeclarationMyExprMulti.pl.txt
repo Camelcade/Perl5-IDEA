@@ -1,0 +1,5 @@
+Target: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 88 in scalarDeclarationMyExprMulti.pl
+Total usages: 1
+	PsiPerlAnnotationVariableImpl(Perl5: ANNOTATION_VARIABLE) at 66 in scalarDeclarationMyExprMulti.pl, via: PerlAnnotationVariableReference at (67,77); text in range: 'otherthing' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 88 in scalarDeclarationMyExprMulti.pl
+

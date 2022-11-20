@@ -1,0 +1,6 @@
+#@type $thirdt<caret>hing Foo::Bar
+#@type $something Foo::Bar
+#@type $otherthing Foo::Bar
+async sub some($something, $otherthing, $thirdthing){
+
+}

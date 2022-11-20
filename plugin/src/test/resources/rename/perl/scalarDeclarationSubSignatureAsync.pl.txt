@@ -1,0 +1,6 @@
+#@type $thirdthing Foo::Bar
+#@type $NewName Foo::Bar
+#@type $otherthing Foo::Bar
+async sub some($NewName, $otherthing, $thirdthing){
+
+}

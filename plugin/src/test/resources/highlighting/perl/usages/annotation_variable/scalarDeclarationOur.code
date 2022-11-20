@@ -1,0 +1,2 @@
+#@type $som<caret>ething Foo::Bar
+our $something;

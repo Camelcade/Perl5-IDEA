@@ -1,0 +1,6 @@
+#@type $<READ>thirdthing</READ> Foo::Bar
+#@type $something Foo::Bar
+#@type $otherthing Foo::Bar
+async sub some($something, $otherthing, $<WRITE>thirdthing</WRITE>){
+
+}

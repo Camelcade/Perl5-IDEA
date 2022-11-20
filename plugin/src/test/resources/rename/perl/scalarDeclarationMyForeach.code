@@ -1,0 +1,2 @@
+#@type $something Foo::Bar
+for my $som<caret>ething (@otherthing){}

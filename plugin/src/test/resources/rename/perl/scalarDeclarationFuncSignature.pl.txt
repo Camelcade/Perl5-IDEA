@@ -1,0 +1,6 @@
+#@type $thirdthing Foo::Bar
+#@type $something Foo::Bar
+#@type $NewName Foo::Bar
+func some($something, $NewName, $thirdthing){
+
+}

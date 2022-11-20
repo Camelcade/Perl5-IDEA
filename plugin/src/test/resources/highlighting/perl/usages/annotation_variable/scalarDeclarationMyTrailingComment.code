@@ -1,0 +1,2 @@
+#@type $someth<caret>ing Foo::Bar some comment in there
+my $something;

@@ -1,0 +1,2 @@
+#@type $<READ>something</READ> Foo::Bar
+local $<WRITE>something</WRITE>;

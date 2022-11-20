@@ -1,0 +1,6 @@
+#@type $NewName Foo::Bar
+#@type $something Foo::Bar
+#@type $otherthing Foo::Bar
+method some($something, $otherthing, $NewName){
+
+}

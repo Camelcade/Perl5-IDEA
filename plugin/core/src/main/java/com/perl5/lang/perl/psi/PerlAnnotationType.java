@@ -17,8 +17,16 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiModificationTracker;
+import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.List;
 
 public interface PerlAnnotationType extends PerlAnnotationWithValue {
 
@@ -47,5 +55,26 @@ public interface PerlAnnotationType extends PerlAnnotationWithValue {
     var annotationVariableName = annotationVariable.getNode().getChars();
     return perlVariable.getActualType().getSigil() == annotationVariableName.charAt(0) &&
            StringUtil.equal(perlVariable.getName(), annotationVariableName.subSequence(1, annotationVariableName.length()), true);
+  }
+
+  /**
+   * @return collection of declarations this annotation applies to
+   */
+  default @NotNull List<PerlVariableDeclarationElement> getTargets() {
+    return CachedValuesManager.getCachedValue(
+      this,
+      () -> CachedValueProvider.Result.create(PerlVariableAnnotations.computeTargets(this), PsiModificationTracker.MODIFICATION_COUNT));
+  }
+
+  /**
+   * @return wrapping comment {@link PsiElement}
+   */
+  default @NotNull PerlAnnotationContainer getAnnotationContainer() {
+    var parent = getParent();
+    if (parent instanceof PerlAnnotationContainer annotationContainer) {
+      return annotationContainer;
+    }
+    throw new IllegalStateException(
+      "Type annotation is expected to be inside " + PerlAnnotationContainer.class.getSimpleName() + ", not " + parent);
   }
 }

@@ -1,0 +1,2 @@
+#@type $something Foo::Bar
+local $so<caret>mething;

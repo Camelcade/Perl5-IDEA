@@ -1,0 +1,9 @@
+my(
+ #@type $something Foo::Bar
+ $something,
+ $something,
+ #@type $otherthing Foo::Bar
+ $otherthing,
+ #@type $othe<caret>rthing Foo::Baz
+ $otherthing,
+);

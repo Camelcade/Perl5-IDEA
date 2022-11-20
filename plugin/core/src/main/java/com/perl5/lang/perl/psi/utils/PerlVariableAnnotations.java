@@ -16,18 +16,21 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.intellij.psi.util.*;
+import com.intellij.util.Processor;
+import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
-import com.perl5.lang.perl.psi.PerlAnnotation;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PsiPerlAnnotationDeprecated;
-import com.perl5.lang.perl.psi.PsiPerlAnnotationType;
+import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
+import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
@@ -100,35 +103,150 @@ public class PerlVariableAnnotations {
     );
   }
 
-  public static @Nullable PerlVariableAnnotations createFromAnnotationsList(@NotNull List<PerlAnnotation> annotations,
-                                                                            @NotNull PerlVariable perlVariable) {
-    if (annotations.isEmpty()) {
-      return null;
+  public static @NotNull PerlVariableAnnotations from(@NotNull PerlVariableDeclarationElement variableDeclarationElement) {
+    PerlVariableAnnotations annotations = new PerlVariableAnnotations();
+    processAnnotations(variableDeclarationElement, new VariableAnnotationProcessor() {
+      @Override
+      public boolean process(@NotNull PsiPerlAnnotationDeprecated annotationDeprecated) {
+        annotations.setIsDeprecated();
+        return true;
+      }
+
+      @Override
+      public boolean process(@NotNull PerlAnnotationType annotationType) {
+        annotations.setValue(annotationType.getValue());
+        return true;
+      }
+    });
+    return annotations.isEmpty() ? EMPTY : annotations;
+  }
+
+  private static @NotNull List<PerlAnnotation> collectAnnotationsInScope(@NotNull PerlVariableDeclarationElement variableDeclarationElement) {
+    return CachedValuesManager.getCachedValue(variableDeclarationElement, () -> {
+      List<PerlAnnotation> perlAnnotations = PerlAnnotations.collectAnnotations(variableDeclarationElement);
+      var declarationExpression = variableDeclarationElement.getDeclarationExpression();
+      if (perlAnnotations.isEmpty() && declarationExpression != null) {
+        perlAnnotations = PerlAnnotations.collectAnnotations(declarationExpression);
+      }
+      if (perlAnnotations.isEmpty() && declarationExpression != null &&
+          PsiUtilCore.getElementType(declarationExpression.getParent()) == PerlElementTypesGenerated.FOREACH_ITERATOR) {
+        perlAnnotations =
+          PerlAnnotations.collectAnnotations(PsiTreeUtil.getParentOfType(variableDeclarationElement, PerlForeachCompound.class));
+      }
+      if (perlAnnotations.isEmpty() &&
+          PsiUtilCore.getElementType(variableDeclarationElement.getParent()) == PerlElementTypesGenerated.SIGNATURE_ELEMENT) {
+        perlAnnotations = ContainerUtil.filter(
+          PerlAnnotations.collectAnnotations(PsiTreeUtil.getParentOfType(variableDeclarationElement, PerlSubElement.class)),
+          it -> !(it instanceof PsiPerlAnnotationDeprecated));
+      }
+      return CachedValueProvider.Result.create(perlAnnotations, PsiModificationTracker.MODIFICATION_COUNT);
+    });
+  }
+
+  private static boolean processAnnotations(@NotNull PerlVariableDeclarationElement variableDeclarationElement,
+                                            @NotNull PerlVariableAnnotations.VariableAnnotationProcessor annotationsProcessor) {
+
+    var annotationList = collectAnnotationsInScope(variableDeclarationElement);
+    if (annotationList.isEmpty()) {
+      return true;
     }
-
-    PerlVariableAnnotations myAnnotations = new PerlVariableAnnotations();
-
     boolean valueSet = false;
     boolean valueSetExplicitly = false;
-    for (PerlAnnotation annotation : annotations) {
-      if (annotation instanceof PsiPerlAnnotationDeprecated) {
-        myAnnotations.setIsDeprecated();
+    for (PerlAnnotation annotation : annotationList) {
+      if (annotation instanceof PsiPerlAnnotationDeprecated annotationDeprecated) {
+        if (!annotationsProcessor.process(annotationDeprecated)) {
+          return false;
+        }
       }
-      else if (!valueSetExplicitly && annotation instanceof PsiPerlAnnotationType typeAnnotation && typeAnnotation.accept(perlVariable)) {
+      else if (!valueSetExplicitly && annotation instanceof PerlAnnotationType typeAnnotation &&
+               typeAnnotation.accept(variableDeclarationElement.getVariable())) {
         var isWildCard = typeAnnotation.isWildCard();
         if (!valueSet || !isWildCard) {
           valueSet = true;
           valueSetExplicitly = !isWildCard;
-          myAnnotations.setValue(((PsiPerlAnnotationType)annotation).getValue());
+          if (!annotationsProcessor.process(typeAnnotation)) {
+            return false;
+          }
         }
       }
     }
-
-    return myAnnotations;
+    return true;
   }
 
   @Override
   public String toString() {
-    return isDeprecated() ? "deprecated" : "none";
+    return isEmpty() ? "none" : "PerlVariableAnnotations{" +
+                                "myFlags=" + myFlags +
+                                ", myValue=" + myValue +
+                                '}';
+  }
+
+  /**
+   * @return list of variable declarations {@code typeAnnotation} applies to
+   */
+  public static @NotNull List<PerlVariableDeclarationElement> computeTargets(@NotNull PerlAnnotationType typeAnnotation) {
+    var result = new ArrayList<PerlVariableDeclarationElement>();
+    processPotentialTargets(typeAnnotation, it -> processAnnotations(it, new VariableAnnotationProcessor() {
+      @Override
+      public boolean process(@NotNull PerlAnnotationType annotationType) {
+        if (annotationType.equals(typeAnnotation)) {
+          result.add(it);
+        }
+        return true;
+      }
+    }));
+    return result;
+  }
+
+  /**
+   * Processes variable declarations to which {@code typeAnnotation} may belong
+   */
+  public static boolean processPotentialTargets(@NotNull PerlAnnotationType typeAnnotation,
+                                                @NotNull Processor<PerlVariableDeclarationElement> declarationElementProcessor) {
+    PsiElement run = typeAnnotation.getAnnotationContainer();
+    while (run != null && PerlParserDefinition.WHITE_SPACE_AND_REAL_COMMENTS.contains(PsiUtilCore.getElementType(run))) {
+      run = run.getNextSibling();
+    }
+
+    if (run instanceof PerlForeachCompound foreachCompound) {
+      run = foreachCompound.getForeachIterator();
+    }
+    else if (run instanceof PerlSubElement subElement) {
+      run = subElement.getSignatureContent();
+    }
+    else if (!(run instanceof PsiPerlExpr || run instanceof PsiPerlStatement || run instanceof PsiPerlVariableDeclarationElement)) {
+      return true;
+    }
+
+    if (run == null) {
+      return true;
+    }
+
+    var visitor = new PerlRecursiveVisitor() {
+      @Override
+      public void visitVariableDeclarationElement(@NotNull PsiPerlVariableDeclarationElement o) {
+        if (!declarationElementProcessor.process(o)) {
+          stop();
+        }
+      }
+
+      @Override
+      public void visitBlock(@NotNull PsiPerlBlock o) {
+        // do not enter blocks
+      }
+    };
+    run.accept(visitor);
+
+    return !visitor.isStopped();
+  }
+
+  public interface VariableAnnotationProcessor {
+    default boolean process(@NotNull PsiPerlAnnotationDeprecated annotationDeprecated) {
+      return true;
+    }
+
+    default boolean process(@NotNull PerlAnnotationType annotationType) {
+      return true;
+    }
   }
 }

@@ -23,18 +23,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation;
-import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
-import com.perl5.lang.perl.psi.utils.PerlAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -43,7 +38,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.List;
 import java.util.Objects;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
@@ -217,22 +211,8 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
   }
 
   @Override
-  public @Nullable PerlVariableAnnotations getLocalVariableAnnotations() {
-    List<PerlAnnotation> perlAnnotations = PerlAnnotations.collectAnnotations(this);
-    var declarationExpression = getPerlDeclaration();
-    if (perlAnnotations.isEmpty() && declarationExpression != null) {
-      perlAnnotations = PerlAnnotations.collectAnnotations(declarationExpression);
-    }
-    if (perlAnnotations.isEmpty() && declarationExpression != null &&
-        PsiUtilCore.getElementType(declarationExpression.getParent()) == PerlElementTypesGenerated.FOREACH_ITERATOR) {
-      perlAnnotations = PerlAnnotations.collectAnnotations(PsiTreeUtil.getParentOfType(this, PerlForeachCompound.class));
-    }
-    if (perlAnnotations.isEmpty() && PsiUtilCore.getElementType(getParent()) == PerlElementTypesGenerated.SIGNATURE_ELEMENT) {
-      perlAnnotations = ContainerUtil.filter(
-        PerlAnnotations.collectAnnotations(PsiTreeUtil.getParentOfType(this, PerlSubElement.class)),
-        it -> !(it instanceof PsiPerlAnnotationDeprecated));
-    }
-    return PerlVariableAnnotations.createFromAnnotationsList(perlAnnotations, getVariable());
+  public @NotNull PerlVariableAnnotations getLocalVariableAnnotations() {
+    return PerlVariableAnnotations.from(this);
   }
 
   @Override

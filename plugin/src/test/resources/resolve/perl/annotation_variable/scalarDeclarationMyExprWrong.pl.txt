@@ -1,0 +1,4 @@
+PerlAnnotationVariableReference at (13,22); text in range: 'something' => 0 results:
+
+PerlNamespaceReference at (23,31); text in range: 'Foo::Bar' => 0 results:
+

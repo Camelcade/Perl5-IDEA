@@ -1,0 +1,6 @@
+my(
+ #@type $som<caret>ething Foo::Bar comment in there
+ $something,
+ $something,
+ $otherthing
+);

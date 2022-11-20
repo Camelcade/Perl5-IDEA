@@ -1,0 +1,6 @@
+#@type $thirdthing Foo::Bar
+#@type $something Foo::Bar
+#@type $other<caret>thing Foo::Bar
+func some($something, $otherthing, $thirdthing){
+
+}

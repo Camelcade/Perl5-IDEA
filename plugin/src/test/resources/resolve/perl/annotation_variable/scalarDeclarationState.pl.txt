@@ -1,0 +1,5 @@
+PerlAnnotationVariableReference at (8,17); text in range: 'something' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 33 in scalarDeclarationState.pl
+
+PerlNamespaceReference at (18,26); text in range: 'Foo::Bar' => 0 results:
+

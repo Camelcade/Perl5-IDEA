@@ -1,0 +1,2 @@
+#@type $NewName Foo::Bar
+for my $NewName (@otherthing){}

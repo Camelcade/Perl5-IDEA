@@ -1,0 +1,6 @@
+my(
+ #@type $something Foo::Bar
+ $something,
+ $something,
+ $otherthing
+);

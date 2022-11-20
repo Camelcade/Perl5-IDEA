@@ -1,0 +1,6 @@
+#@type $thirdthing Foo::Bar
+#@type $something Foo::Bar
+#@type $<READ>otherthing</READ> Foo::Bar
+func some($something, $<WRITE>otherthing</WRITE>, $thirdthing){
+
+}

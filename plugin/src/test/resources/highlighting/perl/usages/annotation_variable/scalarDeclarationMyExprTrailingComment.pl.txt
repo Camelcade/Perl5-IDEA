@@ -1,0 +1,6 @@
+my(
+ #@type $<READ>something</READ> Foo::Bar comment in there
+ $<WRITE>something</WRITE>,
+ $something,
+ $otherthing
+);

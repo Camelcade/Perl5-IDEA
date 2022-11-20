@@ -1,0 +1,7 @@
+#@type $<READ>otherthing</READ> Foo::Bar
+#@type Some::Wildcard
+my(
+  $something,
+  $bomer,
+  $<WRITE>otherthing</WRITE>
+) = (1,2,3);

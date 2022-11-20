@@ -1,0 +1,4 @@
+Target: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 98 in scalarDeclarationSubSignatureAsync.pl
+Total usages: 1
+	PsiPerlAnnotationVariableImpl(Perl5: ANNOTATION_VARIABLE) at 35 in scalarDeclarationSubSignatureAsync.pl, via: PerlAnnotationVariableReference at (36,45); text in range: 'something' => 1 results:
+	PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 98 in scalarDeclarationSubSignatureAsync.pl

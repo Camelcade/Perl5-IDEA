@@ -1,0 +1,9 @@
+my(
+ #@type $something Foo::Bar
+ $something,
+ $something,
+ #@type $NewName Foo::Bar
+ $NewName,
+ #@type $otherthing Foo::Baz
+ $otherthing,
+);

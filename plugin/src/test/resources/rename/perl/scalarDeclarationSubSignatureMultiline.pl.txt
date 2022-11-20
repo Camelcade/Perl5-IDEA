@@ -1,0 +1,8 @@
+#@type $NewName Foo::Bar
+#@type $something Foo::Bar
+#@type $otherthing Foo::Bar
+sub some($something,
+         $otherthing,
+         $NewName){
+
+}

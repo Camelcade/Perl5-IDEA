@@ -1,0 +1,7 @@
+#@type $oth<caret>erthing Foo::Bar
+#@type Some::Wildcard
+my(
+  $something,
+  $bomer,
+  $otherthing
+) = (1,2,3);
