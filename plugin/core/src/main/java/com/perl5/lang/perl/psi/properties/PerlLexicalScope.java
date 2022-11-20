@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,11 @@ package com.perl5.lang.perl.psi.properties;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This interface marks that PsiElement has it's own scope
@@ -26,4 +30,15 @@ import org.jetbrains.annotations.NotNull;
 public interface PerlLexicalScope extends PerlLexicalScopeMember, PsiElement, PerlStatementsContainer {
   @Override
   void accept(@NotNull PsiElementVisitor visitor);
+
+  @Contract("null->null")
+  static @Nullable PerlLexicalScope from(@Nullable PsiElement element) {
+    if (element == null) {
+      return null;
+    }
+    if (element instanceof PerlImplicitVariableDeclaration) {
+      return from(element.getParent());
+    }
+    return PsiTreeUtil.getParentOfType(element, PerlLexicalScope.class);
+  }
 }

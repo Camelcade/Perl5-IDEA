@@ -43,7 +43,6 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.PerlFileContextSubstitutor;
 import com.perl5.lang.perl.psi.stubs.PerlFileStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
@@ -86,12 +85,6 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   protected FileType getDefaultFileType() {
     // fixme getViewProvider().getVirtualFile() should be here, but incompatible with IDEA14
     return PerlFileTypeScript.INSTANCE;
-  }
-
-
-  @Override
-  public PerlLexicalScope getLexicalScope() {
-    return null;
   }
 
   /**

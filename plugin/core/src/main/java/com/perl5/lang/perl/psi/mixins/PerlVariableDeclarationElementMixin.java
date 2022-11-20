@@ -155,7 +155,13 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
   @Override
   public @NotNull SearchScope getUseScope() {
     if (isLexicalDeclaration()) {
-      PerlLexicalScope lexicalScope = getVariable().getLexicalScope();
+      PsiElement lexicalScope = PerlLexicalScope.from(this);
+      if (lexicalScope instanceof PerlSubDefinition) {
+        lexicalScope = getContainingFile();
+      }
+      else if (lexicalScope instanceof PerlForeachCompound) {
+        lexicalScope = PerlLexicalScope.from(lexicalScope);
+      }
       if (lexicalScope != null) {
         return new LocalSearchScope(lexicalScope);
       }

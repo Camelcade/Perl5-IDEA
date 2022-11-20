@@ -26,7 +26,6 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -164,11 +163,6 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     }
     Document document = PsiDocumentManager.getInstance(getProject()).getCachedDocument(file);
     return document == null ? 0 : document.getLineNumber(getTextOffset()) + 1;
-  }
-
-  @Override
-  public PerlLexicalScope getLexicalScope() {
-    return PsiTreeUtil.getParentOfType(getParent(), PerlLexicalScope.class, false);
   }
 
   @Override

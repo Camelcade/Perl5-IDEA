@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.perl5.lang.tt2.psi.impl;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.filetypes.TemplateToolkitFileType;
 import com.perl5.lang.tt2.psi.TemplateToolkitFile;
@@ -34,10 +33,5 @@ public class TemplateToolkitFileImpl extends PsiFileBase implements TemplateTool
   @Override
   public @NotNull FileType getFileType() {
     return TemplateToolkitFileType.INSTANCE;
-  }
-
-  @Override
-  public PerlLexicalScope getLexicalScope() {
-    return null;
   }
 }
