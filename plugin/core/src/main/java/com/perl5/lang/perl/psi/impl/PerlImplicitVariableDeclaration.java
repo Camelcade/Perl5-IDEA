@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.openapi.editor.Document;
 import com.intellij.psi.*;
 import com.intellij.psi.stubs.IStubElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
@@ -261,8 +260,8 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
   @Override
-  public @Nullable PerlVariableAnnotations getLocalVariableAnnotations() {
-    return null;
+  public @NotNull PerlVariableAnnotations getLocalVariableAnnotations() {
+    return PerlVariableAnnotations.empty();
   }
 
   @Override

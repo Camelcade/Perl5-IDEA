@@ -27,13 +27,12 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclarationElement> implements PerlVariableDeclaration {
   private final @NotNull String myNamespaceName;
   private final @NotNull String myVariableName;
   private final @NotNull PerlVariableType myVariableType;
-  private final @Nullable PerlVariableAnnotations myPerlVariableAnnotations;
+  private final @NotNull PerlVariableAnnotations myPerlVariableAnnotations;
   private final @NotNull PerlValue myDeclaredValue;
 
   public PerlVariableDeclarationStub(
@@ -43,7 +42,7 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
     @NotNull String variableName,
     @NotNull PerlValue declaredValue,
     @NotNull PerlVariableType variableType,
-    @Nullable PerlVariableAnnotations variableAnnotations
+    @NotNull PerlVariableAnnotations variableAnnotations
   ) {
     super(parent, elementType);
     myNamespaceName = namespaceName;
@@ -79,7 +78,7 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
   }
 
   @Override
-  public @Nullable PerlVariableAnnotations getVariableAnnotations() {
+  public @NotNull PerlVariableAnnotations getVariableAnnotations() {
     return myPerlVariableAnnotations;
   }
 

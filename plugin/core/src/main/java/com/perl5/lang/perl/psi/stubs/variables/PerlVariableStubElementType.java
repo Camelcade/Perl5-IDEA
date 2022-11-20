@@ -31,7 +31,6 @@ import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Objects;
@@ -110,8 +109,8 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
     );
   }
 
-  private @Nullable PerlVariableAnnotations readAnnotations(@NotNull StubInputStream dataStream) throws IOException {
-    return dataStream.readBoolean() ? PerlVariableAnnotations.deserialize(dataStream) : null;
+  private @NotNull PerlVariableAnnotations readAnnotations(@NotNull StubInputStream dataStream) throws IOException {
+    return dataStream.readBoolean() ? PerlVariableAnnotations.deserialize(dataStream) : PerlVariableAnnotations.empty();
   }
 
   @Override

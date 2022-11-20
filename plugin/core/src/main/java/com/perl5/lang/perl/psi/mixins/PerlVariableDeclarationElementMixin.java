@@ -212,15 +212,9 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
     PerlVariableAnnotations variableAnnotations;
 
     PerlVariableDeclarationStub stub = getGreenStub();
-    if (stub != null) {
-      variableAnnotations = stub.getVariableAnnotations();
-    }
-    else {
-      // re-parsing
-      variableAnnotations = getLocalVariableAnnotations();
-    }
+    variableAnnotations = stub != null ? stub.getVariableAnnotations() : getLocalVariableAnnotations();
 
-    if (variableAnnotations != null) {
+    if (!variableAnnotations.isEmpty()) {
       return variableAnnotations;
     }
 

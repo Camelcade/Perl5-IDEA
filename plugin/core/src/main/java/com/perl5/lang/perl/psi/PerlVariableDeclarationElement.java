@@ -98,12 +98,7 @@ public interface PerlVariableDeclarationElement extends StubBasedPsiElement<Perl
     return getActualType() == PerlVariableType.SCALAR && PerlSharedSettings.getInstance(getProject()).isSelfName(getName());
   }
 
-  /**
-   * Returns local variable annotations if any
-   *
-   * @return annotations object or null
-   */
-  @Nullable
+  @NotNull
   PerlVariableAnnotations getLocalVariableAnnotations();
 
 

@@ -18,19 +18,19 @@ PerlFileStub
 	Variable name: scalar
 	Variable type: SCALAR
 	Declared value: UNKNOWN_VALUE
-	Annotations: null
+	Annotations: none
     VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
 	Namespace name: main
 	Variable name: array
 	Variable type: ARRAY
 	Declared value: UNKNOWN_VALUE
-	Annotations: null
+	Annotations: none
     VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
 	Namespace name: main
 	Variable name: hash
 	Variable type: HASH
 	Declared value: UNKNOWN_VALUE
-	Annotations: null
+	Annotations: none
   NAMESPACE:PerlNamespaceDefinitionStub
 	Name: Foo::Bar
 	Mro: DFS
@@ -44,37 +44,37 @@ PerlFileStub
 	Variable name: scalar2
 	Variable type: SCALAR
 	Declared value: UNKNOWN_VALUE
-	Annotations: null
+	Annotations: none
     VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
 	Namespace name: Foo::Bar
 	Variable name: array2
 	Variable type: ARRAY
 	Declared value: UNKNOWN_VALUE
-	Annotations: null
+	Annotations: none
     VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
 	Namespace name: Foo::Bar
 	Variable name: hash2
 	Variable type: HASH
 	Declared value: UNKNOWN_VALUE
-	Annotations: null
+	Annotations: none
     VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
 	Namespace name: Foo::Bar
 	Variable name: scalarvalue
 	Variable type: SCALAR
 	Declared value: UNKNOWN_VALUE
-	Annotations: deprecated
+	Annotations: PerlVariableAnnotations{myFlags=1, myValue=UNKNOWN_VALUE}
     VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
 	Namespace name: Foo::Bar
 	Variable name: arrayvalue
 	Variable type: ARRAY
 	Declared value: UNKNOWN_VALUE
-	Annotations: null
+	Annotations: none
     VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
 	Namespace name: Foo::Bar
 	Variable name: hashvalue
 	Variable type: HASH
 	Declared value: UNKNOWN_VALUE
-	Annotations: null
+	Annotations: none
 
 ----------
 Language: Perl5 POD

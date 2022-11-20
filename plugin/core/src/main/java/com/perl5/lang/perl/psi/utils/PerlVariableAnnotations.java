@@ -33,6 +33,23 @@ import java.util.List;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public class PerlVariableAnnotations {
+  private static final PerlVariableAnnotations EMPTY = new PerlVariableAnnotations() {
+    @Override
+    public void setIsDeprecated() {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setValue(@NotNull PerlValue value) {
+      throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean isEmpty() {
+      return true;
+    }
+  };
+
   private static final byte IS_DEPRECATED = 0x01;
 
   private byte myFlags = 0;
@@ -66,6 +83,14 @@ public class PerlVariableAnnotations {
 
   public void setValue(@NotNull PerlValue value) {
     myValue = value;
+  }
+
+  public boolean isEmpty() {
+    return myFlags == 0 && myValue.isUnknown();
+  }
+
+  public static PerlVariableAnnotations empty() {
+    return EMPTY;
   }
 
   public static PerlVariableAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
