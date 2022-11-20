@@ -120,15 +120,10 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
     if (stub != null) {
       return stub.getDeclaredValue();
     }
-    PerlVariableDeclarationExpr declaration = getPerlDeclaration();
+    PerlVariableDeclarationExpr declaration = getDeclarationExpression();
     return declaration == null ? UNKNOWN_VALUE :
            PerlScalarValue.create(declaration.getDeclarationType());
   }
-
-  private @Nullable PerlVariableDeclarationExpr getPerlDeclaration() {
-    return PsiTreeUtil.getParentOfType(this, PerlVariableDeclarationExpr.class);
-  }
-
 
   @Override
   public @NotNull String getNamespaceName() {
