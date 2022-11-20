@@ -45,6 +45,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
   private static final String GROUP_SUB = PerlBundle.message("perl.formatting.brace.style.sub");
   private static final String GROUP_VARIABLE_DECLARATION = PerlBundle.message("perl.formatting.wrap.variable.declarations");
   private static final String GROUP_COMMENT = CodeStyleSettingsCustomizableOptions.getInstance().WRAPPING_COMMENTS;
+  private static final String GROUP_ANNOTATIONS = PerlBundle.message("perl.formatting.group.annotations");
   private static final String GROUP_LIST = CodeStyleSettingsCustomizableOptions.getInstance().WRAPPING_ARRAY_INITIALIZER;
   private static final String GROUP_ATTRIBUTES_WRAP = PerlBundle.message("perl.formatting.wrap.attributes");
   private static final String GROUP_COMMA = PerlBundle.message("perl.formatting.comma.after.hash.value");
@@ -208,6 +209,12 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 "ALIGN_COMMENTS_ON_CONSEQUENT_LINES",
                                 PerlBundle.message("perl.formatting.align.comments.in.list"),
                                 GROUP_COMMENT);
+
+      consumer.showCustomOption(PerlCodeStyleSettings.class,
+                                "ALIGN_ANNOTATION_TYPE_SPECIFIERS",
+                                PerlBundle.message("perl.formatting.align.type.specifiers"),
+                                GROUP_ANNOTATIONS);
+
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "VARIABLE_DECLARATION_WRAP",

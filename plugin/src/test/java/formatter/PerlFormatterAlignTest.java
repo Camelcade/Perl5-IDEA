@@ -30,6 +30,18 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testAnnotationsTypesAligned() {
+    alignAnnotationTypes(true);
+    doTestAnnotations();
+  }
+
+  @Test
+  public void testAnnotationsTypesNotAligned() {
+    alignAnnotationTypes(false);
+    doTestAnnotations();
+  }
+
+  @Test
   public void testAnnotationsCommentsAligned() {
     alignComments(true);
     doTestAnnotations();
@@ -91,6 +103,10 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
 
   private void alignComments(boolean value) {
     getCustomSettings().ALIGN_COMMENTS_ON_CONSEQUENT_LINES = value;
+  }
+
+  private void alignAnnotationTypes(boolean value) {
+    getCustomSettings().ALIGN_ANNOTATION_TYPE_SPECIFIERS = value;
   }
 
   @Test

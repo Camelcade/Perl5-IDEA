@@ -1,20 +1,20 @@
-#@type $var1           Boo::Baz annotate  particular  variable
-#@type @var12          Boo::Baz annotate  particular  variable
-#@type %var123         Boo::Baz annotate  particular  variable
-#@type $var1234        Boo::Baz
-#@type @var12345       Boo::Baz
-#@type %var123456      Boo::Baz
-#@type $scalar1        ArrayRef[Foo::Bar]          this is a comment
-#@type %hash12         HashRef[Foo::Bar]           this is a comment
-#@type @arrray123      ArrayRef[HashRef[Foo::Bar]] this is a comment
-#@type $scalar12345    HashRef[HashRef[Foo::Bar]]  this is a comment
-#@type $otherscalar    *                           with comment
-#@type $otherscalar1   __PACKAGE__                 with comment
-#@type $scalar123456   ArrayRef[Foo::Bar]
-#@type @array1234567   HashRef[Foo::Bar]
-#@type %hash12345678   ArrayRef[HashRef[Foo::Bar]]
+#@type $var1 Boo::Baz   annotate  particular  variable
+#@type @var12 Boo::Baz  annotate  particular  variable
+#@type %var123 Boo::Baz annotate  particular  variable
+#@type $var1234 Boo::Baz
+#@type @var12345 Boo::Baz
+#@type %var123456 Boo::Baz
+#@type $scalar1 ArrayRef[Foo::Bar]             this is a comment
+#@type %hash12 HashRef[Foo::Bar]               this is a comment
+#@type @arrray123 ArrayRef[HashRef[Foo::Bar]]  this is a comment
+#@type $scalar12345 HashRef[HashRef[Foo::Bar]] this is a comment
+#@type $otherscalar *                          with comment
+#@type $otherscalar1 __PACKAGE__               with comment
+#@type $scalar123456 ArrayRef[Foo::Bar]
+#@type @array1234567 HashRef[Foo::Bar]
+#@type %hash12345678 ArrayRef[HashRef[Foo::Bar]]
 #@type $scalar12345679 HashRef[HashRef[Foo::Bar]]
-#@type $otherscalar12  *
+#@type $otherscalar12 *
 #@type $otherscalar123 __PACKAGE__
 
 #@type Foo::Fallback with comment
@@ -43,4 +43,5 @@
 #@returns ArrayRef[Foo::Bar]
 #@returns HashRef[Foo::Bar]
 #@returns ArrayRef[HashRef[Foo::Bar]]
-#@returns HashRef[HashRef[Foo::Bar]]
+#@returns HashRef[HashRef[Foo::Bar]]          
+

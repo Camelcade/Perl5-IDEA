@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,6 +65,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
   private final Map<ASTNode, Wrap> myWrapMap = new HashMap<>();
   private final Map<Integer, Alignment> myAssignmentsAlignmentsMap = new HashMap<>();
   private final Int2ObjectOpenHashMap<Alignment> myCommentsAlignmentMap = new Int2ObjectOpenHashMap<>();
+  private final Int2ObjectOpenHashMap<Alignment> myAnnotationTypesAlignmentMap = new Int2ObjectOpenHashMap<>();
   private final Map<ASTNode, Alignment> myRightwardCallsAlignmentMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myOperatorsAlignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
   private final Map<ASTNode, Alignment> myElementsALignmentsMap = FactoryMap.create(sequence -> Alignment.createAlignment(true));
@@ -106,7 +107,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
       LOG.debug("Checking comment line ", commentLine, " - ", commentNode, " - ", commentNode.getChars());
     }
 
-    ASTNode prevLineComment = getPreviousLineEndComment(prevNode);
+    ASTNode prevLineComment = getPreviousLineElement(prevNode, COMMENT_LINE, true);
     if (prevLineComment != null && LOG.isDebugEnabled()) {
       LOG.debug("Delegating to previous line comment: ", commentNode, " - ", commentNode.getChars());
     }
@@ -119,22 +120,52 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
   }
 
   /**
-   * @return a comment node from the end of the line prior to {@code node}
+   * @return alignment for the line comment node when comments on sequential lines should be aligned
    */
-  private @Nullable ASTNode getPreviousLineEndComment(@NotNull ASTNode node) {
+  private @Nullable Alignment getAnnotationTypeAlignment(@NotNull ASTNode commentAnnotationNode) {
+    if (commentAnnotationNode.getElementType() != COMMENT_ANNOTATION) {
+      LOG.error("Expected " + COMMENT_ANNOTATION + ", got " + commentAnnotationNode.getElementType());
+      return null;
+    }
+    ASTNode prevNode = commentAnnotationNode.getTreePrev();
+    int annotationLine = getNodeLine(commentAnnotationNode);
+    if (myAnnotationTypesAlignmentMap.containsKey(annotationLine)) {
+      return myAnnotationTypesAlignmentMap.get(annotationLine);
+    }
+    if (LOG.isDebugEnabled()) {
+      LOG.debug("Checking type specifier at line ", annotationLine, " - ", commentAnnotationNode, " - ", commentAnnotationNode.getChars());
+    }
+
+    ASTNode prevLineAnnotation = getPreviousLineElement(prevNode, COMMENT_ANNOTATION, false);
+    if (prevLineAnnotation != null && LOG.isDebugEnabled()) {
+      LOG.debug("Delegating to previous line comment: ", commentAnnotationNode, " - ", commentAnnotationNode.getChars());
+    }
+    Alignment alignment = prevLineAnnotation == null ? null : getAnnotationTypeAlignment(prevLineAnnotation);
+    if (alignment == null) {
+      alignment = Alignment.createAlignment(true);
+    }
+    myAnnotationTypesAlignmentMap.put(annotationLine, alignment);
+    return alignment;
+  }
+
+  /**
+   * @param leafNode if true, we are iterating through leaves, not composite elements
+   * @return element of {@code elementType} separated from the {@code node} by a spaces with a single newline.
+   */
+  private static @Nullable ASTNode getPreviousLineElement(@Nullable ASTNode node, @NotNull IElementType elementType, boolean leafNode) {
     while (node != null) {
       CharSequence nodeChars = node.getChars();
       int newLinesNumber = StringUtil.countChars(nodeChars, '\n');
       if (newLinesNumber > 1) {
         return null;
       }
-      node = TreeUtil.prevLeaf(node);
+      node = leafNode ? TreeUtil.prevLeaf(node) : node.getTreePrev();
       if (newLinesNumber == 1) {
         break;
       }
     }
 
-    return node != null && node.getElementType() == COMMENT_LINE ? node : null;
+    return node != null && node.getElementType() == elementType ? node : null;
   }
 
   /**
@@ -420,6 +451,10 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
     }
     else if (childNodeType == COMMENT_LINE && perlCodeStyleSettings.ALIGN_COMMENTS_ON_CONSEQUENT_LINES) {
       return getLineCommentAlignment(childNode);
+    }
+    else if (ANNOTATION_TYPE_SPECIFIERS.contains(childNodeType) && parentNodeType == ANNOTATION_TYPE &&
+             perlCodeStyleSettings.ALIGN_ANNOTATION_TYPE_SPECIFIERS) {
+      return getAnnotationTypeAlignment(parentNode.getTreeParent());
     }
     else if (parentNodeType == COMMA_SEQUENCE_EXPR &&
              childNodeType != COMMA &&

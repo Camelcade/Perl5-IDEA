@@ -30,6 +30,9 @@ public final class PerlFormattingTokenSets {
 
   public static final TokenSet COMPOSITE_TYPES = TokenSet.create(ARRAYREF_TYPE, HASHREF_TYPE);
 
+  public static final TokenSet ANNOTATION_TYPE_SPECIFIERS = TokenSet.orSet(
+    COMPOSITE_TYPES, TokenSet.create(PACKAGE, OPERATOR_MUL, TAG_PACKAGE));
+
   public static final TokenSet FOR_OR_FOREACH = TokenSet.create(
     RESERVED_FOR, RESERVED_FOREACH
   );

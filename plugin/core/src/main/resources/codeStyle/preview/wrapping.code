@@ -1,5 +1,9 @@
 package Foo::Bar{
 
+#@type $var Foo::Bar  this is foo bar
+#@type $othervar Something::Else  this is something else
+my($var,$othervar);
+
 my $hashref = {
 # base comment
     key      => 42, # some comment

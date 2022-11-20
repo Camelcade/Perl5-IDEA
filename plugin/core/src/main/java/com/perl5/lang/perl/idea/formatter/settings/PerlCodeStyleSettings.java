@@ -69,6 +69,7 @@ public class PerlCodeStyleSettings extends CustomCodeStyleSettings {
   public boolean ALIGN_QW_ELEMENTS = false;
 
   public boolean ALIGN_COMMENTS_ON_CONSEQUENT_LINES = true;
+  public boolean ALIGN_ANNOTATION_TYPE_SPECIFIERS = true;
 
   public int BRACE_STYLE_NAMESPACE = SAME_LINE;
   public int BRACE_STYLE_SUB = SAME_LINE;
