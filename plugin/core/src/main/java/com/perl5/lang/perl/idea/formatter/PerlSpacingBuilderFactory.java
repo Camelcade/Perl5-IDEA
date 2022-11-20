@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 public class PerlSpacingBuilderFactory {
   static @NotNull SpacingBuilder createSpacingBuilder(CommonCodeStyleSettings settings, PerlCodeStyleSettings perlSettings) {
     return new SpacingBuilder(settings)
+      .beforeInside(COMMENT_LINE, COMMENT_ANNOTATION).spaces(1)
       .before(COMMENT_LINE).spaceIf(perlSettings.ALIGN_COMMENTS_ON_CONSEQUENT_LINES)
       .after(COMMENT_LINE).lineBreakOrForceSpace(true, false)
       // standard settings
@@ -43,6 +44,11 @@ public class PerlSpacingBuilderFactory {
       .around(OPERATORS_LOGICAL).spaceIf(settings.SPACE_AROUND_LOGICAL_OPERATORS)
       .around(BITWISE_BINARY_OPERATORS_TOKENSET).spaceIf(settings.SPACE_AROUND_BITWISE_OPERATORS)
       .after(OPERATOR_REFERENCE).spaces(0)
+
+      .after(ANNOTATIONS_KEYS).spaces(1)
+      .after(ANNOTATION_VARIABLE).spaces(1)
+      .aroundInside(LEFT_BRACKET, COMPOSITE_TYPES).spaces(0)
+      .aroundInside(RIGHT_BRACKET, COMPOSITE_TYPES).spaces(0)
 
       .between(FUNCTION_PARAMETERS_KEYWORDS_TOKENSET, SUB_NAME).spacing(1, 1, 0, false, 0)
 

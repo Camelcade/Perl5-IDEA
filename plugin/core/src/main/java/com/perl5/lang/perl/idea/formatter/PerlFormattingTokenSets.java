@@ -28,6 +28,8 @@ public final class PerlFormattingTokenSets {
   private PerlFormattingTokenSets() {
   }
 
+  public static final TokenSet COMPOSITE_TYPES = TokenSet.create(ARRAYREF_TYPE, HASHREF_TYPE);
+
   public static final TokenSet FOR_OR_FOREACH = TokenSet.create(
     RESERVED_FOR, RESERVED_FOREACH
   );

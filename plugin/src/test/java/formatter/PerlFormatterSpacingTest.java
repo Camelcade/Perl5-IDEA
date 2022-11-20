@@ -27,6 +27,27 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testAnnotations() {
+    doTestAnnotations();
+  }
+
+  private void doTestAnnotations() {
+    doTestSingleSource("annotations");
+  }
+
+  @Test
+  public void testAnnotationsSpaceAroundMul() {
+    getSettings().SPACE_AROUND_MULTIPLICATIVE_OPERATORS = true;
+    doTestAnnotations();
+  }
+
+  @Test
+  public void testAnnotationsNoSpaceAroundMul() {
+    getSettings().SPACE_AROUND_MULTIPLICATIVE_OPERATORS = false;
+    doTestAnnotations();
+  }
+
+  @Test
   public void testHeredocSpacingTrue() {
     getCustomSettings().SPACE_AFTER_HEREDOC_OPERATOR = true;
     doTestSingleSource("heredocSpacing");

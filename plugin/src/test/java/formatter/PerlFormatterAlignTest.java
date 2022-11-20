@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,21 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
     return "formatter/perl/align";
   }
 
+  @Test
+  public void testAnnotationsCommentsAligned() {
+    alignComments(true);
+    doTestAnnotations();
+  }
+
+  @Test
+  public void testAnnotationsCommentsNotAligned() {
+    alignComments(false);
+    doTestAnnotations();
+  }
+
+  private void doTestAnnotations() {
+    doTestSingleSource("annotations");
+  }
 
   @Test
   public void testAlignListElementsTrue() {
@@ -70,8 +85,12 @@ public class PerlFormatterAlignTest extends PerlFormatterTestCase {
   }
 
   private void doTestAlignComments(boolean value) {
-    getCustomSettings().ALIGN_COMMENTS_ON_CONSEQUENT_LINES = value;
+    alignComments(value);
     doTestSingleSource("alignComments");
+  }
+
+  private void alignComments(boolean value) {
+    getCustomSettings().ALIGN_COMMENTS_ON_CONSEQUENT_LINES = value;
   }
 
   @Test
