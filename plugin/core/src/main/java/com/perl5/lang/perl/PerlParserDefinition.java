@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,13 +47,20 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes,
   public static final TokenSet WHITE_SPACES = TokenSet.create(
     TokenType.WHITE_SPACE
   );
+
+  public static final TokenSet REAL_COMMENTS = TokenSet.create(
+    COMMENT_LINE, COMMENT_BLOCK, COMMENT_ANNOTATION
+  );
+
   public static final TokenSet COMMENTS = TokenSet.orSet(
     HEREDOC_BODIES_TOKENSET,
+    REAL_COMMENTS,
     TokenSet.create(
-      COMMENT_LINE, COMMENT_BLOCK, COMMENT_ANNOTATION,
       HEREDOC_END, HEREDOC_END_INDENTABLE
     )
   );
+
+  public static final TokenSet WHITE_SPACE_AND_REAL_COMMENTS = TokenSet.orSet(WHITE_SPACES, REAL_COMMENTS);
 
   public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES, COMMENTS);
 
