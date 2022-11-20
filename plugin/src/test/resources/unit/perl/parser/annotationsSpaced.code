@@ -1,0 +1,43 @@
+#@type        $var2       Boo::Baz                   annotate  particular  variable
+#@type    @var2       Boo::Baz               annotate  particular  variable
+#@type     %var2  Boo::Baz                       annotate  particular  variable
+#@type        $var2       Boo::Baz
+#@type    @var2       Boo::Baz
+#@type     %var2  Boo::Baz
+#@type   $scalar   ArrayRef      [   Foo::Bar      ]         this is a comment
+#@type   %hash     HashRef     [      Foo::Bar    ]         this is a comment
+#@type   @arrray    ArrayRef      [   HashRef     [      Foo::Bar ]     ]       this is a comment
+#@type   $scalar       HashRef    [     HashRef       [     Foo::Bar      ]    ]        this is a comment
+#@type    $scalar        ArrayRef      [   Foo::Bar      ]
+#@type     @array       HashRef     [      Foo::Bar    ]
+#@type    %hash    ArrayRef      [   HashRef     [      Foo::Bar ]     ]
+#@type    $scalar      HashRef    [     HashRef       [     Foo::Bar      ]    ]
+
+#@type        Foo::Fallback       with comment
+#@type        Foo::Fallback
+#@type       *   comment
+#@type       *
+#@type       __PACKAGE__
+#@type       __PACKAGE__        with comment
+#@type     ArrayRef      [   Foo::Bar      ]         this is a comment
+#@type   HashRef     [      Foo::Bar    ]         this is a comment
+#@type       ArrayRef      [   HashRef     [      Foo::Bar ]     ]       this is a comment
+#@type          HashRef    [     HashRef       [     Foo::Bar      ]    ]        this is a comment
+#@type     ArrayRef      [   Foo::Bar      ]
+#@type   HashRef     [      Foo::Bar    ]
+#@type       ArrayRef      [   HashRef     [      Foo::Bar ]     ]
+#@type          HashRef    [     HashRef       [     Foo::Bar      ]    ]
+
+#@returns       Foo::ReturnType   comment
+#@returns       Foo::ReturnType
+#@returns       *   comment
+#@returns       __PACKAGE__
+#@returns     ArrayRef      [   Foo::Bar      ]         this is a comment
+#@returns   HashRef     [      Foo::Bar    ]         this is a comment
+#@returns       ArrayRef      [   HashRef     [      Foo::Bar ]     ]       this is a comment
+#@returns          HashRef    [     HashRef       [     Foo::Bar      ]    ]        this is a comment
+#@returns     ArrayRef      [   Foo::Bar      ]
+#@returns   HashRef     [      Foo::Bar    ]
+#@returns       ArrayRef      [   HashRef     [      Foo::Bar ]     ]
+#@returns          HashRef    [     HashRef       [     Foo::Bar      ]    ]
+
