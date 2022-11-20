@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,6 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
     return PerlMoosePsiUtil.getModifiersNameReference(getExpr(), element);
   }
 
-
   /**
    * fixme probably a bug. This need to be refactored anyway
    */
@@ -55,10 +54,9 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
   }
 
   @Override
-  protected @Nullable PsiElement getSignatureContainer() {
+  public @Nullable PsiPerlSignatureContent getSignatureContent() {
     return null;
   }
-
 
   public @Nullable PsiPerlExpr getExpr() {
     return findChildByClass(PsiPerlExpr.class);

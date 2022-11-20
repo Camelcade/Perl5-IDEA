@@ -106,4 +106,6 @@ public interface PerlSubElement extends PerlSub, PerlCallableElement {
     }
     return true;
   }
+
+  @Nullable PsiPerlSignatureContent getSignatureContent();
 }

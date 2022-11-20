@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import com.perl5.lang.perl.psi.PsiPerlSubSignatureElementIgnore;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -52,10 +51,5 @@ public abstract class PerlSubDefinitionMixin extends PerlSubDefinitionBase imple
       }
     }
     return true;
-  }
-
-  @Override
-  protected @Nullable PsiElement getSignatureContainer() {
-    return getSignatureContent();
   }
 }

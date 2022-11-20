@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,9 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
-import com.perl5.lang.perl.psi.PsiPerlFuncDefinition;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 
 public abstract class PerlFuncDefinitionMixin extends PerlSubDefinitionBase {
@@ -37,10 +34,5 @@ public abstract class PerlFuncDefinitionMixin extends PerlSubDefinitionBase {
   @Override
   public boolean isMethod() {
     return false;
-  }
-
-  @Override
-  protected @Nullable PsiElement getSignatureContainer() {
-    return ((PsiPerlFuncDefinition)this).getSignatureContent();
   }
 }
