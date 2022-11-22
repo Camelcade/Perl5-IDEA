@@ -1,0 +1,5 @@
+my $hash = {};
+$hash->{something} = Foo::Bar->new();
+$hash->{otherthing} = Foo::Baz->new();
+@$hash{'thirdthing','fourththing'} = (4,5);
+$ha<caret>sh;

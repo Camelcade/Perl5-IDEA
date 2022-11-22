@@ -1,0 +1,13 @@
+my $array = [];
+$array->[0] = Foo::Bar->new();
+$array->[1] = Foo::Baz->new();
+@$array[2,3] = (4,5);
+$ar<caret>ray;
+----------
+$array
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 100 in arrayRefElementSetMulti.pl
+Ref[Array()]
+----------
+Resolved
+----------
+Ref[Array()]

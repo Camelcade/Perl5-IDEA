@@ -1,0 +1,13 @@
+my $hash = {key => 42, value => 69};
+$hash->{something} = Foo::Bar->new();
+$ha<caret>sh;
+----------
+$hash
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 75 in hashRefElementSetInitialized.pl
+Ref[Hash(key => 42,
+value => 69)]
+----------
+Resolved
+----------
+Ref[Hash(key => 42,
+value => 69)]

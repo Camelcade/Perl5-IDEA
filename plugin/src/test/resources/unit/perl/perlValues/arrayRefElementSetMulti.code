@@ -1,0 +1,5 @@
+my $array = [];
+$array->[0] = Foo::Bar->new();
+$array->[1] = Foo::Baz->new();
+@$array[2,3] = (4,5);
+$ar<caret>ray;

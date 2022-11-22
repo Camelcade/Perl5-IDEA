@@ -1,0 +1,11 @@
+my $hash;
+$hash->{something} = Foo::Bar->new();
+$ha<caret>sh;
+----------
+$hash
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 48 in hashRefElementSetUninitialized.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown

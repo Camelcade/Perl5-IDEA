@@ -1,0 +1,13 @@
+my %hash = (one => 42, two => 69);
+$hash{something} = Foo::Bar->new();
+%ha<caret>sh;
+----------
+%hash
+PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 71 in hashElementSetInitialized.pl
+Hash(one => 42,
+two => 69)
+----------
+Resolved
+----------
+Hash(one => 42,
+two => 69)

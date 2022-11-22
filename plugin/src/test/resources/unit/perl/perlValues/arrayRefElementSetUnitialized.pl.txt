@@ -1,0 +1,11 @@
+my $array;
+$array->[0] = Foo::Bar->new();
+$ar<caret>ray;
+----------
+$array
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 42 in arrayRefElementSetUnitialized.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown

@@ -1,0 +1,3 @@
+my $array;
+$array->[0] = Foo::Bar->new();
+$ar<caret>ray;

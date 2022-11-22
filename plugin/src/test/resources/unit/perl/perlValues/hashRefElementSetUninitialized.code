@@ -1,0 +1,3 @@
+my $hash;
+$hash->{something} = Foo::Bar->new();
+$ha<caret>sh;

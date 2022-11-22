@@ -1,0 +1,13 @@
+my $hash = {};
+$hash->{something} = Foo::Bar->new();
+$hash->{otherthing} = Foo::Baz->new();
+@$hash{'thirdthing','fourththing'} = (4,5);
+$ha<caret>sh;
+----------
+$hash
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 136 in hashRefElementSetMulti.pl
+Ref[Hash()]
+----------
+Resolved
+----------
+Ref[Hash()]

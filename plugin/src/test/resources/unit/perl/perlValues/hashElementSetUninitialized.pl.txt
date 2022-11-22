@@ -1,0 +1,11 @@
+my %hash;
+$hash{something} = Foo::Bar->new();
+%ha<caret>sh;
+----------
+%hash
+PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE) at 46 in hashElementSetUninitialized.pl
+Value unknown
+----------
+Resolved
+----------
+Value unknown

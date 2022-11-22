@@ -34,6 +34,54 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testArrayElementSet() { doTestArrayVariableValue(); }
+
+  @Test
+  public void testArrayElementSetMulti() { doTestArrayVariableValue(); }
+
+  @Test
+  public void testArrayRefElementSetMulti() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testArrayElementSetInitialized() { doTestArrayVariableValue(); }
+
+  @Test
+  public void testArrayElementSetUnintialized() { doTestArrayVariableValue(); }
+
+  @Test
+  public void testHashElementSet() { doTestHashVariableValue(); }
+
+  @Test
+  public void testHashElementSetMulti() { doTestHashVariableValue(); }
+
+  @Test
+  public void testHashRefElementSetMulti() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testHashElementSetInitialized() { doTestHashVariableValue(); }
+
+  @Test
+  public void testHashElementSetUninitialized() { doTestHashVariableValue(); }
+
+  @Test
+  public void testArrayRefElementSet() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testArrayRefElementSetInitialized() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testArrayRefElementSetUnitialized() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testHashRefElementSet() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testHashRefElementSetInitialized() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testHashRefElementSetUninitialized() { doTestScalarVariableValue(); }
+
+  @Test
   public void testDuckCall() { doTestScalarVariableValue(); }
 
   @Test
