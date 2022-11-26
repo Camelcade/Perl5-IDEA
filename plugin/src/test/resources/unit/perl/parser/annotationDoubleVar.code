@@ -1,0 +1,17 @@
+#@type $something $again
+#@type $something @again
+#@type $something %again
+
+#@type @something $again
+#@type @something @again
+#@type @something %again
+
+#@type %something $again
+#@type %something @again
+#@type %something %again
+
+#@type $something
+#@type @something
+#@type %something
+
+say 'That's all folks'

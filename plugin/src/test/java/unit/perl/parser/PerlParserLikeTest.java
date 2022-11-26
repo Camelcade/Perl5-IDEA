@@ -27,6 +27,9 @@ public abstract class PerlParserLikeTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testAnnotationDoubleVar() { doTest(false); }
+
+  @Test
   public void testAnnotationsSpaced() { doTest(); }
 
   @Test
