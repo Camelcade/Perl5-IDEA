@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,14 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
+import com.intellij.codeInsight.intention.FileModifier;
 import com.intellij.codeInsight.intention.HighPriorityAction;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.SmartPointerManager;
-import com.intellij.psi.SmartPsiElementPointer;
+import com.intellij.psi.*;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ArrayUtil;
 import com.perl5.PerlBundle;
@@ -40,6 +39,7 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -246,6 +246,14 @@ public class PerlSyntaxInspection extends PerlInspection {
           @Override
           public @Nls @NotNull String getFamilyName() {
             return PerlBundle.message("perl.quickfix.switch.signature.with.attributes");
+          }
+
+          @Override
+          public @Nullable FileModifier getFileModifierForPreview(@NotNull PsiFile target) {
+            PsiElement originalAttributes = attributesPointer.getElement();
+            return originalAttributes == null
+                   ? null
+                   : getFlipElementsQuickFix(PsiTreeUtil.findSameElementInCopy(originalAttributes, target));
           }
 
           @Override

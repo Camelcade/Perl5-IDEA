@@ -1,4 +1,5 @@
 sub     name :lvalue :prototype($) ($s<caret>ig) { # with signature, prototype
 }
 ######################### PREVIEW #########################
-NO DIFF PREVIEW
+sub     name :lvalue :prototype($) ($sig) { # with signature, prototype
+}

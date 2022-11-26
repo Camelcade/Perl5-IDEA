@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,7 +91,7 @@ public class PerlUnresolvedPackageFileInspection extends PerlInspection {
   }
 
   private static class InstallPackageQuickfix implements LocalQuickFix {
-    private final @NotNull PackageManagerAdapter myAdapter;
+    @SafeFieldForPreview private final @NotNull PackageManagerAdapter myAdapter;
 
     private final @NotNull String myPackageName;
 
