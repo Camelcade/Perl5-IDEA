@@ -1,0 +1,4 @@
+my @other;
+
+#@type @a<caret> Foo::Bar
+my @array;

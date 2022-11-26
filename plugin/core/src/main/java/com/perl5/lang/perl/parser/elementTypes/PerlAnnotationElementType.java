@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.psi.impl.PerlAnnotationContainerImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -31,9 +32,12 @@ public class PerlAnnotationElementType extends PerlReparseableElementType {
 
   @Override
   protected boolean isReparseableOld(@NotNull ASTNode parent,
-                                     @NotNull CharSequence buffer,
+                                     @NotNull CharSequence newText,
                                      @NotNull Language fileLanguage,
                                      @NotNull Project project) {
-    return false;
+    if (newText.length() < 3 || StringUtil.containsLineBreak(newText)) {
+      return false;
+    }
+    return newText.charAt(0) == '#' && newText.charAt(1) == '@' && Character.isAlphabetic(newText.charAt(2));
   }
 }

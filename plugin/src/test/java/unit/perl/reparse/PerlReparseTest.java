@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,13 +27,55 @@ public class PerlReparseTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testBreakHeredocQQ() {doTest("EOM");}
+  public void testAnnotationBreakAt() { doTest(" "); }
 
   @Test
-  public void testBreakHeredocQX() {doTest("EOM");}
+  public void testAnnotationBreakNewline() { doTest("\n"); }
 
   @Test
-  public void testBreakRegexM() {doTest(">");}
+  public void testAnnotationBreakText() { doTest(" "); }
+
+  @Test
+  public void testAnnotationArray() { doTest("a"); }
+
+  @Test
+  public void testAnnotationArrayTyped() { doTest("a"); }
+
+  @Test
+  public void testAnnotationArrayTypedComment() { doTest("a"); }
+
+  @Test
+  public void testAnnotationHash() { doTest("a"); }
+
+  @Test
+  public void testAnnotationHashTyped() { doTest("a"); }
+
+  @Test
+  public void testAnnotationHashTypedComment() { doTest("a"); }
+
+  @Test
+  public void testAnnotationScalar() { doTest("a"); }
+
+  @Test
+  public void testAnnotationScalarTyped() { doTest("a"); }
+
+  @Test
+  public void testAnnotationScalarTypedComment() { doTest("a"); }
+
+  @Test
+  public void testAnnotationType() { doTest("a"); }
+
+  @Test
+  public void testAnnotationTypeComment() { doTest("a"); }
+
+  @Test
+  public void testBreakHeredocQQ() { doTest("EOM"); }
+
+  @Test
+  public void testBreakHeredocQX() { doTest("EOM"); }
+
+  @Test
+  public void testBreakRegexM() { doTest(">"); }
 
   @Test
   public void testBreakRegexQR() {doTest(">");}

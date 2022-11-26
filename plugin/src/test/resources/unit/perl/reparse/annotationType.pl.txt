@@ -1,0 +1,41 @@
+Reparsing block
+----------
+PerlNamespaceElementImpl(Perl5: package::name)
+----------
+Fo
+----------
+After typing
+----------
+my @other;
+
+#@type Foa<caret>
+my @array;
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
+      PsiElement(Perl5: my)('my')
+      PsiWhiteSpace(' ')
+      PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+        PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+          PsiElement(Perl5: $@)('@')
+          PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('other')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n')
+  PerlAnnotationContainerImpl(Perl5: COMMENT_ANNOTATION)
+    PsiPerlAnnotationTypeImpl(Perl5: ANNOTATION_TYPE)
+      PsiElement(Perl5: #@type)('#@type')
+      PsiWhiteSpace(' ')
+      PerlNamespaceElementImpl(Perl5: package::name)('Foa')
+  PsiWhiteSpace('\n')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
+      PsiElement(Perl5: my)('my')
+      PsiWhiteSpace(' ')
+      PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+        PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE)
+          PsiElement(Perl5: $@)('@')
+          PerlVariableNameElementImpl(Perl5: ARRAY_NAME)('array')
+    PsiElement(Perl5: ;)(';')

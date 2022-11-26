@@ -1,0 +1,4 @@
+my $something;
+
+#<caret>@type Something
+my $something;

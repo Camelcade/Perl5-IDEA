@@ -1,0 +1,44 @@
+Reparsing block
+----------
+Element(Perl5: COMMENT_ANNOTATION)
+----------
+#@type $s Foo::Bar
+----------
+After typing
+----------
+my $other;
+
+#@type $sa<caret> Foo::Bar
+my $scalar;
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
+      PsiElement(Perl5: my)('my')
+      PsiWhiteSpace(' ')
+      PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+        PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+          PsiElement(Perl5: $$)('$')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('other')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n')
+  PerlAnnotationContainerImpl(Perl5: COMMENT_ANNOTATION)
+    PsiPerlAnnotationTypeImpl(Perl5: ANNOTATION_TYPE)
+      PsiElement(Perl5: #@type)('#@type')
+      PsiWhiteSpace(' ')
+      PsiPerlAnnotationVariableImpl(Perl5: ANNOTATION_VARIABLE)
+        PsiElement(Perl5: $annotated)('$sa')
+      PsiWhiteSpace(' ')
+      PerlNamespaceElementImpl(Perl5: package::name)('Foo::Bar')
+  PsiWhiteSpace('\n')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
+      PsiElement(Perl5: my)('my')
+      PsiWhiteSpace(' ')
+      PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+        PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+          PsiElement(Perl5: $$)('$')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('scalar')
+    PsiElement(Perl5: ;)(';')

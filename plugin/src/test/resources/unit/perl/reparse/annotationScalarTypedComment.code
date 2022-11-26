@@ -1,0 +1,4 @@
+my $other;
+
+#@type $s<caret> Foo::Bar and some comment
+my $scalar;

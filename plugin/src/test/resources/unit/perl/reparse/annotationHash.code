@@ -1,0 +1,4 @@
+my %other;
+
+#@type %ha<caret>
+my %hash;

@@ -1,0 +1,4 @@
+my @other;
+
+#@type Fo<caret> some comment
+my @array;

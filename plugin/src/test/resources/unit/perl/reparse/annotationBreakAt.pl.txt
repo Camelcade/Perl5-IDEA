@@ -1,0 +1,37 @@
+Reparsing block
+----------
+Full reparse
+----------
+After typing
+----------
+my $something;
+
+# <caret>@type Something
+my $something;
+
+----------
+Psi structure
+----------
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
+      PsiElement(Perl5: my)('my')
+      PsiWhiteSpace(' ')
+      PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+        PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+          PsiElement(Perl5: $$)('$')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('something')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n\n')
+  PsiComment(Perl5: COMMENT_LINE)('# @type Something')
+  PsiWhiteSpace('\n')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlVariableDeclarationLexicalImpl(Perl5: VARIABLE_DECLARATION_LEXICAL)
+      PsiElement(Perl5: my)('my')
+      PsiWhiteSpace(' ')
+      PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT)
+        PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE)
+          PsiElement(Perl5: $$)('$')
+          PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('something')
+    PsiElement(Perl5: ;)(';')
+  PsiWhiteSpace('\n')

@@ -1,0 +1,4 @@
+my $other;
+
+#@type $s<caret>
+my $scalar;
