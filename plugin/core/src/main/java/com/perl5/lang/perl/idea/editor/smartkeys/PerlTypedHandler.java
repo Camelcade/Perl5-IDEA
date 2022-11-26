@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +61,10 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     RESERVED_NO,
     RESERVED_PACKAGE,
     ANNOTATION_RETURNS_KEY,
-    ANNOTATION_TYPE_KEY
+    ANNOTATION_TYPE_KEY,
+    ANNOTATION_SCALAR,
+    ANNOTATION_ARRAY,
+    ANNOTATION_HASH
   );
 
 
