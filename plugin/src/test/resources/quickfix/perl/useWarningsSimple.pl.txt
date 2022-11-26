@@ -1,2 +1,6 @@
+<caret>use warnings;
+package FooBar42;
+
+######################### PREVIEW #########################
 use warnings;
 package FooBar42;

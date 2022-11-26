@@ -1,3 +1,8 @@
+<caret>foreach (@ARGV) {
+    say 'some';
+}
+
+######################### PREVIEW #########################
 foreach (@ARGV) {
     say 'some';
 }

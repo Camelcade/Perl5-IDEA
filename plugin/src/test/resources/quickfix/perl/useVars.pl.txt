@@ -1,1 +1,4 @@
-our ($scalar, @array, %hash);
+our (<caret>$scalar, @array, %hash);
+
+######################### PREVIEW #########################
+NO DIFF PREVIEW

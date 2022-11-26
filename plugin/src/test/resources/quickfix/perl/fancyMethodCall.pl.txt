@@ -1,2 +1,6 @@
+my $object = ParentPack<caret>age::->new();
+
+
+######################### PREVIEW #########################
 my $object = ParentPackage::->new();
 

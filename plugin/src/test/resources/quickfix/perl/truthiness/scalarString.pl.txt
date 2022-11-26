@@ -1,3 +1,3323 @@
+<caret># scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; $a eq '';) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for not $a;
+for (not $a) {}
+for (; $a eq '';) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a) {}
+say if $a;
+unless ($a) {}
+say unless $a;
+while ($a) {}
+say while $a;
+until ($a) {}
+say until $a;
+say for $a;
+for ($a) {}
+for (; $a;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!$a) {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a;
+unless ($a) {}
+say unless $a;
+while ($a) {}
+say while $a;
+until ($a) {}
+say until $a;
+say for $a;
+for ($a) {}
+for (; $a;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!$a) {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a) {}
+say unless $a;
+while ($a) {}
+say while $a;
+until ($a) {}
+say until $a;
+say for $a;
+for ($a) {}
+for (; $a;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!$a) {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a;
+while ($a) {}
+say while $a;
+until ($a) {}
+say until $a;
+say for $a;
+for ($a) {}
+for (; $a;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!$a) {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a) {}
+say while $a;
+until ($a) {}
+say until $a;
+say for $a;
+for ($a) {}
+for (; $a;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!$a) {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a;
+until ($a) {}
+say until $a;
+say for $a;
+for ($a) {}
+for (; $a;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!$a) {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a) {}
+say until $a;
+say for $a;
+for ($a) {}
+for (; $a;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!$a) {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a;
+say for $a;
+for ($a) {}
+for (; $a;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!$a) {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a;) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!$a) {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if (!$a) {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif (!$a) {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if !$a;
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless (!$a) {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless !$a;
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while (!$a) {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while !$a;
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until (!$a) {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until !$a;
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; !$a;) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if (!($a)) {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif (!($a)) {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if !($a);
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless (!($a)) {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless !($a);
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while (!($a)) {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while !($a);
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until (!($a)) {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until !($a);
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; !($a);) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; $a eq '';) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if (not $a) {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; $a eq '';) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if ($a eq '') {}
+elsif (not $a) {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; $a eq '';) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if not $a;
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; $a eq '';) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless (not $a) {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; $a eq '';) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless not $a;
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; $a eq '';) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while (not $a) {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; $a eq '';) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while not $a;
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; $a eq '';) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until (not $a) {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; $a eq '';) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until not $a;
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
+# scalar
+if ($a ne '') {}
+elsif ($a ne '') {}
+say if $a ne '';
+unless ($a ne '') {}
+say unless $a ne '';
+while ($a ne '') {}
+say while $a ne '';
+until ($a ne '') {}
+say until $a ne '';
+say for $a;
+for ($a) {}
+for (; $a ne '';) {}
+when ($a) {}
+given ($a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !$a;
+for (!$a) {}
+for (; $a eq '';) {}
+when (!$a) {}
+given (!$a) {}
+
+# negated scalar
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for !($a);
+for (!($a)) {}
+for (; $a eq '';) {}
+when (!($a)) {}
+given (!($a)) {}
+
+# negated scalar lp
+if ($a eq '') {}
+elsif ($a eq '') {}
+say if $a eq '';
+unless ($a eq '') {}
+say unless $a eq '';
+while ($a eq '') {}
+say while $a eq '';
+until ($a eq '') {}
+say until $a eq '';
+say for not $a;
+for (not $a) {}
+for (; not $a;) {}
+when (not $a) {}
+given (not $a) {}
+
+# double negated scalar
+if (not !$a) {}
+elsif (not !$a) {}
+say if not !$a;
+unless (not !$a) {}
+say unless not !$a;
+while (not !$a) {}
+say while not !$a;
+until (not !$a) {}
+say until not !$a;
+say for not !$a;
+for (not !$a) {}
+for (; not !$a;) {}
+when (not !$a) {}
+given (not !$a) {}
+
+
+
+######################### PREVIEW #########################
 # scalar
 if ($a ne '') {}
 elsif ($a ne '') {}

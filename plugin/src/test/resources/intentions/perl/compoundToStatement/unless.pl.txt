@@ -1,1 +1,4 @@
+<caret>say 'hi' unless ($a);
+
+######################### PREVIEW #########################
 say 'hi' unless ($a);

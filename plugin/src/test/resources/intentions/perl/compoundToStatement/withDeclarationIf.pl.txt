@@ -1,6 +1,13 @@
 # test
 
 my $line;
+say $line if ($line = shift);<caret>
+
+# test
+######################### PREVIEW #########################
+# test
+
+my $line;
 say $line if ($line = shift);
 
 # test

@@ -3,10 +3,13 @@ package Unknown::Package;
 $a isa 'Unknown::Package';
 $a isa "Unknown::Package";
 $a isa Unknown::Package;
-$a isa Unknown::Package::sub();
+$a i<caret>sa Unknown::Package::sub();
 $a isa $package_name;
 
 UNIVERSAL::isa($a, $b);
 UNIVERSAL->isa($a, $b);
 Unknown::Package::isa($a, $b);
 Unknown::Package->isa($a, $b);
+
+######################### PREVIEW #########################
+NO DIFF PREVIEW

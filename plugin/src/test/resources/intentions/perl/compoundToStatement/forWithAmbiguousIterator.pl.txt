@@ -1,1 +1,4 @@
+<caret>say "$_ $var[0] $var{key}" for (@ARGV);
+
+######################### PREVIEW #########################
 say "$_ $var[0] $var{key}" for (@ARGV);

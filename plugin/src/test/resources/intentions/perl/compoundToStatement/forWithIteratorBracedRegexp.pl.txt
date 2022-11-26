@@ -1,1 +1,4 @@
+<caret>$var[0] =~ s/some${_}thing// foreach (@ARGV);
+
+######################### PREVIEW #########################
 $var[0] =~ s/some${_}thing// foreach (@ARGV);

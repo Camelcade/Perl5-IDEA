@@ -1,2 +1,6 @@
 my $line;
+say $line while ($line = <>);<caret>
+
+######################### PREVIEW #########################
+my $line;
 say $line while ($line = <>);

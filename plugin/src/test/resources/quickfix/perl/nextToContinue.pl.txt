@@ -1,5 +1,11 @@
 given($a){
   when($b){
+    co<caret>ntinue;
+  }
+}
+######################### PREVIEW #########################
+given($a){
+  when($b){
     continue;
   }
 }

@@ -1,2 +1,5 @@
-sub     name($sig) :lvalue :prototype($) { # with signature, prototype
+sub     name($s<caret>ig) :lvalue :prototype($) { # with signature, prototype
 }
+
+######################### PREVIEW #########################
+NO DIFF PREVIEW

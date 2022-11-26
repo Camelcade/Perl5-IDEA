@@ -1,4 +1,7 @@
 %hash{qw/ssp_id dsp_id/};
 %array[1,2,3,4];
 %$scalar{qw/ssp_id dsp_id/};
-%$scalar[1,2,3,4];
+%$scalar[1,<caret>2,3,4];
+
+######################### PREVIEW #########################
+NO DIFF PREVIEW

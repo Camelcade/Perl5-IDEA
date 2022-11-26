@@ -3,6 +3,9 @@ my @list;
 @list = <FH>;
 @list = <Foo::Bar::FH>;
 @list = <Foo'Bar'FH>;
-@list = <<>>;
+@list = <<<caret>>>;
 @list = <$foo>;
 @list = <*.txt>;
+
+######################### PREVIEW #########################
+NO DIFF PREVIEW

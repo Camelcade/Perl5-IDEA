@@ -1,5 +1,10 @@
 
-<<"HEREDOC";
+<<"HEREDOC<caret>";
 this is a $variable test
 HEREDOC
+
+
+######################### PREVIEW #########################
+
+qq/this is a $variable test/;
 

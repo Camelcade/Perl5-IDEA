@@ -1,5 +1,11 @@
 given($a){
   when($b){
+    br<caret>eak;
+  }
+}
+######################### PREVIEW #########################
+given($a){
+  when($b){
     break;
   }
 }

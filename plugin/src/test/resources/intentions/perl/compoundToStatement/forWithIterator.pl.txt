@@ -1,1 +1,4 @@
+<caret>say 'hi' . $_ foreach (@ARGV);
+
+######################### PREVIEW #########################
 say 'hi' . $_ foreach (@ARGV);

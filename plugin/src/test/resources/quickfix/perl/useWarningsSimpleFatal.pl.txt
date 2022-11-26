@@ -1,2 +1,6 @@
+<caret>use warnings FATAL => 'all';
+package FooBar42;
+
+######################### PREVIEW #########################
 use warnings FATAL => 'all';
 package FooBar42;

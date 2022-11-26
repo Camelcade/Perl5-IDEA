@@ -1,1 +1,4 @@
+<caret>say 'hi' foreach (@ARGV);
+
+######################### PREVIEW #########################
 say 'hi' foreach (@ARGV);

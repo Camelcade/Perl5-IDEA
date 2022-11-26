@@ -1,6 +1,6 @@
 
 say $a ^. $b;
-say $a |. $b;
+say $a <caret>|. $b;
 say $a &. $b;
 say ~. $b;
 
@@ -11,3 +11,6 @@ $a &.= $b;
 $a |.= $b;
 $a ^.= $b;
 
+
+######################### PREVIEW #########################
+NO DIFF PREVIEW

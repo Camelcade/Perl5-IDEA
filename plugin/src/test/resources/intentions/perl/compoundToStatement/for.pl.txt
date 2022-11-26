@@ -1,1 +1,4 @@
+<caret>say 'hi' for (@ARGV);
+
+######################### PREVIEW #########################
 say 'hi' for (@ARGV);

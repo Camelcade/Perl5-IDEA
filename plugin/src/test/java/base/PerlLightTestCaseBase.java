@@ -243,6 +243,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     DeleteTypeDescriptionLocation.SINGULAR,
     DeleteTypeDescriptionLocation.PLURAL
   );
+  private static final String PREVIEW_SEPARATOR = "\n######################### PREVIEW #########################\n";
   private TextAttributes myReadAttributes;
   private TextAttributes myWriteAttributes;
   private Perl5CodeInsightSettings myCodeInsightSettings;
@@ -1396,10 +1397,14 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     initWithFileSmart(fileName);
     //noinspection unchecked
     myFixture.enableInspections(inspectionClass);
+    var previewBuilder = new StringBuilder();
     myFixture.getAllQuickFixes().stream()
       .filter((it) -> it.getText().startsWith(quickfixNamePrefix))
-      .forEach(myFixture::launchAction);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
+      .forEach(action -> {
+        previewBuilder.append(PREVIEW_SEPARATOR).append(getIntentionPreview(action));
+        myFixture.launchAction(action);
+      });
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections() + previewBuilder.toString());
   }
 
   protected void doTestAnnotationQuickFix(@NotNull String fileName,
@@ -1465,16 +1470,25 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   private void doTestIntentionWithoutLoad(@NotNull String intentionPrefix, boolean checkErrors) {
-    myFixture.launchAction(getSingleIntention(intentionPrefix));
+    var intentionAction = getSingleIntention(intentionPrefix);
+    var previewText = getIntentionPreview(intentionAction);
+    myFixture.launchAction(intentionAction);
     if (checkErrors) {
       assertNoErrorElements();
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
+
+    var editorText = getEditorTextWithCaretsAndSelections();
+    UsefulTestCase.assertSameLinesWithFile(
+      getTestResultsFilePath(), editorText + PREVIEW_SEPARATOR + previewText);
   }
 
   protected void doTestStructureView() {
     initWithFileSmartWithoutErrors();
     doTestStructureViewWithoutInit();
+  }
+
+  private @NotNull String getIntentionPreview(@NotNull IntentionAction intentionAction) {
+    return StringUtil.notNullize(myFixture.getIntentionPreviewText(intentionAction), "NO DIFF PREVIEW");
   }
 
   protected void doTestStructureViewWithoutInit() {

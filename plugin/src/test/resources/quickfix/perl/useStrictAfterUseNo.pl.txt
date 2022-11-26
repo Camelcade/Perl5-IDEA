@@ -1,3 +1,12 @@
+<caret>package FooBar42;
+
+use warnings;
+no warnings;
+use strict;
+no Foo::Bar;
+
+say 'hi';
+######################### PREVIEW #########################
 package FooBar42;
 
 use warnings;

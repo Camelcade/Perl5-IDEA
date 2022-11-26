@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.quickfixes;
 import com.intellij.codeInsight.FileModificationService;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiComment;
@@ -57,7 +58,8 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
   @Override
   public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
     PsiElement newStatementContainer = descriptor.getPsiElement();
-    if (!FileModificationService.getInstance().prepareFileForWrite(newStatementContainer.getContainingFile())) {
+    if (ApplicationManager.getApplication().isWriteThread() &&
+        !FileModificationService.getInstance().prepareFileForWrite(newStatementContainer.getContainingFile())) {
       return;
     }
 

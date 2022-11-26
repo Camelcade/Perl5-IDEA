@@ -1,5 +1,10 @@
 
-<<`HEREDOC`;
+<<`HEREDOC<caret>`;
 this is a test
 HEREDOC
+
+
+######################### PREVIEW #########################
+
+qx/this is a test/;
 

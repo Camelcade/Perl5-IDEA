@@ -1,5 +1,10 @@
 
-<<'HEREDOC';
+<<'HERED<caret>OC';
 this is a test
 HEREDOC
+
+
+######################### PREVIEW #########################
+
+'this is a test';
 

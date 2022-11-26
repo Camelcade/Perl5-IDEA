@@ -1,2 +1,6 @@
+<caret>use strict;
+package FooBar42;
+
+######################### PREVIEW #########################
 use strict;
 package FooBar42;

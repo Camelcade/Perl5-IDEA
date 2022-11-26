@@ -1,6 +1,13 @@
 # test
 
 my $line;
+say $line while ($line = <>);<caret>
+
+# test
+######################### PREVIEW #########################
+# test
+
+my $line;
 say $line while ($line = <>);
 
 # test

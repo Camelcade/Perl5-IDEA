@@ -1,4 +1,10 @@
 for (my $idx = 0; $idx < scalar(@ARGV); $idx++) {
+   <caret> my $var = $ARGV[$idx];
+    say $var;
+}
+
+######################### PREVIEW #########################
+for (my $idx = 0; $idx < scalar(@ARGV); $idx++) {
     my $var = $ARGV[$idx];
     say $var;
 }
