@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,46 +16,50 @@
 
 package com.perl5.lang.perl.idea.quickfixes;
 
-import com.intellij.codeInspection.LocalQuickFixOnPsiElement;
+import com.intellij.codeInspection.LocalQuickFix;
+import com.intellij.codeInspection.ProblemDescriptor;
+import com.intellij.codeInspection.util.IntentionName;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collection;
+import java.util.Collections;
 
-public class PerlUseVarsQuickFix extends LocalQuickFixOnPsiElement {
-  private final AtomicNotNullLazyValue<Collection<PerlVariableDeclarationElement>> myVariablesProvider =
-    AtomicNotNullLazyValue
-      .createValue(() -> PsiTreeUtil.findChildrenOfType(myStartElement.getElement(), PerlVariableDeclarationElement.class));
+public class PerlUseVarsQuickFix implements LocalQuickFix {
+  private final boolean myIsRemoval;
 
-  public PerlUseVarsQuickFix(@NotNull PerlUseStatementElement element) {
-    super(element);
+  public PerlUseVarsQuickFix(@Nullable PsiElement psiElement) {
+    myIsRemoval = computeVariables(psiElement).isEmpty();
   }
 
-  public boolean isRemoval() {return myVariablesProvider.getValue().isEmpty();}
+  private static @NotNull Collection<? extends PerlVariableDeclarationElement> computeVariables(@Nullable PsiElement psiElement) {
+    return psiElement == null ? Collections.emptyList() : PsiTreeUtil.findChildrenOfType(psiElement, PerlVariableDeclarationElement.class);
+  }
+
+  public boolean isRemoval() { return myIsRemoval; }
 
   @Override
-  public @NotNull String getText() {
+  public @IntentionName @NotNull String getName() {
     return isRemoval() ?
            PerlBundle.message("perl.remove.redundant.code") :
            PerlBundle.message("perl.quickfix.use.vars");
   }
 
   @Override
-  public void invoke(@NotNull Project project, @NotNull PsiFile file, @NotNull PsiElement startElement, @NotNull PsiElement endElement) {
-    Collection<PerlVariableDeclarationElement> declarations = myVariablesProvider.getValue();
+  public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
+    var startElement = descriptor.getPsiElement();
+    var declarations = computeVariables(startElement);
     if (declarations.isEmpty()) {
       startElement.delete();
       return;
@@ -69,7 +73,7 @@ public class PerlUseVarsQuickFix extends LocalQuickFixOnPsiElement {
       newCode.append(")");
     }
     newCode.append(";");
-    PerlFileImpl fakeFile = PerlElementFactory.createFile(myStartElement.getProject(), newCode.toString());
+    PerlFileImpl fakeFile = PerlElementFactory.createFile(project, newCode.toString());
     PsiPerlStatement newElement = PsiTreeUtil.findChildOfType(fakeFile, PsiPerlStatement.class);
     if (newElement != null) {
       startElement.replace(newElement);
