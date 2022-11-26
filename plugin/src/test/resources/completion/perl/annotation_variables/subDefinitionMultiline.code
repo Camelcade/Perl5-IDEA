@@ -1,0 +1,6 @@
+#@type <caret>
+sub something(  $scalar,
+                @array,
+                %hash){
+
+}

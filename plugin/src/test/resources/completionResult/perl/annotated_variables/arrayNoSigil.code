@@ -1,0 +1,2 @@
+#@type <complete array1>
+my(@array1, @array2);

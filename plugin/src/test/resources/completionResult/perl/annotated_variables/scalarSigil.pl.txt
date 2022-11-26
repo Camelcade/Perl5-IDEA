@@ -1,0 +1,2 @@
+#@type $scalar1<caret>
+my($scalar1, $scalar2);

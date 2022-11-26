@@ -52,9 +52,15 @@ Text: UNIVERSAL; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Ic
 Text: __PACKAGE__; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: __PACKAGE__
 	String: __PACKAGE__
+Text: array; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: @array, array
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 69 in subDefinitionMultiline.pl
+Text: hash; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: %hash, hash
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 93 in subDefinitionMultiline.pl
 Text: main; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: main
 	PsiElement: Implicit namespace: main
-Text: var; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $var, var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 31 in annotationTypeScalarPackage.pl
+Text: scalar; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $scalar, scalar
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 44 in subDefinitionMultiline.pl

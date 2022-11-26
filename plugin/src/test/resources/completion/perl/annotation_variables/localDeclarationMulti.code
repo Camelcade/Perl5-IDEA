@@ -1,0 +1,3 @@
+#@type <caret>
+local ($scalar, @array, %hash);
+local ($wrong_scalar, @wrong_array, %wrong_hash);

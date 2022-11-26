@@ -1,0 +1,2 @@
+#@type @array2<caret>
+my(@array1, @array2);

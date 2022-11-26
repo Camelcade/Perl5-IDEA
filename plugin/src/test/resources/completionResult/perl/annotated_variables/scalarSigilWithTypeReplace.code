@@ -1,0 +1,2 @@
+#@type $sc<complete scalar2> Foo::Bar
+my($scalar1, $scalar2);

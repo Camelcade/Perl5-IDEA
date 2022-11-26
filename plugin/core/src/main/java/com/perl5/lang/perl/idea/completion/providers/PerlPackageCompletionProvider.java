@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +19,14 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.PerlInsertHandlers;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
+import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
+import com.perl5.lang.perl.psi.PerlAnnotationType;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,6 +59,16 @@ public class PerlPackageCompletionProvider extends PerlCompletionProvider {
       completionProcessor.processSingle(LookupElementBuilder.create("HashRef")
                                           .withInsertHandler(PerlInsertHandlers.ARRAY_ELEMENT_INSERT_HANDLER)
                                           .withTailText("[]"));
+      if (Registry.is("perl5.completion.var.without.sigil", true) && element.getParent() instanceof PerlAnnotationType typeAnnotation &&
+          typeAnnotation.getAnnotationVariable() == null) {
+        // fill with sigiliess variables
+        PerlVariableCompletionProcessor variableCompletionProcessor =
+          PerlAnnotationVariablesCompletionProvider.createProcessor(parameters, result, element);
+
+        PerlAnnotationVariablesCompletionProvider.processTargets(typeAnnotation, variableCompletionProcessor, true);
+        variableCompletionProcessor.logStatus(getClass());
+      }
+
       PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor);
       logger.debug("Processed all namespace names");
     }

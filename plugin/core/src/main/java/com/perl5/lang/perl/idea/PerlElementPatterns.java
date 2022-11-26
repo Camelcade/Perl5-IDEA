@@ -115,6 +115,13 @@ public final class PerlElementPatterns {
   public static final PsiElementPattern.Capture<PerlAnnotationVariableElement> ANNOTATION_VARIABLE_PATTERN =
     psiElement(PerlAnnotationVariableElement.class);
 
+  public static final PsiElementPattern.Capture<PsiElement> ANNOTATION_VARIABLE_NAME_PATTERN =
+    psiElement().andOr(
+      psiElement(ANNOTATION_SCALAR),
+      psiElement(ANNOTATION_ARRAY),
+      psiElement(ANNOTATION_HASH)
+    );
+
   public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_PATTERN = psiElement(PerlVariableNameElement.class);
   public static final PsiElementPattern.Capture<PerlVariableNameElement> VARIABLE_NAME_IN_DECLARATION_PATTERN =
     VARIABLE_NAME_PATTERN.withParent(

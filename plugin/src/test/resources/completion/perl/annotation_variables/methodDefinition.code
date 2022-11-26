@@ -1,0 +1,4 @@
+#@type <caret>
+method something($scalar, @array, %hash){
+
+}

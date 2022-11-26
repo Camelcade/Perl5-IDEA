@@ -1,0 +1,2 @@
+#@type $sc<complete scalar1>
+my($scalar1, $scalar2);

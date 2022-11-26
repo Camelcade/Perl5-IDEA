@@ -1,0 +1,3 @@
+Text: scalar; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: scalar
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 42 in myDeclarationMultiWithSigilScalarAndType.pl

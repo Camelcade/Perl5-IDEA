@@ -1,0 +1,4 @@
+#@type <caret>
+for my $scalar (@somelist){
+  my $wrong_scalar;
+}

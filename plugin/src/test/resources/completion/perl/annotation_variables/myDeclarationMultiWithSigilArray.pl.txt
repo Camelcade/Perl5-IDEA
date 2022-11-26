@@ -1,0 +1,3 @@
+Text: array; Tail: null; Type: null; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: array
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 42 in myDeclarationMultiWithSigilArray.pl

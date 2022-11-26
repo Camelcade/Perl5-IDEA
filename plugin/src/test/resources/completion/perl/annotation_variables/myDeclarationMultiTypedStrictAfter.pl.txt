@@ -55,6 +55,6 @@ Text: __PACKAGE__; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type 
 Text: main; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: main
 	PsiElement: Implicit namespace: main
-Text: var; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
-	Lookups: $var, var
-	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 31 in annotationTypeScalarPackage.pl
+Text: typed_scalar; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: $typed_scalar, typed_scalar
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 81 in myDeclarationMultiTypedStrictAfter.pl

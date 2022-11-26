@@ -1,0 +1,3 @@
+Text: hash; Tail: null; Type: null; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: hash
+	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 59 in myDeclarationMultiWithSigilHashAndType.pl

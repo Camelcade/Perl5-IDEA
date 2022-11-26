@@ -1,0 +1,4 @@
+#@type Foo::Bar
+#@type <caret>
+my ($scalar, $typed_scalar);
+my ($wrong_scalar, @wrong_array, %wrong_hash);

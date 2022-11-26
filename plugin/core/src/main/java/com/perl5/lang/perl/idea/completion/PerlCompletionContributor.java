@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -101,6 +101,12 @@ public class PerlCompletionContributor extends CompletionContributor implements 
       CompletionType.BASIC,
       STRING_CHAR_NAME_PATTERN,
       new PerlUnicodeNamesCompletionProvider()
+    );
+
+    extend(
+      CompletionType.BASIC,
+      ANNOTATION_VARIABLE_NAME_PATTERN,
+      new PerlAnnotationVariablesCompletionProvider()
     );
 
     // this is really heavy, so should be last

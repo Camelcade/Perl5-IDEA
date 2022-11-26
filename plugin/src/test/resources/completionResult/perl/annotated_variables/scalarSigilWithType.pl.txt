@@ -1,0 +1,2 @@
+#@type $scalar2<caret> Foo::Bar
+my($scalar1, $scalar2);

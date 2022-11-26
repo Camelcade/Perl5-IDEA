@@ -143,8 +143,8 @@ public class PerlVariableAnnotations {
     });
   }
 
-  private static boolean processAnnotations(@NotNull PerlVariableDeclarationElement variableDeclarationElement,
-                                            @NotNull PerlVariableAnnotations.VariableAnnotationProcessor annotationsProcessor) {
+  public static boolean processAnnotations(@NotNull PerlVariableDeclarationElement variableDeclarationElement,
+                                           @NotNull PerlVariableAnnotations.VariableAnnotationProcessor annotationsProcessor) {
 
     var annotationList = collectAnnotationsInScope(variableDeclarationElement);
     if (annotationList.isEmpty()) {

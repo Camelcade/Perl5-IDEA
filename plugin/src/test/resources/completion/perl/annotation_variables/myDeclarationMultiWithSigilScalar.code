@@ -1,0 +1,3 @@
+#@type $<caret>
+my ($scalar, @array, %hash);
+my ($wrong_scalar, @wrong_array, %wrong_hash);
