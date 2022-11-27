@@ -27,4 +27,10 @@ public class PsiPerlSpliceExprImpl extends PsiPerlExprImpl implements PsiPerlSpl
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PsiPerlExpr getExpr() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class);
+  }
+
 }

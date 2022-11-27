@@ -7,4 +7,7 @@ import com.intellij.psi.PsiElement;
 
 public interface PsiPerlReturnExpr extends PsiPerlExpr, PerlReturnExpr {
 
+  @Nullable
+  PsiPerlExpr getExpr();
+
 }

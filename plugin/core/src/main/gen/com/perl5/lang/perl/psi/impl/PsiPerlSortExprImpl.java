@@ -34,15 +34,15 @@ public class PsiPerlSortExprImpl extends PsiPerlExprImpl implements PsiPerlSortE
   }
 
   @Override
-  @Nullable
-  public PsiPerlMethod getMethod() {
-    return PsiTreeUtil.getChildOfType(this, PsiPerlMethod.class);
+  @NotNull
+  public List<PsiPerlExpr> getExprList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlExpr.class);
   }
 
   @Override
   @Nullable
-  public PsiPerlScalarVariable getScalarVariable() {
-    return PsiTreeUtil.getChildOfType(this, PsiPerlScalarVariable.class);
+  public PsiPerlMethod getMethod() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlMethod.class);
   }
 
 }

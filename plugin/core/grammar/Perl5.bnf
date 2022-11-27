@@ -875,7 +875,7 @@ expr ::=
     | atom_expr             // 22
 
 // above list operators
-private parse_list_expr ::= <<parseExpressionLevel 2>>
+parse_list_expr ::= <<parseExpressionLevel 2>> {elementType=expr}
 private optional_list_expr ::= [parse_list_expr]
 
 // List expression elements, code checks if priority < than number, see com.perl5.lang.perl.parser.PerlParserGenerated.expr_0

@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import com.perl5.lang.perl.psi.*;
 
-public abstract class PsiPerlExprImpl extends PerlCompositeElementImpl implements PsiPerlExpr {
+public class PsiPerlExprImpl extends PerlCompositeElementImpl implements PsiPerlExpr {
 
   public PsiPerlExprImpl(ASTNode node) {
     super(node);

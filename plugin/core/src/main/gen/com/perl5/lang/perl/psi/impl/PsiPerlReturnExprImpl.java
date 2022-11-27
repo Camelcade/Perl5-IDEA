@@ -27,4 +27,10 @@ public class PsiPerlReturnExprImpl extends PsiPerlExprImpl implements PsiPerlRet
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PsiPerlExpr getExpr() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class);
+  }
+
 }

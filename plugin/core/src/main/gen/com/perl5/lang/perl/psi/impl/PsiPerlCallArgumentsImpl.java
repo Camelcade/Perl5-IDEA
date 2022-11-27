@@ -28,9 +28,9 @@ public class PsiPerlCallArgumentsImpl extends PerlCallArguments implements PsiPe
   }
 
   @Override
-  @Nullable
+  @NotNull
   public PsiPerlExpr getExpr() {
-    return PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class);
+    return notNullChild(PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class));
   }
 
 }

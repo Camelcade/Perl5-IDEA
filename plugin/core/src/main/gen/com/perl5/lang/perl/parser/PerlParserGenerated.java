@@ -887,7 +887,7 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   public static boolean call_arguments(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "call_arguments")) return false;
     boolean result_;
-    Marker marker_ = enter_section_(builder_, level_, _COLLAPSE_, CALL_ARGUMENTS, "<call arguments>");
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, CALL_ARGUMENTS, "<call arguments>");
     result_ = parse_call_arguments(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
@@ -3451,10 +3451,10 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // <<parseExpressionLevel 2>>
-  static boolean parse_list_expr(PsiBuilder builder_, int level_) {
+  public static boolean parse_list_expr(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "parse_list_expr")) return false;
     boolean result_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, null, "<expression>");
+    Marker marker_ = enter_section_(builder_, level_, _COLLAPSE_, EXPR, "<expression>");
     result_ = parseExpressionLevel(builder_, level_ + 1, 2);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;

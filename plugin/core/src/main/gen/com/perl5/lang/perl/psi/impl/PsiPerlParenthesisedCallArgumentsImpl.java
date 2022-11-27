@@ -27,4 +27,10 @@ public class PsiPerlParenthesisedCallArgumentsImpl extends PsiPerlCallArgumentsI
     else super.accept(visitor);
   }
 
+  @Override
+  @Nullable
+  public PsiPerlExpr getExpr() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlExpr.class);
+  }
+
 }

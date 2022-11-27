@@ -10,10 +10,10 @@ public interface PsiPerlSortExpr extends PsiPerlExpr, PerlSortExpr {
   @Nullable
   PsiPerlBlock getBlock();
 
-  @Nullable
-  PsiPerlMethod getMethod();
+  @NotNull
+  List<PsiPerlExpr> getExprList();
 
   @Nullable
-  PsiPerlScalarVariable getScalarVariable();
+  PsiPerlMethod getMethod();
 
 }
