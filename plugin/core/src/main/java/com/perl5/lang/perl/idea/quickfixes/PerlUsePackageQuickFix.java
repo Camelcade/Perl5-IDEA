@@ -16,10 +16,8 @@
 
 package com.perl5.lang.perl.idea.quickfixes;
 
-import com.intellij.codeInsight.FileModificationService;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiComment;
@@ -56,12 +54,13 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
   }
 
   @Override
+  public boolean startInWriteAction() {
+    return true;
+  }
+
+  @Override
   public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
     PsiElement newStatementContainer = descriptor.getPsiElement();
-    if (ApplicationManager.getApplication().isWriteThread() &&
-        !FileModificationService.getInstance().prepareFileForWrite(newStatementContainer.getContainingFile())) {
-      return;
-    }
 
     PsiElement newStatement = PerlElementFactory.createUseStatement(project, myPackageName);
 
@@ -78,7 +77,7 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
 
           while ((nextStatement = nextStatement.getNextSibling()) != null
                  && PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(nextStatement.getNode().getElementType())
-            ) {
+          ) {
 
           }
 
@@ -148,7 +147,7 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
       if ((preveSibling == null && !(newStatementContainer instanceof PsiFile)) ||
           !(preveSibling instanceof PsiWhiteSpace) ||
           !StringUtil.equals(preveSibling.getText(), "\n")
-        ) {
+      ) {
         newStatementContainer.addBefore(newLineElement, newStatement);
       }
     }
