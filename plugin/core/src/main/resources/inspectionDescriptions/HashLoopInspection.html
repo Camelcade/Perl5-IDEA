@@ -22,20 +22,17 @@
 <p>When "looping over hashes," we mean looping over hash keys or hash values. If you forgot to call keys or values you will accidentally
   loop over both.</p>
 
-<code>
-  foreach my $foo (%hash) {...} # not ok
-  action() for %hash; # not ok
-  foreach my $foo ( keys %hash ) {...} # ok
-  action() for values %hash; # ok
-</code>
+<pre>
+foreach my $foo (%hash) {...} # not ok
+action() for %hash; # not ok
+foreach my $foo ( keys %hash ) {...} # ok
+action() for values %hash; # ok</pre>
 
 <p>An effort is made to detect expressions:</p>
 
-<code>
-  action() for %hash ? keys %hash : (); # ok
-  action() for %{ $hash{'stuff'} } ? keys %{ $hash{'stuff'} } : (); # ok
-</code>
-
+<pre>
+action() for %hash ? keys %hash : (); # ok
+action() for %{ $hash{'stuff'} } ? keys %{ $hash{'stuff'} } : (); # ok</pre>
 <p>(Granted, the second example there doesn't make much sense, but I have found a variationo of it in real code.)</p>
 
 </body>
