@@ -97,6 +97,12 @@ Text: v5.33; Tail: null; Type: bareword_filehandles bitwise current_sub evalbyte
 Text: v5.34; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: null; Type Icon: null
 	Lookups: v5.34
 	PerlVersion
+Text: v5.35; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc isa postderef_qq say signatures state unicode_eval unicode_strings; Icon: null; Type Icon: null
+	Lookups: v5.35
+	PerlVersion
+Text: v5.36; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc isa postderef_qq say signatures state unicode_eval unicode_strings; Icon: null; Type Icon: null
+	Lookups: v5.36
+	PerlVersion
 Text: v5.9.5; Tail: null; Type: bareword_filehandles indirect multidimensional say state switch; Icon: null; Type Icon: null
 	Lookups: v5.9.5
 	PerlVersion

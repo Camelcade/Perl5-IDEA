@@ -1,0 +1,150 @@
+Text: :5.10; Tail: null; Type: bareword_filehandles indirect multidimensional say state switch; Icon: /options.png; Type Icon: null
+	Lookups: :5.10
+	String: :5.10
+Text: :5.11; Tail: null; Type: bareword_filehandles indirect multidimensional say state switch unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.11
+	String: :5.11
+Text: :5.12; Tail: null; Type: bareword_filehandles indirect multidimensional say state switch unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.12
+	String: :5.12
+Text: :5.13; Tail: null; Type: bareword_filehandles indirect multidimensional say state switch unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.13
+	String: :5.13
+Text: :5.14; Tail: null; Type: bareword_filehandles indirect multidimensional say state switch unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.14
+	String: :5.14
+Text: :5.15; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.15
+	String: :5.15
+Text: :5.16; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.16
+	String: :5.16
+Text: :5.17; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.17
+	String: :5.17
+Text: :5.18; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.18
+	String: :5.18
+Text: :5.19; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.19
+	String: :5.19
+Text: :5.20; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.20
+	String: :5.20
+Text: :5.21; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.21
+	String: :5.21
+Text: :5.22; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.22
+	String: :5.22
+Text: :5.23; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.23
+	String: :5.23
+Text: :5.24; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.24
+	String: :5.24
+Text: :5.25; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.25
+	String: :5.25
+Text: :5.26; Tail: null; Type: bareword_filehandles current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.26
+	String: :5.26
+Text: :5.27; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.27
+	String: :5.27
+Text: :5.28; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.28
+	String: :5.28
+Text: :5.29; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.29
+	String: :5.29
+Text: :5.30; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.30
+	String: :5.30
+Text: :5.31; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.31
+	String: :5.31
+Text: :5.32; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.32
+	String: :5.32
+Text: :5.33; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.33
+	String: :5.33
+Text: :5.34; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc indirect multidimensional postderef_qq say state switch unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.34
+	String: :5.34
+Text: :5.35; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc isa postderef_qq say signatures state unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.35
+	String: :5.35
+Text: :5.36; Tail: null; Type: bareword_filehandles bitwise current_sub evalbytes fc isa postderef_qq say signatures state unicode_eval unicode_strings; Icon: /options.png; Type Icon: null
+	Lookups: :5.36
+	String: :5.36
+Text: :5.9.5; Tail: null; Type: bareword_filehandles indirect multidimensional say state switch; Icon: /options.png; Type Icon: null
+	Lookups: :5.9.5
+	String: :5.9.5
+Text: :all; Tail: null; Type: fc isa say try defer state switch bitwise indirect evalbytes signatures current_sub refaliasing postderef_qq unicode_eval declared_refs unicode_strings multidimensional bareword_filehandles extra_paired_delimiters; Icon: /options.png; Type Icon: null
+	Lookups: :all
+	String: :all
+Text: :default; Tail: null; Type: bareword_filehandles indirect multidimensional; Icon: /options.png; Type Icon: null
+	Lookups: :default
+	String: :default
+Text: bareword_filehandles; Tail: null; Type: v5.34, enables bareword filehandles for builtin functions operations, a generally discouraged practice.; Icon: /option.png; Type Icon: null
+	Lookups: bareword_filehandles
+	String: bareword_filehandles
+Text: bitwise; Tail: null; Type: v5.22, makes the four standard bitwise operators treat their operands consistently as numbers, and introduces four new dotted operators that treat their operands consistently as strings. The same applies to the assignment variants. Requires no warnings "experimental::bitwise"; Icon: /option.png; Type Icon: null
+	Lookups: bitwise
+	String: bitwise
+Text: current_sub; Tail: null; Type: v5.16, provides the __SUB__ token that returns a reference to the current subroutine or undef outside of a subroutine; Icon: /option.png; Type Icon: null
+	Lookups: current_sub
+	String: current_sub
+Text: declared_refs; Tail: null; Type: v5.26, allows a reference to a variable to be declared with my, state, our our, or localized with local. Requires no warnings "experimental::declared_refs"; Icon: /option.png; Type Icon: null
+	Lookups: declared_refs
+	String: declared_refs
+Text: defer; Tail: null; Type: v5.36, enables defer block syntax; Icon: /option.png; Type Icon: null
+	Lookups: defer
+	String: defer
+Text: evalbytes; Tail: null; Type: v5.16, force eval to treat string argument as a string of bytes; Icon: /option.png; Type Icon: null
+	Lookups: evalbytes
+	String: evalbytes
+Text: extra_paired_delimiters; Tail: null; Type: v5.36, allows to use additional paired delimiters; Icon: /option.png; Type Icon: null
+	Lookups: extra_paired_delimiters
+	String: extra_paired_delimiters
+Text: fc; Tail: null; Type: v5.16, enables the fc function, which implements Unicode casefolding; Icon: /option.png; Type Icon: null
+	Lookups: fc
+	String: fc
+Text: indirect; Tail: null; Type: v5.32, allows the use of indirect object syntax for method calls, e.g. new Foo 1, 2;; Icon: /option.png; Type Icon: null
+	Lookups: indirect
+	String: indirect
+Text: isa; Tail: null; Type: v5.32, allows the use of the isa infix operator, which tests whether the scalar given by the left operand is an object of the class given by the right operand. Requires no warnings "experimental::isa"; Icon: /option.png; Type Icon: null
+	Lookups: isa
+	String: isa
+Text: multidimensional; Tail: null; Type: v5.34, enables multidimensional array emulation like $foo{$x, $y}; Icon: /option.png; Type Icon: null
+	Lookups: multidimensional
+	String: multidimensional
+Text: postderef_qq; Tail: null; Type: v5.20, allows the use of postfix dereference syntax in within interpolated strings. Requires no warnings "experimental::postderef"; Icon: /option.png; Type Icon: null
+	Lookups: postderef_qq
+	String: postderef_qq
+Text: refaliasing; Tail: null; Type: v5.22, enables aliasing via assignment to references. Requires  no warnings "experimental::refaliasing"; Icon: /option.png; Type Icon: null
+	Lookups: refaliasing
+	String: refaliasing
+Text: say; Tail: null; Type: v5.10, enables the Perl 6 style say function; Icon: /option.png; Type Icon: null
+	Lookups: say
+	String: say
+Text: signatures; Tail: null; Type: v5.20, enables unpacking of subroutine arguments into lexical variables. Requires  no warnings "experimental::signatures"; Icon: /option.png; Type Icon: null
+	Lookups: signatures
+	String: signatures
+Text: state; Tail: null; Type: v5.10, enables state variables; Icon: /option.png; Type Icon: null
+	Lookups: state
+	String: state
+Text: switch; Tail: null; Type: v5.10, enables the Perl 6 given/when construct. Requires no warnings "experimental::smartmatch"; Icon: /option.png; Type Icon: null
+	Lookups: switch
+	String: switch
+Text: try; Tail: null; Type: v5.34, enables the try and catch syntax, which allows exception handling. Requires no warnings "experimental::try"; Icon: /option.png; Type Icon: null
+	Lookups: try
+	String: try
+Text: unicode_eval; Tail: null; Type: v5.16, force eval to treat string argument as a string of characters ignoring any use utf8 declarations; Icon: /option.png; Type Icon: null
+	Lookups: unicode_eval
+	String: unicode_eval
+Text: unicode_strings; Tail: null; Type: v5.16, use Unicode rules in all string operations executed within its scope (unless they are also within the scope of either use locale or use bytes); Icon: /option.png; Type Icon: null
+	Lookups: unicode_strings
+	String: unicode_strings

@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nls;
 import java.util.*;
 
 /**
- * Represents internal %^H
+ * Represents internal {@code %^H}, built from {@code feature.pm}
  */
 public final class PerlFeaturesTable implements Cloneable {
 
@@ -31,6 +31,7 @@ public final class PerlFeaturesTable implements Cloneable {
   private static final String FEATURE_ISA = "isa";
   private static final String FEATURE_SAY = "say";
   private static final String FEATURE_TRY = "try";
+  private static final String FEATURE_DEFER = "defer";
   private static final String FEATURE_STATE = "state";
   private static final String FEATURE_SWITCH = "switch";
   private static final String FEATURE_BITWISE = "bitwise";
@@ -45,11 +46,14 @@ public final class PerlFeaturesTable implements Cloneable {
   private static final String FEATURE_UNICODE_STRINGS = "unicode_strings";
   private static final String FEATURE_MULTIDIMENSIONAL = "multidimensional";
   private static final String FEATURE_BAREWORD_FILEHANDLES = "bareword_filehandles";
+  private static final String FEATURE_EXTRA_PAIRED_DELIMITERS = "extra_paired_delimiters";
+
   public static final Map<String, @Nls String> AVAILABLE_FEATURES = Maps.of(
     FEATURE_FC, PerlBundle.message("perl.feature.fc.description"),
     FEATURE_ISA, PerlBundle.message("perl.feature.isa.description"),
     FEATURE_SAY, PerlBundle.message("perl.feature.say.description"),
     FEATURE_TRY, PerlBundle.message("perl.feature.try.description"),
+    FEATURE_DEFER, PerlBundle.message("perl.feature.defer.description"),
     FEATURE_STATE, PerlBundle.message("perl.feature.state.description"),
     FEATURE_SWITCH, PerlBundle.message("perl.feature.switch.description"),
     FEATURE_BITWISE, PerlBundle.message("perl.feature.bitwise.description"),
@@ -63,10 +67,11 @@ public final class PerlFeaturesTable implements Cloneable {
     FEATURE_DECLARED_REFS, PerlBundle.message("perl.feature.declared.refs.description"),
     FEATURE_UNICODE_STRINGS, PerlBundle.message("perl.feature.unicode.strings.description"),
     FEATURE_MULTIDIMENSIONAL, PerlBundle.message("perl.feature.multidimensional.description"),
-    FEATURE_BAREWORD_FILEHANDLES, PerlBundle.message("perl.feature.bareword.filehandle.description")
+    FEATURE_BAREWORD_FILEHANDLES, PerlBundle.message("perl.feature.bareword.filehandle.description"),
+    FEATURE_EXTRA_PAIRED_DELIMITERS, PerlBundle.message("perl.feature.extra.delimiters.description")
   );
 
-  private static final List<String> FEATURES_5_9_5 = List.of(
+  private static final List<String> FEATURES_5_10 = List.of(
     FEATURE_BAREWORD_FILEHANDLES, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL, FEATURE_SAY, FEATURE_STATE, FEATURE_SWITCH);
   private static final List<String> FEATURES_5_11 = List.of(
     FEATURE_BAREWORD_FILEHANDLES, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL, FEATURE_SAY, FEATURE_STATE, FEATURE_SWITCH,
@@ -81,13 +86,16 @@ public final class PerlFeaturesTable implements Cloneable {
     FEATURE_BAREWORD_FILEHANDLES, FEATURE_BITWISE, FEATURE_CURRENT_SUB, FEATURE_EVALBYTES, FEATURE_FC, FEATURE_INDIRECT,
     FEATURE_MULTIDIMENSIONAL, FEATURE_POSTDEREF_QQ, FEATURE_SAY, FEATURE_STATE, FEATURE_SWITCH, FEATURE_UNICODE_EVAL,
     FEATURE_UNICODE_STRINGS);
+  private static final List<String> FEATURES_5_35 = List.of(
+    FEATURE_BAREWORD_FILEHANDLES, FEATURE_BITWISE, FEATURE_CURRENT_SUB, FEATURE_EVALBYTES, FEATURE_FC, FEATURE_ISA, FEATURE_POSTDEREF_QQ,
+    FEATURE_SAY, FEATURE_SIGNATURES, FEATURE_STATE, FEATURE_UNICODE_EVAL, FEATURE_UNICODE_STRINGS);
 
   public static final Map<String, List<String>> AVAILABLE_FEATURES_BUNDLES = Maps.of(
     "all", new ArrayList<>(AVAILABLE_FEATURES.keySet()),
     "default", Arrays.asList(FEATURE_BAREWORD_FILEHANDLES, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL),
 
-    "5.9.5", FEATURES_5_9_5,
-    "5.10", FEATURES_5_9_5,
+    "5.9.5", FEATURES_5_10,
+    "5.10", FEATURES_5_10,
 
     "5.11", FEATURES_5_11,
     "5.12", FEATURES_5_11,
@@ -115,7 +123,10 @@ public final class PerlFeaturesTable implements Cloneable {
     "5.31", FEATURES_5_27,
     "5.32", FEATURES_5_27,
     "5.33", FEATURES_5_27,
-    "5.34", FEATURES_5_27
+    "5.34", FEATURES_5_27,
+
+    "5.35", FEATURES_5_35,
+    "5.36", FEATURES_5_35
   );
 
   private Map<String, Boolean> featuresMap;

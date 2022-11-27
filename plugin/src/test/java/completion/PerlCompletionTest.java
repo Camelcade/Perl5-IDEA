@@ -37,6 +37,9 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   }
 
   @Test
+  public void testUseFeatureOptions() { doTest(); }
+
+  @Test
   public void testDuckCallResolveDistinctInheritedDifferentParents() {
     doTest();
   }
