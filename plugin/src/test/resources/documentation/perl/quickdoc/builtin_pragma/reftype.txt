@@ -1,0 +1,4 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>reftype</h2><div style="padding-bottom: 10px;"><pre><code>    $str = reftype($ref);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the basic container type of the referent of a reference, or <code>undef</code>
+for a non-reference. This is returned as a string in all-capitals, such as
+<code>ARRAY</code> for array references, or <code>HASH</code> for hash references.</p>

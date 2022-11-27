@@ -1,0 +1,15 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>created_as_string</h2><div style="padding-bottom: 10px;"><pre><code>    $bool = created_as_string($val);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns a boolean representing if the argument value was originally created as
+a string. It will return true for any scalar expression whose most recent
+assignment or modification was of a string-like nature - such as assignment
+from a string literal, or the result of a string operation such as
+concatenation or regexp. It will return false for references (including any
+object), numbers, booleans and undef.</p>
+<p style="padding-bottom: 10px;">It is unlikely that you will want to use this for regular data validation
+within Perl, as it will not return true for regular numbers that are still
+perfectly usable as strings, nor for any object reference - especially objects
+that overload the stringification operator in an attempt to behave more like
+strings. For example</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $val = URI-&gt;new( &quot;https://metacpan.org/&quot; );
+
+    if( created_as_string $val ) { ... }    # this will not execute</code></pre></div>

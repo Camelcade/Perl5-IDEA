@@ -26,6 +26,9 @@ public class PerlFindUsagesHighlightingTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testBuiltin() { doTest(); }
+
+  @Test
   public void testFunctionParametersMethodModifiers() { doTest(); }
 
   @Test

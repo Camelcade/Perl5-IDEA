@@ -37,6 +37,15 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   }
 
   @Test
+  public void testBuiltinOptions() { doTest(); }
+
+  @Test
+  public void testBuiltinFqn() { doTest(); }
+
+  @Test
+  public void testBuiltinImported() { doTestWithTypeText(); }
+
+  @Test
   public void testUseVersionV() { doTest(); }
 
   @Test

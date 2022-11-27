@@ -31,6 +31,16 @@ public class PerlResolveTest extends PerlLightTestCase {
   public void testDuckCallResolveMultiInSubSecond() { doTest(); }
 
   @Test
+  public void testBuiltinFqn() {
+    doTest();
+  }
+
+  @Test
+  public void testBuiltinImported() {
+    doTest();
+  }
+
+  @Test
   public void testScalarUtil() {
     withPerl532();
     doTest();

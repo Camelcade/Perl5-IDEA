@@ -1,0 +1,45 @@
+Text: blessed; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: blessed
+	String: blessed
+Text: ceil; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: ceil
+	String: ceil
+Text: created_as_number; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: created_as_number
+	String: created_as_number
+Text: created_as_string; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: created_as_string
+	String: created_as_string
+Text: false; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: false
+	String: false
+Text: floor; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: floor
+	String: floor
+Text: indexed; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: indexed
+	String: indexed
+Text: is_bool; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: is_bool
+	String: is_bool
+Text: is_weak; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: is_weak
+	String: is_weak
+Text: refaddr; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: refaddr
+	String: refaddr
+Text: reftype; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: reftype
+	String: reftype
+Text: trim; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: trim
+	String: trim
+Text: true; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: true
+	String: true
+Text: unweaken; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: unweaken
+	String: unweaken
+Text: weaken; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: weaken
+	String: weaken

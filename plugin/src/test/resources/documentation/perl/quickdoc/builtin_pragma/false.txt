@@ -1,0 +1,5 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>false</h2><div style="padding-bottom: 10px;"><pre><code>    $val = false;</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the boolean fiction value. While any non-true scalar value is
+considered &quot;false&quot; by perl, this one is special in that <a href="psi_element://builtin%2Fis_bool">is_bool</a> considers
+it to be a distinguished boolean value.</p>
+<p style="padding-bottom: 10px;">This gives an equivalent value to expressions like <code>!!0</code> or <code>!1</code>.</p>

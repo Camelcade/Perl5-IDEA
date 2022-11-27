@@ -1,0 +1,75 @@
+PerlNamespaceReference at (0,7); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (9,13); text in range: 'true' => 1 results:
+	Implicit sub: true()
+
+PerlNamespaceReference at (15,22); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (24,29); text in range: 'false' => 1 results:
+	Implicit sub: false()
+
+PerlNamespaceReference at (31,38); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (40,47); text in range: 'is_bool' => 1 results:
+	Implicit sub: is_bool($value)($value)
+
+PerlNamespaceReference at (49,56); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (58,64); text in range: 'weaken' => 1 results:
+	Implicit sub: weaken($ref)($ref)
+
+PerlNamespaceReference at (66,73); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (75,83); text in range: 'unweaken' => 1 results:
+	Implicit sub: unweaken($ref)($ref)
+
+PerlNamespaceReference at (85,92); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (94,101); text in range: 'is_weak' => 1 results:
+	Implicit sub: is_weak($ref)($ref)
+
+PerlNamespaceReference at (103,110); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (112,119); text in range: 'blessed' => 1 results:
+	Implicit sub: blessed($ref)($ref)
+
+PerlNamespaceReference at (121,128); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (130,137); text in range: 'refaddr' => 1 results:
+	Implicit sub: refaddr($ref)($ref)
+
+PerlNamespaceReference at (139,146); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (148,155); text in range: 'reftype' => 1 results:
+	Implicit sub: reftype($ref)($ref)
+
+PerlNamespaceReference at (157,164); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (166,183); text in range: 'created_as_string' => 1 results:
+	Implicit sub: created_as_string($value)($value)
+
+PerlNamespaceReference at (185,192); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (194,211); text in range: 'created_as_number' => 1 results:
+	Implicit sub: created_as_number($value)($value)
+
+PerlNamespaceReference at (213,220); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (222,226); text in range: 'ceil' => 1 results:
+	Implicit sub: ceil($number)($number)
+
+PerlNamespaceReference at (228,235); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (237,242); text in range: 'floor' => 1 results:
+	Implicit sub: floor($number)($number)
+
+PerlNamespaceReference at (244,251); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (253,260); text in range: 'indexed' => 1 results:
+	Implicit sub: indexed(@list)(@list)
+
+PerlNamespaceReference at (262,269); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (271,275); text in range: 'trim' => 1 results:
+	Implicit sub: trim($string)($string)
+

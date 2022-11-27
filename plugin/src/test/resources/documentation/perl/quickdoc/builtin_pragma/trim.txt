@@ -1,0 +1,17 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>trim</h2><div style="padding-bottom: 10px;"><pre><code>    $stripped = trim($string);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the input string with whitespace stripped from the beginning
+and end. trim() will remove these characters:</p>
+<p style="padding-bottom: 10px;">&quot; &quot;, an ordinary space.</p>
+<p style="padding-bottom: 10px;">&quot;\t&quot;, a tab.</p>
+<p style="padding-bottom: 10px;">&quot;\n&quot;, a new line (line feed).</p>
+<p style="padding-bottom: 10px;">&quot;\r&quot;, a carriage return.</p>
+<p style="padding-bottom: 10px;">and all other Unicode characters that are flagged as whitespace.
+A complete list is in <a href="psi_element://perlrecharclass%2FWhitespace" style="color:red">Whitespace in perlrecharclass</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>    $var = &quot;  Hello world   &quot;;            # &quot;Hello world&quot;
+    $var = &quot;\t\t\tHello world&quot;;           # &quot;Hello world&quot;
+    $var = &quot;Hello world\n&quot;;               # &quot;Hello world&quot;
+    $var = &quot;\x{2028}Hello world\x{3000}&quot;; # &quot;Hello world&quot;</code></pre></div>
+<p style="padding-bottom: 10px;"><code>trim</code> is equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $str =~ s/\A\s+|\s+\z//urg;</code></pre></div>
+<p style="padding-bottom: 10px;">For Perl versions where this feature is not available look at the
+<a href="psi_element://String%3A%3AUtil" style="color:red">String::Util</a> module for a comparable implementation.</p>

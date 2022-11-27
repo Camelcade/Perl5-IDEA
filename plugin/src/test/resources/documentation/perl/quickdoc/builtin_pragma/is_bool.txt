@@ -1,0 +1,8 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>is_bool</h2><div style="padding-bottom: 10px;"><pre><code>    $bool = is_bool($val);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns true when given a distinguished boolean value, or false if not. A
+distinguished boolean value is the result of any boolean-returning builtin
+function (such as <code>true</code> or <code>is_bool</code> itself), boolean-returning operator
+(such as the <code>eq</code> or <code>==</code> comparison tests or the <code>!</code> negation operator),
+or any variable containing one of these results.</p>
+<p style="padding-bottom: 10px;">This function used to be named <code>isbool</code>. A compatibility alias is provided
+currently but will be removed in a later version.</p>

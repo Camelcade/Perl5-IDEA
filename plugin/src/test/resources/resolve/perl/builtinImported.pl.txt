@@ -1,0 +1,47 @@
+PerlNamespaceFileReference at (4,11); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (261,265); text in range: 'true' => 1 results:
+	Implicit sub: true()
+
+PerlSubReference at (267,272); text in range: 'false' => 1 results:
+	Implicit sub: false()
+
+PerlSubReference at (274,281); text in range: 'is_bool' => 1 results:
+	Implicit sub: is_bool($value)($value)
+
+PerlSubReference at (283,289); text in range: 'weaken' => 1 results:
+	Implicit sub: weaken($ref)($ref)
+
+PerlSubReference at (291,299); text in range: 'unweaken' => 1 results:
+	Implicit sub: unweaken($ref)($ref)
+
+PerlSubReference at (301,308); text in range: 'is_weak' => 1 results:
+	Implicit sub: is_weak($ref)($ref)
+
+PerlSubReference at (310,317); text in range: 'blessed' => 1 results:
+	Implicit sub: blessed($ref)($ref)
+
+PerlSubReference at (319,326); text in range: 'refaddr' => 1 results:
+	Implicit sub: refaddr($ref)($ref)
+
+PerlSubReference at (328,335); text in range: 'reftype' => 1 results:
+	Implicit sub: reftype($ref)($ref)
+
+PerlSubReference at (337,354); text in range: 'created_as_string' => 1 results:
+	Implicit sub: created_as_string($value)($value)
+
+PerlSubReference at (356,373); text in range: 'created_as_number' => 1 results:
+	Implicit sub: created_as_number($value)($value)
+
+PerlSubReference at (375,379); text in range: 'ceil' => 1 results:
+	Implicit sub: ceil($number)($number)
+
+PerlSubReference at (381,386); text in range: 'floor' => 1 results:
+	Implicit sub: floor($number)($number)
+
+PerlSubReference at (388,395); text in range: 'indexed' => 1 results:
+	Implicit sub: indexed(@list)(@list)
+
+PerlSubReference at (397,401); text in range: 'trim' => 1 results:
+	Implicit sub: trim($string)($string)
+

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,9 +51,9 @@ public interface PerlPackageProcessor extends PerlLightElementProvider<PerlUseSt
   /**
    * Populates export and exportOk sets with exported names
    *
-   * @param useStatement use statement we processing
-   * @param export       export set to fill
-   * @param exportOk     export_ok set to fill
+   * @param useStatement use statement we are processing
+   * @param export       set to fill with names exported by the target module by default
+   * @param exportOk     set to fill with all names exported by the target module on demand
    */
   void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk);
 

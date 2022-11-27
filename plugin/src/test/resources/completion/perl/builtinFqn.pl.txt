@@ -1,0 +1,45 @@
+Text: blessed; Tail: ($ref); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: blessed
+	PsiElement: Implicit sub: blessed($ref)($ref)
+Text: ceil; Tail: ($number); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: ceil
+	PsiElement: Implicit sub: ceil($number)($number)
+Text: created_as_number; Tail: ($value); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: created_as_number
+	PsiElement: Implicit sub: created_as_number($value)($value)
+Text: created_as_string; Tail: ($value); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: created_as_string
+	PsiElement: Implicit sub: created_as_string($value)($value)
+Text: false; Tail: null; Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: false
+	PsiElement: Implicit sub: false()
+Text: floor; Tail: ($number); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: floor
+	PsiElement: Implicit sub: floor($number)($number)
+Text: indexed; Tail: (@list); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: indexed
+	PsiElement: Implicit sub: indexed(@list)(@list)
+Text: is_bool; Tail: ($value); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: is_bool
+	PsiElement: Implicit sub: is_bool($value)($value)
+Text: is_weak; Tail: ($ref); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: is_weak
+	PsiElement: Implicit sub: is_weak($ref)($ref)
+Text: refaddr; Tail: ($ref); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: refaddr
+	PsiElement: Implicit sub: refaddr($ref)($ref)
+Text: reftype; Tail: ($ref); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: reftype
+	PsiElement: Implicit sub: reftype($ref)($ref)
+Text: trim; Tail: ($string); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: trim
+	PsiElement: Implicit sub: trim($string)($string)
+Text: true; Tail: null; Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: true
+	PsiElement: Implicit sub: true()
+Text: unweaken; Tail: ($ref); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: unweaken
+	PsiElement: Implicit sub: unweaken($ref)($ref)
+Text: weaken; Tail: ($ref); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: weaken
+	PsiElement: Implicit sub: weaken($ref)($ref)

@@ -1,0 +1,1 @@
+use builtin qw/something <caret>/;

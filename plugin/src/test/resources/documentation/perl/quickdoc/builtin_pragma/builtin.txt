@@ -1,0 +1,167 @@
+<ul style="margin-left: 7px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FNAME">NAME</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FSYNOPSIS">SYNOPSIS</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FDESCRIPTION">DESCRIPTION</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FLexical+Import">Lexical Import</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ftrue">true</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ffalse">false</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fis_bool">is_bool</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fweaken">weaken</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Funweaken">unweaken</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fis_weak">is_weak</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fblessed">blessed</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Frefaddr">refaddr</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Freftype">reftype</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fcreated_as_string">created_as_string</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fcreated_as_number">created_as_number</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fceil">ceil</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ffloor">floor</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Findexed">indexed</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ftrim">trim</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FSEE+ALSO">SEE ALSO</a></li></ul><h1>NAME</h1><p style="padding-bottom: 10px;">builtin - Perl pragma to import built-in utility functions</p>
+<h1>SYNOPSIS</h1><div style="padding-bottom: 10px;"><pre><code>    use builtin qw(
+        true false is_bool
+        weaken unweaken is_weak
+        blessed refaddr reftype
+        created_as_string created_as_number
+        ceil floor
+        trim
+    );</code></pre></div>
+<h1>DESCRIPTION</h1><p style="padding-bottom: 10px;">Perl provides several utility functions in the <code>builtin</code> package. These are
+plain functions, and look and behave just like regular user-defined functions
+do. They do not provide new syntax or require special parsing. These functions
+are always present in the interpreter and can be called at any time by their
+fully-qualified names. By default they are not available as short names, but
+can be requested for convenience.</p>
+<p style="padding-bottom: 10px;">Individual named functions can be imported by listing them as import
+parameters on the <code>use</code> statement for this pragma.</p>
+<p style="padding-bottom: 10px;">The overall <code>builtin</code> mechanism, as well as every individual function it
+provides, are currently <B>experimental</B>.</p>
+<p style="padding-bottom: 10px;"><B>Warning</B>:  At present, the entire <code>builtin</code> namespace is experimental.
+Calling functions in it will trigger warnings of the <code>experimental::builtin</code>
+category.</p>
+<h2>Lexical Import</h2><p style="padding-bottom: 10px;">This pragma module creates <i>lexical</i> aliases in the currently-compiling scope
+to these builtin functions. This is similar to the lexical effect of other
+pragmas such as <a href="psi_element://strict" style="color:red">strict</a> and <a href="psi_element://feature" style="color:red">feature</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>    sub classify
+    {
+        my $val = shift;
+
+        use builtin 'is_bool';
+        return is_bool($val) ? &quot;boolean&quot; : &quot;not a boolean&quot;;
+    }
+
+    # the is_bool() function is no longer visible here
+    # but may still be called by builtin::is_bool()</code></pre></div>
+<p style="padding-bottom: 10px;">Because these functions are imported lexically, rather than by package
+symbols, the user does not need to take any special measures to ensure they
+don't accidentally appear as object methods from a class.</p>
+<div style="padding-bottom: 10px;"><pre><code>    package An::Object::Class {
+        use builtin 'true', 'false';
+        ...
+    }
+
+    # does not appear as a method
+    An::Object::Class-&gt;true;
+
+    # Can't locate object method &quot;true&quot; via package &quot;An::Object::Class&quot;
+    #   at ...</code></pre></div>
+<h1>FUNCTIONS</h1><h2>true</h2><div style="padding-bottom: 10px;"><pre><code>    $val = true;</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the boolean truth value. While any scalar value can be tested for
+truth and most defined, non-empty and non-zero values are considered &quot;true&quot;
+by perl, this one is special in that <a href="psi_element://builtin%2Fis_bool">is_bool</a> considers it to be a
+distinguished boolean value.</p>
+<p style="padding-bottom: 10px;">This gives an equivalent value to expressions like <code>!!1</code> or <code>!0</code>.</p>
+<h2>false</h2><div style="padding-bottom: 10px;"><pre><code>    $val = false;</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the boolean fiction value. While any non-true scalar value is
+considered &quot;false&quot; by perl, this one is special in that <a href="psi_element://builtin%2Fis_bool">is_bool</a> considers
+it to be a distinguished boolean value.</p>
+<p style="padding-bottom: 10px;">This gives an equivalent value to expressions like <code>!!0</code> or <code>!1</code>.</p>
+<h2>is_bool</h2><div style="padding-bottom: 10px;"><pre><code>    $bool = is_bool($val);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns true when given a distinguished boolean value, or false if not. A
+distinguished boolean value is the result of any boolean-returning builtin
+function (such as <code>true</code> or <code>is_bool</code> itself), boolean-returning operator
+(such as the <code>eq</code> or <code>==</code> comparison tests or the <code>!</code> negation operator),
+or any variable containing one of these results.</p>
+<p style="padding-bottom: 10px;">This function used to be named <code>isbool</code>. A compatibility alias is provided
+currently but will be removed in a later version.</p>
+<h2>weaken</h2><div style="padding-bottom: 10px;"><pre><code>    weaken($ref);</code></pre></div>
+<p style="padding-bottom: 10px;">Weakens a reference. A weakened reference does not contribute to the reference
+count of its referent. If only weakened references to a referent remain, it
+will be disposed of, and all remaining weak references to it will have their
+value set to <code>undef</code>.</p>
+<h2>unweaken</h2><div style="padding-bottom: 10px;"><pre><code>    unweaken($ref);</code></pre></div>
+<p style="padding-bottom: 10px;">Strengthens a reference, undoing the effects of a previous call to <a href="psi_element://builtin%2Fweaken">weaken</a>.</p>
+<h2>is_weak</h2><div style="padding-bottom: 10px;"><pre><code>    $bool = is_weak($ref);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns true when given a weakened reference, or false if not a reference or
+not weak.</p>
+<p style="padding-bottom: 10px;">This function used to be named <code>isweak</code>. A compatibility alias is provided
+currently but will be removed in a later version.</p>
+<h2>blessed</h2><div style="padding-bottom: 10px;"><pre><code>    $str = blessed($ref);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the package name for an object reference, or <code>undef</code> for a
+non-reference or reference that is not an object.</p>
+<h2>refaddr</h2><div style="padding-bottom: 10px;"><pre><code>    $num = refaddr($ref);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the memory address for a reference, or <code>undef</code> for a non-reference.
+This value is not likely to be very useful for pure Perl code, but is handy as
+a means to test for referential identity or uniqueness.</p>
+<h2>reftype</h2><div style="padding-bottom: 10px;"><pre><code>    $str = reftype($ref);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the basic container type of the referent of a reference, or <code>undef</code>
+for a non-reference. This is returned as a string in all-capitals, such as
+<code>ARRAY</code> for array references, or <code>HASH</code> for hash references.</p>
+<h2>created_as_string</h2><div style="padding-bottom: 10px;"><pre><code>    $bool = created_as_string($val);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns a boolean representing if the argument value was originally created as
+a string. It will return true for any scalar expression whose most recent
+assignment or modification was of a string-like nature - such as assignment
+from a string literal, or the result of a string operation such as
+concatenation or regexp. It will return false for references (including any
+object), numbers, booleans and undef.</p>
+<p style="padding-bottom: 10px;">It is unlikely that you will want to use this for regular data validation
+within Perl, as it will not return true for regular numbers that are still
+perfectly usable as strings, nor for any object reference - especially objects
+that overload the stringification operator in an attempt to behave more like
+strings. For example</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $val = URI-&gt;new( &quot;https://metacpan.org/&quot; );
+
+    if( created_as_string $val ) { ... }    # this will not execute</code></pre></div>
+<h2>created_as_number</h2><div style="padding-bottom: 10px;"><pre><code>    $bool = created_as_number($val);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns a boolean representing if the argument value was originally created as
+a number. It will return true for any scalar expression whose most recent
+assignment or modification was of a numerical nature - such as assignment from
+a number literal, or the result of a numerical operation such as addition. It
+will return false for references (including any object), strings, booleans and
+undef.</p>
+<p style="padding-bottom: 10px;">It is unlikely that you will want to use this for regular data validation
+within Perl, as it will not return true for regular strings of decimal digits
+that are still perfectly usable as numbers, nor for any object reference -
+especially objects that overload the numification operator in an attempt to
+behave more like numbers. For example</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $val = Math::BigInt-&gt;new( 123 );
+
+    if( created_as_number $val ) { ... }    # this will not execute</code></pre></div>
+<p style="padding-bottom: 10px;">While most Perl code should operate on scalar values without needing to know
+their creation history, these two functions are intended to be used by data
+serialisation modules such as JSON encoders or similar situations, where
+language interoperability concerns require making a distinction between values
+that are fundamentally stringlike versus numberlike in nature.</p>
+<h2>ceil</h2><div style="padding-bottom: 10px;"><pre><code>    $num = ceil($num);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the smallest integer value greater than or equal to the given
+numerical argument.</p>
+<h2>floor</h2><div style="padding-bottom: 10px;"><pre><code>    $num = floor($num);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the largest integer value less than or equal to the given numerical
+argument.</p>
+<h2>indexed</h2><div style="padding-bottom: 10px;"><pre><code>    @ivpairs = indexed(@items)</code></pre></div>
+<p style="padding-bottom: 10px;">Returns an even-sized list of number/value pairs, where each pair is formed
+of a number giving an index in the original list followed by the value at that
+position in it.  I.e. returns a list twice the size of the original, being
+equal to</p>
+<div style="padding-bottom: 10px;"><pre><code>    (0, $items[0], 1, $items[1], 2, $items[2], ...)</code></pre></div>
+<p style="padding-bottom: 10px;">Note that unlike the core <code>values</code> function, this function returns copies of
+its original arguments, not aliases to them. Any modifications of these copies
+are <i>not</i> reflected in modifications to the original.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @x = ...;
+    $_++ for indexed @x;  # The @x array remains unaffected</code></pre></div>
+<p style="padding-bottom: 10px;">This function is primarily intended to be useful combined with multi-variable
+<code>foreach</code> loop syntax; as</p>
+<div style="padding-bottom: 10px;"><pre><code>    foreach my ($index, $value) (indexed LIST) {
+        ...
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">In scalar context this function returns the size of the list that it would
+otherwise have returned, and provokes a warning in the <code>scalar</code> category.</p>
+<h2>trim</h2><div style="padding-bottom: 10px;"><pre><code>    $stripped = trim($string);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the input string with whitespace stripped from the beginning
+and end. trim() will remove these characters:</p>
+<p style="padding-bottom: 10px;">&quot; &quot;, an ordinary space.</p>
+<p style="padding-bottom: 10px;">&quot;\t&quot;, a tab.</p>
+<p style="padding-bottom: 10px;">&quot;\n&quot;, a new line (line feed).</p>
+<p style="padding-bottom: 10px;">&quot;\r&quot;, a carriage return.</p>
+<p style="padding-bottom: 10px;">and all other Unicode characters that are flagged as whitespace.
+A complete list is in <a href="psi_element://perlrecharclass%2FWhitespace" style="color:red">Whitespace in perlrecharclass</a>.</p>
+<div style="padding-bottom: 10px;"><pre><code>    $var = &quot;  Hello world   &quot;;            # &quot;Hello world&quot;
+    $var = &quot;\t\t\tHello world&quot;;           # &quot;Hello world&quot;
+    $var = &quot;Hello world\n&quot;;               # &quot;Hello world&quot;
+    $var = &quot;\x{2028}Hello world\x{3000}&quot;; # &quot;Hello world&quot;</code></pre></div>
+<p style="padding-bottom: 10px;"><code>trim</code> is equivalent to:</p>
+<div style="padding-bottom: 10px;"><pre><code>    $str =~ s/\A\s+|\s+\z//urg;</code></pre></div>
+<p style="padding-bottom: 10px;">For Perl versions where this feature is not available look at the
+<a href="psi_element://String%3A%3AUtil" style="color:red">String::Util</a> module for a comparable implementation.</p>
+<h1>SEE ALSO</h1><p style="padding-bottom: 10px;"><a href="psi_element://perlop" style="color:red">perlop</a>, <a href="psi_element://perlfunc" style="color:red">perlfunc</a>, <a href="psi_element://Scalar%3A%3AUtil" style="color:red">Scalar::Util</a></p>

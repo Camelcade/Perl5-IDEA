@@ -1,0 +1,4 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>refaddr</h2><div style="padding-bottom: 10px;"><pre><code>    $num = refaddr($ref);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the memory address for a reference, or <code>undef</code> for a non-reference.
+This value is not likely to be very useful for pure Perl code, but is handy as
+a means to test for referential identity or uniqueness.</p>

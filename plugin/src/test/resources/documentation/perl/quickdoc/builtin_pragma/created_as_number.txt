@@ -1,0 +1,20 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>created_as_number</h2><div style="padding-bottom: 10px;"><pre><code>    $bool = created_as_number($val);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns a boolean representing if the argument value was originally created as
+a number. It will return true for any scalar expression whose most recent
+assignment or modification was of a numerical nature - such as assignment from
+a number literal, or the result of a numerical operation such as addition. It
+will return false for references (including any object), strings, booleans and
+undef.</p>
+<p style="padding-bottom: 10px;">It is unlikely that you will want to use this for regular data validation
+within Perl, as it will not return true for regular strings of decimal digits
+that are still perfectly usable as numbers, nor for any object reference -
+especially objects that overload the numification operator in an attempt to
+behave more like numbers. For example</p>
+<div style="padding-bottom: 10px;"><pre><code>    my $val = Math::BigInt-&gt;new( 123 );
+
+    if( created_as_number $val ) { ... }    # this will not execute</code></pre></div>
+<p style="padding-bottom: 10px;">While most Perl code should operate on scalar values without needing to know
+their creation history, these two functions are intended to be used by data
+serialisation modules such as JSON encoders or similar situations, where
+language interoperability concerns require making a distinction between values
+that are fundamentally stringlike versus numberlike in nature.</p>

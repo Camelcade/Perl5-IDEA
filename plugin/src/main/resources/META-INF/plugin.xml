@@ -86,6 +86,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BaseProcessor"/>
     <packageProcessor key="strict"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.StrictProcessor"/>
+    <packageProcessor key="builtin"
+                      implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.BuiltinProcessor"/>
     <packageProcessor key="warnings"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.WarningsProcessor"/>
     <packageProcessor key="feature"
@@ -183,6 +185,7 @@
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.system.PerlSystemHandler"/>
 
     <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlCoreDeclarationsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlBuiltinDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.readonly.ReadonlyImplicitDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.log4perl.Log4PerlImplicitDeclarationsProvider"/>

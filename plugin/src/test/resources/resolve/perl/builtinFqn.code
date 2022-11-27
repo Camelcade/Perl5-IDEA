@@ -1,0 +1,16 @@
+builtin::true;
+builtin::false;
+builtin::is_bool;
+builtin::weaken;
+builtin::unweaken;
+builtin::is_weak;
+builtin::blessed;
+builtin::refaddr;
+builtin::reftype;
+builtin::created_as_string;
+builtin::created_as_number;
+builtin::ceil;
+builtin::floor;
+builtin::indexed;
+builtin::trim;
+

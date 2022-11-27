@@ -1,0 +1,18 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>indexed</h2><div style="padding-bottom: 10px;"><pre><code>    @ivpairs = indexed(@items)</code></pre></div>
+<p style="padding-bottom: 10px;">Returns an even-sized list of number/value pairs, where each pair is formed
+of a number giving an index in the original list followed by the value at that
+position in it.  I.e. returns a list twice the size of the original, being
+equal to</p>
+<div style="padding-bottom: 10px;"><pre><code>    (0, $items[0], 1, $items[1], 2, $items[2], ...)</code></pre></div>
+<p style="padding-bottom: 10px;">Note that unlike the core <code>values</code> function, this function returns copies of
+its original arguments, not aliases to them. Any modifications of these copies
+are <i>not</i> reflected in modifications to the original.</p>
+<div style="padding-bottom: 10px;"><pre><code>    my @x = ...;
+    $_++ for indexed @x;  # The @x array remains unaffected</code></pre></div>
+<p style="padding-bottom: 10px;">This function is primarily intended to be useful combined with multi-variable
+<code>foreach</code> loop syntax; as</p>
+<div style="padding-bottom: 10px;"><pre><code>    foreach my ($index, $value) (indexed LIST) {
+        ...
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">In scalar context this function returns the size of the list that it would
+otherwise have returned, and provokes a warning in the <code>scalar</code> category.</p>

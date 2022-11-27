@@ -1,0 +1,4 @@
+use builtin qw/ blessed/;
+
+<READ>blessed</READ>;
+builtin::<READ>blessed</READ>;

@@ -1,0 +1,2 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>unweaken</h2><div style="padding-bottom: 10px;"><pre><code>    unweaken($ref);</code></pre></div>
+<p style="padding-bottom: 10px;">Strengthens a reference, undoing the effects of a previous call to <a href="psi_element://builtin%2Fweaken">weaken</a>.</p>

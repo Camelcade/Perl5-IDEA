@@ -1,0 +1,6 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>true</h2><div style="padding-bottom: 10px;"><pre><code>    $val = true;</code></pre></div>
+<p style="padding-bottom: 10px;">Returns the boolean truth value. While any scalar value can be tested for
+truth and most defined, non-empty and non-zero values are considered &quot;true&quot;
+by perl, this one is special in that <a href="psi_element://builtin%2Fis_bool">is_bool</a> considers it to be a
+distinguished boolean value.</p>
+<p style="padding-bottom: 10px;">This gives an equivalent value to expressions like <code>!!1</code> or <code>!0</code>.</p>

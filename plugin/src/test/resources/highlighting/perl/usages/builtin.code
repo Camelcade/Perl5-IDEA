@@ -1,0 +1,4 @@
+use builtin qw/ blessed/;
+
+bl<caret>essed;
+builtin::blessed;
