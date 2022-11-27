@@ -16,7 +16,9 @@
 
 package com.perl5.lang.perl.internals;
 
+import com.perl5.PerlBundle;
 import org.apache.groovy.util.Maps;
+import org.jetbrains.annotations.Nls;
 
 import java.util.*;
 
@@ -43,32 +45,25 @@ public final class PerlFeaturesTable implements Cloneable {
   private static final String FEATURE_UNICODE_STRINGS = "unicode_strings";
   private static final String FEATURE_MULTIDIMENSIONAL = "multidimensional";
   private static final String FEATURE_BAREWORD_FILEHANDLES = "bareword_filehandles";
-  public static final Map<String, String> AVAILABLE_FEATURES = Maps.of(
-    FEATURE_BAREWORD_FILEHANDLES, "v5.34, enables bareword filehandles for builtin functions operations, a generally discouraged practice.",
-    FEATURE_BITWISE,
-    "v5.22, makes the four standard bitwise operators treat their operands consistently as numbers, and introduces four new dotted operators that treat their operands consistently as strings. The same applies to the assignment variants. Requires no warnings \"experimental::bitwise\"",
-    FEATURE_CURRENT_SUB,
-    "v5.16, provides the __SUB__ token that returns a reference to the current subroutine or undef outside of a subroutine",
-    FEATURE_DECLARED_REFS,
-    "v5.26, allows a reference to a variable to be declared with my, state, our our, or localized with local. Requires no warnings \"experimental::declared_refs\"",
-    FEATURE_EVALBYTES, "v5.16, force eval to treat string argument as a string of bytes",
-    FEATURE_FC, "v5.16, enables the fc function, which implements Unicode casefolding",
-    FEATURE_INDIRECT, "v5.32, allows the use of indirect object syntax for method calls, e.g. new Foo 1, 2;",
-    FEATURE_ISA,
-    "v5.32, allows the use of the isa infix operator, which tests whether the scalar given by the left operand is an object of the class given by the right operand. Requires no warnings \"experimental::isa\"",
-    FEATURE_MULTIDIMENSIONAL, "v5.34, enables multidimensional array emulation like $foo{$x, $y}",
-    FEATURE_POSTDEREF_QQ,
-    "v5.20, allows the use of postfix dereference syntax in within interpolated strings. Requires no warnings \"experimental::postderef\"",
-    FEATURE_REFALIASING, "v5.22, enables aliasing via assignment to references. Requires  no warnings \"experimental::refaliasing\"",
-    FEATURE_SAY, "v5.10, enables the Perl 6 style say function",
-    FEATURE_SIGNATURES,
-    "v5.20, enables unpacking of subroutine arguments into lexical variables. Requires  no warnings \"experimental::signatures\"",
-    FEATURE_STATE, "v5.10, enables state variables",
-    FEATURE_SWITCH, "v5.10, enables the Perl 6 given/when construct. Requires no warnings \"experimental::smartmatch\"",
-    FEATURE_TRY, "v5.34, enables the try and catch syntax, which allows exception handling. Requires no warnings \"experimental::try\"",
-    FEATURE_UNICODE_EVAL, "v5.16, force eval to treat string argument as a string of characters ignoring any use utf8 declarations",
-    FEATURE_UNICODE_STRINGS,
-    "v5.16, use Unicode rules in all string operations executed within its scope (unless they are also within the scope of either use locale or use bytes)"
+  public static final Map<String, @Nls String> AVAILABLE_FEATURES = Maps.of(
+    FEATURE_FC, PerlBundle.message("perl.feature.fc.description"),
+    FEATURE_ISA, PerlBundle.message("perl.feature.isa.description"),
+    FEATURE_SAY, PerlBundle.message("perl.feature.say.description"),
+    FEATURE_TRY, PerlBundle.message("perl.feature.try.description"),
+    FEATURE_STATE, PerlBundle.message("perl.feature.state.description"),
+    FEATURE_SWITCH, PerlBundle.message("perl.feature.switch.description"),
+    FEATURE_BITWISE, PerlBundle.message("perl.feature.bitwise.description"),
+    FEATURE_INDIRECT, PerlBundle.message("perl.feature.indirect.description"),
+    FEATURE_EVALBYTES, PerlBundle.message("perl.feature.evalbytes.description"),
+    FEATURE_SIGNATURES, PerlBundle.message("perl.feature.signatures.description"),
+    FEATURE_CURRENT_SUB, PerlBundle.message("perl.feature.current.sub.description"),
+    FEATURE_REFALIASING, PerlBundle.message("perl.feature.refaliasing.description"),
+    FEATURE_POSTDEREF_QQ, PerlBundle.message("perl.feature.postderef.qq.description"),
+    FEATURE_UNICODE_EVAL, PerlBundle.message("perl.feature.unicode.eval.description"),
+    FEATURE_DECLARED_REFS, PerlBundle.message("perl.feature.declared.refs.description"),
+    FEATURE_UNICODE_STRINGS, PerlBundle.message("perl.feature.unicode.strings.description"),
+    FEATURE_MULTIDIMENSIONAL, PerlBundle.message("perl.feature.multidimensional.description"),
+    FEATURE_BAREWORD_FILEHANDLES, PerlBundle.message("perl.feature.bareword.filehandle.description")
   );
 
   private static final List<String> FEATURES_5_9_5 = List.of(
