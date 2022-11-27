@@ -81,6 +81,12 @@ public final class PerlElementPatterns {
   public static final PsiElementPattern.Capture<PerlNamespaceDefinitionElement> NAMESPACE_DEFINITION_PATTERN =
     psiElement(PerlNamespaceDefinitionElement.class);
 
+  public static final PsiElementPattern.Capture<PsiElement> USE_VERSION_PATTERN = psiElement(VERSION_ELEMENT).andOr(
+    psiElement().withParent(USE_STATEMENT_PATTERN),
+    psiElement().withParent(NO_STATEMENT_PATTERN),
+    psiElement().withParent(REQUIRE_EXPR_PATTERN)
+  );
+
   public static final PsiElementPattern.Capture<PerlNamespaceElement> NAMESPACE_IN_USE_PATTERN =
     NAMESPACE_NAME_PATTERN.andOr(
       psiElement().withParent(USE_STATEMENT_PATTERN),

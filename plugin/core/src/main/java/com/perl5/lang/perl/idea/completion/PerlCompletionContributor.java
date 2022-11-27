@@ -47,6 +47,12 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
     extend(
       CompletionType.BASIC,
+      USE_VERSION_PATTERN,
+      new PerlVersionCompletionProvider()
+    );
+
+    extend(
+      CompletionType.BASIC,
       NAMESPACE_NAME_PATTERN,
       new PerlPackageCompletionProvider()
     );
@@ -126,8 +132,24 @@ public class PerlCompletionContributor extends CompletionContributor implements 
 
   @Override
   public void beforeCompletion(@NotNull CompletionInitializationContext context) {
+    adjustDummyIdentifier(context);
     adjustIdentifierEndOffset(context);
     super.beforeCompletion(context);
+  }
+
+  private void adjustDummyIdentifier(@NotNull CompletionInitializationContext context) {
+    var offset = context.getCaret().getOffset();
+    if (offset < 7) {
+      return;
+    }
+    var editor = context.getEditor();
+    var iterator = editor.getHighlighter().createIterator(offset - 1);
+    if (iterator.getTokenType() == OPERATOR_CONCAT) {
+      iterator.retreat();
+    }
+    if (iterator.getTokenType() == NUMBER_VERSION) {
+      context.setDummyIdentifier("1");
+    }
   }
 
   private void adjustIdentifierEndOffset(@NotNull CompletionInitializationContext context) {

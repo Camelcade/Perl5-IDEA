@@ -37,6 +37,42 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   }
 
   @Test
+  public void testUseVersionV() { doTest(); }
+
+  @Test
+  public void testUseVersionV5() { doTest(); }
+
+  @Test
+  public void testUseVersionV5Period() { doTest(); }
+
+  @Test
+  public void testUseVersionV5PeriodNumber() { doTest(); }
+
+  @Test
+  public void testNoVersionV() { doTest(); }
+
+  @Test
+  public void testNoVersionV5() { doTest(); }
+
+  @Test
+  public void testNoVersionV5Period() { doTest(); }
+
+  @Test
+  public void testNoVersionV5PeriodNumber() { doTest(); }
+
+  @Test
+  public void testRequireVersionV() { doTest(); }
+
+  @Test
+  public void testRequireVersionV5() { doTest(); }
+
+  @Test
+  public void testRequireVersionV5Period() { doTest(); }
+
+  @Test
+  public void testRequireVersionV5PeriodNumber() { doTest(); }
+
+  @Test
   public void testUseFeatureOptions() { doTest(); }
 
   @Test
