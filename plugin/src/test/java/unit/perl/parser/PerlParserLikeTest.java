@@ -27,6 +27,9 @@ public abstract class PerlParserLikeTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testEmptySort() { doTest(false); }
+
+  @Test
   public void testUsePragma() { doTest(); }
 
   @Test

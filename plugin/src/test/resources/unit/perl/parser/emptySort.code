@@ -1,0 +1,4 @@
+@a = sort @empty; # unaffected
+@a = sort;        # now a compile-time error
+@a = sort ();     # also a compile-time error
+

@@ -78,6 +78,23 @@ public class PerlSyntaxInspection extends PerlInspection {
             new PerlFancyMethodQuickFix(properForm)
           );
         }
+        super.visitMethod(o);
+      }
+
+      @Override
+      public void visitSortExpr(@NotNull PsiPerlSortExpr o) {
+        super.visitSortExpr(o);
+
+        if (selectedVersion.lesserThan(V5_36) || o.getBlock() != null || o.getMethod() != null) {
+          return;
+        }
+        var sortableList = o.getExprList();
+        if (sortableList.size() != 1 ||
+            !(sortableList.get(0) instanceof PsiPerlParenthesisedExpr parenthesizedExpression) ||
+            parenthesizedExpression.getExpr() != null) {
+          return;
+        }
+        holder.registerProblem(o, PerlBundle.message("perl.inspection.wrong.sort.syntax"), ProblemHighlightType.ERROR);
       }
 
       @Override

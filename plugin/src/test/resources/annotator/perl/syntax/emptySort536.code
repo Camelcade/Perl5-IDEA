@@ -1,0 +1,6 @@
+@a = sort @empty; # unaffected
+@a = sort<error descr="<expression>, <method>, <scalar>, Perl5: ( or Perl5: { expected, got ';'">;</error>        # now a compile-time error
+@a = <error descr="Such syntax is not allowed since v5.36.">sort ()</error>;     # also a compile-time error
+@a = sort {} ();     # okay
+@a = sort sorter ();     # okay
+

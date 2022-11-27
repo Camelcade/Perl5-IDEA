@@ -33,6 +33,16 @@ public class PerlSyntaxInspectionTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testEmptySort534() {
+    doTest(V5_34);
+  }
+
+  @Test
+  public void testEmptySort536() {
+    doTest(V5_36);
+  }
+
+  @Test
   public void testFancyMethodCall534() { doTest(V5_34); }
 
   @Test
