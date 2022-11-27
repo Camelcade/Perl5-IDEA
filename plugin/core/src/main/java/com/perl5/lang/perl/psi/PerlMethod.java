@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,4 +42,11 @@ public interface PerlMethod extends PerlNamespaceElementContainer, PerlSubNameEl
    * Check if this is an object method invocation
    */
   boolean isObjectMethod();
+
+  /**
+   * @return true iff it's a fancy invocation: {@code new Foo::Bar();} instead of canonical {@code Foo::Bar->new();}
+   */
+  default boolean isFancySyntax() {
+    return isObjectMethod() && getLastChild() instanceof PerlNamespaceElement;
+  }
 }

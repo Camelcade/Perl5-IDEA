@@ -238,9 +238,6 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   public void testUnresolvedLabelInspection() {doInspectionTest(PerlUnresolvedLabelInspection.class);}
 
   @Test
-  public void testFancyMethodCall() {doInspectionTest(PerlFancyMethodCallInspection.class);}
-
-  @Test
   public void testMooseAttributesDeprecation() {doDeprecationTest();}
 
   @Test

@@ -21,6 +21,7 @@ import com.intellij.codeInsight.intention.FileModifier;
 import com.intellij.codeInsight.intention.HighPriorityAction;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
+import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
@@ -30,6 +31,7 @@ import com.intellij.util.ArrayUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
+import com.perl5.lang.perl.idea.quickfixes.PerlFancyMethodQuickFix;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
@@ -55,6 +57,29 @@ public class PerlSyntaxInspection extends PerlInspection {
   public @NotNull PsiElementVisitor buildVisitor(@NotNull ProblemsHolder holder, boolean isOnTheFly) {
     PerlVersion selectedVersion = PerlSharedSettings.getInstance(holder.getProject()).getTargetPerlVersion();
     return new PerlVisitor() {
+      @Override
+      public void visitMethod(@NotNull PsiPerlMethod o) {
+        if (o.isFancySyntax()) {
+          String namespaceName = o.getExplicitNamespaceName();
+          if (namespaceName == null) {
+            return;
+          }
+          PerlSubNameElement subNameElement = o.getSubNameElement();
+          if (subNameElement == null) {
+            return;
+          }
+          String properForm = String.format("%s->%s", namespaceName, subNameElement.getName());
+          holder.registerProblem(
+            o,
+            selectedVersion.lesserThan(V5_36)
+            ? PerlBundle.message("perl.inspection.fancy.call", properForm)
+            : PerlBundle.message("perl.inspection.fancy.call.unsupported", properForm),
+            selectedVersion.lesserThan(V5_36) ? ProblemHighlightType.WARNING : ProblemHighlightType.ERROR,
+            new PerlFancyMethodQuickFix(properForm)
+          );
+        }
+      }
+
       @Override
       public void visitAssignExpr(@NotNull PsiPerlAssignExpr o) {
         if (selectedVersion.lesserThan(V5_22)) {

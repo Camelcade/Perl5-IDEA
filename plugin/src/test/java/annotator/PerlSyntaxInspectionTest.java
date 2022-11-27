@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,13 +33,19 @@ public class PerlSyntaxInspectionTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testDoubleDiamond510() {doTest(V5_10);}
+  public void testFancyMethodCall534() { doTest(V5_34); }
 
   @Test
-  public void testDoubleDiamond522() {doTest(V5_22);}
+  public void testFancyMethodCall536() { doTest(V5_36); }
 
   @Test
-  public void testStringBitwiseOperators510() {doTest(V5_10);}
+  public void testDoubleDiamond510() { doTest(V5_10); }
+
+  @Test
+  public void testDoubleDiamond522() { doTest(V5_22); }
+
+  @Test
+  public void testStringBitwiseOperators510() { doTest(V5_10); }
 
   @Test
   public void testStringBitwiseOperators522() {doTest(V5_22);}
