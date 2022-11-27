@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,13 +31,16 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testCharSubstitutions() {doAnnotatorTest();}
+  public void testUsePragma() { doAnnotatorTest(); }
 
   @Test
-  public void testCharSubstitutionsWithUnderscore() {doAnnotatorTest();}
+  public void testCharSubstitutions() { doAnnotatorTest(); }
 
   @Test
-  public void testFunctionParametersFunDeprecated() {doDeprecationTest();}
+  public void testCharSubstitutionsWithUnderscore() { doAnnotatorTest(); }
+
+  @Test
+  public void testFunctionParametersFunDeprecated() { doDeprecationTest(); }
 
   @Test
   public void testTruthinessScalar() { doTruthinessTest(); }

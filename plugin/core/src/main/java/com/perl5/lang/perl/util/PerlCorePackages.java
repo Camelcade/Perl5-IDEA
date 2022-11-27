@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -451,17 +451,26 @@ public final class PerlCorePackages {
   public static final Set<String> CORE_PACKAGES_PRAGMAS = Set.of(
     "attributes",
     "autodie",
+    "autodie::exception",
+    "autodie::exception::system",
+    "autodie::hints",
+    "autodie::skip",
     "autouse",
     "base",
+    "bigfloat",
     "bigint",
     "bignum",
     "bigrat",
     "blib",
+    "builtin",
     "bytes",
     "charnames",
     "constant",
+    "deprecate",
     "diagnostics",
     "encoding",
+    "encoding::warnings",
+    "experimental",
     "feature",
     "fields",
     "filetest",
@@ -471,6 +480,7 @@ public final class PerlCorePackages {
     "lib",
     "locale",
     "mro",
+    "ok",
     "open",
     "ops",
     "overload",
@@ -485,6 +495,7 @@ public final class PerlCorePackages {
     "threads::shared",
     "utf8",
     "vars",
+    "version",
     "vmsish",
     "warnings",
     "warnings::register"
