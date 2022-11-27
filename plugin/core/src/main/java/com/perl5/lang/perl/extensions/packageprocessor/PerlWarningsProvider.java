@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,5 +33,12 @@ public interface PerlWarningsProvider {
   default PerlWarningsMask getWarningMask(@NotNull PerlUseStatementElement useStatement, @NotNull PerlWarningsMask currentMask) {
     // fixme NYI
     return currentMask.clone();
+  }
+
+  /**
+   * @return true iff we have warnings enabled by the {@code useStatement}
+   */
+  default boolean isWarningsEnabled(@NotNull PerlUseStatementElement useStatement) {
+    return true;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,8 @@ public class PerlUseWarningsInspection extends PerlInspection {
         }
 
         for (PerlUseStatementElement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatementElement.class)) {
-          if (useStatement.getPackageProcessor() instanceof PerlWarningsProvider) {
+          if (useStatement.getPackageProcessor() instanceof PerlWarningsProvider warningsProvider &&
+              warningsProvider.isWarningsEnabled(useStatement)) {
             return;
           }
         }
