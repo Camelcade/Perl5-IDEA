@@ -1,4 +1,4 @@
-PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 67636 in perlvar.pod
+Built-in: $^GLOBAL_PHASE
 
 perlvar: perlvar
 	POD file at 0 in perlvar.pod

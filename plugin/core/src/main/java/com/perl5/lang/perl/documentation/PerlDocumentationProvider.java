@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.documentation;
 
-import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -35,8 +34,10 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.pod.PodLanguage;
+import com.perl5.lang.pod.idea.documentation.PodDocumentationProvider;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -135,7 +136,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       return PerlDocUtil.getPerlOpDoc(contextElement);
     }
 
-    return findDocumentation(editor);
+    return null;
   }
 
   /**
@@ -184,16 +185,12 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     return null;
   }
 
-  /**
-   * @return a documentation element related to the perl element pointed by the current editor with caret on declaration or reference
-   */
-  public static @Nullable PsiElement findDocumentation(@NotNull Editor editor) {
-    PsiElement targetElement = TargetElementUtil.findTargetElement(
-      editor, TargetElementUtil.ELEMENT_NAME_ACCEPTED | TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED);
-    if (targetElement instanceof MojoLightDelegatingSubDefinition) {
-      targetElement = ObjectUtils.notNull(((MojoLightDelegatingSubDefinition)targetElement).getTargetSubElement(), targetElement);
+  @Override
+  public @Nullable @Nls String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
+    if (element instanceof MojoLightDelegatingSubDefinition delegatingSubDefinition) {
+      element = ObjectUtils.notNull(delegatingSubDefinition.getTargetSubElement(), element);
     }
-    return findPodElement(targetElement);
+    return PodDocumentationProvider.doGenerateDoc(findPodElement(element));
   }
 
   protected static boolean isFunc(PsiElement element) {
@@ -217,7 +214,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
    * @return corresponding pod element for the {@code element} if any
    */
   @Contract("null->null")
-  private static @Nullable PsiElement findPodElement(@Nullable PsiElement element) {
+  public static @Nullable PsiElement findPodElement(@Nullable PsiElement element) {
     if (element == null) {
       return null;
     }

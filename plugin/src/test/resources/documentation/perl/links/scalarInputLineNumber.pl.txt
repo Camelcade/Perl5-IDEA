@@ -1,4 +1,4 @@
-PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 47984 in perlvar.pod
+Built-in: $INPUT_LINE_NUMBER
 
 perlvar: perlvar
 	POD file at 0 in perlvar.pod

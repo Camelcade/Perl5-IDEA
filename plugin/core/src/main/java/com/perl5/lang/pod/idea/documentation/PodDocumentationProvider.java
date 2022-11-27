@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.documentation.PerlDocUtil;
-import com.perl5.lang.perl.documentation.PerlDocumentationProvider;
 import com.perl5.lang.perl.documentation.PerlDocumentationProviderBase;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
@@ -44,6 +44,8 @@ import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.perl5.lang.perl.documentation.PerlDocumentationProvider.findPodElement;
 
 public class PodDocumentationProvider extends PerlDocumentationProviderBase implements PodElementTypes {
   private static final Logger LOG = Logger.getInstance(PodDocumentationProvider.class);
@@ -86,12 +88,14 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
     else if (PodTokenSets.POD_COMMANDS_TOKENSET.contains(elementType)) {
       return PerlDocUtil.resolveDoc("perlpod", contextElement.getText(), contextElement, true);
     }
-
-    return PerlDocumentationProvider.findDocumentation(editor);
+    return null;
   }
 
   @Override
   public @Nullable PsiElement getDocumentationElementForLink(PsiManager psiManager, String link, PsiElement context) {
+    if (context.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
+      context = findPodElement(context);
+    }
     if (context instanceof PodCompositeElement || context instanceof PerlFile) {
       try {
         return PerlDocUtil.resolveDescriptor(PodLinkDescriptor.createFromUrl(URLDecoder.decode(link, "UTF-8")), context, false);

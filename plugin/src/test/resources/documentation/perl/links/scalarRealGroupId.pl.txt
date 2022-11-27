@@ -1,4 +1,4 @@
-PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 8914 in perlvar.pod
+Built-in: $REAL_GROUP_ID
 
 perlvar: perlvar
 	POD file at 0 in perlvar.pod

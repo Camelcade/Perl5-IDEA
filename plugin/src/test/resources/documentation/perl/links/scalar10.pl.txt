@@ -1,4 +1,4 @@
-PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 31815 in perlvar.pod
+Built-in: $10
 
 perlvar: perlvar
 	POD file at 0 in perlvar.pod

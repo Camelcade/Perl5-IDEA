@@ -1,4 +1,4 @@
-PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 53363 in perlvar.pod
+Built-in: $^LAST_FH
 
 perlvar: perlvar
 	POD file at 0 in perlvar.pod

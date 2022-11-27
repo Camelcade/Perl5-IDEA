@@ -1,4 +1,4 @@
-PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 61459 in perlvar.pod
+Built-in: $^WARNING_BITS
 
 perlvar: perlvar
 	POD file at 0 in perlvar.pod

@@ -1,4 +1,4 @@
-PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36391 in perlvar.pod
+Built-in: $LAST_SUBMATCH_RESULT
 
 perlvar: perlvar
 	POD file at 0 in perlvar.pod

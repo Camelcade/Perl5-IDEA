@@ -1,4 +1,4 @@
-PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 55168 in perlvar.pod
+Built-in: $FORMAT_LINE_BREAK_CHARACTERS
 
 perlvar: perlvar
 	POD file at 0 in perlvar.pod
