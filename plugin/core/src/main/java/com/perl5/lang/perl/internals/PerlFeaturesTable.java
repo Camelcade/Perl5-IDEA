@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,42 +25,47 @@ import java.util.*;
  */
 public final class PerlFeaturesTable implements Cloneable {
 
-  private static final String FEATURE_BAREWORD_FILEHANDLES = "bareword_filehandles";
-  private static final String FEATURE_INDIRECT = "indirect";
-  private static final String FEATURE_MULTIDIMENSIONAL = "multidimensional";
+  private static final String FEATURE_FC = "fc";
+  private static final String FEATURE_ISA = "isa";
   private static final String FEATURE_SAY = "say";
+  private static final String FEATURE_TRY = "try";
   private static final String FEATURE_STATE = "state";
   private static final String FEATURE_SWITCH = "switch";
   private static final String FEATURE_BITWISE = "bitwise";
-  private static final String FEATURE_CURRENT_SUB = "current_sub";
+  private static final String FEATURE_INDIRECT = "indirect";
   private static final String FEATURE_EVALBYTES = "evalbytes";
-  private static final String FEATURE_FC = "fc";
+  private static final String FEATURE_SIGNATURES = "signatures";
+  private static final String FEATURE_CURRENT_SUB = "current_sub";
+  private static final String FEATURE_REFALIASING = "refaliasing";
   private static final String FEATURE_POSTDEREF_QQ = "postderef_qq";
   private static final String FEATURE_UNICODE_EVAL = "unicode_eval";
+  private static final String FEATURE_DECLARED_REFS = "declared_refs";
   private static final String FEATURE_UNICODE_STRINGS = "unicode_strings";
+  private static final String FEATURE_MULTIDIMENSIONAL = "multidimensional";
+  private static final String FEATURE_BAREWORD_FILEHANDLES = "bareword_filehandles";
   public static final Map<String, String> AVAILABLE_FEATURES = Maps.of(
     FEATURE_BAREWORD_FILEHANDLES, "v5.34, enables bareword filehandles for builtin functions operations, a generally discouraged practice.",
     FEATURE_BITWISE,
     "v5.22, makes the four standard bitwise operators treat their operands consistently as numbers, and introduces four new dotted operators that treat their operands consistently as strings. The same applies to the assignment variants. Requires no warnings \"experimental::bitwise\"",
     FEATURE_CURRENT_SUB,
     "v5.16, provides the __SUB__ token that returns a reference to the current subroutine or undef outside of a subroutine",
-    "declared_refs",
+    FEATURE_DECLARED_REFS,
     "v5.26, allows a reference to a variable to be declared with my, state, our our, or localized with local. Requires no warnings \"experimental::declared_refs\"",
     FEATURE_EVALBYTES, "v5.16, force eval to treat string argument as a string of bytes",
     FEATURE_FC, "v5.16, enables the fc function, which implements Unicode casefolding",
     FEATURE_INDIRECT, "v5.32, allows the use of indirect object syntax for method calls, e.g. new Foo 1, 2;",
-    "isa",
+    FEATURE_ISA,
     "v5.32, allows the use of the isa infix operator, which tests whether the scalar given by the left operand is an object of the class given by the right operand. Requires no warnings \"experimental::isa\"",
     FEATURE_MULTIDIMENSIONAL, "v5.34, enables multidimensional array emulation like $foo{$x, $y}",
     FEATURE_POSTDEREF_QQ,
     "v5.20, allows the use of postfix dereference syntax in within interpolated strings. Requires no warnings \"experimental::postderef\"",
-    "refaliasing", "v5.22, enables aliasing via assignment to references. Requires  no warnings \"experimental::refaliasing\"",
+    FEATURE_REFALIASING, "v5.22, enables aliasing via assignment to references. Requires  no warnings \"experimental::refaliasing\"",
     FEATURE_SAY, "v5.10, enables the Perl 6 style say function",
-    "signatures",
+    FEATURE_SIGNATURES,
     "v5.20, enables unpacking of subroutine arguments into lexical variables. Requires  no warnings \"experimental::signatures\"",
     FEATURE_STATE, "v5.10, enables state variables",
     FEATURE_SWITCH, "v5.10, enables the Perl 6 given/when construct. Requires no warnings \"experimental::smartmatch\"",
-    "try", "v5.34, enables the try and catch syntax, which allows exception handling. Requires no warnings \"experimental::try\"",
+    FEATURE_TRY, "v5.34, enables the try and catch syntax, which allows exception handling. Requires no warnings \"experimental::try\"",
     FEATURE_UNICODE_EVAL, "v5.16, force eval to treat string argument as a string of characters ignoring any use utf8 declarations",
     FEATURE_UNICODE_STRINGS,
     "v5.16, use Unicode rules in all string operations executed within its scope (unless they are also within the scope of either use locale or use bytes)"
