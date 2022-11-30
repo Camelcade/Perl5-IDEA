@@ -1,0 +1,20 @@
+package Parent::Package;
+
+sub first{};
+sub second{};
+sub fourth{};
+sub fifth{};
+
+package Child::Package;
+use parent qw/Parent::Package/;
+
+sub third{};
+
+package main;
+my $object;
+$object->first();
+$object->second();
+$object->third();
+$object->fourth();
+$object->fifth();
+$ob<caret>ject;

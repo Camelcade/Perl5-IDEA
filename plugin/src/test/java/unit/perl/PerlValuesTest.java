@@ -34,6 +34,9 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testDuckTypeParentFiveMethods() { doTestScalarVariableValue(); }
+
+  @Test
   public void testArrayElementSet() { doTestArrayVariableValue(); }
 
   @Test

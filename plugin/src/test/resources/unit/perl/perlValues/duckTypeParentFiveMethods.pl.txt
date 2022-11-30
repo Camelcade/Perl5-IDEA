@@ -1,0 +1,28 @@
+package Parent::Package;
+
+sub first{};
+sub second{};
+sub fourth{};
+sub fifth{};
+
+package Child::Package;
+use parent qw/Parent::Package/;
+
+sub third{};
+
+package main;
+my $object;
+$object->first();
+$object->second();
+$object->third();
+$object->fourth();
+$object->fifth();
+$ob<caret>ject;
+----------
+$object
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 270 in duckTypeParentFiveMethods.pl
+DuckType: [fifth, first, fourth, second, third]
+----------
+Resolved
+----------
+Child::Package

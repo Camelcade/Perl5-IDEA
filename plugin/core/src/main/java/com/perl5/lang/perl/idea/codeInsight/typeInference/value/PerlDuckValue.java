@@ -26,7 +26,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -75,13 +78,13 @@ public class PerlDuckValue extends PerlListValue {
     }
     else {
       baseNamespaces.forEach(namespaceName -> processNamespacesWithAllCallables(
-        namespaceName, usedCallableNames, resolver, new HashSet<>(), namespaceNameProcessor));
+        namespaceName, Set.copyOf(usedCallableNames), resolver, new HashSet<>(), namespaceNameProcessor));
     }
     return valueBuilder.build();
   }
 
   private static void processNamespacesWithAllCallables(@Nullable String namespaceName,
-                                                        @NotNull Collection<String> callableNames,
+                                                        @NotNull Set<String> callableNames,
                                                         @NotNull PerlValueResolver resolver,
                                                         @NotNull Set<String> recursionControlSet,
                                                         @NotNull Consumer<String> namespaceNameConsumer) {
@@ -93,7 +96,7 @@ public class PerlDuckValue extends PerlListValue {
     var callablesLeft = new HashSet<>(callableNames);
     var project = resolver.getProject();
     var resolveScope = resolver.getResolveScope();
-    boolean notFinished = PerlMro.processCallables(project, resolveScope, namespaceName, callablesLeft, false, it -> {
+    boolean notFinished = PerlMro.processCallables(project, resolveScope, namespaceName, callableNames, false, it -> {
       callablesLeft.remove(it.getCallableName());
       return !callablesLeft.isEmpty();
     }, false);
