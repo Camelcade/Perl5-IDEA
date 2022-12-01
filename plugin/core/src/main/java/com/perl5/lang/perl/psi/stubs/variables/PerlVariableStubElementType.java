@@ -87,7 +87,7 @@ public class PerlVariableStubElementType extends IStubElementType<PerlVariableDe
     dataStream.writeByte(stub.getActualType().ordinal());
 
     PerlVariableAnnotations annotations = stub.getVariableAnnotations();
-    if (annotations == null) {
+    if (annotations.isEmpty()) {
       dataStream.writeBoolean(false);
     }
     else {

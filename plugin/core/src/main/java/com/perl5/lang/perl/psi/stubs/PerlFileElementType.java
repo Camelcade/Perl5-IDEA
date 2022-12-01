@@ -38,7 +38,7 @@ import java.io.IOException;
 import static com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex.NAMESPACE_KEY;
 
 public final class PerlFileElementType extends IStubFileElementType<PerlFileStub> {
-  private static final int VERSION = 3;
+  private static final int VERSION = 4;
 
   public PerlFileElementType(String debugName, Language language) {
     super(debugName, language);
