@@ -1,0 +1,6 @@
+"this is<caret> a test";
+
+
+######################### PREVIEW #########################
+
+"this is a test";

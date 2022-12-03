@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.codeInsight.intention.PsiElementBaseIntentionAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiDocumentManager;
@@ -37,7 +38,7 @@ import java.util.List;
 
 
 public class StringToLastHeredocIntention extends PsiElementBaseIntentionAction implements IntentionAction {
-  protected static String HEREDOC_MARKER = "HEREDOC";
+  protected static @NotNull @NlsSafe String ourMarker = "HEREDOC";
 
   @Override
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
@@ -52,12 +53,13 @@ public class StringToLastHeredocIntention extends PsiElementBaseIntentionAction 
     }
 
     String contentText = ElementManipulators.getValueText(stringElement);
-    List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(
-      project,
-      quoteSymbol,
-      HEREDOC_MARKER,
-      ""
-    );
+    String heredocString =
+      contentText +
+      "\n" +
+      ourMarker +
+      "\n";
+
+    List<PsiElement> heredocElements = PerlElementFactory.createHereDocElements(project, quoteSymbol, ourMarker, "");
 
     PsiFile currentFile = stringElement.getContainingFile();
     int newLineIndex = StringUtil.indexOf(currentFile.getNode().getChars(), "\n", stringElement.getTextRange().getEndOffset());
@@ -68,29 +70,22 @@ public class StringToLastHeredocIntention extends PsiElementBaseIntentionAction 
         return;
       }
     }
-
-    final PsiDocumentManager manager = PsiDocumentManager.getInstance(element.getProject());
-    final Document document = manager.getDocument(currentFile);
-
-    if (document == null) {
-      return;
+    else if (newLineIndex < 0) {
+      heredocString = "\n" + heredocString;
+      newLineIndex = currentFile.getTextLength() - 1;
     }
 
+    final Document document = editor.getDocument();
     newLineIndex -= stringElement.getTextLength();
     PsiElement heredocOpener = heredocElements.get(0);
     newLineIndex += heredocOpener.getTextLength();
     stringElement.replace(heredocOpener); // replace string with heredoc opener
-    manager.doPostponedOperationsAndUnblockDocument(document);
+    var psiDocumentManager = PsiDocumentManager.getInstance(element.getProject());
+    psiDocumentManager.doPostponedOperationsAndUnblockDocument(document);
 
-    String heredocString =
-      contentText +
-      "\n" +
-      HEREDOC_MARKER +
-      "\n";
-
-    manager.doPostponedOperationsAndUnblockDocument(document);
+    psiDocumentManager.doPostponedOperationsAndUnblockDocument(document);
     document.insertString(newLineIndex + 1, heredocString);
-    manager.commitDocument(document);
+    psiDocumentManager.commitDocument(document);
   }
 
   @Override
@@ -108,6 +103,6 @@ public class StringToLastHeredocIntention extends PsiElementBaseIntentionAction 
 
   @Override
   public @NotNull String getText() {
-    return PerlBundle.message("perl.intention.heredoc.last.prefix") + HEREDOC_MARKER;
+    return PerlBundle.message("perl.intention.heredoc.last.prefix") + ourMarker;
   }
 }

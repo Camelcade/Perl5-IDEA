@@ -1,10 +1,8 @@
-<<'HEREDO<caret>C';
+<<"HERED<caret>OC";
 this is a test
 HEREDOC
 
-
 ######################### PREVIEW #########################
-
-<<'HEREDOC';
+<<"HEREDOC";
 this is a test
 HEREDOC

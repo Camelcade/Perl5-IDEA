@@ -1,0 +1,10 @@
+<<"TESTM<caret>ARKER";
+this is a test of last
+TESTMARKER
+
+
+######################### PREVIEW #########################
+
+<<"TESTMARKER";
+this is a test of last
+TESTMARKER
