@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ public class PerlScriptsPanel extends JPanel {
 
 
   private @Nullable VirtualFile getVirtualFileByName(String virtualFileName) {
-    VirtualFile result = VfsUtil.findFileByIoFile(new File(virtualFileName), true);
+    VirtualFile result = VfsUtil.findFileByIoFile(new File(virtualFileName), false);
 
     if (result != null) {
       return result;
