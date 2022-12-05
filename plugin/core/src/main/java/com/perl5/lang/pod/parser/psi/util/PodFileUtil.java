@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,29 +37,23 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class PodFileUtil {
   public static final String PM_OR_POD_EXTENSION_PATTERN = ".(" + PodFileType.EXTENSION + "|" + PerlFileTypePackage.EXTENSION + ")$";
 
-  private static final Set<String> myClassLikeExtensions = Set.of(
-    PodFileType.EXTENSION,
-    PerlFileTypePackage.EXTENSION
-  );
-
   public static @Nullable String getPackageName(PsiFile file) {
     VirtualFile virtualFile = file.getVirtualFile();
-    VirtualFile classRoot = PerlPackageUtil.getClosestIncRoot(file);
-
-    if (virtualFile != null && myClassLikeExtensions.contains(virtualFile.getExtension())) {
-      if (classRoot == null) {
-        return virtualFile.getName();
-      }
-      else {
-        return getPackageNameFromVirtualFile(virtualFile, classRoot);
-      }
+    if (virtualFile == null) {
+      return null;
     }
-    return null;
+
+    var fileExtension = virtualFile.getExtension();
+    if (!PodFileType.EXTENSION.equals(fileExtension) && !PerlFileTypePackage.EXTENSION.equals(fileExtension)) {
+      return null;
+    }
+
+    VirtualFile classRoot = PerlPackageUtil.getClosestIncRoot(file);
+    return classRoot == null ? virtualFile.getName() : getPackageNameFromVirtualFile(virtualFile, classRoot);
   }
 
   /**
