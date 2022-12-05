@@ -12,6 +12,7 @@ plugin/testData/**/svg/
 .idea/.name
 .idea/sonarlint/
 !.idea/codeInsightSettings.xml
+!.idea/vcs.xml
 !.idea/runConfigurations/*
 tmp/
 temp/
