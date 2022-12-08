@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,7 +65,7 @@ public class PerlSdkAdditionalData implements SaveAwareSdkAdditionalData {
   }
 
   public static @NotNull PerlSdkAdditionalData notNullFrom(@NotNull Sdk sdk) {
-    return Objects.requireNonNull(from(sdk), () -> "No additional data in " + sdk);
+    return Objects.requireNonNull(from(sdk), () -> "No additional data in " + sdk + "; additionalData: " + sdk.getSdkAdditionalData());
   }
 
   @Override
