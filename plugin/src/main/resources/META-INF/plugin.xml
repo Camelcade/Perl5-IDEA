@@ -17,7 +17,7 @@
 <idea-plugin url="https://github.com/Camelcade/Perl5-IDEA">
   <id>com.perl5</id>
   <name>Perl</name>
-  <vendor email="hurricup@evstigneev.com" url="http://www.evstigneev.com">Alexandr Evstigneev</vendor>
+  <vendor email="hurricup@gmail.com" url="https://github.com/hurricup">Alexandr Evstigneev</vendor>
   <category>Custom Languages</category>
 
   <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
