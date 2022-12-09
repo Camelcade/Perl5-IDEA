@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,16 +27,16 @@ import com.perl5.lang.pod.filetypes.PodFileType;
 public abstract class PerlDocumentationProviderBase extends AbstractDocumentationProvider {
   @Override
   public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
-    if (object instanceof VirtualFile) {
-      PsiFile psiFile = psiManager.findFile((VirtualFile)object);
+    if (object instanceof VirtualFile virtualFile && virtualFile.isValid()) {
+      PsiFile psiFile = psiManager.findFile(virtualFile);
       if (psiFile == null) {
         return null;
       }
       if (psiFile.getFileType() == PodFileType.INSTANCE) {
         return psiFile;
       }
-      if (psiFile instanceof PerlFileImpl) {
-        String filePackageName = ((PerlFileImpl)psiFile).getFilePackageName();
+      if (psiFile instanceof PerlFileImpl perlFile) {
+        String filePackageName = perlFile.getFilePackageName();
         if (filePackageName != null) {
           return PerlDocUtil.resolveDoc(filePackageName, null, psiFile, true);
         }

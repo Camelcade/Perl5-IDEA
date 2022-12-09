@@ -86,11 +86,11 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
   @Override
   public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
-    if (object instanceof MojoLightDelegatingSubDefinition) {
-      return findPodElement(ObjectUtils.notNull(((MojoLightDelegatingSubDefinition)object).getTargetSubElement(), (PsiElement)object));
+    if (object instanceof MojoLightDelegatingSubDefinition delegatingSubDefinition && delegatingSubDefinition.isValid()) {
+      return findPodElement(ObjectUtils.notNull(delegatingSubDefinition.getTargetSubElement(), delegatingSubDefinition));
     }
-    if (object instanceof PsiElement) {
-      return findPodElement((PsiElement)object);
+    if (object instanceof PsiElement psiElement && psiElement.isValid()) {
+      return findPodElement(psiElement);
     }
     return super.getDocumentationElementForLookupItem(psiManager, object, element);
   }
