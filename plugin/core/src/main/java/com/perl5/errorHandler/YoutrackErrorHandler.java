@@ -121,7 +121,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     for (IdeaLoggingEvent e : ideaLoggingEvents) {
       descBuilder
         .append("\n").append("Message: ").append(StringUtil.notNullize(e.getMessage(), "none"))
-        .append("\n").append("```").append(e.getThrowableText())
+        .append("\n").append("```\n").append(e.getThrowableText().trim())
         .append("\n```")
       ;
 
