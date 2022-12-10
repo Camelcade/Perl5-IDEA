@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,8 +122,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
     for (IdeaLoggingEvent e : ideaLoggingEvents) {
       descBuilder
         .append("\n").append("Message: ").append(StringUtil.notNullize(e.getMessage(), "none"))
-        .append("\n").append("Throwable:\n").append(e.getThrowableText())
-        .append("\n")
+        .append("\n").append("```").append(e.getThrowableText())
+        .append("\n```")
       ;
 
       Throwable throwable = e.getThrowable();
