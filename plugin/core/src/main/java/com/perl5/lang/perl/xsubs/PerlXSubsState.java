@@ -57,6 +57,7 @@ import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.PerlPathMacros;
+import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -165,7 +166,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
             PerlBundle.message("perl.deparsing.change.detected.title"),
             PerlBundle.message("perl.deparsing.change.detected.message"),
             NotificationType.INFORMATION,
-            notification -> Collections.singletonList(new AnAction(PerlBundle.message("perl.deparsing.action")) {
+            notification -> Collections.singletonList(new PerlActionBase(PerlBundle.message("perl.deparsing.action")) {
               @Override
               public void actionPerformed(@NotNull AnActionEvent e) {
                 notification.expire();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.DumbAware;
-import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.startup.StartupActivity;
@@ -37,6 +36,7 @@ import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
@@ -81,7 +81,7 @@ public class PerlHostCacheCleaner implements StartupActivity, DumbAware {
       NotificationType.WARNING
     );
 
-    notification.addAction(new DumbAwareAction(PerlBundle.message("perl.cache.cleaner.action.clean")) {
+    notification.addAction(new PerlDumbAwareAction(PerlBundle.message("perl.cache.cleaner.action.clean")) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent event) {
         new Task.Backgroundable(project, PerlBundle.message("perl.cache.cleaner.cleaning"), true) {

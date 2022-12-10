@@ -22,6 +22,7 @@ import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -56,7 +57,7 @@ public class CpanAdapter extends PackageManagerAdapter {
                                                       @Nullable Project project,
                                                       @NotNull Collection<String> libraryNames,
                                                       @Nullable Runnable actionCallback) {
-    return new DumbAwareAction(createInstallActionTitle(SCRIPT_NAME)) {
+    return new PerlDumbAwareAction(createInstallActionTitle(SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
         installModules(sdk, project, libraryNames, actionCallback);

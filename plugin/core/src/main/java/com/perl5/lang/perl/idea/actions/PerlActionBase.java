@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 
-public abstract class PerlActionBase extends AnAction {
+public abstract class PerlActionBase extends AnAction implements PerlAction {
   public PerlActionBase() {
   }
 
@@ -53,9 +53,13 @@ public abstract class PerlActionBase extends AnAction {
   @Override
   public void update(@NotNull AnActionEvent event) {
     final boolean enabled = isEnabled(event);
-    event.getPresentation().setEnabled(enabled);
+    var eventPresentation = event.getPresentation();
+    eventPresentation.setEnabled(enabled);
     if (alwaysHideDisabled() || ActionPlaces.isPopupPlace(event.getPlace())) {
-      event.getPresentation().setVisible(enabled);
+      eventPresentation.setVisible(enabled);
+    }
+    else {
+      eventPresentation.setVisible(true);
     }
   }
 

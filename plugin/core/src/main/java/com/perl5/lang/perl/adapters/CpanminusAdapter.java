@@ -23,6 +23,7 @@ import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.Contract;
@@ -90,7 +91,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
                                                        @NotNull Collection<String> libraryNames,
                                                        @Nullable Runnable actionCallback) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return !isAvailable(sdk) ? null : new DumbAwareAction(CpanAdapter.createInstallActionTitle(SCRIPT_NAME)) {
+    return !isAvailable(sdk) ? null : new PerlDumbAwareAction(CpanAdapter.createInstallActionTitle(SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
         new CpanminusAdapter(sdk, project).install(libraryNames);

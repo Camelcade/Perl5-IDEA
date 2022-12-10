@@ -27,7 +27,6 @@ import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.module.ModuleUtilCore;
-import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.RootsChangeRescanningInfo;
 import com.intellij.openapi.projectRoots.ProjectJdkTable;
@@ -51,6 +50,7 @@ import com.intellij.util.containers.ContainerUtil.ImmutableMapBuilder;
 import com.intellij.util.containers.FactoryMap;
 import com.intellij.util.messages.MessageBusConnection;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.PerlSdkLibrary;
@@ -289,7 +289,7 @@ public class PerlProjectManager implements Disposable {
       PerlBundle.message("perl.select.sdk.notification.message"),
       NotificationType.ERROR
     );
-    notification.addAction(new DumbAwareAction(PerlBundle.message("perl.configure.interpreter.action")) {
+    notification.addAction(new PerlDumbAwareAction(PerlBundle.message("perl.configure.interpreter.action")) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
         Perl5SettingsConfigurable.open(project);

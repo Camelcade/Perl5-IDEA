@@ -33,7 +33,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.*;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.SystemInfo;
@@ -41,6 +40,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.Consumer;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.apache.http.Consts;
 import org.apache.http.client.entity.EntityBuilder;
@@ -311,7 +311,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
         .getNotificationGroup("Error Report")
         .createNotification(notificationTitle, notificationText, type);
       if (urlOpener != null) {
-        notification.addAction(new DumbAwareAction(urlOpener.getTemplateText()) {
+        notification.addAction(new PerlDumbAwareAction(urlOpener.getTemplateText()) {
           @Override
           public void actionPerformed(@NotNull AnActionEvent e) {
             urlOpener.actionPerformed(e);
@@ -337,7 +337,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
                                   : DiagnosticBundle.message("error.list.message.submission.failed"));
     }
     else if (linkUrl != null && linkText != null) {
-      return new DumbAwareAction(linkText) {
+      return new PerlDumbAwareAction(linkText) {
         @Override
         public void actionPerformed(@NotNull AnActionEvent e) {
           BrowserUtil.browse(linkUrl);

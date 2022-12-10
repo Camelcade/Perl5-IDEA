@@ -42,6 +42,7 @@ import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.util.messages.MessageBusConnection;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5TextSdkWrapper;
@@ -122,7 +123,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
       .map(hostHandler -> {
         List<DumbAwareAction> groupItems = PerlVersionManagerHandler.stream()
           .filter(it -> it.isApplicable(hostHandler.getOsHandler()))
-          .map(versionManagerHandler -> new DumbAwareAction(versionManagerHandler.getMenuItemTitle()) {
+          .map(versionManagerHandler -> new PerlDumbAwareAction(versionManagerHandler.getMenuItemTitle()) {
             @Override
             public void actionPerformed(@NotNull AnActionEvent e) {
               new Task.Modal(myProject, PerlBundle.message("perl.create.interpreter.progress"), false) {
@@ -159,7 +160,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
       groups.forEach(panelActionGroup::add);
     }
 
-    panelActionGroup.add(new DumbAwareAction(PerlBundle.message("perl.interpreter.edit")) {
+    panelActionGroup.add(new PerlDumbAwareAction(PerlBundle.message("perl.interpreter.edit")) {
       @Override
       public void update(@NotNull AnActionEvent e) {
         e.getPresentation().setEnabledAndVisible(getSelectedSdk() != null);
@@ -170,7 +171,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
         renameSdk();
       }
     });
-    panelActionGroup.add(new DumbAwareAction(PerlBundle.message("perl.interpreter.delete")) {
+    panelActionGroup.add(new PerlDumbAwareAction(PerlBundle.message("perl.interpreter.delete")) {
       @Override
       public void update(@NotNull AnActionEvent e) {
         e.getPresentation().setEnabledAndVisible(getSelectedSdk() != null);

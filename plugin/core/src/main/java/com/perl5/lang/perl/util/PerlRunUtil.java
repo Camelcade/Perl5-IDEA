@@ -40,7 +40,6 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.progress.Task;
-import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.RootsChangeRescanningInfo;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -60,6 +59,7 @@ import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.adapters.CpanAdapter;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
+import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -262,7 +262,7 @@ public final class PerlRunUtil {
     boolean hasAlternatives = actions.size() > 1;
 
     if (new HashSet<>(BUNDLED_MODULE_PARTS).removeAll(packagesToInstall)) {
-      actions.add(new DumbAwareAction(PerlBundle.message("perl.quickfix.install.module", BUNDLED_MODULE_NAME)) {
+      actions.add(new PerlDumbAwareAction(PerlBundle.message("perl.quickfix.install.module", BUNDLED_MODULE_NAME)) {
         @Override
         public void actionPerformed(@NotNull AnActionEvent e) {
           if (hasAlternatives) {
