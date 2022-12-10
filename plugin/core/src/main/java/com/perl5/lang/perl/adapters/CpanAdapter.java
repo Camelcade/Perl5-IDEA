@@ -18,9 +18,9 @@ package com.perl5.lang.perl.adapters;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.NlsSafe;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -31,8 +31,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 
 public class CpanAdapter extends PackageManagerAdapter {
-  private static final String PACKAGE_NAME = "CPAN";
-  public static final String SCRIPT_NAME = "cpan";
+  private static final @NlsSafe String PACKAGE_NAME = "CPAN";
+  public static final @NlsSafe String SCRIPT_NAME = "cpan";
 
   public CpanAdapter(@NotNull Sdk sdk, @Nullable Project project) {
     super(sdk, project);

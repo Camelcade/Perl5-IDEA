@@ -19,9 +19,9 @@ package com.perl5.lang.perl.adapters;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -34,8 +34,8 @@ import java.util.Collection;
 import java.util.List;
 
 public class CpanminusAdapter extends PackageManagerAdapter {
-  public static final String PACKAGE_NAME = "App::cpanminus";
-  public static final String SCRIPT_NAME = "cpanm";
+  public static final @NlsSafe String PACKAGE_NAME = "App::cpanminus";
+  public static final @NlsSafe String SCRIPT_NAME = "cpanm";
 
   public CpanminusAdapter(@NotNull Sdk sdk, @Nullable Project project) {
     super(sdk, project);
