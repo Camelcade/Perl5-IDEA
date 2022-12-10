@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -102,7 +102,7 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
   @Override
   public @Nullable File findFileByName(@NotNull String fileName) {
     try {
-      ProcessOutput output = execAndGetOutput(new PerlCommandLine("\\which", fileName).withHostData(this));
+      ProcessOutput output = execAndGetOutput(new PerlCommandLine("bash", "-cl", "\\which " + fileName).withHostData(this));
       int exitCode = output.getExitCode();
       if (exitCode != 0 && exitCode != 1) {
         LOG.warn("Got non-zero code from script " + exitCode + "; stderr: " + output.getStderr());
@@ -115,6 +115,12 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
       LOG.warn("Error seeking for " + fileName, e);
     }
     return null;
+  }
+
+  @Override
+  public @NotNull String expandUserHome(@NotNull String remotePath) {
+    var remoteFile = findFileByName(remotePath);
+    return remoteFile != null ? remoteFile.getAbsolutePath() : remotePath;
   }
 
   @Override

@@ -131,7 +131,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
     WSLDistribution distribution = getDistribution();
     try {
       // fixme these commands should be handled by osHandler?
-      ProcessOutput output = distribution.executeOnWsl(TIMEOUT, "bash", "-cl", "which " + fileName);
+      ProcessOutput output = distribution.executeOnWsl(TIMEOUT, "bash", "-cl", "\\which " + fileName);
       List<String> lines = output.getStdoutLines();
       return lines.isEmpty() ? null : new File(lines.get(0));
     }
@@ -139,6 +139,12 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
       LOG.warn("Error looking for " + fileName, e);
       return null;
     }
+  }
+
+  @Override
+  public @NotNull String expandUserHome(@NotNull String remotePath) {
+    var remoteFile = findFileByName(remotePath);
+    return remoteFile != null ? remoteFile.getAbsolutePath() : remotePath;
   }
 
   @Override

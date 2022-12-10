@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
-import com.perl5.PerlBundle;
+import com.intellij.openapi.util.NlsSafe;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -28,15 +28,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBrewHandler> {
   private static final Pattern KEY_VAL_PATTERN = Pattern.compile("\\s+([\\w_]+):\\s*(\\S+)");
+  private static final @NlsSafe String PERLBREW = "perlbrew";
+  private static final @NlsSafe String PERLBREW_DEFAULT_PATH = "~/perl5/perlbrew/bin/" + PERLBREW;
 
   @SuppressWarnings("NonDefaultConstructor")
   public PerlBrewHandler(@NotNull PerlHandlerBean bean) {
@@ -45,7 +44,12 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
 
   @Override
   protected @NotNull String getExecutableName() {
-    return "perlbrew";
+    return PERLBREW;
+  }
+
+  @Override
+  protected @NotNull Collection<String> getPossibleVersionManagerPaths() {
+    return Collections.singletonList(PERLBREW_DEFAULT_PATH);
   }
 
   @Override
@@ -55,7 +59,7 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
 
   @Override
   public @NotNull String getPresentableName() {
-    return PerlBundle.message("perl.vm.perlbrew.presentable.name");
+    return PERLBREW;
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.berrybrew;
 
-import com.perl5.PerlBundle;
+import com.intellij.openapi.util.NlsSafe;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -30,11 +30,14 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, BerryBrewHandler> {
+  private static final @NlsSafe String BERRYBREW = "berrybrew";
+  private static final @NlsSafe String BERRYBREW_EXE = BERRYBREW + ".exe";
+
+
   @SuppressWarnings("NonDefaultConstructor")
   public BerryBrewHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
   }
-
 
   @Override
   protected @NotNull BerryBrewData createData(@NotNull PerlVersionManagerAdapter vmAdapter, @NotNull String distributionId) {
@@ -43,7 +46,7 @@ class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, Berr
 
   @Override
   protected @NotNull String getExecutableName() {
-    return "berrybrew.exe";
+    return BERRYBREW_EXE;
   }
 
   @Override
@@ -53,7 +56,7 @@ class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, Berr
 
   @Override
   public @NotNull String getPresentableName() {
-    return PerlBundle.message("perl.vm.berrybrew.presentable.name");
+    return BERRYBREW;
   }
 
   @Override

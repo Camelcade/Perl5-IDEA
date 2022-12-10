@@ -41,6 +41,8 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.io.File;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -108,12 +110,29 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
     if (fileSystem == null) {
       return null;
     }
-    return hostData.getHostSdkStream()
+    var result = hostData.getHostSdkStream()
       .filter(this::isSameHandler)
       .map(it -> fileSystem.findFileByPath(PerlRealVersionManagerData.notNullFrom(it).getVersionManagerPath()))
       .filter(it -> it != null && it.isValid() && it.exists())
       .map(it -> new File(it.getPath()))
       .findFirst().orElseGet(() -> hostData.findFileByName(getExecutableName()));
+
+    if (result != null) {
+      return result;
+    }
+
+    return getPossibleVersionManagerPaths().stream()
+      .map(it -> fileSystem.findFileByPath(hostData.expandUserHome(it)))
+      .filter(it -> it != null && it.isValid() && it.exists())
+      .map(it -> new File(it.getPath()))
+      .findFirst().orElse(null);
+  }
+
+  /**
+   * @return list of possible paths to the version manager. E.g, user-local perlbrew installation is in {@code ~/perl5/perlbrew/bin/perlbrew}
+   */
+  protected @NotNull Collection<String> getPossibleVersionManagerPaths() {
+    return Collections.emptyList();
   }
 
   public abstract @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager,

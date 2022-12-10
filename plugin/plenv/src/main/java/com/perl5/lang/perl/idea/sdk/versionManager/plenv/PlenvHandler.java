@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
 
-import com.perl5.PerlBundle;
+import com.intellij.openapi.util.NlsSafe;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -29,8 +29,13 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
 
 import javax.swing.*;
+import java.util.Collection;
+import java.util.Collections;
 
 class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler> {
+
+  private static final @NlsSafe String PLENV = "plenv";
+  private static final @NlsSafe String PLENV_DEFAULT_PATH = "~/.plenv/bin/" + PLENV;
 
   @SuppressWarnings("NonDefaultConstructor")
   public PlenvHandler(@NotNull PerlHandlerBean bean) {
@@ -39,12 +44,17 @@ class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler
 
   @Override
   public @NotNull String getPresentableName() {
-    return PerlBundle.message("perl.vm.plenv.presentable.name");
+    return PLENV;
   }
 
   @Override
   protected @NotNull String getExecutableName() {
-    return "plenv";
+    return PLENV;
+  }
+
+  @Override
+  protected @NotNull Collection<String> getPossibleVersionManagerPaths() {
+    return Collections.singletonList(PLENV_DEFAULT_PATH);
   }
 
   @Override

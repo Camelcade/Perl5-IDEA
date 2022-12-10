@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -242,6 +242,11 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    * @see PerlPluginUtil#getPluginHelpersRoot()
    */
   public abstract @NotNull String getHelpersRootPath();
+
+  /**
+   * @return passed {@code remotePath} with {@code ~} expanded to the real home path.
+   */
+  public abstract @NotNull String expandUserHome(@NotNull String remotePath);
 
   @Override
   public String toString() {

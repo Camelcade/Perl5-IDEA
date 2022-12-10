@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.containers.ContainerUtil;
@@ -96,7 +97,11 @@ class PerlLocalHostData extends PerlHostData<PerlLocalHostData, PerlLocalHostHan
   }
 
   @Override
-  public void fixPermissionsRecursively(@NotNull String localPath, @Nullable Project project) {
+  public @NotNull String expandUserHome(@NotNull String remotePath) {
+    return FileUtil.expandUserHome(remotePath);
+  }
 
+  @Override
+  public void fixPermissionsRecursively(@NotNull String localPath, @Nullable Project project) {
   }
 }
