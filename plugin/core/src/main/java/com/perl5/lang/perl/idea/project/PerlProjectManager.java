@@ -213,6 +213,7 @@ public class PerlProjectManager implements Disposable {
   }
 
   public void setProjectSdk(@Nullable Sdk sdk) {
+    PerlProjectManagerListener.EP.forEachExtensionSafe(it -> it.beforeSdkSet(myProject, sdk));
     WriteAction.run(
       () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
         () -> myPerlSettings.setPerlInterpreter(sdk == null ? null : sdk.getName()), RootsChangeRescanningInfo.TOTAL_RESCAN)

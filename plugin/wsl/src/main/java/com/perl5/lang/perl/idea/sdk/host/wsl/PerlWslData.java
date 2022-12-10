@@ -25,6 +25,7 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.util.ObjectUtils;
@@ -36,6 +37,7 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.util.PerlPluginUtil;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -95,6 +97,11 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   @NotNull WSLDistribution getDistribution() {
     return WslDistributionManager.getInstance().getOrCreateDistributionByMsId(getDistributionId());
+  }
+
+  @Contract("null->null")
+  public static @Nullable PerlWslData from(@Nullable Sdk sdk) {
+    return ObjectUtils.tryCast(PerlHostData.from(sdk), PerlWslData.class);
   }
 
   @Override

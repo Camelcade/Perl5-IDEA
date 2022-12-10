@@ -68,6 +68,7 @@
     <extensionPoint name="implicitSubsProvider" interface="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider"/>
     <extensionPoint name="settings.configurable.extension"
                     interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension" dynamic="true"/>
+    <extensionPoint name="projectManagerListener" interface="com.perl5.lang.perl.idea.project.PerlProjectManagerListener" dynamic="true"/>
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.perl5">
