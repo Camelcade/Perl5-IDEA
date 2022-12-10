@@ -1,5 +1,23 @@
-#!/bin/bash -e
-
+#!/bin/bash -ex
 PERL_VERSION="5.36.0"
-docker build --tag hurricup/camelcade-test:perl5-$PERL_VERSION --build-arg PERL_VERSION=$PERL_VERSION --file perl5.Dockerfile .
-docker push hurricup/camelcade-test:perl5-$PERL_VERSION
+
+for tag in perl5 perlbrew plenv
+do
+  docker build --tag hurricup/camelcade-test:$tag-$PERL_VERSION \
+    --build-arg PERL_VERSION=$PERL_VERSION \
+    --build-arg PERL_PACKAGES='
+  App::Prove::Plugin::PassEnv
+  B::Debug
+  Devel::Camelcadedb
+  Devel::Cover
+  Devel::NYTProf
+  JSON
+  Mojolicious
+  Perl::Critic
+  Perl::Tidy
+  TAP::Formatter::Camelcade
+  Types::Serialiser
+' \
+    --file $tag.Dockerfile .
+  docker push hurricup/camelcade-test:$tag-$PERL_VERSION
+done
