@@ -16,12 +16,19 @@
 
 package com.perl5.lang.perl.idea.actions;
 
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.project.DumbAwareAction;
 import com.intellij.openapi.util.NlsActions;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PerlDumbAwareAction extends DumbAwareAction implements PerlAction {
   public PerlDumbAwareAction() {
+  }
+
+  @Override
+  public @NotNull ActionUpdateThread getActionUpdateThread() {
+    return ActionUpdateThread.BGT;
   }
 
   public PerlDumbAwareAction(@Nullable @NlsActions.ActionText String text) {

@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.openapi.actionSystem.ActionPlaces;
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -48,6 +49,11 @@ public abstract class PerlActionBase extends AnAction implements PerlAction {
 
   protected boolean isEnabled(@NotNull AnActionEvent event) {
     return PerlProjectManager.isPerlEnabled(event.getDataContext());
+  }
+
+  @Override
+  public @NotNull ActionUpdateThread getActionUpdateThread() {
+    return ActionUpdateThread.BGT;
   }
 
   @Override
