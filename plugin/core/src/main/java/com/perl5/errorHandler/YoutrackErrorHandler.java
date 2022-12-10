@@ -73,8 +73,7 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
   private static final String SERVER_ISSUE_URL = ISSUES_REST_URL + "?fields=idReadable,id";
   public static final String YOUTRACK_PROPERTY_KEY = "youtrack.token";
   private static final String ADMIN_TOKEN = "Bearer " + System.getProperty(YOUTRACK_PROPERTY_KEY);
-  private static final String ACCESS_TOKEN = "Bearer perm:YXV0b3JlcG9ydGVy.NjEtMA==.iG2Zu7rMOzfjaGny7gFHyrOf9NEMCA";
-
+  private static final String ACCESS_TOKEN = "Bearer perm:YXV0b3JlcG9ydGVy.NjEtOA==.rUEAnFhZ1fDTSrK7PMOs0lxnpHzAuC";
 
   @Override
   public @NotNull String getReportActionText() {
