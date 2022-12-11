@@ -2,10 +2,11 @@
 
 [![Java CI with Gradle](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/gradle.yml?query=branch%3Amaster)
 [![Coverage Status](https://coveralls.io/repos/github/Camelcade/Perl5-IDEA/badge.svg?branch=master&dummy)](https://coveralls.io/github/Camelcade/Perl5-IDEA?branch=master)
+[![CodeQL](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/codeql.yml/badge.svg)](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/codeql.yml)
+
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
-
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
