@@ -15,6 +15,7 @@
  */
 dependencies{
   [
+    ":plugin:core",
     ":lang.mojo:core",
     ":lang.mojo:idea",
   ].each {
