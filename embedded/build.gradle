@@ -30,12 +30,12 @@ dependencies{
   [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 
-task generateEmbeddedPerlLexer(type: GenerateLexerTask) {
-  source = "grammar/EmbeddedPerl.flex"
-  targetDir = "src/main/gen/com/perl5/lang/embedded/lexer/"
-  targetClass = "EmbeddedPerlLexer"
-  skeleton = rootProject.file(templating_lexer_skeleton)
-  purgeOldFiles = true
+tasks.register('generateEmbeddedPerlLexer', GenerateLexerTask) {
+  source.set("grammar/EmbeddedPerl.flex")
+  targetDir.set("src/main/gen/com/perl5/lang/embedded/lexer/")
+  targetClass.set("EmbeddedPerlLexer")
+  skeleton.set(rootProject.file(templating_lexer_skeleton))
+  purgeOldFiles.set(true)
 }
 
 

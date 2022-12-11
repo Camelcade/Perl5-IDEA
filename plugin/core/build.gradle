@@ -22,41 +22,41 @@ intellij {
   intellij.plugins = ['java']
 }
 
-task generatePerl5Parser(type: GenerateParserTask) {
-  source = "grammar/Perl5.bnf"
-  pathToParser = '/com/perl5/lang/perl/parser/PerlParserGenerated.java'
-  pathToPsiRoot = '/com/perl5/lang/perl/psi'
+tasks.register('generatePerl5Parser', GenerateParserTask) {
+  source.set("grammar/Perl5.bnf")
+  pathToParser.set('/com/perl5/lang/perl/parser/PerlParserGenerated.java')
+  pathToPsiRoot.set('/com/perl5/lang/perl/psi')
 }
 
-task generatePodParser(type: GenerateParserTask) {
-  source = "grammar/Pod.bnf"
-  pathToParser = '/com/perl5/lang/pod/parser/PodParserGenerated.java'
-  pathToPsiRoot = '/com/perl5/lang/pod/psi'
+tasks.register('generatePodParser', GenerateParserTask) {
+  source.set("grammar/Pod.bnf")
+  pathToParser.set('/com/perl5/lang/pod/parser/PodParserGenerated.java')
+  pathToPsiRoot.set('/com/perl5/lang/pod/psi')
 }
 
 
-task generatePerlLexer(type: GenerateLexerTask) {
+tasks.register('generatePerlLexer', GenerateLexerTask) {
   dependsOn generatePerl5Parser
-  source = "grammar/Perl.flex"
-  targetDir = "src/main/gen/com/perl5/lang/perl/lexer/"
-  targetClass = "PerlLexer"
+  source.set("grammar/Perl.flex")
+  targetDir.set("src/main/gen/com/perl5/lang/perl/lexer/")
+  targetClass.set("PerlLexer")
 }
 
-task generatePodLexer(type: GenerateLexerTask) {
+tasks.register('generatePodLexer', GenerateLexerTask) {
   dependsOn generatePodParser
-  source = "grammar/Pod.flex"
-  targetDir = "src/main/gen/com/perl5/lang/pod/lexer/"
-  targetClass = "PodLexerGenerated"
+  source.set("grammar/Pod.flex")
+  targetDir.set("src/main/gen/com/perl5/lang/pod/lexer/")
+  targetClass.set("PodLexerGenerated")
 }
 
 tasks.withType(GenerateLexerTask).each {
-  it.skeleton = rootProject.file(lexer_skeleton)
-  it.purgeOldFiles = true
+  it.skeleton.set(rootProject.file(lexer_skeleton))
+  it.purgeOldFiles.set(true)
 }
 
 tasks.withType(GenerateParserTask).each {
-  it.targetRoot = genRoot.canonicalPath
-  it.purgeOldFiles = true
+  it.targetRoot.set(genRoot.canonicalPath)
+  it.purgeOldFiles.set(true)
 }
 
 compileJava {

@@ -60,7 +60,7 @@ allprojects {
   apply plugin: 'java'
   sourceCompatibility = javaVersion
   targetCompatibility = javaTargetVersion
-  tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+  tasks.withType(JavaCompile).configureEach { options.encoding = 'UTF-8' }
 
   project.ext {
     genRoot = project.file('src/main/gen')

@@ -36,12 +36,12 @@ dependencies{
   [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 
-task generateMason2Lexer(type: GenerateLexerTask) {
-  source = "grammar/Mason2.flex"
-  targetDir = "src/main/gen/com/perl5/lang/mason2/lexer/"
-  targetClass = "Mason2TemplatingLexer"
-  skeleton = rootProject.file(templating_lexer_skeleton)
-  purgeOldFiles = true
+tasks.register('generateMason2Lexer', GenerateLexerTask) {
+  source.set("grammar/Mason2.flex")
+  targetDir.set("src/main/gen/com/perl5/lang/mason2/lexer/")
+  targetClass.set("Mason2TemplatingLexer")
+  skeleton.set(rootProject.file(templating_lexer_skeleton))
+  purgeOldFiles.set(true)
 }
 
 

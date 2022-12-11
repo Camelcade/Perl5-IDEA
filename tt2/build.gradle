@@ -30,22 +30,22 @@ dependencies {
   [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 
-task generateTT2Parser(type: GenerateParserTask) {
-  source = "grammar/TemplateToolkit.bnf"
-  pathToParser = '/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java'
-  pathToPsiRoot = '/com/perl5/lang/tt2/psi'
-  targetRoot = genRoot.canonicalPath
-  purgeOldFiles = true
+tasks.register('generateTT2Parser', GenerateParserTask) {
+  source.set("grammar/TemplateToolkit.bnf")
+  pathToParser.set('/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java')
+  pathToPsiRoot.set('/com/perl5/lang/tt2/psi')
+  targetRoot.set(genRoot.canonicalPath)
+  purgeOldFiles.set(true)
 }
 
 
-task generateTT2Lexer(type: GenerateLexerTask) {
+tasks.register('generateTT2Lexer', GenerateLexerTask) {
   dependsOn generateTT2Parser
-  source = "grammar/TemplateToolkit.flex"
-  targetDir = "src/main/gen/com/perl5/lang/tt2/lexer/"
-  targetClass = "TemplateToolkitLexerGenerated"
-  skeleton = rootProject.file(lexer_skeleton)
-  purgeOldFiles = true
+  source.set("grammar/TemplateToolkit.flex")
+  targetDir.set("src/main/gen/com/perl5/lang/tt2/lexer/")
+  targetClass.set("TemplateToolkitLexerGenerated")
+  skeleton.set(rootProject.file(lexer_skeleton))
+  purgeOldFiles.set(true)
 }
 
 compileJava {

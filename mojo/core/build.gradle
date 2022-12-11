@@ -26,12 +26,12 @@ dependencies{
   [":plugin:core"].each { compileOnly project(it).sourceSets.main.output }
 }
 
-task generateMojoliciousLexer(type: GenerateLexerTask) {
-  source = "grammar/Mojolicious.flex"
-  targetDir = "src/main/gen/com/perl5/lang/mojolicious/lexer/"
-  targetClass = "MojoliciousLexer"
-  skeleton = rootProject.file(templating_lexer_skeleton)
-  purgeOldFiles = true
+tasks.register('generateMojoliciousLexer', GenerateLexerTask) {
+  source.set("grammar/Mojolicious.flex")
+  targetDir.set("src/main/gen/com/perl5/lang/mojolicious/lexer/")
+  targetClass.set("MojoliciousLexer")
+  skeleton.set(rootProject.file(templating_lexer_skeleton))
+  purgeOldFiles.set(true)
 }
 
 compileJava {

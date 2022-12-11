@@ -36,12 +36,12 @@ dependencies {
   [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 
-task generateHTMLMasonLexer(type: GenerateLexerTask) {
-  source = "grammar/HTMLMason.flex"
-  targetDir = "src/main/gen/com/perl5/lang/htmlmason/lexer/"
-  targetClass = "HTMLMasonLexer"
-  skeleton = rootProject.file(templating_lexer_skeleton)
-  purgeOldFiles = true
+tasks.register('generateHTMLMasonLexer', GenerateLexerTask) {
+  source.set("grammar/HTMLMason.flex")
+  targetDir.set("src/main/gen/com/perl5/lang/htmlmason/lexer/")
+  targetClass.set("HTMLMasonLexer")
+  skeleton.set(rootProject.file(templating_lexer_skeleton))
+  purgeOldFiles.set(true)
 }
 
 
