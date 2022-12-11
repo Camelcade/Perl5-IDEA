@@ -28,7 +28,8 @@ plugins {
   id 'org.jetbrains.grammarkit' version "$grammarKitGradlePluginVersion"
   id 'idea'
   id 'com.github.kt3k.coveralls' version "$coverallsGradlePluginVersion"
-  id "org.sonarqube" version "$sonarQubeGradlePluginVersion"
+  id 'org.sonarqube' version "$sonarQubeGradlePluginVersion"
+  id 'org.jetbrains.qodana' version "$qodanaGradlePluginVersion"
 }
 
 repositories {
@@ -54,7 +55,6 @@ def pluginProjects = allprojects.findAll {
 
 allprojects {
   apply plugin: 'org.jetbrains.grammarkit'
-
   apply plugin: 'jacoco'
 
   apply plugin: 'java'
