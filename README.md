@@ -3,6 +3,7 @@
 [![Java CI with Gradle](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/gradle.yml?query=branch%3Amaster)
 [![Coverage Status](https://coveralls.io/repos/github/Camelcade/Perl5-IDEA/badge.svg?branch=master&dummy)](https://coveralls.io/github/Camelcade/Perl5-IDEA?branch=master)
 [![CodeQL](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/codeql.yml/badge.svg)](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/codeql.yml)
+[![Qodana](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/qodana_scan.yml/badge.svg)](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/qodana_scan.yml)
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
