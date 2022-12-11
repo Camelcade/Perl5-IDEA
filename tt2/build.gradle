@@ -23,7 +23,10 @@ intellij {
 }
 
 dependencies {
-  [":plugin:core"].each { compileOnly project(it).sourceSets.main.output }
+  [":plugin:core"].each {
+    compileOnly project(it).sourceSets.main.output
+    testCompileOnly project(it).sourceSets.main.output
+  }
   [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 

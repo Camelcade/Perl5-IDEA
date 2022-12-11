@@ -29,7 +29,10 @@ dependencies{
   [
     ":plugin:core",
     ":lang.mason.framework"
-  ].each { compileOnly project(it).sourceSets.main.output }
+  ].each {
+    compileOnly project(it).sourceSets.main.output
+    testCompileOnly project(it).sourceSets.main.output
+  }
   [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 

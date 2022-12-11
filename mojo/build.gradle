@@ -17,7 +17,10 @@ dependencies{
   [
     ":lang.mojo:core",
     ":lang.mojo:idea",
-  ].each { implementation project(it).sourceSets.main.output }
+  ].each {
+    implementation project(it).sourceSets.main.output
+    testCompileOnly project(it).sourceSets.main.output
+  }
   [":plugin"].each { testImplementation project(it).sourceSets.test.output }
 }
 
