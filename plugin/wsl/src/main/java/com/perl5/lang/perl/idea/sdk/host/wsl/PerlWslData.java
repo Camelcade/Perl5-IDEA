@@ -45,6 +45,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
+import static com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslHandler.computeSafeOnWsl;
+
 class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   private static final Logger LOG = Logger.getInstance(PerlWslData.class);
   private static final int TIMEOUT = 10000;
@@ -106,7 +108,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   @Override
   public @NotNull String getHelpersRootPath() {
-    return Objects.requireNonNull(getDistribution().getWslPath(PerlPluginUtil.getPluginHelpersRoot()));
+    return Objects.requireNonNull(doGetRemotePath(PerlPluginUtil.getPluginHelpersRoot()));
   }
 
   @Override
@@ -124,14 +126,13 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   @Override
   public @Nullable String doGetLocalPath(@NotNull String remotePathName) {
-    return getDistribution().getWindowsPath(remotePathName);
+    return computeSafeOnWsl(() -> getDistribution().getWindowsPath(remotePathName));
   }
 
   @Override
   public @Nullable String doGetRemotePath(@NotNull String localPathName) {
-    return getDistribution().getWslPath(localPathName);
+    return computeSafeOnWsl(() -> getDistribution().getWslPath(localPathName));
   }
-
 
   @Override
   public @Nullable File findFileByName(@NotNull String fileName) {

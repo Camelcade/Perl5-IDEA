@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2022 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,12 @@ import com.intellij.execution.wsl.WSLDistribution;
 import com.intellij.execution.wsl.WSLUtil;
 import com.intellij.execution.wsl.WslDistributionManager;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.ui.messages.MessagesService;
+import com.intellij.openapi.util.ThrowableComputable;
 import com.intellij.util.ArrayUtil;
+import com.intellij.util.TimeoutUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
@@ -32,8 +36,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.concurrent.ExecutionException;
 
 class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslHandler> {
+  private static final Logger LOG = Logger.getInstance(PerlWslHandler.class);
+  private static final long COMPUTATION_TIMEOUT = 5_000;
+
   @SuppressWarnings("NonDefaultConstructor")
   public PerlWslHandler(@NotNull PerlHandlerBean bean) {
     super(bean);
@@ -76,7 +84,8 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
 
   @Override
   public boolean isApplicable() {
-    return WSLUtil.isSystemCompatible() && !WslDistributionManager.getInstance().getInstalledDistributions().isEmpty();
+    return Boolean.TRUE == computeSafeOnWsl(
+      () -> WSLUtil.isSystemCompatible() && !WslDistributionManager.getInstance().getInstalledDistributions().isEmpty());
   }
 
   @Override
@@ -92,5 +101,42 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
   @Override
   public @Nullable Icon getIcon() {
     return PerlIcons.LINUX_ICON;
+  }
+
+  /**
+   * @apiNote Method is intended to avoid the issue with random WSL executions. Some computations require listing of wsl distributions
+   * or initialising a mount point. And both involve execution of the external tool in the random context: EDT, ReadAction, Actions update pass.
+   * If everything is ok, this should work smoothly. If not - the worse thing that can happen - IDE will lag for up to 5 seconds. Probably
+   * we should reduce the {@link #COMPUTATION_TIMEOUT}, but let's hope for the best. We could show notification here about possible WSL issues
+   * and make WSL subsystem unavailable for the current session.
+   */
+  public static <T, E extends Exception> @Nullable T computeSafeOnWsl(@NotNull ThrowableComputable<T, E> computable) throws E {
+    var application = ApplicationManager.getApplication();
+    if (application.isDispatchThread()) {
+      return ProgressManager.getInstance().runProcessWithProgressSynchronously(
+        computable, PerlWslBundle.message("perl.host.handler.computing"), false, null);
+    }
+    else {
+      var future = application.executeOnPooledThread(computable::compute);
+      try {
+        var started = System.currentTimeMillis();
+        while (!future.isDone() && System.currentTimeMillis() < started + COMPUTATION_TIMEOUT) {
+          TimeoutUtil.sleep(10);
+        }
+        if (future.isDone()) {
+          return future.get();
+        }
+        LOG.warn(new Throwable(
+          "Failed to perform WSL computation in " + COMPUTATION_TIMEOUT + "; probably there is some issue with WSL subsystem"));
+        future.cancel(true);
+      }
+      catch (InterruptedException e) {
+        LOG.warn("WSL computation was interrupted", e);
+      }
+      catch (ExecutionException e) {
+        LOG.warn("Error performing WSL computation", e);
+      }
+      return null;
+    }
   }
 }

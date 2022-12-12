@@ -24,11 +24,9 @@
   <extensions defaultExtensionNs="com.perl5">
     <hostHandler key="wsl"
                  implementationClass="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslHandler"/>
-    <projectManagerListener implementation="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslMountPointInitializer"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
     <consoleInputFilterProvider implementation="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslInputFilterProvider"/>
-    <postStartupActivity implementation="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslMountPointInitializer"/>
   </extensions>
 </idea-plugin>

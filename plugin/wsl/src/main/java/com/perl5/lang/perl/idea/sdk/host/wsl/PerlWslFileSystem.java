@@ -30,6 +30,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
+import static com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslHandler.computeSafeOnWsl;
+
 /**
  * Per-distribution filesystem for WSL distributions.
  * File url looks like: {@code wsl-distro_id:///path/to/file}
@@ -48,14 +50,18 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
 
   @Override
   public @Nullable VirtualFile findFileByPath(@NotNull String path) {
-    String windowsPath = myDistribution.getWindowsPath(path);
+    String windowsPath = computeSafeOnWsl(() -> myDistribution.getWindowsPath(path));
     VirtualFile realFile = VfsUtil.findFileByIoFile(new File(windowsPath), false);
     return realFile == null ? null : new WslVirtualFile(realFile, path);
   }
 
   @Override
   public void refresh(boolean asynchronous) {
-    VirtualFile rootFile = VfsUtil.findFileByIoFile(new File(Objects.requireNonNull(myDistribution.getWindowsPath("/"))), false);
+    var windowsPath = computeSafeOnWsl(() -> myDistribution.getWindowsPath("/"));
+    if (windowsPath == null) {
+      return;
+    }
+    VirtualFile rootFile = VfsUtil.findFileByIoFile(new File(Objects.requireNonNull(windowsPath)), false);
     if (rootFile != null) {
       rootFile.refresh(asynchronous, true);
     }
@@ -63,8 +69,8 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
 
   @Override
   public @Nullable VirtualFile refreshAndFindFileByPath(@NotNull String path) {
-    String windowsPath = myDistribution.getWindowsPath(path);
-    VirtualFile realFile = LocalFileSystem.getInstance().refreshAndFindFileByPath(windowsPath);
+    String windowsPath = computeSafeOnWsl(() -> myDistribution.getWindowsPath(path));
+    VirtualFile realFile = windowsPath == null ? null : LocalFileSystem.getInstance().refreshAndFindFileByPath(windowsPath);
     return realFile == null ? null : new WslVirtualFile(realFile, path);
   }
 
