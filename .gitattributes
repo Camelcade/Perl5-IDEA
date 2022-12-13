@@ -1,9 +1,5 @@
-plugin/intelliLang/testData/* linguist-vendored
-plugin/testData/* linguist-vendored
-plugin/profiler/testData/* linguist-vendored
-mason2/testData/* linguist-vendored
-testData/* linguist-vendored
-embedded/testData/* linguist-vendored
-htmlmason/testData/* linguist-vendored
-mojo/testData/* linguist-vendored
-tt2/testData/* linguist-vendored
+# https://github.com/github/linguist/blob/master/docs/overrides.md
+**/src/test/resources/** linguist-vendored
+**/build/** linguist-vendored
+testData/** linguist-vendored
+perl-utils/** linguist-vendored
