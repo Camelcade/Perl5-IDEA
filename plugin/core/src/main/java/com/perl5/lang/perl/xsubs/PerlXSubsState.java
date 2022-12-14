@@ -31,8 +31,6 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
@@ -40,7 +38,7 @@ import com.intellij.openapi.progress.util.ProgressIndicatorUtils;
 import com.intellij.openapi.progress.util.ReadTask;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
-import com.intellij.openapi.roots.ModuleRootManager;
+import com.intellij.openapi.project.ProjectUtil;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.SystemInfo;
@@ -53,6 +51,7 @@ import com.intellij.psi.search.GlobalSearchScopesCore;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.FileContentUtilCore;
 import com.intellij.util.Function;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.PerlBundle;
@@ -189,8 +188,8 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
 
   @VisibleForTesting
   public @Nullable VirtualFile getDeparsedSubsFile() {
-    for (VirtualFile contentRoot : ProjectRootManager.getInstance(myProject).getContentRoots()) {
-      var deparsedFile = contentRoot.findFileByRelativePath(DEPARSED_FILE_NAME);
+    for (VirtualFile possibleLocation : getPossibleFileLocations()) {
+      var deparsedFile = possibleLocation.findFileByRelativePath(DEPARSED_FILE_NAME);
       if (deparsedFile != null && deparsedFile.isValid()) {
         return deparsedFile;
       }
@@ -199,25 +198,29 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     return null;
   }
 
+  private @NotNull List<VirtualFile> getPossibleFileLocations() {
+    var contentRoots = new ArrayList<>(Arrays.asList(ProjectRootManager.getInstance(myProject).getContentRoots()));
+    contentRoots.add(ProjectUtil.guessProjectDir(myProject));
+    return ContainerUtil.filter(contentRoots, it -> it != null && it.isValid() && it.exists() && it.isDirectory());
+  }
+
   private @NotNull VirtualFile getOrCreateDeparsedSubsFile() throws IOException {
     var deparsedSubsFile = getDeparsedSubsFile();
     if (deparsedSubsFile != null) {
       return deparsedSubsFile;
     }
 
-    for (Module module : ModuleManager.getInstance(myProject).getSortedModules()) {
-      for (VirtualFile moduleContentRoot : ModuleRootManager.getInstance(module).getContentRoots()) {
-        try {
-          return moduleContentRoot.findOrCreateChildData(this, DEPARSED_FILE_NAME);
-        }
-        catch (IOException e) {
-          LOG.warn("Unable to create " + DEPARSED_FILE_NAME + " in the content root " + moduleContentRoot + " of the module " + module +
-                   "cause: " + e.getMessage());
-        }
+    for (VirtualFile possibleLocation : getPossibleFileLocations()) {
+      try {
+        return possibleLocation.findOrCreateChildData(this, DEPARSED_FILE_NAME);
+      }
+      catch (IOException e) {
+        LOG.warn("Unable to create " + DEPARSED_FILE_NAME + " in the content root " + possibleLocation +
+                 "cause: " + e.getMessage());
       }
     }
 
-    throw new IOException("Could not find suitable content root for creating a file: " + DEPARSED_FILE_NAME);
+    throw new IOException("Could not find suitable location for creating a file: " + DEPARSED_FILE_NAME);
   }
 
   private boolean isFileUpToDate(@NotNull VirtualFile virtualFile) {
