@@ -3,4 +3,6 @@
 
 ######################### PREVIEW #########################
 
-"this is a test";
+<<"CUSTOM_MARKER";
+this is a test
+CUSTOM_MARKER

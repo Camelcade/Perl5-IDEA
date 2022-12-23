@@ -5,6 +5,6 @@ TESTMARKER
 
 ######################### PREVIEW #########################
 
-<<"TESTMARKER";
+<<"CUSTOM_MARKER";
 this is a test of last
-TESTMARKER
+CUSTOM_MARKER

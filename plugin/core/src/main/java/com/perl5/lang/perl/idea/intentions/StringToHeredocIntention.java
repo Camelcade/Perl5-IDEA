@@ -17,8 +17,6 @@
 package com.perl5.lang.perl.idea.intentions;
 
 import com.intellij.codeInsight.intention.FileModifier;
-import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
@@ -42,17 +40,20 @@ public class StringToHeredocIntention extends StringToLastHeredocIntention {
     return new StringToHeredocIntention() {
       @Override
       public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
-        doInvoke(project, editor, element);
+        var oldMarker = ourMarker;
+        try {
+          ourMarker = "CUSTOM_MARKER";
+          doInvoke(project, editor, element);
+        }
+        finally {
+          ourMarker = oldMarker;
+        }
       }
     };
   }
 
   @Override
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
-    ApplicationManager.getApplication().invokeLater(() -> doInvoke(project, editor, element));
-  }
-
-  private void doInvoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
     String markerText = Messages.showInputDialog(
       project,
       PerlBundle.message("perl.intention.heredoc.dialog.prompt"),
@@ -69,12 +70,7 @@ public class StringToHeredocIntention extends StringToLastHeredocIntention {
       return;
     }
     ourMarker = markerText;
-    if (ApplicationManager.getApplication().isWriteThread()) {
-      WriteCommandAction.runWriteCommandAction(project, () -> super.invoke(project, editor, element));
-    }
-    else {
-      super.invoke(project, editor, element);
-    }
+    doInvoke(project, editor, element);
   }
 
   @Override

@@ -42,6 +42,10 @@ public class StringToLastHeredocIntention extends PsiElementBaseIntentionAction 
 
   @Override
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
+    doInvoke(project, editor, element);
+  }
+
+  protected static void doInvoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) {
     PsiElement stringElement = element.getParent();
     assert stringElement instanceof PerlString;
     char quoteSymbol = '"';
