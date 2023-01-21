@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -183,7 +183,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   protected void runAction(@NotNull AnAction anAction, @Nullable VirtualFile virtualFile) {
-    TestActionEvent e = new TestActionEvent(dataId -> {
+    var e = TestActionEvent.createTestEvent(dataId -> {
       if (LangDataKeys.MODULE.is(dataId)) {
         return getModule();
       }
@@ -202,7 +202,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   protected void runActionWithTestEvent(@NotNull AnAction action) {
-    var actionEvent = new TestActionEvent(action);
+    var actionEvent = TestActionEvent.createTestEvent(action);
     action.update(actionEvent);
     var eventPresentation = actionEvent.getPresentation();
     assertTrue("Action is not visible: " + action, eventPresentation.isVisible());
