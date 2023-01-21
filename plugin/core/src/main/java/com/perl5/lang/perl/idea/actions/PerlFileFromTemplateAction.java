@@ -27,6 +27,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFile;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.filetemplates.PerlCreateFileFromTemplateHandler;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -38,20 +39,20 @@ import java.util.List;
 
 
 public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction implements DumbAware {
-  public static final String ACTION_TITLE = "New Perl5 file";
 
   public PerlFileFromTemplateAction() {
-    super("Perl5 File", "Creates a Perl5 file from the specified template", PerlIcons.PERL_LANGUAGE_ICON);
+    super(PerlBundle.message("action.perl5.new.file.text"), PerlBundle.message("action.perl5.new.file.description"),
+          PerlIcons.PERL_LANGUAGE_ICON);
   }
 
   @Override
   protected void buildDialog(@NotNull Project project, @NotNull PsiDirectory directory, CreateFileFromTemplateDialog.Builder builder) {
     builder
-      .setTitle(ACTION_TITLE)
-      .addKind("Package", PerlIcons.PM_FILE, "Perl5 package")
-      .addKind("Script", PerlIcons.PERL_SCRIPT_FILE_ICON, "Perl5 script")
-      .addKind("Test", PerlIcons.TEST_FILE, "Perl5 test")
-      .addKind("POD file", PerlIcons.POD_FILE, "Perl5 pod")
+      .setTitle(PerlBundle.message("dialog.title.new.perl5.file"))
+      .addKind(PerlBundle.message("list.item.package"), PerlIcons.PM_FILE, "Perl5 package")
+      .addKind(PerlBundle.message("list.item.script"), PerlIcons.PERL_SCRIPT_FILE_ICON, "Perl5 script")
+      .addKind(PerlBundle.message("list.item.test"), PerlIcons.TEST_FILE, "Perl5 test")
+      .addKind(PerlBundle.message("list.item.pod.file"), PerlIcons.POD_FILE, "Perl5 pod")
     ;
 
     FileTypeManagerEx fileTypeManager = FileTypeManagerEx.getInstanceEx();
@@ -70,7 +71,7 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
 
   @Override
   protected String getActionName(PsiDirectory directory, @NotNull String newName, String templateName) {
-    return "Create Perl5 file " + newName;
+    return PerlBundle.message("command.name.create.perl5.file", newName);
   }
 
   @Override
