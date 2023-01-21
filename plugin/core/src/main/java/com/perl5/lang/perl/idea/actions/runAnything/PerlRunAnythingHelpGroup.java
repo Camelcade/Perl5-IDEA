@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,17 +24,14 @@ import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 public class PerlRunAnythingHelpGroup extends RunAnythingHelpGroup<PerlRunAnythingProvider> {
-  @Override
-  public @NotNull Collection<PerlRunAnythingProvider> getProviders() {
-    throw new RuntimeException("NYI");
-  }
 
-  @Override
-  public @NotNull String getTitle() {
-    return Objects.requireNonNull(RunAnythingProvider.EP_NAME.findExtension(PerlRunAnythingProvider.class)).getHelpGroupTitle();
+  public PerlRunAnythingHelpGroup() {
+    super(Objects.requireNonNull(RunAnythingProvider.EP_NAME.findExtension(PerlRunAnythingProvider.class)).getHelpGroupTitle(),
+          Collections.emptyList());
   }
 
   @Override
