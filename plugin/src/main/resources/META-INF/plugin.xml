@@ -25,6 +25,7 @@
 
   <depends>com.intellij.modules.lang</depends>
 
+  <resource-bundle>messages.PerlBundle</resource-bundle>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
   <content>
@@ -713,7 +714,7 @@
   </extensions>
 
   <actions>
-    <group id="perl5.tools" text="Perl5" popup="true" icon="/icons/perl5language.png">
+    <group id="perl5.tools" popup="true" icon="/icons/perl5language.png">
       <add-to-group group-id="ToolsMenu" anchor="last"/>
       <action id="perl5.DeparseXSubs" class="com.perl5.lang.perl.idea.actions.PerlRegenerateXSubsAction"/>
       <action id="perl5.FormatWithPerlTidy" class="com.perl5.lang.perl.idea.actions.PerlFormatWithPerlTidyAction"/>
@@ -721,7 +722,7 @@
       <action id="perl5.sync.interpreter" class="com.perl5.lang.perl.idea.actions.PerlSynInterpreterAction"/>
     </group>
 
-    <group id="perl5.install" text="Install" popup="true">
+    <group id="perl5.install" popup="true">
       <add-to-group group-id="perl5.tools" anchor="last"/>
       <action id="perl5.install.with.cpanm" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanminusAction"/>
       <action id="perl5.install.with.cpan" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanAction"/>
@@ -736,14 +737,10 @@
     <group id="perl5.GenerateGroup">
       <add-to-group group-id="GenerateGroup" anchor="first"/>
 
-      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlConstructorAction" id="Perl5NewConstructor"
-              text="Generate Constructor" description="Generate class constructor"/>
-      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterAction" id="Perl5NewGetter"
-              text="Generate Getters" description="Generate class getters"/>
-      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlSetterAction" id="Perl5NewSetter"
-              text="Generate Setters" description="Generate class setters"/>
-      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterSetterAction" id="Perl5NewGetterSetter"
-              text="Generate Getters and Setters" description="Generate class getters and setters"/>
+      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlConstructorAction" id="Perl5NewConstructor"/>
+      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterAction" id="Perl5NewGetter"/>
+      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlSetterAction" id="Perl5NewSetter"/>
+      <action class="com.perl5.lang.perl.idea.generation.GeneratePerlGetterSetterAction" id="Perl5NewGetterSetter"/>
     </group>
 
     <action id="perl5.mark.library" class="com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction">
