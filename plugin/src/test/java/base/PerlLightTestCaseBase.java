@@ -2067,7 +2067,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     if (usageGroup instanceof PsiElementUsageGroupBase) {
       return "PsiElement: " + serializePsiElement(((PsiElementUsageGroupBase<?>)usageGroup).getElement());
     }
-    return usageGroup.getClass().getSimpleName() + ": " + usageGroup.getText(null) + "; " + getIconText(usageGroup.getIcon());
+    return usageGroup.getClass().getSimpleName() + ": " + usageGroup.getPresentableGroupText() + "; " + getIconText(usageGroup.getIcon());
   }
 
   /**
