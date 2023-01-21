@@ -128,7 +128,6 @@ import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.impl.source.tree.FileElement;
-import com.intellij.psi.impl.source.tree.injected.InjectedFileViewProvider;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageEditorUtil;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
@@ -552,8 +551,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix) {
     WriteCommandAction.writeCommandAction(getProject()).run(() -> {
       PsiFile file = myFixture.getFile();
-      //noinspection UnstableApiUsage
-      if (file.getViewProvider() instanceof InjectedFileViewProvider) {
+      if (InjectedLanguageManager.getInstance(file.getProject()).isInjectedFragment(file)) {
         //noinspection ConstantConditions
         file = file.getContext().getContainingFile();
       }
@@ -1338,12 +1336,13 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void assertInjected() {
     assertInstanceOf(getEditor(), EditorWindow.class);
-    assertInstanceOf(getFile().getViewProvider(), InjectedFileViewProvider.class);
+    var file = getFile();
+    assertTrue("File is not injected: " + file, InjectedLanguageManager.getInstance(getProject()).isInjectedFragment(file));
   }
 
   protected void assertNotInjected() {
     assertFalse("Editor is EditorWindow, looks like injected to me", getEditor() instanceof EditorWindow);
-    assertFalse("File is injected", getFile() instanceof InjectedFileViewProvider);
+    assertFalse("File is injected", InjectedLanguageManager.getInstance(getProject()).isInjectedFragment(getFile()));
   }
 
   @Deprecated // use initWithFileSmart
