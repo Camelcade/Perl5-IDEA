@@ -91,9 +91,13 @@
         implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSourceRootEditHandler"/>
 
     <localInspection language="Template Toolkit 2"
-                     shortName="TT2OrphanReply" displayName="Orphan nested directives"
-                     groupName="Template Toolkit 2" enabledByDefault="true" level="ERROR"
-                     implementationClass="com.perl5.lang.tt2.idea.TemplateToolkitOrphanDirectiveInspection"/>
+                     shortName="TT2OrphanReply"
+                     groupKey="tt2.group.name"
+                     enabledByDefault="true"
+                     level="ERROR"
+                     implementationClass="com.perl5.lang.tt2.idea.TemplateToolkitOrphanDirectiveInspection"
+                     key="tt2.inspection.orphan.reply.display.name"
+                     bundle="messages.TemplateToolkitBundle"/>
 
     <lang.refactoringSupport language="Template Toolkit 2"
                              implementationClass="com.perl5.lang.tt2.idea.refactoring.TemplateToolkitRefactoringSupportProvider"/>
