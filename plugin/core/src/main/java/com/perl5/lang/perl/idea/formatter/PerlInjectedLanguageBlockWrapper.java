@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,18 +20,15 @@ import com.intellij.formatting.*;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.util.ReflectionUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.intellij.openapi.util.NullableLazyValue.atomicLazyNullable;
 
 public class PerlInjectedLanguageBlockWrapper implements Block {
-  private static final @Nullable Method IS_ABSOLUTE = ReflectionUtil.getDeclaredMethod(IndentImpl.class, "isAbsolute");
   protected final PerlInjectedLanguageBlocksBuilder myBuilder;
   private final Block myOriginal;
   private final NullableLazyValue<TextRange> myRangeProvider;
@@ -75,16 +72,9 @@ public class PerlInjectedLanguageBlockWrapper implements Block {
   }
 
   private boolean isAbsoluteNoneIndent(@Nullable Indent indent) {
-    if (IS_ABSOLUTE == null || !(indent instanceof IndentImpl) || indent.getType() != Indent.Type.NONE) {
-      return false;
-    }
-
-    try {
-      return (Boolean)IS_ABSOLUTE.invoke(indent);
-    }
-    catch (Exception e) {
-      return false;
-    }
+    return indent instanceof IndentImpl indentImpl &&
+           indent.getType() == Indent.Type.NONE &&
+           indentImpl.isAbsolute();
   }
 
   @Override
