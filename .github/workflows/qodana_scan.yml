@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   pull_request:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev/223" ]
 
 jobs:
   qodana:
