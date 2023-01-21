@@ -50,17 +50,26 @@
     <lang.foldingBuilder language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodFoldingBuilder"/>
 
     <localInspection language="Perl5 POD"
-                     shortName="PodUnresolvableLink" displayName="Missing link target" groupName="Perl5 POD"
+                     shortName="PodUnresolvableLink"
+                     groupKey="perl5.pod.group"
                      enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.pod.idea.inspections.PodUnresolvableLinkInspection"/>
+                     implementationClass="com.perl5.lang.pod.idea.inspections.PodUnresolvableLinkInspection"
+                     key="inspection.pod.unresolvable.link.display.name"
+                     bundle="messages.PerlBundle"/>
     <localInspection language="Perl5 POD"
-                     shortName="PodOverlessItem" displayName="Item outside over" groupName="Perl5 POD"
+                     shortName="PodOverlessItem"
+                     groupKey="perl5.pod.group"
                      enabledByDefault="true" level="ERROR"
-                     implementationClass="com.perl5.lang.pod.idea.inspections.PodOverlessItemInspection"/>
+                     implementationClass="com.perl5.lang.pod.idea.inspections.PodOverlessItemInspection"
+                     key="inspection.pod.overless.item.display.name"
+                     bundle="messages.PerlBundle"/>
     <localInspection language="Perl5 POD"
-                     shortName="PodLegacySectionLink" displayName="Legacy section link" groupName="Perl5 POD"
+                     shortName="PodLegacySectionLink"
+                     groupKey="perl5.pod.group"
                      enabledByDefault="true" level="WARNING"
-                     implementationClass="com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection"/>
+                     implementationClass="com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection"
+                     key="inspection.pod.legacy.section.link.display.name"
+                     bundle="messages.PerlBundle"/>
     <lang.syntaxHighlighterFactory language="Perl5 POD"
                                    implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
     <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
