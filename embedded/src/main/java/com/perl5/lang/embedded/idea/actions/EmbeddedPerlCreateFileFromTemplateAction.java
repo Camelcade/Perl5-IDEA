@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class EmbeddedPerlCreateFileFromTemplateAction extends CreateFileFromTemp
   }
 
   @Override
-  protected void buildDialog(Project project, PsiDirectory directory, CreateFileFromTemplateDialog.Builder builder) {
+  protected void buildDialog(@NotNull Project project, @NotNull PsiDirectory directory, CreateFileFromTemplateDialog.Builder builder) {
     builder.setTitle(EmbeddedPerlBundle.message("action.new.file.builder.title"));
     builder.addKind(EmbeddedPerlFileType.INSTANCE.getDescription(), EmbeddedPerlIcons.EMBEDDED_PERL_FILE, "Perl5 embedded");
   }
