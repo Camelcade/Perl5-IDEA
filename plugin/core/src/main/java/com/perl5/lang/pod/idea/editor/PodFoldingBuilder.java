@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,14 +39,14 @@ public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElem
   public @NotNull FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
     // @todo handle this
     if (root instanceof OuterLanguageElementImpl) {
-      return FoldingDescriptor.EMPTY;
+      return FoldingDescriptor.EMPTY_ARRAY;
     }
 
     FoldingRegionsCollector collector = new FoldingRegionsCollector(document);
     root.accept(collector);
     List<FoldingDescriptor> descriptors = collector.getDescriptors();
 
-    return descriptors.toArray(FoldingDescriptor.EMPTY);
+    return descriptors.toArray(FoldingDescriptor.EMPTY_ARRAY);
   }
 
   @Override

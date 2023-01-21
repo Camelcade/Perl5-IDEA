@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder implements 
     List<FoldingDescriptor> masonDescriptors =
       new ArrayList<>(Arrays.asList(super.buildFoldRegions(root, document, quick)));
     root.accept(new MasonFoldingRegionsCollector(document, masonDescriptors));
-    return masonDescriptors.toArray(FoldingDescriptor.EMPTY);
+    return masonDescriptors.toArray(FoldingDescriptor.EMPTY_ARRAY);
   }
 
   @Override
