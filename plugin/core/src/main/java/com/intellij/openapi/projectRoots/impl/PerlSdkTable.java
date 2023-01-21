@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,6 @@ import com.intellij.openapi.projectRoots.SdkTypeId;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.IncorrectOperationException;
-import com.intellij.util.ReflectionUtil;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.Topic;
 import com.perl5.lang.perl.idea.PerlPathMacros;
@@ -37,7 +36,9 @@ import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Method;
+import java.lang.invoke.MethodHandle;
+import java.lang.invoke.MethodHandles;
+import java.lang.invoke.MethodType;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -134,14 +135,23 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
     final String previousName = originalJdk.getName();
     final String newName = modifiedJdk.getName();
 
-    Method method = ReflectionUtil.getDeclaredMethod(ProjectJdkImpl.class, "copyTo", ProjectJdkImpl.class);
-    if (method == null) {
-      throw new RuntimeException("Missing copyTo method");
+    MethodHandle method;
+    try {
+      method = MethodHandles
+        .privateLookupIn(ProjectJdkImpl.class, MethodHandles.lookup())
+        .findVirtual(ProjectJdkImpl.class, "copyTo", MethodType.methodType(void.class, ProjectJdkImpl.class));
     }
+    catch (NoSuchMethodException e) {
+      throw new RuntimeException("Missing copyTo method", e);
+    }
+    catch (IllegalAccessException e) {
+      throw new RuntimeException(e);
+    }
+
     try {
       method.invoke(modifiedJdk, originalJdk);
     }
-    catch (Exception e) {
+    catch (Throwable e) {
       throw new RuntimeException(e);
     }
 
