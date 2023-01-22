@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,17 +53,17 @@ public class PerlStructureViewModel extends StructureViewModelBase implements St
   }
 
   @Override
-  public @NotNull Sorter[] getSorters() {
+  public Sorter @NotNull [] getSorters() {
     return new Sorter[]{Sorter.ALPHA_SORTER};
   }
 
   @Override
-  public @NotNull Grouper[] getGroupers() {
+  public Grouper @NotNull [] getGroupers() {
     return GROUPERS;
   }
 
   @Override
-  public @NotNull Filter[] getFilters() {
+  public Filter @NotNull [] getFilters() {
     return FILTERS;
   }
 
