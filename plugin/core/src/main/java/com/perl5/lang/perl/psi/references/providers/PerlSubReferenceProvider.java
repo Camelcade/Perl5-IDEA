@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ import static com.perl5.lang.perl.parser.moose.MooseElementTypes.RESERVED_SUPER;
 
 public class PerlSubReferenceProvider extends PsiReferenceProvider {
   @Override
-  public @NotNull PsiReference[] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
+  public PsiReference @NotNull [] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
     if (element.getParent() instanceof PerlSubElement) {
       return PsiReference.EMPTY_ARRAY;
     }
