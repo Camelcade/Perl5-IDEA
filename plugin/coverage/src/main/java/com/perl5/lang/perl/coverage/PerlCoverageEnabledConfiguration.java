@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
@@ -35,7 +36,7 @@ public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfigurati
   }
 
   @Override
-  public GenericPerlRunConfiguration getConfiguration() {
+  public @NotNull GenericPerlRunConfiguration getConfiguration() {
     return (GenericPerlRunConfiguration)super.getConfiguration();
   }
 
