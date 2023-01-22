@@ -25,11 +25,13 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.Ref;
 import com.intellij.profiler.api.*;
 import com.intellij.profiler.ui.NativeCallStackElementRenderer;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.profiler.PerlProfilerBundle;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
@@ -57,14 +59,14 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
   public @NotNull ProfilerDumpFileParsingResult parse(@NotNull File file, @NotNull ProgressIndicator indicator) {
     var perlSdk = PerlProjectManager.getSdk(myProject);
     if (perlSdk == null) {
-      return new Failure("Perl sdk is not set for the project " + myProject.getName());
+      return new Failure(PerlProfilerBundle.message("perl.sdk.is.not.set.for.the.project.0", myProject.getName()));
     }
 
     var nytprofUtilPath = PerlPluginUtil.getHelperPath("nytprofcalls.pl");
     var perlCommandLine = PerlRunUtil.getPerlCommandLine(myProject, nytprofUtilPath);
     if (perlCommandLine == null) {
       LOG.warn("Unable to create command line for parsing results in " + myProject);
-      return new Failure("Failed to create command line for parsing profiling results");
+      return new Failure(PerlProfilerBundle.message("failed.to.create.command.line.for.parsing.profiling.results"));
     }
 
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(perlSdk);
@@ -73,13 +75,13 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
     }
     catch (ExecutionException e) {
       LOG.warn("Failed to fix permissions for " + file, e);
-      return new Failure("Failed to set permissions for the " + file);
+      return new Failure(PerlProfilerBundle.message("failed.to.set.permissions.for.the.0", file));
     }
 
     var localPath = file.getAbsolutePath();
     var remotePath = hostData.getRemotePath(localPath);
     if (remotePath == null) {
-      var reason = "Unable to map local path to remote: " + localPath + " with perl " + perlSdk.getName();
+      var reason = PerlProfilerBundle.message("unable.to.map.local.path.to.remote.0.with.perl.1", localPath, perlSdk.getName());
       LOG.warn(reason);
       return new Failure(reason);
     }
@@ -90,7 +92,7 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
 
     try {
       BaseProcessHandler<?> processHandler = PerlHostData.createProcessHandler(perlCommandLine);
-      Ref<String> errorRef = Ref.create();
+      Ref<@NlsSafe String> errorRef = Ref.create();
       processHandler.addProcessListener(new ProcessAdapter() {
         @Override
         public void processTerminated(@NotNull ProcessEvent event) {
