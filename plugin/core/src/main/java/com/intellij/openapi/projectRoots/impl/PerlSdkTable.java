@@ -101,7 +101,7 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
    */
   @Deprecated
   @Override
-  public @NotNull Sdk[] getAllJdks() {
+  public Sdk @NotNull [] getAllJdks() {
     LOG.error("Not expected to be invoked");
     throw new AbstractMethodError();
   }
