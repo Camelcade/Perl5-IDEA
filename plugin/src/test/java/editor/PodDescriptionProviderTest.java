@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,9 +46,12 @@ public class PodDescriptionProviderTest extends PodLightTestCase {
 
   @Test
   public void testItem() {
-    doTest("=over\n\n" +
-           "=item Some <caret>C<item>\n\n" +
-           "=back");
+    doTest("""
+             =over
+
+             =item Some <caret>C<item>
+
+             =back""");
   }
 
   @Test
@@ -59,14 +62,13 @@ public class PodDescriptionProviderTest extends PodLightTestCase {
 
   @Test
   public void testItemIndex() {
-    doTest("=over\n\n" +
-           "=item Some <caret>C<item>\n" +
-           "X<in<caret>dex>\n\n" +
-           "=back");
-  }
+    doTest("""
+             =over
 
-  private void doTest() {
-    doElementDescriptionTest();
+             =item Some <caret>C<item>
+             X<in<caret>dex>
+
+             =back""");
   }
 
   private void doTest(@NotNull String content) {

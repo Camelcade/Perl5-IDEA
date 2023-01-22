@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,13 +99,23 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
   public void testLinkOpenAngle() {doTest("L<caret>", "<");}
 
   @Test
-  public void testLinkBareSection() {doTest("=head1 section name\n\n" + "L<<caret>>", "/");}
+  public void testLinkBareSection() {
+    doTest("""
+             =head1 section name
+
+             L<<caret>>""", "/");
+  }
 
   @Test
   public void testLinkTitledName() {doTest("L<Test name<caret>>", "|");}
 
   @Test
-  public void testLinkTitledSection() {doTest("=head1 section name\n\n" + "L<Test name|<caret>>", "/");}
+  public void testLinkTitledSection() {
+    doTest("""
+             =head1 section name
+
+             L<Test name|<caret>>""", "/");
+  }
 
   @Test
   public void testLinkTitledNamedSection() {doTest("L<Test name|perldoc<caret>>", "/");}

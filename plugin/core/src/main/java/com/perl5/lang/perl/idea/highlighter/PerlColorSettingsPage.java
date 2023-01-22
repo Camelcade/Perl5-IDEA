@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -112,42 +112,42 @@ public class PerlColorSettingsPage implements ColorSettingsPage {
 
   @Override
   public @NotNull String getDemoText() {
-    // fixme remove redundant kw tags after and if https://youtrack.jetbrains.com/issue/IJSDK-80 will be resolved
-    return "#!/usr/bin/perl\n" +
-           "<kw>use</kw> <pragma>strict</pragma>;\n" +
-           "<kw>use</kw> <package_core>Scalar::Util</package_core>;\n" +
-           "<kw>use</kw> v5.10;\n" +
-           "<kw>package</kw> <package_def>Foo::Bar</package_def>;\n" +
-           "<kw>use</kw> <pragma>constant</pragma> <const>CONSTANT</const> => 42;\n" +
-           "<kw>print</kw> <const>CONSTANT</const>;\n" +
-           "<block>BEGIN</block> { <kw>use</kw> <package>Mojo::Base</package> <q>-strict</q>; };\n" +
-           "<kw>sub</kw> <autoload>AUTOLOAD</autoload>{}\n" +
-           "<autoload>autoloaded_sub_call</autoload>();\n" +
-           "/this[-\\s[:^alpha:]a-z-]is\\sa[^\\s]te\\\\sst/;\n" +
-           "<ann>#@method</ann>\n" +
-           "<kw>sub</kw> <sub_declaration>sub_declaration</sub_declaration>: <sub_attr>method</sub_attr>;\n" +
-           "<ann>#@deprecated</ann>\n" +
-           "<kw>sub</kw> <sub_definition>sub_definition</sub_definition>(<sub_proto>$$$</sub_proto>){}\n" +
-           "<glob>*sub_declaration</glob> = \\&<sub>sub_definition</sub>;\n" +
-           "<package>LWP::UserAgent</package>-><sub>new</sub>();\n" +
-           "<package_core>Scalar::Util::</package_core><xsub>blessed</xsub>();\n" +
-           "<kw>my</kw> <scalar>$scalar</scalar>: <sub_attr>someattr</sub_attr> = <qx>`Executable string`</qx>; # line comment\n" +
-           "<scalar>$scalar</scalar> =~ /<rx>is there something</rx>/;\n" +
-           "<scalar>$scalar</scalar> = <scalar_builtin>${^WARNING_BITS}</scalar_builtin>;\n" +
-           "<scalar>$scalar</scalar> = <glob_builtin>*STDERR</glob_builtin>;\n" +
-           "<sub_builtin>open</sub_builtin> <handle>OTHERHANDLE</handle>, <q>'somefile'</q>;\n" +
-           "<kw>my</kw> <array>@array</array> = (<array_builtin>@ARGV</array_builtin>, 42, <array>@{</array><scalar>$scalar</scalar><array>}</array>, <array>@</array><scalar>$scalar</scalar>, <hash>%</hash><scalar>$scalar</scalar>, <angle><</angle><handle_builtin>STDIN</handle_builtin><angle>></angle>, <angle><</angle><handle>OHTERHANDLE</handle><angle>></angle>);\n" +
-           "<kw>my</kw> <hash>%hash</hash> = ( <hash_builtin>%INC</hash_builtin>, <q>bareword_string</q> => <hash>%{</hash><array>@array</array>[0]<hash>}</hash>);\n" +
-           "<label>START</label>: <kw>print</kw> <q>'Single quoted string'</q>;\n" +
-           "<kw>say</kw> <qq>\"Double quoted string\"</qq>;\n" +
-           "<kw>say</kw> __LINE__;\n" +
-           "say \"Something \\Qhere\\E \\uthere \\N{LATIN CAPITAL LETTER A} \\N{U+0028}\";\n" +
-           "my $sum = 42 + 0x42 + 0b1010101 + 042;" +
-           "<kw>say</kw> <<<q>'MOJO'</q>;\n" +
-           "    <em>%=</em> <kw>print</kw> <qq>\"Mojo perl code\"</qq>\n" +
-           "    <em><%</em> <kw>print</kw> <qq>\"Some more Mojo code\"</qq>; <em>%></em>\n" +
-           "<q>MOJO</q>\n" +
-           "\n";
+    return """
+      #!/usr/bin/perl
+      <kw>use</kw> <pragma>strict</pragma>;
+      <kw>use</kw> <package_core>Scalar::Util</package_core>;
+      <kw>use</kw> v5.10;
+      <kw>package</kw> <package_def>Foo::Bar</package_def>;
+      <kw>use</kw> <pragma>constant</pragma> <const>CONSTANT</const> => 42;
+      <kw>print</kw> <const>CONSTANT</const>;
+      <block>BEGIN</block> { <kw>use</kw> <package>Mojo::Base</package> <q>-strict</q>; };
+      <kw>sub</kw> <autoload>AUTOLOAD</autoload>{}
+      <autoload>autoloaded_sub_call</autoload>();
+      /this[-\\s[:^alpha:]a-z-]is\\sa[^\\s]te\\\\sst/;
+      <ann>#@method</ann>
+      <kw>sub</kw> <sub_declaration>sub_declaration</sub_declaration>: <sub_attr>method</sub_attr>;
+      <ann>#@deprecated</ann>
+      <kw>sub</kw> <sub_definition>sub_definition</sub_definition>(<sub_proto>$$$</sub_proto>){}
+      <glob>*sub_declaration</glob> = \\&<sub>sub_definition</sub>;
+      <package>LWP::UserAgent</package>-><sub>new</sub>();
+      <package_core>Scalar::Util::</package_core><xsub>blessed</xsub>();
+      <kw>my</kw> <scalar>$scalar</scalar>: <sub_attr>someattr</sub_attr> = <qx>`Executable string`</qx>; # line comment
+      <scalar>$scalar</scalar> =~ /<rx>is there something</rx>/;
+      <scalar>$scalar</scalar> = <scalar_builtin>${^WARNING_BITS}</scalar_builtin>;
+      <scalar>$scalar</scalar> = <glob_builtin>*STDERR</glob_builtin>;
+      <sub_builtin>open</sub_builtin> <handle>OTHERHANDLE</handle>, <q>'somefile'</q>;
+      <kw>my</kw> <array>@array</array> = (<array_builtin>@ARGV</array_builtin>, 42, <array>@{</array><scalar>$scalar</scalar><array>}</array>, <array>@</array><scalar>$scalar</scalar>, <hash>%</hash><scalar>$scalar</scalar>, <angle><</angle><handle_builtin>STDIN</handle_builtin><angle>></angle>, <angle><</angle><handle>OHTERHANDLE</handle><angle>></angle>);
+      <kw>my</kw> <hash>%hash</hash> = ( <hash_builtin>%INC</hash_builtin>, <q>bareword_string</q> => <hash>%{</hash><array>@array</array>[0]<hash>}</hash>);
+      <label>START</label>: <kw>print</kw> <q>'Single quoted string'</q>;
+      <kw>say</kw> <qq>"Double quoted string"</qq>;
+      <kw>say</kw> __LINE__;
+      say "Something \\Qhere\\E \\uthere \\N{LATIN CAPITAL LETTER A} \\N{U+0028}";
+      my $sum = 42 + 0x42 + 0b1010101 + 042;<kw>say</kw> <<<q>'MOJO'</q>;
+          <em>%=</em> <kw>print</kw> <qq>"Mojo perl code"</qq>
+          <em><%</em> <kw>print</kw> <qq>"Some more Mojo code"</qq>; <em>%></em>
+      <q>MOJO</q>
+
+      """;
   }
 
   @Override

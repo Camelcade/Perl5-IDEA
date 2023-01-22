@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,9 +42,10 @@ public class PodCompletionTest extends PodLightTestCase {
   @Test
   public void testHeading2WithoutDocumented() {
     myFixture.copyFileToProject("test.pm");
-    doTest("=head2 somesub()\n" +
-           "\n" +
-           "=head2 <caret>");
+    doTest("""
+             =head2 somesub()
+
+             =head2 <caret>""");
   }
 
   @Test

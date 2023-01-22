@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,15 +86,16 @@ public abstract class PerlQuoteLikeReparseTestCase extends PerlReparseMultiTestC
     @Override
     protected @NotNull String buildCodeSample() {
 
-      return "sub something {\n" +
-             "  say 'sub start';\n" +
-             "qw\"\n" +
-             "   item1\n" +
-             "   <caret>\n" +
-             "   item2\n" +
-             "\";\n" +
-             "  say 'sub end';\n" +
-             "}";
+      return """
+        sub something {
+          say 'sub start';
+        qw"
+           item1
+           <caret>
+           item2
+        ";
+          say 'sub end';
+        }""";
     }
   }
 
@@ -102,473 +103,554 @@ public abstract class PerlQuoteLikeReparseTestCase extends PerlReparseMultiTestC
     @Override
     protected @NotNull String buildCodeSample() {
 
-      return "BEGIN {\n" +
-             "  say 'begin start';\n" +
-             " use vars qw'\n" +
-             "   $item1\n" +
-             "   <caret>\n" +
-             "   @item2\n" +
-             "';\n" +
-             "  say 'begin end';\n" +
-             "}";
+      return """
+        BEGIN {
+          say 'begin start';
+         use vars qw'
+           $item1
+           <caret>
+           @item2
+        ';
+          say 'begin end';
+        }""";
     }
   }
 
   public static class BlockInRegexpSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  s/test/\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /e;\n" +
-             "}\n";
+      return """
+        sub something{
+          s/test/
+            say 'hi';
+            <caret>
+            say 'hi'
+          /e;
+        }
+        """;
     }
   }
 
   public static class BlockInRegexpBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  s{test}{\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  }e;\n" +
-             "}\n";
+      return """
+        sub something{
+          s{test}{
+            say 'hi';
+            <caret>
+            say 'hi'
+          }e;
+        }
+        """;
     }
   }
 
   public static class RegexMatchSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  m/test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /;\n" +
-             "}\n";
+      return """
+        sub something{
+          m/test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /;
+        }
+        """;
     }
   }
 
   public static class RegexMatchXSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  m/test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /x;\n" +
-             "}\n";
+      return """
+        sub something{
+          m/test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /x;
+        }
+        """;
     }
   }
 
   public static class RegexMatchXXSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  m/test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /xx;\n" +
-             "}\n";
+      return """
+        sub something{
+          m/test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /xx;
+        }
+        """;
     }
   }
 
   public static class RegexMatchSlashNoOperator extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  /test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /;\n" +
-             "}\n";
+      return """
+        sub something{
+          /test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /;
+        }
+        """;
     }
   }
 
   public static class RegexMatchXSlashNoOperator extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  /test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /x;\n" +
-             "}\n";
+      return """
+        sub something{
+          /test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /x;
+        }
+        """;
     }
   }
 
   public static class RegexMatchXXSlashNoOperator extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  /test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /xx;\n" +
-             "}\n";
+      return """
+        sub something{
+          /test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /xx;
+        }
+        """;
     }
   }
 
   public static class RegexMatchBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  m{test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  };\n" +
-             "}\n";
+      return """
+        sub something{
+          m{test
+            say 'hi';
+            <caret>
+            say 'hi'
+          };
+        }
+        """;
     }
   }
 
   public static class RegexMatchXBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  m{test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  }x;\n" +
-             "}\n";
+      return """
+        sub something{
+          m{test
+            say 'hi';
+            <caret>
+            say 'hi'
+          }x;
+        }
+        """;
     }
   }
 
   public static class RegexMatchXXBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  m{test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  }xx;\n" +
-             "}\n";
+      return """
+        sub something{
+          m{test
+            say 'hi';
+            <caret>
+            say 'hi'
+          }xx;
+        }
+        """;
     }
   }
 
   public static class RegexCompileSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qr/test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /;\n" +
-             "}\n";
+      return """
+        sub something{
+          qr/test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /;
+        }
+        """;
     }
   }
 
   public static class RegexCompileXSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qr/test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /x;\n" +
-             "}\n";
+      return """
+        sub something{
+          qr/test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /x;
+        }
+        """;
     }
   }
 
   public static class RegexCompileXXSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qr/test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /xx;\n" +
-             "}\n";
+      return """
+        sub something{
+          qr/test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /xx;
+        }
+        """;
     }
   }
 
   public static class RegexCompileBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qr{test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  };\n" +
-             "}\n";
+      return """
+        sub something{
+          qr{test
+            say 'hi';
+            <caret>
+            say 'hi'
+          };
+        }
+        """;
     }
   }
 
   public static class RegexCompileXBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qr{test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  }x;\n" +
-             "}\n";
+      return """
+        sub something{
+          qr{test
+            say 'hi';
+            <caret>
+            say 'hi'
+          }x;
+        }
+        """;
     }
   }
 
   public static class RegexCompileXXBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qr{test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  }xx;\n" +
-             "}\n";
+      return """
+        sub something{
+          qr{test
+            say 'hi';
+            <caret>
+            say 'hi'
+          }xx;
+        }
+        """;
     }
   }
 
   public static class RegexReplacementSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  s/test\n" +
-             "    say 'hi';\n" +
-             "    say 'hi'\n" +
-             "  /replace<caret>ment $1/;\n" +
-             "}\n";
+      return """
+        sub something{
+          s/test
+            say 'hi';
+            say 'hi'
+          /replace<caret>ment $1/;
+        }
+        """;
     }
   }
 
   public static class RegexReplacementBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  s{test\n" +
-             "    say 'hi';\n" +
-             "    say 'hi'\n" +
-             "  }{replace<caret>ment $3};\n" +
-             "}\n";
+      return """
+        sub something{
+          s{test
+            say 'hi';
+            say 'hi'
+          }{replace<caret>ment $3};
+        }
+        """;
     }
   }
 
   public static class RegexReplaceSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  s/test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /replacement $1/;\n" +
-             "}\n";
+      return """
+        sub something{
+          s/test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /replacement $1/;
+        }
+        """;
     }
   }
 
   public static class RegexReplaceXSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  s/test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /replacement $1/x;\n" +
-             "}\n";
+      return """
+        sub something{
+          s/test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /replacement $1/x;
+        }
+        """;
     }
   }
 
   public static class RegexReplaceXXSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  s/test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  /replacement $2/xx;\n" +
-             "}\n";
+      return """
+        sub something{
+          s/test
+            say 'hi';
+            <caret>
+            say 'hi'
+          /replacement $2/xx;
+        }
+        """;
     }
   }
 
   public static class RegexReplaceBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  s{test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  }<replacement $3>;\n" +
-             "}\n";
+      return """
+        sub something{
+          s{test
+            say 'hi';
+            <caret>
+            say 'hi'
+          }<replacement $3>;
+        }
+        """;
     }
   }
 
   public static class RegexReplaceXBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  s{test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  }<replacement $3>x;\n" +
-             "}\n";
+      return """
+        sub something{
+          s{test
+            say 'hi';
+            <caret>
+            say 'hi'
+          }<replacement $3>x;
+        }
+        """;
     }
   }
 
   public static class RegexReplaceXXBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  s{test\n" +
-             "    say 'hi';\n" +
-             "    <caret>\n" +
-             "    say 'hi'\n" +
-             "  } | replacement $4|xx;\n" +
-             "}\n";
+      return """
+        sub something{
+          s{test
+            say 'hi';
+            <caret>
+            say 'hi'
+          } | replacement $4|xx;
+        }
+        """;
     }
   }
 
   public static class StringSQNoOperator extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  'test  <caret> other';\n" +
-             "}\n";
+      return """
+        sub something{
+          'test  <caret> other';
+        }
+        """;
     }
   }
 
   public static class StringSQSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  q/test  <caret> other/;\n" +
-             "}\n";
+      return """
+        sub something{
+          q/test  <caret> other/;
+        }
+        """;
     }
   }
 
   public static class StringSQBraces extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  q{test  <caret> other};\n" +
-             "}\n";
+      return """
+        sub something{
+          q{test  <caret> other};
+        }
+        """;
     }
   }
 
   public static class StringQQNoOperator extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  \"test  <caret> other\";\n" +
-             "}\n";
+      return """
+        sub something{
+          "test  <caret> other";
+        }
+        """;
     }
   }
 
   public static class StringQQSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qq/test  <caret> other/;\n" +
-             "}\n";
+      return """
+        sub something{
+          qq/test  <caret> other/;
+        }
+        """;
     }
   }
 
   public static class StringQQSingleQuote extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qq'test  <caret> other';\n" +
-             "}\n";
+      return """
+        sub something{
+          qq'test  <caret> other';
+        }
+        """;
     }
   }
 
   public static class StringQQBraces extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qq{test  <caret> other};\n" +
-             "}\n";
+      return """
+        sub something{
+          qq{test  <caret> other};
+        }
+        """;
     }
   }
 
   public static class StringQXNoOperator extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  `test  <caret> other`;\n" +
-             "}\n";
+      return """
+        sub something{
+          `test  <caret> other`;
+        }
+        """;
     }
   }
 
   public static class StringQXSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qx/test  <caret> other/;\n" +
-             "}\n";
+      return """
+        sub something{
+          qx/test  <caret> other/;
+        }
+        """;
     }
   }
 
   public static class StringQXSingleQuote extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qx'test  <caret> other';\n" +
-             "}\n";
+      return """
+        sub something{
+          qx'test  <caret> other';
+        }
+        """;
     }
   }
 
   public static class StringQXBraces extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  qx{test  <caret> other};\n" +
-             "}\n";
+      return """
+        sub something{
+          qx{test  <caret> other};
+        }
+        """;
     }
   }
 
   public static class TrMatchSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  tr/mat<caret>c h/r eplacement/;\n" +
-             "}\n";
+      return """
+        sub something{
+          tr/mat<caret>c h/r eplacement/;
+        }
+        """;
     }
   }
 
   public static class TrReplaceSlash extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  tr/matc h/r epl<caret>acement/;\n" +
-             "}\n";
+      return """
+        sub something{
+          tr/matc h/r epl<caret>acement/;
+        }
+        """;
     }
   }
 
   public static class TrMatchBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  tr{ma<caret>tc h}<replacement $3>;\n" +
-             "}\n";
+      return """
+        sub something{
+          tr{ma<caret>tc h}<replacement $3>;
+        }
+        """;
     }
   }
 
   public static class TrReplaceBrace extends PerlQuoteLikeReparseTestCase {
     @Override
     protected @NotNull String buildCodeSample() {
-      return "sub something{\n" +
-             "  tr{matc h}{repla<caret>cement 3};\n" +
-             "}\n";
+      return """
+        sub something{
+          tr{matc h}{repla<caret>cement 3};
+        }
+        """;
     }
   }
 }
