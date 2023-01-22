@@ -36,7 +36,7 @@ import java.util.List;
 
 public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElementTypes, DumbAware {
   @Override
-  public @NotNull FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
+  public FoldingDescriptor @NotNull [] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
     // @todo handle this
     if (root instanceof OuterLanguageElementImpl) {
       return FoldingDescriptor.EMPTY_ARRAY;
