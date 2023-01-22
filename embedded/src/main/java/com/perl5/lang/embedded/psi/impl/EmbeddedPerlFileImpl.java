@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public class EmbeddedPerlFileImpl extends PerlFileImpl {
@@ -41,7 +42,7 @@ public class EmbeddedPerlFileImpl extends PerlFileImpl {
   }
 
   @Override
-  public byte[] getPerlContentInBytes() {
+  public byte @Nullable [] getPerlContentInBytes() {
     return null;
   }
 }
