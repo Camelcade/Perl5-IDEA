@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.openapi.util.NlsSafe;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 
@@ -26,17 +27,17 @@ public interface PerlCallable extends PerlDeprecatable, PerlPackageMember {
    * @return name
    */
   @Override
-  default String getCanonicalName() {
+  default @NlsSafe String getCanonicalName() {
     String packageName = getNamespaceName();
     if (packageName == null) {
       return null;
     }
 
-    return packageName + PerlPackageUtil.NAMESPACE_SEPARATOR + getCallableName();
+    return PerlPackageUtil.join(packageName, getCallableName());
   }
 
   /**
    * @return a callable name. Sub or typeglob.
    */
-  String getCallableName();
+  @NlsSafe String getCallableName();
 }
