@@ -342,9 +342,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
 
       sub new
       {
-      	my ($proto) = @_;
-      	my $self = bless {}, $proto;
-      	return $self;
+        my ($proto) = @_;
+        my $self = bless {}, $proto;
+        return $self;
       }
 
       """;
