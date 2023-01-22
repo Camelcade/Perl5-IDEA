@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.host.local;
 
+import com.intellij.openapi.util.NlsActions.ActionText;
 import com.intellij.openapi.util.SystemInfo;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
@@ -37,7 +38,7 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
   }
 
   @Override
-  public @NotNull String getMenuItemTitle() {
+  public @NotNull @ActionText String getMenuItemTitle() {
     return PerlBundle.message("perl.host.handler.localhost.menu.title");
   }
 
