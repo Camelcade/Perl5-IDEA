@@ -80,7 +80,7 @@ public class PerlDebugProcess extends XDebugProcess {
   }
 
   @Override
-  public @NotNull XBreakpointHandler<?>[] getBreakpointHandlers() {
+  public XBreakpointHandler<?> @NotNull [] getBreakpointHandlers() {
     return new XBreakpointHandler[]{new PerlLineBreakpointHandler(myDebugThread)};
   }
 
