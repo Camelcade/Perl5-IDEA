@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.sdk.versionManager;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.NlsActions.ActionText;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlHandler;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerCollector;
@@ -58,7 +59,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
   /**
    * @return title for menu item in add interpreter dialog
    */
-  public abstract @NotNull String getMenuItemTitle();
+  public abstract @NotNull @ActionText String getMenuItemTitle();
 
   /**
    * @return short lowercased name, for interpreters list
