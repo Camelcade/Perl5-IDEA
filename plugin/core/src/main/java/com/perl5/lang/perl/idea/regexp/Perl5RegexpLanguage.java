@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,15 @@
 package com.perl5.lang.perl.idea.regexp;
 
 import com.intellij.lang.Language;
+import com.intellij.openapi.util.NlsSafe;
 import org.intellij.lang.regexp.RegExpLanguage;
 
 
 public class Perl5RegexpLanguage extends Language {
   public static final Perl5RegexpLanguage INSTANCE = new Perl5RegexpLanguage();
+  public static final @NlsSafe String NAME = "Perl5Regexp";
 
   private Perl5RegexpLanguage() {
-    super(RegExpLanguage.INSTANCE, "Perl5Regexp");
+    super(RegExpLanguage.INSTANCE, NAME);
   }
 }
