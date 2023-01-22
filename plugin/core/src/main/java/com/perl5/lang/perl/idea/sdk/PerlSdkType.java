@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -206,7 +206,7 @@ public class PerlSdkType extends SdkType {
   }
 
   @Override
-  public @NotNull String suggestSdkName(String currentSdkName, String sdkHome) {
+  public @NotNull String suggestSdkName(String currentSdkName, @NotNull String sdkHome) {
     throw new RuntimeException("Should not be invoked");
   }
 
@@ -224,7 +224,7 @@ public class PerlSdkType extends SdkType {
   }
 
   @Override
-  public boolean isValidSdkHome(String sdkHome) {
+  public boolean isValidSdkHome(@NotNull String sdkHome) {
     throw new RuntimeException("Unsupported");
   }
 
