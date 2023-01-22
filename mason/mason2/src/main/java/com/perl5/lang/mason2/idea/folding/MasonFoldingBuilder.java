@@ -48,7 +48,7 @@ public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder implements 
     ));
 
   @Override
-  public @NotNull FoldingDescriptor[] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
+  public FoldingDescriptor @NotNull [] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
     List<FoldingDescriptor> masonDescriptors =
       new ArrayList<>(Arrays.asList(super.buildFoldRegions(root, document, quick)));
     root.accept(new MasonFoldingRegionsCollector(document, masonDescriptors));
