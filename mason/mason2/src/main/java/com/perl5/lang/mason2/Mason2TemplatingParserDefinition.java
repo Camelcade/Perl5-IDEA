@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.*;
 public class Mason2TemplatingParserDefinition extends Mason2ParserDefinition {
 
   @Override
-  public IFileElementType getFileNodeType() {
+  public @NotNull IFileElementType getFileNodeType() {
     return COMPONENT_FILE;
   }
 
@@ -58,7 +58,7 @@ public class Mason2TemplatingParserDefinition extends Mason2ParserDefinition {
   }
 
   @Override
-  public PsiFile createFile(FileViewProvider viewProvider) {
+  public @NotNull PsiFile createFile(@NotNull FileViewProvider viewProvider) {
     return new MasonTemplatingFileImpl(viewProvider);
   }
 
