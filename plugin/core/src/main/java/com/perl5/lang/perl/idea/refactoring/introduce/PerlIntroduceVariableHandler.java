@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
     if (targets.size() > 1) {
       if (ApplicationManager.getApplication().isUnitTestMode()) {
-        selectOccurrences(targets.get(targets.size() - 1), editor, file, dataContext);
+        selectOccurrences(targets.get(targets.size() - 1), editor, file);
       }
       else {
         IntroduceTargetChooser.showIntroduceTargetChooser(
@@ -79,7 +79,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
           new Pass<>() {
             @Override
             public void pass(PerlIntroduceTarget target) {
-              selectOccurrences(target, editor, file, dataContext);
+              selectOccurrences(target, editor, file);
             }
           },
           PerlBundle.message("perl.introduce.expressions"),
@@ -87,7 +87,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       }
     }
     else {
-      selectOccurrences(targets.iterator().next(), editor, file, dataContext);
+      selectOccurrences(targets.iterator().next(), editor, file);
     }
   }
 
@@ -96,12 +96,11 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    */
   private void selectOccurrences(@NotNull PerlIntroduceTarget target,
                                  @NotNull Editor editor,
-                                 @NotNull PsiFile file,
-                                 DataContext dataContext) {
+                                 @NotNull PsiFile file) {
     List<PerlIntroduceTarget> allOccurrences = PerlIntroduceTargetOccurrencesCollector.collect(target);
     if (allOccurrences.size() > 1) {
       if (ApplicationManager.getApplication().isUnitTestMode()) {
-        performIntroduce(target, allOccurrences, OccurrencesChooser.ReplaceChoice.ALL, editor, file, dataContext);
+        performIntroduce(target, allOccurrences, OccurrencesChooser.ReplaceChoice.ALL, editor, file);
       }
       else {
         new OccurrencesChooser<PerlIntroduceTarget>(editor) {
@@ -115,14 +114,14 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
           new Pass<>() {
             @Override
             public void pass(OccurrencesChooser.ReplaceChoice replaceChoice) {
-              performIntroduce(target, allOccurrences, replaceChoice, editor, file, dataContext);
+              performIntroduce(target, allOccurrences, replaceChoice, editor, file);
             }
           }
         );
       }
     }
     else {
-      performIntroduce(target, allOccurrences, OccurrencesChooser.ReplaceChoice.NO, editor, file, dataContext);
+      performIntroduce(target, allOccurrences, OccurrencesChooser.ReplaceChoice.NO, editor, file);
     }
   }
 
@@ -130,8 +129,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
                                 @NotNull List<PerlIntroduceTarget> occurrences,
                                 @NotNull OccurrencesChooser.ReplaceChoice replaceChoice,
                                 @NotNull Editor editor,
-                                @NotNull PsiFile file,
-                                DataContext dataContext) {
+                                @NotNull PsiFile file) {
     if (replaceChoice == OccurrencesChooser.ReplaceChoice.NO) {
       occurrences = Collections.singletonList(target);
     }
