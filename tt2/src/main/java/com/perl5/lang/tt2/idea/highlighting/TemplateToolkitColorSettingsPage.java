@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,12 +54,14 @@ public class TemplateToolkitColorSettingsPage implements ColorSettingsPage {
 
   @Override
   public @NotNull String getDemoText() {
-    return "%% <kw>SET</kw> <id>somekey</id> <op>=</op> <sqs>'single quoted string'</sqs>\n" +
-           "[% <kw>SET</kw> <id>somekey</id> <op>=</op> <dqs>\"double quoted string\"</dqs> %]\n" +
-           "[% <kw>SET</kw> <id>somekey</id> <op>=</op> 42 %]\n" +
-           "[% <id>somekey</id> <op>and</op> <id>someotherkey</id> <op>or</op> <id>somethingelse</id> %]\n" +
-           "%%# line comment\n" +
-           "[%# block comment  %]\n";
+    return """
+      %% <kw>SET</kw> <id>somekey</id> <op>=</op> <sqs>'single quoted string'</sqs>
+      [% <kw>SET</kw> <id>somekey</id> <op>=</op> <dqs>"double quoted string"</dqs> %]
+      [% <kw>SET</kw> <id>somekey</id> <op>=</op> 42 %]
+      [% <id>somekey</id> <op>and</op> <id>someotherkey</id> <op>or</op> <id>somethingelse</id> %]
+      %%# line comment
+      [%# block comment  %]
+      """;
   }
 
   @Override

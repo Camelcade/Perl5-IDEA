@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,12 +29,13 @@ public class PerlHeredocUpdaterTest extends PerlHeredocInjectionTestCase {
 
   @Test
   public void testUnindentedUpdate() {
-    doTestUnindentedUpdate("<html>\n" +
-                           "<div>\n" +
-                           "    <div>\n" +
-                           "    </div>\n" +
-                           "</div>\n" +
-                           "</html>");
+    doTestUnindentedUpdate("""
+                             <html>
+                             <div>
+                                 <div>
+                                 </div>
+                             </div>
+                             </html>""");
   }
 
   @Test
@@ -54,12 +55,13 @@ public class PerlHeredocUpdaterTest extends PerlHeredocInjectionTestCase {
 
   @Test
   public void testIndentedUpdate() {
-    doTestIndentedUpdate("<html>\n" +
-                         "<div>\n" +
-                         "    <div>\n" +
-                         "    </div>\n" +
-                         "</div>\n" +
-                         "</html>");
+    doTestIndentedUpdate("""
+                           <html>
+                           <div>
+                               <div>
+                               </div>
+                           </div>
+                           </html>""");
   }
 
   @Test
@@ -78,18 +80,24 @@ public class PerlHeredocUpdaterTest extends PerlHeredocInjectionTestCase {
   }
 
   private void doTestUnindentedUpdate(@NotNull String textToUpdate) {
-    initWithTextSmart("{\n" +
-                      "    <<EOM;\nbla<caret>bla\n" +
-                      "EOM\n" +
-                      "}\n");
+    initWithTextSmart("""
+                        {
+                            <<EOM;
+                        bla<caret>bla
+                        EOM
+                        }
+                        """);
     doTest(textToUpdate);
   }
 
   private void doTestIndentedUpdate(@NotNull String textToUpdate) {
-    initWithTextSmart("{\n" +
-                      "    <<~EOM;\nbla<caret>bla\n" +
-                      "    EOM\n" +
-                      "}\n");
+    initWithTextSmart("""
+                        {
+                            <<~EOM;
+                        bla<caret>bla
+                            EOM
+                        }
+                        """);
     doTest(textToUpdate);
   }
 
