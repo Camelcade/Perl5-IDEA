@@ -21,6 +21,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
+import com.perl5.lang.tt2.TemplateToolkitBundle;
 import com.perl5.lang.tt2.TemplateToolkitIcons;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import org.jetbrains.annotations.NotNull;
@@ -68,14 +69,22 @@ public class TemplateToolkitColorSettingsPage implements ColorSettingsPage {
   @Override
   public AttributesDescriptor @NotNull [] getAttributeDescriptors() {
     return new AttributesDescriptor[]{
-      new AttributesDescriptor("Markers", TemplateToolkitSyntaxHighlighter.TT2_MARKER_KEY),
-      new AttributesDescriptor("Numbers", TemplateToolkitSyntaxHighlighter.TT2_NUMBER_KEY),
-      new AttributesDescriptor("Comments", TemplateToolkitSyntaxHighlighter.TT2_COMMENT_KEY),
-      new AttributesDescriptor("Identifiers", TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY),
-      new AttributesDescriptor("Keywords", TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY),
-      new AttributesDescriptor("Operators", TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY),
-      new AttributesDescriptor("Strings, single quoted", TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY),
-      new AttributesDescriptor("Strings, double quoted", TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY),
+      new AttributesDescriptor(TemplateToolkitBundle.message("attribute.descriptor.markers"),
+                               TemplateToolkitSyntaxHighlighter.TT2_MARKER_KEY),
+      new AttributesDescriptor(TemplateToolkitBundle.message("attribute.descriptor.numbers"),
+                               TemplateToolkitSyntaxHighlighter.TT2_NUMBER_KEY),
+      new AttributesDescriptor(TemplateToolkitBundle.message("attribute.descriptor.comments"),
+                               TemplateToolkitSyntaxHighlighter.TT2_COMMENT_KEY),
+      new AttributesDescriptor(TemplateToolkitBundle.message("attribute.descriptor.identifiers"),
+                               TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY),
+      new AttributesDescriptor(TemplateToolkitBundle.message("attribute.descriptor.keywords"),
+                               TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY),
+      new AttributesDescriptor(TemplateToolkitBundle.message("attribute.descriptor.operators"),
+                               TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY),
+      new AttributesDescriptor(TemplateToolkitBundle.message("attribute.descriptor.strings.single.quoted"),
+                               TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY),
+      new AttributesDescriptor(TemplateToolkitBundle.message("attribute.descriptor.strings.double.quoted"),
+                               TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY),
     };
   }
 
