@@ -311,10 +311,6 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     updateSdkModel(itemToSelect);
   }
 
-  @Override
-  public void jdkNameChanged(@NotNull Sdk jdk, @NotNull String previousName) {
-  }
-
   public void setEnabled(boolean isEnabled) {
     myPanel.setEnabled(isEnabled);
   }
