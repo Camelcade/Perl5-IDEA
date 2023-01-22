@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,13 +21,14 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
+import org.jetbrains.annotations.NotNull;
 
 
 public interface PerlReferenceOwner extends PsiElement {
   /**
    * default getReferences[] method should call this one
    */
-  default PsiReference[] getReferencesWithCache() {
+  default PsiReference @NotNull [] getReferencesWithCache() {
     return hasReferences() ?
            CachedValuesManager.getCachedValue(
              this,
@@ -46,7 +47,7 @@ public interface PerlReferenceOwner extends PsiElement {
   /**
    * Computing references for psi element
    */
-  default PsiReference[] computeReferences() {
+  default PsiReference @NotNull [] computeReferences() {
     return ReferenceProvidersRegistry.getReferencesFromProviders(this);
   }
 
