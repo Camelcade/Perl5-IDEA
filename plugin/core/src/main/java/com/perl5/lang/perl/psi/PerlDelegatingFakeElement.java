@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -290,12 +290,12 @@ public class PerlDelegatingFakeElement extends FakePsiElement {
 
   @Override
   @Contract(pure = true)
-  public <T> @Nullable T getCopyableUserData(Key<T> key) {
+  public <T> @Nullable T getCopyableUserData(@NotNull Key<T> key) {
     return myDelegate.getCopyableUserData(key);
   }
 
   @Override
-  public <T> void putCopyableUserData(Key<T> key, @Nullable T value) {
+  public <T> void putCopyableUserData(@NotNull Key<T> key, @Nullable T value) {
     myDelegate.putCopyableUserData(key, value);
   }
 
@@ -338,8 +338,7 @@ public class PerlDelegatingFakeElement extends FakePsiElement {
 
   @Override
   @Contract(pure = true)
-  @NonNls
-  public String toString() {
+  public @NonNls String toString() {
     return myDelegate.toString();
   }
 
