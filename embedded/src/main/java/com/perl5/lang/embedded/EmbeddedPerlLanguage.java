@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,16 @@
 package com.perl5.lang.embedded;
 
 import com.intellij.lang.Language;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.psi.templateLanguages.TemplateLanguage;
 import com.perl5.lang.perl.PerlLanguage;
 
 
 public class EmbeddedPerlLanguage extends Language implements TemplateLanguage {
   public static final EmbeddedPerlLanguage INSTANCE = new EmbeddedPerlLanguage();
+  public static final @NlsSafe String NAME = "Embedded Perl";
 
   private EmbeddedPerlLanguage() {
-    super(PerlLanguage.INSTANCE, "Embedded Perl");
+    super(PerlLanguage.INSTANCE, NAME);
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,14 @@
 package com.perl5.lang.htmlmason;
 
 import com.intellij.lang.Language;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.psi.templateLanguages.TemplateLanguage;
 import com.perl5.lang.perl.PerlLanguage;
 
 
 public class HTMLMasonLanguage extends Language implements TemplateLanguage {
   public static final HTMLMasonLanguage INSTANCE = new HTMLMasonLanguage();
-  public static final String NAME = "HTML::Mason Templating Language";
+  public static final @NlsSafe String NAME = "HTML::Mason Templating Language";
 
   public HTMLMasonLanguage() {
     super(PerlLanguage.INSTANCE, NAME);
