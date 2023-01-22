@@ -33,13 +33,6 @@ import javax.swing.*;
 import java.util.Map;
 
 public class PodColorSettingsPage implements ColorSettingsPage {
-  private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-    new AttributesDescriptor(PerlBundle.message("pod.color.settings.commands"), PodSyntaxHighlighter.POD_TAG_KEY),
-    new AttributesDescriptor(PerlBundle.message("pod.color.settings.verbatim"), PodSyntaxHighlighter.POD_VERBATIM_KEY),
-    new AttributesDescriptor(PerlBundle.message("pod.color.settings.paragraph"), PodSyntaxHighlighter.POD_TEXT_KEY),
-    new AttributesDescriptor(PerlBundle.message("pod.color.settings.formatter"), PodSyntaxHighlighter.POD_FORMATTER_TAG_KEY),
-    new AttributesDescriptor(PerlBundle.message("pod.color.settings.formatter.markup"), PodSyntaxHighlighter.POD_FORMATTER_MARKUP_KEY),
-  };
 
   @Override
   public @Nullable Icon getIcon() {
@@ -63,7 +56,13 @@ public class PodColorSettingsPage implements ColorSettingsPage {
 
   @Override
   public AttributesDescriptor @NotNull [] getAttributeDescriptors() {
-    return DESCRIPTORS;
+    return new AttributesDescriptor[]{
+      new AttributesDescriptor(PerlBundle.message("pod.color.settings.commands"), PodSyntaxHighlighter.POD_TAG_KEY),
+      new AttributesDescriptor(PerlBundle.message("pod.color.settings.verbatim"), PodSyntaxHighlighter.POD_VERBATIM_KEY),
+      new AttributesDescriptor(PerlBundle.message("pod.color.settings.paragraph"), PodSyntaxHighlighter.POD_TEXT_KEY),
+      new AttributesDescriptor(PerlBundle.message("pod.color.settings.formatter"), PodSyntaxHighlighter.POD_FORMATTER_TAG_KEY),
+      new AttributesDescriptor(PerlBundle.message("pod.color.settings.formatter.markup"), PodSyntaxHighlighter.POD_FORMATTER_MARKUP_KEY),
+    };
   }
 
   @Override
