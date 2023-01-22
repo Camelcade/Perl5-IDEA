@@ -31,16 +31,6 @@ import java.util.Map;
 
 
 public class TemplateToolkitColorSettingsPage implements ColorSettingsPage {
-  private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-    new AttributesDescriptor("Markers", TemplateToolkitSyntaxHighlighter.TT2_MARKER_KEY),
-    new AttributesDescriptor("Numbers", TemplateToolkitSyntaxHighlighter.TT2_NUMBER_KEY),
-    new AttributesDescriptor("Comments", TemplateToolkitSyntaxHighlighter.TT2_COMMENT_KEY),
-    new AttributesDescriptor("Identifiers", TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY),
-    new AttributesDescriptor("Keywords", TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY),
-    new AttributesDescriptor("Operators", TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY),
-    new AttributesDescriptor("Strings, single quoted", TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY),
-    new AttributesDescriptor("Strings, double quoted", TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY),
-  };
 
   @Override
   public @Nullable Icon getIcon() {
@@ -77,7 +67,16 @@ public class TemplateToolkitColorSettingsPage implements ColorSettingsPage {
 
   @Override
   public AttributesDescriptor @NotNull [] getAttributeDescriptors() {
-    return DESCRIPTORS;
+    return new AttributesDescriptor[]{
+      new AttributesDescriptor("Markers", TemplateToolkitSyntaxHighlighter.TT2_MARKER_KEY),
+      new AttributesDescriptor("Numbers", TemplateToolkitSyntaxHighlighter.TT2_NUMBER_KEY),
+      new AttributesDescriptor("Comments", TemplateToolkitSyntaxHighlighter.TT2_COMMENT_KEY),
+      new AttributesDescriptor("Identifiers", TemplateToolkitSyntaxHighlighter.TT2_IDENTIFIER_KEY),
+      new AttributesDescriptor("Keywords", TemplateToolkitSyntaxHighlighter.TT2_KEYWORD_KEY),
+      new AttributesDescriptor("Operators", TemplateToolkitSyntaxHighlighter.TT2_OPERATOR_KEY),
+      new AttributesDescriptor("Strings, single quoted", TemplateToolkitSyntaxHighlighter.TT2_SQ_STRING_KEY),
+      new AttributesDescriptor("Strings, double quoted", TemplateToolkitSyntaxHighlighter.TT2_DQ_STRING_KEY),
+    };
   }
 
   @Override

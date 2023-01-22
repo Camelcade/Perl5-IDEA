@@ -33,71 +33,6 @@ import java.util.Map;
 
 
 public class PerlColorSettingsPage implements ColorSettingsPage {
-  private static final AttributesDescriptor[] DESCRIPTORS = new AttributesDescriptor[]{
-    new AttributesDescriptor("Version", PerlSyntaxHighlighter.PERL_VERSION),
-    new AttributesDescriptor("Number", PerlSyntaxHighlighter.PERL_NUMBER),
-    new AttributesDescriptor("Number, binary", PerlSyntaxHighlighter.PERL_NUMBER_BIN),
-    new AttributesDescriptor("Number, octal", PerlSyntaxHighlighter.PERL_NUMBER_OCT),
-    new AttributesDescriptor("Number, hexadecimal", PerlSyntaxHighlighter.PERL_NUMBER_HEX),
-
-    new AttributesDescriptor("Line comment", PerlSyntaxHighlighter.PERL_COMMENT),
-
-    new AttributesDescriptor("Embedding marker", PerlSyntaxHighlighter.EMBED_MARKER_KEY),
-
-    new AttributesDescriptor("Label", PerlSyntaxHighlighter.PERL_LABEL),
-    new AttributesDescriptor("Block name", PerlSyntaxHighlighter.PERL_BLOCK_NAME),
-    new AttributesDescriptor("Special token", PerlSyntaxHighlighter.PERL_TAG),
-
-    new AttributesDescriptor("Operator", PerlSyntaxHighlighter.PERL_OPERATOR),
-    new AttributesDescriptor("Keyword", PerlSyntaxHighlighter.PERL_KEYWORD),
-    new AttributesDescriptor("Dereference", PerlSyntaxHighlighter.PERL_DEREFERENCE),
-
-    new AttributesDescriptor("Annotation", PerlSyntaxHighlighter.PERL_ANNOTATION),
-
-    new AttributesDescriptor("Sub", PerlSyntaxHighlighter.PERL_SUB),
-    new AttributesDescriptor("Sub, built-in", PerlSyntaxHighlighter.PERL_SUB_BUILTIN),
-    new AttributesDescriptor("Sub, XS", PerlSyntaxHighlighter.PERL_XSUB),
-    new AttributesDescriptor("Sub, autoloaded", PerlSyntaxHighlighter.PERL_AUTOLOAD),
-    new AttributesDescriptor("Sub, constant", PerlSyntaxHighlighter.PERL_CONSTANT),
-    new AttributesDescriptor("Sub, definition", PerlSyntaxHighlighter.PERL_SUB_DEFINITION),
-    new AttributesDescriptor("Sub, declaration", PerlSyntaxHighlighter.PERL_SUB_DECLARATION),
-    new AttributesDescriptor("Attribute", PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE),
-    new AttributesDescriptor("Sub prototype", PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN),
-
-    new AttributesDescriptor("Package", PerlSyntaxHighlighter.PERL_PACKAGE),
-    new AttributesDescriptor("Package, pragma", PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA),
-    new AttributesDescriptor("Package, core", PerlSyntaxHighlighter.PERL_PACKAGE_CORE),
-    new AttributesDescriptor("Package definition", PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION),
-
-    new AttributesDescriptor("Variable, scalar", PerlSyntaxHighlighter.PERL_SCALAR),
-    new AttributesDescriptor("Variable, scalar, built-in ", PerlSyntaxHighlighter.PERL_SCALAR_BUILTIN),
-    new AttributesDescriptor("Variable, array", PerlSyntaxHighlighter.PERL_ARRAY),
-    new AttributesDescriptor("Variable, array, built-in", PerlSyntaxHighlighter.PERL_ARRAY_BUILTIN),
-    new AttributesDescriptor("Variable, hash", PerlSyntaxHighlighter.PERL_HASH),
-    new AttributesDescriptor("Variable, hash, built-in", PerlSyntaxHighlighter.PERL_HASH_BUILTIN),
-
-    new AttributesDescriptor("Typeglob", PerlSyntaxHighlighter.PERL_GLOB),
-    new AttributesDescriptor("Typeglob, built-in", PerlSyntaxHighlighter.PERL_GLOB_BUILTIN),
-    new AttributesDescriptor("Typeglob, file handle", PerlSyntaxHighlighter.PERL_HANDLE),
-    new AttributesDescriptor("Typeglob, file handle, built-in", PerlSyntaxHighlighter.PERL_HANDLE_BUILTIN),
-
-    new AttributesDescriptor("String, single-quoted", PerlSyntaxHighlighter.PERL_SQ_STRING),
-    new AttributesDescriptor("String, double-quoted", PerlSyntaxHighlighter.PERL_DQ_STRING),
-    new AttributesDescriptor("String, backticked", PerlSyntaxHighlighter.PERL_DX_STRING),
-    new AttributesDescriptor("String, control chars", PerlSyntaxHighlighter.PERL_STRING_SPECIAL),
-    new AttributesDescriptor("String, character name", PerlSyntaxHighlighter.PERL_STRING_CHAR_NAME),
-
-    new AttributesDescriptor("Regex quote", PerlSyntaxHighlighter.PERL_REGEX_QUOTE),
-    new AttributesDescriptor("Regex element", PerlSyntaxHighlighter.PERL_REGEX_TOKEN),
-    //			new AttributesDescriptor("Regex character class", PerlSyntaxHighlighter.PERL_REGEX_CHAR_CLASS),
-
-    new AttributesDescriptor("Comma", PerlSyntaxHighlighter.PERL_COMMA),
-    new AttributesDescriptor("Semicolon", PerlSyntaxHighlighter.PERL_SEMICOLON),
-    new AttributesDescriptor("Braces", PerlSyntaxHighlighter.PERL_BRACE),
-    new AttributesDescriptor("Parentheses", PerlSyntaxHighlighter.PERL_PAREN),
-    new AttributesDescriptor("Brackets", PerlSyntaxHighlighter.PERL_BRACK),
-    new AttributesDescriptor("Angles", PerlSyntaxHighlighter.PERL_ANGLE)
-  };
 
   @Override
   public @Nullable Icon getIcon() {
@@ -191,7 +126,71 @@ public class PerlColorSettingsPage implements ColorSettingsPage {
 
   @Override
   public AttributesDescriptor @NotNull [] getAttributeDescriptors() {
-    return DESCRIPTORS;
+    return new AttributesDescriptor[]{
+      new AttributesDescriptor("Version", PerlSyntaxHighlighter.PERL_VERSION),
+      new AttributesDescriptor("Number", PerlSyntaxHighlighter.PERL_NUMBER),
+      new AttributesDescriptor("Number, binary", PerlSyntaxHighlighter.PERL_NUMBER_BIN),
+      new AttributesDescriptor("Number, octal", PerlSyntaxHighlighter.PERL_NUMBER_OCT),
+      new AttributesDescriptor("Number, hexadecimal", PerlSyntaxHighlighter.PERL_NUMBER_HEX),
+
+      new AttributesDescriptor("Line comment", PerlSyntaxHighlighter.PERL_COMMENT),
+
+      new AttributesDescriptor("Embedding marker", PerlSyntaxHighlighter.EMBED_MARKER_KEY),
+
+      new AttributesDescriptor("Label", PerlSyntaxHighlighter.PERL_LABEL),
+      new AttributesDescriptor("Block name", PerlSyntaxHighlighter.PERL_BLOCK_NAME),
+      new AttributesDescriptor("Special token", PerlSyntaxHighlighter.PERL_TAG),
+
+      new AttributesDescriptor("Operator", PerlSyntaxHighlighter.PERL_OPERATOR),
+      new AttributesDescriptor("Keyword", PerlSyntaxHighlighter.PERL_KEYWORD),
+      new AttributesDescriptor("Dereference", PerlSyntaxHighlighter.PERL_DEREFERENCE),
+
+      new AttributesDescriptor("Annotation", PerlSyntaxHighlighter.PERL_ANNOTATION),
+
+      new AttributesDescriptor("Sub", PerlSyntaxHighlighter.PERL_SUB),
+      new AttributesDescriptor("Sub, built-in", PerlSyntaxHighlighter.PERL_SUB_BUILTIN),
+      new AttributesDescriptor("Sub, XS", PerlSyntaxHighlighter.PERL_XSUB),
+      new AttributesDescriptor("Sub, autoloaded", PerlSyntaxHighlighter.PERL_AUTOLOAD),
+      new AttributesDescriptor("Sub, constant", PerlSyntaxHighlighter.PERL_CONSTANT),
+      new AttributesDescriptor("Sub, definition", PerlSyntaxHighlighter.PERL_SUB_DEFINITION),
+      new AttributesDescriptor("Sub, declaration", PerlSyntaxHighlighter.PERL_SUB_DECLARATION),
+      new AttributesDescriptor("Attribute", PerlSyntaxHighlighter.PERL_SUB_ATTRIBUTE),
+      new AttributesDescriptor("Sub prototype", PerlSyntaxHighlighter.PERL_SUB_PROTOTYPE_TOKEN),
+
+      new AttributesDescriptor("Package", PerlSyntaxHighlighter.PERL_PACKAGE),
+      new AttributesDescriptor("Package, pragma", PerlSyntaxHighlighter.PERL_PACKAGE_PRAGMA),
+      new AttributesDescriptor("Package, core", PerlSyntaxHighlighter.PERL_PACKAGE_CORE),
+      new AttributesDescriptor("Package definition", PerlSyntaxHighlighter.PERL_PACKAGE_DEFINITION),
+
+      new AttributesDescriptor("Variable, scalar", PerlSyntaxHighlighter.PERL_SCALAR),
+      new AttributesDescriptor("Variable, scalar, built-in ", PerlSyntaxHighlighter.PERL_SCALAR_BUILTIN),
+      new AttributesDescriptor("Variable, array", PerlSyntaxHighlighter.PERL_ARRAY),
+      new AttributesDescriptor("Variable, array, built-in", PerlSyntaxHighlighter.PERL_ARRAY_BUILTIN),
+      new AttributesDescriptor("Variable, hash", PerlSyntaxHighlighter.PERL_HASH),
+      new AttributesDescriptor("Variable, hash, built-in", PerlSyntaxHighlighter.PERL_HASH_BUILTIN),
+
+      new AttributesDescriptor("Typeglob", PerlSyntaxHighlighter.PERL_GLOB),
+      new AttributesDescriptor("Typeglob, built-in", PerlSyntaxHighlighter.PERL_GLOB_BUILTIN),
+      new AttributesDescriptor("Typeglob, file handle", PerlSyntaxHighlighter.PERL_HANDLE),
+      new AttributesDescriptor("Typeglob, file handle, built-in", PerlSyntaxHighlighter.PERL_HANDLE_BUILTIN),
+
+      new AttributesDescriptor("String, single-quoted", PerlSyntaxHighlighter.PERL_SQ_STRING),
+      new AttributesDescriptor("String, double-quoted", PerlSyntaxHighlighter.PERL_DQ_STRING),
+      new AttributesDescriptor("String, backticked", PerlSyntaxHighlighter.PERL_DX_STRING),
+      new AttributesDescriptor("String, control chars", PerlSyntaxHighlighter.PERL_STRING_SPECIAL),
+      new AttributesDescriptor("String, character name", PerlSyntaxHighlighter.PERL_STRING_CHAR_NAME),
+
+      new AttributesDescriptor("Regex quote", PerlSyntaxHighlighter.PERL_REGEX_QUOTE),
+      new AttributesDescriptor("Regex element", PerlSyntaxHighlighter.PERL_REGEX_TOKEN),
+      //			new AttributesDescriptor("Regex character class", PerlSyntaxHighlighter.PERL_REGEX_CHAR_CLASS),
+
+      new AttributesDescriptor("Comma", PerlSyntaxHighlighter.PERL_COMMA),
+      new AttributesDescriptor("Semicolon", PerlSyntaxHighlighter.PERL_SEMICOLON),
+      new AttributesDescriptor("Braces", PerlSyntaxHighlighter.PERL_BRACE),
+      new AttributesDescriptor("Parentheses", PerlSyntaxHighlighter.PERL_PAREN),
+      new AttributesDescriptor("Brackets", PerlSyntaxHighlighter.PERL_BRACK),
+      new AttributesDescriptor("Angles", PerlSyntaxHighlighter.PERL_ANGLE)
+    };
   }
 
   @Override
