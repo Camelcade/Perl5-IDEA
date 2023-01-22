@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.application.options.CodeStyleAbstractConfigurable;
 import com.intellij.application.options.CodeStyleAbstractPanel;
 import com.intellij.psi.codeStyle.CodeStyleSettings;
 import com.perl5.lang.perl.PerlLanguage;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -29,7 +30,7 @@ public class PerlCodeStyleConfigurable extends CodeStyleAbstractConfigurable {
   }
 
   @Override
-  protected CodeStyleAbstractPanel createPanel(CodeStyleSettings settings) {
+  protected @NotNull CodeStyleAbstractPanel createPanel(@NotNull CodeStyleSettings settings) {
     return new PerlCodeStyleMainPanel(getCurrentSettings(), settings);
   }
 
