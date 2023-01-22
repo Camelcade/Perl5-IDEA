@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.ui.messages.MessagesService;
+import com.intellij.openapi.util.NlsActions.ActionText;
 import com.intellij.openapi.util.ThrowableComputable;
 import com.intellij.util.ArrayUtil;
 import com.intellij.util.TimeoutUtil;
@@ -73,7 +74,7 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
   }
 
   @Override
-  public @NotNull String getMenuItemTitle() {
+  public @NotNull @ActionText String getMenuItemTitle() {
     return PerlWslBundle.message("perl.host.handler.wsl.menu.title");
   }
 

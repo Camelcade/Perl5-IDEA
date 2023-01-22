@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.messages.MessagesService;
+import com.intellij.openapi.util.NlsActions.ActionText;
 import com.intellij.util.ArrayUtil;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
@@ -87,7 +88,7 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
   }
 
   @Override
-  public @NotNull String getMenuItemTitle() {
+  public @NotNull @ActionText String getMenuItemTitle() {
     return PerlDockerBundle.message("perl.host.handler.docker.menu.title");
   }
 
