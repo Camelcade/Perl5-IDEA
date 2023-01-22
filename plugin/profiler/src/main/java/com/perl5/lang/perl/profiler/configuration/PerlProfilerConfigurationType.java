@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 
 public class PerlProfilerConfigurationType extends ProfilerConfigurationTypeBase<PerlProfilerConfigurationState> {
-  @NonNls static final @NotNull String ID = "com.perl5.profiler.nytprof";
-  @NonNls static final String PERL_PROFILER_LANGUAGE_SETTINGS_GROUP = "profiler.perl5.group";
+  static final @NonNls @NotNull String ID = "com.perl5.profiler.nytprof";
+  static final @NonNls String PERL_PROFILER_LANGUAGE_SETTINGS_GROUP = "profiler.perl5.group";
   private static final String CONFIGURATION_TYPE_NAME = "NYTProf";
 
   @Override
@@ -53,7 +53,7 @@ public class PerlProfilerConfigurationType extends ProfilerConfigurationTypeBase
   }
 
   @Override
-  public @Nullable String getLanguageSettingsGroup() {
+  public @NotNull String getLanguageSettingsGroup() {
     return PERL_PROFILER_LANGUAGE_SETTINGS_GROUP;
   }
 
