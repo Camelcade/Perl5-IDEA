@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -143,7 +143,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
 
         ActionGroup hostActionGroup = new ActionGroup(hostHandler.getMenuItemTitle(), true) {
           @Override
-          public @NotNull AnAction[] getChildren(@Nullable AnActionEvent e) {
+          public AnAction @NotNull [] getChildren(@Nullable AnActionEvent e) {
             return groupItems.toArray(AnAction.EMPTY_ARRAY);
           }
         };
