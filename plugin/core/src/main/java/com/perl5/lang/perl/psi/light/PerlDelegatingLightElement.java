@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.psi.light;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
@@ -121,11 +120,6 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
   }
 
   @Override
-  public PsiElement getOriginalElement() {
-    return this;
-  }
-
-  @Override
   public @NotNull GlobalSearchScope getResolveScope() {
     return getDelegate().getResolveScope();
   }
@@ -166,11 +160,6 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
   }
 
   @Override
-  public @NotNull PsiElement[] getChildren() {
-    return EMPTY_ARRAY;
-  }
-
-  @Override
   public PsiFile getContainingFile() {
     return getDelegate().getContainingFile();
   }
@@ -186,7 +175,7 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
   }
 
   @Override
-  public @NotNull char[] textToCharArray() {
+  public char @NotNull [] textToCharArray() {
     return getDelegate().textToCharArray();
   }
 
@@ -238,11 +227,6 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
   @Override
   public PsiElement replace(@NotNull PsiElement newElement) throws IncorrectOperationException {
     return getDelegate().replace(newElement);
-  }
-
-  @Override
-  public ASTNode getNode() {
-    return null;
   }
 
   @Override
