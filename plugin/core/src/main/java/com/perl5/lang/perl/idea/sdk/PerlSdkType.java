@@ -306,7 +306,8 @@ public class PerlSdkType extends SdkType {
     VersionDescriptor perlVersionDescriptor = PerlSdkType.getPerlVersionDescriptor(interpreterPath, hostData, versionManagerData);
     if (perlVersionDescriptor == null) {
       ApplicationManager.getApplication().invokeLater(
-        () -> Messages.showErrorDialog("Failed to fetch perl version, see logs for more details", "Failed to Create Interpreter"));
+        () -> Messages.showErrorDialog(PerlBundle.message("dialog.message.failed.to.fetch.perl.version.see.logs.for.more.details"),
+                                       PerlBundle.message("dialog.title.failed.to.create.interpreter")));
       return;
     }
     String newSdkName = SdkConfigurationUtil.createUniqueSdkName(
