@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     ANON_BLOCK
   );
 
-  public static boolean parseIdentifier(PsiBuilder b, int l) {
+  public static boolean parseIdentifier(PsiBuilder b, int ignoredL) {
     if (consumeToken(b, TT2_IDENTIFIER)) {
       return true;
     }
@@ -90,7 +90,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return tokenType == TT2_SEMI || tokenType == TT2_CLOSE_TAG;
   }
 
-  public static boolean parseFileAsString(PsiBuilder b, int l) {
+  public static boolean parseFileAsString(PsiBuilder b, int ignoredL) {
     if (b.eof()) {
       return false;
     }
@@ -128,7 +128,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return gotItem;
   }
 
-  public static boolean parseBlockComment(PsiBuilder b, int i) {
+  public static boolean parseBlockComment(PsiBuilder b, int ignoredL) {
     if (b.getTokenType() == TT2_OPEN_TAG && b.rawLookup(1) == LINE_COMMENT) {
       PsiBuilder.Marker m = b.mark();
       b.advanceLexer(); // open
@@ -387,7 +387,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
   }
 
 
-  protected static boolean isEndTagAhead(PsiBuilder b, int l) {
+  protected static boolean isEndTagAhead(PsiBuilder b, int ignoredL) {
     IElementType tokenType = b.getTokenType();
     return (tokenType == TT2_OPEN_TAG || tokenType == TT2_OUTLINE_TAG) && b.lookAhead(1) == TT2_END;
   }
@@ -520,7 +520,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return true;
   }
 
-  public static boolean parseTags(PsiBuilder b, int l) {
+  public static boolean parseTags(PsiBuilder b, int ignoredL) {
     PsiBuilder.Marker m = null;
     while (!b.eof() && !isEndMarker(b)) {
       if (m == null) {
@@ -564,7 +564,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return false;
   }
 
-  public static boolean parseKeywordFallback(PsiBuilder b, int l) {
+  public static boolean parseKeywordFallback(PsiBuilder b, int ignoredL) {
     if (TemplateToolkitSyntaxElements.KEYWORDS_OR_TEXT_OPERATORS_TOKENSET.contains(b.getTokenType())) {
       PsiBuilder.Marker m = b.mark();
       b.advanceLexer();
@@ -575,7 +575,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return false;
   }
 
-  public static boolean parseUnaryMinus(PsiBuilder b, int l) {
+  public static boolean parseUnaryMinus(PsiBuilder b, int ignoredL) {
     if (b.getTokenType() == TT2_MINUS) {
       PsiBuilder.Marker m = b.mark();
       b.advanceLexer();
