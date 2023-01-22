@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,11 +59,11 @@ public class PodSyntaxHighlighter extends SyntaxHighlighterBase {
   }
 
   @Override
-  public @NotNull TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+  public TextAttributesKey @NotNull [] getTokenHighlights(IElementType tokenType) {
     return getPodHighlights(tokenType);
   }
 
-  public static @NotNull TextAttributesKey[] getPodHighlights(IElementType tokenType) {
+  public static TextAttributesKey @NotNull [] getPodHighlights(IElementType tokenType) {
     return pack(POD_TEXT_KEY, ATTRIBUTES_MAP.get(tokenType));
   }
 }
