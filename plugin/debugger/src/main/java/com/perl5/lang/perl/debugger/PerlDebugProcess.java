@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ public class PerlDebugProcess extends XDebugProcess {
   private final ExecutionResult myExecutionResult;
   private final PerlDebugThread myDebugThread;
   private final PerlRunProfileState myDebugProfileState;
-  @NonNls static final String PERL_DEBUGGER_NOTIFICATION_GROUP_ID = "PERL_DEBUGGER";
+  static final @NonNls String PERL_DEBUGGER_NOTIFICATION_GROUP_ID = "PERL_DEBUGGER";
 
   public PerlDebugProcess(@NotNull XDebugSession session, PerlDebugProfileStateBase state, ExecutionResult executionResult) {
     super(session);
