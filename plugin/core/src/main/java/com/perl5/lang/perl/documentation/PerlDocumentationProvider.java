@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,11 +77,19 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
   @Override
   public @Nullable String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
+    if (isWrongElement(originalElement)) {
+      return null;
+    }
+
     if (originalElement instanceof PerlVariableNameElement) {
       return getQuickNavigateInfo(element, originalElement.getParent());
     }
-    var perlValue = PerlValuesManager.from(originalElement.getOriginalElement());
-    return !perlValue.isUnknown() ? perlValue.getPresentableText() : super.getQuickNavigateInfo(element, originalElement);
+    var perlValue = PerlValuesManager.from(originalElement);
+    return !perlValue.isUnknown() ? perlValue.getPresentableText() : null;
+  }
+
+  private static boolean isWrongElement(@Nullable PsiElement element) {
+    return element == null || !element.isValid() || element.getLanguage() != PerlLanguage.INSTANCE;
   }
 
   @Override
@@ -100,7 +108,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
                                                             @NotNull PsiFile file,
                                                             @Nullable PsiElement contextElement,
                                                             int targetOffset) {
-    if (contextElement == null || contextElement.getLanguage() != PerlLanguage.INSTANCE) {
+    if (isWrongElement(contextElement)) {
       return null;
     }
 
