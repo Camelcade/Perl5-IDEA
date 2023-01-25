@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.search.FilenameIndex;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
@@ -38,19 +39,11 @@ import java.util.Objects;
 public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
   @Override
   public @Nullable PsiElement[] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
-    if (sourceElement == null) {
+    if (sourceElement == null || !sourceElement.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
       return null;
     }
 
-    int offsetInElement = offset - sourceElement.getNode().getStartOffset();
-
     ArrayList<PsiElement> result = new ArrayList<>();
-    PerlResolveUtil.processResolveTargets((element, reference) -> {
-      if (reference.getRangeInElement().contains(offsetInElement)) {
-        result.add(element);
-      }
-      return true;
-    }, sourceElement);
 
     addShadowedVariable(sourceElement, result);
     addStringFileTargets(sourceElement, result);
