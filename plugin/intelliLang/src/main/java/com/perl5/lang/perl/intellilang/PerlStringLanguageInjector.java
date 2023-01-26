@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.search.GlobalSearchScope;
+import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
@@ -124,10 +124,9 @@ public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
     else {
       return null;
     }
-
     PsiElement realVariable = CompletionUtil.getOriginalOrSelf(variable);
     Query<PsiReference> references =
-      ReferencesSearch.search(realVariable, GlobalSearchScope.fileScope(host.getContainingFile().getOriginalFile()));
+      ReferencesSearch.search(realVariable, new LocalSearchScope(host.getContainingFile().getOriginalFile()));
     for (PsiReference reference : references) {
       PsiElement referenceElement = reference.getElement();
       PsiElement variableUsage = referenceElement.getParent();
