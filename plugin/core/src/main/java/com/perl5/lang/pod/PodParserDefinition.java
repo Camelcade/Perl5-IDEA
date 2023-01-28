@@ -28,8 +28,8 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.pod.lexer.PodDebuggingLexerAdapter;
 import com.perl5.lang.pod.lexer.PodElementTypes;
+import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import com.perl5.lang.pod.parser.PodParser;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
@@ -42,7 +42,7 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes {
 
   @Override
   public @NotNull Lexer createLexer(Project project) {
-    return new PodDebuggingLexerAdapter(project);
+    return new PodLexerAdapter();
   }
 
   @Override
