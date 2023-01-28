@@ -19,10 +19,7 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlQuoted;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 public class PerlUseVarsStringElementType extends PerlReparseableElementType {
 
@@ -42,13 +39,5 @@ public class PerlUseVarsStringElementType extends PerlReparseableElementType {
                                      @NotNull Language fileLanguage,
                                      @NotNull Project project) {
     return false;
-  }
-
-  protected char getOpenQuoteCharacter(@Nullable ASTNode parent) {
-    if (parent == null) {
-      return 0;
-    }
-    PsiElement psiElement = parent.getPsi();
-    return psiElement instanceof PerlQuoted ? ((PerlQuoted)psiElement).getOpenQuote() : 0;
   }
 }
