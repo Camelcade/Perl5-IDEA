@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.psi.PerlQuoted;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -51,27 +50,5 @@ public class PerlUseVarsStringElementType extends PerlReparseableElementType {
     }
     PsiElement psiElement = parent.getPsi();
     return psiElement instanceof PerlQuoted ? ((PerlQuoted)psiElement).getOpenQuote() : 0;
-  }
-
-  /**
-   * @implNote we need to check tree (basically, tokens, because container may be a DUMMY_HOLDER), but we need to lex
-   * this properly for stubs.
-   */
-  private @NotNull PerlLexingContext getLexingContext(@NotNull Project project, @NotNull ASTNode chameleon) {
-    PerlLexingContext baseContext = PerlLexingContext.create(project);
-
-    ASTNode quoteNode = getRealNode(chameleon).getTreePrev();
-    if (quoteNode == null) {
-      LOG.error("Missing quote node for " + chameleon);
-      return baseContext;
-    }
-
-    CharSequence quoteChars = quoteNode.getChars();
-    if (quoteChars.length() != 1) {
-      LOG.error("Non-single character quote: " + quoteChars);
-      return baseContext;
-    }
-
-    return baseContext.withOpenChar(quoteChars.charAt(0));
   }
 }
