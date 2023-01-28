@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -154,10 +154,6 @@ public class PodRenderUtil implements PodElementTypes {
 
   public static String getHTMLPsiLink(@NotNull String link, @Nullable String text) {
     return getHTMLLink(link, true, text);
-  }
-
-  public static String getHTMLPsiLink(@NotNull String link) {
-    return getHTMLLink(link, true, null);
   }
 
   public static String getHTMLLink(@NotNull String link, boolean isPsi, @Nullable String text) {
