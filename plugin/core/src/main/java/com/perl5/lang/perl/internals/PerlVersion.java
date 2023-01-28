@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,8 +78,6 @@ public final class PerlVersion implements Comparable<PerlVersion> {
   private int myMajor;
   private int myMinor;
   private List<Integer> myExtraChunks = Collections.emptyList();
-
-  private PerlVersion() { }
 
   public PerlVersion(double version) {
     try {
@@ -205,32 +203,16 @@ public final class PerlVersion implements Comparable<PerlVersion> {
     return "v" + StringUtil.join(result, ".");
   }
 
-  public String getStrictNumericVersion() {
-    return Double.toString(getDoubleVersion());
-  }
-
   public int getRevision() {
     return myRevision;
-  }
-
-  public void setRevision(int revision) {
-    this.myRevision = revision;
   }
 
   public int getMajor() {
     return myMajor;
   }
 
-  public void setMajor(int major) {
-    this.myMajor = major;
-  }
-
   public int getMinor() {
     return myMinor;
-  }
-
-  public void setMinor(int minor) {
-    this.myMinor = minor;
   }
 
   public boolean isAlpha() {
