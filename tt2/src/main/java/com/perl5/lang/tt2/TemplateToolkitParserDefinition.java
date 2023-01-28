@@ -60,7 +60,7 @@ public class TemplateToolkitParserDefinition implements ParserDefinition, Templa
 
   @Override
   public @NotNull PsiParser createParser(Project project) {
-    return new TemplateToolkitParser(project);
+    return new TemplateToolkitParser();
   }
 
   @Override
