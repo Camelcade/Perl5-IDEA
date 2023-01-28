@@ -294,7 +294,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   }
 
   public static @NotNull PerlHostData<?, ?> notNullFrom(@NotNull Sdk sdk) {
-    return Objects.requireNonNull(from(sdk), () -> "No host data in " + sdk);
+    return PerlSdkAdditionalData.notNullFrom(sdk).getHostData();
   }
 
   public static @NotNull ProcessHandler createConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
