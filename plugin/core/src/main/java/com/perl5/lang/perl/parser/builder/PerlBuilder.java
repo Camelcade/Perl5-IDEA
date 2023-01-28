@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserImpl;
-import com.perl5.lang.perl.parser.PerlTokenData;
 
 /**
  * This wrapper created to be able to store per-parsing data like pragmas, warnings and variables ?
@@ -49,7 +48,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
    * @param steps positive or negative steps number to get token
    * @return token data: type and text
    */
-  public PerlTokenData lookupToken(int steps) {
+  public IElementType lookupToken(int steps) {
     assert steps != 0;
     int rawStep = 0;
     int step = steps / Math.abs(steps);
@@ -70,9 +69,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
       }
     }
 
-    // fixme crushes on quick s typing
-    return new PerlTokenData(rawTokenType,
-                             getOriginalText().subSequence(rawTokenTypeStart(rawStep), rawTokenTypeStart(rawStep + 1)).toString());
+    return rawTokenType;
   }
 
   public boolean isUseVarsContent() {
