@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -207,17 +207,11 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
       return variableAnnotations;
     }
 
-    return getExternalVariableAnnotations();
+    return null;
   }
 
   @Override
   public @NotNull PerlVariableAnnotations getLocalVariableAnnotations() {
     return PerlVariableAnnotations.from(this);
-  }
-
-  @Override
-  public @Nullable PerlVariableAnnotations getExternalVariableAnnotations() {
-    // fixme NYI
-    return null;
   }
 }

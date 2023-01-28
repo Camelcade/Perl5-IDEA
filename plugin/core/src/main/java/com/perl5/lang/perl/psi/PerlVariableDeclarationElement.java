@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -101,15 +101,6 @@ public interface PerlVariableDeclarationElement extends StubBasedPsiElement<Perl
 
   @NotNull
   PerlVariableAnnotations getLocalVariableAnnotations();
-
-
-  /**
-   * Returns external variable annotations if any
-   *
-   * @return annotations object or null
-   */
-  @Nullable
-  PerlVariableAnnotations getExternalVariableAnnotations();
 
   /**
    * @return true iff {@code psiElement} is variable declaration element preceding by colon. See {@code Function::Parameters} named
