@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -579,11 +579,6 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
     }
     alignmentsMap.put(nodeLine, alignment);
     return alignment;
-  }
-
-  private @Nullable ASTNode getPrevNonSpaceNode(@NotNull ASTNode node) {
-    ASTNode prevNode = node.getTreePrev();
-    return PsiUtilCore.getElementType(prevNode) != TokenType.WHITE_SPACE ? prevNode : prevNode.getTreePrev();
   }
 
   @Override
