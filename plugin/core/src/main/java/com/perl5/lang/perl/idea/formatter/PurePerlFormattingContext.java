@@ -40,6 +40,7 @@ import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.psi.PerlInterpolationContainer;
 import com.perl5.lang.perl.psi.PerlSignatureElement;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -312,6 +313,11 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
         return getSettings().SPACE_WITHIN_IF_PARENTHESES ?
                Spacing.createSpacing(1, 1, 0, true, 1) :
                Spacing.createSpacing(0, 0, 0, true, 1);
+      }
+
+      if ((child1Type == OPERATOR_DEREFERENCE || child2Type == OPERATOR_DEREFERENCE) &&
+          parentNode.getPsi().getParent() instanceof PerlInterpolationContainer) {
+        return Spacing.createSpacing(0, 0, 0, getSettings().KEEP_LINE_BREAKS, getSettings().KEEP_BLANK_LINES_IN_CODE);
       }
 
       // fix for number/concat
