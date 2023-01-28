@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PsiPerlStringXq extends PsiPerlExpr, PerlString {
+public interface PsiPerlStringXq extends PsiPerlExpr, PerlStringWithInterpolation {
 
   @NotNull
   List<PsiPerlDerefExpr> getDerefExprList();

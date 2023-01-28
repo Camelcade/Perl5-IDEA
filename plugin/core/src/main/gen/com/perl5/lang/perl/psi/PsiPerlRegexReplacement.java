@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PsiPerlRegexReplacement extends PsiElement {
+public interface PsiPerlRegexReplacement extends PerlRegexReplacement {
 
   @NotNull
   List<PsiPerlDerefExpr> getDerefExprList();
