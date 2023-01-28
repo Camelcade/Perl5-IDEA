@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,11 @@
 package com.perl5.lang.perl.idea.sdk.host.os;
 
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.Objects;
 
 public abstract class PerlOsHandler {
   private final @NotNull String myName;
@@ -65,11 +62,6 @@ public abstract class PerlOsHandler {
   }
 
   public static @NotNull PerlOsHandler notNullFrom(@NotNull Sdk sdk) {
-    return Objects.requireNonNull(from(sdk));
-  }
-
-  @Contract("null->null")
-  public static @Nullable PerlOsHandler from(@Nullable Sdk sdk) {
-    return ObjectUtils.doIfNotNull(PerlHostData.from(sdk), PerlHostData::getOsHandler);
+    return PerlHostData.notNullFrom(sdk).getOsHandler();
   }
 }
