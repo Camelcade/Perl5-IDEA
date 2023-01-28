@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,7 +63,7 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
     }
     String openQuoteText = openQuoteElement.getText();
     String closeQuoteText = closeQuoteElement != null ? closeQuoteElement.getText() :
-                            "" + PerlString.getQuoteCloseChar(openQuoteText.charAt(0));
+                            String.valueOf(PerlString.getQuoteCloseChar(openQuoteText.charAt(0)));
     return StringUtil.containsWhitespaces(targetElementsText) ?
            "qw " + openQuoteText + targetElementsText + closeQuoteText :
            PerlPsiUtil.createSingleQuotedString(targetElementsText);
