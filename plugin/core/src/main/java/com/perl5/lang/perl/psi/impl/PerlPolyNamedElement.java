@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -92,11 +92,6 @@ public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub
     else {
       super.accept(visitor);
     }
-  }
-
-  @Override
-  public String toString() {
-    return getClass().getSimpleName() + "(" + getElementType().toString() + ")";
   }
 
   @Override

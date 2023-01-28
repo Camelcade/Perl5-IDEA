@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,10 +69,6 @@ public abstract class AbstractOutlineLiveTemplateProcessor implements TemplateOp
   @Override
   public boolean isEnabled(Template template) {
     return true;
-  }
-
-  @Override
-  public void setEnabled(Template template, boolean value) {
   }
 
   @Override
