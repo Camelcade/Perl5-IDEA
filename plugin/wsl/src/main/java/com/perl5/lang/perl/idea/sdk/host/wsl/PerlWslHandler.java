@@ -41,7 +41,7 @@ import java.util.concurrent.ExecutionException;
 
 class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslHandler> {
   private static final Logger LOG = Logger.getInstance(PerlWslHandler.class);
-  private static final long COMPUTATION_TIMEOUT = 5_000;
+  private static final long COMPUTATION_TIMEOUT = 10_000;
 
   @SuppressWarnings("NonDefaultConstructor")
   public PerlWslHandler(@NotNull PerlHandlerBean bean) {
