@@ -75,6 +75,12 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   public void testStringBitwiseOperators() { doFormatTest(); }
 
   @Test
+  public void testDerefSpacingInStrings() {
+    getCustomSettings().SPACE_AROUND_DEREFERENCE = true;
+    doFormatTest();
+  }
+
+  @Test
   public void testDerefSpacingTrue() {
     getCustomSettings().SPACE_AROUND_DEREFERENCE = true;
     doTestSingleSource("derefSpacing");
