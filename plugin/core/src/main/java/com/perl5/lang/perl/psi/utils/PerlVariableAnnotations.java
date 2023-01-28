@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -107,13 +107,13 @@ public class PerlVariableAnnotations {
     PerlVariableAnnotations annotations = new PerlVariableAnnotations();
     processAnnotations(variableDeclarationElement, new VariableAnnotationProcessor() {
       @Override
-      public boolean process(@NotNull PsiPerlAnnotationDeprecated annotationDeprecated) {
+      public boolean processDeprecated() {
         annotations.setIsDeprecated();
         return true;
       }
 
       @Override
-      public boolean process(@NotNull PerlAnnotationType annotationType) {
+      public boolean processType(@NotNull PerlAnnotationType annotationType) {
         annotations.setValue(annotationType.getValue());
         return true;
       }
@@ -154,7 +154,7 @@ public class PerlVariableAnnotations {
     boolean valueSetExplicitly = false;
     for (PerlAnnotation annotation : annotationList) {
       if (annotation instanceof PsiPerlAnnotationDeprecated annotationDeprecated) {
-        if (!annotationsProcessor.process(annotationDeprecated)) {
+        if (!annotationsProcessor.processDeprecated()) {
           return false;
         }
       }
@@ -164,7 +164,7 @@ public class PerlVariableAnnotations {
         if (!valueSet || !isWildCard) {
           valueSet = true;
           valueSetExplicitly = !isWildCard;
-          if (!annotationsProcessor.process(typeAnnotation)) {
+          if (!annotationsProcessor.processType(typeAnnotation)) {
             return false;
           }
         }
@@ -188,7 +188,7 @@ public class PerlVariableAnnotations {
     var result = new ArrayList<PerlVariableDeclarationElement>();
     processPotentialTargets(typeAnnotation, it -> processAnnotations(it, new VariableAnnotationProcessor() {
       @Override
-      public boolean process(@NotNull PerlAnnotationType annotationType) {
+      public boolean processType(@NotNull PerlAnnotationType annotationType) {
         if (annotationType.equals(typeAnnotation)) {
           result.add(it);
         }
@@ -241,11 +241,11 @@ public class PerlVariableAnnotations {
   }
 
   public interface VariableAnnotationProcessor {
-    default boolean process(@NotNull PsiPerlAnnotationDeprecated annotationDeprecated) {
+    default boolean processDeprecated() {
       return true;
     }
 
-    default boolean process(@NotNull PerlAnnotationType annotationType) {
+    default boolean processType(@NotNull PerlAnnotationType annotationType) {
       return true;
     }
   }
