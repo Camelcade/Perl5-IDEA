@@ -170,11 +170,20 @@ class PerlDockerAdapter {
   }
 
   private @NotNull List<PerlFileDescriptor> doListFiles(@NotNull String containerName, @NotNull String path) throws ExecutionException {
-    ProcessOutput output = runCommand(EXEC, containerName, "ls", "-LAs", "--classify", path);
-    return output.getStdoutLines().stream()
-      .map(it -> PerlFileDescriptor.create(path, it))
-      .filter(Objects::nonNull)
-      .collect(Collectors.toList());
+    try {
+      ProcessOutput output = runCommand(EXEC, containerName, "ls", "-LAs", "--classify", path);
+      return output.getStdoutLines().stream()
+        .map(it -> PerlFileDescriptor.create(path, it))
+        .filter(Objects::nonNull)
+        .collect(Collectors.toList());
+    }
+    catch (ExecutionException e) {
+      if (StringUtil.contains(e.getMessage(), "cannot access")) {
+        LOG.warn("Could not access " + path + " " + e.getMessage());
+        return Collections.emptyList();
+      }
+      throw e;
+    }
   }
 
   private static String createContainerName(@NotNull String seed) {
