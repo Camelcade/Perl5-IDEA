@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -132,10 +132,6 @@ public class PodDocumentPattern {
 
   public static @NotNull PodDocumentPattern headingAndItemPattern(@NotNull String itemText) {
     return new PodDocumentPattern().withItemPattern(itemText).withHeadingPattern(itemText);
-  }
-
-  public static @NotNull PodDocumentPattern exactAnythingPattern(@NotNull String text) {
-    return new PodDocumentPattern().withExactMatch().withItemPattern(text).withIndexPattern(text).withHeadingPattern(text);
   }
 }
 
