@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,15 +27,13 @@ import java.io.IOException;
 
 public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implements PerlLexerWithCustomStates {
   private static final String CHOMP_MODIFIERS = "-+=~";
-  private final Project myProject;
   private final TemplateToolkitSettings mySettings;
   private int customState = 0;
   private boolean isEscaped = false;
 
   public TemplateToolkitLexer(Project project) {
     super(null);
-    myProject = project;
-    mySettings = myProject == null ? null : TemplateToolkitSettings.getInstance(project);
+    mySettings = project == null ? null : TemplateToolkitSettings.getInstance(project);
   }
 
   @Override
@@ -216,10 +214,6 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
     if (currentState == LEX_SQ_STRING || currentState == LEX_DQ_STRING) {
       popState();
     }
-  }
-
-  public Project getProject() {
-    return myProject;
   }
 
   @Override
