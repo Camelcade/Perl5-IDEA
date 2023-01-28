@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor;
 
-import com.perl5.lang.perl.internals.PerlWarningsMask;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -24,17 +23,6 @@ import org.jetbrains.annotations.NotNull;
  * Marks package processor that it can modify ${^WARNING_BITS} (see use warnings)
  */
 public interface PerlWarningsProvider {
-  /**
-   * Adjusts current mask with values, according to package import settings
-   *
-   * @param currentMask mask of the outer block, or null if there is no outer block
-   * @return modified mask
-   */
-  default PerlWarningsMask getWarningMask(@NotNull PerlUseStatementElement useStatement, @NotNull PerlWarningsMask currentMask) {
-    // fixme NYI
-    return currentMask.clone();
-  }
-
   /**
    * @return true iff we have warnings enabled by the {@code useStatement}
    */
