@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PsiPerlHeredocQx extends PsiElement {
+public interface PsiPerlHeredocQx extends PerlHeredocWithInterpolation {
 
   @NotNull
   List<PsiPerlDerefExpr> getDerefExprList();

@@ -465,11 +465,11 @@ public class PsiPerlVisitor extends PsiElementVisitor {
   }
 
   public void visitHeredocQq(@NotNull PsiPerlHeredocQq o) {
-    visitPsiElement(o);
+    visitPerlHeredocWithInterpolation(o);
   }
 
   public void visitHeredocQx(@NotNull PsiPerlHeredocQx o) {
-    visitPsiElement(o);
+    visitPerlHeredocWithInterpolation(o);
   }
 
   public void visitHexChar(@NotNull PsiPerlHexChar o) {
@@ -606,7 +606,7 @@ public class PsiPerlVisitor extends PsiElementVisitor {
   }
 
   public void visitPerlRegex(@NotNull PsiPerlPerlRegex o) {
-    visitPsiElement(o);
+    visitPerlRegexPattern(o);
   }
 
   public void visitPerlRegexModifiers(@NotNull PsiPerlPerlRegexModifiers o) {
@@ -659,7 +659,7 @@ public class PsiPerlVisitor extends PsiElementVisitor {
   }
 
   public void visitRegexReplacement(@NotNull PsiPerlRegexReplacement o) {
-    visitPsiElement(o);
+    visitPerlRegexReplacement(o);
   }
 
   public void visitReplacementRegex(@NotNull PsiPerlReplacementRegex o) {
@@ -736,7 +736,7 @@ public class PsiPerlVisitor extends PsiElementVisitor {
 
   public void visitStringDq(@NotNull PsiPerlStringDq o) {
     visitExpr(o);
-    // visitPerlString(o);
+    // visitPerlStringWithInterpolation(o);
   }
 
   public void visitStringList(@NotNull PsiPerlStringList o) {
@@ -750,7 +750,7 @@ public class PsiPerlVisitor extends PsiElementVisitor {
 
   public void visitStringXq(@NotNull PsiPerlStringXq o) {
     visitExpr(o);
-    // visitPerlString(o);
+    // visitPerlStringWithInterpolation(o);
   }
 
   public void visitSubCall(@NotNull PsiPerlSubCall o) {
@@ -946,6 +946,10 @@ public class PsiPerlVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
+  public void visitPerlHeredocWithInterpolation(@NotNull PerlHeredocWithInterpolation o) {
+    visitElement(o);
+  }
+
   public void visitPerlIfUnlessCompound(@NotNull PerlIfUnlessCompound o) {
     visitElement(o);
   }
@@ -967,6 +971,14 @@ public class PsiPerlVisitor extends PsiElementVisitor {
   }
 
   public void visitPerlNamespaceDefinitionWithIdentifier(@NotNull PerlNamespaceDefinitionWithIdentifier o) {
+    visitElement(o);
+  }
+
+  public void visitPerlRegexPattern(@NotNull PerlRegexPattern o) {
+    visitElement(o);
+  }
+
+  public void visitPerlRegexReplacement(@NotNull PerlRegexReplacement o) {
     visitElement(o);
   }
 

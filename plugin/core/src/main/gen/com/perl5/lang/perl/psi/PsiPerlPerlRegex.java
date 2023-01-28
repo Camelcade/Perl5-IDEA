@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface PsiPerlPerlRegex extends PsiElement {
+public interface PsiPerlPerlRegex extends PerlRegexPattern {
 
   @NotNull
   List<PsiPerlBlockCompound> getBlockCompoundList();
