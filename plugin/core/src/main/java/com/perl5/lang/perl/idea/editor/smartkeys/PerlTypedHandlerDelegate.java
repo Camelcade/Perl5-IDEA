@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public abstract class PerlTypedHandlerDelegate extends TypedHandlerDelegate {
       currentOffset--;
     }
     PsiElement element = file.findElementAt(currentOffset);
-    if (shouldShowPopup(charTyped, project, editor, element)) {
+    if (shouldShowPopup(charTyped, editor, element)) {
       AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
       return Result.STOP;
     }
@@ -46,7 +46,6 @@ public abstract class PerlTypedHandlerDelegate extends TypedHandlerDelegate {
    * @return true iff we should show completion popup for the provided contes
    */
   protected abstract boolean shouldShowPopup(char typedChar,
-                                             @NotNull Project project,
                                              @NotNull Editor editor,
                                              @Nullable PsiElement element);
 }
