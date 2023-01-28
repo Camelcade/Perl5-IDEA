@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,13 @@
 package unit.perl;
 
 
+import base.PerlLightTestCase;
 import com.perl5.lang.perl.internals.PerlVersion;
-import junit.framework.TestCase;
 import org.junit.Test;
-public class PerlVersionUnitTest extends TestCase {
+
+import static org.junit.Assert.assertNotEquals;
+
+public class PerlVersionUnitTest extends PerlLightTestCase {
   @Test
   public void testComparable() {
     PerlVersion version510 = new PerlVersion("v5.10");
@@ -28,16 +31,17 @@ public class PerlVersionUnitTest extends TestCase {
     PerlVersion version514 = new PerlVersion("v5.14");
 
     assertEquals(version514.compareTo(version510), 1);
+    //noinspection EqualsWithItself
     assertEquals(version510.compareTo(version510), 0);
     assertEquals(version510.compareTo(version514), -1);
 
     assertTrue(version514.greaterThan(version510));
-    assertTrue(version510.equals(version510));
-    assertTrue(version510.equals(version510x));
+    assertEquals(version510, version510);
+    assertEquals(version510, version510x);
     assertTrue(version510.lesserThan(version514));
 
     assertFalse(version514.lesserThan(version510));
-    assertFalse(version510.equals(version514));
+    assertNotEquals(version510, version514);
     assertFalse(version510.greaterThan(version514));
   }
 
