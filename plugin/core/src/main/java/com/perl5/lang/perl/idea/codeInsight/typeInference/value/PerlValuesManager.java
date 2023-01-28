@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -400,14 +400,6 @@ public final class PerlValuesManager {
   @Contract("null->true")
   public static boolean isUnknown(@Nullable PerlValue type) {
     return type == null || type == UNKNOWN_VALUE;
-  }
-
-  /**
-   * @return true iff {@code} type is not empty and not {@link PerlValues#UNKNOWN_VALUE}
-   */
-  @Contract("null->false")
-  public static boolean isNotEmpty(@Nullable PerlValue type) {
-    return !isUnknown(type);
   }
 
   public static @NotNull PerlValue from(@NotNull PsiElement target,
