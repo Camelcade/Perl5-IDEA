@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.debugger.protocol;
 
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.TestOnly;
 
 
 public class PerlValueDescriptor {
@@ -80,10 +79,6 @@ public class PerlValueDescriptor {
     return rendered;
   }
 
-  public boolean isRenderError() {
-    return render_error;
-  }
-
   public @Nullable PerlLayersDescriptor getLayers() {
     return layers;
   }
@@ -111,23 +106,6 @@ public class PerlValueDescriptor {
            ", fileno='" + fileno + '\'' +
            ", layers=" + layers +
            ", tied_with=" + tied_with +
-           '}';
-  }
-
-  @TestOnly
-  public String testDebugString() {
-    return "PerlValueDescriptor{" +
-           "\n\tname='" + name + '\'' +
-           "\n\ttype='" + type.replaceAll("\\(.+\\)", "") + '\'' +
-           "\n\tvalue='" + value + '\'' +
-           "\n\tref_depth=" + ref_depth +
-           "\n\tsize=" + size +
-           "\n\texpandable=" + expandable +
-           "\n\tblessed=" + blessed +
-           "\n\tis_utf=" + is_utf +
-           "\n\tfileno='" + fileno + '\'' +
-           "\n\tlayers=" + layers +
-           "\n\ttied_with=" + (tied_with == null ? null : tied_with.testDebugString()) +
            '}';
   }
 }
