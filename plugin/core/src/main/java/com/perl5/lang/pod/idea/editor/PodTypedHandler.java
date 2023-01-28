@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -160,7 +160,7 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
   }
 
   @Override
-  protected boolean shouldShowPopup(char typedChar, @NotNull Project project, @NotNull Editor editor, @Nullable PsiElement element) {
+  protected boolean shouldShowPopup(char typedChar, @NotNull Editor editor, @Nullable PsiElement element) {
     IElementType elementType = PsiUtilCore.getElementType(element);
     ASTNode elementNode = ObjectUtils.doIfNotNull(element, PsiElement::getNode);
     CharSequence elementChars = ObjectUtils.doIfNotNull(elementNode, ASTNode::getChars);
