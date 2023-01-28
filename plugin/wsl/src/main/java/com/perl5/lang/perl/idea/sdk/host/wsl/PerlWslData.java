@@ -108,7 +108,14 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   @Override
   public @NotNull String getHelpersRootPath() {
-    return Objects.requireNonNull(doGetRemotePath(PerlPluginUtil.getPluginHelpersRoot()));
+    var localHelpersPath = PerlPluginUtil.getPluginHelpersRoot();
+    var remoteHelpersPath = doGetRemotePath(localHelpersPath);
+    if (remoteHelpersPath != null) {
+      return remoteHelpersPath;
+    }
+    LOG.warn("Unable to map local path to the remote, see logs above for more details and report to the developers. Falling back to: " +
+             localHelpersPath);
+    return localHelpersPath;
   }
 
   @Override
