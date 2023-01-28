@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PodParserUtil extends GeneratedParserUtilBase implements PodElementTypes {
-  public static boolean completeOrReport(PsiBuilder b, int l, @NotNull IElementType targetElement, @NotNull String message) {
+  public static boolean completeOrReport(PsiBuilder b, int ignoredL, @NotNull IElementType targetElement, @NotNull String message) {
     if (b.getTokenType() == targetElement) {
       b.advanceLexer();
       return true;
@@ -39,7 +39,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
     return true;
   }
 
-  public static boolean checkAndConvert(PsiBuilder b, int l, IElementType sourceType, IElementType targetType) {
+  public static boolean checkAndConvert(PsiBuilder b, int ignoredL, IElementType sourceType, IElementType ignoredTargetType) {
     if (b.getTokenType() == sourceType) {
       PsiBuilder.Marker m = b.mark();
       b.advanceLexer();
@@ -50,7 +50,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
   }
 
 
-  public static boolean collapseNonSpaceTo(PsiBuilder b, int l, IElementType targetElement) {
+  public static boolean collapseNonSpaceTo(PsiBuilder b, int ignoredL, IElementType targetElement) {
     IElementType tokenType = b.getTokenType();
 
     if (tokenType == POD_IDENTIFIER) {
@@ -65,12 +65,14 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
     return false;
   }
 
-  public static boolean parsePodSectionContent(PsiBuilder b, int l, IElementType stopToken, IElementType targetToken, String errorMessage) {
+  public static boolean parsePodSectionContent(PsiBuilder b,
+                                               int ignoredL,
+                                               IElementType stopToken,
+                                               IElementType targetToken,
+                                               String errorMessage) {
     PsiBuilder.Marker m = b.mark();
     while (!b.eof() && b.getTokenType() != stopToken) {
-      //			PsiBuilder.Marker runMarker = b.mark();
       b.advanceLexer();
-      //			runMarker.collapse(POD_IDENTIFIER);
     }
 
     m.done(targetToken);
