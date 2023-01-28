@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,6 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class TemplateToolkitRefactoringSupportProvider extends RefactoringSupportProvider {
-  @Override
-  public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context) {
-    return false;
-  }
 
   @Override
   public boolean isMemberInplaceRenameAvailable(@NotNull PsiElement element, @Nullable PsiElement context) {

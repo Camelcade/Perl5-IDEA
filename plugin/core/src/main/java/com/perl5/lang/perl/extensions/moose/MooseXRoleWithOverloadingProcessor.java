@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,5 @@
 
 package com.perl5.lang.perl.extensions.moose;
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
-
 public class MooseXRoleWithOverloadingProcessor extends MooseRoleProcessor {
-  @Override
-  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    return MooseRoleProcessor.EXPORTS;
-  }
 }

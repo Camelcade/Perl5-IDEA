@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,7 +96,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    * Creates a process and process handler to be run in console.
    */
   protected @NotNull ProcessHandler doCreateConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    KillableProcessHandler processHandler = new KillableProcessHandler(
+    return new KillableProcessHandler(
       createConsoleProcess(commandLine), commandLine.getCommandLineString(), commandLine.getCharset()) {
       @Override
       protected @NotNull BaseOutputReader.Options readerOptions() {
@@ -110,15 +110,9 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
           public boolean splitToLines() {
             return false;
           }
-
-          @Override
-          public boolean withSeparators() {
-            return true;
-          }
         };
       }
     };
-    return processHandler;
   }
 
   /**
