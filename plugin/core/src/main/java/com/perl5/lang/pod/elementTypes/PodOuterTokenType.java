@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public class PodOuterTokenType extends OuterLanguageElementType implements IRepa
     super("POD_OUTER", PodLanguage.INSTANCE);
   }
 
-  private boolean isReparseable(@NotNull ASTNode leaf, @NotNull CharSequence newText) {
+  private boolean isReparseable(@NotNull CharSequence newText) {
     int newTextLength = newText.length();
     if (newTextLength == 0) {
       LOG.debug("New text is empty");
@@ -62,7 +62,7 @@ public class PodOuterTokenType extends OuterLanguageElementType implements IRepa
 
   @Override
   public @Nullable ASTNode reparseLeaf(@NotNull ASTNode leaf, @NotNull CharSequence newText) {
-    return isReparseable(leaf, newText) ? ASTFactory.leaf(this, newText) : null;
+    return isReparseable(newText) ? ASTFactory.leaf(this, newText) : null;
   }
 
   @Override
