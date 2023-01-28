@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,5 @@
 
 package com.perl5.lang.tt2.parser;
 
-import com.intellij.openapi.project.Project;
-
-
 public class TemplateToolkitParser extends TemplateToolkitParserGenerated {
-  private final Project myProject;
-
-  public TemplateToolkitParser(Project project) {
-    myProject = project;
-  }
-
-  public Project getProject() {
-    return myProject;
-  }
 }
