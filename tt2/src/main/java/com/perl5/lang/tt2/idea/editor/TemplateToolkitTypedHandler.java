@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,11 +40,11 @@ public class TemplateToolkitTypedHandler extends TypedHandlerDelegate implements
                                          @NotNull Editor editor,
                                          @NotNull PsiFile file,
                                          @NotNull FileType fileType) {
-    Result result = processChar(c, project, editor, file, fileType);
+    Result result = processChar(c, project, editor, file);
     return result == null ? super.beforeCharTyped(c, project, editor, file, fileType) : result;
   }
 
-  protected Result processChar(char c, Project project, Editor editor, PsiFile file, FileType fileType) {
+  protected Result processChar(char c, Project project, Editor editor, PsiFile file) {
     FileViewProvider viewProvider = file.getViewProvider();
     if (!(viewProvider instanceof TemplateToolkitFileViewProvider)) {
       return null;
