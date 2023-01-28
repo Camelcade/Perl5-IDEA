@@ -24,6 +24,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
@@ -34,8 +35,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Pattern;
 
-import static com.intellij.lang.WhitespacesBinders.GREEDY_LEFT_BINDER;
-import static com.intellij.lang.WhitespacesBinders.GREEDY_RIGHT_BINDER;
+import static com.intellij.lang.WhitespacesBinders.*;
 
 
 public final class PerlParserUtil extends GeneratedParserUtilBase implements PerlElementTypes {
@@ -63,24 +63,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
     "(?:" + BASIC_IDENTIFIER_PATTERN_TEXT + PACKAGE_SEPARATOR_PATTERN_TEXT + ")*+" +
     ")" +
     "(" + BASIC_IDENTIFIER_PATTERN_TEXT + ")");
-  private static final WhitespacesAndCommentsBinder NAMESPACE_RIGHT_BINDER = (tokens, atStreamEdge, getter) -> {
-    int result = tokens.size();
-    if (atStreamEdge || tokens.isEmpty()) {
-      return result;
-    }
-
-    for (int i = tokens.size() - 1; i >= 0; i--) {
-      IElementType currentToken = tokens.get(i);
-      if (currentToken == COMMENT_ANNOTATION || currentToken == COMMENT_LINE) {
-        result = i;
-      }
-      else if (currentToken != TokenType.WHITE_SPACE) {
-        break;
-      }
-    }
-
-    return result;
-  };
+  public static final WhitespacesAndCommentsBinder PERL_LEADING_COMMENTS_BINDER = leadingCommentsBinder(PerlParserDefinition.REAL_COMMENTS);
 
   /**
    * Wrapper for Builder class in order to implement additional per parser information in PerlBuilder
@@ -316,7 +299,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
     PsiBuilder.Marker m = b.mark();
     if (PerlParserGenerated.real_namespace_content(b, l)) {
       m.done(NAMESPACE_CONTENT);
-      m.setCustomEdgeTokenBinders(GREEDY_LEFT_BINDER, NAMESPACE_RIGHT_BINDER);
+      m.setCustomEdgeTokenBinders(GREEDY_LEFT_BINDER, PERL_LEADING_COMMENTS_BINDER);
       return true;
     }
     m.rollbackTo();

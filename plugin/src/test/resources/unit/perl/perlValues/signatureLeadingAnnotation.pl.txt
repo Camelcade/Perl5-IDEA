@@ -1,0 +1,14 @@
+sub my_sub(
+#@type MyType
+$var1
+) {
+    $va<caret>r1;
+}
+----------
+$var1
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 40 in signatureLeadingAnnotation.pl
+MyType
+----------
+Resolved
+----------
+MyType

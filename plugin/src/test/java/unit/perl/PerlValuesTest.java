@@ -34,6 +34,9 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testSignatureLeadingAnnotation() { doTestScalarVariableValue(); }
+
+  @Test
   public void testDuckTypeParentFiveMethods() { doTestScalarVariableValue(); }
 
   @Test

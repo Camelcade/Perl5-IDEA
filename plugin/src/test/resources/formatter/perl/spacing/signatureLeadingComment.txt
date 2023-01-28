@@ -1,0 +1,33 @@
+use feature ('signatures');
+sub my_sub(
+        #@type MyType
+        $var1,
+        #@type MyType
+        $var2
+) {}
+
+my (
+        #@type MyType
+        $var1,
+        #@type MyType
+        $var2,
+        #@type MyType
+        $var3
+);
+
+use feature ('signatures');
+sub my_sub(
+        # here is a comment
+        $var1,
+        # here is a comment
+        $var2
+) {}
+
+my (
+        # here is a comment
+        $var1,
+        # here is a comment
+        $var2,
+        # here is a comment
+        $var3
+);

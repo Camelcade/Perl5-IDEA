@@ -1365,7 +1365,7 @@ augment_modifier ::= 'fp_augment' fp_modifier_named_body {name="augment modifier
 before_modifier ::= 'fp_before' fp_modifier_named_body {name="before modifier"}
 
 private meta parse_signature_content ::= '(' <<signature_content <<x1>>>> ')' {pin=1}
-meta signature_content ::= <<x1>> {recoverWhile=recover_signature_content}
+meta signature_content ::= <<x1>> {recoverWhile=recover_signature_content hooks=[leftBinder="PERL_LEADING_COMMENTS_BINDER"]}
 private recover_signature_content ::= !(')'|'{'|SUB_PROTOTYPE_TOKEN)
 meta signature_element ::= <<x1>>
 

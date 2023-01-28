@@ -4685,6 +4685,7 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, SIGNATURE_CONTENT, null);
     result_ = x1.parse(builder_, level_);
+    register_hook_(builder_, LEFT_BINDER, PERL_LEADING_COMMENTS_BINDER);
     exit_section_(builder_, level_, marker_, result_, false, PerlParserGenerated::recover_signature_content);
     return result_;
   }
