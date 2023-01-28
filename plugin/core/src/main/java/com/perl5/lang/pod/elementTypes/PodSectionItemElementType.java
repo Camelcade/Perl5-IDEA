@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public class PodSectionItemElementType extends PodStubBasedTitledSectionElementT
   @Override
   public @NotNull PodSectionStub createStub(@NotNull PodSectionItem psi, StubElement parentStub) {
     char prefix = psi.isTargetable() ? '+' : '-';
-    return new PodSectionStub(parentStub, this, "" + prefix + psi.getPresentableText());
+    return new PodSectionStub(parentStub, this, prefix + psi.getPresentableText());
   }
 
   @Override

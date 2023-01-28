@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -162,7 +162,7 @@ public class PerlFormattingModelBuilder implements FormattingModelBuilder {
   }
 
   private static @NotNull String dumpNode(@Nullable ASTNode node) {
-    return "" + node + (node == null ? "" : node.getTextRange());
+    return String.valueOf(node) + (node == null ? "" : node.getTextRange());
   }
 
   public static int computeTreeSize(@NotNull Block rootBlock) {

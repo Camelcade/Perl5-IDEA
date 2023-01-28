@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -138,7 +138,7 @@ public final class PerlDocUtil implements PerlElementTypes {
     if (text.length() > 0) {
       char firstChar = text.charAt(0);
       if (StringUtil.containsChar("msixpn", firstChar)) {
-        anchor = "" + firstChar;
+        anchor = String.valueOf(firstChar);
       }
       else if (StringUtil.containsChar("adlux", firstChar)) {
         anchor = "/" + firstChar;

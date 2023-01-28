@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -82,7 +82,7 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
         return elementToReplace;
       }
       prefix = "q " + openQuote;
-      suffix = "" + PerlString.getQuoteCloseChar(openQuote);
+      suffix = String.valueOf(PerlString.getQuoteCloseChar(openQuote));
     }
 
     StringBuilder result = new StringBuilder();
