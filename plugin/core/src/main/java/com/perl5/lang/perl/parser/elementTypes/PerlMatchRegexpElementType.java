@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lexer.Lexer;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlTokenSets;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,11 +43,6 @@ public class PerlMatchRegexpElementType extends PerlTwoQuotesQuoteLikeElementTyp
   @Override
   protected boolean isOpenQuoteToken(@Nullable IElementType tokenType) {
     return tokenType == REGEX_QUOTE_OPEN;
-  }
-
-  @Override
-  protected boolean isContentToken(@Nullable IElementType tokenType) {
-    return PerlTokenSets.LAZY_PARSABLE_REGEX.contains(tokenType);
   }
 
   @Override

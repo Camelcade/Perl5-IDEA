@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,8 +40,6 @@ public abstract class PerlTwoQuotesQuoteLikeElementType extends PerlQuoteLikeEle
   protected abstract boolean isOperatorMandatory();
 
   protected abstract boolean isOpenQuoteToken(@Nullable IElementType tokenType);
-
-  protected abstract boolean isContentToken(@Nullable IElementType tokenType);
 
   protected abstract boolean isCloseQuoteToken(@Nullable IElementType tokenType);
 

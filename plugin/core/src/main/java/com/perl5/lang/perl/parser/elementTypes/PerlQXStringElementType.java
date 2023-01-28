@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,11 +43,6 @@ public class PerlQXStringElementType extends PerlStringElementType {
   @Override
   protected boolean isOpenQuoteToken(@Nullable IElementType tokenType) {
     return tokenType == QUOTE_TICK_OPEN;
-  }
-
-  @Override
-  protected boolean isContentToken(@Nullable IElementType tokenType) {
-    return tokenType == LP_STRING_QX || tokenType == LP_STRING_QX_RESTRICTED || tokenType == STRING_CONTENT_XQ;
   }
 
   @Override
