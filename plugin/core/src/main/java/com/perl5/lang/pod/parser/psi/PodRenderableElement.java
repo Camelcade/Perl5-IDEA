@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.perl5.lang.pod.parser.psi;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
-import org.jetbrains.annotations.NotNull;
 
 public interface PodRenderableElement extends PsiElement {
   /**
@@ -33,23 +32,5 @@ public interface PodRenderableElement extends PsiElement {
    */
   default void renderElementAsText(StringBuilder builder, PodRenderingContext context) {
     PodRenderUtil.renderPsiRangeAsText(getFirstChild(), null, builder, context);
-  }
-
-  /**
-   * @return html representation of element contents
-   */
-  default @NotNull String getAsHTML() {
-    StringBuilder builder = new StringBuilder();
-    renderElementAsHTML(builder, new PodRenderingContext());
-    return builder.toString();
-  }
-
-  /**
-   * @return text representation of element contents
-   */
-  default @NotNull String getAsText() {
-    StringBuilder builder = new StringBuilder();
-    renderElementAsText(builder, new PodRenderingContext());
-    return builder.toString();
   }
 }
