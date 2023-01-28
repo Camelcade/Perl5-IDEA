@@ -205,7 +205,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
   @SuppressWarnings("UnusedReturnValue")
   @Contract("null, _ -> null; !null, null -> !null")
   public static @Nullable PsiElement renameElement(@Nullable PsiElement element, @Nullable String newName) {
-    if (element == null) {
+    if (element == null || !element.isValid()) {
       return null;
     }
     if (StringUtil.isEmpty(newName)) {
