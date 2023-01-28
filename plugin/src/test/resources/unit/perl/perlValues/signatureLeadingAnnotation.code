@@ -1,0 +1,7 @@
+sub my_sub(
+#@type MyType
+$var1
+) {
+    $va<caret>r1;
+}
+
