@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.function.Function;
-public class PerlRegexParts extends PerlLightTestCase {
+public class PerlRegexPartsTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "unit/perl/regex";
