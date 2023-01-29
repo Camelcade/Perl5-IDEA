@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,7 +99,7 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
     if (myCommand == null) {
       throw new RuntimeException("No command in " + pathToConfig);
     }
-    myIsOptionsFirst = Boolean.valueOf(generalElement.getAttributeValue(OPTIONS_FIRST_KEY));
+    myIsOptionsFirst = Boolean.parseBoolean(generalElement.getAttributeValue(OPTIONS_FIRST_KEY));
     LOG.debug("Loading options for " + myCommand + " from " + pathToConfig);
 
     Map<String, OptionDescriptor> allOptionsMap = new HashMap<>();
