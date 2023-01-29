@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,10 +64,10 @@ public class PerlScalarContextValue extends PerlOperationValue {
     }
     if (targetValue instanceof PerlArrayValue) {
       List<PerlValue> arrayElements = ((PerlArrayValue)targetValue).getElements();
-      return arrayElements.indexOf(UNKNOWN_VALUE) < 0 ? PerlScalarValue.create(arrayElements.size()) : UNKNOWN_VALUE;
+      return !arrayElements.contains(UNKNOWN_VALUE) ? PerlScalarValue.create(arrayElements.size()) : UNKNOWN_VALUE;
     }
     else if (targetValue instanceof PerlHashValue) {
-      return ((PerlHashValue)targetValue).getElements().indexOf(UNKNOWN_VALUE) < 0 ?
+      return !((PerlHashValue)targetValue).getElements().contains(UNKNOWN_VALUE) ?
              PerlScalarValue.create(((PerlHashValue)targetValue).getMap().size()) : UNKNOWN_VALUE;
     }
     return null;
