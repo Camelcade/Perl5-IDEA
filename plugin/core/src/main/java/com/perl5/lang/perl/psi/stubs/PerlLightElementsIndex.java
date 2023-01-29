@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("rawtypes")
 public abstract class PerlLightElementsIndex<LightPsi extends PsiElement> extends PerlStubIndexBase<PerlPolyNamedElement> {
   private static final int VERSION = 1;
 
@@ -36,6 +37,13 @@ public abstract class PerlLightElementsIndex<LightPsi extends PsiElement> extend
    * @return a class of {@code PsiElement} we should seek in the light elements provided
    */
   protected abstract Class<LightPsi> getLightPsiClass();
+
+
+  @Override
+  protected @NotNull Class<PerlPolyNamedElement> getPsiClass() {
+    return PerlPolyNamedElement.class;
+  }
+
 
   /**
    * @return true iff {@code lightPsi} element matches {@code key} passed to filtering method

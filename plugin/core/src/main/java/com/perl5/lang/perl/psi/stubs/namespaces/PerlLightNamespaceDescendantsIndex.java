@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import org.jetbrains.annotations.NotNull;
  */
 public class PerlLightNamespaceDescendantsIndex extends PerlLightElementsIndex<PerlNamespaceDefinitionElement> {
   public static final int VERSION = 2;
+  @SuppressWarnings("rawtypes")
   public static final StubIndexKey<String, PerlPolyNamedElement>
     LIGHT_NAMESPACE_DESCENDANTS_KEY = StubIndexKey.createIndexKey("perl.package.light.descendants");
 
@@ -38,14 +39,10 @@ public class PerlLightNamespaceDescendantsIndex extends PerlLightElementsIndex<P
     return super.getVersion() + VERSION;
   }
 
+  @SuppressWarnings("rawtypes")
   @Override
   public @NotNull StubIndexKey<String, PerlPolyNamedElement> getKey() {
     return LIGHT_NAMESPACE_DESCENDANTS_KEY;
-  }
-
-  @Override
-  protected @NotNull Class<PerlPolyNamedElement> getPsiClass() {
-    return PerlPolyNamedElement.class;
   }
 
   @Override

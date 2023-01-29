@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class PerlLightCallableNamesIndex extends PerlLightElementsIndex<PerlCallableElement> {
   public static final int VERSION = 0;
+  @SuppressWarnings("rawtypes")
   public static final StubIndexKey<String, PerlPolyNamedElement> KEY = StubIndexKey.createIndexKey("perl.callable.names.light");
 
   @Override
@@ -32,14 +33,10 @@ public class PerlLightCallableNamesIndex extends PerlLightElementsIndex<PerlCall
     return super.getVersion() + VERSION;
   }
 
+  @SuppressWarnings("rawtypes")
   @Override
   public @NotNull StubIndexKey<String, PerlPolyNamedElement> getKey() {
     return KEY;
-  }
-
-  @Override
-  protected @NotNull Class<PerlPolyNamedElement> getPsiClass() {
-    return PerlPolyNamedElement.class;
   }
 
   @Override
