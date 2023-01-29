@@ -45,8 +45,7 @@ public class PerlValues {
     PerlArrayElementValue.create(ARGUMENTS_VALUE, FIRST_ELEMENT_INDEX_VALUE));
 
   public static final PerlValue DELEGATE_METHOD_ARGUMENTS = PerlSublistValue.createShiftValue(ARGUMENTS_VALUE);
-  public static final List<PerlValue> DELEGATE_METHOD_ARGUMENTS_LIST =
-    Collections.unmodifiableList(Collections.singletonList(DELEGATE_METHOD_ARGUMENTS));
+  public static final List<PerlValue> DELEGATE_METHOD_ARGUMENTS_LIST =    Collections.singletonList(DELEGATE_METHOD_ARGUMENTS);
 
   public static final PerlValue DUMMY_SCALAR = PerlScalarValue.create("dummy");
 
