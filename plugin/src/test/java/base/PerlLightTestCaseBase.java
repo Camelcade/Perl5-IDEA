@@ -1716,12 +1716,14 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
 
-  protected void doInspectionTest(@NotNull Class<? extends LocalInspectionTool>... clazz) {
+  @SafeVarargs
+  protected final void doInspectionTest(@NotNull Class<? extends LocalInspectionTool>... clazz) {
     initWithFileSmart();
     doInspectionTestWithoutInit(clazz);
   }
 
-  protected void doInspectionTestWithoutInit(@NotNull Class<? extends LocalInspectionTool>... clazz) {
+  @SafeVarargs
+  protected final void doInspectionTestWithoutInit(@NotNull Class<? extends LocalInspectionTool>... clazz) {
     addVirtualFileFilter();
     for (Class<? extends LocalInspectionTool> aClass : clazz) {
       //noinspection unchecked
