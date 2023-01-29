@@ -153,7 +153,7 @@ public class PerlVariableAnnotations {
     boolean valueSet = false;
     boolean valueSetExplicitly = false;
     for (PerlAnnotation annotation : annotationList) {
-      if (annotation instanceof PsiPerlAnnotationDeprecated annotationDeprecated) {
+      if (annotation instanceof PsiPerlAnnotationDeprecated) {
         if (!annotationsProcessor.processDeprecated()) {
           return false;
         }
