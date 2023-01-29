@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,89 +28,89 @@ public class PerlWarningTree {
   public static final PerlWarningTreeNode TREE = new PerlWarningTreeNode(
     5.008, "all", new ArrayList<>(Arrays.asList(
     new PerlWarningTreeNode(5.008, "io", new ArrayList<>(Arrays.asList(
-      new PerlWarningTreeLeaf(5.008, "pipe", false),
-      new PerlWarningTreeLeaf(5.008, "unopened", false),
-      new PerlWarningTreeLeaf(5.008, "closed", false),
-      new PerlWarningTreeLeaf(5.008, "newline", false),
-      new PerlWarningTreeLeaf(5.008, "exec", false),
-      new PerlWarningTreeLeaf(5.008, "layer", false),
+      new PerlWarningTreeLeaf(5.008, "pipe"),
+      new PerlWarningTreeLeaf(5.008, "unopened"),
+      new PerlWarningTreeLeaf(5.008, "closed"),
+      new PerlWarningTreeLeaf(5.008, "newline"),
+      new PerlWarningTreeLeaf(5.008, "exec"),
+      new PerlWarningTreeLeaf(5.008, "layer"),
 
-      new PerlWarningTreeLeaf(5.019, "syscalls", true)
+      new PerlWarningTreeLeaf(5.019, "syscalls")
     ))),
 
     new PerlWarningTreeNode(5.008, "syntax", new ArrayList<>(Arrays.asList(
-      new PerlWarningTreeLeaf(5.008, "ambiguous", false),
-      new PerlWarningTreeLeaf(5.008, "semicolon", false),
-      new PerlWarningTreeLeaf(5.008, "precedence", false),
-      new PerlWarningTreeLeaf(5.008, "bareword", false),
-      new PerlWarningTreeLeaf(5.008, "reserved", false),
-      new PerlWarningTreeLeaf(5.008, "digit", false),
-      new PerlWarningTreeLeaf(5.008, "parenthesis", false),
-      new PerlWarningTreeLeaf(5.008, "printf", false),
-      new PerlWarningTreeLeaf(5.008, "prototype", false),
-      new PerlWarningTreeLeaf(5.008, "qw", false),
+      new PerlWarningTreeLeaf(5.008, "ambiguous"),
+      new PerlWarningTreeLeaf(5.008, "semicolon"),
+      new PerlWarningTreeLeaf(5.008, "precedence"),
+      new PerlWarningTreeLeaf(5.008, "bareword"),
+      new PerlWarningTreeLeaf(5.008, "reserved"),
+      new PerlWarningTreeLeaf(5.008, "digit"),
+      new PerlWarningTreeLeaf(5.008, "parenthesis"),
+      new PerlWarningTreeLeaf(5.008, "printf"),
+      new PerlWarningTreeLeaf(5.008, "prototype"),
+      new PerlWarningTreeLeaf(5.008, "qw"),
 
-      new PerlWarningTreeLeaf(5.011, "illegalproto", false)
+      new PerlWarningTreeLeaf(5.011, "illegalproto")
     ))),
 
     new PerlWarningTreeNode(5.008, "severe", new ArrayList<>(Arrays.asList(
-      new PerlWarningTreeLeaf(5.008, "inplace", true),
-      new PerlWarningTreeLeaf(5.008, "internal", false),
-      new PerlWarningTreeLeaf(5.008, "debugging", true),
-      new PerlWarningTreeLeaf(5.008, "malloc", true)
+      new PerlWarningTreeLeaf(5.008, "inplace"),
+      new PerlWarningTreeLeaf(5.008, "internal"),
+      new PerlWarningTreeLeaf(5.008, "debugging"),
+      new PerlWarningTreeLeaf(5.008, "malloc")
     ))),
 
-    new PerlWarningTreeLeaf(5.008, "deprecated", true),
-    new PerlWarningTreeLeaf(5.008, "void", false),
-    new PerlWarningTreeLeaf(5.008, "recursion", false),
-    new PerlWarningTreeLeaf(5.008, "redefine", false),
-    new PerlWarningTreeLeaf(5.008, "numeric", false),
-    new PerlWarningTreeLeaf(5.008, "uninitialized", false),
-    new PerlWarningTreeLeaf(5.008, "once", false),
-    new PerlWarningTreeLeaf(5.008, "misc", false),
-    new PerlWarningTreeLeaf(5.008, "regexp", false),
-    new PerlWarningTreeLeaf(5.008, "glob", true),
-    new PerlWarningTreeLeaf(5.008, "untie", false),
-    new PerlWarningTreeLeaf(5.008, "substr", false),
-    new PerlWarningTreeLeaf(5.008, "taint", false),
-    new PerlWarningTreeLeaf(5.008, "signal", false),
-    new PerlWarningTreeLeaf(5.008, "closure", false),
-    new PerlWarningTreeLeaf(5.008, "overflow", false),
-    new PerlWarningTreeLeaf(5.008, "portable", false),
+    new PerlWarningTreeLeaf(5.008, "deprecated"),
+    new PerlWarningTreeLeaf(5.008, "void"),
+    new PerlWarningTreeLeaf(5.008, "recursion"),
+    new PerlWarningTreeLeaf(5.008, "redefine"),
+    new PerlWarningTreeLeaf(5.008, "numeric"),
+    new PerlWarningTreeLeaf(5.008, "uninitialized"),
+    new PerlWarningTreeLeaf(5.008, "once"),
+    new PerlWarningTreeLeaf(5.008, "misc"),
+    new PerlWarningTreeLeaf(5.008, "regexp"),
+    new PerlWarningTreeLeaf(5.008, "glob"),
+    new PerlWarningTreeLeaf(5.008, "untie"),
+    new PerlWarningTreeLeaf(5.008, "substr"),
+    new PerlWarningTreeLeaf(5.008, "taint"),
+    new PerlWarningTreeLeaf(5.008, "signal"),
+    new PerlWarningTreeLeaf(5.008, "closure"),
+    new PerlWarningTreeLeaf(5.008, "overflow"),
+    new PerlWarningTreeLeaf(5.008, "portable"),
 
     new PerlWarningTreeNode(5.008, "utf8", new ArrayList<>(Arrays.asList(
-      new PerlWarningTreeLeaf(5.013, "surrogate", false),
-      new PerlWarningTreeLeaf(5.013, "nonchar", false),
-      new PerlWarningTreeLeaf(5.013, "non_unicode", false)
+      new PerlWarningTreeLeaf(5.013, "surrogate"),
+      new PerlWarningTreeLeaf(5.013, "nonchar"),
+      new PerlWarningTreeLeaf(5.013, "non_unicode")
     ))),
 
-    new PerlWarningTreeLeaf(5.008, "exiting", false),
-    new PerlWarningTreeLeaf(5.008, "pack", false),
-    new PerlWarningTreeLeaf(5.008, "unpack", false),
-    new PerlWarningTreeLeaf(5.008, "threads", false),
+    new PerlWarningTreeLeaf(5.008, "exiting"),
+    new PerlWarningTreeLeaf(5.008, "pack"),
+    new PerlWarningTreeLeaf(5.008, "unpack"),
+    new PerlWarningTreeLeaf(5.008, "threads"),
 
-    new PerlWarningTreeLeaf(5.011, "imprecision", false),
+    new PerlWarningTreeLeaf(5.011, "imprecision"),
 
     new PerlWarningTreeNode(5.017, "experimental", new ArrayList<>(Arrays.asList(
-      new PerlWarningTreeLeaf(5.017, "experimental::lexical_subs", true),
-      new PerlWarningTreeLeaf(5.017, "experimental::regex_sets", true),
-      new PerlWarningTreeLeaf(5.017, "experimental::lexical_topic", true),
-      new PerlWarningTreeLeaf(5.017, "experimental::smartmatch", true),
+      new PerlWarningTreeLeaf(5.017, "experimental::lexical_subs"),
+      new PerlWarningTreeLeaf(5.017, "experimental::regex_sets"),
+      new PerlWarningTreeLeaf(5.017, "experimental::lexical_topic"),
+      new PerlWarningTreeLeaf(5.017, "experimental::smartmatch"),
 
-      new PerlWarningTreeLeaf(5.019, "experimental::postderef", true),
-      new PerlWarningTreeLeaf(5.019, "experimental::autoderef", true),
-      new PerlWarningTreeLeaf(5.019, "experimental::signatures", true),
+      new PerlWarningTreeLeaf(5.019, "experimental::postderef"),
+      new PerlWarningTreeLeaf(5.019, "experimental::autoderef"),
+      new PerlWarningTreeLeaf(5.019, "experimental::signatures"),
 
-      new PerlWarningTreeLeaf(5.021, "experimental::win32_perlio", true),
-      new PerlWarningTreeLeaf(5.021, "experimental::refaliasing", true),
-      new PerlWarningTreeLeaf(5.021, "experimental::re_strict", true),
-      new PerlWarningTreeLeaf(5.021, "experimental::const_attr", true),
-      new PerlWarningTreeLeaf(5.021, "experimental::bitwise", true)
+      new PerlWarningTreeLeaf(5.021, "experimental::win32_perlio"),
+      new PerlWarningTreeLeaf(5.021, "experimental::refaliasing"),
+      new PerlWarningTreeLeaf(5.021, "experimental::re_strict"),
+      new PerlWarningTreeLeaf(5.021, "experimental::const_attr"),
+      new PerlWarningTreeLeaf(5.021, "experimental::bitwise")
     ))),
 
-    new PerlWarningTreeLeaf(5.021, "missing", false),
-    new PerlWarningTreeLeaf(5.021, "redundant", false),
-    new PerlWarningTreeLeaf(5.021, "locale", true)
+    new PerlWarningTreeLeaf(5.021, "missing"),
+    new PerlWarningTreeLeaf(5.021, "redundant"),
+    new PerlWarningTreeLeaf(5.021, "locale")
   )));
 
   public static final Map<String, PerlWarningTreeLeaf> LEAF_OPTIONS;
