@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,9 +59,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
   }
 
   private @NotNull List<MojoProject> runMojoGenerateActionAndGetProjects(MojoGenerateAction action) {
-    var testSemaphore = action.runWithTestSemaphore(() -> {
-      runAction(action, getModuleRoot());
-    });
+    var testSemaphore = action.runWithTestSemaphore(() -> runAction(action, getModuleRoot()));
     waitForAllDescriptorsToFinish();
     waitWithEventsDispatching("Final callback hasn't finished", testSemaphore::isUp);
     return refreshAndRescanForProjects().getMojoProjects();
