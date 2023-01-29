@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ import com.intellij.psi.tree.IElementType;
  * Class for parsed token type, stores start, end and token type
  */
 public class CustomToken {
-  private int tokenStart;
-  private int tokenEnd;
+  private final int tokenStart;
+  private final int tokenEnd;
   private IElementType tokenType;
 
   /**
