@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,20 +42,19 @@ import java.util.Objects;
 public abstract class PerlImplicitDeclarationsProvider {
   static final ExtensionPointName<PerlImplicitDeclarationsProvider> EP_NAME = ExtensionPointName.create("com.perl5.implicitSubsProvider");
   private static final Logger LOG = Logger.getInstance(PerlImplicitDeclarationsProvider.class);
-  @NonNls private static final String PACKAGE = "package";
-  @NonNls private static final String SUB_ELEMENT = "sub";
-  @NonNls private static final String VARIABLE = "var";
-  @NonNls private static final String NAME = "name";
-  @NonNls private static final String ARGUMENTS_ELEMENT = "arguments";
-  @NonNls private static final String OPTIONAL_ELEMENT = "optional";
-  @NonNls private static final String ARGUMENT_ELEMENT = "argument";
+  private static final @NonNls String PACKAGE = "package";
+  private static final @NonNls String SUB_ELEMENT = "sub";
+  private static final @NonNls String VARIABLE = "var";
+  private static final @NonNls String NAME = "name";
+  private static final @NonNls String ARGUMENTS_ELEMENT = "arguments";
+  private static final @NonNls String OPTIONAL_ELEMENT = "optional";
+  private static final @NonNls String ARGUMENT_ELEMENT = "argument";
 
   /**
    * @return path to XML resource with entities description or null if there is no one
    * @see PerlImplicitDeclarationsService#readSubs(java.lang.ClassLoader, java.lang.String)
    */
-  @NonNls
-  protected abstract @Nullable String getDataFileName();
+  protected abstract @NonNls @Nullable String getDataFileName();
 
   /**
    * Registers implicit entities with project-level {@link PerlImplicitDeclarationsService}

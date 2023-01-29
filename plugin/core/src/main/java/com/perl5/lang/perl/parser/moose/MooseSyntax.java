@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,19 +19,19 @@ package com.perl5.lang.perl.parser.moose;
 import org.jetbrains.annotations.NonNls;
 
 public final class MooseSyntax {
-  @NonNls public static final String MOOSE_KEYWORD_AFTER = "after";
-  @NonNls public static final String MOOSE_KEYWORD_AROUND = "around";
-  @NonNls public static final String MOOSE_KEYWORD_AUGMENT = "augment";
-  @NonNls public static final String MOOSE_KEYWORD_BEFORE = "before";
-  @NonNls public static final String MOOSE_KEYWORD_EXCLUDES = "excludes";
-  @NonNls public static final String MOOSE_KEYWORD_EXTENDS = "extends";
-  @NonNls public static final String MOOSE_KEYWORD_HAS = "has";
-  @NonNls public static final String MOOSE_KEYWORD_INNER = "inner";
-  @NonNls public static final String MOOSE_KEYWORD_META = "meta";
-  @NonNls public static final String MOOSE_KEYWORD_OVERRIDE = "override";
-  @NonNls public static final String MOOSE_KEYWORD_REQUIRES = "requires";
-  @NonNls public static final String MOOSE_KEYWORD_SUPER = "super";
-  @NonNls public static final String MOOSE_KEYWORD_WITH = "with";
+  public static final @NonNls String MOOSE_KEYWORD_AFTER = "after";
+  public static final @NonNls String MOOSE_KEYWORD_AROUND = "around";
+  public static final @NonNls String MOOSE_KEYWORD_AUGMENT = "augment";
+  public static final @NonNls String MOOSE_KEYWORD_BEFORE = "before";
+  public static final @NonNls String MOOSE_KEYWORD_EXCLUDES = "excludes";
+  public static final @NonNls String MOOSE_KEYWORD_EXTENDS = "extends";
+  public static final @NonNls String MOOSE_KEYWORD_HAS = "has";
+  public static final @NonNls String MOOSE_KEYWORD_INNER = "inner";
+  public static final @NonNls String MOOSE_KEYWORD_META = "meta";
+  public static final @NonNls String MOOSE_KEYWORD_OVERRIDE = "override";
+  public static final @NonNls String MOOSE_KEYWORD_REQUIRES = "requires";
+  public static final @NonNls String MOOSE_KEYWORD_SUPER = "super";
+  public static final @NonNls String MOOSE_KEYWORD_WITH = "with";
 
   private MooseSyntax() {
   }

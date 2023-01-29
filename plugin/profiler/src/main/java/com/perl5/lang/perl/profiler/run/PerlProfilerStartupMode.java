@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ public enum PerlProfilerStartupMode {
   NO("no", "don't automatically start");
 
 
-  @NonNls private final @NotNull String myProfilerCommand;
+  private final @NonNls @NotNull String myProfilerCommand;
   private final @NotNull @Nls String myExplanation;
 
   PerlProfilerStartupMode(@NotNull String profilerCommand,
@@ -36,8 +36,7 @@ public enum PerlProfilerStartupMode {
     myExplanation = explanation;
   }
 
-  @NonNls
-  public @NotNull String getProfilerCommand() {
+  public @NonNls @NotNull String getProfilerCommand() {
     return myProfilerCommand;
   }
 

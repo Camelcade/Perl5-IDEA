@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,25 +52,25 @@ import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_ATTRIBUTE
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.LIGHT_METHOD_DEFINITION;
 
 public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
-  @NonNls private static final String WRITER_KEY = "writer";
-  @NonNls private static final String ACCESSOR_KEY = "accessor";
-  @NonNls private static final String READER_KEY = "reader";
-  @NonNls private static final String PREDICATE_KEY = "predicate";
-  @NonNls private static final String CLEARER_KEY = "clearer";
-  @NonNls private static final List<String> MOOSE_SUB_NAMES_KEYS = Arrays.asList(
+  private static final @NonNls String WRITER_KEY = "writer";
+  private static final @NonNls String ACCESSOR_KEY = "accessor";
+  private static final @NonNls String READER_KEY = "reader";
+  private static final @NonNls String PREDICATE_KEY = "predicate";
+  private static final @NonNls String CLEARER_KEY = "clearer";
+  private static final @NonNls List<String> MOOSE_SUB_NAMES_KEYS = Arrays.asList(
     READER_KEY, WRITER_KEY, ACCESSOR_KEY, PREDICATE_KEY, CLEARER_KEY
   );
-  @NonNls private static final String RW_KEY = "rw";
-  @NonNls private static final String RWP_KEY = "rwp";
-  @NonNls private static final String IS_KEY = "is";
-  @NonNls private static final String ISA_KEY = "isa";
-  @NonNls private static final String DOES_KEY = "does";
-  @NonNls private static final String HANDLES_KEY = "handles";
-  @NonNls private static final String PROTECTED_MUTATOR_PREFIX = "_set_";
-  @NonNls private static final String MOO_CLEARER_PREFIX = "clear_";
-  @NonNls private static final String _MOO_CLEARER_PREFIX = "_" + MOO_CLEARER_PREFIX;
-  @NonNls private static final String MOO_PREDICATE_PREFIX = "has_";
-  @NonNls private static final String _MOO_PREDICATE_PREFIX = "_" + MOO_PREDICATE_PREFIX;
+  private static final @NonNls String RW_KEY = "rw";
+  private static final @NonNls String RWP_KEY = "rwp";
+  private static final @NonNls String IS_KEY = "is";
+  private static final @NonNls String ISA_KEY = "isa";
+  private static final @NonNls String DOES_KEY = "does";
+  private static final @NonNls String HANDLES_KEY = "handles";
+  private static final @NonNls String PROTECTED_MUTATOR_PREFIX = "_set_";
+  private static final @NonNls String MOO_CLEARER_PREFIX = "clear_";
+  private static final @NonNls String _MOO_CLEARER_PREFIX = "_" + MOO_CLEARER_PREFIX;
+  private static final @NonNls String MOO_PREDICATE_PREFIX = "has_";
+  private static final @NonNls String _MOO_PREDICATE_PREFIX = "_" + MOO_PREDICATE_PREFIX;
 
   @Override
   public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement subCallElement) {
