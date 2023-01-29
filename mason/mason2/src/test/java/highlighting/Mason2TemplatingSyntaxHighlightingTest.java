@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,30 @@
 package highlighting;
 
 import base.Mason2TopLevelComponentTestCase;
-import com.perl5.lang.mason2.filetypes.MasonInternalComponentFileType;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+import java.util.Arrays;
+import java.util.Collection;
+
+import static com.perl5.lang.mason2.filetypes.MasonInternalComponentFileType.INTERNAL_COMPONENT_EXTENSION;
+import static com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType.TOP_LEVEL_COMPONENT_EXTENSION;
+
+@RunWith(Parameterized.class)
 public class Mason2TemplatingSyntaxHighlightingTest extends Mason2TopLevelComponentTestCase {
+  private final @NotNull String myExtension;
+
+  public Mason2TemplatingSyntaxHighlightingTest(@NotNull String extension) {
+    myExtension = extension;
+  }
+
+  @Override
+  public String getFileExtension() {
+    return myExtension;
+  }
+
   @Override
   protected String getBaseDataPath() {
     return "highlighting/syntax/templates";
@@ -54,10 +74,11 @@ public class Mason2TemplatingSyntaxHighlightingTest extends Mason2TopLevelCompon
     doTestHighlighter(checkErrors);
   }
 
-  public static class InternalComponent extends Mason2TemplatingSyntaxHighlightingTest {
-    @Override
-    public String getFileExtension() {
-      return MasonInternalComponentFileType.INTERNAL_COMPONENT_EXTENSION;
-    }
+  @Parameterized.Parameters(name = "{0}")
+  public static Collection<Object[]> data() {
+    return Arrays.asList(new Object[][]{
+      {INTERNAL_COMPONENT_EXTENSION},
+      {TOP_LEVEL_COMPONENT_EXTENSION},
+    });
   }
 }
