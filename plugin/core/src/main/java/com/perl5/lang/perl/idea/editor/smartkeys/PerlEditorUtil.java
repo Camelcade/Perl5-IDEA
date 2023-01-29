@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -141,6 +141,6 @@ public class PerlEditorUtil {
    * True iff previous non-space token is one of the {@code elementTypes}
    */
   public static boolean isPreviousToken(@NotNull Editor editor, int offset, @NotNull TokenSet elementTypes) {
-    return elementTypes.contains(getPreviousTokenType(((EditorEx)editor).getHighlighter().createIterator(offset), false));
+    return elementTypes.contains(getPreviousTokenType(editor.getHighlighter().createIterator(offset), false));
   }
 }
