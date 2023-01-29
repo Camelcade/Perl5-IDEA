@@ -3207,4 +3207,24 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), b.toString());
   }
+
+  /**
+   * @return test data for parametrized tests with name and code prefix for entity definition
+   */
+  protected static @NotNull List<Object[]> getSubLikeTestParameters() {
+    return Arrays.asList(new Object[][]{
+      {"after", "after somemethod"},
+      {"around", "around somemethod"},
+      {"augment", "augment somemethod"},
+      {"before", "before somemethod"},
+      {"fun", "fun somefun"},
+      {"func", "func somefunc"},
+      {"funExpr", "fun"},
+      {"method", "method somemethod"},
+      {"methodExpr", "method"},
+      {"override", "override somemethod"},
+      {"sub", "sub somesub"},
+      {"subExpr", "sub"}
+    });
+  }
 }

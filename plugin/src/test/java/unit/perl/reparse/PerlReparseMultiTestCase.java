@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,18 +19,36 @@ package unit.perl.reparse;
 import base.PerlLightTestCase;
 import com.intellij.openapi.util.io.FileUtil;
 import org.jetbrains.annotations.NotNull;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
+@RunWith(Parameterized.class)
 public abstract class PerlReparseMultiTestCase extends PerlLightTestCase {
+
+  private final @NotNull String myName;
+  private final @NotNull String myCodeSample;
+
+  protected PerlReparseMultiTestCase(@NotNull String name, @NotNull String codeSample) {
+    myName = name;
+    myCodeSample = codeSample;
+  }
+
+  protected @NotNull String buildCodeSample() {
+    return myCodeSample;
+  }
+
+
+  protected @NotNull String getAnswersDirectory() {
+    return myName;
+  }
 
   protected void doTest(@NotNull String textToInsert) {
     initWithTextSmartWithoutErrors(buildCodeSample());
     doTestReparseWithoutInit(textToInsert);
   }
 
-  protected abstract @NotNull String buildCodeSample();
-
   @Override
   protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
-    return FileUtil.join(getClass().getSimpleName(), super.computeAnswerFileName(appendix));
+    return FileUtil.join(getAnswersDirectory(), super.computeAnswerFileName(appendix));
   }
 }

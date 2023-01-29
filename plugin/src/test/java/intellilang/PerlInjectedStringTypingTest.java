@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,15 +20,30 @@ import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-public abstract class PerlInjectedStringTypingTestCase extends PerlLightTestCase {
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.function.Function;
+
+@RunWith(Parameterized.class)
+public class PerlInjectedStringTypingTest extends PerlLightTestCase {
+  private final @NotNull String myName;
+  private final @NotNull Function<String, String> myContentModifier;
+
+  public PerlInjectedStringTypingTest(@NotNull String name, @NotNull Function<String, String> contentModifier) {
+    myName = name;
+    myContentModifier = contentModifier;
+  }
+
   @Override
   protected String getBaseDataPath() {
     return "intellilang/perl/typing";
   }
 
   @Test
-  public void testStringWithInterpolationAfterVariable() {doTest(" typedtext");}
+  public void testStringWithInterpolationAfterVariable() { doTest(" typedtext"); }
 
   @Test
   public void testStringWithInterpolationAfterVariableJoin() {doTest("typedtext");}
@@ -112,30 +127,20 @@ public abstract class PerlInjectedStringTypingTestCase extends PerlLightTestCase
 
   @Override
   protected String getResultsTestDataPath() {
-    return super.getResultsTestDataPath() + "/" + getClass().getSimpleName();
+    return super.getResultsTestDataPath() + "/" + myName;
   }
 
-  public static class StringQ extends PerlInjectedStringTypingTestCase {
-    @Override
-    public void initWithFileContent(String filename, String extension, String content) {
-      super.initWithFileContent(filename, extension, "#@inject HTML\n" +
-                                                     "'" + content + "'");
-    }
+  @Override
+  public void initWithFileContent(String filename, String extension, String content) {
+    super.initWithFileContent(filename, extension, myContentModifier.apply(content));
   }
 
-  public static class StringDQ extends PerlInjectedStringTypingTestCase {
-    @Override
-    public void initWithFileContent(String filename, String extension, String content) {
-      super.initWithFileContent(filename, extension, "#@inject HTML\n" +
-                                                     "\"" + content + "\"");
-    }
-  }
-
-  public static class StringXQ extends PerlInjectedStringTypingTestCase {
-    @Override
-    public void initWithFileContent(String filename, String extension, String content) {
-      super.initWithFileContent(filename, extension, "#@inject HTML\n" +
-                                                     "`" + content + "`");
-    }
+  @Parameterized.Parameters(name = "{0}")
+  public static Collection<Object[]> data() {
+    return Arrays.asList(new Object[][]{
+      {"StringXQ", (Function<String, String>)content -> "#@inject HTML\n" + "`" + content + "`"},
+      {"StringDQ", (Function<String, String>)content -> "#@inject HTML\n" + "\"" + content + "\""},
+      {"StringQ", (Function<String, String>)content -> "#@inject HTML\n" + "'" + content + "'"}
+    });
   }
 }

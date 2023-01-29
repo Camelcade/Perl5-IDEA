@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,23 +19,40 @@ package unit.perl.parser;
 
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-public abstract class PerlFunctionParametersParserTestCase extends PerlParserTestBase {
+import java.util.Arrays;
+import java.util.Collection;
+
+@RunWith(Parameterized.class)
+public class PerlFunctionParametersParserTestCase extends PerlParserTestBase {
+
+  private final @NotNull String myDataDirName;
+  private final boolean myIsFunction;
+
+  public PerlFunctionParametersParserTestCase(@NotNull String dataDirName, boolean isFunction) {
+    myDataDirName = dataDirName;
+    myIsFunction = isFunction;
+  }
+
   @Override
   protected final String getBaseDataPath() {
     return "unit/perl/parser/functionParameters/" + getDataDirName();
   }
 
-  protected abstract @NotNull String getDataDirName();
+  protected @NotNull String getDataDirName() {
+    return myDataDirName;
+  }
 
   @Test
-  public void testJoined() {doTest(false);}
+  public void testJoined() { doTest(false); }
 
   @Test
-  public void testOmited() {doTest();}
+  public void testOmited() { doTest(); }
 
   @Test
-  public void testOmitedArray() {doTest();}
+  public void testOmitedArray() { doTest(); }
 
   @Test
   public void testTyped() {doTest();}
@@ -89,99 +106,29 @@ public abstract class PerlFunctionParametersParserTestCase extends PerlParserTes
   public void testNoSignatureAttrs() {doTest(false);}
 
   @Test
-  public void testInvocant() {doTest();}
+  public void testInvocant() { doTest(!myIsFunction); }
 
   @Test
-  public void testInvocantWithNamed() {doTest();}
+  public void testInvocantWithNamed() { doTest(!myIsFunction); }
 
   @Test
-  public void testInvocantWithPositional() {doTest();}
+  public void testInvocantWithPositional() { doTest(!myIsFunction); }
 
   @Test
-  public void testInvocantWithPositionalNamed() {doTest();}
+  public void testInvocantWithPositionalNamed() { doTest(!myIsFunction); }
 
-  public static class AfterTest extends PerlFunctionParametersParserTestCase {
-    @Override
-    protected @NotNull String getDataDirName() {
-      return "after";
-    }
-  }
-
-  public static class AroundTest extends PerlFunctionParametersParserTestCase {
-    @Override
-    protected @NotNull String getDataDirName() {
-      return "around";
-    }
-  }
-
-  public static class AugmentTest extends PerlFunctionParametersParserTestCase {
-    @Override
-    protected @NotNull String getDataDirName() {
-      return "augment";
-    }
-  }
-
-  public static class BeforeTest extends PerlFunctionParametersParserTestCase {
-    @Override
-    protected @NotNull String getDataDirName() {
-      return "before";
-    }
-  }
-
-  public abstract static class FunctionTestCase extends PerlFunctionParametersParserTestCase {
-    @Override
-    @Test
-    public void testInvocant() {doTest(false);}
-
-    @Override
-    @Test
-    public void testInvocantWithNamed() {doTest(false);}
-
-    @Override
-    @Test
-    public void testInvocantWithPositional() {doTest(false);}
-
-    @Override
-    @Test
-    public void testInvocantWithPositionalNamed() {doTest(false);}
-  }
-
-  public static class FunctionTest extends FunctionTestCase {
-    @Override
-    protected @NotNull String getDataDirName() {
-      return "fun";
-    }
-  }
-
-  public static class FunctionAnonTest extends FunctionTestCase {
-    @Override
-    protected @NotNull String getDataDirName() {
-      return "funAnon";
-    }
-  }
-
-  public static class MethodAnonTest extends FunctionTestCase {
-    @Override
-    protected @NotNull String getDataDirName() {
-      return "methodAnon";
-    }
-  }
-
-  public static class MethodTest extends PerlFunctionParametersParserTestCase {
-    @Override
-    protected @NotNull String getDataDirName() {
-      return "method";
-    }
-
-    @Override
-    @Test
-    public void testNoSignatureAttrs() {doTest();}
-  }
-
-  public static class OverrideTest extends PerlFunctionParametersParserTestCase {
-    @Override
-    protected @NotNull String getDataDirName() {
-      return "override";
-    }
+  @Parameterized.Parameters(name = "{0}")
+  public static Collection<Object[]> data() {
+    return Arrays.asList(new Object[][]{
+      {"fun", true},
+      {"funAnon", true},
+      {"methodAnon", true},
+      {"override", false},
+      {"method", false},
+      {"augment", false},
+      {"before", false},
+      {"around", false},
+      {"after", false},
+    });
   }
 }
