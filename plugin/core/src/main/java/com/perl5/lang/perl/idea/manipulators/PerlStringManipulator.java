@@ -92,7 +92,7 @@ public class PerlStringManipulator extends AbstractElementManipulator<PerlString
           result.append('\\');
         }
       }
-      else if (!charsToEscape.isEmpty() && charsToEscape.indexOf(currentChar) >= 0) {
+      else if (charsToEscape.indexOf(currentChar) >= 0) {
         result.append('\\');
       }
       result.append(currentChar);
@@ -137,7 +137,7 @@ public class PerlStringManipulator extends AbstractElementManipulator<PerlString
         result.append("\\e");
         continue;
       }
-      else if (!charsToEscape.isEmpty() && charsToEscape.indexOf(currentChar) >= 0) {
+      else if (charsToEscape.indexOf(currentChar) >= 0) {
         result.append('\\');
       }
       else if (!plainAllowedChar(currentChar)) {
