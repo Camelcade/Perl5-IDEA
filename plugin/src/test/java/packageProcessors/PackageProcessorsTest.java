@@ -23,7 +23,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.junit.Test;
-public class packageProcessorsTest extends PerlLightTestCase {
+public class PackageProcessorsTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "packageProcessors";
