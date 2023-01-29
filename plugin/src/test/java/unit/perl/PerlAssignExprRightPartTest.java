@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 
 import java.util.List;
-public class PerlAssignExprRightPart extends PerlLightTestCase {
+public class PerlAssignExprRightPartTest extends PerlLightTestCase {
 
   @Override
   protected String getBaseDataPath() {
@@ -35,7 +35,7 @@ public class PerlAssignExprRightPart extends PerlLightTestCase {
   }
 
   @Test
-  public void testAssignListToScalar() {doTest();}
+  public void testAssignListToScalar() { doTest(); }
 
   @Test
   public void testAssignListToScalarMulti() {doTest();}
