@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -215,13 +215,13 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
 
   private void checkProfilingResultsWithFile(@NotNull CallTreeBuilder<BaseCallStackElement> treeBuilder) {
     assertInstanceOf(treeBuilder, DummyCallTreeBuilder.class);
-    var stacks = ((DummyCallTreeBuilder)treeBuilder).getAllStacks();
+    var stacks = treeBuilder.getAllStacks();
     List<String> serializedFrames = new ArrayList<>();
-    for (Object stack : stacks) {
+    for (var stack : stacks) {
       assertInstanceOf(stack, Stack.class);
-      var frames = ((Stack)stack).getFrames();
+      var frames = stack.getFrames();
       List<String> serializedStack = new ArrayList<>();
-      for (Object frame : frames) {
+      for (var frame : frames) {
         var frameString = frame.toString();
         var prefix = "ANON__[";
         var prefixOffset = frameString.indexOf(prefix);
@@ -311,7 +311,7 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     return toolWindow;
   }
 
-  private void modifyOnlyConfiguration(@NotNull Consumer<PerlProfilerConfigurationState> stateModifier) {
+  private void modifyOnlyConfiguration(@NotNull Consumer<? super PerlProfilerConfigurationState> stateModifier) {
     var profilerRunConfigurationsManager = ProfilerRunConfigurationsManager.getInstance();
     var configurations = profilerRunConfigurationsManager.getConfigurations();
     for (ProfilerConfigurationState configuration : configurations) {
