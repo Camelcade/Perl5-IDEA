@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
-public class PerlVersionManagerParsers extends PerlLightTestCase {
+public class PerlVersionManagerParsersTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "unit/perl/vmList";
