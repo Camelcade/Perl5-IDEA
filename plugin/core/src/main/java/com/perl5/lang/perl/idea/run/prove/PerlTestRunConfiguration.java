@@ -179,7 +179,7 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
       commandLine.withParameters(testScriptParametersList);
     }
 
-    ArrayList<String> perlParametersList = new ArrayList<>(getPerlParametersList());
+    List<String> perlParametersList = new ArrayList<>(getPerlParametersList());
     perlParametersList.addAll(additionalPerlParameters);
     perlParametersList.addAll(perlRunIncludeArguments);
 
