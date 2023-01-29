@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,15 +19,27 @@ package unit.perl.reparse;
 import base.PerlLightTestCase;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-public abstract class PerlHeredocReparseTestCase extends PerlLightTestCase {
+import java.util.Arrays;
+import java.util.Collection;
+
+@RunWith(Parameterized.class)
+public class PerlHeredocReparseTest extends PerlLightTestCase {
+  private final @NotNull String mySampleFileNameSuffix;
+
+  public PerlHeredocReparseTest(@NotNull String sampleFileNameSuffix) {
+    mySampleFileNameSuffix = sampleFileNameSuffix;
+  }
+
   @Override
   protected String getBaseDataPath() {
     return "unit/perl/reparse/heredoc";
   }
 
   @Test
-  public void testSomething() {doTest("something");}
+  public void testSomething() { doTest("something"); }
 
   @Test
   public void testScalar() {doTest("$something");}
@@ -99,76 +111,36 @@ public abstract class PerlHeredocReparseTestCase extends PerlLightTestCase {
   public void testMarkerQQ2Indented() {doTest("    MARKER_QQ2");}
 
   @Test
-  public void testMarkerQQ3() {doTest("MARKER_QQ3");}
+  public void testMarkerQQ3() { doTest("MARKER_QQ3"); }
 
   @Test
-  public void testMarkerQQ3Indented() {doTest("    MARKER_QQ3");}
+  public void testMarkerQQ3Indented() { doTest("    MARKER_QQ3"); }
 
   private void doTest(@NotNull String textToInsert) {
-    initWithFileSmartWithoutErrors(getSampleFileName());
+    initWithFileSmartWithoutErrors(getSampleFileNameName());
     doTestReparseWithoutInit(textToInsert);
   }
 
-  protected abstract @NotNull String getSampleFileName();
+  protected @NotNull String getSampleFileNameName() {
+    return "heredoc" + mySampleFileNameSuffix;
+  }
 
   @Override
   protected String getResultsTestDataPath() {
-    return super.getResultsTestDataPath() + "/" + getClass().getSimpleName();
+    return super.getResultsTestDataPath() + "/" + mySampleFileNameSuffix;
   }
 
-  public static class Q extends PerlHeredocReparseTestCase {
-    @Override
-    protected @NotNull String getSampleFileName() {
-      return "heredocQ";
-    }
-  }
-
-  public static class QIndented extends PerlHeredocReparseTestCase {
-    @Override
-    protected @NotNull String getSampleFileName() {
-      return "heredocQIndented";
-    }
-  }
-
-  public static class QX extends PerlHeredocReparseTestCase {
-    @Override
-    protected @NotNull String getSampleFileName() {
-      return "heredocQX";
-    }
-  }
-
-  public static class QXIndented extends PerlHeredocReparseTestCase {
-    @Override
-    protected @NotNull String getSampleFileName() {
-      return "heredocQXIndented";
-    }
-  }
-
-  public static class QQ extends PerlHeredocReparseTestCase {
-    @Override
-    protected @NotNull String getSampleFileName() {
-      return "heredocQQ";
-    }
-  }
-
-  public static class QQIndented extends PerlHeredocReparseTestCase {
-    @Override
-    protected @NotNull String getSampleFileName() {
-      return "heredocQQIndented";
-    }
-  }
-
-  public static class QQBare extends PerlHeredocReparseTestCase {
-    @Override
-    protected @NotNull String getSampleFileName() {
-      return "heredocQQBare";
-    }
-  }
-
-  public static class QQBareIndented extends PerlHeredocReparseTestCase {
-    @Override
-    protected @NotNull String getSampleFileName() {
-      return "heredocQQBareIndented";
-    }
+  @Parameterized.Parameters(name = "{0}")
+  public static Collection<Object[]> data() {
+    return Arrays.asList(new Object[][]{
+      {"Q"},
+      {"QIndented"},
+      {"QQ"},
+      {"QQBare"},
+      {"QQBareIndented"},
+      {"QQIndented"},
+      {"QX"},
+      {"QXIndented"},
+    });
   }
 }
