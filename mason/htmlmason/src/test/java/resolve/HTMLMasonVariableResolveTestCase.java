@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,25 @@ package resolve;
 
 
 import base.HTMLMasonLightTestCase;
+import com.intellij.openapi.util.io.FileUtil;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 /**
  * Proper file structure: https://github.com/hurricup/Perl5-IDEA/issues/905
  */
 public abstract class HTMLMasonVariableResolveTestCase extends HTMLMasonLightTestCase {
+  private final @NotNull String myBaseDataPath;
+
+  public HTMLMasonVariableResolveTestCase(@NotNull String baseDataPath) {
+    myBaseDataPath = baseDataPath;
+  }
+
+  @Override
+  protected @NotNull String getBaseDataPath() {
+    return FileUtil.join("resolve", myBaseDataPath);
+  }
+
   @Test
   public void testFromCleanup() {
     doTestResolve();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -3203,5 +3203,25 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       b.append("\n");
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), b.toString());
+  }
+
+  /**
+   * @return test data for parametrized tests with name and code prefix for entity definition
+   */
+  protected static @NotNull List<Object[]> getSubLikeTestParameters() {
+    return Arrays.asList(new Object[][]{
+      {"after", "after somemethod"},
+      {"around", "around somemethod"},
+      {"augment", "augment somemethod"},
+      {"before", "before somemethod"},
+      {"fun", "fun somefun"},
+      {"func", "func somefunc"},
+      {"funExpr", "fun"},
+      {"method", "method somemethod"},
+      {"methodExpr", "method"},
+      {"override", "override somemethod"},
+      {"sub", "sub somesub"},
+      {"subExpr", "sub"}
+    });
   }
 }

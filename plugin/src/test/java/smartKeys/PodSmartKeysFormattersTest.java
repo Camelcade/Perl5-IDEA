@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,28 @@ import com.perl5.lang.pod.filetypes.PodFileType;
 import editor.PerlSmartKeysTestCase;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-public abstract class PodSmartKeysFormattersTestCase extends PerlSmartKeysTestCase {
+import java.util.Arrays;
+import java.util.Collection;
+
+@RunWith(Parameterized.class)
+public class PodSmartKeysFormattersTest extends PerlSmartKeysTestCase {
+  private final @NotNull String myFormatter;
+
+  public PodSmartKeysFormattersTest(@NotNull String formatter) {
+    myFormatter = formatter;
+  }
+
   @Override
   protected String getBaseDataPath() {
     return "smartKeys/pod";
   }
 
-  protected abstract @NotNull String formatter();
+  public @NotNull String formatter() {
+    return myFormatter;
+  }
 
   @Test
   public void testOpenAngle() {
@@ -103,5 +117,21 @@ public abstract class PodSmartKeysFormattersTestCase extends PerlSmartKeysTestCa
   @Override
   public String getFileExtension() {
     return PodFileType.EXTENSION;
+  }
+
+
+  @Parameterized.Parameters(name = "{0}")
+  public static Collection<Object[]> data() {
+    return Arrays.asList(new Object[][]{
+      {"E"},
+      {"Z"},
+      {"B"},
+      {"F"},
+      {"C"},
+      {"X"},
+      {"I"},
+      {"L"},
+      {"S"},
+    });
   }
 }
