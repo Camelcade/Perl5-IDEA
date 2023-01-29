@@ -99,7 +99,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   protected final Disposable myPerlTestCaseDisposable = Disposer.newDisposable();
 
-  private @NotNull PerlInterpreterConfigurator myInterpreterConfigurator;
+  private final @NotNull PerlInterpreterConfigurator myInterpreterConfigurator;
 
   public PerlPlatformTestCase(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
     myInterpreterConfigurator = interpreterConfigurator;
