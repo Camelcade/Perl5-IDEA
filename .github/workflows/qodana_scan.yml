@@ -25,7 +25,7 @@ jobs:
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
         with:
-          args: --baseline,.qodana/baseline.sarif.json
+          args: --baseline,.qodana/qodana.sarif.json
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: ${{ runner.temp }}/qodana/results/qodana.sarif.json

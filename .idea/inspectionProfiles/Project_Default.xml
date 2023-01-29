@@ -1,6 +1,7 @@
 <component name="InspectionProjectProfileManager">
   <profile version="1.0">
     <option name="myName" value="Project Default" />
+    <inspection_tool class="CollectionsFieldAccessReplaceableByMethodCall" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="DanglingJavadoc" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="DefaultFileTemplate" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="CHECK_FILE_HEADER" value="true" />
@@ -13,6 +14,7 @@
       <option name="IGNORE_METHODS_OF_DEPRECATED" value="false" />
       <option name="IGNORE_IN_SAME_OUTERMOST_CLASS" value="false" />
     </inspection_tool>
+    <inspection_tool class="EnumerationCanBeIteration" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="HardCodedStringLiteral" enabled="true" level="INFORMATION" enabled_by_default="false">
       <scope name="Production" level="WARNING" enabled="true">
         <option name="ignoreForAssertStatements" value="true" />
