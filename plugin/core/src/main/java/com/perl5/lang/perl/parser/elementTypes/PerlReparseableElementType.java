@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,12 +23,10 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.ClearableLazyValue;
-import com.intellij.openapi.util.Pair;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
-import com.intellij.psi.text.BlockSupport;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IReparseableElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -88,14 +86,6 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     ASTNode result = PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
     logger.trace("Parsed: ", PerlTimeLogger.kb(newChars.length()), " kb of ", this);
     return result;
-  }
-
-  /**
-   * @return real node for reparsing or current node for lazy parsing.
-   */
-  protected @NotNull ASTNode getRealNode(@NotNull ASTNode chameleon) {
-    Pair<ASTNode, CharSequence> originalNodeData = BlockSupport.TREE_TO_BE_REPARSED.get(chameleon);
-    return originalNodeData == null ? chameleon : originalNodeData.first;
   }
 
   @Override
