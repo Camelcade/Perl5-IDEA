@@ -129,15 +129,12 @@ public class PerlEditorUtil {
   }
 
   public static boolean areMarkersBalanced(@NotNull EditorEx editor, int offset, char openChar) {
-    switch (openChar) {
-      case '[':
-        return areMarkersBalanced(editor, offset, LEFT_BRACKET, RIGHT_BRACKET);
-      case '{':
-        return areMarkersBalanced(editor, offset, LEFT_BRACE, RIGHT_BRACE);
-      case '(':
-        return areMarkersBalanced(editor, offset, LEFT_PAREN, RIGHT_PAREN);
-    }
-    throw new RuntimeException("Incorrect char: " + openChar);
+    return switch (openChar) {
+      case '[' -> areMarkersBalanced(editor, offset, LEFT_BRACKET, RIGHT_BRACKET);
+      case '{' -> areMarkersBalanced(editor, offset, LEFT_BRACE, RIGHT_BRACE);
+      case '(' -> areMarkersBalanced(editor, offset, LEFT_PAREN, RIGHT_PAREN);
+      default -> throw new RuntimeException("Incorrect char: " + openChar);
+    };
   }
 
   /**
