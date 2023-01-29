@@ -85,7 +85,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
       return Result.CONTINUE;
     }
 
-    EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
+    EditorHighlighter highlighter = editor.getHighlighter();
     HighlighterIterator nextPositionIterator = highlighter.createIterator(currentOffset);
     IElementType nextTokenType = PerlEditorUtil.getTokenType(nextPositionIterator);
     int nextTokenLength = PerlEditorUtil.getTokenLength(nextPositionIterator);
@@ -190,7 +190,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     }
 
     Perl5CodeInsightSettings perlCodeInsightSettings = Perl5CodeInsightSettings.getInstance();
-    EditorHighlighter highlighter = ((EditorEx)editor).getHighlighter();
+    EditorHighlighter highlighter = editor.getHighlighter();
     HighlighterIterator iterator = highlighter.createIterator(offset);
     IElementType elementTokenType = iterator.getTokenType();
     Document document = editor.getDocument();

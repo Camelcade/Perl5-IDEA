@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtil;
-import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
@@ -208,7 +207,7 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
     if (elementType != TokenType.WHITE_SPACE || elementChars.length() != 1 || elementChars.charAt(0) != '\n') {
       return false;
     }
-    HighlighterIterator iterator = ((EditorEx)editor).getHighlighter().createIterator(offset - 1);
+    HighlighterIterator iterator = editor.getHighlighter().createIterator(offset - 1);
     while (!iterator.atEnd()) {
       IElementType tokenType = iterator.getTokenType();
       if (tokenType == POD_NEWLINE) {
