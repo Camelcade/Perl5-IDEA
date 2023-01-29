@@ -62,13 +62,13 @@ public class PerlScalarContextValue extends PerlOperationValue {
     if (!targetValue.isDeterministic()) {
       return null;
     }
-    if (targetValue instanceof PerlArrayValue) {
-      List<PerlValue> arrayElements = ((PerlArrayValue)targetValue).getElements();
+    if (targetValue instanceof PerlArrayValue perlArrayValue) {
+      List<PerlValue> arrayElements = perlArrayValue.getElements();
       return !arrayElements.contains(UNKNOWN_VALUE) ? PerlScalarValue.create(arrayElements.size()) : UNKNOWN_VALUE;
     }
-    else if (targetValue instanceof PerlHashValue) {
-      return !((PerlHashValue)targetValue).getElements().contains(UNKNOWN_VALUE) ?
-             PerlScalarValue.create(((PerlHashValue)targetValue).getMap().size()) : UNKNOWN_VALUE;
+    else if (targetValue instanceof PerlHashValue hashValue) {
+      return !hashValue.getElements().contains(UNKNOWN_VALUE) ?
+             PerlScalarValue.create(hashValue.getMap().size()) : UNKNOWN_VALUE;
     }
     return null;
   }
