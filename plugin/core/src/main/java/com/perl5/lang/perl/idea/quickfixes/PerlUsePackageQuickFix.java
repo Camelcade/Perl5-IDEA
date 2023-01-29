@@ -22,7 +22,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.PerlBundle;
@@ -64,8 +63,7 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
 
     PsiElement baseUseStatement = PsiTreeUtil.findChildOfType(newStatementContainer, PerlUseStatementElementBase.class);
     if (baseUseStatement != null) {
-      if (((PerlUseStatementElementBase)baseUseStatement).isPragmaOrVersion()) // pragma or version
-      {
+      if (((PerlUseStatementElementBase)baseUseStatement).isPragmaOrVersion()) {
         while (true) {
           // trying to find next use statement
           PsiElement nextStatement = baseUseStatement;
@@ -86,13 +84,11 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
           }
         }
       }
-      else    // not a pragma
-      {
+      else {
         beforeAnchor = baseUseStatement;
       }
     }
-    else    // no uses found
-    {
+    else {
       PsiPerlNamespaceDefinition baseNamespace = PsiTreeUtil.findChildOfType(newStatementContainer, PsiPerlNamespaceDefinition.class);
       if (baseNamespace != null && baseNamespace.getBlock() != null)    // got a namespace definition
       {
@@ -136,13 +132,10 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
       PsiElement preveSibling = newStatement.getPrevSibling();
       newStatementContainer = newStatement.getParent();
 
-      if (nextSibling == null || !(nextSibling instanceof PsiWhiteSpace) || !StringUtil.equals(nextSibling.getText(), "\n")) {
+      if (!(nextSibling instanceof PsiWhiteSpace) || !StringUtil.equals(nextSibling.getText(), "\n")) {
         newStatementContainer.addAfter(newLineElement, newStatement);
       }
-      if ((preveSibling == null && !(newStatementContainer instanceof PsiFile)) ||
-          !(preveSibling instanceof PsiWhiteSpace) ||
-          !StringUtil.equals(preveSibling.getText(), "\n")
-      ) {
+      if (!(preveSibling instanceof PsiWhiteSpace) || !StringUtil.equals(preveSibling.getText(), "\n")) {
         newStatementContainer.addBefore(newLineElement, newStatement);
       }
     }

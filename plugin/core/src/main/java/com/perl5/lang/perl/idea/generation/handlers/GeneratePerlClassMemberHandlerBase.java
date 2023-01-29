@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public abstract class GeneratePerlClassMemberHandlerBase implements CodeInsightA
       PsiElement parent = currentElement.getParent();
       if (parent instanceof PsiPerlNamespaceContent ||
           parent instanceof PsiPerlBlock && parent.getParent() instanceof PerlNamespaceDefinitionWithIdentifier) {
-        while (currentElement != null && (currentElement instanceof PsiComment || currentElement instanceof PerlHeredocElementImpl)) {
+        while ((currentElement instanceof PsiComment || currentElement instanceof PerlHeredocElementImpl)) {
           currentElement = currentElement.getNextSibling();
         }
 
