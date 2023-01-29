@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,8 +35,8 @@ import java.util.List;
 
 public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<PerlSubCallElement>
   implements PerlRenameUsagesHelper {
-  @NonNls private static final String GETTER_PREFIX = "get_";
-  @NonNls private static final String SETTER_PREFIX = "set_";
+  private static final @NonNls String GETTER_PREFIX = "get_";
+  private static final @NonNls String SETTER_PREFIX = "set_";
 
   public static final Function<String, String> SIMPLE_COMPUTATION = name -> name;
   public static final Function<String, String> GETTER_COMPUTATION = name -> GETTER_PREFIX + name;
