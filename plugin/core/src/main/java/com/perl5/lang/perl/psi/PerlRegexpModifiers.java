@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -247,60 +247,24 @@ public class PerlRegexpModifiers {
     while (run != null) {
       if (PsiUtilCore.getElementType(run) == REGEX_MODIFIER) {
         switch (run.getText()) {
-          case "m":
-            result.setMultiline();
-            break;
-          case "s":
-            result.setSingleLine();
-            break;
-          case "i":
-            result.setCaseInsensitive();
-            break;
-          case "x":
-            result.setExtended();
-            break;
-          case "p":
-            result.setPreserveCopy();
-            break;
-          case "o":
-            result.setCompileOnce();
-            break;
-          case "d":
-            result.setUseUnicodeOrNativeCharset();
-            break;
-          case "u":
-            result.setUseUnicode();
-            break;
-          case "a":
-            result.setAsciiRestricted();
-            break;
-          case "l":
-            result.setUseRuntimeLocale();
-            break;
-          case "n":
-            result.setNonCaptureMode();
-            break;
-          case "g":
-            result.setGlobalMatch();
-            break;
-          case "c":
-            result.setContinuationSearch();
-            break;
-          case "e":
-            result.setEval();
-            break;
-          case "r":
-            result.setPreserveOriginal();
-            break;
-          case "aa":
-            result.setSuperAsciiRestricted();
-            break;
-          case "ee":
-            result.setEvalTwice();
-            break;
-          case "xx":
-            result.setSuperExtended();
-            break;
+          case "m" -> result.setMultiline();
+          case "s" -> result.setSingleLine();
+          case "i" -> result.setCaseInsensitive();
+          case "x" -> result.setExtended();
+          case "p" -> result.setPreserveCopy();
+          case "o" -> result.setCompileOnce();
+          case "d" -> result.setUseUnicodeOrNativeCharset();
+          case "u" -> result.setUseUnicode();
+          case "a" -> result.setAsciiRestricted();
+          case "l" -> result.setUseRuntimeLocale();
+          case "n" -> result.setNonCaptureMode();
+          case "g" -> result.setGlobalMatch();
+          case "c" -> result.setContinuationSearch();
+          case "e" -> result.setEval();
+          case "r" -> result.setPreserveOriginal();
+          case "aa" -> result.setSuperAsciiRestricted();
+          case "ee" -> result.setEvalTwice();
+          case "xx" -> result.setSuperExtended();
         }
       }
       run = run.getNextSibling();
