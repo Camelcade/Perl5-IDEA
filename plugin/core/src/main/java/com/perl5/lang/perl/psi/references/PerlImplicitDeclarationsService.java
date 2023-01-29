@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,17 +64,10 @@ public class PerlImplicitDeclarationsService {
 
   public void registerVariable(@NotNull PerlImplicitVariableDeclaration implicitVariable) {
     switch (implicitVariable.getVariableType()) {
-      case SCALAR:
-        doRegister(myScalarsMap, implicitVariable);
-        break;
-      case ARRAY:
-        doRegister(myArraysMap, implicitVariable);
-        break;
-      case HASH:
-        doRegister(myHashesMap, implicitVariable);
-        break;
-      default:
-        LOG.warn("Can handle only SCALAR, ARRAY or HASH at the moment, got: " + implicitVariable);
+      case SCALAR -> doRegister(myScalarsMap, implicitVariable);
+      case ARRAY -> doRegister(myArraysMap, implicitVariable);
+      case HASH -> doRegister(myHashesMap, implicitVariable);
+      default -> LOG.warn("Can handle only SCALAR, ARRAY or HASH at the moment, got: " + implicitVariable);
     }
   }
 

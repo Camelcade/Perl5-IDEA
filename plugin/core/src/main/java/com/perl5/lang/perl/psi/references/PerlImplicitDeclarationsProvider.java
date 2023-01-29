@@ -88,14 +88,9 @@ public abstract class PerlImplicitDeclarationsProvider {
       }
       for (Element element : namespaceElement.getChildren()) {
         switch (element.getName()) {
-          case SUB_ELEMENT:
-            readSub(declarationsService, namespaceName, element);
-            break;
-          case VARIABLE:
-            readVariable(declarationsService, namespaceName, element);
-            break;
-          default:
-            LOG.warn("Don't know what to do with: " + element.getName());
+          case SUB_ELEMENT -> readSub(declarationsService, namespaceName, element);
+          case VARIABLE -> readVariable(declarationsService, namespaceName, element);
+          default -> LOG.warn("Don't know what to do with: " + element.getName());
         }
       }
     }

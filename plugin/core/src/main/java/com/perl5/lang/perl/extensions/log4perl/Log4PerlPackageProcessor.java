@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,16 +79,13 @@ public class Log4PerlPackageProcessor extends PerlPackageProcessorBase implement
     boolean importSubs = false;
     for (String importParameter : importParameters) {
       switch (importParameter) {
-        case GET_LOGGER:
-          importGetLogger = true;
-          break;
-        case LEVELS:
-          importLevels = true;
-          break;
-        case EASY:
+        case GET_LOGGER -> importGetLogger = true;
+        case LEVELS -> importLevels = true;
+        case EASY -> {
           importGetLogger = true;
           importLevels = true;
           importSubs = true;
+        }
       }
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -127,29 +127,15 @@ public class PerlFileDescriptor {
       return null;
     }
     char lastChar = parts[1].charAt(parts[1].length() - 1);
-    Type type = null;
-    switch (lastChar) {
-      case '/':
-        type = Type.DIRECTORY;
-        break;
-      case '|':
-        type = Type.PIPE;
-        break;
-      case '@':
-        type = Type.SYMLINK;
-        break;
-      case '*':
-        type = Type.EXECUTABLE;
-        break;
-      case '=':
-        type = Type.SOCKET;
-        break;
-      case '>':
-        type = Type.DOOR;
-        break;
-      default:
-        type = Type.FILE;
-    }
+    Type type = switch (lastChar) {
+      case '/' -> Type.DIRECTORY;
+      case '|' -> Type.PIPE;
+      case '@' -> Type.SYMLINK;
+      case '*' -> Type.EXECUTABLE;
+      case '=' -> Type.SOCKET;
+      case '>' -> Type.DOOR;
+      default -> Type.FILE;
+    };
     String name = type == Type.FILE ? parts[1] : parts[1].substring(0, parts[1].length() - 1);
     return new PerlFileDescriptor(basePath, name, type, size);
   }

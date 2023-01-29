@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,7 +76,7 @@ public class PerlDocumentBasedFormattingModel extends DocumentBasedFormattingMod
     for (int i = elementRange.getStartOffset(); i < elementRange.getEndOffset(); i++) {
       final char c = getDocument().getCharsSequence().charAt(i);
       switch (c) {
-        case '\n':
+        case '\n' -> {
           if (line > 0) {
             createWhiteSpace(whiteSpaceLength + shift, buffer);
           }
@@ -89,27 +89,27 @@ public class PerlDocumentBasedFormattingModel extends DocumentBasedFormattingMod
           afterWhiteSpace = new StringBuilder();
           buffer.append(c);
           line++;
-          break;
-        case ' ':
+        }
+        case ' ' -> {
           if (insideWhiteSpace) {
             whiteSpaceLength += 1;
           }
           else {
             afterWhiteSpace.append(c);
           }
-          break;
-        case '\t':
+        }
+        case '\t' -> {
           if (insideWhiteSpace) {
             whiteSpaceLength += getIndentOptions().TAB_SIZE;
           }
           else {
             afterWhiteSpace.append(c);
           }
-
-          break;
-        default:
+        }
+        default -> {
           insideWhiteSpace = false;
           afterWhiteSpace.append(c);
+        }
       }
     }
     if (line > 0 && afterWhiteSpace.length() > 0) {
