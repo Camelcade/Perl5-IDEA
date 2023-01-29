@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ import com.intellij.openapi.editor.event.EditorFactoryListener;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.util.JDOMUtil;
 import com.intellij.openapi.util.SystemInfo;
-import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.io.HttpRequests;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
@@ -35,6 +34,7 @@ import org.jdom.JDOMException;
 import org.jetbrains.annotations.NotNull;
 
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeUnit;
 
 import static com.perl5.lang.perl.util.PerlPluginUtil.getPlugin;
@@ -69,7 +69,7 @@ public class PerlEditorFactoryListener implements EditorFactoryListener {
             IdeaPluginDescriptor plugin = getPlugin();
             String pluginVersion = plugin.getVersion();
             String pluginId = plugin.getPluginId().getIdString();
-            String os = URLEncoder.encode(SystemInfo.OS_NAME + " " + SystemInfo.OS_VERSION, CharsetToolkit.UTF8);
+            String os = URLEncoder.encode(SystemInfo.OS_NAME + " " + SystemInfo.OS_VERSION, StandardCharsets.UTF_8);
             String uid = PermanentInstallationID.get();
             String url =
               "https://plugins.jetbrains.com/plugins/list" +

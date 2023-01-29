@@ -27,6 +27,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 import static com.perl5.lang.perl.psi.utils.PerlPsiUtil.DOUBLE_QUOTE;
 
@@ -188,7 +189,7 @@ public class PodRenderUtil implements PodElementTypes {
 
   public static String encodeLink(String link) {
     try {
-      return URLEncoder.encode(link, "UTF-8");
+      return URLEncoder.encode(link, StandardCharsets.UTF_8);
     }
     catch (Exception e) {
       throw new RuntimeException(e);
