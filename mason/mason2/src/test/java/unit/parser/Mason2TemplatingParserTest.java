@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,18 +17,20 @@
 package unit.parser;
 
 
-import com.perl5.lang.mason2.filetypes.MasonInternalComponentFileType;
-import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 import unit.perl.parser.PerlParserTestBase;
 
-public class Mason2TemplatingParserTest extends PerlParserTestBase {
-  public Mason2TemplatingParserTest() {
-    super(MasonTopLevelComponentFileType.TOP_LEVEL_COMPONENT_EXTENSION);
-  }
+import java.util.Collection;
 
-  protected Mason2TemplatingParserTest(@NotNull String fileExt) {
+import static base.Mason2LightTestCase.componentsExtensionsData;
+
+@RunWith(Parameterized.class)
+public class Mason2TemplatingParserTest extends PerlParserTestBase {
+
+  public Mason2TemplatingParserTest(@NotNull String fileExt) {
     super(fileExt);
   }
 
@@ -57,14 +59,13 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase {
     doTest(true);
   }
 
-  public static class InternalComponent extends Mason2TemplatingParserTest {
-    public InternalComponent() {
-      super(MasonInternalComponentFileType.INTERNAL_COMPONENT_EXTENSION);
-    }
+  @Override
+  protected @NotNull String computeAnswerFileNameWithoutExtension(@NotNull String appendix) {
+    return super.computeAnswerFileNameWithoutExtension(appendix + "." + getFileExtension());
+  }
 
-    @Override
-    protected @NotNull String computeAnswerFileNameWithoutExtension(@NotNull String appendix) {
-      return super.computeAnswerFileNameWithoutExtension(appendix + ".internal");
-    }
+  @Parameterized.Parameters(name = "{0}")
+  public static Collection<Object[]> data() {
+    return componentsExtensionsData();
   }
 }

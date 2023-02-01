@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,12 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.mason2.idea.configuration.Mason2SourceRootType;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static com.perl5.lang.mason2.filetypes.MasonInternalComponentFileType.INTERNAL_COMPONENT_EXTENSION;
+import static com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType.TOP_LEVEL_COMPONENT_EXTENSION;
+
 public abstract class Mason2LightTestCase extends PerlLightTestCaseBase {
 
   @Override
@@ -29,5 +35,12 @@ public abstract class Mason2LightTestCase extends PerlLightTestCaseBase {
 
   protected void markAsComponentRoot(@NotNull VirtualFile componentRoot) {
     markAsPerlRoot(componentRoot, true, Mason2SourceRootType.INSTANCE);
+  }
+
+  public static @NotNull List<Object[]> componentsExtensionsData() {
+    return Arrays.asList(new Object[][]{
+      {INTERNAL_COMPONENT_EXTENSION},
+      {TOP_LEVEL_COMPONENT_EXTENSION},
+    });
   }
 }
