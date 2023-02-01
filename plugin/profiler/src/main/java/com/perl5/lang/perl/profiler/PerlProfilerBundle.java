@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import org.jetbrains.annotations.PropertyKey;
 
 public class PerlProfilerBundle extends DynamicBundle {
   private static final PerlProfilerBundle INSTANCE = new PerlProfilerBundle();
-  private static final String PATH_TO_BUNDLE = "messages.PerlProfilerBundle";
+  public static final String PATH_TO_BUNDLE = "messages.PerlProfilerBundle";
 
   private PerlProfilerBundle() {
     super(PATH_TO_BUNDLE);

@@ -16,24 +16,28 @@
 
 package com.perl5.lang.perl.profiler.run;
 
+import com.perl5.lang.perl.profiler.PerlProfilerBundle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.PropertyKey;
+
+import static com.perl5.lang.perl.profiler.PerlProfilerBundle.PATH_TO_BUNDLE;
 
 public enum PerlProfilerStartupMode {
-  BEGIN("begin", "start immediately"),
-  INIT("init", "start at beginning of INIT phase (after compilation/use/BEGIN)"),
-  END("end", "start at beginning of END phase"),
-  NO("no", "don't automatically start");
+  BEGIN("begin", "start.immediately"),
+  INIT("init", "start.at.beginning.of.init.phase.after.compilation.use.begin"),
+  END("end", "start.at.beginning.of.end.phase"),
+  NO("no", "don.t.automatically.start");
 
 
   private final @NonNls @NotNull String myProfilerCommand;
-  private final @NotNull @Nls String myExplanation;
+  private final @NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String myExplanationKey;
 
   PerlProfilerStartupMode(@NotNull String profilerCommand,
-                          @NotNull @Nls String explanation) {
+                          @NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String explanationKey) {
     myProfilerCommand = profilerCommand;
-    myExplanation = explanation;
+    myExplanationKey = explanationKey;
   }
 
   public @NonNls @NotNull String getProfilerCommand() {
@@ -41,6 +45,6 @@ public enum PerlProfilerStartupMode {
   }
 
   public @NotNull @Nls String getExplanation() {
-    return myExplanation;
+    return PerlProfilerBundle.message(myExplanationKey);
   }
 }
