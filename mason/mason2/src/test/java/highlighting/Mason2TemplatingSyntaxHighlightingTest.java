@@ -22,11 +22,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.Arrays;
 import java.util.Collection;
-
-import static com.perl5.lang.mason2.filetypes.MasonInternalComponentFileType.INTERNAL_COMPONENT_EXTENSION;
-import static com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType.TOP_LEVEL_COMPONENT_EXTENSION;
 
 @RunWith(Parameterized.class)
 public class Mason2TemplatingSyntaxHighlightingTest extends Mason2TopLevelComponentTestCase {
@@ -76,9 +72,6 @@ public class Mason2TemplatingSyntaxHighlightingTest extends Mason2TopLevelCompon
 
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
-    return Arrays.asList(new Object[][]{
-      {INTERNAL_COMPONENT_EXTENSION},
-      {TOP_LEVEL_COMPONENT_EXTENSION},
-    });
+    return componentsExtensionsData();
   }
 }
