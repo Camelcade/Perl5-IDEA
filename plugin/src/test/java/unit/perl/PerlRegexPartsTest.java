@@ -80,7 +80,7 @@ public class PerlRegexPartsTest extends PerlLightTestCase {
     doTestCommon(PerlReplacementRegex::getReplaceBlock);
   }
 
-  private void doTestCommon(@NotNull Function<PsiPerlReplacementRegex, PsiElement> producer) {
+  private void doTestCommon(@NotNull Function<? super PsiPerlReplacementRegex, ? extends PsiElement> producer) {
     initWithFileSmart();
     PsiPerlReplacementRegex regex = getElementAtCaret(PsiPerlReplacementRegex.class);
     assertNotNull(regex);

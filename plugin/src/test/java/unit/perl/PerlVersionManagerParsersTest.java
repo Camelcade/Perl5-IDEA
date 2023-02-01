@@ -71,7 +71,7 @@ public class PerlVersionManagerParsersTest extends PerlLightTestCase {
     doTest(PlenvAdapter::parseInstalledDistributionsList);
   }
 
-  private void doTest(@NotNull Function<List<String>, List<String>> parser) {
+  private void doTest(@NotNull Function<? super List<String>, ? extends List<String>> parser) {
     try {
       String outputText = FileUtil.loadFile(new File(getTestDataPath(), getTestName(true) + ".code"));
       List<String> output = StringUtil.split(outputText, "\n");
