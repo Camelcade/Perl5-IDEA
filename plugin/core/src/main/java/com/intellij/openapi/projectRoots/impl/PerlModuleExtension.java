@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -221,7 +221,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
    *
    * @see ModuleExtension#getModifiableModel(boolean)
    */
-  public static void modify(@NotNull Module module, @NotNull Consumer<PerlModuleExtension> mutator) {
+  public static void modify(@NotNull Module module, @NotNull Consumer<? super PerlModuleExtension> mutator) {
     ModifiableRootModel modifiableModel = ModuleRootManager.getInstance(module).getModifiableModel();
     PerlModuleExtension moduleExtensionModifiableModel = modifiableModel.getModuleExtension(PerlModuleExtension.class);
     try {
@@ -236,7 +236,8 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     }
   }
 
-  private static @Nullable JpsModuleSourceRootPropertiesSerializer<?> getSerializer(Predicate<JpsModuleSourceRootPropertiesSerializer<?>> predicate) {
+  private static @Nullable JpsModuleSourceRootPropertiesSerializer<?> getSerializer(
+    Predicate<? super JpsModuleSourceRootPropertiesSerializer<?>> predicate) {
     for (JpsModelSerializerExtension extension : JpsModelSerializerExtension.getExtensions()) {
       for (JpsModuleSourceRootPropertiesSerializer<?> serializer : extension.getModuleSourceRootPropertiesSerializers()) {
         if (predicate.test(serializer)) {
