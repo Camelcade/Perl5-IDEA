@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.extensions.log4perl;
 
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
@@ -41,16 +40,12 @@ public class Log4PerlPackageProcessor extends PerlPackageProcessorBase implement
     ":no_extra_logdie_message", "Suppresses extra LOGDIE message"
   );
 
-  private static final List<String> LOG_METHODS = ContainerUtil.newArrayList(
-    "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "ALWAYS",
-    "LOGDIE", "LOGEXIT", "LOGWARN");
+  private static final List<String> LOG_METHODS = List.of(
+    "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL", "ALWAYS", "LOGDIE", "LOGEXIT", "LOGWARN");
 
-  private static final List<String> LOG_LOGGER_METHODS = ContainerUtil.newArrayList(
-    "LOGCROAK", "LOGCLUCK", "LOGCARP", "LOGCONFESS");
+  private static final List<String> LOG_LOGGER_METHODS = List.of("LOGCROAK", "LOGCLUCK", "LOGCARP", "LOGCONFESS");
 
-  private static final List<String> LEVELS_VARS = ContainerUtil.newArrayList(
-    "OFF", "FATAL", "ERROR", "WARN", "INFO", "DEBUG", "TRACE", "ALL"
-  );
+  private static final List<String> LEVELS_VARS = List.of("OFF", "FATAL", "ERROR", "WARN", "INFO", "DEBUG", "TRACE", "ALL");
 
   private static final Map<String, String> BUNDLE = Collections.singletonMap(
     EASY, "get_logger, logging methods, :levels and :nowarn"
