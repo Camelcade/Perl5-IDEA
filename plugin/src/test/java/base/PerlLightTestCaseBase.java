@@ -264,8 +264,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   /**
    * @return test data path relative to the module root
    */
-  @NonNls
-  protected String getBaseDataPath(){
+  protected @NonNls String getBaseDataPath() {
     return "";
   }
 
