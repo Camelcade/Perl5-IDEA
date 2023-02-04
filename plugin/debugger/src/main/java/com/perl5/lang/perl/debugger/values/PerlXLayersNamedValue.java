@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,12 +62,12 @@ public class PerlXLayersNamedValue extends XNamedValue {
   }
 
   private static class PerlLayers extends XNamedValue {
-    private final @NotNull List<PerlLayerDescriptor> myLayersDescriptors;
+    private final @NotNull List<? extends PerlLayerDescriptor> myLayersDescriptors;
     private final @NotNull Icon myIcon;
 
     public PerlLayers(@NotNull String name,
                       @NotNull Icon icon,
-                      @NotNull List<PerlLayerDescriptor> layersDescriptors) {
+                      @NotNull List<? extends PerlLayerDescriptor> layersDescriptors) {
       super(name);
       myLayersDescriptors = layersDescriptors;
       myIcon = icon;
