@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -130,7 +130,7 @@ public class PerlScriptsPanel extends JPanel {
     });
   }
 
-  public void bulkChange(final List<PerlLoadedFileDescriptor> toAdd, final List<PerlLoadedFileDescriptor> toRemove) {
+  public void bulkChange(final List<? extends PerlLoadedFileDescriptor> toAdd, final List<? extends PerlLoadedFileDescriptor> toRemove) {
     // based on synthetic benchmarks, at 5000 items the performance of bulkChangeNow is definitely
     // better than the naive method; the exact number might still need some tweaking
     if (toAdd.size() + toRemove.size() < 5000) {
@@ -148,8 +148,8 @@ public class PerlScriptsPanel extends JPanel {
 
   // so the naive version is good for "small" added/removed; where the exact value needs to be determined with benchmarks;
   // there is a slightly more detailed analysis in the commit message
-  private void bulkChangeNow(final List<PerlLoadedFileDescriptor> toAdd,
-                             final List<PerlLoadedFileDescriptor> toRemove) {
+  private void bulkChangeNow(final List<? extends PerlLoadedFileDescriptor> toAdd,
+                             final List<? extends PerlLoadedFileDescriptor> toRemove) {
     List<PerlLoadedFileDescriptor> currentEntries = myModel.getItems();
     if (toRemove.size() > 0) {
       // first find all indices to be removed, then remove them in reverse order by overwriting with
