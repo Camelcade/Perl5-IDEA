@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
 
 public class PerlSubArgument {
 
-  @NonNls public static final String NEW_VALUE_VALUE = "new_value";
+  public static final @NonNls String NEW_VALUE_VALUE = "new_value";
   private final @NotNull PerlVariableType myArgumentType;
   private final @NotNull String myArgumentName;
 
