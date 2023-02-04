@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,7 @@ package com.perl5.lang.perl.idea.run;
 import com.intellij.execution.CommonProgramRunConfigurationParameters;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
-import com.intellij.execution.configurations.ConfigurationFactory;
-import com.intellij.execution.configurations.LocatableConfigurationBase;
-import com.intellij.execution.configurations.RunProfile;
-import com.intellij.execution.configurations.RuntimeConfigurationException;
+import com.intellij.execution.configurations.*;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAction;
@@ -64,10 +61,10 @@ import java.util.*;
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.CONSOLE;
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.NONE;
 
-public abstract class GenericPerlRunConfiguration extends LocatableConfigurationBase implements
-                                                                                     CommonProgramRunConfigurationParameters,
-                                                                                     RunConfigurationWithSuppressedDefaultRunAction,
-                                                                                     PerlDebugOptions {
+public abstract class GenericPerlRunConfiguration extends LocatableConfigurationBase<LocatableRunConfigurationOptions>
+  implements CommonProgramRunConfigurationParameters,
+             RunConfigurationWithSuppressedDefaultRunAction,
+             PerlDebugOptions {
   public static final Function<String, List<String>> FILES_PARSER = text -> StringUtil.split(text.trim(), "||");
   public static final Function<List<String>, String> FILES_JOINER = strings ->
     StringUtil.join(ContainerUtil.filter(strings, StringUtil::isNotEmpty), "||");
