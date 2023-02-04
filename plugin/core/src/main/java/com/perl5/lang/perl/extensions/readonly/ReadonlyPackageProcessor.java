@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,9 @@ public class ReadonlyPackageProcessor extends PerlPackageProcessorBase {
   );
 
   @Override
-  public void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+  public void addExports(@NotNull PerlUseStatementElement useStatement,
+                         @NotNull Set<? super String> export,
+                         @NotNull Set<? super String> exportOk) {
     export.addAll(EXPORT);
     exportOk.addAll(EXPORT_OK);
   }

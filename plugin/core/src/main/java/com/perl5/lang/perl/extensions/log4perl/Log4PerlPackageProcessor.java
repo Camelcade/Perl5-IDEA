@@ -104,7 +104,9 @@ public class Log4PerlPackageProcessor extends PerlPackageProcessorBase implement
   }
 
   @Override
-  public void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+  public void addExports(@NotNull PerlUseStatementElement useStatement,
+                         @NotNull Set<? super String> export,
+                         @NotNull Set<? super String> exportOk) {
     export.add(GET_LOGGER);
     exportOk.add(GET_LOGGER);
   }

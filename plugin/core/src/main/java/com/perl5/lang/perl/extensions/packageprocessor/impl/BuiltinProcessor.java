@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,9 @@ import java.util.Set;
 
 public class BuiltinProcessor extends PerlPragmaProcessorBase {
   @Override
-  public void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+  public void addExports(@NotNull PerlUseStatementElement useStatement,
+                         @NotNull Set<? super String> export,
+                         @NotNull Set<? super String> exportOk) {
     PerlImplicitDeclarationsService.getInstance(useStatement.getProject())
       .processSubsInPackage("builtin", it -> exportOk.add(it.getSubName()));
   }

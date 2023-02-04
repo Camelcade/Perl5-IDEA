@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,9 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
   }
 
   @Override
-  public void addExports(@NotNull PerlUseStatementElement useStatement, @NotNull Set<String> export, @NotNull Set<String> exportOk) {
+  public void addExports(@NotNull PerlUseStatementElement useStatement,
+                         @NotNull Set<? super String> export,
+                         @NotNull Set<? super String> exportOk) {
     String packageName = useStatement.getPackageName();
 
     if (StringUtil.isEmpty(packageName)) {
@@ -48,10 +50,11 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
     GlobalSearchScope scope = GlobalSearchScope.allScope(useStatement.getProject());
     for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil
       .getNamespaceDefinitions(useStatement.getProject(), scope, packageName)) {
-      export.addAll(namespaceDefinition.getEXPORT());
+      var defaultExports = namespaceDefinition.getEXPORT();
+      export.addAll(defaultExports);
+      exportOk.addAll(defaultExports);
       exportOk.addAll(namespaceDefinition.getEXPORT_OK());
     }
-    exportOk.addAll(export);
   }
 
 
