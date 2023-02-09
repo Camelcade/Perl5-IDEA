@@ -16,12 +16,8 @@
 
 package com.perl5.lang.perl.util;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,21 +27,6 @@ import java.util.Arrays;
  */
 public final class PerlUtil implements PerlElementTypes {
   private PerlUtil() {
-  }
-
-  public static @NotNull String getParentsChain(@Nullable PsiElement element) {
-    if (element == null) {
-      return "null";
-    }
-    StringBuilder sb = new StringBuilder();
-    while (true) {
-      sb.append(element.getClass()).append("(").append(PsiUtilCore.getElementType(element)).append(")").append(": ");
-      if (element instanceof PsiFile || element.getParent() == null) {
-        break;
-      }
-      element = element.getParent();
-    }
-    return sb.toString();
   }
 
   @SafeVarargs

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,6 @@ import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
-import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -263,7 +262,7 @@ public final class PerlResolveUtil {
                      element.getTextRange() + "; " +
                      PsiUtilCore.getVirtualFile(element) + "; " +
                      controlFlowScope.getClass() + "; " +
-                     PerlUtil.getParentsChain(element);
+                     PerlPsiUtil.dumpHierarchy(element);
     Application application = ApplicationManager.getApplication();
     if (!SUPPRESS_ERRORS && (application.isUnitTestMode() || application.isInternal())) {
       LOG.error(message);
@@ -282,7 +281,7 @@ public final class PerlResolveUtil {
                 element.getTextOffset() +
                 " in " +
                 virtualFile + "; " +
-                PerlUtil.getParentsChain(element));
+                PerlPsiUtil.dumpHierarchy(element));
     }
   }
 
