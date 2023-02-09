@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class PerlFormattingStatementModifierUnwrap extends PerlFormattingStateme
     if (getMyModifier().isValid()) {
       PsiPerlExpr expression = PsiTreeUtil.getChildOfType(getMyModifier(), PsiPerlExpr.class);
 
-      if (expression != null && expression instanceof PsiPerlParenthesisedExpr) {
+      if (expression instanceof PsiPerlParenthesisedExpr) {
         PsiPerlExpr nestedExpression = ((PsiPerlParenthesisedExpr)expression).getExpr();
         if (nestedExpression != null) {
           delta = nestedExpression.getNode().getTextLength() - expression.getNode().getTextLength();
