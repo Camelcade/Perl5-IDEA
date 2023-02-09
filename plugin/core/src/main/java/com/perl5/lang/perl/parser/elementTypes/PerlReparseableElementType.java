@@ -125,7 +125,7 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     return "Perl5: " + super.toString();
   }
 
-  protected static boolean checkBracesBalance(@NotNull Lexer lexer, Stack<IElementType> bracesStack) {
+  protected static boolean checkBracesBalance(@NotNull Lexer lexer, Stack<? super IElementType> bracesStack) {
     while (true) {
       ProgressManager.checkCanceled();
       IElementType type = lexer.getTokenType();
