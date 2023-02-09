@@ -55,7 +55,7 @@ public class MooProcessor extends BaseStrictWarningsProvidingProcessor implement
   }
 
   @Override
-  public void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<String> currentList) {
+  public void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<? super String> currentList) {
     currentList.clear();
     currentList.addAll(PARENT_CLASSES);
   }

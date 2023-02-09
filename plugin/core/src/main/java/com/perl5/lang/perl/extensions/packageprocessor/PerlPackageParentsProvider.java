@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ public interface PerlPackageParentsProvider {
    * @param useStatement use statement to fetch parameters from
    * @param currentList  current parents list
    */
-  void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<String> currentList);
+  void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<? super String> currentList);
 
   /**
    * Returns true if we should show available package files in autocompletion
