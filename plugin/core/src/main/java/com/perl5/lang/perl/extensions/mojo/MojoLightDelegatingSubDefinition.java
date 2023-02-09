@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -112,7 +112,7 @@ public class MojoLightDelegatingSubDefinition extends PerlLightSubDefinitionElem
    * Processes this delegating sub target subs if possible
    */
   public boolean processTargetSubs(Processor<PerlSub> processor) {
-    return processTargets(it -> !(it instanceof PerlSub) || processor.process((PerlSub)it));
+    return processTargets(it -> !(it instanceof PerlSub perlSub) || processor.process(perlSub));
   }
 
   /**
@@ -120,7 +120,7 @@ public class MojoLightDelegatingSubDefinition extends PerlLightSubDefinitionElem
    */
   public boolean processTargets(Processor<PsiNamedElement> processor) {
     PerlValue returnValue = getReturnValueFromCode();
-    return !(returnValue instanceof PerlCallValue) ||
-           ((PerlCallValue)returnValue).processCallTargets(getDelegate(), it -> it.equals(this) || processor.process(it));
+    return !(returnValue instanceof PerlCallValue perlCallValue) ||
+           perlCallValue.processCallTargets(getDelegate(), it -> it.equals(this) || processor.process(it));
   }
 }
