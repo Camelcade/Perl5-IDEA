@@ -79,6 +79,10 @@ public final class PerlVersion implements Comparable<PerlVersion> {
   private int myMinor;
   private List<Integer> myExtraChunks = Collections.emptyList();
 
+  @SuppressWarnings("unused")
+  private PerlVersion() {
+  }
+
   public PerlVersion(double version) {
     try {
       parseDoubleVersion(version);
