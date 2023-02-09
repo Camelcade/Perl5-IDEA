@@ -38,6 +38,8 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.util.*;
 
+import static com.perl5.lang.perl.util.PerlUtil.mutableList;
+
 public class PerlCommandLine extends GeneralCommandLine {
   private static final Logger LOG = Logger.getInstance(PerlCommandLine.class);
   private @Nullable Sdk mySdk;
@@ -190,7 +192,7 @@ public class PerlCommandLine extends GeneralCommandLine {
   }
 
   public @NotNull PerlCommandLine prependLineWith(@NotNull String... commands) {
-    ArrayList<String> commandsList = ContainerUtil.newArrayList(commands);
+    ArrayList<String> commandsList = mutableList(commands);
     commandsList.add(getExePath());
     setExePath(commandsList.remove(0));
     if (!commandsList.isEmpty()) {
