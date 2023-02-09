@@ -29,7 +29,6 @@ import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -64,20 +63,6 @@ public class MojoLightDelegatingSubDefinition extends PerlLightSubDefinitionElem
       return true;
     });
     return argumentsRef.get();
-  }
-
-  @Override
-  public @Nullable PerlSubAnnotations getAnnotations() {
-    Ref<PerlSubAnnotations> annotationsRef = Ref.create(super.getAnnotations());
-    processTargetSubs(it -> {
-      PerlSubAnnotations annotations = it.getAnnotations();
-      if (annotations != null) {
-        annotationsRef.set(annotations);
-        return false;
-      }
-      return true;
-    });
-    return super.getAnnotations();
   }
 
   @Override
