@@ -192,7 +192,7 @@ public class PerlCommandLine extends GeneralCommandLine {
   }
 
   public @NotNull PerlCommandLine prependLineWith(@NotNull String... commands) {
-    ArrayList<String> commandsList = mutableList(commands);
+    List<String> commandsList = mutableList(commands);
     commandsList.add(getExePath());
     setExePath(commandsList.remove(0));
     if (!commandsList.isEmpty()) {
