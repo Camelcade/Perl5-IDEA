@@ -41,6 +41,8 @@ import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.project.ProjectUtil;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.NlsContexts.NotificationContent;
+import com.intellij.openapi.util.NlsContexts.NotificationTitle;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
@@ -356,16 +358,16 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     myParserTask.queue();
   }
 
-  private void showNotification(@NotNull String title,
-                                @NotNull String message,
+  private void showNotification(@NotNull @NotificationTitle String title,
+                                @NotNull @NotificationContent String message,
                                 @NotNull NotificationType type) {
     showNotification(title, message, type, null);
   }
 
-  private void showNotification(@NotNull String title,
-                                @NotNull String message,
+  private void showNotification(@NotNull @NotificationTitle String title,
+                                @NotNull @NotificationContent String message,
                                 @NotNull NotificationType type,
-                                @Nullable Function<Notification, List<AnAction>> actionsProvider) {
+                                @Nullable Function<? super Notification, ? extends List<AnAction>> actionsProvider) {
     Notification notification = new Notification(PerlBundle.message("perl.deparsing.notification"), title, message, type);
 
     if (actionsProvider != null) {
