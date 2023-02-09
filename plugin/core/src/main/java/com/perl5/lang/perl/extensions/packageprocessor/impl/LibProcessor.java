@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import java.util.List;
 
 public class LibProcessor extends PerlPragmaProcessorBase implements PerlLibProvider {
   @Override
-  public void addLibDirs(@NotNull PerlUseStatementElement useStatement, @NotNull List<VirtualFile> libDirs) {
+  public void addLibDirs(@NotNull PerlUseStatementElement useStatement, @NotNull List<? super VirtualFile> libDirs) {
     int fileIndex = 0;
 
     List<String> importParameters = useStatement.getImportParameters();
