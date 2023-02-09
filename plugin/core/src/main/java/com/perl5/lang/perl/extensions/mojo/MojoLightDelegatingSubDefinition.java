@@ -111,14 +111,14 @@ public class MojoLightDelegatingSubDefinition extends PerlLightSubDefinitionElem
   /**
    * Processes this delegating sub target subs if possible
    */
-  public boolean processTargetSubs(Processor<PerlSub> processor) {
+  public boolean processTargetSubs(Processor<? super PerlSub> processor) {
     return processTargets(it -> !(it instanceof PerlSub perlSub) || processor.process(perlSub));
   }
 
   /**
    * Processes this delegating sub targets if possible
    */
-  public boolean processTargets(Processor<PsiNamedElement> processor) {
+  public boolean processTargets(Processor<? super PsiNamedElement> processor) {
     PerlValue returnValue = getReturnValueFromCode();
     return !(returnValue instanceof PerlCallValue perlCallValue) ||
            perlCallValue.processCallTargets(getDelegate(), it -> it.equals(this) || processor.process(it));
