@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Misc helper methods
@@ -30,7 +31,7 @@ public final class PerlUtil implements PerlElementTypes {
   }
 
   @SafeVarargs
-  public static @NotNull <E> ArrayList<E> mutableList(E @NotNull ... array) {
+  public static @NotNull <E> List<E> mutableList(E @NotNull ... array) {
     return new ArrayList<>(Arrays.asList(array));
   }
 }
