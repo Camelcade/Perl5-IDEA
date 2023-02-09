@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,7 +86,7 @@ public final class PerlSubUtil implements PerlElementTypes {
   public static boolean processSubDefinitionsInPackage(@NotNull Project project,
                                                        @NotNull String packageName,
                                                        @NotNull GlobalSearchScope scope,
-                                                       @NotNull Processor<PerlSubDefinitionElement> processor) {
+                                                       @NotNull Processor<? super PerlSubDefinitionElement> processor) {
     return PerlImplicitDeclarationsService.getInstance(project).processSubsInPackage(packageName, processor) &&
            PerlSubDefinitionReverseIndex.getInstance().processElements(project, packageName, scope, processor) &&
            PerlLightSubDefinitionsReverseIndex.getInstance().processLightElements(project, packageName, scope, processor);
@@ -95,14 +95,14 @@ public final class PerlSubUtil implements PerlElementTypes {
   public static boolean processSubDeclarationsInPackage(@NotNull Project project,
                                                         @NotNull String packageName,
                                                         @NotNull GlobalSearchScope scope,
-                                                        @NotNull Processor<PerlSubDeclarationElement> processor) {
+                                                        @NotNull Processor<? super PerlSubDeclarationElement> processor) {
     return PerlSubDeclarationReverseIndex.getInstance().processElements(project, packageName, scope, processor);
   }
 
   public static boolean processSubDefinitions(@NotNull Project project,
                                               @NotNull String canonicalName,
                                               @NotNull GlobalSearchScope scope,
-                                              @NotNull Processor<PerlSubDefinitionElement> processor) {
+                                              @NotNull Processor<? super PerlSubDefinitionElement> processor) {
     return PerlImplicitDeclarationsService.getInstance(project).processSubs(canonicalName, processor) &&
            PerlSubDefinitionsIndex.getInstance().processElements(project, canonicalName, scope, processor) &&
            PerlLightSubDefinitionsIndex.getInstance().processLightElements(project, canonicalName, scope, processor);
@@ -111,7 +111,7 @@ public final class PerlSubUtil implements PerlElementTypes {
   public static boolean processSubDeclarations(@NotNull Project project,
                                                @NotNull String canonicalName,
                                                @NotNull GlobalSearchScope scope,
-                                               @NotNull Processor<PerlSubDeclarationElement> processor) {
+                                               @NotNull Processor<? super PerlSubDeclarationElement> processor) {
     return PerlSubDeclarationIndex.getInstance().processElements(project, canonicalName, scope, processor);
   }
 
@@ -153,7 +153,7 @@ public final class PerlSubUtil implements PerlElementTypes {
    * @param subArguments list of arguments
    * @return stringified prototype
    */
-  public static String getArgumentsListAsString(List<PerlSubArgument> subArguments) {
+  public static String getArgumentsListAsString(List<? extends PerlSubArgument> subArguments) {
     int argumentsNumber = subArguments.size();
 
     List<String> argumentsList = new ArrayList<>();
@@ -202,7 +202,8 @@ public final class PerlSubUtil implements PerlElementTypes {
     return collectOverridingSubs(subBase, new HashSet<>());
   }
 
-  public static @NotNull List<PerlSubElement> collectOverridingSubs(@NotNull PerlSubElement subBase, @NotNull Set<String> recursionSet) {
+  public static @NotNull List<PerlSubElement> collectOverridingSubs(@NotNull PerlSubElement subBase,
+                                                                    @NotNull Set<? super String> recursionSet) {
     List<PerlSubElement> result;
     result = new ArrayList<>();
     for (PerlSubElement directDescendant : subBase.getDirectOverridingSubs()) {
