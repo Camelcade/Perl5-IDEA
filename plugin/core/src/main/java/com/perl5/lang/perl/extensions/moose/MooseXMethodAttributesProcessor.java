@@ -24,6 +24,6 @@ import java.util.List;
 public class MooseXMethodAttributesProcessor extends MooseProcessor {
 
   @Override
-  public void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<String> currentList) {
+  public void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<? super String> currentList) {
   }
 }
