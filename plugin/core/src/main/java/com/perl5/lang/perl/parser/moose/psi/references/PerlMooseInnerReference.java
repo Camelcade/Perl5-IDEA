@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,8 +80,8 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
 
   protected void collectNamespaceMethodsAugmentations(@NotNull PerlNamespaceDefinitionElement namespaceDefinition,
                                                       @NotNull String subName,
-                                                      Set<PerlNamespaceDefinitionElement> recursionSet,
-                                                      List<ResolveResult> result) {
+                                                      Set<? super PerlNamespaceDefinitionElement> recursionSet,
+                                                      List<? super ResolveResult> result) {
     recursionSet.add(namespaceDefinition);
 
     for (PerlNamespaceDefinitionElement childNamespace : namespaceDefinition.getChildNamespaceDefinitions()) {
