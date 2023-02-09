@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,6 +40,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.perl5.PerlIcons.PERLBREW_ICON;
+import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 /**
  * Api to the perlbrew cli
@@ -68,7 +69,7 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
    */
   @Override
   protected @Nullable List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
-    List<String> commandsList = ContainerUtil.newArrayList(PERLBREW_EXEC, PERLBREW_QUIET, PERLBREW_WITH, distributionId);
+    List<String> commandsList = mutableList(PERLBREW_EXEC, PERLBREW_QUIET, PERLBREW_WITH, distributionId);
     commandsList.addAll(Arrays.asList(commands));
     return getOutput(commandsList);
   }

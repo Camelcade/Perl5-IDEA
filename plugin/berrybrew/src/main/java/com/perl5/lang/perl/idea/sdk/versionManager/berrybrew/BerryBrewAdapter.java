@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,8 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.perl5.lang.perl.util.PerlUtil.mutableList;
+
 class BerryBrewAdapter extends PerlVersionManagerAdapter {
   private static final String BERRYBREW_AVAILABLE = "available";
   private static final String BERRYBREW_INSTALL = "install";
@@ -44,7 +46,7 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
 
   @Override
   protected @Nullable List<String> execWith(@NotNull String distributionId, @NotNull String... commands) {
-    List<String> commandsList = ContainerUtil.newArrayList(BERRYBREW_EXEC, BERRYBREW_WITH, distributionId);
+    List<String> commandsList = mutableList(BERRYBREW_EXEC, BERRYBREW_WITH, distributionId);
     commandsList.addAll(Arrays.asList(commands));
     return getOutput(commandsList);
   }

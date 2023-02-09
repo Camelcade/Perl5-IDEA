@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,6 @@ import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.concurrency.Semaphore;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.MojoUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
@@ -44,6 +43,8 @@ import org.jetbrains.annotations.TestOnly;
 import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 public abstract class MojoGenerateAction extends MojoScriptAction {
   private static final Logger LOG = Logger.getInstance(MojoGenerateAction.class);
@@ -92,7 +93,7 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
       return;
     }
 
-    List<String> fullArguments = ContainerUtil.newArrayList(remoteScriptPath, GENERATE_COMMAND);
+    List<String> fullArguments = mutableList(remoteScriptPath, GENERATE_COMMAND);
     fullArguments.addAll(generationParameters);
 
     VirtualFile targetDirectory = getTargetDirectory(e);

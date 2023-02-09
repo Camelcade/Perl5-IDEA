@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,9 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Misc helper methods
  */
@@ -43,5 +46,10 @@ public final class PerlUtil implements PerlElementTypes {
       element = element.getParent();
     }
     return sb.toString();
+  }
+
+  @SafeVarargs
+  public static @NotNull <E> ArrayList<E> mutableList(E @NotNull ... array) {
+    return new ArrayList<>(Arrays.asList(array));
   }
 }
