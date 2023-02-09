@@ -125,7 +125,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
   }
 
   private @NotNull List<PerlDelegatingLightNamedElement<?>> createMojoAttributes(@NotNull PerlSubCallElement subCallElement,
-                                                                                 @NotNull Pair<List<PsiElement>, List<PsiElement>> lists) {
+                                                                                 @NotNull Pair<? extends List<PsiElement>, ? extends List<PsiElement>> lists) {
     List<PsiElement> arguments = lists.second.subList(1, lists.second.size());
     PsiElement argument = ContainerUtil.getFirstItem(arguments);
     PerlSubExpr subExpr = ObjectUtils.tryCast(argument, PerlSubExpr.class);
@@ -163,7 +163,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
   }
 
   private @NotNull List<PerlDelegatingLightNamedElement<?>> createMooseAttributes(@NotNull PerlSubCallElement subCallElement,
-                                                                                  @NotNull List<PsiElement> identifiers,
+                                                                                  @NotNull List<? extends PsiElement> identifiers,
                                                                                   @NotNull List<PsiElement> listElements) {
 
     List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
