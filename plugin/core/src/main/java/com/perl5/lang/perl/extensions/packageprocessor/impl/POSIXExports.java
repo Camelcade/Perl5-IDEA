@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,11 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 public interface POSIXExports {
-  List<String> EXPORT = new ArrayList<>(Arrays.asList(
+  List<String> EXPORT = List.of(
     "%SIGRT",
     "ARG_MAX",
     "B0",
@@ -614,9 +612,9 @@ public interface POSIXExports {
     "vsprintf",
     "wcstombs",
     "wctomb"
-  ));
+  );
 
-  List<String> EXPORT_OK = new ArrayList<>(Arrays.asList(
+  List<String> EXPORT_OK = List.of(
     "FE_DOWNWARD",
     "FE_TONEAREST",
     "FE_TOWARDZERO",
@@ -730,5 +728,5 @@ public interface POSIXExports {
     "y0",
     "y1",
     "yn"
-  ));
+  );
 }

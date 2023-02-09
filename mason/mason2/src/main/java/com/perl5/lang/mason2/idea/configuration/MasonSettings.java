@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,9 @@ import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 
 @State(
@@ -40,7 +40,7 @@ import java.util.List;
 )
 
 public class MasonSettings extends AbstractMasonSettings implements PersistentStateComponent<MasonSettings>, Disposable {
-  public List<String> autobaseNames = new ArrayList<>(Arrays.asList("Base.mp", "Base.mc"));
+  public List<String> autobaseNames = mutableList("Base.mp", "Base.mc");
 
   public MasonSettings() {
     initInstance();

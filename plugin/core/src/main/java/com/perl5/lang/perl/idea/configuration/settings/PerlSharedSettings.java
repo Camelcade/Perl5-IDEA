@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,9 +30,12 @@ import com.perl5.lang.perl.internals.PerlVersion;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
+import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 
 @State(
@@ -42,7 +45,7 @@ import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
 )
 
 public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings> {
-  public List<String> selfNames = new ArrayList<>(Arrays.asList(DEFAULT_SELF_NAME, "this", "class", "proto"));
+  public List<String> selfNames = mutableList(DEFAULT_SELF_NAME, "this", "class", "proto");
   public boolean SIMPLE_MAIN_RESOLUTION = true;
   public boolean AUTOMATIC_HEREDOC_INJECTIONS = true;
   public boolean ALLOW_INJECTIONS_WITH_INTERPOLATION = false;

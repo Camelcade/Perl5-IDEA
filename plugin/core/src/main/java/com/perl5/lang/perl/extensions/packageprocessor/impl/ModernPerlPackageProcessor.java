@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,6 @@ import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -35,10 +33,10 @@ public class ModernPerlPackageProcessor extends BaseStrictWarningsProvidingProce
                                                                                      PerlMroProvider,
                                                                                      PerlPackageLoader,
                                                                                      PerlFeaturesProvider {
-  private static final List<String> LOADED_PACKAGES = new ArrayList<>(Arrays.asList(
+  private static final List<String> LOADED_PACKAGES = List.of(
     "IO::File",
     "IO::Handle"
-  ));
+  );
 
   @Override
   public @NotNull PerlMroType getMroType(PerlUseStatementElement useStatement) {

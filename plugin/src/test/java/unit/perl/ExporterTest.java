@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,13 +21,13 @@ import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
+
 public class ExporterTest extends NamespaceTestCase {
 
   @Override
   protected String getBaseDataPath() {
-    return  "unit/perl/exporter";
+    return "unit/perl/exporter";
   }
 
   @Test
@@ -124,7 +124,7 @@ public class ExporterTest extends NamespaceTestCase {
 
   public void doTest(String fileName, @NotNull String namespaceName, String[] exportArray, String[] exportOkArray) {
     PerlNamespaceDefinitionMixin.ExporterInfo exporterInfo = getNamespaceInFile(fileName, namespaceName).getExporterInfo();
-    assertEquals(new ArrayList<>(Arrays.asList(exportArray)), exporterInfo.getEXPORT());
-    assertEquals(new ArrayList<>(Arrays.asList(exportOkArray)), exporterInfo.getEXPORT_OK());
+    assertEquals(List.of(exportArray), exporterInfo.getEXPORT());
+    assertEquals(List.of(exportOkArray), exporterInfo.getEXPORT_OK());
   }
 }

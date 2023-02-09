@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,11 @@
 
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
 public interface PerlDancer2DSL {
-  List<String> DSL_KEYWORDS = new ArrayList<>(Arrays.asList(
+  List<String> DSL_KEYWORDS = List.of(
     "any",
     "app",
     "body_parameters",
@@ -101,5 +99,5 @@ public interface PerlDancer2DSL {
     "var",
     "vars",
     "warning"
-  ));
+  );
 }
