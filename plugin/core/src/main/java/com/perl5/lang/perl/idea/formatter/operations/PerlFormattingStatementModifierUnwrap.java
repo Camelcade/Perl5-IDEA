@@ -34,8 +34,8 @@ public class PerlFormattingStatementModifierUnwrap extends PerlFormattingStateme
     if (getMyModifier().isValid()) {
       PsiPerlExpr expression = PsiTreeUtil.getChildOfType(getMyModifier(), PsiPerlExpr.class);
 
-      if (expression instanceof PsiPerlParenthesisedExpr) {
-        PsiPerlExpr nestedExpression = ((PsiPerlParenthesisedExpr)expression).getExpr();
+      if (expression instanceof PsiPerlParenthesisedExpr parenthesisedExpr) {
+        PsiPerlExpr nestedExpression = parenthesisedExpr.getExpr();
         if (nestedExpression != null) {
           delta = nestedExpression.getNode().getTextLength() - expression.getNode().getTextLength();
           expression.replace(nestedExpression.copy());
