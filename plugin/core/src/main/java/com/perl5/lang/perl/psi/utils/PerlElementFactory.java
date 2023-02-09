@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,8 +31,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -140,11 +138,7 @@ public class PerlElementFactory {
     @SuppressWarnings("ConstantConditions") PsiElement headingNewLine = heredocOpener.getNextSibling();
     PsiElement tailingNewLine = headingNewLine.getNextSibling().getNextSibling().getNextSibling();
 
-    return new ArrayList<>(Arrays.asList(
-      heredocOpener,
-      headingNewLine,
-      tailingNewLine
-    ));
+    return List.of(heredocOpener, headingNewLine, tailingNewLine);
   }
 
   public static PerlStringContentElementImpl createStringContent(Project project, String name) {

@@ -62,6 +62,7 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
+import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.VisibleForTesting;
@@ -200,8 +201,8 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     return null;
   }
 
-  private @NotNull List<VirtualFile> getPossibleFileLocations() {
-    var contentRoots = new ArrayList<>(Arrays.asList(ProjectRootManager.getInstance(myProject).getContentRoots()));
+  private @NotNull Iterable<VirtualFile> getPossibleFileLocations() {
+    var contentRoots = PerlUtil.mutableList(ProjectRootManager.getInstance(myProject).getContentRoots());
     contentRoots.add(ProjectUtil.guessProjectDir(myProject));
     return ContainerUtil.filter(contentRoots, it -> it != null && it.isValid() && it.exists() && it.isDirectory());
   }

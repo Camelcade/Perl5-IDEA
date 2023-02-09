@@ -29,11 +29,10 @@ import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
+import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 
 public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder {
@@ -62,8 +61,7 @@ public class HTMLMasonFoldingBuilder extends AbstractMasonFoldingBuilder {
 
   @Override
   public FoldingDescriptor @NotNull [] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
-    List<FoldingDescriptor> masonDescriptors =
-      new ArrayList<>(Arrays.asList(super.buildFoldRegions(root, document, quick)));
+    List<FoldingDescriptor> masonDescriptors = mutableList(super.buildFoldRegions(root, document, quick));
     root.accept(new HTMLMasonFoldingRegionsCollector(document, masonDescriptors));
     return masonDescriptors.toArray(FoldingDescriptor.EMPTY_ARRAY);
   }

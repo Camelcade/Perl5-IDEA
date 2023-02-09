@@ -22,11 +22,15 @@ import com.perl5.PerlBundle;
 import org.apache.groovy.util.Maps;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
 
 import static com.perl5.lang.perl.internals.PerlVersionRegexps.*;
+import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 /**
  * Represents perl version
@@ -121,7 +125,7 @@ public final class PerlVersion implements Comparable<PerlVersion> {
   }
 
   private void parseDottedVersion(String versionString, Matcher matcher) {
-    List<String> versionChunks = new ArrayList<>(Arrays.asList(versionString.replace("v", "").replace('_', '.').split("\\.")));
+    List<String> versionChunks = mutableList(versionString.replace("v", "").replace('_', '.').split("\\."));
     myIsAlpha = matcher.group(1) != null;
     myRevision = Integer.parseInt(versionChunks.remove(0));
 
