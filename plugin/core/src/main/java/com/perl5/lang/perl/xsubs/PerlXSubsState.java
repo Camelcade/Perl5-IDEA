@@ -91,6 +91,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
     myProject = ProjectManager.getInstance().getDefaultProject();
   }
 
+  @SuppressWarnings("unused")
   public PerlXSubsState(@NotNull Project project) {
     myProject = project;
   }
