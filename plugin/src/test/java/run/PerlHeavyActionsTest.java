@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,7 +80,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
     var notification = notificationSink.get();
     assertNotNull("Expected notification about not up to date xsubs", notification);
     assertEquals("Perl5 XSubs Deparser", notification.getGroupId());
-    assertEquals("XSubs Change Detected", notification.getTitle());
+    assertEquals("XSubs change detected", notification.getTitle());
     assertEquals("XSubs declarations file is absent or outdated.", notification.getContent());
     assertSize(1, notification.getActions());
 
