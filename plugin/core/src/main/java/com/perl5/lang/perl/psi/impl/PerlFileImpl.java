@@ -22,8 +22,6 @@ import com.intellij.lang.Language;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.roots.impl.DirectoryInfo;
-import com.intellij.openapi.roots.impl.ProjectFileIndexImpl;
 import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -34,7 +32,6 @@ import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
@@ -156,13 +153,16 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     if (parentFile == null) {
       return null;
     }
-    ProjectFileIndex index = ProjectFileIndex.getInstance(getProject());
-    DirectoryInfo fileInfo = ((ProjectFileIndexImpl)index).getInfoForFileOrDirectory(virtualFile);
-    VirtualFile contentRoot = ObjectUtils.coalesce(fileInfo.getContentRoot(), fileInfo.getLibraryClassRoot(), fileInfo.getSourceRoot());
-    if (contentRoot == null) {
-      return parentFile.getPresentableUrl();
+    var fileIndex = ProjectFileIndex.getInstance(getProject());
+    VirtualFile fileRoot = fileIndex.getContentRootForFile(virtualFile);
+    if (fileRoot == null) {
+      fileRoot = fileIndex.getClassRootForFile(virtualFile);
     }
-    return VfsUtil.getRelativePath(parentFile, contentRoot);
+    if (fileRoot == null) {
+      fileRoot = fileIndex.getSourceRootForFile(virtualFile);
+    }
+
+    return fileRoot == null ? parentFile.getPresentableUrl() : VfsUtil.getRelativePath(parentFile, fileRoot);
   }
 
   @Override
