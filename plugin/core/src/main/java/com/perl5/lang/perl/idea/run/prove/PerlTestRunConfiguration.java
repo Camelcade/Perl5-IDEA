@@ -163,7 +163,10 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
       throw new ExecutionException("Unable to map remote path: " + remotePath + " for " + perlHostData);
     }
 
+    var perlRunIncludeArguments = getPerlRunIncludeArguments(perlHostData, project);
+
     PerlCommandLine commandLine = new PerlCommandLine(getEffectiveInterpreterPath())
+      .withParameters(perlRunIncludeArguments)
       .withParameters(remotePath)
       .withParameters(proveParameters)
       .withParameters(testsPaths)
@@ -178,7 +181,7 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
 
     ArrayList<String> perlParametersList = new ArrayList<>(getPerlParametersList());
     perlParametersList.addAll(additionalPerlParameters);
-    perlParametersList.addAll(getPerlRunIncludeArguments(perlHostData, project));
+    perlParametersList.addAll(perlRunIncludeArguments);
 
     // environment
     Map<String, String> environment = new HashMap<>(getEnvs());
