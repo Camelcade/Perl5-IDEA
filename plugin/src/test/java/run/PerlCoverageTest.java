@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
@@ -122,6 +123,9 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
   private @NotNull String serializeFileData(@NotNull String filePath, @NotNull ClassData fileData) {
     VirtualFile coveredFile = VfsUtil.findFileByIoFile(new File(filePath), true);
     assertNotNull(coveredFile);
+    if (!ProjectFileIndex.getInstance(getProject()).isInContent(coveredFile)) {
+      return "";
+    }
     PsiFile coveredPsiFile = PsiManager.getInstance(getProject()).findFile(coveredFile);
     assertNotNull(coveredPsiFile);
     Document coveredDocument = PsiDocumentManager.getInstance(getProject()).getDocument(coveredPsiFile);
