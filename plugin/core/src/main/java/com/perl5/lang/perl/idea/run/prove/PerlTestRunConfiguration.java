@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -54,7 +53,7 @@ import java.util.regex.Pattern;
 
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.CONSOLE;
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.NONE;
-import static com.perl5.lang.perl.util.PerlRunUtil.PERL_I;
+import static com.perl5.lang.perl.util.PerlRunUtil.getPerlRunIncludeArguments;
 
 @VisibleForTesting
 public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
@@ -179,9 +178,7 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
 
     ArrayList<String> perlParametersList = new ArrayList<>(getPerlParametersList());
     perlParametersList.addAll(additionalPerlParameters);
-    for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getModulesLibraryRoots()) {
-      perlParametersList.add(PERL_I + perlHostData.getRemotePath(libRoot.getCanonicalPath()));
-    }
+    perlParametersList.addAll(getPerlRunIncludeArguments(perlHostData, project));
 
     // environment
     Map<String, String> environment = new HashMap<>(getEnvs());
