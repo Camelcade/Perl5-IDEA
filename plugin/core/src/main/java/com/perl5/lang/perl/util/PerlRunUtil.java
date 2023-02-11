@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -167,9 +167,7 @@ public final class PerlRunUtil {
     PerlCommandLine commandLine = new PerlCommandLine(perlSdk).withProject(project);
     commandLine.setExePath(interpreterPath);
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(perlSdk);
-    for (VirtualFile libRoot : PerlProjectManager.getInstance(project).getModulesLibraryRoots()) {
-      commandLine.addParameter(PERL_I + hostData.getRemotePath(libRoot.getCanonicalPath()));
-    }
+    commandLine.addParameters(getPerlRunIncludeArguments(hostData, project));
 
     commandLine.addParameters(perlParameters);
 
@@ -183,6 +181,22 @@ public final class PerlRunUtil {
     commandLine.addParameters(scriptParameters);
 
     return commandLine;
+  }
+
+  /**
+   * @return a list with {@code -I} arguments we need to pass to the Perl to include all in-project library directories and external
+   * libraries configured by user
+   */
+  public static @NotNull List<String> getPerlRunIncludeArguments(@NotNull PerlHostData<?, ?> hostData, @NotNull Project project) {
+    var result = new ArrayList<String>();
+    var perlProjectManager = PerlProjectManager.getInstance(project);
+    for (VirtualFile libRoot : perlProjectManager.getModulesLibraryRoots()) {
+      result.add(PERL_I + hostData.getRemotePath(libRoot.getCanonicalPath()));
+    }
+    for (VirtualFile libRoot : perlProjectManager.getExternalLibraryRoots()) {
+      result.add(PERL_I + hostData.getRemotePath(libRoot.getCanonicalPath()));
+    }
+    return result;
   }
 
   /**
