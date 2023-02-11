@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -139,7 +139,7 @@ public abstract class PackageManagerAdapter {
    * Creates an adapter, prefers cpanminus over cpan
    */
   public static @NotNull PackageManagerAdapter create(@NotNull Sdk sdk, @Nullable Project project) {
-    return CpanminusAdapter.isAvailable(sdk) ? new CpanminusAdapter(sdk, project) : new CpanAdapter(sdk, project);
+    return CpanminusAdapter.isAvailable(project) ? new CpanminusAdapter(sdk, project) : new CpanAdapter(sdk, project);
   }
 
   private static final class InstallUpdate extends Update {

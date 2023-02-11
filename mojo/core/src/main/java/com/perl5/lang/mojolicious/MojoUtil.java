@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,7 @@ import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
@@ -41,8 +39,8 @@ public final class MojoUtil {
    * @return a mojo script virtual file for {@code sdk} if any
    */
   @Contract("null->null")
-  public static @Nullable VirtualFile getMojoScript(@Nullable Sdk sdk) {
-    return PerlRunUtil.findScript(sdk, MOJO_SCRIPT_NAME);
+  public static @Nullable VirtualFile getMojoScript(@Nullable Project project) {
+    return PerlRunUtil.findScript(project, MOJO_SCRIPT_NAME);
   }
 
   /**
@@ -50,15 +48,7 @@ public final class MojoUtil {
    */
   @Contract("null->null")
   public static @Nullable VirtualFile getMojoScript(@Nullable AnActionEvent event) {
-    return getMojoScript(PerlProjectManager.getSdk(event));
-  }
-
-  /**
-   * @return a mojo script virtual file for {@code project} if any
-   */
-  @Contract("null->null")
-  public static @Nullable VirtualFile getMojoScript(@Nullable Project project) {
-    return getMojoScript(PerlProjectManager.getSdk(project));
+    return getMojoScript(event.getProject());
   }
 
   /**
@@ -66,7 +56,7 @@ public final class MojoUtil {
    */
   @Contract("null->null")
   public static @Nullable VirtualFile getMojoScript(@Nullable Module module) {
-    return getMojoScript(PerlProjectManager.getSdk(module));
+    return getMojoScript(module.getProject());
   }
 
   /**
