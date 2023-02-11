@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,6 @@
 package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -41,15 +39,7 @@ public class PerlInstallCpanmAction extends PerlActionBase {
     if (!super.isEnabled(event)) {
       return false;
     }
-    Project project = event.getProject();
-    if (project == null) {
-      return false;
-    }
-    Sdk perlSdk = PerlProjectManager.getSdk(project);
-    if (perlSdk == null) {
-      return false;
-    }
-    return !CpanminusAdapter.isAvailable(perlSdk);
+    return !CpanminusAdapter.isAvailable(event.getProject());
   }
 
   @Override

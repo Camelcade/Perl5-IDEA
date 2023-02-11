@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,7 +76,7 @@ public class PerlUnresolvedPackageFileInspection extends PerlInspection {
           Project project = o.getProject();
           Sdk perlSdk = PerlProjectManager.getSdk(project);
           if (perlSdk != null) {
-            if (CpanminusAdapter.isAvailable(perlSdk)) {
+            if (CpanminusAdapter.isAvailable(project)) {
               fixes.add(new InstallPackageQuickfix(new CpanminusAdapter(perlSdk, project), packageName));
             }
             fixes.add(new InstallPackageQuickfix(new CpanAdapter(perlSdk, project), packageName));

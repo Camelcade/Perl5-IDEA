@@ -275,13 +275,8 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
   @Override
   public void checkConfiguration() throws RuntimeConfigurationException {
     super.checkConfiguration();
-    try {
-      if (PerlRunUtil.findScript(getEffectiveSdk(), PROVE) == null) {
-        throw new RuntimeConfigurationException(PerlBundle.message("perl.run.error.no.prove.found"));
-      }
-    }
-    catch (ExecutionException e) {
-      throw new RuntimeConfigurationException(e.getMessage());
+    if (PerlRunUtil.findScript(getProject(), PROVE) == null) {
+      throw new RuntimeConfigurationException(PerlBundle.message("perl.run.error.no.prove.found"));
     }
   }
 }

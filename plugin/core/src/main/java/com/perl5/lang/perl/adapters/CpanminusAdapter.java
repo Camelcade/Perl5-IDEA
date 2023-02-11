@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,9 +81,9 @@ public class CpanminusAdapter extends PackageManagerAdapter {
    * @return true iff App::cpanminus is available in sdk classpath
    */
   @Contract("null->false")
-  public static boolean isAvailable(@Nullable Sdk sdk) {
+  public static boolean isAvailable(@Nullable Project project) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return PerlRunUtil.findScript(sdk, SCRIPT_NAME) != null;
+    return PerlRunUtil.findScript(project, SCRIPT_NAME) != null;
   }
 
   public static @Nullable AnAction createInstallAction(@NotNull Sdk sdk,
@@ -91,7 +91,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
                                                        @NotNull Collection<String> libraryNames,
                                                        @Nullable Runnable actionCallback) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    return !isAvailable(sdk) ? null : new PerlDumbAwareAction(CpanAdapter.createInstallActionTitle(SCRIPT_NAME)) {
+    return !isAvailable(project) ? null : new PerlDumbAwareAction(CpanAdapter.createInstallActionTitle(SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
         new CpanminusAdapter(sdk, project).install(libraryNames);
@@ -105,6 +105,6 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   @Contract("null->null")
   public static @Nullable CpanminusAdapter create(@Nullable Project project) {
     Sdk sdk = PerlProjectManager.getSdk(project);
-    return isAvailable(sdk) ? new CpanminusAdapter(sdk, project) : null;
+    return isAvailable(project) ? new CpanminusAdapter(sdk, project) : null;
   }
 }

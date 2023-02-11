@@ -43,8 +43,6 @@ import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.RootsChangeRescanningInfo;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkTypeId;
-import com.intellij.openapi.roots.OrderRootType;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.EmptyRunnable;
@@ -230,7 +228,7 @@ public final class PerlRunUtil {
                                                                         @Nullable Project project,
                                                                         @NotNull String scriptName,
                                                                         @Nullable String libraryName) {
-    VirtualFile scriptFile = findScript(sdk, scriptName);
+    VirtualFile scriptFile = findScript(project, scriptName);
     if (scriptFile != null) {
       return scriptFile;
     }
@@ -306,34 +304,21 @@ public final class PerlRunUtil {
     addInstallActionsAndShow(project, sdk, Collections.singletonList(libraryName), notification);
   }
 
-
   /**
    * Attempts to find a script by name in perl's libraries path
    *
-   * @param project    project to get sdk from
-   * @param scriptName script name to find
-   * @return script's virtual file if available
-   **/
-  public static @Nullable VirtualFile findScript(@Nullable Project project, @Nullable String scriptName) {
-    return findScript(PerlProjectManager.getSdk(project), scriptName);
-  }
-
-  /**
-   * Attempts to find a script by name in perl's libraries path
-   *
-   * @param sdk        perl sdk to search in
-   * @param scriptName script name to find
    * @return script's virtual file if available
    * @apiNote returns virtual file of local file, not remote
    **/
-  @Contract("null,_->null; _,null->null")
-  public static @Nullable VirtualFile findScript(@Nullable Sdk sdk, @Nullable String scriptName) {
+  @Contract("null,_->null,_,null->null")
+  public static @Nullable VirtualFile findScript(@Nullable Project project, @Nullable String scriptName) {
+    var sdk = PerlProjectManager.getSdk(project);
     if (sdk == null || StringUtil.isEmpty(scriptName)) {
       return null;
     }
     ApplicationManager.getApplication().assertReadAccessAllowed();
     PerlOsHandler osHandler = PerlOsHandler.notNullFrom(sdk);
-    return getBinDirectories(sdk)
+    return getBinDirectories(project)
       .map(root -> {
         VirtualFile scriptFile = null;
         if (osHandler.isMsWindows()) {
@@ -349,26 +334,22 @@ public final class PerlRunUtil {
   /**
    * @return list of perl bin directories where script from library may be located
    **/
-  public static @NotNull Stream<VirtualFile> getBinDirectories(@Nullable Sdk sdk) {
-    if (sdk == null) {
-      return Stream.empty();
-    }
+  public static @NotNull Stream<VirtualFile> getBinDirectories(@NotNull Project project) {
     ApplicationManager.getApplication().assertReadAccessAllowed();
-    SdkTypeId sdkType = sdk.getSdkType();
-    if (!(sdkType instanceof PerlSdkType)) {
-      throw new IllegalArgumentException("Got non-perl sdk: " + sdk);
-    }
-    List<VirtualFile> files =
-      new ArrayList<>(ContainerUtil.map(sdk.getRootProvider().getFiles(OrderRootType.CLASSES), PerlRunUtil::findLibsBin));
+    var libraryRoots = PerlProjectManager.getInstance(project).getAllLibraryRoots();
+    var files = new ArrayList<>(ContainerUtil.map(libraryRoots, PerlRunUtil::findLibsBin));
 
-    PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(sdk);
-    File localSdkBinDir = hostData.getLocalPath(new File(
-      StringUtil.notNullize(PerlProjectManager.getInterpreterPath(sdk))).getParentFile());
-    if (localSdkBinDir != null) {
-      files.add(VfsUtil.findFileByIoFile(localSdkBinDir, false));
+    var sdk = PerlProjectManager.getSdk(project);
+    if (sdk != null) {
+      PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(sdk);
+      File localSdkBinDir = hostData.getLocalPath(new File(
+        StringUtil.notNullize(PerlProjectManager.getInterpreterPath(sdk))).getParentFile());
+      if (localSdkBinDir != null) {
+        files.add(VfsUtil.findFileByIoFile(localSdkBinDir, false));
+      }
+      PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(
+        it -> ObjectUtils.doIfNotNull(hostData.getLocalPath(it), localPath -> files.add(VfsUtil.findFileByIoFile(localPath, false))));
     }
-    PerlVersionManagerData.notNullFrom(sdk).getBinDirsPath().forEach(
-      it -> ObjectUtils.doIfNotNull(hostData.getLocalPath(it), localPath -> files.add(VfsUtil.findFileByIoFile(localPath, false))));
     return files.stream().filter(Objects::nonNull).distinct();
   }
 
