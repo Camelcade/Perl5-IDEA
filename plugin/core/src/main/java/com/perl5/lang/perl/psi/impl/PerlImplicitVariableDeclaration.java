@@ -135,7 +135,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
   @Override
-  public PerlVariableType getActualType() {
+  public @NotNull PerlVariableType getActualType() {
     return getVariableType();
   }
 
@@ -245,7 +245,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
   @Override
-  public @NotNull String getName() {
+  public @Nullable String getName() {
     return getVariableName();
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,16 +27,16 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public class PerlVariableDeclarationSearcher implements PsiScopeProcessor {
-  private final String myName;
-  private final PerlVariableType myVariableType;
-  private final PsiElement myVariable;
+  private final @Nullable String myName;
+  private final @NotNull PerlVariableType myVariableType;
+  private final @NotNull PsiElement myVariable;
   private PerlVariableDeclarationElement myResult;
-  //	private PerlVariable myPossibleResult;
 
-  public PerlVariableDeclarationSearcher(String name, PerlVariableType variableType, PsiElement anchorElement) {
+  public PerlVariableDeclarationSearcher(@Nullable String name, @NotNull PerlVariableType variableType, @NotNull PsiElement anchorElement) {
     myName = name;
     myVariableType = variableType;
     myVariable = anchorElement;

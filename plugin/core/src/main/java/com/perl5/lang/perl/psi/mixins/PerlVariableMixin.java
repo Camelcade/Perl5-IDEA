@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   }
 
   @Override
-  public PerlVariableType getActualType() {
+  public @NotNull PerlVariableType getActualType() {
     IElementType parentElementType = PsiUtilCore.getElementType(getParent());
 
     if (parentElementType == HASH_ELEMENT || parentElementType == HASH_SLICE || parentElementType == HASH_HASH_SLICE) {
@@ -144,7 +144,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   }
 
   @Override
-  public String getName() {
+  public @Nullable String getName() {
     PerlVariableNameElement variableNameElement = getVariableNameElement();
     if (variableNameElement == null) {
       return null;
