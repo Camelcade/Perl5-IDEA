@@ -72,15 +72,7 @@ public class PerlCommandLine extends GeneralCommandLine {
   public PerlCommandLine() {
   }
 
-  public PerlCommandLine(@NotNull Sdk sdk) {
-    mySdk = sdk;
-  }
-
   public PerlCommandLine(@NotNull String... command) {
-    super(command);
-  }
-
-  public PerlCommandLine(@NotNull List<String> command) {
     super(command);
   }
 
