@@ -29,6 +29,7 @@ import com.intellij.openapi.vfs.VirtualFileSystem;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.io.BaseDataReader;
 import com.intellij.util.io.BaseOutputReader;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
@@ -263,7 +264,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
 
     PerlHostData<?, ?> perlHostData = commandLine.getEffectiveHostData();
     if (perlHostData == null) {
-      throw new ExecutionException("No host data in " + commandLine);
+      throw new ExecutionException(PerlBundle.message("dialog.message.no.host.data.in", commandLine));
     }
     BaseProcessHandler<?> processHandler = perlHostData.doCreateProcessHandler(commandLine);
     commandLine.getProcessListeners().forEach(processHandler::addProcessListener);
@@ -290,7 +291,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   public static @NotNull ProcessHandler createConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
     PerlHostData<?, ?> hostData = commandLine.getEffectiveHostData();
     if (hostData == null) {
-      throw new ExecutionException("No host data in the command line " + commandLine);
+      throw new ExecutionException(PerlBundle.message("dialog.message.no.host.data.in.command.line", commandLine));
     }
     PerlVersionManagerData<?, ?> versionManagerData = commandLine.getEffectiveVersionManagerData();
     if (versionManagerData != null) {

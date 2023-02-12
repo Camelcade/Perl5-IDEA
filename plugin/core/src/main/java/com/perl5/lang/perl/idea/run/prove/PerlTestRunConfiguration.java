@@ -160,7 +160,7 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
 
     String remotePath = perlHostData.getRemotePath(proveScript.getPath());
     if (StringUtil.isEmpty(remotePath)) {
-      throw new ExecutionException("Unable to map remote path: " + remotePath + " for " + perlHostData);
+      throw new ExecutionException(PerlBundle.message("dialog.message.unable.to.map.remote.path.for", remotePath, perlHostData));
     }
 
     var perlRunIncludeArguments = getPerlRunIncludeArguments(perlHostData, project);
