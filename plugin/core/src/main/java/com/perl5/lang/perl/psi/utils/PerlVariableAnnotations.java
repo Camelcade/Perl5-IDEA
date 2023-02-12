@@ -241,6 +241,7 @@ public class PerlVariableAnnotations {
   }
 
   public interface VariableAnnotationProcessor {
+    @SuppressWarnings("SameReturnValue")
     default boolean processDeprecated() {
       return true;
     }
