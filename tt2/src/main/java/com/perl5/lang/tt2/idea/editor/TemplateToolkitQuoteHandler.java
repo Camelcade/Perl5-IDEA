@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,22 +18,31 @@ package com.perl5.lang.tt2.idea.editor;
 
 import com.intellij.codeInsight.editorActions.SimpleTokenSetQuoteHandler;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
+import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
-import com.perl5.lang.tt2.parser.TemplateToolkitParserUtil;
 
 
 public class TemplateToolkitQuoteHandler extends SimpleTokenSetQuoteHandler implements TemplateToolkitElementTypes {
+  private static final TokenSet OPEN_QUOTES = TokenSet.create(
+    TT2_DQ_OPEN,
+    TT2_SQ_OPEN
+  );
+  private static final TokenSet CLOSE_QUOTES = TokenSet.create(
+    TT2_DQ_CLOSE,
+    TT2_SQ_CLOSE
+  );
+
   public TemplateToolkitQuoteHandler() {
-    super(TemplateToolkitParserUtil.OPEN_QUOTES);
+    super(OPEN_QUOTES);
   }
 
   @Override
   public boolean isClosingQuote(HighlighterIterator iterator, int offset) {
-    return TemplateToolkitParserUtil.CLOSE_QUOTES.contains(iterator.getTokenType());
+    return CLOSE_QUOTES.contains(iterator.getTokenType());
   }
 
   @Override
   public boolean isOpeningQuote(HighlighterIterator iterator, int offset) {
-    return TemplateToolkitParserUtil.OPEN_QUOTES.contains(iterator.getTokenType());
+    return OPEN_QUOTES.contains(iterator.getTokenType());
   }
 }
