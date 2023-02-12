@@ -188,6 +188,7 @@ public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implemen
            buffer.charAt(offset) == '#';
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType lexLineComment(CharSequence buffer, int offset, int bufferEnd) {
     int endOffset = offset;
     String endTag = getEndTag();
