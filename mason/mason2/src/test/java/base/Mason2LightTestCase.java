@@ -30,7 +30,7 @@ public abstract class Mason2LightTestCase extends PerlLightTestCaseBase {
 
   @Override
   protected @NotNull String getTestLibPath() {
-    return super.getTestLibPathFromNested();
+    return TEST_LIB_PATH_FROM_NESTED;
   }
 
   protected void markAsComponentRoot(@NotNull VirtualFile componentRoot) {

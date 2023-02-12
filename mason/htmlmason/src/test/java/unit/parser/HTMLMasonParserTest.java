@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public class HTMLMasonParserTest extends PerlParserTestBase {
 
   @Override
   protected @NotNull String getTestLibPath() {
-    return super.getTestLibPathFromNested();
+    return TEST_LIB_PATH_FROM_NESTED;
   }
 
   @Test

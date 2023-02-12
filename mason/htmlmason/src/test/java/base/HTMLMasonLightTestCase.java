@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ public abstract class HTMLMasonLightTestCase extends PerlLightTestCase {
 
   @Override
   protected @NotNull String getTestLibPath() {
-    return super.getTestLibPathFromNested();
+    return TEST_LIB_PATH_FROM_NESTED;
   }
 
   protected void markAsComponentRoot(@NotNull VirtualFile componentRoot) {
