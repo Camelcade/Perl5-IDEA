@@ -184,7 +184,7 @@ public class PerlVariableAnnotations {
    * Processes variable declarations to which {@code typeAnnotation} may belong
    */
   public static boolean processPotentialTargets(@NotNull PerlAnnotationType typeAnnotation,
-                                                @NotNull Processor<PerlVariableDeclarationElement> declarationElementProcessor) {
+                                                @NotNull Processor<? super PerlVariableDeclarationElement> declarationElementProcessor) {
     PsiElement run = typeAnnotation.getAnnotationContainer();
     while (run != null && PerlParserDefinition.WHITE_SPACE_AND_REAL_COMMENTS.contains(PsiUtilCore.getElementType(run))) {
       run = run.getNextSibling();
