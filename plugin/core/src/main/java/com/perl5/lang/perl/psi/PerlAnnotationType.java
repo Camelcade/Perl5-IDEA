@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface PerlAnnotationType extends PerlAnnotationWithValue {
@@ -63,7 +64,7 @@ public interface PerlAnnotationType extends PerlAnnotationWithValue {
   default @NotNull List<PerlVariableDeclarationElement> getTargets() {
     return CachedValuesManager.getCachedValue(
       this,
-      () -> CachedValueProvider.Result.create(PerlVariableAnnotations.computeTargets(this), PsiModificationTracker.MODIFICATION_COUNT));
+      () -> CachedValueProvider.Result.create(computeTargets(this), PsiModificationTracker.MODIFICATION_COUNT));
   }
 
   /**
@@ -76,5 +77,25 @@ public interface PerlAnnotationType extends PerlAnnotationWithValue {
     }
     throw new IllegalStateException(
       "Type annotation is expected to be inside " + PerlAnnotationContainer.class.getSimpleName() + ", not " + parent);
+  }
+
+  /**
+   * @return list of variable declarations {@code typeAnnotation} applies to
+   */
+  static @NotNull List<PerlVariableDeclarationElement> computeTargets(@NotNull PerlAnnotationType typeAnnotation) {
+    var result = new ArrayList<PerlVariableDeclarationElement>();
+    PerlVariableAnnotations.processPotentialTargets(typeAnnotation, it -> PerlVariableAnnotations.processAnnotations(it,
+                                                                                                                     new PerlVariableAnnotations.VariableAnnotationProcessor() {
+                                                                                                                       @Override
+                                                                                                                       public boolean processType(
+                                                                                                                         @NotNull PerlAnnotationType annotationType) {
+                                                                                                                         if (annotationType.equals(
+                                                                                                                           typeAnnotation)) {
+                                                                                                                           result.add(it);
+                                                                                                                         }
+                                                                                                                         return true;
+                                                                                                                       }
+                                                                                                                     }));
+    return result;
   }
 }
