@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,8 +69,10 @@ public abstract class PerlSubDeclarationBase extends PerlSubBase<PerlSubDeclarat
     return StringUtil.equals(getContainingFile().getName(), PerlXSubsState.DEPARSED_FILE_NAME);
   }
 
+  @SuppressWarnings("SameReturnValue")
   public @Nullable PsiPerlExpr getExpr() {return null;}
 
+  @SuppressWarnings("SameReturnValue")
   public @Nullable PsiPerlStatementModifier getStatementModifier() {
     return null;
   }
