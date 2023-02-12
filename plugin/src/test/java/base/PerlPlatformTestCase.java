@@ -179,10 +179,6 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return PerlProjectManager.getSdk(getModule());
   }
 
-  protected void runAction(@NotNull AnAction anAction) {
-    runAction(anAction, null);
-  }
-
   protected void runAction(@NotNull AnAction anAction, @Nullable VirtualFile virtualFile) {
     TestActionEvent e = new TestActionEvent(dataId -> {
       if (LangDataKeys.MODULE.is(dataId)) {

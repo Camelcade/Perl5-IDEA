@@ -58,7 +58,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     LOG.info("Got: " + projects.get(0));
   }
 
-  private @NotNull List<MojoProject> runMojoGenerateActionAndGetProjects(MojoGenerateAction action) {
+  private @NotNull List<MojoProject> runMojoGenerateActionAndGetProjects(@NotNull MojoGenerateAction action) {
     var testSemaphore = action.runWithTestSemaphore(() -> runAction(action, getModuleRoot()));
     waitForAllDescriptorsToFinish();
     waitWithEventsDispatching("Final callback hasn't finished", testSemaphore::isUp);
