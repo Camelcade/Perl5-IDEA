@@ -179,7 +179,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
    */
   protected abstract @Nullable String doGetRemotePath(@NotNull String localPath);
 
-  @Contract("null->null")
+  @Contract("null->null;!null->!null")
   public final @Nullable String getRemotePath(@Nullable String localPathName) {
     if (localPathName == null) {
       return null;
@@ -212,11 +212,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
 
   @Contract("null->null")
   public final @Nullable File getRemotePath(@Nullable File localPath) {
-    if (localPath == null) {
-      return null;
-    }
-    String remotePath = getRemotePath(localPath.getPath());
-    return remotePath == null ? null : new File(remotePath);
+    return localPath == null ? null : new File(getRemotePath(localPath.getPath()));
   }
 
   /**
