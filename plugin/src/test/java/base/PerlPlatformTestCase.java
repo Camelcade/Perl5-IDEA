@@ -395,15 +395,11 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
-    return computeAnswerFileNameWithoutExtension(appendix) + "." + getResultsFileExtension();
+    return computeAnswerFileNameWithoutExtension(appendix) + "." + "txt";
   }
 
   protected @NotNull String computeAnswerFileNameWithoutExtension(@NotNull String appendix) {
     return getTestName(true) + appendix;
-  }
-
-  protected @NotNull String getResultsFileExtension() {
-    return "txt";
   }
 
   protected void waitForProcessFinish(ProcessHandler processHandler) {
