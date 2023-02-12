@@ -76,21 +76,9 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
     return myFileExt;
   }
 
-  protected boolean allTreesInSingleFile() {
-    return true;
-  }
-
-  protected boolean checkAllPsiRoots() {
-    return true;
-  }
-
   @Override
   public void initWithFileContent(String filename, String extension, String content) {
     super.initWithFileContent(filename, extension, StringUtil.replace(content, REPLACES, REPLACEMENTS).trim());
-  }
-
-  protected boolean includeRanges() {
-    return false;
   }
 
   protected void doTest(boolean ensureNoErrorElements) {
@@ -112,9 +100,7 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
     ensureParsed(psiFile);
     assertEquals("doc text mismatch", text, requireNonNull(psiFile.getViewProvider().getDocument()).getText());
     ensureCorrectReparse(psiFile);
-    doCheckResult(getResultsTestDataPath(), psiFile, checkAllPsiRoots(), computeAnswerFileNameWithoutExtension(""), skipSpaces(),
-                  includeRanges(),
-                  allTreesInSingleFile());
+    doCheckResult(getResultsTestDataPath(), psiFile, true, computeAnswerFileNameWithoutExtension(""), skipSpaces(), false, true);
     if (ensureNoErrorElements) {
       ensureNoErrorElements();
     }
