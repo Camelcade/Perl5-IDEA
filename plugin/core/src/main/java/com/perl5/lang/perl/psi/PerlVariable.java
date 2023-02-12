@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,13 +38,8 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlV
    *
    * @return variable type
    */
-  PerlVariableType getActualType();
+  @NotNull PerlVariableType getActualType();
 
-  /**
-   * Looking for lexical declaration of variable
-   *
-   * @return declare variable or null
-   */
   PerlVariableDeclarationElement getLexicalDeclaration();
 
   /**
@@ -54,26 +49,11 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlV
    */
   @NotNull List<PerlVariableDeclarationElement> getGlobalDeclarations();
 
-  /**
-   * Looking for globs, sutable for current variable
-   *
-   * @return list of globs
-   */
   @NotNull List<PerlGlobVariableElement> getRelatedGlobs();
 
-  /**
-   * Returns line number of element in the document
-   *
-   * @return list of globs
-   */
   int getLineNumber();
 
-  /**
-   * Returns variable name
-   *
-   * @return variable name or null
-   */
-  String getName();
+  @Nullable String getName();
 
   /**
    * Checks if this occurrence is declaration
