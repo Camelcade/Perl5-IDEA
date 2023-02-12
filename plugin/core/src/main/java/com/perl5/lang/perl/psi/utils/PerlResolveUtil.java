@@ -127,7 +127,7 @@ public final class PerlResolveUtil {
     return CachedValuesManager.getCachedValue(variable, () -> {
       PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
       if (PerlResolveUtil.treeWalkUp(variable, variableProcessor)) {
-        variableProcessor.processBuiltIns();
+        variableProcessor.searchBuiltIn();
       }
       return CachedValueProvider.Result.create(variableProcessor.getResult(), variable.getContainingFile());
     });
