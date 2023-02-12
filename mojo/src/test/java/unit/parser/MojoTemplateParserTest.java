@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,14 +39,14 @@ public class MojoTemplateParserTest extends MojoliciousParserTestBase {
   @Ignore(value = "Need to fix begin in expression #2265")
   @Test
   public void testBeginAfterFatComma() {
-    setSkipSpaces(false);
+    dontSkipSpaces();
     doTest();
   }
 
   @Ignore(value = "Need to fix begin in expression #2265")
   @Test
   public void testBeginAfterFatComma2() {
-    setSkipSpaces(false);
+    dontSkipSpaces();
     doTest();
   }
 }
