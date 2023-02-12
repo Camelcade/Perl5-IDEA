@@ -186,13 +186,7 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     // environment
     Map<String, String> environment = new HashMap<>(getEnvs());
     environment.putAll(additionalEnvironmentVariables);
-    if (!perlParametersList.isEmpty()) {
-      String currentOpt = environment.get(PerlRunUtil.PERL5OPT);
-      if (StringUtil.isNotEmpty(currentOpt)) {
-        perlParametersList.addAll(0, StringUtil.split(currentOpt, " "));
-      }
-      environment.put(PerlRunUtil.PERL5OPT, StringUtil.join(perlParametersList, " "));
-    }
+    PerlRunUtil.updatePerl5Opt(environment, perlParametersList);
     environment.forEach((key, val) -> commandLine.withEnvironment(PROVE_PASS_PREFIX + key, val));
 
     commandLine.withParentEnvironmentType(isPassParentEnvs() ? CONSOLE : NONE);

@@ -162,8 +162,7 @@ public final class PerlRunUtil {
       LOG.warn("Empty interpreter path in " + perlSdk + " while building command line for " + localScriptPath);
       return null;
     }
-    PerlCommandLine commandLine = new PerlCommandLine(perlSdk).withProject(project);
-    commandLine.setExePath(interpreterPath);
+    PerlCommandLine commandLine = new PerlCommandLine(interpreterPath).withSdk(perlSdk).withProject(project);
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(perlSdk);
     commandLine.addParameters(getPerlRunIncludeArguments(hostData, project));
 
@@ -305,10 +304,11 @@ public final class PerlRunUtil {
   }
 
   /**
-   * Attempts to find a script by name in perl's libraries path
+   * Attempts to find an executable script by name in perl's libraries path
    *
    * @return script's virtual file if available
-   * @apiNote returns virtual file of local file, not remote
+   * @apiNote returns virtual file of local file, not remote. It finds not a perl script, but executable script. E.g. for windows, it may
+   * be a bat script
    **/
   @Contract("null,_->null,_,null->null")
   public static @Nullable VirtualFile findScript(@Nullable Project project, @Nullable String scriptName) {
@@ -643,5 +643,21 @@ public final class PerlRunUtil {
       ourTestSdkRefreshSemaphore = null;
       ourTestDisposable = null;
     });
+  }
+
+  /**
+   * Updates {@code environment} with {@code perlParametersList} packed to {@code PERL5OPT} environment variable to pass it transparently.
+   */
+  public static void updatePerl5Opt(@NotNull Map<? super String, String> environment, @NotNull List<String> perlParametersList) {
+    if (perlParametersList.isEmpty()) {
+      return;
+    }
+    var perlParameters = StringUtil.join(perlParametersList, " ");
+
+    String currentOpt = environment.get(PERL5OPT);
+    if (StringUtil.isNotEmpty(currentOpt)) {
+      perlParameters = String.join(" ", currentOpt, perlParameters);
+    }
+    environment.put(PERL5OPT, perlParameters);
   }
 }

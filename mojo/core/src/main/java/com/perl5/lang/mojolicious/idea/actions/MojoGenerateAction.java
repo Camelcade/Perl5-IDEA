@@ -44,8 +44,6 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.perl5.lang.perl.util.PerlUtil.mutableList;
-
 public abstract class MojoGenerateAction extends MojoScriptAction {
   private static final Logger LOG = Logger.getInstance(MojoGenerateAction.class);
   private static final String GENERATE_COMMAND = "generate";
@@ -93,36 +91,38 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
       return;
     }
 
-    List<String> fullArguments = mutableList(remoteScriptPath, GENERATE_COMMAND);
-    fullArguments.addAll(generationParameters);
-
     VirtualFile targetDirectory = getTargetDirectory(e);
     var targetDirectoryPath = targetDirectory.getPath();
     var callbackTestSemaphore = myCallbackTestSemaphore;
 
-    PerlRunUtil.runInConsole(
-      new PerlCommandLine(fullArguments)
-        .withProject(project)
-        .withConsoleIcon(MojoIcons.MOJO_LOGO)
-        .withWorkDirectory(targetDirectoryPath)
-        .withProcessListener(new ProcessAdapter() {
-          @Override
-          public void processTerminated(@NotNull ProcessEvent event) {
-            targetDirectory.refresh(true, false);
-            try {
-              hostData.fixPermissionsRecursively(targetDirectoryPath, project);
-            }
-            catch (ExecutionException ex) {
-              LOG.warn("Error fixing permissions for " + targetDirectoryPath + ": " + ex.getMessage());
-            }
-            finally {
-              if (callbackTestSemaphore != null) {
-                callbackTestSemaphore.up();
-              }
-            }
+    var processListener = new ProcessAdapter() {
+      @Override
+      public void processTerminated(@NotNull ProcessEvent event) {
+        targetDirectory.refresh(true, false);
+        try {
+          hostData.fixPermissionsRecursively(targetDirectoryPath, project);
+        }
+        catch (ExecutionException ex) {
+          LOG.warn("Error fixing permissions for " + targetDirectoryPath + ": " + ex.getMessage());
+        }
+        finally {
+          if (callbackTestSemaphore != null) {
+            callbackTestSemaphore.up();
           }
-        })
-    );
+        }
+      }
+    };
+    var perlCommandLine = new PerlCommandLine(remoteScriptPath)
+      .withParameters(GENERATE_COMMAND)
+      .withParameters(generationParameters)
+      .withProject(project)
+      .withConsoleIcon(MojoIcons.MOJO_LOGO)
+      .withWorkDirectory(targetDirectoryPath)
+      .withProcessListener(processListener);
+
+    PerlRunUtil.updatePerl5Opt(perlCommandLine.getEnvironment(), PerlRunUtil.getPerlRunIncludeArguments(hostData, project));
+
+    PerlRunUtil.runInConsole(perlCommandLine);
   }
 
   /**
