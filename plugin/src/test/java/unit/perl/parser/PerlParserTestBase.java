@@ -157,7 +157,7 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
     return mySkipSpaces;
   }
 
-  protected void setSkipSpaces(boolean skipSpaces) {
-    mySkipSpaces = skipSpaces;
+  protected void dontSkipSpaces() {
+    mySkipSpaces = false;
   }
 }
