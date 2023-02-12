@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.refactoring.introduce;
 
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNamedElement;
 import com.intellij.refactoring.introduce.inplace.InplaceVariableIntroducer;
 import com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider;
 import com.perl5.lang.perl.psi.PerlVariableDeclaration;
@@ -27,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.LinkedHashSet;
 
 public class PerlVariableIntroducer extends InplaceVariableIntroducer<PsiElement> {
-  public PerlVariableIntroducer(@NotNull PerlVariableDeclarationElement elementToRename,
+  public PerlVariableIntroducer(@NotNull PsiNamedElement elementToRename,
                                 @NotNull Editor editor,
                                 PsiElement[] occurrences,
                                 @NotNull String suggestedName) {
