@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package base;
 
+import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.lookup.Lookup;
 import com.intellij.codeInsight.lookup.LookupEx;
 import com.intellij.codeInsight.lookup.LookupManager;
 import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
@@ -54,7 +56,7 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
                                             @NotNull String lookupToChoose,
                                             boolean shouldPresent) {
     initWithTextSmart(initial);
-    doCompleteLookupString(lookupToChoose, getCompletionType(), getCompletionInvocationCount(), getCompletionCompleteChar());
+    doCompleteLookupString(lookupToChoose, CompletionType.BASIC, getCompletionInvocationCount(), Lookup.NORMAL_SELECT_CHAR);
     myTester.joinAutopopup();// for the autopopup handler's alarm, or the restartCompletion's invokeLater
     myTester.joinCompletion();
     if (shouldPresent) {

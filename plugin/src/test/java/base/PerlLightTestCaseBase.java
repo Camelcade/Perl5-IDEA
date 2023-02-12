@@ -243,6 +243,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     DeleteTypeDescriptionLocation.PLURAL
   );
   private static final String PREVIEW_SEPARATOR = "\n######################### PREVIEW #########################\n";
+  protected static final String TEST_LIB_PATH_FROM_NESTED = "../../testData/testlib";
   private TextAttributes myReadAttributes;
   private TextAttributes myWriteAttributes;
   private Perl5CodeInsightSettings myCodeInsightSettings;
@@ -282,9 +283,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringMixin.class, new PerlStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringBareMixin.class, new PerlBareStringManipulator());
     ElementManipulators.INSTANCE.addExplicitExtension(PerlStringContentElement.class, new PerlStringContentManipulator());
-    if (shouldSetUpLibrary()) {
-      setUpLibrary();
-    }
+    setUpLibrary();
     myCodeInsightSettings = Perl5CodeInsightSettings.getInstance().copy();
     mySharedSettings = XmlSerializerUtil.createCopy(PerlSharedSettings.getInstance(getProject()));
     myLocalSettings = XmlSerializerUtil.createCopy(PerlLocalSettings.getInstance(getProject()));
@@ -429,13 +428,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     });
   }
 
-  /**
-   * @return true iff libraries should be added in the set up test method
-   */
-  protected boolean shouldSetUpLibrary() {
-    return true;
-  }
-
   protected void setUpLibrary() {
     Application application = ApplicationManager.getApplication();
     application.invokeAndWait(() -> application.runWriteAction(
@@ -460,10 +452,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected @NotNull String getTestLibPath() {
     return "../testData/testlib";
-  }
-
-  protected @NotNull String getTestLibPathFromNested() {
-    return "../../testData/testlib";
   }
 
   public abstract String getFileExtension();
@@ -563,21 +551,12 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     assertNoErrorElements();
   }
 
-  @MagicConstant(valuesFromClass = Lookup.class)
-  protected char getCompletionCompleteChar() {
-    return Lookup.NORMAL_SELECT_CHAR;
-  }
-
   protected final int getCompletionInvocationCount() {
     return myCompletionInvocationCount;
   }
 
   protected void setCompletionInvocationCount(int completionInvocationCount) {
     myCompletionInvocationCount = completionInvocationCount;
-  }
-
-  protected @NotNull CompletionType getCompletionType() {
-    return CompletionType.BASIC;
   }
 
   protected String processCompletionResultContent(@NotNull String content) {
@@ -594,14 +573,14 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void doTestCompletionResult() {
-    doTestCompletionResult(getCompletionCompleteChar());
+    doTestCompletionResult(Lookup.NORMAL_SELECT_CHAR);
   }
 
   protected void doTestCompletionResult(@MagicConstant(valuesFromClass = Lookup.class) char completeChar) {
     initWithFileSmart();
     assertNotNull("Please, add <complete lookup_string> to your test data", myCompletionResultLookupString);
     getEditor().getCaretModel().moveToOffset(myCompletionResultEditorOffset);
-    doTestCompletionResult(myCompletionResultLookupString, getCompletionType(), getCompletionInvocationCount(), completeChar);
+    doTestCompletionResult(myCompletionResultLookupString, CompletionType.BASIC, getCompletionInvocationCount(), completeChar);
   }
 
   protected void doTestCompletionResult(@NotNull String lookupString,
@@ -669,7 +648,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
                                        @Nullable BiPredicate<? super LookupElement, ? super LookupElementPresentation> predicate) {
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     addVirtualFileFilter();
-    myFixture.complete(getCompletionType(), getCompletionInvocationCount());
+    myFixture.complete(CompletionType.BASIC, getCompletionInvocationCount());
     LookupElement[] elements = myFixture.getLookupElements();
     removeVirtualFileFilter();
     UsefulTestCase.assertSameLinesWithFile(
@@ -807,11 +786,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
 
   public String getTestResultsFilePath() {
-    return getTestResultsFilePath(getTestResultSuffix());
-  }
-
-  protected @NotNull String getTestResultSuffix() {
-    return "";
+    return getTestResultsFilePath("");
   }
 
   protected String getResultsTestDataPath() {
@@ -2212,7 +2187,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void doTestCompletionQuickDoc(@NotNull String elementPattern) {
-    myFixture.complete(getCompletionType(), getCompletionInvocationCount());
+    myFixture.complete(CompletionType.BASIC, getCompletionInvocationCount());
     LookupElement[] elements = myFixture.getLookupElements();
     assertNotNull("No lookup elements", elements);
     LookupElement targetElement = getMostRelevantLookupElement(elementPattern, elements);

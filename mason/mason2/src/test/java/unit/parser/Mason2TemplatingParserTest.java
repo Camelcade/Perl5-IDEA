@@ -41,7 +41,7 @@ public class Mason2TemplatingParserTest extends PerlParserTestBase {
 
   @Override
   protected @NotNull String getTestLibPath() {
-    return super.getTestLibPathFromNested();
+    return TEST_LIB_PATH_FROM_NESTED;
   }
 
   @Test
