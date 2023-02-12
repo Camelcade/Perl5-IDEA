@@ -30,7 +30,6 @@ import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
@@ -179,23 +178,6 @@ public class PerlVariableAnnotations {
                                 "myFlags=" + myFlags +
                                 ", myValue=" + myValue +
                                 '}';
-  }
-
-  /**
-   * @return list of variable declarations {@code typeAnnotation} applies to
-   */
-  public static @NotNull List<PerlVariableDeclarationElement> computeTargets(@NotNull PerlAnnotationType typeAnnotation) {
-    var result = new ArrayList<PerlVariableDeclarationElement>();
-    processPotentialTargets(typeAnnotation, it -> processAnnotations(it, new VariableAnnotationProcessor() {
-      @Override
-      public boolean processType(@NotNull PerlAnnotationType annotationType) {
-        if (annotationType.equals(typeAnnotation)) {
-          result.add(it);
-        }
-        return true;
-      }
-    }));
-    return result;
   }
 
   /**
