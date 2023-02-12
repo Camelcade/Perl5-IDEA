@@ -18,6 +18,7 @@ package com.perl5.lang.pod.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.openapi.util.NlsContexts.ParsingError;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.PodParserDefinition;
 import com.perl5.lang.pod.lexer.PodElementTypes;
@@ -26,7 +27,10 @@ import org.jetbrains.annotations.NotNull;
 
 public class PodParserUtil extends GeneratedParserUtilBase implements PodElementTypes {
   @SuppressWarnings({"StaticMethodOnlyUsedInOneClass", "SameReturnValue"})
-  public static boolean completeOrReport(PsiBuilder b, int ignoredL, @NotNull IElementType targetElement, @NotNull String message) {
+  public static boolean completeOrReport(@NotNull PsiBuilder b,
+                                         int ignoredL,
+                                         @NotNull IElementType targetElement,
+                                         @NotNull @ParsingError String message) {
     if (b.getTokenType() == targetElement) {
       b.advanceLexer();
       return true;
@@ -41,7 +45,10 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
   }
 
   @SuppressWarnings({"UnusedReturnValue", "StaticMethodOnlyUsedInOneClass"})
-  public static boolean checkAndConvert(PsiBuilder b, int ignoredL, IElementType sourceType, IElementType ignoredTargetType) {
+  public static boolean checkAndConvert(@NotNull PsiBuilder b,
+                                        int ignoredL,
+                                        @NotNull IElementType sourceType,
+                                        @NotNull IElementType ignoredTargetType) {
     if (b.getTokenType() == sourceType) {
       PsiBuilder.Marker m = b.mark();
       b.advanceLexer();
@@ -53,7 +60,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 
 
   @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
-  public static boolean collapseNonSpaceTo(PsiBuilder b, int ignoredL, IElementType targetElement) {
+  public static boolean collapseNonSpaceTo(@NotNull PsiBuilder b, int ignoredL, @NotNull IElementType targetElement) {
     IElementType tokenType = b.getTokenType();
 
     if (tokenType == POD_IDENTIFIER) {
@@ -69,11 +76,11 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
   }
 
   @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
-  public static boolean parsePodSectionContent(PsiBuilder b,
+  public static boolean parsePodSectionContent(@NotNull PsiBuilder b,
                                                int ignoredL,
-                                               IElementType stopToken,
-                                               IElementType targetToken,
-                                               String errorMessage) {
+                                               @NotNull IElementType stopToken,
+                                               @NotNull IElementType targetToken,
+                                               @ParsingError String errorMessage) {
     PsiBuilder.Marker m = b.mark();
     while (!b.eof() && b.getTokenType() != stopToken) {
       b.advanceLexer();
