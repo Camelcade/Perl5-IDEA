@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -134,7 +134,7 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
 
       for (int i = varsToReplace.size() - 1; i >= 0; i--) {
         PerlVariable variable = varsToReplace.get(i);
-        PsiElement nameElement = variable.getVariableNameElement();
+        var nameElement = variable.getVariableNameElement();
         if (nameElement instanceof LeafPsiElement) {
           // replacing variable name with _ => $var => $_
           statementText = nameElement

@@ -174,8 +174,7 @@ public final class PerlValuesManager {
       return expr == null ? UNDEF_VALUE : from(expr);
     }
     else if (element instanceof PerlVariableMixin variableMixin) {
-      PerlVariableNameElement variableNameElement = variableMixin.getVariableNameElement();
-      return variableNameElement == null ? UNKNOWN_VALUE : PerlResolveUtil.inferVariableValue(variableMixin);
+      return PerlResolveUtil.inferVariableValue(variableMixin);
     }
     else if (element instanceof PerlString) {
       return PerlScalarValue.create(ElementManipulators.getValueText(element));

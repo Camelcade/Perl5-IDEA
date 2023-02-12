@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.properties;
 
 import com.perl5.lang.perl.psi.PerlDeprecatable;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import org.jetbrains.annotations.NotNull;
 
 
 public interface PerlVariableNameElementContainer extends PerlDeprecatable {
@@ -26,7 +27,7 @@ public interface PerlVariableNameElementContainer extends PerlDeprecatable {
    *
    * @return PsiElement
    */
-  PerlVariableNameElement getVariableNameElement();
+  @NotNull PerlVariableNameElement getVariableNameElement();
 
   /**
    * Checks if variable is built in

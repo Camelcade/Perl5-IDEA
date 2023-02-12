@@ -17,13 +17,13 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
@@ -49,33 +49,28 @@ import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_NAMESPACE_NAME;
 
 
 public abstract class PerlVariableMixin extends PerlCompositeElementImpl implements PerlElementTypes, PerlVariable {
+  private static final Logger LOG = Logger.getInstance(PerlVariableMixin.class);
   public PerlVariableMixin(ASTNode node) {
     super(node);
   }
 
   @Override
   public @Nullable String getExplicitNamespaceName() {
-    PerlVariableNameElement variableNameElement = getVariableNameElement();
-    if (variableNameElement == null) {
-      return null;
-    }
+    CharSequence variableNameSequence = getVariableNameSequence();
 
-    assert variableNameElement instanceof LeafPsiElement;
-    CharSequence variableName = ((LeafPsiElement)variableNameElement).getChars();
-
-    Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(variableName);
+    Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(variableNameSequence);
     if (qualifiedRanges.first == null) {
       return null;
     }
     else if (qualifiedRanges.first == TextRange.EMPTY_RANGE) {
       return MAIN_NAMESPACE_NAME;
     }
-    return PerlPackageUtil.getCanonicalNamespaceName(qualifiedRanges.first.subSequence(variableName).toString());
+    return PerlPackageUtil.getCanonicalNamespaceName(qualifiedRanges.first.subSequence(variableNameSequence).toString());
   }
 
   @Override
-  public @Nullable PerlVariableNameElement getVariableNameElement() {
-    return findChildByClass(PerlVariableNameElement.class);
+  public @NotNull PerlVariableNameElement getVariableNameElement() {
+    return findNotNullChildByClass(PerlVariableNameElement.class);
   }
 
   @Override
@@ -122,18 +117,16 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   public boolean isDeprecated() {
     PsiElement parent = getParent();
 
-    if (parent instanceof PerlVariableDeclarationElement) {
-      return ((PerlVariableDeclarationElement)parent).isDeprecated();
+    if (parent instanceof PerlVariableDeclarationElement perlVariableDeclarationElement) {
+      return perlVariableDeclarationElement.isDeprecated();
     }
 
     PerlVariableNameElement variableNameElement = getVariableNameElement();
-    if (variableNameElement == null) {
-      return false;
-    }
 
     Ref<Boolean> resultRef = Ref.create();
     PerlResolveUtil.processResolveTargets((targetElement, __) -> {
-      if (targetElement instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)targetElement).isDeprecated()) {
+      if (targetElement instanceof PerlVariableDeclarationElement perlVariableDeclarationElement &&
+          perlVariableDeclarationElement.isDeprecated()) {
         resultRef.set(true);
         return false;
       }
@@ -145,15 +138,16 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
   @Override
   public @Nullable String getName() {
-    PerlVariableNameElement variableNameElement = getVariableNameElement();
-    if (variableNameElement == null) {
-      return null;
-    }
-    assert variableNameElement instanceof LeafPsiElement;
-    CharSequence variableName = ((LeafPsiElement)variableNameElement).getChars();
-    Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(variableName);
+    CharSequence variableNameSequence = getVariableNameSequence();
+    Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(variableNameSequence);
     assert qualifiedRanges.second != null;
-    return qualifiedRanges.second.subSequence(variableName).toString();
+    return qualifiedRanges.second.subSequence(variableNameSequence).toString();
+  }
+
+  private @NotNull CharSequence getVariableNameSequence() {
+    PerlVariableNameElement variableNameElement = getVariableNameElement();
+    LOG.assertTrue(variableNameElement instanceof ASTNode);
+    return ((ASTNode)variableNameElement).getChars();
   }
 
   /**
@@ -167,9 +161,6 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     }
 
     PerlVariableNameElement variableNameElement = getVariableNameElement();
-    if (variableNameElement == null) {
-      return null;
-    }
 
     Ref<PerlVariableDeclarationElement> resultRef = Ref.create();
     PerlResolveUtil.processResolveTargets((target, __) -> {

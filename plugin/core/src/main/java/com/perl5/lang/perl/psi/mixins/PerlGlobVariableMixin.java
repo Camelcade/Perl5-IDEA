@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,9 +78,6 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
     }
 
     PerlVariableNameElement variableNameElement = getVariableNameElement();
-    if (variableNameElement == null) {
-      return null;
-    }
     String variableNameText = variableNameElement.getText();
     int delimiterIndex = variableNameText.lastIndexOf(':');
     return delimiterIndex == -1 ? variableNameText : variableNameText.substring(delimiterIndex + 1);
@@ -93,9 +90,6 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
   @Override
   public @Nullable String getExplicitNamespaceName() {
     PerlVariableNameElement variableNameElement = getVariableNameElement();
-    if (variableNameElement == null) {
-      return null;
-    }
 
     String variableNameText = variableNameElement.getText();
     int delimiterIndex = variableNameText.lastIndexOf(':');
@@ -103,8 +97,8 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
   }
 
   @Override
-  public PerlVariableNameElement getVariableNameElement() {
-    return findChildByClass(PerlVariableNameElement.class);
+  public @NotNull PerlVariableNameElement getVariableNameElement() {
+    return findNotNullChildByClass(PerlVariableNameElement.class);
   }
 
   @Override
@@ -118,7 +112,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
   }
 
   @Override
-  public @Nullable PsiElement getNameIdentifier() {
+  public @NotNull PsiElement getNameIdentifier() {
     return getVariableNameElement();
   }
 

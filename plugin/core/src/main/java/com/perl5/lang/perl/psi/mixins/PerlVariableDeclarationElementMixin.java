@@ -61,7 +61,7 @@ public class PerlVariableDeclarationElementMixin extends PerlStubBasedPsiElement
   }
 
   @Override
-  public @Nullable PsiElement getNameIdentifier() {
+  public @NotNull PsiElement getNameIdentifier() {
     return getVariable().getVariableNameElement();
   }
 
