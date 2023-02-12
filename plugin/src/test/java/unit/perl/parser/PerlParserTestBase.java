@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,23 +18,18 @@ package unit.perl.parser;
 
 import base.PerlLightTestCaseBase;
 import com.intellij.openapi.application.WriteAction;
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.LineColumn;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiErrorElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiRecursiveElementVisitor;
-import com.intellij.psi.impl.DebugUtil;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageManagerImpl;
 import com.intellij.testFramework.EditorTestUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -154,23 +149,6 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
     });
   }
 
-  protected void doCheckErrors() {
-    assertFalse(
-      "PsiFile contains error elements",
-      DebugUtil.psiToString(getFile(), skipSpaces(), includeRanges()).contains("PsiErrorElement")
-    );
-  }
-
-  @Deprecated // this is legacy for heavy tests
-  public void doTest(String name) {
-    doTest(true);
-  }
-
-  @Deprecated // this is legacy for heavy tests
-  public void doTest(String name, boolean check) {
-    doTest(check);
-  }
-
   protected void doTest() {
     doTest(true);
   }
@@ -181,14 +159,5 @@ public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
 
   protected void setSkipSpaces(boolean skipSpaces) {
     mySkipSpaces = skipSpaces;
-  }
-
-  protected String getPerlTidy() {
-    try {
-      return FileUtil.loadFile(new File("testData", "perlTidy.code"), CharsetToolkit.UTF8, true).trim();
-    }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
   }
 }
