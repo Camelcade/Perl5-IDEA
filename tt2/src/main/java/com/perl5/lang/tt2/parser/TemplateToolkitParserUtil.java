@@ -340,7 +340,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
    * @param l level
    * @return result of end parsing.
    */
-  @SuppressWarnings("UnusedReturnValue")
+  @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
   public static boolean parsePerlCode(PsiBuilder b,
                                       int l,
                                       PsiBuilder.Marker outerMarker,
@@ -388,7 +388,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return (tokenType == TT2_OPEN_TAG || tokenType == TT2_OUTLINE_TAG) && b.lookAhead(1) == TT2_END;
   }
 
-  @SuppressWarnings("UnusedReturnValue")
+  @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
   public static boolean parseIfSequence(PsiBuilder b, int l, PsiBuilder.Marker branchMarker, IElementType branchTokenType) {
     while (!b.eof()) {
       PsiBuilder.Marker currentMarker = b.mark();
@@ -435,7 +435,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return true;
   }
 
-  @SuppressWarnings("UnusedReturnValue")
+  @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
   public static boolean parseTryCatchBlock(PsiBuilder b, int l, PsiBuilder.Marker branchMarker, IElementType branchTokenType) {
     while (!b.eof()) {
       PsiBuilder.Marker currentMarker = b.mark();
@@ -482,7 +482,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return true;
   }
 
-  @SuppressWarnings("UnusedReturnValue")
+  @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
   public static boolean parseSwitchBlockContent(PsiBuilder b, int l) {
     PsiBuilder.Marker branchMarker = null;
     while (!b.eof()) {
@@ -519,6 +519,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return true;
   }
 
+  @SuppressWarnings("SameReturnValue")
   public static boolean parseTags(PsiBuilder b, int ignoredL) {
     PsiBuilder.Marker m = null;
     while (!b.eof() && !isEndMarker(b)) {
