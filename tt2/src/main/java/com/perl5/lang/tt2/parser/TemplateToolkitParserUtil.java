@@ -48,6 +48,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     ANON_BLOCK
   );
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static boolean parseIdentifier(PsiBuilder b, int ignoredL) {
     if (consumeToken(b, TT2_IDENTIFIER)) {
       return true;
@@ -61,6 +62,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return false;
   }
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static boolean parseHashKey(@NotNull PsiBuilder b, int l, @NotNull Parser keywordOrIdentifierTermParser) {
     PsiBuilder.Marker m = b.mark();
     if (keywordOrIdentifierTermParser.parse(b, l)) {
@@ -120,6 +122,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return gotItem;
   }
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static boolean parseBlockComment(PsiBuilder b, int ignoredL) {
     if (b.getTokenType() == TT2_OPEN_TAG && b.rawLookup(1) == LINE_COMMENT) {
       PsiBuilder.Marker m = b.mark();
@@ -229,9 +232,8 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
         if (m != null) {
           m.error(TemplateToolkitBundle.message("ttk2.unexpected.token"));
         }
-        // parseHardNewLine(b, l); // fixme this breaks lastMarker mechanism, need to figure out something
         if (b.getTokenType() == TT2_HARD_NEWLINE) {
-          b.remapCurrentToken(TokenType.WHITE_SPACE); // this is irreversable change, so not sure it's a good idea
+          b.remapCurrentToken(TokenType.WHITE_SPACE);
           b.advanceLexer();
         }
       }
@@ -310,6 +312,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
    * @param l level
    * @return result of end parsing.
    */
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean parseBlockContent(PsiBuilder b, int l, PsiBuilder.Marker outerMarker, IElementType blockTokenType) {
     boolean r = false;
     while (!b.eof() && TemplateToolkitParser.element(b, l)) {
@@ -337,6 +340,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
    * @param l level
    * @return result of end parsing.
    */
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean parsePerlCode(PsiBuilder b,
                                       int l,
                                       PsiBuilder.Marker outerMarker,
@@ -384,6 +388,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return (tokenType == TT2_OPEN_TAG || tokenType == TT2_OUTLINE_TAG) && b.lookAhead(1) == TT2_END;
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean parseIfSequence(PsiBuilder b, int l, PsiBuilder.Marker branchMarker, IElementType branchTokenType) {
     while (!b.eof()) {
       PsiBuilder.Marker currentMarker = b.mark();
@@ -430,6 +435,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return true;
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean parseTryCatchBlock(PsiBuilder b, int l, PsiBuilder.Marker branchMarker, IElementType branchTokenType) {
     while (!b.eof()) {
       PsiBuilder.Marker currentMarker = b.mark();
@@ -476,6 +482,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return true;
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean parseSwitchBlockContent(PsiBuilder b, int l) {
     PsiBuilder.Marker branchMarker = null;
     while (!b.eof()) {
@@ -529,6 +536,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return true;
   }
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static boolean parseSetElement(@NotNull PsiBuilder b, int l, @NotNull Parser setElementParser) {
     PsiBuilder.Marker m = b.mark();
     if (setElementParser.parse(b, l)) {
@@ -556,6 +564,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return false;
   }
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static boolean parseKeywordFallback(PsiBuilder b, int ignoredL) {
     if (TemplateToolkitSyntaxElements.KEYWORDS_OR_TEXT_OPERATORS_TOKENSET.contains(b.getTokenType())) {
       PsiBuilder.Marker m = b.mark();
@@ -567,6 +576,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     return false;
   }
 
+  @SuppressWarnings({"UnusedReturnValue", "StaticMethodOnlyUsedInOneClass"})
   public static boolean parseUnaryMinus(PsiBuilder b, int ignoredL) {
     if (b.getTokenType() == TT2_MINUS) {
       PsiBuilder.Marker m = b.mark();
