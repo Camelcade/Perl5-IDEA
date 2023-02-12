@@ -73,13 +73,14 @@
     <inspection_tool class="StaticMethodOnlyUsedInOneClass" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="SystemOutErr" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="TruthinessInspection" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="TypeMayBeWeakened" enabled="true" level="WARNING" enabled_by_default="true">
+    <inspection_tool class="TypeMayBeWeakened" enabled="false" level="WARNING" enabled_by_default="false">
       <option name="useRighthandTypeAsWeakestTypeInAssignments" value="true" />
       <option name="useParameterizedTypeForCollectionMethods" value="true" />
       <option name="doNotWeakenToJavaLangObject" value="true" />
       <option name="onlyWeakentoInterface" value="false" />
       <option name="doNotWeakenReturnType" value="false" />
       <option name="doNotWeakenInferredVariableType" value="true" />
+      <stopClasses>com.intellij.lang.PsiBuilder,com.intellij.lang.PsiBuilder.Marker,java.util.List,java.util.Set</stopClasses>
     </inspection_tool>
     <inspection_tool class="UnnecessaryModuleDependencyInspection" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="UnstableApiUsage" enabled="true" level="WARNING" enabled_by_default="true">
