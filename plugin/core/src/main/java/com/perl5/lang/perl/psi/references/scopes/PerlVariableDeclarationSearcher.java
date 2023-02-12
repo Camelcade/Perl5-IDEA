@@ -68,13 +68,11 @@ public class PerlVariableDeclarationSearcher implements PsiScopeProcessor {
     return myResult;
   }
 
-  public boolean processBuiltIns() {
+  public void searchBuiltIn() {
     PerlVariableDeclarationElement variableDeclaration =
       PerlBuiltInVariablesService.getInstance(myVariable.getProject()).getVariableDeclaration(myVariableType, myName);
-    if (variableDeclaration == null) {
-      return true;
+    if (variableDeclaration != null) {
+      myResult = variableDeclaration;
     }
-    myResult = variableDeclaration;
-    return true;
   }
 }
