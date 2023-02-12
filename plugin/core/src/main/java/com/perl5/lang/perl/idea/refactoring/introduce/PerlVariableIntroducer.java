@@ -20,6 +20,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.refactoring.introduce.inplace.InplaceVariableIntroducer;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.refactoring.PerlNameSuggestionProvider;
 import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -32,7 +33,7 @@ public class PerlVariableIntroducer extends InplaceVariableIntroducer<PsiElement
                                 @NotNull Editor editor,
                                 PsiElement[] occurrences,
                                 @NotNull String suggestedName) {
-    super(elementToRename, editor, elementToRename.getProject(), "Introduce variable", occurrences, null);
+    super(elementToRename, editor, elementToRename.getProject(), PerlBundle.message("command.name.introduce.variable"), occurrences, null);
     myInitialName = suggestedName;
     myOldName = suggestedName;
   }
