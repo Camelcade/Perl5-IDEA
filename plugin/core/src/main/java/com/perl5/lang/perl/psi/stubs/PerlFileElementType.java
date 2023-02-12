@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.lang.*;
-import com.intellij.lexer.Lexer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -31,7 +30,6 @@ import com.perl5.lang.perl.psi.PerlSubCallHandler;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
@@ -58,22 +56,18 @@ public final class PerlFileElementType extends IStubFileElementType<PerlFileStub
     return getParser(psi).parse(this, getBuilder(psi, chameleon)).getFirstChildNode();
   }
 
-  protected @Nullable Lexer getLexer(PsiElement psi) {
-    return null;
-  }
-
-  protected @NotNull PsiParser getParser(PsiElement psi) {
+  private @NotNull PsiParser getParser(PsiElement psi) {
     return LanguageParserDefinitions.INSTANCE.forLanguage(getLanguageForParser(psi)).createParser(psi.getProject());
   }
 
-  protected @NotNull PsiBuilder getBuilder(PsiElement psi, ASTNode chameleon) {
+  private @NotNull PsiBuilder getBuilder(PsiElement psi, ASTNode chameleon) {
     return PsiBuilderFactory.getInstance()
-      .createBuilder(psi.getProject(), chameleon, getLexer(psi), getLanguageForParser(psi), chameleon.getChars());
+      .createBuilder(psi.getProject(), chameleon, null, getLanguageForParser(psi), chameleon.getChars());
   }
 
   @Override
   public @NotNull String getExternalId() {
-    return "perl5.file." + toString();
+    return "perl5.file." + this;
   }
 
   @Override
