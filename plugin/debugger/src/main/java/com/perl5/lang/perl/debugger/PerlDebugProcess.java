@@ -98,11 +98,6 @@ public class PerlDebugProcess extends XDebugProcess {
   }
 
   @Override
-  public boolean checkCanPerformCommands() {
-    return super.checkCanPerformCommands();
-  }
-
-  @Override
   public void startStepOver(@Nullable XSuspendContext context) {
     myDebugThread.sendString("o");
   }

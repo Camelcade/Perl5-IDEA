@@ -193,11 +193,6 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   }
 
   @Override
-  public PsiElement @NotNull [] getChildren() {
-    return super.getChildren();
-  }
-
-  @Override
   public ItemPresentation getPresentation() {
     return new PerlItemPresentationSimple(this, getName());
   }

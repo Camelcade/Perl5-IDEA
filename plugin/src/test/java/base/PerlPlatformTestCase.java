@@ -171,9 +171,9 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
    *
    * @param description test method description
    */
+  @SuppressWarnings("unused")
   protected void doEvaluate(@NotNull Description description) {
   }
-
 
   protected @Nullable Sdk getSdk() {
     return PerlProjectManager.getSdk(getModule());
