@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PodParserUtil extends GeneratedParserUtilBase implements PodElementTypes {
+  @SuppressWarnings({"StaticMethodOnlyUsedInOneClass", "SameReturnValue"})
   public static boolean completeOrReport(PsiBuilder b, int ignoredL, @NotNull IElementType targetElement, @NotNull String message) {
     if (b.getTokenType() == targetElement) {
       b.advanceLexer();
@@ -39,6 +40,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
     return true;
   }
 
+  @SuppressWarnings({"UnusedReturnValue", "StaticMethodOnlyUsedInOneClass"})
   public static boolean checkAndConvert(PsiBuilder b, int ignoredL, IElementType sourceType, IElementType ignoredTargetType) {
     if (b.getTokenType() == sourceType) {
       PsiBuilder.Marker m = b.mark();
@@ -50,6 +52,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
   }
 
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static boolean collapseNonSpaceTo(PsiBuilder b, int ignoredL, IElementType targetElement) {
     IElementType tokenType = b.getTokenType();
 
@@ -65,6 +68,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
     return false;
   }
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static boolean parsePodSectionContent(PsiBuilder b,
                                                int ignoredL,
                                                IElementType stopToken,
