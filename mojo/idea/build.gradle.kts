@@ -13,15 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-intellij{
-  type.set('IC')
-  plugins = [project(':plugin'), 'java']
+
+dependencies {
+  compileOnly(project(":plugin:core", "instrumentedJar"))
+  compileOnly(project(":lang.mojo:core", "instrumentedJar"))
 }
 
-dependencies{
-  [":plugin:core"].each {
-    compileOnly project(it).sourceSets.main.output
-    testCompileOnly project(it).sourceSets.main.output
-  }
-  [":plugin"].each { testImplementation project(it).sourceSets.test.output }
+intellij {
+  type.set("IC")
+  plugins.set(listOf("java"))
 }

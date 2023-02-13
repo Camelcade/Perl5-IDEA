@@ -13,22 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-dependencies{
-  [
-    ":lang.mojo:core",
-    ":lang.mojo:idea",
-  ].each {
-    implementation project(it).sourceSets.main.output
-    testCompileOnly project(it).sourceSets.main.output
-  }
-  [":plugin:core"].each {
-    compileOnly project(it).sourceSets.main.output
-    testCompileOnly project(it).sourceSets.main.output
-  }
-  [":plugin"].each { testImplementation project(it).sourceSets.test.output }
+
+dependencies {
+  compileOnly(project(":plugin:core", "instrumentedJar"))
 }
 
-intellij{
-  type.set('IU')
-  plugins = [project(':plugin'), 'java', remoteRunPlugin]
+intellij {
+  type.set("IC")
 }

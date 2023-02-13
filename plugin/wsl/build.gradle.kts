@@ -14,12 +14,18 @@
  * limitations under the License.
  */
 
-dependencies{
-  [":plugin:core"].each { compileOnly project(it).sourceSets.main.output }
+fun properties(key: String) = providers.gradleProperty(key)
+
+dependencies {
+  compileOnly(project(":plugin:core", "instrumentedJar"))
 }
 
 intellij {
-  type.set('IC')
-  intellij.plugins = [intelliLangPlugin]
+  type.set("IU")
+  plugins.set(project.provider {
+    listOf(
+      properties("remoteRunPlugin").get(),
+      "java",
+    )
+  })
 }
-
