@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-intellij{
-  type.set('IU')
-  plugins = ['Docker', remoteRunPlugin, 'java']
+dependencies {
+  compileOnly(project(":plugin:core", "instrumentedJar"))
 }
 
-dependencies{
-  [":plugin:core"].each { compileOnly project(it).sourceSets.main.output }
+intellij {
+  type.set("IC")
+  plugins.set(listOf("java"))
 }

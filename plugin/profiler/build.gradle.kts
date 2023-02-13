@@ -14,26 +14,10 @@
  * limitations under the License.
  */
 
-
-import org.jetbrains.grammarkit.tasks.GenerateLexerTask
-
-intellij{
-  type.set('IC')
-  plugins = [project(':plugin'), 'java']
+dependencies {
+  compileOnly(project(":plugin:core", "instrumentedJar"))
 }
 
-dependencies{
-  [":plugin:core"].each { compileOnly project(it).sourceSets.main.output }
-}
-
-tasks.register('generateMojoliciousLexer', GenerateLexerTask) {
-  source.set("grammar/Mojolicious.flex")
-  targetDir.set("src/main/gen/com/perl5/lang/mojolicious/lexer/")
-  targetClass.set("MojoliciousLexer")
-  skeleton.set(rootProject.file(templating_lexer_skeleton))
-  purgeOldFiles.set(true)
-}
-
-compileJava {
-  dependsOn generateMojoliciousLexer
+intellij {
+  type.set("IU")
 }

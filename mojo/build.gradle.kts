@@ -13,12 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+fun properties(key: String) = providers.gradleProperty(key)
 
-dependencies{
-  [":plugin:core"].each { compileOnly project(it).sourceSets.main.output }
+dependencies {
+  implementation(project(":lang.mojo:core", "instrumentedJar"))
+  testCompileOnly(project(":lang.mojo:idea", "instrumentedJar"))
+  compileOnly(project(":plugin:core", "instrumentedJar"))
+  testCompileOnly(project(":plugin:core", "instrumentedJar"))
+  testImplementation(testFixtures(project(":plugin")))
 }
 
 intellij {
-  type.set('IC')
+  type.set("IU")
+  plugins.set(project.provider {
+    listOf(
+      project(":plugin"),
+      properties("remoteRunPlugin").get(),
+      "java",
+    )
+  })
 }
-

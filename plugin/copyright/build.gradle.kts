@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-dependencies{
-  [":plugin:core"].each { compileOnly project(it).sourceSets.main.output }
+dependencies {
+  compileOnly(project(":plugin:core", "instrumentedJar"))
 }
 
 intellij {
-  type.set('IC')
-  intellij.plugins = ['java']
+  type.set("IC")
+  plugins.set(listOf("copyright"))
 }
-
