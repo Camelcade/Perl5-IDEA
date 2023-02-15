@@ -576,22 +576,20 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     initWithFileSmart();
     assertNotNull("Please, add <complete lookup_string> to your test data", myCompletionResultLookupString);
     getEditor().getCaretModel().moveToOffset(myCompletionResultEditorOffset);
-    doTestCompletionResult(myCompletionResultLookupString, CompletionType.BASIC, getCompletionInvocationCount(), completeChar);
+    doTestCompletionResult(myCompletionResultLookupString, getCompletionInvocationCount(), completeChar);
   }
 
   protected void doTestCompletionResult(@NotNull String lookupString,
-                                        @NotNull CompletionType completionType,
                                         int invocationCount,
                                         @MagicConstant(valuesFromClass = Lookup.class) char completeChar) {
-    doCompleteLookupString(lookupString, completionType, invocationCount, completeChar);
+    doCompleteLookupString(lookupString, invocationCount, completeChar);
     checkEditorWithFile();
   }
 
   protected void doCompleteLookupString(@NotNull String lookupString,
-                                        @NotNull CompletionType completionType,
                                         int invocationCount,
                                         @MagicConstant(valuesFromClass = Lookup.class) char completeChar) {
-    LookupElement[] lookupElements = myFixture.complete(completionType, invocationCount);
+    LookupElement[] lookupElements = myFixture.complete(CompletionType.BASIC, invocationCount);
     for (LookupElement lookupElement : lookupElements) {
       LookupElementPresentation presentation = new LookupElementPresentation();
       lookupElement.renderElement(presentation);
