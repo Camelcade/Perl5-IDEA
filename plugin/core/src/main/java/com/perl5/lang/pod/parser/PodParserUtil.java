@@ -75,7 +75,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
     return false;
   }
 
-  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
+  @SuppressWarnings({"StaticMethodOnlyUsedInOneClass", "SameReturnValue"})
   public static boolean parsePodSectionContent(@NotNull PsiBuilder b,
                                                int ignoredL,
                                                @NotNull IElementType stopToken,
