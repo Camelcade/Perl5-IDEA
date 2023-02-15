@@ -572,10 +572,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     return content.substring(0, myCompletionResultEditorOffset) + content.substring(endOffset + 1);
   }
 
-  protected void doTestCompletionResult() {
-    doTestCompletionResult(Lookup.NORMAL_SELECT_CHAR);
-  }
-
   protected void doTestCompletionResult(@MagicConstant(valuesFromClass = Lookup.class) char completeChar) {
     initWithFileSmart();
     assertNotNull("Please, add <complete lookup_string> to your test data", myCompletionResultLookupString);
