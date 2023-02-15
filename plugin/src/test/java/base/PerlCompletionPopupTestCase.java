@@ -16,7 +16,6 @@
 
 package base;
 
-import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.codeInsight.lookup.Lookup;
 import com.intellij.codeInsight.lookup.LookupEx;
 import com.intellij.codeInsight.lookup.LookupManager;
@@ -56,7 +55,7 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
                                             @NotNull String lookupToChoose,
                                             boolean shouldPresent) {
     initWithTextSmart(initial);
-    doCompleteLookupString(lookupToChoose, CompletionType.BASIC, getCompletionInvocationCount(), Lookup.NORMAL_SELECT_CHAR);
+    doCompleteLookupString(lookupToChoose, getCompletionInvocationCount(), Lookup.NORMAL_SELECT_CHAR);
     myTester.joinAutopopup();// for the autopopup handler's alarm, or the restartCompletion's invokeLater
     myTester.joinCompletion();
     if (shouldPresent) {
