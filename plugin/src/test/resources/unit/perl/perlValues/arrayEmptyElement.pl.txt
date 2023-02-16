@@ -1,0 +1,11 @@
+my @arr = ();
+my $var = $arr[0];
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 33 in arrayEmptyElement.pl
+undef
+----------
+Resolved
+----------
+undef

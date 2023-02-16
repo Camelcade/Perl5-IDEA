@@ -1,0 +1,7 @@
+sub something{
+    return ();
+}
+
+my @arr = (something());
+my $var = $arr[-1];
+$v<caret>ar;

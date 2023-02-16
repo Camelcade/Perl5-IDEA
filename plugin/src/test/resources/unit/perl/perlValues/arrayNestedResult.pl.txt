@@ -1,0 +1,24 @@
+sub sub1{
+  return (1,2);
+}
+
+sub sub2{
+  return (3,4);
+}
+
+sub sub3{
+  return (sub1, sub2);
+}
+
+
+@var = sub3;
+
+@v<caret>ar;
+----------
+@var
+PsiPerlArrayVariableImpl(Perl5: ARRAY_VARIABLE) at 109 in arrayNestedResult.pl
+Array(main::sub3())
+----------
+Resolved
+----------
+Array(1, 2, 3, 4)

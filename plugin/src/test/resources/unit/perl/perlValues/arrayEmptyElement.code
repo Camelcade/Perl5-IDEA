@@ -1,0 +1,3 @@
+my @arr = ();
+my $var = $arr[0];
+$v<caret>ar;

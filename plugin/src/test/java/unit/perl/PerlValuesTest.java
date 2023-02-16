@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,21 @@ public class PerlValuesTest extends PerlLightTestCase {
   protected String getBaseDataPath() {
     return "unit/perl/perlValues";
   }
+
+  @Test
+  public void testArrayNestedResult() { doTestArrayVariableValue(); }
+
+  @Test
+  public void testArrayNestedResultElement() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testArrayEmptyCallResult() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testArrayEmptyElement() { doTestScalarVariableValue(); }
+
+  @Test
+  public void testArrayRefEmptyElement() { doTestScalarVariableValue(); }
 
   @Test
   public void testSignatureLeadingAnnotation() { doTestScalarVariableValue(); }

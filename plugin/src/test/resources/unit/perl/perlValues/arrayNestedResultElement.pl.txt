@@ -1,0 +1,24 @@
+sub sub1{
+  return (1,2);
+}
+
+sub sub2{
+  return (3,4);
+}
+
+sub sub3{
+  return (sub1, sub2);
+}
+
+
+@var = sub3;
+$var = $var[-1];
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 125 in arrayNestedResultElement.pl
+ArrayItem: Array: [main::sub3()][-1]
+----------
+Resolved
+----------
+4
