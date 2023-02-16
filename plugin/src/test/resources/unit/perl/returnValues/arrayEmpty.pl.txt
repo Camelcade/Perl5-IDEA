@@ -1,0 +1,5 @@
+sub someth<caret>ing{
+    return ();
+}
+----------
+Array: []

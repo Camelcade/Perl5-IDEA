@@ -192,7 +192,8 @@ public final class PerlValuesManager {
       return UNDEF_VALUE;
     }
     else if (elementType == PARENTHESISED_EXPR) {
-      return PerlValuesManager.from(((PsiPerlParenthesisedExpr)element).getExpr());
+      var expr = ((PsiPerlParenthesisedExpr)element).getExpr();
+      return expr == null ? PerlArrayValue.EMPTY_ARRAY : PerlValuesManager.from(expr);
     }
     else if (elementType == PACKAGE_EXPR) {
       String elementText = element.getText();

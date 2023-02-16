@@ -1,0 +1,15 @@
+sub something{
+    return ();
+}
+
+my @arr = (something());
+my $var = $arr[-1];
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 78 in arrayEmptyCallResult.pl
+ArrayItem: Array: [main::something()][-1]
+----------
+Resolved
+----------
+undef
