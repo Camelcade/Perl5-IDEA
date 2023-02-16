@@ -1,0 +1,22 @@
+if( $a ){
+  @array = qw/one two/;
+  $index = 1;
+}
+else{
+  @array = qw//;
+  $index = 2;
+}
+
+$var = $array[1];
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 109 in arrayElementOneOfEmpty.pl
+OneOf[two,
+undef]
+----------
+Resolved
+----------
+OneOf[two,
+undef]

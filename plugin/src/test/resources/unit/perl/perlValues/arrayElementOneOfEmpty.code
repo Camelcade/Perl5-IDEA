@@ -1,0 +1,12 @@
+if( $a ){
+  @array = qw/one two/;
+  $index = 1;
+}
+else{
+  @array = qw//;
+  $index = 2;
+}
+
+$var = $array[1];
+
+$v<caret>ar;

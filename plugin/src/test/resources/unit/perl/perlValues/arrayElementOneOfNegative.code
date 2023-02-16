@@ -1,0 +1,12 @@
+if( $a ){
+  @array = qw/one two/;
+}
+else{
+  @array = qw/three four/;
+}
+
+@otherarray = (zero, @array);
+
+$var = $otherarray[-1];
+
+$v<caret>ar;

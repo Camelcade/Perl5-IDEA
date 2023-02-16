@@ -1086,6 +1086,31 @@ public class PerlValuesTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testArrayElementOneOfDiffSizes() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testArrayElementOneOfDiffSizesNegative() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testArrayElementOneOfEmpty() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testArrayElementOneOfNegative() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
+  public void testArrayElementOneOfNegativeEmpty() {
+    doTestScalarVariableValue();
+  }
+
+  @Test
   public void testArrayElementOneOfDeferred() {
     doTestScalarVariableValue();
   }

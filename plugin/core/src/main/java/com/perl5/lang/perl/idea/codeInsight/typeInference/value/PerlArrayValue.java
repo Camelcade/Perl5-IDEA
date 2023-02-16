@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,21 +56,18 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
       return UNKNOWN_VALUE;
     }
 
-    return doComputeGet(index < 0 ? getElements().size() - 1 : 0,
-                        new ElementSearchState(index, index < 0 ? -1 : 0, index < 0 ? -1 : 1)).buildValue();
+    return doComputeGet(new ElementSearchState(index)).buildValue();
   }
 
   /**
    * Attempts to collect all variants of element at {@code targetIndex}. This method is recursive.
    *
-   * @param realElementOffset current element offset in {@link #getElements()}
    * @return adjusted search state
    */
-  private @NotNull ElementSearchState doComputeGet(int realElementOffset, @NotNull ElementSearchState searchState) {
+  private @NotNull ElementSearchState doComputeGet(@NotNull ElementSearchState searchState) {
     List<PerlValue> elements = getElements();
-
     if (searchState.myStep < 0) {
-      for (int i = realElementOffset; i >= 0; i--) {
+      for (int i = elements.size() - 1; i >= 0; i--) {
         if (searchState.isFinished()) {
           return searchState;
         }
@@ -78,7 +75,8 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
       }
     }
     else {
-      for (int i = realElementOffset; i < elements.size(); i++) {
+      //noinspection ForLoopReplaceableByForEach
+      for (int i = 0; i < elements.size(); i++) {
         if (searchState.isFinished()) {
           return searchState;
         }
@@ -148,10 +146,10 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     private final @NotNull Set<Integer> myReachedOffsets = new HashSet<>();
     private final @NotNull Integer myTargetOffset;
 
-    public ElementSearchState(int targetOffset, int virtualOffset, int step) {
-      myTargetOffset = targetOffset;
-      myReachedOffsets.add(virtualOffset);
-      this.myStep = step;
+    public ElementSearchState(int index) {
+      myTargetOffset = index;
+      myReachedOffsets.add(index < 0 ? -1 : 0);
+      myStep = index < 0 ? -1 : 1;
     }
 
     private ElementSearchState(@NotNull ElementSearchState state) {
@@ -183,7 +181,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
         myReachedOffsets.addAll(newOffsets);
       }
       else if (value instanceof PerlArrayValue) {
-        ((PerlArrayValue)value).doComputeGet(0, this);
+        ((PerlArrayValue)value).doComputeGet(this);
       }
       else if (value instanceof PerlOneOfValue) {
         List<ElementSearchState> states = new SmartList<>();
