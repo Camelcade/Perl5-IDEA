@@ -1,0 +1,26 @@
+if( $a ){
+  @arrayA = qw/A1 A2/;
+  @arrayB = qw/B1 B2 B3/;
+}
+else{
+  @arrayA = qw/C1 C2 C3/;
+  @arrayB = qw/D1 D2/;
+}
+
+@array = (@arrayA, @arrayB);
+
+$var = $array[2];
+
+$v<caret>ar;
+----------
+$var
+PsiPerlScalarVariableImpl(Perl5: SCALAR_VARIABLE) at 168 in arrayElementOneOfDiffSizes.pl
+OneOf[B1,
+C3,
+D1]
+----------
+Resolved
+----------
+OneOf[B1,
+C3,
+D1]
