@@ -5,7 +5,9 @@ name: Tests with Coverage & Sonarqube analysis
 
 on:
   push:
+    branches: [ "master" ]
   pull_request:
+    branches: [ "master" ]
   workflow_dispatch:
     branches: [ "master" ]
 
