@@ -48,7 +48,7 @@ public final class MojoUtil {
    */
   @Contract("null->null")
   public static @Nullable VirtualFile getMojoScript(@Nullable AnActionEvent event) {
-    return getMojoScript(event.getProject());
+    return event == null ? null : getMojoScript(event.getProject());
   }
 
   /**
@@ -56,7 +56,7 @@ public final class MojoUtil {
    */
   @Contract("null->null")
   public static @Nullable VirtualFile getMojoScript(@Nullable Module module) {
-    return getMojoScript(module.getProject());
+    return module == null ? null : getMojoScript(module.getProject());
   }
 
   /**
