@@ -15,7 +15,8 @@ on:
   push:
     branches: [ "master", "dev/223" ]
   pull_request:
-    # The branches below must be a subset of the branches above
+    branches: [ "master", "dev/223" ]
+  workflow_dispatch:
     branches: [ "master", "dev/223" ]
   schedule:
     - cron: '33 17 * * 1'

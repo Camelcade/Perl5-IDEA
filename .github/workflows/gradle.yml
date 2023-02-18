@@ -7,7 +7,7 @@ on:
   push:
     branches: [ "master", "dev/223" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "dev/223" ]
   workflow_dispatch:
     branches: [ "master", "dev/223" ]
 
