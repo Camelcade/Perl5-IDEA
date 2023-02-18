@@ -96,8 +96,6 @@ allprojects {
     test {
       maxHeapSize = "2048m"
 
-      outputs.upToDateWhen { false }
-
       if (project.hasProperty("overwrite")) {
         systemProperty("idea.tests.overwrite.data", "true")
       }
@@ -129,9 +127,9 @@ allprojects {
         showStandardStreams = true
       }
 
-      jacoco {
-        enabled = withCoverage.get()
-        excludes += "jdk.internal.*"
+      configure<JacocoTaskExtension> {
+        isEnabled = withCoverage.get()
+        excludes = listOf("jdk.internal.*")
       }
 
       if (isCI.get()) {
