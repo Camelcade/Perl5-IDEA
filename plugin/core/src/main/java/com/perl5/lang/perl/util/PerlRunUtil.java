@@ -310,7 +310,7 @@ public final class PerlRunUtil {
    * @apiNote returns virtual file of local file, not remote. It finds not a perl script, but executable script. E.g. for windows, it may
    * be a bat script
    **/
-  @Contract("null,_->null,_,null->null")
+  @Contract("null,_->null;_,null->null")
   public static @Nullable VirtualFile findScript(@Nullable Project project, @Nullable String scriptName) {
     var sdk = PerlProjectManager.getSdk(project);
     if (sdk == null || StringUtil.isEmpty(scriptName)) {
