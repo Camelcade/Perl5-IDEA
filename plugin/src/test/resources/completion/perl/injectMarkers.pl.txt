@@ -4,18 +4,39 @@ Text: DTD; Tail: null; Type: inject with DTD; Icon: /dtd.svg; Type Icon: null
 Text: HTML; Tail: null; Type: inject with HTML; Icon: /html.svg; Type Icon: null
 	Lookups: HTML
 	String: HTML
+Text: IGNORE; Tail: null; Type: inject with .ignore (IgnoreLang); Icon: /ignore_file.svg; Type Icon: null
+	Lookups: IGNORE
+	String: IGNORE
 Text: JAVA; Tail: null; Type: inject with Java; Icon: /java.svg; Type Icon: null
 	Lookups: JAVA
 	String: JAVA
+Text: JSHELL; Tail: null; Type: inject with JShell Snippet; Icon: /java.svg; Type Icon: null
+	Lookups: JSHELL
+	String: JSHELL
 Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null
 	Lookups: JSON
 	String: JSON
+Text: JSONPATH; Tail: null; Type: inject with JSONPath; Icon: /json.svg; Type Icon: null
+	Lookups: JSONPATH
+	String: JSONPATH
 Text: MANIFEST; Tail: null; Type: inject with Manifest; Icon: /manifest.svg; Type Icon: null
 	Lookups: MANIFEST
 	String: MANIFEST
 Text: PERL5; Tail: null; Type: inject with Perl5; Icon: /perl5classic.png; Type Icon: null
 	Lookups: PERL5
 	String: PERL5
+Text: REGEXP; Tail: null; Type: inject with RegExp; Icon: /regexp.svg; Type Icon: null
+	Lookups: REGEXP
+	String: REGEXP
+Text: RELAXNG; Tail: null; Type: inject with RELAX-NG; Icon: /text.svg; Type Icon: null
+	Lookups: RELAXNG
+	String: RELAXNG
+Text: SPI; Tail: null; Type: inject with SPI; Icon: /text.svg; Type Icon: null
+	Lookups: SPI
+	String: SPI
+Text: TEXT; Tail: null; Type: inject with Plain text; Icon: TextFileType; Type Icon: null
+	Lookups: TEXT
+	String: TEXT
 Text: XHTML; Tail: null; Type: inject with XHTML; Icon: /xhtml.svg; Type Icon: null
 	Lookups: XHTML
 	String: XHTML
