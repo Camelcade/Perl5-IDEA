@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,6 +72,7 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
     languageColumn.setCellEditor(roleComboBoxTableRenderer);
     getColumnModel().getColumn(0).setPreferredWidth(200);
     languageColumn.setPreferredWidth(600);
+    setVisibleRowCount(18);
   }
 
   @Override
