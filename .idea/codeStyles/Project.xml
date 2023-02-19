@@ -16,6 +16,7 @@
     <option name="DO_NOT_FORMAT">
       <list>
         <fileSet type="globPattern" pattern="**/testData/**/*" />
+        <fileSet type="globPattern" pattern=".qodana/*" />
       </list>
     </option>
     <GroovyCodeStyleSettings>
@@ -469,7 +470,6 @@
       <option name="DOWHILE_BRACE_FORCE" value="1" />
       <option name="WHILE_BRACE_FORCE" value="1" />
       <option name="FOR_BRACE_FORCE" value="1" />
-      <option name="PARENT_SETTINGS_INSTALLED" value="true" />
     </codeStyleSettings>
     <codeStyleSettings language="XML">
       <indentOptions>

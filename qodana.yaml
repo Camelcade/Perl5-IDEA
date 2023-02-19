@@ -1,4 +1,13 @@
 version: "1.0"
-linter: registry.jetbrains.team/p/sa/containers/qodana-jvm:231.5906.609
+linter: registry.jetbrains.team/p/sa/containers/qodana-jvm:231.7617.13
 profile:
   path: .idea/inspectionProfiles/Project_Quality.xml
+exclude:
+  - name: All
+    paths:
+      - plugin/core/src/main/gen
+      - tt2/src/main/gen
+      - embedded/src/main/gen
+      - mojo/core/src/main/gen
+      - mason/mason2/src/main/gen
+      - mason/htmlmason/src/main/gen
