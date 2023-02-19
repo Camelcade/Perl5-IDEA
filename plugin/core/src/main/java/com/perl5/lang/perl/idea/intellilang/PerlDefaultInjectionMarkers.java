@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,13 @@ import com.perl5.lang.perl.PerlLanguage;
 
 import java.util.Map;
 
-public interface PerlDefaultInjectionMarkers {
-  String PERL5_MARKER = "PERL5";
+public final class PerlDefaultInjectionMarkers {
+  private PerlDefaultInjectionMarkers() {
+  }
 
-  Map<String, String> DEFAULT_MARKERS = ContainerUtil.<String, String>immutableMapBuilder()
+  public static final String PERL5_MARKER = "PERL5";
+
+  public static final Map<String, String> DEFAULT_MARKERS = ContainerUtil.<String, String>immutableMapBuilder()
     .put("SQL", "SQL")
     .put("MYSQL", "MySQL")
     .put("PGSQL", "PostgreSQL")
