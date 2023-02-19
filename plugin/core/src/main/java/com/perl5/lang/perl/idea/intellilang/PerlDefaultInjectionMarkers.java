@@ -28,6 +28,7 @@ public final class PerlDefaultInjectionMarkers {
   public static final String PERL5_MARKER = "PERL5";
 
   public static final Map<String, String> DEFAULT_MARKERS = ContainerUtil.<String, String>immutableMapBuilder()
+    .put("SHELL", "Shell Script")
     .put("SQL", "SQL")
     .put("MYSQL", "MySQL")
     .put("PGSQL", "PostgreSQL")
