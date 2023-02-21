@@ -96,6 +96,8 @@ allprojects {
     test {
       maxHeapSize = "2048m"
 
+      outputs.upToDateWhen { false }
+
       if (project.hasProperty("overwrite")) {
         systemProperty("idea.tests.overwrite.data", "true")
       }

@@ -15,8 +15,13 @@
  */
 
 dependencies {
-  compileOnly(project(":plugin:core", "instrumentedJar"))
-  compileOnly(project(":lang.mojo:core", "instrumentedJar"))
+  listOf(
+    ":plugin:core",
+    ":lang.mojo:core",
+  ).forEach {
+    compileOnly(project(it))
+    testCompileOnly(project(it))
+  }
 }
 
 intellij {

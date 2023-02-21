@@ -24,23 +24,33 @@ plugins {
 }
 
 dependencies {
-  implementation(project(":plugin:core", "instrumentedJar"))
-  implementation(project(":plugin:idea", "instrumentedJar"))
-  implementation(project(":plugin:profiler", "instrumentedJar"))
-  implementation(project(":plugin:coverage", "instrumentedJar"))
-  implementation(project(":plugin:debugger", "instrumentedJar"))
-  implementation(project(":plugin:copyright", "instrumentedJar"))
-  implementation(project(":plugin:intelliLang", "instrumentedJar"))
-  implementation(project(":plugin:docker", "instrumentedJar"))
-  implementation(project(":plugin:wsl", "instrumentedJar"))
-  implementation(project(":plugin:perlbrew", "instrumentedJar"))
-  implementation(project(":plugin:berrybrew", "instrumentedJar"))
-  implementation(project(":plugin:plenv", "instrumentedJar"))
+  listOf(
+    ":plugin:core",
+    ":plugin:idea",
+    ":plugin:profiler",
+    ":plugin:coverage",
+    ":plugin:debugger",
+    ":plugin:copyright",
+    ":plugin:intelliLang",
+    ":plugin:docker",
+    ":plugin:wsl",
+    ":plugin:perlbrew",
+    ":plugin:berrybrew",
+    ":plugin:plenv",
+  ).forEach {
+    compileOnly(project(it))
+    testCompileOnly(project(it))
+    runtimeOnly(project(it, "instrumentedJar"))
+  }
 
-  testFixturesApi(project(":plugin:core", "instrumentedJar"))
-  testFixturesApi(project(":plugin:docker", "instrumentedJar"))
-  testFixturesApi(project(":plugin:perlbrew", "instrumentedJar"))
-  testFixturesApi(project(":plugin:plenv", "instrumentedJar"))
+  listOf(
+    ":plugin:core",
+    ":plugin:docker",
+    ":plugin:perlbrew",
+    ":plugin:plenv",
+  ).forEach {
+    testFixturesApi(project(it, "instrumentedJar"))
+  }
 }
 
 intellij {

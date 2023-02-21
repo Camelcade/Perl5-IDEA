@@ -17,7 +17,13 @@
 fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
-  compileOnly(project(":plugin:core", "instrumentedJar"))
+  listOf(
+    ":plugin:core",
+  ).forEach {
+    compileOnly(project(it))
+    testCompileOnly(project(it))
+    runtimeOnly(project(it, "instrumentedJar"))
+  }
 }
 
 intellij {
