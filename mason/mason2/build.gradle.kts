@@ -26,10 +26,14 @@ sourceSets {
 }
 
 dependencies {
-  compileOnly(project(":plugin:core", "instrumentedJar"))
-  testCompileOnly(project(":plugin:core", "instrumentedJar"))
-  compileOnly(project(":lang.mason.framework", "instrumentedJar"))
-  testCompileOnly(project(":lang.mason.framework", "instrumentedJar"))
+  listOf(
+    ":plugin:core",
+    ":lang.mason.framework",
+  ).forEach {
+    compileOnly(project(it))
+    testCompileOnly(project(it))
+    testRuntimeOnly(project(it, "instrumentedJar"))
+  }
   testImplementation(testFixtures(project(":plugin")))
 }
 

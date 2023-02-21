@@ -36,7 +36,10 @@ intellij {
 }
 
 dependencies {
-  compileOnly(project(":plugin:core", "instrumentedJar"))
+  listOf(":plugin:core").forEach {
+    compileOnly(project(it))
+    testCompileOnly(project(it))
+  }
 }
 
 tasks {

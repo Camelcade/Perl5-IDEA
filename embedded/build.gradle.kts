@@ -34,8 +34,13 @@ intellij {
 }
 
 dependencies {
-  compileOnly(project(":plugin:core", "instrumentedJar"))
-  testCompileOnly(project(":plugin:core", "instrumentedJar"))
+  listOf(
+    ":plugin:core",
+  ).forEach {
+    compileOnly(project(it))
+    testCompileOnly(project(it))
+    testRuntimeOnly(project(it, "instrumentedJar"))
+  }
   testImplementation(testFixtures(project(":plugin")))
 }
 

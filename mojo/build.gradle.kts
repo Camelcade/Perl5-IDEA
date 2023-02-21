@@ -16,10 +16,21 @@
 fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
-  implementation(project(":lang.mojo:core", "instrumentedJar"))
-  testCompileOnly(project(":lang.mojo:idea", "instrumentedJar"))
-  compileOnly(project(":plugin:core", "instrumentedJar"))
-  testCompileOnly(project(":plugin:core", "instrumentedJar"))
+  listOf(
+    ":plugin:core",
+    ":lang.mojo:core",
+    ":lang.mojo:idea",
+  ).forEach {
+    compileOnly(project(it))
+    testCompileOnly(project(it))
+    testRuntimeOnly(project(it, "instrumentedJar"))
+  }
+  listOf(
+    ":lang.mojo:core",
+    ":lang.mojo:idea",
+  ).forEach {
+    runtimeOnly(project(it, "instrumentedJar"))
+  }
   testImplementation(testFixtures(project(":plugin")))
 }
 
