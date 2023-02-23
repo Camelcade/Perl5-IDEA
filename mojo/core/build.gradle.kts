@@ -44,7 +44,7 @@ dependencies {
 
 tasks {
   val generateMojoliciousLexer = register<GenerateLexerTask>("generateMojoliciousLexer") {
-    source.set("grammar/Mojolicious.flex")
+    sourceFile.set(file("grammar/Mojolicious.flex"))
     targetDir.set("src/main/gen/com/perl5/lang/mojolicious/lexer/")
     targetClass.set("MojoliciousLexer")
     skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))

@@ -33,7 +33,7 @@ plugins {
   id("idea")
   id("jacoco")
   id("org.jetbrains.intellij") version "1.13.1-SNAPSHOT"
-  id("org.jetbrains.grammarkit") version "2021.2.2"
+  id("org.jetbrains.grammarkit") version "2022.3.1"
   id("com.github.kt3k.coveralls") version "2.12.0"
   id("org.sonarqube") version "4.0.0.2929"
   id("org.jetbrains.qodana") version "0.1.13"

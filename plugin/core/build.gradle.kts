@@ -34,19 +34,19 @@ intellij {
 
 tasks {
   val generatePerl5Parser = register<GenerateParserTask>("generatePerl5Parser") {
-    source.set("grammar/Perl5.bnf")
+    sourceFile.set(file("grammar/Perl5.bnf"))
     pathToParser.set("/com/perl5/lang/perl/parser/PerlParserGenerated.java")
     pathToPsiRoot.set("/com/perl5/lang/perl/psi")
   }
 
   val generatePodParser = register<GenerateParserTask>("generatePodParser") {
-    source.set("grammar/Pod.bnf")
+    sourceFile.set(file("grammar/Pod.bnf"))
     pathToParser.set("/com/perl5/lang/pod/parser/PodParserGenerated.java")
     pathToPsiRoot.set("/com/perl5/lang/pod/psi")
   }
 
   val generatePerlLexer = register<GenerateLexerTask>("generatePerlLexer") {
-    source.set("grammar/Perl.flex")
+    sourceFile.set(file("grammar/Perl.flex"))
     targetDir.set("src/main/gen/com/perl5/lang/perl/lexer/")
     targetClass.set("PerlLexer")
 
@@ -54,7 +54,7 @@ tasks {
   }
 
   val generatePodLexer = register<GenerateLexerTask>("generatePodLexer") {
-    source.set("grammar/Pod.flex")
+    sourceFile.set(file("grammar/Pod.flex"))
     targetDir.set("src/main/gen/com/perl5/lang/pod/lexer/")
     targetClass.set("PodLexerGenerated")
 
