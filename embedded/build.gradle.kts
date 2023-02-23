@@ -46,7 +46,7 @@ dependencies {
 
 tasks {
   val generateEmbeddedPerlLexer = register<GenerateLexerTask>("generateEmbeddedPerlLexer") {
-    source.set("grammar/EmbeddedPerl.flex")
+    sourceFile.set(file("grammar/EmbeddedPerl.flex"))
     targetDir.set("src/main/gen/com/perl5/lang/embedded/lexer/")
     targetClass.set("EmbeddedPerlLexer")
     skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
