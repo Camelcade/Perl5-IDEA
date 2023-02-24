@@ -75,6 +75,10 @@ allprojects {
     mavenCentral()
   }
 
+  grammarKit {
+    jflexRelease.set("1.9.0")
+  }
+
   version = properties("pluginVersion").get().ifEmpty { properties("platformVersion").get() } +
             properties("pluginBranch").get().ifEmpty { properties("platformBranch").get() } +
             properties("pluginBuild").get().ifEmpty { properties("platformBuild").get() }
