@@ -27,12 +27,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 public class PerlTestRunConfigurationType extends ConfigurationTypeBase {
+  private final @NotNull PerlRunConfigurationFactory myTestConfigurationFactory;
   public PerlTestRunConfigurationType() {
     super("PerlTestRunConfiguration",
           PerlBundle.message("perl.run.prove.configuration.group.title"),
           PerlBundle.message("perl.run.prove.configuration.group.description"),
           PerlIcons.PERL_TEST_CONFIGURATION);
-    addFactory(new PerlRunConfigurationFactory(this) {
+    myTestConfigurationFactory = new PerlRunConfigurationFactory(this) {
       @Override
       public @NotNull String getId() {
         return "Perl5 Test";
@@ -42,7 +43,12 @@ public class PerlTestRunConfigurationType extends ConfigurationTypeBase {
       public @NotNull RunConfiguration createTemplateConfiguration(@NotNull Project project) {
         return new PerlTestRunConfiguration(project, this, "Unnamed");
       }
-    });
+    };
+    addFactory(myTestConfigurationFactory);
+  }
+
+  public @NotNull PerlRunConfigurationFactory getTestConfigurationFactory() {
+    return myTestConfigurationFactory;
   }
 
   public static @NotNull PerlTestRunConfigurationType getInstance() {

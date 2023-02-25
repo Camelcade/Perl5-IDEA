@@ -26,15 +26,13 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-/**
- * @author VISTALL
- * @since 16-Sep-15
- */
 public class PerlRunConfigurationType extends ConfigurationTypeBase {
+  private final @NotNull PerlRunConfigurationFactory myScriptConfigurationFactory;
+
   public PerlRunConfigurationType() {
     super("#PerlConfigurationType", PerlBundle.message("perl"), PerlBundle.message("runs.perl5.scripts"), PerlIcons.PERL_LANGUAGE_ICON);
 
-    addFactory(new PerlRunConfigurationFactory(this) {
+    myScriptConfigurationFactory = new PerlRunConfigurationFactory(this) {
       @Override
       public @NotNull String getId() {
         return "Perl";
@@ -44,7 +42,12 @@ public class PerlRunConfigurationType extends ConfigurationTypeBase {
       public @NotNull RunConfiguration createTemplateConfiguration(@NotNull Project project) {
         return new PerlRunConfiguration(project, this, "Unnamed");
       }
-    });
+    };
+    addFactory(myScriptConfigurationFactory);
+  }
+
+  public @NotNull PerlRunConfigurationFactory getScriptConfigurationFactory() {
+    return myScriptConfigurationFactory;
   }
 
   public static @NotNull PerlRunConfigurationType getInstance() {

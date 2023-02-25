@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlTestRunConfigurationProducer extends GenericPerlRunConfigurationProducer<PerlTestRunConfiguration> {
   @Override
   public @NotNull ConfigurationFactory getConfigurationFactory() {
-    return PerlTestRunConfigurationType.getInstance().getConfigurationFactories()[0];
+    return PerlTestRunConfigurationType.getInstance().getTestConfigurationFactory();
   }
 
   @Override
