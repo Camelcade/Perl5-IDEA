@@ -19,6 +19,7 @@ package com.perl5.lang.perl.debugger.run.run.debugger.remote;
 import com.intellij.execution.configurations.ConfigurationTypeBase;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.run.PerlRunConfigurationFactory;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +29,7 @@ import java.util.Objects;
 
 public class PerlRemoteDebuggingConfigurationType extends ConfigurationTypeBase {
   public PerlRemoteDebuggingConfigurationType() {
-    super("#PerlRemoteDebuggingConfigurationType", "Perl Remote Debugging", "", PerlIcons.PERL_LANGUAGE_ICON);
+    super("#PerlRemoteDebuggingConfigurationType", PerlBundle.message("perl.remote.debugging"), "", PerlIcons.PERL_LANGUAGE_ICON);
 
     addFactory(new PerlRunConfigurationFactory(this) {
       @Override
