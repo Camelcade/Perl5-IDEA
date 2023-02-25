@@ -146,7 +146,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     else {
       perlSdk = PerlProjectManager.getSdk(getProject());
       if (perlSdk == null) {
-        throw new ExecutionException(PerlBundle.message("perl.run.error.no.sdk", getProject()));
+        throw new ExecutionException(PerlBundle.message("perl.run.error.no.sdk", getProject().getName()));
       }
     }
     return perlSdk;
