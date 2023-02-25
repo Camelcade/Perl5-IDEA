@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,11 @@
 
 package com.perl5.lang.perl.idea.run.run;
 
-import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationTypeBase;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.run.PerlRunConfigurationFactory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -33,7 +33,7 @@ public class PerlRunConfigurationType extends ConfigurationTypeBase {
   public PerlRunConfigurationType() {
     super("#PerlConfigurationType", "Perl", "Runs perl5 scripts", PerlIcons.PERL_LANGUAGE_ICON);
 
-    addFactory(new ConfigurationFactory(this) {
+    addFactory(new PerlRunConfigurationFactory(this) {
       @Override
       public @NotNull String getId() {
         return "Perl";

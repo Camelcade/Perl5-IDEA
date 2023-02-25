@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,12 +16,12 @@
 
 package com.perl5.lang.perl.idea.run.prove;
 
-import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.ConfigurationTypeBase;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.openapi.project.Project;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
+import com.perl5.lang.perl.idea.run.PerlRunConfigurationFactory;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
@@ -32,7 +32,7 @@ public class PerlTestRunConfigurationType extends ConfigurationTypeBase {
           PerlBundle.message("perl.run.prove.configuration.group.title"),
           PerlBundle.message("perl.run.prove.configuration.group.description"),
           PerlIcons.PERL_TEST_CONFIGURATION);
-    addFactory(new ConfigurationFactory(this) {
+    addFactory(new PerlRunConfigurationFactory(this) {
       @Override
       public @NotNull String getId() {
         return "Perl5 Test";
