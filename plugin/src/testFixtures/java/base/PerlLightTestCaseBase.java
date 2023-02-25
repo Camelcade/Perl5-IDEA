@@ -2325,7 +2325,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
                                    boolean includeNonProjectFiles,
                                    @NotNull Condition<String> nameFilter) {
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
-    List<String> acceptableNames = ContainerUtil.filter(model.getNames(includeNonProjectFiles), nameFilter);
+    List<String> acceptableNames = new ArrayList<>(ContainerUtil.filter(model.getNames(includeNonProjectFiles), nameFilter));
     ContainerUtil.sort(acceptableNames);
     StringBuilder sb = new StringBuilder();
     for (String acceptableName : acceptableNames) {
