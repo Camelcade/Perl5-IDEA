@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,5 +90,10 @@ class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHand
   @Contract("null->null")
   public static @Nullable PerlBrewData from(@Nullable Sdk sdk) {
     return ObjectUtils.tryCast(PerlVersionManagerData.from(sdk), PerlBrewData.class);
+  }
+
+  @Override
+  public @Nullable String getTerminalCustomizerScriptName() {
+    return "perlbrew_starter.sh";
   }
 }

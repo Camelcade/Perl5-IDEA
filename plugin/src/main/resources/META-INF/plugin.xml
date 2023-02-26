@@ -29,20 +29,17 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
   <content>
-    <module name="perl5.plugin.copyright"/>
-    <module name="perl5.plugin.intelliLang"/>
-
-    <module name="perl5.plugin.idea"/>
-
     <module name="perl5.plugin.berrybrew"/>
-    <module name="perl5.plugin.perlbrew"/>
-    <module name="perl5.plugin.plenv"/>
-
+    <module name="perl5.plugin.copyright"/>
     <module name="perl5.plugin.coverage"/>
     <module name="perl5.plugin.debugger"/>
-    <module name="perl5.plugin.profiler"/>
-
     <module name="perl5.plugin.docker"/>
+    <module name="perl5.plugin.idea"/>
+    <module name="perl5.plugin.intelliLang"/>
+    <module name="perl5.plugin.perlbrew"/>
+    <module name="perl5.plugin.plenv"/>
+    <module name="perl5.plugin.profiler"/>
+    <module name="perl5.plugin.terminal"/>
     <module name="perl5.plugin.wsl"/>
   </content>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,5 +65,10 @@ class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
   @Contract("null->null")
   public static @Nullable PlenvData from(@Nullable Sdk sdk) {
     return ObjectUtils.tryCast(PerlVersionManagerData.from(sdk), PlenvData.class);
+  }
+
+  @Override
+  public @Nullable String getTerminalCustomizerScriptName() {
+    return "plenv_starter.sh";
   }
 }

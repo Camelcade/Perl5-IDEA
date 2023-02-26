@@ -82,4 +82,9 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
            SystemInfo.isSolaris ? SOLARIS :
            UNIX;
   }
+
+  @Override
+  public final boolean isLocal() {
+    return true;
+  }
 }

@@ -25,18 +25,19 @@ plugins {
 
 dependencies {
   listOf(
+    ":plugin:berrybrew",
+    ":plugin:copyright",
     ":plugin:core",
-    ":plugin:idea",
-    ":plugin:profiler",
     ":plugin:coverage",
     ":plugin:debugger",
-    ":plugin:copyright",
-    ":plugin:intelliLang",
     ":plugin:docker",
-    ":plugin:wsl",
+    ":plugin:idea",
+    ":plugin:intelliLang",
     ":plugin:perlbrew",
-    ":plugin:berrybrew",
     ":plugin:plenv",
+    ":plugin:profiler",
+    ":plugin:terminal",
+    ":plugin:wsl",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
@@ -61,6 +62,7 @@ intellij {
       properties("coveragePlugin").get(),
       properties("remoteRunPlugin").get(),
       "copyright",
+      "terminal",
       "java",
     )
   })

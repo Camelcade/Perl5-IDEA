@@ -219,6 +219,11 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
    */
   public abstract @Nullable PerlOsHandler getOsHandler();
 
+  /**
+   * @return true  iff it is a localhost handler. Despite docker and wsl are local as well, they considered as remote.
+   */
+  public abstract  boolean isLocal();
+
   @Override
   protected final @NotNull String getTagName() {
     return TAG_NAME;

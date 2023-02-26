@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
     }
   }
 
-  public @NotNull String getVersionManagerPath() {
+  public final @NotNull String getVersionManagerPath() {
     return Objects.requireNonNull(myVersionManagerPath);
   }
 
@@ -72,7 +72,7 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
     return myLibName;
   }
 
-  public @NotNull String getDistributionId() {
+  public final @NotNull String getDistributionId() {
     String versionString = getPerlVersionString();
     String libName = getLibName();
     return StringUtil.isEmpty(libName) ? versionString :
@@ -97,4 +97,6 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
   public @Nullable InstallPerlHandler getInstallPerlHandler() {
     return getHandler().createInstallHandler(getVersionManagerPath());
   }
+
+
 }

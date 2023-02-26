@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -105,4 +106,21 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
   public static @NotNull PerlVersionManagerData<?, ?> getDefault() {
     return PerlVersionManagerHandler.getDefaultHandler().createData();
   }
-}
+
+  /**
+   * @return name of the script for terminal customization (selecting perl) if it is supported by version manager. Otherwise - return null;
+   */
+  public @Nullable String getTerminalCustomizerScriptName() {
+    return null;
+  }
+
+  /**
+   * @return path to the version managerr if applicable
+   */
+  public abstract @Nullable String getVersionManagerPath();
+
+  /**
+   * @return distribution id if applicable
+   */
+  public abstract @Nullable String getDistributionId();
+  }

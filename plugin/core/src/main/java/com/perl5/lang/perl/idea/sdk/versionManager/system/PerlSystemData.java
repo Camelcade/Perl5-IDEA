@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-class PerlSystemData extends PerlVersionManagerData<PerlSystemData, PerlSystemHandler> {
+final class PerlSystemData extends PerlVersionManagerData<PerlSystemData, PerlSystemHandler> {
   PerlSystemData(@NotNull PerlSystemHandler handler) {
     super(handler);
   }
@@ -51,6 +51,16 @@ class PerlSystemData extends PerlVersionManagerData<PerlSystemData, PerlSystemHa
 
   @Override
   public @Nullable InstallPerlHandler getInstallPerlHandler() {
+    return null;
+  }
+
+  @Override
+  public  @Nullable String getVersionManagerPath() {
+    return null;
+  }
+
+  @Override
+  public @Nullable String getDistributionId() {
     return null;
   }
 }
