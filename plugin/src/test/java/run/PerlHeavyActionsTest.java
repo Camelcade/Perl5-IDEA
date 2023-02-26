@@ -22,6 +22,7 @@ import categories.Heavy;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.testFramework.LightVirtualFile;
@@ -127,11 +128,13 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
     var information = annotator.collectInformation(openedPsiFile);
     assertNotNull(information);
     List<String> result = new ArrayList<>();
-    var annotations = CodeInsightTestUtil.runExternalAnnotator(annotator, openedPsiFile, information, it -> {
-      for (PerlCriticErrorDescriptor descriptor : it) {
-        result.add(descriptor.toString());
-      }
-    });
+    var annotations = ProgressManager.getInstance().runProcessWithProgressSynchronously(
+      () -> CodeInsightTestUtil.runExternalAnnotator(annotator, openedPsiFile, information, it -> {
+        for (PerlCriticErrorDescriptor descriptor : it) {
+          result.add(descriptor.toString());
+        }
+      }), "", false, null);
+    assertNotNull(annotations);
     for (Annotation annotation : annotations) {
       result.add(annotation.getStartOffset() + "-" +
                  annotation.getEndOffset() + " " +

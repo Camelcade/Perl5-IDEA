@@ -32,6 +32,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.concurrency.annotations.RequiresReadLock;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
@@ -59,6 +60,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
            ? (PerlFile)file : null;
   }
 
+  @RequiresReadLock
   protected @Nullable PerlCommandLine getPerlCriticCommandLine(@NotNull PsiFile fileToLint) {
     var project = fileToLint.getProject();
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
@@ -99,13 +101,13 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
       return null;
     }
 
-    byte[] sourceBytes = sourcePsiFile.getPerlContentInBytes();
+    byte[] sourceBytes = ReadAction.compute(()->sourcePsiFile.getPerlContentInBytes());
     if (sourceBytes == null) {
       return null;
     }
 
     try {
-      PerlCommandLine criticCommandLine = getPerlCriticCommandLine(sourcePsiFile);
+      PerlCommandLine criticCommandLine = ReadAction.compute(()-> getPerlCriticCommandLine(sourcePsiFile));
       if (criticCommandLine == null) {
         PerlSharedSettings.getInstance(sourcePsiFile.getProject()).PERL_CRITIC_ENABLED = false;
         return null;
