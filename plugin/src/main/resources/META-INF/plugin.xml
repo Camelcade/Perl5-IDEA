@@ -29,6 +29,7 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
 
   <content>
+    <module name="perl5.plugin.asdf"/>
     <module name="perl5.plugin.berrybrew"/>
     <module name="perl5.plugin.copyright"/>
     <module name="perl5.plugin.coverage"/>

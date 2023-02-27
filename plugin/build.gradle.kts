@@ -25,6 +25,7 @@ plugins {
 
 dependencies {
   listOf(
+    ":plugin:asdf",
     ":plugin:berrybrew",
     ":plugin:copyright",
     ":plugin:core",
