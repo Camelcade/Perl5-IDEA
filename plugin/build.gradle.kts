@@ -20,7 +20,7 @@ fun properties(key: String) = providers.gradleProperty(key)
 
 plugins {
   id("java-test-fixtures")
-  id("com.github.johnrengelman.shadow") version "7.1.2"
+  id("com.github.johnrengelman.shadow") version "8.0.0"
 }
 
 dependencies {
