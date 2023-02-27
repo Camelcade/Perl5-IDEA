@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,15 @@
 
 package com.perl5.lang.perl.idea.execution;
 
-import com.intellij.execution.filters.ConsoleDependentFilterProvider;
-import com.intellij.execution.filters.ConsoleFilterProvider;
-import com.intellij.execution.filters.ConsoleFilterProviderEx;
-import com.intellij.execution.filters.Filter;
 import com.intellij.execution.impl.ConsoleViewImpl;
+import com.intellij.execution.impl.ConsoleViewUtil;
 import com.intellij.execution.ui.ConsoleView;
+import com.intellij.openapi.application.ModalityState;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.terminal.TerminalExecutionConsole;
+import com.intellij.util.concurrency.AppExecutorUtil;
 import com.perl5.lang.perl.idea.sdk.host.PerlConsoleView;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +35,7 @@ public class PerlTerminalExecutionConsole extends TerminalExecutionConsole imple
 
   public PerlTerminalExecutionConsole(@NotNull Project project) {
     super(project, null);
-    addFiltersToConsole(project, this);
+    updatePredefinedFiltersLater(project, this);
   }
 
   @Override
@@ -50,25 +50,14 @@ public class PerlTerminalExecutionConsole extends TerminalExecutionConsole imple
   }
 
   /**
-   * This is a copy-paste of {@link ConsoleViewImpl#computeConsoleFilters(com.intellij.openapi.project.Project, com.intellij.psi.search.GlobalSearchScope)}
-   * Must be fixed in the platform
+   * Copy-paste of {@link ConsoleViewImpl#updatePredefinedFiltersLater()}
    */
-  public static void addFiltersToConsole(@NotNull Project project, @NotNull ConsoleView console) {
-    GlobalSearchScope searchScope = GlobalSearchScope.allScope(project);
-    for (ConsoleFilterProvider eachProvider : ConsoleFilterProvider.FILTER_PROVIDERS.getExtensionList()) {
-      Filter[] filters;
-      if (eachProvider instanceof ConsoleDependentFilterProvider) {
-        filters = ((ConsoleDependentFilterProvider)eachProvider).getDefaultFilters(console, project, searchScope);
-      }
-      else if (eachProvider instanceof ConsoleFilterProviderEx) {
-        filters = ((ConsoleFilterProviderEx)eachProvider).getDefaultFilters(project, searchScope);
-      }
-      else {
-        filters = eachProvider.getDefaultFilters(project);
-      }
-      for (Filter filter : filters) {
-        console.addMessageFilter(filter);
-      }
-    }
+  public static void updatePredefinedFiltersLater(@NotNull Project project, @NotNull ConsoleView consoleView) {
+    ReadAction
+      .nonBlocking(() -> ConsoleViewUtil.computeConsoleFilters(project, consoleView, GlobalSearchScope.allScope(project)))
+      .expireWith(consoleView)
+      .finishOnUiThread(ModalityState.stateForComponent(consoleView.getComponent()), filters -> {
+        filters.forEach(consoleView::addMessageFilter);
+      }).submit(AppExecutorUtil.getAppExecutorService());
   }
 }

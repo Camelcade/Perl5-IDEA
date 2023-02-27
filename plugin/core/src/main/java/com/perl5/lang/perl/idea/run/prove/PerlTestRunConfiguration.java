@@ -39,6 +39,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -223,9 +224,11 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     PerlSMTRunnerConsoleProperties consoleProperties =
       new PerlSMTRunnerConsoleProperties(this, PROVE_FRAMEWORK_NAME, runProfileState.getEnvironment().getExecutor());
     String splitterPropertyName = SMTestRunnerConnectionUtil.getSplitterPropertyName(PROVE_FRAMEWORK_NAME);
-    SMTRunnerConsoleView consoleView = new PerlSMTRunnerConsoleView(getProject(), consoleProperties, splitterPropertyName)
+    var project = getProject();
+    SMTRunnerConsoleView consoleView = new PerlSMTRunnerConsoleView(project, consoleProperties, splitterPropertyName)
       .withHostData(PerlHostData.notNullFrom(getEffectiveSdk()));
     SMTestRunnerConnectionUtil.initConsoleView(consoleView, PROVE_FRAMEWORK_NAME);
+    PerlTerminalExecutionConsole.updatePredefinedFiltersLater(project, consoleView);
     return consoleView;
   }
 
