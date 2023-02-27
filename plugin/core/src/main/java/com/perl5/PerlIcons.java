@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ public final class PerlIcons {
   public static final Icon WINDOWS10_ICON = load("/icons/windows.svg");
   public static final Icon LINUX_ICON = load("/icons/linux.svg");
   public static final Icon PLENV_ICON = PERL_LANGUAGE_ICON;
+  public static final Icon ASDF_ICON = PERL_LANGUAGE_ICON;
   public static final Icon MAC_ICON = load("/icons/mac.svg");
   public static final Icon WINDOWS_ICON = WINDOWS10_ICON;
   public static final Icon DOCKER_ICON = load("/icons/docker.svg");
