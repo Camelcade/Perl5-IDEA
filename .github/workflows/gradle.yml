@@ -130,7 +130,7 @@ jobs:
         run: |
           ./gradlew jacocoRootReport
       - name: Uploading coverage results artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: coverage
           path: |
