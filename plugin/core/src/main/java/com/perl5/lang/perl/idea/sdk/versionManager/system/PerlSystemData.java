@@ -55,12 +55,17 @@ final class PerlSystemData extends PerlVersionManagerData<PerlSystemData, PerlSy
   }
 
   @Override
-  public  @Nullable String getVersionManagerPath() {
+  public @Nullable String getVersionManagerPath() {
     return null;
   }
 
   @Override
   public @Nullable String getDistributionId() {
     return null;
+  }
+
+  @Override
+  public boolean isSystem() {
+    return true;
   }
 }

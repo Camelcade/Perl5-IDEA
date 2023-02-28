@@ -23,6 +23,7 @@ import com.intellij.openapi.util.NlsActions.ActionText;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlHandler;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerCollector;
+import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import org.jdom.Element;
@@ -107,6 +108,9 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
     PerlVersionManagerHandler<?, ?> handler = PerlVersionManagerHandler.from(sdk);
     return handler != null && handler.getId().equals(getId());
   }
+
+  public abstract @Nullable PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager,
+                                                                    @NotNull PerlHostData<?, ?> hostData);
 
 
   /**

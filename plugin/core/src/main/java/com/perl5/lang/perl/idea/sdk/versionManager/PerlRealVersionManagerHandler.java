@@ -136,6 +136,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
     return Collections.emptyList();
   }
 
+  @Override
   public abstract @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager,
                                                                    @NotNull PerlHostData<?, ?> hostData);
 

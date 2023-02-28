@@ -55,6 +55,7 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
     }
   }
 
+  @Override
   public final @NotNull String getVersionManagerPath() {
     return Objects.requireNonNull(myVersionManagerPath);
   }
@@ -72,6 +73,7 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
     return myLibName;
   }
 
+  @Override
   public final @NotNull String getDistributionId() {
     String versionString = getPerlVersionString();
     String libName = getLibName();
@@ -98,5 +100,8 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
     return getHandler().createInstallHandler(getVersionManagerPath());
   }
 
-
+  @Override
+  public final boolean isSystem() {
+    return false;
+  }
 }

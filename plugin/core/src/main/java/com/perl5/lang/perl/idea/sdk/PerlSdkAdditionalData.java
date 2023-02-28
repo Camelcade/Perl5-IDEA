@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,12 +24,14 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationData;
 import com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationHandler;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import org.jdom.Element;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.Objects;
 
@@ -57,6 +59,20 @@ public class PerlSdkAdditionalData implements SaveAwareSdkAdditionalData {
 
   public @NotNull PerlImplementationData<?, ?> getImplementationData() {
     return myImplementationData;
+  }
+
+  public @NotNull PerlVersionManagerHandler<?, ?> getVersionManagerHandler() {
+    return getVersionManagerData().getHandler();
+  }
+
+  public @Nullable PerlVersionManagerAdapter getVersionManagerAdapter() {
+    var versionManagerPath = getVersionManagerData().getVersionManagerPath();
+    return versionManagerPath == null ? null : getVersionManagerHandler().createAdapter(versionManagerPath, getHostData());
+  }
+
+  @TestOnly
+  public boolean isSystem() {
+    return getVersionManagerData().isSystem();
   }
 
   @Contract("null -> null")

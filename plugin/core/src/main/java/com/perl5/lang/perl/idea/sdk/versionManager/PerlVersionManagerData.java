@@ -25,11 +25,11 @@ import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -123,4 +123,10 @@ public abstract class PerlVersionManagerData<Data extends PerlVersionManagerData
    * @return distribution id if applicable
    */
   public abstract @Nullable String getDistributionId();
-  }
+
+  /**
+   * @return true iff it is a system version manager data.
+   */
+  @TestOnly
+  public abstract boolean isSystem();
+}

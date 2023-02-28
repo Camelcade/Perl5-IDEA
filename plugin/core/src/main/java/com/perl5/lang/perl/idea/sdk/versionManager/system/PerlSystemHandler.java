@@ -27,6 +27,7 @@ import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -94,5 +95,10 @@ class PerlSystemHandler
   @Override
   public String toString() {
     return getShortName();
+  }
+
+  @Override
+  public @Nullable PerlVersionManagerAdapter createAdapter(@NotNull String pathToVersionManager, @NotNull PerlHostData<?, ?> hostData) {
+    return null;
   }
 }
