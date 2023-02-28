@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.run.prove;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.intellij.execution.testframework.sm.runner.ui.SMTRunnerConsoleView;
-import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.idea.sdk.host.PerlConsoleView;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
@@ -28,8 +27,7 @@ import org.jetbrains.annotations.Nullable;
 public class PerlSMTRunnerConsoleView extends SMTRunnerConsoleView implements PerlConsoleView {
   private PerlHostData<?, ?> myHostData;
 
-  public PerlSMTRunnerConsoleView(@NotNull Project project,
-                                  @NotNull PerlSMTRunnerConsoleProperties consoleProperties,
+  public PerlSMTRunnerConsoleView(@NotNull PerlSMTRunnerConsoleProperties consoleProperties,
                                   @Nullable String splitterProperty) {
     super(consoleProperties, splitterProperty);
   }

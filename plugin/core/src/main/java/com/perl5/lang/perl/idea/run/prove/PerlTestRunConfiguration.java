@@ -225,7 +225,7 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
       new PerlSMTRunnerConsoleProperties(this, PROVE_FRAMEWORK_NAME, runProfileState.getEnvironment().getExecutor());
     String splitterPropertyName = SMTestRunnerConnectionUtil.getSplitterPropertyName(PROVE_FRAMEWORK_NAME);
     var project = getProject();
-    SMTRunnerConsoleView consoleView = new PerlSMTRunnerConsoleView(project, consoleProperties, splitterPropertyName)
+    SMTRunnerConsoleView consoleView = new PerlSMTRunnerConsoleView(consoleProperties, splitterPropertyName)
       .withHostData(PerlHostData.notNullFrom(getEffectiveSdk()));
     SMTestRunnerConnectionUtil.initConsoleView(consoleView, PROVE_FRAMEWORK_NAME);
     PerlTerminalExecutionConsole.updatePredefinedFiltersLater(project, consoleView);
