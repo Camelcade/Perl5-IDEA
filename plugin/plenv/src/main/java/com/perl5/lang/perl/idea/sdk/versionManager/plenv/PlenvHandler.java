@@ -85,8 +85,8 @@ class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler
   @TestOnly
   static @NotNull PlenvHandler getInstance() {
     for (PerlVersionManagerHandler<?, ?> handler : PerlVersionManagerHandler.all()) {
-      if (handler instanceof PlenvHandler) {
-        return (PlenvHandler)handler;
+      if (handler instanceof PlenvHandler plenvHandler) {
+        return plenvHandler;
       }
     }
     throw new NullPointerException();

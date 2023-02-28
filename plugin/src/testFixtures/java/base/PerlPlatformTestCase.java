@@ -91,7 +91,8 @@ import java.util.function.Function;
 
 @RunWith(Parameterized.class)
 public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
-  private static final int MAX_WAIT_TIME = 10_000;
+  private static final int MAX_PROCESS_WAIT_TIME_SECONDS = 20;
+
   protected static final Logger LOG = Logger.getInstance(PerlPlatformTestCase.class);
   private static final Key<CapturingProcessAdapter> ADAPTER_KEY = Key.create("process.adapter");
   static final @NotNull String PERL_TEST_VERSION =
@@ -116,7 +117,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       {PerlBrewWithExternalLibrariesLocalInterpreterConfigurator.INSTANCE},
       {PerlBrewLocalInterpreterConfigurator.INSTANCE},
       {PlenvLocalInterpreterConfigurator.INSTANCE},
-      {PerlSystemDockerInterpreterConfigurator.INSTANCE}
+      {PerlSystemDockerInterpreterConfigurator.INSTANCE},
+      {AsdfLocalInterpreterConfigurator.INSTANCE}
     });
   }
 
@@ -498,26 +500,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   protected void waitWithEventsDispatching(@NotNull String errorMessage, @NotNull BooleanSupplier condition) {
-    waitWithEventsDispatching(errorMessage, condition, MAX_WAIT_TIME);
-  }
-
-  protected void waitWithEventsDispatching(@NotNull String errorMessage, @NotNull BooleanSupplier condition, int maxWaitTime) {
-    long start = System.currentTimeMillis();
-    while (true) {
-      try {
-        if (System.currentTimeMillis() - start > maxWaitTime) {
-          fail(errorMessage);
-        }
-        if (condition.getAsBoolean()) {
-          break;
-        }
-        PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
-        Thread.sleep(10);
-      }
-      catch (InterruptedException e) {
-        throw new RuntimeException(e);
-      }
-    }
+    PlatformTestUtil.waitWithEventsDispatching(errorMessage, condition, MAX_PROCESS_WAIT_TIME_SECONDS);
   }
 
   protected void waitForAllDescriptorsToFinish() {
@@ -573,7 +556,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     assertNotNull(installAction);
     runActionWithTestEvent(installAction);
     waitForAllDescriptorsToFinish();
-    waitWithEventsDispatching("Install action hasn't finished in time", semaphore::isUp, 30_000);
+    PlatformTestUtil.waitWithEventsDispatching("Install action hasn't finished in time", semaphore::isUp, MAX_PROCESS_WAIT_TIME_SECONDS);
     var sdkRefreshSemaphore = PerlRunUtil.getSdkRefreshSemaphore();
     waitWithEventsDispatching("Sdk refresh hasn't finished", sdkRefreshSemaphore::isUp);
     return getPackageFile(contextPsiFile, packageName);

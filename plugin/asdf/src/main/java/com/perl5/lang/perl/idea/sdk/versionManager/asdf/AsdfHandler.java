@@ -23,8 +23,10 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.InstallPerlHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import javax.swing.*;
 import java.util.Collection;
@@ -78,5 +80,15 @@ class AsdfHandler extends PerlRealVersionManagerHandler<AsdfData, AsdfHandler> {
   @Override
   public @Nullable InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
     return new AsdfInstallPerlHandler(pathToVersionManager, this);
+  }
+
+  @TestOnly
+  static @NotNull AsdfHandler getInstance() {
+    for (PerlVersionManagerHandler<?, ?> handler : PerlVersionManagerHandler.all()) {
+      if (handler instanceof AsdfHandler asdfHandler) {
+        return asdfHandler;
+      }
+    }
+    throw new NullPointerException();
   }
 }

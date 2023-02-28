@@ -47,6 +47,7 @@ dependencies {
   }
 
   listOf(
+    ":plugin:asdf",
     ":plugin:core",
     ":plugin:docker",
     ":plugin:perlbrew",

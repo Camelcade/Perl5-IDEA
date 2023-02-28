@@ -72,15 +72,6 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
     return new PerlBrewData(vmAdapter.getVersionManagerPath(), distributionId, this, computeInfoData((PerlBrewAdapter)vmAdapter));
   }
 
-  static @NotNull PerlBrewHandler getInstance() {
-    for (PerlVersionManagerHandler<?, ?> handler : PerlVersionManagerHandler.all()) {
-      if (handler instanceof PerlBrewHandler) {
-        return (PerlBrewHandler)handler;
-      }
-    }
-    throw new NullPointerException();
-  }
-
   /**
    * Builds a map of key-val from {@code perlbrew info}
    */
@@ -107,5 +98,14 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
   @Override
   public @Nullable InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
     return new PerlBrewInstallPerlHandler(pathToVersionManager, this);
+  }
+
+  static @NotNull PerlBrewHandler getInstance() {
+    for (PerlVersionManagerHandler<?, ?> handler : PerlVersionManagerHandler.all()) {
+      if (handler instanceof PerlBrewHandler perlBrewHandler) {
+        return perlBrewHandler;
+      }
+    }
+    throw new NullPointerException();
   }
 }
