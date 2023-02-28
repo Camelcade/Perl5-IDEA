@@ -34,7 +34,7 @@ class PerlInstallOptionsForm extends PerlInstallFormOptions {
   private JCheckBox mySkipTestingCheckBox;
   private JCheckBox myManCheckbox;
   private JTextPane mySetOptionsBelowIfTextPane;
-  private JCheckBox myInstallDevel;
+  private JCheckBox myNoPatch;
 
   public PerlInstallOptionsForm() {
     configureThreadsCombobox(myThreads);
@@ -74,8 +74,8 @@ class PerlInstallOptionsForm extends PerlInstallFormOptions {
       buildParams.add("--as=" + targetName);
     }
 
-    if (myInstallDevel.isSelected()) {
-      buildParams.add("-Dusedevel");
+    if (myNoPatch.isSelected()) {
+      buildParams.add("--nopatch");
     }
 
     return buildParams;

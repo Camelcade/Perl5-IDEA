@@ -86,13 +86,13 @@
           <text resource-bundle="messages/PerlBundle" key="perl.vm.install.form.message"/>
         </properties>
       </component>
-      <component id="41161" class="javax.swing.JCheckBox" binding="myInstallDevel">
+      <component id="41161" class="javax.swing.JCheckBox" binding="myNoPatch">
         <constraints>
           <grid row="10" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
           <forms/>
         </constraints>
         <properties>
-          <text resource-bundle="messages/PerlBundle" key="perl.vm.plenv.install.allow.dev"/>
+          <text resource-bundle="messages/PerlBundle" key="perl.vm.perlbrew.install.form.no.patchperl"/>
         </properties>
       </component>
     </children>
