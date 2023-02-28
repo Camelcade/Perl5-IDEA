@@ -23,6 +23,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       PERL_TEST_VERSION: 5.36.0
+      TEST_PERL_MODULES: Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic B::Debug Types::Serialiser
     steps:
       - uses: actions/checkout@v3
         with:
@@ -57,7 +58,7 @@ jobs:
           source ~/perl5/perlbrew/etc/bashrc
           perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }} cpan App::cpanminus
           perlbrew lib create perl-${{ env.PERL_TEST_VERSION }}@plugin_test || true
-          perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }}@plugin_test cpanm --notest Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic B::Debug Types::Serialiser
+          perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }}@plugin_test cpanm --notest ${{ env.TEST_PERL_MODULES }}
       - name: Cache plenv and installed perls
         uses: actions/cache@v3
         env:
@@ -75,7 +76,25 @@ jobs:
           git clone --depth 1 https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/ || git -C $(realpath ~/.plenv/plugins/perl-build) pull
           ~/.plenv/bin/plenv install ${{ env.PLENV_VERSION }} --noman -j 8 || true
           ~/.plenv/bin/plenv install-cpanm
-          ~/.plenv/bin/plenv exec cpanm --notest Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic B::Debug Types::Serialiser
+          ~/.plenv/bin/plenv exec cpanm --notest ${{ env.TEST_PERL_MODULES }}
+      - name: Cache asdf and installed perls
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-asdf
+          cache-version: 0
+        with:
+          path: |
+            ~/.asdf
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-v${{ env.cache-version }}
+      - name: Set up asdf and perl
+        env:
+          ASDF_PERL_VERSION: ${{ env.PERL_TEST_VERSION }}
+        run: |
+          git clone --depth 1 https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.2
+          ~/.asdf/bin/asdf plugin add perl
+          ~/.asdf/bin/asdf install perl ${{ env.PLENV_VERSION }} --noman -j 8 || true
+          ~/.asdf/bin/asdf exec cpan install App::cpanminus
+          ~/.asdf/bin/asdf exec cpanm --notest  ${{ env.TEST_PERL_MODULES }}
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
