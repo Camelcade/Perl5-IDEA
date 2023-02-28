@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
+package com.perl5.lang.perl.idea.sdk.versionManager.asdf;
 
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.perlInstall.PerlInstallHandlerBase;
@@ -22,14 +22,14 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-class PlenvInstallPerlHandler extends PerlInstallHandlerBase {
-  public PlenvInstallPerlHandler(@NotNull String versionManagerPath,
-                                 @NotNull PerlRealVersionManagerHandler<?, ?> versionManageHandler) {
+class AsdfInstallPerlHandler extends PerlInstallHandlerBase {
+  public AsdfInstallPerlHandler(@NotNull String versionManagerPath,
+                                @NotNull PerlRealVersionManagerHandler<?, ?> versionManageHandler) {
     super(versionManagerPath, versionManageHandler);
   }
 
   @Override
   protected @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData<?, ?> hostData) {
-    return new PlenvAdapter(vmPath, hostData);
+    return new AsdfAdapter(vmPath, hostData);
   }
 }

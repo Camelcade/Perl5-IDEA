@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,10 +23,8 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.InstallPerlHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.TestOnly;
 
 import javax.swing.*;
 import java.util.Collection;
@@ -80,15 +78,5 @@ class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler
   @Override
   public @Nullable InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
     return new PlenvInstallPerlHandler(pathToVersionManager, this);
-  }
-
-  @TestOnly
-  static @NotNull PlenvHandler getInstance() {
-    for (PerlVersionManagerHandler<?, ?> handler : PerlVersionManagerHandler.all()) {
-      if (handler instanceof PlenvHandler) {
-        return (PlenvHandler)handler;
-      }
-    }
-    throw new NullPointerException();
   }
 }

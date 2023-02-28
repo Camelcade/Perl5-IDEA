@@ -77,6 +77,6 @@ class AsdfHandler extends PerlRealVersionManagerHandler<AsdfData, AsdfHandler> {
 
   @Override
   public @Nullable InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
-    return null;
+    return new AsdfInstallPerlHandler(pathToVersionManager, this);
   }
 }

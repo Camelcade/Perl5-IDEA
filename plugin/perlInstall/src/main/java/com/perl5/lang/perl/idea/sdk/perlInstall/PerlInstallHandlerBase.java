@@ -14,22 +14,31 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
+package com.perl5.lang.perl.idea.sdk.perlInstall;
 
-import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.idea.sdk.perlInstall.PerlInstallHandlerBase;
+import com.perl5.lang.perl.idea.sdk.versionManager.InstallPerlHandler;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallFormOptions;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-class PlenvInstallPerlHandler extends PerlInstallHandlerBase {
-  public PlenvInstallPerlHandler(@NotNull String versionManagerPath,
-                                 @NotNull PerlRealVersionManagerHandler<?, ?> versionManageHandler) {
+public abstract class PerlInstallHandlerBase extends InstallPerlHandler {
+  public PerlInstallHandlerBase(@NotNull String versionManagerPath,
+                                @NotNull PerlRealVersionManagerHandler<?, ?> versionManageHandler) {
     super(versionManagerPath, versionManageHandler);
   }
 
   @Override
-  protected @NotNull PerlVersionManagerAdapter createAdapter(@NotNull String vmPath, @NotNull PerlHostData<?, ?> hostData) {
-    return new PlenvAdapter(vmPath, hostData);
+  protected @NotNull String doCleanDistributionItem(@NotNull String rawItem) {
+    return rawItem;
+  }
+
+  @Override
+  protected boolean doIsInstalled(@NotNull String rawItem) {
+    return false;
+  }
+
+  @Override
+  protected @NotNull PerlInstallFormOptions createOptionsForm() {
+    return new PerlInstallOptionsForm();
   }
 }

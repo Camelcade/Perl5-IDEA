@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvInstallPerlForm">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.perl5.lang.perl.idea.sdk.perlInstall.PerlInstallOptionsForm">
   <grid id="27dc6" binding="myRootPanel" layout-manager="FormLayout">
     <rowspec value="center:d:grow"/>
     <rowspec value="top:4dlu:noGrow"/>

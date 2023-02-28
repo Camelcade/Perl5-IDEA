@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.versionManager.plenv;
+package com.perl5.lang.perl.idea.sdk.perlInstall;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ObjectUtils;
@@ -27,7 +27,7 @@ import java.util.List;
 
 import static com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallForm.configureThreadsCombobox;
 
-class PlenvInstallPerlForm extends PerlInstallFormOptions {
+class PerlInstallOptionsForm extends PerlInstallFormOptions {
   private JComboBox<Integer> myThreads;
   private JPanel myRootPanel;
   private JTextField myTargetName;
@@ -36,7 +36,7 @@ class PlenvInstallPerlForm extends PerlInstallFormOptions {
   private JTextPane mySetOptionsBelowIfTextPane;
   private JCheckBox myInstallDevel;
 
-  public PlenvInstallPerlForm() {
+  public PerlInstallOptionsForm() {
     configureThreadsCombobox(myThreads);
   }
 
