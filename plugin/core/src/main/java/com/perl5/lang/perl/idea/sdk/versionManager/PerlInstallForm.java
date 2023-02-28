@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,8 +99,9 @@ public class PerlInstallForm {
   }
 
   public static void configureThreadsCombobox(@NotNull JComboBox<Integer> threadsComboBox) {
-    List<Integer> threadsList = new ArrayList<>(16);
-    for (int i = 1; i <= 16; i++) {
+    var coresCount = Runtime.getRuntime().availableProcessors();
+    List<Integer> threadsList = new ArrayList<>(coresCount);
+    for (int i = 1; i <= coresCount; i++) {
       threadsList.add(i);
     }
     threadsComboBox.setModel(new CollectionComboBoxModel<>(threadsList));
