@@ -1,9 +1,9 @@
 #!/bin/bash -ex
 PERL_VERSION="5.36.0"
 
-for tag in perl5 perlbrew plenv
+for tag in perl5 perlbrew plenv asdf
 do
-  docker build --tag hurricup/camelcade-test:$tag-$PERL_VERSION \
+  docker build --tag registry-1.docker.io/hurricup/camelcade-test:$tag-$PERL_VERSION \
     --build-arg PERL_VERSION=$PERL_VERSION \
     --build-arg PERL_PACKAGES='
   App::Prove::Plugin::PassEnv
@@ -19,5 +19,5 @@ do
   Types::Serialiser
 ' \
     --file $tag.Dockerfile .
-  docker push hurricup/camelcade-test:$tag-$PERL_VERSION
+  docker push registry-1.docker.io/hurricup/camelcade-test:$tag-$PERL_VERSION
 done
