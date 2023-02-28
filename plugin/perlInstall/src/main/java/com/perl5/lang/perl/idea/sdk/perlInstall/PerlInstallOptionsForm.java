@@ -32,7 +32,7 @@ class PerlInstallOptionsForm extends PerlInstallFormOptions {
   private JPanel myRootPanel;
   private JTextField myTargetName;
   private JCheckBox mySkipTestingCheckBox;
-  private JCheckBox myNoManpagesCheckBox;
+  private JCheckBox myManCheckbox;
   private JTextPane mySetOptionsBelowIfTextPane;
   private JCheckBox myInstallDevel;
 
@@ -65,8 +65,8 @@ class PerlInstallOptionsForm extends PerlInstallFormOptions {
       buildParams.add("--test");
     }
 
-    if (myNoManpagesCheckBox.isSelected()) {
-      buildParams.add("--noman");
+    if (myManCheckbox.isSelected()) {
+      buildParams.add("--man");
     }
 
     String targetName = myTargetName.getText().trim();
