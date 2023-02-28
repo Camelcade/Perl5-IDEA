@@ -56,8 +56,8 @@ public class PerlTerminalExecutionConsole extends TerminalExecutionConsole imple
     ReadAction
       .nonBlocking(() -> ConsoleViewUtil.computeConsoleFilters(project, consoleView, GlobalSearchScope.allScope(project)))
       .expireWith(consoleView)
-      .finishOnUiThread(ModalityState.stateForComponent(consoleView.getComponent()), filters -> {
-        filters.forEach(consoleView::addMessageFilter);
-      }).submit(AppExecutorUtil.getAppExecutorService());
+      .finishOnUiThread(
+        ModalityState.stateForComponent(consoleView.getComponent()), filters -> filters.forEach(consoleView::addMessageFilter)
+      ).submit(AppExecutorUtil.getAppExecutorService());
   }
 }
