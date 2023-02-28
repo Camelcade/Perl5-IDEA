@@ -52,7 +52,8 @@ dependencies {
     ":plugin:perlbrew",
     ":plugin:plenv",
   ).forEach {
-    testFixturesApi(project(it, "instrumentedJar"))
+    testFixturesCompileOnly(project(it))
+    testFixturesRuntimeOnly(project(it, "instrumentedJar"))
   }
 }
 
