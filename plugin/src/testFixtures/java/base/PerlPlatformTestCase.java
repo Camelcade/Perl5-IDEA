@@ -95,7 +95,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   protected static final Logger LOG = Logger.getInstance(PerlPlatformTestCase.class);
   private static final Key<CapturingProcessAdapter> ADAPTER_KEY = Key.create("process.adapter");
-  static final @NotNull String PERL_TEST_VERSION =
+  public static final @NotNull String PERL_TEST_VERSION =
     ObjectUtils.notNull(System.getenv("PERL_TEST_VERSION"), System.getProperty("perl.test.version"));
 
   protected final Disposable myPerlTestCaseDisposable = Disposer.newDisposable();

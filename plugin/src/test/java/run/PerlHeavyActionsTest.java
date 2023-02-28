@@ -37,14 +37,21 @@ import com.perl5.lang.perl.idea.actions.PerlRegenerateXSubsAction;
 import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
 import com.perl5.lang.perl.idea.annotators.PerlCriticErrorDescriptor;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.junit.Assume;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
+import java.util.regex.Pattern;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
 @Category(Heavy.class)
@@ -142,5 +149,54 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
                  annotation.getMessage());
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), String.join("\n", result));
+  }
+
+  @Test
+  public void testVersionManagerListInstalled() {
+    PerlVersionManagerAdapter versionManagerAdapter = getVersionManagerAdapter();
+
+    var installedDistributions = versionManagerAdapter.getInstalledDistributionsListInTests();
+    assertContains(installedDistributions, Pattern.quote(PerlPlatformTestCase.PERL_TEST_VERSION));
+    assertNotContains(installedDistributions, "[^\\w\\d-.@_]");
+  }
+
+  private @NotNull PerlVersionManagerAdapter getVersionManagerAdapter() {
+    var perlSdkAdditionalData = PerlSdkAdditionalData.notNullFrom(Objects.requireNonNull(getSdk()));
+    Assume.assumeFalse("Not applicable for system perl", perlSdkAdditionalData.isSystem());
+
+    var versionManagerAdapter = perlSdkAdditionalData.getVersionManagerAdapter();
+    assertNotNull("No version manager adapter for " + getSdk(), versionManagerAdapter);
+    return versionManagerAdapter;
+  }
+
+  @Test
+  public void testVersionManagerListInstallable() {
+    PerlVersionManagerAdapter versionManagerAdapter = getVersionManagerAdapter();
+
+    var installedDistributions = versionManagerAdapter.getInstallableDistributionsListInTests();
+    assertContains(installedDistributions, Pattern.quote(PerlPlatformTestCase.PERL_TEST_VERSION));
+    assertContains(installedDistributions, Pattern.quote("5.12."));
+    assertNotContains(installedDistributions, "[^\\w\\d-. ]");
+  }
+
+  private void assertContains(@Nullable Collection<String> collection, @NotNull String regex) {
+    assertNotNull(collection);
+    var pattern = Pattern.compile(regex);
+    for (String item : collection) {
+      if (pattern.matcher(item).find()) {
+        return;
+      }
+    }
+    fail("Collection does not contain item matching: " + regex + "; collection:\n" + String.join("\n", collection));
+  }
+
+  private void assertNotContains(@Nullable Collection<String> collection, @NotNull String regex) {
+    assertNotNull(collection);
+    var pattern = Pattern.compile(regex);
+    for (String item : collection) {
+      if (pattern.matcher(item).find()) {
+        fail("Found item: " + item + " matching " + regex + " in collection:\n" + String.join("\n", collection));
+      }
+    }
   }
 }
