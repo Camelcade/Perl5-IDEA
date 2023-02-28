@@ -17,7 +17,6 @@
 dependencies {
   listOf(
     ":plugin:core",
-    ":plugin:perlInstall",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
