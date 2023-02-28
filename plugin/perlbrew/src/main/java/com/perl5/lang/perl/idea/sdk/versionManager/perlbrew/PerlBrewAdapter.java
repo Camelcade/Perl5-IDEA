@@ -161,6 +161,7 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
       .map(s -> s.trim().replace(".tar.bz2", ""))
       .filter(StringUtil::isNotEmpty)
       .filter(it -> !StringUtil.startsWith(it, "perl5"))
+      .filter(it -> !StringUtil.contains(it, "#"))
       .collect(Collectors.toList());
   }
 

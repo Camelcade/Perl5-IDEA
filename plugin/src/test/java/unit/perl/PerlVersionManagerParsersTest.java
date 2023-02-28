@@ -42,6 +42,11 @@ public class PerlVersionManagerParsersTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testPerlbrewAvailable2023() {
+    doTest(PerlBrewAdapter::parseInstallableDistributionsList);
+  }
+
+  @Test
   public void testPerlbrewClean() {
     doTest(PerlBrewAdapter::parseInstalledDistributionsList);
   }
