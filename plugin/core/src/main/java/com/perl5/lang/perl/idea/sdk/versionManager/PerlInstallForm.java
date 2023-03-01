@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.sdk.versionManager;
 
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
+import com.intellij.ui.ComboboxSpeedSearch;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
@@ -69,6 +70,7 @@ public class PerlInstallForm {
         }
       }
     });
+    ComboboxSpeedSearch.installSpeedSearch(myDistributionsComboBox, it -> it);
     myAddInstalledPerl5ToCheckBox.addChangeListener(e -> updateState());
     updateState();
   }
@@ -121,6 +123,7 @@ public class PerlInstallForm {
       }
     });
     threadsComboBox.setSelectedIndex(0);
+    ComboboxSpeedSearch.installSpeedSearch(threadsComboBox, Object::toString);
   }
 
   public interface InstallFormHelper extends Comparator<String> {

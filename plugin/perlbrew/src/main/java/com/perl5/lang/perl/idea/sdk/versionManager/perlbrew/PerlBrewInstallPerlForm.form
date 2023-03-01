@@ -32,7 +32,7 @@
     <colspec value="left:4dlu:noGrow"/>
     <colspec value="fill:d:grow"/>
     <constraints>
-      <xy x="20" y="279" width="382" height="402"/>
+      <xy x="20" y="279" width="382" height="433"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -45,6 +45,9 @@
           <forms defaultalign-horz="false" defaultalign-vert="false"/>
         </constraints>
         <properties>
+          <disabledTextColor color="-16777216"/>
+          <editable value="false"/>
+          <enabled value="false"/>
           <text resource-bundle="messages/PerlBundle" key="perl.vm.install.form.message"/>
         </properties>
       </component>
