@@ -1,3 +1,5 @@
+perl-blead
+perl-stable
 perl-5.29.10
 perl-5.28.2
 perl-5.28.1

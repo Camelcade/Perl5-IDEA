@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager.perlbrew;
 
+import com.ibm.icu.text.UTF16;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.InstallPerlHandler;
@@ -26,8 +27,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.List;
 
 class PerlBrewInstallPerlHandler extends InstallPerlHandler {
+  static final String PERL_BLEAD = "perl-blead";
+  static final String PERL_STABLE = "perl-stable";
+  static final List<String> PRE_DEFINED_VERSIONS = List.of(PERL_BLEAD, PERL_STABLE);
 
   static final String INSTALLED_PREFIX = "i ";
 
@@ -43,6 +48,12 @@ class PerlBrewInstallPerlHandler extends InstallPerlHandler {
 
   @Override
   protected int doCompareVersions(String a, String b) {
+    if( PRE_DEFINED_VERSIONS.contains(a)){
+      return PRE_DEFINED_VERSIONS.contains(b) ? a.compareTo(b): -1;
+    }
+    else if(PRE_DEFINED_VERSIONS.contains(b)){
+      return 1;
+    }
     int wordIndex = a.indexOf("-");
     a = wordIndex == -1 ? a : a.substring(wordIndex + 1);
     wordIndex = b.indexOf("-");

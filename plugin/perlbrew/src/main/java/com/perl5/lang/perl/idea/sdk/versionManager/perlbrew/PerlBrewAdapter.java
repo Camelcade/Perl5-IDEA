@@ -33,13 +33,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.perl5.PerlIcons.PERLBREW_ICON;
+import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPerlHandler.*;
 import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 /**
@@ -157,12 +155,15 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
     if (output == null) {
       return null;
     }
-    return output.stream()
+
+    var result = new ArrayList<String>(PRE_DEFINED_VERSIONS);
+    output.stream()
       .map(s -> s.trim().replace(".tar.bz2", ""))
       .filter(StringUtil::isNotEmpty)
       .filter(it -> !StringUtil.startsWith(it, "perl5"))
       .filter(it -> !StringUtil.contains(it, "#"))
-      .collect(Collectors.toList());
+                    .forEach(result::add);
+    return result;
   }
 
   @Override
