@@ -39,6 +39,7 @@ import static com.perl5.PerlIcons.ASDF_ICON;
 @VisibleForTesting
 public class AsdfAdapter extends PerlVersionManagerAdapter {
   static final String ASDF_VERSION = "ASDF_PERL_VERSION";
+  private static final String ASDF_PERL_DEVEL = "ASDF_PERL_DEVEL";
   static final String ASDF_EXEC = "exec";
   private static final String ASDF_INSTALL = "install";
   private static final String ASDF_PERL = "perl";
@@ -80,7 +81,8 @@ public class AsdfAdapter extends PerlVersionManagerAdapter {
 
   @Override
   protected @Nullable List<String> getInstallableDistributionsList() {
-    return parseInstallableDistributionsList(getOutput(ASDF_LIST_ALL, ASDF_PERL));
+    return parseInstallableDistributionsList(getOutput(
+      it -> it.withParameters(ASDF_LIST_ALL, ASDF_PERL).withEnvironment(ASDF_PERL_DEVEL, "true")));
   }
 
   @Override

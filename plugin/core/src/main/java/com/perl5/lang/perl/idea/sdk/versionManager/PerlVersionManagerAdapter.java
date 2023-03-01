@@ -40,6 +40,7 @@ import org.jetbrains.annotations.TestOnly;
 import javax.swing.*;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Base class for CLI adapter of version manager
@@ -125,7 +126,11 @@ public abstract class PerlVersionManagerAdapter {
   protected abstract @Nullable List<String> getInstallableDistributionsList();
 
   protected @Nullable List<String> getOutput(@NotNull List<String> parameters) {
-    return getOutput(new PerlCommandLine(getVersionManagerPath()).withParameters(parameters));
+    return getOutput(it -> it.withParameters(parameters));
+  }
+
+  protected @Nullable List<String> getOutput(@NotNull Function<? super PerlCommandLine, ? extends PerlCommandLine> commandLineProcessor) {
+    return getOutput(commandLineProcessor.apply(new PerlCommandLine(getVersionManagerPath())));
   }
 
   /**

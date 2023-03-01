@@ -180,6 +180,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
     var installedDistributions = versionManagerAdapter.getInstallableDistributionsListInTests();
     assertContains(installedDistributions, Pattern.quote(PERL_TEST_VERSION));
     assertContains(installedDistributions, Pattern.quote("5.12."));
+    assertContains(installedDistributions, Pattern.quote("RC1"));
     assertNotContains(installedDistributions, "[^\\w\\d-. ]");
   }
 
