@@ -226,4 +226,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
     PerlRealVersionManagerData<?, ?> versionManagerData = createData(vmAdapter, distributionId);
     PerlSdkType.createAndAddSdk(perlPath.get(0), vmAdapter.getHostData(), versionManagerData, sdkConsumer, project);
   }
+
+  @Override
+  public abstract @NotNull String getControlOutputForPerlVersion(@NotNull String perlVersion);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.InstallPerlHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
+import kotlin.NotImplementedError;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -77,5 +78,10 @@ class BerryBrewHandler extends PerlRealVersionManagerHandler<BerryBrewData, Berr
   @Override
   public @Nullable InstallPerlHandler createInstallHandler(@NotNull String pathToVersionManager) {
     return new BerryBrewInstallPerlHandler(pathToVersionManager, this);
+  }
+
+  @Override
+  public @NotNull String getControlOutputForPerlVersion(@NotNull String perlVersion) {
+    throw new NotImplementedError("We have no tests for this yet");
   }
 }

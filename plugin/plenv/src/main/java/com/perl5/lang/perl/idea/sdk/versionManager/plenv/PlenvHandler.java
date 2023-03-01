@@ -91,4 +91,9 @@ class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler
     }
     throw new NullPointerException();
   }
+
+  @Override
+  public @NotNull String getControlOutputForPerlVersion(@NotNull String perlVersion) {
+    return "plenv/versions/" + perlVersion + "/lib/perl5/" + perlVersion;
+  }
 }

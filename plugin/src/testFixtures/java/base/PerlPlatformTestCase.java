@@ -66,6 +66,7 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.prove.PerlSMTRunnerConsoleView;
 import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
+import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -92,6 +93,8 @@ import java.util.function.Function;
 @RunWith(Parameterized.class)
 public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   private static final int MAX_PROCESS_WAIT_TIME_SECONDS = 20;
+
+  protected static final int MAX_PROCESS_WAIT_TIME_MS = MAX_PROCESS_WAIT_TIME_SECONDS * 1000;
 
   protected static final Logger LOG = Logger.getInstance(PerlPlatformTestCase.class);
   private static final Key<CapturingProcessAdapter> ADAPTER_KEY = Key.create("process.adapter");
@@ -179,6 +182,18 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   protected @Nullable Sdk getSdk() {
     return PerlProjectManager.getSdk(getModule());
+  }
+
+  protected final @NotNull PerlSdkAdditionalData getSdkAdditionalData() {
+    return PerlSdkAdditionalData.notNullFrom(Objects.requireNonNull(getSdk()));
+  }
+
+  protected final void assumeNonSystemSdk() {
+    Assume.assumeFalse("Not applicable for system perl", getSdkAdditionalData().isSystem());
+  }
+
+  protected final void assumeLocalSdk() {
+    Assume.assumeTrue("Not applicable for remote sdk", getSdkAdditionalData().isLocal());
   }
 
   protected void runAction(@NotNull AnAction anAction, @Nullable VirtualFile virtualFile) {

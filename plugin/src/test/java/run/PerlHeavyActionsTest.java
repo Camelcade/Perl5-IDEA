@@ -23,12 +23,14 @@ import com.intellij.lang.annotation.Annotation;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.CodeInsightTestUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
+import com.intellij.util.EnvironmentUtil;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.actions.PerlDeparseFileAction;
@@ -37,21 +39,24 @@ import com.perl5.lang.perl.idea.actions.PerlRegenerateXSubsAction;
 import com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator;
 import com.perl5.lang.perl.idea.annotators.PerlCriticErrorDescriptor;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.junit.Assume;
+import org.jetbrains.plugins.terminal.TerminalProjectOptionsProvider;
+import org.jetbrains.plugins.terminal.fixture.TestShellSession;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
+
+import static com.intellij.openapi.util.io.IoTestUtil.assumeUnix;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
 @Category(Heavy.class)
@@ -156,25 +161,24 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
     PerlVersionManagerAdapter versionManagerAdapter = getVersionManagerAdapter();
 
     var installedDistributions = versionManagerAdapter.getInstalledDistributionsListInTests();
-    assertContains(installedDistributions, Pattern.quote(PerlPlatformTestCase.PERL_TEST_VERSION));
+    assertContains(installedDistributions, Pattern.quote(PERL_TEST_VERSION));
     assertNotContains(installedDistributions, "[^\\w\\d-.@_]");
   }
 
   private @NotNull PerlVersionManagerAdapter getVersionManagerAdapter() {
-    var perlSdkAdditionalData = PerlSdkAdditionalData.notNullFrom(Objects.requireNonNull(getSdk()));
-    Assume.assumeFalse("Not applicable for system perl", perlSdkAdditionalData.isSystem());
-
-    var versionManagerAdapter = perlSdkAdditionalData.getVersionManagerAdapter();
+    assumeNonSystemSdk();
+    var versionManagerAdapter = getSdkAdditionalData().getVersionManagerAdapter();
     assertNotNull("No version manager adapter for " + getSdk(), versionManagerAdapter);
     return versionManagerAdapter;
   }
+
 
   @Test
   public void testVersionManagerListInstallable() {
     PerlVersionManagerAdapter versionManagerAdapter = getVersionManagerAdapter();
 
     var installedDistributions = versionManagerAdapter.getInstallableDistributionsListInTests();
-    assertContains(installedDistributions, Pattern.quote(PerlPlatformTestCase.PERL_TEST_VERSION));
+    assertContains(installedDistributions, Pattern.quote(PERL_TEST_VERSION));
     assertContains(installedDistributions, Pattern.quote("5.12."));
     assertNotContains(installedDistributions, "[^\\w\\d-. ]");
   }
@@ -197,6 +201,32 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
       if (pattern.matcher(item).find()) {
         fail("Found item: " + item + " matching " + regex + " in collection:\n" + String.join("\n", collection));
       }
+    }
+  }
+
+  @Test
+  public void testUnixTerminalConfiguration() {
+    assumeUnix();
+    assumeLocalSdk();
+    var terminalProjectOptionsProvider = TerminalProjectOptionsProvider.getInstance(getProject());
+    assertNotNull("Terminal project options provider is null!", terminalProjectOptionsProvider);
+    var currentShellPath = terminalProjectOptionsProvider.getShellPath();
+    try {
+      var shellName = StringUtil.notNullize(EnvironmentUtil.getValue(EnvironmentUtil.SHELL_VARIABLE_NAME), currentShellPath);
+      LOG.debug("Using shell: " + shellName);
+      terminalProjectOptionsProvider.setShellPath(shellName + " -l");
+
+      var session = new TestShellSession(getProject(), getTestRootDisposable());
+      session.executeCommand("perl -V");
+      var controlLine = getSdkAdditionalData().getVersionManagerHandler().getControlOutputForPerlVersion(PERL_TEST_VERSION);
+      assertNotNull(controlLine);
+      session.awaitBufferCondition(() -> session.getScreenLines().contains(controlLine), MAX_PROCESS_WAIT_TIME_MS);
+    }
+    catch (IOException | ExecutionException e) {
+      fail(e.getMessage());
+    }
+    finally {
+      terminalProjectOptionsProvider.setShellPath(currentShellPath);
     }
   }
 }

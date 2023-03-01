@@ -30,6 +30,7 @@ import org.jdom.Element;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.List;
 import java.util.Objects;
@@ -130,4 +131,7 @@ public abstract class PerlVersionManagerHandler<Data extends PerlVersionManagerD
   public static @NotNull PerlVersionManagerHandler<?, ?> getDefaultHandler() {
     return Objects.requireNonNull(EP.findSingle("system"), "System perl handler must always present");
   }
+
+  @TestOnly
+  public abstract @Nullable String getControlOutputForPerlVersion(@NotNull String perlVersion);
 }

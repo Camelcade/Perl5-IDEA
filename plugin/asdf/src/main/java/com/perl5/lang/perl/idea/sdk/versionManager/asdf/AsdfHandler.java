@@ -91,4 +91,9 @@ class AsdfHandler extends PerlRealVersionManagerHandler<AsdfData, AsdfHandler> {
     }
     throw new NullPointerException();
   }
+
+  @Override
+  public @NotNull String getControlOutputForPerlVersion(@NotNull String perlVersion) {
+    return "asdf/installs/perl/" + perlVersion + "/lib/" + perlVersion;
+  }
 }

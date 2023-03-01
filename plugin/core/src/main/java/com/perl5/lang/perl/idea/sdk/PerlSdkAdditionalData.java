@@ -75,6 +75,10 @@ public class PerlSdkAdditionalData implements SaveAwareSdkAdditionalData {
     return getVersionManagerData().isSystem();
   }
 
+  public boolean isLocal() {
+    return getHostData().getHandler().isLocal();
+  }
+
   @Contract("null -> null")
   public static @Nullable PerlSdkAdditionalData from(@Nullable Sdk sdk) {
     return sdk == null ? null : ObjectUtils.tryCast(sdk.getSdkAdditionalData(), PerlSdkAdditionalData.class);
