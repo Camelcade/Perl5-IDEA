@@ -13,6 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+source "$HOME/.asdf/asdf.sh"
 asdf shell perl $PERL_VERSION_MANAGER_DISTRIBUTION_ID
 

@@ -13,6 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-
+export PATH="$HOME/.plenv/bin:$PATH"
+eval "$(plenv init -)"
 plenv shell $PERL_VERSION_MANAGER_DISTRIBUTION_ID
 
