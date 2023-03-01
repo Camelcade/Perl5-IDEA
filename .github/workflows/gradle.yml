@@ -95,6 +95,7 @@ jobs:
           ~/.asdf/bin/asdf install perl ${{ env.PERL_TEST_VERSION }} --noman -j 8 || true
           ~/.asdf/bin/asdf exec cpan install App::cpanminus
           ~/.asdf/bin/asdf exec cpanm --notest  ${{ env.TEST_PERL_MODULES }}
+          ~/.asdf/bin/asdf reshim perl
       - name: Cache SonarCloud packages
         uses: actions/cache@v3
         with:
