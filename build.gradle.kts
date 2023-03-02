@@ -1,5 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.intellij.tasks.InstrumentCodeTask
 import org.kt3k.gradle.plugin.coveralls.CoverallsTask
 
 /*
@@ -135,6 +136,7 @@ allprojects {
 
       configure<JacocoTaskExtension> {
         isEnabled = withCoverage.get()
+        isIncludeNoLocationClasses = true
         excludes = listOf("jdk.internal.*")
       }
 
@@ -219,7 +221,7 @@ tasks {
       it.sourceSets.main.map { sourceSet -> sourceSet.allSource.srcDirs }
     })
     classDirectories.setFrom(allprojects.map {
-      it.sourceSets.main.map { sourceSet -> sourceSet.output }
+      it.tasks.named<InstrumentCodeTask>("instrumentCode").map { task -> task.outputDir }
     })
 
     reports {
