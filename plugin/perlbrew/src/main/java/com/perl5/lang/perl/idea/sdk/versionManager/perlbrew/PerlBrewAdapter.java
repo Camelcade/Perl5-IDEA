@@ -34,10 +34,9 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.perl5.PerlIcons.PERLBREW_ICON;
-import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPerlHandler.*;
+import static com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPerlHandler.PRE_DEFINED_VERSIONS;
 import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 /**
