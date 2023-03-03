@@ -48,13 +48,15 @@ dependencies {
 
   listOf(
     ":plugin:asdf",
+    ":plugin:berrybrew",
     ":plugin:core",
     ":plugin:docker",
+    ":plugin:idea",
+    ":plugin:perlInstall",
     ":plugin:perlbrew",
     ":plugin:plenv",
   ).forEach {
     testFixturesCompileOnly(project(it))
-    testFixturesRuntimeOnly(project(it, "instrumentedJar"))
   }
 }
 

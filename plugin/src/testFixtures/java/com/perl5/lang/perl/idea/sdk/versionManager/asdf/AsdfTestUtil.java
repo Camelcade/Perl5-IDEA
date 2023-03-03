@@ -26,4 +26,8 @@ public final class AsdfTestUtil {
   public static @NotNull PerlRealVersionManagerHandler<?, ?> getVersionManagerHandler() {
     return AsdfHandler.getInstance();
   }
+
+  public static @NotNull Class<?> getInstrumentationTestClass() {
+    return AsdfHandler.class;
+  }
 }

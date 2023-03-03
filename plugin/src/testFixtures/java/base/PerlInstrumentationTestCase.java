@@ -14,20 +14,28 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.host.docker;
+package base;
 
-import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Test;
 
-public final class PerlDockerTestUtil {
-  private PerlDockerTestUtil() {
+import java.util.stream.Stream;
+
+public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
+
+  private final Class<?> myClass;
+
+
+  protected PerlInstrumentationTestCase(@NotNull Class<?> aClass) {
+    myClass = aClass;
   }
 
-  public static @NotNull PerlHostData<?, ?> createHostData(@NotNull String imageName) {
-    return PerlDockerHandler.getInstance().createData().withImageName(imageName);
-  }
-
-  public static @NotNull Class<?> getInstrumentationTestClass() {
-    return PerlDockerHandler.class;
+  @SuppressWarnings("JUnitMixedFramework")
+  @Test
+  public void testDependencyInstrumentation() {
+    assertTrue(
+      "Class " + myClass + " does not look instrumented",
+      Stream.of(myClass.getDeclaredMethods()).anyMatch(m -> m.getName().startsWith("$$$reportNull$$$")));
   }
 }

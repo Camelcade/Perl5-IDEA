@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,11 +18,12 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
+import org.jetbrains.annotations.NotNull;
 
 
 public class MasonParserUtil {
 
-  public static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken, IElementType blockToken) {
+  public static boolean parsePerlBlock(@NotNull PsiBuilder b, int l, @NotNull IElementType closeToken, @NotNull IElementType blockToken) {
     PsiBuilder.Marker abstractBlockMarker = b.mark();
     b.advanceLexer();
 
@@ -36,21 +37,21 @@ public class MasonParserUtil {
     return r;
   }
 
-  public static boolean endOrRecover(PsiBuilder b, IElementType toElement) {
+  public static boolean endOrRecover(@NotNull PsiBuilder b, @NotNull IElementType toElement) {
     return endOrRecover(b, toElement, "Error");
   }
 
-  public static boolean endOrRecover(PsiBuilder b, IElementType toElement, String errorMessage) {
+  public static boolean endOrRecover(@NotNull PsiBuilder b, @NotNull IElementType toElement, @NotNull String errorMessage) {
     return PerlParserUtil.consumeToken(b, toElement) || recoverToGreedy(b, toElement, errorMessage);
   }
 
-  public static boolean recoverToGreedy(PsiBuilder b, IElementType toElement, String errorMessage) {
+  public static boolean recoverToGreedy(@NotNull PsiBuilder b, @NotNull IElementType toElement, @NotNull String errorMessage) {
     boolean r = recoverTo(b, toElement, errorMessage);
     r = r || PerlParserUtil.consumeToken(b, toElement);
     return r;
   }
 
-  public static boolean recoverTo(PsiBuilder b, IElementType toElement, String errorMessage) {
+  public static boolean recoverTo(@NotNull PsiBuilder b, @NotNull IElementType toElement, @NotNull String errorMessage) {
     // recover bad code
     PsiBuilder.Marker errorMarker = b.mark();
     while (!b.eof() && b.getTokenType() != toElement) {
