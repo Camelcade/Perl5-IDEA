@@ -180,10 +180,6 @@ allprojects {
     }
   }
 
-  coveralls {
-    sourceDirs.addAll(sourceSets.main.get().allSource.sourceDirectories.map { it.absolutePath })
-  }
-
   if (pluginProjectsNames.contains(name)) {
     tasks {
       patchPluginXml {
@@ -267,6 +263,9 @@ sonarqube {
 
 coveralls {
   jacocoReportPath = coverageReportFile
+  allprojects.map {
+    sourceDirs.addAll(it.sourceSets.main.get().allSource.sourceDirectories.map { it.absolutePath })
+  }
 }
 
 intellij {
