@@ -14,20 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.host.docker;
+package com.perl5.lang.perl.idea.sdk.versionManager.berrybrew;
 
-import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.TestOnly;
 
-public final class PerlDockerTestUtil {
-  private PerlDockerTestUtil() {
-  }
-
-  public static @NotNull PerlHostData<?, ?> createHostData(@NotNull String imageName) {
-    return PerlDockerHandler.getInstance().createData().withImageName(imageName);
+@TestOnly
+public final class BerryBrewTestUtil {
+  private BerryBrewTestUtil() {
   }
 
   public static @NotNull Class<?> getInstrumentationTestClass() {
-    return PerlDockerHandler.class;
+    return BerryBrewHandler.class;
   }
 }
