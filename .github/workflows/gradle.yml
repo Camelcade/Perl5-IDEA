@@ -163,7 +163,7 @@ jobs:
             ./tt2/build/jacoco/test.exec
       - name: Upload coveralls data
         run: |
-          ./gradlew coveralls
+          ./gradlew :coveralls
       - name: SonarCube analysis
         run: |
           ./gradlew sonarqube --info
