@@ -1,17 +1,16 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Run Plugin With PyCharm" type="GradleRunConfiguration" factoryName="Gradle" folderName="Other IDEs">
-    <log_file alias="system" path="$PROJECT_DIR$/build/idea-sandbox/system/log/idea.log" />
+  <configuration default="false" name="Test Plugin (heavy tests)" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="-PrunWith=PY" />
+      <option name="scriptParameters" value="-PheavyTests=1" />
       <option name="taskDescriptions">
         <list />
       </option>
       <option name="taskNames">
         <list>
-          <option value=":runIde" />
+          <option value="test" />
         </list>
       </option>
       <option name="vmOptions" value="" />

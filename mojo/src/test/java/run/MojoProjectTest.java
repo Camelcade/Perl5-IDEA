@@ -18,7 +18,6 @@ package run;
 
 import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
-import categories.Heavy;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.TestDialogManager;
 import com.intellij.testFramework.PlatformTestUtil;
@@ -33,12 +32,10 @@ import com.perl5.lang.mojolicious.model.MojoProject;
 import com.perl5.lang.mojolicious.model.MojoProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import java.util.List;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
-@Category(Heavy.class)
 public class MojoProjectTest extends PerlPlatformTestCase {
   private static final Logger LOG = Logger.getInstance(MojoProjectTest.class);
 

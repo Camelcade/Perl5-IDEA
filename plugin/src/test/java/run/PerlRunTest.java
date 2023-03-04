@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package run;
 
 import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
-import categories.Heavy;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.CapturingProcessAdapter;
 import com.intellij.execution.runners.ExecutionEnvironment;
@@ -34,12 +33,10 @@ import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import java.util.function.BiFunction;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
-@Category(Heavy.class)
 public class PerlRunTest extends PerlPlatformTestCase {
   public PerlRunTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
     super(interpreterConfigurator);

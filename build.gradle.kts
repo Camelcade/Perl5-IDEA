@@ -124,8 +124,20 @@ allprojects {
           include("**/" + properties("runtest").get() + ".class")
         }
 
-        if (!project.hasProperty("includeHeavy")) {
+        if (project.hasProperty("integrationTests")) {
+          excludeCategories("categories.Light")
           excludeCategories("categories.Heavy")
+        }
+        else if (project.hasProperty("heavyTests")) {
+          excludeCategories("categories.Light")
+          excludeCategories("categories.Integration")
+        }
+        else if (project.hasProperty("lightTests")) {
+          excludeCategories("categories.Heavy")
+          excludeCategories("categories.Integration")
+        }
+        else if (!project.hasProperty("allTests")) {
+          excludeCategories("categories.Integration")
         }
       }
 

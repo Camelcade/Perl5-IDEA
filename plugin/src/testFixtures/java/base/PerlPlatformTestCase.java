@@ -16,6 +16,7 @@
 
 package base;
 
+import categories.Integration;
 import com.intellij.execution.*;
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.actions.ConfigurationFromContext;
@@ -75,6 +76,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.concurrency.Promise;
 import org.junit.Assume;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 
@@ -90,6 +92,7 @@ import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
 
+@Category(Integration.class)
 @RunWith(Parameterized.class)
 public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   private static final int MAX_PROCESS_WAIT_TIME_SECONDS = 20;

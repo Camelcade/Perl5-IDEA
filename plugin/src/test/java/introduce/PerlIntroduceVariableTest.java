@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,12 +18,16 @@ package introduce;
 
 
 import base.PerlLightTestCase;
+import categories.Heavy;
 import com.intellij.application.options.CodeStyle;
 import com.perl5.lang.perl.PerlLanguage;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.WRAP_AS_NEEDED;
+
+@Category(Heavy.class)
 public class PerlIntroduceVariableTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {

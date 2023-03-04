@@ -16,6 +16,7 @@
 
 package base;
 
+import categories.Light;
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.codeInsight.actions.MultiCaretCodeInsightAction;
 import com.intellij.codeInsight.completion.CompletionType;
@@ -210,6 +211,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Assert;
 import org.junit.Assume;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
@@ -226,6 +228,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+@Category(Light.class)
 @RunWith(JUnit4.class)
 public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected static final String TEST_RESOURCES_ROOT = "src/test/resources";

@@ -19,7 +19,6 @@ package run;
 import base.PerlInterpreterConfigurator;
 import base.PerlLightTestCaseBase;
 import base.PerlPlatformTestCase;
-import categories.Heavy;
 import com.intellij.coverage.CoverageDataManager;
 import com.intellij.coverage.CoverageExecutor;
 import com.intellij.coverage.CoverageSuite;
@@ -43,7 +42,6 @@ import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -52,7 +50,6 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
-@Category(Heavy.class)
 public class PerlCoverageTest extends PerlPlatformTestCase {
   public PerlCoverageTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
     super(interpreterConfigurator);

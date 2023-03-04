@@ -18,7 +18,6 @@ package run;
 
 import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
-import categories.Heavy;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.configurations.RunProfile;
@@ -48,7 +47,6 @@ import com.pty4j.util.Pair;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -58,7 +56,6 @@ import java.util.List;
 import java.util.function.Consumer;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
-@Category(Heavy.class)
 public class PerlProfilerTest extends PerlPlatformTestCase {
   private Element myConfigurations;
 

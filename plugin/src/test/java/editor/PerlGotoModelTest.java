@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,20 @@ package editor;
 
 
 import base.PerlLightTestCase;
+import categories.Heavy;
 import com.intellij.ide.util.gotoByName.FilteringGotoByModel;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.io.File;
 
 /**
  * To implement module testing, we need a non-light test case
  */
+@Category(Heavy.class)
 public class PerlGotoModelTest extends PerlLightTestCase {
 
   @Override

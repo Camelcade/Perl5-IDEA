@@ -16,13 +16,16 @@
 
 package unit.perl.reparse;
 
+import categories.Heavy;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
 
+@Category(Heavy.class)
 public class PerlQuoteLikeReparseTest extends PerlReparseMultiTestCase {
 
   @Override

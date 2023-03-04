@@ -18,7 +18,6 @@ package run;
 
 import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
-import categories.Heavy;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
@@ -47,7 +46,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.terminal.TerminalProjectOptionsProvider;
 import org.jetbrains.plugins.terminal.fixture.TestShellSession;
 import org.junit.Test;
-import org.junit.experimental.categories.Category;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -59,7 +57,6 @@ import java.util.regex.Pattern;
 import static com.intellij.openapi.util.io.IoTestUtil.assumeUnix;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
-@Category(Heavy.class)
 public class PerlHeavyActionsTest extends PerlPlatformTestCase {
   public PerlHeavyActionsTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
     super(interpreterConfigurator);
