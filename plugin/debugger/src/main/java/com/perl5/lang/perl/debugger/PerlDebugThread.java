@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,7 @@ import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.TimeoutUtil;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.impl.XDebugSessionImpl;
@@ -63,6 +64,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static com.perl5.PerlBundle.PATH_TO_BUNDLE;
@@ -83,7 +85,7 @@ public class PerlDebugThread extends Thread {
   private ServerSocket myServerSocket;
   private OutputStream myOutputStream;
   private InputStream myInputStream;
-  private volatile boolean myStop = false;
+  private AtomicBoolean myStop = new AtomicBoolean(false);
   private final List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<>();
   private boolean isReady = false;
   private int transactionId = 0;
@@ -142,16 +144,16 @@ public class PerlDebugThread extends Thread {
     if (myPerlDebugOptions.getPerlRole().equals(PerlDebugOptions.ROLE_SERVER)) {
       String hostToConnect = myPerlDebugOptions.getHostToConnect();
       debugName = hostToConnect + ":" + debugPort;
-      while (!myStop && !PerlDebugProfileStateBase.isReadyForConnection(myExecutionResult.getProcessHandler())) {
+      while (!myStop.get() && !PerlDebugProfileStateBase.isReadyForConnection(myExecutionResult.getProcessHandler())) {
         print("perl.debug.waiting.start");
-        Thread.sleep(1000);
+        TimeoutUtil.sleep(1000);
       }
 
-      if (myStop) {
+      if (myStop.get()) {
         return;
       }
       print("perl.debug.connecting.to", debugName);
-      for (int i = 1; i < 11 && !myStop; i++) {
+      for (int i = 1; i < 11 && !myStop.get(); i++) {
         try {
           mySocket = new Socket(hostToConnect, debugPort);
           break;
@@ -162,7 +164,7 @@ public class PerlDebugThread extends Thread {
           }
           LOG.info("Connection error: " + e.getMessage());
           print("perl.debug.attempting.again");
-          Thread.sleep(1000);
+          TimeoutUtil.sleep(1000);
         }
       }
     }
@@ -181,7 +183,8 @@ public class PerlDebugThread extends Thread {
   private boolean doRun() throws InterruptedException {
     try {
       prepareAndConnect();
-      if (myStop) {
+      if (myStop.get()) {
+        LOG.debug("Can't start debugger event loop because of stop flag");
         return false;
       }
       print("perl.debug.connected");
@@ -191,7 +194,7 @@ public class PerlDebugThread extends Thread {
 
       ByteArrayList response = new ByteArrayList();
 
-      while (!myStop) {
+      while (!myStop.get()) {
         response.clear();
 
         LOG.debug("Reading data from the debugger");
@@ -203,6 +206,7 @@ public class PerlDebugThread extends Thread {
             break;
           }
           else if (dataByte == -1) {
+            LOG.debug("Stop debugger event loop because dataByte is -1");
             return true;
           }
           else {
@@ -212,6 +216,7 @@ public class PerlDebugThread extends Thread {
 
         processResponse(response);
       }
+      LOG.debug("Reading loop was stopped by myStop=", myStop);
     }
     catch (IOException | ExecutionException e) {
       LOG.warn(e);
@@ -236,6 +241,7 @@ public class PerlDebugThread extends Thread {
       Thread.currentThread().interrupt();
     }
     finally {
+      LOG.debug("Stopping process from run");
       setStop();
     }
   }
@@ -254,12 +260,13 @@ public class PerlDebugThread extends Thread {
             setUpDebugger();
           }
           else {
+            var errorMessage = PerlBundle.message(
+              "perl.debugger.incorrect.version.message", DEBUG_PACKAGE, MODULE_VERSION_PREFIX,
+              ((PerlDebuggingEventReady)newEvent).version);
             Notification notification = new Notification(
               PerlDebugProcess.PERL_DEBUGGER_NOTIFICATION_GROUP_ID,
               PerlBundle.message("perl.debugger.incorrect.version.title", DEBUG_PACKAGE),
-              PerlBundle.message(
-                "perl.debugger.incorrect.version.message", DEBUG_PACKAGE, MODULE_VERSION_PREFIX,
-                ((PerlDebuggingEventReady)newEvent).version),
+              errorMessage,
               NotificationType.ERROR
             );
             Project project = myDebugProfileState.getEnvironment().getProject();
@@ -272,6 +279,7 @@ public class PerlDebugThread extends Thread {
                 Collections.singletonList(DEBUG_PACKAGE),
                 notification);
             }
+            LOG.warn(errorMessage);
             setStop();
           }
         }
@@ -339,10 +347,9 @@ public class PerlDebugThread extends Thread {
   }
 
   public void setStop() {
-    if (myStop) {
+    if (!myStop.compareAndSet(false, true)) {
       return;
     }
-    myStop = true;
     closeStreamsAndSockets();
     myExecutor.shutdownNow();
     StopProcessAction.stopProcess(myExecutionResult.getProcessHandler());
