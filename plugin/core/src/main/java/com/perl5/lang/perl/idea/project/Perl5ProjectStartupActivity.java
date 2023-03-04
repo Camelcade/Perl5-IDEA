@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,9 @@ public class Perl5ProjectStartupActivity implements StartupActivity {
         Notifications.Bus.notify(notification);
       });
     }
-    StartupManager.getInstance(project).runAfterOpened(() -> scheduleNamesUpdateWithReparse(project));
+    if( !ApplicationManager.getApplication().isUnitTestMode()){
+      StartupManager.getInstance(project).runAfterOpened(() -> scheduleNamesUpdateWithReparse(project));
+    }
   }
 
   private static void scheduleNamesUpdateWithReparse(@NotNull Project project) {
