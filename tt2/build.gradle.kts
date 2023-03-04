@@ -55,17 +55,15 @@ tasks {
     purgeOldFiles.set(true)
   }
 
-  val generateTT2Lexer = register<GenerateLexerTask>("generateTT2Lexer") {
-    sourceFile.set(file("grammar/TemplateToolkit.flex"))
-    targetDir.set("src/main/gen/com/perl5/lang/tt2/lexer/")
-    targetClass.set("TemplateToolkitLexerGenerated")
-    skeleton.set(rootProject.file(properties("lexer_skeleton").get()))
-    purgeOldFiles.set(true)
+  rootProject.tasks.findByName("generateLexers")?.dependsOn(
+    register<GenerateLexerTask>("generateTT2Lexer") {
+      sourceFile.set(file("grammar/TemplateToolkit.flex"))
+      targetDir.set("src/main/gen/com/perl5/lang/tt2/lexer/")
+      targetClass.set("TemplateToolkitLexerGenerated")
+      skeleton.set(rootProject.file(properties("lexer_skeleton").get()))
+      purgeOldFiles.set(true)
 
-    dependsOn(generateTT2Parser)
-  }
-
-  withType<JavaCompile> {
-    dependsOn(generateTT2Lexer)
-  }
+      dependsOn(generateTT2Parser)
+    }
+  )
 }

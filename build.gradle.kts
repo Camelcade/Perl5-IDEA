@@ -245,6 +245,9 @@ tasks {
     dependsOn(jacocoRootReport)
   }
 
+  register("generateLexers") { }
+
+
   runIde {
     project.properties.forEach { (key, value) ->
       if (key.startsWith("pass.")) {

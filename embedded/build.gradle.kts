@@ -45,15 +45,13 @@ dependencies {
 }
 
 tasks {
-  val generateEmbeddedPerlLexer = register<GenerateLexerTask>("generateEmbeddedPerlLexer") {
-    sourceFile.set(file("grammar/EmbeddedPerl.flex"))
-    targetDir.set("src/main/gen/com/perl5/lang/embedded/lexer/")
-    targetClass.set("EmbeddedPerlLexer")
-    skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
-    purgeOldFiles.set(true)
-  }
-
-  withType<JavaCompile> {
-    dependsOn(generateEmbeddedPerlLexer)
-  }
+  rootProject.tasks.findByName("generateLexers")?.dependsOn(
+    register<GenerateLexerTask>("generateEmbeddedPerlLexer") {
+      sourceFile.set(file("grammar/EmbeddedPerl.flex"))
+      targetDir.set("src/main/gen/com/perl5/lang/embedded/lexer/")
+      targetClass.set("EmbeddedPerlLexer")
+      skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
+      purgeOldFiles.set(true)
+    }
+  )
 }

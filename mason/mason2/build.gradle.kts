@@ -47,15 +47,13 @@ intellij {
 }
 
 tasks {
-  val generateMason2Lexer = register<GenerateLexerTask>("generateMason2Lexer") {
-    sourceFile.set(file("grammar/Mason2.flex"))
-    targetDir.set("src/main/gen/com/perl5/lang/mason2/lexer/")
-    targetClass.set("Mason2TemplatingLexer")
-    skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
-    purgeOldFiles.set(true)
-  }
-
-  withType<JavaCompile> {
-    dependsOn(generateMason2Lexer)
-  }
+  rootProject.tasks.findByName("generateLexers")?.dependsOn(
+    register<GenerateLexerTask>("generateMason2Lexer") {
+      sourceFile.set(file("grammar/Mason2.flex"))
+      targetDir.set("src/main/gen/com/perl5/lang/mason2/lexer/")
+      targetClass.set("Mason2TemplatingLexer")
+      skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
+      purgeOldFiles.set(true)
+    }
+  )
 }

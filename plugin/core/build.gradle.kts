@@ -45,21 +45,22 @@ tasks {
     pathToPsiRoot.set("/com/perl5/lang/pod/psi")
   }
 
-  val generatePerlLexer = register<GenerateLexerTask>("generatePerlLexer") {
-    sourceFile.set(file("grammar/Perl.flex"))
-    targetDir.set("src/main/gen/com/perl5/lang/perl/lexer/")
-    targetClass.set("PerlLexer")
+  rootProject.tasks.findByName("generateLexers")?.dependsOn(
+    register<GenerateLexerTask>("generatePerlLexer") {
+      sourceFile.set(file("grammar/Perl.flex"))
+      targetDir.set("src/main/gen/com/perl5/lang/perl/lexer/")
+      targetClass.set("PerlLexer")
 
-    dependsOn(generatePerl5Parser)
-  }
+      dependsOn(generatePerl5Parser)
+    },
+    register<GenerateLexerTask>("generatePodLexer") {
+      sourceFile.set(file("grammar/Pod.flex"))
+      targetDir.set("src/main/gen/com/perl5/lang/pod/lexer/")
+      targetClass.set("PodLexerGenerated")
 
-  val generatePodLexer = register<GenerateLexerTask>("generatePodLexer") {
-    sourceFile.set(file("grammar/Pod.flex"))
-    targetDir.set("src/main/gen/com/perl5/lang/pod/lexer/")
-    targetClass.set("PodLexerGenerated")
-
-    dependsOn(generatePodParser)
-  }
+      dependsOn(generatePodParser)
+    }
+  )
 
   withType<GenerateLexerTask> {
     skeleton.set(rootProject.file(properties("lexer_skeleton").get()))
@@ -69,9 +70,5 @@ tasks {
   withType<GenerateParserTask> {
     targetRoot.set(genRoot.canonicalPath)
     purgeOldFiles.set(true)
-  }
-
-  withType<JavaCompile> {
-    dependsOn(generatePerlLexer, generatePodLexer)
   }
 }

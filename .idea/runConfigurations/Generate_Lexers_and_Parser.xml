@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Generate Pod parser" type="GradleRunConfiguration" factoryName="Gradle" folderName="Misc" singleton="true">
+  <configuration default="false" name="Generate Lexers and Parser" type="GradleRunConfiguration" factoryName="Gradle" folderName="Misc" singleton="true">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
@@ -10,11 +10,15 @@
       </option>
       <option name="taskNames">
         <list>
-          <option value="generatePodParser" />
+          <option value="generateLexers" />
         </list>
       </option>
       <option name="vmOptions" value="" />
     </ExternalSystemSettings>
-    <method />
+    <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+    <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+    <DebugAllEnabled>false</DebugAllEnabled>
+    <ForceTestExec>false</ForceTestExec>
+    <method v="2" />
   </configuration>
 </component>

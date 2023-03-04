@@ -47,15 +47,13 @@ intellij {
 }
 
 tasks {
-  val generateHTMLMasonLexer = register<GenerateLexerTask>("generateHTMLMasonLexer") {
-    sourceFile.set(file("grammar/HTMLMason.flex"))
-    targetDir.set("src/main/gen/com/perl5/lang/htmlmason/lexer/")
-    targetClass.set("HTMLMasonLexer")
-    skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
-    purgeOldFiles.set(true)
-  }
-
-  withType<JavaCompile> {
-    dependsOn(generateHTMLMasonLexer)
-  }
+  rootProject.tasks.findByName("generateLexers")?.dependsOn(
+    register<GenerateLexerTask>("generateHTMLMasonLexer") {
+      sourceFile.set(file("grammar/HTMLMason.flex"))
+      targetDir.set("src/main/gen/com/perl5/lang/htmlmason/lexer/")
+      targetClass.set("HTMLMasonLexer")
+      skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
+      purgeOldFiles.set(true)
+    }
+  )
 }
