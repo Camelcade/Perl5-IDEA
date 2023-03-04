@@ -1,0 +1,52 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: Project Validation
+
+on:
+  push:
+    branches: [ "master", "hurricup/complex-workflows" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build project
+    uses: ./.github/workflows/_build_project.yml
+    secrets: inherit
+  codeql:
+    needs: build
+    name: CodeQL
+    uses: ./.github/workflows/_codeql.yml
+    secrets: inherit
+  qodana:
+    needs: build
+    name: Qodana
+    uses: ./.github/workflows/_qodana.yml
+    secrets: inherit
+  light-tests:
+    needs: build
+    name: Tests
+    uses: ./.github/workflows/_light_tests.yml
+    secrets: inherit
+  heavy-tests:
+    needs: build
+    name: Tests
+    uses: ./.github/workflows/_heavy_tests.yml
+    secrets: inherit
+  integration-tests:
+    needs: build
+    name: Tests
+    uses: ./.github/workflows/_integration_tests.yml
+    secrets: inherit
+  plugins:
+    needs: [ light-tests, heavy-tests, integration-tests ]
+    name: Plugins
+    uses: ./.github/workflows/_build_plugins.yml
+    secrets: inherit
+  coverage:
+    needs: [ light-tests, heavy-tests, integration-tests ]
+    name: Coverage
+    uses: ./.github/workflows/_coverage.yml
+    secrets: inherit

@@ -1,0 +1,37 @@
+# Re-usable workflow for building project
+name: "Build project"
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      ORG_GRADLE_PROJECT_downloadIdeaSources: false
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+      CI: GitHub
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'java' ]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 17
+
+      - name: Execute Gradle build
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: false
+          arguments: jar --console plain

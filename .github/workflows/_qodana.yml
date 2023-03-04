@@ -1,33 +1,36 @@
+# Re-usable workflow for project analysis with qodana
 name: Qodana
 
 on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
-  workflow_dispatch:
-    branches: [ "master" ]
+  workflow_call:
 
 jobs:
-  qodana:
+  analyze:
+    name: Analyze
     runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
+
       - name: Login to Jetbrains Space
         uses: docker/login-action@v2
         with:
           registry: registry.jetbrains.team
-          username: Alexey.Evstigneev
+          username: Alexandr.Evstigneev
           password: ${{ secrets.SPACE_DOCKER_PASSWORD }}
+
       - run: docker pull registry.jetbrains.team/p/sa/containers/qodana-jvm:231.7617.13
+
       - name: 'Qodana Scan'
         uses: JetBrains/qodana-action@v2022.3.4
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
         with:
           args: --baseline,.qodana/qodana.sarif.json
+
       - uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: ${{ runner.temp }}/qodana/results/qodana.sarif.json

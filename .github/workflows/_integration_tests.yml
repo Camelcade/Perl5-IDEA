@@ -1,0 +1,110 @@
+# re-usable workflow to run integration tests
+name: Integration Tests
+
+on:
+  workflow_call:
+
+jobs:
+  build-plugins:
+    name: Integration
+    runs-on: ubuntu-latest
+    env:
+      ORG_GRADLE_PROJECT_downloadIdeaSources: false
+      CI: GitHub
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+      WITH_COVERAGE: true
+      PERL_TEST_VERSION: 5.36.0
+      TEST_PERL_MODULES: Mojolicious Devel::Camelcadedb Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic B::Debug Types::Serialiser
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 17
+
+      - name: Cache perlbrew
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-perlbrew
+          cache-version: 7
+        with:
+          path: |
+            ~/perl5
+            ~/.perlbrew
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-v${{ env.cache-version }}
+
+      - name: Set up perlbrew
+        run: |
+          \curl -L https://install.perlbrew.pl | bash
+          source ~/perl5/perlbrew/etc/bashrc
+          perlbrew install --verbose perl-${{ env.PERL_TEST_VERSION }} --notest --noman || true
+          perlbrew clean
+          source ~/perl5/perlbrew/etc/bashrc
+          perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }} cpan App::cpanminus
+          perlbrew lib create perl-${{ env.PERL_TEST_VERSION }}@plugin_test || true
+          perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }}@plugin_test cpanm --notest ${{ env.TEST_PERL_MODULES }}
+
+      - name: Cache plenv
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-plenv
+          cache-version: 0
+        with:
+          path: |
+            ~/.plenv
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-v${{ env.cache-version }}
+
+      - name: Set up plenv
+        env:
+          PLENV_VERSION: ${{ env.PERL_TEST_VERSION }}
+        run: |
+          git clone --depth 1 https://github.com/tokuhirom/plenv.git ~/.plenv || git -C $(realpath ~/.plenv) pull
+          git clone --depth 1 https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/ || git -C $(realpath ~/.plenv/plugins/perl-build) pull
+          ~/.plenv/bin/plenv install ${{ env.PERL_TEST_VERSION }} --noman -j 8 || true
+          ~/.plenv/bin/plenv install-cpanm
+          ~/.plenv/bin/plenv exec cpanm --notest ${{ env.TEST_PERL_MODULES }}
+
+      - name: Cache asdf
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-asdf
+          cache-version: 0
+        with:
+          path: |
+            ~/.asdf
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-v${{ env.cache-version }}
+
+      - name: Set up asdf
+        env:
+          ASDF_PERL_VERSION: ${{ env.PERL_TEST_VERSION }}
+        run: |
+          git clone --depth 1 https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.2 && ~/.asdf/bin/asdf plugin add perl || ~/.asdf/bin/asdf update          
+          ~/.asdf/bin/asdf install perl ${{ env.PERL_TEST_VERSION }} --noman -j 8 || true
+          ~/.asdf/bin/asdf exec cpan install App::cpanminus
+          ~/.asdf/bin/asdf exec cpanm --notest  ${{ env.TEST_PERL_MODULES }} 
+          ~/.asdf/bin/asdf reshim perl
+
+      - name: Run Tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+          arguments: test -PintegrationTests=1 --console plain
+
+      - name: Upload Tests Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: integration-test-results
+          path: |
+            **/build/test-results/*
+            **/build/reports/tests/*
+
+      - name: Upload Coverage Data
+        uses: actions/upload-artifact@v3
+        with:
+          name: integration-tests-coverage
+          path: |
+            **/jacoco/*.exec

@@ -222,6 +222,8 @@ tasks {
       it.tasks.named<JacocoReport>("jacocoTestReport").map { task -> task.executionData }
     })
 
+    executionData(File("coverage").walkTopDown().filter { it.extension == "exec" }.toList())
+
     additionalSourceDirs.setFrom(allprojects.map {
       it.sourceSets.main.map { sourceSet -> sourceSet.allSource.srcDirs }
     })

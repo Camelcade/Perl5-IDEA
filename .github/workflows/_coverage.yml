@@ -1,0 +1,68 @@
+# re-usable workflow to merge and process coverage
+name: Coverage
+
+on:
+  workflow_call:
+
+jobs:
+  build-plugins:
+    name: Analysis
+    runs-on: ubuntu-latest
+    env:
+      ORG_GRADLE_PROJECT_downloadIdeaSources: false
+      CI: GitHub
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+      WITH_COVERAGE: true
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 17
+
+      - uses: actions/download-artifact@v3
+        name: Download Light Tests Coverage
+        with:
+          name: light-tests-coverage
+          path: ./coverage/light
+
+      - uses: actions/download-artifact@v3
+        name: Download Heavy Tests Coverage
+        with:
+          name: heavy-tests-coverage
+          path: ./coverage/heavy
+
+      - uses: actions/download-artifact@v3
+        name: Download Integration Tests Coverage
+        with:
+          name: integration-tests-coverage
+          path: ./coverage/integration
+
+      - name: Build Jar
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+          arguments: jar
+
+      - name: Aggregate Coverage
+        run: ./gradlew jacocoRootReport --console plain
+
+      - name: Upload Aggregated Coverage Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage
+          path: |
+            ./build/jacoco/test.exec
+            ./build/reports/jacoco/jacocoRootReport/*
+
+      - name: Upload Coveralls Data
+        run: ./gradlew :coveralls --console plain
+
+      - name: Perform SonarCube Analysis
+        run: ./gradlew sonarqube --info --console plain
