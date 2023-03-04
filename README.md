@@ -1,18 +1,17 @@
 # Perl5 plugins for IntelliJ IDEA
 
-[![Java CI with Gradle](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/gradle.yml/badge.svg?branch=master)](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/gradle.yml?query=branch%3Amaster)
+[![Project Validation](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/push_and_pr.yml/badge.svg)](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/push_and_pr.yml)
 [![Coverage Status](https://coveralls.io/repos/github/Camelcade/Perl5-IDEA/badge.svg?branch=master&dummy)](https://coveralls.io/github/Camelcade/Perl5-IDEA?branch=master)
-[![CodeQL](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/codeql.yml/badge.svg)](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/codeql.yml)
-[![Qodana](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/qodana_scan.yml/badge.svg)](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/qodana_scan.yml)
+
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/7796)](https://plugins.jetbrains.com/plugin/7796-perl)
+[![Rating](https://img.shields.io/jetbrains/plugin/r/rating/7796)](https://plugins.jetbrains.com/plugin/7796-perl/reviews)
+[![Version](https://img.shields.io/jetbrains/plugin/v/7796)](https://plugins.jetbrains.com/plugin/7796-perl/versions)
 
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=coverage)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
-[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
-[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Camelcade_Perl5-IDEA&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=Camelcade_Perl5-IDEA)
 
 This repo contains a bundle of Perl5-related plugins for [JetBrains IDEs](https://www.jetbrains.com/).
 
