@@ -16,7 +16,7 @@
 
 package run;
 
-import base.PerlInterpreterConfigurator;
+import base.PerlConfigurators;
 import base.PerlPlatformTestCase;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.TestDialogManager;
@@ -39,8 +39,8 @@ import java.util.List;
 public class MojoProjectTest extends PerlPlatformTestCase {
   private static final Logger LOG = Logger.getInstance(MojoProjectTest.class);
 
-  public MojoProjectTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
-    super(interpreterConfigurator);
+  public MojoProjectTest(@NotNull String unusedName, @NotNull PerlConfigurators configuratorWrapper) {
+    super(configuratorWrapper);
   }
 
   @Test

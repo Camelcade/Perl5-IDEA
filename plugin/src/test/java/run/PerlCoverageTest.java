@@ -16,7 +16,7 @@
 
 package run;
 
-import base.PerlInterpreterConfigurator;
+import base.PerlConfigurators;
 import base.PerlLightTestCaseBase;
 import base.PerlPlatformTestCase;
 import com.intellij.coverage.CoverageDataManager;
@@ -51,8 +51,8 @@ import java.util.Map;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlCoverageTest extends PerlPlatformTestCase {
-  public PerlCoverageTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
-    super(interpreterConfigurator);
+  public PerlCoverageTest(@NotNull String unusedName, @NotNull PerlConfigurators configuratorWrapper) {
+    super(configuratorWrapper);
   }
 
   @Override

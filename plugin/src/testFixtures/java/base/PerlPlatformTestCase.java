@@ -59,6 +59,7 @@ import com.intellij.testFramework.*;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.concurrency.Semaphore;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
 import com.perl5.lang.perl.adapters.CpanAdapter;
@@ -82,7 +83,6 @@ import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -108,8 +108,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   private final @NotNull PerlInterpreterConfigurator myInterpreterConfigurator;
 
-  public PerlPlatformTestCase(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
-    myInterpreterConfigurator = interpreterConfigurator;
+  public PerlPlatformTestCase(@NotNull PerlConfigurators configuratorWrapper) {
+    myInterpreterConfigurator = configuratorWrapper.getConfigurator();
   }
 
   @org.junit.runners.Parameterized.Parameters(name = "sdk: {0}")
@@ -119,13 +119,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   @com.intellij.testFramework.Parameterized.Parameters(name = "{0}")
   public static Iterable<Object[]> realData(Class<?> clazz) {
-    return Arrays.asList(new Object[][]{
-      {PerlBrewWithExternalLibrariesLocalInterpreterConfigurator.INSTANCE},
-      {PerlBrewLocalInterpreterConfigurator.INSTANCE},
-      {PlenvLocalInterpreterConfigurator.INSTANCE},
-      {PerlSystemDockerInterpreterConfigurator.INSTANCE},
-      {AsdfLocalInterpreterConfigurator.INSTANCE}
-    });
+    return ContainerUtil.map(PerlConfigurators.getConfigurators(), it -> new Object[]{it.getConfigurator().toString(), it});
   }
 
   @Override
