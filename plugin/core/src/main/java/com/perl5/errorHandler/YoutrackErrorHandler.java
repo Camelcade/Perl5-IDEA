@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,8 +71,10 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
   private static final String SERVER_REST_URL = SERVER_URL + "/api";
   private static final String ISSUES_REST_URL = SERVER_REST_URL + "/issues";
   private static final String SERVER_ISSUE_URL = ISSUES_REST_URL + "?fields=idReadable,id";
+  @VisibleForTesting
   public static final String YOUTRACK_PROPERTY_KEY = "youtrack.token";
-  private static final String ADMIN_TOKEN = "Bearer " + System.getProperty(YOUTRACK_PROPERTY_KEY);
+  public static final String YOUTRACK_PROPERTY_VALUE = System.getProperty(YOUTRACK_PROPERTY_KEY);
+  private static final String ADMIN_TOKEN = "Bearer " + YOUTRACK_PROPERTY_VALUE;
   private static final String ACCESS_TOKEN = "Bearer perm:YXV0b3JlcG9ydGVy.NjEtMTA=.YK1jcKDjlzR3pUbcBM6H8WAxVHuvqg";
 
   @Override

@@ -4,8 +4,9 @@ name: Coverage
 on:
   workflow_call:
 
+
 jobs:
-  build-plugins:
+  analyze:
     name: Analysis
     runs-on: ubuntu-latest
     env:
@@ -13,47 +14,55 @@ jobs:
       CI: GitHub
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
       WITH_COVERAGE: true
-      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
     steps:
       - uses: actions/checkout@v3
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         with:
           fetch-depth: 0
 
       - name: Set up JDK 17
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         uses: actions/setup-java@v3
         with:
           distribution: 'corretto'
           java-version: 17
 
       - uses: actions/download-artifact@v3
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         name: Download Light Tests Coverage
         with:
           name: light-tests-coverage
           path: ./coverage/light
 
       - uses: actions/download-artifact@v3
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         name: Download Heavy Tests Coverage
         with:
           name: heavy-tests-coverage
           path: ./coverage/heavy
 
       - uses: actions/download-artifact@v3
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         name: Download Integration Tests Coverage
         with:
           name: integration-tests-coverage
           path: ./coverage/integration
 
       - name: Build Jar
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         uses: gradle/gradle-build-action@v2
         with:
           cache-read-only: true
           arguments: jar
 
       - name: Aggregate Coverage
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         run: ./gradlew jacocoRootReport --console plain
 
       - name: Upload Aggregated Coverage Report
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         uses: actions/upload-artifact@v3
         with:
           name: coverage
@@ -62,7 +71,9 @@ jobs:
             ./build/reports/jacoco/jacocoRootReport/*
 
       - name: Upload Coveralls Data
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         run: ./gradlew :coveralls --console plain
 
       - name: Perform SonarCube Analysis
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         run: ./gradlew sonarqube --info --console plain

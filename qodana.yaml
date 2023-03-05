@@ -1,4 +1,3 @@
 version: "1.0"
-linter: registry.jetbrains.team/p/sa/containers/qodana-jvm:231.7617.13
 profile:
   path: .idea/inspectionProfiles/Project_Quality.xml
