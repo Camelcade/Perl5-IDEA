@@ -74,6 +74,8 @@ jobs:
         with:
           path: |
             ~/.plenv
+            !~/.plenv/cache
+            !~/.plenv/build
           key: ${{ runner.os }}-build-${{ env.cache-name }}-v${{ env.cache-version }}
 
       - name: Set up plenv
@@ -83,7 +85,6 @@ jobs:
           git clone --depth 1 https://github.com/tokuhirom/plenv.git ~/.plenv || git -C $(realpath ~/.plenv) pull
           git clone --depth 1 https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/ || git -C $(realpath ~/.plenv/plugins/perl-build) pull
           ~/.plenv/bin/plenv install ${{ env.PERL_TEST_VERSION }} --noman -j 8 || true
-          rm -Rf ~/.plenv/cache
           ~/.plenv/bin/plenv install-cpanm
           ~/.plenv/bin/plenv exec cpanm --notest ${{ env.TEST_PERL_MODULES }}
 
