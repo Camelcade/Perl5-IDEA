@@ -5,7 +5,7 @@ name: Project Validation
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "hurricup/optional-steps" ]
   pull_request:
     branches: [ "master" ]
   workflow_dispatch:
