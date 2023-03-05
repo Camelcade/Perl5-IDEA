@@ -1,5 +1,7 @@
 # Perl5 plugins for IntelliJ IDEA
 
+test
+
 [![Project Validation](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/push_and_pr.yml/badge.svg)](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/push_and_pr.yml)
 [![Coverage Status](https://coveralls.io/repos/github/Camelcade/Perl5-IDEA/badge.svg?branch=master&dummy)](https://coveralls.io/github/Camelcade/Perl5-IDEA?branch=master)
 
