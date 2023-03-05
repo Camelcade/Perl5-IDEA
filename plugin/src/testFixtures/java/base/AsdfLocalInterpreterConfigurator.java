@@ -21,7 +21,7 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.idea.sdk.versionManager.asdf.AsdfTestUtil;
 import org.jetbrains.annotations.NotNull;
 
-public class AsdfLocalInterpreterConfigurator extends PerlInterpreterConfigurator {
+class AsdfLocalInterpreterConfigurator extends PerlInterpreterConfigurator {
   public static final PerlInterpreterConfigurator INSTANCE = new AsdfLocalInterpreterConfigurator();
   private static final String ASDF_HOME = "~/.asdf/bin/asdf";
   private static final String DISTRIBUTION_ID = PerlPlatformTestCase.PERL_TEST_VERSION;

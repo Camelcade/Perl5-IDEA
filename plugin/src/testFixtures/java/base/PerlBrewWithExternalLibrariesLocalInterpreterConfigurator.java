@@ -26,7 +26,7 @@ import java.util.Collections;
 
 import static org.junit.Assert.assertNotNull;
 
-public class PerlBrewWithExternalLibrariesLocalInterpreterConfigurator extends PerlBrewLocalInterpreterConfigurator {
+class PerlBrewWithExternalLibrariesLocalInterpreterConfigurator extends PerlBrewLocalInterpreterConfigurator {
   public static final PerlBrewWithExternalLibrariesLocalInterpreterConfigurator INSTANCE =
     new PerlBrewWithExternalLibrariesLocalInterpreterConfigurator();
 

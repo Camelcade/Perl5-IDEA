@@ -16,7 +16,7 @@
 
 package run;
 
-import base.PerlInterpreterConfigurator;
+import base.PerlConfigurators;
 import base.PerlPlatformTestCase;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.CapturingProcessAdapter;
@@ -38,8 +38,8 @@ import java.util.function.BiFunction;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlRunTest extends PerlPlatformTestCase {
-  public PerlRunTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
-    super(interpreterConfigurator);
+  public PerlRunTest(@NotNull String unusedName, @NotNull PerlConfigurators configuratorWrapper) {
+    super(configuratorWrapper);
   }
 
   @Override

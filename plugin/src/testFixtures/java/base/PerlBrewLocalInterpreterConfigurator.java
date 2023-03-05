@@ -21,7 +21,7 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlBrewLocalInterpreterConfigurator extends PerlInterpreterConfigurator {
+class PerlBrewLocalInterpreterConfigurator extends PerlInterpreterConfigurator {
   public static final PerlInterpreterConfigurator INSTANCE = new PerlBrewLocalInterpreterConfigurator();
   private static final String PERLBREW_HOME = "~/perl5/perlbrew/bin/perlbrew";
   protected static final String BASE_DISTRIBUTION_ID = "perl-" + PerlPlatformTestCase.PERL_TEST_VERSION;
