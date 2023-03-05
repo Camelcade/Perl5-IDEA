@@ -52,6 +52,13 @@ jobs:
 
       - uses: actions/download-artifact@v3
         if: ${{ env.COVERALLS_REPO_TOKEN }}
+        name: Download Integration Tests Coverage (macos local)
+        with:
+          name: integration-tests-coverage-macos-local
+          path: ./coverage/integration-macos-local
+
+      - uses: actions/download-artifact@v3
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         name: Download Integration Tests Coverage (linux docker)
         with:
           name: integration-tests-coverage-linux-docker

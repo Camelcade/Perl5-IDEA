@@ -59,11 +59,11 @@ jobs:
         run: |
           \curl -L https://install.perlbrew.pl | bash
           source ~/perl5/perlbrew/etc/bashrc
-          perlbrew install --verbose perl-${{ env.PERL_TEST_VERSION }} --notest --noman || true
+          bash -c 'perlbrew install --verbose perl-${{ env.PERL_TEST_VERSION }} --notest --noman || true'
           perlbrew clean
           source ~/perl5/perlbrew/etc/bashrc
           perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }} cpan App::cpanminus
-          perlbrew lib create perl-${{ env.PERL_TEST_VERSION }}@plugin_test || true
+          bash -c 'perlbrew lib create perl-${{ env.PERL_TEST_VERSION }}@plugin_test || true'
           perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }}@plugin_test cpanm --notest ${{ env.TEST_PERL_MODULES }}
 
       - name: Cache plenv
@@ -82,11 +82,13 @@ jobs:
         env:
           PLENV_VERSION: ${{ env.PERL_TEST_VERSION }}
         run: |
-          git clone --depth 1 https://github.com/tokuhirom/plenv.git ~/.plenv || git -C $(realpath ~/.plenv) pull
-          git clone --depth 1 https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/ || git -C $(realpath ~/.plenv/plugins/perl-build) pull
-          ~/.plenv/bin/plenv install ${{ env.PERL_TEST_VERSION }} --noman -j 8 || true
+          git clone --depth 1 https://github.com/tokuhirom/plenv.git ~/.plenv || git -C ~/.plenv pull
+          git clone --depth 1 https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/ || git -C ~/.plenv/plugins/perl-build pull
+          bash -c '~/.plenv/bin/plenv install ${{ env.PERL_TEST_VERSION }} --noman -j 8 || true'
           ~/.plenv/bin/plenv install-cpanm
           ~/.plenv/bin/plenv exec cpanm --notest ${{ env.TEST_PERL_MODULES }}
+          rm -Rf ~/.plenv/cache ~/.plenv/build
+          du -hd1 ~/.plenv      
 
       - name: Cache asdf
         uses: actions/cache@v3
@@ -103,7 +105,7 @@ jobs:
           ASDF_PERL_VERSION: ${{ env.PERL_TEST_VERSION }}
         run: |
           git clone --depth 1 https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.2 && ~/.asdf/bin/asdf plugin add perl || ~/.asdf/bin/asdf update          
-          ~/.asdf/bin/asdf install perl ${{ env.PERL_TEST_VERSION }} --noman -j 8 || true
+          bash -c '~/.asdf/bin/asdf install perl ${{ env.PERL_TEST_VERSION }} --noman -j 8 || true'
           ~/.asdf/bin/asdf exec cpan install App::cpanminus
           ~/.asdf/bin/asdf exec cpanm --notest  ${{ env.TEST_PERL_MODULES }} 
           ~/.asdf/bin/asdf reshim perl

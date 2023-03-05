@@ -45,6 +45,16 @@ jobs:
       os: ubuntu-latest
       configurators: LOCAL_ASDF,LOCAL_PERLBREW,LOCAL_PERLBREW_WITH_LIBS,LOCAL_PLENV
     secrets: inherit
+  integration-tests-macos-local:
+    needs: build
+    name: Tests
+    uses: ./.github/workflows/_integration_tests.yml
+    with:
+      title: macOS, Local
+      results_suffix: macos-local
+      os: macos-latest
+      configurators: LOCAL_ASDF,LOCAL_PERLBREW_WITH_LIBS,LOCAL_PLENV
+    secrets: inherit
   integration-tests-linux-docker:
     needs: build
     name: Tests
@@ -56,12 +66,12 @@ jobs:
       configurators: DOCKER_SYSTEM
     secrets: inherit
   plugins:
-    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker ]
+    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker, integration-tests-macos-local ]
     name: Plugins
     uses: ./.github/workflows/_build_plugins.yml
     secrets: inherit
   coverage:
-    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker ]
+    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker, integration-tests-macos-local ]
     name: Coverage
     uses: ./.github/workflows/_coverage.yml
     secrets: inherit
