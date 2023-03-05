@@ -1,11 +1,12 @@
 # Re-usable workflow for building project
-name: "Build project"
+name: "Project"
 
 on:
   workflow_call:
 
 jobs:
   build:
+    name: "Build"
     runs-on: ubuntu-latest
 
     env:

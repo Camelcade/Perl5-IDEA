@@ -7,7 +7,7 @@ on:
 
 jobs:
   analyze:
-    name: Analysis
+    name: Analyze
     runs-on: ubuntu-latest
     env:
       ORG_GRADLE_PROJECT_downloadIdeaSources: false

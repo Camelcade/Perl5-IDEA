@@ -1,5 +1,5 @@
 # re-usable workflow to run light tests
-name: Light Tests
+name: Tests
 
 on:
   workflow_call:

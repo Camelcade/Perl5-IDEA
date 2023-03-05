@@ -12,7 +12,7 @@ on:
 
 jobs:
   build:
-    name: Build project
+    name: Project
     uses: ./.github/workflows/_build_project.yml
     secrets: inherit
   codeql:
