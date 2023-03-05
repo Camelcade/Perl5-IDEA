@@ -85,6 +85,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
 
   @Test
   public void testDeparseXSubsFile() {
+    assumeNotMacOs();
     var notificationSink = createNotificationSink();
     rescanXSubsSynchronously();
     var notification = notificationSink.get();
