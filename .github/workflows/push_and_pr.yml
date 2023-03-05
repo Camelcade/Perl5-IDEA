@@ -35,18 +35,33 @@ jobs:
     name: Tests
     uses: ./.github/workflows/_heavy_tests.yml
     secrets: inherit
-  integration-tests:
+  integration-tests-linux-local:
     needs: build
     name: Tests
     uses: ./.github/workflows/_integration_tests.yml
+    with:
+      title: Linux, Local
+      results_suffix: linux-local
+      os: ubuntu-latest
+      configurators: LOCAL_ASDF,LOCAL_PERLBREW,LOCAL_PERLBREW_WITH_LIBS,LOCAL_PLENV
+    secrets: inherit
+  integration-tests-linux-docker:
+    needs: build
+    name: Tests
+    uses: ./.github/workflows/_integration_tests.yml
+    with:
+      title: Linux, Docker
+      results_suffix: linux-docker
+      os: ubuntu-latest
+      configurators: DOCKER_SYSTEM
     secrets: inherit
   plugins:
-    needs: [ light-tests, heavy-tests, integration-tests ]
+    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker ]
     name: Plugins
     uses: ./.github/workflows/_build_plugins.yml
     secrets: inherit
   coverage:
-    needs: [ light-tests, heavy-tests, integration-tests ]
+    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker ]
     name: Coverage
     uses: ./.github/workflows/_coverage.yml
     secrets: inherit
