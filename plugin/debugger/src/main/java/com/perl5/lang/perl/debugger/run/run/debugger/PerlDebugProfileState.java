@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.SystemInfo;
@@ -48,6 +49,8 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
   public static final String PERL5_DEBUG_HOST = "PERL5_DEBUG_HOST";
   public static final String PERL5_DEBUG_PORT = "PERL5_DEBUG_PORT";
   public static final String PERL5_DEBUG_ROLE = "PERL5_DEBUG_ROLE";
+  private static final String CAMELCADEDB_DEV_MODE = "CAMELCADEDB_DEV_MODE";
+
   private static final ProcessAdapter READY_PROCESS_MARKER = new ProcessAdapter() {
     @Override
     public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
@@ -107,6 +110,9 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
     stringStringMap.put(PERL5_DEBUG_ROLE, debugOptions.getPerlRole());
     stringStringMap.put(PERL5_DEBUG_HOST, debugOptions.getHostToBind());
     stringStringMap.put(PERL5_DEBUG_PORT, String.valueOf(getDebugPort()));
+    if (ApplicationManager.getApplication().isUnitTestMode()) {
+      stringStringMap.put(CAMELCADEDB_DEV_MODE, "true");
+    }
     return stringStringMap;
   }
 
