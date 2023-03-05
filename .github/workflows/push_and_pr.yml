@@ -5,7 +5,7 @@ name: Project Validation
 
 on:
   push:
-    branches: [ "master", "hurricup/complex-workflows" ]
+    branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
   workflow_dispatch:
