@@ -12,7 +12,7 @@ jobs:
       ORG_GRADLE_PROJECT_downloadIdeaSources: false
       CI: GitHub
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      WITH_COVERAGE: true
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       PERL_TEST_VERSION: 5.36.0
       TEST_PERL_MODULES: Mojolicious HURRICUP/Devel-Camelcadedb-v2023.1.tar.gz Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic B::Debug Types::Serialiser
     steps:
@@ -91,6 +91,8 @@ jobs:
 
       - name: Run Tests
         uses: gradle/gradle-build-action@v2
+        env:
+          WITH_COVERAGE: ${{ env.COVERALLS_REPO_TOKEN && 'true' || 'false' }}
         with:
           cache-read-only: true
           arguments: test -PintegrationTests=1 --console plain
@@ -104,6 +106,7 @@ jobs:
             **/build/reports/tests/*
 
       - name: Upload Coverage Data
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         uses: actions/upload-artifact@v3
         with:
           name: integration-tests-coverage

@@ -12,7 +12,8 @@ jobs:
       ORG_GRADLE_PROJECT_downloadIdeaSources: false
       CI: GitHub
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      WITH_COVERAGE: true
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+      YOUTRACK_TOKEN: $${{ secrets.YOUTRACK_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -26,9 +27,11 @@ jobs:
 
       - name: Run Tests
         uses: gradle/gradle-build-action@v2
+        env:
+          WITH_COVERAGE: ${{ env.COVERALLS_REPO_TOKEN && 'true' || 'false' }}
         with:
           cache-read-only: true
-          arguments: test -PheavyTests=1 --console plain -Pyoutrack.token=${{ secrets.YOUTRACK_TOKEN }}
+          arguments: test -PheavyTests=1 --console plain -Pyoutrack.token=${{ env.YOUTRACK_TOKEN && env.YOUTRACK_TOKEN || 'skip' }}
 
       - name: Upload Tests Results
         uses: actions/upload-artifact@v3
@@ -39,6 +42,7 @@ jobs:
             **/build/reports/tests/*
 
       - name: Upload Coverage Data
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         uses: actions/upload-artifact@v3
         with:
           name: heavy-tests-coverage

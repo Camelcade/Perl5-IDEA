@@ -12,7 +12,7 @@ jobs:
       ORG_GRADLE_PROJECT_downloadIdeaSources: false
       CI: GitHub
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      WITH_COVERAGE: true
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -26,6 +26,8 @@ jobs:
 
       - name: Run Tests
         uses: gradle/gradle-build-action@v2
+        env:
+          WITH_COVERAGE: ${{ env.COVERALLS_REPO_TOKEN && 'true' || 'false' }}
         with:
           cache-read-only: true
           arguments: test -PlightTests=1 --console plain
@@ -39,6 +41,7 @@ jobs:
             **/build/reports/tests/*
 
       - name: Upload Coverage Data
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
         uses: actions/upload-artifact@v3
         with:
           name: light-tests-coverage

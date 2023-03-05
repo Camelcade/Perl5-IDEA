@@ -22,11 +22,13 @@ import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Attachment;
 import com.intellij.openapi.diagnostic.IdeaLoggingEvent;
 import com.intellij.openapi.diagnostic.RuntimeExceptionWithAttachments;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.errorHandler.YoutrackErrorHandler;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Assume;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -38,6 +40,7 @@ import static com.perl5.errorHandler.YoutrackErrorHandler.YOUTRACK_PROPERTY_KEY;
 public class PerlExceptionReporterTest extends PerlLightTestCase {
   @Test
   public void testReporting() {
+    assumeNotSkipped();
     Throwable first = new Throwable();
     Throwable second = new Throwable(first);
     Throwable third = new Throwable(second);
@@ -51,8 +54,13 @@ public class PerlExceptionReporterTest extends PerlLightTestCase {
     doTest(loggingEvents, "nothing", 4);
   }
 
+  private static void assumeNotSkipped() {
+    Assume.assumeFalse("Skipped for pull requests", StringUtil.equals("skip", YOUTRACK_PROPERTY_KEY));
+  }
+
   @Test
   public void testReportingInvalidPsiElement() {
+    assumeNotSkipped();
     initWithTextSmart("say 'hi'");
     PsiFile file = getFile();
     assertTrue(file.isValid());

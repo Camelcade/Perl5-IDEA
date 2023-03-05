@@ -4,16 +4,19 @@ name: Coverage
 on:
   workflow_call:
 
+env:
+  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
 jobs:
-  build-plugins:
+  analyze:
     name: Analysis
     runs-on: ubuntu-latest
+    if: ${{ env.COVERALLS_REPO_TOKEN }}
     env:
       ORG_GRADLE_PROJECT_downloadIdeaSources: false
       CI: GitHub
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
       WITH_COVERAGE: true
-      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
     steps:
       - uses: actions/checkout@v3
