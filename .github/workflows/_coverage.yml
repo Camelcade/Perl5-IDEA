@@ -45,10 +45,17 @@ jobs:
 
       - uses: actions/download-artifact@v3
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Integration Tests Coverage
+        name: Download Integration Tests Coverage (linux local)
         with:
-          name: integration-tests-coverage
-          path: ./coverage/integration
+          name: integration-tests-coverage-linux-local
+          path: ./coverage/integration-linux-local
+
+      - uses: actions/download-artifact@v3
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        name: Download Integration Tests Coverage (linux docker)
+        with:
+          name: integration-tests-coverage-linux-docker
+          path: ./coverage/integration-linux-docker
 
       - name: Build Jar
         if: ${{ env.COVERALLS_REPO_TOKEN }}
