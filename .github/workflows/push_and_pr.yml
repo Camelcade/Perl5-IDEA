@@ -55,6 +55,16 @@ jobs:
       os: macos-latest
       configurators: LOCAL_ASDF,LOCAL_PERLBREW_WITH_LIBS,LOCAL_PLENV
     secrets: inherit
+  integration-tests-windows-local:
+    needs: build
+    name: Tests
+    uses: ./.github/workflows/_integration_tests_windows.yml
+    with:
+      title: Windows, Local
+      results_suffix: windows-local
+      os: windows-latest
+      configurators: LOCAL_SYSTEM
+    secrets: inherit
   integration-tests-linux-docker:
     needs: build
     name: Tests
@@ -66,13 +76,13 @@ jobs:
       configurators: DOCKER_SYSTEM
     secrets: inherit
   plugins:
-    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker, integration-tests-macos-local ]
+    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker, integration-tests-macos-local, integration-tests-windows-local ]
     if: ${{ github.event_name != 'pull_request' }}
     name: Plugins
     uses: ./.github/workflows/_build_plugins.yml
     secrets: inherit
   coverage:
-    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker, integration-tests-macos-local ]
+    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker, integration-tests-macos-local, integration-tests-windows-local ]
     name: Coverage
     uses: ./.github/workflows/_coverage.yml
     secrets: inherit

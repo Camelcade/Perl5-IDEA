@@ -29,7 +29,8 @@ public enum PerlConfigurators {
   LOCAL_ASDF(AsdfLocalInterpreterConfigurator.INSTANCE),
   LOCAL_PERLBREW(PerlBrewLocalInterpreterConfigurator.INSTANCE),
   LOCAL_PERLBREW_WITH_LIBS(PerlBrewWithExternalLibrariesLocalInterpreterConfigurator.INSTANCE),
-  LOCAL_PLENV(PlenvLocalInterpreterConfigurator.INSTANCE);
+  LOCAL_PLENV(PlenvLocalInterpreterConfigurator.INSTANCE),
+  LOCAL_SYSTEM(LocalSystemInterpreterConfigurator.INSTANCE);
 
   private static final String ENV_VARIABLE_NAME = "PERL_CONFIGURATORS";
 
