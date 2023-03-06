@@ -35,4 +35,4 @@ jobs:
         uses: gradle/gradle-build-action@v2
         with:
           cache-read-only: false
-          arguments: jar --console plain
+          arguments: jar instrumentTest --console plain
