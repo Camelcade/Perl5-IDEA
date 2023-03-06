@@ -26,6 +26,7 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.progress.EmptyProgressIndicator;
+import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.profiler.*;
