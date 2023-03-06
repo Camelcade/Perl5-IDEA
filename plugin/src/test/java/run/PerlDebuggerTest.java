@@ -16,7 +16,7 @@
 
 package run;
 
-import base.PerlConfigurators;
+import base.PerlInterpreterConfigurator;
 import base.PerlLightTestCaseBase;
 import base.PerlPlatformTestCase;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -68,8 +68,8 @@ import static base.PerlLightTestCaseBase.SEPARATOR_NEWLINES;
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlDebuggerTest extends PerlPlatformTestCase {
 
-  public PerlDebuggerTest(@NotNull String unusedName, @NotNull PerlConfigurators configuratorWrapper) {
-    super(configuratorWrapper);
+  public PerlDebuggerTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
+    super(interpreterConfigurator);
   }
 
   @Override

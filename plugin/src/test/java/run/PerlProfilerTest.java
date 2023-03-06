@@ -16,7 +16,7 @@
 
 package run;
 
-import base.PerlConfigurators;
+import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
@@ -60,8 +60,8 @@ import java.util.function.Consumer;
 public class PerlProfilerTest extends PerlPlatformTestCase {
   private Element myConfigurations;
 
-  public PerlProfilerTest(@NotNull String unusedName, @NotNull PerlConfigurators configuratorWrapper) {
-    super(configuratorWrapper);
+  public PerlProfilerTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
+    super(interpreterConfigurator);
   }
 
   @Override

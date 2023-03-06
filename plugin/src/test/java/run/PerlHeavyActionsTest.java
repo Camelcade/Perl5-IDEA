@@ -16,7 +16,7 @@
 
 package run;
 
-import base.PerlConfigurators;
+import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
@@ -58,8 +58,8 @@ import static com.intellij.openapi.util.io.IoTestUtil.assumeUnix;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlHeavyActionsTest extends PerlPlatformTestCase {
-  public PerlHeavyActionsTest(@NotNull String unusedName, @NotNull PerlConfigurators configuratorWrapper) {
-    super(configuratorWrapper);
+  public PerlHeavyActionsTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
+    super(interpreterConfigurator);
   }
 
   @Override

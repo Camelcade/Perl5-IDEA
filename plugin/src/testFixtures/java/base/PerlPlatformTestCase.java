@@ -111,8 +111,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   private final @NotNull PerlInterpreterConfigurator myInterpreterConfigurator;
 
-  public PerlPlatformTestCase(@NotNull PerlConfigurators configuratorWrapper) {
-    myInterpreterConfigurator = configuratorWrapper.getConfigurator();
+  public PerlPlatformTestCase(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
+    myInterpreterConfigurator = interpreterConfigurator;
   }
 
   @org.junit.runners.Parameterized.Parameters(name = "sdk: {0}")
@@ -122,7 +122,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   @com.intellij.testFramework.Parameterized.Parameters(name = "{0}")
   public static Iterable<Object[]> realData(Class<?> clazz) {
-    return ContainerUtil.map(PerlConfigurators.getConfigurators(), it -> new Object[]{it.getConfigurator().toString(), it});
+    return ContainerUtil.map(PerlConfigurators.getConfigurators(), it -> new Object[]{it.getConfigurator()});
   }
 
   @Override
