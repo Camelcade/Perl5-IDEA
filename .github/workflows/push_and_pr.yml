@@ -67,6 +67,7 @@ jobs:
     secrets: inherit
   plugins:
     needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker, integration-tests-macos-local ]
+    if: ${{ github.event_name != 'pull_request' }}
     name: Plugins
     uses: ./.github/workflows/_build_plugins.yml
     secrets: inherit
