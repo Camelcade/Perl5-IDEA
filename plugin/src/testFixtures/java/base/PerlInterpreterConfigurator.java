@@ -18,24 +18,23 @@ package base;
 
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
+import org.apache.commons.lang.NotImplementedException;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlInterpreterConfigurator {
-  abstract void setUpPerlInterpreter(@NotNull Project project);
 
-  protected void addSdk(@NotNull String pathToVersionManager,
-                        @NotNull String distributionId,
-                        @NotNull PerlRealVersionManagerHandler<?, ?> versionManagerHandler,
-                        @NotNull Project project) {
-    versionManagerHandler.createInterpreter(
-      distributionId,
-      versionManagerHandler.createAdapter(pathToVersionManager, getHostData()),
+  void setUpPerlInterpreter(@NotNull Project project) {
+    PerlSdkType.createAndAddSdk(
+      getInterpreterPath(),
+      createHostData(),
+      createVersionManagerData(),
       sdk -> PerlProjectManager.getInstance(project).setProjectSdk(sdk),
-      project
-    );
+      project);
   }
 
   /**
@@ -45,7 +44,19 @@ public abstract class PerlInterpreterConfigurator {
     return true;
   }
 
-  protected @NotNull PerlHostData<?, ?> getHostData() {
+  protected @NotNull PerlHostData<?, ?> createHostData() {
     return PerlHostHandler.getDefaultHandler().createData();
+  }
+
+  protected @NotNull PerlVersionManagerData<?, ?> createVersionManagerData() {
+    return getVersionManagerHandler().createData();
+  }
+
+  protected @NotNull PerlVersionManagerHandler<?, ?> getVersionManagerHandler() {
+    return PerlVersionManagerHandler.getDefaultHandler();
+  }
+
+  protected @NotNull String getInterpreterPath() {
+    throw new NotImplementedException();
   }
 }

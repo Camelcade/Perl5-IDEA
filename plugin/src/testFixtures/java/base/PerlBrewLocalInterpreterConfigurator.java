@@ -16,12 +16,12 @@
 
 package base;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
+import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
 import org.jetbrains.annotations.NotNull;
 
-class PerlBrewLocalInterpreterConfigurator extends PerlInterpreterConfigurator {
+class PerlBrewLocalInterpreterConfigurator extends PerlVersionManagerBasedConfigurator {
   public static final PerlInterpreterConfigurator INSTANCE = new PerlBrewLocalInterpreterConfigurator();
   private static final String PERLBREW_HOME = "~/perl5/perlbrew/bin/perlbrew";
   protected static final String BASE_DISTRIBUTION_ID = "perl-" + PerlPlatformTestCase.PERL_TEST_VERSION;
@@ -32,10 +32,16 @@ class PerlBrewLocalInterpreterConfigurator extends PerlInterpreterConfigurator {
   }
 
   @Override
-  void setUpPerlInterpreter(@NotNull Project project) {
-    addSdk(FileUtil.expandUserHome(PERLBREW_HOME), getDistributionId(), PerlBrewTestUtil.getVersionManagerHandler(), project);
+  protected @NotNull String getPathToVersionManager() {
+    return FileUtil.expandUserHome(PERLBREW_HOME);
   }
 
+  @Override
+  protected @NotNull PerlRealVersionManagerHandler<?, ?> getVersionManagerHandler() {
+    return PerlBrewTestUtil.getVersionManagerHandler();
+  }
+
+  @Override
   protected @NotNull String getDistributionId() {
     return DISTRIBUTION_ID;
   }
