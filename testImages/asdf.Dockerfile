@@ -8,4 +8,4 @@ ENV ASDF_PERL_VERSION=$PERL_VERSION
 RUN bash -c ' ~/.asdf/bin/asdf exec cpan install App::cpanminus'
 ARG PERL_PACKAGES
 RUN bash -c '~/.asdf/bin/asdf exec cpanm --notest $PERL_PACKAGES'
-RUN bash -c '~/.asdf/bin/asdf reshim perl
+RUN bash -c '~/.asdf/bin/asdf reshim perl'
