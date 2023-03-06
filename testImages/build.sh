@@ -3,7 +3,7 @@ PERL_VERSION="5.36.0"
 
 for tag in perl5 perlbrew plenv asdf
 do
-  docker build --tag registry-1.docker.io/hurricup/camelcade-test:$tag-$PERL_VERSION \
+  docker build --progress plain --tag registry-1.docker.io/hurricup/camelcade-test:$tag-$PERL_VERSION \
     --build-arg PERL_VERSION=$PERL_VERSION \
     --build-arg PERL_PACKAGES='
   App::Prove::Plugin::PassEnv
