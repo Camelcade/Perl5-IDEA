@@ -31,17 +31,45 @@ jobs:
 
       - uses: actions/download-artifact@v3
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Light Tests Coverage
+        name: Download Light Tests Coverage (linux)
         with:
-          name: light-tests-coverage
-          path: ./coverage/light
+          name: light-tests-coverage-ubuntu-latest
+          path: ./coverage/light-ubuntu-latest
 
       - uses: actions/download-artifact@v3
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Heavy Tests Coverage
+        name: Download Light Tests Coverage (macOS)
         with:
-          name: heavy-tests-coverage
-          path: ./coverage/heavy
+          name: light-tests-coverage-macos-latest
+          path: ./coverage/light-macos-latest
+
+      - uses: actions/download-artifact@v3
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        name: Download Light Tests Coverage (windows)
+        with:
+          name: light-tests-coverage-windows-latest
+          path: ./coverage/light-windows-latest
+
+      - uses: actions/download-artifact@v3
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        name: Download Heavy Tests Coverage (linux)
+        with:
+          name: heavy-tests-coverage-ubuntu-latest
+          path: ./coverage/heavy-ubuntu-latest
+
+      - uses: actions/download-artifact@v3
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        name: Download Heavy Tests Coverage (macOS)
+        with:
+          name: heavy-tests-coverage-macos-latest
+          path: ./coverage/heavy-macos-latest
+
+      - uses: actions/download-artifact@v3
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        name: Download Heavy Tests Coverage (windows)
+        with:
+          name: heavy-tests-coverage-windows-latest
+          path: ./coverage/heavy-windows-latest
 
       - uses: actions/download-artifact@v3
         if: ${{ env.COVERALLS_REPO_TOKEN }}
