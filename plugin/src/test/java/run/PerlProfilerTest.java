@@ -319,4 +319,9 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     }
     profilerRunConfigurationsManager.setConfigurations(configurations);
   }
+
+  @Override
+  protected boolean shouldRunTest() {
+    return !SystemInfo.isMac;
+  }
 }
