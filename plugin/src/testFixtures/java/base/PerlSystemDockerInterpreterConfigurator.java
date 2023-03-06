@@ -16,13 +16,8 @@
 
 package base;
 
-import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerTestUtil;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import org.jetbrains.annotations.NotNull;
 
 class PerlSystemDockerInterpreterConfigurator extends PerlInterpreterConfigurator {
@@ -34,20 +29,18 @@ class PerlSystemDockerInterpreterConfigurator extends PerlInterpreterConfigurato
   }
 
   @Override
-  protected @NotNull PerlHostData<?, ?> getHostData() {
+  protected @NotNull PerlHostData<?, ?> createHostData() {
     return PerlDockerTestUtil.createHostData(DOCKER_IMAGE);
   }
 
   @Override
-  void setUpPerlInterpreter(@NotNull Project project) {
-    PerlVersionManagerData<?, ?> versionManagerData = PerlVersionManagerHandler.getDefaultHandler().createData();
-    PerlSdkType.createAndAddSdk(PERL_HOME, getHostData(), versionManagerData,
-                                sdk -> PerlProjectManager.getInstance(project).setProjectSdk(sdk), project);
+  protected @NotNull String getInterpreterPath() {
+    return PERL_HOME;
   }
 
   @Override
   public String toString() {
-    return "docker: " + PERL_HOME + "@" + DOCKER_IMAGE;
+    return "docker: " + getInterpreterPath() + "@" + DOCKER_IMAGE;
   }
 
   @Override
