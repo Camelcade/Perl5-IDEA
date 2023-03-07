@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.host.local;
+package com.perl5.lang.perl.idea.sdk.host;
 
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -26,9 +25,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-class PerlLocalFileTransfer extends PerlHostFileTransfer<PerlLocalHostData> {
+class PerlSimpleFileTransfer<Data extends PerlSimpleHostData<Data, Handler>, Handler extends PerlSimpleHostHandler<Data, Handler>>
+  extends PerlHostFileTransfer<Data> {
 
-  public PerlLocalFileTransfer(@NotNull PerlLocalHostData hostData) {
+  public PerlSimpleFileTransfer(@NotNull Data hostData) {
     super(hostData);
   }
 

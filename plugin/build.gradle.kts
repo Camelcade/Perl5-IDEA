@@ -34,6 +34,7 @@ dependencies {
     ":plugin:docker",
     ":plugin:idea",
     ":plugin:intelliLang",
+    ":plugin:msys2",
     ":plugin:perlInstall",
     ":plugin:perlbrew",
     ":plugin:plenv",

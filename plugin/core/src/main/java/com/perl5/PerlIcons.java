@@ -30,6 +30,7 @@ public final class PerlIcons {
   public static final Icon PERLBREW_ICON = load("/icons/perlbrew.png");
   public static final Icon STRAWBERRY_ICON = load("/icons/strawberry.png");
   public static final Icon WINDOWS10_ICON = load("/icons/windows.svg");
+  public static final Icon MSYS2_ICON = load("/icons/msys2.svg");
   public static final Icon LINUX_ICON = load("/icons/linux.svg");
   public static final Icon PLENV_ICON = PERL_LANGUAGE_ICON;
   public static final Icon ASDF_ICON = PERL_LANGUAGE_ICON;

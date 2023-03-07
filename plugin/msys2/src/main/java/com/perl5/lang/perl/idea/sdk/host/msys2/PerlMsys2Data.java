@@ -14,12 +14,9 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.sdk.host.local;
+package com.perl5.lang.perl.idea.sdk.host.msys2;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlSimpleHostData;
 import org.jetbrains.annotations.NotNull;
@@ -27,39 +24,38 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 
-class PerlLocalHostData extends PerlSimpleHostData<PerlLocalHostData, PerlLocalHostHandler> {
-
-  public PerlLocalHostData(@NotNull PerlLocalHostHandler handler) {
+final class PerlMsys2Data extends PerlSimpleHostData<PerlMsys2Data, PerlMsys2Handler> {
+  PerlMsys2Data(@NotNull PerlMsys2Handler handler) {
     super(handler);
   }
 
   @Override
-  protected @NotNull Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return commandLine.createProcess();
-  }
-
-  @Override
-  public @Nullable File findFileByName(@NotNull String fileName) {
-    return ContainerUtil.getFirstItem(PathEnvironmentVariableUtil.findAllExeFilesInPath(fileName));
-  }
-
-  @Override
-  public @NotNull String doGetLocalPath(@NotNull String remotePath) {
-    return remotePath;
-  }
-
-  @Override
-  public @NotNull String doGetRemotePath(@NotNull String localPath) {
-    return localPath;
-  }
-
-  @Override
-  protected @NotNull PerlLocalHostData self() {
+  protected @NotNull PerlMsys2Data self() {
     return this;
   }
 
   @Override
+  public @Nullable File findFileByName(@NotNull String fileName) {
+    return null;
+  }
+
+  @Override
+  protected @NotNull Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    return null;
+  }
+
+  @Override
+  protected @Nullable String doGetLocalPath(@NotNull String remotePath) {
+    return null;
+  }
+
+  @Override
+  protected @Nullable String doGetRemotePath(@NotNull String localPath) {
+    return null;
+  }
+
+  @Override
   public @NotNull String expandUserHome(@NotNull String remotePath) {
-    return FileUtil.expandUserHome(remotePath);
+    return null;
   }
 }

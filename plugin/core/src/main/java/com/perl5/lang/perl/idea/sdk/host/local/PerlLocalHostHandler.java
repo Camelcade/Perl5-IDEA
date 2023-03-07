@@ -20,7 +20,7 @@ import com.intellij.openapi.util.NlsActions.ActionText;
 import com.intellij.openapi.util.SystemInfo;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
+import com.perl5.lang.perl.idea.sdk.host.PerlSimpleHostHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,7 +29,7 @@ import javax.swing.*;
 
 import static com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers.*;
 
-class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalHostHandler> {
+class PerlLocalHostHandler extends PerlSimpleHostHandler<PerlLocalHostData, PerlLocalHostHandler> {
   private final PerlLocalHostData DATA_INSTANCE = new PerlLocalHostData(this);
 
   @SuppressWarnings("NonDefaultConstructor")
@@ -81,10 +81,5 @@ class PerlLocalHostHandler extends PerlHostHandler<PerlLocalHostData, PerlLocalH
            SystemInfo.isFreeBSD ? FREEBSD :
            SystemInfo.isSolaris ? SOLARIS :
            UNIX;
-  }
-
-  @Override
-  public final boolean isLocal() {
-    return true;
   }
 }

@@ -37,6 +37,7 @@
     <module name="perl5.plugin.docker"/>
     <module name="perl5.plugin.idea"/>
     <module name="perl5.plugin.intelliLang"/>
+    <module name="perl5.plugin.msys2"/>
     <module name="perl5.plugin.perlbrew"/>
     <module name="perl5.plugin.plenv"/>
     <module name="perl5.plugin.profiler"/>
