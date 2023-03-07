@@ -58,7 +58,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
         env:
           WITH_COVERAGE: ${{ env.COVERALLS_REPO_TOKEN && 'true' || 'false' }}
-          TEST_SYSTEM_PERL_INTERPRETER_PATH: C:/hostedtoolcache/windows/perl/${{ env.PERL_TEST_VERSION }}-thr/x64/bin/perl.exe
+          TEST_SYSTEM_PERL_INTERPRETER_PATH: C:/hostedtoolcache/windows/strawberry-perl/${{ env.PERL_TEST_VERSION }}/x64/perl/bin/perl.exe
         with:
           cache-read-only: true
           arguments: test -PintegrationTests=1 --console plain
