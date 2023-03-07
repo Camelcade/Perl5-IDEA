@@ -15,8 +15,6 @@ jobs:
       QODANA_PUBLIC_LINTER: jetbrains/qodana-jvm
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
       - name: Login to Jetbrains Space
         if: ${{ env.SPACE_DOCKER_PASSWORD }}
         uses: docker/login-action@v2
