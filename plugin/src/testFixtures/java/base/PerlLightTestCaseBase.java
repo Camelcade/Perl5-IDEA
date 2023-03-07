@@ -2147,6 +2147,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void doTestIntroduceVariableNamesSuggester() {
+    doTestIntroduceVariableNamesSuggester("");
+  }
+
+  protected void doTestIntroduceVariableNamesSuggester(@NotNull String resultsFileSuffix) {
     initWithFileSmartWithoutErrors();
     Editor editor = getEditor();
 
@@ -2167,7 +2171,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
     state.gotoEnd(false);
     UsefulTestCase.assertSameLinesWithFile(
-      getTestResultsFilePath(),
+      getTestResultsFilePath(resultsFileSuffix),
       StringUtil.join(ContainerUtil.map(names, it -> Objects.equals(it, selectedItem) ? "> " + it : it), "\n"));
   }
 

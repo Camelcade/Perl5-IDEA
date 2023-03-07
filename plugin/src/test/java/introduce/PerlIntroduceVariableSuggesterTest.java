@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package introduce;
 
 
 import base.PerlLightTestCase;
+import com.intellij.openapi.util.SystemInfo;
 import org.junit.Test;
 public class PerlIntroduceVariableSuggesterTest extends PerlLightTestCase {
   @Override
@@ -248,7 +249,7 @@ public class PerlIntroduceVariableSuggesterTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testStringPathAbsoluteWindows() {doTest();}
+  public void testStringPathAbsoluteWindows() { doTestIntroduceVariableNamesSuggester(SystemInfo.isWindows ? ".windows" : ""); }
 
   @Test
   public void testStringPathRelative() {doTest();}
