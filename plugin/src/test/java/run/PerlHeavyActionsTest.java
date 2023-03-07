@@ -54,8 +54,6 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
-import static com.intellij.openapi.util.io.IoTestUtil.assumeUnix;
-
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlHeavyActionsTest extends PerlPlatformTestCase {
   public PerlHeavyActionsTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
@@ -204,8 +202,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
   }
 
   @Test
-  public void testUnixTerminalConfiguration() {
-    assumeUnix();
+  public void testLocalTerminalConfiguration() {
     assumeLocalSdk();
     var terminalProjectOptionsProvider = TerminalProjectOptionsProvider.getInstance(getProject());
     assertNotNull("Terminal project options provider is null!", terminalProjectOptionsProvider);

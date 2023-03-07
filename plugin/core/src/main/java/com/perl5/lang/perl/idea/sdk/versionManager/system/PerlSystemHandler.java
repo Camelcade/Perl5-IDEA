@@ -29,7 +29,6 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
-import kotlin.NotImplementedError;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -105,6 +104,6 @@ class PerlSystemHandler
 
   @Override
   public @Nullable String getControlOutputForPerlVersion(@NotNull String perlVersion) {
-    throw new NotImplementedError("Should not be invoked for the system ruby, use isSystem() check");
+    return "v" + perlVersion;
   }
 }
