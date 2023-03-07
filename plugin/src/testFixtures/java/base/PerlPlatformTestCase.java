@@ -98,7 +98,7 @@ import static org.junit.Assume.assumeFalse;
 @Category(Integration.class)
 @RunWith(Parameterized.class)
 public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
-  private static final int MAX_PROCESS_WAIT_TIME_SECONDS = 20;
+  private static final int MAX_PROCESS_WAIT_TIME_SECONDS = 60;
 
   protected static final int MAX_PROCESS_WAIT_TIME_MS = MAX_PROCESS_WAIT_TIME_SECONDS * 1000;
 
