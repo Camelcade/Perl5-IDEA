@@ -18,7 +18,6 @@ package unit.perl;
 
 
 import base.PerlLightTestCase;
-import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewAdapter;
@@ -78,7 +77,7 @@ public class PerlVersionManagerParsersTest extends PerlLightTestCase {
 
   private void doTest(@NotNull Function<? super List<String>, ? extends List<String>> parser) {
     try {
-      String outputText = FileUtil.loadFile(new File(getTestDataPath(), getTestName(true) + ".code"));
+      String outputText = loadFile(new File(getTestDataPath(), getTestName(true) + ".code"));
       List<String> output = StringUtil.split(outputText, "\n");
       List<String> parsedOutput = parser.apply(output);
       UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), StringUtil.join(parsedOutput, "\n"));

@@ -115,6 +115,7 @@ import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.util.*;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.io.FileUtilRt;
 import com.intellij.openapi.util.registry.Registry;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.CharsetToolkit;
@@ -501,8 +502,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   public void initWithFile(String targetFileName, String targetFileExtension, String sourceFileNameWithExtension) throws IOException {
-    initWithFileContent(targetFileName, targetFileExtension,
-                        FileUtil.loadFile(new File(getTestDataPath(), sourceFileNameWithExtension), CharsetToolkit.UTF8, true));
+    initWithFileContent(targetFileName, targetFileExtension, loadFile(new File(getTestDataPath(), sourceFileNameWithExtension)));
+  }
+
+  public static @NotNull String loadFile(@NotNull File fileToLoad) throws IOException {
+    return FileUtilRt.loadFile(fileToLoad, CharsetToolkit.UTF8, true);
   }
 
   public void initWithFileSmartWithoutErrors() {
@@ -1275,7 +1279,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected void testFoldingRegions(@NotNull String verificationFileName, boolean doCheckCollapseStatus, LanguageFileType fileType) {
     String expectedContent;
     try {
-      expectedContent = FileUtil.loadFile(new File(getTestDataPath() + "/" + verificationFileName + getRealDataFileExtension()));
+      expectedContent = FileUtilRt.loadFile(
+        new File(getTestDataPath() + "/" + verificationFileName + getRealDataFileExtension()), CharsetToolkit.UTF8, true);
     }
     catch (IOException e) {
       throw new RuntimeException(e);
@@ -2590,9 +2595,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   public void initWithTestDataFile(@NotNull String sourceName, @NotNull String targetName) {
     try {
-      initWithFileContent(targetName, getFileExtension(),
-                          FileUtil.loadFile(new File(TEST_RESOURCES_ROOT, sourceName + getRealDataFileExtension()), CharsetToolkit.UTF8, true)
-                            .trim());
+      initWithFileContent(
+        targetName, getFileExtension(), loadFile(new File(TEST_RESOURCES_ROOT, sourceName + getRealDataFileExtension())).trim());
       assertNoErrorElements();
     }
     catch (IOException e) {
