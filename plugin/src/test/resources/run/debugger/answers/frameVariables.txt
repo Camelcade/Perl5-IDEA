@@ -11,7 +11,7 @@ Watch expressions: []
 ----------
 Variables view:
 -; icon: null
- -Group:%main::(171); icon: /main_gutter_icon.png
+ -Group:%main::(xxx); icon: /main_gutter_icon.png
  -Group:Lexical variables(15); icon: /my_gutter_icon.png
   -$array_ref-REF(...); navigates to source; source position: testscript.pl:13:319; icon: /array_gutter_icon.png
    -REF(...)-size = 3; navigates to source; icon: /array_gutter_icon.png
