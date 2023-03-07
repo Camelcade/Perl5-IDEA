@@ -374,6 +374,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
 
     return sb.toString()
       .replaceAll("(REF|IO|CODE|FORMAT)\\([^)]+\\)", "$1(...)")
+      .replaceAll("Group:%main::\\(\\d{3}\\)", "Group:%main::(xxx)")
       .replace(":crlf;", ":perlio;");
   }
 
