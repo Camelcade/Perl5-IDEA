@@ -1,0 +1,11 @@
+scalar
+value
+string
+path
+pathname
+> filename
+absolute_path_to_filename
+path_to_filename
+filename_thtml
+absolute_path_to_filename_thtml
+path_to_filename_thtml
