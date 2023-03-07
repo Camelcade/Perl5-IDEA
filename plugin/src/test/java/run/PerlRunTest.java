@@ -24,6 +24,7 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.notification.Notification;
 import com.intellij.openapi.util.Ref;
+import com.intellij.openapi.util.SystemInfo;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiUtilCore;
@@ -117,6 +118,22 @@ public class PerlRunTest extends PerlPlatformTestCase {
     Pair<ExecutionEnvironment, RunContentDescriptor> execResult = runConfigurationAndWait(runConfiguration);
     CapturingProcessAdapter capturingProcessAdapter = getCapturingAdapter(execResult.first);
     assertNotNull(capturingProcessAdapter);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeOutput(capturingProcessAdapter.getOutput()));
+    comparePtyOutputWithFile(getTestResultsFilePath(""), serializeOutput(capturingProcessAdapter.getOutput()));
+  }
+
+  /**
+   * Compares {@code ptyProcessOutput} with content of the file specified by the {@code filePath}
+   *
+   * @implNote ConPty on windows adds two additional things to the output by itself: clearing screen and changing the window title.
+   * Additionally, lines may contain trailing spaces
+   */
+  protected static void comparePtyOutputWithFile(@NotNull String filePath, @NotNull String ptyProcessOutput) {
+    if (SystemInfo.isWindows) {
+      ptyProcessOutput = ptyProcessOutput
+        .replace("\u001B[2J\u001B[m\u001B[H", "")
+        .replaceAll(" +\\r", "\r")
+        .replaceAll("\u001B]0;[^\u0007]+\u0007\u001B\\[\\?25h", "");
+    }
+    UsefulTestCase.assertSameLinesWithFile(filePath, ptyProcessOutput);
   }
 }
