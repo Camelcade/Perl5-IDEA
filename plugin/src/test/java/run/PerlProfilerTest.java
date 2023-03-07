@@ -35,6 +35,7 @@ import com.intellij.profiler.api.configurations.ProfilerConfigurationState;
 import com.intellij.profiler.api.configurations.ProfilerRunConfigurationsManager;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.util.TimeoutUtil;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
@@ -159,7 +160,7 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
   }
 
   protected void checkProfilingResultsWithFile(Pair<Pair<ExecutionEnvironment, RunContentDescriptor>, Pair<Executor, PerlProfilerConfigurationState>> executionResult) {
-    checkProfilingResultsWithFile(getProfilingResults(executionResult));
+    checkProfilingResultsWithFile(getCallTreeBuilder(getProfilingResults(executionResult)));
   }
 
   private @NotNull ProfilerState getProfilingResults(Pair<Pair<ExecutionEnvironment, RunContentDescriptor>, Pair<Executor, PerlProfilerConfigurationState>> executionResult) {
@@ -172,6 +173,9 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     copyDirToModule("../run/testMore");
     var runConfiguration = createTestRunConfiguration("t");
     runTestsWithPRofiler(runConfiguration);
+    if (SystemInfo.isWindows) {
+      TimeoutUtil.sleep(1000);
+    }
   }
 
   @Test
@@ -182,6 +186,9 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     assertInstanceOf(runConfiguration, PerlTestRunConfiguration.class);
     runConfiguration.setJobsNumber(4);
     runTestsWithPRofiler(runConfiguration);
+    if (SystemInfo.isWindows) {
+      TimeoutUtil.sleep(1000);
+    }
   }
 
   protected void runTestsWithPRofiler(PerlTestRunConfiguration runConfiguration) {
@@ -193,7 +200,8 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     catch (Throwable e) {
       failure = e;
     }
-    checkProfilingResultsWithFile(execResults);
+    checkProfilingResultsWithFile(getCallTreeBuilder(getProfilingResults(execResults)),
+                                  SystemInfo.isWindows ? ".profiling.windows" : ".profiling");
     if (failure != null) {
       throw new RuntimeException(failure);
     }
@@ -207,11 +215,12 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     return runConfigurationWithProfilingAndWait(createOnlyRunConfiguration(script));
   }
 
-  private void checkProfilingResultsWithFile(@NotNull ProfilerState profilerState) {
-    checkProfilingResultsWithFile(getCallTreeBuilder(profilerState));
+  private void checkProfilingResultsWithFile(@NotNull CallTreeBuilder<BaseCallStackElement> treeBuilder) {
+    checkProfilingResultsWithFile(treeBuilder, ".profiling");
   }
 
-  private void checkProfilingResultsWithFile(@NotNull CallTreeBuilder<BaseCallStackElement> treeBuilder) {
+  private void checkProfilingResultsWithFile(@NotNull CallTreeBuilder<BaseCallStackElement> treeBuilder,
+                                             @NotNull String dataSuffix) {
     assertInstanceOf(treeBuilder, DummyCallTreeBuilder.class);
     var stacks = treeBuilder.getAllStacks();
     List<String> serializedFrames = new ArrayList<>();
@@ -232,7 +241,7 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
       serializedFrames.add(String.join("; ", serializedStack));
     }
     Collections.sort(serializedFrames);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(".profiling"), String.join("\n", serializedFrames));
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(dataSuffix), String.join("\n", serializedFrames));
   }
 
   private @NotNull CallTreeBuilder<BaseCallStackElement> getCallTreeBuilder(@NotNull ProfilerState profilerState) {
