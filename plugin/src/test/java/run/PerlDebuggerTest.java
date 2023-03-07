@@ -372,7 +372,9 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
       .append(SEPARATOR_NEWLINES)
       .append(serializeSessionTab(debugSession.getSessionTab()));
 
-    return sb.toString().replaceAll("(REF|IO|CODE|FORMAT)\\([^)]+\\)", "$1(...)");
+    return sb.toString()
+      .replaceAll("(REF|IO|CODE|FORMAT)\\([^)]+\\)", "$1(...)")
+      .replace(":crlf;", ":perlio;");
   }
 
   private @NotNull String serializeSessionData(@Nullable XDebugSessionData sessionData) {
