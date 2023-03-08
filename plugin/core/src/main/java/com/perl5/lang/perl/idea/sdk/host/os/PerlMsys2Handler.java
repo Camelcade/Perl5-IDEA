@@ -16,24 +16,16 @@
 
 package com.perl5.lang.perl.idea.sdk.host.os;
 
+import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-
-class PerlWindowsHandler extends PerlOsHandler {
-
-  public PerlWindowsHandler(@NotNull String name, @Nullable Icon icon) {
-    super(name, icon);
+public class PerlMsys2Handler extends PerlLinuxHandler {
+  public PerlMsys2Handler(@NotNull String name) {
+    super(name, PerlIcons.MSYS2_ICON);
   }
 
   @Override
   public @NotNull String getPerlExecutableName() {
     return PerlOsHandlers.PERL_EXE;
-  }
-
-  @Override
-  public final boolean isMsWindows() {
-    return true;
   }
 }

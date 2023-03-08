@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-import static com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers.WINDOWS;
+import static com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers.MSYS2;
 
 class PerlMsys2Handler extends PerlSimpleHostHandler<PerlMsys2Data, PerlMsys2Handler> {
   private final PerlMsys2Data DATA_INSTANCE = new PerlMsys2Data(this);
@@ -70,6 +70,6 @@ class PerlMsys2Handler extends PerlSimpleHostHandler<PerlMsys2Data, PerlMsys2Han
 
   @Override
   public @Nullable PerlOsHandler getOsHandler() {
-    return WINDOWS;
+    return MSYS2;
   }
 }
