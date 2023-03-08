@@ -27,11 +27,6 @@ sourceSets {
   }
 }
 
-intellij {
-  type.set("IC")
-  plugins.set(listOf("java"))
-}
-
 tasks {
   val generatePerl5Parser = register<GenerateParserTask>("generatePerl5Parser") {
     sourceFile.set(file("grammar/Perl5.bnf"))

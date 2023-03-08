@@ -23,13 +23,3 @@ dependencies {
   }
   testImplementation(testFixtures(project(":plugin")))
 }
-
-intellij {
-  type.set("IC")
-  plugins.set(project.provider {
-    listOf(
-      project(":plugin"),
-      "java",
-    )
-  })
-}

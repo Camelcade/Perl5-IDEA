@@ -27,10 +27,7 @@ dependencies {
 }
 
 intellij {
-  type.set("IC")
   plugins.set(project.provider {
-    listOf(
-      properties("intelliLangPlugin").get(),
-    )
+    listOf(properties("intelliLangPlugin").get())
   })
 }

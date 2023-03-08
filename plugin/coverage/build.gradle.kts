@@ -25,12 +25,3 @@ dependencies {
     runtimeOnly(project(it, "instrumentedJar"))
   }
 }
-
-intellij {
-  type.set("IC")
-  plugins.set(project.provider {
-    listOf(
-      properties("coveragePlugin").get()
-    )
-  })
-}
