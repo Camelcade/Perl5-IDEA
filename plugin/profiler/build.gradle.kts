@@ -27,3 +27,4 @@ dependencies {
 intellij {
   type.set("IU")
 }
+

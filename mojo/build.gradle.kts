@@ -19,7 +19,6 @@ dependencies {
   listOf(
     ":plugin:core",
     ":lang.mojo:core",
-    ":lang.mojo:idea",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
@@ -27,7 +26,6 @@ dependencies {
   }
   listOf(
     ":lang.mojo:core",
-    ":lang.mojo:idea",
   ).forEach {
     runtimeOnly(project(it, "instrumentedJar"))
   }
@@ -36,11 +34,8 @@ dependencies {
 
 intellij {
   type.set("IU")
-  plugins.set(project.provider {
-    listOf(
-      project(":plugin"),
-      properties("remoteRunPlugin").get(),
-      "java",
-    )
-  })
+  plugins.set(listOf(
+    project(":plugin"),
+    properties("remoteRunPlugin").get()
+  ))
 }

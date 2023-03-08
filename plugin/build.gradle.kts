@@ -67,7 +67,6 @@ intellij {
       properties("remoteRunPlugin").get(),
       "copyright",
       "terminal",
-      "java",
     )
   })
 }

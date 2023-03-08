@@ -31,8 +31,7 @@ intellij {
   plugins.set(project.provider {
     listOf(
       properties("remoteRunPlugin").get(),
-      "Docker",
-      "java",
+      "Docker"
     )
   })
 }

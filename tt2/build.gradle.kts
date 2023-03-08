@@ -27,6 +27,10 @@ sourceSets {
   }
 }
 
+intellij {
+  plugins.set(listOf(project(":plugin")))
+}
+
 dependencies {
   listOf(
     ":plugin:core",

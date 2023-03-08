@@ -36,6 +36,10 @@ dependencies {
   testImplementation(testFixtures(project(":plugin")))
 }
 
+intellij {
+  plugins.set(listOf(project(":plugin")))
+}
+
 tasks {
   rootProject.tasks.findByName("generateLexers")?.dependsOn(
     register<GenerateLexerTask>("generateEmbeddedPerlLexer") {
