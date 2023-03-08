@@ -25,6 +25,5 @@ dependencies {
 }
 
 intellij {
-  type.set("IC")
   plugins.set(listOf("terminal"))
 }

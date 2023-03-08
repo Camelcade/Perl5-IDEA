@@ -24,7 +24,3 @@ dependencies {
   }
 }
 
-intellij {
-  type.set("IC")
-}
-

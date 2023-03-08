@@ -25,14 +25,6 @@ sourceSets {
   }
 }
 
-intellij {
-  type.set("IC")
-  plugins.set(listOf(
-    project(":plugin"),
-    "java",
-  ))
-}
-
 dependencies {
   listOf(
     ":plugin:core",
