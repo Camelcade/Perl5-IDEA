@@ -11,11 +11,8 @@ Usage: "var"; (18,21); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) 
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: foreachIterator.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -34,11 +31,8 @@ Usage: "var"; (40,43); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) 
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: foreachIterator.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main

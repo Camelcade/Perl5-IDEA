@@ -23,3 +23,7 @@ dependencies {
     runtimeOnly(project(it, "instrumentedJar"))
   }
 }
+
+intellij {
+  plugins.set(listOf("java"))
+}

@@ -23,3 +23,7 @@ dependencies {
   }
   testImplementation(testFixtures(project(":plugin")))
 }
+
+intellij {
+  plugins.set(listOf(project(":plugin")))
+}

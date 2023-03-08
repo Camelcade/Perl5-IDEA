@@ -11,11 +11,8 @@ Usage: "var"; (18,21); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) 
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -34,11 +31,8 @@ Usage: "var"; (24,27); reading; writing; PerlVariableNameElementImpl(Perl5: SCAL
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -57,11 +51,8 @@ Usage: "var"; (34,37); reading; writing; PerlVariableNameElementImpl(Perl5: SCAL
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -80,11 +71,8 @@ Usage: "var"; (40,43); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) 
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -103,11 +91,8 @@ Usage: "var"; (50,53); reading; writing; PerlVariableNameElementImpl(Perl5: SCAL
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -126,11 +111,8 @@ Usage: "var"; (60,63); reading; writing; PerlVariableNameElementImpl(Perl5: SCAL
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -149,11 +131,8 @@ Usage: "var"; (67,70); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) 
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -172,11 +151,8 @@ Usage: "var"; (91,94); reading; writing; PerlVariableNameElementImpl(Perl5: SCAL
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -195,11 +171,8 @@ Usage: "var"; (115,118); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -218,11 +191,8 @@ Usage: "var"; (129,132); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -241,11 +211,8 @@ Usage: "var"; (144,147); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -264,11 +231,8 @@ Usage: "var"; (159,162); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -287,11 +251,8 @@ Usage: "var"; (165,168); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -310,11 +271,8 @@ Usage: "var"; (187,190); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -333,11 +291,8 @@ Usage: "var"; (203,206); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -356,11 +311,8 @@ Usage: "var"; (226,229); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -379,11 +331,8 @@ Usage: "var"; (237,240); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -402,11 +351,8 @@ Usage: "var"; (248,251); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -425,11 +371,8 @@ Usage: "var"; (259,262); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -448,11 +391,8 @@ Usage: "var"; (270,273); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -471,11 +411,8 @@ Usage: "var"; (282,285); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -494,11 +431,8 @@ Usage: "var"; (293,296); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -517,11 +451,8 @@ Usage: "var"; (304,307); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -540,11 +471,8 @@ Usage: "var"; (315,318); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -563,11 +491,8 @@ Usage: "var"; (326,329); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -586,11 +511,8 @@ Usage: "var"; (337,340); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -609,11 +531,8 @@ Usage: "var"; (348,351); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -632,11 +551,8 @@ Usage: "var"; (360,363); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -655,11 +571,8 @@ Usage: "var"; (372,375); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -678,11 +591,8 @@ Usage: "var"; (384,387); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -701,11 +611,8 @@ Usage: "var"; (396,399); reading; writing; PerlVariableNameElementImpl(Perl5: SC
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -724,11 +631,8 @@ Usage: "var"; (409,412); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -747,11 +651,8 @@ Usage: "var"; (419,422); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -770,11 +671,8 @@ Usage: "var"; (429,432); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -793,11 +691,8 @@ Usage: "var"; (439,442); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -816,11 +711,8 @@ Usage: "var"; (449,452); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -839,11 +731,8 @@ Usage: "var"; (460,463); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -862,11 +751,8 @@ Usage: "var"; (470,473); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -885,11 +771,8 @@ Usage: "var"; (480,483); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -908,11 +791,8 @@ Usage: "var"; (490,493); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -931,11 +811,8 @@ Usage: "var"; (500,503); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -954,11 +831,8 @@ Usage: "var"; (510,513); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -977,11 +851,8 @@ Usage: "var"; (520,523); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -1000,11 +871,8 @@ Usage: "var"; (531,534); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -1023,11 +891,8 @@ Usage: "var"; (542,545); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -1046,11 +911,8 @@ Usage: "var"; (553,556); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -1069,11 +931,8 @@ Usage: "var"; (564,567); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: PackageGroupingRule
-    PackageGroup: ; NodePlaceholder
-
- - Rule: NonJavaFileGroupingRule
-    FileUsageGroup: scalarWithContext.pl; /perl5classic.png
+ - Rule: DirectoryGroupingRule
+    DirectoryGroup: ; /folder.svg
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main

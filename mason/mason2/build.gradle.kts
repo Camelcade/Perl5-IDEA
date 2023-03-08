@@ -37,6 +37,10 @@ dependencies {
   testImplementation(testFixtures(project(":plugin")))
 }
 
+intellij {
+  plugins.set(listOf(project(":plugin"), project(":lang.mason.framework")))
+}
+
 tasks {
   rootProject.tasks.findByName("generateLexers")?.dependsOn(
     register<GenerateLexerTask>("generateMason2Lexer") {

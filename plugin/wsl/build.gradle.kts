@@ -29,9 +29,6 @@ dependencies {
 intellij {
   type.set("IU")
   plugins.set(project.provider {
-    listOf(
-      properties("remoteRunPlugin").get(),
-      "java",
-    )
+    listOf(properties("remoteRunPlugin").get())
   })
 }
