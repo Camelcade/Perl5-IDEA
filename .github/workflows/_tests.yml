@@ -74,7 +74,6 @@ jobs:
           ~/.plenv/bin/plenv exec cpanm --notest ${{ env.TEST_PERL_MODULES }}
           bash -c 'echo "" | ~/.plenv/bin/plenv exec cpan' 
           rm -Rf ~/.plenv/cache ~/.plenv/build
-          du -hd1 ~/.plenv/versions/5.36.0
 
       - name: Run Tests
         uses: gradle/gradle-build-action@v2
