@@ -26,7 +26,7 @@ buildscript {
   dependencies {
     classpath("org.codehaus.groovy.modules.http-builder:http-builder:0.7.1")
     classpath("org.apache.httpcomponents:httpmime:4.5.14")
-    classpath("org.eclipse.jgit:org.eclipse.jgit:6.4.0.202211300538-r")
+    classpath("org.eclipse.jgit:org.eclipse.jgit:6.5.0.202303070854-r")
   }
 }
 
@@ -35,7 +35,7 @@ plugins {
   id("jacoco")
   id("org.jetbrains.intellij") version "1.13.1"
   id("org.jetbrains.grammarkit") version "2022.3.1"
-  id("com.github.kt3k.coveralls") version "2.12.0"
+  id("com.github.kt3k.coveralls") version "2.12.2"
   id("org.sonarqube") version "4.0.0.2929"
   id("org.jetbrains.qodana") version "0.1.13"
 }
