@@ -1,0 +1,313 @@
+# re-usable workflow to run integration tests
+name: Tests
+
+on:
+  workflow_call:
+    inputs:
+      os:
+        required: true
+        type: string
+
+env:
+  ORG_GRADLE_PROJECT_downloadIdeaSources: false
+  CI: GitHub
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+  YOUTRACK_TOKEN: ${{ secrets.YOUTRACK_TOKEN }}
+  PERL_TEST_VERSION: 5.36.0
+  TEST_PERL_MODULES: Mojolicious HURRICUP/Devel-Camelcadedb-v2023.1.tar.gz Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic B::Debug Types::Serialiser
+
+jobs:
+  build:
+    name: "Build"
+    runs-on: ${{ inputs.os }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 17
+
+      - name: Execute Gradle build
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: false
+          arguments: jar instrumentTest --console plain
+
+  integration-plenv:
+    needs: build
+    name: Integration (plenv)
+    if: ${{ inputs.os != 'windows-latest' }}
+    runs-on: ${{ inputs.os }}
+    env:
+      PERL_CONFIGURATORS: LOCAL_PLENV
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 17
+
+      - name: Cache plenv
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-plenv
+          cache-version: 0
+        with:
+          path: ~/.plenv
+          key: plenv-${{ runner.os }}
+
+      - name: Set up plenv
+        env:
+          PLENV_VERSION: ${{ env.PERL_TEST_VERSION }}
+        run: |
+          git clone --depth 1 https://github.com/tokuhirom/plenv.git ~/.plenv || git -C ~/.plenv pull
+          git clone --depth 1 https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/ || git -C ~/.plenv/plugins/perl-build pull
+          bash -c '~/.plenv/bin/plenv install ${{ env.PERL_TEST_VERSION }} --noman -j 8 || true'
+          ~/.plenv/bin/plenv install-cpanm
+          ~/.plenv/bin/plenv exec cpanm --notest ${{ env.TEST_PERL_MODULES }}
+          rm -Rf ~/.plenv/cache ~/.plenv/build
+          du -hd1 ~/.plenv/versions
+
+      - name: Run Tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+          arguments: test -PintegrationTests=1 --console plain
+
+      - name: Upload Coverage Data
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-integration-plenv-${{ inputs.results_suffix }}
+          path: |
+            **/jacoco/*.exec  
+
+  integration-asdf:
+    needs: build
+    name: Integration (asdf)
+    if: ${{ inputs.os != 'windows-latest' }}
+    runs-on: ${{ inputs.os }}
+    env:
+      PERL_CONFIGURATORS: LOCAL_ASDF
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 17
+
+      - name: Cache asdf
+        uses: actions/cache@v3
+        with:
+          path: ~/.asdf
+          key: asdf-${{ runner.os }}
+
+      - name: Set up asdf
+        env:
+          ASDF_PERL_VERSION: ${{ env.PERL_TEST_VERSION }}
+        run: |
+          git clone --depth 1 https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.2 && ~/.asdf/bin/asdf plugin add perl || ~/.asdf/bin/asdf update          
+          bash -c '~/.asdf/bin/asdf install perl ${{ env.PERL_TEST_VERSION }} --noman -j 8 || true'
+          ~/.asdf/bin/asdf exec cpan install App::cpanminus
+          ~/.asdf/bin/asdf exec cpanm --notest  ${{ env.TEST_PERL_MODULES }} 
+          ~/.asdf/bin/asdf reshim perl
+
+      - name: Run Tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+          arguments: test -PintegrationTests=1 --console plain
+
+      - name: Upload Coverage Data
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-integration-asdf-${{ inputs.results_suffix }}
+          path: |
+            **/jacoco/*.exec  
+
+  integration-perlbrew:
+    needs: build
+    name: Integration (perlbrew)
+    if: ${{ inputs.os != 'windows-latest' }}
+    runs-on: ${{ inputs.os }}
+    env:
+      PERL_CONFIGURATORS: ${{ inputs.os == 'ubuntu-latest' && 'LOCAL_PERLBREW,LOCAL_PERLBREW_WITH_LIBS' || 'LOCAL_PERLBREW' }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 17
+
+      - name: Cache perlbrew
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/perl5
+            ~/.perlbrew
+          key: perlbrew-${{ runner.os }}
+
+      - name: Set up perlbrew
+        run: |
+          \curl -L https://install.perlbrew.pl | bash
+          source ~/perl5/perlbrew/etc/bashrc
+          bash -c 'perlbrew install --verbose perl-${{ env.PERL_TEST_VERSION }} --notest --noman || true'
+          perlbrew clean
+          source ~/perl5/perlbrew/etc/bashrc
+          perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }} cpan App::cpanminus
+          bash -c 'perlbrew lib create perl-${{ env.PERL_TEST_VERSION }}@plugin_test || true'
+          perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }}@plugin_test cpanm --notest ${{ env.TEST_PERL_MODULES }}
+
+      - name: Run Tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+          arguments: test -PintegrationTests=1 --console plain
+
+      - name: Upload Coverage Data
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-integration-perlbrew-${{ inputs.results_suffix }}
+          path: |
+            **/jacoco/*.exec  
+
+  integration-system:
+    needs: build
+    name: Integration (system)
+    if: ${{ inputs.os == 'windows-latest' }}
+    runs-on: ${{ inputs.os }}
+    env:
+      PERL_TEST_VERSION: 5.32.1
+      TEST_SYSTEM_PERL_INTERPRETER_PATH: C:/hostedtoolcache/windows/strawberry-perl/5.32.1/x64/perl/bin/perl.exe
+      PERL_CONFIGURATORS: LOCAL_SYSTEM
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 17
+
+      - name: Install Strawberry Perl
+        if: ${{ inputs.os == 'windows-latest' }}
+        uses: shogo82148/actions-setup-perl@v1
+        with:
+          distribution: strawberry
+          perl-version: ${{ env.PERL_TEST_VERSION }}
+
+      - name: Configure Perl for Windows
+        shell: cmd
+        run: cpanm --notest  ${{ env.TEST_PERL_MODULES }}
+
+      - name: Run Tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+          arguments: test -PintegrationTests=1 --console plain
+
+      - name: Upload Coverage Data
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-integration-system-${{ inputs.os }}
+          path: |
+            **/jacoco/*.exec
+
+  integration-docker:
+    needs: build
+    name: Integration (docker)
+    runs-on: ${{ inputs.os }}
+    if: ${{ inputs.os == 'ubuntu-latest' }}
+    env:
+      PERL_CONFIGURATORS: DOCKER_SYSTEM
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 17
+
+      - name: Run Tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+          arguments: test -PintegrationTests=1 --console plain
+
+      - name: Upload Coverage Data
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: coverage-integration-docker-${{ inputs.os }}
+          path: |
+            **/jacoco/*.exec  
+
+  light-tests:
+    name: Light
+    needs: build
+    runs-on: ${{ inputs.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 17
+
+      - name: Run Tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+          arguments: test -PlightTests=1 --console plain
+
+      - name: Upload Coverage Data
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: light-tests-coverage-${{ inputs.os }}
+          path: |
+            **/jacoco/*.exec
+
+  heavy-tests:
+    name: Heavy
+    needs: build
+    runs-on: ${{ inputs.os }}
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto'
+          java-version: 17
+
+      - name: Run Tests
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: true
+          arguments: test -PheavyTests=1 --console plain -Pyoutrack.token=${{ env.YOUTRACK_TOKEN && env.YOUTRACK_TOKEN || 'skip' }}
+
+      - name: Upload Coverage Data
+        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: heavy-tests-coverage-${{ inputs.os }}
+          path: |
+            **/jacoco/*.exec
