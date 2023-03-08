@@ -13,7 +13,6 @@ jobs:
       ORG_GRADLE_PROJECT_downloadIdeaSources: false
       CI: GitHub
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      WITH_COVERAGE: true
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
     steps:
@@ -29,73 +28,9 @@ jobs:
 
       - uses: actions/download-artifact@v3
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Light Tests Coverage (linux)
+        name: Tests Coverage
         with:
-          name: light-tests-coverage-ubuntu-latest
-          path: ./coverage/light-ubuntu-latest
-
-      - uses: actions/download-artifact@v3
-        if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Light Tests Coverage (macOS)
-        with:
-          name: light-tests-coverage-macos-latest
-          path: ./coverage/light-macos-latest
-
-      - uses: actions/download-artifact@v3
-        if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Light Tests Coverage (windows)
-        with:
-          name: light-tests-coverage-windows-latest
-          path: ./coverage/light-windows-latest
-
-      - uses: actions/download-artifact@v3
-        if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Heavy Tests Coverage (linux)
-        with:
-          name: heavy-tests-coverage-ubuntu-latest
-          path: ./coverage/heavy-ubuntu-latest
-
-      - uses: actions/download-artifact@v3
-        if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Heavy Tests Coverage (macOS)
-        with:
-          name: heavy-tests-coverage-macos-latest
-          path: ./coverage/heavy-macos-latest
-
-      - uses: actions/download-artifact@v3
-        if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Heavy Tests Coverage (windows)
-        with:
-          name: heavy-tests-coverage-windows-latest
-          path: ./coverage/heavy-windows-latest
-
-      - uses: actions/download-artifact@v3
-        if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Integration Tests Coverage (linux local)
-        with:
-          name: integration-tests-coverage-linux-local
-          path: ./coverage/integration-linux-local
-
-      - uses: actions/download-artifact@v3
-        if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Integration Tests Coverage (windows local)
-        with:
-          name: integration-tests-coverage-windows-local
-          path: ./coverage/integration-windows-local
-
-      - uses: actions/download-artifact@v3
-        if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Integration Tests Coverage (macos local)
-        with:
-          name: integration-tests-coverage-macos-local
-          path: ./coverage/integration-macos-local
-
-      - uses: actions/download-artifact@v3
-        if: ${{ env.COVERALLS_REPO_TOKEN }}
-        name: Download Integration Tests Coverage (linux docker)
-        with:
-          name: integration-tests-coverage-linux-docker
-          path: ./coverage/integration-linux-docker
+          path: ./coverage
 
       - name: Build Jar
         if: ${{ env.COVERALLS_REPO_TOKEN }}

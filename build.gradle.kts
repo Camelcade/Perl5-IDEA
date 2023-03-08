@@ -45,7 +45,7 @@ repositories {
 }
 
 val isCI = environment("CI").map { it.toBoolean() }.orElse(false)
-val withCoverage = environment("WITH_COVERAGE").orElse(properties("with_coverage")).map { it.toBoolean() }.orElse(false)
+val withCoverage = environment("COVERALLS_REPO_TOKEN").orElse(properties("with_coverage")).map { !it.isEmpty() }.orElse(false)
 
 val pluginProjectsNames = setOf(
   "plugin",

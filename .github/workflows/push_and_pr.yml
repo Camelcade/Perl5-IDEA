@@ -11,78 +11,32 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    name: Project
-    uses: ./.github/workflows/_build_project.yml
-    secrets: inherit
   codeql:
-    needs: build
     name: CodeQL
     uses: ./.github/workflows/_codeql.yml
     secrets: inherit
   qodana:
-    needs: build
     name: Qodana
     uses: ./.github/workflows/_qodana.yml
     secrets: inherit
-  light-tests:
-    needs: build
+  tests:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ 'ubuntu-latest', 'macos-latest', 'windows-latest' ]
     name: Tests
-    uses: ./.github/workflows/_light_tests.yml
-    secrets: inherit
-  heavy-tests:
-    needs: build
-    name: Tests
-    uses: ./.github/workflows/_heavy_tests.yml
-    secrets: inherit
-  integration-tests-linux-local:
-    needs: build
-    name: Tests
-    uses: ./.github/workflows/_integration_tests.yml
+    uses: ./.github/workflows/_tests.yml
     with:
-      title: Linux, Local
-      results_suffix: linux-local
-      os: ubuntu-latest
-      configurators: LOCAL_ASDF,LOCAL_PERLBREW,LOCAL_PERLBREW_WITH_LIBS,LOCAL_PLENV
-    secrets: inherit
-  integration-tests-macos-local:
-    needs: build
-    name: Tests
-    uses: ./.github/workflows/_integration_tests.yml
-    with:
-      title: macOS, Local
-      results_suffix: macos-local
-      os: macos-latest
-      configurators: LOCAL_ASDF,LOCAL_PERLBREW_WITH_LIBS,LOCAL_PLENV
-    secrets: inherit
-  integration-tests-windows-local:
-    needs: build
-    name: Tests
-    uses: ./.github/workflows/_integration_tests_windows.yml
-    with:
-      title: Windows, Local
-      results_suffix: windows-local
-      os: windows-latest
-      configurators: LOCAL_SYSTEM
-    secrets: inherit
-  integration-tests-linux-docker:
-    needs: build
-    name: Tests
-    uses: ./.github/workflows/_integration_tests.yml
-    with:
-      title: Linux, Docker
-      results_suffix: linux-docker
-      os: ubuntu-latest
-      configurators: DOCKER_SYSTEM
+      os: ${{ matrix.os }}
     secrets: inherit
   plugins:
-    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker, integration-tests-macos-local, integration-tests-windows-local ]
+    needs: tests
     if: ${{ github.event_name != 'pull_request' }}
     name: Plugins
     uses: ./.github/workflows/_build_plugins.yml
     secrets: inherit
   coverage:
-    needs: [ light-tests, heavy-tests, integration-tests-linux-local, integration-tests-linux-docker, integration-tests-macos-local, integration-tests-windows-local ]
+    needs: tests
     name: Coverage
     uses: ./.github/workflows/_coverage.yml
     secrets: inherit
