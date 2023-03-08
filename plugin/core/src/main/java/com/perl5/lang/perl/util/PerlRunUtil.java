@@ -434,7 +434,11 @@ public final class PerlRunUtil {
    */
   private static @NotNull List<String> getOutputFromProgram(@NotNull PerlCommandLine commandLine) {
     try {
-      return PerlHostData.execAndGetOutput(commandLine).getStdoutLines();
+      var commandOutput = PerlHostData.execAndGetOutput(commandLine);
+      if (commandOutput.getExitCode() != 0) {
+        LOG.warn("Non-zero exit code from " + commandLine + "; " + commandOutput);
+      }
+      return commandOutput.getStdoutLines();
     }
     catch (Exception e) {
       LOG.warn("Error executing " + commandLine, e);
