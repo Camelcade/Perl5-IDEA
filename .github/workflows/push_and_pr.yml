@@ -31,7 +31,6 @@ jobs:
     secrets: inherit
   plugins:
     needs: tests
-    if: ${{ github.event_name != 'pull_request' }}
     name: Plugins
     uses: ./.github/workflows/_build_plugins.yml
     secrets: inherit
