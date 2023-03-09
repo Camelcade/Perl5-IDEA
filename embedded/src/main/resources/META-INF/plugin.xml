@@ -83,9 +83,9 @@
   </extensions>
 
   <actions>
-      <action id="Embedded.Perl.newFile" class="com.perl5.lang.embedded.idea.actions.EmbeddedPerlCreateFileFromTemplateAction">
-        <add-to-group group-id="NewGroup" relative-to-action="Perl5.NewFile" anchor="after"/>
-      </action>
+    <action id="Embedded.Perl.newFile" class="com.perl5.lang.embedded.idea.actions.EmbeddedPerlCreateFileFromTemplateAction">
+      <add-to-group group-id="NewGroup" relative-to-action="Perl5.NewFile" anchor="after"/>
+    </action>
   </actions>
 
 </idea-plugin>
