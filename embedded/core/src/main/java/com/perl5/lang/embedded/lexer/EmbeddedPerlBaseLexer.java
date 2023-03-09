@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-fun properties(key: String) = providers.gradleProperty(key)
 
-dependencies {
-  listOf(
-    ":plugin:core",
-    ":lang.embedded:core",
-  ).forEach {
-    compileOnly(project(it))
-    testCompileOnly(project(it))
-    testRuntimeOnly(project(it, "instrumentedJar"))
-  }
-  listOf(
-    ":lang.embedded:core",
-  ).forEach {
-    runtimeOnly(project(it, "instrumentedJar"))
-  }
-  testImplementation(testFixtures(project(":plugin")))
-}
+package com.perl5.lang.embedded.lexer;
 
-intellij {
-  plugins.set(listOf(project(":plugin")))
+import com.intellij.openapi.util.text.StringUtil;
+import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
+import org.jetbrains.annotations.Nullable;
+
+public abstract class EmbeddedPerlBaseLexer extends PerlTemplatingLexer {
+  private static final CommentEndCalculator COMMENT_END_CALCULATOR = commentText -> StringUtil.indexOf(commentText, "?>");
+
+  @Override
+  protected @Nullable CommentEndCalculator getCommentEndCalculator() {
+    return COMMENT_END_CALCULATOR;
+  }
 }

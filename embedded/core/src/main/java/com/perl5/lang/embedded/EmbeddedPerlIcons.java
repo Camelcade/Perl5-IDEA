@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,25 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-fun properties(key: String) = providers.gradleProperty(key)
 
-dependencies {
-  listOf(
-    ":plugin:core",
-    ":lang.embedded:core",
-  ).forEach {
-    compileOnly(project(it))
-    testCompileOnly(project(it))
-    testRuntimeOnly(project(it, "instrumentedJar"))
-  }
-  listOf(
-    ":lang.embedded:core",
-  ).forEach {
-    runtimeOnly(project(it, "instrumentedJar"))
-  }
-  testImplementation(testFixtures(project(":plugin")))
-}
+package com.perl5.lang.embedded;
 
-intellij {
-  plugins.set(listOf(project(":plugin")))
+import com.intellij.openapi.util.IconLoader;
+import org.jetbrains.annotations.NotNull;
+
+import javax.swing.*;
+
+public final class EmbeddedPerlIcons {
+  public static final Icon EMBEDDED_PERL_FILE = load("/icons/embeddedperl.png");
+  private static @NotNull Icon load(@NotNull String resourcePath) {
+    return IconLoader.getIcon(resourcePath, EmbeddedPerlIcons.class);
+  }
+
+  private EmbeddedPerlIcons() {
+  }
 }
