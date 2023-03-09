@@ -1,3 +1,5 @@
+import org.jetbrains.intellij.tasks.PrepareSandboxTask
+
 /*
  * Copyright 2015-2021 Alexandr Evstigneev
  *
@@ -13,6 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+plugins {
+  id("com.github.johnrengelman.shadow") version "8.1.0"
+}
+
 fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
@@ -38,4 +44,15 @@ intellij {
     project(":plugin"),
     properties("remoteRunPlugin").get()
   ))
+}
+
+tasks {
+  withType<PrepareSandboxTask> {
+    pluginJar.set(shadowJar.flatMap {
+      it.archiveFile
+    })
+    runtimeClasspathFiles.set(project.files())
+
+    dependsOn(shadowJar)
+  }
 }
