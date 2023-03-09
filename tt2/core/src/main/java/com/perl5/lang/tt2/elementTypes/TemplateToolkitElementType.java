@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-dependencies {
-  listOf(
-    ":plugin:core",
-    ":lang.tt2:core",
-  ).forEach {
-    compileOnly(project(it))
-    testCompileOnly(project(it))
-    testRuntimeOnly(project(it, "instrumentedJar"))
-  }
-  listOf(
-    ":lang.tt2:core",
-  ).forEach {
-    runtimeOnly(project(it, "instrumentedJar"))
-  }
-  testImplementation(testFixtures(project(":plugin")))
-}
 
-intellij {
-  plugins.set(listOf(project(":plugin")))
+package com.perl5.lang.tt2.elementTypes;
+
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import org.jetbrains.annotations.NonNls;
+import org.jetbrains.annotations.NotNull;
+
+
+public abstract class TemplateToolkitElementType extends TemplateToolkitTokenType implements PsiElementProvider {
+  public TemplateToolkitElementType(@NotNull @NonNls String debugName) {
+    super(debugName);
+  }
 }
