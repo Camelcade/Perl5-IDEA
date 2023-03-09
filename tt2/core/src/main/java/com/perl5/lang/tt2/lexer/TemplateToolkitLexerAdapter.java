@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-dependencies {
-  listOf(
-    ":plugin:core",
-    ":lang.tt2:core",
-  ).forEach {
-    compileOnly(project(it))
-    testCompileOnly(project(it))
-    testRuntimeOnly(project(it, "instrumentedJar"))
-  }
-  listOf(
-    ":lang.tt2:core",
-  ).forEach {
-    runtimeOnly(project(it, "instrumentedJar"))
-  }
-  testImplementation(testFixtures(project(":plugin")))
-}
 
-intellij {
-  plugins.set(listOf(project(":plugin")))
+package com.perl5.lang.tt2.lexer;
+
+import com.intellij.openapi.project.Project;
+import com.perl5.lang.perl.lexer.PerlLexerWithCustomStatesAdapter;
+import org.jetbrains.annotations.Nullable;
+
+
+public class TemplateToolkitLexerAdapter extends PerlLexerWithCustomStatesAdapter {
+  public TemplateToolkitLexerAdapter(@Nullable Project project) {
+    super(new TemplateToolkitLexer(project));
+  }
 }
