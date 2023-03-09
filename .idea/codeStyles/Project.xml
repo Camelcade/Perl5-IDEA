@@ -15,6 +15,7 @@
     <option name="BLOCK_COMMENT_AT_FIRST_COLUMN" value="false" />
     <option name="DO_NOT_FORMAT">
       <list>
+        <fileSet type="globPattern" pattern="**/main/gen/**/*" />
         <fileSet type="globPattern" pattern="**/testData/**/*" />
         <fileSet type="globPattern" pattern=".qodana/*" />
       </list>
