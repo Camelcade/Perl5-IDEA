@@ -86,7 +86,7 @@ public class PerlRunTest extends PerlPlatformTestCase {
     doTestInstall(this::installPackageWithCpanminusAndGetPackageFile);
   }
 
-  private void doTestInstall(@NotNull BiFunction<PsiFile, String, PsiFile> installer) {
+  private void doTestInstall(@NotNull BiFunction<? super PsiFile, ? super String, ? extends PsiFile> installer) {
     assumeStatefulSdk();
     copyDirToModule("simple");
     var contextVirtualFile = openAndGetModuleFileInEditor("simplescript.pl");
