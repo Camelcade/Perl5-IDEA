@@ -31,6 +31,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
@@ -92,13 +93,24 @@ public class PerlRunTest extends PerlPlatformTestCase {
     var contextVirtualFile = openAndGetModuleFileInEditor("simplescript.pl");
     var contextPsiFile = PsiManager.getInstance(getProject()).findFile(contextVirtualFile);
     assertNotNull(contextPsiFile);
-    var packageName = "Class::Variable";
+    var packageName = "Carton";
+    var scriptName = "carton";
     assertPackageNotExists(contextPsiFile, packageName);
+    var cartonScriptVirtualFile = PerlRunUtil.findScript(getProject(), scriptName);
+    assertNull("carton script is expected to be missing, but found " + cartonScriptVirtualFile, cartonScriptVirtualFile);
     var packageFile = installer.apply(contextPsiFile, packageName);
     assertNotNull(packageFile);
     var packageVirtualFile = PsiUtilCore.getVirtualFile(packageFile);
     assertNotNull(packageVirtualFile);
     delete(packageVirtualFile);
+    var scriptVirtualFile = PerlRunUtil.findScript(getProject(), scriptName);
+    assertNotNull("cpan script is expected to be discoverable", scriptVirtualFile);
+
+    while (scriptVirtualFile != null) {
+      LOG.debug("Removing ", scriptVirtualFile);
+      delete(scriptVirtualFile);
+      scriptVirtualFile = PerlRunUtil.findScript(getProject(), scriptName);
+    }
   }
 
   @Test

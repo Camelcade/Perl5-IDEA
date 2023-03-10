@@ -98,7 +98,7 @@ import static org.junit.Assume.assumeFalse;
 @Category(Integration.class)
 @RunWith(Parameterized.class)
 public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
-  private static final int MAX_PROCESS_WAIT_TIME_SECONDS = 60;
+  private static final int MAX_PROCESS_WAIT_TIME_SECONDS = 120;
 
   protected static final int MAX_PROCESS_WAIT_TIME_MS = MAX_PROCESS_WAIT_TIME_SECONDS * 1000;
 
@@ -551,13 +551,14 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected @NotNull PsiFile installPackageWithCpanminusAndGetPackageFile(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
     return installPackageAndGetPackageFile(
       contextPsiFile, packageName,
-      (sdk, callback) -> CpanminusAdapter.createInstallAction(sdk, getProject(), List.of(packageName), callback)
+      (sdk, callback) -> CpanminusAdapter.createInstallAction(sdk, getProject(), List.of("--notest", packageName), callback)
     );
   }
 
   protected @NotNull PsiFile installPackageWithCpanAndGetPackageFile(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
     return installPackageAndGetPackageFile(
-      contextPsiFile, packageName, (sdk, callback) -> CpanAdapter.createInstallAction(sdk, getProject(), List.of(packageName), callback)
+      contextPsiFile, packageName,
+      (sdk, callback) -> CpanAdapter.createInstallAction(sdk, getProject(), List.of("-T", "-M", "www.cpan.org", packageName), callback)
     );
   }
 
