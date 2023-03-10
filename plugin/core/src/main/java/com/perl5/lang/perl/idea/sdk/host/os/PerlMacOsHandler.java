@@ -16,29 +16,18 @@
 
 package com.perl5.lang.perl.idea.sdk.host.os;
 
-import com.intellij.openapi.util.SystemInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-class PerlWindowsHandler extends PerlOsHandler {
-  public PerlWindowsHandler(@NotNull String name, @Nullable Icon icon) {
+class PerlMacOsHandler extends PerlBsdHandler{
+  public PerlMacOsHandler(@NotNull String name, @Nullable Icon icon) {
     super(name, icon);
   }
 
   @Override
-  public @NotNull String getPerlExecutableName() {
-    return "perl.exe";
-  }
-
-  @Override
-  public final boolean isMsWindows() {
-    return true;
-  }
-
   public @NotNull String getXSBinaryExtension() {
-    return "xs.dll";
+    return "bundle";
   }
-
 }

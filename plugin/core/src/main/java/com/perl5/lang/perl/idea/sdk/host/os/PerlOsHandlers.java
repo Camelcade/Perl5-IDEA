@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.perl5.PerlIcons;
 public interface PerlOsHandlers {
   PerlOsHandler WINDOWS10 = new PerlWindows10Handler("Windows 10", PerlIcons.WINDOWS10_ICON);
   PerlOsHandler WINDOWS = new PerlWindowsHandler("Windows", PerlIcons.WINDOWS_ICON);
-  PerlOsHandler MACOS = new PerlBsdHandler("MacOs", PerlIcons.MAC_ICON);
+  PerlOsHandler MACOS = new PerlMacOsHandler("MacOs", PerlIcons.MAC_ICON);
   PerlOsHandler FREEBSD = new PerlBsdHandler("FreeBsd", PerlIcons.FREEBSD_ICON);
   PerlOsHandler LINUX = new PerlLinuxHandler("Linux", PerlIcons.LINUX_ICON);
   PerlOsHandler SOLARIS = new PerlUnixHandler("Solaris", PerlIcons.SOLARIS_ICON);
