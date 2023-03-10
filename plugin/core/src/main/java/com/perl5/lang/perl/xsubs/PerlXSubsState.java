@@ -39,6 +39,7 @@ import com.intellij.openapi.progress.util.ReadTask;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.project.ProjectUtil;
+import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.NlsContexts.NotificationContent;
@@ -62,6 +63,8 @@ import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
+import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.perl.util.PerlUtil;
@@ -110,16 +113,19 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   }
 
   private Set<VirtualFile> getAllXSFiles(@NotNull Project project) {
-    List<VirtualFile> classesRoots = PerlProjectManager.getInstance(project).getAllLibraryRoots();
+    PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(project);
+    List<VirtualFile> classesRoots = perlProjectManager.getAllLibraryRoots();
     if (classesRoots.isEmpty()) {
       return Collections.emptySet();
     }
+    Sdk projectSdk = perlProjectManager.getProjectSdk();
+    PerlOsHandler osHandler = PerlOsHandler.notNullFrom(projectSdk);
 
     GlobalSearchScope classRootsScope =
       GlobalSearchScopesCore.directoriesScope(myProject, true, classesRoots.toArray(VirtualFile.EMPTY_ARRAY));
 
     Set<VirtualFile> result = new HashSet<>();
-    for (VirtualFile virtualFile : FilenameIndex.getAllFilesByExt(project, getXSBinaryExtension(), classRootsScope)) {
+    for (VirtualFile virtualFile : FilenameIndex.getAllFilesByExt(project, osHandler.getXSBinaryExtension(), classRootsScope)) {
       if (virtualFile.isValid() && !virtualFile.isDirectory() && !(virtualFile instanceof LightVirtualFile)) {
         String path = virtualFile.getCanonicalPath();
         if (path != null && StringUtil.contains(path, "/auto/")) {
@@ -381,9 +387,5 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
 
   public static PerlXSubsState getInstance(@NotNull Project project) {
     return project.getService(PerlXSubsState.class);
-  }
-
-  private static @NotNull String getXSBinaryExtension() {
-    return SystemInfo.isWindows ? "xs.dll" : "so";
   }
 }

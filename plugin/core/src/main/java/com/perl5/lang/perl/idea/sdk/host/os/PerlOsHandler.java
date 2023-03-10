@@ -61,6 +61,11 @@ public abstract class PerlOsHandler {
     return myIcon;
   }
 
+  /**
+   * @return file extension used for compiled xs extensions.
+   */
+  public abstract @NotNull String getXSBinaryExtension();
+
   public static @NotNull PerlOsHandler notNullFrom(@NotNull Sdk sdk) {
     return PerlHostData.notNullFrom(sdk).getOsHandler();
   }
