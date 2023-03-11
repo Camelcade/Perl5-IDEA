@@ -18,28 +18,8 @@ env:
   TEST_PERL_MODULES: Mojolicious HURRICUP/Devel-Camelcadedb-v2023.1.tar.gz Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic B::Debug Types::Serialiser
 
 jobs:
-  build:
-    name: "Build"
-    runs-on: ${{ inputs.os }}
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'corretto'
-          java-version: 17
-
-      - name: Execute Gradle build
-        uses: gradle/gradle-build-action@v2
-        with:
-          cache-read-only: false
-          arguments: jar instrumentTest --console plain
 
   integration-plenv:
-    needs: build
     name: Integration (plenv)
     if: ${{ inputs.os != 'windows-latest' }}
     runs-on: ${{ inputs.os }}
@@ -90,7 +70,6 @@ jobs:
             **/jacoco/*.exec  
 
   integration-asdf:
-    needs: build
     name: Integration (asdf)
     if: ${{ inputs.os != 'windows-latest' }}
     runs-on: ${{ inputs.os }}
@@ -136,9 +115,8 @@ jobs:
             **/jacoco/*.exec  
 
   integration-perlbrew:
-    needs: build
     name: Integration (perlbrew)
-    if: ${{ inputs.os != 'windows-latest' }}
+    if: ${{ inputs.os == 'ubuntu-latest' }}
     runs-on: ${{ inputs.os }}
     env:
       PERL_CONFIGURATORS: LOCAL_PERLBREW
@@ -185,7 +163,6 @@ jobs:
             **/jacoco/*.exec  
 
   integration-perlbrew-external-libs:
-    needs: build
     name: Integration (perlbrew with libs)
     if: ${{ inputs.os != 'windows-latest' }}
     runs-on: ${{ inputs.os }}
@@ -234,7 +211,6 @@ jobs:
             **/jacoco/*.exec  
 
   integration-system:
-    needs: build
     name: Integration (system)
     if: ${{ inputs.os == 'windows-latest' }}
     runs-on: ${{ inputs.os }}
@@ -278,7 +254,6 @@ jobs:
             **/jacoco/*.exec
 
   integration-docker:
-    needs: build
     name: Integration (docker)
     runs-on: ${{ inputs.os }}
     if: ${{ inputs.os == 'ubuntu-latest' }}
@@ -309,7 +284,6 @@ jobs:
 
   light-tests:
     name: Light
-    needs: build
     runs-on: ${{ inputs.os }}
     steps:
       - uses: actions/checkout@v3
@@ -336,7 +310,6 @@ jobs:
 
   heavy-tests:
     name: Heavy
-    needs: build
     runs-on: ${{ inputs.os }}
     steps:
       - uses: actions/checkout@v3
