@@ -18,6 +18,7 @@ package unit;
 
 import base.PerlInstrumentationTestCase;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.carton.PerlCartonDirectoryConfigurationProvider;
 import com.perl5.lang.perl.coverage.PerlCoverageEnabledConfiguration;
 import com.perl5.lang.perl.debugger.run.run.debugger.PerlDebuggerProgramRunner;
 import com.perl5.lang.perl.idea.configuration.module.idea.PerlIdeaTestUtil;
@@ -31,6 +32,8 @@ import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
 import com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvTestUtil;
 import com.perl5.lang.perl.idea.terminal.PerlLocalTerminalCustomizer;
 import com.perl5.lang.perl.intellilang.PerlInjectionSupport;
+import com.perl5.lang.perl.makeMaker.PerlMakeMakerDirectoryConfigurationProvider;
+import com.perl5.lang.perl.moduleBuild.PerlModuleBuildDirectoryConfigurationProvider;
 import com.perl5.lang.perl.profiler.PerlProfilerBundle;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runner.RunWith;
@@ -51,6 +54,7 @@ public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
     return Arrays.asList(new Object[][]{
       {"asdf", AsdfTestUtil.getInstrumentationTestClass()},
       {"berrybrew", BerryBrewTestUtil.getInstrumentationTestClass()},
+      {"carton", PerlCartonDirectoryConfigurationProvider.class},
       {"copyright", PerlCopyrightsVariablesProvider.class},
       {"core", PerlParserDefinition.class},
       {"coverage", PerlCoverageEnabledConfiguration.class},
@@ -58,6 +62,8 @@ public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
       {"docker", PerlDockerTestUtil.getInstrumentationTestClass()},
       {"idea", PerlIdeaTestUtil.getInstrumentationTestClass()},
       {"intelliLang", PerlInjectionSupport.class},
+      {"makeMaker", PerlMakeMakerDirectoryConfigurationProvider.class},
+      {"moduleBuild", PerlModuleBuildDirectoryConfigurationProvider.class},
       {"perlInstall", PerlInstallHandlerBase.class},
       {"perlbrew", PerlBrewTestUtil.getInstrumentationTestClass()},
       {"plenv", PlenvTestUtil.getInstrumentationTestClass()},

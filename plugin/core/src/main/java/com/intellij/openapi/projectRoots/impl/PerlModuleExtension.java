@@ -232,7 +232,12 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
       modifiableModel.dispose();
     }
     finally {
-      WriteAction.run(modifiableModel::commit);
+      if( moduleExtensionModifiableModel.isChanged()){
+        WriteAction.run(modifiableModel::commit);
+      }
+      else {
+        modifiableModel.dispose();
+      }
     }
   }
 

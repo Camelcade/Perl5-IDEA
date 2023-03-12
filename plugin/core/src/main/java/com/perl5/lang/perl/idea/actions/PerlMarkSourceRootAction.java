@@ -30,6 +30,7 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -75,6 +76,9 @@ public abstract class PerlMarkSourceRootAction extends PerlSourceRootAction {
   }
 
   public final void markRoot(@NotNull Module module, @NotNull VirtualFile... files) {
+    markRoot(module, Arrays.asList(files));
+  }
+  public final void markRoot(@NotNull Module module, @NotNull List<? extends VirtualFile> files) {
     PerlModuleExtension.modify(module, it -> {
       for (VirtualFile virtualFile : files) {
         it.setRoot(virtualFile, myType);
