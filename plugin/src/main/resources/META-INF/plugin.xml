@@ -31,12 +31,15 @@
   <content>
     <module name="perl5.plugin.asdf"/>
     <module name="perl5.plugin.berrybrew"/>
+    <module name="perl5.plugin.carton"/>
     <module name="perl5.plugin.copyright"/>
     <module name="perl5.plugin.coverage"/>
     <module name="perl5.plugin.debugger"/>
     <module name="perl5.plugin.docker"/>
     <module name="perl5.plugin.idea"/>
     <module name="perl5.plugin.intelliLang"/>
+    <module name="perl5.plugin.makeMaker"/>
+    <module name="perl5.plugin.moduleBuild"/>
     <module name="perl5.plugin.perlbrew"/>
     <module name="perl5.plugin.plenv"/>
     <module name="perl5.plugin.profiler"/>
@@ -67,6 +70,8 @@
     <extensionPoint name="implicitSubsProvider" interface="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider"/>
     <extensionPoint name="settings.configurable.extension"
                     interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension" dynamic="true"/>
+    <extensionPoint name="directoryConfigurationProvider" interface="com.perl5.lang.perl.idea.project.PerlDirectoryConfigurationProvider"
+                    dynamic="true"/>
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.perl5">
@@ -258,6 +263,7 @@
     <postStartupActivity implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeServiceWatcher"/>
     <postStartupActivity implementation="com.perl5.lang.perl.idea.sdk.host.PerlHostCacheCleaner"/>
     <postStartupActivity implementation="com.perl5.lang.perl.idea.project.Perl5ProjectStartupActivity"/>
+    <postStartupActivity implementation="com.perl5.lang.perl.idea.project.PerlProjectDirectoriesConfigurator"/>
 
     <applicationService serviceInterface="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"
                         serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>

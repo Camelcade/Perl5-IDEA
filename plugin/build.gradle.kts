@@ -27,6 +27,7 @@ dependencies {
   listOf(
     ":plugin:asdf",
     ":plugin:berrybrew",
+    ":plugin:carton",
     ":plugin:copyright",
     ":plugin:core",
     ":plugin:coverage",
@@ -34,6 +35,8 @@ dependencies {
     ":plugin:docker",
     ":plugin:idea",
     ":plugin:intelliLang",
+    ":plugin:makeMaker",
+    ":plugin:moduleBuild",
     ":plugin:perlInstall",
     ":plugin:perlbrew",
     ":plugin:plenv",
