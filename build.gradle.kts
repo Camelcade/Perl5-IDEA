@@ -297,7 +297,7 @@ intellij {
     project(":lang.mason.mason2"),
   )
 
-  if (isCI.get()) {
+  if (!isCI.get()) {
     pluginList.add("PsiViewer:${properties("psiViewerVersion").get()}")
   }
 
