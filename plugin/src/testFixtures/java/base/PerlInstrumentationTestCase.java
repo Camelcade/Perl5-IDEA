@@ -16,12 +16,15 @@
 
 package base;
 
+import categories.Light;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.util.stream.Stream;
 
+@Category(Light.class)
 public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
 
   private final Class<?> myClass;
