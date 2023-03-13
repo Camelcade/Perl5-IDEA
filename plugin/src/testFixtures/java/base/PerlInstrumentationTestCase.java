@@ -18,6 +18,7 @@ package base;
 
 import categories.Light;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
+import com.intellij.util.lang.PathClassLoader;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -37,8 +38,11 @@ public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
   @SuppressWarnings("JUnitMixedFramework")
   @Test
   public void testDependencyInstrumentation() {
+    var classLoader = myClass.getClassLoader();
+    assertInstanceOf(classLoader, PathClassLoader.class);
+    var pathClassLoader = (PathClassLoader)classLoader;
     assertTrue(
-      "Class " + myClass + " does not look instrumented",
+      "Class " + myClass + " does not look instrumented, classpaths: " + pathClassLoader.getClassPath().getBaseUrls(),
       Stream.of(myClass.getDeclaredMethods()).anyMatch(m -> m.getName().startsWith("$$$reportNull$$$")));
   }
 }
