@@ -148,6 +148,7 @@ import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.testFramework.utils.parameterInfo.MockCreateParameterInfoContext;
 import com.intellij.ui.DeferredIcon;
 import com.intellij.ui.components.breadcrumbs.Crumb;
+import com.intellij.ui.icons.CachedImageIcon;
 import com.intellij.ui.icons.RowIcon;
 import com.intellij.usageView.*;
 import com.intellij.usages.*;
