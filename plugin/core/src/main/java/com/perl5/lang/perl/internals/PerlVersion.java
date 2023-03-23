@@ -18,6 +18,7 @@ package com.perl5.lang.perl.internals;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.util.xmlb.annotations.Tag;
 import com.perl5.PerlBundle;
 import org.apache.groovy.util.Maps;
 import org.jetbrains.annotations.NotNull;
@@ -75,12 +76,19 @@ public final class PerlVersion implements Comparable<PerlVersion> {
     V5_36, PerlBundle.message("perl.version.description.5.36")
   );
 
+  @Tag("isAlpha")
   private boolean myIsAlpha;
+  @Tag("isStrict")
   private boolean myIsStrict;
+  @Tag("isValid")
   private boolean myIsValid;
+  @Tag("revision")
   private int myRevision;
+  @Tag("major")
   private int myMajor;
+  @Tag("minor")
   private int myMinor;
+  @Tag("extraChunks")
   private List<Integer> myExtraChunks = Collections.emptyList();
 
   @SuppressWarnings("unused")
