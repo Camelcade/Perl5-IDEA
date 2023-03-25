@@ -295,25 +295,25 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
       return CodeFoldingSettings.getInstance().COLLAPSE_METHODS;
     }
     else if (elementType == COMMENT_LINE || elementType == COMMENT_BLOCK) {
-      return PerlFoldingSettings.getInstance().COLLAPSE_COMMENTS;
+      return PerlFoldingSettingsImpl.getInstance().COLLAPSE_COMMENTS;
     }
     else if (elementType == ANON_ARRAY) {
-      return PerlFoldingSettings.getInstance().COLLAPSE_ANON_ARRAYS;
+      return PerlFoldingSettingsImpl.getInstance().COLLAPSE_ANON_ARRAYS;
     }
     else if (elementType == ANON_HASH) {
-      return PerlFoldingSettings.getInstance().COLLAPSE_ANON_HASHES;
+      return PerlFoldingSettingsImpl.getInstance().COLLAPSE_ANON_HASHES;
     }
     else if (elementType == PARENTHESISED_EXPR) {
-      return PerlFoldingSettings.getInstance().COLLAPSE_PARENTHESISED;
+      return PerlFoldingSettingsImpl.getInstance().COLLAPSE_PARENTHESISED;
     }
     else if (elementType == HEREDOC) {
-      return PerlFoldingSettings.getInstance().COLLAPSE_HEREDOCS;
+      return PerlFoldingSettingsImpl.getInstance().COLLAPSE_HEREDOCS;
     }
     else if (elementType == STRING_LIST) {
-      return PerlFoldingSettings.getInstance().COLLAPSE_QW;
+      return PerlFoldingSettingsImpl.getInstance().COLLAPSE_QW;
     }
     else if (elementType == getTemplateBlockElementType()) {
-      return PerlFoldingSettings.getInstance().COLLAPSE_TEMPLATES;
+      return PerlFoldingSettingsImpl.getInstance().COLLAPSE_TEMPLATES;
     }
     else {
       return false;
@@ -378,7 +378,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
       if (!chars.isEmpty()) {
         myDescriptors.add(new FoldingDescriptor(
           o.getNode(), o.getTextRange(), null, chars,
-          PerlFoldingSettings.getInstance().COLLAPSE_CHAR_SUBSTITUTIONS, Collections.emptySet()));
+          PerlFoldingSettingsImpl.getInstance().COLLAPSE_CHAR_SUBSTITUTIONS, Collections.emptySet()));
       }
     }
 

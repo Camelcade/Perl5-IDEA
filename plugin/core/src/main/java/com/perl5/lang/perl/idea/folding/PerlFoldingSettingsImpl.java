@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
   name = "PerlCodeFoldingSettings",
   storages = @Storage(PerlPathMacros.APP_CODEINSIGHT_SETTINGS_FILE)
 )
-public class PerlFoldingSettings implements PersistentStateComponent<PerlFoldingSettings> {
+public class PerlFoldingSettingsImpl implements PersistentStateComponent<PerlFoldingSettingsImpl> {
   public boolean COLLAPSE_COMMENTS = true;
   public boolean COLLAPSE_CONSTANT_BLOCKS = false;
   public boolean COLLAPSE_ANON_ARRAYS = false;
@@ -42,16 +42,16 @@ public class PerlFoldingSettings implements PersistentStateComponent<PerlFolding
   public boolean COLLAPSE_CHAR_SUBSTITUTIONS = true;
 
   @Override
-  public @Nullable PerlFoldingSettings getState() {
+  public @Nullable PerlFoldingSettingsImpl getState() {
     return this;
   }
 
   @Override
-  public void loadState(@NotNull PerlFoldingSettings state) {
+  public void loadState(@NotNull PerlFoldingSettingsImpl state) {
     XmlSerializerUtil.copyBean(state, this);
   }
 
-  public static PerlFoldingSettings getInstance() {
-    return ApplicationManager.getApplication().getService(PerlFoldingSettings.class);
+  public static PerlFoldingSettingsImpl getInstance() {
+    return ApplicationManager.getApplication().getService(PerlFoldingSettingsImpl.class);
   }
 }
