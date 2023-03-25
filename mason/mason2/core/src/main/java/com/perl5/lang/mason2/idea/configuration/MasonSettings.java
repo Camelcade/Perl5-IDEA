@@ -42,6 +42,7 @@ import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 public class MasonSettings extends AbstractMasonSettings implements PersistentStateComponent<MasonSettings>, Disposable {
   public List<String> autobaseNames = mutableList("Base.mp", "Base.mc");
 
+  @SuppressWarnings("unused")
   public MasonSettings() {
     initInstance();
   }

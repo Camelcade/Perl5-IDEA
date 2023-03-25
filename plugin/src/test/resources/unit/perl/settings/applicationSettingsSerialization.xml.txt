@@ -1,0 +1,4 @@
+<PerlApplicationSettings>
+  <option name="pluginVersion" value="test version" />
+  <option name="popupShown" value="true" />
+</PerlApplicationSettings>

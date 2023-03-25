@@ -1,0 +1,11 @@
+<PerlLocalSettings>
+  <option name="externalLibrariesPaths">
+    <list>
+      <option value="testlib1" />
+      <option value="testlib2" />
+    </list>
+  </option>
+  <option name="perlInterpreter" value="test_interpreter" />
+  <option name="DISABLE_NO_INTERPRETER_WARNING" value="true" />
+  <option name="ENABLE_REGEX_INJECTIONS" value="true" />
+</PerlLocalSettings>

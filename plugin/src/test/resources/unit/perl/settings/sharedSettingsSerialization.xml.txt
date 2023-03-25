@@ -1,0 +1,24 @@
+<PerlSharedSettings>
+  <option name="targetPerlVersion">
+    <PerlVersion>
+      <isStrict>true</isStrict>
+      <isValid>true</isValid>
+      <revision>5</revision>
+      <major>20</major>
+    </PerlVersion>
+  </option>
+  <option name="selfNames">
+    <list>
+      <option value="selfname" />
+    </list>
+  </option>
+  <option name="SIMPLE_MAIN_RESOLUTION" value="false" />
+  <option name="AUTOMATIC_HEREDOC_INJECTIONS" value="false" />
+  <option name="ALLOW_INJECTIONS_WITH_INTERPOLATION" value="true" />
+  <option name="PERL_CRITIC_ENABLED" value="true" />
+  <option name="PERL_ANNOTATOR_ENABLED" value="true" />
+  <option name="PERL_DEPARSE_ARGUMENTS" value="deparse args" />
+  <option name="PERL_TIDY_ARGS" value="perltidy args" />
+  <option name="PERL_CRITIC_ARGS" value="perlcritic args" />
+  <option name="PERL_SWITCH_ENABLED" value="true" />
+</PerlSharedSettings>

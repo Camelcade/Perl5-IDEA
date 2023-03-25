@@ -1,0 +1,11 @@
+<PerlFoldingSettingsImpl>
+  <option name="COLLAPSE_COMMENTS" value="false" />
+  <option name="COLLAPSE_CONSTANT_BLOCKS" value="true" />
+  <option name="COLLAPSE_ANON_ARRAYS" value="true" />
+  <option name="COLLAPSE_ANON_HASHES" value="true" />
+  <option name="COLLAPSE_PARENTHESISED" value="true" />
+  <option name="COLLAPSE_HEREDOCS" value="true" />
+  <option name="COLLAPSE_TEMPLATES" value="true" />
+  <option name="COLLAPSE_QW" value="true" />
+  <option name="COLLAPSE_CHAR_SUBSTITUTIONS" value="false" />
+</PerlFoldingSettingsImpl>

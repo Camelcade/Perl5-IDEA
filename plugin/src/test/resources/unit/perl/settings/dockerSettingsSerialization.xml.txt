@@ -1,0 +1,4 @@
+<PerlDockerProjectSettings>
+  <option name="additionalDockerParameters" value="additional params" />
+  <additional-params>additional params</additional-params>
+</PerlDockerProjectSettings>

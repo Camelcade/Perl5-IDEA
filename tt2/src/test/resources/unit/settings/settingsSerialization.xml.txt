@@ -1,0 +1,13 @@
+<TemplateToolkitSettings>
+  <option name="substitutedExtensions">
+    <list>
+      <option value="ext1" />
+      <option value="ext2" />
+      <option value="ext3" />
+    </list>
+  </option>
+  <option name="START_TAG" value="%start" />
+  <option name="END_TAG" value="%end" />
+  <option name="OUTLINE_TAG" value="%%outline" />
+  <option name="ENABLE_ANYCASE" value="true" />
+</TemplateToolkitSettings>

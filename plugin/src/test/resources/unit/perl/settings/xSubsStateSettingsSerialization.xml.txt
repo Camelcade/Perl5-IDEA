@@ -1,0 +1,9 @@
+<PerlXSubsState>
+  <option name="isActual" value="false" />
+  <option name="myFilesMap">
+    <map>
+      <entry key="testfile1" value="1" />
+      <entry key="testfile2" value="2" />
+    </map>
+  </option>
+</PerlXSubsState>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import com.intellij.util.xmlb.annotations.Tag;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 
 @State(
   name = "Perl5DockerSettings",
@@ -33,7 +34,8 @@ import org.jetbrains.annotations.Nullable;
     @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE)
   }
 )
-class PerlDockerProjectSettings implements PersistentStateComponent<PerlDockerProjectSettings> {
+@VisibleForTesting
+public class PerlDockerProjectSettings implements PersistentStateComponent<PerlDockerProjectSettings> {
   @Tag("additional-params") private @NotNull String myAdditionalDockerParameters = "";
 
   public @NotNull String getAdditionalDockerParameters() {

@@ -1,0 +1,7 @@
+<Perl5CodeInsightSettings>
+  <option name="HEREDOC_AUTO_INSERTION" value="false" />
+  <option name="AUTO_INSERT_COLON" value="false" />
+  <option name="SMART_COMMA_SEQUENCE_TYPING" value="false" />
+  <option name="AUTO_BRACE_HEX_SUBSTITUTION" value="false" />
+  <option name="AUTO_BRACE_OCT_SUBSTITUTION" value="false" />
+</Perl5CodeInsightSettings>

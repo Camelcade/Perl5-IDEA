@@ -44,7 +44,6 @@ import com.intellij.openapi.roots.ProjectRootManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.NlsContexts.NotificationContent;
 import com.intellij.openapi.util.NlsContexts.NotificationTitle;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -64,7 +63,6 @@ import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
-import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandlers;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.perl.util.PerlUtil;
@@ -86,7 +84,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   @Transient
   public static final String DEPARSED_FILE_NAME = "_Deparsed_XSubs.pm";
   public boolean isActual = true;
-  public Map<String, Long> myFilesMap = new HashMap<>();
+  public Map<String, Long> myFilesMap = Collections.emptyMap();
   @Transient
   private Task.Backgroundable myParserTask = null;
   @Transient
