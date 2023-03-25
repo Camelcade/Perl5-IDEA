@@ -465,12 +465,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   public void initWithFileSmart(String filename) {
-    try {
-      initWithFile(filename, getFileExtension());
-    }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    initWithFile(filename, getFileExtension());
   }
 
   public void initWithTextSmart(@NotNull String content) {
@@ -493,7 +488,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     return "Implement getPerTestCode() method in test";
   }
 
-  public void initWithFile(String filename, String extension) throws IOException {
+  public void initWithFile(String filename, String extension) {
     initWithFile(filename, extension, filename + (extension.isEmpty() ? "" : getRealDataFileExtension()));
   }
 
@@ -501,12 +496,18 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     return ".code";
   }
 
-  public void initWithFile(String targetFileName, String targetFileExtension, String sourceFileNameWithExtension) throws IOException {
+  public void initWithFile(String targetFileName, String targetFileExtension, String sourceFileNameWithExtension) {
     initWithFileContent(targetFileName, targetFileExtension, loadFile(new File(getTestDataPath(), sourceFileNameWithExtension)));
   }
 
-  public static @NotNull String loadFile(@NotNull File fileToLoad) throws IOException {
-    return FileUtilRt.loadFile(fileToLoad, CharsetToolkit.UTF8, true);
+  public static @NotNull String loadFile(@NotNull File fileToLoad) {
+    try {
+      return FileUtilRt.loadFile(fileToLoad, CharsetToolkit.UTF8, true);
+    }
+    catch (IOException e) {
+      fail("Error loading file: " + fileToLoad + ", " + e.getMessage());
+    }
+    throw new RuntimeException("Can't be");
   }
 
   public void initWithFileSmartWithoutErrors() {
@@ -1323,12 +1324,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   @Deprecated // use initWithFileSmart
   public void initWithFileAsScript(String filename) {
-    try {
-      initWithFile(filename, PerlFileTypeScript.EXTENSION_PL);
-    }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    initWithFile(filename, PerlFileTypeScript.EXTENSION_PL);
   }
 
 
@@ -2585,12 +2581,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void initWithCpanFile() {
-    try {
-      initWithFile("cpanfile", "");
-    }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    initWithFile("cpanfile", "");
   }
 
   public void initWithTestDataFile(@NotNull String sourceName) {
@@ -2598,14 +2589,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   public void initWithTestDataFile(@NotNull String sourceName, @NotNull String targetName) {
-    try {
-      initWithFileContent(
-        targetName, getFileExtension(), loadFile(new File(TEST_RESOURCES_ROOT, sourceName + getRealDataFileExtension())).trim());
-      assertNoErrorElements();
-    }
-    catch (IOException e) {
-      throw new RuntimeException(e);
-    }
+    initWithFileContent(
+      targetName, getFileExtension(), loadFile(new File(TEST_RESOURCES_ROOT, sourceName + getRealDataFileExtension())).trim());
+    assertNoErrorElements();
   }
 
   protected void withFunctionParameters() { addTestLibrary("functionParameters"); }
