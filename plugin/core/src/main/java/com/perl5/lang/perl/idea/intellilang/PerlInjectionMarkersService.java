@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.perl5.lang.perl.idea.intellilang.PerlDefaultInjectionMarkers.DEFAULT_MARKERS;
 
@@ -45,7 +42,7 @@ import static com.perl5.lang.perl.idea.intellilang.PerlDefaultInjectionMarkers.D
 )
 public class PerlInjectionMarkersService implements PersistentStateComponent<PerlInjectionMarkersService> {
   @Tag("MARKERS_MAP")
-  private Map<String, String> myCustomMarkersMap = new HashMap<>();
+  private Map<String, String> myCustomMarkersMap = Collections.emptyMap();
 
   private final transient ClearableLazyValue<Map<String, Language>> myLanguageMapProvider =
     AtomicClearableLazyValue.create(this::computeMarkersMap);
@@ -69,7 +66,7 @@ public class PerlInjectionMarkersService implements PersistentStateComponent<Per
   }
 
   public void setCustomMarkersMap(Map<String, String> customMarkersMap) {
-    Map<String, String> result = new HashMap<>();
+    Map<String, String> result = new LinkedHashMap<>();
     customMarkersMap.forEach((marker, languageId) -> {
       String defaultLanguageId = DEFAULT_MARKERS.get(marker);
       if (defaultLanguageId == null || !defaultLanguageId.equals(languageId)) {
