@@ -1,3 +1,4 @@
 version: "1.0"
+linter: jetbrains/qodana-jvm
 profile:
   path: .idea/inspectionProfiles/Project_Quality.xml
