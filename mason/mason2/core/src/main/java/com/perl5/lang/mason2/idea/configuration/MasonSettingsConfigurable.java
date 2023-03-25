@@ -93,7 +93,7 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
 
     myGlobalsModel.setItems(new ArrayList<>());
     for (VariableDescription variableDescription : mySettings.globalVariables) {
-      myGlobalsModel.addRow(variableDescription.clone());
+      myGlobalsModel.addRow(variableDescription.copy());
     }
   }
 

@@ -17,18 +17,22 @@
 package com.perl5.lang.htmlmason.idea.configuration;
 
 
+import java.util.Objects;
+
 public class HTMLMasonCustomTag {
   private String myText;
   private HTMLMasonCustomTagRole myRole;
+
+  @SuppressWarnings("unused")
+  private HTMLMasonCustomTag() {
+  }
 
   public HTMLMasonCustomTag(String myText, HTMLMasonCustomTagRole myRole) {
     this.myText = myText;
     this.myRole = myRole;
   }
 
-  @SuppressWarnings("CloneDoesntDeclareCloneNotSupportedException")
-  @Override
-  protected HTMLMasonCustomTag clone() {
+  protected HTMLMasonCustomTag copy() {
     return new HTMLMasonCustomTag(myText, myRole);
   }
 
@@ -53,18 +57,21 @@ public class HTMLMasonCustomTag {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof HTMLMasonCustomTag)) {
+    if (!(o instanceof HTMLMasonCustomTag tag)) {
       return false;
     }
 
-    HTMLMasonCustomTag that = (HTMLMasonCustomTag)o;
-
-    return myText.equals(that.myText);
+    if (!Objects.equals(myText, tag.myText)) {
+      return false;
+    }
+    return myRole == tag.myRole;
   }
 
   @Override
   public int hashCode() {
-    return myText.hashCode();
+    int result = myText != null ? myText.hashCode() : 0;
+    result = 31 * result + (myRole != null ? myRole.hashCode() : 0);
+    return result;
   }
 
   public String getOpenTagText() {
