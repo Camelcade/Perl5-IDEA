@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.psi.ElementManipulators;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
-import com.perl5.lang.perl.idea.folding.PerlFoldingSettings;
+import com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl;
 import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.PsiPerlAnonHash;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
@@ -88,6 +88,6 @@ public class ConstantProcessor extends PerlPragmaProcessorBase {
 
   @Override
   public boolean isFoldedByDefault(@NotNull PerlUseStatementElementBase useStatementElement) {
-    return PerlFoldingSettings.getInstance().COLLAPSE_CONSTANT_BLOCKS;
+    return PerlFoldingSettingsImpl.getInstance().COLLAPSE_CONSTANT_BLOCKS;
   }
 }

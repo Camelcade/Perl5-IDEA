@@ -269,7 +269,7 @@
     <applicationService serviceImplementation="com.intellij.openapi.projectRoots.impl.PerlSdkTable"/>
     <additionalLibraryRootsProvider implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlLibraryProvider"/>
     <resolveScopeProvider implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlResolveScopeProvider"/>
-    <applicationService serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettings"/>
+    <applicationService serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
 
     <extendWordSelectionHandler implementation="com.perl5.lang.perl.idea.editor.PerlVariableSelectionHandler"/>
