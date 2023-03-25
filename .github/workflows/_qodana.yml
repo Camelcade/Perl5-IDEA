@@ -10,22 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      SPACE_DOCKER_PASSWORD: ${{ secrets.SPACE_DOCKER_PASSWORD }}
-      QODANA_LINTER: registry.jetbrains.team/p/sa/containers/qodana-jvm:231.7617.13
-      QODANA_PUBLIC_LINTER: jetbrains/qodana-jvm
     steps:
       - uses: actions/checkout@v3
-      - name: Login to Jetbrains Space
-        if: ${{ env.SPACE_DOCKER_PASSWORD }}
-        uses: docker/login-action@v2
-        with:
-          registry: registry.jetbrains.team
-          username: Alexandr.Evstigneev
-          password: ${{ env.SPACE_DOCKER_PASSWORD }}
-
-      - name: Pull Linter Image
-        if: ${{ env.SPACE_DOCKER_PASSWORD }}
-        run: docker pull ${{ env.QODANA_LINTER }}
 
       - name: Qodana Scan
         uses: JetBrains/qodana-action@v2022.3.4
@@ -33,7 +19,7 @@ jobs:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
         with:
           use-caches: false
-          args: --baseline,.qodana/qodana.sarif.json,-l,${{ env.SPACE_DOCKER_PASSWORD && env.QODANA_LINTER || env.QODANA_PUBLIC_LINTER }}
+          args: --baseline,.qodana/qodana.sarif.json
 
       - uses: github/codeql-action/upload-sarif@v2
         with:
