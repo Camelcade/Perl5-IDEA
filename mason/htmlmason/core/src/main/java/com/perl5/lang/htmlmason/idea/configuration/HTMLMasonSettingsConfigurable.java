@@ -160,12 +160,12 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
 
     myCustomTagsModel.setItems(new ArrayList<>());
     for (HTMLMasonCustomTag htmlMasonCustomTag : mySettings.customTags) {
-      myCustomTagsModel.addRow(htmlMasonCustomTag.clone());
+      myCustomTagsModel.addRow(htmlMasonCustomTag.copy());
     }
 
     myGlobalsModel.setItems(new ArrayList<>());
     for (VariableDescription variableDescription : mySettings.globalVariables) {
-      myGlobalsModel.addRow(variableDescription.clone());
+      myGlobalsModel.addRow(variableDescription.copy());
     }
   }
 

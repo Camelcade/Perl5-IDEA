@@ -17,6 +17,8 @@
 package com.perl5.lang.mason2.idea.configuration;
 
 
+import java.util.Objects;
+
 public class VariableDescription {
   public String variableName;
   public String variableType;
@@ -29,8 +31,7 @@ public class VariableDescription {
     this.variableType = variableType;
   }
 
-  @Override
-  public VariableDescription clone() {
+  public VariableDescription copy() {
     return new VariableDescription(variableName, variableType);
   }
 
@@ -39,16 +40,14 @@ public class VariableDescription {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof VariableDescription that)) {
       return false;
     }
 
-    VariableDescription that = (VariableDescription)o;
-
-    if (variableName != null ? !variableName.equals(that.variableName) : that.variableName != null) {
+    if (!Objects.equals(variableName, that.variableName)) {
       return false;
     }
-    return variableType != null ? variableType.equals(that.variableType) : that.variableType == null;
+    return Objects.equals(variableType, that.variableType);
   }
 
   @Override
