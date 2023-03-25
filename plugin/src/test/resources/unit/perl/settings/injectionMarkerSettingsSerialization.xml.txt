@@ -1,0 +1,8 @@
+<PerlInjectionMarkersService>
+  <MARKERS_MAP>
+    <map>
+      <entry key="TEST_MARKER1" value="HTML" />
+      <entry key="TEST_MARKER2" value="TEXT" />
+    </map>
+  </MARKERS_MAP>
+</PerlInjectionMarkersService>

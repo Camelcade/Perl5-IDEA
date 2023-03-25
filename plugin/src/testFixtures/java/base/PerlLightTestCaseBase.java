@@ -43,6 +43,7 @@ import com.intellij.codeInsight.template.impl.TemplateManagerImpl;
 import com.intellij.codeInsight.template.impl.TemplateState;
 import com.intellij.codeInsight.template.impl.editorActions.ExpandLiveTemplateByTabAction;
 import com.intellij.codeInspection.LocalInspectionTool;
+import com.intellij.configurationStore.XmlSerializer;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.GeneralCommandLine;
 import com.intellij.execution.configurations.PathEnvironmentVariableUtil;
@@ -86,6 +87,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.command.WriteCommandAction;
+import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.editor.*;
 import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.EditorColorsManager;
@@ -207,6 +209,7 @@ import junit.framework.AssertionFailedError;
 import kotlin.collections.CollectionsKt;
 import org.intellij.lang.annotations.MagicConstant;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
+import org.jdom.JDOMException;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -3173,6 +3176,24 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       b.append("\n");
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), b.toString());
+  }
+
+  protected final <T extends PersistentStateComponent<S>, S> void loadSettings(@NotNull String fileName,
+                                                                               @NotNull T container,
+                                                                               @NotNull Class<S> stateClass) {
+    try {
+      var serializedState = JDOMUtil.load(new File(getResultsTestDataPath(), fileName));
+      container.loadState(XmlSerializer.deserialize(serializedState, stateClass));
+    }
+    catch (JDOMException | IOException e) {
+      fail(e.getMessage());
+    }
+  }
+
+  protected final <T> void compareSerializedStateWithFile(@NotNull T settings) {
+    var serializedResult = XmlSerializer.serialize(settings);
+    assertNotNull(serializedResult);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), JDOMUtil.write(serializedResult));
   }
 
   /**

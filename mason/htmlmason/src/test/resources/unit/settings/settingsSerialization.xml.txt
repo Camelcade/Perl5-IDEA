@@ -1,0 +1,47 @@
+<HTMLMasonSettings>
+  <option name="autoHandlerName" value="customautohandler" />
+  <option name="defaultHandlerName" value="customdefaulthandler" />
+  <option name="substitutedExtensions">
+    <list>
+      <option value="ext1" />
+      <option value="ext2" />
+      <option value="ext3" />
+    </list>
+  </option>
+  <option name="customTags">
+    <list>
+      <HTMLMasonCustomTag>
+        <option name="role" value="ARGS" />
+        <option name="text" value="testargs" />
+      </HTMLMasonCustomTag>
+      <HTMLMasonCustomTag>
+        <option name="role" value="DEF" />
+        <option name="text" value="testdef" />
+      </HTMLMasonCustomTag>
+      <HTMLMasonCustomTag>
+        <option name="role" value="PERL" />
+        <option name="text" value="testperl" />
+      </HTMLMasonCustomTag>
+      <HTMLMasonCustomTag>
+        <option name="role" value="METHOD" />
+        <option name="text" value="testmethod" />
+      </HTMLMasonCustomTag>
+    </list>
+  </option>
+  <option name="globalVariables">
+    <list>
+      <VariableDescription>
+        <option name="variableName" value="$m" />
+        <option name="variableType" value="HTML::Mason::Request" />
+      </VariableDescription>
+      <VariableDescription>
+        <option name="variableName" value="$r" />
+        <option name="variableType" value="Apache::Request" />
+      </VariableDescription>
+      <VariableDescription>
+        <option name="variableName" value="foo_bar" />
+        <option name="variableType" value="Foo::Bar" />
+      </VariableDescription>
+    </list>
+  </option>
+</HTMLMasonSettings>

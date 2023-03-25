@@ -1,0 +1,23 @@
+<MasonSettings>
+  <option name="autobaseNames">
+    <list>
+      <option value="Base.mp" />
+      <option value="Base.mc" />
+      <option value="name1" />
+      <option value="name2" />
+      <option value="name3" />
+    </list>
+  </option>
+  <option name="globalVariables">
+    <list>
+      <VariableDescription>
+        <option name="variableName" value="$m" />
+        <option name="variableType" value="Mason::Request" />
+      </VariableDescription>
+      <VariableDescription>
+        <option name="variableName" value="foo_bar" />
+        <option name="variableType" value="Foo::Bar" />
+      </VariableDescription>
+    </list>
+  </option>
+</MasonSettings>
