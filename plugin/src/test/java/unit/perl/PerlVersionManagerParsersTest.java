@@ -26,7 +26,6 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
 public class PerlVersionManagerParsersTest extends PerlLightTestCase {
@@ -76,14 +75,9 @@ public class PerlVersionManagerParsersTest extends PerlLightTestCase {
   }
 
   private void doTest(@NotNull Function<? super List<String>, ? extends List<String>> parser) {
-    try {
-      String outputText = loadFile(new File(getTestDataPath(), getTestName(true) + ".code"));
-      List<String> output = StringUtil.split(outputText, "\n");
-      List<String> parsedOutput = parser.apply(output);
-      UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), StringUtil.join(parsedOutput, "\n"));
-    }
-    catch (IOException e) {
-      fail(e.getMessage());
-    }
+    String outputText = loadFile(new File(getTestDataPath(), getTestName(true) + ".code"));
+    List<String> output = StringUtil.split(outputText, "\n");
+    List<String> parsedOutput = parser.apply(output);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), StringUtil.join(parsedOutput, "\n"));
   }
 }
