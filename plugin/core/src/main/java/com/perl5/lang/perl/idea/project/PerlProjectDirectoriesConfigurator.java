@@ -16,24 +16,17 @@
 
 package com.perl5.lang.perl.idea.project;
 
-import com.intellij.ProjectTopics;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
-import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.ModuleRootEvent;
-import com.intellij.openapi.roots.ModuleRootListener;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.openapi.vfs.newvfs.BulkFileListener;
-import com.intellij.openapi.vfs.newvfs.events.VFileCreateEvent;
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent;
-import com.intellij.openapi.vfs.newvfs.events.VFilePropertyChangeEvent;
-import com.intellij.util.messages.MessageBusConnection;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
 import com.intellij.workspaceModel.ide.JpsProjectLoadedListener;
@@ -64,6 +57,9 @@ public class PerlProjectDirectoriesConfigurator implements StartupActivity {
   }
 
   private static void configureContentRoots(@NotNull Project project) {
+    if (project.isDefault() || project.isDisposed()) {
+      return;
+    }
     var collector = new PerlDirectoryInfoCollector(project);
     for (Module module : ModuleManager.getInstance(project).getModules()) {
       for (VirtualFile contentRoot : ModuleRootManager.getInstance(module).getContentRoots()) {
