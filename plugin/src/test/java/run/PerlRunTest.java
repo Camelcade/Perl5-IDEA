@@ -31,6 +31,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
+import com.perl5.lang.perl.idea.sdk.PerlConfig;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -75,6 +76,15 @@ public class PerlRunTest extends PerlPlatformTestCase {
   public void testRunSimpleScript() {
     copyDirToModule("simple");
     runAndCompareOutput(createOnlyRunConfiguration("simplescript.pl"));
+  }
+
+  @Test
+  public void testPerlConfigInitialized() {
+    var perlConfig = PerlConfig.from(getSdk());
+    assertNotNull("PerlConfig is null", perlConfig);
+    assertFalse("PerlConfig is empty", perlConfig.isEmpty());
+
+    assertNotNull("archname is missing", perlConfig.getArchname());
   }
 
   @Test

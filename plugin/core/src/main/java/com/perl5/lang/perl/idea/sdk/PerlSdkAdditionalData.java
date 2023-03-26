@@ -67,6 +67,10 @@ public class PerlSdkAdditionalData implements SaveAwareSdkAdditionalData {
     return myConfig;
   }
 
+  void setConfig(@NotNull PerlConfig config) {
+    myConfig = config;
+  }
+
   public @NotNull PerlVersionManagerHandler<?, ?> getVersionManagerHandler() {
     return getVersionManagerData().getHandler();
   }

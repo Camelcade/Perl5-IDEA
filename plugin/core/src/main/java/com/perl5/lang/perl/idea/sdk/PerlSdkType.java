@@ -325,7 +325,7 @@ public class PerlSdkType extends SdkType {
 
     newSdk.setVersionString(perlVersionDescriptor.getVersionString());
     newSdk.setSdkAdditionalData(new PerlSdkAdditionalData(hostData, versionManagerData, implementationData, PerlConfig.empty()));
-
+    PerlConfig.init(newSdk);
     sdkConsumer.accept(newSdk);
   }
 

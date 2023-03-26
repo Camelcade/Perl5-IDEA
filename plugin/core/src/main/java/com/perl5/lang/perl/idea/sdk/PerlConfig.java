@@ -17,7 +17,14 @@
 package com.perl5.lang.perl.idea.sdk;
 
 import com.intellij.configurationStore.XmlSerializer;
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.progress.ProgressManager;
+import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.Key;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.xmlb.annotations.Tag;
+import com.perl5.PerlBundle;
+import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jdom.Element;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -29,8 +36,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public final class PerlConfig {
+  private static final Key<Boolean> INIT_KEY = Key.create("perl.config.read");
+  private static final Logger LOG = Logger.getInstance(PerlConfig.class);
   private static final String TAG_NAME = "PerlConfig";
   private static final PerlConfig EMPTY_CONFIG = new PerlConfig(Collections.emptyMap());
+
+  private static final String ARCHNAME = "archname";
+
   @Tag("configMap")
   private final @NotNull Map<String, String> myConfig;
 
@@ -46,6 +58,10 @@ public final class PerlConfig {
   @Contract("null->null")
   public @Nullable String get(@Nullable String key) {
     return myConfig.get(key);
+  }
+
+  public @Nullable String getArchname() {
+    return get(ARCHNAME);
   }
 
   public boolean isEmpty() {
@@ -75,6 +91,51 @@ public final class PerlConfig {
     var container = new Element(TAG_NAME);
     XmlSerializer.serializeObjectInto(this, container);
     parentElement.addContent(container);
+  }
+
+  @Contract("null->null")
+  public static @Nullable PerlConfig from(@Nullable Sdk sdk) {
+    var sdkAdditionalData = PerlSdkAdditionalData.from(sdk);
+    return sdkAdditionalData == null ? null : sdkAdditionalData.getConfig();
+  }
+
+  public static void init(@Nullable Sdk sdk) {
+    var currentConfig = from(sdk);
+    if (currentConfig == null || !currentConfig.isEmpty() || INIT_KEY.get(sdk) != null) {
+      return;
+    }
+    try {
+      INIT_KEY.set(sdk, true);
+      PerlConfig perlConfig = ProgressManager.getInstance().runProcessWithProgressSynchronously(
+        () -> readConfig(sdk), PerlBundle.message("dialog.title.reading.perl.config"), false, null
+      );
+      if (perlConfig != null) {
+        PerlSdkAdditionalData.notNullFrom(sdk).setConfig(perlConfig);
+      }
+    }
+    finally {
+      INIT_KEY.set(sdk, null);
+    }
+  }
+
+  private static @Nullable PerlConfig readConfig(@NotNull Sdk sdk) {
+    var configOutput =
+      PerlRunUtil.getOutputFromPerl(sdk, "-MConfig", "-e", "print \"$_\\1$Config{$_}\\0\" for grep {$Config{$_}} sort keys %Config");
+    if (configOutput.isEmpty()) {
+      LOG.warn("Error reading config for " + sdk);
+      return null;
+    }
+    var configData = new HashMap<String, String>();
+    var configPairs = StringUtil.split(String.join("", configOutput), "\0");
+    for (String configPair : configPairs) {
+      var keyValPair = StringUtil.split(configPair, "\1");
+      if (keyValPair.size() != 2) {
+        LOG.warn("Unexpected parsing of key/value pair: " + keyValPair);
+        continue;
+      }
+      configData.put(keyValPair.get(0), keyValPair.get(1));
+    }
+    return intern(new PerlConfig(configData));
   }
 
   @TestOnly
