@@ -29,6 +29,10 @@ public class PerlCartonDirectoryConfigurationProvider implements PerlDirectoryCo
   public void configureContentRoot(@NotNull Module module,
                                    @NotNull VirtualFile contentRoot,
                                    @NotNull PerlDirectoryInfoCollector collector) {
+
+    collector.addTestRoot(contentRoot.findChild("t"));
+    collector.addLibRoot(contentRoot.findChild("lib"));
+
     var localRoot = contentRoot.findChild("local");
     if (localRoot == null) {
       return;
