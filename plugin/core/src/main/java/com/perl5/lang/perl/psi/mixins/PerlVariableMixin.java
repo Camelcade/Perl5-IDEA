@@ -199,20 +199,19 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     String fullQualifiedName = PerlPackageUtil.join(namespaceName, variableName);
 
     Processor<PerlVariableDeclarationElement> variableProcessor = it -> {
-      // fixme we must check fqn, because atm implicit variables are processed without NS restriction
-      if (!it.equals(parent) && fullQualifiedName.equals(it.getCanonicalName())) {
+      if (!it.equals(parent)) {
         result.add(it);
       }
       return true;
     };
     if (myType == PerlVariableType.SCALAR) {
-      PerlScalarUtil.processDefinedGlobalScalars(getProject(), getResolveScope(), variableProcessor, true, namespaceName);
+      PerlScalarUtil.processGlobalScalarsByName(getProject(), getResolveScope(), fullQualifiedName, true, variableProcessor);
     }
     else if (myType == PerlVariableType.ARRAY) {
-      PerlArrayUtil.processDefinedGlobalArrays(getProject(), getResolveScope(), variableProcessor, true, namespaceName);
+      PerlArrayUtil.processGlobalArraysByName(getProject(), getResolveScope(), fullQualifiedName, true, variableProcessor);
     }
     else if (myType == PerlVariableType.HASH) {
-      PerlHashUtil.processDefinedGlobalHashes(getProject(), getResolveScope(), variableProcessor, true, namespaceName);
+      PerlHashUtil.processGlobalHashesByName(getProject(), getResolveScope(), fullQualifiedName, true, variableProcessor);
     }
 
     return result;
@@ -228,7 +227,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     String fullQualifiedName = PerlPackageUtil.join(namespaceName, variableName);
 
     List<PerlGlobVariableElement> result = new ArrayList<>();
-    PerlGlobUtil.processDefinedGlobs(getProject(), getResolveScope(), fullQualifiedName::equals, result::add, true, namespaceName);
+    PerlGlobUtil.processGlobsByName(getProject(), getResolveScope(), fullQualifiedName, result::add, true);
     return result;
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,12 +63,10 @@ public final class PerlScalarUtil implements PerlElementTypes {
       return Collections.emptyList();
     }
     List<PerlVariableDeclarationElement> result = new SmartList<>();
-    processDefinedGlobalScalars(project, scope, it -> {
-      if (canonicalName.equals(it.getCanonicalName())) {
-        result.add(it);
-      }
+    processGlobalScalarsByName(project, scope, canonicalName, true, it -> {
+      result.add(it);
       return true;
-    }, true, null);
+    });
     return result;
   }
 
@@ -83,23 +81,27 @@ public final class PerlScalarUtil implements PerlElementTypes {
     return PerlStubUtil.getAllKeys(KEY_SCALAR, GlobalSearchScope.allScope(project));
   }
 
-  /**
-   * Processes all global scalars with specific processor
-   *
-   * @param processAll    if false, only one entry per name going to be processed. May be need when filling completion
-   * @param namespaceName optional namespace filter
-   */
-  public static boolean processDefinedGlobalScalars(@NotNull Project project,
-                                                    @NotNull GlobalSearchScope scope,
-                                                    @NotNull Processor<PerlVariableDeclarationElement> processor,
-                                                    boolean processAll,
-                                                    @Nullable String namespaceName) {
-    if (!PerlImplicitDeclarationsService.getInstance(project).processScalars(processor)) {
-      return false;
+  public static boolean processGlobalScalarsByName(@NotNull Project project,
+                                                   @NotNull GlobalSearchScope scope,
+                                                   @NotNull String canonicalName,
+                                                   boolean processAll,
+                                                   @NotNull Processor<PerlVariableDeclarationElement> processor) {
+    return PerlImplicitDeclarationsService.getInstance(project).processScalars(canonicalName, processor) &&
+           PerlVariableUtil.processGlobalVariables(KEY_SCALAR, project, scope, processor, canonicalName, !processAll);
+  }
+
+  public static boolean processGlobalScalars(@NotNull Project project,
+                                             @NotNull GlobalSearchScope scope,
+                                             @Nullable String namespaceName,
+                                             boolean processAll,
+                                             @NotNull Processor<PerlVariableDeclarationElement> processor) {
+    if (namespaceName == null) {
+      return PerlImplicitDeclarationsService.getInstance(project).processScalars(processor) &&
+             PerlVariableUtil.processGlobalVariables(KEY_SCALAR, project, scope, processor, processAll);
     }
-    return namespaceName == null ?
-           PerlVariableUtil.processGlobalVariables(KEY_SCALAR, project, scope, processor, processAll) :
-           PerlVariableUtil.processGlobalVariables(KEY_SCALAR_IN_NAMESPACE, project, scope, processor, namespaceName, !processAll);
+    return PerlImplicitDeclarationsService.getInstance(project).processScalarsInNamespace(namespaceName, processor) &&
+           PerlVariableUtil.processGlobalVariables(
+             KEY_SCALAR_IN_NAMESPACE, project, scope, processor, namespaceName, !processAll);
   }
 
   /**

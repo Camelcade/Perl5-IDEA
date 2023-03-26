@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -87,19 +87,19 @@ public final class PerlHashUtil implements PerlElementTypes {
     return getGlobalHashDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
   }
 
-  public static Collection<PerlVariableDeclarationElement> getGlobalHashDefinitions(Project project,
-                                                                                    String canonicalName,
-                                                                                    GlobalSearchScope scope) {
+  public static Collection<PerlVariableDeclarationElement> getGlobalHashDefinitions(@NotNull Project project,
+                                                                                    @NotNull String canonicalName,
+                                                                                    @NotNull GlobalSearchScope scope) {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
     List<PerlVariableDeclarationElement> result = new SmartList<>();
-    processDefinedGlobalHashes(project, scope, it -> {
+    processGlobalHashesByName(project, scope, canonicalName, true, it -> {
       if (canonicalName.equals(it.getCanonicalName())) {
         result.add(it);
       }
       return true;
-    }, true, null);
+    });
     return result;
   }
 
@@ -110,26 +110,29 @@ public final class PerlHashUtil implements PerlElementTypes {
    * @param project project to search in
    * @return collection of variable canonical names
    */
-  public static Collection<String> getDefinedGlobalHashNames(Project project) {
+  public static Collection<String> getDefinedGlobalHashNames(@NotNull Project project) {
     return PerlStubUtil.getAllKeys(KEY_HASH, GlobalSearchScope.allScope(project));
   }
 
-  /**
-   * Processes all global hashes names with specific processor
-   *
-   * @param processAll    if false, only one entry per name going to be processed. May be need when filling completion
-   * @param namespaceName optional namespace filter
-   */
-  public static boolean processDefinedGlobalHashes(@NotNull Project project,
-                                                   @NotNull GlobalSearchScope scope,
-                                                   @NotNull Processor<PerlVariableDeclarationElement> processor,
-                                                   boolean processAll,
-                                                   @Nullable String namespaceName) {
-    if (!PerlImplicitDeclarationsService.getInstance(project).processHashes(processor)) {
-      return false;
+  public static boolean processGlobalHashesByName(@NotNull Project project,
+                                                  @NotNull GlobalSearchScope scope,
+                                                  @NotNull String canonicalName,
+                                                  boolean processAll,
+                                                  @NotNull Processor<PerlVariableDeclarationElement> processor) {
+    return PerlImplicitDeclarationsService.getInstance(project).processHashes(canonicalName, processor) &&
+           PerlVariableUtil.processGlobalVariables(KEY_HASH, project, scope, processor, canonicalName, processAll);
+  }
+
+  public static boolean processGlobalHashes(@NotNull Project project,
+                                            @NotNull GlobalSearchScope scope,
+                                            @Nullable String namespaceName,
+                                            boolean processAll,
+                                            @NotNull Processor<PerlVariableDeclarationElement> processor) {
+    if( namespaceName == null){
+      return PerlImplicitDeclarationsService.getInstance(project).processHashes(processor) &&
+             PerlVariableUtil.processGlobalVariables(KEY_HASH, project, scope, processor, processAll);
     }
-    return namespaceName == null ?
-           PerlVariableUtil.processGlobalVariables(KEY_HASH, project, scope, processor, processAll) :
+    return PerlImplicitDeclarationsService.getInstance(project).processHashesInNamespace(namespaceName, processor) &&
            PerlVariableUtil.processGlobalVariables(KEY_HASH_IN_NAMESPACE, project, scope, processor, namespaceName, !processAll);
   }
 
