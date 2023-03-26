@@ -65,13 +65,33 @@ jobs:
     with:
       os: ${{ matrix.os }}
     secrets: inherit
-  all-tests:
+  tests-aggregator:
     needs: tests
+    if: ${{ success() }}
+    runs-on: ubuntu-latest
+    name: Tests Results Aggregator
+    outputs:
+      success: ${{ steps.aggregate.outputs.success }}
+    steps:
+      - id: aggregate
+        name: Aggregate results
+        run: echo "success=true" >> $GITHUB_OUTPUT
+  all-tests:
+    needs: [ tests, tests-aggregator ]
+    if: ${{ always() }}
     runs-on: ubuntu-latest
     name: All tests
     steps:
       - name: Done
-        run: echo All tests are passed
+        run: |
+          echo Success flag: ${{ needs.tests-aggregator.outputs.success }}
+          if [[ "${{ needs.tests-aggregator.outputs.success }}" == "true" ]]; then
+            echo "Tests passed"
+            exit 0
+          else
+            echo "Tests failed"
+            exit 1
+          fi
   coverage:
     needs: tests
     name: Coverage
