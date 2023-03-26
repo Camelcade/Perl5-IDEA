@@ -32,6 +32,7 @@ import com.intellij.util.io.BaseOutputReader;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
+import com.perl5.lang.perl.idea.sdk.PerlConfig;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
@@ -257,6 +258,8 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   }
 
   public static @NotNull BaseProcessHandler<?> createProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    PerlConfig.init(commandLine.getEffectiveSdk());
+
     PerlVersionManagerData<?, ?> versionManagerData = commandLine.getEffectiveVersionManagerData();
     if (versionManagerData != null) {
       commandLine = versionManagerData.patchCommandLine(commandLine);
@@ -289,6 +292,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
   }
 
   public static @NotNull ProcessHandler createConsoleProcessHandler(@NotNull PerlCommandLine commandLine) throws ExecutionException {
+    PerlConfig.init(commandLine.getEffectiveSdk());
     PerlHostData<?, ?> hostData = commandLine.getEffectiveHostData();
     if (hostData == null) {
       throw new ExecutionException(PerlBundle.message("dialog.message.no.host.data.in.command.line", commandLine));
