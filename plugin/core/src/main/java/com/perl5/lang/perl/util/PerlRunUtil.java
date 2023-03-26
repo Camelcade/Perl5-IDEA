@@ -385,18 +385,6 @@ public final class PerlRunUtil {
   }
 
   /**
-   * Requests perl path using introspection variable $^X: {@code perl -le print $^X}
-   *
-   * @param hostData host to execute command on
-   * @return version string or null if response was wrong
-   */
-  public static @Nullable String getPathFromPerl(@NotNull PerlHostData<?, ?> hostData) {
-    List<String> perlPathLines = getOutputFromProgram(
-      hostData, hostData.getOsHandler().getPerlExecutableName(), PERL_LE, PERL_CTRL_X);
-    return perlPathLines.size() == 1 ? perlPathLines.get(0) : null;
-  }
-
-  /**
    * Gets stdout from executing a perl command with a given parameters, command represented by {@code parameters}.
    */
   public static @NotNull List<String> getOutputFromPerl(@NotNull Sdk perlSdk, @NotNull String... parameters) {
@@ -418,15 +406,6 @@ public final class PerlRunUtil {
                                                            @NotNull PerlVersionManagerData<?, ?> versionManagerData,
                                                            @NotNull String... commands) {
     return getOutputFromProgram(new PerlCommandLine(commands).withHostData(hostData).withVersionManagerData(versionManagerData));
-  }
-
-  /**
-   * Gets stdout from executing a command represented by {@code commands} on the host represented by {@code hostData}
-   *
-   * @apiNote MUST not be used for executing perl scripts
-   */
-  public static @NotNull List<String> getOutputFromProgram(@NotNull PerlHostData<?, ?> hostData, @NotNull String... commands) {
-    return getOutputFromProgram(new PerlCommandLine(commands).withHostData(hostData));
   }
 
   /**
@@ -572,21 +551,6 @@ public final class PerlRunUtil {
     if (indicator != null) {
       String oldText = indicator.getText();
       indicator.setText(newText);
-      return oldText;
-    }
-    return null;
-  }
-
-  /**
-   * Sets {@code newText} to the progress indicator secondary text, if indicator is available
-   *
-   * @return old indicator text
-   */
-  public static @Nullable String setProgressText2(@Nullable String newText) {
-    ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
-    if (indicator != null) {
-      String oldText = indicator.getText2();
-      indicator.setText2(newText);
       return oldText;
     }
     return null;
