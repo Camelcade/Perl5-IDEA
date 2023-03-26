@@ -79,6 +79,9 @@ public class PerlProjectDirectoriesConfigurator implements StartupActivity {
   }
 
   private void queueRescan(@NotNull Project project) {
+    if( ApplicationManager.getApplication().isUnitTestMode()){
+      return;
+    }
     myScanningQueue.queue(new Update(project) {
       @Override
       public void run() {
