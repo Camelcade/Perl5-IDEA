@@ -20,6 +20,8 @@ import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.project.PerlDirectoryConfigurationProvider;
 import com.perl5.lang.perl.idea.project.PerlDirectoryInfoCollector;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.idea.sdk.PerlConfig;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlCartonDirectoryConfigurationProvider implements PerlDirectoryConfigurationProvider {
@@ -43,5 +45,23 @@ public class PerlCartonDirectoryConfigurationProvider implements PerlDirectoryCo
 
     collector.addExcludedRoot(localRoot);
     collector.addExternalLibRoot(perl5Root);
+
+    var perlConfig = PerlConfig.from(PerlProjectManager.getSdk(module));
+    if (perlConfig == null) {
+      return;
+    }
+
+    var apiVersionString = perlConfig.getApiVersionString();
+    var apiVersionDir = apiVersionString == null ? null : perl5Root.findChild(apiVersionString);
+    collector.addExternalLibRoot(apiVersionDir);
+
+    var archname = perlConfig.getArchname();
+    if (archname != null) {
+      collector.addExternalLibRoot(perl5Root.findChild(archname));
+
+      if (apiVersionDir != null) {
+        collector.addExternalLibRoot(apiVersionDir.findChild(archname));
+      }
+    }
   }
 }

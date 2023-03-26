@@ -85,6 +85,7 @@ public class PerlRunTest extends PerlPlatformTestCase {
     assertFalse("PerlConfig is empty", perlConfig.isEmpty());
 
     assertNotNull("archname is missing", perlConfig.getArchname());
+    assertNotNull("api_versionstring is missing", perlConfig.getApiVersionString());
   }
 
   @Test
