@@ -152,19 +152,19 @@ public class PerlImplicitDeclarationsService {
     return hash == null || processor.process(hash);
   }
 
-  public boolean processScalarsInPackage(@Nullable String packageName,
-                                         @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
-    return packageName != null && processScalars(it -> !packageName.equals(it.getNamespaceName()) || processor.process(it));
+  public boolean processScalarsInNamespace(@NotNull String namespaceName,
+                                           @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    return processScalars(it -> !namespaceName.equals(it.getNamespaceName()) || processor.process(it));
   }
 
-  public boolean processArraysInPackage(@Nullable String packageName,
-                                        @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
-    return packageName != null && processArrays(it -> !packageName.equals(it.getNamespaceName()) || processor.process(it));
+  public boolean processArraysInNamespace(@NotNull String namespaceName,
+                                          @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    return processArrays(it -> !namespaceName.equals(it.getNamespaceName()) || processor.process(it));
   }
 
-  public boolean processHashesInPackage(@Nullable String packageName,
-                                        @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
-    return packageName != null && processHashes(it -> !packageName.equals(it.getNamespaceName()) || processor.process(it));
+  public boolean processHashesInNamespace(@NotNull String namespaceName,
+                                          @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
+    return processHashes(it -> !namespaceName.equals(it.getNamespaceName()) || processor.process(it));
   }
 
   public boolean processScalars(@NotNull Processor<? super PerlVariableDeclarationElement> processor) {

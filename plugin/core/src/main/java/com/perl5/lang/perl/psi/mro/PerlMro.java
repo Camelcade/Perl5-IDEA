@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -146,7 +146,7 @@ public abstract class PerlMro {
         methods.putIfAbsent(it.getName(), it);
         return true;
       });
-      for (PerlGlobVariableElement globVariable : PerlGlobUtil.getGlobsDefinitionsInPackage(project, packageName)) {
+      for (PerlGlobVariableElement globVariable : PerlGlobUtil.getGlobsDefinitionsInNamespace(project, packageName)) {
         if (globVariable.isLeftSideOfAssignment() && !methods.containsKey(globVariable.getName())) {
           methods.putIfAbsent(globVariable.getName(), globVariable);
         }

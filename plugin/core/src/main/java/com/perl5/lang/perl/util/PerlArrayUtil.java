@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,23 +64,24 @@ public final class PerlArrayUtil implements PerlElementTypes {
    * @param canonicalName canonical variable name package::name
    * @return Collection of found definitions
    */
-  public static Collection<PerlVariableDeclarationElement> getGlobalArrayDefinitions(Project project, String canonicalName) {
+  public static Collection<PerlVariableDeclarationElement> getGlobalArrayDefinitions(@NotNull Project project,
+                                                                                     @NotNull String canonicalName) {
     return getGlobalArrayDefinitions(project, canonicalName, GlobalSearchScope.allScope(project));
   }
 
-  public static Collection<PerlVariableDeclarationElement> getGlobalArrayDefinitions(Project project,
-                                                                                     @Nullable String canonicalName,
-                                                                                     GlobalSearchScope scope) {
+  public static @NotNull Collection<PerlVariableDeclarationElement> getGlobalArrayDefinitions(@NotNull Project project,
+                                                                                              @Nullable String canonicalName,
+                                                                                              @NotNull GlobalSearchScope scope) {
     if (canonicalName == null) {
       return Collections.emptyList();
     }
     List<PerlVariableDeclarationElement> result = new SmartList<>();
-    processDefinedGlobalArrays(project, scope, it -> {
+    processGlobalArraysByName(project, scope, canonicalName, true, it -> {
       if (canonicalName.equals(it.getCanonicalName())) {
         result.add(it);
       }
       return true;
-    }, true, null);
+    });
     return result;
   }
 
@@ -90,26 +91,29 @@ public final class PerlArrayUtil implements PerlElementTypes {
    * @param project project to search in
    * @return collection of variable canonical names
    */
-  public static Collection<String> getDefinedGlobalArrayNames(Project project) {
+  public static Collection<String> getDefinedGlobalArrayNames(@NotNull Project project) {
     return PerlStubUtil.getAllKeys(KEY_ARRAY, GlobalSearchScope.allScope(project));
   }
 
-  /**
-   * Processes all global arrays names with specific processor
-   *
-   * @param processAll    if false, only one entry per name going to be processed. May be need when filling completion
-   * @param namespaceName optional namespace filter
-   */
-  public static boolean processDefinedGlobalArrays(@NotNull Project project,
-                                                   @NotNull GlobalSearchScope scope,
-                                                   @NotNull Processor<PerlVariableDeclarationElement> processor,
-                                                   boolean processAll,
-                                                   @Nullable String namespaceName) {
-    if (!PerlImplicitDeclarationsService.getInstance(project).processArrays(processor)) {
-      return false;
+  public static boolean processGlobalArraysByName(@NotNull Project project,
+                                                  @NotNull GlobalSearchScope scope,
+                                                  @NotNull String canonicalName,
+                                                  boolean processAll,
+                                                  @NotNull Processor<PerlVariableDeclarationElement> processor) {
+    return PerlImplicitDeclarationsService.getInstance(project).processArrays(canonicalName, processor) &&
+           PerlVariableUtil.processGlobalVariables(KEY_ARRAY, project, scope, processor, canonicalName, processAll);
+  }
+
+  public static boolean processGlobalArrays(@NotNull Project project,
+                                            @NotNull GlobalSearchScope scope,
+                                            @Nullable String namespaceName,
+                                            boolean processAll,
+                                            @NotNull Processor<PerlVariableDeclarationElement> processor) {
+    if( namespaceName == null){
+      return PerlImplicitDeclarationsService.getInstance(project).processArrays( processor) &&
+             PerlVariableUtil.processGlobalVariables(KEY_ARRAY, project, scope, processor, processAll);
     }
-    return namespaceName == null ?
-           PerlVariableUtil.processGlobalVariables(KEY_ARRAY, project, scope, processor, processAll) :
+    return PerlImplicitDeclarationsService.getInstance(project).processArraysInNamespace(namespaceName, processor) &&
            PerlVariableUtil.processGlobalVariables(KEY_ARRAY_IN_NAMESPACE, project, scope, processor, namespaceName, !processAll);
   }
 

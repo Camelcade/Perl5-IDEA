@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -82,10 +82,6 @@ public final class PerlVariableUtil {
                                                @NotNull Processor<PerlVariableDeclarationElement> processor,
                                                boolean processAll) {
     for (String variableName : PerlStubUtil.getAllKeys(indexKey, scope)) {
-      if (variableName.length() == 0 || variableName.charAt(0) == '*') {
-        continue;
-      }
-
       if (!processGlobalVariables(indexKey, project, scope, processor, variableName, !processAll)) {
         return false;
       }

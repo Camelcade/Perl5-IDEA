@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
@@ -33,7 +32,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -73,13 +71,14 @@ public final class PerlGlobUtil implements PerlElementTypes {
     return StubIndex.getElements(PerlGlobStubIndex.KEY_GLOB, canonicalName, project, scope, PsiPerlGlobVariable.class);
   }
 
-  public static Collection<PsiPerlGlobVariable> getGlobsDefinitionsInPackage(@NotNull Project project, @Nullable String namespaceName) {
-    return getGlobsDefinitionsInPackage(project, namespaceName, GlobalSearchScope.allScope(project));
+  public static @NotNull Collection<PsiPerlGlobVariable> getGlobsDefinitionsInNamespace(@NotNull Project project,
+                                                                                        @Nullable String namespaceName) {
+    return getGlobsDefinitionsInNamespace(project, namespaceName, GlobalSearchScope.allScope(project));
   }
 
-  public static Collection<PsiPerlGlobVariable> getGlobsDefinitionsInPackage(@NotNull Project project,
-                                                                             @Nullable String namespaceName,
-                                                                             @NotNull GlobalSearchScope scope) {
+  public static @NotNull Collection<PsiPerlGlobVariable> getGlobsDefinitionsInNamespace(@NotNull Project project,
+                                                                                        @Nullable String namespaceName,
+                                                                                        @NotNull GlobalSearchScope scope) {
     if (namespaceName == null) {
       return Collections.emptyList();
     }
@@ -96,70 +95,48 @@ public final class PerlGlobUtil implements PerlElementTypes {
     return PerlStubUtil.getAllKeys(PerlGlobStubIndex.KEY_GLOB, GlobalSearchScope.allScope(project));
   }
 
-  /**
-   * Processes all globs names with specific processor
-   * fixme: this need to be refactored, duplicates variable logic
-   *
-   * @param processAll    if false, only one entry per name going to be processed. May be need when filling completion
-   * @param namespaceName optional namespace filter
-   */
-  public static boolean processDefinedGlobs(@NotNull Project project,
-                                            @NotNull GlobalSearchScope scope,
-                                            @Nullable Predicate<String> namesFilter,
-                                            @NotNull Processor<PerlGlobVariableElement> processor,
-                                            boolean processAll,
-                                            @Nullable String namespaceName) {
-    return namespaceName == null
-           ? !processDefinedGlobsByNames(project, scope, namesFilter, processor, processAll)
-           : processDefinedGlobsByNamespace(project, scope, namesFilter, processor, processAll, namespaceName);
-  }
-
-  private static boolean processDefinedGlobsByNamespace(@NotNull Project project,
-                                                        @NotNull GlobalSearchScope scope,
-                                                        @Nullable Predicate<String> namesFilter,
-                                                        @NotNull Processor<PerlGlobVariableElement> processor,
-                                                        boolean processAll,
-                                                        @NotNull String namespaceName) {
-    Set<String> processedNames = processAll ? null : new HashSet<>();
-    StubIndex stubIndex = StubIndex.getInstance();
-    return stubIndex.processElements(KEY_GLOB_NAMESPACE, namespaceName, project, scope, PsiPerlGlobVariable.class, it -> {
-      ProgressManager.checkCanceled();
-      String canonicalName = it.getCanonicalName();
-      if ((namesFilter == null || namesFilter.test(canonicalName)) && (processAll || processedNames.add(canonicalName))) {
-        return processor.process(it);
-      }
-      return true;
-    });
-  }
-
-  private static boolean processDefinedGlobsByNames(@NotNull Project project,
-                                                    @NotNull GlobalSearchScope scope,
-                                                    @Nullable Predicate<String> namesFilter,
-                                                    @NotNull Processor<PerlGlobVariableElement> processor,
-                                                    boolean processAll) {
-    var namesToProcess = new HashSet<String>();
-    for (String globName : PerlStubUtil.getAllKeys(PerlGlobStubIndex.KEY_GLOB, scope)) {
-      if (StringUtil.isEmpty(globName) || namesFilter != null && !namesFilter.test(globName)) {
-        continue;
-      }
-      namesToProcess.add(globName);
+  public static boolean processGlobs(@NotNull Project project,
+                                     @NotNull GlobalSearchScope scope,
+                                     @Nullable String namespaceName,
+                                     boolean processAll,
+                                     @NotNull Processor<PerlGlobVariableElement> processor) {
+    Set<String> namespacesToProcess;
+    if( namespaceName == null){
+      namespacesToProcess = new HashSet<>(getDefinedGlobsNames(project));
     }
-
+    else{
+      namespacesToProcess = Collections.singleton(namespaceName);
+    }
     Set<String> processedNames = processAll ? null : new HashSet<>();
-    StubIndex stubIndex = StubIndex.getInstance();
-    for (String key : namesToProcess) {
-      if (!stubIndex.processElements(PerlGlobStubIndex.KEY_GLOB, key, project, scope, PsiPerlGlobVariable.class, it -> {
+    for (String namespace : namespacesToProcess) {
+      if(!StubIndex.getInstance().processElements(KEY_GLOB_NAMESPACE, namespace, project, scope, PsiPerlGlobVariable.class, it -> {
         ProgressManager.checkCanceled();
         String canonicalName = it.getCanonicalName();
         if (processAll || processedNames.add(canonicalName)) {
           return processor.process(it);
         }
         return true;
-      })) {
-        return true;
+      })){
+        return false;
       }
     }
-    return false;
+    return true;
+  }
+
+  public static boolean processGlobsByName(@NotNull Project project,
+                                           @NotNull GlobalSearchScope scope,
+                                           @NotNull String canonicalName,
+                                           @NotNull Processor<PerlGlobVariableElement> processor,
+                                           boolean processAll) {
+    Set<String> processedNames = processAll ? null : new HashSet<>();
+    return StubIndex.getInstance().processElements(PerlGlobStubIndex.KEY_GLOB, canonicalName, project, scope, PsiPerlGlobVariable.class, it -> {
+      ProgressManager.checkCanceled();
+      String globName = it.getCanonicalName();
+      if (processAll || processedNames.add(globName)) {
+        return processor.process(it);
+      }
+      return true;
+    });
   }
 }
 
