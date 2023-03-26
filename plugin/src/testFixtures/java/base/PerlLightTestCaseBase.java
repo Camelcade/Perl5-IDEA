@@ -188,6 +188,7 @@ import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceVariableHandl
 import com.perl5.lang.perl.idea.refactoring.introduce.occurrence.PerlIntroduceTargetOccurrencesCollector;
 import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTargetsHandler;
 import com.perl5.lang.perl.idea.refactoring.rename.PerlMemberInplaceRenameHandler;
+import com.perl5.lang.perl.idea.sdk.PerlConfig;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
@@ -209,6 +210,7 @@ import junit.framework.AssertionFailedError;
 import kotlin.collections.CollectionsKt;
 import org.intellij.lang.annotations.MagicConstant;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
+import org.jdom.Element;
 import org.jdom.JDOMException;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -448,7 +450,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         testSdk.setSdkAdditionalData(new PerlSdkAdditionalData(
           PerlHostHandler.getDefaultHandler().createData(),
           PerlVersionManagerData.getDefault(),
-          PerlImplementationHandler.getDefaultHandler().createData()));
+          PerlImplementationHandler.getDefaultHandler().createData(),
+          PerlConfig.empty()));
         PerlSdkTable.getInstance().addJdk(testSdk, myPerlLightTestCaseDisposable);
         perlProjectManager.setProjectSdk(testSdk);
         perlProjectManager.addExternalLibrary(libdir);
@@ -3181,13 +3184,17 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected final <T extends PersistentStateComponent<S>, S> void loadSettings(@NotNull String fileName,
                                                                                @NotNull T container,
                                                                                @NotNull Class<S> stateClass) {
+    container.loadState(XmlSerializer.deserialize(loadState(fileName), stateClass));
+  }
+
+  protected @NotNull Element loadState(@NotNull String fileName) {
     try {
-      var serializedState = JDOMUtil.load(new File(getResultsTestDataPath(), fileName));
-      container.loadState(XmlSerializer.deserialize(serializedState, stateClass));
+      return JDOMUtil.load(new File(getResultsTestDataPath(), fileName));
     }
     catch (JDOMException | IOException e) {
       fail(e.getMessage());
     }
+    throw new RuntimeException("Can't be");
   }
 
   protected final <T> void compareSerializedStateWithFile(@NotNull T settings) {

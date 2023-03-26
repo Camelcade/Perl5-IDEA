@@ -1,0 +1,29 @@
+<sdkData>
+  <PerlConfig>
+    <configMap>
+      <map>
+        <entry key="vendorarch" value="/usr/lib/x86_64-linux-gnu/perl5/5.34" />
+        <entry key="vendorarchexp" value="/usr/lib/x86_64-linux-gnu/perl5/5.34" />
+        <entry key="vendorbin" value="/usr/bin" />
+        <entry key="vendorbinexp" value="/usr/bin" />
+        <entry key="vendorhtml1dir" value=" " />
+        <entry key="vendorhtml3dir" value=" " />
+        <entry key="vendorlib" value="/usr/share/perl5" />
+        <entry key="vendorlibexp" value="/usr/share/perl5" />
+        <entry key="vendorman1dir" value="/usr/share/man/man1" />
+        <entry key="vendorman1direxp" value="/usr/share/man/man1" />
+        <entry key="vendorman3dir" value="/usr/share/man/man3" />
+        <entry key="vendorman3direxp" value="/usr/share/man/man3" />
+        <entry key="vendorprefix" value="/usr" />
+        <entry key="vendorprefixexp" value="/usr" />
+        <entry key="vendorscript" value="/usr/bin" />
+        <entry key="vendorscriptexp" value="/usr/bin" />
+        <entry key="version" value="5.34.0" />
+        <entry key="version_patchlevel_string" value="version 34 subversion 0" />
+        <entry key="xlibpth" value="/usr/lib/386 /lib/386" />
+        <entry key="yacc" value="yacc" />
+        <entry key="zip" value="zip" />
+      </map>
+    </configMap>
+  </PerlConfig>
+</sdkData>

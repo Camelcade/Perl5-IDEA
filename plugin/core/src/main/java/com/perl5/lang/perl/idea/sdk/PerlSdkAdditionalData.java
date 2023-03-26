@@ -39,14 +39,16 @@ public class PerlSdkAdditionalData implements SaveAwareSdkAdditionalData {
   private final @NotNull PerlHostData<?, ?> myHostData;
   private final @NotNull PerlVersionManagerData<?, ?> myVersionManagerData;
   private final @NotNull PerlImplementationData<?, ?> myImplementationData;
-
+  private @NotNull PerlConfig myConfig;
 
   public PerlSdkAdditionalData(@NotNull PerlHostData<?, ?> hostData,
                                @NotNull PerlVersionManagerData<?, ?> versionManagerData,
-                               @NotNull PerlImplementationData<?, ?> implementationData) {
+                               @NotNull PerlImplementationData<?, ?> implementationData,
+                               @NotNull PerlConfig perlConfig) {
     myHostData = hostData;
     myVersionManagerData = versionManagerData;
     myImplementationData = implementationData;
+    myConfig = perlConfig;
   }
 
   public @NotNull PerlHostData<?, ?> getHostData() {
@@ -59,6 +61,10 @@ public class PerlSdkAdditionalData implements SaveAwareSdkAdditionalData {
 
   public @NotNull PerlImplementationData<?, ?> getImplementationData() {
     return myImplementationData;
+  }
+
+  public @NotNull PerlConfig getConfig() {
+    return myConfig;
   }
 
   public @NotNull PerlVersionManagerHandler<?, ?> getVersionManagerHandler() {
@@ -93,17 +99,16 @@ public class PerlSdkAdditionalData implements SaveAwareSdkAdditionalData {
     myHostData.save(target);
     myImplementationData.save(target);
     myVersionManagerData.save(target);
+    myConfig.save(target);
   }
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   static @NotNull SdkAdditionalData load(@NotNull Element source) {
     PerlHostData<?, ?> hostData = PerlHostHandler.load(source);
     PerlVersionManagerData<?, ?> versionManagerData = PerlVersionManagerHandler.load(source);
     PerlImplementationData<?, ?> implementationData = PerlImplementationHandler.load(source);
     if (hostData != null && versionManagerData != null && implementationData != null) {
-      return new PerlSdkAdditionalData(
-        hostData,
-        versionManagerData,
-        implementationData);
+      return new PerlSdkAdditionalData(hostData, versionManagerData, implementationData, PerlConfig.load(source));
     }
     return new UnknownSdkAdditionalData(source);
   }

@@ -18,17 +18,22 @@ package unit.perl;
 
 import base.PerlLightTestCase;
 import com.intellij.configurationStore.XmlSerializer;
+import com.intellij.openapi.util.JDOMUtil;
+import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
+import com.perl5.lang.perl.idea.sdk.PerlConfig;
 import com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerProjectSettings;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.xsubs.PerlXSubsState;
+import org.jdom.Element;
 import org.junit.Test;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +49,60 @@ public class PerlSettingsPersistenceTest extends PerlLightTestCase {
   @Override
   public String getFileExtension() {
     return "xml";
+  }
+
+  @Test
+  public void testPerlConfigSerialization() {
+    Map<String, String> configData = new LinkedHashMap<>();
+    configData.put("vendorarch", "/usr/lib/x86_64-linux-gnu/perl5/5.34");
+    configData.put("vendorarchexp", "/usr/lib/x86_64-linux-gnu/perl5/5.34");
+    configData.put("vendorbin", "/usr/bin");
+    configData.put("vendorbinexp", "/usr/bin");
+    configData.put("vendorhtml1dir", " ");
+    configData.put("vendorhtml3dir", " ");
+    configData.put("vendorlib", "/usr/share/perl5");
+    configData.put("vendorlibexp", "/usr/share/perl5");
+    configData.put("vendorman1dir", "/usr/share/man/man1");
+    configData.put("vendorman1direxp", "/usr/share/man/man1");
+    configData.put("vendorman3dir", "/usr/share/man/man3");
+    configData.put("vendorman3direxp", "/usr/share/man/man3");
+    configData.put("vendorprefix", "/usr");
+    configData.put("vendorprefixexp", "/usr");
+    configData.put("vendorscript", "/usr/bin");
+    configData.put("vendorscriptexp", "/usr/bin");
+    configData.put("version", "5.34.0");
+    configData.put("version_patchlevel_string", "version 34 subversion 0");
+    configData.put("xlibpth", "/usr/lib/386 /lib/386");
+    configData.put("yacc", "yacc");
+    configData.put("zip", "zip");
+    var perlConfig = PerlConfig.create(configData);
+    assertFalse(perlConfig.isEmpty());
+    var sdkData = new Element("sdkData");
+    perlConfig.save(sdkData);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), JDOMUtil.write(sdkData));
+  }
+
+  @Test
+  public void testPerlConfigDeserialization() {
+    var perlConfig = PerlConfig.load(loadState("perlConfigSerialization.xml.txt"));
+    assertFalse(perlConfig.isEmpty());
+    assertEquals("5.34.0", perlConfig.get("version"));
+    assertEquals("/usr/share/man/man3", perlConfig.get("vendorman3dir"));
+  }
+
+  @Test
+  public void testPerlConfigEmptySerialization() {
+    var perlConfig = PerlConfig.create(new HashMap<>());
+    assertTrue(perlConfig.isEmpty());
+    var sdkData = new Element("sdkData");
+    perlConfig.save(sdkData);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), JDOMUtil.write(sdkData));
+  }
+
+  @Test
+  public void testPerlConfigEmptyDeserialization() {
+    var perlConfig = PerlConfig.load(loadState("perlConfigEmptySerialization.xml.txt"));
+    assertTrue(perlConfig.isEmpty());
   }
 
   @Test
