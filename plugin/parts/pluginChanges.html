@@ -15,22 +15,30 @@
   -->
 
 <ul>
-  <li>Basic support for the duck typing, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2517">#2517</a></li>
-  <li>Basic support for the <code>#@type [$var_name] Some::Type</code> syntax, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1675">#1675</a></li>
-  <li>Basic support for the perl 5.36, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/2500">#2500</a></li>
-  <li>Added intentions and quick-fixes preview, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/2527">#2527</a></li>
-  <li>Fixed version completion issues in <code>use</code>/<code>no</code>/<code>require</code>, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/1778">#1778</a>, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/957">#957</a></li>
-  <li><code>Fancy Method Invocation Inspection</code> merged into <code>Perl Syntax Inspection</code> and show an error if target level set
-    to <code>v5.36</code>+, <a
-        href="https://github.com/Camelcade/Perl5-IDEA/issues/2500">#2500</a></li>
-  <li>Fixed issue with quick documentation introduced in IDE 2022.1, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/2502">#2502</a></li>
-  <li>Improved version managers automatic discovery for <code>perlbrew</code> and <code>plenv</code>, <a
-      href="https://github.com/Camelcade/Perl5-IDEA/issues/2541">#2541</a></li>
-  <li>Fixed some exceptions reported by users</li>
+  <li>Features and improvements:
+    <ul>
+      <li><a href="https://github.com/ouest/asdf-perl"><code>asdf</code></a> version manager support, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2499">#2499</a></li>
+      <li>Terminal automatically switch to the perl selected for the project, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2584">#2584</a>
+      </li>
+      <li>Automatic directories configuration for the <a href="https://metacpan.org/pod/Carton">Carton</a>,
+        <a href="https://metacpan.org/pod/Module::Build">Module::Build</a> and
+        <a href="https://metacpan.org/pod/ExtUtils::MakeMaker">ExtUtils::MakeMaker</a>, <a
+            href="https://github.com/Camelcade/Perl5-IDEA/issues/1829">#1829</a></li>
+    </ul>
+  </li>
+  <li>Bugfixes:
+    <ul>
+      <li>External libraries handling for run/test configurations, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2569">#2569</a>
+      </li>
+      <li>Spacing around deref formatting in strings, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2552">#2552</a></li>
+      <li>Annotations formatting in signatures, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2555">#2555</a></li>
+      <li>Target version persistence in settings, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2635">#2635</a></li>
+      <li>XS subs deparsing on MacOS, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2607">#2607</a></li>
+      <li>Perl installation actions improvements, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2595">#2595</a>, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2585">#2585</a></li>
+      <li>Icons scaling in some UI elements, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2574">#2574</a></li>
+      <li>Many minor bugfixes and performance improvements.</li>
+    </ul>
+  </li>
 </ul>
