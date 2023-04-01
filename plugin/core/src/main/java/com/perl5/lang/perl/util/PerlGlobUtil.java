@@ -95,21 +95,22 @@ public final class PerlGlobUtil implements PerlElementTypes {
     return PerlStubUtil.getAllKeys(PerlGlobStubIndex.KEY_GLOB, GlobalSearchScope.allScope(project));
   }
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static boolean processGlobs(@NotNull Project project,
                                      @NotNull GlobalSearchScope scope,
                                      @Nullable String namespaceName,
                                      boolean processAll,
-                                     @NotNull Processor<PerlGlobVariableElement> processor) {
+                                     @NotNull Processor<? super PerlGlobVariableElement> processor) {
     Set<String> namespacesToProcess;
-    if( namespaceName == null){
+    if (namespaceName == null) {
       namespacesToProcess = new HashSet<>(getDefinedGlobsNames(project));
     }
-    else{
+    else {
       namespacesToProcess = Collections.singleton(namespaceName);
     }
     Set<String> processedNames = processAll ? null : new HashSet<>();
     for (String namespace : namespacesToProcess) {
-      if(!StubIndex.getInstance().processElements(KEY_GLOB_NAMESPACE, namespace, project, scope, PsiPerlGlobVariable.class, it -> {
+      if (!StubIndex.getInstance().processElements(KEY_GLOB_NAMESPACE, namespace, project, scope, PsiPerlGlobVariable.class, it -> {
         ProgressManager.checkCanceled();
         String canonicalName = it.getCanonicalName();
         if (processAll || processedNames.add(canonicalName)) {
@@ -123,10 +124,11 @@ public final class PerlGlobUtil implements PerlElementTypes {
     return true;
   }
 
+  @SuppressWarnings({"StaticMethodOnlyUsedInOneClass", "UnusedReturnValue"})
   public static boolean processGlobsByName(@NotNull Project project,
                                            @NotNull GlobalSearchScope scope,
                                            @NotNull String canonicalName,
-                                           @NotNull Processor<PerlGlobVariableElement> processor,
+                                           @NotNull Processor<? super PerlGlobVariableElement> processor,
                                            boolean processAll) {
     Set<String> processedNames = processAll ? null : new HashSet<>();
     return StubIndex.getInstance().processElements(PerlGlobStubIndex.KEY_GLOB, canonicalName, project, scope, PsiPerlGlobVariable.class, it -> {
