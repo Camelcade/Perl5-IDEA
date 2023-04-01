@@ -34,7 +34,6 @@ import javax.swing.*;
 
 public class TemplateToolkitSettingsConfigurable implements Configurable {
   private final TemplateToolkitSettings mySettings;
-  @SuppressWarnings("Since15")
   protected CollectionListModel<String> substitutedExtensionsModel;
   protected JBList<String> substitutedExtensionsList;
   protected JPanel substitutedExtensionsPanel;
@@ -50,7 +49,7 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
 
   @Override
   public @Nls String getDisplayName() {
-    return "Template Toolkit 2";
+    return TemplateToolkitBundle.message("template.toolkit.2");
   }
 
   @Override
@@ -82,7 +81,6 @@ public class TemplateToolkitSettingsConfigurable implements Configurable {
       enableAnycaseCheckBox = new JCheckBox(TemplateToolkitBundle.message("ttk2.label.enableanycase"))
     );
 
-    //noinspection Since15
     substitutedExtensionsModel = new CollectionListModel<>();
     substitutedExtensionsList = new JBList<>(substitutedExtensionsModel);
     substitutedExtensionsPanel =
