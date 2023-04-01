@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.sdk.host.os;
 
-import com.intellij.openapi.util.SystemInfo;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -37,6 +36,7 @@ class PerlWindowsHandler extends PerlOsHandler {
     return true;
   }
 
+  @Override
   public @NotNull String getXSBinaryExtension() {
     return "xs.dll";
   }
