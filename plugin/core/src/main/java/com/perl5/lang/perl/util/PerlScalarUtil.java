@@ -77,10 +77,12 @@ public final class PerlScalarUtil implements PerlElementTypes {
    * @param project project to search in
    * @return collection of variable canonical names
    */
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static Collection<String> getDefinedGlobalScalarNames(Project project) {
     return PerlStubUtil.getAllKeys(KEY_SCALAR, GlobalSearchScope.allScope(project));
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processGlobalScalarsByName(@NotNull Project project,
                                                    @NotNull GlobalSearchScope scope,
                                                    @NotNull String canonicalName,
@@ -90,6 +92,7 @@ public final class PerlScalarUtil implements PerlElementTypes {
            PerlVariableUtil.processGlobalVariables(KEY_SCALAR, project, scope, processor, canonicalName, !processAll);
   }
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static boolean processGlobalScalars(@NotNull Project project,
                                              @NotNull GlobalSearchScope scope,
                                              @Nullable String namespaceName,

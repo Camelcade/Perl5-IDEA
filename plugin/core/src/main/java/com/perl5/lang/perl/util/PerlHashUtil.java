@@ -90,9 +90,6 @@ public final class PerlHashUtil implements PerlElementTypes {
   public static Collection<PerlVariableDeclarationElement> getGlobalHashDefinitions(@NotNull Project project,
                                                                                     @NotNull String canonicalName,
                                                                                     @NotNull GlobalSearchScope scope) {
-    if (canonicalName == null) {
-      return Collections.emptyList();
-    }
     List<PerlVariableDeclarationElement> result = new SmartList<>();
     processGlobalHashesByName(project, scope, canonicalName, true, it -> {
       if (canonicalName.equals(it.getCanonicalName())) {
@@ -110,10 +107,12 @@ public final class PerlHashUtil implements PerlElementTypes {
    * @param project project to search in
    * @return collection of variable canonical names
    */
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static Collection<String> getDefinedGlobalHashNames(@NotNull Project project) {
     return PerlStubUtil.getAllKeys(KEY_HASH, GlobalSearchScope.allScope(project));
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processGlobalHashesByName(@NotNull Project project,
                                                   @NotNull GlobalSearchScope scope,
                                                   @NotNull String canonicalName,
@@ -123,6 +122,7 @@ public final class PerlHashUtil implements PerlElementTypes {
            PerlVariableUtil.processGlobalVariables(KEY_HASH, project, scope, processor, canonicalName, processAll);
   }
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static boolean processGlobalHashes(@NotNull Project project,
                                             @NotNull GlobalSearchScope scope,
                                             @Nullable String namespaceName,
@@ -146,7 +146,7 @@ public final class PerlHashUtil implements PerlElementTypes {
     return packToHash(collectHashElements(rootElement));
   }
 
-  public static Map<String, PerlHashEntry> packToHash(@NotNull List<PsiElement> elements) {
+  public static Map<String, PerlHashEntry> packToHash(@NotNull List<? extends PsiElement> elements) {
     if (elements.isEmpty()) {
       return Collections.emptyMap();
     }
@@ -163,7 +163,9 @@ public final class PerlHashUtil implements PerlElementTypes {
     return result;
   }
 
-  public static boolean processHashElements(@NotNull PsiElement rootElement, @NotNull PairProcessor<PsiElement, PsiElement> processor) {
+  @SuppressWarnings({"UnusedReturnValue", "StaticMethodOnlyUsedInOneClass"})
+  public static boolean processHashElements(@NotNull PsiElement rootElement,
+                                            @NotNull PairProcessor<? super PsiElement, ? super PsiElement> processor) {
     return processAsHash(collectHashElements(rootElement), processor);
   }
 
@@ -182,7 +184,8 @@ public final class PerlHashUtil implements PerlElementTypes {
     return PerlArrayUtil.collectListElements(rootElement);
   }
 
-  public static boolean processAsHash(@NotNull List<PsiElement> elements, @NotNull PairProcessor<PsiElement, PsiElement> processor) {
+  public static boolean processAsHash(@NotNull List<? extends PsiElement> elements,
+                                      @NotNull PairProcessor<? super PsiElement, ? super PsiElement> processor) {
     boolean isKey = true;
     for (int i = 0; i < elements.size(); i++) {
       PsiElement listElement = elements.get(i);

@@ -91,10 +91,12 @@ public final class PerlArrayUtil implements PerlElementTypes {
    * @param project project to search in
    * @return collection of variable canonical names
    */
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static Collection<String> getDefinedGlobalArrayNames(@NotNull Project project) {
     return PerlStubUtil.getAllKeys(KEY_ARRAY, GlobalSearchScope.allScope(project));
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processGlobalArraysByName(@NotNull Project project,
                                                   @NotNull GlobalSearchScope scope,
                                                   @NotNull String canonicalName,
@@ -104,6 +106,7 @@ public final class PerlArrayUtil implements PerlElementTypes {
            PerlVariableUtil.processGlobalVariables(KEY_ARRAY, project, scope, processor, canonicalName, processAll);
   }
 
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static boolean processGlobalArrays(@NotNull Project project,
                                             @NotNull GlobalSearchScope scope,
                                             @Nullable String namespaceName,
@@ -131,6 +134,7 @@ public final class PerlArrayUtil implements PerlElementTypes {
   /**
    * @return list of all children of {@code parentElement} with flattened sequence expressions
    */
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
   public static @NotNull List<PsiElement> collectChildrenList(@Nullable PsiElement parentElement) {
     if (parentElement == null) {
       return Collections.emptyList();
