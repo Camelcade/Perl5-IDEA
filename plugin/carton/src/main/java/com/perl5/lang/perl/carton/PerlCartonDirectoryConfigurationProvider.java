@@ -29,10 +29,6 @@ public class PerlCartonDirectoryConfigurationProvider implements PerlDirectoryCo
   public void configureContentRoot(@NotNull Module module,
                                    @NotNull VirtualFile contentRoot,
                                    @NotNull PerlDirectoryInfoCollector collector) {
-
-    collector.addTestRoot(contentRoot.findChild("t"));
-    collector.addLibRoot(contentRoot.findChild("lib"));
-
     var localRoot = contentRoot.findChild("local");
     if (localRoot == null) {
       return;
@@ -43,6 +39,13 @@ public class PerlCartonDirectoryConfigurationProvider implements PerlDirectoryCo
     }
 
     var perl5Root = localLibRoot.findChild("perl5");
+    var cpanfile = contentRoot.findChild("cpanfile");
+
+    if (cpanfile != null || perl5Root != null) {
+      collector.addTestRoot(contentRoot.findChild("t"));
+      collector.addLibRoot(contentRoot.findChild("lib"));
+    }
+
     if (perl5Root == null) {
       return;
     }
