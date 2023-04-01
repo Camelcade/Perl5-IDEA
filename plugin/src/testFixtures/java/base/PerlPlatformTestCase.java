@@ -49,7 +49,6 @@ import com.intellij.openapi.roots.ModuleRootModificationUtil;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Ref;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -92,8 +91,6 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
-
-import static org.junit.Assume.assumeFalse;
 
 @Category(Integration.class)
 @RunWith(Parameterized.class)
@@ -599,9 +596,5 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   protected void assumeStatefulSdk() {
     Assume.assumeTrue("Not applicable in stateless sdk", myInterpreterConfigurator.isStateful());
-  }
-
-  protected static void assumeNotMacOs() {
-    assumeFalse("Not available on macOS", SystemInfo.isMac);
   }
 }
