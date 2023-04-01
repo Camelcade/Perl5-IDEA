@@ -19,11 +19,10 @@ package com.perl5.lang.perl.idea.project;
 import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import org.jetbrains.annotations.NotNull;
 
 public interface PerlDirectoryConfigurationProvider {
-  static final ExtensionPointName<PerlDirectoryConfigurationProvider> EP_NAME = ExtensionPointName.create("com.perl5.directoryConfigurationProvider");
+  ExtensionPointName<PerlDirectoryConfigurationProvider> EP_NAME = ExtensionPointName.create("com.perl5.directoryConfigurationProvider");
 
   /**
    * Extension may analyze {@code contentRoot} of the {@code module} and submit known roots/exclusion to the {@code collector}
