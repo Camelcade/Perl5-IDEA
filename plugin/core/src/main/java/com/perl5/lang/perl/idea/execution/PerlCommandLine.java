@@ -30,6 +30,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,7 +55,7 @@ public class PerlCommandLine extends GeneralCommandLine {
 
   private @Nullable Module myModule;
 
-  private @Nullable String myConsoleTitle;
+  private @Nullable @Nls String myConsoleTitle;
 
   private @Nullable Icon myConsoleIcon;
 
@@ -174,11 +175,11 @@ public class PerlCommandLine extends GeneralCommandLine {
     return this;
   }
 
-  public @Nullable String getConsoleTitle() {
+  public @Nullable @Nls String getConsoleTitle() {
     return myConsoleTitle;
   }
 
-  public @NotNull PerlCommandLine withConsoleTitle(@Nullable String consoleTitle) {
+  public @NotNull PerlCommandLine withConsoleTitle(@Nullable @Nls String consoleTitle) {
     myConsoleTitle = consoleTitle;
     return this;
   }
