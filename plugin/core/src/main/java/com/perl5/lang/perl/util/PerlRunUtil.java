@@ -67,10 +67,7 @@ import com.perl5.lang.perl.idea.sdk.host.PerlConsoleView;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.jetbrains.annotations.TestOnly;
+import org.jetbrains.annotations.*;
 
 import java.io.File;
 import java.util.*;
@@ -546,7 +543,7 @@ public final class PerlRunUtil {
    *
    * @return old indicator text
    */
-  public static @Nullable String setProgressText(@Nullable String newText) {
+  public static @Nullable String setProgressText(@Nullable @Nls String newText) {
     ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
     if (indicator != null) {
       String oldText = indicator.getText();
