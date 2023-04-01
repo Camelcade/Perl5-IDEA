@@ -51,11 +51,6 @@ public abstract class PerlOsHandler {
    */
   public abstract boolean isMsWindows();
 
-  /**
-   * @return true iff OS has Windows Subsystem for Linux support
-   */
-  public boolean hasWslSupport() {return false;}
-
 
   public final @Nullable Icon getIcon() {
     return myIcon;
