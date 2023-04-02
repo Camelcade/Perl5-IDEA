@@ -37,7 +37,6 @@ import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.progress.util.ProgressIndicatorUtils;
 import com.intellij.openapi.progress.util.ReadTask;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.project.ProjectUtil;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.roots.ProjectRootManager;
@@ -88,11 +87,11 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   @Transient
   private Task.Backgroundable myParserTask = null;
   @Transient
-  private final @NotNull Project myProject;
+  private final @Nullable Project myProject;
 
   @SuppressWarnings("unused")
   public PerlXSubsState() {
-    myProject = ProjectManager.getInstance().getDefaultProject();
+    myProject = null;
   }
 
   @SuppressWarnings("unused")
@@ -103,6 +102,10 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   @Override
   public @Nullable PerlXSubsState getState() {
     return this;
+  }
+
+  private @NotNull Project getProject() {
+    return Objects.requireNonNull(myProject);
   }
 
   @Override
@@ -117,10 +120,13 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
       return Collections.emptySet();
     }
     Sdk projectSdk = perlProjectManager.getProjectSdk();
+    if (projectSdk == null) {
+      return Collections.emptySet();
+    }
     PerlOsHandler osHandler = PerlOsHandler.notNullFrom(projectSdk);
 
     GlobalSearchScope classRootsScope =
-      GlobalSearchScopesCore.directoriesScope(myProject, true, classesRoots.toArray(VirtualFile.EMPTY_ARRAY));
+      GlobalSearchScopesCore.directoriesScope(getProject(), true, classesRoots.toArray(VirtualFile.EMPTY_ARRAY));
 
     Set<VirtualFile> result = new HashSet<>();
     for (VirtualFile virtualFile : FilenameIndex.getAllFilesByExt(project, osHandler.getXSBinaryExtension(), classRootsScope)) {
@@ -208,8 +214,8 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   }
 
   private @NotNull Iterable<VirtualFile> getPossibleFileLocations() {
-    var contentRoots = PerlUtil.mutableList(ProjectRootManager.getInstance(myProject).getContentRoots());
-    contentRoots.add(ProjectUtil.guessProjectDir(myProject));
+    var contentRoots = PerlUtil.mutableList(ProjectRootManager.getInstance(getProject()).getContentRoots());
+    contentRoots.add(ProjectUtil.guessProjectDir(getProject()));
     return ContainerUtil.filter(contentRoots, it -> it != null && it.isValid() && it.exists() && it.isDirectory());
   }
 
