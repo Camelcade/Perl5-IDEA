@@ -88,6 +88,23 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
     }
   }
 
+  @Test
+  public void testCoverageRunTestsWithBlib() {
+    copyDirToModule("testMoreWithBlib");
+    Pair<ExecutionEnvironment, RunContentDescriptor> execResults = runConfigurationWithCoverageAndWait(createTestRunConfiguration("t"));
+    Throwable failure = null;
+    try {
+      checkTestRunResultsWithFile(execResults.second);
+    }
+    catch (Throwable e) {
+      failure = e;
+    }
+    checkCoverageResultsWithFile();
+    if (failure != null) {
+      throw new RuntimeException(failure);
+    }
+  }
+
   private void checkCoverageResultsWithFile() {
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(".coverage"), serializeProjectData(getProjectCoverageData()));
   }

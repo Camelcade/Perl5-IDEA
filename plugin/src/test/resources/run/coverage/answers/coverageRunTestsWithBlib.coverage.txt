@@ -1,0 +1,25 @@
+File: MyPackage.pm
+----------
+package MyPackage;
+2 | use v5.10;
+
+sub somesub {
+2 |     say 42;
+}
+
+1;
+----------
+File: is_passed_named.t
+----------
+2 | use warnings FATAL => 'all';
+2 | use strict;
+2 | use Test::More;
+
+2 | use_ok('MyPackage');
+
+2 | require MyPackage;
+
+2 | MyPackage::somesub();
+
+2 | done_testing;
+----------
