@@ -32,6 +32,7 @@ import com.intellij.util.ui.update.Update;
 import com.intellij.workspaceModel.ide.JpsProjectLoadedListener;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.List;
 
@@ -99,5 +100,10 @@ public class PerlProjectDirectoriesConfigurator implements StartupActivity {
       }
     }
     return false;
+  }
+
+  @TestOnly
+  public static void configureRoots(@NotNull Project project){
+    configureContentRoots(project);
   }
 }

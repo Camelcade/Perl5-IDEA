@@ -64,6 +64,7 @@ import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
 import com.perl5.lang.perl.adapters.CpanAdapter;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
+import com.perl5.lang.perl.idea.project.PerlProjectDirectoriesConfigurator;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.prove.PerlSMTRunnerConsoleView;
@@ -239,6 +240,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     assertNotNull("Unable to find virtual file for: " + file, virtualFile);
     virtualFile.refresh(false, true);
     copyDirContentsTo(virtualFile, getModuleRoot());
+    PerlProjectDirectoriesConfigurator.configureRoots(getProject());
   }
 
   protected @NotNull VirtualFile getFileInModule(@NotNull String relativePath) {

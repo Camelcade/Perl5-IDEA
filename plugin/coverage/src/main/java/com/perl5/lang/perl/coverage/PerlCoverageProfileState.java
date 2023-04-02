@@ -57,9 +57,9 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(effectiveSdk);
     var remoteDataPath = FileUtil.toSystemIndependentName(hostData.getRemotePath(coverageBasePath));
     if (ApplicationManager.getApplication().isUnitTestMode()) {
-      return Collections.singletonList("-MDevel::Cover=-db," + remoteDataPath + ",-dir,.");
+      return Collections.singletonList("-MDevel::Cover=-db," + remoteDataPath + ",-dir,.,-blib,0");
     }
-    return Collections.singletonList("-MDevel::Cover=-silent,1,-db," + remoteDataPath + ",-dir,.");
+    return Collections.singletonList("-MDevel::Cover=-silent,1,-db," + remoteDataPath + ",-dir,.,-blib,0");
   }
 
   @Override

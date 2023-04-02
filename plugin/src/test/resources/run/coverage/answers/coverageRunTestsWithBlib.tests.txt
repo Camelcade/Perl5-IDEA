@@ -1,0 +1,3 @@
+[root] (passed suite)
+  t/is_passed_named.t (passed suite)
+    use MyPackage; (passed test)
