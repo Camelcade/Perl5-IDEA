@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -54,10 +55,11 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
 
     Sdk effectiveSdk = perlRunConfiguration.getEffectiveSdk();
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(effectiveSdk);
+    var remoteDataPath = FileUtil.toSystemIndependentName(hostData.getRemotePath(coverageBasePath));
     if (ApplicationManager.getApplication().isUnitTestMode()) {
-      return Collections.singletonList("-MDevel::Cover=-db," + hostData.getRemotePath(coverageBasePath) + ",-dir,.");
+      return Collections.singletonList("-MDevel::Cover=-db," + remoteDataPath + ",-dir,.");
     }
-    return Collections.singletonList("-MDevel::Cover=-silent,1,-db," + hostData.getRemotePath(coverageBasePath) + ",-dir,.");
+    return Collections.singletonList("-MDevel::Cover=-silent,1,-db," + remoteDataPath + ",-dir,.");
   }
 
   @Override

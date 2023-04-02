@@ -54,22 +54,27 @@ import java.util.regex.Pattern;
 
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.CONSOLE;
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.NONE;
+import static com.perl5.lang.perl.util.PerlRunUtil.PERL5OPT;
 import static com.perl5.lang.perl.util.PerlRunUtil.getPerlRunIncludeArguments;
 
 @VisibleForTesting
 public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
   private static final String PROVE = "prove";
   private static final String TEST_HARNESS = "Test::Harness";
-  private static final String PROVE_PASS_PREFIX = "PROVE_PASS_";
   static final int DEFAULT_JOBS_NUMBER = 1;
   private static final String PROVE_FORMAT_PARAMETER = "--formatter";
   private static final String PROVE_FRAMEWORK_NAME = TEST_HARNESS;
   private static final Pattern MISSING_FILTER_PATTERN = Pattern.compile("Can't load module (\\S+) at .+?/prove line");
   private static final String PROVE_PLUGIN_NAMESPACE = "App::Prove::Plugin";
-  private static final List<String> PROVE_DEFAULT_PARAMETERS = Arrays.asList(
-    "-PPassEnv", PROVE_FORMAT_PARAMETER, "TAP::Formatter::Camelcade", "--merge", "--recurse");
+  private static final List<String> PROVE_DEFAULT_PARAMETERS = Arrays.asList("--merge", "--recurse");
   private static final String PROVE_JOBS_SHORT_PREFIX = "-j";
   private static final String PROVE_JOBS_PARAMETER = "--jobs";
+  private static final String HARNESS_OPTIONS = "HARNESS_OPTIONS";
+  private static final String HARNESS_OPTIONS_SEPARATOR = ":";
+  private static final String HARNESS_OPTIONS_JOBS = "j";
+  private static final String HARNESS_OPTIONS_FORMATTER = "f";
+  private static final String HARNESS_OPTIONS_FORMATTER_CLASS = "TAP-Formatter-Camelcade";
+  private static final String HARNESS_PERL_SWITCHES = "HARNESS_PERL_SWITCHES";
   private static final Logger LOG = Logger.getInstance(PerlTestRunConfiguration.class);
   @Tag("JOBS_NUMBER")
   private int myJobsNumber = DEFAULT_JOBS_NUMBER;
@@ -141,8 +146,7 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
 
     Set<String> proveParameters = new LinkedHashSet<>(PROVE_DEFAULT_PARAMETERS);
     proveParameters.addAll(getScriptParameters());
-    proveParameters.add(PROVE_JOBS_PARAMETER);
-    proveParameters.add(Integer.toString(perlRunProfileState.isParallelRunAllowed() ? getJobsNumber() : 1));
+
     VirtualFile workingDirectory = computeExplicitWorkingDirectory();
 
     List<String> testsPaths = new ArrayList<>();
@@ -188,8 +192,18 @@ public class PerlTestRunConfiguration extends GenericPerlRunConfiguration {
     Map<String, String> environment = new HashMap<>(getEnvs());
     environment.putAll(additionalEnvironmentVariables);
     PerlRunUtil.updatePerl5Opt(environment, perlParametersList);
-    environment.forEach((key, val) -> commandLine.withEnvironment(PROVE_PASS_PREFIX + key, val));
 
+    List<String> harnessOptions = new ArrayList<>();
+    harnessOptions.add(HARNESS_OPTIONS_JOBS + Integer.toString(perlRunProfileState.isParallelRunAllowed() ? getJobsNumber() : 1));
+    harnessOptions.add(HARNESS_OPTIONS_FORMATTER + HARNESS_OPTIONS_FORMATTER_CLASS);
+
+    environment.put(HARNESS_OPTIONS, String.join(HARNESS_OPTIONS_SEPARATOR, harnessOptions));
+    var perl5Opt = environment.remove(PERL5OPT);
+    if (StringUtil.isNotEmpty(perl5Opt)) {
+      environment.put(HARNESS_PERL_SWITCHES, perl5Opt);
+    }
+
+    commandLine.withEnvironment(environment);
     commandLine.withParentEnvironmentType(isPassParentEnvs() ? CONSOLE : NONE);
     return commandLine;
   }
