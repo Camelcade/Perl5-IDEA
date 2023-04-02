@@ -2,6 +2,7 @@
 
 [![Project Validation](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/push_and_pr.yml/badge.svg)](https://github.com/Camelcade/Perl5-IDEA/actions/workflows/push_and_pr.yml)
 [![Coverage Status](https://coveralls.io/repos/github/Camelcade/Perl5-IDEA/badge.svg?branch=master&dummy)](https://coveralls.io/github/Camelcade/Perl5-IDEA?branch=master)
+[![Translate Camelcade](https://img.shields.io/badge/Translate-Camelcade-blue.svg)](https://explore.transifex.com/camelcade/perl5-plugin-for-intellij-idea/)
 
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/7796)](https://plugins.jetbrains.com/plugin/7796-perl)
 [![Rating](https://img.shields.io/jetbrains/plugin/r/rating/7796)](https://plugins.jetbrains.com/plugin/7796-perl/reviews)
