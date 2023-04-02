@@ -550,14 +550,14 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected @NotNull PsiFile installPackageWithCpanminusAndGetPackageFile(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
     return installPackageAndGetPackageFile(
       contextPsiFile, packageName,
-      (sdk, callback) -> CpanminusAdapter.createInstallAction(sdk, getProject(), List.of("--notest", packageName), callback)
+      (sdk, callback) -> CpanminusAdapter.createInstallAction(sdk, getProject(), List.of(packageName), callback)
     );
   }
 
   protected @NotNull PsiFile installPackageWithCpanAndGetPackageFile(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
     return installPackageAndGetPackageFile(
       contextPsiFile, packageName,
-      (sdk, callback) -> CpanAdapter.createInstallAction(sdk, getProject(), List.of("-T", "-M", "www.cpan.org", packageName), callback)
+      (sdk, callback) -> CpanAdapter.createInstallAction(sdk, getProject(), List.of("-M", "www.cpan.org", packageName), callback)
     );
   }
 

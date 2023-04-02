@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,11 +28,13 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class CpanAdapter extends PackageManagerAdapter {
   private static final @NlsSafe String PACKAGE_NAME = "CPAN";
   public static final @NlsSafe String SCRIPT_NAME = "cpan";
+  private static final @NlsSafe String NO_TEST_ARGUMENT = "-T";
 
   public CpanAdapter(@NotNull Sdk sdk, @Nullable Project project) {
     super(sdk, project);
@@ -60,7 +62,10 @@ public class CpanAdapter extends PackageManagerAdapter {
     return new PerlDumbAwareAction(createInstallActionTitle(SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
-        installModules(sdk, project, libraryNames, actionCallback);
+        var arguments = new ArrayList<String>();
+        arguments.add(NO_TEST_ARGUMENT);
+        arguments.addAll(libraryNames);
+        installModules(sdk, project, arguments, actionCallback);
       }
     };
   }

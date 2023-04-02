@@ -77,9 +77,6 @@ public abstract class PackageManagerAdapter {
       return;
     }
     String remotePath = PerlHostData.notNullFrom(mySdk).getRemotePath(script.getPath());
-    if (remotePath == null) {
-      return;
-    }
     PerlRunUtil.runInConsole(
       new PerlCommandLine(remotePath)
         .withParameters(getInstallParameters(packageNames))
@@ -145,7 +142,7 @@ public abstract class PackageManagerAdapter {
   private static final class InstallUpdate extends Update {
     private final @NotNull PackageManagerAdapter myAdapter;
 
-    private final @NotNull Set<String> myPackages = new HashSet<>();
+    private final @NotNull Set<String> myPackages = new LinkedHashSet<>();
 
     public InstallUpdate(@NotNull PackageManagerAdapter adapter, @NotNull Collection<String> packageNames) {
       super(Pair.create(adapter, packageNames));

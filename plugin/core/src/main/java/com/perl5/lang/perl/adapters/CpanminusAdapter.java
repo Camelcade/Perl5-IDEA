@@ -30,12 +30,14 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class CpanminusAdapter extends PackageManagerAdapter {
   public static final @NlsSafe String PACKAGE_NAME = "App::cpanminus";
   public static final @NlsSafe String SCRIPT_NAME = "cpanm";
+  private static final @NlsSafe String NO_TEST_ARGUMENT = "--notest";
 
   public CpanminusAdapter(@NotNull Sdk sdk, @Nullable Project project) {
     super(sdk, project);
@@ -94,7 +96,9 @@ public class CpanminusAdapter extends PackageManagerAdapter {
     return !isAvailable(project) ? null : new PerlDumbAwareAction(CpanAdapter.createInstallActionTitle(SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
-        new CpanminusAdapter(sdk, project).install(libraryNames);
+        var arguments = new ArrayList<>(libraryNames);
+        arguments.add(NO_TEST_ARGUMENT);
+        new CpanminusAdapter(sdk, project).install(arguments);
         if (actionCallback != null) {
           actionCallback.run();
         }
