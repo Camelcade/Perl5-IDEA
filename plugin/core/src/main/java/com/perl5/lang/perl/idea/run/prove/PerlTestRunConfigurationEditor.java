@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,9 +41,13 @@ import java.util.List;
 import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.FILES_JOINER;
 import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.FILES_PARSER;
 
-class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<PerlTestRunConfiguration> {
-  public PerlTestRunConfigurationEditor(Project project) {
+class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<PerlAbstractTestRunConfiguration> {
+  private final @NotNull PerlAbstractTestRunConfigurationProducer myProducer;
+
+  public PerlTestRunConfigurationEditor(@NotNull Project project,
+                                        @NotNull PerlAbstractTestRunConfigurationProducer producer) {
     super(project);
+    myProducer = producer;
   }
 
   @Override
@@ -52,7 +56,7 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
   }
 
 
-  private class ParametersPanel extends GenericPerlRunConfigurationEditorPanel<PerlTestRunConfiguration> {
+  private class ParametersPanel extends GenericPerlRunConfigurationEditorPanel<PerlAbstractTestRunConfiguration> {
     private JComboBox<Integer> myJobsCombobox;
     private LabeledComponent<JComboBox<Integer>> myLabeledJobsCombobox;
 
@@ -65,7 +69,7 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
 
     @Override
     protected @NotNull String getProgramParametersLabel() {
-      return PerlBundle.message("perl.run.prove.option.parameters");
+      return PerlBundle.message("perl.run.test.runner.arguemnts");
     }
 
     @Override
@@ -88,14 +92,14 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
     }
 
     @Override
-    protected void reset(PerlTestRunConfiguration runConfiguration) {
+    protected void reset(PerlAbstractTestRunConfiguration runConfiguration) {
       super.reset(runConfiguration);
       myJobsCombobox.setSelectedItem(runConfiguration.getJobsNumber());
       myTestScriptParametersEditor.setText(runConfiguration.getTestScriptParameters());
     }
 
     @Override
-    protected void applyTo(PerlTestRunConfiguration runConfiguration) {
+    protected void applyTo(PerlAbstractTestRunConfiguration runConfiguration) {
       super.applyTo(runConfiguration);
       Object item = myJobsCombobox.getSelectedItem();
       runConfiguration.setJobsNumber(item instanceof Integer ? (Integer)item : PerlTestRunConfiguration.DEFAULT_JOBS_NUMBER);
@@ -138,8 +142,8 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
     }
 
     @Override
-    protected @NotNull GenericPerlRunConfigurationProducer<PerlTestRunConfiguration> getRunConfigurationProducer() {
-      return PerlTestRunConfigurationProducer.getInstance();
+    protected final @NotNull GenericPerlRunConfigurationProducer<PerlAbstractTestRunConfiguration> getRunConfigurationProducer() {
+      return myProducer;
     }
   }
 }

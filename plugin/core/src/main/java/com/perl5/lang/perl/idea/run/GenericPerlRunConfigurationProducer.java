@@ -21,6 +21,7 @@ import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.actions.LazyRunConfigurationProducer;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.module.Module;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -29,7 +30,9 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Consumer;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -37,6 +40,9 @@ public abstract class GenericPerlRunConfigurationProducer<Configuration extends 
   extends LazyRunConfigurationProducer<Configuration> {
   private @NotNull List<VirtualFile> computeTargetFiles(ConfigurationContext configurationContext) {
     if (configurationContext.containsMultipleSelection() && !allowMultipleFiles()) {
+      return Collections.emptyList();
+    }
+    if( !isOurModule(configurationContext.getModule())){
       return Collections.emptyList();
     }
     Set<VirtualFile> virtualFiles = new LinkedHashSet<>();
@@ -72,6 +78,10 @@ public abstract class GenericPerlRunConfigurationProducer<Configuration extends 
     locationConsumer.consume(configurationContext.getLocation());
 
     return new ArrayList<>(virtualFiles);
+  }
+
+  protected boolean isOurModule(@Nullable Module module) {
+    return PerlProjectManager.isPerlEnabled(module);
   }
 
   @Override

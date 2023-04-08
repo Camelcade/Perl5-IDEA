@@ -114,6 +114,11 @@ public class PerlCommandLine extends GeneralCommandLine {
   }
 
   @Override
+  public @NotNull PerlCommandLine withParentEnvironmentType(@NotNull ParentEnvironmentType type) {
+    return (PerlCommandLine)super.withParentEnvironmentType(type);
+  }
+
+  @Override
   public @NotNull PerlCommandLine withEnvironment(@NotNull String key, @NotNull String value) {
     return (PerlCommandLine)super.withEnvironment(key, value);
   }
