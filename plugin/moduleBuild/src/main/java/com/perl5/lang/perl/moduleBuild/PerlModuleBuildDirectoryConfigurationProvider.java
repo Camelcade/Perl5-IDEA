@@ -27,7 +27,7 @@ public class PerlModuleBuildDirectoryConfigurationProvider implements PerlDirect
   public void configureContentRoot(@NotNull Module module,
                                    @NotNull VirtualFile contentRoot,
                                    @NotNull PerlDirectoryInfoCollector collector) {
-    var makeFilePl = contentRoot.findChild("Build.PL");
+    var makeFilePl = contentRoot.findChild(PerlModuleBuildUtil.BUILD_PL);
     if (makeFilePl == null) {
       return;
     }
