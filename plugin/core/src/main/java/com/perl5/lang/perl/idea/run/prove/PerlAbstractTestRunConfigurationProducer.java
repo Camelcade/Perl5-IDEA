@@ -16,20 +16,21 @@
 
 package com.perl5.lang.perl.idea.run.prove;
 
-import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
+import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationProducer;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlTestRunConfigurationProducer extends PerlAbstractTestRunConfigurationProducer<PerlTestRunConfiguration> {
+public abstract class PerlAbstractTestRunConfigurationProducer<Configuration extends PerlAbstractTestRunConfiguration> extends GenericPerlRunConfigurationProducer<Configuration> {
+
   @Override
-  public @NotNull ConfigurationFactory getConfigurationFactory() {
-    return PerlTestRunConfigurationType.getInstance().getTestConfigurationFactory();
+  public boolean isOurFile(@NotNull VirtualFile virtualFiles) {
+    return virtualFiles.isDirectory() || virtualFiles.getFileType() == PerlFileTypeTest.INSTANCE;
   }
 
-  public static @NotNull PerlTestRunConfigurationProducer getInstance() {
-    return getInstance(PerlTestRunConfigurationProducer.class);
+  @Override
+  public boolean allowMultipleFiles() {
+    return true;
   }
-
 }

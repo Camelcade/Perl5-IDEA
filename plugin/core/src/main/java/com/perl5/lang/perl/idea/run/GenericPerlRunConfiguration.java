@@ -90,7 +90,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
 
   private transient Integer myDebugPort;
 
-  public GenericPerlRunConfiguration(Project project, @NotNull ConfigurationFactory factory, String name) {
+  public GenericPerlRunConfiguration(@NotNull Project project, @NotNull ConfigurationFactory factory, @Nullable String name) {
     super(project, factory, name);
   }
 
