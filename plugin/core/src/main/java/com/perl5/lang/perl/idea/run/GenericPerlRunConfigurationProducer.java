@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import java.util.*;
 
 public abstract class GenericPerlRunConfigurationProducer<Configuration extends GenericPerlRunConfiguration>
   extends LazyRunConfigurationProducer<Configuration> {
-  private @NotNull List<VirtualFile> computeTargetFiles(ConfigurationContext configurationContext) {
+  protected @NotNull List<VirtualFile> computeTargetFiles(@NotNull ConfigurationContext configurationContext) {
     if (configurationContext.containsMultipleSelection() && !allowMultipleFiles()) {
       return Collections.emptyList();
     }

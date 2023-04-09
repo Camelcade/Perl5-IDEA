@@ -72,6 +72,7 @@
                     interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension" dynamic="true"/>
     <extensionPoint name="directoryConfigurationProvider" interface="com.perl5.lang.perl.idea.project.PerlDirectoryConfigurationProvider"
                     dynamic="true"/>
+    <extensionPoint name="buildSystemHandler" interface="com.perl5.lang.perl.buildSystem.PerlBuildSystemHandler" dynamic="true"/>
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.perl5">
