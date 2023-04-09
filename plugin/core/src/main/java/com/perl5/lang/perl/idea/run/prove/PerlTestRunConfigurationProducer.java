@@ -16,11 +16,19 @@
 
 package com.perl5.lang.perl.idea.run.prove;
 
+import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.openapi.module.Module;
+import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.containers.SmartHashSet;
+import com.perl5.lang.perl.buildSystem.PerlBuildSystemHandler;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationProducer;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.Collections;
+import java.util.List;
 
 public class PerlTestRunConfigurationProducer extends PerlAbstractTestRunConfigurationProducer<PerlTestRunConfiguration> {
   @Override
@@ -28,8 +36,21 @@ public class PerlTestRunConfigurationProducer extends PerlAbstractTestRunConfigu
     return PerlTestRunConfigurationType.getInstance().getTestConfigurationFactory();
   }
 
+  @Override
+  protected @NotNull List<VirtualFile> computeTargetFiles(@NotNull ConfigurationContext configurationContext) {
+    var targetFiles = super.computeTargetFiles(configurationContext);
+    var projectFileIndex = ProjectFileIndex.getInstance(configurationContext.getProject());
+    var processedModules = new SmartHashSet<Module>();
+    for (VirtualFile targetFile : targetFiles) {
+      var fileModule = projectFileIndex.getModuleForFile(targetFile);
+      if( processedModules.add(fileModule) && PerlBuildSystemHandler.getTestsHandler(fileModule) != null ){
+        return Collections.emptyList();
+      }
+    }
+    return targetFiles;
+  }
+
   public static @NotNull PerlTestRunConfigurationProducer getInstance() {
     return getInstance(PerlTestRunConfigurationProducer.class);
   }
-
 }
