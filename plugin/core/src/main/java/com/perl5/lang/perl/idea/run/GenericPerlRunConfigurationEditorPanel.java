@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,8 +59,8 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   private LabeledComponent<?> myLabeledConsoleCharset;
   private ComboBox<String> myConsoleCharset;
 
-  private LabeledComponent<RawCommandLineEditor> myLabeledPerlParametersPanel;
-  private RawCommandLineEditor myPerlParametersPanel;
+  private LabeledComponent<RawCommandLineEditor> myLabeledPerlArgumentsPanel;
+  private RawCommandLineEditor myPerlArgumentsPanel;
 
   private JBCheckBox myAlternativeSdkCheckbox;
   private Perl5SdkConfigurable mySdkConfigurable;
@@ -78,28 +78,28 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     add(createAlternativeSdkPanel());
 
     setLayout(new VerticalFlowLayout(VerticalFlowLayout.TOP, 0, 5, true, false));
-    setProgramParametersLabel(getProgramParametersLabel());
+    setProgramParametersLabel(getProgramArgumentsLabel());
   }
 
   protected void createLabeledComponents() {
     createConsoleEncodingField();
-    createPerlParametersField();
+    createPerlArgumentsField();
     createScriptField();
   }
 
   protected @NotNull List<LabeledComponent<?>> getLabeledComponents() {
-    return Arrays.asList(myScriptLabeledField, myLabeledConsoleCharset, myLabeledPerlParametersPanel);
+    return Arrays.asList(myScriptLabeledField, myLabeledConsoleCharset, myLabeledPerlArgumentsPanel);
   }
 
-  protected @NotNull String getProgramParametersLabel() {
-    return PerlBundle.message("perl.run.option.script.parameters");
+  protected @NotNull String getProgramArgumentsLabel() {
+    return PerlBundle.message("perl.run.option.script.arguments");
   }
 
-  protected void createPerlParametersField() {
-    myPerlParametersPanel = new RawCommandLineEditor();
-    myLabeledPerlParametersPanel = LabeledComponent.create(myPerlParametersPanel, PerlBundle.message("perl.run.option.perl.parameters"));
-    myLabeledPerlParametersPanel.setLabelLocation(BorderLayout.WEST);
-    copyDialogCaption(myLabeledPerlParametersPanel);
+  protected void createPerlArgumentsField() {
+    myPerlArgumentsPanel = new RawCommandLineEditor();
+    myLabeledPerlArgumentsPanel = LabeledComponent.create(myPerlArgumentsPanel, PerlBundle.message("perl.run.option.perl.arguments"));
+    myLabeledPerlArgumentsPanel.setLabelLocation(BorderLayout.WEST);
+    copyDialogCaption(myLabeledPerlArgumentsPanel);
   }
 
   private void createConsoleEncodingField() {
@@ -173,7 +173,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   protected void reset(Configuration runConfiguration) {
     ((TextAccessor)myScriptField).setText(runConfiguration.getScriptPath());
     myConsoleCharset.setSelectedItem(runConfiguration.getConsoleCharset());
-    myPerlParametersPanel.setText(runConfiguration.getPerlParameters());
+    myPerlArgumentsPanel.setText(runConfiguration.getPerlArguments());
     myAlternativeSdkCheckbox.setSelected(runConfiguration.isUseAlternativeSdk());
     mySdkConfigurable.setEnabled(runConfiguration.isUseAlternativeSdk());
     mySdkProxy = PerlSdkTable.getInstance().findJdk(runConfiguration.getAlternativeSdkName());
@@ -184,7 +184,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   protected void applyTo(Configuration runConfiguration) {
     runConfiguration.setScriptPath(((TextAccessor)myScriptField).getText());
     runConfiguration.setConsoleCharset(StringUtil.nullize((String)myConsoleCharset.getSelectedItem(), true));
-    runConfiguration.setPerlParameters(myPerlParametersPanel.getText());
+    runConfiguration.setPerlArguments(myPerlArgumentsPanel.getText());
     runConfiguration.setUseAlternativeSdk(myAlternativeSdkCheckbox.isSelected());
     mySdkConfigurable.apply();
     runConfiguration.setAlternativeSdkName(ObjectUtils.doIfNotNull(mySdkProxy, Sdk::getName));

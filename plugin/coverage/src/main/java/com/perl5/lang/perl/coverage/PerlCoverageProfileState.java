@@ -40,7 +40,7 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
   }
 
   @Override
-  public @NotNull List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration)
+  public @NotNull List<String> getAdditionalPerlArguments(@NotNull GenericPerlRunConfiguration perlRunConfiguration)
     throws ExecutionException {
     CoverageHelper.resetCoverageSuit(perlRunConfiguration);
 

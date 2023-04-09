@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import javax.swing.*;
 
 public abstract class GenericPerlRunConfigurationEditor<Configuration extends GenericPerlRunConfiguration>
   extends PerlConfigurationEditorBase<Configuration> {
-  private GenericPerlRunConfigurationEditorPanel<Configuration> myParametersPanel;
+  private GenericPerlRunConfigurationEditorPanel<Configuration> myArgumentsPanel;
 
   public GenericPerlRunConfigurationEditor(Project project) {
     super(project);
@@ -32,26 +32,26 @@ public abstract class GenericPerlRunConfigurationEditor<Configuration extends Ge
 
   @Override
   protected void resetEditorFrom(@NotNull Configuration perlRunConfiguration) {
-    myParametersPanel.reset(perlRunConfiguration);
+    myArgumentsPanel.reset(perlRunConfiguration);
     super.resetEditorFrom(perlRunConfiguration);
   }
 
   @Override
   protected void applyEditorTo(@NotNull Configuration perlRunConfiguration) throws ConfigurationException {
-    myParametersPanel.applyTo(perlRunConfiguration);
+    myArgumentsPanel.applyTo(perlRunConfiguration);
     super.applyEditorTo(perlRunConfiguration);
   }
 
   @Override
   protected final @NotNull JComponent getGeneralComponent() {
-    return myParametersPanel = createCommonParametersPanel();
+    return myArgumentsPanel = createCommonArgumentsPanel();
   }
 
-  protected abstract @NotNull GenericPerlRunConfigurationEditorPanel<Configuration> createCommonParametersPanel();
+  protected abstract @NotNull GenericPerlRunConfigurationEditorPanel<Configuration> createCommonArgumentsPanel();
 
   @Override
   protected void disposeEditor() {
     super.disposeEditor();
-    myParametersPanel.disposeUIResources();
+    myArgumentsPanel.disposeUIResources();
   }
 }

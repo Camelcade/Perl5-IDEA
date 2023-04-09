@@ -51,24 +51,24 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
   }
 
   @Override
-  protected @NotNull ParametersPanel createCommonParametersPanel() {
-    return new ParametersPanel(myProject);
+  protected @NotNull PerlTestRunConfigurationEditor.ArgumentsPanel createCommonArgumentsPanel() {
+    return new ArgumentsPanel(myProject);
   }
 
 
-  private class ParametersPanel extends GenericPerlRunConfigurationEditorPanel<PerlAbstractTestRunConfiguration> {
+  private class ArgumentsPanel extends GenericPerlRunConfigurationEditorPanel<PerlAbstractTestRunConfiguration> {
     private JComboBox<Integer> myJobsCombobox;
     private LabeledComponent<JComboBox<Integer>> myLabeledJobsCombobox;
 
-    private RawCommandLineEditor myTestScriptParametersEditor;
-    private LabeledComponent<RawCommandLineEditor> myLabeledTestScriptParametersEditor;
+    private RawCommandLineEditor myTestScriptArgumentsEditor;
+    private LabeledComponent<RawCommandLineEditor> myLabeledTestScriptArgumentsEditor;
 
-    public ParametersPanel(@NotNull Project project) {
+    public ArgumentsPanel(@NotNull Project project) {
       super(project);
     }
 
     @Override
-    protected @NotNull String getProgramParametersLabel() {
+    protected @NotNull String getProgramArgumentsLabel() {
       return PerlBundle.message("perl.run.test.runner.arguemnts");
     }
 
@@ -85,17 +85,17 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
       myLabeledJobsCombobox = LabeledComponent.create(myJobsCombobox, PerlBundle.message("perl.run.option.jobs.number"));
       myLabeledJobsCombobox.setLabelLocation(BorderLayout.WEST);
 
-      myTestScriptParametersEditor = new RawCommandLineEditor();
-      myLabeledTestScriptParametersEditor = LabeledComponent.create(
-        myTestScriptParametersEditor, PerlBundle.message("perl.run.option.test.script.parameters"));
-      myLabeledTestScriptParametersEditor.setLabelLocation(BorderLayout.WEST);
+      myTestScriptArgumentsEditor = new RawCommandLineEditor();
+      myLabeledTestScriptArgumentsEditor =
+        LabeledComponent.create(myTestScriptArgumentsEditor, PerlBundle.message("perl.run.option.test.script.arguments"));
+      myLabeledTestScriptArgumentsEditor.setLabelLocation(BorderLayout.WEST);
     }
 
     @Override
     protected void reset(PerlAbstractTestRunConfiguration runConfiguration) {
       super.reset(runConfiguration);
       myJobsCombobox.setSelectedItem(runConfiguration.getJobsNumber());
-      myTestScriptParametersEditor.setText(runConfiguration.getTestScriptParameters());
+      myTestScriptArgumentsEditor.setText(runConfiguration.getTestScriptParameters());
     }
 
     @Override
@@ -103,14 +103,14 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
       super.applyTo(runConfiguration);
       Object item = myJobsCombobox.getSelectedItem();
       runConfiguration.setJobsNumber(item instanceof Integer ? (Integer)item : PerlTestRunConfiguration.DEFAULT_JOBS_NUMBER);
-      runConfiguration.setTestScriptParameters(myTestScriptParametersEditor.getText());
+      runConfiguration.setTestScriptParameters(myTestScriptArgumentsEditor.getText());
     }
 
     @Override
     protected @NotNull List<LabeledComponent<?>> getLabeledComponents() {
       List<LabeledComponent<?>> parentComponents = new ArrayList<>(super.getLabeledComponents());
       parentComponents.add(myLabeledJobsCombobox);
-      parentComponents.add(myLabeledTestScriptParametersEditor);
+      parentComponents.add(myLabeledTestScriptArgumentsEditor);
       return parentComponents;
     }
 

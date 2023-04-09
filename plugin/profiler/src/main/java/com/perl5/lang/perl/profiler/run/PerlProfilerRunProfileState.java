@@ -70,7 +70,7 @@ public class PerlProfilerRunProfileState extends PerlRunProfileState {
   }
 
   @Override
-  public @NotNull List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration)
+  public @NotNull List<String> getAdditionalPerlArguments(@NotNull GenericPerlRunConfiguration perlRunConfiguration)
     throws ExecutionException {
     return Collections.singletonList("-d:NYTProf");
   }
