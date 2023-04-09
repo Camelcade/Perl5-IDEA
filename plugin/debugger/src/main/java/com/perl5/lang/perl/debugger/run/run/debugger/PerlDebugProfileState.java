@@ -94,7 +94,7 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
   }
 
   @Override
-  public @NotNull List<String> getAdditionalPerlParameters(@NotNull GenericPerlRunConfiguration perlRunConfiguration) {
+  public @NotNull List<String> getAdditionalPerlArguments(@NotNull GenericPerlRunConfiguration perlRunConfiguration) {
     return Collections.singletonList(DEBUG_ARGUMENT);
   }
 

@@ -23,18 +23,13 @@ import com.intellij.execution.configurations.RuntimeConfigurationException;
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.idea.execution.PerlCommandLine;
-import com.perl5.lang.perl.idea.run.PerlRunProfileState;
-import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
@@ -44,21 +39,16 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.CONSOLE;
-import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.NONE;
-import static com.perl5.lang.perl.util.PerlRunUtil.PERL5OPT;
-import static com.perl5.lang.perl.util.PerlRunUtil.getPerlRunIncludeArguments;
-
 @VisibleForTesting
 public class PerlTestRunConfiguration extends PerlAbstractTestRunConfiguration {
   private static final Logger LOG = Logger.getInstance(PerlTestRunConfiguration.class);
   private static final String PROVE = "prove";
   private static final String TEST_HARNESS = "Test::Harness";
-  private static final String PROVE_FORMAT_PARAMETER = "--formatter";
+  private static final String PROVE_FORMAT_ARGUMENT = "--formatter";
   private static final String PROVE_FRAMEWORK_NAME = "Prove";
   private static final Pattern MISSING_FILTER_PATTERN = Pattern.compile("Can't load module (\\S+) at .+?/prove line");
   private static final String PROVE_PLUGIN_NAMESPACE = "App::Prove::Plugin";
-  private static final List<String> PROVE_DEFAULT_PARAMETERS = Arrays.asList("--merge", "--recurse");
+  private static final List<String> PROVE_DEFAULT_ARGUMENTS = Arrays.asList("--merge", "--recurse");
   private static final String PROVE_JOBS_SHORT_PREFIX = "-j";
   private static final String PROVE_JOBS_PARAMETER = "--jobs";
 
@@ -69,7 +59,7 @@ public class PerlTestRunConfiguration extends PerlAbstractTestRunConfiguration {
   }
 
   protected @NotNull List<String> getDefaultTestRunnerArguments() {
-    return PROVE_DEFAULT_PARAMETERS;
+    return PROVE_DEFAULT_ARGUMENTS;
   }
 
   protected @NotNull String getTestRunnerLocalPath() throws ExecutionException {
@@ -94,14 +84,14 @@ public class PerlTestRunConfiguration extends PerlAbstractTestRunConfiguration {
   }
 
   @Override
-  protected @NotNull List<String> getScriptParameters() {
-    List<String> userParameters = super.getScriptParameters();
-    for (Iterator<String> iterator = userParameters.iterator(); iterator.hasNext(); ) {
+  protected @NotNull List<String> getScriptArguments() {
+    List<String> userArguments = super.getScriptArguments();
+    for (Iterator<String> iterator = userArguments.iterator(); iterator.hasNext(); ) {
       String userParameter = iterator.next();
       if (StringUtil.startsWith(userParameter, PROVE_JOBS_SHORT_PREFIX)) {
         iterator.remove();
       }
-      else if (PROVE_FORMAT_PARAMETER.equals(userParameter) || PROVE_JOBS_PARAMETER.equals(userParameter)) {
+      else if (PROVE_FORMAT_ARGUMENT.equals(userParameter) || PROVE_JOBS_PARAMETER.equals(userParameter)) {
         iterator.remove();
         if (iterator.hasNext()) {
           iterator.next();
@@ -109,7 +99,7 @@ public class PerlTestRunConfiguration extends PerlAbstractTestRunConfiguration {
         }
       }
     }
-    return userParameters;
+    return userArguments;
   }
 
   protected @NotNull String getFrameworkName() {

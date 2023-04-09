@@ -153,13 +153,13 @@ public abstract class PerlAbstractTestRunConfiguration extends GenericPerlRunCon
     throws ExecutionException {
 
     // environment
-    List<String> perlParametersList = new ArrayList<>(getPerlParametersList());
-    perlParametersList.addAll(perlRunProfileState.getAdditionalPerlParameters(this));
-    perlParametersList.addAll(getPerlRunIncludeArguments(getEffectiveHostData(), getProject()));
+    List<String> perlArgumentsList = new ArrayList<>(getPerlArgumentsList());
+    perlArgumentsList.addAll(perlRunProfileState.getAdditionalPerlArguments(this));
+    perlArgumentsList.addAll(getPerlRunIncludeArguments(getEffectiveHostData(), getProject()));
 
     Map<String, String> environment = new HashMap<>(getEnvs());
     environment.putAll(perlRunProfileState.getAdditionalEnvironmentVariables());
-    PerlRunUtil.updatePerl5Opt(environment, perlParametersList);
+    PerlRunUtil.updatePerl5Opt(environment, perlArgumentsList);
 
     List<String> harnessOptions = new ArrayList<>();
     harnessOptions.add(HARNESS_OPTIONS_JOBS + Integer.toString(perlRunProfileState.isParallelRunAllowed() ? getJobsNumber() : 1));
@@ -190,7 +190,7 @@ public abstract class PerlAbstractTestRunConfiguration extends GenericPerlRunCon
 
   private @NotNull List<String> getTestRunnerArguments() throws ExecutionException {
     List<String> testRunnerArguments = new ArrayList<>(getDefaultTestRunnerArguments());
-    testRunnerArguments.addAll(getScriptParameters());
+    testRunnerArguments.addAll(getScriptArguments());
     testRunnerArguments.addAll(getTestsToRunArguments());
     return testRunnerArguments;
   }

@@ -611,13 +611,13 @@ public final class PerlRunUtil {
   }
 
   /**
-   * Updates {@code environment} with {@code perlParametersList} packed to {@code PERL5OPT} environment variable to pass it transparently.
+   * Updates {@code environment} with {@code perlArguments} packed to {@code PERL5OPT} environment variable to pass it transparently.
    */
-  public static void updatePerl5Opt(@NotNull Map<? super String, String> environment, @NotNull List<String> perlParametersList) {
-    if (perlParametersList.isEmpty()) {
+  public static void updatePerl5Opt(@NotNull Map<? super String, String> environment, @NotNull List<String> perlArguments) {
+    if (perlArguments.isEmpty()) {
       return;
     }
-    var perlParameters = StringUtil.join(perlParametersList, " ");
+    var perlParameters = StringUtil.join(perlArguments, " ");
 
     String currentOpt = environment.get(PERL5OPT);
     if (StringUtil.isNotEmpty(currentOpt)) {

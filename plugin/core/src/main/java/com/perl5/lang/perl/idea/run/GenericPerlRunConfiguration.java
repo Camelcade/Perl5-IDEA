@@ -71,9 +71,9 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   private static final Logger LOG = Logger.getInstance(GenericPerlRunConfiguration.class);
 
   private String myScriptPath;
-  private String myScriptParameters;    // these are script parameters
+  private String myScriptArguments;
 
-  private String myPerlParameters = "";
+  private String myPerlArguments = "";
   private String myWorkingDirectory;
   private Map<String, String> myEnvironments = new HashMap<>();
   private boolean myPassParentEnvironments = true;
@@ -204,12 +204,12 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
 
   @Override
   public @Nullable String getProgramParameters() {
-    return myScriptParameters;
+    return myScriptArguments;
   }
 
   @Override
   public void setProgramParameters(@Nullable String s) {
-    myScriptParameters = s;
+    myScriptArguments = s;
   }
 
   @Override
@@ -253,17 +253,17 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     myPassParentEnvironments = b;
   }
 
-  public String getPerlParameters() {
-    return myPerlParameters;
+  public String getPerlArguments() {
+    return myPerlArguments;
   }
 
-  protected @NotNull List<String> getPerlParametersList() {
-    String perlParameters = getPerlParameters();
-    return StringUtil.isEmpty(perlParameters) ? Collections.emptyList() : ParametersListUtil.parse(perlParameters);
+  protected @NotNull List<String> getPerlArgumentsList() {
+    String perlArguments = getPerlArguments();
+    return StringUtil.isEmpty(perlArguments) ? Collections.emptyList() : ParametersListUtil.parse(perlArguments);
   }
 
-  public void setPerlParameters(String PERL_PARAMETERS) {
-    this.myPerlParameters = PERL_PARAMETERS;
+  public void setPerlArguments(String perlArguments) {
+    this.myPerlArguments = perlArguments;
   }
 
   @Override
@@ -375,12 +375,12 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   protected @NotNull PerlCommandLine createBaseCommandLine(@NotNull PerlRunProfileState perlRunProfileState) throws ExecutionException {
     ExecutionEnvironment executionEnvironment = perlRunProfileState.getEnvironment();
     Project project = executionEnvironment.getProject();
-    List<String> additionalPerlParameters = perlRunProfileState.getAdditionalPerlParameters(this);
+    List<String> additionalPerlArguments = perlRunProfileState.getAdditionalPerlArguments(this);
     Map<String, String> additionalEnvironmentVariables = perlRunProfileState.getAdditionalEnvironmentVariables();
 
     PerlCommandLine commandLine = PerlRunUtil.getPerlCommandLine(
-      project, getEffectiveSdk(), computeNonNullScriptFile(), ContainerUtil.concat(getPerlParametersList(), additionalPerlParameters),
-      getScriptParameters());
+      project, getEffectiveSdk(), computeNonNullScriptFile(), ContainerUtil.concat(getPerlArgumentsList(), additionalPerlArguments),
+      getScriptArguments());
 
     if (commandLine == null) {
       throw new ExecutionException(PerlBundle.message("perl.run.error.sdk.corrupted", getEffectiveSdk()));
@@ -400,9 +400,9 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return project.getBasePath();
   }
 
-  protected @NotNull List<String> getScriptParameters() {
-    String programParameters = getProgramParameters();
-    return StringUtil.isEmpty(programParameters) ? Collections.emptyList() : ParametersListUtil.parse(programParameters);
+  protected @NotNull List<String> getScriptArguments() {
+    String programArguments = getProgramParameters();
+    return StringUtil.isEmpty(programArguments) ? Collections.emptyList() : ParametersListUtil.parse(programArguments);
   }
 
   @Override

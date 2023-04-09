@@ -8,12 +8,12 @@ no Foo::Bar some => <fold text='{hash}'>{
   tree => 'four'
 }</fold>;
 
-use Foo::Bar <fold text='{import parameters}'>{
+use Foo::Bar <fold text='{import arguments}'>{
   one => 'two',
   tree => 'four'
 }</fold>;
 
-no Foo::Bar <fold text='{import parameters}'>{
+no Foo::Bar <fold text='{import arguments}'>{
   one => 'two',
   tree => 'four'
 }</fold>;</fold>
