@@ -34,8 +34,7 @@ public class PerlRunConfigurationProducer extends GenericPerlRunConfigurationPro
 
   @Override
   public boolean isOurFile(@NotNull VirtualFile virtualFiles) {
-    FileType fileType = virtualFiles.getFileType();
-    return fileType == PerlFileTypeScript.INSTANCE || fileType == PerlFileTypeTest.INSTANCE;
+    return virtualFiles.getFileType() == PerlFileTypeScript.INSTANCE;
   }
 
   @Override
