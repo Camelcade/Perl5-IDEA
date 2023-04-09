@@ -16,9 +16,14 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,11 +32,22 @@ import java.util.List;
  * Misc helper methods
  */
 public final class PerlUtil implements PerlElementTypes {
+  private static final Logger LOG = Logger.getInstance(PerlUtil.class);
   private PerlUtil() {
   }
 
   @SafeVarargs
   public static @NotNull <E> List<E> mutableList(E @NotNull ... array) {
     return new ArrayList<>(Arrays.asList(array));
+  }
+
+  public static long getLastModifiedTime(@NotNull VirtualFile virtualFile){
+    try {
+      return Files.getLastModifiedTime(Paths.get(virtualFile.getPath())).toMillis();
+    }
+    catch (IOException e) {
+      LOG.warn("Can't get last modified for " + virtualFile, e);
+      return 0;
+    }
   }
 }

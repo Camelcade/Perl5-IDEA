@@ -422,8 +422,7 @@ public final class PerlRunUtil {
     }
   }
 
-  public static void runInConsole(@NotNull PerlCommandLine perlCommandLine) {
-
+  public static @NotNull RunContentDescriptor runInConsole(@NotNull PerlCommandLine perlCommandLine) {
     ApplicationManager.getApplication().assertIsDispatchThread();
     Executor runExecutor = DefaultRunExecutor.getRunExecutorInstance();
     Project project = perlCommandLine.getNonNullEffectiveProject();
@@ -465,6 +464,7 @@ public final class PerlRunUtil {
         Disposer.register(ourTestDisposable, runContentDescriptor.getExecutionConsole());
       }
     }
+    return runContentDescriptor;
   }
 
   public static void addMissingPackageListener(@NotNull ProcessHandler handler,

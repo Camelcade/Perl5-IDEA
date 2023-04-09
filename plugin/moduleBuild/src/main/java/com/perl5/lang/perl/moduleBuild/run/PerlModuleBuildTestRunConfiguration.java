@@ -16,8 +16,10 @@
 
 package com.perl5.lang.perl.moduleBuild.run;
 
+import com.intellij.execution.BeforeRunTask;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.ConfigurationFactory;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
@@ -29,6 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -59,21 +62,31 @@ public class PerlModuleBuildTestRunConfiguration extends PerlAbstractTestRunConf
   }
 
   private @NotNull VirtualFile getEffectiveContentRoot() throws ExecutionException {
-    var files = computeTargetFiles();
-    if (!files.isEmpty()) {
-      var projectFileIndex = ProjectFileIndex.getInstance(getProject());
-      for (VirtualFile virtualFile : files) {
-        var contentRoot = projectFileIndex.getContentRootForFile(virtualFile);
-        if (contentRoot != null) {
-          return contentRoot;
-        }
-      }
-      LOG.warn("Unable to compute effective root with files: " + files);
-    }
-    else {
-      LOG.warn("There is no target files to run");
+    VirtualFile contentRoot = getEffectiveContentRootSafe();
+    if (contentRoot != null) {
+      return contentRoot;
     }
     throw new ExecutionException(PerlBundle.message("perl.run.error.no.test.set"));
+  }
+
+  @Nullable VirtualFile getEffectiveContentRootSafe() {
+    return ReadAction.compute(()->{
+      var files = computeTargetFiles();
+      if (!files.isEmpty()) {
+        var projectFileIndex = ProjectFileIndex.getInstance(getProject());
+        for (VirtualFile virtualFile : files) {
+          var contentRoot = projectFileIndex.getContentRootForFile(virtualFile);
+          if (contentRoot != null) {
+            return contentRoot;
+          }
+        }
+        LOG.warn("Unable to compute effective root with files: " + files);
+      }
+      else {
+        LOG.warn("There is no target files to run");
+      }
+      return null;
+    });
   }
 
   @Override
@@ -87,6 +100,18 @@ public class PerlModuleBuildTestRunConfiguration extends PerlAbstractTestRunConf
     else {
       arguments.add(testFilePath);
     }
+  }
+
+  @Override
+  public @NotNull List<BeforeRunTask<?>> getBeforeRunTasks() {
+    var realTasks = super.getBeforeRunTasks();
+    if (realTasks.contains(PerlModuleBuildTaskProvider.PerlModuleBuildTask.INSTANCE)) {
+      return realTasks;
+    }
+    var patchedTasks = new ArrayList<BeforeRunTask<?>>();
+    patchedTasks.add(PerlModuleBuildTaskProvider.PerlModuleBuildTask.INSTANCE);
+    patchedTasks.addAll(realTasks);
+    return patchedTasks;
   }
 
   @Override
