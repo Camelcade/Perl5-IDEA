@@ -443,7 +443,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       () -> {
         var testLibPathName = getTestLibPath();
         VirtualFile libdir = LocalFileSystem.getInstance().refreshAndFindFileByPath(testLibPathName);
-        assertNotNull("Directory does not exists: " + new File(testLibPathName).getAbsolutePath(), libdir);
+        assertNotNull("Directory does not exist: " + new File(testLibPathName).getAbsolutePath(), libdir);
 
         PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(getProject());
         ProjectJdkImpl testSdk = PerlSdkTable.getInstance().createSdk("test");
