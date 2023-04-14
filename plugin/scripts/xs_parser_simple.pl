@@ -2,6 +2,11 @@
 use File::Find;
 use B::Deparse;
 
+# Redirect STDOUT to STDERR temporarily to prevent loaded modules from mixing
+# their output into our intended output (which must be valid perl)
+open my $initial_stdout, '>&', \*STDOUT or die $!;
+open STDOUT, '>&', \*STDERR or die $!;
+
 File::Find::find( \&file_processor, @INC );
 
 my @packages = ();
@@ -21,6 +26,10 @@ sub file_processor
 
 my $deparser = B::Deparse->new();
 my %sub_map = ();
+
+# Undo the redirection
+open STDOUT, '>&', $initial_stdout or die $!;
+close $initial_stdout;
 
 print <<'EOM';
 #
