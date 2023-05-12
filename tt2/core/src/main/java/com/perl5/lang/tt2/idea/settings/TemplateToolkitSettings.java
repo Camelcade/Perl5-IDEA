@@ -26,7 +26,6 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.project.RootsChangeRescanningInfo;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
@@ -43,10 +42,7 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 
 @State(
@@ -71,10 +67,10 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   @Transient
   private transient AtomicNotNullLazyValue<Collection<PsiFileSystemItem>> myLazyPsiDirsRoots;
   @Transient
-  private final transient @NotNull Project myProject;
+  private final transient @Nullable Project myProject;
 
   public TemplateToolkitSettings() {
-    this(ProjectManager.getInstance().getDefaultProject());
+    myProject = null;
   }
 
   public TemplateToolkitSettings(@NotNull Project project) {
@@ -82,10 +78,14 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
     createLazyObjects();
   }
 
+  public @NotNull Project getProject() {
+    return Objects.requireNonNull(myProject);
+  }
+
   public void settingsUpdated() {
     createLazyObjects();
     ApplicationManager.getApplication().invokeLater(() -> WriteAction.run(
-      () -> ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
+      () -> ProjectRootManagerEx.getInstanceEx(getProject()).makeRootsChange(
         EmptyRunnable.getInstance(), RootsChangeRescanningInfo.TOTAL_RESCAN)));
   }
 
@@ -108,7 +108,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
     myLazyPsiDirsRoots = AtomicNotNullLazyValue.createValue(() -> {
       Collection<PsiFileSystemItem> result = new ArrayDeque<>();
 
-      PsiManager psiManager = PsiManager.getInstance(myProject);
+      PsiManager psiManager = PsiManager.getInstance(getProject());
       for (VirtualFile virtualFile : getTemplateRoots()) {
         PsiDirectory directory = psiManager.findDirectory(virtualFile);
         if (directory != null) {
@@ -130,7 +130,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   }
 
   public @NotNull List<VirtualFile> getTemplateRoots() {
-    return PerlProjectManager.getInstance(myProject).getModulesRootsOfType(TemplateToolkitSourceRootType.INSTANCE);
+    return PerlProjectManager.getInstance(getProject()).getModulesRootsOfType(TemplateToolkitSourceRootType.INSTANCE);
   }
 
   public @NotNull Collection<PsiFileSystemItem> getTemplatePsiRoots() {

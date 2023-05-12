@@ -18,7 +18,6 @@ package com.perl5.lang.htmlmason.idea.configuration;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.EditorNotifications;
 import com.intellij.util.xmlb.annotations.Transient;
@@ -26,9 +25,11 @@ import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 public abstract class AbstractMasonSettings {
@@ -37,10 +38,14 @@ public abstract class AbstractMasonSettings {
   @Transient
   protected int changeCounter = 0;
 
-  @Transient protected final @NotNull Project myProject;
+  @Transient private final @Nullable Project myProject;
 
   public AbstractMasonSettings() {
-    this(ProjectManager.getInstance().getDefaultProject());
+    myProject = null;
+  }
+
+  public @NotNull Project getProject() {
+    return Objects.requireNonNull(myProject);
   }
 
   public AbstractMasonSettings(@NotNull Project project) {
@@ -50,14 +55,14 @@ public abstract class AbstractMasonSettings {
   public void settingsUpdated() {
     changeCounter++;
     if (!ApplicationManager.getApplication().isUnitTestMode()) {
-      EditorNotifications.getInstance(myProject).updateAllNotifications();
+      EditorNotifications.getInstance(getProject()).updateAllNotifications();
     }
   }
 
   protected abstract PerlSourceRootType getSourceRootType();
 
   public @NotNull List<VirtualFile> getComponentsRoots() {
-    return PerlProjectManager.getInstance(myProject).getModulesRootsOfType(getSourceRootType());
+    return PerlProjectManager.getInstance(getProject()).getModulesRootsOfType(getSourceRootType());
   }
 
   public int getChangeCounter() {
