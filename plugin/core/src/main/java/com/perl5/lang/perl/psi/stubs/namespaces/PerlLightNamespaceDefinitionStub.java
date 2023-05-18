@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.stubs.namespaces;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.stubs.PsiFileStubImpl;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.stubs.PerlLightElementStub;
@@ -32,7 +33,7 @@ public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStu
   public PerlLightNamespaceDefinitionStub(@Nullable StubElement<?> parent,
                                           IStubElementType elementType,
                                           @NotNull PerlNamespaceDefinitionData data) {
-    super(null, elementType, data);
+    super(new PsiFileStubImpl<>(null), elementType, data);
     myParent = parent;
   }
 
