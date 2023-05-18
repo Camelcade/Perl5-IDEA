@@ -13,36 +13,6 @@ Text: ... statement; Tail: (The Ellipsis Statement); Type: Index; Icon: /perl5la
 Text: ...; Tail: (The Ellipsis Statement); Type: Index; Icon: /perl5language.png; Type Icon: null
 	Lookups: ...
 	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 28687 in perlsyn.pod
-Text: 1.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-	Lookups: 1.
-	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36246 in perlsyn.pod
-Text: 10.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-	Lookups: 10.
-	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38400 in perlsyn.pod
-Text: 2.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-	Lookups: 2.
-	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36315 in perlsyn.pod
-Text: 3.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-	Lookups: 3.
-	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36530 in perlsyn.pod
-Text: 4.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-	Lookups: 4.
-	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 36765 in perlsyn.pod
-Text: 5.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-	Lookups: 5.
-	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37079 in perlsyn.pod
-Text: 6.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-	Lookups: 6.
-	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37243 in perlsyn.pod
-Text: 7.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-	Lookups: 7.
-	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37422 in perlsyn.pod
-Text: 8.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-	Lookups: 8.
-	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 37636 in perlsyn.pod
-Text: 9.; Tail: null; Type: List Item; Icon: /perl5language.png; Type Icon: null
-	Lookups: 9.
-	PsiElement: PsiItemSectionImpl(Perl5 POD: ITEM_SECTION) at 38135 in perlsyn.pod
 Text: ;; Tail: (Simple Statements); Type: Index; Icon: /perl5language.png; Type Icon: null
 	Lookups: ;
 	PsiElement: PsiPodFormatIndexImpl(Perl5 POD: POD_FORMAT_INDEX) at 4607 in perlsyn.pod
