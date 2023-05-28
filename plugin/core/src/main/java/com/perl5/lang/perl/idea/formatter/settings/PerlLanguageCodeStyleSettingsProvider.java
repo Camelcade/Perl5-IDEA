@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,7 +103,8 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       );
       consumer.renameStandardOption("SPACE_BEFORE_IF_PARENTHESES", PerlBundle.message("perl.formatting.condition"));
       consumer.renameStandardOption("SPACE_BEFORE_IF_LBRACE", PerlBundle.message("perl.formatting.compound.block"));
-      consumer.renameStandardOption("SPACE_BEFORE_ELSE_KEYWORD", PerlBundle.message("perl.formatting.compound.secondary"));
+      //noinspection DialogTitleCapitalization
+      consumer.renameStandardOption("SPACE_BEFORE_ELSE_KEYWORD", PerlBundle.message("perl.formatting.else.eslif.continue.default"));
       consumer.renameStandardOption("SPACE_BEFORE_DO_LBRACE", PerlBundle.message("perl.formatting.term.block"));
       consumer.renameStandardOption("SPACE_WITHIN_IF_PARENTHESES", PerlBundle.message("perl.formatting.condition"));
       consumer.renameStandardOption("SPACE_WITHIN_BRACES", PerlBundle.message("perl.formatting.within.code.block"));
