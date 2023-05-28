@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
+import com.intellij.openapi.util.NlsContexts.DialogTitle;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -84,6 +85,8 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
   private JCheckBox allowRegexpInjections;
   private JCheckBox enablePerlSwitchCheckbox;
   private CollectionListModel<String> selfNamesModel;
+  private CollectionListModel<String> myWarningsProvidersModel;
+  private CollectionListModel<String> myStrictProvidersModel;
   private ComboBox<PerlVersion> myTargetPerlVersionComboBox;
 
   public Perl5ProjectConfigurable(@NotNull Project project) {
@@ -180,6 +183,31 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     deparseArgumentsTextField = new JTextField();
     builder.addLabeledComponent(PerlBundle.message("perl.config.deparse.options.label"), deparseArgumentsTextField);
 
+    myStrictProvidersModel = new CollectionListModel<>();
+    JBList<String> strictNamesList = new JBList<>(myStrictProvidersModel);
+    strictNamesList.setVisibleRowCount(ourRowsCount);
+    builder.addLabeledComponent(
+      new JLabel(PerlBundle.message("perl.config.strict.provider.label")),
+      ToolbarDecorator.createDecorator(strictNamesList)
+        .setAddAction(anActionButton -> addModuleList(PerlBundle.message("perl.config.add.strict.provider.title"), myStrictProvidersModel))
+        .disableDownAction()
+        .disableUpAction()
+        .createPanel());
+
+
+    myWarningsProvidersModel = new CollectionListModel<>();
+    JBList<String> warningsNamesList = new JBList<>(myWarningsProvidersModel);
+    warningsNamesList.setVisibleRowCount(ourRowsCount);
+    builder.addLabeledComponent(
+      new JLabel(PerlBundle.message("perl.config.warnings.provider.label")),
+      ToolbarDecorator.createDecorator(warningsNamesList)
+        .setAddAction(
+          anActionButton -> addModuleList(PerlBundle.message("perl.config.add.warnings.provider.title"), myWarningsProvidersModel))
+        .disableDownAction()
+        .disableUpAction()
+        .createPanel());
+
+
     selfNamesModel = new CollectionListModel<>();
     JBList<String> selfNamesList = new JBList<>(selfNamesModel);
     selfNamesList.setVisibleRowCount(ourRowsCount);
@@ -206,6 +234,24 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
         }).createPanel());
 
     return builder.getPanel();
+  }
+
+  private void addModuleList(@NotNull @DialogTitle String title, @NotNull CollectionListModel<String> model) {
+    String moduleNames = Messages.showInputDialog(
+      myProject,
+      PerlBundle.message("perl.enter.comma.separated.values.to.add"),
+      title,
+      Messages.getQuestionIcon(),
+      "",
+      null);
+    var moduleNamesList = StringUtil.split(StringUtil.notNullize(moduleNames), ",");
+    for (String moduleName : moduleNamesList) {
+      moduleName = moduleName.trim();
+      if (StringUtil.isNotEmpty(moduleName) && !model.contains(moduleName)) {
+        model.add(moduleName);
+      }
+    }
+    model.sort(Comparator.naturalOrder());
   }
 
   @Override
@@ -273,6 +319,8 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
            !StringUtil.equals(mySharedSettings.PERL_CRITIC_ARGS, perlCriticArgsInputField.getText()) ||
            !StringUtil.equals(mySharedSettings.PERL_TIDY_ARGS, perlTidyArgsInputField.getText()) ||
            !mySharedSettings.selfNames.equals(selfNamesModel.getItems()) ||
+           !mySharedSettings.getStrictProviders().equals(myStrictProvidersModel.getItems()) ||
+           !mySharedSettings.getWarningsProviders().equals(myWarningsProvidersModel.getItems()) ||
            myHostProjectConfigurable != null && myHostProjectConfigurable.isModified();
   }
 
@@ -286,10 +334,13 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
       myHostProjectConfigurable.reset();
     }
     myPerl5SdkConfigurable.reset();
-    myLibsModel.removeAll();
-    myLibsModel.add(PerlProjectManager.getInstance(myProject).getExternalLibraryRoots());
-    selfNamesModel.removeAll();
-    selfNamesModel.add(mySharedSettings.selfNames);
+    myLibsModel.replaceAll(PerlProjectManager.getInstance(myProject).getExternalLibraryRoots());
+    selfNamesModel.replaceAll(mySharedSettings.selfNames);
+
+    myStrictProvidersModel.replaceAll(mySharedSettings.getStrictProviders());
+    myStrictProvidersModel.sort(Comparator.naturalOrder());
+    myWarningsProvidersModel.replaceAll(mySharedSettings.getWarningsProviders());
+    myWarningsProvidersModel.sort(Comparator.naturalOrder());
 
     myTargetPerlVersionComboBox.setSelectedItem(mySharedSettings.getTargetPerlVersion());
     simpleMainCheckbox.setSelected(mySharedSettings.SIMPLE_MAIN_RESOLUTION);
@@ -342,6 +393,9 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
 
     mySharedSettings.selfNames.clear();
     mySharedSettings.selfNames.addAll(selfNamesModel.getItems());
+
+    mySharedSettings.setStrictProviders(myStrictProvidersModel.getItems());
+    mySharedSettings.setWarningsProviders(myWarningsProvidersModel.getItems());
 
     mySharedSettings.settingsUpdated();
 
