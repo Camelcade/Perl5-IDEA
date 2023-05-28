@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlLightElementProvider;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
@@ -71,5 +72,19 @@ public interface PerlPackageProcessor extends PerlLightElementProvider<PerlUseSt
    */
   default boolean isFoldedByDefault(@NotNull PerlUseStatementElementBase useStatementElement) {
     return false;
+  }
+
+  /**
+   * @return true iff we have warnings enabled by the {@code useStatement}
+   */
+  default boolean isWarningsEnabled(@NotNull PerlUseStatementElement useStatement) {
+    return PerlSharedSettings.getInstance(useStatement).isWarningsProvider(useStatement.getPackageName());
+  }
+
+  /**
+   * @return true iff we have strict mode enabled by the {@code useStatement}
+   */
+  default boolean isStrictEnabled(@NotNull PerlUseStatementElement useStatement) {
+    return PerlSharedSettings.getInstance(useStatement).isStrictProvider(useStatement.getPackageName());
   }
 }

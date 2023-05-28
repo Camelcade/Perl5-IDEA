@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,9 @@ package packageProcessors;
 
 
 import base.PerlLightTestCase;
-import com.perl5.lang.perl.extensions.packageprocessor.*;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageLoader;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
@@ -39,9 +41,7 @@ public class PackageProcessorsTest extends PerlLightTestCase {
     assertNotNull(useStatement);
     PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
     assertNotNull(packageProcessor);
-    assertInstanceOf(packageProcessor, PerlStrictProvider.class);
     assertInstanceOf(packageProcessor, PerlMroProvider.class);
-    assertInstanceOf(packageProcessor, PerlWarningsProvider.class);
     assertInstanceOf(packageProcessor, PerlPackageLoader.class);
   }
 }

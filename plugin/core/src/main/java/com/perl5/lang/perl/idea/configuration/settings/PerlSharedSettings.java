@@ -34,10 +34,12 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.perl5.lang.perl.idea.configuration.settings.PerlStrictWarningsDefaults.*;
 import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
 import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
@@ -48,12 +50,12 @@ import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 )
 
-public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings> {
+public final class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings> {
   public List<String> selfNames = mutableList(DEFAULT_SELF_NAME, "this", "class", "proto");
 
-  private final List<String> myWarningsProviders = mutableList("warnings");
+  private final List<String> myWarningsProviders = new ArrayList<>();
 
-  private final List<String> myStrictProviders = mutableList("strict");
+  private final List<String> myStrictProviders = new ArrayList<>();
 
   public boolean SIMPLE_MAIN_RESOLUTION = true;
   public boolean AUTOMATIC_HEREDOC_INJECTIONS = true;
@@ -71,20 +73,22 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 
   private final ClearableLazyValue<Set<String>> myWarningsProvidersSet = ClearableLazyValue.create(() -> Set.copyOf(myWarningsProviders));
   private final ClearableLazyValue<Set<String>> myStrictProvidersSet = ClearableLazyValue.create(() -> Set.copyOf(myStrictProviders));
-  ;
 
   @Transient
-  private Project myProject;
+  private final Project myProject;
 
   private PerlSharedSettings() {
+    this(null);
   }
 
   public PerlSharedSettings(Project project) {
     myProject = project;
+    setWarningsProviders(ContainerUtil.concat(DEFAULT_STRICT_AND_WARNINGS_PROVIDERS, DEFAULT_WARNINGS_ONLY_PROVIDERS));
+    setStrictProviders(ContainerUtil.concat(DEFAULT_STRICT_AND_WARNINGS_PROVIDERS, DEFAULT_STRICT_ONLY_PROVIDERS));
   }
 
   @Override
-  public @Nullable PerlSharedSettings getState() {
+  public @NotNull PerlSharedSettings getState() {
     return this;
   }
 

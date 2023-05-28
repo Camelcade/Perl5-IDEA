@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.testFramework.LightVirtualFile;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import com.perl5.lang.perl.idea.quickfixes.PerlUsePackageQuickFix;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -52,8 +51,7 @@ public class PerlUseWarningsInspection extends PerlInspection {
         }
 
         for (PerlUseStatementElement useStatement : PsiTreeUtil.findChildrenOfType(file, PerlUseStatementElement.class)) {
-          if (useStatement.getPackageProcessor() instanceof PerlWarningsProvider warningsProvider &&
-              warningsProvider.isWarningsEnabled(useStatement)) {
+          if (useStatement.getPackageProcessor().isWarningsEnabled(useStatement)) {
             return;
           }
         }

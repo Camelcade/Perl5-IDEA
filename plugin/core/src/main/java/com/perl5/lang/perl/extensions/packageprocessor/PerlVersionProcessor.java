@@ -19,9 +19,7 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 import com.intellij.openapi.diagnostic.Logger;
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.internals.PerlVersion;
-import com.perl5.lang.perl.psi.PerlVersionElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -29,11 +27,11 @@ import java.util.List;
 import java.util.Set;
 
 
-public class PerlVersionProcessor implements PerlPackageProcessor, PerlFeaturesProvider, PerlWarningsProvider {
+public final class PerlVersionProcessor implements PerlPackageProcessor, PerlFeaturesProvider {
   private static final Logger LOG = Logger.getInstance(PerlVersionProcessor.class);
-  protected static final PerlVersionProcessor INSTANCE = new PerlVersionProcessor();
+  private static final PerlVersionProcessor INSTANCE = new PerlVersionProcessor();
 
-  protected PerlVersionProcessor() {
+  private PerlVersionProcessor() {
   }
 
   @Override
@@ -59,24 +57,17 @@ public class PerlVersionProcessor implements PerlPackageProcessor, PerlFeaturesP
     return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
   }
 
-  public static PerlVersionProcessor getProcessor(@NotNull PerlUseStatementElementBase useStatement) {
-    PerlVersionElement versionElement = getVersionElement(useStatement);
-
-    if (versionElement.getPerlVersion().lesserThan(PerlVersion.V5_12)) {
-      return INSTANCE;
-    }
-
-    return PerlVersionProcessor512.INSTANCE;
-  }
-
-  private static @NotNull PerlVersionElement getVersionElement(@NotNull PerlUseStatementElementBase useStatement) {
-    PerlVersionElement versionElement = useStatement.getVersionElement();
-    LOG.assertTrue(versionElement != null);
-    return versionElement;
+  public static PerlVersionProcessor getInstance() {
+    return INSTANCE;
   }
 
   @Override
   public boolean isWarningsEnabled(@NotNull PerlUseStatementElement useStatement) {
     return !useStatement.getVersionElement().getPerlVersion().lesserThan(PerlVersion.V5_36);
+  }
+
+  @Override
+  public boolean isStrictEnabled(@NotNull PerlUseStatementElement useStatement) {
+    return !useStatement.getVersionElement().getPerlVersion().lesserThan(PerlVersion.V5_12);
   }
 }
