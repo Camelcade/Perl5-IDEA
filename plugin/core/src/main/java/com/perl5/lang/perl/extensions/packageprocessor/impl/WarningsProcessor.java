@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,10 +19,10 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTree;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTreeLeaf;
 import com.perl5.lang.perl.internals.warnings.PerlWarningTreeNode;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class WarningsProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlWarningsProvider {
+public class WarningsProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider {
   protected static final Map<String, String> OPTIONS = new HashMap<>();
   protected static final Map<String, String> OPTIONS_BUNDLES = new HashMap<>();
 
@@ -67,5 +67,10 @@ public class WarningsProcessor extends PerlPragmaProcessorBase implements PerlPa
   @Override
   public @NotNull Map<String, String> getOptionsBundles() {
     return OPTIONS_BUNDLES;
+  }
+
+  @Override
+  public boolean isWarningsEnabled(@NotNull PerlUseStatementElement useStatement) {
+    return true;
   }
 }

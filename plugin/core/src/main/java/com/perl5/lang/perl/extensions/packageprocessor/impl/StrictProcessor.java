@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class StrictProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlStrictProvider {
+public class StrictProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider {
   protected static final Map<String, String> OPTIONS = new HashMap<>();
 
   static {
@@ -43,5 +43,10 @@ public class StrictProcessor extends PerlPragmaProcessorBase implements PerlPack
   @Override
   public @NotNull Map<String, String> getOptionsBundles() {
     return Collections.emptyMap();
+  }
+
+  @Override
+  public boolean isStrictEnabled(@NotNull PerlUseStatementElement useStatement) {
+    return true;
   }
 }

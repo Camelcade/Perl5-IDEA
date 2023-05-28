@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,20 @@
 package com.perl5.lang.perl.extensions.packageprocessor.impl;
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlStrictProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlWarningsProvider;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * This class intended to handle packages providing strict/warnings settings by including them.
  */
-public class BaseStrictWarningsProvidingProcessor extends PerlPackageProcessorBase implements
-                                                                                   PerlWarningsProvider,
-                                                                                   PerlStrictProvider {
+public abstract class BaseStrictWarningsProvidingProcessor extends PerlPackageProcessorBase {
+  @Override
+  public boolean isStrictEnabled(@NotNull PerlUseStatementElement useStatement) {
+    return true;
+  }
+
+  @Override
+  public boolean isWarningsEnabled(@NotNull PerlUseStatementElement useStatement) {
+    return true;
+  }
 }
