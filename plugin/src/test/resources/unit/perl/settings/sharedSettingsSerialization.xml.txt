@@ -1,4 +1,10 @@
 <PerlSharedSettings>
+  <STRICT_PROVIDERS>
+    <list>
+      <option value="custom::strict" />
+      <option value="strict" />
+    </list>
+  </STRICT_PROVIDERS>
   <option name="targetPerlVersion">
     <PerlVersion>
       <isStrict>true</isStrict>
@@ -7,6 +13,12 @@
       <major>20</major>
     </PerlVersion>
   </option>
+  <WARNING_PROVIDERS>
+    <list>
+      <option value="custom::warnings" />
+      <option value="warnings" />
+    </list>
+  </WARNING_PROVIDERS>
   <option name="selfNames">
     <list>
       <option value="selfname" />

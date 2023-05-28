@@ -21,12 +21,16 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiManager;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
+import com.intellij.util.xmlb.annotations.Tag;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.internals.PerlVersion;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,6 +50,11 @@ import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings> {
   public List<String> selfNames = mutableList(DEFAULT_SELF_NAME, "this", "class", "proto");
+
+  private final List<String> myWarningsProviders = mutableList("warnings");
+
+  private final List<String> myStrictProviders = mutableList("strict");
+
   public boolean SIMPLE_MAIN_RESOLUTION = true;
   public boolean AUTOMATIC_HEREDOC_INJECTIONS = true;
   public boolean ALLOW_INJECTIONS_WITH_INTERPOLATION = false;
@@ -59,6 +68,10 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 
   @Transient
   private Set<String> SELF_NAMES_SET = null;
+
+  private final ClearableLazyValue<Set<String>> myWarningsProvidersSet = ClearableLazyValue.create(() -> Set.copyOf(myWarningsProviders));
+  private final ClearableLazyValue<Set<String>> myStrictProvidersSet = ClearableLazyValue.create(() -> Set.copyOf(myStrictProviders));
+  ;
 
   @Transient
   private Project myProject;
@@ -102,6 +115,28 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
     return SELF_NAMES_SET.contains(name);
   }
 
+  public void setStrictProviders(@NotNull List<String> strictProviders) {
+    myStrictProviders.clear();
+    myStrictProviders.addAll(ContainerUtil.sorted(strictProviders));
+    myStrictProvidersSet.drop();
+  }
+
+  @Contract("null->false")
+  public final boolean isStrictProvider(@Nullable String packageName) {
+    return packageName != null && myStrictProvidersSet.getValue().contains(packageName);
+  }
+
+  public void setWarningsProviders(@NotNull List<String> warningsProviders) {
+    myWarningsProviders.clear();
+    myWarningsProviders.addAll(ContainerUtil.sorted(warningsProviders));
+    myWarningsProvidersSet.drop();
+  }
+
+  @Contract("null->false")
+  public final boolean isWarningsProvider(@Nullable String packageName) {
+    return packageName != null && myWarningsProvidersSet.getValue().contains(packageName);
+  }
+
   public void setDeparseOptions(String optionsString) {
     while (optionsString.length() > 0 && optionsString.charAt(0) != '-') {
       optionsString = optionsString.substring(1);
@@ -115,5 +150,15 @@ public class PerlSharedSettings implements PersistentStateComponent<PerlSharedSe
 
   public static @NotNull PerlSharedSettings getInstance(@NotNull PsiElement psiElement) {
     return getInstance(psiElement.getProject());
+  }
+
+  @Tag("WARNING_PROVIDERS")
+  public @NotNull List<String> getWarningsProviders() {
+    return List.copyOf(myWarningsProviders);
+  }
+
+  @Tag("STRICT_PROVIDERS")
+  public @NotNull List<String> getStrictProviders() {
+    return List.copyOf(myStrictProviders);
   }
 }
