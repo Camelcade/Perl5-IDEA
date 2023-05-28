@@ -332,6 +332,8 @@ public class PerlSettingsPersistenceTest extends PerlLightTestCase {
     settings.PERL_TIDY_ARGS = "perltidy args";
     settings.PERL_CRITIC_ARGS = "perlcritic args";
     settings.selfNames = List.of("selfname");
+    settings.setStrictProviders(List.of("strict", "custom::strict"));
+    settings.setWarningsProviders(List.of("warnings", "custom::warnings"));
     compareSerializedStateWithFile(settings);
   }
 
@@ -362,5 +364,7 @@ public class PerlSettingsPersistenceTest extends PerlLightTestCase {
     assertEquals("perltidy args", settings.PERL_TIDY_ARGS);
     assertEquals("perlcritic args", settings.PERL_CRITIC_ARGS);
     assertEquals(List.of("selfname"), settings.selfNames);
+    assertEquals(List.of("custom::warnings", "warnings"), settings.getWarningsProviders());
+    assertEquals(List.of("custom::strict", "strict"), settings.getStrictProviders());
   }
 }
