@@ -33,7 +33,7 @@ buildscript {
 plugins {
   id("idea")
   id("jacoco")
-  id("org.jetbrains.intellij") version "1.13.3"
+  id("org.jetbrains.intellij") version "1.14.1"
   id("org.jetbrains.grammarkit") version "2022.3.1"
   id("com.github.kt3k.coveralls") version "2.12.2"
   id("org.sonarqube") version "4.2.0.3129"
