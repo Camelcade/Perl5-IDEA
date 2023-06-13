@@ -26,7 +26,7 @@ buildscript {
   dependencies {
     classpath("org.codehaus.groovy.modules.http-builder:http-builder:0.7.1")
     classpath("org.apache.httpcomponents:httpmime:4.5.14")
-    classpath("org.eclipse.jgit:org.eclipse.jgit:6.5.0.202303070854-r")
+    classpath("org.eclipse.jgit:org.eclipse.jgit:6.6.0.202305301015-r")
   }
 }
 
