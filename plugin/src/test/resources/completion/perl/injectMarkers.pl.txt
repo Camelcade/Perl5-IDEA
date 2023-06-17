@@ -10,9 +10,6 @@ Text: IGNORE; Tail: null; Type: inject with .ignore (IgnoreLang); Icon: /ignore_
 Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null
 	Lookups: JSON
 	String: JSON
-Text: JSONPATH; Tail: null; Type: inject with JSONPath; Icon: /json.svg; Type Icon: null
-	Lookups: JSONPATH
-	String: JSONPATH
 Text: PERL5; Tail: null; Type: inject with Perl5; Icon: /perl5classic.png; Type Icon: null
 	Lookups: PERL5
 	String: PERL5
