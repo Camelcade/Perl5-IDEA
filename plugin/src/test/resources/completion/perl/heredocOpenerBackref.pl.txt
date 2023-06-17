@@ -10,9 +10,6 @@ Text: IGNORE; Tail: null; Type: inject with .ignore (IgnoreLang); Icon: /ignore_
 Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null
 	Lookups: JSON
 	String: JSON
-Text: JSONPATH; Tail: null; Type: inject with JSONPath; Icon: /json.svg; Type Icon: null
-	Lookups: JSONPATH
-	String: JSONPATH
 Text: MYSUPERMARKER; Tail: null; Type: null; Icon: null; Type Icon: null
 	Lookups: MYSUPERMARKER
 	PsiElement: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 0 in heredocOpenerBackref.pl
