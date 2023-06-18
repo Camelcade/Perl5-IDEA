@@ -278,7 +278,7 @@ public final class PerlRunUtil {
             showMissingLibraryNotification(project, sdk, BUNDLED_MODULE_NAME);
           }
           else {
-            CpanAdapter.installModules(sdk, project, packagesToInstall, notification::expire);
+            CpanAdapter.installModules(sdk, project, packagesToInstall, notification::expire, true);
           }
         }
       });

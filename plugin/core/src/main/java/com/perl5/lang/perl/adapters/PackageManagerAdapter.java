@@ -61,26 +61,30 @@ public abstract class PackageManagerAdapter {
   /**
    * @return list of parameters for manager's script to install a package with {@code packageName}
    */
-  protected @NotNull List<String> getInstallParameters(@NotNull Collection<String> packageNames) {
+  protected @NotNull List<String> getInstallParameters(@NotNull Collection<String> packageNames, boolean suppressTests) {
     return new ArrayList<>(packageNames);
   }
 
   /**
    * This method installs packages with given package names using manager's script.
-   * @param packageNames a collection of strings representing package names to install
-   * @param callback a runnable object to execute when installation is complete
+   *
+   * @param packageNames  a collection of strings representing package names to install
+   * @param callback      a runnable object to execute when installation is complete
+   * @param suppressTests true iff tests should be suppressed during installation
    * @apiNote this method starts installation process immediately. If you need a deferred installation (with 300ms) and it is possible that
-   * more packages may come for installation, use {@link #queueInstall(Collection)}
+   * more packages may come for installation, use {@link #queueInstall(Collection, boolean)}
    */
-  public void install(@NotNull Collection<String> packageNames, @NotNull Runnable callback) {
-    doInstall(packageNames, callback);
+  public void install(@NotNull Collection<String> packageNames, @NotNull Runnable callback, boolean suppressTests) {
+    doInstall(packageNames, callback, suppressTests);
   }
 
   /**
    * Asynchronously installs {@code packageNames} with output in the console
-   * @param callback optional callback to be invoked after installing and paths.
+   *
+   * @param callback      optional callback to be invoked after installing and paths.
+   * @param suppressTests tue iff tests should not run during installation
    */
-  private void doInstall(@NotNull Collection<String> packageNames, @Nullable Runnable callback) {
+  private void doInstall(@NotNull Collection<String> packageNames, @Nullable Runnable callback, boolean suppressTests) {
     ApplicationManager.getApplication().assertIsDispatchThread();
     if (myProject != null && myProject.isDisposed()) {
       return;
@@ -98,7 +102,7 @@ public abstract class PackageManagerAdapter {
     String remotePath = PerlHostData.notNullFrom(mySdk).getRemotePath(script.getPath());
     PerlRunUtil.runInConsole(
       new PerlCommandLine(remotePath)
-        .withParameters(getInstallParameters(packageNames))
+        .withParameters(getInstallParameters(packageNames, suppressTests))
         .withSdk(getSdk())
         .withProject(getProject())
         .withConsoleTitle(PerlBundle.message("perl.cpan.console.installing", StringUtil.join(packageNames, ", ")))
@@ -119,24 +123,26 @@ public abstract class PackageManagerAdapter {
    * Queues {@code packageNames} for installation by adding them to the update queue for asynchronous processing.
    * <p>
    * Note that this method only adds the packages to the queue for installation; it does not perform the installation itself.
-   * Use {@link #install(Collection, Runnable)} to actually install the packages.
+   * Use {@link #install(Collection, Runnable, boolean)} to actually install the packages.
    *
-   * @param packageNames the collection of package names to be installed
+   * @param packageNames  the collection of package names to be installed
+   * @param suppressTests {@code true} if tests should not run during installation; {@code false} otherwise
+   * @see #install(Collection, Runnable, boolean)
    */
-  public final void queueInstall(@NotNull Collection<String> packageNames) {
-    QUEUE.queue(new InstallUpdate(this, packageNames));
+  public final void queueInstall(@NotNull Collection<String> packageNames, boolean suppressTests) {
+    QUEUE.queue(new InstallUpdate(this, packageNames, suppressTests));
   }
 
   /**
    * Queues the given {@code packageName} for installation by adding it to the update queue for asynchronous processing.
    * <p>
    * Note that this method only adds the package to the queue for installation; it does not perform the installation itself.
-   * Use {@link #install(Collection, Runnable)} to actually install the package.
+   * Use {@link #install(Collection, Runnable, boolean)} to actually install the package.
    *
    * @param packageName the name of the package to be installed
    */
   public final void queueInstall(@NotNull String packageName) {
-    queueInstall(Collections.singletonList(packageName));
+    queueInstall(Collections.singletonList(packageName), false);
   }
 
   @Override
@@ -180,18 +186,19 @@ public abstract class PackageManagerAdapter {
 
   private static final class InstallUpdate extends Update {
     private final @NotNull PackageManagerAdapter myAdapter;
-
+    private final boolean mySuppressTests;
     private final @NotNull Set<String> myPackages = new LinkedHashSet<>();
 
-    public InstallUpdate(@NotNull PackageManagerAdapter adapter, @NotNull Collection<String> packageNames) {
+    public InstallUpdate(@NotNull PackageManagerAdapter adapter, @NotNull Collection<String> packageNames, boolean suppressTests) {
       super(Pair.create(adapter, packageNames));
       myAdapter = adapter;
       myPackages.addAll(packageNames);
+      mySuppressTests = suppressTests;
     }
 
     @Override
     public void run() {
-      myAdapter.doInstall(myPackages, null);
+      myAdapter.doInstall(myPackages, null, mySuppressTests);
     }
 
     @Override
