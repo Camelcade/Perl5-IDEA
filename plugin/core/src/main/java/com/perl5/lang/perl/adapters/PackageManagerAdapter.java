@@ -64,6 +64,17 @@ public abstract class PackageManagerAdapter {
   }
 
   /**
+   * This method installs packages with given package names using manager's script.
+   * @param packageNames a collection of strings representing package names to install
+   * @param callback a runnable object to execute when installation is complete
+   * @apiNote this method starts installation process immediately. If you need a deferred installation (with 300ms) and it is possible that
+   * more packages may come for installation, use {@link #queueInstall(Collection)}
+   */
+  public void install(@NotNull Collection<String> packageNames, @NotNull Runnable callback) {
+    doInstall(packageNames, callback);
+  }
+
+  /**
    * Installs a package with {@code packageName} with output in console
    */
   private void doInstall(@NotNull Collection<String> packageNames) {
@@ -92,12 +103,28 @@ public abstract class PackageManagerAdapter {
     );
   }
 
-  public final void install(@NotNull Collection<String> packageNames) {
+  /**
+   * Queues {@code packageNames} for installation by adding them to the update queue for asynchronous processing.
+   * <p>
+   * Note that this method only adds the packages to the queue for installation; it does not perform the installation itself.
+   * Use {@link #install(Collection, Runnable)} to actually install the packages.
+   *
+   * @param packageNames the collection of package names to be installed
+   */
+  public final void queueInstall(@NotNull Collection<String> packageNames) {
     QUEUE.queue(new InstallUpdate(this, packageNames));
   }
 
-  public final void install(@NotNull String packageName) {
-    install(Collections.singletonList(packageName));
+  /**
+   * Queues the given {@code packageName} for installation by adding it to the update queue for asynchronous processing.
+   * <p>
+   * Note that this method only adds the package to the queue for installation; it does not perform the installation itself.
+   * Use {@link #install(Collection, Runnable)} to actually install the package.
+   *
+   * @param packageName the name of the package to be installed
+   */
+  public final void queueInstall(@NotNull String packageName) {
+    queueInstall(Collections.singletonList(packageName));
   }
 
   @Override

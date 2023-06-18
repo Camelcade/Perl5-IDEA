@@ -112,7 +112,7 @@ public class PerlUnresolvedPackageFileInspection extends PerlInspection {
 
     @Override
     public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
-      myAdapter.install(myPackageName);
+      myAdapter.queueInstall(myPackageName);
     }
   }
 }

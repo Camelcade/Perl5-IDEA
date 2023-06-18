@@ -77,7 +77,7 @@ public class CpanAdapter extends PackageManagerAdapter {
                                     @Nullable Project project,
                                     @NotNull Collection<String> libraryNames,
                                     @Nullable Runnable actionCallback) {
-    new CpanAdapter(sdk, project).install(libraryNames);
+    new CpanAdapter(sdk, project).queueInstall(libraryNames);
     if (actionCallback != null) {
       actionCallback.run();
     }
