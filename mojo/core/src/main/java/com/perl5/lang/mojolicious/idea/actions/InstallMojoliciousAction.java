@@ -42,7 +42,7 @@ public class InstallMojoliciousAction extends PerlActionBase {
     if (sdk == null) {
       return;
     }
-    PackageManagerAdapter.create(sdk, e.getProject()).install(MojoUtil.MOJO_PACKAGE_NAME);
+    PackageManagerAdapter.create(sdk, e.getProject()).queueInstall(MojoUtil.MOJO_PACKAGE_NAME);
   }
 
   @Override

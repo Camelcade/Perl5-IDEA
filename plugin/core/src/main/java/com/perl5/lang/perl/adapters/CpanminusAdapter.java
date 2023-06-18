@@ -72,7 +72,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
     if (project == null || sdk == null) {
       return;
     }
-    new CpanAdapter(sdk, project).install(PACKAGE_NAME);
+    new CpanAdapter(sdk, project).queueInstall(PACKAGE_NAME);
   }
 
   public static void install(@Nullable Project project) {
@@ -98,7 +98,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
       public void actionPerformed(@NotNull AnActionEvent e) {
         var arguments = new ArrayList<>(libraryNames);
         arguments.add(NO_TEST_ARGUMENT);
-        new CpanminusAdapter(sdk, project).install(arguments);
+        new CpanminusAdapter(sdk, project).queueInstall(arguments);
         if (actionCallback != null) {
           actionCallback.run();
         }
