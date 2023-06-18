@@ -21,15 +21,18 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.NlsSafe;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.Contract;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 public class CpanAdapter extends PackageManagerAdapter {
   private static final @NlsSafe String PACKAGE_NAME = "CPAN";
@@ -62,12 +65,15 @@ public class CpanAdapter extends PackageManagerAdapter {
     return new PerlDumbAwareAction(createInstallActionTitle(SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
-        var arguments = new ArrayList<String>();
-        arguments.add(NO_TEST_ARGUMENT);
-        arguments.addAll(libraryNames);
-        installModules(sdk, project, arguments, actionCallback);
+        installModules(sdk, project, libraryNames, actionCallback, true);
       }
     };
+  }
+
+  @Override
+  protected @NotNull List<String> getInstallParameters(@NotNull Collection<String> packageNames, boolean suppressTests) {
+    var result = super.getInstallParameters(packageNames, suppressTests);
+    return suppressTests ? ContainerUtil.prepend(result, NO_TEST_ARGUMENT): result;
   }
 
   /**
@@ -76,8 +82,9 @@ public class CpanAdapter extends PackageManagerAdapter {
   public static void installModules(@NotNull Sdk sdk,
                                     @Nullable Project project,
                                     @NotNull Collection<String> libraryNames,
-                                    @Nullable Runnable actionCallback) {
-    new CpanAdapter(sdk, project).queueInstall(libraryNames);
+                                    @Nullable Runnable actionCallback, 
+                                    boolean suppressTests) {
+    new CpanAdapter(sdk, project).queueInstall(libraryNames, suppressTests);
     if (actionCallback != null) {
       actionCallback.run();
     }
@@ -86,7 +93,7 @@ public class CpanAdapter extends PackageManagerAdapter {
   /**
    * @return action title for installing {@code libraryNames} with tool identified by {@code toolName}
    */
-  public static @NotNull String createInstallActionTitle(@NotNull String toolName) {
+  public static @NotNull @Nls String createInstallActionTitle(@NotNull String toolName) {
     return PerlBundle.message("perl.quickfix.install.family", toolName);
   }
 

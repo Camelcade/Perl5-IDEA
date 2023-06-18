@@ -22,7 +22,6 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.NlsSafe;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -59,8 +58,14 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   }
 
   @Override
-  protected @NotNull List<String> getInstallParameters(@NotNull Collection<String> packageNames) {
-    return ContainerUtil.prepend(super.getInstallParameters(packageNames), "-v");
+  protected @NotNull List<String> getInstallParameters(@NotNull Collection<String> packageNames, boolean suppressTests) {
+    var result = new ArrayList<String>();
+    result.add("-v");
+    if( suppressTests){
+      result.add(NO_TEST_ARGUMENT);
+    }
+    result.addAll(super.getInstallParameters(packageNames, suppressTests));
+    return result;
   }
 
   /**
@@ -96,9 +101,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
     return !isAvailable(project) ? null : new PerlDumbAwareAction(CpanAdapter.createInstallActionTitle(SCRIPT_NAME)) {
       @Override
       public void actionPerformed(@NotNull AnActionEvent e) {
-        var arguments = new ArrayList<>(libraryNames);
-        arguments.add(NO_TEST_ARGUMENT);
-        new CpanminusAdapter(sdk, project).queueInstall(arguments);
+        new CpanminusAdapter(sdk, project).queueInstall(libraryNames, true);
         if (actionCallback != null) {
           actionCallback.run();
         }
@@ -109,6 +112,6 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   @Contract("null->null")
   public static @Nullable CpanminusAdapter create(@Nullable Project project) {
     Sdk sdk = PerlProjectManager.getSdk(project);
-    return isAvailable(project) ? new CpanminusAdapter(sdk, project) : null;
+    return isAvailable(project) && sdk != null ? new CpanminusAdapter(sdk, project) : null;
   }
 }

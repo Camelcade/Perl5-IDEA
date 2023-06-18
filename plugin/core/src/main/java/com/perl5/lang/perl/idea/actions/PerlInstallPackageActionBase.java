@@ -62,6 +62,6 @@ public abstract class PerlInstallPackageActionBase extends PerlActionBase {
       return;
     }
 
-    packageManagerAdapter.queueInstall(Arrays.asList(packageNames.split("[\\s,;]+")));
+    packageManagerAdapter.queueInstall(Arrays.asList(packageNames.split("[\\s,;]+")), false);
   }
 }
