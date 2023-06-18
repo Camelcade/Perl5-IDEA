@@ -75,6 +75,13 @@ import static com.perl5.lang.perl.util.PerlCorePackages.*;
 
 
 public final class PerlPackageUtil implements PerlElementTypes {
+  public static final String PROFILER_MODULE = "Devel::NYTProf";
+  public static final String DEBUGGER_MODULE = "Devel::Camelcadedb";
+  public static final String COVERAGE_MODULE = "Devel::Cover";
+  public static final String TEST_HARNESS_MODULE = "Test::Harness";
+  public static final String TAP_FORMATTER_MODULE = "TAP::Formatter::Camelcade";
+  public static final String JSON_MODULE = "JSON";
+
   private PerlPackageUtil() {
   }
 

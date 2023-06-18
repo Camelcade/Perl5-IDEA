@@ -94,15 +94,15 @@ public final class PerlRunUtil {
     "App::Prove::Plugin::PassEnv",
     "B::Deparse",
     "Config",
-    "Devel::Cover",
-    "Devel::Camelcadedb",
-    "Devel::NYTProf",
+    PerlPackageUtil.COVERAGE_MODULE,
+    PerlPackageUtil.DEBUGGER_MODULE,
+    PerlPackageUtil.PROFILER_MODULE,
     "File::Find",
-    "JSON",
+    PerlPackageUtil.JSON_MODULE,
     "Perl::Critic",
     "Perl::Tidy",
-    "TAP::Formatter::Camelcade",
-    "Test::Harness"
+    PerlPackageUtil.TAP_FORMATTER_MODULE,
+    PerlPackageUtil.TEST_HARNESS_MODULE
   ));
 
   private PerlRunUtil() {
