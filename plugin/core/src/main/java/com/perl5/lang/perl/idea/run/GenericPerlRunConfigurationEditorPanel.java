@@ -79,8 +79,9 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   @Override
   protected void addComponents() {
     createLabeledComponents();
-    getLabeledComponents().forEach(this::add);
+    add(myScriptLabeledField);
     super.addComponents();
+    getLabeledComponents().forEach(this::add);
     add(createAlternativeSdkPanel());
 
     setLayout(new VerticalFlowLayout(VerticalFlowLayout.TOP, 0, 5, true, false));
@@ -113,7 +114,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   }
 
   protected @NotNull List<LabeledComponent<?>> getLabeledComponents() {
-    return Arrays.asList(myScriptLabeledField, myLabeledConsoleCharset, myLabeledPerlArgumentsPanel, myRequiredModulesLabeledField);
+    return Arrays.asList( myLabeledPerlArgumentsPanel, myLabeledConsoleCharset,myRequiredModulesLabeledField);
   }
 
   protected @NotNull String getProgramArgumentsLabel() {
