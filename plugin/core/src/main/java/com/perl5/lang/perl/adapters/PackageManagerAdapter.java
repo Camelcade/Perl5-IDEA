@@ -19,6 +19,7 @@ package com.perl5.lang.perl.adapters;
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.text.StringUtil;
@@ -37,6 +38,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 public abstract class PackageManagerAdapter {
+  private static final Logger LOG = Logger.getInstance(PackageManagerAdapter.class);
   private static final MergingUpdateQueue QUEUE =
     new MergingUpdateQueue("perl.installer.queue", 300, true, null, PerlPluginUtil.getUnloadAwareDisposable())
       .usePassThroughInUnitTestMode();
@@ -75,9 +77,10 @@ public abstract class PackageManagerAdapter {
   }
 
   /**
-   * Installs a package with {@code packageName} with output in console
+   * Asynchronously installs {@code packageNames} with output in the console
+   * @param callback optional callback to be invoked after installing and paths.
    */
-  private void doInstall(@NotNull Collection<String> packageNames) {
+  private void doInstall(@NotNull Collection<String> packageNames, @Nullable Runnable callback) {
     ApplicationManager.getApplication().assertIsDispatchThread();
     if (myProject != null && myProject.isDisposed()) {
       return;
@@ -85,6 +88,11 @@ public abstract class PackageManagerAdapter {
     VirtualFile script = PerlRunUtil.findLibraryScriptWithNotification(
       getSdk(), getProject(), getManagerScriptName(), getManagerPackageName());
     if (script == null) {
+      LOG.warn("Unable to find a script: " +
+               "sdk=" + getSdk() +
+               "; project=" + getProject() +
+               "; scriptName=" + getManagerScriptName() +
+               "; packageName=" + getManagerPackageName());
       return;
     }
     String remotePath = PerlHostData.notNullFrom(mySdk).getRemotePath(script.getPath());
@@ -97,7 +105,11 @@ public abstract class PackageManagerAdapter {
         .withProcessListener(new ProcessAdapter() {
           @Override
           public void processTerminated(@NotNull ProcessEvent event) {
-            PerlRunUtil.refreshSdkDirs(mySdk, myProject);
+            PerlRunUtil.refreshSdkDirs(mySdk, myProject, ()->{
+              if( event.getExitCode() == 0 && callback != null){
+                callback.run();
+              }
+            });
           }
         })
     );
@@ -179,7 +191,7 @@ public abstract class PackageManagerAdapter {
 
     @Override
     public void run() {
-      myAdapter.doInstall(myPackages);
+      myAdapter.doInstall(myPackages, null);
     }
 
     @Override
