@@ -191,7 +191,8 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   @Override
   protected final void setupAnchor() {
     super.setupAnchor();
-    ArrayList<PanelWithAnchor> components = new ArrayList<>(getLabeledComponents());
+    List<PanelWithAnchor> components = new ArrayList<>(getLabeledComponents());
+    components.add(0, myScriptLabeledField);
     components.add(0, this);
     myAnchor = UIUtil.mergeComponentsWithAnchor(components);
   }
