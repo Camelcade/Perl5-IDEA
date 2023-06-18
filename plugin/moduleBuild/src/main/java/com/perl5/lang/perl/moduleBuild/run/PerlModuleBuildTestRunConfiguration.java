@@ -24,6 +24,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.prove.PerlAbstractTestRunConfiguration;
 import com.perl5.lang.perl.moduleBuild.PerlModuleBuildUtil;
@@ -34,6 +35,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import static com.perl5.lang.perl.moduleBuild.PerlModuleBuildUtil.MODULE_BUILD;
 
 public class PerlModuleBuildTestRunConfiguration extends PerlAbstractTestRunConfiguration {
   private static final Logger LOG = Logger.getInstance(PerlModuleBuildTestRunConfiguration.class);
@@ -48,7 +51,7 @@ public class PerlModuleBuildTestRunConfiguration extends PerlAbstractTestRunConf
 
   @Override
   protected @NotNull String getFrameworkName() {
-    return PerlModuleBuildUtil.MODULE_BUILD;
+    return MODULE_BUILD;
   }
 
   @Override
@@ -67,6 +70,11 @@ public class PerlModuleBuildTestRunConfiguration extends PerlAbstractTestRunConf
       return contentRoot;
     }
     throw new ExecutionException(PerlBundle.message("perl.run.error.no.test.set"));
+  }
+
+  @Override
+  public @NotNull List<String> getRequiredModulesList() {
+    return ContainerUtil.append(super.getRequiredModulesList(), MODULE_BUILD);
   }
 
   @Nullable VirtualFile getEffectiveContentRootSafe() {

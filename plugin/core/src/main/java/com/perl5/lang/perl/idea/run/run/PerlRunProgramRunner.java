@@ -42,7 +42,7 @@ public class PerlRunProgramRunner extends GenericPerlProgramRunner {
   }
 
   @Override
-  public void execute(@NotNull ExecutionEnvironment environment) throws ExecutionException {
+  protected void doExecute(@NotNull ExecutionEnvironment environment) throws ExecutionException {
     FileDocumentManager.getInstance().saveAllDocuments();
     ExecutionManager.getInstance(environment.getProject()).startRunProfile(
       environment, state -> DefaultProgramRunnerKt.executeState(state, environment, this));

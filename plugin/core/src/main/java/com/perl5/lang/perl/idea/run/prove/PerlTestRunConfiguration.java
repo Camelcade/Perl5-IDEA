@@ -43,7 +43,6 @@ import java.util.regex.Pattern;
 public class PerlTestRunConfiguration extends PerlAbstractTestRunConfiguration {
   private static final Logger LOG = Logger.getInstance(PerlTestRunConfiguration.class);
   private static final String PROVE = "prove";
-  private static final String TEST_HARNESS = "Test::Harness";
   private static final String PROVE_FORMAT_ARGUMENT = "--formatter";
   private static final String PROVE_FRAMEWORK_NAME = "Prove";
   private static final Pattern MISSING_FILTER_PATTERN = Pattern.compile("Can't load module (\\S+) at .+?/prove line");
@@ -64,7 +63,7 @@ public class PerlTestRunConfiguration extends PerlAbstractTestRunConfiguration {
 
   protected @NotNull String getTestRunnerLocalPath() throws ExecutionException {
     Sdk perlSdk = getEffectiveSdk();
-    VirtualFile proveScript = PerlRunUtil.findLibraryScriptWithNotification(perlSdk, getProject(), PROVE, TEST_HARNESS);
+    VirtualFile proveScript = PerlRunUtil.findLibraryScriptWithNotification(perlSdk, getProject(), PROVE, PerlPackageUtil.TEST_HARNESS_MODULE);
     if (proveScript == null) {
       throw new ExecutionException(PerlBundle.message("perl.run.error.prove.missing", perlSdk.getName()));
     }
