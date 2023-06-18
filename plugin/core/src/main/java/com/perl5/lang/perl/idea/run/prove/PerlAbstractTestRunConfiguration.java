@@ -28,6 +28,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
@@ -35,6 +36,7 @@ import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -214,6 +216,11 @@ public abstract class PerlAbstractTestRunConfiguration extends GenericPerlRunCon
       addTestPathArguments(testsPaths, effectivePath, testVirtualFile);
     }
     return testsPaths;
+  }
+
+  @Override
+  public @NotNull List<String> getRequiredModulesList() {
+    return ContainerUtil.append(super.getRequiredModulesList(), PerlPackageUtil.TEST_HARNESS_MODULE, PerlPackageUtil.TAP_FORMATTER_MODULE);
   }
 
   protected void addTestPathArguments(@NotNull List<? super String> arguments, @NotNull String testFilePath, @NotNull VirtualFile testVirtualFile) {

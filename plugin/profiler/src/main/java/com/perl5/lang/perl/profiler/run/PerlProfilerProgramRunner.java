@@ -30,10 +30,12 @@ import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
+import java.util.Set;
 
 @SuppressWarnings("UnstableApiUsage")
 public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
@@ -87,7 +89,14 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
   }
 
   @Override
-  public void execute(@NotNull ExecutionEnvironment environment) throws ExecutionException {
+  protected Set<String> getRequiredModules(@NotNull ExecutionEnvironment environment) {
+    var modules = super.getRequiredModules(environment);
+    modules.add(PerlPackageUtil.PROFILER_MODULE);
+    return modules;
+  }
+
+  @Override
+  protected void doExecute(@NotNull ExecutionEnvironment environment) throws ExecutionException {
 
     ExecutionManager.getInstance(environment.getProject()).startRunProfile(
       environment, state -> {

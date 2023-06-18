@@ -31,8 +31,11 @@ import com.perl5.lang.perl.debugger.PerlDebugProcess;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Set;
 
 
 public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
@@ -54,7 +57,14 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
   }
 
   @Override
-  public void execute(@NotNull ExecutionEnvironment env) throws ExecutionException {
+  protected Set<String> getRequiredModules(@NotNull ExecutionEnvironment environment) {
+    var modules = super.getRequiredModules(environment);
+    modules.add(PerlPackageUtil.DEBUGGER_MODULE);
+    return modules;
+  }
+
+  @Override
+  protected void doExecute(@NotNull ExecutionEnvironment env) throws ExecutionException {
     FileDocumentManager.getInstance().saveAllDocuments();
     ExecutionManager.getInstance(env.getProject()).startRunProfile(env, state -> {
       if (!(state instanceof PerlDebugProfileStateBase)) {
