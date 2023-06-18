@@ -23,11 +23,13 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.ui.*;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.*;
 import com.intellij.ui.components.JBCheckBox;
+import com.intellij.ui.components.fields.ExpandableTextField;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.ui.UIUtil;
 import com.perl5.PerlBundle;
@@ -47,6 +49,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.*;
+
 public abstract class GenericPerlRunConfigurationEditorPanel<Configuration extends GenericPerlRunConfiguration>
   extends CommonProgramParametersPanel implements Perl5SdkManipulator {
   private @Nullable Sdk mySdkProxy;
@@ -64,6 +68,8 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
 
   private JBCheckBox myAlternativeSdkCheckbox;
   private Perl5SdkConfigurable mySdkConfigurable;
+
+  private LabeledComponent<ExpandableTextField> myRequiredModulesLabeledField;
 
   public GenericPerlRunConfigurationEditorPanel(@NotNull Project project) {
     myProject = project;
@@ -85,10 +91,29 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     createConsoleEncodingField();
     createPerlArgumentsField();
     createScriptField();
+    createPrerequisitesField();
+  }
+
+  protected void createPrerequisitesField(){
+    myRequiredModulesLabeledField = createLabeledComponent(
+      new ExpandableTextField(PREREQUISITES_PARSER, PREREQUISITES_JOINER),
+      PerlBundle.message("label.required.modules"),
+      PerlBundle.message("tooltip.comma.separated.list.modules.required.to.run.configuration"));
+  }
+
+  protected static @NotNull <T extends JComponent> LabeledComponent<T> createLabeledComponent(@NotNull T component,
+                                                                                            @NotNull @NlsContexts.Label String label,
+                                                                                            @Nullable @NlsContexts.Tooltip String tooltip) {
+    var labeledComponent = LabeledComponent.create(component, label, BorderLayout.WEST);
+    if( tooltip != null){
+      labeledComponent.setToolTipText(tooltip);
+      component.setToolTipText(tooltip);
+    }
+    return labeledComponent;
   }
 
   protected @NotNull List<LabeledComponent<?>> getLabeledComponents() {
-    return Arrays.asList(myScriptLabeledField, myLabeledConsoleCharset, myLabeledPerlArgumentsPanel);
+    return Arrays.asList(myScriptLabeledField, myLabeledConsoleCharset, myLabeledPerlArgumentsPanel, myRequiredModulesLabeledField);
   }
 
   protected @NotNull String getProgramArgumentsLabel() {
@@ -172,6 +197,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
 
   protected void reset(Configuration runConfiguration) {
     ((TextAccessor)myScriptField).setText(runConfiguration.getScriptPath());
+    myRequiredModulesLabeledField.getComponent().setText(runConfiguration.getRequiredModules());
     myConsoleCharset.setSelectedItem(runConfiguration.getConsoleCharset());
     myPerlArgumentsPanel.setText(runConfiguration.getPerlArguments());
     myAlternativeSdkCheckbox.setSelected(runConfiguration.isUseAlternativeSdk());
@@ -182,6 +208,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   }
 
   protected void applyTo(Configuration runConfiguration) {
+    runConfiguration.setRequiredModules(myRequiredModulesLabeledField.getComponent().getText());
     runConfiguration.setScriptPath(((TextAccessor)myScriptField).getText());
     runConfiguration.setConsoleCharset(StringUtil.nullize((String)myConsoleCharset.getSelectedItem(), true));
     runConfiguration.setPerlArguments(myPerlArgumentsPanel.getText());

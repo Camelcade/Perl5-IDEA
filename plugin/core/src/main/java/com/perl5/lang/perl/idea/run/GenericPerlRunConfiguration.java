@@ -57,6 +57,7 @@ import java.io.File;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.CONSOLE;
 import static com.intellij.execution.configurations.GeneralCommandLine.ParentEnvironmentType.NONE;
@@ -68,6 +69,12 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   public static final Function<String, List<String>> FILES_PARSER = text -> StringUtil.split(text.trim(), "||");
   public static final Function<List<String>, String> FILES_JOINER = strings ->
     StringUtil.join(ContainerUtil.filter(strings, StringUtil::isNotEmpty), "||");
+  public static final Function<String, List<String>> PREREQUISITES_PARSER = text -> Arrays.stream(text.trim().split("\\s*,\\s*"))
+    .filter( StringUtil::isNotEmpty).sorted().toList() ;
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
+  public static final Function<List<String>, String> PREREQUISITES_JOINER = strings -> strings.stream()
+    .filter(StringUtil::isNotEmpty).map(String::trim).sorted().collect(Collectors.joining(","));
+
   private static final Logger LOG = Logger.getInstance(GenericPerlRunConfiguration.class);
 
   private String myScriptPath;
@@ -80,6 +87,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   private String myConsoleCharset;
   private boolean myUseAlternativeSdk;
   private String myAlternativeSdkName;
+  private @NotNull String myRequiredModules = "";
 
   // debugging-related options
   private String myScriptCharset = "utf8";
@@ -168,6 +176,18 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
       throw new ExecutionException(PerlBundle.message("perl.run.error.script.missing", getScriptPath()));
     }
     return targetFiles.get(0);
+  }
+
+  public @NotNull String getRequiredModules() {
+    return myRequiredModules;
+  }
+
+  public @NotNull List<String> getRequiredModulesList() {
+    return PREREQUISITES_PARSER.fun(myRequiredModules);
+  }
+
+  public void setRequiredModules(@NotNull String requiredModules) {
+    myRequiredModules = PREREQUISITES_JOINER.fun(PREREQUISITES_PARSER.fun(requiredModules));
   }
 
   public String getConsoleCharset() {
