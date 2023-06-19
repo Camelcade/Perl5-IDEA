@@ -1,9 +1,9 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Test Plugin (integration tests)" type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests">
+  <configuration default="false" name="Test Plugin (integration tests, perlbrew with libs) " type="GradleRunConfiguration" factoryName="Gradle" folderName="Perl Tests">
     <ExternalSystemSettings>
       <option name="env">
         <map>
-          <entry key="PERL_CONFIGURATORS" value="LOCAL_PERLBREW" />
+          <entry key="PERL_CONFIGURATORS" value="LOCAL_PERLBREW_WITH_LIBS" />
         </map>
       </option>
       <option name="executionName" />
@@ -23,7 +23,7 @@
     <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
     <DebugAllEnabled>false</DebugAllEnabled>
-    <ForceTestExec>false</ForceTestExec>
+    <RunAsTest>false</RunAsTest>
     <method v="2" />
   </configuration>
 </component>
