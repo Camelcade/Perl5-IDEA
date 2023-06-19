@@ -142,7 +142,7 @@ public class PerlProjectManager implements Disposable {
     });
     mySdkProvider = NullableLazyValue.atomicLazyNullable(() -> PerlSdkTable.getInstance().findJdk(myPerlSettings.getPerlInterpreter()));
     myExternalLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
-      List<VirtualFile> result = new ArrayList<>();
+      var result = new ArrayList<VirtualFile>();
 
       for (String externalPath : myPerlSettings.getExternalLibrariesPaths()) {
         VirtualFile virtualFile = VfsUtil.findFileByIoFile(new File(externalPath), false);
@@ -153,7 +153,7 @@ public class PerlProjectManager implements Disposable {
       return Collections.unmodifiableList(result);
     });
     mySdkLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
-      List<VirtualFile> result = new ArrayList<>(getExternalLibraryRoots());
+      var result = new ArrayList<>(getExternalLibraryRoots());
       Sdk projectSdk = getProjectSdk();
       if (projectSdk != null) {
         result.addAll(Arrays.asList(projectSdk.getRootProvider().getFiles(OrderRootType.CLASSES)));
@@ -161,12 +161,12 @@ public class PerlProjectManager implements Disposable {
       return Collections.unmodifiableList(result);
     });
     myLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
-      ArrayList<VirtualFile> result = new ArrayList<>(getModulesLibraryRoots());
+      var result = new ArrayList<>(getModulesLibraryRoots());
       result.addAll(getProjectSdkLibraryRoots());
       return Collections.unmodifiableList(result);
     });
     myLibrariesProvider = AtomicNotNullLazyValue.createValue(() -> {
-      List<VirtualFile> sdkLibs = getProjectSdkLibraryRoots();
+      var sdkLibs = getProjectSdkLibraryRoots();
       if (sdkLibs.isEmpty()) {
         return Collections.emptyList();
       }
@@ -191,18 +191,38 @@ public class PerlProjectManager implements Disposable {
     return myExternalLibraryRootsProvider.getValue();
   }
 
+  /**
+   * @return list of in-project perl library roots, that should be included into modules lookup and {@code -I} argument when starting the
+   * perl process
+   */
   public List<VirtualFile> getModulesLibraryRoots() {
     return getModulesRootsOfType(PerlLibrarySourceRootType.INSTANCE);
   }
 
+  /**
+   * @return list of user-configured roots of {@code type}
+   */
   public List<VirtualFile> getModulesRootsOfType(@NotNull PerlSourceRootType type) {
     return myModulesRootsProvider.get(type);
   }
 
+  /**
+   * @return list of library roots for the project, including:<ul>
+   *   <li>default interpreter roots</li>
+   *   <li>configured project external library roots</li>
+   *   <li>in-project perl library roots, that should be included into modules lookup and {@code -I} argument when starting the process</li>
+   * </ul>
+   */
   public List<VirtualFile> getAllLibraryRoots() {
     return myLibraryRootsProvider.getValue();
   }
 
+  /**
+   * @return list of library roots including:<ul>
+   *   <li>default interpreter roots</li>
+   *   <li>configured project external library roots</li>
+   * </ul>
+   */
   public List<VirtualFile> getProjectSdkLibraryRoots() {
     return mySdkLibraryRootsProvider.getValue();
   }
