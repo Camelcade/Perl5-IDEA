@@ -1,6 +1,7 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.intellij.tasks.InstrumentCodeTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.kt3k.gradle.plugin.coveralls.CoverallsTask
 
 /*
@@ -38,6 +39,7 @@ plugins {
   id("com.github.kt3k.coveralls") version "2.12.2"
   id("org.sonarqube") version "4.2.1.3168"
   id("org.jetbrains.qodana") version "0.1.13"
+  id("org.jetbrains.kotlin.jvm") version "1.8.22"
 }
 
 repositories {
@@ -71,6 +73,7 @@ allprojects {
   apply(plugin = "com.github.kt3k.coveralls")
   apply(plugin = "jacoco")
   apply(plugin = "java")
+  apply(plugin = "org.jetbrains.kotlin.jvm")
 
   repositories {
     mavenCentral()
@@ -96,6 +99,10 @@ allprojects {
       options.encoding = "UTF-8"
       sourceCompatibility = properties("javaVersion").get()
       targetCompatibility = properties("javaTargetVersion").get()
+    }
+
+    withType<KotlinCompile>{
+      kotlinOptions.jvmTarget = properties("javaTargetVersion").get()
     }
 
     test {
