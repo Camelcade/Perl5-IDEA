@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun properties(key: String) = providers.gradleProperty(key)
 
@@ -49,5 +50,7 @@ tasks {
   withType<JavaCompile> {
     dependsOn(generateLexerTask)
   }
-
+  withType<KotlinCompile>{
+    dependsOn(generateLexerTask)
+  }
 }
