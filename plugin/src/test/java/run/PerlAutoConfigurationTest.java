@@ -26,6 +26,8 @@ import com.perl5.lang.perl.idea.sdk.PerlConfig;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
+import java.util.List;
+
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlAutoConfigurationTest extends PerlPlatformTestCase {
   public PerlAutoConfigurationTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
@@ -142,22 +144,26 @@ public class PerlAutoConfigurationTest extends PerlPlatformTestCase {
   }
 
   private void assertLibRoot(@NotNull VirtualFile directory) {
-    assertTrue("Expected to be perl library: " + directory,
-               PerlProjectManager.getInstance(getProject()).getModulesLibraryRoots().contains(directory));
+    var modulesLibraryRoots = PerlProjectManager.getInstance(getProject()).getModulesLibraryRoots();
+    assertTrue("Expected to be perl library: " + directory + ", got " + modulesLibraryRoots,
+               modulesLibraryRoots.contains(directory));
   }
 
   private void assertNotLibRoot(@NotNull VirtualFile directory) {
-    assertFalse("Expected NOT to be perl library: " + directory,
-                PerlProjectManager.getInstance(getProject()).getModulesLibraryRoots().contains(directory));
+    var modulesLibraryRoots = PerlProjectManager.getInstance(getProject()).getModulesLibraryRoots();
+    assertFalse("Expected NOT to be perl library: " + directory + ", got " + modulesLibraryRoots,
+                modulesLibraryRoots.contains(directory));
   }
 
   private void assertExternalLibRoot(@NotNull VirtualFile directory) {
-    assertTrue("Expected to be external library: " + directory,
-               PerlProjectManager.getInstance(getProject()).getExternalLibraryRoots().contains(directory));
+    var externalLibraryRoots = PerlProjectManager.getInstance(getProject()).getExternalLibraryRoots();
+    assertTrue("Expected to be external library: " + directory + ", got " + externalLibraryRoots,
+               externalLibraryRoots.contains(directory));
   }
 
   private void assertNotExternalLibRoot(@NotNull VirtualFile directory) {
-    assertFalse("Expected NOT to be external library: " + directory,
-                PerlProjectManager.getInstance(getProject()).getExternalLibraryRoots().contains(directory));
+    var externalLibraryRoots = PerlProjectManager.getInstance(getProject()).getExternalLibraryRoots();
+    assertFalse("Expected NOT to be external library: " + directory + ", got " + externalLibraryRoots,
+                externalLibraryRoots.contains(directory));
   }
 }

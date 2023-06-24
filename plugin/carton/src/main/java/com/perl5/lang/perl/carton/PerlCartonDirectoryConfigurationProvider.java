@@ -52,23 +52,5 @@ public class PerlCartonDirectoryConfigurationProvider implements PerlDirectoryCo
 
     collector.addExcludedRoot(localRoot);
     collector.addExternalLibRoot(perl5Root);
-
-    var perlConfig = PerlConfig.from(PerlProjectManager.getSdk(module));
-    if (perlConfig == null) {
-      return;
-    }
-
-    var versionString = perlConfig.getVersion();
-    var versionDir = versionString == null ? null : perl5Root.findChild(versionString);
-    collector.addExternalLibRoot(versionDir);
-
-    var archname = perlConfig.getArchname();
-    if (archname != null) {
-      collector.addExternalLibRoot(perl5Root.findChild(archname));
-
-      if (versionDir != null) {
-        collector.addExternalLibRoot(versionDir.findChild(archname));
-      }
-    }
   }
 }
