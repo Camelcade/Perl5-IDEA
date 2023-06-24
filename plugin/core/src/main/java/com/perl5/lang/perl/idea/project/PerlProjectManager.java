@@ -57,6 +57,7 @@ import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigur
 import com.perl5.lang.perl.idea.configuration.settings.sdk.PerlSdkLibrary;
 import com.perl5.lang.perl.idea.modules.PerlLibrarySourceRootType;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
+import com.perl5.lang.perl.idea.sdk.PerlConfig;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -107,6 +108,11 @@ public class PerlProjectManager implements Disposable {
     });
     VirtualFileListener listener = new VirtualFileListener() {
       @Override
+      public void fileCreated(@NotNull VirtualFileEvent event) {
+        resetProjectCaches();
+      }
+
+      @Override
       public void propertyChanged(@NotNull VirtualFilePropertyEvent event) {
         resetProjectCaches();
       }
@@ -144,10 +150,30 @@ public class PerlProjectManager implements Disposable {
     myExternalLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {
       var result = new ArrayList<VirtualFile>();
 
+      var perlConfig = PerlConfig.from(getSdk(myProject));
+      var versionString = perlConfig  == null ? null: perlConfig.getVersion();
+      var archname = perlConfig == null ? null: perlConfig.getArchname();
+
       for (String externalPath : myPerlSettings.getExternalLibrariesPaths()) {
-        VirtualFile virtualFile = VfsUtil.findFileByIoFile(new File(externalPath), false);
-        if (virtualFile != null && virtualFile.isValid() && virtualFile.isDirectory()) {
-          result.add(virtualFile);
+        VirtualFile externalLibDir = VfsUtil.findFileByIoFile(new File(externalPath), false);
+        if (isAcceptableLibDir(externalLibDir)) {
+          result.add(externalLibDir);
+
+          var versionDir = versionString == null ? null : externalLibDir.findChild(versionString);
+          if( isAcceptableLibDir(versionDir)){
+            var versionArchDir = archname == null ? null: versionDir.findChild(archname);
+            if (isAcceptableLibDir(versionArchDir)) {
+              result.add(versionArchDir);
+            }
+            result.add(versionDir);
+          }
+
+          if (archname != null) {
+            var archDir = externalLibDir.findChild(archname);
+            if( isAcceptableLibDir(archDir)){
+              result.add(archDir);
+            }
+          }
         }
       }
       return Collections.unmodifiableList(result);
@@ -181,6 +207,11 @@ public class PerlProjectManager implements Disposable {
       }
       return Collections.singletonList(sdkLibrary);
     });
+  }
+
+  @Contract("null->false")
+  private static boolean isAcceptableLibDir(@Nullable VirtualFile externalLibDir) {
+    return externalLibDir != null && externalLibDir.isValid() && externalLibDir.isDirectory();
   }
 
   public Map<VirtualFile, PerlSourceRootType> getAllModulesRoots() {
