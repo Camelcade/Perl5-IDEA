@@ -58,16 +58,16 @@ public class PerlCartonDirectoryConfigurationProvider implements PerlDirectoryCo
       return;
     }
 
-    var apiVersionString = perlConfig.getApiVersionString();
-    var apiVersionDir = apiVersionString == null ? null : perl5Root.findChild(apiVersionString);
-    collector.addExternalLibRoot(apiVersionDir);
+    var versionString = perlConfig.getVersion();
+    var versionDir = versionString == null ? null : perl5Root.findChild(versionString);
+    collector.addExternalLibRoot(versionDir);
 
     var archname = perlConfig.getArchname();
     if (archname != null) {
       collector.addExternalLibRoot(perl5Root.findChild(archname));
 
-      if (apiVersionDir != null) {
-        collector.addExternalLibRoot(apiVersionDir.findChild(archname));
+      if (versionDir != null) {
+        collector.addExternalLibRoot(versionDir.findChild(archname));
       }
     }
   }
