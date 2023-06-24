@@ -59,9 +59,9 @@ public class PerlAutoConfigurationTest extends PerlPlatformTestCase {
     assertNotNull(perl5Root);
     var archname = perlConfig.getArchname();
     assertNotNull(archname);
-    var apiVersionString = perlConfig.getApiVersionString();
-    assertNotNull(apiVersionString);
-    var versionDir = createChildDirectory(perl5Root, apiVersionString);
+    var versionString = perlConfig.getVersion();
+    assertNotNull(versionString);
+    var versionDir = createChildDirectory(perl5Root, versionString);
     assertNotNull(versionDir);
     var archDir = createChildDirectory(perl5Root, archname);
     assertNotNull(archDir);
