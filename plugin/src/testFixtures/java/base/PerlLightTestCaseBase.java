@@ -86,6 +86,7 @@ import com.intellij.openapi.application.Application;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
+import com.intellij.openapi.application.impl.NonBlockingReadActionImpl;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.editor.*;
@@ -140,10 +141,7 @@ import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.util.NonCodeSearchDescriptionLocation;
-import com.intellij.testFramework.LightVirtualFile;
-import com.intellij.testFramework.MapDataContext;
-import com.intellij.testFramework.ParsingTestCase;
-import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.testFramework.*;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.testFramework.fixtures.CodeInsightTestUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
@@ -160,6 +158,7 @@ import com.intellij.usages.rules.UsageGroupingRuleProvider;
 import com.intellij.util.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
+import com.intellij.util.ui.UIUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
@@ -990,21 +989,26 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     StringBuilder sb = new StringBuilder();
 
     for (Integer offset : caretsOffsets) {
+      Ref<String> textBeforeAction = Ref.create("");
       WriteCommandAction.runWriteCommandAction(getProject(), () -> {
         caretModel.moveToOffset(offset);
         if (StringUtil.isNotEmpty(textToType)) {
           EditorModificationUtil.insertStringAtCaret(editor, textToType);
         }
-        String textBeforeAction = document.getText();
+        textBeforeAction.set(document.getText());
         myFixture.testAction(new ExpandLiveTemplateByTabAction());
-        if (!StringUtil.equals(document.getText(), textBeforeAction)) {
-          sb.append(StringUtil.repeat("-", 80)).append("\n")
-            .append("Caret offset: ")
-            .append(offset)
-            .append("\n")
-            .append(StringUtil.repeat("-", 80)).append("\n")
-            .append(getEditorTextWithCaretsAndSelections());
-        }
+      });
+      NonBlockingReadActionImpl.waitForAsyncTaskCompletion();
+      PlatformTestUtil.dispatchAllInvocationEventsInIdeEventQueue();
+      if (!StringUtil.equals(document.getText(), textBeforeAction.get())) {
+        sb.append(StringUtil.repeat("-", 80)).append("\n")
+          .append("Caret offset: ")
+          .append(offset)
+          .append("\n")
+          .append(StringUtil.repeat("-", 80)).append("\n")
+          .append(getEditorTextWithCaretsAndSelections());
+      }
+      WriteCommandAction.runWriteCommandAction(getProject(), () -> {
         TemplateState templateState = TemplateManagerImpl.getTemplateState(editor);
         if (templateState != null) {
           templateState.gotoEnd(true);
