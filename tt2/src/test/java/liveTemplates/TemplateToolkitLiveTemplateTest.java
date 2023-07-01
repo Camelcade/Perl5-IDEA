@@ -1,8 +1,27 @@
 package liveTemplates;
 
+import com.intellij.testFramework.LiveTemplateTestUtil;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
-public abstract class TemplateToolkitLiveTemplateTestCase extends TemplateToolkitPostfixLiveTemplateTestCase {
+import java.util.Arrays;
+import java.util.Collection;
+
+@RunWith(Parameterized.class)
+public final class TemplateToolkitLiveTemplateTest extends TemplateToolkitPostfixLiveTemplateTestCase {
+  private final boolean myIsExpanding;
+
+  @Override
+  protected String getBaseDataPath() {
+    return myIsExpanding ? "liveTemplates/expand": "liveTemplates/expandContext";
+  }
+
+  public TemplateToolkitLiveTemplateTest(@NotNull String name, boolean isExpanding) {
+    myIsExpanding = isExpanding;
+  }
+
   @Test
   public void testBlock() { doTest("bl"); }
 
@@ -91,4 +110,23 @@ public abstract class TemplateToolkitLiveTemplateTestCase extends TemplateToolki
 
   @Test
   public void testUse() { doTest("us"); }
+
+  @Override
+  protected void doTest(@NotNull String templateId, @NotNull String fileName) {
+    if( myIsExpanding){
+      doLiveTemplateBulkTest(fileName, templateId);
+    }
+    else{
+      initWithFileSmart(fileName);
+      LiveTemplateTestUtil.doTestTemplateExpandingAvailability(myFixture, templateId, "Template Toolkit 2", getTestResultsFilePath());
+    }
+  }
+
+  @Parameterized.Parameters(name = "{0}")
+  public static Collection<Object[]> data() {
+    return Arrays.asList(new Object[][]{
+      {"Expanding", true},
+      {"Availability", false},
+    });
+  }
 }
