@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
 package unit.perl;
 
 import base.PerlLightTestCase;
+import categories.Heavy;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 public class PerlHighlightingRestartTest extends PerlLightTestCase {
 
@@ -97,14 +99,73 @@ public class PerlHighlightingRestartTest extends PerlLightTestCase {
   }
 
   @Test
+  @Category(Heavy.class)
   public void testPerlTidy() {
-    initWithPerlTidy();
-    doTestHighlighterRestartWithoutInit();
+    doTestLarge(true);
   }
 
   @Test
+  @Category(Heavy.class)
   public void testPinxi() {
-    initWithPinxi();
+    doTestLarge(true);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testCatalyst() {
+    doTestLarge(true);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testMojo() {
+    doTestLarge(true);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testMoose() {
+    doTestLarge(true);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testMysqltuner() {
+    doTestLarge(true);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testPerl532() {
+    doTestLarge(false);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testPerl534() {
+    doTestLarge(false);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testPerl536() {
+    doTestLarge(false);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testPerl5125() {
+    doTestLarge(false);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testPerl5303() {
+    doTestLarge(false);
+  }
+
+  private void doTestLarge(boolean checkErrors) {
+    initWithLarge(getTestName(true), checkErrors);
     doTestHighlighterRestartWithoutInit();
   }
 

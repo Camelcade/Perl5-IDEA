@@ -1145,7 +1145,6 @@ use warnings;
 
 # this syntax error is intentional!
 
-    {
 
 1;
 package # hide the package from PAUSE

@@ -1,0 +1,610 @@
+File size: 259557
+Re-highlighted ranges: 20017
+Avg range size: 12.627017035519808
+Min range size: 1
+Max range size: 1139
+10% of text has range <= 7
+20% of text has range <= 11
+30% of text has range <= 17
+40% of text has range <= 25
+50% of text has range <= 34
+60% of text has range <= 46
+70% of text has range <= 64
+80% of text has range <= 85
+90% of text has range <= 139
+----------
+Range: (11548,11693) (145)
+`awk␣-F:␣'/^core␣id/␣&&␣!P[\$2]␣{␣CORES++;␣P[\$2]=1␣};␣/^physical␣id/␣&&␣!N[\$2]␣{␣CPUs++;␣N[\$2]=1␣};␣␣END␣{␣print␣CPUs*CORES␣}'␣/proc/cpuinfo`;
+----------
+Range: (38320,38486) (166)
+"SELECT␣DISTINCT␣TABLE_SCHEMA␣FROM␣information_schema.TABLES␣WHERE␣TABLE_SCHEMA␣NOT␣IN␣('mysql',␣'information_schema',␣'performance_schema',␣'percona',␣'sys')"
+␣␣␣␣);
+----------
+Range: (59085,59234) (149)
+'sunrpc.tcp_slot_table_entries␣>␣100␣(echo␣128␣>␣/proc/sys/sunrpc/tcp_slot_table_entries)␣␣or␣sunrpc.tcp_slot_table_entries=128␣in␣/etc/sysctl.conf';
+----------
+Range: (66952,67119) (167)
+`$mysqlcmd␣$mysqllogin␣-Bse␣"SELECT␣1␣FROM␣information_schema.columns␣WHERE␣TABLE_SCHEMA␣=␣'mysql'␣AND␣TABLE_NAME␣=␣'user'␣AND␣COLUMN_NAME␣=␣'password'"␣2>>/dev/null`;
+----------
+Range: (67159,67339) (180)
+`$mysqlcmd␣$mysqllogin␣-Bse␣"SELECT␣1␣FROM␣information_schema.columns␣WHERE␣TABLE_SCHEMA␣=␣'mysql'␣AND␣TABLE_NAME␣=␣'user'␣AND␣COLUMN_NAME␣=␣'authentication_string'"␣2>>/dev/null`;
+----------
+Range: (68622,68761) (139)
+select_array
+"SELECT␣CONCAT(QUOTE(user),␣'\@',␣QUOTE(host))␣FROM␣mysql.user␣WHERE␣$extra_user_condition␣(TRIM(USER)␣=␣''␣OR␣USER␣IS␣NULL)";
+----------
+Range: (69645,69942) (297)
+select_array
+q{SELECT␣CONCAT(QUOTE(user),␣'@',␣QUOTE(host))␣FROM␣mysql.global_priv␣WHERE
+␣␣␣␣(␣user␣!=␣''
+␣␣␣␣AND␣JSON_CONTAINS(Priv,␣'"mysql_native_password"',␣'$.plugin')␣AND␣JSON_CONTAINS(Priv,␣'""',␣'$.authentication_string')
+␣␣␣␣AND␣NOT␣JSON_CONTAINS(Priv,␣'true',␣'$.account_locked')
+␣␣␣␣)};
+----------
+Range: (69985,70307) (322)
+select_array
+"SELECT␣CONCAT(QUOTE(user),␣'\@',␣QUOTE(host))␣FROM␣mysql.user␣WHERE␣($PASS_COLUMN_NAME␣=␣''␣OR␣$PASS_COLUMN_NAME␣IS␣NULL)
+␣␣␣␣AND␣user␣!=␣''
+␣␣␣␣/*!50501␣AND␣plugin␣NOT␣IN␣('auth_socket',␣'unix_socket',␣'win_socket',␣'auth_pam_compat')␣*/
+␣␣␣␣/*!80000␣AND␣account_locked␣=␣'N'␣AND␣password_expired␣=␣'N'␣*/";
+----------
+Range: (71194,71518) (324)
+select_array
+"SELECT␣CONCAT(QUOTE(user),␣'\@',␣QUOTE(host))␣FROM␣mysql.user␣WHERE␣user␣!=␣''␣AND␣(CAST($PASS_COLUMN_NAME␣as␣Binary)␣=␣PASSWORD(user)␣OR␣CAST($PASS_COLUMN_NAME␣as␣Binary)␣=␣PASSWORD(UPPER(user))␣OR␣CAST($PASS_COLUMN_NAME␣as␣Binary)␣=␣PASSWORD(CONCAT(UPPER(LEFT(User,␣1)),␣SUBSTRING(User,␣2,␣LENGTH(User)))))";
+----------
+Range: (85293,85576) (283)
+select_array
+"SELECT␣ENGINE,␣SUM(DATA_LENGTH+INDEX_LENGTH),␣COUNT(ENGINE),␣SUM(DATA_LENGTH),␣SUM(INDEX_LENGTH)␣FROM␣information_schema.TABLES␣WHERE␣TABLE_SCHEMA␣NOT␣IN␣('information_schema',␣'performance_schema',␣'mysql')␣AND␣ENGINE␣IS␣NOT␣NULL␣GROUP␣BY␣ENGINE␣ORDER␣BY␣ENGINE␣ASC;";
+----------
+Range: (87032,87395) (363)
+select_array
+"SELECT␣TABLE_SCHEMA,␣TABLE_NAME,␣ENGINE,␣CAST(DATA_FREE␣AS␣SIGNED)␣FROM␣information_schema.TABLES␣WHERE␣TABLE_SCHEMA␣NOT␣IN␣('information_schema',␣'performance_schema',␣'mysql')␣AND␣DATA_LENGTH/1024/1024>100␣AND␣cast(DATA_FREE␣as␣signed)*100/(DATA_LENGTH+INDEX_LENGTH+cast(DATA_FREE␣as␣signed))␣>␣10␣AND␣NOT␣ENGINE='MEMORY'␣$not_innodb"
+␣␣␣␣␣␣␣␣␣␣];
+----------
+Range: (99744,99896) (152)
+select_one
+"SELECT␣IFNULL(SUM(INDEX_LENGTH),␣0)␣FROM␣information_schema.TABLES␣WHERE␣TABLE_SCHEMA␣NOT␣IN␣('information_schema')␣AND␣ENGINE␣=␣'MyISAM';";
+----------
+Range: (99937,100087) (150)
+select_one
+"SELECT␣IFNULL(SUM(INDEX_LENGTH),␣0)␣FROM␣information_schema.TABLES␣WHERE␣TABLE_SCHEMA␣NOT␣IN␣('information_schema')␣AND␣ENGINE␣=␣'Aria';";
+----------
+Range: (114082,114227) (145)
+goodprint
+"Highest␣usage␣of␣available␣connections:␣$mycalc{'pct_connections_used'}%␣($mystat{'Max_used_connections'}/$myvar{'max_connections'})";
+----------
+Range: (120414,120660) (246)
+"We␣will␣suggest␣raising␣the␣'join_buffer_size'␣until␣JOINs␣not␣using␣indexes␣are␣found.
+␣␣␣␣␣␣␣␣␣␣␣␣␣See␣https://dev.mysql.com/doc/internals/en/join-buffer-size.html
+␣␣␣␣␣␣␣␣␣␣␣␣␣(specially␣the␣conclusions␣at␣the␣bottom␣of␣the␣page)."
+␣␣␣␣␣␣␣␣);
+----------
+Range: (131939,132087) (148)
+"SELECT␣COUNT(*)␣FROM␣information_schema.TABLES␣WHERE␣ENGINE='MyISAM'␣and␣TABLE_SCHEMA␣NOT␣IN␣('mysql','information_schema','performance_schema')");
+----------
+Range: (132388,132568) (180)
+"SELECT␣CONCAT(TABLE_SCHEMA,␣'.',␣TABLE_NAME)␣FROM␣information_schema.TABLES␣WHERE␣ENGINE='MyISAM'␣and␣TABLE_SCHEMA␣NOT␣IN␣('mysql','information_schema','performance_schema')"␣))␣{
+----------
+Range: (151655,151837) (182)
+'use␣sys;select␣substring(event_name,14),␣SUM(total)AS␣total␣from␣sys.x\\$host_summary_by_file_io_type␣GROUP␣BY␣substring(event_name,14)␣ORDER␣BY␣total␣DESC;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (152168,152376) (208)
+'select␣substring(event_name,14),␣ROUND(SUM(total_latency),1)␣AS␣total_latency␣from␣sys.x\\$host_summary_by_file_io_type␣GROUP␣BY␣substring(event_name,14)␣ORDER␣BY␣total_latency␣DESC;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (152699,152900) (201)
+'use␣sys;select␣substring(event_name,14),␣MAX(max_latency)␣as␣max_latency␣from␣sys.x\\$host_summary_by_file_io_type␣GROUP␣BY␣substring(event_name,14)␣ORDER␣BY␣max_latency␣DESC;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (153215,153389) (174)
+'use␣sys;select␣substring(event_name,7),␣SUM(total)AS␣total␣from␣sys.x\\$host_summary_by_stages␣GROUP␣BY␣substring(event_name,7)␣ORDER␣BY␣total␣DESC;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (153718,153926) (208)
+'use␣sys;select␣substring(event_name,7),␣ROUND(SUM(total_latency),1)␣AS␣total_latency␣from␣sys.x\\$host_summary_by_stages␣GROUP␣BY␣substring(event_name,7)␣ORDER␣BY␣total_latency␣DESC;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (154247,154440) (193)
+'use␣sys;select␣substring(event_name,7),␣MAX(avg_latency)␣as␣avg_latency␣from␣sys.x\\$host_summary_by_stages␣GROUP␣BY␣substring(event_name,7)␣ORDER␣BY␣avg_latency␣DESC;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (155631,155785) (154)
+'select␣object_schema,␣␣object_name,␣allocated,data,␣pages␣from␣sys.x\\$innodb_buffer_stats_by_table␣ORDER␣BY␣pages␣DESC␣LIMIT␣40'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (156494,156642) (148)
+'select␣wait_age_secs,␣locked_table,␣locked_type,␣waiting_query␣from␣sys.x\\$innodb_lock_waits␣order␣by␣wait_age_secs␣DESC;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (157810,157962) (152)
+'select␣LEFT(query,␣120),␣exec_count␣from␣sys.x\\$statements_with_runtimes_in_95th_percentile␣order␣by␣exec_count␣desc␣LIMIT␣15'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (158271,158435) (164)
+'use␣sys;select␣statement,␣sum(total)␣as␣total␣from␣sys.x\\$host_summary_by_statement_type␣group␣by␣statement␣order␣by␣total␣desc␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (158757,158929) (172)
+'use␣sys;select␣statement,␣sum(total_latency)␣as␣total␣from␣sys.x\\$host_summary_by_statement_type␣group␣by␣statement␣order␣by␣total␣desc␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (159249,159420) (171)
+'use␣sys;select␣statement,␣sum(lock_latency)␣as␣total␣from␣sys.x\\$host_summary_by_statement_type␣group␣by␣statement␣order␣by␣total␣desc␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (159736,159905) (169)
+'use␣sys;select␣statement,␣sum(full_scans)␣as␣total␣from␣sys.x\\$host_summary_by_statement_type␣group␣by␣statement␣order␣by␣total␣desc␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (160219,160387) (168)
+'use␣sys;select␣statement,␣sum(rows_sent)␣as␣total␣from␣sys.x\\$host_summary_by_statement_type␣group␣by␣statement␣order␣by␣total␣desc␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (160709,160881) (172)
+'use␣sys;select␣statement,␣sum(rows_affected)␣as␣total␣from␣sys.x\\$host_summary_by_statement_type␣group␣by␣statement␣order␣by␣total␣desc␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (164615,164755) (140)
+'use␣sys;select␣file,␣write_latency␣from␣sys.x\\$io_global_by_file_by_latency␣ORDER␣BY␣write_latency␣DESC␣LIMIT␣20;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (165951,166097) (146)
+'use␣sys;select␣event_name,␣total_latency␣from␣sys.x\\$io_global_by_wait_by_latency␣ORDER␣BY␣total_latency␣DESC␣LIMIT␣20;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (166410,166554) (144)
+'use␣sys;select␣event_name,␣read_latency␣from␣sys.x\\$io_global_by_wait_by_latency␣ORDER␣BY␣read_latency␣DESC␣LIMIT␣20;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (166869,167015) (146)
+'use␣sys;select␣event_name,␣write_latency␣from␣sys.x\\$io_global_by_wait_by_latency␣ORDER␣BY␣write_latency␣DESC␣LIMIT␣20;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (167349,167515) (166)
+'use␣sys;select␣table_schema,␣table_name,index_name,␣rows_selected␣from␣sys.x\\$schema_index_statistics␣ORDER␣BY␣ROWs_selected␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (167824,168053) (229)
+'use␣sys;select␣table_schema,␣table_name,index_name,␣rows_inserted+rows_updated+rows_deleted␣AS␣changes␣from␣sys.x\\$schema_index_statistics␣ORDER␣BY␣rows_inserted+rows_updated+rows_deleted␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (168372,168540) (168)
+'use␣sys;select␣table_schema,␣table_name,index_name,␣select_latency␣from␣sys.x\\$schema_index_statistics␣ORDER␣BY␣select_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (168859,169027) (168)
+'use␣sys;select␣table_schema,␣table_name,index_name,␣insert_latency␣from␣sys.x\\$schema_index_statistics␣ORDER␣BY␣insert_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (169350,169518) (168)
+'use␣sys;select␣table_schema,␣table_name,index_name,␣update_latency␣from␣sys.x\\$schema_index_statistics␣ORDER␣BY␣update_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (169841,170009) (168)
+'use␣sys;select␣table_schema,␣table_name,index_name,␣delete_latency␣from␣sys.x\\$schema_index_statistics␣ORDER␣BY␣delete_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (170314,170467) (153)
+'use␣sys;select␣table_schema,␣table_name,␣rows_fetched␣from␣sys.x\\$schema_table_statistics␣ORDER␣BY␣ROWs_fetched␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (170776,170994) (218)
+'use␣sys;select␣table_schema,␣table_name,␣rows_inserted+rows_updated+rows_deleted␣AS␣changes␣from␣sys.x\\$schema_table_statistics␣ORDER␣BY␣rows_inserted+rows_updated+rows_deleted␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (171315,171470) (155)
+'use␣sys;select␣table_schema,␣table_name,␣fetch_latency␣from␣sys.x\\$schema_table_statistics␣ORDER␣BY␣fetch_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (171795,171952) (157)
+'use␣sys;select␣table_schema,␣table_name,␣insert_latency␣from␣sys.x\\$schema_table_statistics␣ORDER␣BY␣insert_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (172277,172434) (157)
+'use␣sys;select␣table_schema,␣table_name,␣update_latency␣from␣sys.x\\$schema_table_statistics␣ORDER␣BY␣update_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (172759,172916) (157)
+'use␣sys;select␣table_schema,␣table_name,␣delete_latency␣from␣sys.x\\$schema_table_statistics␣ORDER␣BY␣delete_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (173547,173693) (146)
+'␣Select␣table_schema,␣table_name␣from␣sys.x\\$schema_table_statistics_with_buffer␣where␣innodb_buffer_allocated␣IS␣NULL;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (173978,174197) (219)
+'select␣table_schema,table_name,innodb_buffer_allocated␣from␣sys.x\\$schema_table_statistics_with_buffer␣where␣innodb_buffer_allocated␣IS␣NOT␣NULL␣ORDER␣BY␣innodb_buffer_allocated␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (174486,174695) (209)
+'select␣table_schema,table_name,innodb_buffer_free␣from␣sys.x\\$schema_table_statistics_with_buffer␣where␣innodb_buffer_allocated␣IS␣NOT␣NULL␣ORDER␣BY␣innodb_buffer_free␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (175830,175976) (146)
+'select␣db,␣LEFT(query,␣120),␣exec_count␣from␣sys.x\\$statements_with_full_table_scans␣order␣BY␣exec_count␣DESC␣LIMIT␣20;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (176265,176409) (144)
+'select␣db,␣LEFT(query,␣120),␣last_seen␣from␣sys.x\\$statements_with_full_table_scans␣order␣BY␣last_seen␣DESC␣LIMIT␣50;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (176699,176862) (163)
+'use␣sys;select␣db,␣LEFT(query,␣120),␣rows_sent␣from␣sys.x\\$statements_with_runtimes_in_95th_percentile␣ORDER␣BY␣ROWs_sent␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (177165,177346) (181)
+'use␣sys;select␣db,␣LEFT(query,␣120),␣rows_examined␣AS␣search␣from␣sys.x\\$statements_with_runtimes_in_95th_percentile␣ORDER␣BY␣rows_examined␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (177649,177830) (181)
+'use␣sys;select␣db,␣LEFT(query,␣120),␣total_latency␣AS␣search␣from␣sys.x\\$statements_with_runtimes_in_95th_percentile␣ORDER␣BY␣total_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (178131,178308) (177)
+'use␣sys;select␣db,␣LEFT(query,␣120),␣max_latency␣AS␣search␣from␣sys.x\\$statements_with_runtimes_in_95th_percentile␣ORDER␣BY␣max_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (178613,178790) (177)
+'use␣sys;select␣db,␣LEFT(query,␣120),␣avg_latency␣AS␣search␣from␣sys.x\\$statements_with_runtimes_in_95th_percentile␣ORDER␣BY␣avg_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (179903,180050) (147)
+'use␣sys;select␣db,␣LEFT(query,␣120),␣rows_sorted␣from␣sys.x\\$statements_with_sorting␣ORDER␣BY␣ROWs_sorted␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (180340,180501) (161)
+'use␣sys;select␣db,␣LEFT(query,␣120),␣total_latency␣AS␣search␣from␣sys.x\\$statements_with_sorting␣ORDER␣BY␣total_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (180783,180952) (169)
+'use␣sys;select␣db,␣LEFT(query,␣120),␣sort_merge_passes␣AS␣search␣from␣sys.x\\$statements_with_sorting␣ORDER␣BY␣sort_merge_passes␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (181254,181411) (157)
+'select␣db,␣LEFT(query,␣120),␣avg_sort_merges␣AS␣search␣from␣sys.x\\$statements_with_sorting␣ORDER␣BY␣avg_sort_merges␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (181693,181862) (169)
+'use␣sys;select␣db,␣LEFT(query,␣120),␣sorts_using_scans␣AS␣search␣from␣sys.x\\$statements_with_sorting␣ORDER␣BY␣sorts_using_scans␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (182144,182311) (167)
+'use␣sys;select␣db,␣LEFT(query,␣120),␣sort_using_range␣AS␣search␣from␣sys.x\\$statements_with_sorting␣ORDER␣BY␣sort_using_range␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (184208,184349) (141)
+'select␣db,␣LEFT(query,␣120),␣exec_count␣from␣sys.x\\$statements_with_temp_tables␣order␣BY␣exec_count␣DESC␣LIMIT␣20;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (184632,184771) (139)
+'select␣db,␣LEFT(query,␣120),␣last_seen␣from␣sys.x\\$statements_with_temp_tables␣order␣BY␣last_seen␣DESC␣LIMIT␣50;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (185073,185230) (157)
+'select␣db,␣LEFT(query,␣120),␣total_latency␣AS␣search␣from␣sys.x\\$statements_with_temp_tables␣ORDER␣BY␣total_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (185520,185679) (159)
+'use␣sys;select␣db,␣LEFT(query,␣120),␣disk_tmp_tables␣from␣sys.x\\$statements_with_temp_tables␣ORDER␣BY␣disk_tmp_tables␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (187579,187728) (149)
+'use␣sys;select␣event_class,␣total_latency␣from␣sys.x\\$wait_classes_global_by_latency␣ORDER␣BY␣total_latency␣DESC␣LIMIT␣15;'
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)
+␣␣␣␣{
+----------
+Range: (194441,194816) (375)
+"Select␣CONCAT(c.table_schema,␣','␣,␣c.table_name)
+from␣information_schema.columns␣c
+join␣information_schema.tables␣t␣using␣(TABLE_SCHEMA,␣TABLE_NAME)
+where␣c.table_schema␣not␣in␣('sys',␣'mysql',␣'information_schema',␣'performance_schema')
+␣␣and␣t.table_type␣=␣'BASE␣TABLE'
+group␣by␣c.table_schema,c.table_name
+having␣sum(if(c.column_key␣in␣('PRI',␣'UNI'),␣1,␣0))␣=␣0"
+␣␣␣␣);
+----------
+Range: (195509,195753) (244)
+"select␣CONCAT(table_schema,␣',',␣table_name,␣',',␣ENGINE)␣
+FROM␣information_schema.tables␣t
+WHERE␣ENGINE␣<>␣'InnoDB'␣
+and␣t.table_type␣=␣'BASE␣TABLE'
+and␣table_schema␣not␣in␣
+('sys',␣'mysql',␣'performance_schema',␣'information_schema')"
+␣␣␣␣);
+----------
+Range: (196521,196883) (362)
+"SELECT␣CONCAT(table_schema,␣',',␣table_name,␣',',␣column_name,␣',',␣CHARacter_set_name,␣',',␣COLLATION_name,␣',',␣data_type,␣',',␣CHARACTER_MAXIMUM_LENGTH)
+from␣information_schema.columns
+WHERE␣table_schema␣not␣in␣('sys',␣'mysql',␣'performance_schema',␣'information_schema')
+and␣(CHARacter_set_name␣␣NOT␣LIKE␣'utf8%'
+or␣COLLATION_name␣NOT␣LIKE␣'utf8%');"
+␣␣␣␣);
+----------
+Range: (197512,197866) (354)
+"SELECT␣CONCAT(table_schema,␣',',␣table_name,␣',',␣column_name,␣',',␣CHARacter_set_name,␣',',␣COLLATION_name,␣',',␣data_type,␣',',␣CHARACTER_MAXIMUM_LENGTH)
+from␣information_schema.columns
+WHERE␣table_schema␣not␣in␣('sys',␣'mysql',␣'performance_schema',␣'information_schema')
+and␣(CHARacter_set_name␣␣LIKE␣'utf8%'
+or␣COLLATION_name␣LIKE␣'utf8%');"
+␣␣␣␣);
+----------
+Range: (198127,198359) (232)
+"SELECT␣CONCAT(table_schema,␣',',␣table_name,␣',',␣column_name,␣',',␣data_type)
+from␣information_schema.columns
+WHERE␣table_schema␣not␣in␣('sys',␣'mysql',␣'performance_schema',␣'information_schema')
+AND␣data_type='FULLTEXT';"
+␣␣␣␣);
+----------
+Range: (220456,220598) (142)
+"innodb_buffer_pool_size␣must␣always␣be␣equal␣to␣or␣a␣multiple␣of␣innodb_buffer_pool_chunk_size␣*␣innodb_buffer_pool_instances"
+␣␣␣␣␣␣␣␣␣␣␣␣);
+----------
+Range: (224504,224653) (149)
+"SELECT␣SCHEMA_NAME␣FROM␣information_schema.SCHEMATA␣WHERE␣SCHEMA_NAME␣NOT␣IN␣(␣'mysql',␣'performance_schema',␣'information_schema',␣'sys'␣);"
+␣␣␣␣);
+----------
+Range: (224769,225067) (298)
+"SELECT␣SUM(TABLE_ROWS),␣SUM(DATA_LENGTH),␣SUM(INDEX_LENGTH),␣SUM(DATA_LENGTH+INDEX_LENGTH),␣COUNT(TABLE_NAME),␣COUNT(DISTINCT(TABLE_COLLATION)),␣COUNT(DISTINCT(ENGINE))␣FROM␣information_schema.TABLES␣WHERE␣TABLE_SCHEMA␣NOT␣IN␣('mysql',␣'performance_schema',␣'information_schema',␣'sys');"
+␣␣␣␣␣␣);
+----------
+Range: (225155,225329) (174)
+"SELECT␣count(*)␣from␣information_schema.TABLES␣WHERE␣TABLE_TYPE␣='BASE␣TABLE'␣AND␣TABLE_SCHEMA␣NOT␣IN␣('mysql',␣'performance_schema',␣'information_schema',␣'sys')"
+␣␣␣␣␣␣)␣.
+----------
+Range: (225384,225552) (168)
+"SELECT␣count(*)␣from␣information_schema.TABLES␣WHERE␣TABLE_TYPE␣='VIEW'␣AND␣TABLE_SCHEMA␣NOT␣IN␣('mysql',␣'performance_schema',␣'information_schema',␣'sys')"
+␣␣␣␣␣␣)␣.
+----------
+Range: (225607,225809) (202)
+"SELECT␣count(distinct(concat(TABLE_NAME,␣TABLE_SCHEMA,␣INDEX_NAME)))␣from␣information_schema.STATISTICS␣WHERE␣TABLE_SCHEMA␣NOT␣IN␣('mysql',␣'performance_schema',␣'information_schema',␣'sys')"
+␣␣␣␣␣␣)␣.
+----------
+Range: (225963,226175) (212)
+"select␣distinct(CHARACTER_SET_NAME)␣from␣information_schema.columns␣WHERE␣CHARACTER_SET_NAME␣IS␣NOT␣NULL␣AND␣TABLE_SCHEMA␣NOT␣IN␣('mysql',␣'performance_schema',␣'information_schema',␣'sys');"
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)␣.
+----------
+Range: (226329,226534) (205)
+"SELECT␣DISTINCT(TABLE_COLLATION)␣FROM␣information_schema.TABLES␣WHERE␣TABLE_COLLATION␣IS␣NOT␣NULL␣AND␣TABLE_SCHEMA␣NOT␣IN␣('mysql',␣'performance_schema',␣'information_schema',␣'sys');"
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)␣.
+----------
+Range: (227120,227307) (187)
+"SELECT␣DISTINCT(ENGINE)␣FROM␣information_schema.TABLES␣WHERE␣ENGINE␣IS␣NOT␣NULL␣AND␣TABLE_SCHEMA␣NOT␣IN␣('mysql',␣'performance_schema',␣'information_schema',␣'sys');"
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣)␣.
+----------
+Range: (228020,228340) (320)
+"SELECT␣TABLE_SCHEMA,␣SUM(TABLE_ROWS),␣SUM(DATA_LENGTH),␣SUM(INDEX_LENGTH),␣SUM(DATA_LENGTH+INDEX_LENGTH),␣COUNT(DISTINCT␣ENGINE),␣COUNT(TABLE_NAME),␣COUNT(DISTINCT(TABLE_COLLATION)),␣COUNT(DISTINCT(ENGINE))␣FROM␣information_schema.TABLES␣WHERE␣TABLE_SCHEMA='$_'␣GROUP␣BY␣TABLE_SCHEMA␣ORDER␣BY␣TABLE_SCHEMA"
+␣␣␣␣␣␣␣␣␣␣);
+----------
+Range: (228839,228982) (143)
+"SELECT␣count(distinct(concat(TABLE_NAME,␣TABLE_SCHEMA,␣INDEX_NAME)))␣from␣information_schema.STATISTICS␣WHERE␣TABLE_SCHEMA='$_'"
+␣␣␣␣␣␣␣␣␣␣)␣.
+----------
+Range: (229155,229312) (157)
+"select␣distinct(CHARACTER_SET_NAME)␣from␣information_schema.columns␣WHERE␣CHARACTER_SET_NAME␣IS␣NOT␣NULL␣AND␣TABLE_SCHEMA='$_';"
+␣␣␣␣␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣␣␣␣␣)␣.
+----------
+Range: (229476,229626) (150)
+"SELECT␣DISTINCT(TABLE_COLLATION)␣FROM␣information_schema.TABLES␣WHERE␣TABLE_SCHEMA='$_'␣AND␣TABLE_COLLATION␣IS␣NOT␣NULL;"
+␣␣␣␣␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣␣␣␣␣)␣.
+----------
+Range: (230439,230578) (139)
+"SELECT␣DISTINCT(ENGINE)␣FROM␣information_schema.TABLES␣WHERE␣TABLE_SCHEMA='$_'␣AND␣ENGINE␣IS␣NOT␣NULL"
+␣␣␣␣␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣␣␣{
+----------
+Range: (232915,233090) (175)
+"select␣DISTINCT(CHARACTER_SET_NAME)␣from␣information_schema.COLUMNS␣where␣CHARACTER_SET_NAME␣IS␣NOT␣NULL␣AND␣TABLE_SCHEMA␣='$_'␣AND␣CHARACTER_SET_NAME␣IS␣NOT␣NULL"
+␣␣␣␣␣␣␣␣);
+----------
+Range: (233781,233944) (163)
+"select␣DISTINCT(COLLATION_NAME)␣from␣information_schema.COLUMNS␣where␣COLLATION_NAME␣IS␣NOT␣NULL␣AND␣TABLE_SCHEMA␣='$_'␣AND␣COLLATION_NAME␣IS␣NOT␣NULL"
+␣␣␣␣␣␣␣␣);
+----------
+Range: (236339,236668) (329)
+<<"ENDSQL";
+␣␣␣␣␣␣SELECT␣␣index_name␣AS␣idxname,␣
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣GROUP_CONCAT(column_name␣ORDER␣BY␣seq_in_index)␣AS␣cols,␣
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣INDEX_TYPE␣as␣type
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣FROM␣information_schema.statistics
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣WHERE␣INDEX_SCHEMA='$dbname'
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣AND␣TABLE_NAME='$tbname'
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣GROUP␣BY␣idxname,␣type
+ENDSQL
+----------
+Range: (237476,237623) (147)
+"SELECT␣COLUMN_TYPE␣FROM␣information_schema.COLUMNS␣WHERE␣TABLE_SCHEMA='$dbname'␣AND␣TABLE_NAME='$tbname'␣AND␣COLUMN_NAME='$_'␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣);
+----------
+Range: (237665,237812) (147)
+"SELECT␣IS_NULLABLE␣FROM␣information_schema.COLUMNS␣WHERE␣TABLE_SCHEMA='$dbname'␣AND␣TABLE_NAME='$tbname'␣AND␣COLUMN_NAME='$_'␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣);
+----------
+Range: (240054,241193) (1139)
+<<'ENDSQL';
+SELECT
+␣␣CONCAT(t.TABLE_SCHEMA,␣'.',␣t.TABLE_NAME)␣AS␣'table',␣
+␣␣CONCAT(s.INDEX_NAME,␣'(',␣s.COLUMN_NAME,␣')')␣AS␣'index'
+␣,␣s.SEQ_IN_INDEX␣AS␣'seq'
+␣,␣s2.max_columns␣AS␣'maxcol'
+␣,␣s.CARDINALITY␣␣AS␣'card'
+␣,␣t.TABLE_ROWS␣␣␣AS␣'est_rows'
+␣,␣INDEX_TYPE␣as␣type
+␣,␣ROUND(((s.CARDINALITY␣/␣IFNULL(t.TABLE_ROWS,␣0.01))␣*␣100),␣2)␣AS␣'sel'
+FROM␣INFORMATION_SCHEMA.STATISTICS␣s
+␣INNER␣JOIN␣INFORMATION_SCHEMA.TABLES␣t
+␣␣ON␣s.TABLE_SCHEMA␣=␣t.TABLE_SCHEMA
+␣␣AND␣s.TABLE_NAME␣=␣t.TABLE_NAME
+␣INNER␣JOIN␣(
+␣␣SELECT
+␣␣␣␣␣TABLE_SCHEMA
+␣␣␣,␣TABLE_NAME
+␣␣␣,␣INDEX_NAME
+␣␣␣,␣MAX(SEQ_IN_INDEX)␣AS␣max_columns
+␣␣FROM␣INFORMATION_SCHEMA.STATISTICS
+␣␣WHERE␣TABLE_SCHEMA␣NOT␣IN␣('mysql',␣'information_schema',␣'performance_schema')
+␣␣AND␣INDEX_TYPE␣<>␣'FULLTEXT'
+␣␣GROUP␣BY␣TABLE_SCHEMA,␣TABLE_NAME,␣INDEX_NAME
+␣)␣AS␣s2
+␣ON␣s.TABLE_SCHEMA␣=␣s2.TABLE_SCHEMA
+␣AND␣s.TABLE_NAME␣=␣s2.TABLE_NAME
+␣AND␣s.INDEX_NAME␣=␣s2.INDEX_NAME
+WHERE␣t.TABLE_SCHEMA␣NOT␣IN␣('mysql',␣'information_schema',␣'performance_schema')
+AND␣t.TABLE_ROWS␣>␣10
+AND␣s.CARDINALITY␣IS␣NOT␣NULL
+AND␣(s.CARDINALITY␣/␣IFNULL(t.TABLE_ROWS,␣0.01))␣<␣8.00
+ORDER␣BY␣sel
+LIMIT␣10;
+ENDSQL
+----------
+Range: (242601,242991) (390)
+<<"ENDSQL";
+␣␣␣␣␣␣␣␣SELECT␣␣concat(table_name,␣'.',␣index_name)␣AS␣idxname,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣GROUP_CONCAT(column_name␣ORDER␣BY␣seq_in_index)␣AS␣cols,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣SUM(CARDINALITY)␣as␣card,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣INDEX_TYPE␣as␣type
+␣␣␣␣␣␣␣␣FROM␣information_schema.statistics
+␣␣␣␣␣␣␣␣WHERE␣INDEX_SCHEMA='$dbname'
+␣␣␣␣␣␣␣␣AND␣index_name␣IS␣NOT␣NULL
+␣␣␣␣␣␣␣␣GROUP␣BY␣table_name,␣idxname,␣type
+ENDSQL
+----------
+Range: (243819,244173) (354)
+<<'ENDSQL';
+SELECT␣CONCAT(object_schema,␣'.',␣object_name)␣AS␣'table',␣index_name
+FROM␣performance_schema.table_io_waits_summary_by_index_usage
+WHERE␣index_name␣IS␣NOT␣NULL
+AND␣count_star␣=␣0
+AND␣index_name␣<>␣'PRIMARY'
+AND␣object_schema␣NOT␣IN␣('mysql',␣'performance_schema',␣'information_schema')
+ORDER␣BY␣count_star,␣object_schema,␣object_name;
+ENDSQL
+----------
+Range: (247367,247564) (197)
+<<'END_TEMPLATE';
+<!DOCTYPE␣html>
+<html>
+<head>
+␣␣<title>MySQLTuner␣Report</title>
+␣␣<meta␣charset="UTF-8">
+</head>
+<body>
+
+<h1>Result␣output</h1>
+<pre>
+{$data}
+</pre>
+
+</body>
+</html>
+END_TEMPLATE
+----------

@@ -99,13 +99,13 @@ use Mojo::Base 'Mojo::Server::Morbo::Backend';
 
 sub modified_files { return ['always_changed'] }
 
-1
+1;
 package Mojo::LoaderException::A;
 use Mojo::Base -base;
 
 sub new { }
 
-foo {
+foo {}
 
 1;
 package Mojo::LoaderTest::B;
@@ -239,7 +239,7 @@ use Mojo::Base -base;
 
 sub new { }
 
-foo {
+foo {}
 
 1;
 package PluginWithEmbeddedApp;
@@ -519,7 +519,7 @@ sub withlayout { shift->stash(template => 'WithGreenLayout') }
 package MojoliciousTest::SyntaxError;
 use Mojo::Base 'Mojolicious::Controller';
 
-sub foo {
+sub foo {}
 
 1;
 package MojoliciousTest::Exceptional;

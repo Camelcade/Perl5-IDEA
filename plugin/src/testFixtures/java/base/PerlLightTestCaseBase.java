@@ -2591,17 +2591,22 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   public void initWithLarge(@NotNull String name) {
-    initWithTestDataFile("largeFiles/" + name, name);
+    initWithLarge(name, true);
+  }
+
+  public void initWithLarge(@NotNull String name, boolean checkErrors) {
+    initWithTestDataFile("largeFiles/" + name, name, checkErrors);
   }
 
   protected void initWithCpanFile() {
     initWithFile("cpanfile", "");
   }
 
-  public void initWithTestDataFile(@NotNull String sourceName, @NotNull String targetName) {
-    initWithFileContent(
-      targetName, getFileExtension(), loadTestFile(sourceName));
-    assertNoErrorElements();
+  public void initWithTestDataFile(@NotNull String sourceName, @NotNull String targetName, boolean checkErrors) {
+    initWithFileContent(targetName, getFileExtension(), loadTestFile(sourceName));
+    if (checkErrors) {
+      assertNoErrorElements();
+    }
   }
 
   public @NotNull String loadTestFile(@NotNull String sourceName) {
