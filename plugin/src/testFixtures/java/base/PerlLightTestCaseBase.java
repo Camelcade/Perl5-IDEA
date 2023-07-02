@@ -545,10 +545,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doFormatTest(@NotNull String sourceFileName, @NotNull String resultFileName, @NotNull String resultSuffix) {
     initWithFileSmartWithoutErrors(sourceFileName);
-    doFormatTestWithoutInitialization(resultFileName, resultSuffix);
+    doFormatTestWithoutInitialization(resultFileName, resultSuffix, true);
   }
 
-  protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix) {
+  protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix, boolean checkErrors) {
     WriteCommandAction.writeCommandAction(getProject()).run(() -> {
       PsiFile file = myFixture.getFile();
       if (InjectedLanguageManager.getInstance(file.getProject()).isInjectedFragment(file)) {
@@ -561,7 +561,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
     String resultFilePath = getTestDataPath() + "/" + resultFileName + resultSuffix + ".txt";
     UsefulTestCase.assertSameLinesWithFile(resultFilePath, myFixture.getFile().getText());
-    assertNoErrorElements();
+    if (checkErrors) {
+      assertNoErrorElements();
+    }
   }
 
   protected final int getCompletionInvocationCount() {

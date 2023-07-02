@@ -175,7 +175,7 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   public void testSmarterHashFormatting() {doFormatTest();}
 
   @Test
-  public void testMoose() {doFormatTest();}
+  public void testMooseSample() { doFormatTest(); }
 
   @Test
   public void testPolishing() {doFormatTest();}
@@ -269,17 +269,68 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   }
 
   @Test
-  public void testPerlTidy() {
-    initWithPerlTidy();
-    assertNoErrorElements();
-    doFormatTestWithoutInitialization(getTestName(true), "");
+  @Category(Heavy.class)
+  public void testPinxi() {
+    doTestLarge(true);
   }
 
   @Test
-  public void testPinxi() {
-    initWithPinxi();
-    assertNoErrorElements();
-    doFormatTestWithoutInitialization(getTestName(true), "");
+  @Category(Heavy.class)
+  public void testCatalyst() {
+    doTestLarge(true);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testMojo() {
+    doTestLarge(true);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testMoose() {
+    doTestLarge(true);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testMysqltuner() {
+    doTestLarge(true);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testPerl532() {
+    doTestLarge(false);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testPerl534() {
+    doTestLarge(false);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testPerl536() {
+    doTestLarge(false);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testPerl5125() {
+    doTestLarge(false);
+  }
+
+  @Test
+  @Category(Heavy.class)
+  public void testPerl5303() {
+    doTestLarge(false);
+  }
+
+  private void doTestLarge(boolean checkErrors) {
+    initWithLarge(getTestName(true), checkErrors);
+    doFormatTestWithoutInitialization(getTestName(true), "", checkErrors);
   }
 
   @Test
