@@ -33,6 +33,7 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.PerlParserImpl;
+import com.perl5.lang.perl.parser.builder.PerlPsiBuilderFactory;
 import com.perl5.lang.perl.psi.PerlLexerAwareParserDefinition;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.util.PerlTimeLogger;
@@ -76,7 +77,7 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     PsiElement parentElement = chameleon.getTreeParent().getPsi();
     Project project = parentElement.getProject();
     CharSequence newChars = chameleon.getChars();
-    PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
+    PsiBuilder builder = PerlPsiBuilderFactory.Companion.createBuilder(
       project,
       chameleon,
       createLexer(chameleon),
