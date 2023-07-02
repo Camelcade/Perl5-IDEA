@@ -1,0 +1,3048 @@
+File size: 673091
+Re-highlighted ranges: 62912
+Avg range size: 10.69834053916582
+Min range size: 1
+Max range size: 1678
+10% of text has range <= 6
+20% of text has range <= 10
+30% of text has range <= 13
+40% of text has range <= 18
+50% of text has range <= 24
+60% of text has range <= 31
+70% of text has range <= 37
+80% of text has range <= 48
+90% of text has range <= 63
+----------
+Range: (9362,9432) (70)
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣ArrayBasedStorage::Instance;
+----------
+Range: (11601,11665) (64)
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣InstanceCountingClass;
+----------
+Range: (12000,12070) (70)
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣ClassEncapsulatedAttributes;
+----------
+Range: (12510,12589) (79)
+#␣initialize␣*ALL*␣attributes,␣including␣masked␣ones␣(as␣opposed␣to␣applicable)
+----------
+Range: (12937,13021) (84)
+}
+
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣ClassEncapsulatedAttributes::Attribute;
+----------
+Range: (14065,14133) (68)
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣InsideOutClass::Attribute;
+----------
+Range: (14959,15072) (113)
+'InsideOutClass::Method::Accessor'␣}
+
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣InsideOutClass::Method::Accessor;
+----------
+Range: (15913,15980) (67)
+$meta_class->get_meta_instance
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣->get_slot_value(
+----------
+Range: (16197,16264) (67)
+$meta_class->get_meta_instance
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣->set_slot_value(
+----------
+Range: (16499,16574) (75)
+$meta_class->get_meta_instance
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣->get_slot_value(
+----------
+Range: (16609,16679) (70)
+}
+
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣InsideOutClass::Instance;
+----------
+Range: (17874,17937) (63)
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣LazyClass::Attribute;
+----------
+Range: (18470,18573) (103)
+'LazyClass::Method::Accessor'␣}
+
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣LazyClass::Method::Accessor;
+----------
+Range: (19906,19971) (65)
+}
+
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣LazyClass::Instance;
+----------
+Range: (20844,20915) (71)
+#␣we␣need␣to␣look␣at␣$AUTOLOAD␣in␣the␣package␣where␣the␣coderef␣belongs
+----------
+Range: (20920,20994) (74)
+#␣if␣subname␣works,␣then␣it'll␣be␣where␣this␣AUTOLOAD␣method␣was␣installed
+----------
+Range: (20999,21068) (69)
+#␣otherwise,␣it'll␣be␣$C3MethodDispatchOrder::AUTOLOAD.␣get_code_info
+----------
+Range: (26336,26400) (64)
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣AttributesWithHistory;
+----------
+Range: (27016,27116) (100)
+'AttributesWithHistory::Method::Accessor'␣}
+
+AttributesWithHistory->meta->add_after_method_modifier(
+----------
+Range: (27374,27456) (82)
+package␣#␣hide␣the␣package␣from␣PAUSE
+␣␣␣␣AttributesWithHistory::Method::Accessor;
+----------
+Range: (27683,27965) (282)
+qq{sub␣{
+␣␣␣␣␣␣␣␣unless␣(ref␣\$_[0]->meta->get_attribute('$attr_name')->_history()->\{\$_[0]\})␣\{
+␣␣␣␣␣␣␣␣␣␣␣␣\$_[0]->meta->get_attribute('$attr_name')->_history()->\{\$_[0]\}␣=␣[];
+␣␣␣␣␣␣␣␣\}
+␣␣␣␣␣␣␣␣\@\{\$_[0]->meta->get_attribute('$attr_name')->_history()->\{\$_[0]\}\};
+␣␣␣␣}};
+----------
+Range: (28067,28499) (432)
+qq{sub␣{
+␣␣␣␣␣␣␣␣if␣(scalar(\@_)␣==␣2)␣{
+␣␣␣␣␣␣␣␣␣␣␣␣unless␣(ref␣\$_[0]->meta->get_attribute('$attr_name')->_history()->\{\$_[0]\})␣\{
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣\$_[0]->meta->get_attribute('$attr_name')->_history()->\{\$_[0]\}␣=␣[];
+␣␣␣␣␣␣␣␣␣␣␣␣\}
+␣␣␣␣␣␣␣␣␣␣␣␣push␣\@\{\$_[0]->meta->get_attribute('$attr_name')->_history()->\{\$_[0]\}\}␣=>␣\$_[1];
+␣␣␣␣␣␣␣␣␣␣␣␣\$_[0]->{'$attr_name'}␣=␣\$_[1];
+␣␣␣␣␣␣␣␣}
+␣␣␣␣␣␣␣␣\$_[0]->{'$attr_name'};
+␣␣␣␣}};
+----------
+Range: (28599,28937) (338)
+qq{sub␣{
+␣␣␣␣␣␣␣␣unless␣(ref␣\$_[0]->meta->get_attribute('$attr_name')->_history()->\{\$_[0]\})␣\{
+␣␣␣␣␣␣␣␣␣␣␣␣\$_[0]->meta->get_attribute('$attr_name')->_history()->\{\$_[0]\}␣=␣[];
+␣␣␣␣␣␣␣␣\}
+␣␣␣␣␣␣␣␣push␣\@\{\$_[0]->meta->get_attribute('$attr_name')->_history()->\{\$_[0]\}\}␣=>␣\$_[1];
+␣␣␣␣␣␣␣␣\$_[0]->{'$attr_name'}␣=␣\$_[1];
+␣␣␣␣}};
+----------
+Range: (28945,29925) (980)
+=pod
+
+=head1␣NAME
+
+AttributesWithHistory␣-␣An␣example␣attribute␣metaclass␣which␣keeps␣a␣history␣of␣changes
+
+=head1␣SYSNOPSIS
+
+␣␣package␣Foo;
+
+␣␣Foo->meta->add_attribute(AttributesWithHistory->new('foo'␣=>␣(
+␣␣␣␣␣␣accessor␣␣␣␣␣␣␣␣␣=>␣'foo',
+␣␣␣␣␣␣history_accessor␣=>␣'get_foo_history',
+␣␣)));
+
+␣␣Foo->meta->add_attribute(AttributesWithHistory->new('bar'␣=>␣(
+␣␣␣␣␣␣reader␣␣␣␣␣␣␣␣␣␣␣=>␣'get_bar',
+␣␣␣␣␣␣writer␣␣␣␣␣␣␣␣␣␣␣=>␣'set_bar',
+␣␣␣␣␣␣history_accessor␣=>␣'get_bar_history',
+␣␣)));
+
+␣␣sub␣new␣␣{
+␣␣␣␣␣␣my␣$class␣=␣shift;
+␣␣␣␣␣␣$class->meta->new_object(@_);
+␣␣}
+
+=head1␣DESCRIPTION
+
+This␣is␣an␣example␣of␣an␣attribute␣metaclass␣which␣keeps␣a
+record␣of␣all␣the␣values␣it␣has␣been␣assigned.␣It␣stores␣the
+history␣as␣a␣field␣in␣the␣attribute␣meta-object,␣and␣will
+autogenerate␣a␣means␣of␣accessing␣that␣history␣for␣the␣class
+which␣these␣attributes␣are␣added␣too.
+
+=head1␣AUTHORS
+
+Stevan␣Little␣E<lt>stevan@iinteractive.comE<gt>
+
+Yuval␣Kogman␣E<lt>nothingmuch@woobling.comE<gt>
+
+=cut
+----------
+Range: (30543,30609) (66)
+'Moose::Exception::MetaclassMustBeDerivedFromClassMOPClass')->new(
+----------
+Range: (31093,31161) (68)
+#␣ABSTRACT:␣a␣pragma␣for␣installing␣and␣using␣Class::MOP␣metaclasses
+----------
+Range: (31494,31564) (70)
+s/^/package␣$package;\nuse␣Moose;use␣Moose::Util::TypeConstraints;\n/;
+----------
+Range: (32976,33064) (88)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (35505,35575) (70)
+#␣it'll␣happen␣soon␣anyway␣and␣this␣just␣makes␣things␣more␣complicated
+----------
+Range: (36168,36231) (63)
+#␣The␣other␣options␣here␣are␣that␣$current_meta␣can␣be␣undef␣if
+----------
+Range: (36240,36303) (63)
+#␣remove_metaclass_by_name␣is␣called␣explicitly␣(since␣the␣hash
+----------
+Range: (36383,36446) (63)
+#␣or␣that␣$current_meta␣can␣be␣the␣same␣as␣$self,␣which␣happens
+----------
+Range: (36455,36519) (64)
+#␣when␣the␣metaclass␣goes␣out␣of␣scope␣(since␣the␣weak␣reference
+----------
+Range: (37430,37498) (68)
+#␣Need␣to␣quote␣package␣to␣avoid␣a␣problem␣with␣PPI␣mis-parsing␣this
+----------
+Range: (38199,38265) (66)
+#␣...␣these␣functions␣have␣to␣touch␣the␣symbol␣table␣itself,..␣yuk
+----------
+Range: (38452,38515) (63)
+}
+
+#␣...␣these␣functions␣deal␣with␣stuff␣on␣the␣namespace␣level
+----------
+Range: (39906,39995) (89)
+}
+␣␣␣␣}
+}
+
+#␣We␣can't␣load␣this␣with␣use,␣since␣it␣may␣be␣loaded␣and␣used␣from␣Class::MOP
+----------
+Range: (39996,40077) (81)
+#␣(via␣Class::MOP::Class,␣etc).␣However,␣if␣for␣some␣reason␣this␣module␣is␣loaded
+----------
+Range: (40078,40154) (76)
+#␣_without_␣first␣loading␣Class::MOP␣we␣need␣to␣require␣Class::MOP␣so␣we␣can
+----------
+Range: (40427,40499) (72)
+#␣make␣this␣not␣a␣valid␣method␣name,␣to␣avoid␣(most)␣attribute␣conflicts
+----------
+Range: (44618,44686) (68)
+#␣we␣use␣$_[1]␣here␣because␣of␣t/cmop/rebless_overload.t␣regressions
+----------
+Range: (44787,44854) (67)
+#␣for␣meta␣instances␣that␣require␣updates␣on␣inherited␣slot␣changes
+----------
+Range: (48555,48627) (72)
+try␣{␣$params{associated_metaclass}->isa('Class::MOP::Module')␣}␣)
+␣␣␣␣{
+----------
+Range: (48733,48816) (83)
+qw(␣method_name␣coderef␣coderef_package␣coderef_name␣method␣associated_metaclass␣);
+----------
+Range: (50942,51028) (86)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (51419,51491) (72)
+#␣This␣method␣is␣called␣to␣allow␣for␣installing␣accessors.␣Ideally,␣we'd
+----------
+Range: (51496,51567) (71)
+#␣use␣method␣overriding,␣but␣then␣the␣subclass␣would␣be␣responsible␣for
+----------
+Range: (51637,51706) (69)
+#␣duplication.␣Even␣more␣ideally,␣we'd␣use␣augment/inner,␣but␣this␣is
+----------
+Range: (53020,53085) (65)
+$_)␣}
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$old_meta->get_attribute_list)␣{
+----------
+Range: (55356,55420) (64)
+#␣Perl␣5.10␣and␣earlier␣appear␣to␣have␣a␣bug␣where␣setting␣a␣new
+----------
+Range: (55425,55499) (74)
+#␣overloading␣operator␣wipes␣out␣the␣fallback␣value␣unless␣we␣pass␣it␣each
+----------
+Range: (55791,55863) (72)
+#␣overload.pm␣provides␣no␣api␣for␣this␣-␣but␣the␣problem␣that␣makes␣this
+----------
+Range: (56308,56386) (78)
+}
+
+#␣We␣could␣cache␣this␣but␣we'd␣need␣some␣logic␣to␣clear␣it␣at␣all␣the␣right
+----------
+Range: (58425,58493) (68)
+#␣Uber␣hack␣because␣it␣is␣called␣from␣CMOP::Attribute␣constructor␣as
+----------
+Range: (58867,58931) (64)
+#␣if␣the␣default␣is␣a␣CODE␣ref,␣then␣we␣pass␣in␣the␣instance␣and
+----------
+Range: (58940,59008) (68)
+#␣default␣can␣return␣a␣value␣based␣on␣that␣instance.␣Somewhat␣crude,
+----------
+Range: (60222,60291) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (61076,61148) (72)
+#␣If␣a␣raw␣code␣reference␣is␣supplied,␣its␣method␣object␣is␣not␣created.
+----------
+Range: (61562,61626) (64)
+#␣we␣added␣the␣method␣to␣the␣method␣map␣too,␣so␣it's␣still␣valid
+----------
+Range: (64244,64311) (67)
+#␣Track␣DB::sub␣information␣for␣this␣method␣if␣debugger␣is␣enabled.
+----------
+Range: (64478,64574) (96)
+$DB::sub{$package_name␣.␣"::"␣.␣$method_name}
+␣␣␣␣␣␣␣␣}
+
+␣␣␣␣␣␣␣␣$method->_make_compatible_with(
+----------
+Range: (64661,64734) (73)
+#␣Restore␣method␣debug␣information,␣which␣can␣be␣clobbered␣by␣add_method.
+----------
+Range: (64743,64811) (68)
+#␣Note␣that␣we␣handle␣this␣here␣instead␣of␣in␣add_method,␣because␣we
+----------
+Range: (64820,64889) (69)
+#␣only␣want␣to␣preserve␣the␣original␣debug␣info␣in␣cases␣where␣we␣are
+----------
+Range: (69570,69642) (72)
+#␣NOTE:␣we␣need␣to␣deal␣with␣the␣possibility␣of␣class␣immutability␣here,
+----------
+Range: (73365,73428) (63)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (73465,73528) (63)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (73569,73632) (63)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (74816,74883) (67)
+#␣for␣instance,␣Moose::Meta::Class␣has␣a␣error_class␣attribute,␣but
+----------
+Range: (75190,75263) (73)
+#␣if␣metaclass␣is␣defined␣in␣superclass␣but␣not␣here,␣it's␣not␣compatible
+----------
+Range: (77332,77398) (66)
+#␣if␣metaclass␣is␣defined␣in␣superclass␣but␣not␣here,␣it's␣fixable
+----------
+Range: (77859,77927) (68)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (78448,78516) (68)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (78546,78614) (68)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (79607,79681) (74)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (79920,79992) (72)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (80221,80289) (68)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (81545,81611) (66)
+'Class::MOP::Class::__ANON__::SERIAL::'␣}
+
+sub␣create_anon_class␣{
+----------
+Range: (82845,82911) (66)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (82933,82999) (66)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (89535,89607) (72)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (91074,91142) (68)
+#␣we␣use␣$_[1]␣here␣because␣of␣t/cmop/rebless_overload.t␣regressions
+----------
+Range: (94016,94183) (167)
+try␣{
+␣␣␣␣␣␣␣␣local␣$SIG{__DIE__};
+␣␣␣␣␣␣␣␣$attribute->install_accessors;
+␣␣␣␣}
+␣␣␣␣catch␣{
+␣␣␣␣␣␣␣␣$self->remove_attribute(␣$attribute->name␣);
+␣␣␣␣␣␣␣␣die␣$_;
+␣␣␣␣};
+----------
+Range: (94870,94942) (72)
+%{␣Class::MOP::Class->initialize($_)->_attribute_map␣}␣}
+␣␣␣␣␣␣␣␣reverse
+----------
+Range: (95824,95895) (71)
+#␣keep␣strong␣references␣to␣all␣our␣parents,␣so␣they␣don't␣disappear␣if
+----------
+Range: (97038,97118) (80)
+'This␣is␣a␣test␣for␣circular␣inheritance')
+␣␣␣␣}
+
+␣␣␣␣#␣if␣our␣mro␣is␣c3,␣we␣can
+----------
+Range: (98248,98329) (81)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (104568,104662) (94)
+#␣FIXME␣do␣we␣need␣to␣enforce␣this␣too?␣return␣unless␣$method->isa(␣$self->method_metaclass␣);
+----------
+Range: (104776,104842) (66)
+%{␣$_[0]{__immutable}{options}␣||␣{}␣}␣}
+
+sub␣_immutable_options␣{
+----------
+Range: (106371,106437) (66)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (107165,107229) (64)
+#␣metaclass␣roles␣applied␣(via␣Moose),␣then␣we␣want␣to␣make␣sure
+----------
+Range: (107883,107958) (75)
+@{␣$_[0]{__immutable}{inlined_methods}␣||␣[]␣}␣}
+
+sub␣_add_inlined_method␣{
+----------
+Range: (109098,109168) (70)
+"Not␣inlining␣a␣constructor␣for␣$class␣since␣it␣defines"
+␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (109209,109273) (64)
+"If␣you␣are␣certain␣you␣don't␣need␣to␣inline␣your"
+␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (109274,109343) (69)
+"␣constructor,␣specify␣inline_constructor␣=>␣0␣in␣your"
+␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (110595,110664) (69)
+"Not␣inlining␣a␣destructor␣for␣$class␣since␣it␣defines"
+␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (112851,112967) (116)
+qw/add_method␣alias_method␣remove_method␣add_attribute␣remove_attribute␣remove_package_symbol␣add_package_symbol/)␣{
+----------
+Range: (113139,113221) (82)
+@{␣$self->{__immutable}{class_precedence_list}
+␣␣␣␣␣␣␣␣␣␣␣␣||=␣[␣$self->$orig␣]␣};
+----------
+Range: (113294,113357) (63)
+@{␣$self->{__immutable}{linearized_isa}␣||=␣[␣$self->$orig␣]␣};
+----------
+Range: (113431,113495) (64)
+@{␣$self->{__immutable}{get_all_methods}␣||=␣[␣$self->$orig␣]␣};
+----------
+Range: (113574,113643) (69)
+@{␣$self->{__immutable}{get_all_method_names}␣||=␣[␣$self->$orig␣]␣};
+----------
+Range: (113720,113787) (67)
+@{␣$self->{__immutable}{get_all_attributes}␣||=␣[␣$self->$orig␣]␣};
+----------
+Range: (114084,114159) (75)
+#␣if␣we␣declare␣a␣method␣here,␣it␣will␣behave␣differently␣depending␣on␣what
+----------
+Range: (114160,114237) (77)
+#␣class␣this␣trait␣is␣applied␣to,␣so␣we␣won't␣have␣a␣reliable␣parameter␣list.
+----------
+Range: (114802,114882) (80)
+'die␣Module::Runtime::use_module("Moose::Exception::Legacy")->new(message␣=>␣'␣.
+----------
+Range: (115937,116009) (72)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (116078,116153) (75)
+}
+
+␣␣␣␣#␣can't␣use␣rebless_instance␣here,␣because␣it␣might␣not␣be␣an␣actual
+----------
+Range: (117762,117829) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (117846,117913) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (118118,118202) (84)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (118219,118303) (84)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (119524,119600) (76)
+$_[1]␣}
+
+#␣It's␣possible␣that␣this␣could␣cause␣a␣loop␣if␣there␣is␣a␣circular
+----------
+Range: (119659,119725) (66)
+#␣circumstances,␣since␣original␣method␣only␣gets␣set␣when␣clone␣is
+----------
+Range: (119726,119796) (70)
+#␣called.␣We␣_could_␣check␣for␣such␣a␣loop,␣but␣it'd␣involve␣some␣sort
+----------
+Range: (119797,119866) (69)
+#␣of␣package-lexical␣variable,␣and␣wouldn't␣be␣terribly␣subclassable.
+----------
+Range: (120275,120338) (63)
+$self->original_method->original_fully_qualified_name
+␣␣␣␣␣␣␣␣:
+----------
+Range: (120430,120510) (80)
+}
+
+#␣We␣used␣to␣go␣through␣use␣Class::MOP::Class->clone_instance␣to␣do␣this,␣but
+----------
+Range: (120511,120584) (73)
+#␣this␣was␣awfully␣slow.␣This␣method␣may␣be␣called␣a␣number␣of␣times␣when
+----------
+Range: (120585,120658) (73)
+#␣classes␣are␣loaded␣(especially␣during␣Moose␣role␣application),␣so␣it␣is
+----------
+Range: (121022,121085) (63)
+'die␣Module::Runtime::use_module("Moose::Exception::'
+␣␣␣␣␣␣␣␣.
+----------
+Range: (126711,126784) (73)
+#␣XXX:␣this␣is␣pretty␣gross.␣the␣issue␣here␣is␣that␣CMOP::Method::Wrapped
+----------
+Range: (126789,126864) (75)
+#␣objects␣are␣subclasses␣of␣CMOP::Method,␣but␣when␣we␣get␣to␣moose,␣they'll
+----------
+Range: (126869,126944) (75)
+#␣need␣to␣be␣compatible␣with␣Moose::Meta::Method,␣which␣isn't␣possible.␣the
+----------
+Range: (126949,127024) (75)
+#␣right␣solution␣here␣is␣to␣make␣::Wrapped␣into␣a␣role␣that␣gets␣applied␣to
+----------
+Range: (127094,127167) (73)
+#␣wrapped_method_metaclass␣entirely,␣but␣that's␣not␣going␣to␣happen␣until
+----------
+Range: (127172,127237) (65)
+#␣we␣ditch␣cmop␣and␣get␣roles␣into␣the␣bootstrapping,␣so.␣i'm␣not
+----------
+Range: (127242,127315) (73)
+#␣maintaining␣the␣previous␣behavior␣of␣turning␣them␣into␣instances␣of␣the
+----------
+Range: (127320,127395) (75)
+#␣new␣method_metaclass␣because␣that's␣equally␣broken,␣and␣at␣least␣this␣way
+----------
+Range: (127400,127470) (70)
+#␣any␣issues␣will␣at␣least␣be␣detectable␣and␣potentially␣fixable.␣-doy
+----------
+Range: (127607,127684) (77)
+#␣ABSTRACT:␣Method␣Meta␣Object␣for␣methods␣with␣before/after/around␣modifiers
+----------
+Range: (130359,130423) (64)
+"has␣method␣modifiers␣which␣would␣be␣lost␣if␣it␣were␣inlined\n";
+----------
+Range: (131166,131231) (65)
+#␣otherwise␣we␣have␣to␣check␣that␣the␣actual␣method␣is␣an␣inlined
+----------
+Range: (131979,132043) (64)
+"If␣you␣are␣certain␣you␣don't␣need␣to␣inline␣your"
+␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (132044,132113) (69)
+"␣constructor,␣specify␣inline_constructor␣=>␣0␣in␣your"
+␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (132205,132270) (65)
+#␣ABSTRACT:␣Method␣base␣class␣for␣methods␣which␣have␣been␣inlined
+----------
+Range: (132881,133063) (182)
+confess␣"'meta'␣method␣called␣by␣MOP␣internals"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣it's␣okay␣to␣call␣meta␣methods␣on␣metaclasses,␣since␣we
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣explicitly␣ask␣for␣them
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣if
+----------
+Range: (133129,133299) (170)
+'Class::MOP::Mixin')
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣it's␣okay␣if␣the␣test␣itself␣calls␣->meta,␣we␣only␣care␣about
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣if␣the␣mop␣internals␣call␣->meta
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣&&
+----------
+Range: (133820,133890) (70)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (134221,134291) (70)
+#␣XXX:␣this␣is␣pretty␣gross.␣the␣issue␣here␣is␣that␣CMOP::Method::Meta
+----------
+Range: (134296,134371) (75)
+#␣objects␣are␣subclasses␣of␣CMOP::Method,␣but␣when␣we␣get␣to␣moose,␣they'll
+----------
+Range: (134376,134451) (75)
+#␣need␣to␣be␣compatible␣with␣Moose::Meta::Method,␣which␣isn't␣possible.␣the
+----------
+Range: (134456,134528) (72)
+#␣right␣solution␣here␣is␣to␣make␣::Meta␣into␣a␣role␣that␣gets␣applied␣to
+----------
+Range: (134598,134669) (71)
+#␣_meta_method_metaclass␣entirely,␣but␣that's␣not␣going␣to␣happen␣until
+----------
+Range: (134674,134739) (65)
+#␣we␣ditch␣cmop␣and␣get␣roles␣into␣the␣bootstrapping,␣so.␣i'm␣not
+----------
+Range: (134744,134817) (73)
+#␣maintaining␣the␣previous␣behavior␣of␣turning␣them␣into␣instances␣of␣the
+----------
+Range: (134822,134897) (75)
+#␣new␣method_metaclass␣because␣that's␣equally␣broken,␣and␣at␣least␣this␣way
+----------
+Range: (134902,134972) (70)
+#␣any␣issues␣will␣at␣least␣be␣detectable␣and␣potentially␣fixable.␣-doy
+----------
+Range: (136469,136540) (71)
+#␣associated_metaclass␣=>␣$params->{associated_metaclass},␣#␣overridden
+----------
+Range: (138012,138399) (387)
+try␣{
+␣␣␣␣␣␣␣␣$self->_compile_code(\@source);
+␣␣␣␣}
+␣␣␣␣catch␣{
+␣␣␣␣␣␣␣␣my␣$source␣=␣join("\n",␣@source);
+␣␣␣␣␣␣␣␣$self->_throw_exception(␣CouldNotEvalConstructor␣=>␣constructor_method␣=>␣$self,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣source␣␣␣␣␣␣␣␣␣␣␣␣␣=>␣$source,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣error␣␣␣␣␣␣␣␣␣␣␣␣␣␣=>␣$_
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣);
+␣␣␣␣};
+----------
+Range: (138853,138922) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (139107,139179) (72)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (139412,139481) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (141590,142160) (570)
+try␣{
+␣␣␣␣␣␣␣␣$self->_compile_code([
+␣␣␣␣␣␣␣␣␣␣␣␣'sub␣{',
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣'if␣(@_␣>␣1)␣{',
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$attr->_inline_set_value('$_[0]',␣'$_[1]'),
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣'}',
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$attr->_inline_get_value('$_[0]'),
+␣␣␣␣␣␣␣␣␣␣␣␣'}',
+␣␣␣␣␣␣␣␣]);
+␣␣␣␣}
+␣␣␣␣catch␣{
+␣␣␣␣␣␣␣␣$self->_throw_exception(␣CouldNotGenerateInlineAttributeMethod␣=>␣instance␣=>␣$self,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣error␣␣␣␣=>␣$_,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣option␣␣␣=>␣"accessor"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣);
+␣␣␣␣};
+----------
+Range: (142418,142483) (65)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (142503,142568) (65)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (142827,143768) (941)
+try␣{
+␣␣␣␣␣␣␣␣$self->_compile_code([
+␣␣␣␣␣␣␣␣␣␣␣␣'sub␣{',
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣'if␣(@_␣>␣1)␣{',
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$self->_inline_throw_exception(␣CannotAssignValueToReadOnlyAccessor␣=>
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣'class_name␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣=>␣ref␣$_[0],'.
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣'value␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣=>␣$_[1],'.
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣"attribute_name␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣=>␣'".$attr_name."'",
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣)␣.␣';',
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣'}',
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$attr->_inline_get_value('$_[0]'),
+␣␣␣␣␣␣␣␣␣␣␣␣'}',
+␣␣␣␣␣␣␣␣]);
+␣␣␣␣}
+␣␣␣␣catch␣{
+␣␣␣␣␣␣␣␣$self->_throw_exception(␣CouldNotGenerateInlineAttributeMethod␣=>␣instance␣=>␣$self,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣error␣␣␣␣=>␣$_,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣option␣␣␣=>␣"reader"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣);
+␣␣␣␣};
+----------
+Range: (144051,144510) (459)
+try␣{
+␣␣␣␣␣␣␣␣$self->_compile_code([
+␣␣␣␣␣␣␣␣␣␣␣␣'sub␣{',
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$attr->_inline_set_value('$_[0]',␣'$_[1]'),
+␣␣␣␣␣␣␣␣␣␣␣␣'}',
+␣␣␣␣␣␣␣␣]);
+␣␣␣␣}
+␣␣␣␣catch␣{
+␣␣␣␣␣␣␣␣$self->_throw_exception(␣CouldNotGenerateInlineAttributeMethod␣=>␣instance␣=>␣$self,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣error␣␣␣␣=>␣$_,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣option␣␣␣=>␣"writer"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣);
+␣␣␣␣};
+----------
+Range: (144791,145244) (453)
+try␣{
+␣␣␣␣␣␣␣␣$self->_compile_code([
+␣␣␣␣␣␣␣␣␣␣␣␣'sub␣{',
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$attr->_inline_has_value('$_[0]'),
+␣␣␣␣␣␣␣␣␣␣␣␣'}',
+␣␣␣␣␣␣␣␣]);
+␣␣␣␣}
+␣␣␣␣catch␣{
+␣␣␣␣␣␣␣␣$self->_throw_exception(␣CouldNotGenerateInlineAttributeMethod␣=>␣instance␣=>␣$self,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣error␣␣␣␣=>␣$_,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣option␣␣␣=>␣"predicate"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣);
+␣␣␣␣};
+----------
+Range: (145523,145976) (453)
+try␣{
+␣␣␣␣␣␣␣␣$self->_compile_code([
+␣␣␣␣␣␣␣␣␣␣␣␣'sub␣{',
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$attr->_inline_clear_value('$_[0]'),
+␣␣␣␣␣␣␣␣␣␣␣␣'}',
+␣␣␣␣␣␣␣␣]);
+␣␣␣␣}
+␣␣␣␣catch␣{
+␣␣␣␣␣␣␣␣$self->_throw_exception(␣CouldNotGenerateInlineAttributeMethod␣=>␣instance␣=>␣$self,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣error␣␣␣␣=>␣$_,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣option␣␣␣=>␣"clearer"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣);
+␣␣␣␣};
+----------
+Range: (146874,146940) (66)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (147434,147498) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (147749,147818) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (147846,147915) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (147933,147998) (65)
+$options{name}
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣if
+----------
+Range: (148276,148342) (66)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (150171,150240) (69)
+#␣of␣Moose,␣so␣we␣wouldn't␣want␣a␣Moose-based␣exception␣object␣anyway
+----------
+Range: (151356,151427) (71)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (151895,151960) (65)
+#␣most␣things␣will␣just␣want␣to␣set␣a␣value,␣so␣make␣it␣first␣arg
+----------
+Range: (154074,154158) (84)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (158115,159007) (892)
+try␣{
+␣␣␣␣␣␣␣␣␣␣␣␣$method_ctx->{description}␣=␣$self->_accessor_description($accessor,␣$type);
+
+␣␣␣␣␣␣␣␣␣␣␣␣$method␣=␣$self->accessor_metaclass->new(
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣attribute␣␣␣␣␣=>␣$self,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣is_inline␣␣␣␣␣=>␣$inline_me,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣accessor_type␣=>␣$type,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣package_name␣␣=>␣$self->associated_class->name,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣name␣␣␣␣␣␣␣␣␣␣=>␣$accessor,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣associated_metaclass␣=>␣$self->associated_class,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣definition_context␣=>␣$method_ctx,
+␣␣␣␣␣␣␣␣␣␣␣␣);
+␣␣␣␣␣␣␣␣}
+␣␣␣␣␣␣␣␣catch␣{
+␣␣␣␣␣␣␣␣␣␣␣␣$self->_throw_exception(␣CouldNotCreateMethod␣=>␣attribute␣␣␣␣=>␣$self,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣option_value␣=>␣$accessor,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣option_name␣␣=>␣$type,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣error␣␣␣␣␣␣␣␣=>␣$_
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣);
+␣␣␣␣␣␣␣␣};
+----------
+Range: (161902,161970) (68)
+#␣Need␣to␣quote␣package␣to␣avoid␣a␣problem␣with␣PPI␣mis-parsing␣this
+----------
+Range: (162989,163054) (65)
+'Class::MOP::Module::__ANON__::SERIAL::'␣}
+
+sub␣_anon_cache_key␣{
+----------
+Range: (164224,164292) (68)
+#␣this␣is␣either␣part␣of␣core␣or␣set␣up␣appropriately␣by␣MRO::Compat
+----------
+Range: (166637,166719) (82)
+}
+
+##␣----------------------------------------------------------------------------
+----------
+Range: (166754,166833) (79)
+##␣----------------------------------------------------------------------------
+----------
+Range: (166834,166908) (74)
+##␣Class::MOP␣needs␣to␣have␣a␣few␣things␣in␣the␣global␣perl␣environment␣so
+----------
+Range: (166909,166972) (63)
+##␣that␣it␣can␣operate␣effectively.␣Those␣things␣are␣done␣here.
+----------
+Range: (166973,167052) (79)
+##␣----------------------------------------------------------------------------
+----------
+Range: (167085,167164) (79)
+##␣----------------------------------------------------------------------------
+----------
+Range: (167182,167261) (79)
+##␣----------------------------------------------------------------------------
+----------
+Range: (167262,167334) (72)
+##␣The␣code␣below␣here␣is␣to␣bootstrap␣our␣MOP␣with␣itself.␣This␣is␣also
+----------
+Range: (167335,167410) (75)
+##␣sometimes␣called␣"tying␣the␣knot".␣By␣doing␣this,␣we␣make␣it␣much␣easier
+----------
+Range: (167411,167486) (75)
+##␣to␣extend␣the␣MOP␣through␣subclassing␣and␣such␣since␣now␣you␣can␣use␣the
+----------
+Range: (167522,167597) (75)
+##␣Yes,␣I␣know,␣that's␣weird␣and␣insane,␣but␣it's␣a␣good␣thing,␣trust␣me␣:)
+----------
+Range: (167598,167677) (79)
+##␣----------------------------------------------------------------------------
+----------
+Range: (169022,169089) (67)
+&Class::MOP::Mixin::HasMethods::wrapped_method_metaclass
+␣␣␣␣␣␣␣␣},
+----------
+Range: (170109,170174) (65)
+&Class::MOP::Mixin::HasAttributes::attribute_metaclass
+␣␣␣␣␣␣␣␣},
+----------
+Range: (184385,184450) (65)
+&Class::MOP::Method::Constructor::associated_metaclass
+␣␣␣␣␣␣␣␣},
+----------
+Range: (184849,184913) (64)
+qw(␣method_name␣coderef␣coderef_package␣coderef_name␣method␣))␣{
+----------
+Range: (186245,186329) (84)
+#lazy␣␣␣␣␣=>␣1,␣#␣not␣yet␣supported␣by␣Class::MOP␣but␣out␣our␣version␣does␣it␣anyway
+----------
+Range: (187121,187191) (70)
+#␣need␣to␣replace␣the␣meta␣method␣there␣with␣a␣real␣meta␣method␣object
+----------
+Range: (187327,187397) (70)
+#␣need␣to␣replace␣the␣meta␣method␣there␣with␣a␣real␣meta␣method␣object
+----------
+Range: (187509,187585) (76)
+#␣we␣need␣the␣meta␣instance␣of␣the␣meta␣instance␣to␣be␣created␣now,␣in␣order
+----------
+Range: (187677,187749) (72)
+#␣pretend␣the␣add_method␣never␣happened.␣it␣hasn't␣yet␣affected␣anything
+----------
+Range: (187912,187989) (77)
+#␣NOTE:␣we␣don't␣need␣to␣inline␣the␣accessors␣this␣only␣lengthens␣the␣compile
+----------
+Range: (188167,188566) (399)
+qw/
+␣␣␣␣Class::MOP::Package
+␣␣␣␣Class::MOP::Module
+␣␣␣␣Class::MOP::Class
+
+␣␣␣␣Class::MOP::Attribute
+␣␣␣␣Class::MOP::Method
+␣␣␣␣Class::MOP::Instance
+
+␣␣␣␣Class::MOP::Object
+
+␣␣␣␣Class::MOP::Method::Generated
+␣␣␣␣Class::MOP::Method::Inlined
+
+␣␣␣␣Class::MOP::Method::Accessor
+␣␣␣␣Class::MOP::Method::Constructor
+␣␣␣␣Class::MOP::Method::Wrapped
+
+␣␣␣␣Class::MOP::Method::Meta
+
+␣␣␣␣Class::MOP::Overload
+/;
+----------
+Range: (188691,188863) (172)
+qw/
+␣␣␣␣Class::MOP::Mixin
+␣␣␣␣Class::MOP::Mixin::AttributeCore
+␣␣␣␣Class::MOP::Mixin::HasAttributes
+␣␣␣␣Class::MOP::Mixin::HasMethods
+␣␣␣␣Class::MOP::Mixin::HasOverloads
+/;
+----------
+Range: (189227,189317) (90)
+"Class::MOP␣version␣$Moose::VERSION␣required--this␣is␣version␣$Class::MOP::VERSION"
+␣␣␣␣if
+----------
+Range: (191915,191981) (66)
+qw(␣extends␣with␣has␣before␣after␣around␣override␣augment␣)
+␣␣␣␣],
+----------
+Range: (193104,193186) (82)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (193210,193292) (82)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (193463,193540) (77)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (193565,193642) (77)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (193765,193839) (74)
+#␣now␣we␣check␣whether␣our␣ancestors␣have␣metaclass,␣and␣if␣so␣borrow␣that
+----------
+Range: (194114,194181) (67)
+#␣if␣we␣have␣an␣ancestor␣metaclass␣that␣inherits␣$metaclass,␣we␣use
+----------
+Range: (194194,194268) (74)
+#␣that.␣This␣is␣like␣_fix_metaclass_incompatibility,␣but␣we␣can␣do␣it␣now.
+----------
+Range: (194282,194348) (66)
+#␣the␣case␣of␣having␣an␣ancestry␣is␣not␣very␣common,␣but␣arises␣in
+----------
+Range: (195034,195118) (84)
+Carp::cluck␣"Moose␣is␣overwriting␣an␣existing␣method␣named␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (195119,195186) (67)
+"$meta_name␣in␣class␣$class␣with␣a␣method␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (195187,195261) (74)
+"which␣returns␣the␣class's␣metaclass.␣If␣this␣is␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (195262,195334) (72)
+"actually␣what␣you␣want,␣you␣should␣remove␣the␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (195335,195410) (75)
+"existing␣method,␣otherwise,␣you␣should␣rename␣or␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (195411,195477) (66)
+"disable␣this␣generated␣method␣using␣the␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (196075,196832) (757)
+$_->meta␣}
+␣␣␣␣qw(
+␣␣␣␣Moose::Meta::Attribute
+␣␣␣␣Moose::Meta::Class
+␣␣␣␣Moose::Meta::Instance
+
+␣␣␣␣Moose::Meta::TypeCoercion
+␣␣␣␣Moose::Meta::TypeCoercion::Union
+
+␣␣␣␣Moose::Meta::Method
+␣␣␣␣Moose::Meta::Method::Constructor
+␣␣␣␣Moose::Meta::Method::Destructor
+␣␣␣␣Moose::Meta::Method::Overridden
+␣␣␣␣Moose::Meta::Method::Augmented
+
+␣␣␣␣Moose::Meta::Role
+␣␣␣␣Moose::Meta::Role::Attribute
+␣␣␣␣Moose::Meta::Role::Method
+␣␣␣␣Moose::Meta::Role::Method::Required
+␣␣␣␣Moose::Meta::Role::Method::Conflicting
+
+␣␣␣␣Moose::Meta::Role::Composite
+
+␣␣␣␣Moose::Meta::Role::Application
+␣␣␣␣Moose::Meta::Role::Application::RoleSummation
+␣␣␣␣Moose::Meta::Role::Application::ToClass
+␣␣␣␣Moose::Meta::Role::Application::ToRole
+␣␣␣␣Moose::Meta::Role::Application::ToInstance
+);
+----------
+Range: (197046,197175) (129)
+$_->meta␣}
+␣␣␣␣qw(
+␣␣␣␣Moose::Meta::Method::Accessor
+␣␣␣␣Moose::Meta::Method::Delegation
+␣␣␣␣Moose::Meta::Mixin::AttributeCore
+);
+----------
+Range: (198797,198877) (80)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (199603,199671) (68)
+qw(␣with␣requires␣excludes␣has␣before␣after␣around␣override␣)
+␣␣␣␣],
+----------
+Range: (200778,200861) (83)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (201038,201115) (77)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (201646,201736) (90)
+Carp::cluck␣"Moose::Role␣is␣overwriting␣an␣existing␣method␣named␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (201737,201802) (65)
+"$meta_name␣in␣role␣$role␣with␣a␣method␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (201803,201877) (74)
+"which␣returns␣the␣class's␣metaclass.␣If␣this␣is␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (201878,201950) (72)
+"actually␣what␣you␣want,␣you␣should␣remove␣the␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (201951,202026) (75)
+"existing␣method,␣otherwise,␣you␣should␣rename␣or␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (202027,202093) (66)
+"disable␣this␣generated␣method␣using␣the␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (205207,205270) (63)
+#␣version␣of␣it␣if␣we␣would␣install␣the␣same␣sub␣that's␣already
+----------
+Range: (207091,207157) (66)
+}
+
+#␣this␣is␣no␣Tarjan␣algorithm,␣but␣for␣the␣list␣sizes␣expected,
+----------
+Range: (208428,208499) (71)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (208524,208595) (71)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (211827,211892) (65)
+Carp::cluck␣"Trying␣to␣export␣undefined␣sub␣${package}::${name}";
+----------
+Range: (218854,219081) (227)
+"${_}_roles"␣}␣qw(
+␣␣␣␣␣␣␣␣metaclass
+␣␣␣␣␣␣␣␣attribute_metaclass
+␣␣␣␣␣␣␣␣method_metaclass
+␣␣␣␣␣␣␣␣wrapped_method_metaclass
+␣␣␣␣␣␣␣␣instance_metaclass
+␣␣␣␣␣␣␣␣constructor_class
+␣␣␣␣␣␣␣␣destructor_class
+␣␣␣␣␣␣␣␣error_class
+␣␣␣␣);
+----------
+Range: (220755,220822) (67)
+'Cannot␣determine␣metaclass␣type␣for␣'
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (221389,221453) (64)
+#␣1␣extra␣level␣because␣it's␣called␣by␣import␣so␣there's␣a␣layer
+----------
+Range: (222970,223048) (78)
+#␣make␣sure␣to␣return␣a␣sub␣to␣install␣in␣the␣same␣circumstances␣as␣previously
+----------
+Range: (223296,223545) (249)
+"${_}_roles"}
+␣␣␣␣␣␣␣␣qw(
+␣␣␣␣␣␣␣␣metaclass
+␣␣␣␣␣␣␣␣attribute_metaclass
+␣␣␣␣␣␣␣␣method_metaclass
+␣␣␣␣␣␣␣␣wrapped_method_metaclass
+␣␣␣␣␣␣␣␣instance_metaclass
+␣␣␣␣␣␣␣␣constructor_class
+␣␣␣␣␣␣␣␣destructor_class
+␣␣␣␣␣␣␣␣error_class
+␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣␣␣)␣{
+----------
+Range: (224524,224866) (342)
+qw[
+␣␣␣␣find_meta
+␣␣␣␣is_role
+␣␣␣␣does_role
+␣␣␣␣search_class_by_role
+␣␣␣␣ensure_all_roles
+␣␣␣␣apply_all_roles
+␣␣␣␣with_traits
+␣␣␣␣get_all_init_args
+␣␣␣␣get_all_attribute_values
+␣␣␣␣resolve_metatrait_alias
+␣␣␣␣resolve_metaclass_alias
+␣␣␣␣add_method_modifier
+␣␣␣␣english_list
+␣␣␣␣meta_attribute_alias
+␣␣␣␣meta_class_alias
+␣␣␣␣throw_exception
+];
+----------
+Range: (226349,226430) (81)
+}
+
+#␣this␣can␣possibly␣behave␣in␣unexpected␣ways␣because␣the␣roles␣being␣composed
+----------
+Range: (226431,226508) (77)
+#␣before␣being␣applied␣could␣differ␣from␣call␣to␣call;␣I'm␣not␣sure␣if␣or␣how
+----------
+Range: (226985,227065) (80)
+}
+
+␣␣␣␣#␣If␣@_␣contains␣role␣meta␣objects,␣mkopt␣will␣think␣that␣they're␣values,
+----------
+Range: (227070,227136) (66)
+#␣because␣they're␣references.␣␣In␣other␣words␣(roleobj1,␣roleobj2,
+----------
+Range: (227141,227212) (71)
+#␣roleobj3)␣will␣become␣[␣[␣roleobj1,␣roleobj2␣],␣[␣roleobj3,␣undef␣]␣]
+----------
+Range: (227217,227292) (75)
+#␣--␣this␣is␣no␣good.␣␣We'll␣preprocess␣@_␣first␣to␣eliminate␣the␣potential
+----------
+Range: (229326,229395) (69)
+$_->init_arg)␣}
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$class->get_all_attributes
+␣␣␣␣};
+----------
+Range: (231995,232065) (70)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (232099,232169) (70)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (234182,234254) (72)
+#␣handle␣the␣case␣where␣we␣need␣to␣fix␣compatibility␣between␣a␣class␣and
+----------
+Range: (234259,234328) (69)
+#␣its␣parent,␣but␣all␣roles␣in␣the␣class␣are␣already␣also␣done␣by␣the
+----------
+Range: (236398,236462) (64)
+#␣FIXME?␣This␣doesn't␣account␣for␣multiple␣inheritance␣(not␣sure
+----------
+Range: (236467,236530) (63)
+#␣if␣it␣needs␣to␣though).␣For␣example,␣if␣somewhere␣in␣$meta1's
+----------
+Range: (236601,236664) (63)
+#␣inherits␣from␣ClassB␣&␣ClassA,␣does␣it␣matter?␣And␣what␣crazy
+----------
+Range: (237295,237370) (75)
+#␣XXX:␣don't␣feel␣like␣messing␣with␣multiple␣inheritance␣here...␣what␣would
+----------
+Range: (237540,237609) (69)
+#␣only␣get␣the␣roles␣attached␣to␣this␣particular␣class,␣don't␣look␣at
+----------
+Range: (237759,237827) (68)
+#␣it's␣obviously␣not␣a␣role-only␣subclass␣if␣it␣doesn't␣do␣any␣roles
+----------
+Range: (238426,238489) (63)
+#␣defined␣in␣a␣role␣doesn't␣mean␣it␣isn't␣_also_␣defined␣in␣the
+----------
+Range: (239030,239100) (70)
+}
+
+␣␣␣␣#␣loop␣over␣all␣attributes␣that␣are␣a␣part␣of␣the␣current␣class
+----------
+Range: (239127,239190) (63)
+#␣FIXME␣-␣this␣really␣isn't␣right.␣Just␣because␣an␣attribute␣is
+----------
+Range: (239195,239258) (63)
+#␣defined␣in␣a␣role␣doesn't␣mean␣it␣isn't␣_also_␣defined␣in␣the
+----------
+Range: (240258,240327) (69)
+##␣------------------------------------------------------------------
+----------
+Range: (240637,240706) (69)
+##␣------------------------------------------------------------------
+----------
+Range: (240739,240808) (69)
+##␣------------------------------------------------------------------
+----------
+Range: (245280,245634) (354)
+)␣}␣qw(
+␣␣␣␣␣␣␣␣␣␣␣␣attribute_metaclass
+␣␣␣␣␣␣␣␣␣␣␣␣method_metaclass
+␣␣␣␣␣␣␣␣␣␣␣␣wrapped_method_metaclass
+␣␣␣␣␣␣␣␣␣␣␣␣required_method_metaclass
+␣␣␣␣␣␣␣␣␣␣␣␣conflicting_method_metaclass
+␣␣␣␣␣␣␣␣␣␣␣␣application_to_class_class
+␣␣␣␣␣␣␣␣␣␣␣␣application_to_role_class
+␣␣␣␣␣␣␣␣␣␣␣␣application_to_instance_class
+␣␣␣␣␣␣␣␣␣␣␣␣applied_attribute_metaclass
+␣␣␣␣␣␣␣␣);
+----------
+Range: (245841,245910) (69)
+#␣don't␣need␣to␣remove␣generated␣metaobjects␣here␣yet,␣since␣we␣don't
+----------
+Range: (245915,245988) (73)
+#␣yet␣generate␣anything␣in␣roles.␣this␣may␣change␣in␣the␣future␣though...
+----------
+Range: (247043,247112) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (247904,247976) (72)
+}
+
+##␣------------------------------------------------------------------
+----------
+Range: (249793,249865) (72)
+}
+
+##␣------------------------------------------------------------------
+----------
+Range: (250787,250853) (66)
+exists␣$self->get_override_method_modifiers_map->{$method_name})␣?
+----------
+Range: (251219,251319) (100)
+'Moose::Meta::Method::Meta'␣}
+
+##␣------------------------------------------------------------------
+----------
+Range: (251656,251722) (66)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (252001,252064) (63)
+$_->calculate_all_roles
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣}␣@{␣$self->get_roles␣});
+----------
+Range: (252564,252640) (76)
+@_)␣}
+
+##␣------------------------------------------------------------------
+----------
+Range: (252662,252731) (69)
+##␣------------------------------------------------------------------
+----------
+Range: (254743,254806) (63)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (256925,256990) (65)
+'Moose::Meta::Role::__ANON__::SERIAL::'␣}
+
+sub␣create_anon_role␣{
+----------
+Range: (257964,258036) (72)
+"Roles␣with␣parameters␣cannot␣be␣cached.␣Consider␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (258602,258674) (72)
+}
+
+#####################################################################
+----------
+Range: (258684,258749) (65)
+##␣This␣is␣Moose::Meta::Role␣as␣defined␣by␣Moose␣(plus␣the␣use␣of
+----------
+Range: (258750,258815) (65)
+##␣MooseX::AttributeHelpers␣module).␣It␣is␣here␣as␣a␣reference␣to
+----------
+Range: (258816,258882) (66)
+##␣make␣it␣easier␣to␣see␣what␣is␣happening␣above␣with␣all␣the␣meta
+----------
+Range: (258904,258973) (69)
+#####################################################################
+----------
+Range: (259667,259733) (66)
+#␣␣␣␣␣isa␣␣␣␣␣␣␣=>␣'HashRef[Moose::Meta::Role::Method::Required]',
+----------
+Range: (259755,259821) (66)
+#␣␣␣␣␣␣␣␣␣#␣not␣exactly␣set,␣or␣delete␣since␣it␣works␣for␣multiple
+----------
+Range: (262127,262209) (82)
+#␣␣␣␣␣␣␣␣␣'add'␣␣␣␣=>␣'add_override_method_modifier',␣#␣checks␣for␣local␣method␣..
+----------
+Range: (262225,262294) (69)
+#####################################################################
+----------
+Range: (263757,263829) (72)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (266791,266864) (73)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (266877,266950) (73)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (267551,267632) (81)
+}
+
+#␣There's␣no␣such␣thing␣as␣an␣anonymous␣composite␣role␣since␣composites␣are␣an
+----------
+Range: (267633,267708) (75)
+#␣artifact␣of␣Moose's␣internals.␣However,␣a␣composite␣role␣that␣contains␣an
+----------
+Range: (267709,267786) (77)
+#␣anon␣role␣may␣_look_␣like␣an␣anon␣role␣since␣$self->name␣=~␣/$anon_key/␣can
+----------
+Range: (267787,267856) (69)
+#␣return␣true␣if␣the␣first␣role␣in␣the␣composite␣is␣anonymous␣itself.
+----------
+Range: (267871,267939) (68)
+0␣}
+
+#␣This␣is␣largely␣a␣copy␣of␣what's␣in␣Moose::Meta::Role␣(itself
+----------
+Range: (267940,268006) (66)
+#␣largely␣a␣copy␣of␣Class::MOP::Class).␣However,␣we␣can't␣actually
+----------
+Range: (268007,268074) (67)
+#␣call␣add_package_symbol,␣because␣there's␣no␣package␣into␣which␣to
+----------
+Range: (270274,270338) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (270363,270427) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (271085,271151) (66)
+#␣see␣the␣comments␣in␣CMOP::Method::Meta␣and␣CMOP::Method::Wrapped
+----------
+Range: (274594,274672) (78)
+#␣This␣is␣not␣a␣Moose::Meta::Role::Method␣because␣it␣has␣no␣implementation,␣it
+----------
+Range: (275955,276022) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (279165,279242) (77)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (279277,279354) (77)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (279394,279471) (77)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (280405,280468) (63)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (280508,280571) (63)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (281109,281176) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (281216,281283) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (281323,281390) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (282854,282926) (72)
+#␣This␣is␣a␣special␣case␣to␣handle␣the␣case␣where␣the␣object's␣metaclass
+----------
+Range: (282931,283001) (70)
+#␣is␣a␣Class::MOP::Class,␣but␣_not_␣a␣Moose::Meta::Class␣(for␣example,
+----------
+Range: (284684,284760) (76)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (286735,286799) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (286830,286894) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (286923,286987) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (287168,287238) (70)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (287269,287339) (70)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (288946,289030) (84)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (289061,289145) (84)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (289180,289264) (84)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (295591,295667) (76)
+'Class::MOP::Method::Meta')␣}
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$role->_get_local_methods),
+----------
+Range: (297739,297804) (65)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (297833,297898) (65)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (297939,298004) (65)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (302060,302124) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (302582,302655) (73)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (304868,304942) (74)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (305142,305220) (78)
+$_->has_coercion␣}
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣@{␣$type_constraint->type_constraints␣}␣)␣{
+----------
+Range: (306118,306186) (68)
+#␣ABSTRACT:␣Helper␣trait␣for␣Int␣attributes␣which␣represent␣counters
+----------
+Range: (309290,309366) (76)
+confess
+␣␣␣␣␣␣␣␣␣␣␣␣"$name␣is␣an␣unsupported␣method␣type␣-␣$accessor_class";
+----------
+Range: (312514,312600) (86)
+"(found␣'$class'␣when␣trying␣to␣register␣'$trait_class')"
+␣␣␣␣}
+␣␣␣␣$meta->add_method(
+----------
+Range: (312641,312708) (67)
+#␣resolve_metatrait_alias␣will␣load␣classes␣anyway,␣but␣throws␣away
+----------
+Range: (317775,317840) (65)
+'Moose::Meta::Class::__ANON__::SERIAL::'␣}
+
+sub␣_anon_cache_key␣{
+----------
+Range: (317936,318008) (72)
+$_->[0]␣}␣@{␣Data::OptList::mkopt($options{superclasses}␣||␣[])␣}
+␣␣␣␣);
+----------
+Range: (318860,318932) (72)
+"Roles␣with␣parameters␣cannot␣be␣cached.␣Consider␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (319471,319535) (64)
+#␣Makes␣something␣like␣Super::Class|Super::Class::2=Role|Role::1
+----------
+Range: (319812,320018) (206)
+)␣}␣qw(
+␣␣␣␣␣␣␣␣␣␣␣␣attribute_metaclass
+␣␣␣␣␣␣␣␣␣␣␣␣method_metaclass
+␣␣␣␣␣␣␣␣␣␣␣␣wrapped_method_metaclass
+␣␣␣␣␣␣␣␣␣␣␣␣instance_metaclass
+␣␣␣␣␣␣␣␣␣␣␣␣constructor_class
+␣␣␣␣␣␣␣␣␣␣␣␣destructor_class
+␣␣␣␣␣␣␣␣);
+----------
+Range: (320319,320386) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (325003,325079) (76)
+'hash␣reference␣or␣a␣key/value␣list.␣You␣passed␣an␣'
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (326013,326208) (195)
+<<'EOF',␣quotemeta(␣$attr->name␣),␣quotemeta(␣$attr->init_arg␣)␣),␣);
+params␣␣␣␣␣␣␣␣␣␣␣␣␣=>␣$params,
+class_name␣␣␣␣␣␣␣␣␣=>␣$class_name,
+attribute_name␣␣␣␣␣=>␣"%s",
+attribute_init_arg␣=>␣"%s",
+EOF
+----------
+Range: (326230,326407) (177)
+<<'EOF',␣quotemeta(␣$attr->init_arg␣),␣$throw␣)
+if␣(␣!exists␣$params->{"%s"}␣)␣{
+␣␣␣␣%s;
+}
+EOF
+}
+
+#␣XXX:␣these␣two␣are␣duplicated␣from␣cmop,␣because␣we␣have␣to␣pass␣the␣tc␣stuff
+----------
+Range: (326408,326483) (75)
+#␣through␣to␣_inline_set_value␣-␣this␣should␣probably␣be␣fixed,␣but␣i'm␣not
+----------
+Range: (329810,329873) (63)
+#␣because␣the␣inlined␣code␣is␣using␣the␣index␣of␣the␣attributes
+----------
+Range: (331002,331072) (70)
+#␣pretty␣sure␣this␣is␣only␣going␣to␣be␣closed␣over␣if␣you␣use␣a␣custom
+----------
+Range: (331081,331145) (64)
+#␣error␣class␣at␣this␣point,␣but␣we␣should␣still␣get␣rid␣of␣this
+----------
+Range: (332005,332075) (70)
+#␣it␣may␣be␣a␣Class::MOP::Attribute,␣theoretically,␣which␣doesn't␣have
+----------
+Range: (332501,332568) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (334320,334388) (68)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (335201,335269) (68)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (335299,335367) (68)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (336021,336092) (71)
+#␣We␣need␣to␣replace␣the␣cached␣metaclass␣instance␣or␣else␣when␣it␣goes
+----------
+Range: (336097,336161) (64)
+#␣out␣of␣scope␣Class::MOP::Class␣destroy's␣the␣namespace␣for␣the
+----------
+Range: (337573,337640) (67)
+$inherited_attr->Moose::Meta::Attribute::clone_and_inherit_options(
+----------
+Range: (340207,340282) (75)
+#␣can't␣make␣this␣a␣default␣because␣it␣has␣to␣close␣over␣the␣type␣name,␣and
+----------
+Range: (340514,340703) (189)
+try␣{
+␣␣␣␣␣␣␣␣␣␣␣␣#␣versions␣prior␣to␣0.14␣had␣a␣potential␣infinite␣loop␣bug
+␣␣␣␣␣␣␣␣␣␣␣␣require␣Devel::PartialDump;
+␣␣␣␣␣␣␣␣␣␣␣␣Devel::PartialDump->VERSION(0.14);
+␣␣␣␣␣␣␣␣␣␣␣␣1;
+␣␣␣␣␣␣␣␣};
+----------
+Range: (346851,346928) (77)
+#␣general␣case,␣check␣all␣the␣constraints,␣from␣the␣first␣parent␣to␣ourselves
+----------
+Range: (348400,348468) (68)
+@{␣$self->{__immutable}{calculate_all_roles}␣||=␣[␣$self->$orig␣]␣};
+----------
+Range: (348563,348648) (85)
+@{␣$self->{__immutable}{calculate_all_roles_with_inheritance}␣||=␣[␣$self->$orig␣]␣};
+----------
+Range: (350013,350079) (66)
+#␣ABSTRACT:␣Some␣overrides␣for␣L<Class::MOP::Object>␣functionality
+----------
+Range: (350391,350464) (73)
+#␣this␣is␣where␣we␣need␣to␣override␣the␣definition␣of␣super()␣so␣that␣the
+----------
+Range: (352025,352094) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (352335,352405) (70)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (353290,353359) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (354005,354079) (74)
+#␣We␣don't␣inline␣because␣it's␣faster,␣we␣do␣it␣because␣when␣the␣method␣is
+----------
+Range: (354084,354158) (74)
+#␣inlined,␣any␣errors␣thrown␣because␣of␣the␣delegated␣method␣have␣a␣_much_
+----------
+Range: (354163,354233) (70)
+#␣nicer␣stack␣trace,␣as␣the␣trace␣doesn't␣include␣any␣Moose␣internals.
+----------
+Range: (354691,354858) (167)
+<<'EOF',␣$method_name,␣$attr_name␣)␣);
+method␣␣␣␣=>␣$self->meta->find_method_by_name(%s),
+instance␣␣=>␣$self,
+attribute␣=>␣$self->meta->find_attribute_by_name(%s),
+EOF
+----------
+Range: (354978,355174) (196)
+<<'EOF',␣$method_name,␣$attr_name␣)␣);
+method␣␣␣␣␣␣=>␣$self->meta->find_method_by_name(%s),
+instance␣␣␣␣=>␣$self,
+attribute␣␣␣=>␣$self->meta->find_attribute_by_name(%s),
+given_value␣=>␣$proxy,
+EOF
+----------
+Range: (355370,355672) (302)
+<<'EOF',␣$get_proxy,␣$undefined_attr_throw,␣$not_an_object_throw,␣$delegate,␣$args␣);
+sub␣{
+␣␣␣␣my␣$self␣=␣shift;
+
+␣␣␣␣my␣$proxy␣=␣$self->%s;
+␣␣␣␣if␣(␣!defined␣$proxy␣)␣{
+␣␣␣␣␣␣␣␣%s;
+␣␣␣␣}
+␣␣␣␣elsif␣(␣ref␣$proxy␣&&␣!Scalar::Util::blessed($proxy)␣)␣{
+␣␣␣␣␣␣␣␣%s;
+␣␣␣␣}
+␣␣␣␣return␣$proxy->%s(␣%s␣);
+}
+EOF
+----------
+Range: (355871,355943) (72)
+#␣While␣all␣attributes␣created␣in␣the␣usual␣way␣(via␣Moose's␣has())␣will
+----------
+Range: (355948,356014) (66)
+#␣define␣this,␣there's␣no␣guarantee␣that␣this␣must␣be␣defined.␣For
+----------
+Range: (356019,356093) (74)
+#␣example,␣when␣Moo␣inflates␣a␣class␣to␣Moose␣it␣does␣not␣define␣these␣(as
+----------
+Range: (356135,356220) (85)
+"␣(attribute␣declared␣in␣$definition->{file}␣at␣line␣$definition->{line})"
+␣␣␣␣␣␣␣␣if
+----------
+Range: (356293,356670) (377)
+try␣{
+␣␣␣␣␣␣␣␣$self->_compile_code(
+␣␣␣␣␣␣␣␣␣␣␣␣source␣␣␣␣␣␣=>␣$source,
+␣␣␣␣␣␣␣␣␣␣␣␣description␣=>␣$description,
+␣␣␣␣␣␣␣␣);
+␣␣␣␣}
+␣␣␣␣catch␣{
+␣␣␣␣␣␣␣␣$self->_throw_exception(
+␣␣␣␣␣␣␣␣␣␣␣␣'CouldNotGenerateInlineAttributeMethod',
+␣␣␣␣␣␣␣␣␣␣␣␣instance␣=>␣$self,
+␣␣␣␣␣␣␣␣␣␣␣␣error␣␣␣␣=>␣$_,
+␣␣␣␣␣␣␣␣␣␣␣␣option␣␣␣=>␣'handles␣for␣'␣.␣$attr->name␣.␣'->'␣.␣$delegate,
+␣␣␣␣␣␣␣␣);
+␣␣␣␣};
+----------
+Range: (359656,359719) (63)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (360591,360995) (404)
+try␣{
+␣␣␣␣␣␣␣␣$self->_compile_code(source␣=>␣\@source);
+␣␣␣␣}
+␣␣␣␣catch␣{
+␣␣␣␣␣␣␣␣my␣$source␣=␣join("\n",␣@source);
+␣␣␣␣␣␣␣␣throw_exception(␣CouldNotEvalDestructor␣=>␣method_destructor_object␣=>␣$self,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣source␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣=>␣$source,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣error␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣=>␣$_
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣);
+␣␣␣␣};
+----------
+Range: (365184,365252) (68)
+#␣some␣writers␣will␣save␣the␣return␣value␣in␣this␣variable␣when␣they
+----------
+Range: (367987,368075) (88)
+$self->associated_attribute->associated_class->instance_metaclass->inline_get_is_lvalue;
+----------
+Range: (369343,369406) (63)
+package␣Moose::Meta::Method::Accessor::Native::Counter::Writer;
+----------
+Range: (374516,374591) (75)
+'if␣(!Moose::Util::_STRINGLIKE0($_[0])␣&&␣!Params::Util::_REGEX($_[0]))␣{',
+----------
+Range: (378450,378528) (78)
+'@return␣=␣substr␣$potential,␣$offset,␣$length,␣$replacement;␣'
+␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (378993,379056) (63)
+package␣Moose::Meta::Method::Accessor::Native::String::prepend;
+----------
+Range: (380982,381045) (63)
+package␣Moose::Meta::Method::Accessor::Native::String::replace;
+----------
+Range: (381348,381423) (75)
+'if␣(!Moose::Util::_STRINGLIKE0($_[0])␣&&␣!Params::Util::_REGEX($_[0]))␣{',
+----------
+Range: (381980,382058) (78)
+'if␣(!Moose::Util::_STRINGLIKE0($_[1])␣&&␣!Params::Util::_CODELIKE($_[1]))␣{',
+----------
+Range: (386483,386557) (74)
+#␣If␣we␣have␣a␣coercion,␣we␣could␣come␣up␣with␣an␣entirely␣new␣value␣after
+----------
+Range: (386670,386742) (72)
+#␣If␣the␣parent␣is␣our␣root␣type␣(ArrayRef,␣HashRef,␣etc),␣that␣means␣we
+----------
+Range: (386747,386819) (72)
+#␣can␣just␣check␣the␣new␣members␣of␣the␣collection,␣because␣we␣know␣that
+----------
+Range: (386897,386968) (71)
+#␣However,␣if␣this␣type␣has␣its␣own␣constraint␣(it's␣Parameteriz_able_,
+----------
+Range: (386973,387039) (66)
+#␣not␣Paramet_erized_),␣we␣don't␣know␣what␣is␣being␣checked␣by␣the
+----------
+Range: (387044,387116) (72)
+#␣constraint,␣so␣we␣need␣to␣check␣the␣whole␣value,␣not␣just␣the␣members.
+----------
+Range: (387203,387268) (65)
+'Moose::Meta::TypeConstraint::Parameterized')
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣||
+----------
+Range: (387744,387813) (69)
+'my␣$msg␣=␣do␣{␣local␣$_␣=␣$new_val;␣$member_message->($new_val)␣};'.
+----------
+Range: (394421,394502) (81)
+}
+
+#␣We␣need␣to␣override␣this␣because␣while␣@_␣can␣be␣written␣to,␣we␣cannot␣write
+----------
+Range: (395448,395532) (84)
+$self->Moose::Meta::Method::Accessor::Native::Collection::_inline_coerce_new_values(
+----------
+Range: (396611,396677) (66)
+package␣Moose::Meta::Method::Accessor::Native::Array::first_index;
+----------
+Range: (398933,398996) (63)
+package␣Moose::Meta::Method::Accessor::Native::Array::natatime;
+----------
+Range: (400979,401047) (68)
+package␣Moose::Meta::Method::Accessor::Native::Array::sort_in_place;
+----------
+Range: (403411,403474) (63)
+package␣Moose::Meta::Method::Accessor::Native::Array::accessor;
+----------
+Range: (403721,403805) (84)
+$self->Moose::Meta::Method::Accessor::Native::Array::get::_inline_process_arguments(
+----------
+Range: (403869,403951) (82)
+$self->Moose::Meta::Method::Accessor::Native::Array::get::_inline_check_arguments(
+----------
+Range: (404005,404077) (72)
+$self->Moose::Meta::Method::Accessor::Native::Array::get::_return_value(
+----------
+Range: (404556,404635) (79)
+$self->Moose::Meta::Method::Accessor::Native::Array::get::_inline_return_value(
+----------
+Range: (407794,407857) (63)
+package␣Moose::Meta::Method::Accessor::Native::Array::elements;
+----------
+Range: (408150,408218) (68)
+package␣Moose::Meta::Method::Accessor::Native::Array::shallow_clone;
+----------
+Range: (410072,410153) (81)
+}
+
+#␣We␣need␣to␣override␣this␣because␣while␣@_␣can␣be␣written␣to,␣we␣cannot␣write
+----------
+Range: (410721,410784) (63)
+package␣Moose::Meta::Method::Accessor::Native::Array::is_empty;
+----------
+Range: (418635,418703) (68)
+package␣Moose::Meta::Method::Accessor::Native::Code::execute_method;
+----------
+Range: (419475,419591) (116)
+<<'EOF';
+if␣(@_)␣{
+␣␣␣␣my␣%h␣=␣@_;
+␣␣␣␣@h{␣sort␣keys␣%h␣}␣=␣map␣{␣$member_coercion->($_)␣}␣@h{␣sort␣keys␣%h␣};
+}
+EOF
+----------
+Range: (421665,421748) (83)
+$self->Moose::Meta::Method::Accessor::Native::Hash::set::_inline_process_arguments(
+----------
+Range: (421817,421903) (86)
+$self->Moose::Meta::Method::Accessor::Native::Hash::set::_inline_check_argument_count(
+----------
+Range: (421967,422048) (81)
+$self->Moose::Meta::Method::Accessor::Native::Hash::set::_inline_check_arguments(
+----------
+Range: (422102,422173) (71)
+$self->Moose::Meta::Method::Accessor::Native::Hash::set::_return_value(
+----------
+Range: (423899,423966) (67)
+package␣Moose::Meta::Method::Accessor::Native::Hash::shallow_clone;
+----------
+Range: (424972,425051) (79)
+0␣}
+
+#␣The␣inner␣()␣in␣this␣expression␣is␣for␣the␣benefit␣of␣inlining␣code␣that
+----------
+Range: (425052,425128) (76)
+#␣might␣end␣up␣looking␣like␣"values␣%{␣{}␣}".␣This␣is␣a␣syntax␣error␣in␣perl
+----------
+Range: (425187,425277) (90)
+'{␣(␣)␣}'␣}
+
+#␣There␣are␣no␣new␣members␣so␣we␣don't␣need␣to␣coerce␣new␣values␣(none␣exist)
+----------
+Range: (427014,427097) (83)
+1␣}
+
+#␣We␣need␣to␣override␣this␣because␣while␣@_␣can␣be␣written␣to,␣we␣cannot␣write
+----------
+Range: (427353,427417) (64)
+'@_␣=␣List::Util::pairmap␣{␣$a␣=>␣$member_coercion->($b)␣}␣@_;',
+----------
+Range: (429330,429412) (82)
+0␣}
+
+#␣There␣are␣no␣new␣members␣so␣we␣don't␣need␣to␣coerce␣new␣values␣(none␣exist)
+----------
+Range: (434631,434971) (340)
+try␣{
+␣␣␣␣␣␣␣␣$self->SUPER::_compile_code(@args);
+␣␣␣␣}
+␣␣␣␣catch␣{
+␣␣␣␣␣␣␣␣throw_exception(␣CouldNotCreateWriter␣=>␣attribute␣␣␣␣␣␣=>␣$self->associated_attribute,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣error␣␣␣␣␣␣␣␣␣␣=>␣$_,
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣instance␣␣␣␣␣␣␣=>␣$self
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣);
+␣␣␣␣};
+----------
+Range: (435145,435225) (80)
+$self->associated_attribute->associated_class->instance_metaclass->is_inlinable;
+----------
+Range: (436896,436959) (63)
+shift->associated_attribute->_inline_get_old_value_for_trigger(
+----------
+Range: (437569,437642) (73)
+#␣this␣is␣where␣we␣need␣to␣override␣the␣definition␣of␣super()␣so␣that␣the
+----------
+Range: (440085,440175) (90)
+#␣FIXME␣find_type_constraint␣might␣find␣a␣TC␣named␣after␣the␣role␣but␣that␣isn't␣really␣it
+----------
+Range: (440188,440286) (98)
+#␣I␣did␣this␣anyway␣since␣it's␣a␣convention␣that␣preceded␣TypeConstraint::Role,␣and␣it␣should␣DWIM
+----------
+Range: (440371,440471) (100)
+#␣a␣possible␣fix␣is␣to␣add␣by␣attr␣indexing␣to␣the␣type␣registry␣to␣find␣types␣of␣a␣certain␣property
+----------
+Range: (440647,440720) (73)
+"__ANON__"␣)
+␣␣␣␣␣␣␣␣}␣@{␣Class::MOP::class_of($self->role)->get_roles␣},
+----------
+Range: (441651,441738) (87)
+#␣if␣$type_or_name_or_role␣isn't␣a␣role,␣it␣might␣be␣the␣TC␣name␣of␣another␣::Role␣type
+----------
+Range: (445586,445652) (66)
+$self->type_constraints->{$type_name}
+}
+
+sub␣add_type_constraint␣{
+----------
+Range: (448275,448340) (65)
+Moose::Util::TypeConstraints::find_or_create_isa_type_constraint(
+----------
+Range: (448494,448566) (72)
+##␣The␣type␣parameter␣should␣be␣a␣subtype␣of␣the␣parent's␣type␣parameter
+----------
+Range: (448852,448919) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (449493,449559) (66)
+#␣ABSTRACT:␣Type␣constraints␣which␣can␣take␣a␣parameter␣(ArrayRef)
+----------
+Range: (451482,451557) (75)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (451946,452011) (65)
+%{␣$self->parameterized_from->inline_environment␣})
+␣␣␣␣␣␣␣␣␣␣␣␣:
+----------
+Range: (452463,452530) (67)
+#␣ABSTRACT:␣Type␣constraints␣with␣a␣bound␣parameter␣(ArrayRef[Int])
+----------
+Range: (453531,453595) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (456760,456851) (91)
+#␣FIXME␣find_type_constraint␣might␣find␣a␣TC␣named␣after␣the␣class␣but␣that␣isn't␣really␣it
+----------
+Range: (456864,456963) (99)
+#␣I␣did␣this␣anyway␣since␣it's␣a␣convention␣that␣preceded␣TypeConstraint::Class,␣and␣it␣should␣DWIM
+----------
+Range: (457048,457148) (100)
+#␣a␣possible␣fix␣is␣to␣add␣by␣attr␣indexing␣to␣the␣type␣registry␣to␣find␣types␣of␣a␣certain␣property
+----------
+Range: (458453,458543) (90)
+#␣if␣$type_or_name_or_class␣isn't␣a␣class,␣it␣might␣be␣the␣TC␣name␣of␣another␣::Class␣type
+----------
+Range: (458780,458852) (72)
+}
+}
+
+#␣This␣is␣a␣bit␣counter-intuitive,␣but␣a␣child␣type␣of␣a␣Class␣type
+----------
+Range: (458853,458920) (67)
+#␣constraint␣is␣not␣itself␣a␣Class␣type␣constraint␣(it␣has␣no␣class
+----------
+Range: (458921,458989) (68)
+#␣attribute).␣This␣whole␣create_child_type␣thing␣needs␣some␣changing
+----------
+Range: (460266,460345) (79)
+}
+
+#␣XXX␣-␣this␣is␣a␣rather␣gross␣implementation␣of␣laziness␣for␣the␣benefit␣of
+----------
+Range: (460346,460420) (74)
+#␣MX::Types.␣If␣we␣try␣to␣call␣->has_coercion␣on␣the␣objects␣during␣object
+----------
+Range: (460421,460497) (76)
+#␣construction,␣this␣does␣not␣work␣when␣defining␣a␣recursive␣constraint␣with
+----------
+Range: (460612,460682) (70)
+#␣Using␣any␣instead␣of␣grep␣here␣causes␣a␣weird␣error␣with␣some␣corner
+----------
+Range: (461382,461450) (68)
+#␣This␣was␣originally␣done␣with␣all()␣from␣List::MoreUtils,␣but␣that
+----------
+Range: (461800,461884) (84)
+')'␣}
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣@{␣$self->type_constraints␣}
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣)
+␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (461960,462033) (73)
+%{␣$_->inline_environment␣}␣}
+␣␣␣␣␣␣␣␣␣␣␣␣@{␣$self->type_constraints␣}␣};
+----------
+Range: (465522,465604) (82)
+try␣{
+␣␣␣␣␣␣␣␣Moose::Util::resolve_metatrait_alias(Attribute␣=>␣$role_name)
+␣␣␣␣};
+----------
+Range: (466893,466988) (95)
+}
+
+␣␣␣␣␣␣␣␣Carp::cluck␣"Found␣unknown␣argument$s␣'$list'␣in␣the␣$context␣for␣'$name'$location";
+----------
+Range: (471240,471317) (77)
+}
+
+␣␣␣␣#␣This␣method␣can␣be␣called␣on␣a␣CMOP::Attribute␣object,␣so␣we␣need␣to
+----------
+Range: (472864,472949) (85)
+##␣is␣=>␣ro,␣writer␣=>␣_foo␣␣␣␣#␣turns␣into␣(reader␣=>␣foo,␣writer␣=>␣_foo)␣as␣before
+----------
+Range: (472954,473029) (75)
+##␣is␣=>␣rw,␣writer␣=>␣_foo␣␣␣␣#␣turns␣into␣(reader␣=>␣foo,␣writer␣=>␣_foo)
+----------
+Range: (474836,474902) (66)
+#␣There␣are␣a␣_lot_␣of␣methods␣that␣we␣expect␣from␣TC␣objects,␣but
+----------
+Range: (474907,474980) (73)
+#␣checking␣for␣a␣specific␣parent␣class␣via␣->isa␣is␣gross,␣so␣we'll␣check
+----------
+Range: (475223,475288) (65)
+Moose::Util::TypeConstraints::find_or_create_isa_type_constraint(
+----------
+Range: (475812,475878) (66)
+Moose::Util::TypeConstraints::find_or_create_does_type_constraint(
+----------
+Range: (476767,476836) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (476860,476929) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (477912,477976) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (478245,478313) (68)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (482732,482800) (68)
+my␣($instance,␣$value,␣$tc,␣$coercion,␣$message,␣$for_constructor)␣=
+----------
+Range: (484140,484235) (95)
+<<'EOF',␣quotemeta(␣$self->name␣)␣);
+attribute_name␣=>␣"%s",
+class_name␣␣␣␣␣=>␣$class_name,
+EOF
+----------
+Range: (488990,489060) (70)
+#␣pretty␣sure␣this␣is␣only␣going␣to␣be␣closed␣over␣if␣you␣use␣a␣custom
+----------
+Range: (489065,489129) (64)
+#␣error␣class␣at␣this␣point,␣but␣we␣should␣still␣get␣rid␣of␣this
+----------
+Range: (490734,490803) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (490826,490895) (69)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (491900,491963) (63)
+my␣($instance,␣$default,␣$tc,␣$coercion,␣$message,␣$for_lazy)␣=
+----------
+Range: (492191,492262) (71)
+#␣intentionally␣not␣using␣_inline_tc_code,␣since␣that␣can␣be␣overridden
+----------
+Range: (492271,492337) (66)
+#␣to␣do␣things␣like␣possibly␣only␣do␣member␣tc␣checks,␣which␣isn't
+----------
+Range: (496148,496218) (70)
+#␣This␣is␣a␣special␣case␣that␣is␣very␣unlikely␣to␣occur␣outside␣of␣the
+----------
+Range: (496227,496294) (67)
+#␣Moose␣bootstrapping␣process.␣We␣do␣not␣want␣to␣warn␣if␣the␣method
+----------
+Range: (496303,496367) (64)
+#␣we're␣about␣to␣replace␣is␣for␣this␣same␣attribute,␣_and_␣we're
+----------
+Range: (496451,496521) (70)
+#␣This␣would␣never␣occur␣in␣normal␣user␣code␣because␣Moose␣inlines␣all
+----------
+Range: (496661,496729) (68)
+#␣default.␣However,␣in␣Class::MOP␣&␣Moose.pm,␣we␣iterate␣over␣all␣of
+----------
+Range: (496738,496808) (70)
+#␣our␣internal␣metaclasses␣and␣make␣them␣immutable␣after␣they're␣fully
+----------
+Range: (498536,498618) (82)
+"You␣are␣overwriting␣a␣locally␣defined␣method␣($accessor)␣with␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (498813,498897) (84)
+"You␣are␣overwriting␣a␣locally␣defined␣function␣($accessor)␣with␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (500204,500301) (97)
+#␣FIXME␣warn␣when␣$handle␣was␣explicitly␣specified,␣but␣not␣if␣the␣source␣is␣a␣regex␣or␣something
+----------
+Range: (500310,500383) (73)
+#cluck("Not␣delegating␣method␣'$handle'␣because␣it␣is␣a␣core␣method")␣and
+----------
+Range: (502651,502718) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (503259,503332) (73)
+'Class::MOP::Method::Meta')␣}
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$meta->get_all_methods;
+----------
+Range: (503532,503596) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (504227,504295) (68)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (504745,504812) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (505047,505113) (66)
+'Moose::Meta::Method::Delegation'␣}
+
+sub␣_make_delegation_method␣{
+----------
+Range: (506277,506343) (66)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (506361,506427) (66)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (506476,506548) (72)
+}
+
+package␣␣#␣hide␣from␣PAUSE
+␣␣␣␣Moose::Meta::Attribute::Custom::Moose;
+----------
+Range: (507790,508055) (265)
+qw(
+␣␣␣␣␣␣␣␣␣␣␣␣type␣subtype␣class_type␣role_type␣maybe_type␣duck_type
+␣␣␣␣␣␣␣␣␣␣␣␣as␣where␣message␣inline_as
+␣␣␣␣␣␣␣␣␣␣␣␣coerce␣from␣via
+␣␣␣␣␣␣␣␣␣␣␣␣enum␣union
+␣␣␣␣␣␣␣␣␣␣␣␣find_type_constraint
+␣␣␣␣␣␣␣␣␣␣␣␣register_type_constraint
+␣␣␣␣␣␣␣␣␣␣␣␣match_on_type␣)
+␣␣␣␣],
+----------
+Range: (508376,508454) (78)
+%{␣$REGISTRY->type_constraints␣}␣}
+
+sub␣export_type_constraints_as_functions␣{
+----------
+Range: (511277,511388) (111)
+#␣␣␣␣||␣__PACKAGE__->_throw_error("Can't␣create␣a␣class␣type␣constraint␣because␣'$class'␣is␣not␣a␣class␣name");
+----------
+Range: (511726,511790) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (512442,512553) (111)
+#␣␣␣␣||␣__PACKAGE__->_throw_error("Can't␣create␣a␣class␣type␣constraint␣because␣'$class'␣is␣not␣a␣class␣name");
+----------
+Range: (512883,512947) (64)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (516663,516735) (72)
+}
+
+␣␣␣␣#␣The␣blessed␣check␣is␣mostly␣to␣accommodate␣MooseX::Types,␣which
+----------
+Range: (516740,516804) (64)
+#␣uses␣an␣object␣which␣overloads␣stringification␣as␣a␣type␣name.
+----------
+Range: (517824,517902) (78)
+"Passing␣a␣list␣of␣values␣to␣duck_type␣is␣deprecated.␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (518224,518288) (64)
+}
+
+#␣The␣trick␣of␣returning␣@_␣lets␣us␣avoid␣having␣to␣specify␣a
+----------
+Range: (518448,518511) (63)
+#␣If␣as()␣returns␣all␣its␣extra␣arguments,␣this␣just␣works,␣and
+----------
+Range: (519072,519150) (78)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (519491,519564) (73)
+"Passing␣a␣list␣of␣values␣to␣enum␣is␣deprecated.␣"
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (519968,520041) (73)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (521126,521196) (70)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (521228,521298) (70)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (521667,521741) (74)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (521763,521837) (74)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (522643,522708) (65)
+}
+}
+
+
+##␣--------------------------------------------------------
+----------
+Range: (523267,523334) (67)
+
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣
+----------
+Range: (524811,524875) (64)
+}
+}
+
+##␣--------------------------------------------------------
+----------
+Range: (525345,525413) (68)
+my␣($type,␣$type_capture_parts,␣$type_with_parameter,␣$union,␣$any);
+----------
+Range: (525957,526453) (496)
+qr{(?(DEFINE)
+␣␣␣␣␣␣␣␣␣␣␣␣(?<valid_chars>␣␣␣␣␣␣␣␣␣$valid_chars)
+␣␣␣␣␣␣␣␣␣␣␣␣(?<type_atom>␣␣␣␣␣␣␣␣␣␣␣$type_atom)
+␣␣␣␣␣␣␣␣␣␣␣␣(?<ws>␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$ws)
+␣␣␣␣␣␣␣␣␣␣␣␣(?<op_union>␣␣␣␣␣␣␣␣␣␣␣␣$op_union)
+␣␣␣␣␣␣␣␣␣␣␣␣(?<type>␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$type_pattern)
+␣␣␣␣␣␣␣␣␣␣␣␣(?<type_capture_parts>␣␣$type_capture_parts_pattern)
+␣␣␣␣␣␣␣␣␣␣␣␣(?<type_with_parameter>␣$type_with_parameter_pattern)
+␣␣␣␣␣␣␣␣␣␣␣␣(?<union>␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$union_pattern)
+␣␣␣␣␣␣␣␣␣␣␣␣(?<any>␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣$any_pattern)
+␣␣␣␣␣␣␣␣)}x;
+----------
+Range: (528351,528415) (64)
+}
+}
+
+##␣--------------------------------------------------------
+----------
+Range: (528512,528580) (68)
+#␣By␣making␣these␣classes␣immutable␣before␣creating␣all␣the␣types␣in
+----------
+Range: (528581,528659) (78)
+#␣Moose::Util::TypeConstraints::Builtin␣,␣we␣avoid␣repeatedly␣calling␣the␣slow
+----------
+Range: (528918,529300) (382)
+$_)␣}
+␣␣␣␣qw(
+␣␣␣␣Moose::Meta::TypeConstraint
+␣␣␣␣Moose::Meta::TypeConstraint::Union
+␣␣␣␣Moose::Meta::TypeConstraint::Parameterized
+␣␣␣␣Moose::Meta::TypeConstraint::Parameterizable
+␣␣␣␣Moose::Meta::TypeConstraint::Class
+␣␣␣␣Moose::Meta::TypeConstraint::Role
+␣␣␣␣Moose::Meta::TypeConstraint::Enum
+␣␣␣␣Moose::Meta::TypeConstraint::DuckType
+␣␣␣␣Moose::Meta::TypeConstraint::Registry
+);
+----------
+Range: (530571,530634) (63)
+goto␣&Moose::Util::TypeConstraints::where␣}
+sub␣inline_as␣(&)␣{
+----------
+Range: (530635,530705) (70)
+goto␣&Moose::Util::TypeConstraints::inline_as␣}
+
+sub␣define_builtins␣{
+----------
+Range: (531845,531921) (76)
+$_)␣}
+␣␣␣␣␣␣␣␣␣␣␣␣#␣no␣need␣to␣call␣parent␣-␣ref␣also␣checks␣for␣definedness
+----------
+Range: (532553,532975) (422)
+/\A(?:[+-]?)␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣matches␣optional␣+-␣in␣the␣beginning
+␣␣␣␣␣␣␣␣(?=[0-9]|\.[0-9])␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣matches␣previous␣+-␣only␣if␣there␣is␣something␣like␣3␣or␣.3
+␣␣␣␣␣␣␣␣[0-9]*␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣matches␣0-9␣zero␣or␣more␣times
+␣␣␣␣␣␣␣␣(?:\.[0-9]+)?␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣matches␣optional␣.89␣or␣nothing
+␣␣␣␣␣␣␣␣(?:[Ee](?:[+-]?[0-9]+))?␣␣␣␣␣␣␣␣␣␣␣␣#␣matches␣E1␣or␣e1␣or␣e-1␣or␣e+1␣etc
+␣␣␣␣␣␣␣␣\z/x␣);
+----------
+Range: (533374,533825) (451)
+'$val␣=~␣/\A(?:[+-]?)␣␣␣␣␣␣␣␣␣␣␣␣␣#␣matches␣optional␣+-␣in␣the␣beginning
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣(?=[0-9]|\.[0-9])␣␣␣␣␣␣␣␣␣␣␣#␣matches␣previous␣+-␣only␣if␣there␣is␣something␣like␣3␣or␣.3
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣[0-9]*␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣matches␣0-9␣zero␣or␣more␣times
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣(?:\.[0-9]+)?␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣matches␣optional␣.89␣or␣nothing
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣(?:[Ee](?:[+-]?[0-9]+))?␣␣␣␣#␣matches␣E1␣or␣e1␣or␣e-1␣or␣e+1␣etc
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣\z/x␣);␣'
+␣␣␣␣␣␣␣␣};
+----------
+Range: (534538,534610) (72)
+#␣NOTE:␣scalar␣filehandles␣are␣GLOB␣refs,␣but␣a␣GLOB␣ref␣is␣not␣always␣a
+----------
+Range: (543534,543608) (74)
+#␣ABSTRACT:␣Apply␣roles␣to␣any␣metaclass,␣as␣well␣as␣the␣object␣base␣class
+----------
+Range: (544473,544566) (93)
+"The␣new()␣method␣for␣$class␣expects␣a␣hash␣reference␣or␣a␣key/value␣list."
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (546027,546121) (94)
+#␣<␣doy>␣if␣the␣destructor␣is␣being␣called␣because␣an␣exception␣is␣thrown,␣then␣$@␣will␣be␣set
+----------
+Range: (546126,546198) (72)
+#␣<␣doy>␣but␣if␣DEMOLISH␣does␣an␣eval␣which␣succeeds,␣that␣will␣clear␣$@
+----------
+Range: (546232,546309) (77)
+#␣<␣doy>␣try::tiny␣implicitly␣localizes␣$@␣in␣the␣try␣block,␣which␣fixes␣that
+----------
+Range: (546590,546674) (84)
+'sub␣DOES␣{
+␣␣␣␣␣␣␣␣my␣(␣$self,␣$class_or_role_name␣)␣=␣@_;
+␣␣␣␣␣␣␣␣return␣$self->'.
+----------
+Range: (546680,546759) (79)
+'($class_or_role_name)
+␣␣␣␣␣␣␣␣␣␣␣␣||␣$self->does($class_or_role_name);
+␣␣␣␣}';
+----------
+Range: (547387,547450) (63)
+package␣Moose::Exception::CouldNotLocateTypeConstraintForUnion;
+----------
+Range: (549792,549864) (72)
+"You␣may␣rebless␣only␣into␣a␣subclass␣of␣($instance_class),␣of␣which␣(".
+----------
+Range: (549936,550006) (70)
+package␣Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresent;
+----------
+Range: (550369,550442) (73)
+"Cannot␣create␣a␣method␣alias␣if␣a␣local␣method␣of␣the␣same␣name␣exists";
+----------
+Range: (551542,551605) (63)
+package␣Moose::Exception::MustPassEvenNumberOfAttributeOptions;
+----------
+Range: (552606,552678) (72)
+"Cannot␣provide␣traits␣when␣$class␣does␣not␣have␣an␣init_meta()␣method";
+----------
+Range: (552995,553074) (79)
+'When␣using␣Moose::Util::MetaRole,␣you␣must␣pass␣a␣Moose␣class␣name,'
+␣␣␣␣␣␣␣␣.
+----------
+Range: (553523,553593) (70)
+",␣and␣this␣did␣not␣resolve␣to␣a␣metaclass␣or␣metarole."
+␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (553594,553672) (78)
+'␣Maybe␣you␣need␣to␣call␣Moose->init_meta␣to␣initialize␣the␣metaclass␣first?';
+----------
+Range: (553746,553824) (78)
+'␣Maybe␣you␣need␣to␣call␣Moose->init_meta␣to␣initialize␣the␣metaclass␣first?';
+----------
+Range: (555398,555473) (75)
+"␣attribute␣is␣trying␣to␣delegate␣to␣a␣class␣which␣has␣not␣been␣loaded␣-␣".
+----------
+Range: (555979,556055) (76)
+"Cannot␣delegate␣methods␣based␣on␣a␣Regexp␣without␣a␣type␣constraint␣(isa)";
+----------
+Range: (556097,556163) (66)
+package␣Moose::Exception::NoBodyToInitializeInAnAbstractBaseClass;
+----------
+Range: (556487,556554) (67)
+package␣Moose::Exception::MustPassAMooseMetaRoleInstanceOrSubclass;
+----------
+Range: (557948,558079) (131)
+'If␣you␣provide␣an␣associated_metaclass␣parameter␣to␣the␣Moose::Meta::Overload␣constructor␣it␣must␣be␣a␣Class::MOP::Module␣object';
+----------
+Range: (558779,558861) (82)
+"You␣must␣supply␣a␣delegate_to_method␣which␣is␣a␣method␣name␣or␣a␣CODE␣reference";
+----------
+Range: (559275,559357) (82)
+package␣Moose::Exception::InvalidBaseTypeGivenToCreateParameterizedTypeConstraint;
+----------
+Range: (559841,559909) (68)
+"You␣can␣only␣apply␣base␣class␣roles␣to␣a␣Moose␣class,␣not␣a␣role.";
+----------
+Range: (562249,562316) (67)
+"Conflict␣detected:␣$role_noun␣$all_roles␣$verb␣role␣'$role_name'";
+----------
+Range: (562358,562425) (67)
+package␣Moose::Exception::MethodNameNotFoundInInheritanceHierarchy;
+----------
+Range: (563190,563255) (65)
+package␣Moose::Exception::ConstructClassInstanceTakesPackageName;
+----------
+Range: (563648,563735) (87)
+"You␣cannot␣auto-dereference␣anything␣other␣than␣a␣ArrayRef␣or␣HashRef␣on␣attribute␣(".
+----------
+Range: (564254,564320) (66)
+package␣Moose::Exception::MetaclassMustBeDerivedFromClassMOPClass;
+----------
+Range: (566090,566169) (79)
+"References␣are␣not␣allowed␣as␣default␣values,␣you␣must␣wrap␣the␣default␣of␣'".
+----------
+Range: (566294,566360) (66)
+package␣Moose::Exception::MustSupplyAnAccessorTypeToConstructWith;
+----------
+Range: (566914,566990) (76)
+"This␣attribute␣can␣be␣used␣for␣fetching␣the␣class's␣metaclass␣instance:\n".
+----------
+Range: (567012,567096) (84)
+"␣␣␣␣my␣\$metaclass_instance␣=␣Moose::Util::find_meta(␣\$exception->role_name␣);\n",
+----------
+Range: (568046,568110) (64)
+"This␣attribute␣can␣be␣used␣for␣fetching␣metaclass␣instance:\n".
+----------
+Range: (568132,568217) (85)
+"␣␣␣␣my␣\$metaclass_instance␣=␣Moose::Util::find_meta(␣\$exception->class_name␣);\n",
+----------
+Range: (568438,568528) (90)
+"This␣attribute␣can␣be␣used␣for␣fetching␣type␣constraint(Moose::Meta::TypeConstraint):\n".
+----------
+Range: (568550,568660) (110)
+"␣␣␣␣my␣\$type_constraint␣=␣␣Moose::Util::TypeConstraints::find_type_constraint(␣\$exception->type_name␣);\n",
+----------
+Range: (569319,569382) (63)
+package␣Moose::Exception::Role::EitherAttributeOrAttributeName;
+----------
+Range: (571213,571279) (66)
+package␣Moose::Exception::RolesListMustBeInstancesOfMooseMetaRole;
+----------
+Range: (571603,571668) (65)
+"The␣list␣of␣roles␣must␣be␣instances␣of␣Moose::Meta::Role,␣not␣".
+----------
+Range: (571722,571787) (65)
+package␣Moose::Exception::PackageNameAndNameParamsNotGivenToWrap;
+----------
+Range: (572647,572716) (69)
+"The␣class␣$class_name␣does␣the␣excluded␣role␣'$excluded_role_name'";
+----------
+Range: (574784,574851) (67)
+"A␣subtype␣cannot␣consist␣solely␣of␣a␣name,␣it␣must␣have␣a␣parent";
+----------
+Range: (575826,575895) (69)
+package␣Moose::Exception::CannotUseLazyBuildAndDefaultSimultaneously;
+----------
+Range: (576065,576131) (66)
+"You␣can␣not␣use␣lazy_build␣and␣default␣for␣the␣same␣attribute␣(".
+----------
+Range: (577383,577458) (75)
+package␣Moose::Exception::CannotCreateHigherOrderTypeWithoutATypeParameter;
+----------
+Range: (577597,577662) (65)
+"You␣cannot␣create␣a␣Higher␣Order␣type␣without␣a␣type␣parameter";
+----------
+Range: (578121,578203) (82)
+"Can't␣fix␣metaclass␣incompatibility␣for␣$class_name␣because␣it␣is␣not␣pristine.";
+----------
+Range: (578714,578777) (63)
+package␣Moose::Exception::MustSupplyAClassMOPAttributeInstance;
+----------
+Range: (578996,579071) (75)
+"You␣must␣supply␣an␣attribute␣which␣is␣a␣'Class::MOP::Attribute'␣instance";
+----------
+Range: (580428,580506) (78)
+"␣($self_metaclass_type)␣is␣not␣compatible␣with␣the␣$metaclass_type_name"
+␣␣␣.
+----------
+Range: (580507,580574) (67)
+"␣metaclass␣of␣its␣superclass,␣$superclass_name␣($super_metatype)";
+----------
+Range: (580922,580985) (63)
+package␣Moose::Exception::RequiredAttributeLacksInitialization;
+----------
+Range: (581204,581280) (76)
+"A␣required␣attribute␣must␣have␣either␣'init_arg',␣'builder',␣or␣'default'";
+----------
+Range: (582500,582564) (64)
+package␣Moose::Exception::BuilderMethodNotSupportedForAttribute;
+----------
+Range: (583448,583517) (69)
+"You␣cannot␣have␣a␣weak␣reference␣to␣a␣coerced␣value␣on␣attribute␣(".
+----------
+Range: (583945,584022) (77)
+package␣Moose::Exception::CannotCreateMethodAliasLocalMethodIsPresentInClass;
+----------
+Range: (584316,584389) (73)
+"Cannot␣create␣a␣method␣alias␣if␣a␣local␣method␣of␣the␣same␣name␣exists";
+----------
+Range: (584861,585005) (144)
+'If␣you␣provide␣a␣coderef␣parameter␣to␣the␣Moose::Meta::Overload␣constructor␣you␣must␣also␣provide␣coderef_package␣and␣coderef_name␣parameters';
+----------
+Range: (585047,585120) (73)
+package␣Moose::Exception::ConflictDetectedInCheckRoleExclusionsInToClass;
+----------
+Range: (586082,586170) (88)
+'The␣operator␣parameter␣you␣passed␣to␣the␣Moose::Meta::Overload␣constructor␣('
+␣␣␣␣␣␣␣␣.
+----------
+Range: (586900,586980) (80)
+"Attribute␣($attribute_name)␣does␣not␣pass␣the␣type␣constraint␣because:␣$error";
+----------
+Range: (587165,587240) (75)
+"Roles␣do␣not␣support␣'extends'␣(you␣can␣use␣'with'␣to␣specialize␣a␣role)";
+----------
+Range: (587282,587350) (68)
+package␣Moose::Exception::EnumCalledWithAnArrayRefAndAdditionalArgs;
+----------
+Range: (587619,587740) (121)
+"enum␣called␣with␣an␣array␣reference␣and␣additional␣arguments.␣Did␣you␣mean␣to␣parenthesize␣the␣enum␣call's␣parameters?";
+----------
+Range: (588501,588583) (82)
+package␣Moose::Exception::MustPassAPackageNameOrAnExistingClassMOPPackageInstance;
+----------
+Range: (588802,588877) (75)
+"You␣must␣pass␣a␣package␣name␣or␣an␣existing␣Class::MOP::Package␣instance";
+----------
+Range: (589710,589778) (68)
+package␣Moose::Exception::CreateMOPClassTakesArrayRefOfSuperclasses;
+----------
+Range: (590288,590352) (64)
+"This␣attribute␣can␣be␣used␣for␣fetching␣attribute␣instance:\n".
+----------
+Range: (590374,590446) (72)
+"␣␣␣␣my␣\$class␣=␣Moose::Util::find_meta(␣\$exception->class_name␣);\n".
+----------
+Range: (590468,590548) (80)
+"␣␣␣␣my␣\$attribute␣=␣\$class->get_attribute(␣\$exception->attribute_name␣);\n",
+----------
+Range: (591082,591147) (65)
+package␣Moose::Exception::CannotInitializeMooseMetaRoleComposite;
+----------
+Range: (591532,591635) (103)
+'Moose::Meta::Role::Composite␣instances␣can␣only␣be␣reinitialized␣from␣an␣existing␣metaclass␣instance';
+----------
+Range: (592021,592086) (65)
+package␣Moose::Exception::CouldNotFindTypeConstraintToCoerceFrom;
+----------
+Range: (592783,592852) (69)
+package␣Moose::Exception::UnionCalledWithAnArrayRefAndAdditionalArgs;
+----------
+Range: (593121,593185) (64)
+"union␣called␣with␣an␣array␣reference␣and␣additional␣arguments";
+----------
+Range: (594981,595044) (63)
+package␣Moose::Exception::MustSupplyArrayRefAsCurriedArguments;
+----------
+Range: (595212,595278) (66)
+"You␣must␣supply␣a␣curried_arguments␣which␣is␣an␣ARRAY␣reference";
+----------
+Range: (595733,595799) (66)
+package␣Moose::Exception::CannotAddAdditionalTypeCoercionsToUnion;
+----------
+Range: (596128,596199) (71)
+package␣Moose::Exception::MetaclassIsARoleNotASubclassOfGivenMetaclass;
+----------
+Range: (596596,596688) (92)
+"$role_name␣already␣has␣a␣metaclass,␣but␣it␣does␣not␣inherit␣$metaclass␣($role).␣"
+␣␣␣␣␣␣␣␣.
+----------
+Range: (596688,596777) (89)
+"You␣cannot␣make␣the␣same␣thing␣a␣role␣and␣a␣class.␣Remove␣either␣Moose␣or␣Moose::Role.";
+----------
+Range: (597336,597403) (67)
+"The␣role␣$role_name␣does␣the␣excluded␣role␣'$excluded_role_name'";
+----------
+Range: (598318,598394) (76)
+package␣Moose::Exception::TypeConstraintCannotBeUsedForAParameterizableType;
+----------
+Range: (598636,598726) (90)
+"This␣attribute␣can␣be␣used␣for␣fetching␣type␣constraint(Moose::Meta::TypeConstraint):\n".
+----------
+Range: (598748,598865) (117)
+"␣␣␣␣my␣\$type_constraint␣=␣␣Moose::Util::TypeConstraints::find_type_constraint(␣\$exception->parent_type_name␣);\n",
+----------
+Range: (599089,599164) (75)
+"$parent_type_name␣doesn't␣subtype␣or␣coerce␣from␣a␣parameterizable␣type.";
+----------
+Range: (599206,599272) (66)
+package␣Moose::Exception::MetaclassIsNotASubclassOfGivenMetaclass;
+----------
+Range: (602620,602701) (81)
+"This␣attribute␣is␣an␣ArrayRef␣containing␣role␣names,␣if␣you␣want␣metaobjects\n".
+----------
+Range: (602723,602809) (86)
+"associated␣with␣these␣role␣names,␣then␣call␣method␣roles␣on␣the␣exception␣object.\n",
+----------
+Range: (603411,603488) (77)
+"during␣composition␣(Two␣'override'␣methods␣of␣the␣same␣name␣encountered).␣".
+----------
+Range: (603562,603631) (69)
+"Role␣'$role_names'␣has␣encountered␣an␣'override'␣method␣conflict␣"␣.
+----------
+Range: (603647,603725) (78)
+"during␣composition␣(A␣local␣method␣of␣the␣same␣name␣has␣been␣found).␣This␣"␣.
+----------
+Range: (604393,604475) (82)
+"You␣cannot␣auto-dereference␣without␣specifying␣a␣type␣constraint␣on␣attribute␣(".
+----------
+Range: (605101,605167) (66)
+package␣Moose::Exception::AttributeExtensionIsNotSupportedInRoles;
+----------
+Range: (605472,605536) (64)
+package␣Moose::Exception::ConflictDetectedInCheckRoleExclusions;
+----------
+Range: (605908,605976) (68)
+"Conflict␣detected:␣$role_name␣excludes␣role␣'$excluded_role_name'";
+----------
+Range: (607457,607522) (65)
+"Cannot␣have␣an␣isa␣option␣which␣cannot␣->does()␣on␣attribute␣(".
+----------
+Range: (608461,608538) (77)
+"Cannot␣find␣or␣parse␣the␣type␣'$type'"
+}
+
+__PACKAGE__->meta->make_immutable;
+----------
+Range: (609502,609565) (63)
+"Role␣'$role_name'␣has␣encountered␣an␣attribute␣conflict"
+␣␣␣␣.
+----------
+Range: (610051,610132) (81)
+"Role␣applications␣must␣be␣instances␣of␣Moose::Meta::Role::Application::ToClass";
+----------
+Range: (610833,610937) (104)
+"Can't␣locate␣$possible_packages␣in␣\@INC␣(\@INC␣contains:␣@INC)."
+}
+
+__PACKAGE__->meta->make_immutable;
+----------
+Range: (611197,611260) (63)
+package␣Moose::Exception::IllegalMethodTypeToAddMethodModifier;
+----------
+Range: (611810,611882) (72)
+package␣Moose::Exception::MetaclassIsAClassNotASubclassOfGivenMetaclass;
+----------
+Range: (612297,612397) (100)
+"␣($class).␣You␣cannot␣make␣the␣same␣thing␣a␣role␣and␣a␣class.␣Remove␣either␣Moose␣or␣Moose::Role.";
+----------
+Range: (612439,612505) (66)
+package␣Moose::Exception::CreateMOPClassTakesArrayRefOfAttributes;
+----------
+Range: (612904,613020) (116)
+'If␣you␣provide␣a␣method␣parameter␣to␣the␣Moose::Meta::Overload␣constructor␣it␣must␣be␣a␣Class::MOP::Method␣object';
+----------
+Range: (613062,613125) (63)
+package␣Moose::Exception::MustSpecifyAtleastOneRoleToApplicant;
+----------
+Range: (613433,613503) (70)
+package␣Moose::Exception::BuilderMethodNotSupportedForInlineAttribute;
+----------
+Range: (614429,614492) (63)
+"Can't␣make␣$class_name␣compatible␣with␣metaclass␣$superclass";
+----------
+Range: (614534,614598) (64)
+package␣Moose::Exception::MustSupplyAMooseMetaAttributeInstance;
+----------
+Range: (614817,614893) (76)
+"You␣must␣supply␣an␣attribute␣which␣is␣a␣'Moose::Meta::Attribute'␣instance";
+----------
+Range: (615388,615511) (123)
+"This␣attribute␣can␣be␣used␣for␣fetching␣parameterizable␣type␣constraint(Moose::Meta::TypeConstraint::Parameterizable):\n".
+----------
+Range: (615533,615643) (110)
+"␣␣␣␣my␣\$type_constraint␣=␣␣Moose::Util::TypeConstraints::find_type_constraint(␣\$exception->type_name␣);\n",
+----------
+Range: (615820,615892) (72)
+"Can't␣generate␣an␣inline␣constraint␣for␣$type,␣since␣none␣was␣defined";
+----------
+Range: (617031,617115) (84)
+"Cannot␣define␣an␣accessor␣name␣on␣a␣read-only␣attribute,␣accessors␣are␣read/write";
+----------
+Range: (617478,617545) (67)
+"The␣is_needed␣method␣expected␣a␣metaclass␣object␣as␣its␣arugment";
+----------
+Range: (617587,617650) (63)
+package␣Moose::Exception::MustSupplyAnAttributeToConstructWith;
+----------
+Range: (618295,618369) (74)
+"␣attribute␣is␣trying␣to␣delegate␣to␣a␣role␣which␣has␣not␣been␣loaded␣-␣".
+----------
+Range: (619764,619830) (66)
+package␣Moose::Exception::NeitherAttributeNorAttributeNameIsGiven;
+----------
+Range: (620516,620606) (90)
+"This␣attribute␣is␣an␣ArrayRef␣containing␣role␣names,␣if␣you␣want␣metaobjects\n"
+␣␣␣␣␣␣␣␣.
+----------
+Range: (620607,620693) (86)
+"associated␣with␣these␣role␣names,␣then␣call␣method␣roles␣on␣the␣exception␣object.\n",
+----------
+Range: (621152,621229) (77)
+'We␣have␣encountered␣an␣overloading␣conflict␣for␣the␣fallback␣'
+␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (621322,621397) (75)
+"Role␣'$role_names'␣has␣encountered␣an␣overloading␣conflict␣"
+␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (621398,621482) (84)
+"during␣composition.␣The␣two␣roles␣both␣overload␣the␣'$op'␣operator.␣"
+␣␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (621826,621890) (64)
+"builder␣must␣be␣a␣defined␣scalar␣value␣which␣is␣a␣method␣name";
+----------
+Range: (621932,622010) (78)
+package␣Moose::Exception::InvalidTypeGivenToCreateParameterizedTypeConstraint;
+----------
+Range: (622274,622340) (66)
+package␣Moose::Exception::CannotCoerceAttributeWhichHasNoCoercion;
+----------
+Range: (622631,622711) (80)
+"You␣cannot␣coerce␣an␣attribute␣($name)␣unless␣its␣type␣($type)␣has␣a␣coercion";
+----------
+Range: (622753,622820) (67)
+package␣Moose::Exception::MetaclassMustBeASubclassOfMooseMetaClass;
+----------
+Range: (623007,623089) (82)
+"␣must␣be␣a␣subclass␣of␣Moose::Meta::Class."
+}
+
+__PACKAGE__->meta->make_immutable;
+----------
+Range: (623773,623851) (78)
+"during␣composition␣(Two␣'override'␣methods␣of␣the␣same␣name␣encountered).␣"␣.
+----------
+Range: (624032,624103) (71)
+"during␣composition␣(A␣local␣method␣of␣the␣same␣name␣as␣been␣found).␣".
+----------
+Range: (624413,624496) (83)
+"The␣'inline_destructor'␣option␣is␣present,␣but␣no␣destructor␣class␣was␣specified";
+----------
+Range: (624996,625074) (78)
+package␣Moose::Exception::AttachToClassNeedsAClassMOPClassInstanceOrASubclass;
+----------
+Range: (625619,625698) (79)
+"You␣cannot␣have␣coercion␣without␣specifying␣a␣type␣constraint␣on␣attribute␣(".
+----------
+Range: (627954,628047) (93)
+"Cannot␣have␣an␣isa␣option␣and␣a␣does␣option␣if␣the␣isa␣does␣not␣do␣the␣does␣on␣attribute␣(".
+----------
+Range: (628856,628930) (74)
+"We␣have␣encountered␣an␣attribute␣conflict␣with␣'$attr_name'"
+␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (628973,629041) (68)
+"␣This␣attribute␣is␣defined␣in␣both␣$role1␣and␣$role2."
+␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (629362,629430) (68)
+"Cannot␣add␣an␣augment␣method␣if␣a␣local␣method␣is␣already␣present";
+----------
+Range: (630004,630104) (100)
+"Objects␣passed␣as␣the␣__INSTANCE__␣parameter␣must␣already␣be␣blessed␣into␣the␣correct␣class,␣but␣".
+----------
+Range: (631880,631970) (90)
+'You␣must␣provide␣an␣operator␣parameter␣when␣constructing␣a␣Moose::Meta::Overload␣object';
+----------
+Range: (632657,632796) (139)
+"The␣type␣constraint␣'$type_name'␣has␣already␣been␣created␣in␣$type_package_defined_in␣and␣cannot␣be␣created␣again␣in␣$package_defined_in";
+----------
+Range: (632838,632918) (80)
+package␣Moose::Exception::AttributeMustBeAnClassMOPMixinAttributeCoreOrSubclass;
+----------
+Range: (633136,633225) (89)
+"Your␣attribute␣must␣be␣an␣instance␣of␣Class::MOP::Mixin::AttributeCore␣(or␣a␣subclass)";
+----------
+Range: (633267,633333) (66)
+package␣Moose::Exception::ValidationFailedForInlineTypeConstraint;
+----------
+Range: (635442,635505) (63)
+"If␣you␣imported␣functions␣intending␣to␣use␣them␣as␣"
+␣␣␣␣␣␣␣␣.
+----------
+Range: (635506,635573) (67)
+"methods,␣you␣need␣to␣explicitly␣mark␣them␣as␣such,␣via␣"
+␣␣␣␣␣␣␣␣.
+----------
+Range: (636708,636782) (74)
+"bad␣accessor/reader/writer/predicate/clearer␣format,␣must␣be␣a␣HASH␣ref";
+----------
+Range: (637369,637440) (71)
+package␣Moose::Exception::NeedsTypeConstraintUnionForTypeCoercionUnion;
+----------
+Range: (637847,637912) (65)
+"You␣can␣only␣create␣a␣Moose::Meta::TypeCoercion::Union␣for␣a␣"␣.
+----------
+Range: (637924,638022) (98)
+"Moose::Meta::TypeConstraint::Union,␣not␣a␣$type_constraint"
+}
+
+__PACKAGE__->meta->make_immutable;
+----------
+Range: (638026,638099) (73)
+package␣Moose::Exception::AddParameterizableTypeTakesParameterizableType;
+----------
+Range: (638301,638368) (67)
+"Type␣must␣be␣a␣Moose::Meta::TypeConstraint::Parameterizable␣not␣".
+----------
+Range: (638892,638961) (69)
+"Cannot␣add␣an␣override␣method␣if␣a␣local␣method␣is␣already␣present";
+----------
+Range: (639338,639401) (63)
+"The␣__INSTANCE__␣parameter␣must␣be␣a␣blessed␣reference,␣not␣".
+----------
+Range: (639460,639529) (69)
+package␣Moose::Exception::CallingReadOnlyMethodOnAnImmutableInstance;
+----------
+Range: (640207,640273) (66)
+package␣Moose::Exception::MetaclassMustBeASubclassOfMooseMetaRole;
+----------
+Range: (640458,640539) (81)
+"␣must␣be␣a␣subclass␣of␣Moose::Meta::Role."
+}
+
+__PACKAGE__->meta->make_immutable;
+----------
+Range: (640543,640609) (66)
+package␣Moose::Exception::CloneObjectExpectsAnInstanceOfMetaclass;
+----------
+Range: (641280,641353) (73)
+"All␣values␣passed␣to␣handles␣must␣be␣strings␣or␣ARRAY␣references,␣not␣".
+----------
+Range: (641894,641975) (81)
+"Circular␣reference␣in␣'also'␣parameter␣to␣Moose::Exporter␣between␣"
+␣␣␣␣␣␣␣␣␣␣␣.
+----------
+Range: (642467,642531) (64)
+package␣Moose::Exception::CouldNotGenerateInlineAttributeMethod;
+----------
+Range: (644554,644617) (63)
+package␣Moose::Exception::RequiredMethodsNotImplementedByClass;
+----------
+Range: (646022,646091) (69)
+"Could␣not␣eval␣the␣constructor␣:\n\n$source\n\nbecause␣:\n\n$error";
+----------
+Range: (646388,646492) (104)
+"␣contains␣invalid␣characters␣for␣a␣type␣name.␣Names␣can␣contain␣alphanumeric␣characters,␣':',␣and␣'.'";
+----------
+Range: (648020,648151) (131)
+'If␣you␣provide␣an␣original_overload␣parameter␣to␣the␣Moose::Meta::Overload␣constructor␣it␣must␣be␣a␣Moose::Meta::Overload␣object';
+----------
+Range: (648193,648256) (63)
+package␣Moose::Exception::OverloadRequiresAMethodNameOrCoderef;
+----------
+Range: (648370,648473) (103)
+'You␣must␣provide␣a␣method_name␣or␣coderef␣parameter␣when␣constructing␣a␣Moose::Meta::Overload␣object';
+----------
+Range: (650079,650147) (68)
+"Could␣not␣eval␣the␣destructor␣:\n\n$source\n\nbecause␣:\n\n$error";
+----------
+Range: (650189,650266) (77)
+package␣Moose::Exception::RolesDoNotSupportRegexReferencesForMethodModifiers;
+----------
+Range: (651796,651870) (74)
+#␣skip␣frames␣that␣are␣method␣calls␣on␣the␣exception␣object,␣which␣include
+----------
+Range: (651875,651949) (74)
+#␣the␣object␣itself␣in␣the␣arguments␣(but␣Devel::LeakTrace␣really␣ought␣to
+----------
+Range: (652976,653042) (66)
+}
+
+␣␣␣␣#␣This␣would␣be␣a␣somewhat␣pathological␣case,␣but␣who␣knows
+----------
+Range: (653910,653980) (70)
+qw[
+␣␣␣␣meta_ok
+␣␣␣␣does_ok
+␣␣␣␣has_attribute_ok
+␣␣␣␣with_immutable
+];
+----------
+Range: (656066,656142) (76)
+"Branch␣$branch␣is␣not␣up␣to␣date␣(origin:␣$origin,␣HEAD:␣$head)"
+␣␣␣␣␣␣␣␣if
+----------
+Range: (656233,656298) (65)
+#␣that␣is,␣that␣the␣release␣branch␣is␣an␣ancestor␣commit␣of␣HEAD.
+----------
+Range: (656604,656683) (79)
+"Branch␣$branch␣does␣not␣contain␣all␣commits␣from␣the␣current␣release␣branch␣",
+----------
+Range: (656700,656781) (81)
+"(common␣ancestor␣for␣${remote}$release_branch:␣$common_ancestor)"
+␣␣␣␣␣␣␣␣␣␣␣␣if
+----------
+Range: (656917,656991) (74)
+#␣see␣https://github.com/metacpan/metacpan-web/issues/1468#event-283925638
+----------
+Range: (657312,657380) (68)
+#␣our␣goal␣is␣to␣verify␣that␣the␣declared␣authordeps␣already␣reflect
+----------
+Range: (657381,657456) (75)
+#␣everything␣in␣configure␣+␣runtime␣prerequisites␣--␣otherwise,␣we␣won't␣be
+----------
+Range: (657457,657520) (63)
+#␣able␣to␣bootstrap␣our␣built␣Moose␣for␣the␣purposes␣of␣running
+----------
+Range: (658367,658430) (63)
+#␣remove␣some␣false␣positives␣we␣know␣we␣already␣have␣fulfilled
+----------
+Range: (658563,658633) (70)
+#␣the␣merged␣set␣should␣not␣be␣different␣than␣the␣original␣authordeps.
+----------
+Range: (658858,658944) (86)
+'authordeps␣does␣not␣have␣all␣prereqs␣found␣in␣configure,␣runtime␣prereqs:␣'
+␣␣␣␣␣␣␣␣.
+----------
+Range: (659809,659898) (89)
+"WARNING:␣Files␣were␣left␣behind␣in␣$opts->{build_root}␣that␣were␣not␣explicitly␣added:",
+----------
+Range: (660175,660241) (66)
+"Running␣$make␣distclean␣in␣$build_dir␣to␣clear␣out␣build␣cruft");
+----------
+Range: (660752,660831) (79)
+'lib/Moose/Manual/Delta.pod'␣}
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣@{␣$self->zilla->files␣};
+----------
+Range: (662172,662941) (769)
+<<'EOP';
+{
+package␣MY;
+
+use␣Config;
+
+#␣These␣two␣are␣necessary␣to␣keep␣bmake␣happy
+sub␣xs_c␣{
+␣␣␣␣my␣$self␣=␣shift;
+␣␣␣␣my␣$ret␣=␣$self->SUPER::xs_c(@_);
+␣␣␣␣$ret␣=~␣s/\$\*\.xs/\$</g;
+␣␣␣␣$ret␣=~␣s/\$\*\.c\b/\$@/g;
+␣␣␣␣return␣$ret;
+}
+
+sub␣c_o␣{
+␣␣␣␣my␣$self␣=␣shift;
+␣␣␣␣my␣$ret␣=␣$self->SUPER::c_o(@_);
+␣␣␣␣$ret␣=~␣s/\$\*\.c\b/\$</g;
+␣␣␣␣$ret␣=~␣s/\$\*\$\(OBJ_EXT\)/\$@/g;
+␣␣␣␣return␣$ret;
+}
+
+sub␣const_cccmd␣{
+␣␣␣␣my␣$ret␣=␣shift->SUPER::const_cccmd(@_);
+␣␣␣␣return␣q{}␣unless␣$ret;
+
+␣␣␣␣if␣($Config{cc}␣=~␣/^cl\b/i)␣{
+␣␣␣␣␣␣␣␣warn␣'you␣are␣using␣MSVC...␣we␣may␣not␣have␣gotten␣some␣options␣quite␣right.';
+␣␣␣␣␣␣␣␣$ret␣.=␣'␣/Fo$@';
+␣␣␣␣}
+␣␣␣␣else␣{
+␣␣␣␣␣␣␣␣$ret␣.=␣'␣-o␣$@';
+␣␣␣␣}
+
+␣␣␣␣return␣$ret;
+}
+
+sub␣postamble␣{
+␣␣␣␣return␣<<'EOF';
+$(OBJECT)␣:␣mop.h
+EOF
+}
+}
+EOP
+----------
+Range: (664131,664203) (72)
+#␣this␣is␣so␣I␣don't␣accidentally␣release␣2.x<odd>xx␣without␣the␣--trial
+----------
+Range: (664403,664476) (73)
+"version␣$version␣doesn't␣seem␣to␣conform␣to␣the␣normal␣specification!");
+----------
+Range: (664667,664808) (141)
+'you\'re␣doing␣a␣-TRIAL␣release␣using␣an␣even␣number?␣okay,␣I\'ll␣assume␣you␣know␣what␣you\'re␣doing,␣since␣you␣set␣MOOSE_EVEN_TRIAL_OK...');
+----------
+Range: (664863,664990) (127)
+'-TRIAL␣releases␣must␣be␣numbered␣2.x{ODD}xx!␣set␣MOOSE_EVEN_TRIAL_OK␣to␣release␣anyway␣(you␣better␣know␣what␣you\'re␣doing)');
+----------
+Range: (665439,665514) (75)
+'2.x{EVEN}00␣releases␣can␣only␣occur␣in␣January,␣April,␣July␣or␣October!');
+----------
+Range: (665761,666034) (273)
+<<'ASSERT_COMPILER';
+#␣Secondary␣compile␣testing␣via␣ExtUtils::HasCompiler
+use␣lib␣'inc';
+use␣ExtUtils::HasCompiler␣0.014␣'can_compile_loadable_object';
+die␣'This␣distribution␣requires␣a␣working␣compiler'
+␣␣␣␣unless␣can_compile_loadable_object(quiet␣=>␣1);
+
+ASSERT_COMPILER
+----------
+Range: (666261,666324) (63)
+#␣TODO:␣splice␣this␣in␣using␣'around␣_build_WriteMakefile_args'
+----------
+Range: (666386,666456) (70)
+s/^(WriteMakefile\()/\$WriteMakefileArgs{CCFLAGS}␣=␣$ccflags;\n\n$1/m;
+----------
+Range: (667369,667526) (157)
+<<'END_POD',
+#␣PODNAME:␣Moose::Manual::Exceptions::Manifest
+#␣ABSTRACT:␣Moose's␣Exception␣Types
+
+#__END__
+
+=for␣comment␣insert␣generated␣content␣here
+END_POD
+----------
+Range: (667850,667939) (89)
+'building␣the␣distribution␣in␣order␣to␣generate␣documentation␣for␣exception␣classes...');
+----------
+Range: (668044,668122) (78)
+}
+
+␣␣␣␣#␣This␣must␣be␣run␣as␣a␣separate␣process␣because␣we␣need␣to␣use␣the␣new
+----------
+Range: (668127,668193) (66)
+#␣Moose␣we␣just␣generated␣in␣order␣to␣introspect␣all␣the␣exception
+----------
+Range: (668967,670645) (1678)
+qr/
+␣␣␣␣␣␣␣␣(?:^|\n)␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣After␣the␣beginning␣of␣the␣string,␣or␣a␣newline
+␣␣␣␣␣␣␣␣(␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣...␣start␣capturing
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣EITHER
+␣␣␣␣␣␣␣␣␣␣␣␣package\s+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣A␣package
+␣␣␣␣␣␣␣␣␣␣␣␣[^\W\d]\w*(?:(?:\'|::)[^\W\d]\w*)*␣␣␣␣#␣...␣with␣a␣name
+␣␣␣␣␣␣␣␣␣␣␣␣\s*;␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣And␣a␣statement␣terminator
+␣␣␣␣␣␣␣␣|␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣OR
+␣␣␣␣␣␣␣␣␣␣␣␣\#\s*PODNAME:\s+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣A␣PODNAME␣comment
+␣␣␣␣␣␣␣␣␣␣␣␣[^\W\d]\w*(?:(?:\'|::)[^\W\d]\w*)*␣␣␣␣#␣...␣with␣a␣name
+␣␣␣␣␣␣␣␣␣␣␣␣(?:\s+|$)␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣And␣a␣name␣terminator
+␣␣␣␣␣␣␣␣|
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣=head1[␣\t]+SYNOPSIS\n
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.*?
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣(?=\n=)
+␣␣␣␣␣␣␣␣|␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣OR
+␣␣␣␣␣␣␣␣␣␣␣␣=for[␣\t]+example[␣\t]+begin\n␣␣␣␣␣␣␣␣#␣...␣when␣we␣find␣a␣=for␣example␣begin
+␣␣␣␣␣␣␣␣␣␣␣␣.*?␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣...␣and␣keep␣capturing
+␣␣␣␣␣␣␣␣␣␣␣␣\n=for[␣\t]+example[␣\t]+end\s*?␣␣␣␣␣␣#␣...␣until␣the␣=for␣example␣end
+␣␣␣␣␣␣␣␣␣␣␣␣(?:\n|$)␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣...␣at␣the␣end␣of␣file␣or␣a␣newline
+␣␣␣␣␣␣␣␣|␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣OR
+␣␣␣␣␣␣␣␣␣␣␣␣=begin[␣\t]+(?:test|testing)(?:-SETUP)?␣#␣...␣when␣we␣find␣a␣=begin␣test␣or␣testing
+␣␣␣␣␣␣␣␣␣␣␣␣.*?␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣...␣and␣keep␣capturing
+␣␣␣␣␣␣␣␣␣␣␣␣\n=end[␣\t]+(?:test|testing)(?:-SETUP)?␣#␣...␣until␣an␣=end␣tag
+␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣.*?
+␣␣␣␣␣␣␣␣␣␣␣␣(?:\n|$)␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣...␣at␣the␣end␣of␣file␣or␣a␣newline
+␣␣␣␣␣␣␣␣)␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣#␣...␣and␣stop␣capturing
+␣␣␣␣␣␣␣␣/isx;
+----------
+Range: (671045,671112) (67)
+}
+
+␣␣␣␣␣␣␣␣␣␣␣␣#␣It␣seems␣like␣search.cpan␣doesn't␣like␣a␣name␣with
+----------
+Range: (671264,671335) (71)
+}
+
+␣␣␣␣␣␣␣␣#␣If␣we␣have␣just␣one␣element␣it's␣a␣SYNOPSIS,␣so␣there's␣no
+----------
