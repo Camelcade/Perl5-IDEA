@@ -18,7 +18,6 @@ package com.perl5.lang.tt2.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiBuilderFactory;
 import com.intellij.lang.PsiParser;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
@@ -27,6 +26,7 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
+import com.perl5.lang.perl.parser.builder.PerlPsiBuilderFactory;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
@@ -43,7 +43,7 @@ public class TemplateToolkitPerlCodeElementType extends ILazyParseableElementTyp
   @Override
   protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi) {
     Project project = psi.getProject();
-    PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(
+    PsiBuilder builder = PerlPsiBuilderFactory.Companion.createBuilder(
       project,
       chameleon,
       new PerlMergingLexerAdapter(PerlLexingContext.create(project)),

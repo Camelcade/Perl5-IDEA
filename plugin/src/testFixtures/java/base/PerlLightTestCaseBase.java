@@ -158,7 +158,6 @@ import com.intellij.usages.rules.UsageGroupingRuleProvider;
 import com.intellij.util.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
-import com.intellij.util.ui.UIUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
@@ -2584,25 +2583,29 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   public void initWithPerlTidy() {
-    initWithTestDataFile("perlTidy");
+    initWithLarge("perlTidy");
   }
 
   public void initWithPinxi() {
-    initWithTestDataFile("pinxi");
+    initWithLarge("pinxi");
+  }
+
+  public void initWithLarge(@NotNull String name) {
+    initWithTestDataFile("largeFiles/" + name, name);
   }
 
   protected void initWithCpanFile() {
     initWithFile("cpanfile", "");
   }
 
-  public void initWithTestDataFile(@NotNull String sourceName) {
-    initWithTestDataFile(sourceName, sourceName);
-  }
-
   public void initWithTestDataFile(@NotNull String sourceName, @NotNull String targetName) {
     initWithFileContent(
-      targetName, getFileExtension(), loadFile(new File(TEST_RESOURCES_ROOT, sourceName + getRealDataFileExtension())).trim());
+      targetName, getFileExtension(), loadTestFile(sourceName));
     assertNoErrorElements();
+  }
+
+  public @NotNull String loadTestFile(@NotNull String sourceName) {
+    return loadFile(new File(TEST_RESOURCES_ROOT, sourceName + getRealDataFileExtension())).trim();
   }
 
   protected void withFunctionParameters() { addTestLibrary("functionParameters"); }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,7 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.TestOnly;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -176,6 +177,12 @@ public class PerlNamesCache implements Disposable {
     var application = ApplicationManager.getApplication();
     LOG.assertTrue(!application.isDispatchThread() || application.isUnitTestMode());
     doUpdateCache();
+  }
+
+  @TestOnly
+  public void cleanCache(){
+    myKnownSubs = Collections.emptySet();
+    myKnownNamespaces = Collections.emptySet();
   }
 
   @Override
