@@ -154,6 +154,12 @@ public class PerlHighlightingRestartTest extends PerlLightTestCase {
 
   @Test
   @Category(Heavy.class)
+  public void testPerl538() {
+    doTestLarge(false);
+  }
+
+  @Test
+  @Category(Heavy.class)
   public void testPerl5125() {
     doTestLarge(false);
   }

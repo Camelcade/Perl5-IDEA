@@ -60,6 +60,11 @@ class PerlParserRollbackTest : PerlParserTestBase() {
   }
 
   @Test
+  fun testPerl538() {
+    doTest()
+  }
+
+  @Test
   fun testPerl534() {
     doTest()
   }

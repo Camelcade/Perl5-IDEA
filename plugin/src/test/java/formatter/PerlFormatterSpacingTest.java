@@ -318,6 +318,12 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
 
   @Test
   @Category(Heavy.class)
+  public void testPerl538() {
+    doTestLarge(false);
+  }
+
+  @Test
+  @Category(Heavy.class)
   public void testPerl5125() {
     doTestLarge(false);
   }
