@@ -1239,7 +1239,8 @@ type_specifier_method ::= type_specifier_tokens {elementType=method}
 private type_specifier_tokens ::= 'unary_custom'|'subname'
 
 private rightward_call ::= method  [call_arguments]
-private leftward_call ::= {method|code_primitive_variation} parenthesised_call_arguments
+private leftward_call ::= &leftward_prefix {method|code_primitive_variation} parenthesised_call_arguments
+private leftward_prefix ::= '$&' | 'argumentless' | 'case' | 'catch' | 'default' | 'finally' | 'fp_after' | 'fp_around' | 'fp_augment' | 'fp_before' | 'fp_override' | 'fun' | 'func' | 'list' | 'method' | 'package::name::' | 'subname' | 'switch' | 'try' | 'unary' | 'unary_custom'
 
 private anon_hash_lookahead ::= '{' anon_hash_lookahead_body '}'
 private anon_hash_lookahead_body ::=

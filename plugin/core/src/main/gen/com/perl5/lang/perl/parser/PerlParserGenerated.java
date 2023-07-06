@@ -2513,23 +2513,63 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // {method|code_primitive_variation} parenthesised_call_arguments
+  // &leftward_prefix {method|code_primitive_variation} parenthesised_call_arguments
   static boolean leftward_call(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "leftward_call")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
     result_ = leftward_call_0(builder_, level_ + 1);
+    result_ = result_ && leftward_call_1(builder_, level_ + 1);
     result_ = result_ && parenthesised_call_arguments(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
 
-  // method|code_primitive_variation
+  // &leftward_prefix
   private static boolean leftward_call_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "leftward_call_0")) return false;
     boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _AND_);
+    result_ = leftward_prefix(builder_, level_ + 1);
+    exit_section_(builder_, level_, marker_, result_, false, null);
+    return result_;
+  }
+
+  // method|code_primitive_variation
+  private static boolean leftward_call_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "leftward_call_1")) return false;
+    boolean result_;
     result_ = method(builder_, level_ + 1);
     if (!result_) result_ = code_primitive_variation(builder_, level_ + 1);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // '$&' | 'argumentless' | 'case' | 'catch' | 'default' | 'finally' | 'fp_after' | 'fp_around' | 'fp_augment' | 'fp_before' | 'fp_override' | 'fun' | 'func' | 'list' | 'method' | 'package::name::' | 'subname' | 'switch' | 'try' | 'unary' | 'unary_custom'
+  static boolean leftward_prefix(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "leftward_prefix")) return false;
+    boolean result_;
+    result_ = consumeToken(builder_, SIGIL_CODE);
+    if (!result_) result_ = consumeToken(builder_, BUILTIN_ARGUMENTLESS);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_CASE);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_CATCH);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_DEFAULT);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_FINALLY);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_AFTER_FP);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_AROUND_FP);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_AUGMENT_FP);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_BEFORE_FP);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_OVERRIDE_FP);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_FUN);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_FUNC);
+    if (!result_) result_ = consumeToken(builder_, BUILTIN_LIST);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_METHOD);
+    if (!result_) result_ = consumeToken(builder_, QUALIFYING_PACKAGE);
+    if (!result_) result_ = consumeToken(builder_, SUB_NAME);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_SWITCH);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_TRY);
+    if (!result_) result_ = consumeToken(builder_, BUILTIN_UNARY);
+    if (!result_) result_ = consumeToken(builder_, CUSTOM_UNARY);
     return result_;
   }
 
