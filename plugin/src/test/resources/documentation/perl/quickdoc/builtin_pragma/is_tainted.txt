@@ -1,0 +1,2 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>is_tainted</h2><div style="padding-bottom: 10px;"><pre><code>    $bool = is_tainted($var);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns true when given a tainted variable.</p>

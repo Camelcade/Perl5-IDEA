@@ -1,11 +1,14 @@
-<ul style="margin-left: 7px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FNAME">NAME</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FSYNOPSIS">SYNOPSIS</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FDESCRIPTION">DESCRIPTION</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FLexical+Import">Lexical Import</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ftrue">true</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ffalse">false</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fis_bool">is_bool</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fweaken">weaken</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Funweaken">unweaken</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fis_weak">is_weak</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fblessed">blessed</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Frefaddr">refaddr</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Freftype">reftype</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fcreated_as_string">created_as_string</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fcreated_as_number">created_as_number</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fceil">ceil</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ffloor">floor</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Findexed">indexed</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ftrim">trim</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FSEE+ALSO">SEE ALSO</a></li></ul><h1>NAME</h1><p style="padding-bottom: 10px;">builtin - Perl pragma to import built-in utility functions</p>
+<ul style="margin-left: 7px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FNAME">NAME</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FSYNOPSIS">SYNOPSIS</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FDESCRIPTION">DESCRIPTION</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FLexical+Import">Lexical Import</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></li><ul style="margin-left: 20px;margin-top:0px;margin-bottom:0px;"><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ftrue">true</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ffalse">false</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fis_bool">is_bool</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fweaken">weaken</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Funweaken">unweaken</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fis_weak">is_weak</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fblessed">blessed</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Frefaddr">refaddr</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Freftype">reftype</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fcreated_as_string">created_as_string</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fcreated_as_number">created_as_number</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fceil">ceil</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ffloor">floor</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Findexed">indexed</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Ftrim">trim</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fis_tainted">is_tainted</a></li><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2Fexport_lexically">export_lexically</a></li></ul><li style="margin-top:3px;margin-bottom:2px;"><a href="psi_element://builtin%2FSEE+ALSO">SEE ALSO</a></li></ul><h1>NAME</h1><p style="padding-bottom: 10px;">builtin - Perl pragma to import built-in utility functions</p>
 <h1>SYNOPSIS</h1><div style="padding-bottom: 10px;"><pre><code>    use builtin qw(
         true false is_bool
         weaken unweaken is_weak
         blessed refaddr reftype
         created_as_string created_as_number
         ceil floor
+        indexed
         trim
+        is_tainted
+        export_lexically
     );</code></pre></div>
 <h1>DESCRIPTION</h1><p style="padding-bottom: 10px;">Perl provides several utility functions in the <code>builtin</code> package. These are
 plain functions, and look and behave just like regular user-defined functions
@@ -164,4 +167,27 @@ A complete list is in <a href="psi_element://perlrecharclass%2FWhitespace" style
 <div style="padding-bottom: 10px;"><pre><code>    $str =~ s/\A\s+|\s+\z//urg;</code></pre></div>
 <p style="padding-bottom: 10px;">For Perl versions where this feature is not available look at the
 <a href="psi_element://String%3A%3AUtil" style="color:red">String::Util</a> module for a comparable implementation.</p>
+<h2>is_tainted</h2><div style="padding-bottom: 10px;"><pre><code>    $bool = is_tainted($var);</code></pre></div>
+<p style="padding-bottom: 10px;">Returns true when given a tainted variable.</p>
+<h2>export_lexically</h2><div style="padding-bottom: 10px;"><pre><code>    export_lexically($name1, $ref1, $name2, $ref2, ...)</code></pre></div>
+<p style="padding-bottom: 10px;">Exports new lexical names into the scope currently being compiled. Names given
+by the first of each pair of values will refer to the corresponding item whose
+reference is given by the second. Types of item that are permitted are
+subroutines, and scalar, array, and hash variables. If the item is a
+subroutine, the name may optionally be prefixed with the <code>&amp;</code> sigil, but for
+convenience it doesn't have to. For items that are variables the sigil is
+required, and must match the type of the variable.</p>
+<div style="padding-bottom: 10px;"><pre><code>    export_lexically func    =&gt; \&amp;func,
+                     '&amp;func' =&gt; \&amp;func;  # same as above
+
+    export_lexically '$scalar' =&gt; \my $var;</code></pre></div>
+<p style="padding-bottom: 10px;"></p>
+<div style="padding-bottom: 10px;"><pre><code>    # The following are not permitted
+    export_lexically '$var' =&gt; \@arr;   # sigil does not match
+    export_lexically name =&gt; \$scalar;  # implied '&amp;' sigil does not match
+
+    export_lexically '*name' =&gt; \*globref;  # globrefs are not supported</code></pre></div>
+<p style="padding-bottom: 10px;">This must be called at compile time; which typically means during a <code>BEGIN</code>
+block. Usually this would be used as part of an <code>import</code> method of a module,
+when invoked as part of a <code>use ...</code> statement.</p>
 <h1>SEE ALSO</h1><p style="padding-bottom: 10px;"><a href="psi_element://perlop" style="color:red">perlop</a>, <a href="psi_element://perlfunc" style="color:red">perlfunc</a>, <a href="psi_element://Scalar%3A%3AUtil" style="color:red">Scalar::Util</a></p>

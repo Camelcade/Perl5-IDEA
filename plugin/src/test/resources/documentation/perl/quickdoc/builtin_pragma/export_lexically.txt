@@ -1,0 +1,21 @@
+<p><a href="psi_element://builtin">builtin</a>: <a href="psi_element://builtin%2FFUNCTIONS">FUNCTIONS</a></p><h2>export_lexically</h2><div style="padding-bottom: 10px;"><pre><code>    export_lexically($name1, $ref1, $name2, $ref2, ...)</code></pre></div>
+<p style="padding-bottom: 10px;">Exports new lexical names into the scope currently being compiled. Names given
+by the first of each pair of values will refer to the corresponding item whose
+reference is given by the second. Types of item that are permitted are
+subroutines, and scalar, array, and hash variables. If the item is a
+subroutine, the name may optionally be prefixed with the <code>&amp;</code> sigil, but for
+convenience it doesn't have to. For items that are variables the sigil is
+required, and must match the type of the variable.</p>
+<div style="padding-bottom: 10px;"><pre><code>    export_lexically func    =&gt; \&amp;func,
+                     '&amp;func' =&gt; \&amp;func;  # same as above
+
+    export_lexically '$scalar' =&gt; \my $var;</code></pre></div>
+<p style="padding-bottom: 10px;"></p>
+<div style="padding-bottom: 10px;"><pre><code>    # The following are not permitted
+    export_lexically '$var' =&gt; \@arr;   # sigil does not match
+    export_lexically name =&gt; \$scalar;  # implied '&amp;' sigil does not match
+
+    export_lexically '*name' =&gt; \*globref;  # globrefs are not supported</code></pre></div>
+<p style="padding-bottom: 10px;">This must be called at compile time; which typically means during a <code>BEGIN</code>
+block. Usually this would be used as part of an <code>import</code> method of a module,
+when invoked as part of a <code>use ...</code> statement.</p>

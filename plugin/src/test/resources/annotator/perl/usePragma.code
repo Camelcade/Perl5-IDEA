@@ -39,6 +39,7 @@ use <info descr="null">parent</info>;
 use <info descr="null">re</info>;
 use <info descr="null">sigtrap</info>;
 use <info descr="null">sort</info>;
+use <info descr="null">stable</info>;
 use <info descr="null">strict</info>;
 use <info descr="null">subs</info>;
 use <info descr="null">threads</info>;

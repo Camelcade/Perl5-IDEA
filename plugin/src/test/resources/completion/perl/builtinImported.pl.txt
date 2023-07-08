@@ -10,6 +10,9 @@ Text: created_as_number; Tail: ($value); Type: builtin; Icon: /subroutine_gutter
 Text: created_as_string; Tail: ($value); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: created_as_string
 	PsiElement: Implicit sub: created_as_string($value)($value)
+Text: export_lexically; Tail: (%names_to_refs); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: export_lexically
+	PsiElement: Implicit sub: export_lexically(%names_to_refs)(%names_to_refs)
 Text: false; Tail: null; Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: false
 	PsiElement: Implicit sub: false()
@@ -22,6 +25,9 @@ Text: indexed; Tail: (@list); Type: builtin; Icon: /subroutine_gutter_icon.png; 
 Text: is_bool; Tail: ($value); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: is_bool
 	PsiElement: Implicit sub: is_bool($value)($value)
+Text: is_tainted; Tail: ($var); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: is_tainted
+	PsiElement: Implicit sub: is_tainted($var)($var)
 Text: is_weak; Tail: ($ref); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: is_weak
 	PsiElement: Implicit sub: is_weak($ref)($ref)

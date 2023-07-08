@@ -2400,7 +2400,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         ((LexerEditorHighlighter)editorHighlighter).getSyntaxHighlighter();
       TextAttributesKey[] highlights = activeSyntaxHighlighter.getTokenHighlights(highlighterIterator.getTokenType());
       if (highlights.length > 0) {
-        if (sb.length() > 0) {
+        if (!sb.isEmpty()) {
           sb.append("\n");
         }
         sb.append(documentText, highlighterIterator.getStart(), highlighterIterator.getEnd())
@@ -2624,6 +2624,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected void withPerlPod532() { addTestLibrary("perldoc532"); }
 
   protected void withPerl536() { addTestLibrary("perl5360"); }
+
+  protected void withPerl538() { addTestLibrary("perl5380"); }
 
   protected void withCpanfile() { addTestLibrary("cpanfile"); }
 
