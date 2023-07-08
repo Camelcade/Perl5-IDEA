@@ -10,6 +10,9 @@ Text: created_as_number; Tail: null; Type: optional; Icon: /subroutine_gutter_ic
 Text: created_as_string; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: created_as_string
 	String: created_as_string
+Text: export_lexically; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: export_lexically
+	String: export_lexically
 Text: false; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: false
 	String: false
@@ -22,6 +25,9 @@ Text: indexed; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Ty
 Text: is_bool; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: is_bool
 	String: is_bool
+Text: is_tainted; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: is_tainted
+	String: is_tainted
 Text: is_weak; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: is_weak
 	String: is_weak

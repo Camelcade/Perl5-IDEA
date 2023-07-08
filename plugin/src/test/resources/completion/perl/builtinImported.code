@@ -3,6 +3,7 @@ use builtin qw/ true false is_bool
                        blessed refaddr reftype
                        created_as_string created_as_number
                        ceil floor indexed
-                       trim/;
+                       trim
+                       is_tainted export_lexically/;
 
 <caret>

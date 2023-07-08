@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ abstract class PerlQuickDocBuiltInPragmaTestCase extends PerlLightTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    withPerl536();
+    withPerl538();
   }
 
   @Override
@@ -79,6 +79,12 @@ abstract class PerlQuickDocBuiltInPragmaTestCase extends PerlLightTestCase {
 
   @Test
   public void testTrim() { doTest(); }
+
+  @Test
+  public void testIs_tainted() { doTest(); }
+
+  @Test
+  public void testExport_lexically() { doTest(); }
 
   @Override
   protected @NotNull String getResultsFileExtension() {

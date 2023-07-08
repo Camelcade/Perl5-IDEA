@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,16 @@
 package highlighting;
 
 
-import com.intellij.openapi.util.io.FileUtil;
 import org.junit.Test;
 import unit.perl.parser.PerlParserLikeTest;
+
+import java.io.File;
 
 public class PerlSyntaxHighlightingTest extends PerlParserLikeTest {
 
   @Override
   protected String getResultsTestDataPath() {
-    return FileUtil.join(TEST_RESOURCES_ROOT,  "highlighting/perl/syntax");
+    return new File(TEST_RESOURCES_ROOT, "highlighting/perl/syntax").getAbsolutePath();
   }
 
   @Test

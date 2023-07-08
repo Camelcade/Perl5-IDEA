@@ -1,5 +1,5 @@
 #!/bin/bash -ex
-PERL_VERSION="5.36.0"
+PERL_VERSION="5.38.0"
 
 for tag in perl5 perlbrew plenv asdf
 do

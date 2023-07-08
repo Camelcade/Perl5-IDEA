@@ -38,6 +38,7 @@ use parent;
 use re;
 use sigtrap;
 use sort;
+use stable;
 use strict;
 use subs;
 use threads;

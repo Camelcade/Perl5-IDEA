@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ public final class PerlFeaturesTable implements Cloneable {
   private static final String FEATURE_ISA = "isa";
   private static final String FEATURE_SAY = "say";
   private static final String FEATURE_TRY = "try";
+  private static final String FEATURE_CLASS = "class";
   private static final String FEATURE_DEFER = "defer";
   private static final String FEATURE_STATE = "state";
   private static final String FEATURE_SWITCH = "switch";
@@ -38,21 +39,23 @@ public final class PerlFeaturesTable implements Cloneable {
   private static final String FEATURE_INDIRECT = "indirect";
   private static final String FEATURE_EVALBYTES = "evalbytes";
   private static final String FEATURE_SIGNATURES = "signatures";
-  private static final String FEATURE_CURRENT_SUB = "current_sub";
+  private static final String FEATURE_CURRENT_SUB = "__SUB__";
+  private static final String FEATURE_MODULE_TRUE = "module_true";
   private static final String FEATURE_REFALIASING = "refaliasing";
   private static final String FEATURE_POSTDEREF_QQ = "postderef_qq";
-  private static final String FEATURE_UNICODE_EVAL = "unicode_eval";
-  private static final String FEATURE_DECLARED_REFS = "declared_refs";
-  private static final String FEATURE_UNICODE_STRINGS = "unicode_strings";
+  private static final String FEATURE_UNICODE_EVAL = "unieval";
+  private static final String FEATURE_DECLARED_REFS = "myref";
+  private static final String FEATURE_UNICODE_STRINGS = "unicode";
   private static final String FEATURE_MULTIDIMENSIONAL = "multidimensional";
   private static final String FEATURE_BAREWORD_FILEHANDLES = "bareword_filehandles";
-  private static final String FEATURE_EXTRA_PAIRED_DELIMITERS = "extra_paired_delimiters";
+  private static final String FEATURE_EXTRA_PAIRED_DELIMITERS = "more_delims";
 
   public static final Map<String, @Nls String> AVAILABLE_FEATURES = Maps.of(
     FEATURE_FC, PerlBundle.message("perl.feature.fc.description"),
     FEATURE_ISA, PerlBundle.message("perl.feature.isa.description"),
     FEATURE_SAY, PerlBundle.message("perl.feature.say.description"),
     FEATURE_TRY, PerlBundle.message("perl.feature.try.description"),
+    FEATURE_CLASS, PerlBundle.message("perl.feature.class"),
     FEATURE_DEFER, PerlBundle.message("perl.feature.defer.description"),
     FEATURE_STATE, PerlBundle.message("perl.feature.state.description"),
     FEATURE_SWITCH, PerlBundle.message("perl.feature.switch.description"),
@@ -61,6 +64,7 @@ public final class PerlFeaturesTable implements Cloneable {
     FEATURE_EVALBYTES, PerlBundle.message("perl.feature.evalbytes.description"),
     FEATURE_SIGNATURES, PerlBundle.message("perl.feature.signatures.description"),
     FEATURE_CURRENT_SUB, PerlBundle.message("perl.feature.current.sub.description"),
+    FEATURE_MODULE_TRUE, PerlBundle.message("perl.feature.module.true"),
     FEATURE_REFALIASING, PerlBundle.message("perl.feature.refaliasing.description"),
     FEATURE_POSTDEREF_QQ, PerlBundle.message("perl.feature.postderef.qq.description"),
     FEATURE_UNICODE_EVAL, PerlBundle.message("perl.feature.unicode.eval.description"),
@@ -88,6 +92,9 @@ public final class PerlFeaturesTable implements Cloneable {
     FEATURE_UNICODE_STRINGS);
   private static final List<String> FEATURES_5_35 = List.of(
     FEATURE_BAREWORD_FILEHANDLES, FEATURE_BITWISE, FEATURE_CURRENT_SUB, FEATURE_EVALBYTES, FEATURE_FC, FEATURE_ISA, FEATURE_POSTDEREF_QQ,
+    FEATURE_SAY, FEATURE_SIGNATURES, FEATURE_STATE, FEATURE_UNICODE_EVAL, FEATURE_UNICODE_STRINGS);
+  private static final List<String> FEATURES_5_37 = List.of(
+    FEATURE_BITWISE, FEATURE_CURRENT_SUB, FEATURE_EVALBYTES, FEATURE_FC, FEATURE_ISA, FEATURE_MODULE_TRUE, FEATURE_POSTDEREF_QQ,
     FEATURE_SAY, FEATURE_SIGNATURES, FEATURE_STATE, FEATURE_UNICODE_EVAL, FEATURE_UNICODE_STRINGS);
 
   public static final Map<String, List<String>> AVAILABLE_FEATURES_BUNDLES = Maps.of(
@@ -126,7 +133,10 @@ public final class PerlFeaturesTable implements Cloneable {
     "5.34", FEATURES_5_27,
 
     "5.35", FEATURES_5_35,
-    "5.36", FEATURES_5_35
+    "5.36", FEATURES_5_35,
+
+    "5.37", FEATURES_5_37,
+    "5.38", FEATURES_5_37
   );
 
   private Map<String, Boolean> featuresMap;

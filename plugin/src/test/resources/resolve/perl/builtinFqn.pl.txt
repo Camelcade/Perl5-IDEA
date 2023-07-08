@@ -73,3 +73,12 @@ PerlNamespaceReference at (262,269); text in range: 'builtin' => 0 results:
 PerlSubReference at (271,275); text in range: 'trim' => 1 results:
 	Implicit sub: trim($string)($string)
 
+PerlNamespaceReference at (277,284); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (286,296); text in range: 'is_tainted' => 1 results:
+	Implicit sub: is_tainted($var)($var)
+
+PerlNamespaceReference at (298,305); text in range: 'builtin' => 0 results:
+
+PerlSubReference at (307,323); text in range: 'export_lexically' => 1 results:
+	Implicit sub: export_lexically(%names_to_refs)(%names_to_refs)

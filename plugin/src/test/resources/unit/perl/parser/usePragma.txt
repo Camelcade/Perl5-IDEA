@@ -162,6 +162,10 @@ Perl5
     PsiElement(Perl5: ;)(';')
   PerlUseStatementElement(USE_STATEMENT)
     PsiElement(Perl5: use)('use')
+    PerlNamespaceElementImpl(Perl5: package::name)('stable')
+    PsiElement(Perl5: ;)(';')
+  PerlUseStatementElement(USE_STATEMENT)
+    PsiElement(Perl5: use)('use')
     PerlNamespaceElementImpl(Perl5: package::name)('strict')
     PsiElement(Perl5: ;)(';')
   PerlUseStatementElement(USE_STATEMENT)
@@ -203,5 +207,5 @@ Perl5
 --------------------------------------------------------------------------------
 Subtree: Perl5 POD (Perl5 POD)
 POD file
-  PsiElement(Perl5 POD: POD_OUTER)('use attributes;\nuse autodie;\nuse autodie::exception;\nuse autodie::exception::system;\nuse autodie::hints;\nuse autodie::skip;\nuse autouse;\nuse base;\nuse bigfloat;\nuse bigint;\nuse bignum;\nuse bigrat;\nuse blib;\nuse builtin;\nuse bytes;\nuse charnames;\nuse constant;\nuse deprecate;\nuse diagnostics;\nuse encoding;\nuse encoding::warnings;\nuse experimental;\nuse feature;\nuse fields;\nuse filetest;\nuse if;\nuse integer;\nuse less;\nuse lib;\nuse locale;\nuse mro;\nuse ok;\nuse open;\nuse ops;\nuse overload;\nuse overloading;\nuse parent;\nuse re;\nuse sigtrap;\nuse sort;\nuse strict;\nuse subs;\nuse threads;\nuse threads::shared;\nuse utf8;\nuse vars;\nuse version;\nuse vmsish;\nuse warnings;\nuse warnings::register;')
+  PsiElement(Perl5 POD: POD_OUTER)('use attributes;\nuse autodie;\nuse autodie::exception;\nuse autodie::exception::system;\nuse autodie::hints;\nuse autodie::skip;\nuse autouse;\nuse base;\nuse bigfloat;\nuse bigint;\nuse bignum;\nuse bigrat;\nuse blib;\nuse builtin;\nuse bytes;\nuse charnames;\nuse constant;\nuse deprecate;\nuse diagnostics;\nuse encoding;\nuse encoding::warnings;\nuse experimental;\nuse feature;\nuse fields;\nuse filetest;\nuse if;\nuse integer;\nuse less;\nuse lib;\nuse locale;\nuse mro;\nuse ok;\nuse open;\nuse ops;\nuse overload;\nuse overloading;\nuse parent;\nuse re;\nuse sigtrap;\nuse sort;\nuse stable;\nuse strict;\nuse subs;\nuse threads;\nuse threads::shared;\nuse utf8;\nuse vars;\nuse version;\nuse vmsish;\nuse warnings;\nuse warnings::register;')
 --------------------------------------------------------------------------------

@@ -86,5 +86,15 @@
         <argument name="string" type="$"/>
       </arguments>
     </sub>
+    <sub name="is_tainted">
+      <arguments>
+        <argument name="var" type="$"/>
+      </arguments>
+    </sub>
+    <sub name="export_lexically">
+      <arguments>
+        <argument name="names_to_refs" type="%"/>
+      </arguments>
+    </sub>
   </package>
 </xml>

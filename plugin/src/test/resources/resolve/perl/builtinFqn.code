@@ -13,4 +13,5 @@ builtin::ceil;
 builtin::floor;
 builtin::indexed;
 builtin::trim;
-
+builtin::is_tainted;
+builtin::export_lexically;
