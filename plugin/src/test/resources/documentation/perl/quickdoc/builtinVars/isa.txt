@@ -1,0 +1,27 @@
+<p><a href="psi_element://perlobj">perlobj</a>: <a href="psi_element://perlobj%2FDESCRIPTION">DESCRIPTION</a></p><h2>A Class is Simply a Package
+   </h2><p style="padding-bottom: 10px;">Perl does not provide any special syntax for class definitions. A
+package is simply a namespace containing variables and subroutines. The
+only difference is that in a class, the subroutines may expect a
+reference to an object or the name of a class as the first argument.
+This is purely a matter of convention, so a class may contain both
+methods and subroutines which <i>don't</i> operate on an object or class.</p>
+<p style="padding-bottom: 10px;">Each package contains a special array called <code>@ISA</code>. The <code>@ISA</code> array
+contains a list of that class's parent classes, if any. This array is
+examined when Perl does method resolution, which we will cover later.</p>
+<p style="padding-bottom: 10px;">Calling methods from a package means it must be loaded, of course, so
+you will often want to load a module and add it to <code>@ISA</code> at the same
+time. You can do so in a single step using the <a href="psi_element://parent" style="color:red">parent</a> pragma.
+(In older code you may encounter the <a href="psi_element://base" style="color:red">base</a> pragma, which is nowadays
+discouraged except when you have to work with the equally discouraged
+<a href="psi_element://fields" style="color:red">fields</a> pragma.)</p>
+<p style="padding-bottom: 10px;">However the parent classes are set, the package's <code>@ISA</code> variable will
+contain a list of those parents. This is simply a list of scalars, each
+of which is a string that corresponds to a package name.</p>
+<p style="padding-bottom: 10px;">All classes inherit from the <a href="psi_element://UNIVERSAL" style="color:red">UNIVERSAL</a> class implicitly. The
+<a href="psi_element://UNIVERSAL" style="color:red">UNIVERSAL</a> class is implemented by the Perl core, and provides
+several default methods, such as <code>isa()</code>, <code>can()</code>, and <code>VERSION()</code>.
+The <code>UNIVERSAL</code> class will <i>never</i> appear in a package's <code>@ISA</code>
+variable.</p>
+<p style="padding-bottom: 10px;">Perl <i>only</i> provides method inheritance as a built-in feature.
+Attribute inheritance is left up the class to implement. See the
+<a href="psi_element://perlobj%2FWriting+Accessors">Writing Accessors</a> section for details.</p>

@@ -13,3 +13,6 @@ Text: varsub3; Tail: {}; Type: null; Icon: /hash_gutter_icon.png; Type Icon: nul
 Text: {^CHILD_ERROR_NATIVE}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: {^CHILD_ERROR_NATIVE}
 	PsiElement: Built-in: $^CHILD_ERROR_NATIVE
+Text: {^MAX_NESTED_EVAL_BEGIN_BLOCKS}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: {^MAX_NESTED_EVAL_BEGIN_BLOCKS}
+	PsiElement: Built-in: $^MAX_NESTED_EVAL_BEGIN_BLOCKS

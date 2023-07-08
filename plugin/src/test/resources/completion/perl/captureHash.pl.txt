@@ -79,6 +79,9 @@ Text: ^CAPTURE_ALL; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Typ
 Text: ^H; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: ^H
 	PsiElement: Built-in: %^H
+Text: ^HOOK; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: ^HOOK
+	PsiElement: Built-in: %^HOOK
 Text: main::; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: main::
 	PsiElement: Implicit namespace: main

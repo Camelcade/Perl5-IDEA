@@ -1,0 +1,6 @@
+<p><a href="psi_element://perlvar">perlvar</a>: <a href="psi_element://perlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://perlvar%2FVariables+related+to+regular+expressions">Variables related to regular expressions</a>: <a href="psi_element://perlvar%2FPerformance+issues">Performance issues</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">${^RE_COMPILE_RECURSION_LIMIT}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The current value giving the maximum number of open but unclosed
+parenthetical groups there may be at any point during a regular
+expression compilation.  The default is currently 1000 nested groups.
+You may adjust it depending on your needs and the amount of memory
+available.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.30.0.</p></dd></dl>

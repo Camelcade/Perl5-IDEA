@@ -1,0 +1,10 @@
+Built-in: $^SAFE_LOCALES
+
+perlvar: perlvar
+	POD file at 0 in perlvar.pod
+SPECIAL VARIABLES: perlvar%2FSPECIAL+VARIABLES
+	PsiHead1SectionImpl(Perl5 POD: HEAD_1_SECTION) at 2852 in perlvar.pod
+Variables related to the interpreter state: perlvar%2FVariables+related+to+the+interpreter+state
+	PsiHead2SectionImpl(Perl5 POD: HEAD_2_SECTION) at 77947 in perlvar.pod
+switch_to_global_locale in perlapi: perlapi%2Fswitch_to_global_locale
+	null

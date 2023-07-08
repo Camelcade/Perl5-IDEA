@@ -1,0 +1,12 @@
+<p><a href="psi_element://perlvar">perlvar</a>: <a href="psi_element://perlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://perlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">$INC</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">As of 5.37.7 when an <code>@INC</code> hook is executed the index of the <code>@INC</code>
+array that holds the hook will be localized into the <code>$INC</code> variable.
+When the hook returns the integer successor of its value will be used to
+determine the next index in <code>@INC</code> that will be checked, thus if it is
+set to -1 (or <code>undef</code>) the traversal over the <code>@INC</code> array will be
+restarted from its beginning.</p>
+<p style="padding-bottom: 10px;">Normally traversal through the <code>@INC</code> array is from beginning to end
+(<code>0 .. $#INC</code>), and if the <code>@INC</code> array is modified by the hook the
+iterator may be left in a state where newly added entries are skipped.
+Changing this value allows an <code>@INC</code> hook to rewrite the <code>@INC</code> array
+and tell Perl where to continue afterwards. See <a href="psi_element://perlfunc%2Frequire" style="color:red">require in perlfunc</a> for
+details on <code>@INC</code> hooks.</p></dd></dl>

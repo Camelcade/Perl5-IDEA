@@ -13,3 +13,6 @@ Text: {^CAPTURE}; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type
 Text: {^CAPTURE}; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: {^CAPTURE}
 	PsiElement: Built-in: %^CAPTURE
+Text: {^HOOK}; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: {^HOOK}
+	PsiElement: Built-in: %^HOOK

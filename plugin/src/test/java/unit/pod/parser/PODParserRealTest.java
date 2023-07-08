@@ -27,7 +27,7 @@ public class PODParserRealTest extends PerlParserTestBase {
 
   @Override
   protected String getBaseDataPath() {
-    return "testLibSets/perldoc528/pod";
+    return "testLibSets/perl5280/pod";
   }
 
   @Override

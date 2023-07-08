@@ -1,0 +1,12 @@
+<p><a href="psi_element://perlvar">perlvar</a>: <a href="psi_element://perlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://perlvar%2FVariables+related+to+regular+expressions">Variables related to regular expressions</a>: <a href="psi_element://perlvar%2FPerformance+issues">Performance issues</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">${^LAST_SUCCESSFUL_PATTERN}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The last successful pattern that matched in the current scope.  The empty
+pattern defaults to matching to this. For instance:</p>
+<div style="padding-bottom: 10px;"><pre><code>    if (m/foo/ || m/bar/) {
+        s//BLAH/;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">and</p>
+<div style="padding-bottom: 10px;"><pre><code>    if (m/foo/ || m/bar/) {
+        s/${^LAST_SUCCESSFUL_PATTERN}/BLAH/;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">are equivalent.</p>
+<p style="padding-bottom: 10px;">You can use this to debug which pattern matched last, or to match with it again.</p>
+<p style="padding-bottom: 10px;">Added in Perl 5.37.10.</p></dd></dl>

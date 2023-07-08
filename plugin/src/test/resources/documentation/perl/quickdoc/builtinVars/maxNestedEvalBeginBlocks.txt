@@ -1,0 +1,34 @@
+<p><a href="psi_element://perlvar">perlvar</a>: <a href="psi_element://perlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://perlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">${^MAX_NESTED_EVAL_BEGIN_BLOCKS}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This variable determines the maximum number <code>eval EXPR</code>/<code>BEGIN</code> or
+<code>require</code>/<code>BEGIN</code> block nesting that is allowed. This means it also
+controls the maximum nesting of <code>use</code> statements as well.</p>
+<p style="padding-bottom: 10px;">The default of 1000 should be sufficiently large for normal working
+purposes, and if you must raise it then you should be conservative
+with your choice or you may encounter segfaults from exhaustion of
+the C stack. It seems unlikely that real code has a use depth above
+1000, but we have left this configurable just in case.</p>
+<p style="padding-bottom: 10px;">When set to <code>0</code> then <code>BEGIN</code> blocks inside of <code>eval EXPR</code> or
+<code>require EXPR</code> are forbidden entirely and will trigger an exception
+which will terminate the compilation and in the case of <code>require</code>
+will throw an exception, or in the case of <code>eval</code> return the error in
+<code>$@</code> as usual.</p>
+<p style="padding-bottom: 10px;">Consider the code</p>
+<div style="padding-bottom: 10px;"><pre><code> perl -le'sub f { eval &quot;BEGIN { f() }&quot;; } f()'</code></pre></div>
+<p style="padding-bottom: 10px;">each invocation of <code>f()</code> will consume considerable C stack, and this
+variable is used to cause code like this to die instead of exhausting
+the C stack and triggering a segfault. Needless to say code like this is
+unusual, it is unlikely you will actually need to raise the setting.
+However it may be useful to set it to 0 for a limited time period to
+prevent BEGIN{} blocks from being executed during an <code>eval EXPR</code>.</p>
+<p style="padding-bottom: 10px;">Note that setting this to 1 would NOT affect code like this:</p>
+<div style="padding-bottom: 10px;"><pre><code>    BEGIN { $n += 1; BEGIN { $n += 2; BEGIN { $n += 4 } } }</code></pre></div>
+<p style="padding-bottom: 10px;">The reason is that BEGIN blocks are executed immediately after they are
+completed, thus the innermost will execute before the ones which contain
+it have even finished compiling, and the depth will not go above 1. In
+fact the above code is equivalent to</p>
+<div style="padding-bottom: 10px;"><pre><code>    BEGIN { $n+=4 }
+    BEGIN { $n+=2 }
+    BEGIN { $n+=1 }</code></pre></div>
+<p style="padding-bottom: 10px;">which makes it obvious why a ${^MAX_EVAL_BEGIN_DEPTH} of 1 would not
+block this code.</p>
+<p style="padding-bottom: 10px;">Only <code>BEGIN</code>'s executed inside of an <code>eval</code> or <code>require</code> (possibly via
+<code>use</code>) are affected.</p></dd></dl>

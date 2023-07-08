@@ -1,0 +1,9 @@
+<p><a href="psi_element://perlvar">perlvar</a>: <a href="psi_element://perlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://perlvar%2FVariables+related+to+the+interpreter+state">Variables related to the interpreter state</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">${^SAFE_LOCALES}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">Reflects if safe locale operations are available to this perl (when the
+value is 1) or not (the value is 0).  This variable is always 1 if the
+perl has been compiled without threads.  It is also 1 if this perl is
+using thread-safe locale operations.  Note that an individual thread may
+choose to use the global locale (generally unsafe) by calling
+<a href="psi_element://perlapi%2Fswitch_to_global_locale" style="color:red">switch_to_global_locale in perlapi</a>.  This variable currently is still
+set to 1 in such threads.</p>
+<p style="padding-bottom: 10px;">This variable is read-only.</p>
+<p style="padding-bottom: 10px;">This variable was added in Perl v5.28.0.</p></dd></dl>

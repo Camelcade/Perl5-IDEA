@@ -36,7 +36,7 @@ public class PodCompletionPopupTest extends PerlCompletionPopupTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    withPerlPod528();
+    withPerl528();
   }
 
   @Test
