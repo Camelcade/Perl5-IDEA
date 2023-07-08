@@ -54,7 +54,8 @@ public final class PerlHashUtil implements PerlElementTypes {
     "^CAPTURE",
     "^CAPTURE_ALL",
     "OS_ERROR",
-    "ERRNO"
+    "ERRNO",
+    "^HOOK"
   );
 
   private PerlHashUtil() {

@@ -2619,9 +2619,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void withFuture() { addTestLibrary("future"); }
 
-  protected void withPerlPod528() { addTestLibrary("perldoc528"); }
+  protected void withPerl528() { addTestLibrary("perl5280"); }
 
-  protected void withPerlPod532() { addTestLibrary("perldoc532"); }
+  protected void withPerl532() { addTestLibrary("perl5320"); }
 
   protected void withPerl536() { addTestLibrary("perl5360"); }
 
@@ -2639,8 +2639,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void withRoleTiny() { addTestLibrary("roleTiny"); }
-
-  protected void withPerl532() { addTestLibrary("perl5320"); }
 
   protected void withMoo() { addTestLibrary("moo"); }
 

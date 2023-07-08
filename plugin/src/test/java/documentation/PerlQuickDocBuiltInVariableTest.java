@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,12 +23,6 @@ import org.junit.Test;
 public class PerlQuickDocBuiltInVariableTest extends PerlLightTestCase {
 
   static final String DATA_PATH = "documentation/perl/quickdoc/builtinVars";
-
-  @Override
-  protected void setUp() throws Exception {
-    super.setUp();
-    withPerlPod528();
-  }
 
   @Override
   protected String getBaseDataPath() {
@@ -470,6 +464,27 @@ public class PerlQuickDocBuiltInVariableTest extends PerlLightTestCase {
   @Test
   public void testHashErrno() {doTest("%ERRNO");}
 
+  @Test
+  public void testHook() { doTest538("%{^HOOK}"); }
+
+  @Test
+  public void testLastSuccessfulPattern() { doTest538("${^LAST_SUCCESSFUL_PATTERN}"); }
+
+  @Test
+  public void testMaxNestedEvalBeginBlocks() { doTest538("${^MAX_NESTED_EVAL_BEGIN_BLOCKS}"); }
+
+  @Test
+  public void testReCompileRecursionLimit() { doTest538("${^RE_COMPILE_RECURSION_LIMIT}"); }
+
+  @Test
+  public void testSafeLocales() { doTest538("${^SAFE_LOCALES}"); }
+
+  @Test
+  public void testScalarInc() { doTest538("$INC"); }
+
+  @Test
+  public void testIsa() { doTest("@ISA"); }
+
 
   @Override
   protected @NotNull String getResultsFileExtension() {
@@ -477,6 +492,16 @@ public class PerlQuickDocBuiltInVariableTest extends PerlLightTestCase {
   }
 
   private void doTest(@NotNull String text) {
+    withPerl528();
+    doTestInner(text);
+  }
+
+  private void doTest538(@NotNull String text) {
+    withPerl538();
+    doTestInner(text);
+  }
+
+  private void doTestInner(@NotNull String text) {
     initWithTextSmart(text + " ");
     getEditor().getCaretModel().moveToOffset(text.length() == 2 ? 1 : 2);
     doTestQuickDocWithoutInit();

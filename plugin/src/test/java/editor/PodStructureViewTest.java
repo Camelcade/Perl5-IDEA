@@ -29,7 +29,7 @@ import org.junit.experimental.categories.Category;
 public class PodStructureViewTest extends PodLightTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "testLibSets/perldoc528/pod";
+    return "testLibSets/perl5280/pod";
   }
 
   @Override

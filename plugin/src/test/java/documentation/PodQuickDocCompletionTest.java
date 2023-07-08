@@ -25,7 +25,7 @@ public class PodQuickDocCompletionTest extends PodLightTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    withPerlPod528();
+    withPerl528();
   }
 
   @Override

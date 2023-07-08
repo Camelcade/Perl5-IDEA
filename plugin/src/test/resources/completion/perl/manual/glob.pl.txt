@@ -421,6 +421,9 @@ Text: INC; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: n
 Text: INC; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: INC
 	PsiElement: Built-in: %INC
+Text: INC; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: INC
+	PsiElement: Built-in: $INC
 Text: INFO; Tail: null; Type: Log::Log4perl::Levels; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: Log::Log4perl::Levels::INFO
 	PsiElement: Implicit variable: $Log::Log4perl::Levels::INFO@UNKNOWN_VALUE
@@ -442,6 +445,12 @@ Text: INPUT_RECORD_SEPARATOR; Tail: null; Type: Built-in; Icon: /glob_gutter_ico
 Text: INPUT_RECORD_SEPARATOR; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: INPUT_RECORD_SEPARATOR
 	PsiElement: Built-in: $INPUT_RECORD_SEPARATOR
+Text: ISA; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: ISA
+	PsiElement: Built-in: @ISA
+Text: ISA; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: null
+	Lookups: ISA
+	PsiElement: Built-in: *ISA
 Text: LAST_MATCH_END; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: LAST_MATCH_END
 	PsiElement: Built-in: @LAST_MATCH_END
@@ -910,18 +919,36 @@ Text: {^GLOBAL_PHASE}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; 
 Text: {^GLOBAL_PHASE}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: {^GLOBAL_PHASE}
 	PsiElement: Built-in: $^GLOBAL_PHASE
+Text: {^HOOK}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: null
+	Lookups: {^HOOK}
+	PsiElement: Built-in: *^HOOK
+Text: {^HOOK}; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: {^HOOK}
+	PsiElement: Built-in: %^HOOK
 Text: {^LAST_FH}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: null
 	Lookups: {^LAST_FH}
 	PsiElement: Built-in: *^LAST_FH
 Text: {^LAST_FH}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: {^LAST_FH}
 	PsiElement: Built-in: $^LAST_FH
+Text: {^LAST_SUCCESSFUL_PATTERN}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: null
+	Lookups: {^LAST_SUCCESSFUL_PATTERN}
+	PsiElement: Built-in: *^LAST_SUCCESSFUL_PATTERN
+Text: {^LAST_SUCCESSFUL_PATTERN}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: {^LAST_SUCCESSFUL_PATTERN}
+	PsiElement: Built-in: $^LAST_SUCCESSFUL_PATTERN
 Text: {^MATCH}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: null
 	Lookups: {^MATCH}
 	PsiElement: Built-in: *^MATCH
 Text: {^MATCH}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: {^MATCH}
 	PsiElement: Built-in: $^MATCH
+Text: {^MAX_NESTED_EVAL_BEGIN_BLOCKS}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: null
+	Lookups: {^MAX_NESTED_EVAL_BEGIN_BLOCKS}
+	PsiElement: Built-in: *^MAX_NESTED_EVAL_BEGIN_BLOCKS
+Text: {^MAX_NESTED_EVAL_BEGIN_BLOCKS}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: {^MAX_NESTED_EVAL_BEGIN_BLOCKS}
+	PsiElement: Built-in: $^MAX_NESTED_EVAL_BEGIN_BLOCKS
 Text: {^OPEN}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: null
 	Lookups: {^OPEN}
 	PsiElement: Built-in: *^OPEN
@@ -940,6 +967,12 @@ Text: {^PREMATCH}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type
 Text: {^PREMATCH}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: {^PREMATCH}
 	PsiElement: Built-in: $^PREMATCH
+Text: {^RE_COMPILE_RECURSION_LIMIT}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: null
+	Lookups: {^RE_COMPILE_RECURSION_LIMIT}
+	PsiElement: Built-in: *^RE_COMPILE_RECURSION_LIMIT
+Text: {^RE_COMPILE_RECURSION_LIMIT}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: {^RE_COMPILE_RECURSION_LIMIT}
+	PsiElement: Built-in: $^RE_COMPILE_RECURSION_LIMIT
 Text: {^RE_DEBUG_FLAGS}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: null
 	Lookups: {^RE_DEBUG_FLAGS}
 	PsiElement: Built-in: *^RE_DEBUG_FLAGS
@@ -952,6 +985,12 @@ Text: {^RE_TRIE_MAXBUF}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png
 Text: {^RE_TRIE_MAXBUF}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: {^RE_TRIE_MAXBUF}
 	PsiElement: Built-in: $^RE_TRIE_MAXBUF
+Text: {^SAFE_LOCALES}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: null
+	Lookups: {^SAFE_LOCALES}
+	PsiElement: Built-in: *^SAFE_LOCALES
+Text: {^SAFE_LOCALES}; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
+	Lookups: {^SAFE_LOCALES}
+	PsiElement: Built-in: $^SAFE_LOCALES
 Text: {^TAINT}; Tail: null; Type: Built-in; Icon: /glob_gutter_icon.png; Type Icon: null
 	Lookups: {^TAINT}
 	PsiElement: Built-in: *^TAINT

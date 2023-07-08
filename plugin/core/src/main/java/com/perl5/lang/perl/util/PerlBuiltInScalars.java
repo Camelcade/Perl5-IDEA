@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ public final class PerlBuiltInScalars {
 
   public static final Set<String> BUILT_IN = Set.of(
     "OLD_PERL_VERSION",
-    "^WIN32_SLOPPY_STAT",
+    "^WIN32_SLOPPY_STAT",  // deprecated
     "^MATCH",
     "^PREMATCH",
     "^POSTMATCH",
@@ -126,7 +126,7 @@ public final class PerlBuiltInScalars {
     "EXTENDED_OS_ERROR",
     "^E",
     "FORMAT_FORMFEED",
-    "^ENCODING",
+    "^ENCODING", // deprecated
     "FORMAT_LINE_BREAK_CHARACTERS",
     "^F",
     "FORMAT_LINES_LEFT",
@@ -148,6 +148,11 @@ public final class PerlBuiltInScalars {
     "INPUT_RECORD_SEPARATOR",
     "^R",
     "^RE_DEBUG_FLAGS",
-    "LAST_PAREN_MATCH"
+    "LAST_PAREN_MATCH",
+    "^LAST_SUCCESSFUL_PATTERN",
+    "INC",
+    "^MAX_NESTED_EVAL_BEGIN_BLOCKS",
+    "^RE_COMPILE_RECURSION_LIMIT",
+    "^SAFE_LOCALES"
   );
 }

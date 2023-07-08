@@ -1,0 +1,45 @@
+<p><a href="psi_element://perlvar">perlvar</a>: <a href="psi_element://perlvar%2FSPECIAL+VARIABLES">SPECIAL VARIABLES</a>: <a href="psi_element://perlvar%2FGeneral+Variables">General Variables</a></p><dl><dt style="padding-bottom:4px;font-weight:bold;">%{^HOOK}</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">This hash contains coderefs which are called when various perl keywords
+which are hard or impossible to wrap are called. The keys of this hash
+are named after the keyword that is being hooked, followed by two
+underbars and then a phase term; either &quot;before&quot; or &quot;after&quot;.</p>
+<p style="padding-bottom: 10px;">Perl will throw an error if you attempt modify a key which is not
+documented to exist, or if you attempt to store anything other than a
+code reference or undef in the hash.  If you wish to use an object to
+implement a hook you can use currying to embed the object into an
+anonymous code reference.</p>
+<p style="padding-bottom: 10px;">Currently there is only one keyword which can be hooked, <code>require</code>, but
+it is expected that in future releases there will be additional keywords
+with hook support.</p>
+<dl><dt style="padding-bottom:4px;font-weight:bold;">require__before</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The routine indicated by <code>${^HOOK}{require__before}</code> is called by
+<code>require</code> <B>before</B> it checks <code>%INC</code>, looks up <code>@INC</code>, calls INC
+hooks, or compiles any code.  It is called with a single argument, the
+filename for the item being required (package names are converted to
+paths).  It may alter this filename to change what file is loaded.  If
+the hook dies during execution then it will block the require from executing.</p>
+<p style="padding-bottom: 10px;">In order to make it easy to perform an action with shared state both
+before and after the require keyword was executed the <code>require__before</code>
+hook may return a &quot;post-action&quot; coderef which will in turn be executed when
+the <code>require</code> completes.  This coderef will be executed regardless as to
+whether the require completed succesfully or threw an exception.  It will
+be called with the filename that was required.  You can check %INC to
+determine if the require was successful.  Any other return from the
+<code>require__before</code> hook will be silently ignored.</p>
+<p style="padding-bottom: 10px;"><code>require__before</code> hooks are called in FIFO order, and if the hook
+returns a code reference those code references will be called in FILO
+order.  In other words if A requires B requires C, then
+<code>require__before</code> will be called first for A, then B and then C, and
+the post-action code reference will executed first for C, then B and
+then finally A.</p>
+<p style="padding-bottom: 10px;">Well behaved code should ensure that when setting up a
+<code>require__before</code> hook that any prior installed hook will be called,
+and that their return value, if a code reference, will be called as
+well.  See <a href="psi_element://perlfunc%2Frequire" style="color:red">require in perlfunc</a> for an example implementation.</p></dd>
+<dt style="padding-bottom:4px;font-weight:bold;">require__after</dt><dd style="padding-top:6px;"><p style="padding-bottom: 10px;">The routine indicated by <code>${^HOOK}{require__after}</code> is called by
+<code>require</code> <B>after</B> the require completes.  It is called with a single
+argument, the filename for the item being required (package names are
+converted to paths).  It is executed when the <code>require</code> completes,
+either via exception or via completion of the require statement, and you
+can check <code>%INC</code> to determine if the require was successful.</p>
+<p style="padding-bottom: 10px;">The <code>require__after</code> hook is called for each required file in FILO
+order. In other words if A requires B requires C, then <code>require__after</code>
+will be called first for C, then B and then A.</p></dd></dl></dd></dl>

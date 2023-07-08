@@ -53,7 +53,8 @@ public final class PerlArrayUtil implements PerlElementTypes {
     "ARGV",
     "INC",
     "^CAPTURE",
-    "LAST_MATCH_START"
+    "LAST_MATCH_START",
+    "ISA"
   );
 
 

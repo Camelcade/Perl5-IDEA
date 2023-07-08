@@ -85,3 +85,6 @@ Text: {^CAPTURE_ALL}; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; T
 Text: {^CAPTURE}; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: {^CAPTURE}
 	PsiElement: Built-in: %^CAPTURE
+Text: {^HOOK}; Tail: null; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: {^HOOK}
+	PsiElement: Built-in: %^HOOK

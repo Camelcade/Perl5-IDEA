@@ -67,6 +67,12 @@ Text: INC; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: 
 Text: INC; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: INC
 	PsiElement: Built-in: %INC
+Text: ISA; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: ISA
+	PsiElement: Built-in: @ISA
+Text: ISA; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
+	Lookups: ISA
+	PsiElement: Built-in: @ISA
 Text: LAST_MATCH_END; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: LAST_MATCH_END
 	PsiElement: Built-in: @LAST_MATCH_END
@@ -154,3 +160,6 @@ Text: {^CAPTURE}; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type
 Text: {^CAPTURE}; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
 	Lookups: {^CAPTURE}
 	PsiElement: Built-in: %^CAPTURE
+Text: {^HOOK}; Tail: {}; Type: Built-in; Icon: /hash_gutter_icon.png; Type Icon: null
+	Lookups: {^HOOK}
+	PsiElement: Built-in: %^HOOK
