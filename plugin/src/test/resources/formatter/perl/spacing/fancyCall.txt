@@ -1,0 +1,6 @@
+eval {
+    require IO::Compress::Adapter::Bzip2;
+    import IO::Compress::Adapter::Bzip2 2.093;
+    require IO::Compress::Bzip2;
+    import IO::Compress::Bzip2 2.093;
+};
