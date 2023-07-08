@@ -34,6 +34,9 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   public void testSignatureLeadingComment() { doFormatTest(); }
 
   @Test
+  public void testFancyCall() { doFormatTest(); }
+
+  @Test
   public void testAnnotations() {
     doTestAnnotations();
   }
