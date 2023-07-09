@@ -19,6 +19,7 @@ package formatter;
 
 import categories.Heavy;
 import com.intellij.openapi.util.registry.Registry;
+import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -273,77 +274,67 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   }
 
   @Test
-  @Category(Heavy.class)
   public void testPinxi() {
-    doTestLarge(true);
+    doTestLarge();
   }
 
   @Test
-  @Category(Heavy.class)
   public void testCatalyst() {
-    doTestLarge(true);
+    doTestLarge();
   }
 
   @Test
-  @Category(Heavy.class)
   public void testMojo() {
-    doTestLarge(true);
+    doTestLarge();
   }
 
   @Test
-  @Category(Heavy.class)
   public void testMoose() {
-    doTestLarge(true);
+    doTestLarge();
   }
 
   @Test
-  @Category(Heavy.class)
   public void testMysqltuner() {
-    doTestLarge(true);
+    doTestLarge();
   }
 
   @Test
-  @Category(Heavy.class)
   public void testPerl532() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
   @Test
-  @Category(Heavy.class)
   public void testPerl534() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
   @Test
-  @Category(Heavy.class)
   public void testPerl536() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
   @Test
-  @Category(Heavy.class)
   public void testPerl538() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
   @Test
-  @Category(Heavy.class)
   public void testPerl5125() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
   @Test
-  @Category(Heavy.class)
   public void testPerl5303() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
-  private void doTestLarge(boolean checkErrors) {
+  private void doTestLarge() {
     var value = Registry.get("perl5.eval.auto.injection");
     try {
       value.setValue(false);
-      initWithLarge(getTestName(true), checkErrors);
-      doFormatTestWithoutInitialization(getTestName(true), "", checkErrors);
+      PerlNamesCache.getInstance(getProject()).cleanCache();
+      initWithLarge(getTestName(true));
+      doFormatTestWithoutInitialization(getTestName(true), "");
     }
     finally {
       value.setValue(true);

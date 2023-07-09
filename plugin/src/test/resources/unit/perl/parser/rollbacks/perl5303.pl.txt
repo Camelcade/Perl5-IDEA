@@ -1,11 +1,11 @@
 Diagnostics:
-          Passes: 491
-    Tokens count: 1810371
- Total rollbacks: 7368914
-     Rolled back: 231619 (12%) tokens
+          Passes: 492
+    Tokens count: 1810407
+ Total rollbacks: 7755626
+     Rolled back: 231560 (12%) tokens
 
 Characters;Tokens
-7516266;1807310
+7516302;1807344
 223;10
 27;1
 24;1
@@ -235,6 +235,7 @@ Characters;Tokens
 280;1
 605;4
 44;1
+8;2
 24;8
 21;5
 170;1
@@ -498,10 +499,10 @@ Characters;Tokens
 32;3
 
 Tokens;Rollbacks;Tokens rolled;% of tokens count;% of rollbacks;% of rolled back
-0;7212138;0;0%;97%;0%
-1;104091;104091;5%;1%;44%
-2;50664;101328;5%;0%;43%
-3;335;1005;0%;0%;0%
+0;7598879;0;0%;97%;0%
+1;104090;104090;5%;1%;44%
+2;50637;101274;5%;0%;43%
+3;334;1002;0%;0%;0%
 4;300;1200;0%;0%;0%
 5;80;400;0%;0%;0%
 6;89;534;0%;0%;0%
@@ -533,8 +534,8 @@ Tokens;Rollbacks;Tokens rolled;% of tokens count;% of rollbacks;% of rolled back
 32;8;256;0%;0%;0%
 33;10;330;0%;0%;0%
 34;6;204;0%;0%;0%
-35;7;245;0%;0%;0%
-36;4;144;0%;0%;0%
+35;8;280;0%;0%;0%
+36;3;108;0%;0%;0%
 37;2;74;0%;0%;0%
 38;3;114;0%;0%;0%
 39;5;195;0%;0%;0%
@@ -580,3 +581,4 @@ Tokens;Rollbacks;Tokens rolled;% of tokens count;% of rollbacks;% of rolled back
 276;1;276;0%;0%;0%
 311;1;311;0%;0%;0%
 450;1;450;0%;0%;0%
+        

@@ -101,77 +101,77 @@ public class PerlHighlightingRestartTest extends PerlLightTestCase {
   @Test
   @Category(Heavy.class)
   public void testPerlTidy() {
-    doTestLarge(true);
+    doTestLarge();
   }
 
   @Test
   @Category(Heavy.class)
   public void testPinxi() {
-    doTestLarge(true);
+    doTestLarge();
   }
 
   @Test
   @Category(Heavy.class)
   public void testCatalyst() {
-    doTestLarge(true);
+    doTestLarge();
   }
 
   @Test
   @Category(Heavy.class)
   public void testMojo() {
-    doTestLarge(true);
+    doTestLarge();
   }
 
   @Test
   @Category(Heavy.class)
   public void testMoose() {
-    doTestLarge(true);
+    doTestLarge();
   }
 
   @Test
   @Category(Heavy.class)
   public void testMysqltuner() {
-    doTestLarge(true);
+    doTestLarge();
   }
 
   @Test
   @Category(Heavy.class)
   public void testPerl532() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
   @Test
   @Category(Heavy.class)
   public void testPerl534() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
   @Test
   @Category(Heavy.class)
   public void testPerl536() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
   @Test
   @Category(Heavy.class)
   public void testPerl538() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
   @Test
   @Category(Heavy.class)
   public void testPerl5125() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
   @Test
   @Category(Heavy.class)
   public void testPerl5303() {
-    doTestLarge(false);
+    doTestLarge();
   }
 
-  private void doTestLarge(boolean checkErrors) {
-    initWithLarge(getTestName(true), checkErrors);
+  private void doTestLarge() {
+    initWithLarge(getTestName(true));
     doTestHighlighterRestartWithoutInit();
   }
 
