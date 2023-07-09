@@ -26,19 +26,28 @@ public class PerlQuickDocTest extends PerlQuickDocTestCase {
   }
 
   @Test
-  public void testEvalString() {doTest();}
+  public void testClass() { doTest538(); }
 
   @Test
-  public void testEvalStringQQ() {doTest();}
+  public void testField() { doTest538(); }
+
+  @Test
+  public void testAdjust() { doTest538(); }
+
+  @Test
+  public void testEvalString() { doTest528(); }
+
+  @Test
+  public void testEvalStringQQ() { doTest528(); }
 
   @Test
   public void testDiamondSingle() {
-    doTest();
+    doTest528();
   }
 
   @Test
   public void testDiamondDouble() {
-    doTest();
+    doTest528();
   }
 
   @Test
@@ -49,193 +58,197 @@ public class PerlQuickDocTest extends PerlQuickDocTestCase {
   @Test
   public void testAsyncSub() {
     withFuture();
-    doTest();
+    doTest528();
   }
 
   @Test
   public void testAsyncSubExpr() {
     withFuture();
-    doTest();
+    doTest528();
   }
 
   @Test
   public void testAsyncMethod() {
     withFuture();
-    doTest();
+    doTest528();
   }
 
   @Test
-  public void testUsePackage() {doTest();}
+  public void testUsePackage() { doTest528(); }
 
   @Test
-  public void testSubDefinition() {doTest();}
+  public void testSubDefinition() { doTest528(); }
 
   @Test
-  public void testSubDeclaration() {doTest();}
+  public void testSubDeclaration() { doTest528(); }
 
   @Test
-  public void testSubExpr() {doTest();}
+  public void testSubExpr() { doTest528(); }
 
   @Test
-  public void testM() {doTest();}
+  public void testM() { doTest528(); }
 
   @Test
-  public void testQ() {doTest();}
+  public void testQ() { doTest528(); }
 
   @Test
-  public void testQq() {doTest();}
+  public void testQq() { doTest528(); }
 
   @Test
-  public void testQr() {doTest();}
+  public void testQr() { doTest528(); }
 
   @Test
-  public void testQw() {doTest();}
+  public void testQw() { doTest528(); }
 
   @Test
-  public void testQx() {doTest();}
+  public void testQx() { doTest528(); }
 
   @Test
-  public void testS() {doTest();}
+  public void testS() { doTest528(); }
 
   @Test
-  public void testTr() {doTest();}
+  public void testTr() { doTest528(); }
 
   @Test
-  public void testY() {doTest();}
+  public void testY() { doTest528(); }
 
   @Test
-  public void testBlockAutoload() {doTest();}
+  public void testBlockAutoload() { doTest528(); }
 
   @Test
-  public void testBlockDestroy() {doTest();}
+  public void testBlockDestroy() { doTest528(); }
 
   @Test
-  public void testBlockBegin() {doTest();}
+  public void testBlockBegin() { doTest528(); }
 
   @Test
-  public void testBlockCheck() {doTest();}
+  public void testBlockCheck() { doTest528(); }
 
   @Test
-  public void testBlockEnd() {doTest();}
+  public void testBlockEnd() { doTest528(); }
 
   @Test
-  public void testBlockInit() {doTest();}
+  public void testBlockInit() { doTest528(); }
 
   @Test
-  public void testBlockUnitcheck() {doTest();}
+  public void testBlockUnitcheck() { doTest528(); }
 
   @Test
-  public void testTagData() {doTest();}
+  public void testTagData() { doTest528(); }
 
   @Test
-  public void testTagEnd() {doTest();}
+  public void testTagEnd() { doTest528(); }
 
   @Test
-  public void testTagFile() {doTest();}
+  public void testTagFile() { doTest528(); }
 
   @Test
-  public void testTagLine() {doTest();}
+  public void testTagLine() { doTest528(); }
 
   @Test
-  public void testTagPackage() {doTest();}
+  public void testTagPackage() { doTest528(); }
 
   @Test
-  public void testTagSub() {doTest();}
+  public void testTagSub() { doTest528(); }
 
   @Test
-  public void testGivenCompound() {doTest();}
+  public void testGivenCompound() { doTest528(); }
 
   @Test
-  public void testWhenCompound() {doTest();}
+  public void testWhenCompound() { doTest528(); }
 
   @Test
-  public void testDefaultCompound() {doTest();}
+  public void testDefaultCompound() { doTest528(); }
 
   @Test
-  public void testElseCompound() {doTest();}
+  public void testElseCompound() { doTest528(); }
 
   @Test
-  public void testElsifCompound() {doTest();}
+  public void testElsifCompound() { doTest528(); }
 
   @Test
-  public void testForeachIdexedCompound() {doTest();}
+  public void testForeachIndexedCompound() { doTest528(); }
 
   @Test
-  public void testForeachIterateCompound() {doTest();}
+  public void testForeachIterateCompound() { doTest528(); }
 
   @Test
-  public void testForIdexedCompound() {doTest();}
+  public void testForIdexedCompound() { doTest528(); }
 
   @Test
-  public void testForIterateCompound() {doTest();}
+  public void testForIterateCompound() { doTest528(); }
 
   @Test
-  public void testIfCompound() {doTest();}
+  public void testIfCompound() { doTest528(); }
 
   @Test
-  public void testUnlessCompound() {doTest();}
+  public void testUnlessCompound() { doTest528(); }
 
   @Test
-  public void testUntilCompound() {doTest();}
+  public void testUntilCompound() { doTest528(); }
 
   @Test
-  public void testWhileCompound() {doTest();}
+  public void testWhileCompound() { doTest528(); }
 
   @Test
-  public void testIfModifier() {doTest();}
+  public void testIfModifier() { doTest528(); }
 
   @Test
-  public void testUnlessModifier() {doTest();}
+  public void testUnlessModifier() { doTest528(); }
 
   @Test
-  public void testWhileModifier() {doTest();}
+  public void testWhileModifier() { doTest528(); }
 
   @Test
-  public void testUntilModifier() {doTest();}
+  public void testUntilModifier() { doTest528(); }
 
   @Test
-  public void testForModifier() {doTest();}
+  public void testForModifier() { doTest528(); }
 
   @Test
-  public void testForeachModifier() {doTest();}
+  public void testForeachModifier() { doTest528(); }
 
   @Test
-  public void testWhenModifier() {doTest();}
+  public void testWhenModifier() { doTest528(); }
 
   @Test
-  public void testPodWeaverAttr() {doTest();}
+  public void testPodWeaverAttr() { doTest528(); }
 
   @Test
-  public void testPodWeaverFunc() {doTest();}
+  public void testPodWeaverFunc() { doTest528(); }
 
   @Test
-  public void testPodWeaverMethod() {doTest();}
+  public void testPodWeaverMethod() { doTest528(); }
 
   @Test
-  public void testUnknownSectionWithContent() {doTest();}
+  public void testUnknownSectionWithContent() { doTest528(); }
 
   @Test
-  public void testSubDefinitionInline() {doTest();}
+  public void testSubDefinitionInline() { doTest528(); }
 
   @Test
-  public void testSubDefinitionUsageInline() {doTest();}
+  public void testSubDefinitionUsageInline() { doTest528(); }
 
   @Test
-  public void testExternalSubUsagePod() {doTest();}
+  public void testExternalSubUsagePod() { doTest528(); }
 
   @Test
-  public void testSubDefinitionCross() {doTest();}
+  public void testSubDefinitionCross() { doTest528(); }
 
   @Test
-  public void testNamespaceDefinitionInline() {doTest();}
+  public void testNamespaceDefinitionInline() { doTest528(); }
+
+  protected void doTest538() {
+    withPerl538();
+    super.doTest();
+  }
 
   protected void doTest532() {
     withPerl532();
     super.doTest();
   }
 
-  @Override
-  protected void doTest() {
+  protected void doTest528() {
     withPerl528();
     super.doTest();
   }

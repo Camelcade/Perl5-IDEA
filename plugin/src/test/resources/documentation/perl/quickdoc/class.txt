@@ -1,0 +1,20 @@
+<p><a href="psi_element://perlclass">perlclass</a>: <a href="psi_element://perlclass%2FKEYWORDS">KEYWORDS</a></p><h2>class</h2><div style="padding-bottom: 10px;"><pre><code>    class NAME BLOCK
+
+    class NAME VERSION BLOCK
+
+    class NAME;
+
+    class NAME VERSION;</code></pre></div>
+<p style="padding-bottom: 10px;">The <code>class</code> keyword declares a new package which is intended to be a class.
+All other keywords from the <code>class</code> feature should be used in scope of this
+declaration.</p>
+<div style="padding-bottom: 10px;"><pre><code>    class WithVersion 1.000 {
+        # class definition goes here
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Classes can be declared in either block or statement syntax. If a block is
+used, the body of the block contains the implementation of the class. If the
+statement form is used, the remainder of the file is used up until the next
+<code>class</code> or <code>package</code> statement.</p>
+<p style="padding-bottom: 10px;"><code>class</code> and <code>package</code> declarations are similar, but classes automatically get
+a constructor named <code>new</code> - You don't have to (and should not) write one.
+Additionally, in the class BLOCK you are allowed to declare fields and methods.</p>

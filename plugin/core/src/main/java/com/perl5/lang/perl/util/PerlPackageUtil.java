@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,6 +81,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
   public static final String TEST_HARNESS_MODULE = "Test::Harness";
   public static final String TAP_FORMATTER_MODULE = "TAP::Formatter::Camelcade";
   public static final String JSON_MODULE = "JSON";
+  public static final String ADJUST_BLOCK = "ADJUST";
 
   private PerlPackageUtil() {
   }

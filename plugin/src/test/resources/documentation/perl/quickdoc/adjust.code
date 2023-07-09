@@ -1,0 +1,7 @@
+class Some::Class{
+  field $foo;
+
+  AD<caret>JUST{
+
+  }
+}

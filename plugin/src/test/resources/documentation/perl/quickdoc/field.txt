@@ -1,0 +1,33 @@
+<p><a href="psi_element://perlclass">perlclass</a>: <a href="psi_element://perlclass%2FKEYWORDS">KEYWORDS</a></p><h2>field</h2><div style="padding-bottom: 10px;"><pre><code>    field VARIABLE_NAME;
+
+    field VARIABLE_NAME = EXPR;
+
+    field VARIABLE_NAME : ATTRIBUTES;
+
+    field VARIABLE_NAME : ATTRIBUTES = EXPR;</code></pre></div>
+<p style="padding-bottom: 10px;">Fields are variables which are visible in the scope of the class - more
+specifically within <a href="psi_element://perlclass%2Fmethod">method</a> and <code>ADJUST</code> blocks. Each class instance get
+their own storage of fields, independent of each other.</p>
+<p style="padding-bottom: 10px;">A field behaves like a normal lexically scoped variable. It has a sigil and is
+private to the class (though creation of an accessor method will make it
+accessible from the outside). The main difference is that different instances
+access different values in the same scope.</p>
+<div style="padding-bottom: 10px;"><pre><code>    class WithFields {
+        field $scalar = 42;
+        field @array  = qw(this is just an array);
+        field %hash   = (species =&gt; 'Martian', planet =&gt; 'Mars');
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">Fields may optionally have initializing expressions. If present, the expression
+will be evaluated within the constructor of each object instance. During each
+evaluation, the expression can use the value of any previously-set field, as
+well as see any other variables in scope.</p>
+<div style="padding-bottom: 10px;"><pre><code>    class WithACounter {
+        my $next_count = 1;
+        field $count = $next_count++;
+    }</code></pre></div>
+<p style="padding-bottom: 10px;">When combined with the <code>:param</code> field attribute, the defaulting expression can
+use any of the <code>=</code>, <code>//=</code> or <code>||=</code> operators. Expressions using <code>=</code> will
+apply whenever the caller did not pass the corresponding parameter to the
+constructor at all. Expressions using <code>//=</code> will also apply if the caller did
+pass the parameter but the value was undefined, and expressions using <code>||=</code>
+will apply if the value was false.</p>
