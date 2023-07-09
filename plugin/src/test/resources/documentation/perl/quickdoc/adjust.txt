@@ -1,0 +1,6 @@
+<p><a href="psi_element://perlclass">perlclass</a>: <a href="psi_element://perlclass%2FOBJECT+LIFECYCLE">OBJECT LIFECYCLE</a></p><h2>Adjustment</h2><p style="padding-bottom: 10px;">Object adjustment can be performed during the construction to run user-defined
+code. It is done with the help of <code>ADJUST</code> blocks, which are called in order
+of declaration.</p>
+<p style="padding-bottom: 10px;">They are similar to <code>BEGIN</code> blocks, which run during the compilation of a
+package. However, they also have access to <code>$self</code> lexical (object instance)
+and all object fields created up to that point.</p>

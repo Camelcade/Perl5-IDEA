@@ -52,6 +52,7 @@ import java.util.Map;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.util.PerlCorePackages.PACKAGE_EXPORTER;
+import static com.perl5.lang.perl.util.PerlPackageUtil.ADJUST_BLOCK;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
 
@@ -191,6 +192,12 @@ public final class PerlDocUtil implements PerlElementTypes {
     else if (SWITCH_KEYWORDS_TOKENSET.contains(elementType)) {
       redirect = SWITCH_DOC_LINK;
     }
+    else if(elementType == RESERVED_CLASS){
+      redirect = PodLinkDescriptor.create("perlclass", "class");
+    }
+    else if(elementType == RESERVED_FIELD){
+      redirect = PodLinkDescriptor.create("perlclass", "field");
+    }
     else if (COMPOUND_KEYWORDS_TOKENSET.contains(elementType)) {
       redirect = COMPOUND_DOC_LINK;
     }
@@ -200,6 +207,9 @@ public final class PerlDocUtil implements PerlElementTypes {
     else if (elementType == BLOCK_NAME) {
       if (StringUtil.equals(tokenChars, SUB_AUTOLOAD)) {
         redirect = AUTOLOAD_LINK;
+      }
+      else if( StringUtil.equals(tokenChars, ADJUST_BLOCK)){
+        redirect = PodLinkDescriptor.create("perlclass", "Adjustment");
       }
       else if (StringUtil.equals(tokenChars, SUB_DESTROY)) {
         redirect = DESTROY_LINK;

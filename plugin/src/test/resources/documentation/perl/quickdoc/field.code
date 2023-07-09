@@ -1,0 +1,3 @@
+class Some::Class{
+  fi<caret>eld $foo;
+}
