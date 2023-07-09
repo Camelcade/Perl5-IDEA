@@ -10,6 +10,9 @@ import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 public interface PsiPerlNamespaceDefinition extends PerlNamespaceDefinitionWithIdentifier, StubBasedPsiElement<PerlNamespaceDefinitionStub> {
 
   @Nullable
+  PsiPerlAttributes getAttributes();
+
+  @Nullable
   PsiPerlBlock getBlock();
 
 }

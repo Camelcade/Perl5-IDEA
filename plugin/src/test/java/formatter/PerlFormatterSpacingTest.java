@@ -33,6 +33,12 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testClassSyntax() { doFormatTest(); }
+
+  @Test
+  public void testClassAsSubName() { doFormatTest(); }
+
+  @Test
   public void testSignatureLeadingComment() { doFormatTest(); }
 
   @Test

@@ -49,8 +49,9 @@ Perl5
           PsiPerlBlockImpl(Perl5: BLOCK)
             PsiElement(Perl5: {)('{')
             PsiElement(Perl5: })('}')
-        PsiErrorElement:')' unexpected
-          PsiElement(Perl5: ))(')')
+        PsiElement(Perl5: ))(')')
+        PsiErrorElement:<class definition> expected, got '{'
+          <empty list>
         PsiPerlBlockCompoundImpl(Perl5: BLOCK_COMPOUND)
           PsiPerlBlockImpl(Perl5: BLOCK)
             PsiElement(Perl5: {)('{')

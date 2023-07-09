@@ -384,6 +384,7 @@ public interface PerlElementTypesGenerated {
   IElementType RESERVED_CASE = PerlElementTypeFactory.getTokenType("case");
   IElementType RESERVED_CATCH = PerlElementTypeFactory.getTokenType("catch");
   IElementType RESERVED_CATCH_WITH = PerlElementTypeFactory.getTokenType("catch_with");
+  IElementType RESERVED_CLASS = PerlElementTypeFactory.getTokenType("class");
   IElementType RESERVED_CONTINUATION = PerlElementTypeFactory.getTokenType("continuation");
   IElementType RESERVED_CONTINUE = PerlElementTypeFactory.getTokenType("continue");
   IElementType RESERVED_DEFAULT = PerlElementTypeFactory.getTokenType("default");
@@ -397,6 +398,7 @@ public interface PerlElementTypesGenerated {
   IElementType RESERVED_EXCEPT = PerlElementTypeFactory.getTokenType("except");
   IElementType RESERVED_EXISTS = PerlElementTypeFactory.getTokenType("exists");
   IElementType RESERVED_EXIT = PerlElementTypeFactory.getTokenType("exit");
+  IElementType RESERVED_FIELD = PerlElementTypeFactory.getTokenType("field");
   IElementType RESERVED_FINALLY = PerlElementTypeFactory.getTokenType("finally");
   IElementType RESERVED_FOR = PerlElementTypeFactory.getTokenType("for");
   IElementType RESERVED_FOREACH = PerlElementTypeFactory.getTokenType("foreach");

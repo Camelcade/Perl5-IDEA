@@ -222,6 +222,7 @@ public final class PerlTokenSets {
     SWITCH_KEYWORDS_TOKENSET,
     TokenSet.create(
       RESERVED_MY,
+      RESERVED_FIELD,
       RESERVED_OUR,
       RESERVED_STATE,
       RESERVED_LOCAL,
@@ -231,6 +232,7 @@ public final class PerlTokenSets {
       RESERVED_SUB,
       RESERVED_ASYNC,
       RESERVED_PACKAGE,
+      RESERVED_CLASS,
       RESERVED_DO,
       RESERVED_EVAL,
       RESERVED_GOTO,

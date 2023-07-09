@@ -35,6 +35,12 @@ public class PsiPerlNamespaceDefinitionImpl extends PerlNamespaceDefinitionMixin
 
   @Override
   @Nullable
+  public PsiPerlAttributes getAttributes() {
+    return PsiTreeUtil.getChildOfType(this, PsiPerlAttributes.class);
+  }
+
+  @Override
+  @Nullable
   public PsiPerlBlock getBlock() {
     return PsiTreeUtil.getChildOfType(this, PsiPerlBlock.class);
   }

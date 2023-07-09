@@ -1106,6 +1106,35 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // 'class' any_package [perl_version] [sub_attributes]
+  static boolean class_definition_name(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "class_definition_name")) return false;
+    boolean result_, pinned_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, null, "<class definition>");
+    result_ = consumeToken(builder_, RESERVED_CLASS);
+    pinned_ = result_; // pin = 1
+    result_ = result_ && report_error_(builder_, any_package(builder_, level_ + 1));
+    result_ = pinned_ && report_error_(builder_, class_definition_name_2(builder_, level_ + 1)) && result_;
+    result_ = pinned_ && class_definition_name_3(builder_, level_ + 1) && result_;
+    exit_section_(builder_, level_, marker_, result_, pinned_, PerlParserGenerated::recover_statement);
+    return result_ || pinned_;
+  }
+
+  // [perl_version]
+  private static boolean class_definition_name_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "class_definition_name_2")) return false;
+    perl_version(builder_, level_ + 1);
+    return true;
+  }
+
+  // [sub_attributes]
+  private static boolean class_definition_name_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "class_definition_name_3")) return false;
+    sub_attributes(builder_, level_ + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
   // '$&' code_cast_target
   public static boolean code_cast_expr(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "code_cast_expr")) return false;
@@ -1431,10 +1460,53 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // {'field' !'('} variable_declaration_element [var_attributes]
+  static boolean field_lexical_declaration(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "field_lexical_declaration")) return false;
+    if (!nextTokenIs(builder_, "<field declaration>", RESERVED_FIELD)) return false;
+    boolean result_, pinned_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, null, "<field declaration>");
+    result_ = field_lexical_declaration_0(builder_, level_ + 1);
+    pinned_ = result_; // pin = 1
+    result_ = result_ && report_error_(builder_, variable_declaration_element(builder_, level_ + 1));
+    result_ = pinned_ && field_lexical_declaration_2(builder_, level_ + 1) && result_;
+    exit_section_(builder_, level_, marker_, result_, pinned_, null);
+    return result_ || pinned_;
+  }
+
+  // 'field' !'('
+  private static boolean field_lexical_declaration_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "field_lexical_declaration_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = consumeToken(builder_, RESERVED_FIELD);
+    result_ = result_ && field_lexical_declaration_0_1(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
+  }
+
+  // !'('
+  private static boolean field_lexical_declaration_0_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "field_lexical_declaration_0_1")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_, level_, _NOT_);
+    result_ = !consumeToken(builder_, LEFT_PAREN);
+    exit_section_(builder_, level_, marker_, result_, false, null);
+    return result_;
+  }
+
+  // [var_attributes]
+  private static boolean field_lexical_declaration_2(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "field_lexical_declaration_2")) return false;
+    var_attributes(builder_, level_ + 1);
+    return true;
+  }
+
+  /* ********************************************************** */
   // !<<eof>>
   // {
-  // 	namespace_definition
-  // 	| label_declaration [statement_item]
+  // 	namespace_definition |
+  // 	label_declaration [statement_item]
   //     | statement_item
   // }
   static boolean file_item(PsiBuilder builder_, int level_) {
@@ -1457,8 +1529,8 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     return result_;
   }
 
-  // namespace_definition
-  // 	| label_declaration [statement_item]
+  // namespace_definition |
+  // 	label_declaration [statement_item]
   //     | statement_item
   private static boolean file_item_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "file_item_1")) return false;
@@ -2763,7 +2835,7 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   //   'method' | 'func' | 'default' | 'fun' |
   //   'finally' | 'try' | 'catch' |
   //   'switch' | 'case' |
-  //   'fp_override' | 'fp_after' | 'fp_before' | 'fp_around' | 'fp_augment'
+  //   'fp_override' | 'fp_after' | 'fp_before' | 'fp_around' | 'fp_augment' | 'class' | 'field'
   static boolean method_tokens(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "method_tokens")) return false;
     boolean result_;
@@ -2788,6 +2860,8 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     if (!result_) result_ = consumeToken(builder_, RESERVED_BEFORE_FP);
     if (!result_) result_ = consumeToken(builder_, RESERVED_AROUND_FP);
     if (!result_) result_ = consumeToken(builder_, RESERVED_AUGMENT_FP);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_CLASS);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_FIELD);
     exit_section_(builder_, marker_, null, result_);
     return result_;
   }
@@ -2877,16 +2951,27 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>)
+  // {namespace_definition_name|class_definition_name} (block | <<parseSemicolon>> <<parseNamespaceContent>>)
   public static boolean namespace_definition(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "namespace_definition")) return false;
     boolean result_, pinned_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, NAMESPACE_DEFINITION, "<namespace definition>");
-    result_ = namespace_definition_name(builder_, level_ + 1);
+    result_ = namespace_definition_0(builder_, level_ + 1);
     pinned_ = result_; // pin = 1
     result_ = result_ && namespace_definition_1(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, pinned_, PerlParserGenerated::recover_statement);
     return result_ || pinned_;
+  }
+
+  // namespace_definition_name|class_definition_name
+  private static boolean namespace_definition_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "namespace_definition_0")) return false;
+    boolean result_;
+    Marker marker_ = enter_section_(builder_);
+    result_ = namespace_definition_name(builder_, level_ + 1);
+    if (!result_) result_ = class_definition_name(builder_, level_ + 1);
+    exit_section_(builder_, marker_, null, result_);
+    return result_;
   }
 
   // block | <<parseSemicolon>> <<parseNamespaceContent>>
@@ -2955,6 +3040,45 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     if (!result_) result_ = post_deref_array_slice_expr(builder_, level_ + 1);
     if (!result_) result_ = post_deref_hash_slice_expr(builder_, level_ + 1);
     return result_;
+  }
+
+  /* ********************************************************** */
+  // ('my' | 'state' ) [any_package] variable_declaration_variation [var_attributes]
+  static boolean normal_lexical_declaration(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "normal_lexical_declaration")) return false;
+    if (!nextTokenIs(builder_, "<lexical variable declaration>", RESERVED_MY, RESERVED_STATE)) return false;
+    boolean result_, pinned_;
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, null, "<lexical variable declaration>");
+    result_ = normal_lexical_declaration_0(builder_, level_ + 1);
+    pinned_ = result_; // pin = 1
+    result_ = result_ && report_error_(builder_, normal_lexical_declaration_1(builder_, level_ + 1));
+    result_ = pinned_ && report_error_(builder_, variable_declaration_variation(builder_, level_ + 1)) && result_;
+    result_ = pinned_ && normal_lexical_declaration_3(builder_, level_ + 1) && result_;
+    exit_section_(builder_, level_, marker_, result_, pinned_, null);
+    return result_ || pinned_;
+  }
+
+  // 'my' | 'state'
+  private static boolean normal_lexical_declaration_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "normal_lexical_declaration_0")) return false;
+    boolean result_;
+    result_ = consumeToken(builder_, RESERVED_MY);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_STATE);
+    return result_;
+  }
+
+  // [any_package]
+  private static boolean normal_lexical_declaration_1(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "normal_lexical_declaration_1")) return false;
+    any_package(builder_, level_ + 1);
+    return true;
+  }
+
+  // [var_attributes]
+  private static boolean normal_lexical_declaration_3(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "normal_lexical_declaration_3")) return false;
+    var_attributes(builder_, level_ + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -4272,7 +4396,7 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // {!'package' file_item} *
+  // {!('package'|'class') file_item} *
   static boolean real_namespace_content(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "real_namespace_content")) return false;
     Marker marker_ = enter_section_(builder_, level_, _NONE_);
@@ -4285,7 +4409,7 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // !'package' file_item
+  // !('package'|'class') file_item
   private static boolean real_namespace_content_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "real_namespace_content_0")) return false;
     boolean result_;
@@ -4296,13 +4420,22 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     return result_;
   }
 
-  // !'package'
+  // !('package'|'class')
   private static boolean real_namespace_content_0_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "real_namespace_content_0_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NOT_);
-    result_ = !consumeToken(builder_, RESERVED_PACKAGE);
+    result_ = !real_namespace_content_0_0_0(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
+    return result_;
+  }
+
+  // 'package'|'class'
+  private static boolean real_namespace_content_0_0_0(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "real_namespace_content_0_0_0")) return false;
+    boolean result_;
+    result_ = consumeToken(builder_, RESERVED_PACKAGE);
+    if (!result_) result_ = consumeToken(builder_, RESERVED_CLASS);
     return result_;
   }
 
@@ -6952,42 +7085,15 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     return result_;
   }
 
-  // ('my' | 'state') [any_package] variable_declaration_variation [var_attributes]
+  // normal_lexical_declaration | field_lexical_declaration
   public static boolean variable_declaration_lexical(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "variable_declaration_lexical")) return false;
-    if (!nextTokenIsSmart(builder_, RESERVED_MY, RESERVED_STATE)) return false;
-    boolean result_, pinned_;
-    Marker marker_ = enter_section_(builder_, level_, _COLLAPSE_, VARIABLE_DECLARATION_LEXICAL, "<variable declaration lexical>");
-    result_ = variable_declaration_lexical_0(builder_, level_ + 1);
-    pinned_ = result_; // pin = 1
-    result_ = result_ && report_error_(builder_, variable_declaration_lexical_1(builder_, level_ + 1));
-    result_ = pinned_ && report_error_(builder_, variable_declaration_variation(builder_, level_ + 1)) && result_;
-    result_ = pinned_ && variable_declaration_lexical_3(builder_, level_ + 1) && result_;
-    exit_section_(builder_, level_, marker_, result_, pinned_, null);
-    return result_ || pinned_;
-  }
-
-  // 'my' | 'state'
-  private static boolean variable_declaration_lexical_0(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "variable_declaration_lexical_0")) return false;
     boolean result_;
-    result_ = consumeTokenSmart(builder_, RESERVED_MY);
-    if (!result_) result_ = consumeTokenSmart(builder_, RESERVED_STATE);
+    Marker marker_ = enter_section_(builder_, level_, _COLLAPSE_, VARIABLE_DECLARATION_LEXICAL, "<variable declaration lexical>");
+    result_ = normal_lexical_declaration(builder_, level_ + 1);
+    if (!result_) result_ = field_lexical_declaration(builder_, level_ + 1);
+    exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
-  }
-
-  // [any_package]
-  private static boolean variable_declaration_lexical_1(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "variable_declaration_lexical_1")) return false;
-    any_package(builder_, level_ + 1);
-    return true;
-  }
-
-  // [var_attributes]
-  private static boolean variable_declaration_lexical_3(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "variable_declaration_lexical_3")) return false;
-    var_attributes(builder_, level_ + 1);
-    return true;
   }
 
   // ['m'] match_regex_body
