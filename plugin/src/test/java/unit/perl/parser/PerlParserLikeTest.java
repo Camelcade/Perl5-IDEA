@@ -27,6 +27,12 @@ public abstract class PerlParserLikeTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testClassSyntax() { doTest(); }
+
+  @Test
+  public void testClassAsSubName() { doTest(); }
+
+  @Test
   public void testSignatureLeadingComment() { doTest(); }
 
   @Test

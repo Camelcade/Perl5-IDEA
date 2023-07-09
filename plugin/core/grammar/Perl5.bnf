@@ -144,6 +144,9 @@
     RESERVED_NO='no'
     RESERVED_REQUIRE='require'
 
+    RESERVED_CLASS='class'
+    RESERVED_FIELD='field'
+
     RESERVED_PRINT='print'
     RESERVED_PRINTF='printf'
     RESERVED_SAY='say'
@@ -616,8 +619,8 @@ private file_items ::= file_item*
 
 private file_item ::= !<<eof>>
 {
-	namespace_definition
-	| label_declaration [statement_item]
+	namespace_definition |
+	label_declaration [statement_item]
     | statement_item
 }
 
@@ -643,10 +646,12 @@ private end_or_data ::= '__DATA__' | '__END__' {name="__END__ or __DATA__"}
 // invoked from PerlUseVarsDeclarationsParser
 private use_vars_declarations ::= {variable_declaration_element|glob_variable|code_variable}*
 
-namespace_definition ::= namespace_definition_name (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
+namespace_definition ::= {namespace_definition_name|class_definition_name} (block | <<parseSemicolon>> <<parseNamespaceContent>>) {pin=1 recoverWhile=recover_statement}
 private namespace_definition_name ::= 'package' any_package [perl_version] {pin=1 recoverWhile=recover_statement name="namespace definition"}
+private class_definition_name ::= 'class' any_package [perl_version] [sub_attributes] {pin=1 recoverWhile=recover_statement name="class definition"}
+// these two are used in parseNamespaceContent
 namespace_content ::= real_namespace_content
-private real_namespace_content ::= {!'package' file_item} *  {extends=block recoverWhile=recover_statement} //
+private real_namespace_content ::= {!('package'|'class') file_item} *  {extends=block recoverWhile=recover_statement}
 
 // used in com.perl5.lang.perl.parser.PerlLazyBlockParser
 block_braceless ::= file_items {extends=block hooks=[rightBinder="GREEDY_RIGHT_BINDER" leftBinder="GREEDY_LEFT_BINDER"]}
@@ -1099,7 +1104,9 @@ private variable_declaration ::=
 
 // @todo attributes support
 variable_declaration_local ::=  'local' local_variable_declaration_variation {pin=1}
-variable_declaration_lexical ::=  ('my' | 'state') [any_package] variable_declaration_variation [var_attributes] {pin=1}
+variable_declaration_lexical ::=  normal_lexical_declaration | field_lexical_declaration
+private normal_lexical_declaration ::= ('my' | 'state' ) [any_package] variable_declaration_variation [var_attributes] {pin=1 name='lexical variable declaration'}
+private field_lexical_declaration ::= {'field' !'('} variable_declaration_element [var_attributes]  {pin=1 name='field declaration'}
 variable_declaration_global ::=  'our' [any_package] variable_declaration_variation [var_attributes] {pin=1}
 
 
@@ -1256,7 +1263,7 @@ private method_tokens ::= 'list' | 'unary' | 'unary_custom'| 'argumentless' |
   'method' | 'func' | 'default' | 'fun' |
   'finally' | 'try' | 'catch' |
   'switch' | 'case' |
-  'fp_override' | 'fp_after' | 'fp_before' | 'fp_around' | 'fp_augment'
+  'fp_override' | 'fp_after' | 'fp_before' | 'fp_around' | 'fp_augment' | 'class' | 'field'
 
 
 

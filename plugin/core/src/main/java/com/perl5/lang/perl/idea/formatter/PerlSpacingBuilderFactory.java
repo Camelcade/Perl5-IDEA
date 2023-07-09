@@ -62,7 +62,9 @@ public class PerlSpacingBuilderFactory {
       .aroundInside(OPERATORS_RANGE, FLIPFLOP_EXPR).spaceIf(perlSettings.SPACE_AROUND_RANGE_OPERATORS)
 
       .between(RESERVED_PACKAGE, PACKAGE).spaces(1)
+      .between(RESERVED_CLASS, PACKAGE).spaces(1)
       .between(PACKAGE, VERSION_ELEMENT).spaces(1)
+      .between(ATTRIBUTES, VERSION_ELEMENT).spaces(1)
       .between(RESERVED_FORMAT, SUB_NAME).spaces(1)
       .betweenInside(SUB_NAME, PACKAGE, METHOD).spaces(1)
 

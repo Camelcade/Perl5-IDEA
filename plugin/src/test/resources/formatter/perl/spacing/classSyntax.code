@@ -1,0 +1,66 @@
+     class           First::Example           {
+                                            field           $x1;
+     }
+
+     class           Second::Example           1.234           {
+                                            field           $x1;
+     }
+
+
+     class           Third::Example           :isa(First::Example)           {
+                                            field           $x1;
+     }
+
+     class           Forth::Example           1.234           :isa(First::Example           1.234)           {
+                                            field           $x1;
+                                            field           $x2           =           42;
+                                            field           $x3           :param           :otherthing(test);
+                                            field           $x4           :param(some_val)           :otherthing(test)           =           42;
+
+                                            ADJUST           {
+                                                                                        $x1           =           "Hello,           world";
+                                            }
+
+                                            ADJUST           {
+                                                                                        $x2           =           "Hello,           world";
+                                            }
+
+                                            method           first_method           {
+                                                                                        say           $x1;
+                                                                                        return           method($x           =           'default           value',           $y)           {
+                                                                                                                                    say           $x;
+                                                                                        }
+                                            }
+
+                                            method           second_method($x           =           'default           value',           $y)           {
+                                                                                        say           $x2;
+                                                                                        return           method           {
+                                                                                                                                    say           $x;
+                                                                                        }
+                                            }
+     }
+
+     class           Fifth::Example;
+     field           $x1;
+
+     package           Old::Style1;
+     say           'hi';
+
+     class           Sixth::Example           1.234;
+     field           $x1;
+
+     package           Old::Style2;
+     say           'hi';
+
+     class           Seventh::Example           :isa(First::Example);
+     field           $x1;
+
+     package           Old::Style3;
+     say           'hi';
+
+     class           Eight::Example           1.234           :isa(First::Example);
+     field           $x1;
+
+     package           Old::Style4;
+     say           'hi';
+

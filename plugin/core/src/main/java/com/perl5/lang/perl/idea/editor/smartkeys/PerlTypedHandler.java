@@ -60,6 +60,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     RESERVED_USE,
     RESERVED_NO,
     RESERVED_PACKAGE,
+    RESERVED_CLASS,
     ANNOTATION_RETURNS_KEY,
     ANNOTATION_TYPE_KEY,
     ANNOTATION_SCALAR,

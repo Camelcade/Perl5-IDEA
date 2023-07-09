@@ -47,8 +47,9 @@ Perl5
                   <empty list>
         PsiWhiteSpace(' ')
         PsiElement(Perl5: })('}')
-  PsiErrorElement:')' unexpected
-    PsiElement(Perl5: ))(')')
+  PsiElement(Perl5: ))(')')
+  PsiErrorElement:<class definition> expected, got ';'
+    <empty list>
   PsiElement(Perl5: ;)(';')
   PsiWhiteSpace('\n')
   PsiErrorElement:<__END__ or __DATA__>, <after modifier>, <around modifier>, <augment modifier>, <before modifier>, <compound statement>, <format definition>, <func definition>, <method definition>, <named block>, <namespace definition>, <perl annotation>, <pod section>, <statement>, <sub definition> or Perl5: { expected, got '}'

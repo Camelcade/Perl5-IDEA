@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -249,6 +249,7 @@ public final class PerlFormattingTokenSets {
 
   public static final TokenSet RESERVED_VARIABLE_DECLARATION = TokenSet.create(
     RESERVED_MY,
+    RESERVED_FIELD,
     RESERVED_OUR,
     RESERVED_LOCAL,
     RESERVED_STATE

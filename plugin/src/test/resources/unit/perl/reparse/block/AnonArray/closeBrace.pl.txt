@@ -74,8 +74,9 @@ Perl5
                 <empty list>
         PsiWhiteSpace(' ')
         PsiElement(Perl5: })('}')
-  PsiErrorElement:',' unexpected
-    PsiElement(Perl5: ,)(',')
+  PsiElement(Perl5: ,)(',')
+  PsiErrorElement:<class definition> expected, got 'say'
+    <empty list>
   PsiWhiteSpace('\n    ')
   PsiPerlStatementImpl(Perl5: STATEMENT)
     PsiPerlCommaSequenceExprImpl(Perl5: COMMA_SEQUENCE_EXPR)
