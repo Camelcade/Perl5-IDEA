@@ -1,6 +1,6 @@
-File size: 7516266
-Re-highlighted ranges: 678627
-Avg range size: 11.075688117331023
+File size: 7516302
+Re-highlighted ranges: 678670
+Avg range size: 11.075039415327037
 Min range size: 1
 Max range size: 39918
 10% of text has range <= 6
@@ -1304,7 +1304,7 @@ s{^((?:[^\r\n]*(?:$re_newline[␣\t])?)*)($re_newline)?}{
 
 ␣␣␣␣}se;
 ----------
-Range: (511486,514720) (3234)
+Range: (511487,514721) (3234)
 =head1␣NAME
 
 IO::File␣-␣supply␣object␣methods␣for␣filehandles
@@ -1427,7 +1427,7 @@ Derived␣from␣FileHandle.pm␣by␣Graham␣Barr␣E<lt>F<gbarr@pobox.com>E<g
 
 =cut
 ----------
-Range: (525976,534913) (8937)
+Range: (525977,534914) (8937)
 =head1␣NAME
 
 IO::Handle␣-␣supply␣object␣methods␣for␣I/O␣handles
@@ -1688,7 +1688,7 @@ Derived␣from␣FileHandle.pm␣by␣Graham␣Barr␣E<lt>F<gbarr@pobox.com>E<g
 
 =cut
 ----------
-Range: (543123,545370) (2247)
+Range: (543124,545371) (2247)
 =head1␣NAME
 
 IO::Seekable␣-␣supply␣seek␣based␣methods␣for␣I/O␣objects
@@ -1781,7 +1781,7 @@ Derived␣from␣FileHandle.pm␣by␣Graham␣Barr␣E<lt>gbarr@pobox.comE<gt>
 
 =cut
 ----------
-Range: (571647,578558) (6911)
+Range: (571648,578559) (6911)
 =head2␣reduce
 
 ␣␣␣␣$result␣=␣reduce␣{␣BLOCK␣}␣@list
@@ -1986,7 +1986,7 @@ than␣C<undef>.
 
 =cut
 ----------
-Range: (579962,585177) (5215)
+Range: (579963,585178) (5215)
 =head2␣pairs
 
 ␣␣␣␣my␣@pairs␣=␣pairs␣@kvlist;
@@ -2148,7 +2148,7 @@ See␣L</KNOWN␣BUGS>␣for␣a␣known-bug␣with␣C<pairmap>,␣and␣a␣wo
 
 =cut
 ----------
-Range: (585209,587738) (2529)
+Range: (585210,587739) (2529)
 =head2␣shuffle
 
 ␣␣␣␣my␣@values␣=␣shuffle␣@values;
@@ -2225,7 +2225,7 @@ entire␣list␣of␣values␣returned␣by␣C<uniqstr>␣are␣well-behaved␣
 
 =cut
 ----------
-Range: (587740,590893) (3153)
+Range: (587741,590894) (3153)
 =head2␣head
 
 ␣␣␣␣my␣@values␣=␣head␣$size,␣@list;
@@ -2340,7 +2340,7 @@ Paul␣Evans,␣<leonerd@leonerd.org.uk>.
 
 =cut
 ----------
-Range: (591100,592602) (1502)
+Range: (591101,592603) (1502)
 =head1␣NAME
 
 GDBM_File␣-␣Perl5␣access␣to␣the␣gdbm␣library.
@@ -2396,7 +2396,7 @@ L<perl(1)>,␣L<DB_File(3)>,␣L<perldbmfilter>.␣
 
 =cut
 ----------
-Range: (625437,650107) (24670)
+Range: (625438,650108) (24670)
 =head1␣NAME
 
 Devel::PPPort␣-␣Perl/Pollution/Portability
@@ -3914,7 +3914,7 @@ See␣L<h2xs>,␣L<ppport.h>.
 
 =cut
 ----------
-Range: (653100,655345) (2245)
+Range: (653101,655346) (2245)
 =head1␣NAME
 
 C<Socket>␣-␣networking␣constants␣and␣support␣functions
@@ -3972,7 +3972,7 @@ C<AI_*>,␣C<NI_*>,␣C<NIx_*>␣and␣C<EAI_*>␣constants.
 
 =cut
 ----------
-Range: (655660,658207) (2547)
+Range: (655661,658208) (2547)
 =head2␣PF_INET,␣PF_INET6,␣PF_UNIX,␣...
 
 Protocol␣family␣constants␣to␣use␣as␣the␣first␣argument␣to␣socket()␣or␣the
@@ -4060,7 +4060,7 @@ level.
 
 =cut
 ----------
-Range: (658420,664171) (5751)
+Range: (658421,664172) (5751)
 =head2␣$family␣=␣sockaddr_family␣$sockaddr
 
 Takes␣a␣packed␣socket␣address␣(as␣returned␣by␣pack_sockaddr_in(),
@@ -4197,7 +4197,7 @@ address␣and␣an␣interface␣number.
 
 =cut
 ----------
-Range: (664197,672073) (7876)
+Range: (664198,672074) (7876)
 =head2␣$ip_address␣=␣inet_aton␣$string
 
 Takes␣a␣string␣giving␣the␣name␣of␣a␣host,␣or␣a␣textual␣representation␣of␣an␣IP
@@ -4447,7 +4447,7 @@ type␣given␣in␣the␣$hints.
 
 =cut
 ----------
-Range: (672075,676167) (4092)
+Range: (672076,676168) (4092)
 =head1␣EXAMPLES
 
 =head2␣Lookup␣for␣connect()
@@ -4577,7 +4577,7 @@ correct␣size␣back␣into␣a␣number.
 
 =cut
 ----------
-Range: (676735,678612) (1877)
+Range: (676736,678613) (1877)
 qw(
 	PF_802␣PF_AAL␣PF_APPLETALK␣PF_CCITT␣PF_CHAOS␣PF_CTF␣PF_DATAKIT
 	PF_DECnet␣PF_DLI␣PF_ECMA␣PF_GOSIP␣PF_HYLINK␣PF_IMPLINK␣PF_INET␣PF_INET6
@@ -4631,7 +4631,7 @@ qw(
 	inet_aton␣inet_ntoa
 );
 ----------
-Range: (678776,680629) (1853)
+Range: (678777,680630) (1853)
 qw(
 	CR␣LF␣CRLF␣$CR␣$LF␣$CRLF
 
@@ -4687,7 +4687,7 @@ qw(
 	EAI_NODATA␣EAI_NONAME␣EAI_PROTOCOL␣EAI_SERVICE␣EAI_SOCKTYPE␣EAI_SYSTEM
 );
 ----------
-Range: (699503,701389) (1886)
+Range: (699504,701390) (1886)
 =head1␣NAME
 
 Fcntl␣-␣load␣the␣C␣Fcntl.h␣defines
@@ -4743,7 +4743,7 @@ See␣L<perlfunc/stat>␣about␣the␣S_I*␣constants.
 
 =cut
 ----------
-Range: (714624,718183) (3559)
+Range: (714625,718184) (3559)
 }
 
 
@@ -4862,7 +4862,7 @@ Both␣routines␣return␣a␣reference␣to␣the␣hash␣operated␣on.
 
 =cut
 ----------
-Range: (724481,730045) (5564)
+Range: (724482,730046) (5564)
 @_)␣}
 
 =item␣B<legal_keys>
@@ -5020,7 +5020,7 @@ would␣be␣used␣in␣production␣code.
 
 =cut
 ----------
-Range: (730803,732872) (2069)
+Range: (730804,732873) (2069)
 }
 
 =item␣B<bucket_stats_formatted>
@@ -5072,7 +5072,7 @@ theory␣the␣larger␣the␣bucket␣array␣the␣less␣chance␣of␣collis
 
 =cut
 ----------
-Range: (734729,737989) (3260)
+Range: (734730,737990) (3260)
 $return
 }
 
@@ -5192,7 +5192,7 @@ L<Hash::Util::FieldHash>.
 
 =cut
 ----------
-Range: (755009,756443) (1434)
+Range: (755010,756444) (1434)
 =head1␣NAME
 
 English␣-␣use␣nice␣English␣(or␣awk)␣names␣for␣ugly␣punctuation␣variables
@@ -5238,7 +5238,7 @@ all␣applications␣which␣use␣them.>
 
 =cut
 ----------
-Range: (769623,771229) (1606)
+Range: (769624,771230) (1606)
 =head1␣NAME
 
 ExtUtils::Typemaps␣-␣Read/Write/Modify␣Perl/XS␣typemap␣files
@@ -5288,7 +5288,7 @@ in␣a␣different␣typemap.
 
 =cut
 ----------
-Range: (852392,857885) (5493)
+Range: (852393,857886) (5493)
 printf␣$fh␣<<'EOF!HEAD',␣xsi_header();
 /*␣␣␣␣miniperlmain.c␣or␣perlmain.c␣-␣a␣generated␣file
 ␣*
@@ -5464,7 +5464,7 @@ main(int␣argc,␣char␣**argv,␣char␣**env)
 
 EOF!HEAD
 ----------
-Range: (859372,861106) (1734)
+Range: (859373,861107) (1734)
 }
 }
 
@@ -5515,7 +5515,7 @@ something␣that␣used␣to␣be␣in␣here,␣look␣in␣MM_Any.
 
 =cut
 ----------
-Range: (991569,996457) (4888)
+Range: (991570,996458) (4888)
 }
 
 =pod
@@ -5640,7 +5640,7 @@ provided␣then␣the␣returned␣hashref␣will␣be␣the␣passed␣in␣has
 
 =cut
 ----------
-Range: (1021774,1024196) (2422)
+Range: (1021775,1024197) (2422)
 =head1␣NAME
 
 ExtUtils::ParseXS::Utilities␣-␣Subroutines␣used␣with␣ExtUtils::ParseXS
@@ -5736,7 +5736,7 @@ Array␣holding␣list␣of␣directories␣to␣be␣searched␣for␣F<typemap
 
 =cut
 ----------
-Range: (1028010,1030907) (2897)
+Range: (1028011,1030908) (2897)
 print␣<<"EOF";
 #ifndef␣PERL_UNUSED_VAR
 #␣␣define␣PERL_UNUSED_VAR(var)␣if␣(0)␣var␣=␣var
@@ -5834,7 +5834,7 @@ print␣<<"EOF";
 
 EOF
 ----------
-Range: (1030911,1032491) (1580)
+Range: (1030912,1032492) (1580)
 print␣<<"EOF";
 #ifndef␣PERL_ARGS_ASSERT_CROAK_XS_USAGE
 #define␣PERL_ARGS_ASSERT_CROAK_XS_USAGE␣assert(cv);␣assert(params)
@@ -5887,7 +5887,7 @@ S_croak_xs_usage(const␣CV␣*const␣cv,␣const␣char␣*const␣params)
 
 EOF
 ----------
-Range: (1121087,1122938) (1851)
+Range: (1121088,1122939) (1851)
 =head1␣NAME
 
 ExtUtils::MM_Any␣-␣Platform-agnostic␣MM␣methods
@@ -5969,7 +5969,7 @@ This␣is␣useful␣for␣code␣like:
 
 =cut
 ----------
-Range: (1132193,1134724) (2531)
+Range: (1132194,1134725) (2531)
 $_[1]␣}
 
 
@@ -6059,7 +6059,7 @@ It␣lets␣by␣C<$(...)>.
 
 =cut
 ----------
-Range: (1190185,1191680) (1495)
+Range: (1190186,1191681) (1495)
 }
 
 
@@ -6115,7 +6115,7 @@ A␣typical␣one␣is␣the␣version␣number␣of␣your␣OS␣specific␣mo
 
 =cut
 ----------
-Range: (1249980,1251780) (1800)
+Range: (1249981,1251781) (1800)
 =head1␣NAME
 
 ExtUtils::Typemaps::Cmd␣-␣Quick␣commands␣for␣handling␣typemaps
@@ -6181,7 +6181,7 @@ modify␣it␣under␣the␣same␣terms␣as␣Perl␣itself.
 
 =cut
 ----------
-Range: (1260354,1262217) (1863)
+Range: (1260355,1262218) (1863)
 =head1␣NAME
 
 ExtUtils::Constant␣-␣generate␣XS␣code␣to␣import␣C␣header␣constants
@@ -6270,7 +6270,7 @@ C<undef>.␣␣The␣value␣of␣the␣macro␣is␣not␣needed.
 
 =cut
 ----------
-Range: (1270943,1272881) (1938)
+Range: (1270944,1272882) (1938)
 }
 
 =item␣WriteConstants␣ATTRIBUTE␣=E<gt>␣VALUE␣[,␣...]
@@ -6344,7 +6344,7 @@ C<constant_10>␣with␣the␣default␣I<XS_SUBNAME>.
 
 =cut
 ----------
-Range: (1303460,1307339) (3879)
+Range: (1303461,1307340) (3879)
 }
 
 =head2␣MANIFEST
@@ -6497,7 +6497,7 @@ the␣same␣terms␣as␣the␣Perl␣5␣programming␣language␣system␣its
 
 =cut
 ----------
-Range: (1308366,1310799) (2433)
+Range: (1308367,1310800) (2433)
 }
 
 =back
@@ -6587,7 +6587,7 @@ Filenames␣with␣*␣and␣?␣will␣be␣glob␣expanded.
 
 =cut
 ----------
-Range: (1384628,1386755) (2127)
+Range: (1384629,1386756) (2127)
 <<"EXPLODE"␣:␣<<␣"DONT";
 		SV␣*tripwire␣=␣newSV(0);
 		
@@ -6651,7 +6651,7 @@ EXPLODE
 #endif
 DONT
 ----------
-Range: (1421978,1425831) (3853)
+Range: (1422011,1425864) (3853)
 }
 
 =item␣C_constant␣arg_hashref,␣ITEM...
@@ -6763,7 +6763,7 @@ example␣C<constant_5>␣for␣names␣5␣characters␣long.␣␣The␣defaul
 
 =cut
 ----------
-Range: (1528625,1536866) (8241)
+Range: (1528658,1536899) (8241)
 =head1␣NAME␣
 
 Memoize::Expire␣-␣Plug-in␣module␣for␣automatic␣expiration␣of␣memoized␣values
@@ -7013,7 +7013,7 @@ mjd-perl-memoize-request@Plover.com.
 
 =cut
 ----------
-Range: (1728199,1731484) (3285)
+Range: (1728232,1731517) (3285)
 =head1␣NAME
 
 Locale::Maketext::Simple␣-␣Simple␣interface␣to␣Locale::Maketext::Lexicon
@@ -7118,7 +7118,7 @@ locale␣setting␣is␣used.␣␣Implies␣a␣true␣value␣for␣C<Decode>.
 
 =cut
 ----------
-Range: (1736229,1737883) (1654)
+Range: (1736262,1737916) (1654)
 =head1␣ACKNOWLEDGMENTS
 
 Thanks␣to␣Jos␣I.␣Boumans␣for␣suggesting␣this␣module␣to␣be␣written.
@@ -7163,7 +7163,7 @@ DEALINGS␣IN␣THE␣SOFTWARE.
 
 =cut
 ----------
-Range: (1770829,1772847) (2018)
+Range: (1770862,1772880) (2018)
 0␣}␣qw(
 
 ␣␣␣␣DEBUGGING
@@ -7258,7 +7258,7 @@ Range: (1770829,1772847) (2018)
 ␣␣␣␣VMS_SYMBOL_CASE_AS_IS
 ␣␣␣␣);
 ----------
-Range: (1798932,1802538) (3606)
+Range: (1798965,1802571) (3606)
 =head1␣NAME
 
 Dumpvalue␣-␣provides␣screen␣dump␣of␣Perl␣data.
@@ -7424,7 +7424,7 @@ Sets␣C<compactDump>␣and␣C<veryCompact>␣options␣simultaneously.
 
 =cut
 ----------
-Range: (1807007,1810261) (3254)
+Range: (1807040,1810294) (3254)
 65␣}
 
 =head1␣NAME
@@ -7532,7 +7532,7 @@ Note␣that␣the␣largest␣code␣point␣in␣Unicode␣is␣U+10FFFF.
 
 =cut
 ----------
-Range: (1811347,1816739) (5392)
+Range: (1811380,1816772) (5392)
 }
 }
 
@@ -7697,7 +7697,7 @@ L<Unicode::Normalize>␣module.)
 
 =cut
 ----------
-Range: (1826928,1829594) (2666)
+Range: (1826961,1829627) (2666)
 }
 
 =head2␣B<charprop()>
@@ -7776,7 +7776,7 @@ that␣are␣internal-only.
 
 =cut
 ----------
-Range: (1834027,1835739) (1712)
+Range: (1834060,1835772) (1712)
 }
 
 =head2␣B<charblock()>
@@ -7819,7 +7819,7 @@ returned.
 
 =cut
 ----------
-Range: (1846379,1848151) (1772)
+Range: (1846412,1848184) (1772)
 }
 
 =head2␣B<compexcl()>
@@ -7867,7 +7867,7 @@ The␣routine␣returns␣B<false>␣otherwise.
 
 =cut
 ----------
-Range: (1848645,1853430) (4785)
+Range: (1848678,1853463) (4785)
 $Composition_Exclusion_re
 }
 
@@ -7998,7 +7998,7 @@ L<http://www.unicode.org/unicode/reports/tr21>
 
 =cut
 ----------
-Range: (1857450,1859286) (1836)
+Range: (1857483,1859319) (1836)
 }
 
 =head2␣B<all_casefolds()>
@@ -8045,7 +8045,7 @@ C<<␣all_casefolds()->{ord("A")}'␣>>␣is␣equivalent␣to␣C<casefold(ord(
 
 =cut
 ----------
-Range: (1859376,1863139) (3763)
+Range: (1859409,1863172) (3763)
 }
 
 =head2␣B<casespec()>
@@ -8147,7 +8147,7 @@ L<http://www.unicode.org/unicode/reports/tr21/>
 
 =cut
 ----------
-Range: (1870789,1872570) (1781)
+Range: (1870822,1872603) (1781)
 =pod
 
 If␣the␣string␣is␣more␣than␣one␣character,␣C<undef>␣is␣returned␣unless
@@ -8180,7 +8180,7 @@ change␣these␣into␣digits,␣and␣then␣call␣C<num>␣on␣the␣result
 
 =cut
 ----------
-Range: (1875346,1879462) (4116)
+Range: (1875379,1879495) (4116)
 }
 
 =pod
@@ -8263,7 +8263,7 @@ about␣(and␣which␣is␣documented␣below␣in␣L</prop_invmap()>).
 
 =cut
 ----------
-Range: (1887330,1888892) (1562)
+Range: (1887363,1888925) (1562)
 }
 
 =pod
@@ -8310,7 +8310,7 @@ will␣return␣C<undef>␣if␣called␣with␣one␣of␣those.
 
 =cut
 ----------
-Range: (1889761,1892724) (2963)
+Range: (1889794,1892757) (2963)
 }
 
 =pod
@@ -8379,7 +8379,7 @@ will␣return␣C<undef>␣if␣called␣with␣one␣of␣those.
 
 =cut
 ----------
-Range: (1896605,1900731) (4126)
+Range: (1896638,1900764) (4126)
 =pod
 
 =head2␣B<prop_invlist()>
@@ -8484,7 +8484,7 @@ an␣inversion␣list.
 
 =cut
 ----------
-Range: (1904346,1925838) (21492)
+Range: (1904379,1925871) (21492)
 }
 
 =pod
@@ -9026,7 +9026,7 @@ You␣ought␣to␣use␣L</prop_invmap()>␣like␣this:
 
 =cut
 ----------
-Range: (1963970,1967046) (3076)
+Range: (1964003,1967079) (3076)
 }
 
 =head2␣B<Blocks␣versus␣Scripts>
@@ -9106,7 +9106,7 @@ Jarkko␣Hietaniemi.␣␣Now␣maintained␣by␣perl5␣porters.
 
 =cut
 ----------
-Range: (1968155,1973503) (5348)
+Range: (1968188,1973536) (5348)
 =pod
 
 =head1␣NAME
@@ -9316,7 +9316,7 @@ on␣this.
 
 =cut
 ----------
-Range: (1982578,1986251) (3673)
+Range: (1982611,1986284) (3673)
 =head1␣Global␣Variables
 
 The␣behaviour␣of␣Params::Check␣can␣be␣altered␣by␣changing␣the
@@ -9444,7 +9444,7 @@ under␣the␣same␣terms␣as␣Perl␣itself.
 
 =cut
 ----------
-Range: (2128017,2129454) (1437)
+Range: (2128050,2129487) (1437)
 qw{
 ␣␣␣␣context␣release
 ␣␣␣␣context_do
@@ -9513,7 +9513,7 @@ qw{
 ␣␣␣␣test2_reset_io
 };
 ----------
-Range: (2159661,2163178) (3517)
+Range: (2159694,2163211) (3517)
 =pod
 
 =encoding␣UTF-8
@@ -9678,7 +9678,7 @@ See␣F<http://dev.perl.org/licenses/>
 
 =cut
 ----------
-Range: (2247024,2250053) (3029)
+Range: (2247057,2250086) (3029)
 =pod
 
 =encoding␣UTF-8
@@ -9811,7 +9811,7 @@ the␣same␣terms␣as␣the␣Perl␣5␣programming␣language␣system␣its
 
 =cut
 ----------
-Range: (2298335,2303334) (4999)
+Range: (2298368,2303367) (4999)
 =head1␣NAME
 
 Thread::Semaphore␣-␣Thread-safe␣semaphores
@@ -9972,7 +9972,7 @@ the␣same␣terms␣as␣Perl␣itself.
 
 =cut
 ----------
-Range: (2310997,2320981) (9984)
+Range: (2311030,2321014) (9984)
 =head1␣NAME
 
 Thread::Queue␣-␣Thread-safe␣queues
@@ -10317,7 +10317,7 @@ the␣same␣terms␣as␣Perl␣itself.
 
 =cut
 ----------
-Range: (2329662,2331558) (1896)
+Range: (2329695,2331591) (1896)
 =head1␣NAME
 
 I18N::Collate␣-␣compare␣8-bit␣scalar␣data␣according␣to␣the␣current␣locale
@@ -10375,7 +10375,7 @@ European␣character␣set.
 
 =cut
 ----------
-Range: (2354723,2358264) (3541)
+Range: (2354756,2358297) (3541)
 =item␣*␣the␣function␣encode_language_tag($lang1)
 
 This␣function,␣if␣given␣a␣language␣tag,␣returns␣an␣encoding␣of␣it␣such
@@ -10485,7 +10485,7 @@ And␣that␣does␣the␣Right␣Thing.
 
 =cut
 ----------
-Range: (2366311,2367822) (1511)
+Range: (2366344,2367855) (1511)
 =item␣*␣the␣function␣implicate_supers(␣...languages...␣)
 
 This␣takes␣a␣list␣of␣strings␣(which␣are␣presumed␣to␣be␣language-tags;
@@ -10534,7 +10534,7 @@ as␣far␣as␣I'm␣concerned)␣you'd␣use␣implicate_supers.
 
 =cut
 ----------
-Range: (2381529,2388143) (6614)
+Range: (2381562,2388176) (6614)
 =head1␣NAME
 
 Pod::Select,␣podselect()␣-␣extract␣selected␣sections␣of␣POD␣from␣input
@@ -10758,7 +10758,7 @@ C</=item␣mine/../=(item|back)/>
 
 =cut
 ----------
-Range: (2397943,2399432) (1489)
+Range: (2397976,2399465) (1489)
 =head1␣B<podselect()>
 
 ␣␣␣␣␣␣␣␣␣␣␣␣podselect(\%options,@filelist);
@@ -10807,7 +10807,7 @@ is␣the␣default␣if␣no␣arguments␣are␣given).
 
 =cut␣
 ----------
-Range: (2464808,2466575) (1767)
+Range: (2464841,2466608) (1767)
 <<'----END␣OF␣PREAMBLE----';
 .de␣Sp␣\"␣Vertical␣space␣(when␣we␣can't␣use␣.PP)
 .if␣t␣.sp␣.5v
@@ -10877,7 +10877,7 @@ Range: (2464808,2466575) (1767)
 .rr␣rF
 ----END␣OF␣PREAMBLE----
 ----------
-Range: (2466637,2468528) (1891)
+Range: (2466670,2468561) (1891)
 <<'----END␣OF␣PREAMBLE----'
 .\"
 .\"␣Accent␣mark␣definitions␣(@(#)ms.acc␣1.5␣88/02/08␣SMI;␣from␣UCB␣4.2).
@@ -10946,7 +10946,7 @@ Range: (2466637,2468528) (1891)
 ␣␣␣␣}
 ␣␣␣␣return
 ----------
-Range: (2483798,2490585) (6787)
+Range: (2483831,2490618) (6787)
 =head1␣NAME
 
 Pod::Parser␣-␣base␣class␣for␣creating␣POD␣filters␣and␣translators
@@ -11133,7 +11133,7 @@ for␣the␣setting␣and␣unsetting␣of␣parse-options.
 
 =cut
 ----------
-Range: (2496490,2498060) (1570)
+Range: (2496523,2498093) (1570)
 =head1␣B<new()>
 
 ␣␣␣␣␣␣␣␣␣␣␣␣my␣$parser␣=␣Pod::Parser->new();
@@ -11172,7 +11172,7 @@ subclasses␣returns␣a␣blessed␣reference␣to␣the␣initialized␣object
 
 =cut
 ----------
-Range: (2502478,2504042) (1564)
+Range: (2502511,2504075) (1564)
 =head1␣B<preprocess_paragraph()>
 
 ␣␣␣␣␣␣␣␣␣␣␣␣$textblock␣=␣$parser->preprocess_paragraph($text,␣$line_num);
@@ -11206,7 +11206,7 @@ The␣base␣class␣implementation␣of␣this␣method␣returns␣the␣given
 
 =cut
 ----------
-Range: (2504572,2508253) (3681)
+Range: (2504605,2508286) (3681)
 =head1␣B<parse_text()>
 
 ␣␣␣␣␣␣␣␣␣␣␣␣$ptree1␣=␣$parser->parse_text($text,␣$line_num);
@@ -11301,7 +11301,7 @@ is␣a␣reference␣to␣the␣parse-tree␣object.
 
 =cut
 ----------
-Range: (2520253,2521710) (1457)
+Range: (2520286,2521743) (1457)
 =head1␣B<parse_from_filehandle()>
 
 ␣␣␣␣␣␣␣␣␣␣␣␣$parser->parse_from_filehandle($in_fh,$out_fh);
@@ -11335,7 +11335,7 @@ This␣method␣does␣I<not>␣usually␣need␣to␣be␣overridden␣by␣sub
 
 =cut
 ----------
-Range: (2523939,2525438) (1499)
+Range: (2523972,2525471) (1499)
 =head1␣B<parse_from_file()>
 
 ␣␣␣␣␣␣␣␣␣␣␣␣$parser->parse_from_file($filename,$outfile);
@@ -11382,7 +11382,7 @@ This␣method␣does␣I<not>␣usually␣need␣to␣be␣overridden␣by␣sub
 
 =cut
 ----------
-Range: (2540488,2548740) (8252)
+Range: (2540521,2548773) (8252)
 =head1␣TREE-BASED␣PARSING
 
 If␣straightforward␣stream-based␣parsing␣wont␣meet␣your␣needs␣(as␣is
@@ -11588,7 +11588,7 @@ under␣the␣same␣terms␣as␣Perl␣itself.
 
 =cut
 ----------
-Range: (2550864,2552723) (1859)
+Range: (2550897,2552756) (1859)
 =head2␣C<pod_find(␣{␣%opts␣}␣,␣@directories␣)>
 
 The␣function␣B<pod_find>␣searches␣for␣POD␣documents␣in␣a␣given␣set␣of
@@ -11641,7 +11641,7 @@ as␣this␣is␣included␣in␣I<@INC>␣by␣the␣Perl␣interpreter␣itsel
 
 =cut
 ----------
-Range: (2565087,2575239) (10152)
+Range: (2565120,2575272) (10152)
 =head1␣NAME
 
 Pod::Checker␣-␣check␣pod␣documents␣for␣syntax␣errors
@@ -11998,7 +11998,7 @@ repeat,␣DO␣B<NOT>␣USE␣POD::SIMPLE'S␣INTERFACE.
 
 =cut
 ----------
-Range: (2653725,2657206) (3481)
+Range: (2653759,2657240) (3481)
 <<'EOCSS';
 /*␣For␣accessibility␣reasons,␣never␣specify␣text␣sizes␣in␣px/pt/pc/in/cm/mm␣*/
 
@@ -12131,7 +12131,7 @@ Range: (2653725,2657206) (3481)
 
 EOCSS
 ----------
-Range: (2657299,2659292) (1993)
+Range: (2657333,2659326) (1993)
 <<'EOJAVASCRIPT';
 
 //␣From␣http://www.alistapart.com/articles/alternate/
@@ -12208,7 +12208,7 @@ setActiveStyleSheet(title);
 
 EOJAVASCRIPT
 ----------
-Range: (2769553,2773720) (4167)
+Range: (2769587,2773754) (4167)
 =head1␣METHODS
 
 Pod::Simple::XHTML␣offers␣a␣number␣of␣methods␣that␣modify␣the␣format␣of
@@ -12338,7 +12338,7 @@ of␣the␣page␣(specifically,␣the␣opening␣body␣tag).
 
 =cut
 ----------
-Range: (2775576,2777709) (2133)
+Range: (2775610,2777743) (2133)
 =head2␣handle_text
 
 This␣method␣handles␣the␣body␣of␣text␣within␣any␣element:␣it's␣the␣body
@@ -12393,7 +12393,7 @@ or␣wrapping␣in␣a␣C<div>␣element.
 
 =cut
 ----------
-Range: (2864653,2868722) (4069)
+Range: (2864687,2868756) (4069)
 =head1␣NAME
 
 Pod::Html␣-␣module␣to␣convert␣pod␣files␣to␣HTML
@@ -12599,7 +12599,7 @@ This␣program␣is␣distributed␣under␣the␣Artistic␣License.
 
 =cut
 ----------
-Range: (2877363,2879426) (2063)
+Range: (2877397,2879460) (2063)
 <<END_OF_USAGE;
 Usage:␣␣$0␣--help␣--htmldir=<name>␣--htmlroot=<URL>
 ␣␣␣␣␣␣␣␣␣␣␣--infile=<name>␣--outfile=<name>
@@ -12640,7 +12640,7 @@ Usage:␣␣$0␣--help␣--htmldir=<name>␣--htmlroot=<URL>
 
 END_OF_USAGE
 ----------
-Range: (3010991,3012622) (1631)
+Range: (3011025,3012656) (1631)
 =head1␣NAME
 
 Pod::InputObjects␣-␣objects␣representing␣POD␣input␣paragraphs,␣commands,␣etc.
@@ -12709,7 +12709,7 @@ sections␣which␣follow.
 
 =cut
 ----------
-Range: (3022758,3024250) (1492)
+Range: (3022792,3024284) (1492)
 =head2␣Pod::InteriorSequence-E<gt>B<new()>
 
 ␣␣␣␣␣␣␣␣my␣$pod_seq1␣=␣Pod::InteriorSequence->new(-name␣=>␣$cmd
@@ -12738,7 +12738,7 @@ it␣may␣be␣a␣reference␣to␣a␣Pod::ParseTree␣object).
 
 =cut
 ----------
-Range: (3091561,3093636) (2075)
+Range: (3091595,3093670) (2075)
 <<EOF␣);
 perldoc␣[options]␣PageName|ModuleName|ProgramName|URL...
 perldoc␣[options]␣-f␣BuiltinFunction
@@ -12792,7 +12792,7 @@ filenames,␣one␣per␣line.
 ␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣[Perldoc␣v$VERSION]
 EOF
 ----------
-Range: (3149762,3154556) (4794)
+Range: (3149797,3154591) (4794)
 =head1␣NAME
 
 encoding::warnings␣-␣Warn␣on␣implicit␣encoding␣conversions
@@ -12944,7 +12944,7 @@ instead␣of␣inside␣its␣lexical␣block.
 
 =cut
 ----------
-Range: (3228629,3230145) (1516)
+Range: (3228664,3230180) (1516)
 }
 
 
@@ -12990,7 +12990,7 @@ current␣default␣device␣and␣directory␣is␣used.
 
 =cut
 ----------
-Range: (3232986,3237685) (4699)
+Range: (3233021,3237720) (4699)
 =head1␣SEE␣ALSO
 
 L<dirname(1)>,␣L<basename(1)>,␣L<File::Spec>
@@ -13151,7 +13151,7 @@ http://www.abc.net.au/␣the␣contents␣retrieved␣may␣be␣from␣a␣remo
 
 =cut
 ----------
-Range: (3273744,3279780) (6036)
+Range: (3273779,3279815) (6036)
 =pod
 
 =head1␣HOW␣IT␣WORKS
@@ -13361,7 +13361,7 @@ under␣the␣same␣terms␣as␣Perl␣itself.
 
 =cut
 ----------
-Range: (3373932,3381245) (7313)
+Range: (3373967,3381280) (7313)
 =head1␣NAME
 
 AutoSplit␣-␣split␣a␣package␣for␣autoloading
@@ -13548,7 +13548,7 @@ This␣package␣has␣the␣same␣copyright␣and␣license␣as␣the␣perl�
 
 =cut
 ----------
-Range: (3392949,3396323) (3374)
+Range: (3392984,3396358) (3374)
 =head1␣NAME
 
 vmsish␣-␣Perl␣pragma␣to␣control␣VMS-specific␣language␣features
@@ -13658,7 +13658,7 @@ See␣L<perlmod/Perl␣Modules>.
 
 =cut
 ----------
-Range: (3441436,3481354) (39918)
+Range: (3441471,3481389) (39918)
 =head1␣NAME
 
 Getopt::Long␣-␣Extended␣processing␣of␣command␣line␣options
@@ -14858,7 +14858,7 @@ MA␣02139,␣USA.
 
 =cut
 ----------
-Range: (3481411,3484929) (3518)
+Range: (3481446,3484964) (3518)
 =head1␣NAME
 
 Getopt::Std␣-␣Process␣single-character␣switches␣with␣switch␣clustering
@@ -14936,7 +14936,7 @@ and␣version_mess()␣with␣the␣switches␣string␣as␣an␣argument.
 
 =cut
 ----------
-Range: (3496616,3498261) (1645)
+Range: (3496651,3498296) (1645)
 use␣B␣qw(class␣main_root␣main_start␣main_cv␣svref_2object␣opnumber␣perlstring
 	␣OPf_WANT␣OPf_WANT_VOID␣OPf_WANT_SCALAR␣OPf_WANT_LIST
 	␣OPf_KIDS␣OPf_REF␣OPf_STACKED␣OPf_SPECIAL␣OPf_MOD␣OPf_PARENS
@@ -14980,7 +14980,7 @@ use␣B␣qw(class␣main_root␣main_start␣main_cv␣svref_2object␣opnumber
 ␣␣␣␣␣␣␣␣MDEREF_SHIFT
 ␣␣␣␣);
 ----------
-Range: (3644942,3647437) (2495)
+Range: (3644977,3647472) (2495)
 /^(?:scalar|pushmark|wantarray|const|gvsv|gv|padsv|rv2gv
 ␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣|rv2sv|av2arylen|anoncode|prototype|srefgen|ref|bless
 ␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣␣|regcmaybe|regcreset|regcomp|qr|subst|substcont|trans
@@ -15020,7 +15020,7 @@ Range: (3644942,3647437) (2495)
 
 sub␣pp_entersub␣{
 ----------
-Range: (3690585,3693513) (2928)
+Range: (3690620,3693548) (2928)
 =head1␣NAME
 
 B::Op_private␣-␣OP␣op_private␣flag␣definitions
@@ -15122,7 +15122,7 @@ the␣flag.
 
 =cut
 ----------
-Range: (3781168,3784248) (3080)
+Range: (3781203,3784283) (3080)
 =head1␣NAME
 
 integer␣-␣Perl␣pragma␣to␣use␣integer␣arithmetic␣instead␣of␣floating␣point
@@ -15201,7 +15201,7 @@ See␣L<perlmodlib/"Pragmatic␣Modules">,␣L<perlop/"Integer␣Arithmetic">
 
 =cut
 ----------
-Range: (3824431,3834765) (10334)
+Range: (3824466,3834800) (10334)
 =head1␣NAME
 
 autodie::hints␣-␣Provide␣hints␣about␣user␣subroutines␣to␣autodie
@@ -15517,7 +15517,7 @@ Insisting␣on␣hints␣is␣I<strongly>␣recommended.
 
 =cut
 ----------
-Range: (3860855,3862302) (1447)
+Range: (3860890,3862337) (1447)
 =head2␣Instance␣Methods
 
 =head3␣C<raw>
@@ -15575,7 +15575,7 @@ passed␣to␣the␣source␣(where␣appropriate).␣␣Defaults␣to␣undef.
 
 =cut
 ----------
-Range: (3884260,3887772) (3512)
+Range: (3884295,3887807) (3512)
 =head1␣SYNOPSIS
 
 ␣␣␣␣use␣TAP::Parser::Scheduler;
@@ -15683,7 +15683,7 @@ We␣implement␣our␣own␣glob-style␣pattern␣matching.␣Here␣are␣the
 
 =cut
 ----------
-Range: (3909099,3910568) (1469)
+Range: (3909134,3910603) (1469)
 =head1␣SYNOPSIS
 
 ␣␣#␣abstract␣class␣-␣don't␣use␣directly!
@@ -15731,7 +15731,7 @@ L<TAP::Parser::IteratorFactory/detect_source>␣for␣details␣on␣how␣this�
 
 =cut
 ----------
-Range: (3931482,3934033) (2551)
+Range: (3931517,3934068) (2551)
 =head1␣TAP␣GRAMMAR
 
 B<NOTE:>␣␣This␣grammar␣is␣slightly␣out␣of␣date.␣␣There's␣still␣some␣discussion
@@ -15819,7 +15819,7 @@ L<TAP::Parser::Result>,
 
 =cut
 ----------
-Range: (3999473,4001476) (2003)
+Range: (3999508,4001511) (2003)
 3␣}
 
 =head1␣METHODS
@@ -15911,7 +15911,7 @@ Any␣keys␣for␣which␣the␣value␣is␣C<undef>␣will␣be␣ignored.
 
 =cut
 ----------
-Range: (4011914,4019487) (7573)
+Range: (4011949,4019522) (7573)
 =head1␣METHODS
 
 =head2␣Class␣Methods
@@ -16192,7 +16192,7 @@ Any␣keys␣for␣which␣the␣value␣is␣C<undef>␣will␣be␣ignored.
 
 =cut
 ----------
-Range: (4027118,4028978) (1860)
+Range: (4027153,4029013) (1860)
 }
 
 =head3␣C<aggregate_tests>
@@ -16249,7 +16249,7 @@ different␣name.
 
 =cut
 ----------
-Range: (4037145,4040068) (2923)
+Range: (4037180,4040103) (2923)
 =head1␣NAME
 
 TAP::Harness::Env␣-␣Parsing␣harness␣related␣environmental␣variables␣where␣appropriate
@@ -16376,7 +16376,7 @@ Version␣3.42
 
 =cut
 ----------
-Range: (4040855,4046635) (5780)
+Range: (4040890,4046670) (5780)
 =head1␣SYNOPSIS
 
 ␣␣␣␣use␣TAP::Parser;
@@ -16584,7 +16584,7 @@ L<TAP::Parser::IteratorFactory>.
 
 =cut
 ----------
-Range: (4053029,4060325) (7296)
+Range: (4053064,4060360) (7296)
 }
 }
 
@@ -16896,7 +16896,7 @@ but␣had␣a␣TODO␣directive,␣it␣will␣be␣counted␣as␣a␣passed�
 
 =cut
 ----------
-Range: (4066992,4068513) (1521)
+Range: (4067027,4068548) (1521)
 @_␣)␣}
 
 =head3␣C<parse_errors>
@@ -16959,7 +16959,7 @@ But␣this␣is␣not:
 
 =cut
 ----------
-Range: (4081075,4091473) (10398)
+Range: (4081110,4091508) (10398)
 =head1␣CALLBACKS
 
 As␣mentioned␣earlier,␣a␣"callback"␣key␣may␣be␣added␣to␣the
@@ -17340,7 +17340,7 @@ under␣the␣same␣terms␣as␣Perl␣itself.
 
 =cut
 ----------
-Range: (4200249,4202909) (2660)
+Range: (4200284,4202944) (2660)
 =head1␣NAME
 
 FileCache␣-␣keep␣more␣files␣open␣than␣the␣system␣permits
@@ -17422,7 +17422,7 @@ so␣you␣may␣have␣to␣set␣I<maxopen>␣yourself.
 
 =cut
 ----------
-Range: (4207882,4209979) (2097)
+Range: (4207917,4210014) (2097)
 =head1␣NAME
 
 C<IO::Socket::IP>␣-␣Family-neutral␣IP␣socket␣supporting␣both␣IPv4␣and␣IPv6
@@ -17483,7 +17483,7 @@ scope.
 
 =cut
 ----------
-Range: (4210941,4217810) (6869)
+Range: (4210976,4217845) (6869)
 =head2␣$sock␣=␣IO::Socket::IP->new(␣%args␣)
 
 Creates␣a␣new␣C<IO::Socket::IP>␣object,␣containing␣a␣newly␣created␣socket
@@ -17679,7 +17679,7 @@ behaviour␣given␣in␣the␣C<PeerHost>␣AND␣C<LocalHost>␣PARSING␣sect
 
 =cut
 ----------
-Range: (4237481,4240336) (2855)
+Range: (4237516,4240371) (2855)
 }
 
 =head1␣NON-BLOCKING
@@ -17751,7 +17751,7 @@ F<examples/nonblocking_libasyncns.pl>␣file␣in␣the␣module␣distribution.
 
 =cut
 ----------
-Range: (4240338,4242333) (1995)
+Range: (4240373,4242368) (1995)
 =head1␣C<PeerHost>␣AND␣C<LocalHost>␣PARSING
 
 To␣support␣the␣C<IO::Socket::INET>␣API,␣the␣host␣and␣port␣information␣may␣be
@@ -17804,7 +17804,7 @@ not␣recognised.
 
 =cut
 ----------
-Range: (4244008,4245760) (1752)
+Range: (4244043,4245795) (1752)
 }
 
 =head1␣C<IO::Socket::INET>␣INCOMPATIBILITES
@@ -17855,7 +17855,7 @@ C<IO::Socket::IP>.
 
 =cut
 ----------
-Range: (4246244,4253292) (7048)
+Range: (4246279,4253327) (7048)
 =head1␣NAME
 
 IO::Zlib␣-␣IO::␣style␣interface␣to␣L<Compress::Zlib>
@@ -18131,7 +18131,7 @@ it␣and/or␣modify␣it␣under␣the␣same␣terms␣as␣Perl␣itself.
 
 =cut
 ----------
-Range: (4485550,4487752) (2202)
+Range: (4485585,4487787) (2202)
 =pod
 
 =head1␣NAME
@@ -18205,7 +18205,7 @@ if␣L<IPC::Run>␣can␣not␣be␣found␣or␣loaded.
 
 =cut
 ----------
-Range: (4491055,4493968) (2913)
+Range: (4491090,4494003) (2913)
 }
 
 =head2␣$ok␣|␣($ok,␣$err,␣$full_buf,␣$stdout_buff,␣$stderr_buff)␣=␣run(␣command␣=>␣COMMAND,␣[verbose␣=>␣BOOL,␣buffer␣=>␣\$SCALAR,␣timeout␣=>␣DIGIT]␣);
@@ -18304,7 +18304,7 @@ what␣modules␣or␣function␣calls␣to␣use␣when␣issuing␣a␣command
 
 =cut
 ----------
-Range: (4503752,4507675) (3923)
+Range: (4503787,4507710) (3923)
 }
 }
 
@@ -18431,7 +18431,7 @@ Holds␣some␣explanation␣in␣the␣case␣of␣an␣error.
 
 =cut
 ----------
-Range: (4545144,4548330) (3186)
+Range: (4545179,4548365) (3186)
 =head1␣NAME
 
 IPC::Open2␣-␣open␣a␣process␣for␣both␣reading␣and␣writing␣using␣open2()
@@ -18514,7 +18514,7 @@ function␣is␣really␣just␣a␣wrapper␣around␣open3().
 
 =cut
 ----------
-Range: (4549240,4553043) (3803)
+Range: (4549276,4553079) (3803)
 =head1␣NAME
 
 IPC::Open3␣-␣open␣a␣process␣for␣reading,␣writing,␣and␣error␣handling␣using␣open3()
@@ -18616,7 +18616,7 @@ The␣order␣of␣arguments␣differs␣from␣that␣of␣open2().
 
 =cut
 ----------
-Range: (4621027,4624210) (3183)
+Range: (4621063,4624246) (3183)
 }
 
 =pod
@@ -18737,7 +18737,7 @@ the␣outcome␣of␣this␣value.
 
 =cut
 ----------
-Range: (4630136,4631720) (1584)
+Range: (4630172,4631756) (1584)
 }
 
 =head2␣$bool␣=␣can_load(␣modules␣=>␣{␣NAME␣=>␣VERSION␣[,NAME␣=>␣VERSION]␣},␣[verbose␣=>␣BOOL,␣nocache␣=>␣BOOL,␣autoload␣=>␣BOOL]␣)
@@ -18784,7 +18784,7 @@ See␣the␣C<autoload>␣function␣and␣the␣C<autoload_remote>␣function�
 
 =cut
 ----------
-Range: (5456614,5458686) (2072)
+Range: (5456650,5458722) (2072)
 1␣}␣qw/
 ␣␣␣␣␣␣␣␣␣␣␣␣Archive::Extract
 ␣␣␣␣␣␣␣␣␣␣␣␣B::Lint
@@ -18845,7 +18845,7 @@ Range: (5456614,5458686) (2072)
 ␣␣␣␣␣␣␣␣␣␣␣␣Text::Soundex
 ␣␣␣␣␣␣␣␣/},
 ----------
-Range: (5459424,5461525) (2101)
+Range: (5459460,5461561) (2101)
 1␣}␣qw/
 ␣␣␣␣␣␣␣␣␣␣␣␣Archive::Extract
 ␣␣␣␣␣␣␣␣␣␣␣␣B::Lint
@@ -18908,7 +18908,7 @@ Range: (5459424,5461525) (2101)
 ␣␣␣␣␣␣␣␣/}
 ␣␣␣␣},
 ----------
-Range: (5553201,5556211) (3010)
+Range: (5553237,5556247) (3010)
 =pod
 
 =head1␣NAME
@@ -19016,7 +19016,7 @@ L<corelist>,␣L<Module::CoreList>,␣L<perl>,␣L<http://perlpunks.de/corelist>
 
 =cut
 ----------
-Range: (5572948,5598949) (26001)
+Range: (5572984,5598985) (26001)
 =head1␣NAME
 
 Memoize␣-␣Make␣functions␣faster␣by␣trading␣space␣for␣time
@@ -19742,7 +19742,7 @@ during␣the␣integration␣process.
 
 =cut
 ----------
-Range: (5723434,5727918) (4484)
+Range: (5723470,5727954) (4484)
 =pod
 
 =encoding␣UTF-8
@@ -19902,7 +19902,7 @@ the␣same␣terms␣as␣the␣Perl␣5␣programming␣language␣system␣its
 
 =cut
 ----------
-Range: (5774022,5777878) (3856)
+Range: (5774058,5777914) (3856)
 =pod
 
 =encoding␣UTF-8
@@ -20051,7 +20051,7 @@ the␣same␣terms␣as␣the␣Perl␣5␣programming␣language␣system␣its
 
 =cut
 ----------
-Range: (5803074,5804796) (1722)
+Range: (5803110,5804832) (1722)
 =pod
 
 =encoding␣UTF-8
@@ -20127,7 +20127,7 @@ the␣same␣terms␣as␣the␣Perl␣5␣programming␣language␣system␣its
 
 =cut
 ----------
-Range: (5836173,5837960) (1787)
+Range: (5836209,5837996) (1787)
 =pod
 
 =encoding␣UTF-8
@@ -20208,7 +20208,7 @@ the␣same␣terms␣as␣the␣Perl␣5␣programming␣language␣system␣its
 
 =cut
 ----------
-Range: (5867376,5871850) (4474)
+Range: (5867412,5871886) (4474)
 =pod
 
 =encoding␣UTF-8
@@ -20431,7 +20431,7 @@ the␣same␣terms␣as␣the␣Perl␣5␣programming␣language␣system␣its
 
 =cut
 ----------
-Range: (6083443,6096017) (12574)
+Range: (6083479,6096053) (12574)
 =pod
 
 =encoding␣UTF-8
@@ -20962,7 +20962,7 @@ the␣same␣terms␣as␣the␣Perl␣5␣programming␣language␣system␣its
 
 =cut
 ----------
-Range: (6268189,6288056) (19867)
+Range: (6268225,6288092) (19867)
 <<'=back';
 
 =over␣2
@@ -21548,7 +21548,7 @@ Which␣YAML␣implementation␣would␣you␣prefer?
 
 =back
 ----------
-Range: (6878858,6881555) (2697)
+Range: (6878894,6881591) (2697)
 =head1␣NAME
 
 Symbol␣-␣manipulate␣Perl␣symbols␣and␣their␣names
@@ -21627,7 +21627,7 @@ you␣reload␣the␣C<Foo>␣module␣afterwards.
 
 =cut
 ----------
-Range: (6885777,6892090) (6313)
+Range: (6885813,6892126) (6313)
 =head1␣NAME
 
 Term::ReadLine␣-␣Perl␣interface␣to␣various␣C<readline>␣packages.
@@ -21830,7 +21830,7 @@ particular␣used␣C<Term::ReadLine::*>␣package).
 
 =cut
 ----------
-Range: (6923406,6925394) (1988)
+Range: (6923442,6925430) (1988)
 }
 
 =over␣4
@@ -21889,7 +21889,7 @@ It␣calls␣C<croak>␣on␣failure.
 
 =cut
 ----------
-Range: (6944651,6950251) (5600)
+Range: (6944687,6950287) (5600)
 =head1␣NAME
 
 Tie::Hash,␣Tie::StdHash,␣Tie::ExtraHash␣-␣base␣class␣definitions␣for␣tied␣hashes
@@ -22075,7 +22075,7 @@ good␣working␣examples.
 
 =cut
 ----------
-Range: (7009000,7011782) (2782)
+Range: (7009036,7011818) (2782)
 =head1␣NAME
 
 Tie::Scalar,␣Tie::StdScalar␣-␣base␣class␣definitions␣for␣tied␣scalars
@@ -22167,7 +22167,7 @@ process␣IDs␣with␣priority.
 
 =cut
 ----------
-Range: (7013336,7015890) (2554)
+Range: (7013372,7015926) (2554)
 =head1␣NAME
 
 Tie::Handle␣-␣base␣class␣definitions␣for␣tied␣handles
@@ -22281,7 +22281,7 @@ been␣bumped␣up␣to␣4.0.
 
 =cut
 ----------
-Range: (7017399,7019524) (2125)
+Range: (7017435,7019560) (2125)
 =head1␣NAME
 
 Tie::RefHash␣-␣use␣references␣as␣hash␣keys
@@ -22368,7 +22368,7 @@ perl(1),␣perlfunc(1),␣perltie(1)
 
 =cut
 ----------
-Range: (7033127,7035718) (2591)
+Range: (7033163,7035754) (2591)
 =head1␣NAME
 
 Tie::Memoize␣-␣add␣data␣to␣hash␣when␣needed
@@ -22446,7 +22446,7 @@ Ilya␣Zakharevich␣L<mailto:perl-module-hash-memoize@ilyaz.org>.
 
 =cut
 ----------
-Range: (7035923,7038139) (2216)
+Range: (7035959,7038175) (2216)
 =head1␣NAME
 
 FindBin␣-␣Locate␣directory␣of␣original␣perl␣script
@@ -22519,7 +22519,7 @@ under␣the␣same␣terms␣as␣Perl␣itself.
 
 =cut
 ----------
-Range: (7109256,7110699) (1443)
+Range: (7109292,7110735) (1443)
 }
 
 =head2␣Instance␣Methods
@@ -22590,7 +22590,7 @@ information␣for␣the␣test␣program.
 
 =cut
 ----------
-Range: (7115967,7122519) (6552)
+Range: (7116003,7122555) (6552)
 =head1␣NAME
 
 App::Cpan␣-␣easily␣interact␣with␣CPAN␣from␣the␣command␣line
@@ -22869,7 +22869,7 @@ is␣C</usr/local/bin/git>.
 
 =cut
 ----------
-Range: (7154336,7155986) (1650)
+Range: (7154372,7156022) (1650)
 =back
 
 =head1␣EXIT␣VALUES
@@ -22943,7 +22943,7 @@ You␣may␣redistribute␣this␣under␣the␣same␣terms␣as␣Perl␣itsel
 
 =cut
 ----------
-Range: (7171679,7184556) (12877)
+Range: (7171715,7184592) (12877)
 =head1␣NAME
 
 feature␣-␣Perl␣pragma␣to␣enable␣new␣features
@@ -23326,7 +23326,7 @@ also␣does␣the␣equivalent␣of␣C<use␣strict>;␣see␣L<perlfunc/use>�
 
 =cut
 ----------
-Range: (7186676,7192588) (5912)
+Range: (7186712,7192624) (5912)
 =head1␣NAME
 
 diagnostics,␣splain␣-␣produce␣verbose␣warning␣diagnostics
@@ -23508,7 +23508,7 @@ Tom␣Christiansen␣<F<tchrist@mox.perl.com>>,␣25␣June␣1995.
 
 =cut
 ----------
-Range: (7237143,7238617) (1474)
+Range: (7237179,7238653) (1474)
 }
 
 =back
@@ -23551,7 +23551,7 @@ the␣PERL5LIB.
 
 =cut
 ----------
-Range: (7238681,7240478) (1797)
+Range: (7238717,7240514) (1797)
 }
 
 =back
@@ -23610,7 +23610,7 @@ L<Test::Builder>,␣L<Test::Builder::Tester::Color>,␣L<Test::More>.
 
 =cut
 ----------
-Range: (7245041,7246594) (1553)
+Range: (7245077,7246630) (1553)
 =head1␣NAME
 
 Test::Builder::Module␣-␣Base␣class␣for␣test␣modules
@@ -23673,7 +23673,7 @@ C<import_extra()>.
 
 =cut
 ----------
-Range: (7260037,7261684) (1647)
+Range: (7260073,7261720) (1647)
 }
 
 =head2␣execute_tests(␣tests␣=>␣\@test_files,␣out␣=>␣\*FH␣)
@@ -23718,7 +23718,7 @@ C<$failed>␣should␣be␣empty␣if␣everything␣passed.
 
 =cut
 ----------
-Range: (7261882,7263704) (1822)
+Range: (7261918,7263740) (1822)
 =head1␣NAME
 
 Test::Simple␣-␣Basic␣utilities␣for␣writing␣tests.
@@ -23782,7 +23782,7 @@ will␣do␣what␣you␣mean␣(fail␣if␣stuff␣is␣empty)
 
 =cut
 ----------
-Range: (7263817,7268176) (4359)
+Range: (7263853,7268212) (4359)
 }
 
 =back
@@ -23923,7 +23923,7 @@ See␣F<http://www.perl.com/perl/misc/Artistic.html>
 
 =cut
 ----------
-Range: (7268980,7272258) (3278)
+Range: (7269016,7272294) (3278)
 =head1␣NAME
 
 Test::More␣-␣yet␣another␣framework␣for␣writing␣test␣scripts
@@ -24053,7 +24053,7 @@ or␣for␣deciding␣between␣running␣the␣tests␣at␣all:
 
 =cut
 ----------
-Range: (7274267,7276217) (1950)
+Range: (7274303,7276253) (1950)
 }
 
 =head2␣Test␣names
@@ -24123,7 +24123,7 @@ This␣is␣the␣same␣as␣L<Test::Simple>'s␣C<ok()>␣routine.
 
 =cut
 ----------
-Range: (7276334,7278630) (2296)
+Range: (7276370,7278666) (2296)
 }
 
 =item␣B<is>
@@ -24202,7 +24202,7 @@ function␣which␣is␣an␣alias␣of␣C<isnt()>.
 
 =cut
 ----------
-Range: (7286704,7288568) (1864)
+Range: (7286740,7288604) (1864)
 }
 
 =item␣B<subtest>
@@ -24279,7 +24279,7 @@ Extra␣arguments␣given␣to␣C<subtest>␣are␣passed␣to␣the␣callback
 
 =cut
 ----------
-Range: (7294274,7295958) (1684)
+Range: (7294310,7295994) (1684)
 }
 
 
@@ -24332,7 +24332,7 @@ an␣C<is()>␣function␣that␣works␣like␣C<is_deeply>␣with␣many␣imp
 
 =cut
 ----------
-Range: (7298605,7300052) (1447)
+Range: (7298641,7300088) (1447)
 }
 
 =back
@@ -24390,7 +24390,7 @@ don't␣indicate␣a␣problem.
 
 =cut
 ----------
-Range: (7300557,7302485) (1928)
+Range: (7300593,7302521) (1928)
 }
 
 =back
@@ -24455,7 +24455,7 @@ use␣TODO.␣␣Read␣on.
 
 =cut
 ----------
-Range: (7303304,7305223) (1919)
+Range: (7303340,7305259) (1919)
 }
 
 =item␣B<TODO:␣BLOCK>
@@ -24516,7 +24516,7 @@ interpret␣them␣as␣passing.
 
 =cut
 ----------
-Range: (7313279,7320867) (7588)
+Range: (7313315,7320903) (7588)
 }
 
 =back
@@ -24760,7 +24760,7 @@ See␣F<http://www.perl.com/perl/misc/Artistic.html>
 
 =cut
 ----------
-Range: (7425321,7427353) (2032)
+Range: (7425357,7427389) (2032)
 =head1␣NAME
 
 Env␣-␣perl␣module␣that␣imports␣environment␣variables␣as␣scalars␣or␣arrays
@@ -24832,7 +24832,7 @@ Gregor␣N.␣Purdy␣E<lt>F<gregor@focusresearch.com>E<gt>
 
 =cut
 ----------
-Range: (7433641,7435079) (1438)
+Range: (7433677,7435115) (1438)
 }
 
 =head1␣NAME
@@ -24883,7 +24883,7 @@ for␣any␣reason,␣C<new()>␣returns␣undef.
 
 =cut
 ----------
-Range: (7435834,7438090) (2256)
+Range: (7435870,7438126) (2256)
 }
 
 =head2␣$tar->read␣(␣$filename|$handle,␣[$compressed,␣{opt␣=>␣'val'}]␣)
@@ -24950,7 +24950,7 @@ C<Archive::Tar::File>␣objects␣in␣list␣context.
 
 =cut
 ----------
-Range: (7485309,7486781) (1472)
+Range: (7485345,7486817) (1472)
 }
 
 =head1␣Class␣Methods
@@ -24991,7 +24991,7 @@ Consult␣the␣FAQ␣below␣if␣this␣is␣a␣problem.
 
 =cut
 ----------
-Range: (7495066,7497433) (2367)
+Range: (7495102,7497469) (2367)
 }
 ␣␣␣␣}
 }

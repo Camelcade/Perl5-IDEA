@@ -525,10 +525,19 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void assertNoErrorElements() {
-    assertFalse(
-      "PsiFile contains error elements:\n" + getFile().getText(),
-      DebugUtil.psiToString(getFile(), true, false).contains("PsiErrorElement")
-    );
+    var foundErrors = new ArrayList<Pair<Integer, String>>();
+    getFile().accept(new PerlRecursiveVisitor() {
+      @Override
+      public void visitElement(@NotNull PsiElement element) {
+        if (element instanceof PsiErrorElement) {
+          foundErrors.add(Pair.create(element.getTextOffset(), ((PsiErrorElement)element).getErrorDescription()));
+        }
+        super.visitElement(element);
+      }
+    });
+    if (!foundErrors.isEmpty()) {
+      fail("Found error PsiElements:\n" + foundErrors.stream().map(it -> it.first + ": " + it.second).collect(Collectors.joining("\n")));
+    }
   }
 
   protected void doFormatTest() {
@@ -545,10 +554,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doFormatTest(@NotNull String sourceFileName, @NotNull String resultFileName, @NotNull String resultSuffix) {
     initWithFileSmartWithoutErrors(sourceFileName);
-    doFormatTestWithoutInitialization(resultFileName, resultSuffix, true);
+    doFormatTestWithoutInitialization(resultFileName, resultSuffix);
   }
 
-  protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix, boolean checkErrors) {
+  protected void doFormatTestWithoutInitialization(@NotNull String resultFileName, @NotNull String resultSuffix) {
     WriteCommandAction.writeCommandAction(getProject()).run(() -> {
       PsiFile file = myFixture.getFile();
       if (InjectedLanguageManager.getInstance(file.getProject()).isInjectedFragment(file)) {
@@ -561,9 +570,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
     String resultFilePath = getTestDataPath() + "/" + resultFileName + resultSuffix + ".txt";
     UsefulTestCase.assertSameLinesWithFile(resultFilePath, myFixture.getFile().getText());
-    if (checkErrors) {
-      assertNoErrorElements();
-    }
+    assertNoErrorElements();
   }
 
   protected final int getCompletionInvocationCount() {
@@ -2593,22 +2600,16 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   public void initWithLarge(@NotNull String name) {
-    initWithLarge(name, true);
-  }
-
-  public void initWithLarge(@NotNull String name, boolean checkErrors) {
-    initWithTestDataFile("largeFiles/" + name, name, checkErrors);
+    initWithTestDataFile("largeFiles/" + name, name);
   }
 
   protected void initWithCpanFile() {
     initWithFile("cpanfile", "");
   }
 
-  public void initWithTestDataFile(@NotNull String sourceName, @NotNull String targetName, boolean checkErrors) {
+  public void initWithTestDataFile(@NotNull String sourceName, @NotNull String targetName) {
     initWithFileContent(targetName, getFileExtension(), loadTestFile(sourceName));
-    if (checkErrors) {
-      assertNoErrorElements();
-    }
+    assertNoErrorElements();
   }
 
   public @NotNull String loadTestFile(@NotNull String sourceName) {
