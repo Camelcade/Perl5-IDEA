@@ -1,0 +1,3 @@
+undef %something;
+undef *something;
+undef &something;

@@ -33,6 +33,9 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
   }
 
   @Test
+  public void testUndefAmbiguity() { doFormatTest(); }
+
+  @Test
   public void testClassSyntax() { doFormatTest(); }
 
   @Test

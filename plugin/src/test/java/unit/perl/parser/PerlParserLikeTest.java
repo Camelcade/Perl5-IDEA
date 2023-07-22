@@ -27,6 +27,9 @@ public abstract class PerlParserLikeTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testUndefHash() { doTest(); }
+
+  @Test
   public void testClassSyntax() { doTest(); }
 
   @Test
