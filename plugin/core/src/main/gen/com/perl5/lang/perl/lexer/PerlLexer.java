@@ -14896,7 +14896,7 @@ public class PerlLexer extends PerlBaseLexer {
           // fall through
           case 844: break;
           case 390:
-            { yybegin(AFTER_IDENTIFIER); return RESERVED_UNDEF;
+            { yybegin(YYINITIAL); return RESERVED_UNDEF;
             }
           // fall through
           case 845: break;

@@ -1,0 +1,21 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlUndefExprImpl(Perl5: UNDEF_EXPR)
+      PsiElement(Perl5: undef)('undef')
+      PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE)
+        PsiElement(Perl5: $%)('%')
+        PerlVariableNameElementImpl(Perl5: HASH_NAME)('EXPORT_OK')
+    PsiElement(Perl5: ;)(';')
+  PsiPerlStatementImpl(Perl5: STATEMENT)
+    PsiPerlUndefExprImpl(Perl5: UNDEF_EXPR)
+      PsiElement(Perl5: undef)('undef')
+      PsiPerlHashVariableImpl(Perl5: HASH_VARIABLE)
+        PsiElement(Perl5: $%)('%')
+        PerlVariableNameElementImpl(Perl5: HASH_NAME)('EXPORT')
+    PsiElement(Perl5: ;)(';')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)('undef %EXPORT_OK;\nundef %EXPORT;')
+--------------------------------------------------------------------------------
