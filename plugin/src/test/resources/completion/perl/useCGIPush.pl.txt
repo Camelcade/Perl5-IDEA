@@ -1,0 +1,12 @@
+Text: multipart_end; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: multipart_end
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::multipart_end at 47973 in CGI.pm
+Text: multipart_final; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: multipart_final
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::multipart_final at 48229 in CGI.pm
+Text: multipart_init; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: multipart_init
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::multipart_init at 46053 in CGI.pm
+Text: multipart_start; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: multipart_start
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::multipart_start at 47026 in CGI.pm

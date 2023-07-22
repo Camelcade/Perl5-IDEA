@@ -1,0 +1,138 @@
+Text: DELETE; Tail: ($param); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: DELETE
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::DELETE($self, $param) at 41126 in CGI.pm
+Text: NEXTKEY; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: NEXTKEY
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::NEXTKEY($self) at 41005 in CGI.pm
+Text: STORE; Tail: ($tag, $vals); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: STORE
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::STORE($self, $tag, $vals) at 40536 in CGI.pm
+Text: TIEHASH; Tail: ($arg); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: TIEHASH
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::TIEHASH($class, $arg) at 40361 in CGI.pm
+Text: _box_group; Tail: ($box_type); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _box_group
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::_box_group($self, $box_type) at 77505 in CGI.pm
+Text: _checked; Tail: ($value); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _checked
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::_checked($self, $value) at 30492 in CGI.pm
+Text: _decode_utf8; Tail: ($val); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _decode_utf8
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::_decode_utf8($self, $val) at 14359 in CGI.pm
+Text: _get_query_string_from_env; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _get_query_string_from_env
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::_get_query_string_from_env($self) at 24971 in CGI.pm
+Text: _name_and_path_from_env; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _name_and_path_from_env
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::_name_and_path_from_env($self) at 98457 in CGI.pm
+Text: _script; Tail: ($script); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _script
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::_script($self, $script) at 60082 in CGI.pm
+Text: _selected; Tail: ($value); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _selected
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::_selected($self, $value) at 30337 in CGI.pm
+Text: _set_attributes; Tail: ($element, $attributes); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _set_attributes
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::_set_attributes($self, $element, $attributes) at 122205 in CGI.pm
+Text: _set_values_and_labels; Tail: ($v, $l, $n); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _set_values_and_labels
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::_set_values_and_labels($self, $v, $l, $n) at 121923 in CGI.pm
+Text: _setup_symbols; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _setup_symbols
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::_setup_symbols($self) at 30687 in CGI.pm
+Text: _style; Tail: ($style); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: _style
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::_style($self, $style) at 57940 in CGI.pm
+Text: add_parameter; Tail: ($param); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: add_parameter
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::add_parameter($self, $param) at 27857 in CGI.pm
+Text: all_parameters; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: all_parameters
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::all_parameters($self) at 28035 in CGI.pm
+Text: ascii2ebcdic; Tail: ($data); Type: CGI::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: ascii2ebcdic
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::Util::ascii2ebcdic($data) at 11404 in Util.pm
+Text: ebcdic2ascii; Tail: ($data); Type: CGI::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: ebcdic2ascii
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::Util::ebcdic2ascii($data) at 11308 in Util.pm
+Text: escape; Tail: null; Type: CGI::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: escape
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::Util::escape at 8749 in Util.pm
+Text: expires; Tail: ($time, $format); Type: CGI::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: expires
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::Util::expires($time, $format) at 9434 in Util.pm
+Text: get_fields; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: get_fields
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::get_fields($self) at 110223 in CGI.pm
+Text: import; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: import
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::import($self) at 8432 in CGI.pm
+Text: in; Tail: null; Type: CGI; Icon: /glob_gutter_icon.png; Type Icon: null
+	Lookups: in
+	PsiElement: PsiPerlGlobVariableImpl(*) at 39589 in CGI.pm
+Text: in; Tail: null; Type: CGI; Icon: /glob_gutter_icon.png; Type Icon: null
+	Lookups: in
+	PsiElement: PsiPerlGlobVariableImpl(*) at 39655 in CGI.pm
+Text: init; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: init
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::init($self) at 15625 in CGI.pm
+Text: make_attributes; Tail: ($attr); Type: CGI::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: make_attributes
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::Util::make_attributes($attr) at 5908 in Util.pm
+Text: new; Tail: (@initializer); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: new
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::new($class, @initializer) at 9843 in CGI.pm
+Text: new_MultipartBuffer; Tail: ($boundary, $length); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: new_MultipartBuffer
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::new_MultipartBuffer($self, $boundary, $length) at 36906 in CGI.pm
+Text: parse_keywordlist; Tail: ($tosplit); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: parse_keywordlist
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::parse_keywordlist($self, $tosplit) at 95802 in CGI.pm
+Text: parse_params; Tail: ($tosplit); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: parse_params
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::parse_params($self, $tosplit) at 27372 in CGI.pm
+Text: previous_or_default; Tail: ($name, $defaults, $override); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: previous_or_default
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::previous_or_default($self, $name, $defaults, $override) at 109635 in CGI.pm
+Text: print; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: print
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::print($self) at 26602 in CGI.pm
+Text: protocol; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: protocol
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::protocol($self) at 107002 in CGI.pm
+Text: r; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: r
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::r($self) at 11285 in CGI.pm
+Text: read_from_client; Tail: ($buff, $len, $offset); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: read_from_client
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::read_from_client($self, $buff, $len, $offset) at 37072 in CGI.pm
+Text: read_multipart; Tail: ($boundary, $length); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: read_multipart
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::read_multipart($self, $boundary, $length) at 111575 in CGI.pm
+Text: read_multipart_related; Tail: ($start, $boundary, $length); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: read_multipart_related
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::read_multipart_related($self, $start, $boundary, $length) at 117390 in CGI.pm
+Text: read_postdata_putdata; Tail: ($postOrPut, $content_length, $content_type); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: read_postdata_putdata
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::read_postdata_putdata($self, $postOrPut, $content_length, $content_type) at 32861 in CGI.pm
+Text: rearrange; Tail: ($order, @param); Type: CGI::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: rearrange
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::Util::rearrange($order, @param) at 4197 in Util.pm
+Text: rearrange_header; Tail: ($order, @param); Type: CGI::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: rearrange_header
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::Util::rearrange_header($order, @param) at 4440 in Util.pm
+Text: register_parameter; Tail: ($param); Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: register_parameter
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::register_parameter($self, $param) at 110121 in CGI.pm
+Text: save_request; Tail: null; Type: CGI; Icon: /method_gutter_icon.png; Type Icon: null
+	Lookups: save_request
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::save_request($self) at 26821 in CGI.pm
+Text: symbol; Tail: null; Type: CGI; Icon: /glob_gutter_icon.png; Type Icon: null
+	Lookups: symbol
+	PsiElement: PsiPerlGlobVariableImpl(*) at 38310 in CGI.pm
+Text: symbol; Tail: null; Type: CGI; Icon: /glob_gutter_icon.png; Type Icon: null
+	Lookups: symbol
+	PsiElement: PsiPerlGlobVariableImpl(*) at 38631 in CGI.pm
+Text: unescape; Tail: null; Type: CGI::Util; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: unescape
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::Util::unescape at 7144 in Util.pm

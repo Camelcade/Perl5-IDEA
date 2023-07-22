@@ -124,6 +124,8 @@
     <packageProcessor key="MooseX::MethodAttributes"
                       implementationClass="com.perl5.lang.perl.extensions.moose.MooseXMethodAttributesProcessor"/>
 
+    <packageProcessor key="CGI"
+                      implementationClass="com.perl5.lang.perl.extensions.cgi.PerlCgiPackageProcessor"/>
 
     <packageProcessor key="Moo"
                       implementationClass="com.perl5.lang.perl.extensions.moo.MooProcessor"/>

@@ -1,0 +1,18 @@
+Text: HtmlBot; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: HtmlBot
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::HtmlBot at 39915 in CGI.pm
+Text: HtmlTop; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: HtmlTop
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::HtmlTop at 39822 in CGI.pm
+Text: PrintHeader; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: PrintHeader
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::PrintHeader at 39735 in CGI.pm
+Text: ReadParse; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: ReadParse
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::ReadParse at 39534 in CGI.pm
+Text: SplitParam; Tail: ($param); Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: SplitParam
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::SplitParam($param) at 40006 in CGI.pm
+Text: Vars; Tail: ($q); Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: Vars
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::Vars($q) at 39325 in CGI.pm

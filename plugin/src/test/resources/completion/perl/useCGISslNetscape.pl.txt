@@ -1,0 +1,12 @@
+Text: blink; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: blink
+	PsiElement: Implicit sub: blink()
+Text: center; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: center
+	PsiElement: Implicit sub: center()
+Text: fontsize; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: fontsize
+	PsiElement: Implicit sub: fontsize()
+Text: https; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: https
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::https at 106565 in CGI.pm

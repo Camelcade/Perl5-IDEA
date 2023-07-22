@@ -1,0 +1,31 @@
+PerlNamespaceFileReference at (23,26); text in range: 'CGI' => 1 results:
+	Perl5 at 0 in CGI.pm
+
+PerlNamespaceReference at (54,57); text in range: 'CGI' => 2 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@CGI at 0 in CGI.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@CGI at 131102 in CGI.pm
+
+PerlSubReference at (59,69); text in range: 'start_html' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::start_html at 54036 in CGI.pm
+
+PerlNamespaceReference at (71,74); text in range: 'CGI' => 2 results:
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@CGI at 0 in CGI.pm
+	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@CGI at 131102 in CGI.pm
+
+PerlSubReference at (76,84); text in range: 'end_html' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::end_html at 61825 in CGI.pm
+
+PerlSubReference at (86,94); text in range: 'start_TR' => 1 results:
+	Implicit sub: start_TR()
+
+PerlSubReference at (96,102); text in range: 'end_Tr' => 1 results:
+	Implicit sub: end_Tr()
+
+PerlSubReference at (104,106); text in range: 'td' => 1 results:
+	Implicit sub: td()
+
+PerlSubReference at (108,118); text in range: 'start_form' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::start_form at 62639 in CGI.pm
+
+PerlSubReference at (120,128); text in range: 'end_form' => 1 results:
+	PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::end_form at 63914 in CGI.pm

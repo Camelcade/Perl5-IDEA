@@ -2634,6 +2634,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void withMoose() { addTestLibrary("moose"); }
 
+  protected void withCGI() { addTestLibrary("cgi"); }
+
   protected void withMooseX() {
     withMoose();
     addTestLibrary("mooseX");
