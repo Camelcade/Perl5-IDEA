@@ -179,6 +179,7 @@
     <versionManagerHandler key="system"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.system.PerlSystemHandler"/>
 
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.cgi.PerlCgiDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlCoreDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlBuiltinDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitDeclarationsProvider"/>
