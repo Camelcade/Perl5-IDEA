@@ -1,0 +1,57 @@
+Text: Q; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: Q
+	PsiElement: Implicit sub: Q()
+Text: abbr; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: abbr
+	PsiElement: Implicit sub: abbr()
+Text: acronym; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: acronym
+	PsiElement: Implicit sub: acronym()
+Text: bdo; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: bdo
+	PsiElement: Implicit sub: bdo()
+Text: col; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: col
+	PsiElement: Implicit sub: col()
+Text: colgroup; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: colgroup
+	PsiElement: Implicit sub: colgroup()
+Text: del; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: del
+	PsiElement: Implicit sub: del()
+Text: fieldset; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: fieldset
+	PsiElement: Implicit sub: fieldset()
+Text: iframe; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: iframe
+	PsiElement: Implicit sub: iframe()
+Text: ins; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: ins
+	PsiElement: Implicit sub: ins()
+Text: label; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: label
+	PsiElement: Implicit sub: label()
+Text: legend; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: legend
+	PsiElement: Implicit sub: legend()
+Text: noframes; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: noframes
+	PsiElement: Implicit sub: noframes()
+Text: noscript; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: noscript
+	PsiElement: Implicit sub: noscript()
+Text: object; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: object
+	PsiElement: Implicit sub: object()
+Text: optgroup; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: optgroup
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::optgroup at 84104 in CGI.pm
+Text: tbody; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: tbody
+	PsiElement: Implicit sub: tbody()
+Text: tfoot; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: tfoot
+	PsiElement: Implicit sub: tfoot()
+Text: thead; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: thead
+	PsiElement: Implicit sub: thead()

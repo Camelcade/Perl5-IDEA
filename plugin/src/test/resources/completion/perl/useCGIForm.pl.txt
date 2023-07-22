@@ -1,0 +1,75 @@
+Text: MULTIPART; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: MULTIPART
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::MULTIPART at 36759 in CGI.pm
+Text: URL_ENCODED; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: URL_ENCODED
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::URL_ENCODED at 36703 in CGI.pm
+Text: autoEscape; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: autoEscape
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::autoEscape at 42157 in CGI.pm
+Text: button; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: button
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::button at 68249 in CGI.pm
+Text: checkbox; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: checkbox
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::checkbox at 72465 in CGI.pm
+Text: checkbox_group; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: checkbox_group
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::checkbox_group at 77400 in CGI.pm
+Text: defaults; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: defaults
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::defaults at 71291 in CGI.pm
+Text: end_form; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: end_form
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::end_form at 63914 in CGI.pm
+Text: end_multipart_form; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: end_multipart_form
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::end_multipart_form at 64377 in CGI.pm
+Text: filefield; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: filefield
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::filefield at 66184 in CGI.pm
+Text: hidden; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: hidden
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::hidden at 88546 in CGI.pm
+Text: image_button; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: image_button
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::image_button at 89940 in CGI.pm
+Text: isindex; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: isindex
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::isindex at 62141 in CGI.pm
+Text: password_field; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: password_field
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::password_field at 66670 in CGI.pm
+Text: popup_menu; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: popup_menu
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::popup_menu at 81076 in CGI.pm
+Text: radio_group; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: radio_group
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::radio_group at 76310 in CGI.pm
+Text: reset; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: reset
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::reset at 70256 in CGI.pm
+Text: scrolling_list; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: scrolling_list
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::scrolling_list at 86467 in CGI.pm
+Text: start_form; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: start_form
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::start_form at 62639 in CGI.pm
+Text: start_multipart_form; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: start_multipart_form
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::start_multipart_form at 63457 in CGI.pm
+Text: submit; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: submit
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::submit at 69394 in CGI.pm
+Text: textarea; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: textarea
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::textarea at 67112 in CGI.pm
+Text: textfield; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: textfield
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::textfield at 65832 in CGI.pm
+Text: tmpFileName; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: tmpFileName
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::tmpFileName at 121042 in CGI.pm
+Text: uploadInfo; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: uploadInfo
+	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@CGI::uploadInfo at 121722 in CGI.pm

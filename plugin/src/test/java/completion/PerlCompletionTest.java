@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,70 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   @Override
   protected String getBaseDataPath() {
     return "completion/perl";
+  }
+
+  @Test
+  public void testUseCGISubs() { doTestCgi(); }
+
+  @Test
+  public void testUseCGIMethods() { doTestCgi(); }
+
+  @Test
+  public void testUseCGIHtml2() { doTestCgi(); }
+
+  @Test
+  public void testUseCGIHtml3() { doTestCgi(); }
+
+  @Test
+  public void testUseCGIHtml4() { doTestCgi(); }
+
+  @Test
+  public void testUseCGIAll() { doTestCgi(); }
+
+  @Test
+  public void testUseCGICgi() { doTestCgi(); }
+
+  @Test
+  public void testUseCGICgiLib() { doTestCgi(); }
+
+  @Test
+  public void testUseCGIForm() { doTestCgi(); }
+
+  @Test
+  public void testUseCGIHtml() { doTestCgi(); }
+
+  @Test
+  public void testUseCGINetscape() { doTestCgi(); }
+
+  @Test
+  public void testUseCGIParams() { doTestWithTypeText(); }
+
+  @Test
+  public void testUseCGIParamsWithLib() {
+    doTestCgi();
+  }
+
+  @Test
+  public void testUseCGIPush() { doTestCgi(); }
+
+  @Test
+  public void testUseCGISsl() { doTestCgi(); }
+
+  @Test
+  public void testUseCGISslHtml() { doTestCgi(); }
+
+  @Test
+  public void testUseCGISslNetscape() { doTestCgi(); }
+
+  @Test
+  public void testUseCGIStandard() { doTestCgi(); }
+
+  @Test
+  public void testUseCGIStartTh() { doTestCgi(); }
+
+  private void doTestCgi() {
+    withCGI();
+    doTestWithTypeText();
   }
 
   @Test

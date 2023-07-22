@@ -1,0 +1,5 @@
+package Foo::Bar;
+
+use CGI qw/:push/;
+
+<caret>

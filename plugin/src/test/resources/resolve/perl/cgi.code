@@ -1,0 +1,11 @@
+package Foo::Bar;
+
+use CGI qw/:all start_TR end_Tr/;
+
+CGI->start_html;
+CGI::end_html;
+start_TR;
+end_Tr;
+td;
+start_form;
+end_form;

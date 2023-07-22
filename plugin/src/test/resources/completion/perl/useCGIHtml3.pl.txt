@@ -1,0 +1,81 @@
+Text: Area; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: Area
+	PsiElement: Implicit sub: Area()
+Text: Map; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: Map
+	PsiElement: Implicit sub: Map()
+Text: Param; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: Param
+	PsiElement: Implicit sub: Param()
+Text: Sub; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: Sub
+	PsiElement: Implicit sub: Sub()
+Text: TR; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: TR
+	PsiElement: Implicit sub: TR()
+Text: Tr; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: Tr
+	PsiElement: Implicit sub: Tr()
+Text: applet; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: applet
+	PsiElement: Implicit sub: applet()
+Text: basefont; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: basefont
+	PsiElement: Implicit sub: basefont()
+Text: big; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: big
+	PsiElement: Implicit sub: big()
+Text: caption; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: caption
+	PsiElement: Implicit sub: caption()
+Text: div; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: div
+	PsiElement: Implicit sub: div()
+Text: embed; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: embed
+	PsiElement: Implicit sub: embed()
+Text: font; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: font
+	PsiElement: Implicit sub: font()
+Text: frame; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: frame
+	PsiElement: Implicit sub: frame()
+Text: frameset; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: frameset
+	PsiElement: Implicit sub: frameset()
+Text: ilayer; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: ilayer
+	PsiElement: Implicit sub: ilayer()
+Text: layer; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: layer
+	PsiElement: Implicit sub: layer()
+Text: nobr; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: nobr
+	PsiElement: Implicit sub: nobr()
+Text: script; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: script
+	PsiElement: Implicit sub: script()
+Text: small; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: small
+	PsiElement: Implicit sub: small()
+Text: span; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: span
+	PsiElement: Implicit sub: span()
+Text: strike; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: strike
+	PsiElement: Implicit sub: strike()
+Text: style; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: style
+	PsiElement: Implicit sub: style()
+Text: sup; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: sup
+	PsiElement: Implicit sub: sup()
+Text: table; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: table
+	PsiElement: Implicit sub: table()
+Text: td; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: td
+	PsiElement: Implicit sub: td()
+Text: th; Tail: null; Type: CGI; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: th
+	PsiElement: Implicit sub: th()
