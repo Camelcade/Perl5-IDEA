@@ -17,28 +17,22 @@
 <ul>
   <li>Features and improvements:
     <ul>
-      <li><a href="https://github.com/ouest/asdf-perl"><code>asdf</code></a> version manager support, <a
-          href="https://github.com/Camelcade/Perl5-IDEA/issues/2499">#2499</a></li>
-      <li>Terminal automatically switch to the perl selected for the project, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2584">#2584</a>
-      </li>
-      <li>Automatic directories configuration for the <a href="https://metacpan.org/pod/Carton">Carton</a>,
-        <a href="https://metacpan.org/pod/Module::Build">Module::Build</a> and
-        <a href="https://metacpan.org/pod/ExtUtils::MakeMaker">ExtUtils::MakeMaker</a>, <a
-            href="https://github.com/Camelcade/Perl5-IDEA/issues/1829">#1829</a></li>
-    </ul>
-  </li>
-  <li>Bugfixes:
-    <ul>
-      <li>External libraries handling for run/test configurations, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2569">#2569</a>
-      </li>
-      <li>Spacing around deref formatting in strings, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2552">#2552</a></li>
-      <li>Annotations formatting in signatures, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2555">#2555</a></li>
-      <li>Target version persistence in settings, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2635">#2635</a></li>
-      <li>XS subs deparsing on MacOS, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2607">#2607</a></li>
-      <li>Perl installation actions improvements, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2595">#2595</a>, <a
-          href="https://github.com/Camelcade/Perl5-IDEA/issues/2585">#2585</a></li>
-      <li>Icons scaling in some UI elements, <a href="https://github.com/Camelcade/Perl5-IDEA/issues/2574">#2574</a></li>
-      <li>Many minor bugfixes and performance improvements.</li>
+      <li>Arguments to the <code>Test::Harness</code> are now passed via environment variables, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2651">#2651</a></li>
+      <li>Coverage is now collected for <code>lib</code> directory instead of <code>blib</code>, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/1940">#1940</a></li>
+      <li>Modules installation from notifications now running without testing to speed the installation process, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2655">#2655</a></li>
+      <li>Plugin may now run tests using <code>Module::Build</code> instead of <code>prove</code>, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2663">#2663</a></li>
+      <li>Added configuration for modules providing <code>use strict</code>/<code>use warnings</code> implicitly, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2681">#2681</a></li>
+      <li>Run configurations may now have modules prerequisites to run, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2698">#2698</a></li>
+      <li>Basic support for perl 5.38: language level, <code>class</code> syntax, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2714">#2714</a></li>
+      <li>Added support for <code>CGI</code> module exports, <a
+          href="https://github.com/Camelcade/Perl5-IDEA/issues/2737">#2737</a></li>
     </ul>
   </li>
 </ul>
