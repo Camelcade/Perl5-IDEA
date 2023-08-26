@@ -15,6 +15,7 @@
  */
 
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun properties(key: String) = providers.gradleProperty(key)
 
@@ -35,13 +36,21 @@ dependencies {
 }
 
 tasks {
+  val generateLexerTask = register<GenerateLexerTask>("generateMojoliciousLexer") {
+    sourceFile.set(file("grammar/Mojolicious.flex"))
+    targetDir.set("src/main/gen/com/perl5/lang/mojolicious/lexer/")
+    targetClass.set("MojoliciousLexer")
+    skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
+    purgeOldFiles.set(true)
+  }
   rootProject.tasks.findByName("generateLexers")?.dependsOn(
-    register<GenerateLexerTask>("generateMojoliciousLexer") {
-      sourceFile.set(file("grammar/Mojolicious.flex"))
-      targetDir.set("src/main/gen/com/perl5/lang/mojolicious/lexer/")
-      targetClass.set("MojoliciousLexer")
-      skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
-      purgeOldFiles.set(true)
-    }
+    generateLexerTask
   )
+
+  withType<JavaCompile> {
+    dependsOn(generateLexerTask)
+  }
+  withType<KotlinCompile> {
+    dependsOn(generateLexerTask)
+  }
 }
