@@ -346,15 +346,13 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 /////////////////////////////////// quote like openers /////////////////////////////////////////////////////////////////
 
 <QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW, TRANS_OPENER, REGEX_OPENER>{
-	{WHITE_SPACE}+	{setNoSharpState(); return TokenType.WHITE_SPACE;}
-	{NEW_LINE}		{return getNewLineToken();}
+        \s              {setNoSharpState(); return captureSpaces();}
 }
 
 <QUOTE_LIKE_OPENER_Q_NOSHARP,QUOTE_LIKE_OPENER_QQ_NOSHARP,QUOTE_LIKE_OPENER_QX_NOSHARP,QUOTE_LIKE_OPENER_QW_NOSHARP,TRANS_OPENER_NO_SHARP,REGEX_OPENER_NO_SHARP>
 {
-	{WHITE_SPACE}+	{return TokenType.WHITE_SPACE;}
+        \s              {return captureSpaces();}
 	{LINE_COMMENT}	{return COMMENT_LINE;}
-	{NEW_LINE}		{return getNewLineToken();}
 }
 
 <QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW,QUOTE_LIKE_OPENER_Q_NOSHARP, QUOTE_LIKE_OPENER_QQ_NOSHARP, QUOTE_LIKE_OPENER_QX_NOSHARP, QUOTE_LIKE_OPENER_QW_NOSHARP>{
@@ -521,7 +519,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <MATCH_REGEX_X,MATCH_REGEX_XX,MATCH_REGEX_X_SQ,MATCH_REGEX_XX_SQ>
 {
 	{ESCAPED_SPACE_OR_COMMENT}	{return REGEX_TOKEN;}
-	{ANY_SPACE}+			{return TokenType.WHITE_SPACE;}
+        \s                              {return captureSpaces();}
 	{LINE_COMMENT}			{return COMMENT_LINE;}
         "["                             {pushStateAndBegin(REGEX_CHARCLASS_X);return REGEX_TOKEN;}
         "\\Q"                           {pushStateAndBegin(REGEX_QUOTED_X);return REGEX_TOKEN;}
@@ -570,8 +568,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
   AFTER_EXCEPT, AFTER_CONTINUATION,  AFTER_OTHERWISE, AFTER_OTHERWISE_BLOCK,
   AFTER_TRY_TRYCATCH_BLOCK, AFTER_CATCH_TRYCATCH
   >{
-  {NEW_LINE}   				{return getNewLineToken();}
-  {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
+  \s                {return captureSpaces();}
   {LINE_COMMENT}			{return COMMENT_LINE;}
 }
 
@@ -763,7 +760,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 <STRING_LIST>
 {
-  {ANY_SPACE}            {return TokenType.WHITE_SPACE;}
+  \s                     {return captureSpaces();}
   [^\\\s]+               {return STRING_CONTENT;}
   "\\"                   {
     IElementType tokenType = getSQBackSlashTokenType();
@@ -807,8 +804,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 ^{POD_START} 				{yybegin(POD_STATE);}
 
-{NEW_LINE}   				{return getNewLineToken();}
-{WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
+\s                                      {return captureSpaces();}
 {END_BLOCK}				{yybegin(END_BLOCK);yypushback(yylength()-7);return TAG_END;}
 {DATA_BLOCK}				{yybegin(END_BLOCK);yypushback(yylength()-8);return TAG_DATA;}
 {LINE_COMMENT_ANNOTATION}	        {return COMMENT_ANNOTATION;}
@@ -832,8 +828,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <SUB_DECLARATION,METHOD_DECLARATION, BLOCK_DECLARATION,
   SUB_ATTRIBUTES, SUB_ATTRIBUTE,
   SUB_DECLARATION_CONTENT, METHOD_DECLARATION_CONTENT>{
-  {NEW_LINE}   				{return getNewLineToken();}
-  {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
+  \s                {return captureSpaces();}
   {LINE_COMMENT}			{return COMMENT_LINE;}
 }
 
@@ -1043,8 +1038,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <AFTER_RIGHT_BRACE> {
-  {NEW_LINE}   				{return getNewLineToken();}
-  {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
+  \s                {return captureSpaces();}
   [^]   {yypushback(1);yybegin(YYINITIAL);}
 }
 
@@ -1377,8 +1371,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <FORCE_PACKAGE_TOKEN>{
-  {NEW_LINE}   				{return getNewLineToken();}
-  {WHITE_SPACE}+  			{return TokenType.WHITE_SPACE;}
+  \s                                    {return captureSpaces();}
   {LINE_COMMENT_ANNOTATION}	        {return COMMENT_ANNOTATION;}
   {LINE_COMMENT}			{return COMMENT_LINE;}
 

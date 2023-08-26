@@ -20,7 +20,7 @@ WHITE_SPACES = {WHITE_SPACE}+
 ANY_SPACE = {WHITE_SPACE}|\R
 ANY_SPACES = {ANY_SPACE}+
 WHITE_SPACES_WITH_NEW_LINE={WHITE_SPACES}?\R{ANY_SPACES}?
-
+NBSP = [\s&&[^\n]]
 
 PERL_LINE_OPENER = "%"
 PERL_EXPR_LINE_OPENER = "%=" "="?
@@ -79,15 +79,16 @@ BLOCK_COMMENT_START = "<%#"
 }
 
 <PERL_LINE>{
-	\R								{yybegin(AFTER_PERL_LINE);return TokenType.WHITE_SPACE;}
+	{NBSP}* \R			{yybegin(AFTER_PERL_LINE);return TokenType.WHITE_SPACE;}
 	"begin" / {WHITE_SPACES}? \R	{return MOJO_BEGIN;}
-	"end" / {WHITE_SPACES}? \R		{return MOJO_END;}
-	[^]								{return delegateLexing();}
+	"end" / {WHITE_SPACES}? \R	{return MOJO_END;}
+	[^]				{return delegateLexing();}
 }
 
 <PERL_EXPR_LINE>{
-	\R							{yybegin(AFTER_PERL_LINE);endPerlExpression();return SEMICOLON;}
-	[^]							{return delegateLexing();}
+	{NBSP}+ / \R					{return TokenType.WHITE_SPACE;}
+	\R						{yybegin(AFTER_PERL_LINE);endPerlExpression();return SEMICOLON;}
+	[^]						{return delegateLexing();}
 }
 
 // checking what is behind the spaces

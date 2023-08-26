@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,6 +117,9 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
    * Regex processor qr{} m{} s{}{}
    **/
   protected IElementType regexCommand = null;
+  /**
+   * Indicates that we did encounter {@code <<} and the next line may be a heredoc
+   */
   private boolean myIsHeredocLike = false;
   private IElementType myCurrentSigilToken;
   private boolean myIsPerlSwitchEnabled = false;
@@ -412,16 +415,35 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     myHasTryCatch = hasTryCatch;
   }
 
-  protected IElementType getNewLineToken() {
-    setNoSharpState();
-    if (myFormatWaiting) {
-      myFormatWaiting = false;
-      yybegin(CAPTURE_FORMAT);
+  /**
+   * Fast method for lexing spaces with or without newlines. Lexer invokes this method after lexing first space character.
+   */
+  protected IElementType captureSpaces() {
+    var bufferEnd = getBufferEnd();
+    var currentOffset = getTokenEnd() - 1;
+    var buffer = getBuffer();
+    while (currentOffset < bufferEnd) {
+      var currentChar = buffer.charAt(currentOffset);
+      if (currentChar == '\n') {
+        setHeredocLike(false);
+        if (myFormatWaiting) {
+          currentOffset++;
+          myFormatWaiting = false;
+          yybegin(CAPTURE_FORMAT);
+          break;
+        }
+        else if (!heredocQueue.isEmpty()) {
+          currentOffset++;
+          startHeredocCapture();
+          break;
+        }
+      }
+      else if (!Character.isWhitespace(currentChar)) {
+        break;
+      }
+      currentOffset++;
     }
-    else if (!heredocQueue.isEmpty()) {
-      startHeredocCapture();
-    }
-    setHeredocLike(false);
+    setTokenEnd(currentOffset);
     return TokenType.WHITE_SPACE;
   }
 
@@ -905,7 +927,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     pushState();
     var headElement = heredocQueue.peek();
     LOG.assertTrue(headElement != null);
-    if (headElement.getMarker().length() > 0) {
+    if (!headElement.getMarker().isEmpty()) {
       yybegin(CAPTURE_HEREDOC);
     }
     else {
