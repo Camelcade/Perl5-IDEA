@@ -10,7 +10,7 @@ say
 After typing
 ----------
 
-say 1<caret>
+say 1;<caret>
 
 =pod
 
@@ -22,7 +22,7 @@ Pod is here
 Psi structure
 ----------
 POD file
-  PsiElement(Perl5 POD: POD_OUTER)('\nsay 1\n\n')
+  PsiElement(Perl5 POD: POD_OUTER)('\nsay 1;\n\n')
   PsiPodSectionImpl(Perl5 POD: POD_SECTION)
     PsiElement(Perl5 POD: =pod)('=pod')
   PsiElement(Perl5 POD: NL)('\n')

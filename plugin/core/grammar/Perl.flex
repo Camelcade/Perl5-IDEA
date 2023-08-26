@@ -129,9 +129,6 @@ LINE_TO_END = .+ {NEW_LINE}?
 SUB_PROTOTYPE = [\[\$\@\%\&\*\]\;\+\\_]+
 SUB_PROTOTYPE_WITH_SPACES = ({WHITE_SPACE} | {SUB_PROTOTYPE})+
 
-POD_START = "="[\w].* {NEW_LINE} ?
-POD_END = "=cut" ({WHITE_SPACE} .*)?
-
 BLOCK_NAMES = "BEGIN"|"UNITCHECK"|"CHECK"|"INIT"|"END"|"AUTOLOAD"|"DESTROY"|"ADJUST"
 TAG_NAMES = "__FILE__"|"__LINE__"|"__SUB__"
 
@@ -169,7 +166,6 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 %state UNICODE_SUBSTITUTION, UNICODE_SUBSTITUTION_IN_BRACE, SUBSTITUTION_CODE, SUBSTITUTION_CLOSE_BRACE
 %state LEX_HANDLE, LEX_HANDLE_STRICT,LEX_PRINT_HANDLE,LEX_PRINT_HANDLE_STRICT
 %xstate END_BLOCK
-%xstate POD_STATE, ENDLESS_POD_STATE
 
 %xstate QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW, QUOTE_LIKE_OPENER_GLOB
 %xstate QUOTE_LIKE_OPENER_Q_NOSHARP, QUOTE_LIKE_OPENER_QQ_NOSHARP, QUOTE_LIKE_OPENER_QX_NOSHARP, QUOTE_LIKE_OPENER_QW_NOSHARP
@@ -249,19 +245,6 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	{CAPPED_SINGLE_LETTER_VARIABLE_NAME} |
 	{SPECIAL_VARIABLE_NAME} {popState();return SUB_NAME;}
 }
-
-/////////////////////////////////////// pod capture ////////////////////////////////////////////////////////////////////
-
-<POD_STATE> {
-	{POD_END}  	{yybegin(YYINITIAL);return POD;}
-}
-<ENDLESS_POD_STATE,POD_STATE> {
-	.+			{}
-	\R+			{}
-	<<EOF>>		{yybegin(YYINITIAL);return POD;}
-}
-
-/////////////////////////////////// end of pod capture /////////////////////////////////////////////////////////////////
 
 /////////////////////////////////// heredoc capture ////////////////////////////////////////////////////////////////////
 
@@ -802,8 +785,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
       }
 }
 
-^{POD_START} 				{yybegin(POD_STATE);}
-
+<YYINITIAL> "="                 	{return capturePod(false);}
 \s                                      {return captureSpaces();}
 {END_BLOCK}				{yybegin(END_BLOCK);yypushback(yylength()-7);return TAG_END;}
 {DATA_BLOCK}				{yybegin(END_BLOCK);yypushback(yylength()-8);return TAG_DATA;}
@@ -819,7 +801,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <END_BLOCK>{
-  {POD_START}           {yybegin(ENDLESS_POD_STATE);}
+  "=" \w {LINE_TO_END}  {return capturePod(true);}
   {LINE_TO_END}         {return COMMENT_BLOCK;}
   [^] 		        {return COMMENT_BLOCK;}
 }

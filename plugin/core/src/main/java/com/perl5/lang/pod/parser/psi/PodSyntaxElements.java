@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ public class PodSyntaxElements {
     Arrays.asList(FORMAT_HTML, FORMAT_MAN, FORMAT_LATEX, FORMAT_ROFF, FORMAT_TEX, FORMAT_TEXT));
 
   public static final String CUT_COMMAND = "=cut";
+  public static final String CUT_COMMAND_WITH_LEADING_NEWLINE = "\n" + CUT_COMMAND;
 
   private PodSyntaxElements() {
   }

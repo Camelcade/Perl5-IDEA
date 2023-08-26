@@ -1,6 +1,14 @@
 Reparsing block
 ----------
-Full reparse
+PsiElement(Perl5: POD)
+----------
+=head1 DESCRIPTION
+
+text 
+
+=cut
+
+asdfasdf
 ----------
 After typing
 ----------
