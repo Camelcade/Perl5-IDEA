@@ -449,6 +449,23 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   }
 
   /**
+   * Fast method for lexing line comment
+   */
+  protected IElementType captureComment() {
+    var bufferEnd = getBufferEnd();
+    var currentOffset = getTokenEnd();
+    var buffer = getBuffer();
+    while (currentOffset < bufferEnd) {
+      if (buffer.charAt(currentOffset) == '\n') {
+        break;
+      }
+      currentOffset++;
+    }
+    setTokenEnd(currentOffset);
+    return COMMENT_LINE;
+  }
+
+  /**
    * Fast POD block capture method. Invoked after opening line was captured. No line beginning check was preformed.
    *
    * @param true iff pod block is not expecting to have end. Not sure why, but this was initial logic for the pod in the end blocks.
