@@ -18,7 +18,7 @@ Pod is here
 
 =cut
 
-say 1<caret>
+say 1;<caret>
 
 
 =pod
@@ -48,7 +48,7 @@ POD file
     PsiElement(Perl5 POD: =cut)('=cut')
     PsiSectionTitleImpl(Perl5 POD: SECTION_TITLE)
       <empty list>
-  PsiElement(Perl5 POD: POD_OUTER)('\n\nsay 1\n\n\n')
+  PsiElement(Perl5 POD: POD_OUTER)('\n\nsay 1;\n\n\n')
   PsiPodSectionImpl(Perl5 POD: POD_SECTION)
     PsiElement(Perl5 POD: =pod)('=pod')
   PsiElement(Perl5 POD: NL)('\n')

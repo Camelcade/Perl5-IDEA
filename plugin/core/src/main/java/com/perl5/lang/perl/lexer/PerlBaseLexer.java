@@ -41,6 +41,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 import static com.perl5.lang.perl.lexer.PerlLexer.*;
+import static com.perl5.lang.pod.parser.psi.PodSyntaxElements.CUT_COMMAND_WITH_LEADING_NEWLINE;
 
 
 public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElementTypes,
@@ -445,6 +446,51 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     }
     setTokenEnd(currentOffset);
     return TokenType.WHITE_SPACE;
+  }
+
+  /**
+   * Fast POD block capture method. Invoked after opening line was captured. No line beginning check was preformed.
+   *
+   * @param true iff pod block is not expecting to have end. Not sure why, but this was initial logic for the pod in the end blocks.
+   */
+  protected final IElementType capturePod(boolean isEndless) {
+    var tokenStart = getTokenStart();
+    var buffer = getBuffer();
+    if (tokenStart != 0 && buffer.charAt(tokenStart - 1) != '\n') {
+      yypushback(yylength() - 1);
+      yybegin(YYINITIAL);
+      return OPERATOR_ASSIGN;
+    }
+
+    int bufferEnd = getBufferEnd();
+    if (isEndless) {
+      setTokenEnd(bufferEnd);
+      return POD;
+    }
+
+    int tokenEnd = getTokenEnd();
+    while (tokenEnd < bufferEnd) {
+      tokenEnd = StringUtil.indexOf(buffer, CUT_COMMAND_WITH_LEADING_NEWLINE, tokenEnd);
+      if (tokenEnd < 0) {
+        tokenEnd = bufferEnd;
+        break;
+      }
+      tokenEnd += CUT_COMMAND_WITH_LEADING_NEWLINE.length();
+      if (tokenEnd >= bufferEnd) {
+        tokenEnd = bufferEnd;
+        break;
+      }
+      if (!Character.isWhitespace(buffer.charAt(tokenEnd))) {
+        continue;
+      }
+      tokenEnd = StringUtil.indexOf(buffer, '\n', tokenEnd);
+      if (tokenEnd < 0) {
+        tokenEnd = bufferEnd;
+      }
+      break;
+    }
+    setTokenEnd(tokenEnd);
+    return POD;
   }
 
   /**

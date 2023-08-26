@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,11 @@ package com.perl5.lang.perl.parser.elementTypes;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.impl.source.tree.TreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.impl.PerlPodElement;
 import org.jetbrains.annotations.NotNull;
+
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_BLOCK;
 
 public class PerlPodReparseableTokenType extends PerlReparseableTemplateTokenType {
   public PerlPodReparseableTokenType(@NotNull String debugName) {
@@ -30,6 +33,9 @@ public class PerlPodReparseableTokenType extends PerlReparseableTemplateTokenTyp
   @Override
   protected @NotNull TextRange getLexerConfirmationRange(@NotNull ASTNode leaf) {
     ASTNode prevLeaf = TreeUtil.prevLeaf(leaf);
+    if(PsiUtilCore.getElementType(prevLeaf) == COMMENT_BLOCK){
+      prevLeaf = TreeUtil.prevLeaf(prevLeaf);
+    }
     ASTNode nextLeaf = TreeUtil.nextLeaf(leaf);
     int startOffset = prevLeaf == null ? leaf.getStartOffset() : prevLeaf.getStartOffset();
     int endOffset = nextLeaf == null ? leaf.getTextRange().getEndOffset() : nextLeaf.getTextRange().getEndOffset();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package unit.perl.reparse;
 
 import base.PerlLightTestCase;
 import com.perl5.lang.pod.PodLanguage;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class PodInPerlReparseTest extends PerlLightTestCase {
@@ -30,10 +31,10 @@ public class PodInPerlReparseTest extends PerlLightTestCase {
   public void testAfterPod() {doTest();}
 
   @Test
-  public void testBeforePod() {doTest();}
+  public void testBeforePod() { doTest("1;"); }
 
   @Test
-  public void testBetweenPod() {doTest();}
+  public void testBetweenPod() { doTest("1;"); }
 
   @Test
   public void testEmptyPod() {doTest();}
@@ -57,11 +58,15 @@ public class PodInPerlReparseTest extends PerlLightTestCase {
   public void testBreakByTypingBetween() {doTestBreak();}
 
   private void doTest() {
-    doTestReparse("1", PodLanguage.INSTANCE);
+    doTest("1");
+  }
+
+  private void doTest(@NotNull String toType) {
+    doTestReparse(toType, PodLanguage.INSTANCE);
   }
 
   private void doTestBreak() {
-    doTestReparse("=h", PodLanguage.INSTANCE);
+    doTest("=h");
   }
 
   private void doTestBs() {
