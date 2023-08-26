@@ -197,6 +197,16 @@
     zzMarkedPos -= number;
   }
 
+  private int myOuterSteps = 0;
+  private int myInnerSteps = 0;
+
+  public int getOuterSteps() {
+    return myOuterSteps;
+  }
+
+  public int getInnerSteps() {
+    return myInnerSteps;
+  }
 
 --- zzDoEOF
   /**
@@ -207,6 +217,9 @@
    * @exception   java.io.IOException  if any I/O-Error occurs
    */
 --- yylex declaration
+    myOuterSteps = 0;
+    myInnerSteps = 0;
+
     int zzInput;
     int zzAction;
 
@@ -220,6 +233,7 @@
 
     while (true) {
       zzMarkedPosL = zzMarkedPos;
+      myOuterSteps++;
 
 --- start admin (line, char, col count)
       zzAction = -1;
@@ -230,6 +244,7 @@
 
       zzForAction: {
         while (true) {
+          myInnerSteps++;
 
 --- next input, line, col, char count, next transition, isFinal action
             zzAction = zzState;

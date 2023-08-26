@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,10 +35,14 @@ import com.perl5.lang.perl.lexer.PerlProtoLexer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementTypes {
+  private static final Map<String, LexerStatEntry> ourStatMap = new ConcurrentHashMap<>();
   private static final Logger LOG = Logger.getInstance(FlexAdapter.class);
   private static final Map<IElementType, Integer> SUBLEXINGS_MAP = new HashMap<>();
   private static final Map<IElementType, Integer> ENFORCED_SUBLEXINGS_MAP = new HashMap<>();
@@ -189,7 +193,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     }
 
     if (myIsSublexing) {
-      lexToken(mySubLexer);
+      lexToken(mySubLexer, false);
 
       if (myTokenType != null) {
         myState = PerlLexer.PREPARSED_ITEMS;
@@ -200,7 +204,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
       myIsSublexing = false;
     }
 
-    lexToken(getFlexAdapter());
+    lexToken(getFlexAdapter(), true);
 
     Integer subLexingState = SUBLEXINGS_MAP.get(myTokenType);
 
@@ -229,7 +233,7 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     locateToken();
   }
 
-  private void lexToken(Lexer lexer) {
+  private void lexToken(Lexer lexer, boolean countStat) {
     myTokenType = lexer.getTokenType();
     if (myTokenType == QUOTE_SINGLE_OPEN) {
       CharSequence tokenSequence = lexer.getTokenSequence();
@@ -244,6 +248,26 @@ public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementT
     myTokenStart = lexer.getTokenStart();
     myState = lexer.getState();
     myTokenEnd = lexer.getTokenEnd();
+    var realLexicalState = myPerlLexer.getRealLexicalState();
+
     lexer.advance();
+
+    if (countStat) {
+      assert lexer instanceof FlexAdapter : "Got " + lexer;
+      var result = lexer.getTokenType();
+      if (result != null) {
+        var key = realLexicalState + result.toString();
+        ourStatMap.computeIfAbsent(key, it -> new LexerStatEntry(result, realLexicalState))
+          .register((PerlProtoLexer)((FlexAdapter)lexer).getFlex(), myTokenStart);
+      }
+    }
+  }
+
+  public static @NotNull String dumpStats() {
+    return String.join("\t", "Token Type", "Start state", "Tokens", "Length", "Outer steps", "Inner steps") + "\n" +
+           ourStatMap.values().stream()
+             .sorted(Comparator.comparing(statEntry -> -statEntry.getSort()))
+             .map(LexerStatEntry::asCsv)
+             .collect(Collectors.joining("\n"));
   }
 }
