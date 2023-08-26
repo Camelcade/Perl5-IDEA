@@ -1318,9 +1318,9 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 	"<<~" / {QUOTED_HEREDOC_MARKER_NON_EMPTY} {yybegin(QUOTED_HEREDOC_OPENER_INDENTABLE);return OPERATOR_HEREDOC;}
 	"<<~" / "\\"?{UNQUOTED_HEREDOC_MARKER} 	  {yybegin(BARE_HEREDOC_OPENER_INDENTABLE);return OPERATOR_HEREDOC;}
 
-	{DQ_STRING} {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QQ);return captureString();}
-	{SQ_STRING} {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_Q);return captureString();}
-	{XQ_STRING} {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QX);return captureString();}
+	"\""  {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QQ);return captureString();}
+	"'"   {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_Q);return captureString();}
+	"`"   {pushStateAndBegin(AFTER_VALUE, QUOTE_LIKE_OPENER_QX);return captureString();}
 
 	// fixme optimize via merging?
 	{BAREWORD_MINUS} / {MAY_BE_SPACES_OR_COMMENTS}* {FARROW}	{yybegin(AFTER_VALUE);return STRING_CONTENT;}
