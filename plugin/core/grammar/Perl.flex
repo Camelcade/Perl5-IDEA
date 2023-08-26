@@ -335,7 +335,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <QUOTE_LIKE_OPENER_Q_NOSHARP,QUOTE_LIKE_OPENER_QQ_NOSHARP,QUOTE_LIKE_OPENER_QX_NOSHARP,QUOTE_LIKE_OPENER_QW_NOSHARP,TRANS_OPENER_NO_SHARP,REGEX_OPENER_NO_SHARP>
 {
         \s              {return captureSpaces();}
-	{LINE_COMMENT}	{return COMMENT_LINE;}
+	"#"     	{return captureComment();}
 }
 
 <QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW,QUOTE_LIKE_OPENER_Q_NOSHARP, QUOTE_LIKE_OPENER_QQ_NOSHARP, QUOTE_LIKE_OPENER_QX_NOSHARP, QUOTE_LIKE_OPENER_QW_NOSHARP>{
@@ -503,7 +503,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 {
 	{ESCAPED_SPACE_OR_COMMENT}	{return REGEX_TOKEN;}
         \s                              {return captureSpaces();}
-	{LINE_COMMENT}			{return COMMENT_LINE;}
+	"#"     	                {return captureComment();}
         "["                             {pushStateAndBegin(REGEX_CHARCLASS_X);return REGEX_TOKEN;}
         "\\Q"                           {pushStateAndBegin(REGEX_QUOTED_X);return REGEX_TOKEN;}
         <MATCH_REGEX,MATCH_REGEX_SQ>{
@@ -552,7 +552,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
   AFTER_TRY_TRYCATCH_BLOCK, AFTER_CATCH_TRYCATCH
   >{
   \s                {return captureSpaces();}
-  {LINE_COMMENT}			{return COMMENT_LINE;}
+  "#"     	    {return captureComment();}
 }
 
 <AFTER_TRY>                       "{"            {return startBracedBlock(AFTER_TRY_BLOCK);}
@@ -790,7 +790,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 {END_BLOCK}				{yybegin(END_BLOCK);yypushback(yylength()-7);return TAG_END;}
 {DATA_BLOCK}				{yybegin(END_BLOCK);yypushback(yylength()-8);return TAG_DATA;}
 {LINE_COMMENT_ANNOTATION}	        {return COMMENT_ANNOTATION;}
-{LINE_COMMENT}				{return COMMENT_LINE;}
+"#"     	                        {return captureComment();}
 
 <HANDLE_WITH_ANGLE>{
         "$" / {VARIABLE_QUALIFIED_IDENTIFIER} ">"          {return startUnbracedVariable(SIGIL_SCALAR);}
@@ -811,7 +811,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
   SUB_ATTRIBUTES, SUB_ATTRIBUTE,
   SUB_DECLARATION_CONTENT, METHOD_DECLARATION_CONTENT>{
   \s                {return captureSpaces();}
-  {LINE_COMMENT}			{return COMMENT_LINE;}
+  "#"     	    {return captureComment();}
 }
 
 <SUB_DECLARATION>{
@@ -1355,7 +1355,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <FORCE_PACKAGE_TOKEN>{
   \s                                    {return captureSpaces();}
   {LINE_COMMENT_ANNOTATION}	        {return COMMENT_ANNOTATION;}
-  {LINE_COMMENT}			{return COMMENT_LINE;}
+  "#"     	                        {return captureComment();}
 
   {IDENTIFIER}                          {popState();return PACKAGE;}
 }
