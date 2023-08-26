@@ -19,6 +19,7 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlProtoLexer;
 import org.jetbrains.annotations.NotNull;
+import com.intellij.psi.tree.IElementType;import java.io.IOException;
 
 %%
 
