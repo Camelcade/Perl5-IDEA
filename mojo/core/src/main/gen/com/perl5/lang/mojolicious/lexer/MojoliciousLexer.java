@@ -45,7 +45,8 @@ public class MojoliciousLexer extends MojoliciousBaseLexer {
   private static final int [] ZZ_CMAP_TOP = zzUnpackcmap_top();
 
   private static final String ZZ_CMAP_TOP_PACKED_0 =
-    "\1\0\37\u0100\1\u0200\267\u0100\10\u0300\u1020\u0100";
+    "\1\0\25\u0100\1\u0200\11\u0100\1\u0300\17\u0100\1\u0400\247\u0100"+
+    "\10\u0500\u1020\u0100";
 
   private static int [] zzUnpackcmap_top() {
     int [] result = new int[4352];
@@ -76,11 +77,12 @@ public class MojoliciousLexer extends MojoliciousBaseLexer {
     "\11\0\1\1\1\2\1\3\1\4\1\5\22\0\1\1"+
     "\2\0\1\6\1\0\1\7\26\0\1\10\1\11\1\12"+
     "\43\0\1\13\1\0\1\14\1\15\1\0\1\16\1\0"+
-    "\1\17\4\0\1\20\26\0\1\3\u01a2\0\2\3\326\0"+
-    "\u0100\21";
+    "\1\17\4\0\1\20\26\0\1\3\32\0\1\21\u01df\0"+
+    "\1\21\177\0\13\21\35\0\2\3\5\0\1\21\57\0"+
+    "\1\21\240\0\1\21\377\0\u0100\22";
 
   private static int [] zzUnpackcmap_blocks() {
-    int [] result = new int[1024];
+    int [] result = new int[1536];
     int offset = 0;
     offset = zzUnpackcmap_blocks(ZZ_CMAP_BLOCKS_PACKED_0, offset, result);
     return result;
@@ -104,15 +106,15 @@ public class MojoliciousLexer extends MojoliciousBaseLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\13\0\1\1\2\2\1\3\1\1\7\4\2\5\2\4"+
+    "\13\0\1\1\2\2\1\3\1\1\10\4\2\5\3\4"+
     "\2\6\1\7\1\1\3\10\1\11\1\12\1\11\1\13"+
     "\1\14\1\13\1\15\1\16\1\15\1\17\1\20\1\21"+
-    "\1\22\1\23\3\0\1\24\3\0\1\25\1\0\3\12"+
-    "\1\21\1\26\1\27\1\30\4\0\1\12\1\30\4\0"+
-    "\3\31\4\0\3\32";
+    "\1\22\1\23\3\0\1\24\5\0\3\25\1\26\1\0"+
+    "\3\12\1\21\1\27\1\30\1\31\4\0\1\32\1\12"+
+    "\1\31\4\0\3\33\4\0\3\34";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[84];
+    int [] result = new int[92];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -137,20 +139,21 @@ public class MojoliciousLexer extends MojoliciousBaseLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\22\0\44\0\66\0\110\0\132\0\154\0\176"+
-    "\0\220\0\242\0\264\0\306\0\330\0\352\0\374\0\u010e"+
-    "\0\u0120\0\u0132\0\u0144\0\u0156\0\u0168\0\u017a\0\u018c\0\u0120"+
-    "\0\u019e\0\u01b0\0\u01c2\0\u0120\0\u01d4\0\u01e6\0\u01f8\0\u020a"+
-    "\0\u021c\0\u022e\0\u0120\0\u0240\0\u0252\0\u0120\0\u0264\0\u0276"+
-    "\0\u0120\0\u0276\0\u0276\0\u0288\0\u0120\0\u029a\0\u02ac\0\u0120"+
-    "\0\u0132\0\u02be\0\u02d0\0\u0120\0\u017a\0\u02e2\0\u02f4\0\u0120"+
-    "\0\u021c\0\u0306\0\u0318\0\u032a\0\u0120\0\u0120\0\u0120\0\u033c"+
-    "\0\u034e\0\u0360\0\u0372\0\u0384\0\u0120\0\u0120\0\u0396\0\u03a8"+
-    "\0\u03ba\0\u03cc\0\u0120\0\u0384\0\u03de\0\u03f0\0\u0402\0\u0414"+
-    "\0\u0426\0\u0120\0\u0402\0\u0438";
+    "\0\0\0\23\0\46\0\71\0\114\0\137\0\162\0\205"+
+    "\0\230\0\253\0\276\0\321\0\344\0\367\0\u010a\0\u011d"+
+    "\0\u0130\0\u0143\0\u0156\0\u0169\0\u017c\0\u018f\0\u01a2\0\u01b5"+
+    "\0\u0130\0\u01b5\0\u01c8\0\u01db\0\u01ee\0\u0130\0\u01ee\0\u0201"+
+    "\0\u0214\0\u0227\0\u023a\0\u024d\0\u0130\0\u0260\0\u0273\0\u0130"+
+    "\0\u0286\0\u0299\0\u0130\0\u0299\0\u0299\0\u02ac\0\u0130\0\u02bf"+
+    "\0\u02d2\0\u0130\0\u0143\0\u02e5\0\u02f8\0\u0130\0\u018f\0\u01b5"+
+    "\0\u030b\0\u031e\0\u01ee\0\u0130\0\u01ee\0\u0331\0\u0130\0\u023a"+
+    "\0\u0344\0\u0357\0\u036a\0\u0130\0\u0130\0\u0130\0\u037d\0\u0390"+
+    "\0\u03a3\0\u03b6\0\u03c9\0\u0130\0\u0130\0\u0130\0\u03dc\0\u03ef"+
+    "\0\u0402\0\u0415\0\u0130\0\u03c9\0\u0428\0\u043b\0\u044e\0\u0461"+
+    "\0\u0474\0\u0130\0\u044e\0\u0487";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[84];
+    int [] result = new int[92];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -173,36 +176,39 @@ public class MojoliciousLexer extends MojoliciousBaseLexer {
   private static final int [] ZZ_TRANS = zzUnpacktrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\1\14\2\15\1\16\2\15\1\14\1\17\1\20\11\14"+
+    "\1\14\2\15\1\16\2\15\1\14\1\17\1\20\12\14"+
     "\7\21\1\22\1\21\1\23\1\21\1\24\1\21\1\25"+
-    "\13\21\1\26\1\21\1\27\12\21\3\30\1\31\5\21"+
-    "\1\32\1\21\1\33\6\21\3\34\1\35\14\21\1\14"+
-    "\1\36\1\15\1\16\1\36\1\15\1\14\1\37\1\20"+
-    "\11\14\7\40\1\41\1\40\1\42\10\40\7\43\1\44"+
-    "\1\45\21\43\1\45\11\43\1\46\1\47\2\50\1\47"+
-    "\1\50\14\46\1\51\1\52\2\53\1\52\1\53\14\51"+
-    "\1\14\2\0\1\14\2\0\1\14\2\0\11\14\1\0"+
-    "\5\15\14\0\1\14\2\15\1\16\2\15\1\14\2\0"+
-    "\11\14\6\0\1\54\1\55\1\0\1\56\17\0\1\57"+
-    "\46\0\1\60\16\0\1\61\27\0\1\62\24\0\1\63"+
-    "\13\0\1\64\16\0\1\65\14\0\1\30\34\0\1\66"+
-    "\24\0\1\67\3\0\1\34\20\0\1\36\2\15\1\36"+
-    "\1\15\23\0\1\55\12\0\7\40\1\0\1\40\1\0"+
-    "\10\40\12\0\1\70\16\0\1\71\20\0\1\72\2\0"+
-    "\1\73\17\0\1\74\13\0\1\47\2\52\1\47\1\52"+
-    "\15\0\5\52\14\0\2\54\4\0\13\54\12\0\1\75"+
-    "\16\0\1\76\1\77\1\0\1\100\26\0\1\101\17\0"+
-    "\1\102\23\0\1\103\17\0\1\104\5\0\2\72\4\0"+
-    "\13\72\12\0\1\105\16\0\1\105\2\0\1\73\21\0"+
-    "\1\106\27\0\1\107\3\0\5\102\1\0\1\110\1\0"+
-    "\1\111\27\0\1\112\3\0\1\104\2\113\1\114\1\115"+
-    "\34\0\1\116\13\0\1\113\16\0\1\110\32\0\1\117"+
-    "\3\0\1\113\20\0\5\116\1\0\1\120\1\0\1\121"+
-    "\11\0\1\117\2\122\1\123\1\124\26\0\1\122\16\0"+
-    "\1\120\14\0\1\122\17\0";
+    "\14\21\1\26\1\21\1\27\12\21\1\30\1\31\3\32"+
+    "\5\21\1\33\1\21\1\34\3\21\1\30\2\21\1\35"+
+    "\1\36\3\37\13\21\1\35\1\21\1\14\1\40\1\15"+
+    "\1\16\1\40\1\15\1\14\1\41\1\20\12\14\7\42"+
+    "\1\43\1\42\1\44\11\42\7\45\1\46\1\47\22\45"+
+    "\1\47\12\45\1\50\1\51\2\52\1\51\1\52\15\50"+
+    "\1\53\1\54\2\55\1\54\1\55\15\53\1\14\2\0"+
+    "\1\14\2\0\1\14\2\0\12\14\1\0\5\15\15\0"+
+    "\1\14\2\15\1\16\2\15\1\14\2\0\12\14\6\0"+
+    "\1\56\1\57\1\0\1\60\20\0\1\61\50\0\1\62"+
+    "\17\0\1\63\30\0\1\64\25\0\1\65\14\0\1\66"+
+    "\17\0\1\67\14\0\1\70\1\31\3\32\13\0\1\70"+
+    "\16\0\1\71\25\0\1\72\3\0\1\73\1\74\2\75"+
+    "\1\76\13\0\1\73\2\0\1\40\2\15\1\40\1\15"+
+    "\24\0\1\57\13\0\7\42\1\0\1\42\1\0\11\42"+
+    "\12\0\1\77\17\0\1\100\21\0\1\101\2\0\1\102"+
+    "\20\0\1\103\14\0\1\51\2\54\1\51\1\54\16\0"+
+    "\5\54\15\0\2\56\4\0\14\56\12\0\1\104\17\0"+
+    "\1\105\1\106\1\0\1\107\27\0\1\110\20\0\1\111"+
+    "\24\0\1\112\20\0\1\113\7\0\1\73\1\114\2\75"+
+    "\1\76\13\0\1\73\1\0\2\101\4\0\14\101\12\0"+
+    "\1\115\17\0\1\115\2\0\1\102\22\0\1\116\30\0"+
+    "\1\117\4\0\5\111\1\0\1\120\1\0\1\121\30\0"+
+    "\1\122\4\0\1\113\2\123\1\124\1\125\35\0\1\126"+
+    "\14\0\1\123\17\0\1\120\33\0\1\127\4\0\1\123"+
+    "\21\0\5\126\1\0\1\130\1\0\1\131\12\0\1\127"+
+    "\2\132\1\133\1\134\27\0\1\132\17\0\1\130\15\0"+
+    "\1\132\20\0";
 
   private static int [] zzUnpacktrans() {
-    int [] result = new int[1098];
+    int [] result = new int[1178];
     int offset = 0;
     offset = zzUnpacktrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -240,14 +246,14 @@ public class MojoliciousLexer extends MojoliciousBaseLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\13\0\5\1\1\11\6\1\1\11\3\1\1\11\6\1"+
+    "\13\0\5\1\1\11\7\1\1\11\4\1\1\11\6\1"+
     "\1\11\2\1\1\11\2\1\1\11\3\1\1\11\2\1"+
-    "\1\11\3\0\1\11\3\0\1\11\1\0\3\1\3\11"+
-    "\1\1\4\0\2\11\4\0\1\11\2\1\4\0\1\11"+
-    "\2\1";
+    "\1\11\3\0\1\11\5\0\1\11\2\1\1\11\1\0"+
+    "\3\1\3\11\1\1\4\0\3\11\4\0\1\11\2\1"+
+    "\4\0\1\11\2\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[84];
+    int [] result = new int[92];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -578,15 +584,15 @@ public class MojoliciousLexer extends MojoliciousBaseLexer {
             case BLOCK_COMMENT: {
               yybegin(YYINITIAL);return COMMENT_BLOCK;
             }  // fall though
-            case 85: break;
+            case 93: break;
             case CHECK_SPACE_CLEAR_LINE: {
               yybegin(YYINITIAL);return MOJO_TEMPLATE_BLOCK_HTML;
             }  // fall though
-            case 86: break;
+            case 94: break;
             case CHECK_SPACE: {
               yybegin(YYINITIAL);return MOJO_TEMPLATE_BLOCK_HTML;
             }  // fall though
-            case 87: break;
+            case 95: break;
             default:
         return null;
         }
@@ -597,138 +603,154 @@ public class MojoliciousLexer extends MojoliciousBaseLexer {
             { yybegin(NON_CLEAR_LINE);return MOJO_TEMPLATE_BLOCK_HTML;
             }
           // fall through
-          case 27: break;
+          case 29: break;
           case 2:
             { yybegin(CHECK_SPACE_CLEAR_LINE);
             }
           // fall through
-          case 28: break;
+          case 30: break;
           case 3:
             { yybegin(PERL_LINE);return MOJO_LINE_OPENER;
             }
           // fall through
-          case 29: break;
+          case 31: break;
           case 4:
             { return delegateLexing();
             }
           // fall through
-          case 30: break;
+          case 32: break;
           case 5:
             { yybegin(AFTER_PERL_LINE);return TokenType.WHITE_SPACE;
             }
           // fall through
-          case 31: break;
+          case 33: break;
           case 6:
             { yybegin(AFTER_PERL_LINE);endPerlExpression();return SEMICOLON;
             }
           // fall through
-          case 32: break;
+          case 34: break;
           case 7:
             { yybegin(CHECK_SPACE);
             }
           // fall through
-          case 33: break;
+          case 35: break;
           case 8:
             { 
             }
           // fall through
-          case 34: break;
+          case 36: break;
           case 9:
             { yypushback(1);yybegin(NON_CLEAR_LINE);return MOJO_TEMPLATE_BLOCK_HTML;
             }
           // fall through
-          case 35: break;
+          case 37: break;
           case 10:
             { pullback(0);yybegin(YYINITIAL);return TokenType.WHITE_SPACE;
             }
           // fall through
-          case 36: break;
+          case 38: break;
           case 11:
             { yypushback(1);yybegin(NON_CLEAR_LINE);
             }
           // fall through
-          case 37: break;
+          case 39: break;
           case 12:
             { yybegin(NON_CLEAR_LINE);return TokenType.WHITE_SPACE;
             }
           // fall through
-          case 38: break;
+          case 40: break;
           case 13:
             { yypushback(1);yybegin(YYINITIAL);
             }
           // fall through
-          case 39: break;
+          case 41: break;
           case 14:
             { yybegin(YYINITIAL);return TokenType.WHITE_SPACE;
             }
           // fall through
-          case 40: break;
+          case 42: break;
           case 15:
             { yybegin(NON_CLEAR_LINE);return COMMENT_LINE;
             }
           // fall through
-          case 41: break;
+          case 43: break;
           case 16:
             { yybegin(NON_CLEAR_LINE);return MOJO_LINE_OPENER_TAG;
             }
           // fall through
-          case 42: break;
+          case 44: break;
           case 17:
             { startPerlExpression();yybegin(PERL_EXPR_LINE);return MOJO_LINE_OPENER;
             }
           // fall through
-          case 43: break;
+          case 45: break;
           case 18:
             { yybegin(PERL_BLOCK);return MOJO_BLOCK_OPENER;
             }
           // fall through
-          case 44: break;
+          case 46: break;
           case 19:
             { yybegin(AFTER_PERL_BLOCK);return MOJO_BLOCK_CLOSER;
             }
           // fall through
-          case 45: break;
+          case 47: break;
           case 20:
             { yybegin(AFTER_PERL_BLOCK);endPerlExpression();return MOJO_BLOCK_EXPR_CLOSER;
             }
           // fall through
-          case 46: break;
-          case 21:
-            { yybegin(AFTER_PERL_BLOCK);return COMMENT_BLOCK;
-            }
-          // fall through
-          case 47: break;
-          case 22:
-            { yybegin(BLOCK_COMMENT);
-            }
-          // fall through
           case 48: break;
-          case 23:
-            { yybegin(NON_CLEAR_LINE);return MOJO_BLOCK_OPENER_TAG;
+          case 21:
+            // lookahead expression with fixed lookahead length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL, zzMarkedPos, -1);
+            { return TokenType.WHITE_SPACE;
             }
           // fall through
           case 49: break;
-          case 24:
-            { startPerlExpression();yybegin(PERL_EXPR_BLOCK);return MOJO_BLOCK_EXPR_OPENER;
+          case 22:
+            { yybegin(AFTER_PERL_BLOCK);return COMMENT_BLOCK;
             }
           // fall through
           case 50: break;
+          case 23:
+            { yybegin(BLOCK_COMMENT);
+            }
+          // fall through
+          case 51: break;
+          case 24:
+            { yybegin(NON_CLEAR_LINE);return MOJO_BLOCK_OPENER_TAG;
+            }
+          // fall through
+          case 52: break;
           case 25:
+            { startPerlExpression();yybegin(PERL_EXPR_BLOCK);return MOJO_BLOCK_EXPR_OPENER;
+            }
+          // fall through
+          case 53: break;
+          case 26:
+            // lookahead expression with fixed lookahead length
+            zzMarkedPos = Character.offsetByCodePoints
+                (zzBufferL, zzMarkedPos, -2);
+            { return TokenType.WHITE_SPACE;
+            }
+          // fall through
+          case 54: break;
+          case 27:
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL, zzStartRead, 3);
             { return MOJO_END;
             }
           // fall through
-          case 51: break;
-          case 26:
+          case 55: break;
+          case 28:
             // lookahead expression with fixed base length
             zzMarkedPos = Character.offsetByCodePoints
                 (zzBufferL, zzStartRead, 5);
             { return MOJO_BEGIN;
             }
           // fall through
-          case 52: break;
+          case 56: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

@@ -21,11 +21,11 @@ PERL_XIDC = [\w && \p{XID_Continue}]
 
 IDENTIFIER = {PERL_XIDS} {PERL_XIDC}*
 
-
 WHITE_SPACE = [ \t\f]
 ANY_SPACE = {WHITE_SPACE}|\R
 ANY_SPACES = {ANY_SPACE}+
 WHITE_SPACES_ENDING_NEW_LINE={ANY_SPACES}?\R
+NBSP = [\s&&[^\n]]
 
 EXPR_BLOCK_CLOSER = "%>"
 OPEN_TAG_START = "<%"
@@ -279,8 +279,8 @@ PERL_CLOSE_TAG = {CLOSE_TAG_START}{KEYWORD_PERL}">"
 }
 
 <PERL_LINE>{
-	\R	{yybegin(AFTER_PERL_LINE);return TokenType.WHITE_SPACE;}
-	[^]	{return delegateLexing();}
+	{NBSP}*\R   {yybegin(AFTER_PERL_LINE);return TokenType.WHITE_SPACE;}
+	[^]	    {return delegateLexing();}
 }
 
 <CHECK_SPACE_CLEAR_LINE>{

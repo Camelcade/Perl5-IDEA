@@ -25,6 +25,7 @@ WHITE_SPACES = {WHITE_SPACE}+
 ANY_SPACE = {WHITE_SPACE}|\R
 ANY_SPACES = {ANY_SPACE}+
 WHITE_SPACES_WITH_NEW_LINE={WHITE_SPACES}?\R{ANY_SPACES}?
+NBSP = [\s&&[^\n]]
 
 LINE_COMMENT = "#".*
 
@@ -113,7 +114,7 @@ SELF_POINTER = "$."
 }
 
 <FLAGS>{
-	\R					{setPerlToInitial();return TokenType.WHITE_SPACE;}
+	{NBSP}* \R					{setPerlToInitial();return TokenType.WHITE_SPACE;}
 	{FLAGS_CLOSE_TAG}	{endPerlExpression();yybegin(AFTER_PERL_BLOCK);return MASON_FLAGS_CLOSER;}
 	[^]					{return delegateLexing();}
 }
@@ -220,11 +221,12 @@ SELF_POINTER = "$."
 }
 
 <PERL_LINE>{
-	\R											{yybegin(AFTER_PERL_LINE);return SEMICOLON;}
+	{NBSP}+ / \R                                    {return TokenType.WHITE_SPACE;}
+	\R                                              {yybegin(AFTER_PERL_LINE);return SEMICOLON;}
 	// we should probably use start/end perl expression instead just resetting to initial
 	"{{" / {WHITE_SPACES}?{LINE_COMMENT}?\R?	{setPerlToInitial();return MASON_FILTERED_BLOCK_OPENER;}
 	"}}" / {WHITE_SPACES}?{LINE_COMMENT}?\R?	{setPerlToInitial();return MASON_FILTERED_BLOCK_CLOSER;}
-	[^]											{return delegateLexing();}
+	[^]						{return delegateLexing();}
 }
 
 // checking what is behind the spaces
