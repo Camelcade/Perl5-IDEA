@@ -39,7 +39,6 @@ import com.intellij.psi.tree.IElementType;
 NEW_LINE = \R
 WHITE_SPACE = [ \t\f]
 ANY_SPACE = [ \t\f\n\r]
-NON_SPACE = [^ \t\f\n\r]
 LINE_COMMENT = "#" .*
 LINE_COMMENT_ANNOTATION = "#@"[\w] .*
 LINE_COMMENT_WITH_NEW_LINE = {LINE_COMMENT} \R
@@ -219,9 +218,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 %state AFTER_POSSIBLE_SIGIL
 
 %xstate CAPTURE_FORMAT,CAPTURE_FORMAT_NON_EMPTY
-%xstate CAPTURE_HEREDOC, CAPTURE_NON_EMPTY_HEREDOC
-%xstate CAPTURE_HEREDOC_INDENTABLE_TERMINATOR
-%xstate CAPTURE_HEREDOC_WITH_EMPTY_MARKER, CAPTURE_NON_EMPTY_HEREDOC_WITH_EMPTY_MARKER
+%xstate CAPTURE_HEREDOC,  CAPTURE_HEREDOC_WITH_EMPTY_MARKER
 
 %state AFTER_IDENTIFIER_WITH_LABEL
 %xstate LEX_SUB_NAME
@@ -248,63 +245,14 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 /////////////////////////////////// heredoc capture ////////////////////////////////////////////////////////////////////
 
-<CAPTURE_NON_EMPTY_HEREDOC_WITH_EMPTY_MARKER>{
-	.+ \R?	{}
-	\R		{yypushback(1);yybegin(CAPTURE_HEREDOC_WITH_EMPTY_MARKER);return heredocQueue.peek().getTargetElement();}
-	<<EOF>>	{yybegin(YYINITIAL);return heredocQueue.peek().getTargetElement();}
-}
-
 <CAPTURE_HEREDOC_WITH_EMPTY_MARKER>{
-	\R		{
-		heredocQueue.poll();
-		popState();
-
-		if (!heredocQueue.isEmpty())
-		{
-			startHeredocCapture();
-		}
-		return HEREDOC_END;
-	}
-	.+ \R?	{yybegin(CAPTURE_NON_EMPTY_HEREDOC_WITH_EMPTY_MARKER);}
-}
-
-<CAPTURE_NON_EMPTY_HEREDOC>{
-	.+			{
-		if( isCloseMarker())
-		{
-			pullback(0);
-			yybegin(CAPTURE_HEREDOC);
-			return heredocQueue.peek().getTargetElement();
-		}
-	}
-	\R+			{}
-	<<EOF>>		{yybegin(YYINITIAL);return heredocQueue.peek().getTargetElement();}
+        [^]           { return captureHeredocWithEmptyMarker(); }
+	<<EOF>>	      {yybegin(YYINITIAL);return heredocQueue.peek().getTargetElement();}
 }
 
 <CAPTURE_HEREDOC>{
-	.+		{
-		if( isCloseMarker()){
-			PerlHeredocQueueElement currentHeredoc = heredocQueue.poll();
-			if( currentHeredoc.isIndentable() ){
-			        pullback(0);
-			        yybegin(CAPTURE_HEREDOC_INDENTABLE_TERMINATOR);
-			}
-			else{
-        			popState();
-                		return HEREDOC_END;
-			}
-		}
-		else
-		{
-			yybegin(CAPTURE_NON_EMPTY_HEREDOC);
-		}
-	}
-	\R		{yybegin(CAPTURE_NON_EMPTY_HEREDOC);}
-}
-
-<CAPTURE_HEREDOC_INDENTABLE_TERMINATOR>{
-  {WHITE_SPACE}+    {return TokenType.WHITE_SPACE;}
-  {NON_SPACE}.*     {popState();return HEREDOC_END_INDENTABLE;}
+        [^]           { return captureHeredoc(); }
+	<<EOF>>	      {yybegin(YYINITIAL);return heredocQueue.peek().getTargetElement();}
 }
 
 ////////////////////////////////// end of heredoc capture //////////////////////////////////////////////////////////////
