@@ -749,9 +749,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <END_BLOCK>{
-  "=" \w {LINE_TO_END}  {return capturePod(true);}
-  {LINE_TO_END}         {return COMMENT_BLOCK;}
-  [^] 		        {return COMMENT_BLOCK;}
+  "=" \w     {return capturePod(true);}
+  [^]        {return captureEndBlock();}
 }
 
 /////////////////////////////////  subs, anon subs, methods, etc //////////////////////////////////////////////////////////
