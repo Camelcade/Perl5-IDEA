@@ -998,28 +998,107 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     }
   }
 
-  protected boolean isCloseMarker() {
-    PerlHeredocQueueElement currentHeredoc = heredocQueue.peek();
+  /**
+   * Fast here-document capture method. Invoked on the first character after the newline
+   */
+  protected final @NotNull IElementType captureHeredoc(){
+    final int bodyStartOffset = getTokenStart();
+    int offset = bodyStartOffset;
+    var buffer = getBuffer();
+    var bufferEnd = getBufferEnd();
+    PerlHeredocQueueElement currentHeredoc = heredocQueue.poll();
+    popState();
     LOG.assertTrue(currentHeredoc != null);
-    CharSequence tokenText = yytext();
-    CharSequence markerText = currentHeredoc.getMarker();
 
-    if (currentHeredoc.isIndentable()) {
-      if (!StringUtil.endsWith(tokenText, markerText)) {
-        return false;
+    var closeMarker = currentHeredoc.getMarker();
+
+    while( offset < bufferEnd){
+      int markerStartOffset = StringUtil.indexOf(buffer, closeMarker, offset);
+      if( markerStartOffset < 0){
+        // no end marker text ahead
+        break;
       }
 
-      for (int i = 0; i < tokenText.length() - markerText.length(); i++) {
-        if (!Character.isWhitespace(tokenText.charAt(i))) {
-          return false;
+      int markerEndOffset = markerStartOffset + closeMarker.length();
+      if( markerEndOffset < bufferEnd && buffer.charAt(markerEndOffset) != '\n' ){
+        // no newline or end of the buffer after end marker
+        offset = markerEndOffset;
+        continue;
+      }
+
+      int spacesStartOffset = markerStartOffset;
+      if( currentHeredoc.isIndentable()){
+        // looking for leading spaces for indented heredoc
+        while( spacesStartOffset > 0 ){
+          char prevChar = buffer.charAt(spacesStartOffset-1);
+          if( prevChar == '\n'){
+            break;
+          }
+          if( !Character.isWhitespace(prevChar)){
+            break;
+          }
+          spacesStartOffset--;
         }
       }
-      return true;
+
+      if( spacesStartOffset > 0 && buffer.charAt(spacesStartOffset-1) == '\n'){
+        // we found the valid end
+        if( spacesStartOffset > bodyStartOffset){
+          pushPreparsedToken(bodyStartOffset, spacesStartOffset, currentHeredoc.getTargetElement());
+        }
+        if( spacesStartOffset < markerStartOffset){
+          pushPreparsedToken(spacesStartOffset, markerStartOffset, TokenType.WHITE_SPACE);
+        }
+        pushPreparsedToken(markerStartOffset, markerEndOffset, currentHeredoc.getTerminatorElementType());
+        return getPreParsedToken();
+      }
+      offset = markerEndOffset;
     }
-    else {
-      return StringUtil.equals(tokenText, markerText);
-    }
+
+    yybegin(YYINITIAL);
+    setTokenEnd(bufferEnd);
+    return currentHeredoc.getTargetElement();
   }
+
+  /**
+   * Fast here-document capture method with empty close marker. Invoked on the first character after the newline
+   */
+  protected final @NotNull IElementType captureHeredocWithEmptyMarker(){
+    final int bodyStartOffset = getTokenStart();
+    var buffer = getBuffer();
+    PerlHeredocQueueElement currentHeredoc = heredocQueue.poll();
+    LOG.assertTrue(currentHeredoc != null);
+    popState();
+
+    if( buffer.charAt(bodyStartOffset) == '\n'){
+      // empty heredoc with empty marker
+      if( !heredocQueue.isEmpty()){
+        startHeredocCapture();
+      }
+      return currentHeredoc.getTerminatorElementType();
+    }
+
+    var bufferEnd = getBufferEnd();
+
+    int markerStartOffset = StringUtil.indexOf(buffer, "\n\n", bodyStartOffset) + 1;
+    if (markerStartOffset < 1) {
+      // no end marker text ahead
+      yybegin(YYINITIAL);
+      setTokenEnd(bufferEnd);
+      return currentHeredoc.getTargetElement();
+    }
+
+    int markerEndOffset = markerStartOffset + 1;
+
+    pushPreparsedToken(bodyStartOffset, markerStartOffset, currentHeredoc.getTargetElement());
+    pushPreparsedToken(markerStartOffset, markerEndOffset, currentHeredoc.getTerminatorElementType());
+    if( !heredocQueue.isEmpty()){
+      startHeredocCapture();
+    }
+
+    return getPreParsedToken();
+  }
+
 
   protected IElementType registerPackage(IElementType tokenType) {
     myLocalPackages.add(PerlPackageUtil.getCanonicalNamespaceName(yytext().toString()));

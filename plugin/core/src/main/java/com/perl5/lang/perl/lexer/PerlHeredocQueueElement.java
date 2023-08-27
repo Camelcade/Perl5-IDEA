@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,11 @@ package com.perl5.lang.perl.lexer;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END;
+import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END_INDENTABLE;
 
-public class PerlHeredocQueueElement {
+
+public final class PerlHeredocQueueElement {
   private final IElementType myTargetElement;
   private final CharSequence myMarker;
   private final boolean myIsIndentable;
@@ -31,15 +34,19 @@ public class PerlHeredocQueueElement {
     myIsIndentable = isIndentable;
   }
 
-  public IElementType getTargetElement() {
+  public @NotNull IElementType getTargetElement() {
     return myTargetElement;
   }
 
-  public CharSequence getMarker() {
+  public @NotNull CharSequence getMarker() {
     return myMarker;
   }
 
   public boolean isIndentable() {
     return myIsIndentable;
+  }
+
+  public final @NotNull IElementType getTerminatorElementType(){
+    return myIsIndentable ? HEREDOC_END_INDENTABLE: HEREDOC_END;
   }
 }
