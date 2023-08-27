@@ -419,7 +419,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   /**
    * Fast method for lexing spaces with or without newlines. Lexer invokes this method after lexing first space character.
    */
-  protected IElementType captureSpaces() {
+  protected final @NotNull IElementType captureSpaces() {
     var bufferEnd = getBufferEnd();
     var currentOffset = getTokenEnd() - 1;
     var buffer = getBuffer();
@@ -451,7 +451,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   /**
    * Fast method for lexing line comment
    */
-  protected IElementType captureComment() {
+  protected final @NotNull IElementType captureComment() {
     var bufferEnd = getBufferEnd();
     var currentOffset = getTokenEnd();
     var buffer = getBuffer();
@@ -463,6 +463,33 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     }
     setTokenEnd(currentOffset);
     return COMMENT_LINE;
+  }
+
+
+  /**
+   * Fast {@code __END__} block capture method. Invoked on the first character match after the block beginning.
+   */
+  protected final @NotNull IElementType captureEndBlock(){
+    int offset = getTokenStart();
+    var bufferEnd = getBufferEnd();
+    var buffer = getBuffer();
+    while( offset < bufferEnd){
+      offset = StringUtil.indexOf(buffer, "\n=", offset) + 1;
+      if( offset < 1){
+        // no pod inside
+        offset = bufferEnd;
+        yybegin(YYINITIAL);
+        break;
+      }
+      char nextChar = offset + 1 < bufferEnd ? buffer.charAt(offset + 1) : 0;
+      if( nextChar >= 'a' && nextChar <= 'z' ||  nextChar >= 'A' && nextChar <= 'Z'){
+        // valid pod starter
+        break;
+      }
+      offset++;
+    }
+    setTokenEnd(offset);
+    return COMMENT_BLOCK;
   }
 
   /**
