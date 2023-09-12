@@ -17,9 +17,10 @@ jobs:
         uses: JetBrains/qodana-action@v2023.2.1
         env:
           QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+          QODANA_LINTER: ${{ secrets.QODANA_TOKEN == '' && 'jetbrains/qodana-jvm-community' || 'jetbrains/qodana-jvm' }}
         with:
           use-caches: false
-          args: --baseline,.qodana/qodana.sarif.json
+          args: --baseline,.qodana/qodana.sarif.json,--linter,${{ env.QODANA_LINTER }}
 
       - uses: github/codeql-action/upload-sarif@v2
         with:
