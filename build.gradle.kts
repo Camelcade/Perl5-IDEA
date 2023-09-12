@@ -80,7 +80,7 @@ allprojects {
   }
 
   grammarKit {
-    jflexRelease.set("1.9.1")
+    jflexRelease.set(properties("jflexVersion"))
   }
 
   version = properties("pluginVersion").get().ifEmpty { properties("platformVersion").get() } +
