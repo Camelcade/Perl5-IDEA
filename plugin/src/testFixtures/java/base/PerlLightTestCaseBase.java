@@ -624,8 +624,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         if (StringUtil.equals(lookupString, elementLookupString + tailText) || StringUtil.equals(lookupString, elementLookupString)) {
           LookupEx activeLookup = LookupManager.getActiveLookup(getEditor());
           assertNotNull(activeLookup);
-          activeLookup.setCurrentItem(lookupElement);
-          ApplicationManager.getApplication().invokeAndWait(() -> myFixture.finishLookup(completeChar));
+          ApplicationManager.getApplication().invokeAndWait(() -> {
+            activeLookup.setCurrentItem(lookupElement);
+            myFixture.finishLookup(completeChar);
+          });
           return;
         }
       }
