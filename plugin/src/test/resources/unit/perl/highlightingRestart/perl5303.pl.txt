@@ -1,6 +1,6 @@
 File size: 7516302
-Re-highlighted ranges: 678670
-Avg range size: 11.075039415327037
+Re-highlighted ranges: 680794
+Avg range size: 11.040486549528932
 Min range size: 1
 Max range size: 39918
 10% of text has range <= 6
