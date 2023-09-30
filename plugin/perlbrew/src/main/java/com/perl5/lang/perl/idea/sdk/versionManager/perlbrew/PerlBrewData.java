@@ -20,7 +20,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.xmlb.annotations.Tag;
-import com.perl5.lang.perl.adapters.CpanminusAdapter;
+import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
@@ -79,7 +79,7 @@ class PerlBrewData extends PerlRealVersionManagerData<PerlBrewData, PerlBrewHand
     if (perlBrewAdapter == null) {
       return;
     }
-    perlBrewAdapter.runInstallInConsole(project, CpanminusAdapter.PACKAGE_NAME, PerlBrewAdapter.PERLBREW_INSTALL_CPANM);
+    perlBrewAdapter.runInstallInConsole(project, PackageManagerAdapter.CPANMINUS_PACKAGE_NAME, PerlBrewAdapter.PERLBREW_INSTALL_CPANM);
   }
 
   @Override

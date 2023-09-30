@@ -34,7 +34,6 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -55,8 +54,7 @@ import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.adapters.CpanAdapter;
-import com.perl5.lang.perl.adapters.CpanminusAdapter;
+import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
@@ -264,22 +262,17 @@ public final class PerlRunUtil {
                                               @NotNull Collection<String> packagesToInstall,
                                               @NotNull Notification notification) {
     List<AnAction> actions = new ArrayList<>();
-    ContainerUtil.addIfNotNull(actions, ReadAction.compute(
-      () -> CpanminusAdapter.createInstallAction(sdk, project, packagesToInstall, notification::expire)));
-    actions.add(CpanAdapter.createInstallAction(sdk, project, packagesToInstall, notification::expire));
-    boolean hasAlternatives = actions.size() > 1;
+    actions.add(PackageManagerAdapter.createInstallAction(sdk, project, packagesToInstall, notification::expire));
 
-    if (new HashSet<>(BUNDLED_MODULE_PARTS).removeAll(packagesToInstall)) {
+    if (ContainerUtil.intersects(BUNDLED_MODULE_PARTS, packagesToInstall)) {
       actions.add(new PerlDumbAwareAction(PerlBundle.message("perl.quickfix.install.module", BUNDLED_MODULE_NAME)) {
         @Override
         public void actionPerformed(@NotNull AnActionEvent e) {
-          if (hasAlternatives) {
-            notification.expire();
-            showMissingLibraryNotification(project, sdk, BUNDLED_MODULE_NAME);
-          }
-          else {
-            CpanAdapter.installModules(sdk, project, packagesToInstall, notification::expire, true);
-          }
+          notification.expire();
+          var extendedModulesList = new ArrayList<String>();
+          extendedModulesList.add(BUNDLED_MODULE_NAME);
+          extendedModulesList.addAll(ContainerUtil.subtract(packagesToInstall, BUNDLED_MODULE_PARTS));
+          PackageManagerAdapter.installModules(sdk, project, extendedModulesList, notification::expire, true);
         }
       });
     }

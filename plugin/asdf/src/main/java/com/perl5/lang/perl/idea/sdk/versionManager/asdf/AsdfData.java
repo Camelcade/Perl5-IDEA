@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.sdk.versionManager.asdf;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.util.ObjectUtils;
-import com.perl5.lang.perl.adapters.CpanminusAdapter;
+import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
@@ -51,7 +51,7 @@ class AsdfData extends PerlRealVersionManagerData<AsdfData, AsdfHandler> {
 
   @Override
   public void installCpanminus(@Nullable Project project) {
-    CpanminusAdapter.install(project);
+    PackageManagerAdapter.installCpanminus(project);
   }
 
   @Override

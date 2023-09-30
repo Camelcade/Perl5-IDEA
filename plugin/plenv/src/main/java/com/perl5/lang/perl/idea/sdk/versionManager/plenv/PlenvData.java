@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 
-import static com.perl5.lang.perl.adapters.CpanminusAdapter.PACKAGE_NAME;
+import static com.perl5.lang.perl.adapters.PackageManagerAdapter.CPANMINUS_PACKAGE_NAME;
 import static com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvAdapter.*;
 
 class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
@@ -54,7 +54,7 @@ class PlenvData extends PerlRealVersionManagerData<PlenvData, PlenvHandler> {
     if (plenvAdapter == null) {
       return;
     }
-    plenvAdapter.runInstallInConsole(project, PACKAGE_NAME, PLENV_INSTALL_CPANM, getDistributionId());
+    plenvAdapter.runInstallInConsole(project, CPANMINUS_PACKAGE_NAME, PLENV_INSTALL_CPANM, getDistributionId());
   }
 
   @Override

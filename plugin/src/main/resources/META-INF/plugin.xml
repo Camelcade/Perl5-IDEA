@@ -65,6 +65,7 @@
     <extensionPoint name="versionManagerHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean" dynamic="true">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler"/>
     </extensionPoint>
+    <extensionPoint name="packageManagerAdapterFactory" interface="com.perl5.lang.perl.adapters.PackageManagerAdapter.Factory" dynamic="true"/>
     <extensionPoint name="fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider" dynamic="true"/>
     <extensionPoint name="parserExtension" interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension" dynamic="true"/>
     <extensionPoint name="importsProvider" interface="com.perl5.lang.perl.extensions.imports.PerlImportsProvider" dynamic="true"/>
@@ -187,6 +188,9 @@
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.readonly.ReadonlyImplicitDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.log4perl.Log4PerlImplicitDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.moo.MooImplicitSubsProvider"/>
+
+    <packageManagerAdapterFactory implementation="com.perl5.lang.perl.adapters.CpanminusAdapter$Factory"/>
+    <packageManagerAdapterFactory implementation="com.perl5.lang.perl.adapters.CpanAdapter$Factory" order="last"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

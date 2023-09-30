@@ -64,6 +64,7 @@ import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
 import com.perl5.lang.perl.adapters.CpanAdapter;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
+import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.idea.project.PerlProjectDirectoriesConfigurator;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
@@ -550,14 +551,20 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected @NotNull PsiFile installPackageWithCpanminusAndGetPackageFile(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
     return installPackageAndGetPackageFile(
       contextPsiFile, packageName,
-      (sdk, callback) -> CpanminusAdapter.createInstallAction(sdk, getProject(), List.of(packageName), callback)
+      (sdk, callback) -> {
+        var adapter = Objects.requireNonNull(CpanminusAdapter.Factory.getInstance().createAdapter(sdk, getProject()));
+        return PackageManagerAdapter.createInstallAction(adapter, List.of(packageName), callback);
+      }
     );
   }
 
   protected @NotNull PsiFile installPackageWithCpanAndGetPackageFile(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
     return installPackageAndGetPackageFile(
       contextPsiFile, packageName,
-      (sdk, callback) -> CpanAdapter.createInstallAction(sdk, getProject(), List.of("-M", "www.cpan.org", packageName), callback)
+      (sdk, callback) -> {
+        var adapter = Objects.requireNonNull(CpanAdapter.Factory.getInstance().createAdapter(sdk, getProject()));
+        return PackageManagerAdapter.createInstallAction(adapter,List.of("-M", "www.cpan.org", packageName), callback);
+      }
     );
   }
 
