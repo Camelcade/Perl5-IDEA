@@ -19,4 +19,13 @@
   </extensions>
   <extensions defaultExtensionNs="com.intellij">
   </extensions>
+  <actions>
+    <action id="perl5.install.with.cpanm" class="com.perl5.lang.perl.cpanminus.action.PerlInstallPackagesWithCpanminusAction">
+      <add-to-group group-id="perl5.install"/>
+    </action>
+
+    <action id="perl5.intsall.cpanm" class="com.perl5.lang.perl.cpanminus.action.PerlInstallCpanmAction">
+      <add-to-group group-id="perl5.install"/>
+    </action>
+  </actions>
 </idea-plugin>

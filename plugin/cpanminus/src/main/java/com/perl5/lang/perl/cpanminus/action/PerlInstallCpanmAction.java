@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.actions;
+package com.perl5.lang.perl.cpanminus.action;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.adapters.CpanminusAdapter;
+import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import org.jetbrains.annotations.NotNull;
