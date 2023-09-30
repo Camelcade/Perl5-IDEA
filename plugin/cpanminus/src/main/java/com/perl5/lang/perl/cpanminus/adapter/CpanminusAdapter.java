@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.cpanminus.adapter;
 
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.NlsSafe;
@@ -85,7 +86,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   public static final class Factory implements PackageManagerAdapterFactory<CpanminusAdapter> {
     @Override
     public @Nullable CpanminusAdapter createAdapter(@NotNull Sdk sdk, @Nullable Project project) {
-      return isAvailable(project) ? new CpanminusAdapter(sdk, project) : null;
+      return ReadAction.compute(() -> isAvailable(project) ? new CpanminusAdapter(sdk, project) : null);
     }
 
     @VisibleForTesting
