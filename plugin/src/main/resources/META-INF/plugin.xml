@@ -189,7 +189,6 @@
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.log4perl.Log4PerlImplicitDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.moo.MooImplicitSubsProvider"/>
 
-    <packageManagerAdapterFactory implementation="com.perl5.lang.perl.adapters.CpanminusAdapter$Factory"/>
     <packageManagerAdapterFactory implementation="com.perl5.lang.perl.adapters.CpanAdapter$Factory" order="last"/>
   </extensions>
 
