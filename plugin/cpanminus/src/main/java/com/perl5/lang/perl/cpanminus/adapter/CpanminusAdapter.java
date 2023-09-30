@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.adapters;
+package com.perl5.lang.perl.cpanminus.adapter;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.NlsSafe;
 import com.intellij.util.concurrency.annotations.RequiresReadLock;
-import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
+import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.Contract;

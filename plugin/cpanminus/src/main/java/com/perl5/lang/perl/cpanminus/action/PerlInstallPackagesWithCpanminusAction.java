@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.cpanminus.action;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.perl5.lang.perl.adapters.CpanminusAdapter;
+import com.perl5.lang.perl.cpanminus.adapter.CpanminusAdapter;
 import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.idea.actions.PerlInstallPackageActionBase;
 import org.jetbrains.annotations.NotNull;

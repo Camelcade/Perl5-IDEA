@@ -17,6 +17,7 @@
 <idea-plugin package="com.perl5.lang.perl.cpanminus">
   <extensions defaultExtensionNs="com.perl5">
     <importsProvider implementation="com.perl5.lang.perl.cpanminus.cpanfile.PerlCpanfileImportProvider"/>
+    <packageManagerAdapterFactory implementation="com.perl5.lang.perl.cpanminus.adapter.CpanminusAdapter$Factory"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

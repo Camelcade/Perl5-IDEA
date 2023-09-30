@@ -54,6 +54,7 @@ dependencies {
     ":plugin:asdf",
     ":plugin:berrybrew",
     ":plugin:core",
+    ":plugin:cpanminus",
     ":plugin:docker",
     ":plugin:idea",
     ":plugin:perlInstall",
