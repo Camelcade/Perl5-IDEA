@@ -62,7 +62,7 @@ import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
-import com.perl5.lang.perl.adapters.CpanAdapter;
+import com.perl5.lang.perl.cpan.adapter.CpanAdapter;
 import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.cpanminus.adapter.CpanminusAdapter;
 import com.perl5.lang.perl.idea.project.PerlProjectDirectoriesConfigurator;
