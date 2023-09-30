@@ -60,7 +60,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   protected @NotNull List<String> getInstallParameters(@NotNull Collection<String> packageNames, boolean suppressTests) {
     var result = new ArrayList<String>();
     result.add("-v");
-    if( suppressTests){
+    if (suppressTests) {
       result.add(NO_TEST_ARGUMENT);
     }
     result.addAll(super.getInstallParameters(packageNames, suppressTests));
@@ -85,11 +85,11 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   public static final class Factory implements PackageManagerAdapterFactory<CpanminusAdapter> {
     @Override
     public @Nullable CpanminusAdapter createAdapter(@NotNull Sdk sdk, @Nullable Project project) {
-      return isAvailable(project) ?  new CpanminusAdapter(sdk, project): null;
+      return isAvailable(project) ? new CpanminusAdapter(sdk, project) : null;
     }
 
     @VisibleForTesting
-    public static @NotNull Factory getInstance(){
+    public static @NotNull Factory getInstance() {
       return PackageManagerAdapterFactory.findInstance(Factory.class);
     }
   }

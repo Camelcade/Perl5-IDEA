@@ -117,8 +117,8 @@ public abstract class PackageManagerAdapter {
         .withProcessListener(new ProcessAdapter() {
           @Override
           public void processTerminated(@NotNull ProcessEvent event) {
-            PerlRunUtil.refreshSdkDirs(mySdk, myProject, ()->{
-              if( event.getExitCode() == 0 && callback != null){
+            PerlRunUtil.refreshSdkDirs(mySdk, myProject, () -> {
+              if (event.getExitCode() == 0 && callback != null) {
                 callback.run();
               }
             });

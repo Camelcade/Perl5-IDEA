@@ -574,7 +574,7 @@ public final class PerlRunUtil {
             }
           });
         }
-        if( callback != null){
+        if (callback != null) {
           callback.run();
         }
         if (ourTestSdkRefreshSemaphore != null) {
@@ -589,8 +589,8 @@ public final class PerlRunUtil {
    * Asynchronously refreshes directories of the provided sdk.
    * This method sets up sdk paths and rescans the roots of the project to ensure that all changes are accounted for.
    *
-   * @param sdk The sdk to refresh.
-   * @param project The project associated with the sdk.
+   * @param sdk      The sdk to refresh.
+   * @param project  The project associated with the sdk.
    * @param callback A callback function to execute after the sdk is refreshed (optional).
    */
   public static void refreshSdkDirs(@Nullable Sdk sdk, @Nullable Project project) {

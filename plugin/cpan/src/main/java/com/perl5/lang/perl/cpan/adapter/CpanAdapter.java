@@ -58,7 +58,7 @@ public class CpanAdapter extends PackageManagerAdapter {
   @Override
   protected @NotNull List<String> getInstallParameters(@NotNull Collection<String> packageNames, boolean suppressTests) {
     var result = super.getInstallParameters(packageNames, suppressTests);
-    return suppressTests ? ContainerUtil.prepend(result, NO_TEST_ARGUMENT): result;
+    return suppressTests ? ContainerUtil.prepend(result, NO_TEST_ARGUMENT) : result;
   }
 
   @Contract("null->null")

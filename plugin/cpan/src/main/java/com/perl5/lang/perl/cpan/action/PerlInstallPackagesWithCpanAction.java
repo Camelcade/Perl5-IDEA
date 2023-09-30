@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.cpan.action;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.perl5.lang.perl.cpan.adapter.CpanAdapter;
 import com.perl5.lang.perl.adapters.PackageManagerAdapter;
+import com.perl5.lang.perl.cpan.adapter.CpanAdapter;
 import com.perl5.lang.perl.idea.actions.PerlInstallPackageActionBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

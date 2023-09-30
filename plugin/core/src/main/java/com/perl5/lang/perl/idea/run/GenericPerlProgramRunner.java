@@ -39,6 +39,7 @@ import java.util.stream.Collectors;
 
 public abstract class GenericPerlProgramRunner implements ProgramRunner<RunnerSettings> {
   private static final Logger LOG = Logger.getInstance(GenericPerlProgramRunner.class);
+
   protected abstract @Nullable PerlRunProfileState createState(@NotNull ExecutionEnvironment executionEnvironment) throws
                                                                                                                    ExecutionException;
 
@@ -55,7 +56,8 @@ public abstract class GenericPerlProgramRunner implements ProgramRunner<RunnerSe
   /**
    * Handles missing modules by prompting the user to install them, and then installing them
    * using the package manager adapter. Executes the environment after the installation is complete.
-   * @param environment the execution environment
+   *
+   * @param environment    the execution environment
    * @param missingModules a list of missing modules
    * @return true iff invoker should not call run configuration itself, because it's going to be handled by the callback
    */
@@ -67,18 +69,19 @@ public abstract class GenericPerlProgramRunner implements ProgramRunner<RunnerSe
     }
     var request = Messages.showYesNoDialog(
       project,
-      PerlBundle.message("dialog.message.are.missing.in.would.you.like.to.install", missingModules.stream().sorted().collect(Collectors.joining(", "))),
+      PerlBundle.message("dialog.message.are.missing.in.would.you.like.to.install",
+                         missingModules.stream().sorted().collect(Collectors.joining(", "))),
       PerlBundle.message("dialog.title.missing.modules"),
       Messages.getQuestionIcon());
     if (request != Messages.YES) {
       return false;
     }
     var packageManagerAdapter = PackageManagerAdapterFactory.create(sdk, project);
-    packageManagerAdapter.install(missingModules, ()->{
+    packageManagerAdapter.install(missingModules, () -> {
       if (project.isDisposed()) {
         return;
       }
-      ApplicationManager.getApplication().invokeLater(()-> {
+      ApplicationManager.getApplication().invokeLater(() -> {
         try {
           doExecute(environment);
         }
@@ -90,19 +93,20 @@ public abstract class GenericPerlProgramRunner implements ProgramRunner<RunnerSe
     return true;
   }
 
-  private List<String> getMissingModules(@NotNull ExecutionEnvironment environment){
+  private List<String> getMissingModules(@NotNull ExecutionEnvironment environment) {
     var project = environment.getProject();
     return ContainerUtil.filter(getRequiredModules(environment),
-                                it-> PerlPackageUtil.getPackageVirtualFileByPackageName(project, it) == null);
+                                it -> PerlPackageUtil.getPackageVirtualFileByPackageName(project, it) == null);
   }
 
   /**
    * Returns a modifiable set of required modules for the given execution environment.
    * By default, the set is obtained from the "Required modules" field of the run configuration.
+   *
    * @param environment the execution environment
    * @return a modifiable set of required modules
    */
-  protected Set<String> getRequiredModules(@NotNull ExecutionEnvironment environment){
+  protected Set<String> getRequiredModules(@NotNull ExecutionEnvironment environment) {
     var runProfile = environment.getRunProfile();
     return runProfile instanceof GenericPerlRunConfiguration perlRunConfiguration
            ? new HashSet<>(perlRunConfiguration.getRequiredModulesList())
