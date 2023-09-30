@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.adapters.PackageManagerAdapter;
+import com.perl5.lang.perl.adapters.PackageManagerAdapterFactory;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -73,7 +73,7 @@ public abstract class GenericPerlProgramRunner implements ProgramRunner<RunnerSe
     if (request != Messages.YES) {
       return false;
     }
-    var packageManagerAdapter = PackageManagerAdapter.create(sdk, project);
+    var packageManagerAdapter = PackageManagerAdapterFactory.create(sdk, project);
     packageManagerAdapter.install(missingModules, ()->{
       if (project.isDisposed()) {
         return;

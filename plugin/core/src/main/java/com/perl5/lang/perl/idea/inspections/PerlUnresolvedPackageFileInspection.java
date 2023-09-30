@@ -25,6 +25,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElementVisitor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.adapters.PackageManagerAdapter;
+import com.perl5.lang.perl.adapters.PackageManagerAdapterFactory;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -74,7 +75,7 @@ public class PerlUnresolvedPackageFileInspection extends PerlInspection {
           Project project = o.getProject();
           Sdk perlSdk = PerlProjectManager.getSdk(project);
           if (perlSdk != null) {
-            fixes.add(new InstallPackageQuickfix(PackageManagerAdapter.create(perlSdk, project), packageName));
+            fixes.add(new InstallPackageQuickfix(PackageManagerAdapterFactory.create(perlSdk, project), packageName));
           }
 
           registerProblem(holder, o,

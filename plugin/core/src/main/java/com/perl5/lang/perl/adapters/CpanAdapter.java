@@ -65,7 +65,7 @@ public class CpanAdapter extends PackageManagerAdapter {
     return sdk == null ? null : new CpanAdapter(sdk, project);
   }
 
-  public static final class Factory implements PackageManagerAdapter.Factory<CpanAdapter> {
+  public static final class Factory implements PackageManagerAdapterFactory<CpanAdapter> {
     @Override
     public @NotNull CpanAdapter createAdapter(@NotNull Sdk sdk, @Nullable Project project) {
       return new CpanAdapter(sdk, project);
@@ -73,7 +73,7 @@ public class CpanAdapter extends PackageManagerAdapter {
 
     @VisibleForTesting
     public static @NotNull Factory getInstance() {
-      return findInstance(Factory.class);
+      return PackageManagerAdapterFactory.findInstance(Factory.class);
     }
   }
 }

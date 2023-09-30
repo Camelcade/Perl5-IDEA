@@ -22,7 +22,6 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.NlsSafe;
@@ -46,9 +45,6 @@ import java.util.*;
 
 public abstract class PackageManagerAdapter {
   public static final @NlsSafe String CPANMINUS_PACKAGE_NAME = "App::cpanminus";
-
-  private static final ExtensionPointName<PackageManagerAdapter.Factory<?>> EP_NAME =
-    ExtensionPointName.create("com.perl5.packageManagerAdapterFactory");
 
   private static final Logger LOG = Logger.getInstance(PackageManagerAdapter.class);
   private static final MergingUpdateQueue QUEUE =
@@ -190,19 +186,6 @@ public abstract class PackageManagerAdapter {
   }
 
   /**
-   * Creates an adapter, prefers cpanminus over cpan
-   */
-  public static @NotNull PackageManagerAdapter create(@NotNull Sdk sdk, @Nullable Project project) {
-    for (Factory<?> factory : EP_NAME.getExtensionList()) {
-      PackageManagerAdapter adapter = factory.createAdapter(sdk, project);
-      if (adapter != null) {
-        return adapter;
-      }
-    }
-    throw new RuntimeException("CPAN adapter expected to be always available");
-  }
-
-  /**
    * Installs {@code libraryNames} into {@code sdk} and invoking a {@code callback} if any
    */
   public static void installModules(@NotNull Sdk sdk,
@@ -210,7 +193,7 @@ public abstract class PackageManagerAdapter {
                                     @NotNull Collection<String> libraryNames,
                                     @Nullable Runnable actionCallback,
                                     boolean suppressTests) {
-    installModules(create(sdk, project), libraryNames, actionCallback, suppressTests);
+    installModules(PackageManagerAdapterFactory.create(sdk, project), libraryNames, actionCallback, suppressTests);
   }
 
   private static void installModules(@NotNull PackageManagerAdapter adapter,
@@ -227,7 +210,7 @@ public abstract class PackageManagerAdapter {
                                                       @Nullable Project project,
                                                       @NotNull Collection<String> libraryNames,
                                                       @Nullable Runnable actionCallback) {
-    return createInstallAction(create(sdk, project), libraryNames, actionCallback);
+    return createInstallAction(PackageManagerAdapterFactory.create(sdk, project), libraryNames, actionCallback);
   }
 
   @VisibleForTesting
@@ -249,7 +232,7 @@ public abstract class PackageManagerAdapter {
       LOG.debug("No sdk for installation");
       return;
     }
-    create(sdk, project).queueInstall(CPANMINUS_PACKAGE_NAME);
+    PackageManagerAdapterFactory.create(sdk, project).queueInstall(CPANMINUS_PACKAGE_NAME);
   }
 
   private static final class InstallUpdate extends Update {
@@ -277,13 +260,5 @@ public abstract class PackageManagerAdapter {
       myPackages.addAll(((InstallUpdate)update).myPackages);
       return true;
     }
-  }
-
-  public interface Factory<T extends PackageManagerAdapter> {
-    @Nullable T createAdapter(@NotNull Sdk sdk, @Nullable Project project);
-  }
-
-  protected static <F extends PackageManagerAdapter.Factory<? extends PackageManagerAdapter>> @NotNull F findInstance(@NotNull Class<F> cls) {
-    return Objects.requireNonNull(EP_NAME.findFirstAssignableExtension(cls));
   }
 }
