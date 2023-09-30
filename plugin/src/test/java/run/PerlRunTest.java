@@ -133,7 +133,7 @@ public class PerlRunTest extends PerlPlatformTestCase {
     assertNotNull(notification);
     assertEquals(PerlBundle.message("perl.missing.library.notification"), notification.getGroupId());
     assertEquals(PerlBundle.message("perl.missing.library.notification.title", "Some::Missing::Module"), notification.getTitle());
-    assertSize(2, notification.getActions());
+    assertSize(1, notification.getActions());
     assertEquals(PerlBundle.message("perl.missing.library.notification.message"), notification.getContent());
   }
 
