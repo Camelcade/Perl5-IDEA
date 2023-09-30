@@ -16,9 +16,14 @@
 
 <idea-plugin package="com.perl5.lang.perl.cpanminus">
   <extensions defaultExtensionNs="com.perl5">
+    <importsProvider implementation="com.perl5.lang.perl.cpanminus.cpanfile.PerlCpanfileImportProvider"/>
   </extensions>
+
   <extensions defaultExtensionNs="com.intellij">
+    <fileType implementationClass="com.perl5.lang.perl.cpanminus.cpanfile.PerlFileTypeCpanfile" fieldName="INSTANCE"
+              name="Cpanfile" language="Perl5" fileNames="cpanfile"/>
   </extensions>
+
   <actions>
     <action id="perl5.install.with.cpanm" class="com.perl5.lang.perl.cpanminus.action.PerlInstallPackagesWithCpanminusAction">
       <add-to-group group-id="perl5.install"/>
