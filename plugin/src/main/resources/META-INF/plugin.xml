@@ -173,8 +173,6 @@
         implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtensionImpl"/>
     <settings.configurable.extension implementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersConfigurableExtension"/>
 
-    <importsProvider implementation="com.perl5.lang.perl.extensions.imports.PerlCpanfileImportProvider"/>
-
     <hostHandler key="localhost"
                  implementationClass="com.perl5.lang.perl.idea.sdk.host.local.PerlLocalHostHandler"/>
     <implementationHandler key="porters"
@@ -324,8 +322,6 @@
               name="Perl5 Script" language="Perl5" extensions="pl;ph;al;cgi"/>
     <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypePackage" fieldName="INSTANCE"
               name="Perl5 Package" extensions="pm" language="Perl5"/>
-    <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypeCpanfile" fieldName="INSTANCE"
-              name="Cpanfile" language="Perl5" fileNames="cpanfile"/>
     <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypeTest" fieldName="INSTANCE"
               name="Perl5 Test" language="Perl5" extensions="t"/>
 
