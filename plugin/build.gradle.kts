@@ -31,6 +31,7 @@ dependencies {
     ":plugin:copyright",
     ":plugin:core",
     ":plugin:coverage",
+    ":plugin:cpanminus",
     ":plugin:debugger",
     ":plugin:docker",
     ":plugin:idea",
