@@ -38,8 +38,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.*;
 
-public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRunAnythingProvider.CommandElement>> {
-  private static final Logger LOG = Logger.getInstance(PerlRunAnythingProvider.class);
+public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<List<PerlCpanminusRunAnythingProvider.CommandElement>> {
+  private static final Logger LOG = Logger.getInstance(PerlCpanminusRunAnythingProvider.class);
   private static final String GENERAL_KEY = "general";
   private static final String COMPLETION_GROUP_NAME_KEY = "completionGroupName";
   private static final String HELP_GROUP_NAME_KEY = "helpGroupName";
@@ -66,11 +66,11 @@ public class PerlRunAnythingProvider extends RunAnythingProviderBase<List<PerlRu
 
   private final boolean myIsOptionsFirst;
 
-  public PerlRunAnythingProvider() {
+  public PerlCpanminusRunAnythingProvider() {
     this("runAnything/cli/cpanm.xml");
   }
 
-  protected PerlRunAnythingProvider(@NotNull String pathToConfig) {
+  protected PerlCpanminusRunAnythingProvider(@NotNull String pathToConfig) {
     LOG.debug("Loading cli options from " + pathToConfig);
     ClassLoader classLoader = getClass().getClassLoader();
     final Element xmlElement;

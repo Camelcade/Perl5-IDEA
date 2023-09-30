@@ -27,10 +27,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
 
-public class PerlRunAnythingHelpGroup extends RunAnythingHelpGroup<PerlRunAnythingProvider> {
+public class PerlCpanminusRunAnythingHelpGroup extends RunAnythingHelpGroup<PerlCpanminusRunAnythingProvider> {
 
-  public PerlRunAnythingHelpGroup() {
-    super(Objects.requireNonNull(RunAnythingProvider.EP_NAME.findExtension(PerlRunAnythingProvider.class)).getHelpGroupTitle(),
+  public PerlCpanminusRunAnythingHelpGroup() {
+    super(Objects.requireNonNull(RunAnythingProvider.EP_NAME.findExtension(PerlCpanminusRunAnythingProvider.class)).getHelpGroupTitle(),
           Collections.emptyList());
   }
 
@@ -42,7 +42,7 @@ public class PerlRunAnythingHelpGroup extends RunAnythingHelpGroup<PerlRunAnythi
   @Override
   public @NotNull Collection<RunAnythingItem> getGroupItems(@NotNull DataContext dataContext, @NotNull String pattern) {
     return ContainerUtil.filter(
-      Objects.requireNonNull(RunAnythingProvider.EP_NAME.findExtension(PerlRunAnythingProvider.class)).getHelpItems(dataContext),
+      Objects.requireNonNull(RunAnythingProvider.EP_NAME.findExtension(PerlCpanminusRunAnythingProvider.class)).getHelpItems(dataContext),
       Objects::nonNull);
   }
 }
