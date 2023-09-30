@@ -18,26 +18,38 @@ package com.perl5.lang.perl.adapters;
 
 import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 
 import java.util.*;
 
 public abstract class PackageManagerAdapter {
+  public static final @NlsSafe String CPANMINUS_PACKAGE_NAME = "App::cpanminus";
+
+  private static final ExtensionPointName<PackageManagerAdapter.Factory<?>> EP_NAME =
+    ExtensionPointName.create("com.perl5.packageManagerAdapterFactory");
+
   private static final Logger LOG = Logger.getInstance(PackageManagerAdapter.class);
   private static final MergingUpdateQueue QUEUE =
     new MergingUpdateQueue("perl.installer.queue", 300, true, null, PerlPluginUtil.getUnloadAwareDisposable())
@@ -181,7 +193,63 @@ public abstract class PackageManagerAdapter {
    * Creates an adapter, prefers cpanminus over cpan
    */
   public static @NotNull PackageManagerAdapter create(@NotNull Sdk sdk, @Nullable Project project) {
-    return CpanminusAdapter.isAvailable(project) ? new CpanminusAdapter(sdk, project) : new CpanAdapter(sdk, project);
+    for (Factory<?> factory : EP_NAME.getExtensionList()) {
+      PackageManagerAdapter adapter = factory.createAdapter(sdk, project);
+      if (adapter != null) {
+        return adapter;
+      }
+    }
+    throw new RuntimeException("CPAN adapter expected to be always available");
+  }
+
+  /**
+   * Installs {@code libraryNames} into {@code sdk} and invoking a {@code callback} if any
+   */
+  public static void installModules(@NotNull Sdk sdk,
+                                    @Nullable Project project,
+                                    @NotNull Collection<String> libraryNames,
+                                    @Nullable Runnable actionCallback,
+                                    boolean suppressTests) {
+    installModules(create(sdk, project), libraryNames, actionCallback, suppressTests);
+  }
+
+  private static void installModules(@NotNull PackageManagerAdapter adapter,
+                                     @NotNull Collection<String> libraryNames,
+                                     @Nullable Runnable actionCallback,
+                                     boolean suppressTests) {
+    adapter.queueInstall(libraryNames, suppressTests);
+    if (actionCallback != null) {
+      actionCallback.run();
+    }
+  }
+
+  public static @NotNull AnAction createInstallAction(@NotNull Sdk sdk,
+                                                      @Nullable Project project,
+                                                      @NotNull Collection<String> libraryNames,
+                                                      @Nullable Runnable actionCallback) {
+    return createInstallAction(create(sdk, project), libraryNames, actionCallback);
+  }
+
+  @VisibleForTesting
+  public static @NotNull PerlDumbAwareAction createInstallAction(@NotNull PackageManagerAdapter adapter,
+                                                                 @NotNull Collection<String> libraryNames,
+                                                                 @Nullable Runnable actionCallback) {
+    @NotNull String toolName = adapter.getManagerScriptName();
+    return new PerlDumbAwareAction(PerlBundle.message("perl.quickfix.install.family", toolName)) {
+      @Override
+      public void actionPerformed(@NotNull AnActionEvent e) {
+        installModules(adapter, libraryNames, actionCallback, true);
+      }
+    };
+  }
+
+  public static void installCpanminus(@Nullable Project project) {
+    @Nullable Sdk sdk = PerlProjectManager.getSdk(project);
+    if (sdk == null) {
+      LOG.debug("No sdk for installation");
+      return;
+    }
+    create(sdk, project).queueInstall(CPANMINUS_PACKAGE_NAME);
   }
 
   private static final class InstallUpdate extends Update {
@@ -209,5 +277,13 @@ public abstract class PackageManagerAdapter {
       myPackages.addAll(((InstallUpdate)update).myPackages);
       return true;
     }
+  }
+
+  public interface Factory<T extends PackageManagerAdapter> {
+    @Nullable T createAdapter(@NotNull Sdk sdk, @Nullable Project project);
+  }
+
+  protected static <F extends PackageManagerAdapter.Factory<? extends PackageManagerAdapter>> @NotNull F findInstance(@NotNull Class<F> cls) {
+    return Objects.requireNonNull(EP_NAME.findFirstAssignableExtension(cls));
   }
 }

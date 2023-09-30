@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.sdk.versionManager.berrybrew;
 
 import com.intellij.openapi.project.Project;
-import com.perl5.lang.perl.adapters.CpanminusAdapter;
+import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerData;
 import org.jetbrains.annotations.NotNull;
@@ -44,7 +44,7 @@ class BerryBrewData extends PerlRealVersionManagerData<BerryBrewData, BerryBrewH
 
   @Override
   public void installCpanminus(@Nullable Project project) {
-    CpanminusAdapter.install(project);
+    PackageManagerAdapter.installCpanminus(project);
   }
 
   @Override

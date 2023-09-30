@@ -22,23 +22,24 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.NlsSafe;
+import com.intellij.util.concurrency.annotations.RequiresReadLock;
 import com.perl5.lang.perl.idea.actions.PerlDumbAwareAction;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class CpanminusAdapter extends PackageManagerAdapter {
-  public static final @NlsSafe String PACKAGE_NAME = "App::cpanminus";
   public static final @NlsSafe String SCRIPT_NAME = "cpanm";
   private static final @NlsSafe String NO_TEST_ARGUMENT = "--notest";
 
-  public CpanminusAdapter(@NotNull Sdk sdk, @Nullable Project project) {
+  private CpanminusAdapter(@NotNull Sdk sdk, @Nullable Project project) {
     super(sdk, project);
   }
 
@@ -54,7 +55,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
 
   @Override
   protected @NotNull String getManagerPackageName() {
-    return PACKAGE_NAME;
+    return CPANMINUS_PACKAGE_NAME;
   }
 
   @Override
@@ -69,49 +70,29 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   }
 
   /**
-   * Installs a cpanminus into {@code sdk} using {@code cpan}
-   *
-   * @see CpanAdapter
-   */
-  public static void install(@Nullable Project project, @Nullable Sdk sdk) {
-    if (project == null || sdk == null) {
-      return;
-    }
-    new CpanAdapter(sdk, project).queueInstall(PACKAGE_NAME);
-  }
-
-  public static void install(@Nullable Project project) {
-    install(project, PerlProjectManager.getSdk(project));
-  }
-
-  /**
    * @return true iff App::cpanminus is available in sdk classpath
    */
+  @RequiresReadLock
   @Contract("null->false")
   public static boolean isAvailable(@Nullable Project project) {
-    ApplicationManager.getApplication().assertReadAccessAllowed();
     return PerlRunUtil.findScript(project, SCRIPT_NAME) != null;
-  }
-
-  public static @Nullable AnAction createInstallAction(@NotNull Sdk sdk,
-                                                       @Nullable Project project,
-                                                       @NotNull Collection<String> libraryNames,
-                                                       @Nullable Runnable actionCallback) {
-    ApplicationManager.getApplication().assertReadAccessAllowed();
-    return !isAvailable(project) ? null : new PerlDumbAwareAction(CpanAdapter.createInstallActionTitle(SCRIPT_NAME)) {
-      @Override
-      public void actionPerformed(@NotNull AnActionEvent e) {
-        new CpanminusAdapter(sdk, project).queueInstall(libraryNames, true);
-        if (actionCallback != null) {
-          actionCallback.run();
-        }
-      }
-    };
   }
 
   @Contract("null->null")
   public static @Nullable CpanminusAdapter create(@Nullable Project project) {
     Sdk sdk = PerlProjectManager.getSdk(project);
     return isAvailable(project) && sdk != null ? new CpanminusAdapter(sdk, project) : null;
+  }
+
+  public static final class Factory implements PackageManagerAdapter.Factory<CpanminusAdapter> {
+    @Override
+    public @Nullable CpanminusAdapter createAdapter(@NotNull Sdk sdk, @Nullable Project project) {
+      return isAvailable(project) ?  new CpanminusAdapter(sdk, project): null;
+    }
+
+    @VisibleForTesting
+    public static @NotNull Factory getInstance(){
+      return findInstance(Factory.class);
+    }
   }
 }
