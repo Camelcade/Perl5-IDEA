@@ -14,12 +14,14 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.adapters;
+package com.perl5.lang.perl.cpan.adapter;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.NlsSafe;
 import com.intellij.util.containers.ContainerUtil;
+import com.perl5.lang.perl.adapters.PackageManagerAdapter;
+import com.perl5.lang.perl.adapters.PackageManagerAdapterFactory;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;

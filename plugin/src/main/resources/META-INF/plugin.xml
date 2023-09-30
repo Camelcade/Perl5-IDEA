@@ -34,6 +34,7 @@
     <module name="perl5.plugin.carton"/>
     <module name="perl5.plugin.copyright"/>
     <module name="perl5.plugin.coverage"/>
+    <module name="perl5.plugin.cpan"/>
     <module name="perl5.plugin.cpanminus"/>
     <module name="perl5.plugin.debugger"/>
     <module name="perl5.plugin.docker"/>
@@ -188,8 +189,6 @@
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.readonly.ReadonlyImplicitDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.log4perl.Log4PerlImplicitDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.moo.MooImplicitSubsProvider"/>
-
-    <packageManagerAdapterFactory implementation="com.perl5.lang.perl.adapters.CpanAdapter$Factory" order="last"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
@@ -747,7 +746,6 @@
 
     <group id="perl5.install" popup="true">
       <add-to-group group-id="perl5.tools" anchor="last"/>
-      <action id="perl5.install.with.cpan" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanAction"/>
       <action id="perl5.install.perl" class="com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallAction"/>
     </group>
 
