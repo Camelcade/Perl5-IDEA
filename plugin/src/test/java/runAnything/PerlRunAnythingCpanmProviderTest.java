@@ -18,8 +18,8 @@ package runAnything;
 
 
 import base.PerlLightTestCase;
-import com.perl5.lang.perl.cpanminus.runAnything.PerlRunAnythingHelpGroup;
-import com.perl5.lang.perl.cpanminus.runAnything.PerlRunAnythingProvider;
+import com.perl5.lang.perl.cpanminus.runAnything.PerlCpanminusRunAnythingHelpGroup;
+import com.perl5.lang.perl.cpanminus.runAnything.PerlCpanminusRunAnythingProvider;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class PerlRunAnythingCpanmProviderTest extends PerlLightTestCase {
@@ -29,7 +29,7 @@ public class PerlRunAnythingCpanmProviderTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testHelpGroup() {doTestRunAnythingHelpGroup(new PerlRunAnythingHelpGroup());}
+  public void testHelpGroup() {doTestRunAnythingHelpGroup(new PerlCpanminusRunAnythingHelpGroup());}
 
   @Test
   public void testCpanmTestMore() {doTest("cpanm Test::More");}
@@ -123,6 +123,6 @@ public class PerlRunAnythingCpanmProviderTest extends PerlLightTestCase {
 
 
   private void doTest(@NotNull String pattern) {
-    doTestRunAnythingProvider(pattern, new PerlRunAnythingProvider());
+    doTestRunAnythingProvider(pattern, new PerlCpanminusRunAnythingProvider());
   }
 }

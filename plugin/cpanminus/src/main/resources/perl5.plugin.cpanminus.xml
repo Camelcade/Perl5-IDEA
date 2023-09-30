@@ -23,8 +23,8 @@
     <fileType implementationClass="com.perl5.lang.perl.cpanminus.cpanfile.PerlFileTypeCpanfile" fieldName="INSTANCE"
               name="Cpanfile" language="Perl5" fileNames="cpanfile"/>
 
-    <runAnything.helpGroup implementation="com.perl5.lang.perl.cpanminus.runAnything.PerlRunAnythingHelpGroup"/>
-    <runAnything.executionProvider implementation="com.perl5.lang.perl.cpanminus.runAnything.PerlRunAnythingProvider"/>
+    <runAnything.helpGroup implementation="com.perl5.lang.perl.cpanminus.runAnything.PerlCpanminusRunAnythingHelpGroup"/>
+    <runAnything.executionProvider implementation="com.perl5.lang.perl.cpanminus.runAnything.PerlCpanminusRunAnythingProvider"/>
   </extensions>
 
   <actions>
