@@ -60,7 +60,7 @@ public class PerlNamesCache implements Disposable {
 
   public PerlNamesCache(Project project) {
     myProject = project;
-    if (LightEdit.owns(myProject)) {
+    if (LightEdit.owns(myProject) || project.isDefault()) {
       return;
     }
     MessageBusConnection connection = project.getMessageBus().connect(this);
@@ -110,7 +110,9 @@ public class PerlNamesCache implements Disposable {
   }
 
   private void queueUpdate() {
-    myQueue.queue(Update.create(this, this::doUpdateSingleThread));
+    if(!myProject.isDefault()){
+      myQueue.queue(Update.create(this, this::doUpdateSingleThread));
+    }
   }
 
   private void doUpdateSingleThread() {
