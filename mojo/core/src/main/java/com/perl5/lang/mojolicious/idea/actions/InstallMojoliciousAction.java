@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,12 @@ import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.MojoUtil;
 import com.perl5.lang.perl.adapters.PackageManagerAdapter;
+import com.perl5.lang.perl.adapters.PackageManagerAdapterFactory;
 import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class InstallMojoliciousAction extends PerlActionBase {
   public InstallMojoliciousAction() {
@@ -42,7 +45,7 @@ public class InstallMojoliciousAction extends PerlActionBase {
     if (sdk == null) {
       return;
     }
-    PackageManagerAdapter.create(sdk, e.getProject()).queueInstall(MojoUtil.MOJO_PACKAGE_NAME);
+    PackageManagerAdapter.installModules(sdk, e.getProject(), List.of(MojoUtil.MOJO_PACKAGE_NAME), null, true);
   }
 
   @Override

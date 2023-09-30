@@ -21,6 +21,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.NlsSafe;
 import com.intellij.util.concurrency.annotations.RequiresReadLock;
 import com.perl5.lang.perl.adapters.PackageManagerAdapter;
+import com.perl5.lang.perl.adapters.PackageManagerAdapterFactory;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.Contract;
@@ -81,7 +82,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
     return isAvailable(project) && sdk != null ? new CpanminusAdapter(sdk, project) : null;
   }
 
-  public static final class Factory implements PackageManagerAdapter.Factory<CpanminusAdapter> {
+  public static final class Factory implements PackageManagerAdapterFactory<CpanminusAdapter> {
     @Override
     public @Nullable CpanminusAdapter createAdapter(@NotNull Sdk sdk, @Nullable Project project) {
       return isAvailable(project) ?  new CpanminusAdapter(sdk, project): null;
@@ -89,7 +90,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
 
     @VisibleForTesting
     public static @NotNull Factory getInstance(){
-      return findInstance(Factory.class);
+      return PackageManagerAdapterFactory.findInstance(Factory.class);
     }
   }
 }
