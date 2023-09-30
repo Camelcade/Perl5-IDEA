@@ -22,6 +22,9 @@
   <extensions defaultExtensionNs="com.intellij">
     <fileType implementationClass="com.perl5.lang.perl.cpanminus.cpanfile.PerlFileTypeCpanfile" fieldName="INSTANCE"
               name="Cpanfile" language="Perl5" fileNames="cpanfile"/>
+
+    <runAnything.helpGroup implementation="com.perl5.lang.perl.cpanminus.runAnything.PerlRunAnythingHelpGroup"/>
+    <runAnything.executionProvider implementation="com.perl5.lang.perl.cpanminus.runAnything.PerlRunAnythingProvider"/>
   </extensions>
 
   <actions>

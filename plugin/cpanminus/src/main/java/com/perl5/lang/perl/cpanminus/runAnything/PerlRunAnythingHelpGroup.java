@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.actions.runAnything;
+package com.perl5.lang.perl.cpanminus.runAnything;
 
 import com.intellij.ide.actions.runAnything.activity.RunAnythingProvider;
 import com.intellij.ide.actions.runAnything.groups.RunAnythingHelpGroup;

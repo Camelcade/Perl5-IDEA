@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ package runAnything;
 
 
 import base.PerlLightTestCase;
-import com.perl5.lang.perl.idea.actions.runAnything.PerlRunAnythingHelpGroup;
-import com.perl5.lang.perl.idea.actions.runAnything.PerlRunAnythingProvider;
+import com.perl5.lang.perl.cpanminus.runAnything.PerlRunAnythingHelpGroup;
+import com.perl5.lang.perl.cpanminus.runAnything.PerlRunAnythingProvider;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class PerlRunAnythingCpanmProviderTest extends PerlLightTestCase {
