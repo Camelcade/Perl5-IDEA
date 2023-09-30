@@ -751,9 +751,7 @@
 
     <group id="perl5.install" popup="true">
       <add-to-group group-id="perl5.tools" anchor="last"/>
-      <action id="perl5.install.with.cpanm" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanminusAction"/>
       <action id="perl5.install.with.cpan" class="com.perl5.lang.perl.idea.actions.PerlInstallPackagesWithCpanAction"/>
-      <action id="perl5.intsall.cpanm" class="com.perl5.lang.perl.idea.actions.PerlInstallCpanmAction"/>
       <action id="perl5.install.perl" class="com.perl5.lang.perl.idea.sdk.versionManager.PerlInstallAction"/>
     </group>
 
