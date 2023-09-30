@@ -34,6 +34,7 @@
     <module name="perl5.plugin.carton"/>
     <module name="perl5.plugin.copyright"/>
     <module name="perl5.plugin.coverage"/>
+    <module name="perl5.plugin.cpanminus"/>
     <module name="perl5.plugin.debugger"/>
     <module name="perl5.plugin.docker"/>
     <module name="perl5.plugin.idea"/>
