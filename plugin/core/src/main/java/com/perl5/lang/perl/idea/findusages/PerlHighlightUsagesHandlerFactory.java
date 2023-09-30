@@ -44,7 +44,7 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
 
   @Override
   public @Nullable HighlightUsagesHandlerBase<?> createHighlightUsagesHandler(@NotNull Editor editor, @NotNull PsiFile file) {
-    if( !file.isValid()){
+    if (!file.isValid()) {
       return null;
     }
     Project project = file.getProject();

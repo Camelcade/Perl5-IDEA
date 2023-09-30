@@ -22,6 +22,7 @@ import com.perl5.lang.perl.cpanminus.runAnything.PerlCpanminusRunAnythingHelpGro
 import com.perl5.lang.perl.cpanminus.runAnything.PerlCpanminusRunAnythingProvider;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+
 public class PerlRunAnythingCpanmProviderTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
@@ -29,97 +30,97 @@ public class PerlRunAnythingCpanmProviderTest extends PerlLightTestCase {
   }
 
   @Test
-  public void testHelpGroup() {doTestRunAnythingHelpGroup(new PerlCpanminusRunAnythingHelpGroup());}
+  public void testHelpGroup() { doTestRunAnythingHelpGroup(new PerlCpanminusRunAnythingHelpGroup()); }
 
   @Test
-  public void testCpanmTestMore() {doTest("cpanm Test::More");}
+  public void testCpanmTestMore() { doTest("cpanm Test::More"); }
 
   @Test
-  public void testEmpty() {doTest("");}
+  public void testEmpty() { doTest(""); }
 
   @Test
-  public void testCpanm() {doTest("cpanm");}
+  public void testCpanm() { doTest("cpanm"); }
 
   @Test
-  public void testOptionQuiet() {doTest("cpanm   --quiet");}
+  public void testOptionQuiet() { doTest("cpanm   --quiet"); }
 
   @Test
-  public void testOptionNotest() {doTest("cpanm   --notest");}
+  public void testOptionNotest() { doTest("cpanm   --notest"); }
 
   @Test
-  public void testOptionVerbose() {doTest("cpanm --verbose");}
+  public void testOptionVerbose() { doTest("cpanm --verbose"); }
 
   @Test
-  public void testOptionInteractive() {doTest("cpanm --interactive");}
+  public void testOptionInteractive() { doTest("cpanm --interactive"); }
 
   @Test
-  public void testOptionForce() {doTest("cpanm --force");}
+  public void testOptionForce() { doTest("cpanm --force"); }
 
   @Test
-  public void testOptionTestOnly() {doTest("cpanm --test-only");}
+  public void testOptionTestOnly() { doTest("cpanm --test-only"); }
 
   @Test
-  public void testOptionSudo() {doTest("cpanm --sudo");}
+  public void testOptionSudo() { doTest("cpanm --sudo"); }
 
   @Test
-  public void testOptionInstalldeps() {doTest("cpanm --installdeps");}
+  public void testOptionInstalldeps() { doTest("cpanm --installdeps"); }
 
   @Test
-  public void testOptionShowdeps() {doTest("cpanm --showdeps");}
+  public void testOptionShowdeps() { doTest("cpanm --showdeps"); }
 
   @Test
-  public void testOptionReinstall() {doTest("cpanm --reinstall");}
+  public void testOptionReinstall() { doTest("cpanm --reinstall"); }
 
   @Test
-  public void testOptionMirror() {doTest("cpanm --mirror");}
+  public void testOptionMirror() { doTest("cpanm --mirror"); }
 
   @Test
-  public void testOptionMirrorOnly() {doTest("cpanm --mirror-only");}
+  public void testOptionMirrorOnly() { doTest("cpanm --mirror-only"); }
 
   @Test
-  public void testOptionFrom() {doTest("cpanm --from");}
+  public void testOptionFrom() { doTest("cpanm --from"); }
 
   @Test
-  public void testOptionPrompt() {doTest("cpanm --prompt");}
+  public void testOptionPrompt() { doTest("cpanm --prompt"); }
 
   @Test
-  public void testOptionLocalLib() {doTest("cpanm --local-lib");}
+  public void testOptionLocalLib() { doTest("cpanm --local-lib"); }
 
   @Test
-  public void testOptionLocalLibContained() {doTest("cpanm --local-lib-contained");}
+  public void testOptionLocalLibContained() { doTest("cpanm --local-lib-contained"); }
 
   @Test
-  public void testOptionSelfContained() {doTest("cpanm --self-contained");}
+  public void testOptionSelfContained() { doTest("cpanm --self-contained"); }
 
   @Test
-  public void testOptionAutoCleanup() {doTest("cpanm --auto-cleanup");}
+  public void testOptionAutoCleanup() { doTest("cpanm --auto-cleanup"); }
 
   @Test
-  public void testCommandUninstall() {doTest("cpanm --uninstall");}
+  public void testCommandUninstall() { doTest("cpanm --uninstall"); }
 
   @Test
-  public void testCommandSelfUpgrade() {doTest("cpanm --self-upgrade");}
+  public void testCommandSelfUpgrade() { doTest("cpanm --self-upgrade"); }
 
   @Test
-  public void testCommandHelp() {doTest("cpanm --help");}
+  public void testCommandHelp() { doTest("cpanm --help"); }
 
   @Test
-  public void testCommandHelpVersion() {doTest("cpanm --help --version");}
+  public void testCommandHelpVersion() { doTest("cpanm --help --version"); }
 
   @Test
-  public void testCommandHelpUninstall() {doTest("cpanm --help --uninstall");}
+  public void testCommandHelpUninstall() { doTest("cpanm --help --uninstall"); }
 
   @Test
-  public void testCommandLook() {doTest("cpanm --look");}
+  public void testCommandLook() { doTest("cpanm --look"); }
 
   @Test
-  public void testCommandVersion() {doTest("cpanm --version");}
+  public void testCommandVersion() { doTest("cpanm --version"); }
 
   @Test
-  public void testCommandInfo() {doTest("cpanm --info");}
+  public void testCommandInfo() { doTest("cpanm --info"); }
 
   @Test
-  public void testCommandDot() {doTest("cpanm .");}
+  public void testCommandDot() { doTest("cpanm ."); }
 
 
   private void doTest(@NotNull String pattern) {

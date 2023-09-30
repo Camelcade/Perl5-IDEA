@@ -110,7 +110,7 @@ public class PerlNamesCache implements Disposable {
   }
 
   private void queueUpdate() {
-    if(!myProject.isDefault()){
+    if (!myProject.isDefault()) {
       myQueue.queue(Update.create(this, this::doUpdateSingleThread));
     }
   }
@@ -182,7 +182,7 @@ public class PerlNamesCache implements Disposable {
   }
 
   @TestOnly
-  public void cleanCache(){
+  public void cleanCache() {
     myKnownSubs = Collections.emptySet();
     myKnownNamespaces = Collections.emptySet();
   }

@@ -22,7 +22,6 @@ import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.MojoUtil;
 import com.perl5.lang.perl.adapters.PackageManagerAdapter;
-import com.perl5.lang.perl.adapters.PackageManagerAdapterFactory;
 import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
