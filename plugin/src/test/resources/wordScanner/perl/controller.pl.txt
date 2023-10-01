@@ -1,5 +1,5 @@
 Statistics:
-	CODE: 697 occurrences
+	CODE: 699 occurrences
 	COMMENTS: 140 occurrences
 	LITERALS: 135 occurrences
 ================================
@@ -155,6 +155,7 @@ Tokens by type:
 		type
 		URL
 		app
+		has
 		isa
 		log
 		msg
@@ -381,8 +382,8 @@ use <CODE>Mojolicious</CODE>::<CODE>Routes</CODE>::<CODE>Match</CODE>;
 use <CODE>Scalar</CODE>::<CODE>Util</CODE> ();
 use <CODE>Time</CODE>::<CODE>HiRes</CODE>  ();
 
-has [qw(<LITERALS>app</LITERALS> <LITERALS>tx</LITERALS>)];
-has <LITERALS>match</LITERALS> =>
+<CODE>has</CODE> [qw(<LITERALS>app</LITERALS> <LITERALS>tx</LITERALS>)];
+<CODE>has</CODE> <LITERALS>match</LITERALS> =>
   sub { <CODE>Mojolicious</CODE>::<CODE>Routes</CODE>::<CODE>Match</CODE>-><CODE>new</CODE>(<LITERALS>root</LITERALS> => shift-><CODE>app</CODE>-><CODE>routes</CODE>) };
 
 # <COMMENTS>Reserved</COMMENTS> <COMMENTS>stash</COMMENTS> <COMMENTS>values</COMMENTS>
