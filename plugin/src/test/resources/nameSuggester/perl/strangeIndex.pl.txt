@@ -1,0 +1,8 @@
+scalar
+value
+hash_element
+hash_item
+a_element
+a_item
+x_tika_content
+a_x_tika_content

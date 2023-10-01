@@ -1,19 +1,19 @@
 package Foo::Bar;
 
-my $<selection>bar<caret></selection> = 'Foo::Bar';
-$bar->method;
-$bar->method;
-$bar->method;
-$bar->method;
-$bar->method;
-$bar->method;
+my $<selection>foo_bar<caret></selection> = 'Foo::Bar';
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
 `Foo::Bar::`->method;
 `Foo::Bar`->method;
 
-$bar->method;
-$bar->method;
-$bar->method;
-$bar->method;
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
 qx`Foo::Bar::`->method;
 qx`Foo::Bar`->method;
 

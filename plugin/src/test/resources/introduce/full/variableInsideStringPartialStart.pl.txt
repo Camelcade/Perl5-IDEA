@@ -1,26 +1,26 @@
-my $<selection>string<caret></selection> = 'som${variable}ething ';
-$string . 'here bla';
+my $<selection>som_variable_ething<caret></selection> = 'som${variable}ething ';
+$som_variable_ething . 'here bla';
 "som${variable}ething here bla";
 `som${variable}ething here bla`;
-$string . 'here bla';
+$som_variable_ething . 'here bla';
 qq {som${variable}ething here bla};
 qx fsom${variable}ething here blaf;
 qw/som${variable}ething here bla/;
 something => "here bla";
 
-$string;
+$som_variable_ething;
 "som${variable}ething ";
 `som${variable}ething `;
-$string;
+$som_variable_ething;
 qq {som${variable}ething };
 qx fsom${variable}ething f;
 qw/som${variable}ething /;
 something => "";
 
-$string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ';
+$som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ';
 "som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla ";
 `som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla `;
-$string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ' . $string . 'here bla ';
+$som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ' . $som_variable_ething . 'here bla ';
 qq {som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla };
 qx fsom${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla f;
 qw/som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla som${variable}ething here bla /;

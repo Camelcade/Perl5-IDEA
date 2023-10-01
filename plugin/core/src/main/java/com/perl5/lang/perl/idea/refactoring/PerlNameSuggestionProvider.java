@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,6 +54,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.util.*;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
@@ -362,36 +363,37 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       result.add(COMMAND_OUTPUT);
       return COMMAND_OUTPUT;
     }
-    if (expression.getChildren().length == 0) {
-      String nameFromManipulator = getNameFromManipulator(expression);
-      if (nameFromManipulator != null) {
-        result.add(nameFromManipulator);
-        return nameFromManipulator;
-      }
-      String valueText = ElementManipulators.getValueText(expression);
+    String recommendedString = STRING;
+    if (expression.getChildren().length != 0) {
+      return recommendedString;
+    }
+    String nameFromManipulator = getNameFromManipulator(expression);
+    if (nameFromManipulator != null) {
+      result.add(nameFromManipulator);
+      recommendedString = nameFromManipulator;
+    }
 
-      if (PerlString.looksLikePackage(valueText)) {
-        result.addAll(PACKAGE_BASE_NAMES);
-        List<String> namespaceVariants = getVariantsFromNamespaceName(valueText);
-        result.addAll(namespaceVariants);
-        if (!namespaceVariants.isEmpty()) {
-          return namespaceVariants.get(0);
-        }
+    String valueText = ElementManipulators.getValueText(expression);
+    if (PerlString.looksLikePackage(valueText)) {
+      result.addAll(PACKAGE_BASE_NAMES);
+      List<String> namespaceVariants = getVariantsFromNamespaceName(valueText);
+      result.addAll(namespaceVariants);
+      if (!namespaceVariants.isEmpty() && STRING.equals(recommendedString)) {
+        recommendedString = namespaceVariants.get(0);
       }
-
-      // this probably should be the last
+    }
+    else{
       String independentPath = FileUtil.toSystemIndependentName(valueText);
       if (PerlString.looksLikePath(independentPath)) {
         result.addAll(BASE_PATH_NAMES);
         List<String> pathVariants = getVariantsFromPath(independentPath);
         result.addAll(pathVariants);
-        if (!pathVariants.isEmpty()) {
-          return pathVariants.get(0);
+        if (!pathVariants.isEmpty() && STRING.equals(recommendedString)) {
+          recommendedString = pathVariants.get(0);
         }
       }
     }
-
-    return STRING;
+    return recommendedString;
   }
 
   @Contract("null->null")
@@ -484,7 +486,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     String nameFromKey = getBaseName(indexExpr);
     if (indexExpr instanceof PerlString) {
       if (StringUtil.isEmpty(nameFromKey)) {
-        LOG.error("Unable to extract name from: " + indexExpr + "; '" + indexExpr.getText() + "'");
+        LOG.debug("Unable to extract name from: ", indexExpr, "; '", indexExpr.getText(), "'");
+        recommendation = "element";
       }
       else {
         recommendation = nameFromKey;
@@ -587,16 +590,15 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   }
 
   private static @Nullable String join(@NotNull List<String> source) {
-    for (String element : source) {
-      if (StringUtil.isEmptyOrSpaces(element)) {
-        return null;
-      }
-    }
-    return validateName(StringUtil.join(ContainerUtil.map(source, it -> it.toLowerCase(Locale.getDefault())), "_"));
+    var result = source.stream()
+      .filter(chunk -> !StringUtil.isEmptyOrSpaces(chunk))
+      .collect(Collectors.joining("_"))
+      .toLowerCase(Locale.getDefault());
+    return validateName(result);
   }
 
   private static @Nullable String spacedToSnakeCase(@NotNull String source) {
-    return join(source.toLowerCase(Locale.getDefault()).split("\\s+"));
+    return join(source.toLowerCase(Locale.getDefault()).split("\\W+"));
   }
 
   @Contract("null->null")

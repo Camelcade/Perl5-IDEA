@@ -1,8 +1,8 @@
-my $<selection>string<caret></selection> = 'iable}something ';
-'${var' . $string . 'here bla';
+my $<selection>iable_something<caret></selection> = 'iable}something ';
+'${var' . $iable_something . 'here bla';
 "${variable}something here bla";
 `${variable}something here bla`;
-'${var' . $string . 'here bla';
+'${var' . $iable_something . 'here bla';
 qq {${variable}something here bla};
 qx f${variable}something here blaf;
 qw/${variable}something here bla/;
@@ -17,10 +17,10 @@ qx fsomething f;
 qw/something /;
 something => "";
 
-'${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ';
+'${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ';
 "${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ";
 `${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla `;
-'${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ${var' . $string . 'here bla ';
+'${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ${var' . $iable_something . 'here bla ';
 qq {${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla };
 qx f${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla f;
 qw/${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla ${variable}something here bla /;

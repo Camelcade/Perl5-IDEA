@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,18 @@ public class PerlNamesSuggesterTest extends PerlLightTestCase {
   protected String getBaseDataPath() {
     return "nameSuggester/perl";
   }
+
+  @Test
+  public void testStrangeIndex() { doTest(); }
+
+  @Test
+  public void testSeparatorCharIndex() { doTest(); }
+
+  @Test
+  public void testSpacesIndex() { doTest(); }
+
+  @Test
+  public void testSpecialCharIndex() { doTest(); }
 
   @Test
   public void testListToScalarDeclaration() {doTest();}

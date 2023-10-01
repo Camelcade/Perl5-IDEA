@@ -1,3 +1,7 @@
 scalar
 value
 > string
+path
+pathname
+relative_path_to_string
+path_to_string

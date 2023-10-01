@@ -1,8 +1,8 @@
 package Foo::Bar;
 
-my $<selection>bar<caret></selection> = 'Foo::Bar';
-$bar->method;
-$bar->method;
+my $<selection>foo_bar<caret></selection> = 'Foo::Bar';
+$foo_bar->method;
+$foo_bar->method;
 ================ AFTER RENAME =================
 package Foo::Bar;
 
