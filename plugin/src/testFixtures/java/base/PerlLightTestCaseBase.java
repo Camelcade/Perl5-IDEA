@@ -72,6 +72,7 @@ import com.intellij.injected.editor.EditorWindow;
 import com.intellij.injected.editor.VirtualFileWindow;
 import com.intellij.lang.*;
 import com.intellij.lang.cacheBuilder.VersionedWordsScanner;
+import com.intellij.lang.cacheBuilder.WordOccurrence;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.lang.injection.MultiHostInjector;
@@ -173,6 +174,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManage
 import com.perl5.lang.perl.idea.completion.PerlStringCompletionCache;
 import com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.idea.findusages.PsiBasedWordScanner;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlHierarchyBrowser;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator;
@@ -3235,20 +3237,27 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     Map<String, AtomicInteger> stat = new HashMap<>();
     Map<String, Set<String>> tokensByType = new HashMap<>();
     Map<IElementType, Set<String>> elementTypesMappings = new HashMap<>();
-    wordsScanner.processWords(sourceText, it -> {
-      var kind = it.getKind();
+    Processor<WordOccurrence> wordsProcessor = wordOccurrence -> {
+      var kind = wordOccurrence.getKind();
       var tagName = kind == null ? "NULL" : kind.getName();
-      macros.add(Pair.create(it.getStart(), "<" + tagName + ">"));
-      macros.add(Pair.create(it.getEnd(), "</" + tagName + ">"));
+      macros.add(Pair.create(wordOccurrence.getStart(), "<" + tagName + ">"));
+      macros.add(Pair.create(wordOccurrence.getEnd(), "</" + tagName + ">"));
       stat.computeIfAbsent(tagName, name -> new AtomicInteger()).incrementAndGet();
-      tokensByType.computeIfAbsent(tagName, name -> new HashSet<>()).add(sourceText.substring(it.getStart(), it.getEnd()));
-      var elementAtOffset = psiFile.findElementAt(it.getStart());
-      assertNotNull("No element at offset: " + it.getStart(), elementAtOffset);
+      tokensByType.computeIfAbsent(tagName, name -> new HashSet<>())
+        .add(sourceText.substring(wordOccurrence.getStart(), wordOccurrence.getEnd()));
+      var elementAtOffset = psiFile.findElementAt(wordOccurrence.getStart());
+      assertNotNull("No element at offset: " + wordOccurrence.getStart(), elementAtOffset);
       elementTypesMappings.computeIfAbsent(
         PsiUtilCore.getElementType(elementAtOffset),
         elementType -> new HashSet<>()).add(tagName);
       return true;
-    });
+    };
+    if (wordsScanner instanceof PsiBasedWordScanner psiBasedWordScanner) {
+      psiBasedWordScanner.processWordsUsingPsi(psiFile, wordsProcessor);
+    }
+    else {
+      wordsScanner.processWords(sourceText, wordsProcessor);
+    }
 
     var statText = "Statistics:\n" +
                    stat.entrySet().stream()
