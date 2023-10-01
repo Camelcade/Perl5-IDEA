@@ -2,3 +2,7 @@ scalar
 value
 string
 one
+path
+pathname
+relative_path_to_one
+path_to_one

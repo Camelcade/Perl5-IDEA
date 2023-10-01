@@ -1,26 +1,26 @@
-my $<selection>string<caret></selection> = 're bla${vari';
-'something he' . $string . 'able}';
+my $<selection>re_bla_vari<caret></selection> = 're bla${vari';
+'something he' . $re_bla_vari . 'able}';
 "something here bla${variable}";
 `something here bla${variable}`;
-'something he' . $string . 'able}';
+'something he' . $re_bla_vari . 'able}';
 qq {something here bla${variable}};
 qx fsomething here bla${variable}f;
 qw/something here bla${variable}/;
 something => "here bla${variable}";
 
-$string . 'able}';
+$re_bla_vari . 'able}';
 "re bla${variable}";
 `re bla${variable}`;
-$string . 'able}';
+$re_bla_vari . 'able}';
 qq {re bla${variable}};
 qx fre bla${variable}f;
 qw/re bla${variable}/;
 something => "";
 
-'something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able}';
+'something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able}';
 "something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} ";
 `something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} `;
-'something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} something he' . $string . 'able} ';
+'something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} something he' . $re_bla_vari . 'able} ';
 qq {something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} };
 qx fsomething here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} f;
 qw/something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} something here bla${variable} /;

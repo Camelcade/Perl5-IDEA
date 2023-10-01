@@ -1,9 +1,9 @@
 scalar
 value
 string
+> foo_bar_baz
 package
 namespace
 module
-> baz
+baz
 bar_baz
-foo_bar_baz

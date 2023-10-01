@@ -1,8 +1,8 @@
-my $<selection>string<caret></selection> = 'ble}re bla';
-'something he${varia' . $string;
+my $<selection>ble_re_bla<caret></selection> = 'ble}re bla';
+'something he${varia' . $ble_re_bla;
 "something he${variable}re bla";
 `something he${variable}re bla`;
-'something he${varia' . $string;
+'something he${varia' . $ble_re_bla;
 qq {something he${variable}re bla};
 qx fsomething he${variable}re blaf;
 qw/something he${variable}re bla/;
@@ -17,10 +17,10 @@ qx fre blaf;
 qw/re bla/;
 something => "";
 
-'something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string;
+'something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla;
 "something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla ";
 `something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla `;
-'something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' something he${varia' . $string . ' ';
+'something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' something he${varia' . $ble_re_bla . ' ';
 qq {something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla };
 qx fsomething he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla f;
 qw/something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla something he${variable}re bla /;

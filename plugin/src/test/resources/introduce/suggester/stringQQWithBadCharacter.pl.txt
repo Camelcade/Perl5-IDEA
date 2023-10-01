@@ -1,3 +1,4 @@
 scalar
 value
-> string
+string
+> some_cumberso_me_string

@@ -1,8 +1,8 @@
-my $<selection>string<caret></selection> = 'ing here b${var';
-'someth' . $string . 'iable}la';
+my $<selection>ing_here_b_var<caret></selection> = 'ing here b${var';
+'someth' . $ing_here_b_var . 'iable}la';
 "something here b${variable}la";
 `something here b${variable}la`;
-'someth' . $string . 'iable}la';
+'someth' . $ing_here_b_var . 'iable}la';
 qq {something here b${variable}la};
 qx fsomething here b${variable}laf;
 qw/something here b${variable}la/;
@@ -17,10 +17,10 @@ qx fing here bf;
 qw/ing here b/;
 something => "";
 
-'someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la ';
+'someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la ';
 "something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la ";
 `something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la `;
-'someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la someth' . $string . 'iable}la ';
+'someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la someth' . $ing_here_b_var . 'iable}la ';
 qq {something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la };
 qx fsomething here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la f;
 qw/something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la something here b${variable}la /;

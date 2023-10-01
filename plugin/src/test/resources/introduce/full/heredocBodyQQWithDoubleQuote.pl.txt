@@ -1,10 +1,10 @@
-my $<selection>string<caret></selection> = qq<bl"alba>;
+my $<selection>bl_alba<caret></selection> = qq<bl"alba>;
 say <<"EOM";
-test $string text
+test $bl_alba text
 EOM
 
 say <<EOM;
-test $string text
+test $bl_alba text
 EOM
 
 say <<'EOM';
@@ -12,7 +12,7 @@ test bl"alba text
 EOM
 
 say <<`EOM`;
-test $string text
+test $bl_alba text
 EOM
 
 

@@ -1,9 +1,10 @@
 scalar
 value
 string
+> c_some_path_to_filename_thtml_pl
 path
 pathname
-> filename
+filename
 absolute_path_to_filename
 path_to_filename
 filename_thtml

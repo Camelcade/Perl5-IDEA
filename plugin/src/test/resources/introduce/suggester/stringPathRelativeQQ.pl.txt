@@ -1,9 +1,10 @@
 scalar
 value
 string
+> path_to_filename_thtml_pl
 path
 pathname
-> filename
+filename
 relative_path_to_filename
 path_to_filename
 filename_thtml

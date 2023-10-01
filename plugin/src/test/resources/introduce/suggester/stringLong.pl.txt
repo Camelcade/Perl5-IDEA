@@ -2,3 +2,5 @@ scalar
 value
 string
 > asdf_asdf_asdf_asdf_asdf_asdff
+path
+pathname

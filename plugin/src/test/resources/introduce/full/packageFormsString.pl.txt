@@ -1,20 +1,20 @@
 package Foo::Bar;
 
-my $<selection>string<caret></selection> = 'Foo::Bar::';
-$string->method;
-$string->method;
-$string->method;
-$string->method;
-$string->method;
-$string->method;
-`$string`->method;
+my $<selection>foo_bar<caret></selection> = 'Foo::Bar::';
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
+`$foo_bar`->method;
 `Foo::Bar`->method;
 
-$string->method;
-$string->method;
-$string->method;
-$string->method;
-qx`$string`->method;
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
+$foo_bar->method;
+qx`$foo_bar`->method;
 qx`Foo::Bar`->method;
 
 ================ AFTER RENAME =================

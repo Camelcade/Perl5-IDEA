@@ -2,3 +2,7 @@ scalar
 value
 string
 tree
+path
+pathname
+relative_path_to_tree
+path_to_tree
