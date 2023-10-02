@@ -46,7 +46,6 @@ import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import com.perl5.lang.pod.psi.PsiItemSection;
 import com.perl5.lang.pod.psi.PsiPodFormatIndex;
-import org.apache.commons.lang.math.NumberUtils;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -163,10 +162,24 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           return null;
         }
         String trimmed = StringUtil.trimLeading(itemText.trim(), '*');
-        if (NumberUtils.isNumber(trimmed)) {
+        if (isNumber(trimmed)) {
           return null;
         }
         return trimItemText(trimmed);
+      }
+
+      private static boolean isNumber(@NotNull String text){
+        if( text.isEmpty()){
+          return false;
+        }
+
+        for( int i = 0; i < text.length(); i++){
+          if( !Character.isDigit(text.charAt(i))){
+            return false;
+          }
+        }
+
+        return true;
       }
 
       @Override
