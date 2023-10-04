@@ -134,7 +134,6 @@
       <option name="ALIGN_MULTILINE_PARAMETERS_IN_CALLS" value="true" />
       <option name="ALIGN_MULTILINE_BINARY_OPERATION" value="true" />
       <option name="ALIGN_MULTILINE_ASSIGNMENT" value="true" />
-      <option name="ALIGN_MULTILINE_TERNARY_OPERATION" value="true" />
       <option name="ALIGN_MULTILINE_THROWS_LIST" value="true" />
       <option name="ALIGN_MULTILINE_EXTENDS_LIST" value="true" />
       <option name="ALIGN_MULTILINE_PARENTHESIZED_EXPRESSION" value="true" />
@@ -149,7 +148,6 @@
       <option name="METHOD_CALL_CHAIN_WRAP" value="1" />
       <option name="BINARY_OPERATION_WRAP" value="5" />
       <option name="TERNARY_OPERATION_WRAP" value="5" />
-      <option name="TERNARY_OPERATION_SIGNS_ON_NEXT_LINE" value="true" />
       <option name="KEEP_SIMPLE_METHODS_IN_ONE_LINE" value="true" />
       <option name="FOR_STATEMENT_WRAP" value="5" />
       <option name="ARRAY_INITIALIZER_WRAP" value="1" />
