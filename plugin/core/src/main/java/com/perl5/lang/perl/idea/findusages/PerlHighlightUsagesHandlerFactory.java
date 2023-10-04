@@ -79,8 +79,8 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
 
     @Override
     public @NotNull List<PsiElement> getTargets() {
-      PsiElement namedElement =
-        TargetElementUtil.getInstance().getNamedElement(myElement, myOriginalEditorOffset - myElement.getNode().getStartOffset());
+      PsiElement namedElement = myElement.isValid() ?
+        TargetElementUtil.getInstance().getNamedElement(myElement, myOriginalEditorOffset - myElement.getNode().getStartOffset()) : null;
       if (namedElement != null) {
         return collectReferenceTargets(ReferencesSearch.search(namedElement, new LocalSearchScope(myFile)).findFirst());
       }
