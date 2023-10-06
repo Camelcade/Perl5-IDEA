@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ public class PodUsagesHighlightingFactory extends HighlightUsagesHandlerFactoryB
   public @Nullable HighlightUsagesHandlerBase<?> createHighlightUsagesHandler(@NotNull Editor editor,
                                                                               @NotNull PsiFile file,
                                                                               @NotNull PsiElement target) {
-    if (!target.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
+    if (!target.isValid() || !target.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
       return null;
     }
 
