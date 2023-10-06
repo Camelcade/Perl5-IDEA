@@ -52,6 +52,8 @@ public abstract class GenericPerlRunConfigurationEditor<Configuration extends Ge
   @Override
   protected void disposeEditor() {
     super.disposeEditor();
-    myArgumentsPanel.disposeUIResources();
+    if( myArgumentsPanel != null){
+      myArgumentsPanel.disposeUIResources();
+    }
   }
 }
