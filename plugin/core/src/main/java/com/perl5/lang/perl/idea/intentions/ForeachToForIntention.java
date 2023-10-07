@@ -29,6 +29,8 @@ import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 
 public class ForeachToForIntention extends PsiElementBaseIntentionAction {
   @Override
@@ -59,28 +61,29 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
     if (foreachStatement == null) {
       return false;
     }
-    return foreachStatement.getConditionExpr() != null;
+    PsiPerlForeachIterator foreachIterator = foreachStatement.getForeachIterator();
+    if( foreachIterator == null){
+      return false;
+    }
+
+    PsiPerlExpr iterableList = foreachStatement.getConditionExpr();
+    if( iterableList == null){
+      return false;
+    }
+
+    return foreachStatement.getBlock() != null;
   }
 
   @Override
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
-    PerlForeachCompound forCompound = getForeachStatement(element);
-    assert forCompound != null;
-
-    PsiPerlForeachIterator foreachIterator = forCompound.getForeachIterator();
-    assert foreachIterator != null;
-
-    PsiPerlExpr variableDeclaration = foreachIterator.getExpr();
-    assert variableDeclaration instanceof PsiPerlVariableDeclarationLexical;
-
-    PsiPerlExpr iterableList = forCompound.getConditionExpr();
-    assert iterableList != null;
-
-    PsiPerlBlock block = forCompound.getBlock();
-    assert block != null;
+    PerlForeachCompound foreachStatement = Objects.requireNonNull(getForeachStatement(element));
+    PsiPerlForeachIterator foreachIterator = Objects.requireNonNull(foreachStatement.getForeachIterator());
+    PsiPerlExpr variableDeclaration = Objects.requireNonNull(foreachIterator.getExpr());
+    PsiPerlExpr iterableList = Objects.requireNonNull(foreachStatement.getConditionExpr());
+    PsiPerlBlock block = Objects.requireNonNull(foreachStatement.getBlock());
 
     PsiPerlForCompound indexedFor = createIndexedFor(project, (PsiPerlVariableDeclarationLexical)variableDeclaration, iterableList, block);
-    forCompound.replace(indexedFor);
+    foreachStatement.replace(indexedFor);
   }
 
   public static PsiPerlForCompound createIndexedFor(@NotNull Project project,
