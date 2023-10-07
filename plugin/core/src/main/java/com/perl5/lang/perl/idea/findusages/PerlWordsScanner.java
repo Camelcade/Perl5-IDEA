@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,15 +22,33 @@ import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
+import org.jetbrains.annotations.NotNull;
+
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 
 public class PerlWordsScanner extends DefaultWordsScanner implements PerlElementTypes {
+  private static final TokenSet IGNORE_CODE_TOKENSET = TokenSet.orSet(
+    SIGILS, SPECIAL_STRING_TOKENS, KEYWORDS_TOKENSET, OPERATORS_TOKENSET,
+    QUOTE_OPEN_ANY, QUOTE_CLOSE_FIRST_ANY,
+    TokenSet.andNot(TAGS_TOKEN_SET, TokenSet.create(TAG_PACKAGE)),
+    TokenSet.create(
+      REGEX_MODIFIER, REGEX_TOKEN,
+      NUMBER, NUMBER_BIN, NUMBER_OCT, NUMBER_HEX,
+      OPERATOR_FILETEST, BUILTIN_ARGUMENTLESS, BUILTIN_UNARY, BUILTIN_LIST,
+      NUMBER_VERSION, VERSION_ELEMENT, SUB_PROTOTYPE_TOKEN
+    ));
+  private static final @NotNull TokenSet COMMENTS = TokenSet.andNot(
+    TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
+    TokenSet.create(HEREDOC_END)
+  );
+
   public PerlWordsScanner() {
     super(new PerlMergingLexerAdapter(PerlLexingContext.create(null).withEnforcedSublexing(true)),
           PerlParserDefinition.IDENTIFIERS,
-          TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
-          PerlParserDefinition.LITERALS
+          COMMENTS,
+          PerlParserDefinition.LITERALS,
+          IGNORE_CODE_TOKENSET
     );
-    setMayHaveFileRefsInLiterals(true);
   }
 }

@@ -71,6 +71,7 @@ import com.intellij.ide.util.treeView.smartTree.*;
 import com.intellij.injected.editor.EditorWindow;
 import com.intellij.injected.editor.VirtualFileWindow;
 import com.intellij.lang.*;
+import com.intellij.lang.cacheBuilder.VersionedWordsScanner;
 import com.intellij.lang.documentation.DocumentationProvider;
 import com.intellij.lang.injection.InjectedLanguageManager;
 import com.intellij.lang.injection.MultiHostInjector;
@@ -227,6 +228,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 import java.util.regex.Matcher;
@@ -3219,6 +3221,66 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     var serializedResult = XmlSerializer.serialize(settings);
     assertNotNull(serializedResult);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), JDOMUtil.write(serializedResult));
+  }
+
+  protected void doTestWordScanner(@NotNull VersionedWordsScanner wordsScanner) {
+    initWithFileSmartWithoutErrors();
+    doTestWordScannerWithoutInit(wordsScanner);
+  }
+
+  protected void doTestWordScannerWithoutInit(@NotNull VersionedWordsScanner wordsScanner) {
+    var psiFile = getFile();
+    var sourceText = psiFile.getText();
+    List<Pair<Integer, String>> macros = new ArrayList<>();
+    Map<String, AtomicInteger> stat = new HashMap<>();
+    Map<String, Set<String>> tokensByType = new HashMap<>();
+    Map<IElementType, Set<String>> elementTypesMappings = new HashMap<>();
+    wordsScanner.processWords(sourceText, it -> {
+      var kind = it.getKind();
+      var tagName = kind == null ? "NULL" : kind.getName();
+      macros.add(Pair.create(it.getStart(), "<" + tagName + ">"));
+      macros.add(Pair.create(it.getEnd(), "</" + tagName + ">"));
+      stat.computeIfAbsent(tagName, name -> new AtomicInteger()).incrementAndGet();
+      tokensByType.computeIfAbsent(tagName, name -> new HashSet<>()).add(sourceText.substring(it.getStart(), it.getEnd()));
+      var elementAtOffset = psiFile.findElementAt(it.getStart());
+      assertNotNull("No element at offset: " + it.getStart(), elementAtOffset);
+      elementTypesMappings.computeIfAbsent(
+        PsiUtilCore.getElementType(elementAtOffset),
+        elementType -> new HashSet<>()).add(tagName);
+      return true;
+    });
+
+    var statText = "Statistics:\n" +
+                   stat.entrySet().stream()
+                     .sorted(Comparator.comparingInt(entry -> -entry.getValue().get()))
+                     .map(entry -> "\t" + entry.getKey() + ": " + entry.getValue().get() + " occurrences\n")
+                     .collect(Collectors.joining());
+
+    StringBuilder tokensList = new StringBuilder("Tokens by type:\n");
+    tokensByType.keySet().stream().sorted().forEach(kind -> {
+      tokensList.append("\t").append(kind).append("\n");
+      var comparator = StringLenComparator.getDescendingInstance().thenComparing(Comparator.naturalOrder());
+      tokensList.append("\t\t").append(
+        tokensByType.get(kind).stream()
+          .sorted(comparator)
+          .collect(Collectors.joining("\n\t\t"))
+      ).append("\n");
+    });
+
+    StringBuilder tokenTypesMappings = new StringBuilder("Token types mappings:\n");
+    elementTypesMappings.keySet().stream()
+      .sorted(Comparator.comparing(Object::toString))
+      .forEach(elementType -> {
+        tokenTypesMappings.append("\t")
+          .append(elementType)
+          .append(": ")
+          .append(elementTypesMappings.get(elementType).stream().sorted().collect(Collectors.joining(", ")))
+          .append("\n");
+      });
+
+    var textWithMacros = getEditorTextWithMacroses(getEditor(), macros);
+    var result = String.join("================================\n", statText, tokenTypesMappings, tokensList, textWithMacros);
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result);
   }
 
   /**
