@@ -1,0 +1,753 @@
+Statistics:
+	CODE: 697 occurrences
+	COMMENTS: 140 occurrences
+	LITERALS: 135 occurrences
+================================
+Token types mappings:
+	Perl5 POD: =cut: COMMENTS
+	Perl5 POD: =encoding: COMMENTS
+	Perl5 POD: =head1: COMMENTS
+	Perl5 POD: code: COMMENTS
+	Perl5 POD: encoding_name: COMMENTS
+	Perl5 POD: identifier: COMMENTS
+	Perl5: ARRAY_NAME: CODE
+	Perl5: COMMENT_LINE: COMMENTS
+	Perl5: HASH_NAME: CODE
+	Perl5: SCALAR_NAME: CODE
+	Perl5: STRING_CONTENT: LITERALS
+	Perl5: STRING_CONTENT_QQ: LITERALS
+	Perl5: __PACKAGE__: CODE
+	Perl5: package::name: CODE
+	Perl5: package::name::: CODE
+	Perl5: subname: CODE
+================================
+Tokens by type:
+	CODE
+		every_signed_cookie
+		emit_hook_reverse
+		render_to_string
+		default_message
+		default_format
+		secure_compare
+		trailing_slash
+		hmac_sha1_sum
+		signed_cookie
+		content_type
+		every_cookie
+		every_upload
+		gettimeofday
+		is_websocket
+		render_later
+		render_maybe
+		Mojolicious
+		__PACKAGE__
+		established
+		every_param
+		is_redirect
+		redirect_to
+		tv_interval
+		write_chunk
+		ByteStream
+		Controller
+		csrf_token
+		get_helper
+		is_chunked
+		respond_to
+		validation
+		base_path
+		emit_hook
+		generated
+		not_found
+		signature
+		validator
+		AUTOLOAD
+		RESERVED
+		captures
+		checksum
+		continue
+		location
+		path_for
+		protocol
+		rendered
+		renderer
+		sessions
+		template
+		to_route
+		userinfo
+		accepts
+		blessed
+		content
+		cookies
+		elapsed
+		formats
+		headers
+		helpers
+		message
+		options
+		package
+		plugins
+		results
+		secrets
+		session
+		started
+		to_hash
+		uploads
+		url_for
+		Routes
+		Scalar
+		_stash
+		cookie
+		finish
+		format
+		header
+		helper
+		method
+		output
+		params
+		prefix
+		render
+		resume
+		routes
+		scheme
+		secret
+		status
+		target
+		values
+		HiRes
+		Match
+		check
+		chunk
+		clone
+		croak
+		debug
+		error
+		flash
+		input
+		match
+		maybe
+		param
+		parse
+		parts
+		reply
+		stash
+		store
+		token
+		types
+		valid
+		value
+		write
+		Base
+		Carp
+		Mojo
+		Time
+		Util
+		args
+		base
+		body
+		code
+		hash
+		load
+		name
+		path
+		real
+		self
+		send
+		type
+		URL
+		app
+		isa
+		log
+		msg
+		new
+		req
+		res
+		rps
+		url
+		cb
+		on
+		ts
+		tx
+		1
+		_
+	COMMENTS
+		cache_control
+		Mojolicious
+		transaction
+		Controller
+		Initialize
+		controller
+		unreserved
+		WebSocket
+		rendering
+		signature
+		Absolute
+		Captured
+		Dispatch
+		Fallback
+		Relative
+		Reserved
+		Response
+		SYNOPSIS
+		Template
+		absolute
+		argument
+		encoding
+		override
+		rotating
+		security
+		Chunked
+		Disable
+		Request
+		Uploads
+		cookies
+		current
+		headers
+		imports
+		package
+		reasons
+		secrets
+		Action
+		Cookie
+		Finish
+		Normal
+		cookie
+		helper
+		render
+		status
+		stream
+		target
+		values
+		$name
+		$self
+		Check
+		Maybe
+		MyApp
+		Route
+		cache
+		class
+		first
+		flash
+		head1
+		hello
+		merge
+		param
+		shift
+		stash
+		timer
+		Base
+		Call
+		Find
+		Hash
+		Make
+		Mojo
+		NAME
+		auto
+		base
+		have
+		json
+		name
+		path
+		stop
+		sure
+		utf8
+		with
+		3xx
+		404
+		Don
+		Foo
+		Get
+		Set
+		URL
+		age
+		and
+		bar
+		big
+		cut
+		for
+		max
+		may
+		new
+		old
+		res
+		sub
+		too
+		use
+		No
+		be
+		my
+		no
+		or
+		we
+		1
+		a
+		t
+	LITERALS
+		active_session
+		after_dispatch
+		before_render
+		after_render
+		Connection
+		connection
+		controller
+		csrf_token
+		subroutine
+		validation
+		Undefined
+		WebSocket
+		namespace
+		new_flash
+		signature
+		websocket
+		captures
+		finished
+		rendered
+		template
+		already
+		extends
+		handler
+		message
+		package
+		session
+		started
+		variant
+		Cookie
+		action
+		bigger
+		called
+		closed
+		format
+		inline
+		layout
+		locate
+		method
+		object
+		signed
+		status
+		string
+		ARRAY
+		Token
+		bytes
+		flash
+		https
+		match
+		maybe
+		plain
+		stash
+		value
+		4096
+		CODE
+		CSRF
+		Mojo
+		base
+		data
+		json
+		mojo
+		name
+		path
+		root
+		send
+		text
+		than
+		Can
+		URL
+		any
+		app
+		bad
+		has
+		not
+		via
+		wss
+		3f
+		No
+		cb
+		is
+		to
+		tx
+		ws
+		X
+		a
+		s
+		t
+================================
+package <CODE>Mojolicious</CODE>::<CODE>Controller</CODE>;
+use <CODE>Mojo</CODE>::<CODE>Base</CODE> -<LITERALS>base</LITERALS>;
+
+# <COMMENTS>No</COMMENTS> <COMMENTS>imports</COMMENTS>, <COMMENTS>for</COMMENTS> <COMMENTS>security</COMMENTS> <COMMENTS>reasons</COMMENTS>!
+use <CODE>Carp</CODE> ();
+use <CODE>Mojo</CODE>::<CODE>ByteStream</CODE>;
+use <CODE>Mojo</CODE>::<CODE>URL</CODE>;
+use <CODE>Mojo</CODE>::<CODE>Util</CODE>;
+use <CODE>Mojolicious</CODE>::<CODE>Routes</CODE>::<CODE>Match</CODE>;
+use <CODE>Scalar</CODE>::<CODE>Util</CODE> ();
+use <CODE>Time</CODE>::<CODE>HiRes</CODE>  ();
+
+has [qw(<LITERALS>app</LITERALS> <LITERALS>tx</LITERALS>)];
+has <LITERALS>match</LITERALS> =>
+  sub { <CODE>Mojolicious</CODE>::<CODE>Routes</CODE>::<CODE>Match</CODE>-><CODE>new</CODE>(<LITERALS>root</LITERALS> => shift-><CODE>app</CODE>-><CODE>routes</CODE>) };
+
+# <COMMENTS>Reserved</COMMENTS> <COMMENTS>stash</COMMENTS> <COMMENTS>values</COMMENTS>
+my %<CODE>RESERVED</CODE> = map { $<CODE>_</CODE> => 1 } (
+  qw(<LITERALS>action</LITERALS> <LITERALS>app</LITERALS> <LITERALS>cb</LITERALS> <LITERALS>controller</LITERALS> <LITERALS>data</LITERALS> <LITERALS>extends</LITERALS> <LITERALS>format</LITERALS> <LITERALS>handler</LITERALS> <LITERALS>inline</LITERALS> <LITERALS>json</LITERALS> <LITERALS>layout</LITERALS>),
+  qw(<LITERALS>namespace</LITERALS> <LITERALS>path</LITERALS> <LITERALS>status</LITERALS> <LITERALS>template</LITERALS> <LITERALS>text</LITERALS> <LITERALS>variant</LITERALS>)
+);
+
+sub <CODE>AUTOLOAD</CODE> {
+  my $<CODE>self</CODE> = shift;
+
+  my ($<CODE>package</CODE>, $<CODE>method</CODE>) = our $<CODE>AUTOLOAD</CODE> =~ /^(.+)::(.+)$/;
+  <CODE>Carp</CODE>::<CODE>croak</CODE> "<LITERALS>Undefined</LITERALS> <LITERALS>subroutine</LITERALS> &${<CODE>package</CODE>}::$<CODE>method</CODE> <LITERALS>called</LITERALS>"
+    unless <CODE>Scalar</CODE>::<CODE>Util</CODE>::<CODE>blessed</CODE> $<CODE>self</CODE> && $<CODE>self</CODE>-><CODE>isa</CODE>(<CODE>__PACKAGE__</CODE>);
+
+  # <COMMENTS>Call</COMMENTS> <COMMENTS>helper</COMMENTS> <COMMENTS>with</COMMENTS> <COMMENTS>current</COMMENTS> <COMMENTS>controller</COMMENTS>
+  <CODE>Carp</CODE>::<CODE>croak</CODE> qq{<LITERALS>Can</LITERALS>'<LITERALS>t</LITERALS> <LITERALS>locate</LITERALS> <LITERALS>object</LITERALS> <LITERALS>method</LITERALS> "$<CODE>method</CODE>" <LITERALS>via</LITERALS> <LITERALS>package</LITERALS> "$<CODE>package</CODE>"}
+    unless my $<CODE>helper</CODE> = $<CODE>self</CODE>-><CODE>app</CODE>-><CODE>renderer</CODE>-><CODE>get_helper</CODE>($<CODE>method</CODE>);
+  return $<CODE>self</CODE>->$<CODE>helper</CODE>(@<CODE>_</CODE>);
+}
+
+sub <CODE>continue</CODE> { $<CODE>_</CODE>[0]-><CODE>app</CODE>-><CODE>routes</CODE>-><CODE>continue</CODE>($<CODE>_</CODE>[0]) }
+
+sub <CODE>cookie</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>name</CODE>) = (shift, shift);
+
+  # <COMMENTS>Response</COMMENTS> <COMMENTS>cookie</COMMENTS>
+  if (@<CODE>_</CODE>) {
+
+    # <COMMENTS>Cookie</COMMENTS> <COMMENTS>too</COMMENTS> <COMMENTS>big</COMMENTS>
+    my $<CODE>cookie</CODE> = {<LITERALS>name</LITERALS> => $<CODE>name</CODE>, <LITERALS>value</LITERALS> => shift, %{shift || {}}};
+    $<CODE>self</CODE>-><CODE>app</CODE>-><CODE>log</CODE>-><CODE>error</CODE>(qq{<LITERALS>Cookie</LITERALS> "$<CODE>name</CODE>" <LITERALS>is</LITERALS> <LITERALS>bigger</LITERALS> <LITERALS>than</LITERALS> <LITERALS>4096</LITERALS> <LITERALS>bytes</LITERALS>})
+      if length $<CODE>cookie</CODE>->{<LITERALS>value</LITERALS>} > 4096;
+
+    $<CODE>self</CODE>-><CODE>res</CODE>-><CODE>cookies</CODE>($<CODE>cookie</CODE>);
+    return $<CODE>self</CODE>;
+  }
+
+  # <COMMENTS>Request</COMMENTS> <COMMENTS>cookies</COMMENTS>
+  return undef unless my $<CODE>cookie</CODE> = $<CODE>self</CODE>-><CODE>req</CODE>-><CODE>cookie</CODE>($<CODE>name</CODE>);
+  return $<CODE>cookie</CODE>-><CODE>value</CODE>;
+}
+
+sub <CODE>every_cookie</CODE> {
+  [map { $<CODE>_</CODE>-><CODE>value</CODE> } @{shift-><CODE>req</CODE>-><CODE>every_cookie</CODE>(shift)}];
+}
+
+sub <CODE>every_param</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>name</CODE>) = @<CODE>_</CODE>;
+
+  # <COMMENTS>Captured</COMMENTS> <COMMENTS>unreserved</COMMENTS> <COMMENTS>values</COMMENTS>
+  my $<CODE>captures</CODE> = $<CODE>self</CODE>-><CODE>stash</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>captures</LITERALS>'} ||= {};
+  if (!$<CODE>RESERVED</CODE>{$<CODE>name</CODE>} && exists $<CODE>captures</CODE>->{$<CODE>name</CODE>}) {
+    my $<CODE>value</CODE> = $<CODE>captures</CODE>->{$<CODE>name</CODE>};
+    return ref $<CODE>value</CODE> eq '<LITERALS>ARRAY</LITERALS>' ? $<CODE>value</CODE> : [$<CODE>value</CODE>];
+  }
+
+  # <COMMENTS>Uploads</COMMENTS> <COMMENTS>or</COMMENTS> <COMMENTS>param</COMMENTS> <COMMENTS>values</COMMENTS>
+  my $<CODE>req</CODE>     = $<CODE>self</CODE>-><CODE>req</CODE>;
+  my $<CODE>uploads</CODE> = $<CODE>req</CODE>-><CODE>every_upload</CODE>($<CODE>name</CODE>);
+  return @$<CODE>uploads</CODE> ? $<CODE>uploads</CODE> : $<CODE>req</CODE>-><CODE>every_param</CODE>($<CODE>name</CODE>);
+}
+
+sub <CODE>every_signed_cookie</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>name</CODE>) = @<CODE>_</CODE>;
+
+  my $<CODE>secrets</CODE> = $<CODE>self</CODE>-><CODE>app</CODE>-><CODE>secrets</CODE>;
+  my @<CODE>results</CODE>;
+  for my $<CODE>value</CODE> (@{$<CODE>self</CODE>-><CODE>every_cookie</CODE>($<CODE>name</CODE>)}) {
+
+    # <COMMENTS>Check</COMMENTS> <COMMENTS>signature</COMMENTS> <COMMENTS>with</COMMENTS> <COMMENTS>rotating</COMMENTS> <COMMENTS>secrets</COMMENTS>
+    if ($<CODE>value</CODE> =~ s/--([^\-]+)$//) {
+      my $<CODE>signature</CODE> = $<CODE>1</CODE>;
+
+      my $<CODE>valid</CODE>;
+      for my $<CODE>secret</CODE> (@$<CODE>secrets</CODE>) {
+        my $<CODE>check</CODE> = <CODE>Mojo</CODE>::<CODE>Util</CODE>::<CODE>hmac_sha1_sum</CODE>($<CODE>value</CODE>, $<CODE>secret</CODE>);
+        ++$<CODE>valid</CODE> and last if <CODE>Mojo</CODE>::<CODE>Util</CODE>::<CODE>secure_compare</CODE>($<CODE>signature</CODE>, $<CODE>check</CODE>);
+      }
+      if ($<CODE>valid</CODE>) { push @<CODE>results</CODE>, $<CODE>value</CODE> }
+
+      else { $<CODE>self</CODE>-><CODE>app</CODE>-><CODE>log</CODE>-><CODE>debug</CODE>(qq{<LITERALS>Cookie</LITERALS> "$<CODE>name</CODE>" <LITERALS>has</LITERALS> <LITERALS>a</LITERALS> <LITERALS>bad</LITERALS> <LITERALS>signature</LITERALS>}) }
+    }
+
+    else { $<CODE>self</CODE>-><CODE>app</CODE>-><CODE>log</CODE>-><CODE>debug</CODE>(qq{<LITERALS>Cookie</LITERALS> "$<CODE>name</CODE>" <LITERALS>is</LITERALS> <LITERALS>not</LITERALS> <LITERALS>signed</LITERALS>}) }
+  }
+
+  return \@<CODE>results</CODE>;
+}
+
+sub <CODE>finish</CODE> {
+  my $<CODE>self</CODE> = shift;
+
+  # <COMMENTS>WebSocket</COMMENTS>
+  my $<CODE>tx</CODE> = $<CODE>self</CODE>-><CODE>tx</CODE> || <CODE>Carp</CODE>::<CODE>croak</CODE> '<LITERALS>Connection</LITERALS> <LITERALS>already</LITERALS> <LITERALS>closed</LITERALS>';
+  $<CODE>tx</CODE>-><CODE>finish</CODE>(@<CODE>_</CODE>) and return $<CODE>tx</CODE>-><CODE>established</CODE> ? $<CODE>self</CODE> : $<CODE>self</CODE>-><CODE>rendered</CODE>(101)
+    if $<CODE>tx</CODE>-><CODE>is_websocket</CODE>;
+
+  # <COMMENTS>Chunked</COMMENTS> <COMMENTS>stream</COMMENTS>
+  return @<CODE>_</CODE> ? $<CODE>self</CODE>-><CODE>write_chunk</CODE>(@<CODE>_</CODE>)-><CODE>write_chunk</CODE>('') : $<CODE>self</CODE>-><CODE>write_chunk</CODE>('')
+    if $<CODE>tx</CODE>-><CODE>res</CODE>-><CODE>content</CODE>-><CODE>is_chunked</CODE>;
+
+  # <COMMENTS>Normal</COMMENTS> <COMMENTS>stream</COMMENTS>
+  return @<CODE>_</CODE> ? $<CODE>self</CODE>-><CODE>write</CODE>(@<CODE>_</CODE>)-><CODE>write</CODE>('') : $<CODE>self</CODE>-><CODE>write</CODE>('');
+}
+
+sub <CODE>flash</CODE> {
+  my $<CODE>self</CODE> = shift;
+
+  # <COMMENTS>Check</COMMENTS> <COMMENTS>old</COMMENTS> <COMMENTS>flash</COMMENTS>
+  my $<CODE>session</CODE> = $<CODE>self</CODE>-><CODE>session</CODE>;
+  return $<CODE>session</CODE>->{<LITERALS>flash</LITERALS>} ? $<CODE>session</CODE>->{<LITERALS>flash</LITERALS>}{$<CODE>_</CODE>[0]} : undef
+    if @<CODE>_</CODE> == 1 && !ref $<CODE>_</CODE>[0];
+
+  # <COMMENTS>Initialize</COMMENTS> <COMMENTS>new</COMMENTS> <COMMENTS>flash</COMMENTS> <COMMENTS>and</COMMENTS> <COMMENTS>merge</COMMENTS> <COMMENTS>values</COMMENTS>
+  my $<CODE>values</CODE> = ref $<CODE>_</CODE>[0] ? $<CODE>_</CODE>[0] : {@<CODE>_</CODE>};
+  @{$<CODE>session</CODE>->{<LITERALS>new_flash</LITERALS>} ||= {}}{keys %$<CODE>values</CODE>} = values %$<CODE>values</CODE>;
+
+  return $<CODE>self</CODE>;
+}
+
+sub <CODE>helpers</CODE> { $<CODE>_</CODE>[0]-><CODE>app</CODE>-><CODE>renderer</CODE>-><CODE>get_helper</CODE>('')->($<CODE>_</CODE>[0]) }
+
+sub <CODE>on</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>name</CODE>, $<CODE>cb</CODE>) = @<CODE>_</CODE>;
+  my $<CODE>tx</CODE> = $<CODE>self</CODE>-><CODE>tx</CODE> || <CODE>Carp</CODE>::<CODE>croak</CODE> '<LITERALS>Connection</LITERALS> <LITERALS>already</LITERALS> <LITERALS>closed</LITERALS>';
+  $<CODE>self</CODE>-><CODE>rendered</CODE>(101) if $<CODE>tx</CODE>-><CODE>is_websocket</CODE> && !$<CODE>tx</CODE>-><CODE>established</CODE>;
+  return $<CODE>tx</CODE>-><CODE>on</CODE>($<CODE>name</CODE> => sub { shift; $<CODE>self</CODE>->$<CODE>cb</CODE>(@<CODE>_</CODE>) });
+}
+
+sub <CODE>param</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>name</CODE>) = (shift, shift);
+  return $<CODE>self</CODE>-><CODE>every_param</CODE>($<CODE>name</CODE>)->[-1] unless @<CODE>_</CODE>;
+  $<CODE>self</CODE>-><CODE>stash</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>captures</LITERALS>'}{$<CODE>name</CODE>} = @<CODE>_</CODE> > 1 ? [@<CODE>_</CODE>] : $<CODE>_</CODE>[0];
+  return $<CODE>self</CODE>;
+}
+
+sub <CODE>redirect_to</CODE> {
+  my $<CODE>self</CODE> = shift;
+
+  # <COMMENTS>Don</COMMENTS>'<COMMENTS>t</COMMENTS> <COMMENTS>override</COMMENTS> <COMMENTS>3xx</COMMENTS> <COMMENTS>status</COMMENTS>
+  my $<CODE>res</CODE> = $<CODE>self</CODE>-><CODE>res</CODE>;
+  $<CODE>res</CODE>-><CODE>headers</CODE>-><CODE>location</CODE>($<CODE>self</CODE>-><CODE>url_for</CODE>(@<CODE>_</CODE>));
+  return $<CODE>self</CODE>-><CODE>rendered</CODE>($<CODE>res</CODE>-><CODE>is_redirect</CODE> ? () : 302);
+}
+
+sub <CODE>render</CODE> {
+  my $<CODE>self</CODE> = shift;
+
+  # <COMMENTS>Template</COMMENTS> <COMMENTS>may</COMMENTS> <COMMENTS>be</COMMENTS> <COMMENTS>first</COMMENTS> <COMMENTS>argument</COMMENTS>
+  my ($<CODE>template</CODE>, $<CODE>args</CODE>) = (@<CODE>_</CODE> % 2 ? shift : undef, {@<CODE>_</CODE>});
+  $<CODE>args</CODE>->{<LITERALS>template</LITERALS>} = $<CODE>template</CODE> if $<CODE>template</CODE>;
+  my $<CODE>app</CODE>     = $<CODE>self</CODE>-><CODE>app</CODE>;
+  my $<CODE>plugins</CODE> = $<CODE>app</CODE>-><CODE>plugins</CODE>-><CODE>emit_hook</CODE>(<LITERALS>before_render</LITERALS> => $<CODE>self</CODE>, $<CODE>args</CODE>);
+  my $<CODE>maybe</CODE>   = delete $<CODE>args</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>maybe</LITERALS>'};
+
+  my $<CODE>ts</CODE> = $<CODE>args</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>string</LITERALS>'};
+  my ($<CODE>output</CODE>, $<CODE>format</CODE>) = $<CODE>app</CODE>-><CODE>renderer</CODE>-><CODE>render</CODE>($<CODE>self</CODE>, $<CODE>args</CODE>);
+
+  # <COMMENTS>Maybe</COMMENTS> <COMMENTS>no</COMMENTS> <COMMENTS>404</COMMENTS>
+  return defined $<CODE>output</CODE> ? <CODE>Mojo</CODE>::<CODE>ByteStream</CODE>-><CODE>new</CODE>($<CODE>output</CODE>) : undef if $<CODE>ts</CODE>;
+  return $<CODE>maybe</CODE> ? undef : !$<CODE>self</CODE>-><CODE>helpers</CODE>-><CODE>reply</CODE>-><CODE>not_found</CODE>
+    unless defined $<CODE>output</CODE>;
+
+  $<CODE>plugins</CODE>-><CODE>emit_hook</CODE>(<LITERALS>after_render</LITERALS> => $<CODE>self</CODE>, \$<CODE>output</CODE>, $<CODE>format</CODE>);
+  my $<CODE>headers</CODE> = $<CODE>self</CODE>-><CODE>res</CODE>-><CODE>body</CODE>($<CODE>output</CODE>)-><CODE>headers</CODE>;
+  $<CODE>headers</CODE>-><CODE>content_type</CODE>($<CODE>app</CODE>-><CODE>types</CODE>-><CODE>type</CODE>($<CODE>format</CODE>) || '<LITERALS>text</LITERALS>/<LITERALS>plain</LITERALS>')
+    unless $<CODE>headers</CODE>-><CODE>content_type</CODE>;
+  return !!$<CODE>self</CODE>-><CODE>rendered</CODE>($<CODE>self</CODE>-><CODE>stash</CODE>->{<LITERALS>status</LITERALS>});
+}
+
+sub <CODE>render_later</CODE> { shift-><CODE>stash</CODE>('<LITERALS>mojo</LITERALS>.<LITERALS>rendered</LITERALS>' => 1) }
+
+sub <CODE>render_maybe</CODE> { shift-><CODE>render</CODE>(@<CODE>_</CODE>, '<LITERALS>mojo</LITERALS>.<LITERALS>maybe</LITERALS>' => 1) }
+
+sub <CODE>render_to_string</CODE> { shift-><CODE>render</CODE>(@<CODE>_</CODE>, '<LITERALS>mojo</LITERALS>.<LITERALS>string</LITERALS>' => 1) }
+
+sub <CODE>rendered</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>status</CODE>) = @<CODE>_</CODE>;
+
+  # <COMMENTS>Make</COMMENTS> <COMMENTS>sure</COMMENTS> <COMMENTS>we</COMMENTS> <COMMENTS>have</COMMENTS> <COMMENTS>a</COMMENTS> <COMMENTS>status</COMMENTS>
+  my $<CODE>res</CODE> = $<CODE>self</CODE>-><CODE>res</CODE>;
+  $<CODE>res</CODE>-><CODE>code</CODE>($<CODE>status</CODE> || 200) if $<CODE>status</CODE> || !$<CODE>res</CODE>-><CODE>code</CODE>;
+
+  # <COMMENTS>Finish</COMMENTS> <COMMENTS>transaction</COMMENTS>
+  my $<CODE>stash</CODE> = $<CODE>self</CODE>-><CODE>stash</CODE>;
+  if (!$<CODE>stash</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>finished</LITERALS>'} && ++$<CODE>stash</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>finished</LITERALS>'}) {
+
+    # <COMMENTS>Disable</COMMENTS> <COMMENTS>auto</COMMENTS> <COMMENTS>rendering</COMMENTS> <COMMENTS>and</COMMENTS> <COMMENTS>stop</COMMENTS> <COMMENTS>timer</COMMENTS>
+    my $<CODE>app</CODE> = $<CODE>self</CODE>-><CODE>render_later</CODE>-><CODE>app</CODE>;
+    if (my $<CODE>started</CODE> = delete $<CODE>stash</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>started</LITERALS>'}) {
+      my $<CODE>elapsed</CODE>
+        = <CODE>Time</CODE>::<CODE>HiRes</CODE>::<CODE>tv_interval</CODE>($<CODE>started</CODE>, [<CODE>Time</CODE>::<CODE>HiRes</CODE>::<CODE>gettimeofday</CODE>()]);
+      my $<CODE>rps</CODE>  = $<CODE>elapsed</CODE> == 0 ? '??' : sprintf '%.<LITERALS>3f</LITERALS>', 1 / $<CODE>elapsed</CODE>;
+      my $<CODE>code</CODE> = $<CODE>res</CODE>-><CODE>code</CODE>;
+      my $<CODE>msg</CODE>  = $<CODE>res</CODE>-><CODE>message</CODE> || $<CODE>res</CODE>-><CODE>default_message</CODE>($<CODE>code</CODE>);
+      $<CODE>app</CODE>-><CODE>log</CODE>-><CODE>debug</CODE>("$<CODE>code</CODE> $<CODE>msg</CODE> (${<CODE>elapsed</CODE>}<LITERALS>s</LITERALS>, $<CODE>rps</CODE>/<LITERALS>s</LITERALS>)");
+    }
+
+    $<CODE>app</CODE>-><CODE>plugins</CODE>-><CODE>emit_hook_reverse</CODE>(<LITERALS>after_dispatch</LITERALS> => $<CODE>self</CODE>);
+    $<CODE>app</CODE>-><CODE>sessions</CODE>-><CODE>store</CODE>($<CODE>self</CODE>);
+  }
+  $<CODE>self</CODE>-><CODE>tx</CODE>-><CODE>resume</CODE>;
+  return $<CODE>self</CODE>;
+}
+
+sub <CODE>req</CODE> { (shift-><CODE>tx</CODE> || <CODE>Carp</CODE>::<CODE>croak</CODE> '<LITERALS>Connection</LITERALS> <LITERALS>already</LITERALS> <LITERALS>closed</LITERALS>')-><CODE>req</CODE> }
+sub <CODE>res</CODE> { (shift-><CODE>tx</CODE> || <CODE>Carp</CODE>::<CODE>croak</CODE> '<LITERALS>Connection</LITERALS> <LITERALS>already</LITERALS> <LITERALS>closed</LITERALS>')-><CODE>res</CODE> }
+
+sub <CODE>respond_to</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>args</CODE>) = (shift, ref $<CODE>_</CODE>[0] ? $<CODE>_</CODE>[0] : {@<CODE>_</CODE>});
+
+  # <COMMENTS>Find</COMMENTS> <COMMENTS>target</COMMENTS>
+  my $<CODE>target</CODE>;
+  my $<CODE>renderer</CODE> = $<CODE>self</CODE>-><CODE>app</CODE>-><CODE>renderer</CODE>;
+  my @<CODE>formats</CODE>  = @{$<CODE>renderer</CODE>-><CODE>accepts</CODE>($<CODE>self</CODE>)};
+  for my $<CODE>format</CODE> (@<CODE>formats</CODE> ? @<CODE>formats</CODE> : ($<CODE>renderer</CODE>-><CODE>default_format</CODE>)) {
+    next unless $<CODE>target</CODE> = $<CODE>args</CODE>->{$<CODE>format</CODE>};
+    $<CODE>self</CODE>-><CODE>stash</CODE>->{<LITERALS>format</LITERALS>} = $<CODE>format</CODE>;
+    last;
+  }
+
+  # <COMMENTS>Fallback</COMMENTS>
+  unless ($<CODE>target</CODE>) {
+    return $<CODE>self</CODE>-><CODE>rendered</CODE>(204) unless $<CODE>target</CODE> = $<CODE>args</CODE>->{<LITERALS>any</LITERALS>};
+    delete $<CODE>self</CODE>-><CODE>stash</CODE>->{<LITERALS>format</LITERALS>};
+  }
+
+  # <COMMENTS>Dispatch</COMMENTS>
+  ref $<CODE>target</CODE> eq '<LITERALS>CODE</LITERALS>' ? $<CODE>target</CODE>->($<CODE>self</CODE>) : $<CODE>self</CODE>-><CODE>render</CODE>(%$<CODE>target</CODE>);
+
+  return $<CODE>self</CODE>;
+}
+
+sub <CODE>send</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>msg</CODE>, $<CODE>cb</CODE>) = @<CODE>_</CODE>;
+  my $<CODE>tx</CODE> = $<CODE>self</CODE>-><CODE>tx</CODE> || <CODE>Carp</CODE>::<CODE>croak</CODE> '<LITERALS>Connection</LITERALS> <LITERALS>already</LITERALS> <LITERALS>closed</LITERALS>';
+  <CODE>Carp</CODE>::<CODE>croak</CODE> '<LITERALS>No</LITERALS> <LITERALS>WebSocket</LITERALS> <LITERALS>connection</LITERALS> <LITERALS>to</LITERALS> <LITERALS>send</LITERALS> <LITERALS>message</LITERALS> <LITERALS>to</LITERALS>'
+    unless $<CODE>tx</CODE>-><CODE>is_websocket</CODE>;
+  $<CODE>tx</CODE>-><CODE>send</CODE>($<CODE>msg</CODE>, $<CODE>cb</CODE> ? sub { shift; $<CODE>self</CODE>->$<CODE>cb</CODE>(@<CODE>_</CODE>) } : ());
+  return $<CODE>tx</CODE>-><CODE>established</CODE> ? $<CODE>self</CODE> : $<CODE>self</CODE>-><CODE>rendered</CODE>(101);
+}
+
+sub <CODE>session</CODE> {
+  my $<CODE>self</CODE> = shift;
+
+  my $<CODE>stash</CODE> = $<CODE>self</CODE>-><CODE>stash</CODE>;
+  $<CODE>self</CODE>-><CODE>app</CODE>-><CODE>sessions</CODE>-><CODE>load</CODE>($<CODE>self</CODE>)
+    unless exists $<CODE>stash</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>active_session</LITERALS>'};
+
+  # <COMMENTS>Hash</COMMENTS>
+  my $<CODE>session</CODE> = $<CODE>stash</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>session</LITERALS>'} ||= {};
+  return $<CODE>session</CODE> unless @<CODE>_</CODE>;
+
+  # <COMMENTS>Get</COMMENTS>
+  return $<CODE>session</CODE>->{$<CODE>_</CODE>[0]} unless @<CODE>_</CODE> > 1 || ref $<CODE>_</CODE>[0];
+
+  # <COMMENTS>Set</COMMENTS>
+  my $<CODE>values</CODE> = ref $<CODE>_</CODE>[0] ? $<CODE>_</CODE>[0] : {@<CODE>_</CODE>};
+  @$<CODE>session</CODE>{keys %$<CODE>values</CODE>} = values %$<CODE>values</CODE>;
+
+  return $<CODE>self</CODE>;
+}
+
+sub <CODE>signed_cookie</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>name</CODE>, $<CODE>value</CODE>, $<CODE>options</CODE>) = @<CODE>_</CODE>;
+
+  # <COMMENTS>Request</COMMENTS> <COMMENTS>cookie</COMMENTS>
+  return $<CODE>self</CODE>-><CODE>every_signed_cookie</CODE>($<CODE>name</CODE>)->[-1] unless defined $<CODE>value</CODE>;
+
+  # <COMMENTS>Response</COMMENTS> <COMMENTS>cookie</COMMENTS>
+  my $<CODE>checksum</CODE> = <CODE>Mojo</CODE>::<CODE>Util</CODE>::<CODE>hmac_sha1_sum</CODE>($<CODE>value</CODE>, $<CODE>self</CODE>-><CODE>app</CODE>-><CODE>secrets</CODE>->[0]);
+  return $<CODE>self</CODE>-><CODE>cookie</CODE>($<CODE>name</CODE>, "$<CODE>value</CODE>--$<CODE>checksum</CODE>", $<CODE>options</CODE>);
+}
+
+sub <CODE>stash</CODE> { <CODE>Mojo</CODE>::<CODE>Util</CODE>::<CODE>_stash</CODE>(<LITERALS>stash</LITERALS> => @<CODE>_</CODE>) }
+
+sub <CODE>url_for</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>target</CODE>) = (shift, shift // '');
+
+  # <COMMENTS>Absolute</COMMENTS> <COMMENTS>URL</COMMENTS>
+  return $<CODE>target</CODE> if <CODE>Scalar</CODE>::<CODE>Util</CODE>::<CODE>blessed</CODE> $<CODE>target</CODE> && $<CODE>target</CODE>-><CODE>isa</CODE>('<LITERALS>Mojo</LITERALS>::<LITERALS>URL</LITERALS>');
+  return <CODE>Mojo</CODE>::<CODE>URL</CODE>-><CODE>new</CODE>($<CODE>target</CODE>) if $<CODE>target</CODE> =~ m!^(?:[^:/?#]+:|//|#)!;
+
+  # <COMMENTS>Base</COMMENTS>
+  my $<CODE>url</CODE>  = <CODE>Mojo</CODE>::<CODE>URL</CODE>-><CODE>new</CODE>;
+  my $<CODE>req</CODE>  = $<CODE>self</CODE>-><CODE>req</CODE>;
+  my $<CODE>base</CODE> = $<CODE>url</CODE>-><CODE>base</CODE>($<CODE>req</CODE>-><CODE>url</CODE>-><CODE>base</CODE>-><CODE>clone</CODE>)-><CODE>base</CODE>-><CODE>userinfo</CODE>(undef);
+
+  # <COMMENTS>Relative</COMMENTS> <COMMENTS>URL</COMMENTS>
+  my $<CODE>path</CODE> = $<CODE>url</CODE>-><CODE>path</CODE>;
+  if ($<CODE>target</CODE> =~ m!^/!) {
+    if (defined(my $<CODE>prefix</CODE> = $<CODE>self</CODE>-><CODE>stash</CODE>->{<LITERALS>path</LITERALS>})) {
+      my $<CODE>real</CODE> = $<CODE>req</CODE>-><CODE>url</CODE>-><CODE>path</CODE>-><CODE>to_route</CODE>;
+      $<CODE>real</CODE> =~ s!/?\Q$<CODE>prefix</CODE>\E$!$<CODE>target</CODE>!;
+      $<CODE>target</CODE> = $<CODE>real</CODE>;
+    }
+    $<CODE>url</CODE>-><CODE>parse</CODE>($<CODE>target</CODE>);
+  }
+
+  # <COMMENTS>Route</COMMENTS>
+  else {
+    my $<CODE>generated</CODE> = $<CODE>self</CODE>-><CODE>match</CODE>-><CODE>path_for</CODE>($<CODE>target</CODE>, @<CODE>_</CODE>);
+    $<CODE>path</CODE>-><CODE>parse</CODE>($<CODE>generated</CODE>->{<LITERALS>path</LITERALS>}) if $<CODE>generated</CODE>->{<LITERALS>path</LITERALS>};
+    $<CODE>base</CODE>-><CODE>scheme</CODE>($<CODE>base</CODE>-><CODE>protocol</CODE> eq '<LITERALS>https</LITERALS>' ? '<LITERALS>wss</LITERALS>' : '<LITERALS>ws</LITERALS>')
+      if $<CODE>generated</CODE>->{<LITERALS>websocket</LITERALS>};
+  }
+
+  # <COMMENTS>Make</COMMENTS> <COMMENTS>path</COMMENTS> <COMMENTS>absolute</COMMENTS>
+  my $<CODE>base_path</CODE> = $<CODE>base</CODE>-><CODE>path</CODE>;
+  unshift @{$<CODE>path</CODE>-><CODE>parts</CODE>}, @{$<CODE>base_path</CODE>-><CODE>parts</CODE>};
+  $<CODE>base_path</CODE>-><CODE>parts</CODE>([])-><CODE>trailing_slash</CODE>(0);
+
+  return $<CODE>url</CODE>;
+}
+
+sub <CODE>validation</CODE> {
+  my $<CODE>self</CODE> = shift;
+
+  my $<CODE>stash</CODE> = $<CODE>self</CODE>-><CODE>stash</CODE>;
+  return $<CODE>stash</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>validation</LITERALS>'} if $<CODE>stash</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>validation</LITERALS>'};
+
+  my $<CODE>req</CODE>    = $<CODE>self</CODE>-><CODE>req</CODE>;
+  my $<CODE>token</CODE>  = $<CODE>self</CODE>-><CODE>session</CODE>->{<LITERALS>csrf_token</LITERALS>};
+  my $<CODE>header</CODE> = $<CODE>req</CODE>-><CODE>headers</CODE>-><CODE>header</CODE>('<LITERALS>X</LITERALS>-<LITERALS>CSRF</LITERALS>-<LITERALS>Token</LITERALS>');
+  my $<CODE>hash</CODE>   = $<CODE>req</CODE>-><CODE>params</CODE>-><CODE>to_hash</CODE>;
+  $<CODE>hash</CODE>->{<LITERALS>csrf_token</LITERALS>} //= $<CODE>header</CODE> if $<CODE>token</CODE> && $<CODE>header</CODE>;
+  $<CODE>hash</CODE>->{$<CODE>_</CODE>} = $<CODE>req</CODE>-><CODE>every_upload</CODE>($<CODE>_</CODE>) for map { $<CODE>_</CODE>-><CODE>name</CODE> } @{$<CODE>req</CODE>-><CODE>uploads</CODE>};
+  my $<CODE>validation</CODE> = $<CODE>self</CODE>-><CODE>app</CODE>-><CODE>validator</CODE>-><CODE>validation</CODE>-><CODE>input</CODE>($<CODE>hash</CODE>);
+  return $<CODE>stash</CODE>->{'<LITERALS>mojo</LITERALS>.<LITERALS>validation</LITERALS>'} = $<CODE>validation</CODE>-><CODE>csrf_token</CODE>($<CODE>token</CODE>);
+}
+
+sub <CODE>write</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>chunk</CODE>, $<CODE>cb</CODE>) = @<CODE>_</CODE>;
+  $<CODE>self</CODE>-><CODE>res</CODE>-><CODE>content</CODE>-><CODE>write</CODE>($<CODE>chunk</CODE>, $<CODE>cb</CODE> ? sub { shift; $<CODE>self</CODE>->$<CODE>cb</CODE>(@<CODE>_</CODE>) } : ());
+  return $<CODE>self</CODE>-><CODE>rendered</CODE>;
+}
+
+sub <CODE>write_chunk</CODE> {
+  my ($<CODE>self</CODE>, $<CODE>chunk</CODE>, $<CODE>cb</CODE>) = @<CODE>_</CODE>;
+  my $<CODE>content</CODE> = $<CODE>self</CODE>-><CODE>res</CODE>-><CODE>content</CODE>;
+  $<CODE>content</CODE>-><CODE>write_chunk</CODE>($<CODE>chunk</CODE>, $<CODE>cb</CODE> ? sub { shift; $<CODE>self</CODE>->$<CODE>cb</CODE>(@<CODE>_</CODE>) } : ());
+  return $<CODE>self</CODE>-><CODE>rendered</CODE>;
+}
+
+1;
+
+=<COMMENTS>encoding</COMMENTS> <COMMENTS>utf8</COMMENTS>
+
+=<COMMENTS>head1</COMMENTS> <COMMENTS>NAME</COMMENTS>
+
+<COMMENTS>Mojolicious</COMMENTS>::<COMMENTS>Controller</COMMENTS> - <COMMENTS>Controller</COMMENTS> <COMMENTS>base</COMMENTS> <COMMENTS>class</COMMENTS>
+
+=<COMMENTS>head1</COMMENTS> <COMMENTS>SYNOPSIS</COMMENTS>
+
+  # <COMMENTS>Controller</COMMENTS>
+  <COMMENTS>package</COMMENTS> <COMMENTS>MyApp</COMMENTS>::<COMMENTS>Controller</COMMENTS>::<COMMENTS>Foo</COMMENTS>;
+  <COMMENTS>use</COMMENTS> <COMMENTS>Mojo</COMMENTS>::<COMMENTS>Base</COMMENTS> '<COMMENTS>Mojolicious</COMMENTS>::<COMMENTS>Controller</COMMENTS>';
+
+  # <COMMENTS>Action</COMMENTS>
+  <COMMENTS>sub</COMMENTS> <COMMENTS>bar</COMMENTS> {
+    <COMMENTS>my</COMMENTS> <COMMENTS>$self</COMMENTS> = <COMMENTS>shift</COMMENTS>;
+    <COMMENTS>my</COMMENTS> <COMMENTS>$name</COMMENTS> = <COMMENTS>$self</COMMENTS>-><COMMENTS>param</COMMENTS>('<COMMENTS>name</COMMENTS>');
+    <COMMENTS>$self</COMMENTS>-><COMMENTS>res</COMMENTS>-><COMMENTS>headers</COMMENTS>-><COMMENTS>cache_control</COMMENTS>('<COMMENTS>max</COMMENTS>-<COMMENTS>age</COMMENTS>=<COMMENTS>1</COMMENTS>, <COMMENTS>no</COMMENTS>-<COMMENTS>cache</COMMENTS>');
+    <COMMENTS>$self</COMMENTS>-><COMMENTS>render</COMMENTS>(<COMMENTS>json</COMMENTS> => {<COMMENTS>hello</COMMENTS> => <COMMENTS>$name</COMMENTS>});
+  }
+
+=<COMMENTS>cut</COMMENTS>
