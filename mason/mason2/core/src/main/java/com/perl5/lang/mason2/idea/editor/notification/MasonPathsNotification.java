@@ -19,6 +19,7 @@ package com.perl5.lang.mason2.idea.editor.notification;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
@@ -45,28 +46,22 @@ public class MasonPathsNotification implements EditorNotificationProvider, DumbA
   @Override
   public @Nullable Function<? super @NotNull FileEditor, ? extends @Nullable JComponent> collectNotificationData(@NotNull Project project,
                                                                                                                  @NotNull VirtualFile file) {
-    return fileEditor -> createNotificationPanel(file);
-  }
-
-  private @Nullable EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file) {
     if (!(file.getFileType() instanceof MasonPurePerlComponentFileType)) {
       return null;
     }
-    String message = null;
-
     if (MasonSettings.getInstance(myProject).getComponentsRoots().isEmpty()) {
-      message = "Mason2 components roots are not configured";
+      return fileEditor -> createNotificationPanel("Mason2 components roots are not configured");
     }
     else {
       PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
-      if (psiFile instanceof MasonFileImpl && ((MasonFileImpl)psiFile).getComponentRoot() == null) {
-        message = "Component is not under one of configured roots";
+      if (psiFile instanceof MasonFileImpl masonFile && masonFile.getComponentRoot() == null) {
+        return fileEditor -> createNotificationPanel("Component is not under one of configured roots");
       }
     }
+    return null;
+  }
 
-    if (message == null) {
-      return null;
-    }
+  private @NotNull EditorNotificationPanel createNotificationPanel(@NotNull @NlsContexts.Label String message) {
     EditorNotificationPanel panel = new EditorNotificationPanel();
     panel.setText(message);
     panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
