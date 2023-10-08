@@ -241,7 +241,12 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     assertNotNull("Unable to find virtual file for: " + file, virtualFile);
     virtualFile.refresh(false, true);
     copyDirContentsTo(virtualFile, getModuleRoot());
-    PerlProjectDirectoriesConfigurator.configureRoots(getProject());
+    configureRoots();
+  }
+
+  protected final void configureRoots() {
+    var promise = PerlProjectDirectoriesConfigurator.configureRoots(getProject());
+    PlatformTestUtil.waitWithEventsDispatching("Could not configure directories in time", promise::isDone, 5);
   }
 
   protected @NotNull VirtualFile getFileInModule(@NotNull String relativePath) {

@@ -32,12 +32,12 @@ public class PerlMakeMakerDirectoryConfigurationProvider implements PerlDirector
       return;
     }
 
-    collector.addTestRoot(contentRoot.findChild("t"));
-    collector.addLibRoot(contentRoot.findChild("lib"));
+    collector.addTestRoot(module, contentRoot.findChild("t"));
+    collector.addLibRoot(module, contentRoot.findChild("lib"));
 
     var blibRoot = contentRoot.findChild("blib");
     if (blibRoot != null) {
-      collector.addExcludedRoot(blibRoot);
+      collector.addExcludedRoot(module, blibRoot);
 
       var blibLibRoot = blibRoot.findChild("lib");
       if (blibLibRoot != null) {

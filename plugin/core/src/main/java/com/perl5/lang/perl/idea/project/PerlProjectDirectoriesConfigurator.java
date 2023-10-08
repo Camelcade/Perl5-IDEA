@@ -16,7 +16,12 @@
 
 package com.perl5.lang.perl.idea.project;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ModalityState;
+import com.intellij.openapi.application.ReadAction;
+import com.intellij.openapi.application.WriteAction;
+import com.intellij.openapi.components.Service;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
@@ -27,72 +32,81 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.openapi.vfs.newvfs.BulkFileListener;
 import com.intellij.openapi.vfs.newvfs.events.VFileEvent;
+import com.intellij.util.concurrency.AppExecutorUtil;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
 import com.intellij.workspaceModel.ide.JpsProjectLoadedListener;
-import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
+import org.jetbrains.concurrency.CancellablePromise;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
-public class PerlProjectDirectoriesConfigurator implements StartupActivity {
-  private final MergingUpdateQueue myScanningQueue =
-    new MergingUpdateQueue("Project configuration", 300, true, null, ApplicationManager.getApplication(), null, true);
+@Service(Service.Level.PROJECT)
+public final class PerlProjectDirectoriesConfigurator implements Disposable, BulkFileListener, JpsProjectLoadedListener {
+  private final MergingUpdateQueue myScanningQueue = new MergingUpdateQueue("Project configuration", 300, true, null, this, null, false);
+  private final @NotNull Project myProject;
+
+  public PerlProjectDirectoriesConfigurator(@NotNull Project project) {
+    myProject = project;
+    var connection = project.getMessageBus().connect(this);
+    connection.subscribe(VirtualFileManager.VFS_CHANGES, this);
+    connection.subscribe(JpsProjectLoadedListener.Companion.getLOADED(), this);
+  }
 
   @Override
-  public void runActivity(@NotNull Project project) {
+  public void loaded() {
+    queueRescan();
+  }
+
+  @Override
+  public void after(@NotNull List<? extends @NotNull VFileEvent> events) {
+    scheduleUpdateIfNecessary(events);
+  }
+
+  private static @Nullable CancellablePromise<PerlDirectoryInfoCollector> configureContentRoots(@NotNull Project project) {
     if (project.isDefault()) {
-      return;
+      return null;
     }
-    var connection = project.getMessageBus().connect(PerlPluginUtil.getUnloadAwareDisposable(project));
-    connection.subscribe(
-      VirtualFileManager.VFS_CHANGES,
-      new BulkFileListener() {
-        @Override
-        public void after(@NotNull List<? extends @NotNull VFileEvent> events) {
-          scheduleUpdateIfNecessary(project, events);
+
+    return ReadAction.nonBlocking(() -> {
+        var collector = new PerlDirectoryInfoCollector(project);
+        for (Module module : ModuleManager.getInstance(project).getModules()) {
+          for (VirtualFile contentRoot : ModuleRootManager.getInstance(module).getContentRoots()) {
+            PerlDirectoryConfigurationProvider.EP_NAME.forEachExtensionSafe(it -> it.configureContentRoot(module, contentRoot, collector));
+          }
         }
-      });
-    connection.subscribe(JpsProjectLoadedListener.Companion.getLOADED(),  (JpsProjectLoadedListener)()->queueRescan(project));
+        return collector;
+      }).expireWhen(project::isDisposed)
+      .finishOnUiThread(ModalityState.defaultModalityState(), collector -> WriteAction.run(collector::commit))
+      .submit(AppExecutorUtil.getAppExecutorService());
   }
 
-  private static void configureContentRoots(@NotNull Project project) {
-    if (project.isDefault() || project.isDisposed()) {
-      return;
-    }
-    var collector = new PerlDirectoryInfoCollector(project);
-    for (Module module : ModuleManager.getInstance(project).getModules()) {
-      for (VirtualFile contentRoot : ModuleRootManager.getInstance(module).getContentRoots()) {
-        PerlDirectoryConfigurationProvider.EP_NAME.forEachExtensionSafe(it -> it.configureContentRoot(module, contentRoot, collector));
-      }
-      collector.commitExcluded(module);
-      collector.commitLibRoots(module);
-      collector.commitTestRoots(module);
-    }
-    collector.commitExternalLibRoots(project);
-  }
-
-  private void scheduleUpdateIfNecessary(@NotNull Project project, @NotNull List<? extends @NotNull VFileEvent> events) {
-    if (isMyEvent(project, events)) {
-      queueRescan(project);
+  private void scheduleUpdateIfNecessary(@NotNull List<? extends @NotNull VFileEvent> events) {
+    if (isMyEvent(events)) {
+      queueRescan();
     }
   }
 
-  private void queueRescan(@NotNull Project project) {
+  private void queueRescan() {
     if( ApplicationManager.getApplication().isUnitTestMode()){
       return;
     }
-    myScanningQueue.queue(new Update(project) {
+    myScanningQueue.queue(new Update(myProject) {
       @Override
       public void run() {
-        configureContentRoots(project);
+        configureContentRoots(myProject);
       }
     });
   }
 
-  private static boolean isMyEvent(@NotNull Project project, @NotNull List<? extends @NotNull VFileEvent> events) {
-    var projectFileIndex = ProjectFileIndex.getInstance(project);
+  private boolean isMyEvent(@NotNull List<? extends @NotNull VFileEvent> events) {
+    var projectFileIndex = ProjectFileIndex.getInstance(myProject);
     for (VFileEvent vfsEvent : events) {
       var virtualFile = vfsEvent.getFile();
       if( virtualFile != null && virtualFile.isDirectory() && projectFileIndex.isInContent(virtualFile)){
@@ -102,8 +116,27 @@ public class PerlProjectDirectoriesConfigurator implements StartupActivity {
     return false;
   }
 
+  @SuppressWarnings("MethodOnlyUsedFromInnerClass")
+  private static @Nullable PerlProjectDirectoriesConfigurator getInstance(@NotNull Project project) {
+    return project.isDefault() ? null : project.getService(PerlProjectDirectoriesConfigurator.class);
+  }
+
+  @Override
+  public void dispose() {
+  }
+
+  public static final class Starter implements StartupActivity {
+    @Override
+    public void runActivity(@NotNull Project project) {
+      var service = getInstance(project);
+      if (service != null) {
+        service.queueRescan();
+      }
+    }
+  }
+
   @TestOnly
-  public static void configureRoots(@NotNull Project project){
-    configureContentRoots(project);
+  public static @NotNull CancellablePromise<PerlDirectoryInfoCollector> configureRoots(@NotNull Project project){
+    return Objects.requireNonNull(configureContentRoots(project));
   }
 }

@@ -32,13 +32,13 @@ public class PerlModuleBuildDirectoryConfigurationProvider implements PerlDirect
       return;
     }
 
-    collector.addTestRoot(contentRoot.findChild("t"));
-    collector.addLibRoot(contentRoot.findChild("lib"));
-    collector.addExcludedRoot(contentRoot.findChild("_build"));
+    collector.addTestRoot(module, contentRoot.findChild("t"));
+    collector.addLibRoot(module, contentRoot.findChild("lib"));
+    collector.addExcludedRoot(module, contentRoot.findChild("_build"));
 
     var blibRoot = contentRoot.findChild("blib");
     if (blibRoot != null) {
-      collector.addExcludedRoot(blibRoot);
+      collector.addExcludedRoot(module, blibRoot);
       var blibLibRoot = blibRoot.findChild("lib");
       if (blibLibRoot != null) {
         collector.addExternalLibRoot(blibRoot.findChild("arch"));

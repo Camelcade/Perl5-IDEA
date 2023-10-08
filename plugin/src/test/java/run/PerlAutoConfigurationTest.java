@@ -20,13 +20,10 @@ import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.idea.project.PerlProjectDirectoriesConfigurator;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.PerlConfig;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-
-import java.util.List;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlAutoConfigurationTest extends PerlPlatformTestCase {
@@ -70,7 +67,7 @@ public class PerlAutoConfigurationTest extends PerlPlatformTestCase {
     var versionArchDir = createChildDirectory(versionDir, archname);
     assertNotNull(versionArchDir);
 
-    PerlProjectDirectoriesConfigurator.configureRoots(getProject());
+    configureRoots();
 
     assertExcluded(localRoot);
     assertTestRoot(testRoot);
