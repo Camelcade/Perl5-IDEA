@@ -24,11 +24,12 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.openapi.util.RecursionManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.util.*;
+import com.intellij.psi.util.PsiCacheKey;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstruction;
@@ -59,6 +60,8 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 public final class PerlResolveUtil {
   private static final Logger LOG = Logger.getInstance(PerlResolveUtil.class);
   private static boolean SUPPRESS_ERRORS = false;
+  private static final ThreadLocal<int[]> INFERENCE_DEPTH = ThreadLocal.withInitial(()-> new int[]{0});
+  private static final int MAX_INFERENCE_DEPTH = 300;
   private static final PsiCacheKey<PerlVariableDeclarationElement, PerlVariable> DECLARATION_KEY = PsiCacheKey.create(
     "perl5.variable.declaration", variable -> {
       PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
@@ -191,12 +194,21 @@ public final class PerlResolveUtil {
    * @see PerlValue
    */
   public static @NotNull PerlValue inferVariableValue(@NotNull PerlVariable variable) {
+    var currentDepth = INFERENCE_DEPTH.get();
+    if(currentDepth[0] >= MAX_INFERENCE_DEPTH){
+      LOG.warn("Too complex to analyze: " + variable + "; file: " + PsiUtilCore.getVirtualFile(variable));
+      return UNKNOWN_VALUE;
+    }
     try{
+      currentDepth[0]++;
       return getValueFromControlFlow(new TypeInferringContext(variable)).buildValue();
     }
     catch (StackOverflowError e){
       LOG.error("Stack overflow while inferring variable value: " + variable + "; file: " + PsiUtilCore.getVirtualFile(variable));
       return UNKNOWN_VALUE;
+    }
+    finally {
+      currentDepth[0]--;
     }
   }
 
