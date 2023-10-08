@@ -24,13 +24,11 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.util.RecursionManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.psi.util.*;
 import com.intellij.util.PairProcessor;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlAssignInstruction;
@@ -59,11 +57,20 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 
 
 public final class PerlResolveUtil {
-  private PerlResolveUtil() {
-  }
-
   private static final Logger LOG = Logger.getInstance(PerlResolveUtil.class);
   private static boolean SUPPRESS_ERRORS = false;
+  private static final PsiCacheKey<PerlVariableDeclarationElement, PerlVariable> DECLARATION_KEY = PsiCacheKey.create(
+    "perl5.variable.declaration", variable -> {
+      PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
+      if (PerlResolveUtil.treeWalkUp(variable, variableProcessor)) {
+        variableProcessor.searchBuiltIn();
+      }
+      return variableProcessor.getResult();
+    }
+  );
+
+  private PerlResolveUtil() {
+  }
 
   public static boolean treeWalkUp(@Nullable PsiElement place, @NotNull PsiScopeProcessor processor) {
     PsiElement lastParent = null;
@@ -117,20 +124,15 @@ public final class PerlResolveUtil {
    * @param variable variable to search declaration for
    * @return variable in declaration term or null if there is no such one
    */
-  public static @Nullable PerlVariableDeclarationElement getLexicalDeclaration(PerlVariable variable) {
+  public static @Nullable PerlVariableDeclarationElement getLexicalDeclaration(@NotNull PerlVariable variable) {
     if (variable instanceof PerlVariableDeclarationElement) {
       return (PerlVariableDeclarationElement)variable;
     }
     if (variable.getExplicitNamespaceName() != null) {
       return null;
     }
-    return CachedValuesManager.getCachedValue(variable, () -> {
-      PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);
-      if (PerlResolveUtil.treeWalkUp(variable, variableProcessor)) {
-        variableProcessor.searchBuiltIn();
-      }
-      return CachedValueProvider.Result.create(variableProcessor.getResult(), variable.getContainingFile());
-    });
+
+    return DECLARATION_KEY.getValue(variable);
   }
 
   /**
