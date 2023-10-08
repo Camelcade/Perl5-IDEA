@@ -79,6 +79,22 @@ public class PerlAutoConfigurationTest extends PerlPlatformTestCase {
   }
 
   @Test
+  public void testCpanminus() {
+    copyDirToModule("cpanminusProject");
+
+    var moduleRoot = getModuleRoot();
+    var testRoot = moduleRoot.findChild("t");
+    assertNotNull(testRoot);
+    var libRoot = moduleRoot.findChild("lib");
+    assertNotNull(libRoot);
+
+    configureRoots();
+
+    assertTestRoot(testRoot);
+    assertLibRoot(libRoot);
+  }
+
+  @Test
   public void testMakeMaker() {
     copyDirToModule("makeMakerProject");
 
