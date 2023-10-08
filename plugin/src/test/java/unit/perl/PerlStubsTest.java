@@ -44,6 +44,9 @@ public class PerlStubsTest extends PerlLightTestCase {
   public void testAmavis_pl() { doTest(); }
 
   @Test
+  public void testHugeList_pl() { doTest(); }
+
+  @Test
   public void testFunctionParametersFun_pl() {doTest();}
 
   @Test
