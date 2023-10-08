@@ -33,6 +33,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 
@@ -93,7 +94,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
   /**
    * Adds a variable declaration that current one shadows
    */
-  private void addShadowedVariable(@NotNull PsiElement sourceElement, ArrayList<PsiElement> result) {
+  private void addShadowedVariable(@NotNull PsiElement sourceElement, @NotNull List<? super PsiElement> result) {
     if (!(sourceElement instanceof PerlVariableNameElement)) {
       return;
     }
