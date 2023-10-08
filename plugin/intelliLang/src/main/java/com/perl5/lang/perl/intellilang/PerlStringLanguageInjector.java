@@ -101,24 +101,24 @@ public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
       return parent;
     }
 
-    if (!(parent instanceof PsiPerlAssignExpr)) {
+    if (!(parent instanceof PsiPerlAssignExpr assignExpr)) {
       return null;
     }
 
-    if (PsiUtilCore.getElementType(((PsiPerlAssignExpr)parent).getRightOperatorElement(host)) != OPERATOR_ASSIGN) {
+    if (PsiUtilCore.getElementType(assignExpr.getRightOperatorElement(host)) != OPERATOR_ASSIGN) {
       return null;
     }
 
-    PsiElement variable = ((PsiPerlAssignExpr)parent).getLeftPartOfAssignment(host);
-    if (variable instanceof PerlVariableDeclarationExpr) {
-      List<PsiPerlVariableDeclarationElement> variables = ((PerlVariableDeclarationExpr)variable).getVariableDeclarationElementList();
+    PsiElement variable = assignExpr.getLeftPartOfAssignment(host);
+    if (variable instanceof PerlVariableDeclarationExpr variableDeclarationExpr) {
+      List<PsiPerlVariableDeclarationElement> variables = variableDeclarationExpr.getVariableDeclarationElementList();
       if (variables.size() != 1) {
         return null;
       }
       variable = variables.get(0);
     }
-    else if (variable instanceof PsiPerlScalarVariable) {
-      PerlVariableDeclarationElement variableDeclarationElement = ((PsiPerlScalarVariable)variable).getLexicalDeclaration();
+    else if (variable instanceof PsiPerlScalarVariable scalarVariable) {
+      PerlVariableDeclarationElement variableDeclarationElement = scalarVariable.getLexicalDeclaration();
       if (variableDeclarationElement == null) {
         return null;
       }
