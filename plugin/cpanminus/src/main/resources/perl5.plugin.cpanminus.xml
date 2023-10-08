@@ -18,6 +18,7 @@
   <extensions defaultExtensionNs="com.perl5">
     <importsProvider implementation="com.perl5.lang.perl.cpanminus.cpanfile.PerlCpanfileImportProvider"/>
     <packageManagerAdapterFactory implementation="com.perl5.lang.perl.cpanminus.adapter.CpanminusAdapter$Factory"/>
+    <directoryConfigurationProvider implementation="com.perl5.lang.perl.cpanminus.PerlCpanminusDirectoryConfigurationProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
