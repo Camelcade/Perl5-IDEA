@@ -18,33 +18,36 @@ package com.perl5.lang.perl.idea.project;
 
 import com.intellij.ide.projectView.actions.MarkExcludeRootAction;
 import com.intellij.ide.projectView.actions.MarkTestSourceRootAction;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.concurrency.annotations.RequiresEdt;
+import com.intellij.util.concurrency.annotations.RequiresWriteLock;
 import com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.Set;
+import java.util.*;
 
 public final class PerlDirectoryInfoCollector {
-  private final Set<VirtualFile> myLibRoots = new LinkedHashSet<>();
   private final Set<VirtualFile> myExternalLibRoots = new LinkedHashSet<>();
-  private final Set<VirtualFile> myExcludedRoots = new LinkedHashSet<>();
-  private final Set<VirtualFile> myTestRoots = new LinkedHashSet<>();
+  private final Map<Module, ModuleRootInfo> myModulesInfo = new HashMap<>();
   private final ProjectFileIndex myProjectFileIndex;
+  private final Project myProject;
 
   PerlDirectoryInfoCollector(@NotNull Project project) {
+    myProject = project;
     myProjectFileIndex = ProjectFileIndex.getInstance(project);
   }
 
-  public void addLibRoot(@Nullable VirtualFile virtualFile) {
-    if (virtualFile != null) {
-      myLibRoots.add(virtualFile);
-    }
+  public void addLibRoot(@NotNull Module module, @Nullable VirtualFile virtualFile) {
+    getModuleRootInfo(module).addLibRoot(virtualFile);
+  }
+
+  private @NotNull ModuleRootInfo getModuleRootInfo(@NotNull Module module) {
+    return myModulesInfo.computeIfAbsent(module, it -> new ModuleRootInfo());
   }
 
   public void addExternalLibRoot(@Nullable VirtualFile virtualFile) {
@@ -53,43 +56,69 @@ public final class PerlDirectoryInfoCollector {
     }
   }
 
-  public void addExcludedRoot(@Nullable VirtualFile virtualFile) {
+  public void addExcludedRoot(@NotNull Module module, @Nullable VirtualFile virtualFile) {
     if (virtualFile != null && !myProjectFileIndex.isExcluded(virtualFile)) {
-      myExcludedRoots.add(virtualFile);
+      getModuleRootInfo(module).addExcludedRoot(virtualFile);
     }
   }
 
-  public void addTestRoot(@Nullable VirtualFile virtualFile) {
+  public void addTestRoot(@NotNull Module module, @Nullable VirtualFile virtualFile) {
     if (virtualFile != null && !myProjectFileIndex.isInTestSourceContent(virtualFile)) {
-      myTestRoots.add(virtualFile);
+      getModuleRootInfo(module).addTestRoot(virtualFile);
     }
   }
 
-  void commitExcluded(@NotNull Module module) {
-    if (module.isDisposed() || myExcludedRoots.isEmpty()) {
+  private void commitExcluded(@NotNull Module module ) {
+    if (module.isDisposed()) {
       return;
     }
+    var excludedRoots = getModuleRootInfo(module).getExcludedRoots();
+    if( excludedRoots.isEmpty()){
+      return;
+    }
+
     new MarkExcludeRootAction() {
       public void actionPerformed() {
-        modifyRoots(module, myExcludedRoots.toArray(VirtualFile.EMPTY_ARRAY));
-        myExcludedRoots.clear();
+        modifyRoots(module, excludedRoots.toArray(VirtualFile.EMPTY_ARRAY));
+        excludedRoots.clear();
       }
     }.actionPerformed();
   }
 
-  void commitTestRoots(@NotNull Module module) {
-    if (module.isDisposed() || myTestRoots.isEmpty()) {
+  private void commitTestRoots(@NotNull Module module) {
+    if (module.isDisposed() ) {
       return;
     }
+
+    var testRoots = getModuleRootInfo(module).getTestRoots();
+    if( testRoots.isEmpty()){
+      return;
+    }
+
     new MarkTestSourceRootAction() {
       public void actionPerformed() {
-        modifyRoots(module, myTestRoots.toArray(VirtualFile.EMPTY_ARRAY));
-        myTestRoots.clear();
+        modifyRoots(module, testRoots.toArray(VirtualFile.EMPTY_ARRAY));
+        testRoots.clear();
       }
     }.actionPerformed();
   }
 
-  void commitExternalLibRoots(@NotNull Project project){
+  @RequiresWriteLock
+  void commit(){
+    if( myProject.isDisposed()){
+      return;
+    }
+    for (Module module : myModulesInfo.keySet()) {
+      if( !module.isDisposed()){
+        commitLibRoots(module);
+        commitTestRoots(module);
+        commitExcluded(module);
+      }
+    }
+    commitExternalLibRoots(myProject);
+  }
+
+  private void commitExternalLibRoots(@NotNull Project project){
     if( project.isDisposed() || myExternalLibRoots.isEmpty()){
       return;
     }
@@ -98,11 +127,13 @@ public final class PerlDirectoryInfoCollector {
     myExternalLibRoots.clear();
   }
 
-  void commitLibRoots(@NotNull Module module){
-    if(module.isDisposed() || myLibRoots.isEmpty()){
+  private void commitLibRoots(@NotNull Module module) {
+    if (module.isDisposed()) {
       return;
     }
-    new PerlMarkLibrarySourceRootAction().markRoot(module, new ArrayList<>(myLibRoots));
-    myLibRoots.clear();
+
+    var libRoots = getModuleRootInfo(module).getLibRoots();
+    new PerlMarkLibrarySourceRootAction().markRoot(module, new ArrayList<>(libRoots));
+    libRoots.clear();
   }
 }

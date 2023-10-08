@@ -262,7 +262,7 @@
     <postStartupActivity implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeServiceWatcher"/>
     <postStartupActivity implementation="com.perl5.lang.perl.idea.sdk.host.PerlHostCacheCleaner"/>
     <postStartupActivity implementation="com.perl5.lang.perl.idea.project.Perl5ProjectStartupActivity"/>
-    <postStartupActivity implementation="com.perl5.lang.perl.idea.project.PerlProjectDirectoriesConfigurator"/>
+    <postStartupActivity implementation="com.perl5.lang.perl.idea.project.PerlProjectDirectoriesConfigurator$Starter"/>
 
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
     <applicationService serviceImplementation="com.intellij.openapi.projectRoots.impl.PerlSdkTable"/>
