@@ -27,6 +27,7 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiCacheKey;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.Interner;
@@ -63,6 +64,9 @@ public final class PerlValuesManager {
   );
   private static final TokenSet LIST_VALUES = TokenSet.create(
     STRING_LIST, COMMA_SEQUENCE_EXPR
+  );
+  private static final PsiCacheKey<PerlValue, PsiElement> VALUE_KEY = PsiCacheKey.create(
+    "perl5.value", it -> RecursionManager.doPreventingRecursion(it, true, () -> intern(computeValue(it)))
   );
   /**
    * Values from this entities delegated to the kids
@@ -150,8 +154,7 @@ public final class PerlValuesManager {
       return from(children[0]);
     }
 
-    return CachedValuesManager.getCachedValue(
-      finalElement, () -> CachedValueProvider.Result.create(intern(computeValue(finalElement)), finalElement.getContainingFile()));
+    return VALUE_KEY.getValue(finalElement);
   }
 
   private static @NotNull PerlValue computeValue(@NotNull PsiElement element) {

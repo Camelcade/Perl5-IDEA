@@ -1,0 +1,965 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: Logreporters
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: strict
+	Outer package name: Logreporters
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: warnings
+	Outer package name: Logreporters
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: re
+	Outer package name: Logreporters
+	Import options: [taint]
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters
+	Variable name: Version
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters
+	Variable name: progname_prefix
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: Logreporters::Utils
+	Mro: DFS
+	Parents: [Exporter]
+	@EXPORT: [&formathost, &get_percentiles, &get_percentiles2, &get_frequencies, &commify, &unitize, &get_usable_sectvars, &add_section, &begin_section_group, &end_section_group, &get_version, &unique_list]
+	@EXPORT_OK: [&gen_test_log]
+	@EXPORT_TAGS: {}
+	Annotations: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: strict
+	Outer package name: Logreporters::Utils
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: re
+	Outer package name: Logreporters::Utils
+	Import options: [taint]
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: warnings
+	Outer package name: Logreporters::Utils
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: Exporter
+	Outer package name: Logreporters::Utils
+	Import options: []
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: vars
+	Outer package name: Logreporters::Utils
+	Import options: []
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Utils
+	Variable name: ISA
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Utils
+	Variable name: EXPORT
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Utils
+	Variable name: EXPORT_OK
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Utils
+	Variable name: EXPORT_TAGS
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Utils
+	Variable name: VERSION
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: subs
+	Outer package name: Logreporters::Utils
+	Import options: [@EXPORT, @EXPORT_OK]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: formathost
+	Annotations: null
+	Arguments: []
+	Return value: OneOf: [ArrayItem: SUB_ARGUMENTS[0], Logreporters::Utils::sprintf(%-$Logreporters::Config::Opts{'ipaddr_width'}s  %s, OneOf: [*unknown, ArrayItem: SUB_ARGUMENTS[0]], OneOf: [*unknown, Logreporters::Utils::lc(ArrayItem: SUB_ARGUMENTS[1])])]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: add_section
+	Annotations: null
+	Arguments: [$sref]
+	Return value: OneOf: [Logreporters::Utils::die(Improperly specified Section entry: $_[0]), scalar Push: [ArrayDeref: ArrayItem: SUB_ARGUMENTS[0], Array: [Reference to: Hash: [CLASS, DATA, NAME, ArrayItem: Sublist (1;0) SUB_ARGUMENTS[0], DETAIL, ArrayItem: Sublist (1;0) SUB_ARGUMENTS[1], FMT, ArrayItem: Sublist (1;0) SUB_ARGUMENTS[2], TITLE, ArrayItem: Sublist (1;0) SUB_ARGUMENTS[3]]]]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: begin_section_group
+	Annotations: null
+	Arguments: [$sref, $group_name]
+	Return value: scalar Push: [ArrayDeref: ArrayItem: SUB_ARGUMENTS[0], Array: [Reference to: Hash: [CLASS, GROUP_BEGIN, NAME, ArrayItem: Sublist (1;0) SUB_ARGUMENTS[0], LEVEL, UNKNOWN_VALUE, HEADERS, Reference to: Sublist (2;0) SUB_ARGUMENTS]]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: end_section_group
+	Annotations: null
+	Arguments: [$sref, $group_name]
+	Return value: scalar Push: [ArrayDeref: ArrayItem: SUB_ARGUMENTS[0], Array: [Reference to: Hash: [CLASS, GROUP_END, NAME, ArrayItem: Sublist (1;0) SUB_ARGUMENTS[0], LEVEL, UNKNOWN_VALUE, FOOTERS, Reference to: Sublist (2;0) SUB_ARGUMENTS]]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: get_usable_sectvars
+	Annotations: null
+	Arguments: [$sectref, $namesonly]
+	Return value: Push: [UNKNOWN_VALUE, UNKNOWN_VALUE]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: get_version
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: get_percentiles
+	Annotations: null
+	Arguments: [$aref, @plist]
+	Return value: Push: [UNKNOWN_VALUE, Array: [OneOf: [ArrayItem: ArrayDeref: ArrayItem: SUB_ARGUMENTS[0][0], ArrayItem: ArrayDeref: ArrayItem: SUB_ARGUMENTS[0][UNKNOWN_VALUE]]]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: get_num_scores
+	Annotations: null
+	Arguments: [$scoretab_r]
+	Return value: OneOf: [0, ArrayItem: ArrayDeref: ArrayItem: SUB_ARGUMENTS[0][UNKNOWN_VALUE]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: get_nth_score
+	Annotations: null
+	Arguments: [$scoretab_r, $n]
+	Return value: OneOf: [ArrayItem: ArrayDeref: ArrayItem: SUB_ARGUMENTS[0][0], ArrayItem: ArrayDeref: ArrayItem: SUB_ARGUMENTS[0][OneOf: [0, 2]]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: get_percentiles2
+	Annotations: null
+	Arguments: [$scoretab_r, @plist]
+	Return value: Push: [UNKNOWN_VALUE, Array: [OneOf: [scalar Logreporters::Utils::get_nth_score(ArrayItem: SUB_ARGUMENTS[0], 1), scalar Logreporters::Utils::get_nth_score(ArrayItem: SUB_ARGUMENTS[0], scalar Logreporters::Utils::get_num_scores(ArrayItem: SUB_ARGUMENTS[0]))]]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: get_frequencies
+	Annotations: null
+	Arguments: [$aref, @blist]
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: commify
+	Annotations: null
+	Arguments: []
+	Return value: OneOf: [UNDEF_VALUE, scalar Logreporters::Utils::reverse(scalar Logreporters::Utils::reverse(ArrayItem: SUB_ARGUMENTS[0]))]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: unitize
+	Annotations: null
+	Arguments: [$num, $fmt]
+	Return value: Array: [ArrayItem: SUB_ARGUMENTS[0], OneOf: [.3fG, .3fK, .3fM, .3fT, d ]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: unique_list
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Utils
+	Sub name: gen_test_log
+	Annotations: null
+	Arguments: [$scriptpath]
+	Return value: OneOf: [Logreporters::Utils::close(UNKNOWN_VALUE), Logreporters::Utils::die(Can't close $datafile: $!), Logreporters::Utils::die(Can't create test data file: $!), Logreporters::Utils::die(No such service: \"$service\": line \"$_\"), Logreporters::Utils::die(Unable to create test data file: required module(s) not found\n$@), Logreporters::Utils::die(gen_test_log: invalid toolname $toolname)]
+      PERL_REQUIRE_EXPR:PerlRuntimeImportStubImpl
+	Path: Sys/Hostname.pm
+      PERL_REQUIRE_EXPR:PerlRuntimeImportStubImpl
+	Path: Fcntl.pm
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: Logreporters::Config
+	Mro: DFS
+	Parents: [Exporter]
+	@EXPORT: [&init_run_mode, &add_option, &get_options, &init_cmdline, &get_vars_from_file, &process_limiters, &process_debug_opts, &init_getopts_table_common, &zero_opts, @Optspec, %Opts, %Configvars, @Limiters, %line_styles, $fw1, $fw2, $sep1, $sep2, &D_CONFIG, &D_ARGS, &D_VARS, &D_TREE, &D_SECT, &D_UNMATCHED, &D_TEST, &D_ALL]
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: strict
+	Outer package name: Logreporters::Config
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: re
+	Outer package name: Logreporters::Config
+	Import options: [taint]
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: warnings
+	Outer package name: Logreporters::Config
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: Exporter
+	Outer package name: Logreporters::Config
+	Import options: []
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: vars
+	Outer package name: Logreporters::Config
+	Import options: []
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: ISA
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: EXPORT
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: EXPORT_OK
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: EXPORT_TAGS
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: VERSION
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: subs
+	Outer package name: Logreporters::Config
+	Import options: []
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: Optspec
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: Opts
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: Configvars
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: Limiters
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: fw1
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: fw2
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: sep1
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: sep2
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: Getopt::Long
+	Outer package name: Logreporters::Config
+	Import options: null
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Config
+	Variable name: line_styles
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters::Config
+	Sub name: init_run_mode
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters::Config
+	Sub name: confighash_to_cmdline
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters::Config
+	Sub name: get_vars_from_file
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters::Config
+	Sub name: process_limiters
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters::Config
+	Sub name: add_option
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters::Config
+	Sub name: get_options
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters::Config
+	Sub name: init_getopts_table_common
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters::Config
+	Sub name: set_supplemental_reports
+	Annotations: null
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: D_CONFIG
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: D_ARGS
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: D_VARS
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: D_TREE
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: D_SECT
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: D_UNMATCHED
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: D_TEST
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: D_ALL
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: init_run_mode
+	Annotations: null
+	Arguments: [$config_file]
+	Return value: OneOf: [Logreporters::Config::get_vars_from_file(Hash: [], ArrayItem: SUB_ARGUMENTS[0]), UNDEF_VALUE]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: get_options
+	Annotations: null
+	Arguments: [$pass_through]
+	Return value: Logreporters::Config::die(get_options: program error: %Opts is empty)
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: add_option
+	Annotations: null
+	Arguments: []
+	Return value: scalar SUB_ARGUMENTS
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: untaint
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: init_getopts_table_common
+	Annotations: null
+	Arguments: [@supplemental_reports]
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: get_option_names
+	Annotations: null
+	Arguments: []
+	Return value: Push: [UNKNOWN_VALUE, Array: [Logreporters::Config::split(UNKNOWN_VALUE, UNKNOWN_VALUE)]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: init_cmdline
+	Annotations: null
+	Arguments: []
+	Return value: OneOf: [Logreporters::Config::die(Options table not yet set), scalar Unshift: [OneOf: [Array: [-l, UNKNOWN_VALUE], Array: [], Unshift: [Array: [--$configvar], OneOf: [Array: [-l, UNKNOWN_VALUE], Array: [], Unshift: [UNKNOWN_VALUE, OneOf: [Array: [-l, UNKNOWN_VALUE], Array: []]]]]], UNKNOWN_VALUE]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: get_vars_from_file
+	Annotations: null
+	Arguments: [$href, $file]
+	Return value: OneOf: [Logreporters::Config::die(failed to close configuration handle for $file: $!), Logreporters::Config::die(unable to open configuration file $file: $!)]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: process_limiters
+	Annotations: null
+	Arguments: [$sectref]
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: set_supplemental_reports
+	Annotations: null
+	Arguments: [$onoff, $aref]
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: process_debug_opts
+	Annotations: null
+	Arguments: [$optstring]
+	Return value: OneOf: [Array: [Unknown debug keyword \"$word\"], Array: [], Push: [OneOf: [Array: [Unknown debug keyword \"$word\"], Array: []], Array: [Ambiguous debug keyword abbreviation \"$word\": (matches: @matched)]]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Config
+	Sub name: zero_opts
+	Annotations: null
+	Arguments: [$sectref]
+	Return value: UNKNOWN_VALUE
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: Logreporters::TreeData
+	Mro: DFS
+	Parents: [Exporter]
+	@EXPORT: [%Totals, %Counts, %Collecting, $END_KEY]
+	@EXPORT_OK: [&printTree, &buildTree]
+	@EXPORT_TAGS: {}
+	Annotations: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: strict
+	Outer package name: Logreporters::TreeData
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: re
+	Outer package name: Logreporters::TreeData
+	Import options: [taint]
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: warnings
+	Outer package name: Logreporters::TreeData
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: Exporter
+	Outer package name: Logreporters::TreeData
+	Import options: []
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: vars
+	Outer package name: Logreporters::TreeData
+	Import options: []
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::TreeData
+	Variable name: ISA
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::TreeData
+	Variable name: EXPORT
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::TreeData
+	Variable name: EXPORT_OK
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::TreeData
+	Variable name: EXPORT_TAGS
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::TreeData
+	Variable name: VERSION
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: subs
+	Outer package name: Logreporters::TreeData
+	Import options: []
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::TreeData
+	Variable name: Totals
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::TreeData
+	Variable name: Counts
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::TreeData
+	Variable name: Collecting
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters::TreeData
+	Sub name: buildTree
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters::TreeData
+	Sub name: printTree
+	Annotations: null
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::TreeData
+	Sub name: printTree
+	Annotations: null
+	Arguments: [$treeref, $lspecsref, $line_style, $max_report_width, $debug]
+	Return value: OneOf: [Logreporters::TreeData::die(Unexpected entry in tree: $entry\n), Logreporters::TreeData::die(unexpected line style)]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::TreeData
+	Sub name: bycount
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::TreeData
+	Variable name: END_KEY
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::TreeData
+	Sub name: buildTree
+	Annotations: null
+	Arguments: [$href, $max_level_section, $levspecref, $max_level_global, $recurs_level, $show_unique, $debug]
+	Return value: Array: [OneOf: [0, HashItem: HashDeref: ArrayItem: SUB_ARGUMENTS[0]{UNKNOWN_VALUE}, scalar Logreporters::TreeData::buildTree(HashDeref: HashItem: HashDeref: ArrayItem: SUB_ARGUMENTS[0]{UNKNOWN_VALUE}, ArrayItem: SUB_ARGUMENTS[1], ArrayItem: SUB_ARGUMENTS[2], ArrayItem: SUB_ARGUMENTS[3], UNKNOWN_VALUE, ArrayItem: SUB_ARGUMENTS[6])], Reference to: OneOf: [Array: [Reference to: Hash: [DATA, UNKNOWN_VALUE, TOTAL, scalar Logreporters::TreeData::buildTree(HashDeref: HashItem: HashDeref: ArrayItem: SUB_ARGUMENTS[0]{UNKNOWN_VALUE}, ArrayItem: SUB_ARGUMENTS[1], ArrayItem: SUB_ARGUMENTS[2], ArrayItem: SUB_ARGUMENTS[3], UNKNOWN_VALUE, ArrayItem: SUB_ARGUMENTS[6]), LEVEL, ArrayItem: SUB_ARGUMENTS[4], CHILDREF, UNKNOWN_VALUE]], Array: [], Push: [OneOf: [Array: [Reference to: Hash: [DATA, UNKNOWN_VALUE, TOTAL, scalar Logreporters::TreeData::buildTree(HashDeref: HashItem: HashDeref: ArrayItem: SUB_ARGUMENTS[0]{UNKNOWN_VALUE}, ArrayItem: SUB_ARGUMENTS[1], ArrayItem: SUB_ARGUMENTS[2], ArrayItem: SUB_ARGUMENTS[3], UNKNOWN_VALUE, ArrayItem: SUB_ARGUMENTS[6]), LEVEL, ArrayItem: SUB_ARGUMENTS[4], CHILDREF, UNKNOWN_VALUE]], Array: []], Array: [Reference to: Hash: [DATA, UNKNOWN_VALUE, TOTAL, HashItem: HashDeref: ArrayItem: SUB_ARGUMENTS[0]{UNKNOWN_VALUE}, LEVEL, ArrayItem: SUB_ARGUMENTS[4]]]]]]
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: Logreporters::Reports
+	Mro: DFS
+	Parents: [Exporter]
+	@EXPORT: [&inc_unmatched, &print_unmatched_report, &print_percentiles_report2, &print_summary_report, &print_detail_report]
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: strict
+	Outer package name: Logreporters::Reports
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: re
+	Outer package name: Logreporters::Reports
+	Import options: [taint]
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: warnings
+	Outer package name: Logreporters::Reports
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: Exporter
+	Outer package name: Logreporters::Reports
+	Import options: []
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: vars
+	Outer package name: Logreporters::Reports
+	Import options: []
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Reports
+	Variable name: ISA
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Reports
+	Variable name: EXPORT
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Reports
+	Variable name: EXPORT_OK
+	Variable type: ARRAY
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Reports
+	Variable name: EXPORT_TAGS
+	Variable type: HASH
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Reports
+	Variable name: VERSION
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: subs
+	Outer package name: Logreporters::Reports
+	Import options: []
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters::Reports
+	Variable name: origline
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Reports
+	Sub name: inc_unmatched
+	Annotations: null
+	Arguments: [$id]
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Reports
+	Sub name: print_unmatched_report
+	Annotations: null
+	Arguments: []
+	Return value: UNDEF_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Reports
+	Sub name: print_summary_report
+	Annotations: null
+	Arguments: [$sections]
+	Return value: OneOf: [Logreporters::Reports::die(Unexpected Section $sref), Logreporters::Reports::die(print_summary_report: unexpected control...)]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Reports
+	Sub name: print_detail_report
+	Annotations: null
+	Arguments: [$sections]
+	Return value: UNDEF_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Reports
+	Sub name: print_percentiles_report2
+	Annotations: null
+	Arguments: [$tableref, $title, $percentiles_str]
+	Return value: UNDEF_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Reports
+	Sub name: clear_level_specs
+	Annotations: null
+	Arguments: [$max_level, $lspecsref]
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Reports
+	Sub name: create_level_specs
+	Annotations: null
+	Arguments: [$optkey, $gdetail, $lspecref]
+	Return value: OneOf: [0, ArrayItem: SUB_ARGUMENTS[1]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters::Reports
+	Sub name: print_level_specs
+	Annotations: null
+	Arguments: [$max_level, $lspecref]
+	Return value: UNKNOWN_VALUE
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: Logreporters
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: strict
+	Outer package name: Logreporters
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: warnings
+	Outer package name: Logreporters
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: re
+	Outer package name: Logreporters
+	Import options: [taint]
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: Getopt::Long
+	Outer package name: Logreporters
+	Import options: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 0
+	Package name: File::Basename
+	Outer package name: Logreporters
+	Import options: null
+    VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters
+	Variable name: progname
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: usage
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: init_getopts_table
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: init_defaults
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: build_sect_table
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: parse_vals
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: triway_opts
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: printSpamScorePercentilesReport
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: printSpamScoreFrequencyReport
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: printAutolearnReport
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: printSARulesReport
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: printTimingsReport
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: printStartupInfoReport
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: strip_trace
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: prioritize_cmdline
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: create_ignore_list
+	Annotations: null
+    SUB_DECLARATION:PerlSubDeclarationStub
+	Namespace name: Logreporters
+	Sub name: check_ignore_list
+	Annotations: null
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: create_ignore_list
+	Annotations: null
+	Arguments: []
+	Return value: scalar Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [UNKNOWN_VALUE, UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], Array: [UNKNOWN_VALUE, scalar Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [Push: [UNKNOWN_VALUE, UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE]]], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE], UNKNOWN_VALUE]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: check_ignore_list
+	Annotations: null
+	Arguments: [$line, $listref]
+	Return value: OneOf: [0, 1]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: printSpamScorePercentilesReport
+	Annotations: null
+	Arguments: []
+	Return value: UNDEF_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: printSpamScoreFrequencyReport
+	Annotations: null
+	Arguments: []
+	Return value: UNDEF_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: printSARulesReport
+	Annotations: null
+	Arguments: []
+	Return value: OneOf: [Logreporters::getSAHitsReport(Ham, UNKNOWN_VALUE), UNDEF_VALUE]
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters
+	Variable name: maxlen
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: getSAHitsReport
+	Annotations: null
+	Arguments: [$type, $topn]
+	Return value: OneOf: [UNDEF_VALUE, scalar OneOf: [Array: [...\n], Array: [Logreporters::sprintf(%4d %8d   %6.2f%%  %6.2f%%  %6.2f%%     %s\n, UNKNOWN_VALUE, HashItem: HashDeref: HashItem: UNKNOWN_VALUE{ArrayItem: SUB_ARGUMENTS[0]}{UNKNOWN_VALUE}, 0, 0, 0, UNKNOWN_VALUE)], Array: []]]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: printAutolearnReport
+	Annotations: null
+	Arguments: []
+	Return value: OneOf: [UNDEF_VALUE, scalar Array: [Logreporters::getAutolearnReport(Spam)]]
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters
+	Variable name: maxlen
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters
+	Variable name: nhamtotal
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      VARIABLE_DECLARATION_ELEMENT:PerlVariableDeclarationStub
+	Namespace name: Logreporters
+	Variable name: nspamtotal
+	Variable type: SCALAR
+	Declared value: UNKNOWN_VALUE
+	Annotations: none
+      SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: getAutolearnReport
+	Annotations: null
+	Arguments: [$type]
+	Return value: OneOf: [Array: [Logreporters::sprintf(%-13s %9d %9d %9d  %6.2f%%  %6.2f%%  %6.2f%%\n, Logreporters::ucfirst(UNKNOWN_VALUE), UNKNOWN_VALUE, 0, 0, 0, 0, 0)], Array: []]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: printTimingsReport
+	Annotations: null
+	Arguments: [$title, $timingsref, $totalsref, $cutoff]
+	Return value: UNDEF_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: printStartupInfoReport
+	Annotations: null
+	Arguments: []
+	Return value: OneOf: [Logreporters::print_modules(SAPlugins, SpamAssassin plugins), UNDEF_VALUE]
+      SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: print2col
+	Annotations: null
+	Arguments: [$label, $val]
+	Return value: UNKNOWN_VALUE
+      SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: print_modules
+	Annotations: null
+	Arguments: [$key, $label]
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: init_getopts_table
+	Annotations: null
+	Arguments: []
+	Return value: Logreporters::add_option(show_autolearn=i, UNKNOWN_VALUE)
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: build_sect_table
+	Annotations: null
+	Arguments: []
+	Return value: UNKNOWN_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: init_defaults
+	Annotations: null
+	Arguments: []
+	Return value: UNDEF_VALUE
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: usage
+	Annotations: null
+	Arguments: []
+	Return value: \n
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: strip_trace
+	Annotations: null
+	Arguments: []
+	Return value: ArrayItem: SUB_ARGUMENTS[0]
+    SUB_DEFINITION:PerlSubDefinitionStub
+	Namespace name: Logreporters
+	Sub name: triway_opts
+	Annotations: null
+	Arguments: [$opt, $val]
+	Return value: OneOf: [Logreporters::die(Option \"--${opt}\" requires an argument), UNDEF_VALUE]
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl
