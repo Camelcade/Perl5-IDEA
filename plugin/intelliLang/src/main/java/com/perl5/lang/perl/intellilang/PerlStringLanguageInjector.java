@@ -85,8 +85,11 @@ public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
   }
 
   public static @Nullable PsiElement getPerlInjectionContext(@NotNull PsiLanguageInjectionHost host) {
-    return RecursionManager.doPreventingRecursion(host, false, CachedValuesManager.getCachedValue(
-      host, () -> CachedValueProvider.Result.create(() -> computeInjectionContext(host), host)));
+    return CachedValuesManager.getCachedValue(
+      host, () -> {
+        var result = RecursionManager.doPreventingRecursion(host, false, () -> computeInjectionContext(host));
+        return CachedValueProvider.Result.create(result, host.getContainingFile());
+      });
   }
 
   private static @Nullable PsiElement computeInjectionContext(@NotNull PsiLanguageInjectionHost host) {

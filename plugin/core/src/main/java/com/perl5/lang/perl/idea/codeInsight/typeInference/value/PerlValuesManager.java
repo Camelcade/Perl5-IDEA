@@ -151,14 +151,7 @@ public final class PerlValuesManager {
     }
 
     return CachedValuesManager.getCachedValue(
-      finalElement, () -> {
-        PerlValue computedValue = RecursionManager.doPreventingRecursion(finalElement, true, () -> computeValue(finalElement));
-        if (computedValue == null) {
-          LOG.error("Recursion while computing value of " + finalElement + " from " + PsiUtilCore.getVirtualFile(finalElement));
-          computedValue = UNKNOWN_VALUE;
-        }
-        return CachedValueProvider.Result.create(intern(computedValue), finalElement.getContainingFile());
-      });
+      finalElement, () -> CachedValueProvider.Result.create(intern(computeValue(finalElement)), finalElement.getContainingFile()));
   }
 
   private static @NotNull PerlValue computeValue(@NotNull PsiElement element) {

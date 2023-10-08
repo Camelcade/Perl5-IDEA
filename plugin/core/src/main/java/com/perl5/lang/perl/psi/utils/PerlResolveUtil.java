@@ -189,7 +189,13 @@ public final class PerlResolveUtil {
    * @see PerlValue
    */
   public static @NotNull PerlValue inferVariableValue(@NotNull PerlVariable variable) {
-        return getValueFromControlFlow(new TypeInferringContext(variable)).buildValue();
+    try{
+      return getValueFromControlFlow(new TypeInferringContext(variable)).buildValue();
+    }
+    catch (StackOverflowError e){
+      LOG.error("Stack overflow while inferring variable value: " + variable + "; file: " + PsiUtilCore.getVirtualFile(variable));
+      return UNKNOWN_VALUE;
+    }
   }
 
   public static @NotNull PerlValue inferVariableValue(@NotNull PerlBuiltInVariable variable, @NotNull PsiElement contextElement) {
