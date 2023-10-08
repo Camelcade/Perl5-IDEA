@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,15 +45,11 @@ public class PerlInterpreterEditorNotification implements EditorNotificationProv
 
   @Override
   public @Nullable Function<? super @NotNull FileEditor, ? extends @Nullable JComponent> collectNotificationData(@NotNull Project project,
-                                                                                                                 @NotNull VirtualFile file) {
-    return fileEditor -> createNotificationPanel(file);
-  }
-
-
-  private @Nullable EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile virtualFile) {
+                                                                                                                 @NotNull VirtualFile virtualFile) {
     if (!(virtualFile.getFileType() instanceof PerlFileType) || virtualFile instanceof LightVirtualFile) {
       return null;
     }
+
     final PerlLocalSettings perlLocalSettings = PerlLocalSettings.getInstance(myProject);
     if (perlLocalSettings.DISABLE_NO_INTERPRETER_WARNING) {
       return null;
@@ -62,7 +58,10 @@ public class PerlInterpreterEditorNotification implements EditorNotificationProv
     if (PerlProjectManager.getSdk(myProject, virtualFile) != null) {
       return null;
     }
+    return fileEditor -> createNotificationPanel(perlLocalSettings);
+  }
 
+  private @NotNull EditorNotificationPanel createNotificationPanel(@NotNull PerlLocalSettings perlLocalSettings) {
     EditorNotificationPanel panel = new EditorNotificationPanel();
     panel.setText(PerlBundle.message("perl.notification.sdk.not.configured"));
     panel.createActionLabel(PerlBundle.message("perl.notification.configure"),

@@ -19,6 +19,7 @@ package com.perl5.lang.htmlmason.idea.editor.notification;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.NlsContexts.Label;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
@@ -46,28 +47,23 @@ public class HTMLMasonPathsNotification implements EditorNotificationProvider, D
   @Override
   public @Nullable Function<? super @NotNull FileEditor, ? extends @Nullable JComponent> collectNotificationData(@NotNull Project project,
                                                                                                                  @NotNull VirtualFile file) {
-    return fileEditor -> createNotificationPanel(file);
-  }
-
-  private @Nullable EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file) {
     if (file.getFileType() != HTMLMasonFileType.INSTANCE) {
       return null;
     }
-    String message = null;
 
     if (HTMLMasonSettings.getInstance(myProject).getComponentsRoots().isEmpty()) {
-      message = HtmlMasonBundle.message("link.label.html.mason.components.roots.are.not.configured");
+      return fileEditor -> createNotificationPanel(HtmlMasonBundle.message("link.label.html.mason.components.roots.are.not.configured"));
     }
     else {
       PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
       if (psiFile instanceof HTMLMasonFileImpl && ((HTMLMasonFileImpl)psiFile).getComponentRoot() == null) {
-        message = HtmlMasonBundle.message("link.label.component.not.under.one.configured.roots");
+        return fileEditor -> createNotificationPanel(HtmlMasonBundle.message("link.label.component.not.under.one.configured.roots"));
       }
     }
+    return null;
+  }
 
-    if (message == null) {
-      return null;
-    }
+  private @NotNull EditorNotificationPanel createNotificationPanel(@NotNull @Label String message) {
     EditorNotificationPanel panel = new EditorNotificationPanel();
     panel.setText(message);
     panel.createActionLabel(HtmlMasonBundle.message("link.label.configure"), () -> Perl5SettingsConfigurable.open(myProject));

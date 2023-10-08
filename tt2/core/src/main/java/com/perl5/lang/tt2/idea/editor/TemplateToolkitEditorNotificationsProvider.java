@@ -43,10 +43,6 @@ public class TemplateToolkitEditorNotificationsProvider implements EditorNotific
   @Override
   public @Nullable Function<? super @NotNull FileEditor, ? extends @Nullable JComponent> collectNotificationData(@NotNull Project project,
                                                                                                                  @NotNull VirtualFile file) {
-    return fileEditor -> createNotificationPanel(file);
-  }
-
-  private @Nullable EditorNotificationPanel createNotificationPanel(@NotNull VirtualFile file) {
     if (file.getFileType() != TemplateToolkitFileType.INSTANCE) {
       return null;
     }
@@ -54,6 +50,10 @@ public class TemplateToolkitEditorNotificationsProvider implements EditorNotific
     if (settings.isVirtualFileUnderRoot(file)) {
       return null;
     }
+    return fileEditor -> createNotificationPanel();
+  }
+
+  private @NotNull EditorNotificationPanel createNotificationPanel() {
     EditorNotificationPanel panel = new EditorNotificationPanel();
     panel.setText(TemplateToolkitBundle.message("tt2.error.file.not.in.root"));
     panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
