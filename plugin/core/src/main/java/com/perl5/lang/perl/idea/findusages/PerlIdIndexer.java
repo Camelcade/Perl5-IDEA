@@ -42,40 +42,8 @@ public class PerlIdIndexer extends ScanningIdIndexer {
     var psiFile = inputData.getPsiFile();
     var perlPsi = psiFile.getViewProvider().getPsi(PerlLanguage.INSTANCE);
     if (perlPsi != null) {
-      //noinspection deprecation
       createScanner().processWordsUsingPsi(psiFile, createProcessor(inputData.getContentAsText(), consumer));
     }
     return consumer.getResult();
-  }
-
-  /**
-   * @deprecated available in IDEA since 2023.3
-   * @see com.intellij.psi.impl.cache.impl.id.ScanningIdIndexer#createProcessor
-   */
-  private static @NotNull Processor<WordOccurrence> createProcessor(@NotNull CharSequence chars, @NotNull IdDataConsumer consumer) {
-    final char[] charsArray = CharArrayUtil.fromSequenceWithoutCopying(chars);
-    return new Processor<>() {
-      @Override
-      public boolean process(final WordOccurrence t) {
-        if (charsArray != null && t.getBaseText() == chars) {
-          consumer.addOccurrence(charsArray, t.getStart(), t.getEnd(), convertToMask(t.getKind()));
-        }
-        else {
-          consumer.addOccurrence(t.getBaseText(), t.getStart(), t.getEnd(), convertToMask(t.getKind()));
-        }
-        return true;
-      }
-
-      private int convertToMask(final WordOccurrence.Kind kind) {
-        if (kind == null) {
-          return UsageSearchContext.ANY;
-        }
-        if (kind == WordOccurrence.Kind.CODE) return UsageSearchContext.IN_CODE;
-        if (kind == WordOccurrence.Kind.COMMENTS) return UsageSearchContext.IN_COMMENTS;
-        if (kind == WordOccurrence.Kind.LITERALS) return UsageSearchContext.IN_STRINGS;
-        if (kind == WordOccurrence.Kind.FOREIGN_LANGUAGE) return UsageSearchContext.IN_FOREIGN_LANGUAGES;
-        return 0;
-      }
-    };
   }
 }
