@@ -85,7 +85,7 @@ public class PerlStackFrame extends XStackFrame {
   @Override
   public void customizePresentation(@NotNull ColoredTextContainer component) {
     @NlsSafe var frameName =
-      String.join(":", myFrameDescriptor.getFileDescriptor().getNameOrPath(), String.valueOf(myFrameDescriptor.getLine()));
+      String.join(":", myFrameDescriptor.getFileDescriptor().getNameOrPath(), String.valueOf(myFrameDescriptor.getOneBasedLine()));
     component.append(frameName, SimpleTextAttributes.REGULAR_ATTRIBUTES);
     component.setIcon(AllIcons.Debugger.Frame);
   }
@@ -94,7 +94,7 @@ public class PerlStackFrame extends XStackFrame {
   public @Nullable XSourcePosition getSourcePosition() {
     VirtualFile virtualFile = myVirtualFile.getValue();
     if (virtualFile != null) {
-      return XSourcePositionImpl.create(virtualFile, myFrameDescriptor.getLine());
+      return XSourcePositionImpl.create(virtualFile, myFrameDescriptor.getZeroBasedLine());
     }
     return super.getSourcePosition();
   }
