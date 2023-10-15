@@ -19,7 +19,7 @@ package com.perl5.lang.perl.cpanminus.action
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.diagnostic.Logger
 import com.perl5.PerlIcons
-import com.perl5.lang.perl.cpanminus.PerlCpanmBundle
+import com.perl5.lang.perl.cpanminus.PerlCpanminusBundle
 import com.perl5.lang.perl.cpanminus.adapter.CpanminusAdapter
 import com.perl5.lang.perl.cpanminus.cpanfile.PerlFileTypeCpanfile
 import com.perl5.lang.perl.idea.actions.PerlActionBase
@@ -28,7 +28,7 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager
 private val log = Logger.getInstance(PerlInstallDependenciesWithCpanMinusAction::class.java);
 
 class PerlInstallDependenciesWithCpanMinusAction :
-  PerlActionBase(PerlCpanmBundle.message("install.dependencies.with.cpanminus"), PerlIcons.METACPAN) {
+  PerlActionBase(PerlCpanminusBundle.message("install.dependencies.with.cpanminus"), PerlIcons.METACPAN) {
   override fun isEnabled(event: AnActionEvent): Boolean {
     if (!super.isEnabled(event)) {
       return false

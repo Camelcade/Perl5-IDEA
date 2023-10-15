@@ -26,6 +26,8 @@
   <depends>com.perl5</depends>
   <depends>com.intellij.modules.lang</depends>
 
+  <resource-bundle>messages.MojoBundle</resource-bundle>
+
   <extensions defaultExtensionNs="com.perl5">
     <subCallHandler key="helper" implementationClass="com.perl5.lang.mojolicious.psi.impl.MojoHelperHandler"/>
 
