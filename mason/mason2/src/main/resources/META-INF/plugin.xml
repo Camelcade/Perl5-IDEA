@@ -27,6 +27,8 @@
   <depends>com.perl5.lang.mason.framework</depends>
   <depends>com.intellij.modules.lang</depends>
 
+  <resource-bundle>messages.MasonBundle</resource-bundle>
+
   <extensions defaultExtensionNs="com.perl5">
     <settings.configurable.extension implementation="com.perl5.lang.mason2.idea.configuration.Mason2SettingsConfigurableExtension"/>
   </extensions>

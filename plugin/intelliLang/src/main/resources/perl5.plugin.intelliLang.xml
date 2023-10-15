@@ -15,9 +15,14 @@
   -->
 
 <idea-plugin package="com.perl5.lang.perl.intellilang">
+
+  <resource-bundle>messages.PerlIntelliLangBundle</resource-bundle>
+
+
   <dependencies>
     <plugin id="org.intellij.intelliLang"/>
   </dependencies>
+
   <extensions defaultExtensionNs="org.intellij.intelliLang">
     <languageSupport implementation="com.perl5.lang.perl.intellilang.PerlInjectionSupport"/>
     <injectionConfig config="perlInjections.xml"/>

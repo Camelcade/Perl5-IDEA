@@ -21,11 +21,11 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
-public class PerlCpanmBundle extends DynamicBundle {
-  private static final PerlCpanmBundle INSTANCE = new PerlCpanmBundle();
-  public static final String PATH_TO_BUNDLE = "messages.PerlCpanmBundle";
+public class PerlCpanminusBundle extends DynamicBundle {
+  private static final PerlCpanminusBundle INSTANCE = new PerlCpanminusBundle();
+  public static final String PATH_TO_BUNDLE = "messages.PerlCpanminusBundle";
 
-  private PerlCpanmBundle() {
+  private PerlCpanminusBundle() {
     super(PATH_TO_BUNDLE);
   }
 
