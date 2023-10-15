@@ -20,6 +20,8 @@ import base.PerlInstrumentationTestCase;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.carton.PerlCartonDirectoryConfigurationProvider;
 import com.perl5.lang.perl.coverage.PerlCoverageEnabledConfiguration;
+import com.perl5.lang.perl.cpan.action.PerlInstallPackagesWithCpanAction;
+import com.perl5.lang.perl.cpanminus.action.PerlInstallCpanmAction;
 import com.perl5.lang.perl.debugger.run.run.debugger.PerlDebuggerProgramRunner;
 import com.perl5.lang.perl.idea.configuration.module.idea.PerlIdeaTestUtil;
 import com.perl5.lang.perl.idea.copyright.PerlCopyrightsVariablesProvider;
@@ -58,6 +60,8 @@ public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
       {"copyright", PerlCopyrightsVariablesProvider.class},
       {"core", PerlParserDefinition.class},
       {"coverage", PerlCoverageEnabledConfiguration.class},
+      {"cpan", PerlInstallPackagesWithCpanAction.class},
+      {"cpanminus", PerlInstallCpanmAction.class},
       {"debugger", PerlDebuggerProgramRunner.class},
       {"docker", PerlDockerTestUtil.getInstrumentationTestClass()},
       {"idea", PerlIdeaTestUtil.getInstrumentationTestClass()},
