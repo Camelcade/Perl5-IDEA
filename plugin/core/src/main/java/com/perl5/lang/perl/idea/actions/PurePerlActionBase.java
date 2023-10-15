@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.PsiFile;
 import com.perl5.lang.perl.fileTypes.PurePerlFileType;
-import com.perl5.lang.perl.util.PerlActionUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +36,7 @@ public abstract class PurePerlActionBase extends PerlActionBase {
 
   @Override
   protected boolean isEnabled(@NotNull AnActionEvent event) {
-    return super.isEnabled(event) && isMyFile(PerlActionUtil.getPsiFileFromEvent(event));
+    return super.isEnabled(event) && isMyFile(PerlActionBase.getPsiFile(event));
   }
 
   @Contract("null -> false")

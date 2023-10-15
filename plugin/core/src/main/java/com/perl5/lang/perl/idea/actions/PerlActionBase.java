@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,10 +16,13 @@
 
 package com.perl5.lang.perl.idea.actions;
 
-import com.intellij.openapi.actionSystem.ActionPlaces;
-import com.intellij.openapi.actionSystem.ActionUpdateThread;
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.*;
+import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.PsiDocumentManager;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.PsiManager;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
@@ -71,5 +74,29 @@ public abstract class PerlActionBase extends AnAction implements PerlAction {
 
   protected boolean alwaysHideDisabled() {
     return false;
+  }
+
+  protected static @Nullable PsiFile getPsiFile(@NotNull AnActionEvent event) {
+    final DataContext context = event.getDataContext();
+    final Project project = CommonDataKeys.PROJECT.getData(context);
+    if (project == null) {
+      return null;
+    }
+
+    final Editor editor = CommonDataKeys.EDITOR.getData(context);
+    if (editor != null) {
+      return PsiDocumentManager.getInstance(project).getPsiFile(editor.getDocument());
+    }
+    else {
+      VirtualFile virtualFile = getVirtualFile(event);
+      if (virtualFile != null) {
+        return PsiManager.getInstance(project).findFile(virtualFile);
+      }
+    }
+    return null;
+  }
+
+  protected static @Nullable VirtualFile getVirtualFile(@NotNull AnActionEvent event) {
+    return CommonDataKeys.VIRTUAL_FILE.getData(event.getDataContext());
   }
 }

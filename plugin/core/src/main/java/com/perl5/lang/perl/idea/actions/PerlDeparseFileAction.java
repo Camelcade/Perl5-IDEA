@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,6 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.util.PerlActionUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -59,7 +58,7 @@ public class PerlDeparseFileAction extends PurePerlActionBase {
       isEnabled ?
       PerlBundle.message(
         "perl.action.deparse.file.specific",
-        Objects.requireNonNull(PerlActionUtil.getPsiFileFromEvent(event)).getName()) :
+        Objects.requireNonNull(PerlActionBase.getPsiFile(event)).getName()) :
       PerlBundle.message("perl.action.deparse.file")
     );
     return isEnabled;
@@ -67,7 +66,7 @@ public class PerlDeparseFileAction extends PurePerlActionBase {
 
   @Override
   public void actionPerformed(@NotNull AnActionEvent event) {
-    PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
+    PsiFile file = PerlActionBase.getPsiFile(event);
 
     if (file == null) {
       return;

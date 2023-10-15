@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,6 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.util.PerlActionUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -69,7 +68,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
     if (!super.isEnabled(event)) {
       return false;
     }
-    final PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
+    final PsiFile file = PerlActionBase.getPsiFile(event);
     //noinspection ConstantConditions
     if (!file.isWritable()) {
       return false;
@@ -101,7 +100,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   @Override
   public void actionPerformed(@NotNull AnActionEvent event) {
     if (isEnabled(event)) {
-      final PsiFile file = PerlActionUtil.getPsiFileFromEvent(event);
+      final PsiFile file = PerlActionBase.getPsiFile(event);
 
       if (file == null) {
         return;
