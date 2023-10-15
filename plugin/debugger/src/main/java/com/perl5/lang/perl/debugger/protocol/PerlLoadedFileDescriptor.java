@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,14 @@
 
 package com.perl5.lang.perl.debugger.protocol;
 
+import com.intellij.openapi.util.NlsSafe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
 public class PerlLoadedFileDescriptor {
-  @SuppressWarnings("unused") private String path;
-  @SuppressWarnings("unused") private String name;
+  @SuppressWarnings("unused") private @NlsSafe String path;
+  @SuppressWarnings("unused") private @NlsSafe String name;
 
   public @NotNull String getPath() {
     return path;
@@ -32,7 +33,7 @@ public class PerlLoadedFileDescriptor {
     return name;
   }
 
-  public @NotNull String getNameOrPath() {
+  public @NotNull @NlsSafe String getNameOrPath() {
     return name == null ? path : name;
   }
 
