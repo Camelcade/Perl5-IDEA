@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.cpanminus.action;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.perl5.PerlBundle;
+import com.perl5.lang.perl.cpanminus.PerlCpanmBundle;
 import com.perl5.lang.perl.cpanminus.adapter.CpanminusAdapter;
 import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -27,7 +27,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlInstallCpanmAction extends PerlActionBase {
   public PerlInstallCpanmAction() {
     //noinspection DialogTitleCapitalization
-    super(PerlBundle.message("perl.action.install.cpanm"));
+    super(PerlCpanmBundle.message("perl.action.install.cpanm"));
   }
 
   @Override

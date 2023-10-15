@@ -34,8 +34,12 @@
       <add-to-group group-id="perl5.install"/>
     </action>
 
-    <action id="perl5.intsall.cpanm" class="com.perl5.lang.perl.cpanminus.action.PerlInstallCpanmAction">
+    <action id="perl5.install.cpanm" class="com.perl5.lang.perl.cpanminus.action.PerlInstallCpanmAction">
       <add-to-group group-id="perl5.install"/>
+    </action>
+    <action id="perl5.install.dependencies.cpanm"
+            class="com.perl5.lang.perl.cpanminus.action.PerlInstallDependenciesWithCpanMinusAction">
+      <add-to-group group-id="ProjectViewPopupMenu" anchor="first"/>
     </action>
   </actions>
 </idea-plugin>
