@@ -42,6 +42,7 @@ import com.intellij.rt.coverage.data.LineData;
 import com.intellij.rt.coverage.data.ProjectData;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
@@ -63,7 +64,11 @@ public class PerlCoverageRunner extends CoverageRunner {
     if (!(baseCoverageSuite instanceof PerlCoverageSuite)) {
       return null;
     }
-    if (ApplicationManager.getApplication().isDispatchThread()) {
+    if(PerlProjectManager.getSdk(baseCoverageSuite.getProject()) == null){
+      LOG.warn("Unable to load coverage for perl project because interpreter is not selected: " + baseCoverageSuite.getProject());
+      return null;
+    }
+   if (ApplicationManager.getApplication().isDispatchThread()) {
       final Ref<ProjectData> projectDataRef = new Ref<>();
 
       ProgressManager.getInstance().runProcessWithProgressSynchronously(
