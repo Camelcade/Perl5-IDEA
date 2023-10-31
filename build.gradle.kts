@@ -39,7 +39,7 @@ plugins {
   id("com.github.kt3k.coveralls") version "2.12.2"
   id("org.sonarqube") version "4.4.1.3373"
   id("org.jetbrains.qodana") version "0.1.13"
-  id("org.jetbrains.kotlin.jvm") version "1.9.10"
+  id("org.jetbrains.kotlin.jvm") version "1.9.20"
 }
 
 repositories {
