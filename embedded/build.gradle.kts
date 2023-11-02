@@ -41,6 +41,10 @@ intellij {
 }
 
 tasks {
+  buildPlugin {
+    archiveBaseName.set("lang.perl5.embedded")
+  }
+
   withType<PrepareSandboxTask> {
     pluginJar.set(shadowJar.flatMap {
       it.archiveFile
