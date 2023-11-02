@@ -81,6 +81,10 @@ intellij {
 }
 
 tasks {
+  buildPlugin {
+    archiveBaseName.set("lang.perl5")
+  }
+
   withType<PrepareSandboxTask> {
     inputs.dir("scripts")
     outputs.dir("$destinationDir/${intellij.pluginName.get()}/perl")

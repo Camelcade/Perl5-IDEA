@@ -27,3 +27,9 @@ dependencies {
 intellij {
   plugins.set(listOf(project(":plugin")))
 }
+
+tasks {
+  buildPlugin {
+    archiveBaseName.set("lang.mason.framework")
+  }
+}

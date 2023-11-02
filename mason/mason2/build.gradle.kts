@@ -42,6 +42,10 @@ intellij {
 }
 
 tasks {
+  buildPlugin {
+    archiveBaseName.set("lang.mason2")
+  }
+
   withType<PrepareSandboxTask> {
     pluginJar.set(shadowJar.flatMap {
       it.archiveFile

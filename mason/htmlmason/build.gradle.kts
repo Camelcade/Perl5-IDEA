@@ -43,6 +43,10 @@ intellij {
 }
 
 tasks {
+  buildPlugin {
+    archiveBaseName.set("lang.htmlmason")
+  }
+
   withType<PrepareSandboxTask> {
     pluginJar.set(shadowJar.flatMap {
       it.archiveFile
