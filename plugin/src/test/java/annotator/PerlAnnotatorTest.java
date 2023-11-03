@@ -282,11 +282,9 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
     doDeprecationTest();
   }
 
-  // Caused by multiple entities created from one identifier
   @Test
   public void testClassAccessorDeprecation() {
-    //noinspection deprecation
-    ExpectedHighlightingData.expectedDuplicatedHighlighting(this::doDeprecationTest);
+    doDeprecationTest();
   }
 
   @Test
