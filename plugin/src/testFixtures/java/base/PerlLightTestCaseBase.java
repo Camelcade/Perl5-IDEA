@@ -111,6 +111,7 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
@@ -450,11 +451,13 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
         PerlProjectManager perlProjectManager = PerlProjectManager.getInstance(getProject());
         ProjectJdkImpl testSdk = PerlSdkTable.getInstance().createSdk("test");
-        testSdk.setSdkAdditionalData(new PerlSdkAdditionalData(
+        var sdkModificator = testSdk.getSdkModificator();
+        sdkModificator.setSdkAdditionalData(new PerlSdkAdditionalData(
           PerlHostHandler.getDefaultHandler().createData(),
           PerlVersionManagerData.getDefault(),
           PerlImplementationHandler.getDefaultHandler().createData(),
           PerlConfig.empty()));
+        WriteAction.run(sdkModificator::commitChanges);
         PerlSdkTable.getInstance().addJdk(testSdk, myPerlLightTestCaseDisposable);
         perlProjectManager.setProjectSdk(testSdk);
         perlProjectManager.addExternalLibrary(libdir);

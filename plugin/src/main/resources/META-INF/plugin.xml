@@ -253,6 +253,8 @@
     <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlDirectoryIndex"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlNamesCache"/>
 
+    <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
+
     <postStartupActivity implementation="com.perl5.lang.perl.xsubs.PerlXSubsStartupActivity"/>
 
     <treeStructureProvider implementation="com.perl5.lang.perl.idea.project.PerlTreeStructureProvider"/>

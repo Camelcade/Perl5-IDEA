@@ -18,6 +18,8 @@ package com.perl5.lang.perl.idea.sdk;
 
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkAdditionalData;
+import com.intellij.openapi.projectRoots.SdkModificator;
+import com.intellij.openapi.projectRoots.impl.SdkAdditionalDataBase;
 import com.intellij.openapi.util.JDOMUtil;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -35,7 +37,7 @@ import org.jetbrains.annotations.TestOnly;
 
 import java.util.Objects;
 
-public class PerlSdkAdditionalData implements SaveAwareSdkAdditionalData {
+public class PerlSdkAdditionalData extends SdkAdditionalDataBase implements SaveAwareSdkAdditionalData {
   private final @NotNull PerlHostData<?, ?> myHostData;
   private final @NotNull PerlVersionManagerData<?, ?> myVersionManagerData;
   private final @NotNull PerlImplementationData<?, ?> myImplementationData;
@@ -67,7 +69,15 @@ public class PerlSdkAdditionalData implements SaveAwareSdkAdditionalData {
     return myConfig;
   }
 
+  @Override
+  protected void markInternalsAsCommited(@NotNull Throwable commitStackTrace) {
+    myHostData.markAsCommited(commitStackTrace);
+    myVersionManagerData.markAsCommited(commitStackTrace);
+    myImplementationData.markAsCommited(commitStackTrace);
+  }
+
   void setConfig(@NotNull PerlConfig config) {
+    assertWritable();
     myConfig = config;
   }
 
@@ -94,8 +104,17 @@ public class PerlSdkAdditionalData implements SaveAwareSdkAdditionalData {
     return sdk == null ? null : ObjectUtils.tryCast(sdk.getSdkAdditionalData(), PerlSdkAdditionalData.class);
   }
 
+  @Contract("null -> null")
+  public static @Nullable PerlSdkAdditionalData from(@Nullable SdkModificator sdkModificator) {
+    return sdkModificator == null ? null : ObjectUtils.tryCast(sdkModificator.getSdkAdditionalData(), PerlSdkAdditionalData.class);
+  }
+
   public static @NotNull PerlSdkAdditionalData notNullFrom(@NotNull Sdk sdk) {
     return Objects.requireNonNull(from(sdk), () -> "No additional data in " + sdk + "; additionalData: " + sdk.getSdkAdditionalData());
+  }
+
+  public static @NotNull PerlSdkAdditionalData notNullFrom(@NotNull SdkModificator sdkModificator) {
+    return Objects.requireNonNull(from(sdkModificator), () -> "No additional data in " + sdkModificator + "; additionalData: " + sdkModificator.getSdkAdditionalData());
   }
 
   @Override
