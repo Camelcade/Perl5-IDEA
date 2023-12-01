@@ -16,8 +16,11 @@
 
 package com.perl5.lang.perl.idea.sdk;
 
+import com.esotericsoftware.kryo.kryo5.util.Null;
+import com.intellij.openapi.diagnostic.Logger;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Base class for all sub-elements for {@link PerlSdkAdditionalData}
@@ -25,9 +28,29 @@ import org.jetbrains.annotations.NotNull;
  * @param <Handler> for this data
  */
 public abstract class AbstractPerlData<Data extends AbstractPerlData<Data, Handler>, Handler extends AbstractPerlHandler<Data, Handler>> {
+  private static final Logger LOG = Logger.getInstance(AbstractPerlData.class);
+  private Throwable myCommitStackTrace = null;
+
+  public final void markAsCommited(@NotNull Throwable commitStackTrace) {
+    if (myCommitStackTrace == null) {
+      myCommitStackTrace = commitStackTrace;
+    }
+  }
+
+  protected final boolean isWritable() {
+    return myCommitStackTrace == null;
+  }
+
+  protected final void assertWritable() {
+    if (!isWritable()) {
+      LOG.error(new Throwable("Additional sdk data can't be directly modified, see javadoc for the assertion.", myCommitStackTrace));
+    }
+  }
+
   private final @NotNull Handler myHandler;
 
   protected AbstractPerlData(@NotNull Handler handler) {
+    assertWritable();
     myHandler = handler;
   }
 
