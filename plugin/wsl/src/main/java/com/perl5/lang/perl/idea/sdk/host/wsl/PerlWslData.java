@@ -69,6 +69,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
   }
 
   void setDistributionId(String distributionId) {
+    assertWritable();
     myDistributionId = distributionId;
   }
 
