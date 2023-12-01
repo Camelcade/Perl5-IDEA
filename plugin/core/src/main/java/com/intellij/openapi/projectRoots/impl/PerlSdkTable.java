@@ -65,7 +65,7 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
 
     for (Element child : element.getChildren(PERL)) {
       ProjectJdkImpl sdk = new ProjectJdkImpl(null, null);
-      sdk.readExternal(child, this);
+      sdk.readExternal(child, this::getSdkTypeByName);
       myInterpretersList.add(sdk);
     }
   }
@@ -182,5 +182,10 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
 
   public static PerlSdkTable getInstance() {
     return ApplicationManager.getApplication().getService(PerlSdkTable.class);
+  }
+
+  @Override
+  public void saveOnDisk() {
+    throw new RuntimeException("Not supposed to be used for the perl plugin, not implemented");
   }
 }
