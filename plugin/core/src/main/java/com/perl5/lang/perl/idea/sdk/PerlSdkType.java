@@ -20,6 +20,7 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.*;
@@ -157,7 +158,7 @@ public class PerlSdkType extends SdkType {
       }
     }
 
-    ApplicationManager.getApplication().invokeAndWait(sdkModificator::commitChanges);
+    ApplicationManager.getApplication().invokeAndWait(() -> WriteAction.run(sdkModificator::commitChanges));
     PerlRunUtil.setProgressText(oldText);
   }
 
@@ -314,7 +315,8 @@ public class PerlSdkType extends SdkType {
       suggestSdkName(perlVersionDescriptor, hostData, versionManagerData), PerlSdkTable.getInstance().getInterpreters());
 
     final ProjectJdkImpl newSdk = PerlSdkTable.getInstance().createSdk(newSdkName);
-    newSdk.setHomePath(interpreterPath);
+    var sdkModificator = newSdk.getSdkModificator();
+    sdkModificator.setHomePath(interpreterPath);
 
     PerlImplementationData<?, ?> implementationData = PerlImplementationHandler.createData(
       interpreterPath, hostData, versionManagerData);
@@ -323,8 +325,9 @@ public class PerlSdkType extends SdkType {
       return;
     }
 
-    newSdk.setVersionString(perlVersionDescriptor.getVersionString());
-    newSdk.setSdkAdditionalData(new PerlSdkAdditionalData(hostData, versionManagerData, implementationData, PerlConfig.empty()));
+    sdkModificator.setVersionString(perlVersionDescriptor.getVersionString());
+    sdkModificator.setSdkAdditionalData(new PerlSdkAdditionalData(hostData, versionManagerData, implementationData, PerlConfig.empty()));
+    ApplicationManager.getApplication().invokeAndWait(() -> WriteAction.run(sdkModificator::commitChanges));
     PerlConfig.init(newSdk);
     sdkConsumer.accept(newSdk);
   }

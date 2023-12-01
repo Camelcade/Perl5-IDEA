@@ -17,9 +17,12 @@
 package com.perl5.lang.perl.idea.sdk;
 
 import com.intellij.configurationStore.XmlSerializer;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.xmlb.annotations.Tag;
@@ -50,11 +53,11 @@ public final class PerlConfig {
 
   @SuppressWarnings("unused")
   private PerlConfig() {
-    this(new HashMap<>());
+    this(Collections.emptyMap());
   }
 
   private PerlConfig(@NotNull Map<String, String> config) {
-    myConfig = config;
+    myConfig = Collections.unmodifiableMap(new HashMap<>(config));
   }
 
   @Contract("null->null")
@@ -120,7 +123,9 @@ public final class PerlConfig {
         () -> readConfig(sdk), PerlBundle.message("dialog.title.reading.perl.config"), false, null
       );
       if (perlConfig != null) {
-        PerlSdkAdditionalData.notNullFrom(sdk).setConfig(perlConfig);
+        var sdkModificator = sdk.getSdkModificator();
+        PerlSdkAdditionalData.notNullFrom(sdkModificator).setConfig(perlConfig);
+        ApplicationManager.getApplication().invokeAndWait(()-> WriteAction.run(sdkModificator::commitChanges));
       }
     }
     finally {

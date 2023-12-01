@@ -31,6 +31,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.messages.MessageBus;
 import com.intellij.util.messages.Topic;
 import com.perl5.lang.perl.idea.PerlPathMacros;
+import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
@@ -64,9 +65,14 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
     myInterpretersList.clear();
 
     for (Element child : element.getChildren(PERL)) {
-      ProjectJdkImpl sdk = new ProjectJdkImpl(null, null);
-      sdk.readExternal(child, this);
-      myInterpretersList.add(sdk);
+      ProjectJdkImpl sdk = new ProjectJdkImpl("", PerlSdkType.INSTANCE);
+      sdk.readExternal(child);
+      if( PerlSdkAdditionalData.from((Sdk)sdk) != null){
+        myInterpretersList.add(sdk);
+      }
+      else{
+        LOG.warn("Dropped sdk with missing additional data, bad migration in 2024.1 EAP, re-add the sdk: " + sdk);
+      }
     }
   }
 
@@ -74,9 +80,14 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
   public Element getState() {
     Element element = new Element("state");
     for (Sdk sdk : myInterpretersList) {
-      Element e = new Element(PERL);
-      ((ProjectJdkImpl)sdk).writeExternal(e);
-      element.addContent(e);
+      if( PerlSdkAdditionalData.from(sdk) != null){
+        Element e = new Element(PERL);
+        ((ProjectJdkImpl)sdk).writeExternal(e);
+        element.addContent(e);
+      }
+      else{
+        LOG.warn("Dropped sdk with missing additional data, corrupted on creation 2024.1 EAP, re-add the sdk: " + sdk);
+      }
     }
     return element;
   }
@@ -117,8 +128,13 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
 
   @Override
   public void addJdk(@NotNull Sdk jdk) {
-    myInterpretersList.add(jdk);
-    myMessageBus.syncPublisher(PERL_TABLE_TOPIC).jdkAdded(jdk);
+    if( PerlSdkAdditionalData.from(jdk) == null){
+      LOG.error("Attempt to add corrupted sdk: " + jdk);
+    }
+    else{
+      myInterpretersList.add(jdk);
+      myMessageBus.syncPublisher(PERL_TABLE_TOPIC).jdkAdded(jdk);
+    }
   }
 
   @Override
@@ -182,5 +198,10 @@ public class PerlSdkTable extends ProjectJdkTable implements PersistentStateComp
 
   public static PerlSdkTable getInstance() {
     return ApplicationManager.getApplication().getService(PerlSdkTable.class);
+  }
+
+  @Override
+  public void saveOnDisk() {
+    throw new RuntimeException("Not supposed to be used for the perl plugin, not implemented");
   }
 }

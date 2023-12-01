@@ -76,6 +76,7 @@ class PerlDockerData extends PerlHostData<PerlDockerData, PerlDockerHandler> {
   }
 
   public @NotNull PerlDockerData withImageName(@NotNull String imageName) {
+    assertWritable();
     myImageName = imageName;
     return this;
   }
