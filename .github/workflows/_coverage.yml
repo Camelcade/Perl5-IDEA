@@ -26,7 +26,7 @@ jobs:
           distribution: 'corretto'
           java-version: 17
 
-      - uses: actions/download-artifact@v3
+      - uses: actions/download-artifact@v4
         if: ${{ env.COVERALLS_REPO_TOKEN }}
         name: Tests Coverage
         with:
