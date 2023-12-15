@@ -30,7 +30,7 @@ jobs:
           arguments: buildPlugin --console plain
 
       - name: Upload Plugins
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: plugins
           path: |

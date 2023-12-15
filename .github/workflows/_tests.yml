@@ -63,7 +63,7 @@ jobs:
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-integration-plenv-${{ inputs.os }}
           path: |
@@ -108,7 +108,7 @@ jobs:
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-integration-asdf-${{ inputs.os }}
           path: |
@@ -156,7 +156,7 @@ jobs:
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-integration-perlbrew-${{ inputs.os }}
           path: |
@@ -204,7 +204,7 @@ jobs:
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-integration-perlbrew-libs-${{ inputs.os }}
           path: |
@@ -247,7 +247,7 @@ jobs:
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-integration-system-${{ inputs.os }}
           path: |
@@ -276,7 +276,7 @@ jobs:
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage-integration-docker-${{ inputs.os }}
           path: |
@@ -302,7 +302,7 @@ jobs:
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: light-tests-coverage-${{ inputs.os }}
           path: |
@@ -328,7 +328,7 @@ jobs:
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: heavy-tests-coverage-${{ inputs.os }}
           path: |

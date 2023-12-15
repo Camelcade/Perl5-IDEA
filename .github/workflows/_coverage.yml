@@ -45,7 +45,7 @@ jobs:
 
       - name: Upload Aggregated Coverage Report
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: coverage
           path: |
