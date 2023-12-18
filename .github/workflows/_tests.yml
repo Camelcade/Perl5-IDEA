@@ -65,7 +65,7 @@ jobs:
         if: ${{ env.COVERALLS_REPO_TOKEN }}
         uses: actions/upload-artifact@v3
         with:
-          name: coverage-integration-plenv-${{ inputs.results_suffix }}
+          name: coverage-integration-plenv-${{ inputs.os }}
           path: |
             **/jacoco/*.exec  
 
@@ -110,7 +110,7 @@ jobs:
         if: ${{ env.COVERALLS_REPO_TOKEN }}
         uses: actions/upload-artifact@v3
         with:
-          name: coverage-integration-asdf-${{ inputs.results_suffix }}
+          name: coverage-integration-asdf-${{ inputs.os }}
           path: |
             **/jacoco/*.exec  
 
@@ -158,7 +158,7 @@ jobs:
         if: ${{ env.COVERALLS_REPO_TOKEN }}
         uses: actions/upload-artifact@v3
         with:
-          name: coverage-integration-perlbrew-${{ inputs.results_suffix }}
+          name: coverage-integration-perlbrew-${{ inputs.os }}
           path: |
             **/jacoco/*.exec  
 
@@ -206,7 +206,7 @@ jobs:
         if: ${{ env.COVERALLS_REPO_TOKEN }}
         uses: actions/upload-artifact@v3
         with:
-          name: coverage-integration-perlbrew-libs-${{ inputs.results_suffix }}
+          name: coverage-integration-perlbrew-libs-${{ inputs.os }}
           path: |
             **/jacoco/*.exec  
 
