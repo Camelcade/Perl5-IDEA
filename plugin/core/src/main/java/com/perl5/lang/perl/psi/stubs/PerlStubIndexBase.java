@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
-import com.perl5.lang.perl.psi.PerlSubCallHandler;
+import com.perl5.lang.perl.psi.PerlSubCallHandlerVersionService;
 import com.perl5.lang.perl.util.PerlStubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +40,7 @@ public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringSt
     return super.getVersion() +
            VERSION +
            PerlValuesManager.getVersion() +
-           PerlSubCallHandler.getHandlersVersion() +
+           PerlSubCallHandlerVersionService.getHandlersVersion() +
            PerlPackageProcessorEP.getVersion();
   }
 

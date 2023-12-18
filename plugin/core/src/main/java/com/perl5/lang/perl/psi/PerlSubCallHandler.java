@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2023 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
-import com.intellij.openapi.util.AtomicClearableLazyValue;
-import com.intellij.openapi.util.ClearableLazyValue;
+import com.intellij.openapi.extensions.ExtensionPoint;
 import com.intellij.openapi.util.KeyedExtensionCollector;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
@@ -25,7 +24,6 @@ import com.intellij.util.KeyedLazyInstance;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementData;
 import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementStub;
-import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,23 +36,6 @@ public abstract class PerlSubCallHandler<CallData extends PerlSubCallElementData
              PerlSelfHinter {
   private static final KeyedExtensionCollector<PerlSubCallHandler<?>, String> EP =
     new KeyedExtensionCollector<>("com.perl5.subCallHandler");
-  private static final ClearableLazyValue<Integer> VERSION_PROVIDER = AtomicClearableLazyValue.createAtomic(() -> {
-    int version = 0;
-    //noinspection UnstableApiUsage
-    for (KeyedLazyInstance<PerlSubCallHandler<?>> instance : EP.getPoint().getExtensions()) {
-      version += instance.getInstance().getVersion();
-    }
-    return version;
-  });
-
-  static {
-    //noinspection UnstableApiUsage
-    Objects.requireNonNull(EP.getPoint()).addChangeListener(VERSION_PROVIDER::drop, PerlPluginUtil.getUnloadAwareDisposable());
-  }
-
-  public static int getHandlersVersion() {
-    return VERSION_PROVIDER.getValue();
-  }
 
   public final @NotNull CallData getCallData(@NotNull PerlSubCallElement subCallElement) {
     PerlSubCallElementStub stub = subCallElement.getGreenStub();
@@ -78,5 +59,9 @@ public abstract class PerlSubCallHandler<CallData extends PerlSubCallElementData
       return null;
     }
     return EP.findSingle(subName);
+  }
+
+  static @NotNull ExtensionPoint<@NotNull KeyedLazyInstance<PerlSubCallHandler<?>>> getExtensionPoint() {
+    return Objects.requireNonNull(EP.getPoint());
   }
 }
