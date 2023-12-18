@@ -27,7 +27,7 @@ import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.parser.builder.PerlPsiBuilderFactory;
 import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlSubCallHandler;
+import com.perl5.lang.perl.psi.PerlSubCallHandlerVersionService;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -48,7 +48,7 @@ public final class PerlFileElementType extends IStubFileElementType<PerlFileStub
     return super.getStubVersion() +
            VERSION +
            PerlValuesManager.getVersion() +
-           PerlSubCallHandler.getHandlersVersion() +
+           PerlSubCallHandlerVersionService.getHandlersVersion() +
            PerlPackageProcessorEP.getVersion();
   }
 
