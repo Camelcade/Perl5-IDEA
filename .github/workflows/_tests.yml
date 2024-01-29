@@ -56,7 +56,7 @@ jobs:
           rm -Rf ~/.plenv/cache ~/.plenv/build
 
       - name: Run Tests
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           cache-read-only: true
           arguments: test -PintegrationTests=1 --console plain
@@ -101,7 +101,7 @@ jobs:
           ~/.asdf/bin/asdf reshim perl
 
       - name: Run Tests
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           cache-read-only: true
           arguments: test -PintegrationTests=1 --console plain
@@ -149,7 +149,7 @@ jobs:
           perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }}@plugin_test cpanm --notest ${{ env.TEST_PERL_MODULES }}
 
       - name: Run Tests
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           cache-read-only: true
           arguments: test -PintegrationTests=1 --console plain
@@ -197,7 +197,7 @@ jobs:
           perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }}@plugin_test cpanm --notest ${{ env.TEST_PERL_MODULES }}
 
       - name: Run Tests
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           cache-read-only: true
           arguments: test -PintegrationTests=1 --console plain
@@ -240,7 +240,7 @@ jobs:
         run: cpanm --notest  ${{ env.TEST_PERL_MODULES }}
 
       - name: Run Tests
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           cache-read-only: true
           arguments: test -PintegrationTests=1 --console plain
@@ -269,7 +269,7 @@ jobs:
           java-version: 17
 
       - name: Run Tests
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           cache-read-only: true
           arguments: test -PintegrationTests=1 --console plain
@@ -295,7 +295,7 @@ jobs:
           java-version: 17
 
       - name: Run Tests
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           cache-read-only: true
           arguments: test -PlightTests=1 --console plain
@@ -321,7 +321,7 @@ jobs:
           java-version: 17
 
       - name: Run Tests
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           cache-read-only: true
           arguments: test -PheavyTests=1 --console plain -Pyoutrack.token=${{ env.YOUTRACK_TOKEN && env.YOUTRACK_TOKEN || 'skip' }}

@@ -34,7 +34,7 @@ jobs:
 
       - name: Build Jar
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           cache-read-only: true
           arguments: jar

@@ -34,7 +34,7 @@ jobs:
           java-version: 17
 
       - name: Execute Gradle build
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           cache-read-only: false
           arguments: jar instrumentTest --console plain
