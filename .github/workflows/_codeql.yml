@@ -38,7 +38,7 @@ jobs:
           # queries: security-extended,security-and-quality
 
       - name: Execute Gradle build
-        uses: gradle/gradle-build-action@v2
+        uses: gradle/gradle-build-action@v3
         with:
           cache-read-only: true
           arguments: jar --console plain
