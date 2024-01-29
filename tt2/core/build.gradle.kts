@@ -65,4 +65,7 @@ tasks {
   withType<KotlinCompile>{
     dependsOn(generateLexerTask)
   }
+  withType<GenerateParserTask> {
+    classpath(setupDependencies.flatMap { it.idea.map { idea -> idea.classes.resolve("lib/opentelemetry.jar") } })
+  }
 }
