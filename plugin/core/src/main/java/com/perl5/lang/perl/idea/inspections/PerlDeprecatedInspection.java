@@ -25,6 +25,9 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * fixme butify this
  */
@@ -32,6 +35,8 @@ public class PerlDeprecatedInspection extends PerlInspection {
   @Override
   public @NotNull PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
+      private Set<PsiElement> myMarkedElements = new HashSet<>();
+
       @Override
       public void visitSubNameElement(@NotNull PerlSubNameElement o) {
         PsiElement container = o.getParent();
@@ -93,7 +98,7 @@ public class PerlDeprecatedInspection extends PerlInspection {
       public void visitPerlSubElement(@NotNull PerlSubElement o) {
         if (o.isDeprecated()) {
           PsiElement nameIdentifier = o.getNameIdentifier();
-          if (nameIdentifier != null) {
+          if (nameIdentifier != null && myMarkedElements.add(nameIdentifier)) {
             markDeprecated(holder, nameIdentifier, PerlBundle.message("perl.deprecated.sub"));
           }
         }
