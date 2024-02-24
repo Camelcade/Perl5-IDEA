@@ -50,7 +50,7 @@
   </content>
 
   <extensionPoints>
-    <extensionPoint name="packageProcessor" beanClass="com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP">
+    <extensionPoint name="packageProcessor" beanClass="com.intellij.util.KeyedLazyInstanceEP" dynamic="true">
       <with attribute="implementationClass"
             implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
     </extensionPoint>
@@ -70,7 +70,8 @@
     <extensionPoint name="fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider" dynamic="true"/>
     <extensionPoint name="parserExtension" interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension" dynamic="true"/>
     <extensionPoint name="importsProvider" interface="com.perl5.lang.perl.extensions.imports.PerlImportsProvider" dynamic="true"/>
-    <extensionPoint name="implicitSubsProvider" interface="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider"/>
+    <extensionPoint name="implicitSubsProvider" interface="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider"
+                    dynamic="true"/>
     <extensionPoint name="settings.configurable.extension"
                     interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension" dynamic="true"/>
     <extensionPoint name="directoryConfigurationProvider" interface="com.perl5.lang.perl.idea.project.PerlDirectoryConfigurationProvider"

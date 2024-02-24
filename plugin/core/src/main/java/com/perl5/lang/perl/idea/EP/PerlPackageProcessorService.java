@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,36 +16,39 @@
 
 package com.perl5.lang.perl.idea.EP;
 
+import com.intellij.openapi.Disposable;
+import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.components.Service;
 import com.intellij.openapi.util.AtomicClearableLazyValue;
 import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.util.KeyedExtensionCollector;
 import com.intellij.util.KeyedLazyInstance;
-import com.intellij.util.KeyedLazyInstanceEP;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
-import com.perl5.lang.perl.util.PerlPluginUtil;
 
 import java.util.Objects;
 
-
-public class PerlPackageProcessorEP extends KeyedLazyInstanceEP<PerlPackageProcessor> {
+@Service
+public final class PerlPackageProcessorService implements Disposable {
   public static final KeyedExtensionCollector<PerlPackageProcessor, String> EP =
     new KeyedExtensionCollector<>("com.perl5.packageProcessor");
 
-  private static final ClearableLazyValue<Integer> VERSION_PROVIDER = AtomicClearableLazyValue.createAtomic(() -> {
+  private final ClearableLazyValue<Integer> myVersionProvider = AtomicClearableLazyValue.createAtomic(() -> {
     int version = 0;
-    //noinspection UnstableApiUsage
     for (KeyedLazyInstance<PerlPackageProcessor> instance : Objects.requireNonNull(EP.getPoint()).getExtensionList()) {
       version += instance.getInstance().getVersion();
     }
     return version;
   });
 
-  static {
-    //noinspection UnstableApiUsage
-    Objects.requireNonNull(EP.getPoint()).addChangeListener(VERSION_PROVIDER::drop, PerlPluginUtil.getUnloadAwareDisposable());
+  public PerlPackageProcessorService() {
+    Objects.requireNonNull(EP.getPoint()).addChangeListener(myVersionProvider::drop, this);
   }
 
   public static int getVersion() {
-    return VERSION_PROVIDER.getValue();
+    return ApplicationManager.getApplication().getService(PerlPackageProcessorService.class).myVersionProvider.getValue();
+  }
+
+  @Override
+  public void dispose() {
   }
 }
