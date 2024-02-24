@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorDefault;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlVersionProcessor;
-import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
+import com.perl5.lang.perl.idea.EP.PerlPackageProcessorService;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
@@ -109,7 +109,7 @@ public abstract class PerlUseStatementElementBase extends PerlPolyNamedElement<P
     // package name processor
     String packageName = getPackageName();
     if (packageName != null) {
-      packageProcessor = PerlPackageProcessorEP.EP.findSingle(packageName);
+      packageProcessor = PerlPackageProcessorService.EP.findSingle(packageName);
     }
     else if (getVersionElement() != null) {
       packageProcessor = PerlVersionProcessor.getInstance();

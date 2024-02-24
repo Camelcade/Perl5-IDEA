@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.StubBuilder;
 import com.intellij.psi.stubs.*;
 import com.intellij.psi.tree.IStubFileElementType;
-import com.perl5.lang.perl.idea.EP.PerlPackageProcessorEP;
+import com.perl5.lang.perl.idea.EP.PerlPackageProcessorService;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.parser.builder.PerlPsiBuilderFactory;
 import com.perl5.lang.perl.psi.PerlFile;
@@ -49,7 +49,7 @@ public final class PerlFileElementType extends IStubFileElementType<PerlFileStub
            VERSION +
            PerlValuesManager.getVersion() +
            PerlSubCallHandlerVersionService.getHandlersVersion() +
-           PerlPackageProcessorEP.getVersion();
+           PerlPackageProcessorService.getVersion();
   }
 
   @Override
