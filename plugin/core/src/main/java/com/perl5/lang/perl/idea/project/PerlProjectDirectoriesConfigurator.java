@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,6 @@ import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.startup.StartupActivity;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
 import com.intellij.openapi.vfs.newvfs.BulkFileListener;
@@ -43,9 +42,6 @@ import org.jetbrains.concurrency.CancellablePromise;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 @Service(Service.Level.PROJECT)
 public final class PerlProjectDirectoriesConfigurator implements Disposable, BulkFileListener, JpsProjectLoadedListener {
@@ -93,7 +89,7 @@ public final class PerlProjectDirectoriesConfigurator implements Disposable, Bul
     }
   }
 
-  private void queueRescan() {
+  void queueRescan() {
     if( ApplicationManager.getApplication().isUnitTestMode()){
       return;
     }
@@ -117,22 +113,12 @@ public final class PerlProjectDirectoriesConfigurator implements Disposable, Bul
   }
 
   @SuppressWarnings("MethodOnlyUsedFromInnerClass")
-  private static @Nullable PerlProjectDirectoriesConfigurator getInstance(@NotNull Project project) {
+  static @Nullable PerlProjectDirectoriesConfigurator getInstance(@NotNull Project project) {
     return project.isDefault() ? null : project.getService(PerlProjectDirectoriesConfigurator.class);
   }
 
   @Override
   public void dispose() {
-  }
-
-  public static final class Starter implements StartupActivity {
-    @Override
-    public void runActivity(@NotNull Project project) {
-      var service = getInstance(project);
-      if (service != null) {
-        service.queueRescan();
-      }
-    }
   }
 
   @TestOnly

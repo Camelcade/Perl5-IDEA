@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,12 +23,9 @@ import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.DumbAware;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
-import com.intellij.openapi.startup.StartupActivity;
-import com.intellij.openapi.startup.StartupManager;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -121,7 +118,7 @@ public class MojoProjectManager implements Disposable {
   /**
    * Queues model update
    */
-  private void scheduleUpdate() {
+  void scheduleUpdate() {
     LOG.debug("Scheduling update");
     myUpdateQueue.queue(Update.create(this, this::updateModel));
   }
@@ -262,21 +259,6 @@ public class MojoProjectManager implements Disposable {
 
   public static @NotNull MojoProjectManager getInstance(@NotNull Project project) {
     return project.getService(MojoProjectManager.class);
-  }
-
-  public static class Starter implements StartupActivity, DumbAware {
-    @Override
-    public void runActivity(@NotNull Project project) {
-      if (project.isDefault()) {
-        return;
-      }
-      StartupManager.getInstance(project).runAfterOpened(() -> ReadAction.run(() -> {
-        if (!project.isDisposed()) {
-          LOG.debug("Project is initialized");
-          getInstance(project).scheduleUpdate();
-        }
-      }));
-    }
   }
 
   private static class Model {
