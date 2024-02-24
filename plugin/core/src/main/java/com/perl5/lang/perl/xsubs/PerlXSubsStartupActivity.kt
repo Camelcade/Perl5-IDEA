@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,16 +14,13 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.xsubs;
+package com.perl5.lang.perl.xsubs
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.startup.StartupActivity;
-import com.intellij.openapi.startup.StartupManager;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.startup.ProjectActivity
 
-public class PerlXSubsStartupActivity implements StartupActivity {
-  @Override
-  public void runActivity(@NotNull Project project) {
-    StartupManager.getInstance(project).runAfterOpened(() -> PerlXSubsState.getInstance(project).rescanFiles(null));
+class PerlXSubsStartupActivity : ProjectActivity {
+  override suspend fun execute(project: Project) {
+    PerlXSubsState.getInstance(project).rescanFiles(null)
   }
 }

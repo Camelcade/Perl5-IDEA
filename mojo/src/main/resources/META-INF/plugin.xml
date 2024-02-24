@@ -92,7 +92,7 @@
         implementation="com.perl5.lang.mojolicious.idea.modules.MojoTemplateSourceRootEditHandler"/>
 
     <projectService serviceImplementation="com.perl5.lang.mojolicious.model.MojoProjectManager"/>
-    <postStartupActivity implementation="com.perl5.lang.mojolicious.model.MojoProjectManager$Starter"/>
+    <postStartupActivity implementation="com.perl5.lang.mojolicious.model.MojoProjectManagerStarter"/>
 
     <treeStructureProvider implementation="com.perl5.lang.mojolicious.idea.projectView.MojoTreeStructureProvider"/>
   </extensions>
