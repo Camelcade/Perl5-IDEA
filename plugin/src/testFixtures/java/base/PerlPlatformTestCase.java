@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,14 @@
 package base;
 
 import categories.Integration;
-import com.intellij.execution.*;
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.actions.ConfigurationFromContext;
-import com.intellij.execution.configurations.ConfigurationFactory;
 import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.executors.DefaultRunExecutor;
-import com.intellij.execution.process.*;
+import com.intellij.execution.process.CapturingProcessAdapter;
+import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.process.ProcessOutput;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.runners.ProgramRunner;
 import com.intellij.execution.testframework.TestTreeView;
 import com.intellij.execution.testframework.sm.runner.SMTestProxy;
 import com.intellij.execution.testframework.sm.runner.ui.SMTestRunnerResultsForm;
@@ -36,18 +35,17 @@ import com.intellij.notification.Notifications;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.application.ApplicationManager;
-import com.intellij.openapi.application.impl.NonBlockingReadActionImpl;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.module.Module;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.roots.ModuleRootModificationUtil;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.util.Key;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -60,7 +58,6 @@ import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.ui.UIUtil;
 import com.intellij.util.ui.tree.TreeUtil;
 import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.cpan.adapter.CpanAdapter;
@@ -74,7 +71,6 @@ import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
-import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.concurrency.Promise;
@@ -88,8 +84,6 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
@@ -321,8 +315,13 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   protected @NotNull Pair<ExecutionEnvironment, RunContentDescriptor> runConfigurationAndWait(GenericPerlRunConfiguration runConfiguration) {
     Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
+    CapturingProcessAdapter capturingAdapter = new CapturingProcessAdapter();
     try {
-      execResult = executeConfiguration(runConfiguration, DefaultRunExecutor.EXECUTOR_ID);
+      execResult = PlatformTestUtil.executeConfiguration(runConfiguration, DefaultRunExecutor.EXECUTOR_ID, descriptor -> {
+        var processHandler = descriptor.getProcessHandler();
+        assertNotNull(processHandler);
+        processHandler.addProcessListener(capturingAdapter);
+      });
     }
     catch (InterruptedException e) {
       throw new RuntimeException(e);
@@ -331,77 +330,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     ProcessHandler processHandler = contentDescriptor.getProcessHandler();
     assertNotNull(processHandler);
     waitForProcessFinish(processHandler);
+    ADAPTER_KEY.set(execResult.getFirst(), capturingAdapter);
     return execResult;
-  }
-
-  /**
-   * Copy of {@link com.intellij.testFramework.PlatformTestUtil#executeConfiguration(RunConfiguration, String)} without waiting
-   */
-  protected Pair<ExecutionEnvironment, RunContentDescriptor> executeConfiguration(@NotNull RunConfiguration runConfiguration,
-                                                                                  @NotNull String executorId) throws InterruptedException {
-    Executor executor = ExecutorRegistry.getInstance().getExecutorById(executorId);
-    assertNotNull("Unable to find executor: " + executorId, executor);
-    return executeConfiguration(runConfiguration, executor);
-  }
-
-  protected @NotNull Pair<ExecutionEnvironment, RunContentDescriptor> executeConfiguration(@NotNull RunConfiguration runConfiguration,
-                                                                                           Executor executor) throws InterruptedException {
-    Project project = runConfiguration.getProject();
-    ConfigurationFactory factory = runConfiguration.getFactory();
-    if (factory == null) {
-      fail("No factory found for: " + runConfiguration);
-    }
-    RunnerAndConfigurationSettings runnerAndConfigurationSettings =
-      RunManager.getInstance(project).createConfiguration(runConfiguration, factory);
-    ProgramRunner<?> runner = ProgramRunner.getRunner(executor.getId(), runConfiguration);
-    if (runner == null) {
-      fail("No runner found for: " + executor.getId() + " and " + runConfiguration);
-    }
-    Ref<RunContentDescriptor> refRunContentDescriptor = new Ref<>();
-    ExecutionEnvironment executionEnvironment =
-      new ExecutionEnvironment(executor, runner, runnerAndConfigurationSettings, project);
-    CountDownLatch latch = new CountDownLatch(1);
-    ProgramRunnerUtil.executeConfigurationAsync(executionEnvironment, false, false, descriptor -> {
-      LOG.debug("Process started");
-      refRunContentDescriptor.set(descriptor);
-      ProcessHandler processHandler = descriptor.getProcessHandler();
-      assertNotNull(processHandler);
-      CapturingProcessAdapter capturingAdapter = new CapturingProcessAdapter();
-      processHandler.addProcessListener(capturingAdapter);
-      processHandler.addProcessListener(new ProcessAdapter() {
-        @Override
-        public void startNotified(@NotNull ProcessEvent event) {
-          LOG.debug("Process notified");
-        }
-
-        @Override
-        public void processTerminated(@NotNull ProcessEvent event) {
-          LOG.debug("Process terminated with " + event.getExitCode());
-        }
-
-        @Override
-        public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
-          LOG.debug(outputType + ": " + event.getText());
-        }
-      });
-      ADAPTER_KEY.set(executionEnvironment, capturingAdapter);
-      latch.countDown();
-    });
-    NonBlockingReadActionImpl.waitForAsyncTaskCompletion();
-    if (!latch.await(60, TimeUnit.SECONDS)) {
-      fail("Process failed to start");
-    }
-    RunContentDescriptor runContentDescriptor = refRunContentDescriptor.get();
-    ProcessHandler processHandler = runContentDescriptor.getProcessHandler();
-    assertNotNull(processHandler);
-    disposeOnPerlTearDown(runContentDescriptor);
-    disposeOnPerlTearDown(() -> {
-      if (!processHandler.isProcessTerminated()) {
-        processHandler.destroyProcess();
-      }
-      UIUtil.dispatchAllInvocationEvents();
-    });
-    return Pair.create(executionEnvironment, runContentDescriptor);
   }
 
   protected final @Nullable CapturingProcessAdapter getCapturingAdapter(@NotNull ExecutionEnvironment environment) {
@@ -490,7 +420,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected void runTestConfigurationWithExecutorAndCheckResultsWithFile(GenericPerlRunConfiguration runConfiguration, String executorId) {
     Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
     try {
-      execResult = executeConfiguration(runConfiguration, executorId);
+      execResult = PlatformTestUtil.executeConfiguration(runConfiguration, executorId, null);
     }
     catch (InterruptedException e) {
       throw new RuntimeException(e);

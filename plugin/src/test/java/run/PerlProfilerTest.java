@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.progress.EmptyProgressIndicator;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowManager;
@@ -45,7 +46,6 @@ import com.perl5.lang.perl.profiler.parser.PerlProfilerDumpWriter;
 import com.perl5.lang.perl.profiler.run.PerlProfilerProcess;
 import com.perl5.lang.perl.profiler.run.PerlProfilerRunProfileState;
 import com.perl5.lang.perl.profiler.run.PerlProfilerStartupMode;
-import com.pty4j.util.Pair;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
@@ -259,7 +259,7 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     var executorAndSettings = getExecutorAndSettings();
     Pair<ExecutionEnvironment, RunContentDescriptor> pair;
     try {
-      pair = executeConfiguration(runConfiguration, executorAndSettings.first);
+      pair = PlatformTestUtil.executeConfiguration(runConfiguration, executorAndSettings.first, null);
     }
     catch (InterruptedException e) {
       throw new RuntimeException(e);
