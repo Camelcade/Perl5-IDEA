@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.roots.ProjectFileIndex;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
@@ -36,10 +37,10 @@ import com.intellij.psi.PsiManager;
 import com.intellij.rt.coverage.data.ClassData;
 import com.intellij.rt.coverage.data.LineData;
 import com.intellij.rt.coverage.data.ProjectData;
+import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.coverage.PerlCoverageSuite;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
-import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -172,7 +173,7 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
   private @NotNull Pair<ExecutionEnvironment, RunContentDescriptor> runConfigurationWithCoverageAndWait(GenericPerlRunConfiguration runConfiguration) {
     Pair<ExecutionEnvironment, RunContentDescriptor> pair;
     try {
-      pair = executeConfiguration(runConfiguration, CoverageExecutor.EXECUTOR_ID);
+      pair = PlatformTestUtil.executeConfiguration(runConfiguration, CoverageExecutor.EXECUTOR_ID, null);
     }
     catch (InterruptedException e) {
       throw new RuntimeException(e);

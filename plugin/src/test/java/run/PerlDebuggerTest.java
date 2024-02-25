@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Trinity;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -53,7 +54,6 @@ import com.perl5.lang.perl.debugger.protocol.PerlStackFrameDescriptor;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
 import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
-import com.pty4j.util.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
@@ -303,7 +303,8 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
 
   private @NotNull Trinity<ExecutionEnvironment, RunContentDescriptor, XDebugSession> runConfigurationWithDebugger(@NotNull RunConfiguration runConfiguration) {
     try {
-      Pair<ExecutionEnvironment, RunContentDescriptor> pair = executeConfiguration(runConfiguration, DefaultDebugExecutor.EXECUTOR_ID);
+      Pair<ExecutionEnvironment, RunContentDescriptor>
+        pair = PlatformTestUtil.executeConfiguration(runConfiguration, DefaultDebugExecutor.EXECUTOR_ID, null);
       XDebugSession debugSession = XDebuggerManager.getInstance(getProject()).getDebugSession(pair.second.getExecutionConsole());
       assertNotNull(debugSession);
       disposeOnPerlTearDown(() -> {
