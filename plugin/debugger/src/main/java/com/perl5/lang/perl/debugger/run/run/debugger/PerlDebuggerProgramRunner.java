@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,12 +17,13 @@
 package com.perl5.lang.perl.debugger.run.run.debugger;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.configurations.RunProfile;
+import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.executors.DefaultDebugExecutor;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.ui.RunContentDescriptor;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugProcessStarter;
 import com.intellij.xdebugger.XDebugSession;
@@ -34,6 +35,7 @@ import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.concurrency.AsyncPromise;
 
 import java.util.Set;
 
@@ -64,21 +66,28 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
   }
 
   @Override
-  protected void doExecute(@NotNull ExecutionEnvironment env) throws ExecutionException {
-    FileDocumentManager.getInstance().saveAllDocuments();
-    ExecutionManager.getInstance(env.getProject()).startRunProfile(env, state -> {
-      if (!(state instanceof PerlDebugProfileStateBase)) {
-        LOG.error("PerlDebugProfileStateBase expected, got " + state + " for " + env);
-        throw new ExecutionException("Incorrect run state");
+  protected void doExecute(@NotNull RunProfileState state,
+                           @NotNull ExecutionEnvironment env,
+                           @NotNull AsyncPromise<RunContentDescriptor> result) throws ExecutionException {
+    if (!(state instanceof PerlDebugProfileStateBase)) {
+      LOG.error("PerlDebugProfileStateBase expected, got " + state + " for " + env);
+      throw new ExecutionException("Incorrect run state");
+    }
+    var executionResult = ((PerlDebugProfileStateBase)state).execute(env.getExecutor(), this);
+    ApplicationManager.getApplication().invokeLater(() -> {
+      try {
+        XDebugSession xDebugSession = XDebuggerManager.getInstance(env.getProject()).startSession(env, new XDebugProcessStarter() {
+          @Override
+          public @NotNull XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException {
+            return new PerlDebugProcess(session, (PerlDebugProfileStateBase)state, executionResult);
+          }
+        });
+        result.setResult(xDebugSession.getRunContentDescriptor());
       }
-      XDebugSession xDebugSession = XDebuggerManager.getInstance(env.getProject()).startSession(env, new XDebugProcessStarter() {
-        @Override
-        public @NotNull XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException {
-          return new PerlDebugProcess(session, (PerlDebugProfileStateBase)state,
-                                      ((PerlDebugProfileStateBase)state).execute(env.getExecutor()));
-        }
-      });
-      return xDebugSession.getRunContentDescriptor();
+      catch (ExecutionException e) {
+        LOG.error(e);
+        result.setError(e);
+      }
     });
   }
 }

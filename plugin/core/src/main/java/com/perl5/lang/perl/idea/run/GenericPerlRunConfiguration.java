@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAction;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -35,6 +36,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.Function;
+import com.intellij.util.concurrency.annotations.RequiresReadLock;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.execution.ParametersListUtil;
 import com.intellij.util.net.NetUtils;
@@ -389,7 +391,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     if (StringUtil.isNotEmpty(workDirectory)) {
       return workDirectory;
     }
-    return computeWorkingDirectory(project, computeNonNullScriptFile());
+    return ReadAction.compute(() -> computeWorkingDirectory(project, computeNonNullScriptFile()));
   }
 
   protected @NotNull PerlCommandLine createBaseCommandLine(@NotNull PerlRunProfileState perlRunProfileState) throws ExecutionException {
@@ -412,6 +414,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     return commandLine;
   }
 
+  @RequiresReadLock
   protected static @Nullable String computeWorkingDirectory(@NotNull Project project, @NotNull VirtualFile virtualFile) {
     var fileContentRoot = PerlFileUtil.getContentRoot(project, virtualFile);
     if (fileContentRoot != null) {

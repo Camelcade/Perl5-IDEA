@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.execution.configurations.RunConfiguration;
 import com.intellij.execution.testframework.sm.SMTestRunnerConnectionUtil;
 import com.intellij.execution.testframework.sm.runner.ui.SMTRunnerConsoleView;
 import com.intellij.execution.ui.ConsoleView;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -131,7 +132,7 @@ public abstract class PerlAbstractTestRunConfiguration extends GenericPerlRunCon
     var project = getProject();
     SMTRunnerConsoleView consoleView = new PerlSMTRunnerConsoleView(consoleProperties, splitterPropertyName)
       .withHostData(getEffectiveHostData());
-    SMTestRunnerConnectionUtil.initConsoleView(consoleView, getFrameworkName());
+    ApplicationManager.getApplication().invokeAndWait(() -> SMTestRunnerConnectionUtil.initConsoleView(consoleView, getFrameworkName()));
     PerlTerminalExecutionConsole.updatePredefinedFiltersLater(project, consoleView);
     return consoleView;
   }
