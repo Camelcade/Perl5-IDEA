@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
 package com.perl5.lang.perl.profiler.run;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.configurations.RunProfile;
-import com.intellij.execution.runners.DefaultProgramRunnerKt;
+import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.runners.ExecutionEnvironment;
+import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
@@ -33,6 +33,7 @@ import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.concurrency.AsyncPromise;
 
 import java.io.IOException;
 import java.util.Set;
@@ -96,37 +97,37 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
   }
 
   @Override
-  protected void doExecute(@NotNull ExecutionEnvironment environment) throws ExecutionException {
+  protected void doExecute(@NotNull RunProfileState state,
+                           @NotNull ExecutionEnvironment environment,
+                           @NotNull AsyncPromise<RunContentDescriptor> result) throws ExecutionException {
+    if (!(state instanceof PerlProfilerRunProfileState)) {
+      LOG.error("PerlProfilerRunProfileState expected, got " + state);
+      throw new ExecutionException("Incorrect run configuration state, see logs for details");
+    }
+    var profileResultsPath = ((PerlProfilerRunProfileState)state).getProfilingResultsPath();
+    LOG.info("Profiling results saved in: " + profileResultsPath);
+    if (FileUtil.isAncestor(PathManager.getSystemPath(), profileResultsPath.toString(), true)) {
+      try {
+        // fxime we probably should fix permissions here
+        FileUtil.delete(profileResultsPath);
+      }
+      catch (IOException e) {
+        throw new ExecutionException("Error removing old profiling data at " + profileResultsPath, e);
+      }
+    }
+    else {
+      LOG.error("Wrong profiler results directory: " + profileResultsPath);
+    }
+    //noinspection ResultOfMethodCallIgnored
+    profileResultsPath.toFile().mkdirs();
 
-    ExecutionManager.getInstance(environment.getProject()).startRunProfile(
-      environment, state -> {
-        if (!(state instanceof PerlProfilerRunProfileState)) {
-          LOG.error("PerlProfilerRunProfileState expected, got " + state);
-          throw new ExecutionException("Incorrect run configuration state, see logs for details");
-        }
-        var profileResultsPath = ((PerlProfilerRunProfileState)state).getProfilingResultsPath();
-        LOG.info("Profiling results saved in: " + profileResultsPath);
-        if (FileUtil.isAncestor(PathManager.getSystemPath(), profileResultsPath.toString(), true)) {
-          try {
-            // fxime we probably should fix permissions here
-            FileUtil.delete(profileResultsPath);
-          }
-          catch (IOException e) {
-            throw new ExecutionException("Error removing old profiling data at " + profileResultsPath, e);
-          }
-        }
-        else {
-          LOG.error("Wrong profiler results directory: " + profileResultsPath);
-        }
-        profileResultsPath.toFile().mkdirs();
-
-        var descriptor = DefaultProgramRunnerKt.executeState(state, environment, this);
-        if (descriptor == null) {
-          return null;
-        }
+    result.then(descriptor -> {
+      if (descriptor != null) {
         var profilerProcess = new PerlProfilerProcess(environment, descriptor, ((PerlProfilerRunProfileState)state));
         ProfilerToolWindowManager.getInstance(environment.getProject()).addProfilerProcessTab(profilerProcess, false);
-        return descriptor;
-      });
+      }
+      return descriptor;
+    });
+    createAndSetContentDescriptor(environment, state.execute(environment.getExecutor(), this), result);
   }
 }

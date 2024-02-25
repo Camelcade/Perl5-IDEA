@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,13 +17,19 @@
 package com.perl5.lang.perl.idea.run;
 
 import com.intellij.execution.ExecutionException;
+import com.intellij.execution.ExecutionResult;
+import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.configurations.RunnerSettings;
+import com.intellij.execution.runners.AsyncProgramRunner;
 import com.intellij.execution.runners.ExecutionEnvironment;
-import com.intellij.execution.runners.ProgramRunner;
+import com.intellij.execution.runners.RunContentBuilder;
+import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.util.concurrency.AppExecutorUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.adapters.PackageManagerAdapterFactory;
@@ -31,26 +37,40 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.concurrency.AsyncPromise;
+import org.jetbrains.concurrency.Promise;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class GenericPerlProgramRunner implements ProgramRunner<RunnerSettings> {
+public abstract class GenericPerlProgramRunner extends AsyncProgramRunner<RunnerSettings> {
   private static final Logger LOG = Logger.getInstance(GenericPerlProgramRunner.class);
 
   protected abstract @Nullable PerlRunProfileState createState(@NotNull ExecutionEnvironment executionEnvironment) throws
                                                                                                                    ExecutionException;
 
   @Override
-  public final void execute(@NotNull ExecutionEnvironment environment) throws ExecutionException {
+  protected @NotNull Promise<RunContentDescriptor> execute(@NotNull ExecutionEnvironment environment, @NotNull RunProfileState state)
+    throws ExecutionException {
     FileDocumentManager.getInstance().saveAllDocuments();
+    AsyncPromise<RunContentDescriptor> result = new AsyncPromise<>();
     var missingModules = getMissingModules(environment);
     if (!missingModules.isEmpty() && handleMissingModules(environment, missingModules)) {
-      return;
+      result.setResult(null);
     }
-    doExecute(environment);
+    else {
+      AppExecutorUtil.getAppExecutorService().execute(() -> {
+        try {
+          doExecute(state, environment, result);
+        }
+        catch (ExecutionException e) {
+          result.setError(e);
+        }
+      });
+    }
+    return result;
   }
 
   /**
@@ -76,20 +96,23 @@ public abstract class GenericPerlProgramRunner implements ProgramRunner<RunnerSe
     if (request != Messages.YES) {
       return false;
     }
-    var packageManagerAdapter = PackageManagerAdapterFactory.create(sdk, project);
-    packageManagerAdapter.install(missingModules, () -> {
-      if (project.isDisposed()) {
-        return;
-      }
-      ApplicationManager.getApplication().invokeLater(() -> {
-        try {
-          doExecute(environment);
+
+    AppExecutorUtil.getAppExecutorService().execute(() -> {
+      var packageManagerAdapter = PackageManagerAdapterFactory.create(sdk, project);
+      ApplicationManager.getApplication().invokeLater(() -> packageManagerAdapter.install(missingModules, () -> {
+        if (project.isDisposed()) {
+          return;
         }
-        catch (ExecutionException e) {
-          LOG.warn("Error running environment after installation: " + environment + "; " + e.getMessage());
-        }
-      });
-    }, true);
+        ApplicationManager.getApplication().invokeLater(() -> {
+          try {
+            execute(environment);
+          }
+          catch (ExecutionException e) {
+            LOG.warn("Error running environment after installation: " + environment + "; " + e.getMessage());
+          }
+        });
+      }, true));
+    });
     return true;
   }
 
@@ -113,5 +136,20 @@ public abstract class GenericPerlProgramRunner implements ProgramRunner<RunnerSe
            : new HashSet<>();
   }
 
-  protected abstract void doExecute(@NotNull ExecutionEnvironment environment) throws ExecutionException;
+  protected static void createAndSetContentDescriptor(@NotNull ExecutionEnvironment environment,
+                                                      @Nullable ExecutionResult executionResult,
+                                                      @NotNull AsyncPromise<? super RunContentDescriptor> result) {
+    if (executionResult == null) {
+      result.setResult(null);
+    }
+    else {
+      ApplicationManager.getApplication().invokeLater(
+        () -> result.setResult(new RunContentBuilder(executionResult, environment).showRunContent(environment.getContentToReuse())),
+        ModalityState.any());
+    }
+  }
+
+  protected abstract void doExecute(@NotNull RunProfileState state,
+                                    @NotNull ExecutionEnvironment environment,
+                                    @NotNull AsyncPromise<RunContentDescriptor> result) throws ExecutionException;
 }

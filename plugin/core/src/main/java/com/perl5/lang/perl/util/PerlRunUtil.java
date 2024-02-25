@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -302,22 +303,23 @@ public final class PerlRunUtil {
    **/
   @Contract("null,_->null;_,null->null")
   public static @Nullable VirtualFile findScript(@Nullable Project project, @Nullable String scriptName) {
-    var sdk = PerlProjectManager.getSdk(project);
-    if (sdk == null || StringUtil.isEmpty(scriptName)) {
-      return null;
-    }
-    ApplicationManager.getApplication().assertReadAccessAllowed();
-    PerlOsHandler osHandler = PerlOsHandler.notNullFrom(sdk);
-    return getBinDirectories(project)
-      .map(root -> {
-        VirtualFile scriptFile = null;
-        if (osHandler.isMsWindows()) {
-          scriptFile = root.findChild(scriptName + ".bat");
-        }
-        return scriptFile != null ? scriptFile : root.findChild(scriptName);
-      })
-      .filter(Objects::nonNull)
-      .findFirst().orElse(null);
+    return ReadAction.nonBlocking(() -> {
+      var sdk = PerlProjectManager.getSdk(project);
+      if (sdk == null || StringUtil.isEmpty(scriptName)) {
+        return null;
+      }
+      PerlOsHandler osHandler = PerlOsHandler.notNullFrom(sdk);
+      return getBinDirectories(project)
+        .map(root -> {
+          VirtualFile scriptFile = null;
+          if (osHandler.isMsWindows()) {
+            scriptFile = root.findChild(scriptName + ".bat");
+          }
+          return scriptFile != null ? scriptFile : root.findChild(scriptName);
+        })
+        .filter(Objects::nonNull)
+        .findFirst().orElse(null);
+    }).executeSynchronously();
   }
 
 

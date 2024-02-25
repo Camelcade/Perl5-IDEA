@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,12 +20,11 @@ import com.intellij.coverage.CoverageDataManager;
 import com.intellij.coverage.CoverageExecutor;
 import com.intellij.coverage.CoverageRunnerData;
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.ExecutionManager;
 import com.intellij.execution.configurations.ConfigurationInfoProvider;
 import com.intellij.execution.configurations.RunProfile;
+import com.intellij.execution.configurations.RunProfileState;
 import com.intellij.execution.configurations.RunnerSettings;
 import com.intellij.execution.process.ProcessHandler;
-import com.intellij.execution.runners.DefaultProgramRunnerKt;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
@@ -34,6 +33,7 @@ import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.concurrency.AsyncPromise;
 
 import java.util.Set;
 
@@ -68,19 +68,19 @@ public class PerlCoverageProgramRunner extends GenericPerlProgramRunner {
   }
 
   @Override
-  protected void doExecute(@NotNull ExecutionEnvironment environment) throws ExecutionException {
-    ExecutionManager.getInstance(environment.getProject()).startRunProfile(environment, state -> {
-      GenericPerlRunConfiguration runConfiguration = (GenericPerlRunConfiguration)environment.getRunProfile();
-      RunContentDescriptor descriptor = DefaultProgramRunnerKt.executeState(state, environment, this);
-      if (descriptor == null) {
-        return null;
-      }
-      ProcessHandler processHandler = descriptor.getProcessHandler();
+  protected void doExecute(@NotNull RunProfileState state,
+                           @NotNull ExecutionEnvironment environment,
+                           @NotNull AsyncPromise<RunContentDescriptor> result) throws ExecutionException {
+    GenericPerlRunConfiguration runConfiguration = (GenericPerlRunConfiguration)environment.getRunProfile();
+
+    var executionResult = state.execute(environment.getExecutor(), this);
+    if (executionResult != null) {
+      ProcessHandler processHandler = executionResult.getProcessHandler();
       if (processHandler != null) {
         CoverageDataManager.getInstance(runConfiguration.getProject())
           .attachToProcess(processHandler, runConfiguration, environment.getRunnerSettings());
       }
-      return descriptor;
-    });
+    }
+    createAndSetContentDescriptor(environment, executionResult, result);
   }
 }
