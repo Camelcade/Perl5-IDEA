@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ package com.perl5.lang.perl.debugger;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonObject;
 import com.intellij.icons.AllIcons;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.util.NlsSafe;
-import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
@@ -45,17 +45,17 @@ import java.io.File;
 
 
 public class PerlStackFrame extends XStackFrame {
-  private final PerlStackFrameDescriptor myFrameDescriptor;
-  private final PerlExecutionStack myPerlExecutionStack;
-  private final PerlDebugThread myDebugThread;
-  private final NullableLazyValue<VirtualFile> myVirtualFile;
+  private final @NotNull PerlStackFrameDescriptor myFrameDescriptor;
+  private final @NotNull PerlExecutionStack myPerlExecutionStack;
+  private final @NotNull PerlDebugThread myDebugThread;
+  private final @Nullable VirtualFile myVirtualFile;
 
-  public PerlStackFrame(PerlStackFrameDescriptor frameDescriptor, PerlExecutionStack stack) {
+  public PerlStackFrame(@NotNull PerlStackFrameDescriptor frameDescriptor, @NotNull PerlExecutionStack stack) {
     myFrameDescriptor = frameDescriptor;
     myPerlExecutionStack = stack;
     myDebugThread = myPerlExecutionStack.getSuspendContext().getDebugThread();
 
-    myVirtualFile = NullableLazyValue.atomicLazyNullable(() -> {
+    myVirtualFile = ReadAction.nonBlocking(() -> {
       String remoteFilePath = myFrameDescriptor.getFileDescriptor().getPath();
       String localFilePath = myDebugThread.getDebugProfileState().mapPathToLocal(remoteFilePath);
       VirtualFile result = VfsUtil.findFileByIoFile(new File(localFilePath), false);
@@ -64,13 +64,13 @@ public class PerlStackFrame extends XStackFrame {
         String remoteFileUrl = PerlRemoteFileSystem.PROTOCOL_PREFIX + remoteFilePath;
         result = VirtualFileManager.getInstance().findFileByUrl(remoteFileUrl);
 
-        if (result == null) {    // suppose that we need to fetch file
+        if (result == null) {    // suppose that we need to fetch a file
           result = myDebugThread.loadRemoteSource(remoteFilePath);
         }
       }
 
       return result;
-    });
+    }).executeSynchronously();
 
     PerlLoadedFileDescriptor fileDescriptor = myFrameDescriptor.getFileDescriptor();
 
@@ -92,7 +92,7 @@ public class PerlStackFrame extends XStackFrame {
 
   @Override
   public @Nullable XSourcePosition getSourcePosition() {
-    VirtualFile virtualFile = myVirtualFile.getValue();
+    VirtualFile virtualFile = myVirtualFile;
     if (virtualFile != null) {
       return XSourcePositionImpl.create(virtualFile, myFrameDescriptor.getZeroBasedLine());
     }
@@ -180,7 +180,7 @@ public class PerlStackFrame extends XStackFrame {
   public String toString() {
     return "PerlStackFrame{" +
            "myFrameDescriptor=" + myFrameDescriptor +
-           ", myVirtualFile=" + myVirtualFile.getValue() +
+           ", myVirtualFile=" + myVirtualFile +
            '}';
   }
 }
