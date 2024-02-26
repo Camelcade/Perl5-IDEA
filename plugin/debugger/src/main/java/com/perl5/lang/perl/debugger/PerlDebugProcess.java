@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +62,8 @@ public class PerlDebugProcess extends XDebugProcess {
 
   public PerlDebugProcess(@NotNull XDebugSession session, PerlDebugProfileStateBase state, ExecutionResult executionResult) {
     super(session);
-    this.myExecutionResult = executionResult;
+    session.setPauseActionSupported(true);
+    myExecutionResult = executionResult;
     myDebugThread = new PerlDebugThread(session, state, executionResult);
     myDebugProfileState = state;
     myDebugThread.start();
