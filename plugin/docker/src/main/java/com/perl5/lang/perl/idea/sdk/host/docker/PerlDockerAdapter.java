@@ -110,6 +110,30 @@ class PerlDockerAdapter {
     return containerName;
   }
 
+  private boolean tryCopyWithTar(@NotNull String containerName, @NotNull String remotePath, @NotNull String localPath)
+    throws ExecutionException {
+    File localPathFile = new File(localPath);
+    File remotePathFile = new File(remotePath);
+    String command = String.join(" ", DOCKER_EXECUTABLE, EXEC, INTERACTIVELY, containerName,
+                                 "tar", "hCcF", remotePathFile.getParent(), "-", remotePathFile.getName(),
+                                 "|", "tar", "Cxf", localPathFile.getParent(), "-");
+    if (SystemInfo.isLinux) {
+      try {
+        checkOutput(PerlHostData.execAndGetOutput(
+          new PerlCommandLine("sh").withHostData(PerlHostHandler.getDefaultHandler().createData())
+            .withParameters("-c", command)));
+        return true;
+      }
+      catch (PerlExecutionException e) {
+        LOG.error(e);
+      }
+    }
+    else {
+      LOG.error("Try execute command: " + command);
+    }
+    return false;
+  }
+
   public void copyRemote(@NotNull String containerName, @NotNull String remotePath, @NotNull String localPath) throws ExecutionException {
     try {
       File localPathFile = new File(localPath);
@@ -119,7 +143,8 @@ class PerlDockerAdapter {
     catch (PerlExecutionException e) {
       ProcessOutput processOutput = e.getProcessOutput();
       String stderr = processOutput.getStderr();
-      if (!stderr.contains("no such file or directory") &&
+      if (!(stderr.contains("invalid symlink") && tryCopyWithTar(containerName, remotePath, localPath)) &&
+          !stderr.contains("no such file or directory") &&
           !stderr.contains("Could not find the file") &&
           !stderr.contains("No such container:path")) {
         throw e;
@@ -171,7 +196,7 @@ class PerlDockerAdapter {
 
   private @NotNull List<PerlFileDescriptor> doListFiles(@NotNull String containerName, @NotNull String path) throws ExecutionException {
     try {
-      ProcessOutput output = runCommand(EXEC, containerName, "ls", "-LAs", "--classify", path);
+      ProcessOutput output = runCommand(EXEC, INTERACTIVELY, containerName, "ls", "-LAs", "--classify", path);
       return output.getStdoutLines().stream()
         .map(it -> PerlFileDescriptor.create(path, it))
         .filter(Objects::nonNull)
