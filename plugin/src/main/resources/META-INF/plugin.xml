@@ -580,7 +580,7 @@
                      key="inspection.namespace.recursive.inheritance.display.name"/>
 
     <localInspection language="Perl5"
-                     shortName="UnreachableCode" groupKey="inspection.group.perl"
+                     shortName="PerlUnreachableCode" groupKey="inspection.group.perl"
                      enabledByDefault="true" level="ERROR"
                      implementationClass="com.perl5.lang.perl.idea.inspections.PerlUnreachableCodeInspection"
                      key="inspection.unreachable.code.display.name"/>
