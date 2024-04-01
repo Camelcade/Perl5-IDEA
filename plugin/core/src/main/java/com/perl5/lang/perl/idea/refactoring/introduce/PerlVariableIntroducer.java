@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.refactoring.introduce;
 
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
@@ -42,7 +43,7 @@ public class PerlVariableIntroducer extends InplaceVariableIntroducer<PsiElement
     LinkedHashSet<String> nameSuggestions = new LinkedHashSet<>();
     assert myElementToRename instanceof PerlVariableDeclaration;
     PerlNameSuggestionProvider.suggestNames((PerlVariableDeclarationElement)myElementToRename, nameSuggestions);
-    boolean result = super.performInplaceRefactoring(nameSuggestions);
+    boolean result = ReadAction.compute(()-> super.performInplaceRefactoring(nameSuggestions));
     if (!result) {
       finish(false);
     }
