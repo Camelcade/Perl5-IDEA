@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.refactoring.introduce;
 
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.util.Segment;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
@@ -45,7 +46,7 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
 
   @Override
   public String toString() {
-    return isValid() ? getPlace() + ";" + getTextRange() + "; " + render() : "INVALID";
+    return ReadAction.compute(() -> isValid() ? getPlace() + ";" + getTextRange() + "; " + render() : "INVALID");
   }
 
   public @NotNull TextRange getTextRangeInElement() {
@@ -54,7 +55,13 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
 
   @Override
   public @NotNull String render() {
-    String elementText = super.render();
+    String elementText = ReadAction.compute(()->{
+      if( !isValid()){
+        return "INVALID";
+      }
+      return super.render();
+    });
+
     return myTextRangeInElement.getEndOffset() > elementText.length() ?
            elementText : myTextRangeInElement.subSequence(elementText).toString();
   }
