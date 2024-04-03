@@ -29,6 +29,7 @@ import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.Pair;
+import com.intellij.openapi.util.registry.Registry;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
@@ -54,6 +55,12 @@ import java.util.Map;
 public class PerlCoverageTest extends PerlPlatformTestCase {
   public PerlCoverageTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
     super(interpreterConfigurator);
+  }
+
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    Registry.get("terminal.use.conpty.on.windows").setValue(false);
   }
 
   @Override
