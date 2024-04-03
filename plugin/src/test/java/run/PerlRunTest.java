@@ -26,6 +26,7 @@ import com.intellij.notification.Notification;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.SystemInfo;
+import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiUtilCore;
@@ -43,6 +44,12 @@ import java.util.function.BiFunction;
 public class PerlRunTest extends PerlPlatformTestCase {
   public PerlRunTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
     super(interpreterConfigurator);
+  }
+
+  @Override
+  protected void setUp() throws Exception {
+    super.setUp();
+    Registry.get("terminal.use.conpty.on.windows").setValue(false);
   }
 
   @Override
