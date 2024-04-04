@@ -161,6 +161,11 @@ public class PerlRunTest extends PerlPlatformTestCase {
     if (SystemInfo.isWindows) {
       ptyProcessOutput = ptyProcessOutput
         .replace("\u001B[2J\u001B[m\u001B[H", "")
+        .replace("\u001B[0m", "")
+        .replace("\u001B[0K", "")
+        .replace("\u001B[1G", "")
+        .replace("\u001B[?25h", "")
+        .replace("\u001B[?25l", "")
         .replaceAll(" +\\r", "\r")
         .replaceAll("\u001B]0;[^\u0007]+\u0007\u001B\\[\\?25h", "");
     }
