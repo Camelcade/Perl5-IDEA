@@ -24,6 +24,7 @@
        on how to target different products  -->
 
   <depends>com.intellij.modules.lang</depends>
+  <incompatible-with>com.intellij.jetbrains.client</incompatible-with>
 
   <resource-bundle>messages.PerlBundle</resource-bundle>
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="/META-INF/perl-pod.xml" xpointer="xpointer(/idea-plugin/*)"/>
