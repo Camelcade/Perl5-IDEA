@@ -218,6 +218,7 @@ jobs:
       PERL_TEST_VERSION: 5.32.1
       TEST_SYSTEM_PERL_INTERPRETER_PATH: C:/hostedtoolcache/windows/strawberry-perl/5.32.1/x64/perl/bin/perl.exe
       PERL_CONFIGURATORS: LOCAL_SYSTEM
+      NO_FS_ROOTS_ACCESS_CHECK: true
 
     steps:
       - uses: actions/checkout@v4
