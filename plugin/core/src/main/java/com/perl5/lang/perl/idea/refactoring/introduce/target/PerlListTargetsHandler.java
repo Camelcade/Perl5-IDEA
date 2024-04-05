@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.STRING_LIST;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.STRING_LIST;
 
 class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
   private static final Logger LOG = Logger.getInstance(PerlListTargetsHandler.class);

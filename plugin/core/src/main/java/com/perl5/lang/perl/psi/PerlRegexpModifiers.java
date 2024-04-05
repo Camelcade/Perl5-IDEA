@@ -18,15 +18,15 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
+import com.perl5.lang.perl.parser.PerlElementTypesGenerated;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.BitSet;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.PERL_REGEX_MODIFIERS;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.REGEX_MODIFIER;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.PERL_REGEX_MODIFIERS;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.REGEX_MODIFIER;
 
 /**
  * Represents possible regular expression modifiers

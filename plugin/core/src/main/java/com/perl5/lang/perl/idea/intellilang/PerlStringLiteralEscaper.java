@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
 public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin> {

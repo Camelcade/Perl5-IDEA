@@ -27,8 +27,8 @@ import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodTokenSets;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_CODE;
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_NEWLINE;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_CODE;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_NEWLINE;
 
 public class PodSurroundDescriptor implements SurroundDescriptor {
   private static final TokenSet NEGATION_TOKENS = TokenSet.orSet(

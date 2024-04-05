@@ -1,5 +1,5 @@
 // This is a generated file. Not intended for manual editing.
-package com.perl5.lang.tt2.lexer;
+package com.perl5.lang.tt2.parser;
 
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.PsiElement;

@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.STRING_LIST;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.STRING_LIST;
 
 class PerlStringOccurrencesCollector extends PerlGenericStringsOccurrencesCollector {
   PerlStringOccurrencesCollector(@NotNull PerlIntroduceTarget target) {

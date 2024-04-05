@@ -7,7 +7,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import com.perl5.lang.perl.psi.*;
 
 public class PsiPerlArrayPopExprImpl extends PsiPerlExprImpl implements PsiPerlArrayPopExpr {

@@ -3,7 +3,7 @@ package com.perl5.lang.tt2.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import static com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated.*;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 import static com.perl5.lang.tt2.parser.TemplateToolkitParserUtil.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;

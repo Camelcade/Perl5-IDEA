@@ -29,8 +29,8 @@ import com.perl5.lang.perl.psi.PsiPerlForeachCompound;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HASH_CAST_EXPR;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HASH_VARIABLE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.HASH_CAST_EXPR;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.HASH_VARIABLE;
 
 public class PerlHashLoopInspection extends PerlInspection {
   private static final TokenSet HASH_LIKE_TOKENS = TokenSet.create(

@@ -24,7 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlLexer.AFTER_VALUE;
 
 public class PerlRegexReplacementElementType extends PerlReparseableElementType {

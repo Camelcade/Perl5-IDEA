@@ -21,7 +21,7 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_BRACKET;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.LEFT_BRACKET;
 import static com.perl5.lang.perl.lexer.PerlLexer.AFTER_VALUE;
 
 public class PerlAnonArrayElementType extends PerlBracedBlockElementType {

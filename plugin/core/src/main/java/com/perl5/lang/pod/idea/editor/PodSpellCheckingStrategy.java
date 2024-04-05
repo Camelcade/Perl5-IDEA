@@ -27,7 +27,7 @@ import com.intellij.spellchecker.tokenizer.Tokenizer;
 import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_IDENTIFIER;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_IDENTIFIER;
 
 public class PodSpellCheckingStrategy extends SpellcheckingStrategy {
   @Override

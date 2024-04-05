@@ -3,7 +3,7 @@ package com.perl5.lang.pod.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiBuilder.Marker;
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.*;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
 import static com.perl5.lang.pod.parser.PodParserUtil.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.lang.ASTNode;

@@ -16,7 +16,7 @@
 {
   generate=[psi-factory="no"]
   psiVisitorName="PodVisitorGenerated"
-  elementTypeHolderClass="com.perl5.lang.pod.lexer.PodElementTypesGenerated"
+  elementTypeHolderClass="com.perl5.lang.pod.parser.PodElementTypesGenerated"
 
   elementTypeFactory="com.perl5.lang.pod.elementTypes.PodElementTypeFactory.getElementType"
   tokenTypeFactory="com.perl5.lang.pod.elementTypes.PodElementTypeFactory.getTokenType"

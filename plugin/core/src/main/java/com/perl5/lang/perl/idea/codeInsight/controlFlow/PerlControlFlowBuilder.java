@@ -53,7 +53,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlControlFlowBuilder extends ControlFlowBuilder {
   public static final Set<String> DIE_SUBS = ContainerUtil.newHashSet(

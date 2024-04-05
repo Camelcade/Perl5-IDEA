@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
   private static final TokenSet VARIABLE_RW_CONTAINERS = TokenSet.create(

@@ -20,8 +20,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.NUMBER_HEX;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.STRING_CHAR_NAME;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.NUMBER_HEX;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.STRING_CHAR_NAME;
 
 public class PerlUnicodeSubstitutionMixin extends PerlNumericCharSubstitution {
   public PerlUnicodeSubstitutionMixin(@NotNull ASTNode node) {

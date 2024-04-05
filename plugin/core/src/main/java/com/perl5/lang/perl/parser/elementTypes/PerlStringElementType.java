@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_OPENER;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.HEREDOC_OPENER;
 
 public abstract class PerlStringElementType extends PerlTwoQuotesQuoteLikeElementType {
 

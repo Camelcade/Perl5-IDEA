@@ -33,7 +33,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.maddyhome.idea.copyright.CopyrightProfile;
 import com.maddyhome.idea.copyright.options.LanguageOptions;
 import com.maddyhome.idea.copyright.psi.UpdatePsiFileCopyright;
-import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
+import com.perl5.lang.perl.parser.PerlElementTypesGenerated;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.idea.completion.PodTitleCompletionProvider;
 import com.perl5.lang.pod.parser.psi.PodRecursiveVisitor;
@@ -45,7 +45,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.regex.Pattern;
 
 import static com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER;
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.CUT_SECTION;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.CUT_SECTION;
 
 class UpdatePerlPackageFileCopyright extends UpdatePsiFileCopyright {
   private final @NotNull CopyrightProfile myOptions;

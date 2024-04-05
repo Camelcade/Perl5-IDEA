@@ -26,8 +26,8 @@ import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.PACKAGE;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.QUALIFYING_PACKAGE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.PACKAGE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.QUALIFYING_PACKAGE;
 
 
 public abstract class PerlMethodMixin extends PerlCompositeElementImpl implements PerlMethod {

@@ -35,7 +35,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlEnterInBracketsHandler extends PerlEnterHandler {
   private static final Logger LOG = Logger.getInstance(PerlEnterInBracketsHandler.class);

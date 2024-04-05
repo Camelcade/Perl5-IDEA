@@ -29,7 +29,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlBlockOwner;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlSmartEnterProcessor extends SmartEnterProcessor {
   private static final TokenSet BLOCK_OWNER_FALLBACK_KEYWORDS = TokenSet.create(

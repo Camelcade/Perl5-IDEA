@@ -25,7 +25,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
-import com.perl5.lang.perl.lexer.PerlElementTypesGenerated;
+import com.perl5.lang.perl.parser.PerlElementTypesGenerated;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 

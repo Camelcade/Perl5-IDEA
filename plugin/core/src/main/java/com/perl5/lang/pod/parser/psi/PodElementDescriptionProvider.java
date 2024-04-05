@@ -27,7 +27,7 @@ import com.perl5.lang.pod.parser.psi.mixin.PodStubBasedTitledSection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.*;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
 
 public class PodElementDescriptionProvider extends PerlElementDescriptionProviderBase {
   private static final Logger LOG = Logger.getInstance(PodElementDescriptionProvider.class);

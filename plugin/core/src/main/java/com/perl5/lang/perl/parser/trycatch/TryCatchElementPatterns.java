@@ -22,7 +22,7 @@ import com.perl5.lang.perl.psi.PsiPerlStatement;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 import static com.perl5.lang.perl.idea.PerlElementPatterns.WHITE_SPACE_AND_COMMENTS;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
 public final class TryCatchElementPatterns {

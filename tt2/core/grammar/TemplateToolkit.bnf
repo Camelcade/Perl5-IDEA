@@ -21,7 +21,7 @@
 
   tokenTypeClass="com.perl5.lang.tt2.elementTypes.TemplateToolkitTokenType"
   elementTypeClass="com.perl5.lang.tt2.elementTypes.TemplateToolkitElementType"
-  elementTypeHolderClass="com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated"
+  elementTypeHolderClass="com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated"
   elementTypeFactory="com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypeFactory.getElementType"
   tokenTypeFactory="com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypeFactory.getTokenType"
 

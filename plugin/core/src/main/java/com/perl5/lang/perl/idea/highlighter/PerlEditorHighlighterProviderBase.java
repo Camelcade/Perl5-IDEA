@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.POD;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.POD;
 
 public abstract class PerlEditorHighlighterProviderBase implements EditorHighlighterProvider {
   @Override

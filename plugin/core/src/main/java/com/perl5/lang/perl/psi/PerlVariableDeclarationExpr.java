@@ -28,7 +28,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_PAREN;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.LEFT_PAREN;
 
 /**
  * Common interface for my/our/local/state declarations

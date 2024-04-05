@@ -34,7 +34,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END_INDENTABLE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.HEREDOC_END_INDENTABLE;
 
 
 public class PerlHeredocElementImpl extends PerlCompositeElementImpl implements PsiLanguageInjectionHost {

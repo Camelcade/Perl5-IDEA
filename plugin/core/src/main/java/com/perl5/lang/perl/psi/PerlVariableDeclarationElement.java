@@ -34,8 +34,8 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COLON;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SIGNATURE_ELEMENT;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.COLON;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.SIGNATURE_ELEMENT;
 
 
 public interface PerlVariableDeclarationElement extends StubBasedPsiElement<PerlVariableDeclarationStub>,

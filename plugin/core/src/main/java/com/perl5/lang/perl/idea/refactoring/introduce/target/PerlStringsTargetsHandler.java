@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RESERVED_Q;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.RESERVED_Q;
 
 class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
   static final PerlStringsTargetsHandler INSTANCE = new PerlStringsTargetsHandler();

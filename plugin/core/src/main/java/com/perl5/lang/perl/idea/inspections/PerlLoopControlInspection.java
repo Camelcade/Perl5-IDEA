@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.PropertyKey;
 
 import static com.perl5.PerlBundle.PATH_TO_BUNDLE;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlLoopControlInspection extends PerlInspection {
   static final TokenSet MAP_GREP = TokenSet.create(

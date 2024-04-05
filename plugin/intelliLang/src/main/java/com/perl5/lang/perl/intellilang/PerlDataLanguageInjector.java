@@ -31,8 +31,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_BLOCK;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.TAG_DATA;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.COMMENT_BLOCK;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.TAG_DATA;
 
 public final class PerlDataLanguageInjector implements MultiHostInjector {
   private static final List<? extends Class<? extends PsiElement>> INJECTABLES = Collections.singletonList(PsiCommentImpl.class);

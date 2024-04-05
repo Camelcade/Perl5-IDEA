@@ -34,8 +34,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_ASSIGN;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SIGNATURE_ELEMENT;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.OPERATOR_ASSIGN;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.SIGNATURE_ELEMENT;
 import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
 
 

@@ -31,7 +31,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.*;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
 
 
 public class PodSyntaxHighlighter extends SyntaxHighlighterBase {

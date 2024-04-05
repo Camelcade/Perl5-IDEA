@@ -23,7 +23,7 @@ import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
 public final class PerlElementPatterns {

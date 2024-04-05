@@ -33,8 +33,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.ARRAY_NAME;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SCALAR_NAME;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.ARRAY_NAME;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.SCALAR_NAME;
 
 
 public class PerlStringManipulator extends AbstractElementManipulator<PerlStringMixin> {

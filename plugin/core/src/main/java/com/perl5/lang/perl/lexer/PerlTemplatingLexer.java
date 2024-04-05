@@ -23,8 +23,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_ANNOTATION;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_LINE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.COMMENT_ANNOTATION;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.COMMENT_LINE;
 
 public abstract class PerlTemplatingLexer extends PerlProtoLexer {
   private static final Logger LOG = Logger.getInstance(PerlTemplatingLexer.class);

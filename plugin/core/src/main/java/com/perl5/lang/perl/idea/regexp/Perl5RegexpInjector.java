@@ -28,7 +28,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.REGEX_TOKEN;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.REGEX_TOKEN;
 
 
 public class Perl5RegexpInjector implements MultiHostInjector {

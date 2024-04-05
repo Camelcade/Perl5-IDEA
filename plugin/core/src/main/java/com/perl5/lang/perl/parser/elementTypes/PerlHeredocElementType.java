@@ -32,8 +32,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_END_INDENTABLE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.HEREDOC_END;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.HEREDOC_END_INDENTABLE;
 
 
 public class PerlHeredocElementType extends PerlReparseableElementType {

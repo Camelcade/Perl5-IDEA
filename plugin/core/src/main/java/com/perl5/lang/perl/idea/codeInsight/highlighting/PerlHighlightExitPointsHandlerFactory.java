@@ -32,8 +32,8 @@ import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RESERVED_EXIT;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RESERVED_RETURN;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.RESERVED_EXIT;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.RESERVED_RETURN;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.LOOP_CONTROL_KEYWORDS;
 
 public class PerlHighlightExitPointsHandlerFactory extends HighlightUsagesHandlerFactoryBase {

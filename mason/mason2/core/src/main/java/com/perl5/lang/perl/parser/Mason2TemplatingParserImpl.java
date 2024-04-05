@@ -20,7 +20,7 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
 import com.intellij.psi.tree.IElementType;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
 public class Mason2TemplatingParserImpl extends Mason2ParserImpl {

@@ -21,7 +21,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.PERL_REGEX;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.PERL_REGEX;
 
 public class PerlRegexTokenType extends PerlReparseableTokenType {
   public PerlRegexTokenType(@NotNull String debugName, Class<? extends ASTNode> clazz) {

@@ -35,7 +35,7 @@ import java.util.Map;
 import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes.TT2_PERL_CODE;
 import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes.TT2_RAWPERL_CODE;
 import static com.perl5.lang.tt2.formatter.TemplateToolkitFormattingTokenSets.*;
-import static com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated.*;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.ALL_OPERATORS_TOKENSET;
 import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.KEYWORDS_TOKENSET;
 
