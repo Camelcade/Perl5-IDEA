@@ -38,8 +38,7 @@ dependencies {
 tasks {
   val generateLexerTask = register<GenerateLexerTask>("generateHTMLMasonLexer") {
     sourceFile.set(file("grammar/HTMLMason.flex"))
-    targetDir.set("src/main/gen/com/perl5/lang/htmlmason/lexer/")
-    targetClass.set("HTMLMasonLexer")
+    targetOutputDir.set(file("src/main/gen/com/perl5/lang/htmlmason/lexer/"))
     skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
     purgeOldFiles.set(true)
   }
