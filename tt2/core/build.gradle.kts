@@ -41,14 +41,13 @@ tasks {
     sourceFile.set(file("grammar/TemplateToolkit.bnf"))
     pathToParser.set("/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java")
     pathToPsiRoot.set("/com/perl5/lang/tt2/psi")
-    targetRoot.set(genRoot.canonicalPath)
+    targetRootOutputDir.set(genRoot)
     purgeOldFiles.set(true)
   }
 
   val generateLexerTask = register<GenerateLexerTask>("generateTT2Lexer") {
     sourceFile.set(file("grammar/TemplateToolkit.flex"))
-    targetDir.set("src/main/gen/com/perl5/lang/tt2/lexer/")
-    targetClass.set("TemplateToolkitLexerGenerated")
+    targetOutputDir.set(file("src/main/gen/com/perl5/lang/tt2/lexer/"))
     skeleton.set(rootProject.file(properties("lexer_skeleton").get()))
     purgeOldFiles.set(true)
 

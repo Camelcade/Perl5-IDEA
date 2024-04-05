@@ -43,15 +43,13 @@ tasks {
 
   val generatePerlLexerTask = register<GenerateLexerTask>("generatePerlLexer") {
     sourceFile.set(file("grammar/Perl.flex"))
-    targetDir.set("src/main/gen/com/perl5/lang/perl/lexer/")
-    targetClass.set("PerlLexer")
+    targetOutputDir.set(file("src/main/gen/com/perl5/lang/perl/lexer/"))
 
     dependsOn(generatePerlParserTask)
   }
   val generatePodLexerTask = register<GenerateLexerTask>("generatePodLexer") {
     sourceFile.set(file("grammar/Pod.flex"))
-    targetDir.set("src/main/gen/com/perl5/lang/pod/lexer/")
-    targetClass.set("PodLexerGenerated")
+    targetOutputDir.set(file("src/main/gen/com/perl5/lang/pod/lexer/"))
 
     dependsOn(generatePodParserTask)
   }
@@ -66,7 +64,7 @@ tasks {
   }
 
   withType<GenerateParserTask> {
-    targetRoot.set(genRoot.canonicalPath)
+    targetRootOutputDir.set(genRoot)
     purgeOldFiles.set(true)
   }
 
