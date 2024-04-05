@@ -21,7 +21,7 @@ import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.RESERVED_QR;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.RESERVED_QR;
 
 public class PerlCompileRegexpElementType extends PerlMatchRegexpElementType {
   public PerlCompileRegexpElementType(@NotNull String debugName,

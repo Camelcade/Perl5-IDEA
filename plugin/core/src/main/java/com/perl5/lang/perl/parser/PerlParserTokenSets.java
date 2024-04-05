@@ -18,7 +18,7 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.psi.tree.TokenSet;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
 

@@ -24,7 +24,7 @@ import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import com.perl5.lang.perl.psi.impl.PsiPerlAnonHashImpl;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlAnonHashElementType extends PerlBracedBlockElementType {
   public PerlAnonHashElementType() {

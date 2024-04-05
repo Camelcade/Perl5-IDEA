@@ -20,7 +20,7 @@ import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
-import com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated;
+import com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

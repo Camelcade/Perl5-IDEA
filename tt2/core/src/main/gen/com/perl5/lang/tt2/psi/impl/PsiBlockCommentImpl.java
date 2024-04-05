@@ -7,7 +7,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
-import static com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated.*;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 import com.perl5.lang.tt2.psi.*;
 
 public class PsiBlockCommentImpl extends TemplateToolkitCompositeElementImpl implements PsiBlockComment {

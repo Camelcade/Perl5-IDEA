@@ -25,7 +25,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 

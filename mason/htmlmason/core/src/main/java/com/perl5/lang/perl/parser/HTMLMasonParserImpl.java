@@ -25,7 +25,7 @@ import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
 @SuppressWarnings("Duplicates")

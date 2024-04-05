@@ -27,7 +27,7 @@ import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_NUMBER;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_NUMBER;
 
 public class PodSectionItem extends PodTitledSectionMixin {
   public PodSectionItem(@NotNull ASTNode node) {

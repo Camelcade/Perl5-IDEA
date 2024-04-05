@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Stack;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlLexer.AFTER_VARIABLE;
 
 public abstract class PerlDereferenceElementType extends PerlReparseableElementType {

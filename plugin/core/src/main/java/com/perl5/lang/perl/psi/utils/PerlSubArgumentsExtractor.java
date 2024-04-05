@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.*;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.UNDEF_EXPR;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.UNDEF_EXPR;
 
 public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement> {
   private final List<PerlSubArgument> myArguments = new ArrayList<>();

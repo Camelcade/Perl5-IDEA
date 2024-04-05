@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.NUMBER_HEX;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.NUMBER_HEX;
 
 public class PerlHexSubstitutionMixin extends PerlNumericCharSubstitution {
   public PerlHexSubstitutionMixin(@NotNull ASTNode node) {

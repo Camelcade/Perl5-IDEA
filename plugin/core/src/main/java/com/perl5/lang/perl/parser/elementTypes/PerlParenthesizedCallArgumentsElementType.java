@@ -23,8 +23,8 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.LEFT_PAREN;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.PRINT_EXPR;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.LEFT_PAREN;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.PRINT_EXPR;
 import static com.perl5.lang.perl.lexer.PerlLexer.AFTER_VALUE;
 
 public class PerlParenthesizedCallArgumentsElementType extends PerlBracedBlockElementType {

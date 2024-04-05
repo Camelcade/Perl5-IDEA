@@ -28,7 +28,7 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlLanguage;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_LINE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.COMMENT_LINE;
 
 public class PerlEnterInCommentHandler extends PerlEnterHandler {
   @Override

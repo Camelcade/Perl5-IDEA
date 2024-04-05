@@ -32,8 +32,8 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_DIV;
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_QUOTE_DOUBLE;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_DIV;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_QUOTE_DOUBLE;
 
 public class PodLegacySectionLinkInspection extends LocalInspectionTool {
   @Override

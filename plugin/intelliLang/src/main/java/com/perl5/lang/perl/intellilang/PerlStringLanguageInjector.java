@@ -45,7 +45,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_ASSIGN;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.OPERATOR_ASSIGN;
 
 
 public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {

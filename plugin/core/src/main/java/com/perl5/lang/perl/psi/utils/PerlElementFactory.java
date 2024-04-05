@@ -34,8 +34,8 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.HEREDOC_QQ;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.HEREDOC;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.HEREDOC_QQ;
 
 public class PerlElementFactory {
   public static PsiElement createNewLine(Project project) {

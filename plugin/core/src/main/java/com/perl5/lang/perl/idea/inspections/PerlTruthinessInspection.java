@@ -36,7 +36,7 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlTruthinessInspection extends PerlInspection {
   private static final TokenSet AMBIGUOUS_CONDITIONS = TokenSet.create(SCALAR_VARIABLE, SCALAR_CAST_EXPR);

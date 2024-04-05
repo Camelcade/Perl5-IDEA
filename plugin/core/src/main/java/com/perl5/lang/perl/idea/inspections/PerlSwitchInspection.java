@@ -34,7 +34,7 @@ import java.util.Objects;
 
 import static com.perl5.PerlBundle.PATH_TO_BUNDLE;
 import static com.perl5.lang.perl.idea.inspections.PerlLoopControlInspection.MAP_GREP;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlSwitchInspection extends PerlInspection {
   @Override

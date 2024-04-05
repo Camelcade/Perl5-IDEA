@@ -35,7 +35,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlUnreachableCodeInspection extends PerlInspection {
   private final TokenSet TRANSPARENT_ELEMENTS = TokenSet.create(

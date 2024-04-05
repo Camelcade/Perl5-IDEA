@@ -33,7 +33,7 @@ import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.pod.lexer.PodElementTypesGenerated.POD_SYMBOL;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_SYMBOL;
 
 @VisibleForTesting
 public abstract class PodSurrounder implements Surrounder {

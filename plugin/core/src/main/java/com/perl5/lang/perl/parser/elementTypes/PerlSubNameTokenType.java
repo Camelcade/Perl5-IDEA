@@ -24,7 +24,7 @@ import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.SUB_DECLARATION;
 
 public class PerlSubNameTokenType extends PerlReparseableTokenType {

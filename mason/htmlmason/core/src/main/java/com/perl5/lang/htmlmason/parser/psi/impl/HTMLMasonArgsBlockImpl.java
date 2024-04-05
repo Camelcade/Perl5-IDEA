@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.FAT_COMMA;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.FAT_COMMA;
 
 
 public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonArgsBlockStub> implements HTMLMasonArgsBlock {

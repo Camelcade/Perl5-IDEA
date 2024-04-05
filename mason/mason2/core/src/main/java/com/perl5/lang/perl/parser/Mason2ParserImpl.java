@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.NAMESPACE_CONTENT;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.NAMESPACE_CONTENT;
 
 
 public class Mason2ParserImpl extends PerlParserImpl implements MasonParser {

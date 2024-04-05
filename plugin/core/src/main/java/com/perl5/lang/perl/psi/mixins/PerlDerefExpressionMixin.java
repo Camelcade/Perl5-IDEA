@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.PsiPerlDerefExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.OPERATOR_DEREFERENCE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.OPERATOR_DEREFERENCE;
 
 
 public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implements PsiPerlDerefExpr {

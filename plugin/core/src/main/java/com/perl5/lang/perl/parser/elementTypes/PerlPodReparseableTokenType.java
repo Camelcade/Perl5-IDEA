@@ -23,7 +23,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.impl.PerlPodElement;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMENT_BLOCK;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.COMMENT_BLOCK;
 
 public class PerlPodReparseableTokenType extends PerlReparseableTemplateTokenType {
   public PerlPodReparseableTokenType(@NotNull String debugName) {

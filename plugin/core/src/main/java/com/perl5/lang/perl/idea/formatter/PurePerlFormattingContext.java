@@ -58,7 +58,7 @@ import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 public class PurePerlFormattingContext extends PerlBaseFormattingContext {

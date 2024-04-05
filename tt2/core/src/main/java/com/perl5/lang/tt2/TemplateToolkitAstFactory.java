@@ -23,7 +23,7 @@ import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated.TT2_OUTER;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.TT2_OUTER;
 
 public class TemplateToolkitAstFactory extends ASTFactory {
   @Override

@@ -48,7 +48,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public abstract class PerlIntroduceTargetsHandler {
   private static final Logger LOG = Logger.getInstance(PerlIntroduceTargetsHandler.class);

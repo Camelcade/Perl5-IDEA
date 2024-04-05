@@ -31,8 +31,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMA;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.FAT_COMMA;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.COMMA;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.FAT_COMMA;
 
 
 public class MasonFlagsStatementImpl extends PsiPerlStatementImpl implements MasonFlagsStatement {

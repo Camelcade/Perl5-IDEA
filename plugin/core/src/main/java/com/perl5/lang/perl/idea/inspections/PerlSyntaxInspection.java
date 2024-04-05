@@ -48,7 +48,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import static com.perl5.lang.perl.internals.PerlVersion.*;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.BITWISE_ASSIGN_OPERATORS_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.BITWISE_OPERATORS_TOKENSET;
 

@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.NUMBER_OCT;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.NUMBER_OCT;
 
 public class PerlOctSubstitutionMixin extends PerlNumericCharSubstitution {
   public PerlOctSubstitutionMixin(@NotNull ASTNode node) {

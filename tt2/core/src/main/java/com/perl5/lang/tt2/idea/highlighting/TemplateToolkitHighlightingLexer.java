@@ -27,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes.TT2_PERL_CODE;
 import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes.TT2_RAWPERL_CODE;
-import static com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated.*;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 
 public class TemplateToolkitHighlightingLexer extends MergingLexerAdapterBase {
   private IElementType myPreviousType = null;

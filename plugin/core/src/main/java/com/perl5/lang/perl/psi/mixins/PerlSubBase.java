@@ -38,7 +38,7 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.SUB_NAME;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.SUB_NAME;
 
 
 public abstract class PerlSubBase<Stub extends PerlSubStub<?>> extends PerlStubBasedPsiElementBase<Stub>

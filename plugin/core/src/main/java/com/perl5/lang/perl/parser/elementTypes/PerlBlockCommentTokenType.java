@@ -24,8 +24,8 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.TAG_DATA;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.TAG_END;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.TAG_DATA;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.TAG_END;
 
 public class PerlBlockCommentTokenType extends PerlReparseableTokenType {
   public PerlBlockCommentTokenType(@NotNull String debugName) {

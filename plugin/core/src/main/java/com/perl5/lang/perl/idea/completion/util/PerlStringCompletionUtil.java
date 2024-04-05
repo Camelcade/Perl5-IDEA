@@ -42,8 +42,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.SIMPLE_HASH_INDEX;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.COMMA;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.FAT_COMMA;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.COMMA;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.FAT_COMMA;
 import static com.perl5.lang.perl.parser.PerlParserUtil.isIdentifier;
 
 

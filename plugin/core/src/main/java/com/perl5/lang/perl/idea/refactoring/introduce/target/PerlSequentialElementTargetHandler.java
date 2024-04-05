@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.DEREF_EXPR;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.DEREF_EXPR;
 
 /**
  * Computes introduce targets for expr+ elements: comma sequences, lists, additions, etc

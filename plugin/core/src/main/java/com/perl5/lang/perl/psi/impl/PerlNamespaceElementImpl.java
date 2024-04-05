@@ -31,7 +31,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.TAG_PACKAGE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.TAG_PACKAGE;
 import static com.perl5.lang.perl.util.PerlCorePackages.CORE_PACKAGES_PRAGMAS;
 
 

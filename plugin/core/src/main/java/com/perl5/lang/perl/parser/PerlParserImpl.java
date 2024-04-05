@@ -26,7 +26,7 @@ import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.parser.PerlParserTokenSets.*;
 
 

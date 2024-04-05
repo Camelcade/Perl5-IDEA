@@ -22,8 +22,8 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.ATTRIBUTE;
-import static com.perl5.lang.perl.lexer.PerlElementTypesGenerated.ATTRIBUTES;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.ATTRIBUTE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.ATTRIBUTES;
 
 public class PerlAttributeIdentifierTokenType extends PerlReparseableTokenType {
   public PerlAttributeIdentifierTokenType(@NotNull String debugName) {

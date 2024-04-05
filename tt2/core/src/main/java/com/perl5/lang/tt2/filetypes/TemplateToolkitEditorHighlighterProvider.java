@@ -32,7 +32,7 @@ import com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import static com.perl5.lang.tt2.lexer.TemplateToolkitElementTypesGenerated.TT2_HTML;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.TT2_HTML;
 
 public class TemplateToolkitEditorHighlighterProvider extends PerlEditorHighlighterProviderBase {
   @Override
