@@ -1,6 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.jetbrains.intellij.tasks.InstrumentCodeTask
+import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.kt3k.gradle.plugin.coveralls.CoverallsTask
 
@@ -34,7 +34,7 @@ buildscript {
 plugins {
   id("idea")
   id("jacoco")
-  id("org.jetbrains.intellij") version "1.17.4"
+  id("org.jetbrains.intellij.platform") version "2.0.1"
   id("org.jetbrains.grammarkit") version "2022.3.2.2"
   id("com.github.kt3k.coveralls") version "2.12.2"
   id("org.sonarqube") version "5.1.0.4882"
@@ -48,6 +48,9 @@ repositories {
 
 val isCI = environment("CI").map { it.toBoolean() }.orElse(false)
 val withCoverage = environment("COVERALLS_REPO_TOKEN").orElse(properties("with_coverage")).map { !it.isEmpty() }.orElse(false)
+val platformVersionProvider by extra(project.provider {
+  properties("platformVersion").get() + properties("platformBranch").get() + properties("platformBuild").get()
+})
 
 val pluginProjectsNames = setOf(
   "plugin",
@@ -59,17 +62,14 @@ val pluginProjectsNames = setOf(
   "lang.mason.mason2"
 )
 
-val pluginProjects = allprojects.filter {
-  pluginProjectsNames.contains(it.name)
-}
-
 allprojects {
   if (name == "test-utils") {
     return@allprojects
   }
+  val isPlugin = pluginProjectsNames.contains(project.name)
 
   apply(plugin = "org.jetbrains.grammarkit")
-  apply(plugin = "org.jetbrains.intellij")
+  apply(plugin = if (isPlugin) "org.jetbrains.intellij.platform" else "org.jetbrains.intellij.platform.module")
   apply(plugin = "com.github.kt3k.coveralls")
   apply(plugin = "jacoco")
   apply(plugin = "java")
@@ -77,6 +77,9 @@ allprojects {
 
   repositories {
     mavenCentral()
+    intellijPlatform {
+      defaultRepositories()
+    }
   }
 
   grammarKit {
@@ -87,12 +90,14 @@ allprojects {
             properties("pluginBranch").get().ifEmpty { properties("platformBranch").get() } +
             properties("pluginBuild").get().ifEmpty { properties("platformBuild").get() }
 
-  intellij {
-    version.set(project.provider {
-      properties("platformVersion").get() + properties("platformBranch").get() + properties("platformBuild").get()
-    })
-    updateSinceUntilBuild.set(true)
+  dependencies {
+    intellijPlatform {
+      instrumentationTools()
+      testFramework(TestFrameworkType.Platform)
+    }
+    testImplementation("org.opentest4j:opentest4j:1.3.0")
   }
+
 
   tasks {
     withType<JavaCompile> {
@@ -107,7 +112,6 @@ allprojects {
 
     test {
       maxHeapSize = "2048m"
-
       outputs.upToDateWhen { false }
 
       if (project.hasProperty("overwrite")) {
@@ -169,33 +173,32 @@ allprojects {
       }
     }
 
-    val isPlugin = pluginProjectsNames.contains(project.name)
     val isRoot = project == rootProject
 
-    buildPlugin {
-      onlyIf { isPlugin }
-    }
-    prepareSandbox {
-      onlyIf { isPlugin || isRoot }
-    }
-    prepareTestingSandbox {
-      onlyIf { isPlugin }
-    }
-    patchPluginXml {
-      onlyIf { isPlugin }
-    }
-    buildSearchableOptions {
-      onlyIf { isPlugin }
-    }
-    publishPlugin {
-      if (project.hasProperty("eap")) {
-        channels.set(listOf("EAP"))
+    if( isRoot ){
+      buildPlugin {
+        enabled = false
       }
-      token.set(properties("jbToken").orElse(""))
-      onlyIf { isPlugin }
+      prepareTestSandbox {
+        enabled = false
+      }
+      patchPluginXml {
+        enabled = false
+      }
+      buildSearchableOptions {
+        enabled = false
+      }
+      verifyPlugin {
+        enabled = false
+      }
     }
-    verifyPlugin {
-      onlyIf { isPlugin }
+    if( isPlugin ){
+      publishPlugin {
+        if (project.hasProperty("eap")) {
+          channels.set(listOf("EAP"))
+        }
+        token.set(properties("jbToken").orElse(""))
+      }
     }
   }
 
@@ -236,9 +239,6 @@ tasks {
     })
     sourceDirectories.setFrom(allprojects.map {
       it.sourceSets.main.map { sourceSet -> sourceSet.allSource.srcDirs }
-    })
-    classDirectories.setFrom(allprojects.map {
-      it.tasks.named<InstrumentCodeTask>("instrumentCode").map { task -> task.outputDir }
     })
 
     reports {
@@ -292,48 +292,48 @@ coveralls {
   }
 }
 
-intellij {
-  val pluginList = mutableListOf(
-    properties("intelliLangPlugin").get(),
-    project(":plugin"),
-    project(":lang.tt2"),
-    project(":lang.mojo"),
-    project(":lang.embedded"),
-    project(":lang.mason.framework"),
-    project(":lang.mason.htmlmason"),
-    project(":lang.mason.mason2"),
-  )
+intellijPlatform {
+  val pluginList = mutableListOf<String>()
+  val bundledPluginList = mutableListOf(properties("intelliLangPlugin").get(),)
 
   if (!isCI.get()) {
     pluginList.add("PsiViewer:${properties("psiViewerVersion").get()}")
   }
 
   val runWith = properties("runWith").orElse("")
-  when (runWith.get()) {
+  val (ideType, ideVersion) = when (runWith.get()) {
     "CL" -> {
-      type.set("CL")
-      version.set(properties("clionVersion"))
+      "CL" to properties("clionVersion").get()
     }
-
     "PC" -> {
-      type.set("PC")
-      version.set(properties("pycharmVersion"))
+      "PC" to properties("pycharmVersion").get()
     }
-
     "PY" -> {
-      type.set("PY")
-      version.set(properties("pycharmVersion"))
-      pluginList.add("Docker")
-      pluginList.add(properties("remoteRunPlugin").get())
+      bundledPluginList.add("Docker")
+      bundledPluginList.add(properties("remoteRunPlugin").get())
+      "PY" to properties("pycharmVersion").get()
     }
-
     else -> {
-      type.set("IU")
-      pluginList.add("Docker")
-      pluginList.add(properties("coveragePlugin").get())
-      pluginList.add(properties("remoteRunPlugin").get())
+      bundledPluginList.add("Docker")
+      bundledPluginList.add(properties("coveragePlugin").get())
+      bundledPluginList.add(properties("remoteRunPlugin").get())
+      "IU" to platformVersionProvider.get()
     }
   }
-
-  plugins.set(pluginList)
+  dependencies {
+    intellijPlatform {
+      create(ideType, ideVersion, useInstaller = properties("useInstaller").get().toBoolean())
+      listOf(
+        project(":plugin"),
+        project(":lang.tt2"),
+        project(":lang.mojo"),
+        project(":lang.embedded"),
+        project(":lang.mason.framework"),
+        project(":lang.mason.htmlmason"),
+        project(":lang.mason.mason2"),
+      ).forEach { localPlugin(it) }
+      plugins(pluginList)
+      bundledPlugins(bundledPluginList)
+    }
+  }
 }

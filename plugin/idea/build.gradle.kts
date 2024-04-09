@@ -20,10 +20,12 @@ dependencies {
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
-    runtimeOnly(project(it, "instrumentedJar"))
+    runtimeOnly(project(it))
+  }
+  intellijPlatform {
+    val platformVersionProvider: Provider<String> by rootProject.extra
+    create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
+    bundledPlugins("com.intellij.java")
   }
 }
 
-intellij {
-  plugins.set(listOf("java"))
-}

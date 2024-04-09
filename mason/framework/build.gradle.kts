@@ -19,13 +19,16 @@ dependencies {
   listOf(":plugin:core").forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
-    testRuntimeOnly(project(it, "instrumentedJar"))
+    testRuntimeOnly(project(it))
   }
   testImplementation(testFixtures(project(":plugin")))
-}
-
-intellij {
-  plugins.set(listOf(project(":plugin")))
+  intellijPlatform {
+    intellijPlatform{
+      val platformVersionProvider: Provider<String> by rootProject.extra
+      create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+    }
+    localPlugin(project(":plugin"))
+  }
 }
 
 tasks {
