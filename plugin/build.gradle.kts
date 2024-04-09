@@ -1,4 +1,4 @@
-import org.jetbrains.intellij.tasks.PrepareSandboxTask
+import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
 
 /*
  * Copyright 2015-2021 Alexandr Evstigneev
@@ -20,7 +20,6 @@ fun properties(key: String) = providers.gradleProperty(key)
 
 plugins {
   id("java-test-fixtures")
-  id("com.github.johnrengelman.shadow") version "8.1.1"
 }
 
 dependencies {
@@ -48,7 +47,10 @@ dependencies {
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
-    runtimeOnly(project(it, "instrumentedJar"))
+    runtimeOnly(project(it))
+    intellijPlatform{
+      pluginModule(implementation(project(it)))
+    }
   }
 
   listOf(
@@ -65,20 +67,19 @@ dependencies {
   ).forEach {
     testFixturesCompileOnly(project(it))
   }
+  intellijPlatform {
+    val platformVersionProvider: Provider<String> by rootProject.extra
+    create("IU", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+    bundledPlugins(
+      "com.intellij.copyright",
+      properties("intelliLangPlugin").get(),
+      properties("remoteRunPlugin").get(),
+      properties("coveragePlugin").get(),
+      "org.jetbrains.plugins.terminal",
+    )
+  }
 }
 
-intellij {
-  type.set("IU")
-  plugins.set(project.provider {
-    listOf(
-      properties("intelliLangPlugin").get(),
-      properties("coveragePlugin").get(),
-      properties("remoteRunPlugin").get(),
-      "copyright",
-      "terminal",
-    )
-  })
-}
 
 tasks {
   buildPlugin {
@@ -87,15 +88,8 @@ tasks {
 
   withType<PrepareSandboxTask> {
     inputs.dir("scripts")
-    outputs.dir("$destinationDir/${intellij.pluginName.get()}/perl")
-    pluginJar.set(shadowJar.flatMap {
-      it.archiveFile
-    })
-    runtimeClasspathFiles.set(project.files())
 
-    intoChild(pluginName.map { "$it/perl" })
+    intoChild(intellijPlatform.projectName.map { projectName -> "$projectName/perl" })
       .from(file("scripts"))
-
-    dependsOn(shadowJar)
   }
 }

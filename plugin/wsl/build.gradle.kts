@@ -22,13 +22,12 @@ dependencies {
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
-    runtimeOnly(project(it, "instrumentedJar"))
+    runtimeOnly(project(it))
+  }
+  intellijPlatform {
+    val platformVersionProvider: Provider<String> by rootProject.extra
+    create("IU", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+    bundledPlugins(properties("remoteRunPlugin").get())
   }
 }
 
-intellij {
-  type.set("IU")
-  plugins.set(project.provider {
-    listOf(properties("remoteRunPlugin").get())
-  })
-}

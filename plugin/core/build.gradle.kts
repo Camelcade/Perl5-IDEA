@@ -22,6 +22,13 @@ fun properties(key: String) = providers.gradleProperty(key)
 
 val genRoot = project.file("src/main/gen")
 
+dependencies{
+  intellijPlatform{
+    val platformVersionProvider: Provider<String> by rootProject.extra
+    create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+  }
+}
+
 sourceSets {
   main {
     java.srcDirs(genRoot)
