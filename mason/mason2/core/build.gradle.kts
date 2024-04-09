@@ -33,6 +33,11 @@ dependencies {
   ).forEach {
     compileOnly(project(it))
   }
+  intellijPlatform {
+    val platformVersionProvider: Provider<String> by rootProject.extra
+    create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+  }
+
 }
 
 tasks {
