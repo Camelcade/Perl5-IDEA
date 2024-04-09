@@ -22,6 +22,18 @@ dependencies {
     testCompileOnly(project(it))
     runtimeOnly(project(it, "instrumentedJar"))
   }
+
+  val ideaJars = tasks.setupDependencies
+    .flatMap { task -> task.idea.map { it.classes } }
+    .map { idea ->
+      listOf(
+        "lib/modules/intellij.profiler.common.jar"
+      ).map { idea.resolve(it) }
+    }
+    .let { project.files(it) }
+
+  compileOnly(ideaJars)
+  testCompileOnly(ideaJars)
 }
 
 intellij {
