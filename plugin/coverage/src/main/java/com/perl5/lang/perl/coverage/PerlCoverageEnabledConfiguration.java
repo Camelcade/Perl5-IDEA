@@ -40,6 +40,7 @@ public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfigurati
     return (GenericPerlRunConfiguration)super.getConfiguration();
   }
 
+  /*
   @Override
   protected @Nullable String createCoverageFile() {
     CoverageRunner coverageRunner = getCoverageRunner();
@@ -54,6 +55,7 @@ public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfigurati
            this.coverageFileNameSeparator() +
            FileUtil.sanitizeFileName(perlRunConfiguration.getName());
   }
+  */
 
   @Override
   protected String coverageFileNameSeparator() {
