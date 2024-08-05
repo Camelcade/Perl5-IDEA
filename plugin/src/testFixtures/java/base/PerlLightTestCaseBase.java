@@ -2798,7 +2798,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doTestSurrounders(Predicate<String> namePredicate, boolean shouldHaveSurrounders) {
     initWithFileSmartWithoutErrors();
-    List<AnAction> actions = ReadAction.compute(() -> SurroundWithHandler.buildSurroundActions(getProject(), getEditor(), getFile(), null));
+    List<AnAction> actions = ReadAction.compute(() -> SurroundWithHandler.buildSurroundActions(getProject(), getEditor(), getFile()));
     if (actions == null) {
       if (shouldHaveSurrounders) {
         fail("No surounders found");
@@ -2824,7 +2824,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
       sb.append(actionName).append(SEPARATOR_NEWLINES);
       List<AnAction> actionsList = ReadAction.compute(
-        () -> SurroundWithHandler.buildSurroundActions(getProject(), getEditor(), getFile(), null));
+        () -> SurroundWithHandler.buildSurroundActions(getProject(), getEditor(), getFile()));
       assertNotNull(actionsList);
       AnAction anAction = ContainerUtil.find(actionsList, it -> it.toString().equals(actionName));
       assertNotNull("No action: " + actionName, anAction);
