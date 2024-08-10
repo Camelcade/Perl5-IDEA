@@ -7,27 +7,63 @@ Text: HTML; Tail: null; Type: inject with HTML; Icon: /html.svg; Type Icon: null
 Text: IGNORE; Tail: null; Type: inject with .ignore (IgnoreLang); Icon: /ignore_file.svg; Type Icon: null
 	Lookups: IGNORE
 	String: IGNORE
+Text: JAVA; Tail: null; Type: inject with Java; Icon: /java.svg; Type Icon: null
+	Lookups: JAVA
+	String: JAVA
+Text: JSHELL; Tail: null; Type: inject with JShell Snippet; Icon: /java.svg; Type Icon: null
+	Lookups: JSHELL
+	String: JSHELL
 Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null
 	Lookups: JSON
 	String: JSON
+Text: MANIFEST; Tail: null; Type: inject with Manifest; Icon: /manifest.svg; Type Icon: null
+	Lookups: MANIFEST
+	String: MANIFEST
+Text: MARKDOWN; Tail: null; Type: inject with Markdown; Icon: /MarkdownPlugin.svg; Type Icon: null
+	Lookups: MARKDOWN
+	String: MARKDOWN
 Text: MYSUPERMARKER; Tail: null; Type: null; Icon: null; Type Icon: null
 	Lookups: MYSUPERMARKER
 	PsiElement: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 0 in heredocOpenerBackref.pl
 Text: PERL5; Tail: null; Type: inject with Perl5; Icon: /perl5classic.png; Type Icon: null
 	Lookups: PERL5
 	String: PERL5
+Text: PROPERTIES; Tail: null; Type: inject with Properties; Icon: PropertiesFileType; Type Icon: null
+	Lookups: PROPERTIES
+	String: PROPERTIES
 Text: REGEXP; Tail: null; Type: inject with RegExp; Icon: /regexp.svg; Type Icon: null
 	Lookups: REGEXP
 	String: REGEXP
 Text: RELAXNG; Tail: null; Type: inject with RELAX-NG; Icon: /text.svg; Type Icon: null
 	Lookups: RELAXNG
 	String: RELAXNG
+Text: SHELL; Tail: null; Type: inject with Shell Script; Icon: /console.svg; Type Icon: null
+	Lookups: SHELL
+	String: SHELL
+Text: SPI; Tail: null; Type: inject with SPI; Icon: /text.svg; Type Icon: null
+	Lookups: SPI
+	String: SPI
+Text: SVG; Tail: null; Type: inject with SVG; Icon: /image.svg; Type Icon: null
+	Lookups: SVG
+	String: SVG
 Text: TEXT; Tail: null; Type: inject with Plain text; Icon: TextFileType; Type Icon: null
 	Lookups: TEXT
 	String: TEXT
+Text: TOML; Tail: null; Type: inject with TOML; Icon: /toml-file.svg; Type Icon: null
+	Lookups: TOML
+	String: TOML
 Text: XHTML; Tail: null; Type: inject with XHTML; Icon: /xhtml.svg; Type Icon: null
 	Lookups: XHTML
 	String: XHTML
 Text: XML; Tail: null; Type: inject with XML; Icon: /xml.svg; Type Icon: null
 	Lookups: XML
 	String: XML
+Text: XPATH2; Tail: null; Type: inject with XPath2; Icon: /xpath.svg; Type Icon: null
+	Lookups: XPATH2
+	String: XPATH2
+Text: XPATH; Tail: null; Type: inject with XPath; Icon: /xpath.svg; Type Icon: null
+	Lookups: XPATH
+	String: XPATH
+Text: YAML; Tail: null; Type: inject with YAML; Icon: /yaml.svg; Type Icon: null
+	Lookups: YAML
+	String: YAML

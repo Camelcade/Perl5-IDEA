@@ -61,7 +61,7 @@ public final class PerlResolveUtil {
   private static final Logger LOG = Logger.getInstance(PerlResolveUtil.class);
   private static boolean SUPPRESS_ERRORS = false;
   private static final ThreadLocal<int[]> INFERENCE_DEPTH = ThreadLocal.withInitial(()-> new int[]{0});
-  private static final int MAX_INFERENCE_DEPTH = 300;
+  private static final int MAX_INFERENCE_DEPTH = 250;
   private static final PsiCacheKey<PerlVariableDeclarationElement, PerlVariable> DECLARATION_KEY = PsiCacheKey.create(
     "perl5.variable.declaration", variable -> {
       PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variable);

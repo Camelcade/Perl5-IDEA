@@ -11,8 +11,11 @@ Usage: "somesub"; (10,17); reading; PerlSubNameElementImpl(Perl5: subname) at 10
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: sub.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -31,8 +34,11 @@ Usage: "somesub"; (54,61); reading; PerlSubNameElementImpl(Perl5: subname) at 54
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: sub.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Bazooka::somesub at 37 in sub.pl
@@ -51,8 +57,11 @@ Usage: "somesub"; (69,76); reading; PerlSubNameElementImpl(Perl5: subname) at 69
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: sub.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Bazooka at 20 in sub.pl
@@ -71,8 +80,11 @@ Usage: "somesub"; (111,118); reading; PerlSubNameElementImpl(Perl5: subname) at 
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: sub.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bar at 79 in sub.pl
@@ -91,8 +103,11 @@ Usage: "somesub"; (157,164); reading; PerlSubNameElementImpl(Perl5: subname) at 
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: sub.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::othersub at 125 in sub.pl
@@ -111,8 +126,11 @@ Usage: "somesub"; (209,216); reading; PerlSubNameElementImpl(Perl5: subname) at 
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: sub.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Bar::Baz at 177 in sub.pl
@@ -131,8 +149,11 @@ Usage: "somesub"; (254,261); reading; PerlSubNameElementImpl(Perl5: subname) at 
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: sub.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Bar::Baz::othersub at 223 in sub.pl
@@ -151,8 +172,11 @@ Usage: "somesub"; (323,330); reading; PodIdentifierImpl(Perl5 POD: identifier) a
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: sub.pl; /perl5classic.png
 
  - Rule: PodUsageGroupingRule
     PsiElement: PsiHead3SectionImpl(Perl5 POD: HEAD_3_SECTION) at 316 in sub.pl

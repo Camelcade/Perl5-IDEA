@@ -10,11 +10,11 @@ fun funcname() {
 }
 
 method () {
-    say 'anon method';<[Parent::Package, /package_gutter_icon.png]: [sub(), /perl5classic.png]>
+    say 'anon method';<[Parent::Package, /package_gutter_icon.png]: [sub(), /subroutine_gutter_icon.png]>
 };
 
 fun () {
-    say 'anon method';<[Parent::Package, /package_gutter_icon.png]: [sub(), /perl5classic.png]>
+    say 'anon method';<[Parent::Package, /package_gutter_icon.png]: [sub(), /subroutine_gutter_icon.png]>
 };
 
 package Child::Package;

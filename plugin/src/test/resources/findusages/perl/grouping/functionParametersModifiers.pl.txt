@@ -11,8 +11,11 @@ Usage: "somevar"; (100,107); reading; PerlVariableNameElementImpl(Perl5: SCALAR_
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersModifiers.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: PsiPerlMethodDefinitionImpl(METHOD_DEFINITION)@Parent::Package::methodname at 51 in functionParametersModifiers.pl
@@ -31,8 +34,11 @@ Usage: "somevar"; (223,230); reading; PerlVariableNameElementImpl(Perl5: SCALAR_
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersModifiers.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: PsiPerlBeforeModifierImpl(Perl5: BEFORE_MODIFIER) at 175 in functionParametersModifiers.pl; navigated to: PerlSubNameElementImpl(Perl5: subname) at 182 in functionParametersModifiers.pl
@@ -51,8 +57,11 @@ Usage: "somevar"; (281,288); reading; PerlVariableNameElementImpl(Perl5: SCALAR_
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersModifiers.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: PsiPerlAfterModifierImpl(Perl5: AFTER_MODIFIER) at 235 in functionParametersModifiers.pl; navigated to: PerlSubNameElementImpl(Perl5: subname) at 241 in functionParametersModifiers.pl
@@ -71,8 +80,11 @@ Usage: "somevar"; (361,368); reading; PerlVariableNameElementImpl(Perl5: SCALAR_
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersModifiers.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: PsiPerlAroundModifierImpl(Perl5: AROUND_MODIFIER) at 293 in functionParametersModifiers.pl; navigated to: PerlSubNameElementImpl(Perl5: subname) at 300 in functionParametersModifiers.pl
@@ -91,8 +103,11 @@ Usage: "somevar"; (448,455); reading; PerlVariableNameElementImpl(Perl5: SCALAR_
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: functionParametersModifiers.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: PsiPerlAugmentModifierImpl(Perl5: AUGMENT_MODIFIER) at 398 in functionParametersModifiers.pl; navigated to: PerlSubNameElementImpl(Perl5: subname) at 406 in functionParametersModifiers.pl

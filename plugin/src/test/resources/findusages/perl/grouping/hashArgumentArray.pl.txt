@@ -11,8 +11,11 @@ Usage: "keys"; (52,56); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME) 
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hashArgumentArray.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -31,8 +34,11 @@ Usage: "keys"; (92,96); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME) 
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hashArgumentArray.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -51,8 +57,11 @@ Usage: "keys"; (132,136); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hashArgumentArray.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
@@ -71,8 +80,11 @@ Usage: "keys"; (174,178); reading; PerlVariableNameElementImpl(Perl5: ARRAY_NAME
  - Rule: ModuleGroupingRule
     ModuleUsageGroup: light_idea_test_case; /Module.svg
 
- - Rule: DirectoryGroupingRule
-    DirectoryGroup: ; /folder.svg
+ - Rule: PackageGroupingRule
+    PackageGroup: ; Package
+
+ - Rule: NonJavaFileGroupingRule
+    FileUsageGroup: hashArgumentArray.pl; /perl5classic.png
 
  - Rule: PerlUsageGroupingRule
     PsiElement: Implicit namespace: main
