@@ -1,5 +1,5 @@
 README.md
-README.md in /src; /text.svg
+README.md in /src; /MarkdownPlugin.svg
 ----------
 TestPackage.pm
 TestPackage in lib; /perl5.png

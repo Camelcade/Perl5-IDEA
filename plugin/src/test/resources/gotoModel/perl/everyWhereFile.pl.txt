@@ -26,7 +26,7 @@ Plugin
 PsiDirectory
 ----------
 README.md
-README.md in /src; /text.svg
+README.md in /src; /MarkdownPlugin.svg
 ----------
 Some
 PsiDirectory
