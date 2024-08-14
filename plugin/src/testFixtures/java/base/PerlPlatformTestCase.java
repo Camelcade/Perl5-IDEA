@@ -39,6 +39,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.module.Module;
+import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -236,6 +237,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     virtualFile.refresh(false, true);
     copyDirContentsTo(virtualFile, getModuleRoot());
     configureRoots();
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
   }
 
   protected final void configureRoots() {
