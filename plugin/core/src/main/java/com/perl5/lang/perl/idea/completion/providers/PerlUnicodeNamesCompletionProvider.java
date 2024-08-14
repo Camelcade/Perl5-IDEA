@@ -47,7 +47,7 @@ public class PerlUnicodeNamesCompletionProvider extends PerlCompletionProvider {
     if (cache == null) {
       LOG.debug("Cache been collected, re-init");
       cache = new HashMap<>();
-      myCodePoint = 0;
+      myCodePoint = Character.MIN_CODE_POINT;
       myNamesCacheRef = new SoftReference<>(cache);
     }
 
@@ -77,7 +77,7 @@ public class PerlUnicodeNamesCompletionProvider extends PerlCompletionProvider {
     if (!completionProcessor.result()) {
       return;
     }
-    for (; myCodePoint < Integer.MAX_VALUE; myCodePoint++) {
+    for (; myCodePoint <= Character.MAX_CODE_POINT; myCodePoint++) {
       ProgressManager.checkCanceled();
       if (!Character.isValidCodePoint(myCodePoint)) {
         continue;
