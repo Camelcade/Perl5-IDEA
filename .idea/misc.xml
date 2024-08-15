@@ -4,7 +4,7 @@
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_17" default="true" project-jdk-name="jbr-17" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_21" default="true" project-jdk-name="jbr-21 (2)" project-jdk-type="JavaSDK" />
   <component name="TaskProjectConfiguration">
     <server type="YouTrack" url="https://camelcade.myjetbrains.com" />
     <server type="GitHub" url="https://github.com" />
