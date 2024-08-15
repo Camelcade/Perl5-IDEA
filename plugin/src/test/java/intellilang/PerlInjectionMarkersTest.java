@@ -19,9 +19,11 @@ package intellilang;
 
 import base.PerlLightTestCase;
 import com.intellij.lang.html.HTMLLanguage;
+import com.intellij.openapi.util.SystemInfo;
 import com.intellij.util.FileContentUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
+import org.intellij.lang.xpath.xslt.psi.impl.XsltLanguage;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -56,6 +58,7 @@ public class PerlInjectionMarkersTest extends PerlLightTestCase {
 
   @Test
   public void testMarkerCompletion() {
+    LOG.debug("Loading ", XsltLanguage.INSTANCE);
     PerlInjectionMarkersService markersService = PerlInjectionMarkersService.getInstance(getProject());
     markersService.setCustomMarkersMap(Map.of(TEST_MARKER, HTMLLanguage.INSTANCE.getID()));
     doTestCompletion();
