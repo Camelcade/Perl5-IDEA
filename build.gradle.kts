@@ -79,6 +79,7 @@ allprojects {
     mavenCentral()
     intellijPlatform {
       defaultRepositories()
+      jetbrainsRuntime()
     }
   }
 
@@ -94,6 +95,7 @@ allprojects {
     intellijPlatform {
       instrumentationTools()
       testFramework(TestFrameworkType.Platform)
+      jetbrainsRuntime()
     }
     testImplementation("org.opentest4j:opentest4j:1.3.0")
   }
