@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,7 +111,6 @@ import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
@@ -676,9 +675,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     myFixture.complete(CompletionType.BASIC, getCompletionInvocationCount());
     LookupElement[] elements = myFixture.getLookupElements();
     removeVirtualFileFilter();
-    UsefulTestCase.assertSameLinesWithFile(
-      getTestResultsFilePath(answerSuffix),
-      renderLookupElementsToString(elements, predicate));
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(answerSuffix), renderLookupElementsToString(elements, predicate));
   }
 
   protected @NotNull String renderLookupElementsToString(@Nullable LookupElement[] elements,
