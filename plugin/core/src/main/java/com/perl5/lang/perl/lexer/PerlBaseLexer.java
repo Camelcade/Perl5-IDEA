@@ -79,10 +79,11 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 
   protected static final String SUB_SIGNATURE = "Sub.Signature";
 
-  static {
+  private static final AtomicNotNullLazyValue<Boolean> ourListenersInitializer = AtomicNotNullLazyValue.createValue(()->{
     PerlParserExtension.EP_NAME.addChangeListener(PerlBaseLexer::refreshExtensions, PerlPluginUtil.getUnloadAwareDisposable());
     refreshExtensions();
-  }
+    return true;
+  });
 
   private static void refreshExtensions() {
     PerlParserImpl.restoreDefaultExtendsSet();
@@ -130,6 +131,10 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   private AtomicNotNullLazyValue<Set<String>> myNamespaceNamesProvider;
   private PerlImplicitDeclarationsService myImplicitSubsService;
   private final Set<String> myLocalPackages = new HashSet<>();
+
+  public PerlBaseLexer() {
+    ourListenersInitializer.get();
+  }
 
   public PerlBaseLexer withProject(@Nullable Project project) {
     myProject = project;
