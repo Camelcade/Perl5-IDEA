@@ -28,10 +28,10 @@ import com.perl5.lang.perl.util.PerlPluginUtil
 class PerlFileTypeServiceWatcher : ProjectActivity, ModuleListener, ModuleRootListener {
   override suspend fun execute(project: Project) {
     project.messageBus.connect(PerlPluginUtil.getUnloadAwareDisposable(project)).let {
-      it.subscribe(ModuleRootListener.TOPIC, this);
-      it.subscribe(ModuleListener.TOPIC, this);
+      it.subscribe(ModuleRootListener.TOPIC, this)
+      it.subscribe(ModuleListener.TOPIC, this)
     }
-    reset();
+    reset()
   }
 
   override fun modulesAdded(project: Project, modules: List<Module?>) = reset()
