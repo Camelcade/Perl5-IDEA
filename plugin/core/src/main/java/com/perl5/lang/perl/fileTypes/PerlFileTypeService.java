@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
+import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.newvfs.impl.FakeVirtualFile;
 import com.intellij.util.indexing.LightDirectoryIndex;
@@ -34,30 +35,33 @@ import java.util.function.Function;
 public class PerlFileTypeService implements Disposable {
   private static final Logger LOG = Logger.getInstance(PerlFileTypeService.class);
 
-  private final LightDirectoryIndex<Function<VirtualFile, FileType>> myDirectoryIndex = new LightDirectoryIndex<>(
-    this,
-    virtualFile -> null,
-    directoryIndex -> ReadAction.run(() -> {
-      for (Project project : ProjectManager.getInstance().getOpenProjects()) {
-        if (project.isDisposed()) {
-          continue;
-        }
-        for (PerlFileTypeProvider fileTypeProvider : PerlFileTypeProvider.EP_NAME.getExtensionList()) {
-          fileTypeProvider.addRoots(project, (root, function) -> {
-            if (!root.isValid()) {
-              LOG.warn("Attempt to create a descriptor for invalid file for " + root);
-              return;
+  private final NotNullLazyValue<LightDirectoryIndex<Function<VirtualFile, FileType>>> myDirectoryIndexProvider =
+    NotNullLazyValue.createValue(() -> {
+      return new LightDirectoryIndex<>(
+        this,
+        virtualFile -> null,
+        directoryIndex -> ReadAction.run(() -> {
+          for (Project project : ProjectManager.getInstance().getOpenProjects()) {
+            if (project.isDisposed()) {
+              continue;
             }
-            if (!root.isDirectory()) {
-              LOG.warn("Attempt to create root for non-directory: " + root);
-              return;
+            for (PerlFileTypeProvider fileTypeProvider : PerlFileTypeProvider.EP_NAME.getExtensionList()) {
+              fileTypeProvider.addRoots(project, (root, function) -> {
+                if (!root.isValid()) {
+                  LOG.warn("Attempt to create a descriptor for invalid file for " + root);
+                  return;
+                }
+                if (!root.isDirectory()) {
+                  LOG.warn("Attempt to create root for non-directory: " + root);
+                  return;
+                }
+                directoryIndex.putInfo(root, function);
+              });
             }
-            directoryIndex.putInfo(root, function);
-          });
-        }
-      }
-    })
-  );
+          }
+        })
+      );
+    });
 
   public PerlFileTypeService() {
     PerlFileTypeProvider.EP_NAME.addChangeListener(this::reset, this);
@@ -69,7 +73,7 @@ public class PerlFileTypeService implements Disposable {
   }
 
   void reset() {
-    myDirectoryIndex.resetIndex();
+    myDirectoryIndexProvider.get().resetIndex();
   }
 
   public static PerlFileTypeService getInstance() {
@@ -78,6 +82,6 @@ public class PerlFileTypeService implements Disposable {
 
   public static @Nullable FileType getFileType(@Nullable VirtualFile virtualFile) {
     VirtualFile fileForAncestryCheck = virtualFile instanceof FakeVirtualFile ? virtualFile.getParent() : virtualFile;
-    return getInstance().myDirectoryIndex.getInfoForFile(fileForAncestryCheck).apply(virtualFile);
+    return getInstance().myDirectoryIndexProvider.get().getInfoForFile(fileForAncestryCheck).apply(virtualFile);
   }
 }
