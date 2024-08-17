@@ -45,6 +45,7 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
 
 import java.util.*;
+import com.intellij.util.concurrency.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BooleanSupplier;
 
@@ -56,6 +57,7 @@ public class MojoProjectManager implements Disposable {
   private final @NotNull MergingUpdateQueue myUpdateQueue;
   private final @NotNull AtomicBoolean myUpdatingModel = new AtomicBoolean(false);
   private volatile @NotNull Model myModel = new Model(Collections.emptySet());
+  private volatile Semaphore myTestSemaphore;
 
   public MojoProjectManager(@NotNull Project project) {
     myProject = project;
@@ -140,7 +142,16 @@ public class MojoProjectManager implements Disposable {
             scheduleUpdate();
           }
           else {
-            doUpdateModel();
+            try{
+              LOG.debug("Performing model update");
+              doUpdateModel();
+            }
+            finally {
+              if( myTestSemaphore != null) {
+                myTestSemaphore.up();
+                myTestSemaphore = null;
+              }
+            }
           }
         });
       }
@@ -281,7 +292,9 @@ public class MojoProjectManager implements Disposable {
 
   @TestOnly
   public BooleanSupplier updateInTestMode() {
+    var semaphore = new Semaphore(1);
+    myTestSemaphore = semaphore;
     updateModel();
-    return ()-> myUpdateQueue.isEmpty() && !myUpdatingModel.get();
+    return semaphore::isUp;
   }
 }
