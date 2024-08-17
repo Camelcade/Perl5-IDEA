@@ -80,6 +80,7 @@ allprojects {
     intellijPlatform {
       defaultRepositories()
       jetbrainsRuntime()
+      nightly()
     }
   }
 
