@@ -88,7 +88,8 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
       !(it instanceof PerlLightElementStub) || !((PerlLightElementStub)it).isImplicit());
     dataStream.writeVarInt(childrenStubs.size());
     serializeStub(stub, dataStream);
-    for (StubElement<?> childStub : childrenStubs) {
+    //noinspection rawtypes
+    for (StubElement childStub : childrenStubs) {
       dataStream.writeVarInt(getSerializationId(childStub)); // serialization id
       //noinspection unchecked
       childStub.getStubType().serialize(childStub, dataStream);
@@ -118,8 +119,11 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
 
   @Override
   public final void indexStub(@NotNull Stub stub, @NotNull IndexSink sink) {
-    //noinspection unchecked
-    stub.getLightNamedElementsStubs().forEach(childStub -> childStub.getStubType().indexStub(childStub, sink));
+    stub.getLightNamedElementsStubs().forEach(childStub -> {
+      @SuppressWarnings("rawtypes") var typedStub = (StubElement)childStub;
+      //noinspection unchecked
+      typedStub.getStubType().indexStub(typedStub, sink);
+    });
     doIndexStub(stub, sink);
   }
 
