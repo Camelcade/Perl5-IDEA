@@ -193,6 +193,10 @@ allprojects {
       verifyPlugin {
         enabled = false
       }
+      publishPlugin {
+        enabled = false
+      }
+
     }
     if( isPlugin ){
       publishPlugin {
