@@ -33,11 +33,14 @@ jobs:
           distribution: 'corretto'
           java-version: 21
 
-      - name: Execute Gradle build
-        uses: gradle/gradle-build-action@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
         with:
           cache-read-only: false
-          arguments: jar instrumentTest --console plain
+
+      - name: Instrumenting tests
+        run: |
+          ./gradlew jar instrumentTest --console plain
 
   codeql:
     needs: build

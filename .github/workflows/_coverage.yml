@@ -32,12 +32,15 @@ jobs:
         with:
           path: ./coverage
 
-      - name: Build Jar
+      - name: Setup Gradle
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v3
         with:
           cache-read-only: true
-          arguments: jar
+
+      - name: Make jar
+        run: |
+          ./gradlew jar
 
       - name: Aggregate Coverage
         if: ${{ env.COVERALLS_REPO_TOKEN }}

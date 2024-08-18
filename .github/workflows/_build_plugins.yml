@@ -23,11 +23,14 @@ jobs:
           distribution: 'corretto'
           java-version: 21
 
-      - name: Build plugins with Gradle
-        uses: gradle/gradle-build-action@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
         with:
           cache-read-only: true
-          arguments: buildPlugin --console plain
+
+      - name: Build plugins
+        run: |
+          ./gradlew buildPlugin --console plain
 
       - name: Upload Plugins
         uses: actions/upload-artifact@v4
