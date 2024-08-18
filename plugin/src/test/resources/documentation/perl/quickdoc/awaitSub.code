@@ -1,0 +1,2 @@
+use Future::AsyncAwait;
+say aw<caret>ait something();

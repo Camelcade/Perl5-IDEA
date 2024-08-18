@@ -1,0 +1,47 @@
+<p><a href="psi_element://Future%3A%3AAsyncAwait">Future::AsyncAwait</a>: <a href="psi_element://Future%3A%3AAsyncAwait%2FDESCRIPTION">DESCRIPTION</a></p><h2><code>await</code></h2><p style="padding-bottom: 10px;">The <code>await</code> keyword forms an expression which takes a <code>Future</code> instance as
+an operand and yields the eventual result of it. Superficially it can be
+thought of similar to invoking the <code>get</code> method on the future.</p>
+<div style="padding-bottom: 10px;"><pre><code>   my $result = await $f;
+
+   my $result = $f-&gt;get;</code></pre></div>
+<p style="padding-bottom: 10px;">However, the key difference (and indeed the entire reason for being a new
+syntax keyword) is the behaviour when the future is still pending and is not
+yet complete. Whereas the simple <code>get</code> method would block until the future is
+complete, the <code>await</code> keyword causes its entire containing function to become
+suspended, making it return a new (pending) future instance. It waits in this
+state until the future it was waiting on completes, at which point it wakes up
+and resumes execution from the point of the <code>await</code> expression. When the
+now-resumed function eventually finishes (either by returning a value or
+throwing an exception), this value is set as the result of the future it had
+returned earlier.</p>
+<p style="padding-bottom: 10px;"><code>await</code> provides scalar context to its controlling expression.</p>
+<div style="padding-bottom: 10px;"><pre><code>   async sub func {
+      # this function is invoked in scalar context
+   }
+
+   await func();</code></pre></div>
+<p style="padding-bottom: 10px;">Because the <code>await</code> keyword may cause its containing function to suspend
+early, returning a pending future instance, it is only allowed inside
+<code>async</code>-marked subs.</p>
+<p style="padding-bottom: 10px;">The converse is not true; just because a function is marked as <code>async</code> does
+not require it to make use of the <code>await</code> expression. It is still useful to
+turn the result of that function into a future, entirely without <code>await</code>ing
+on any itself.</p>
+<p style="padding-bottom: 10px;">Any function that doesn't actually await anything, and just returns immediate
+futures can be neatened by this module too.</p>
+<p style="padding-bottom: 10px;">Instead of writing</p>
+<div style="padding-bottom: 10px;"><pre><code>   sub imm
+   {
+      ...
+      return Future-&gt;done( @result );
+   }</code></pre></div>
+<p style="padding-bottom: 10px;">you can now simply write</p>
+<div style="padding-bottom: 10px;"><pre><code>   async sub imm
+   {
+      ...
+      return @result;
+   }</code></pre></div>
+<p style="padding-bottom: 10px;">with the added side-benefit that any exceptions thrown by the elided code will
+be turned into an immediate-failed <code>Future</code> rather than making the call
+itself propagate the exception, which is usually what you wanted when dealing
+with futures.</p>

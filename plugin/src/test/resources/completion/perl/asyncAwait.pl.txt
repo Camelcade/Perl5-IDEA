@@ -1,0 +1,18 @@
+Text: af; Tail: null; Type: after statement; Icon: /template.svg; Type Icon: null
+	Lookups: af
+	Live template: Perl5: Moose/af
+Text: ar; Tail: null; Type: around statement; Icon: /template.svg; Type Icon: null
+	Lookups: ar
+	Live template: Perl5: Moose/ar
+Text: as; Tail: null; Type: async sub definition; Icon: /template.svg; Type Icon: null
+	Lookups: as
+	Live template: Perl5/as
+Text: async; Tail: null; Type: Future::AsyncAwait; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: async
+	PsiElement: Implicit sub: async()
+Text: au; Tail: null; Type: augment statement; Icon: /template.svg; Type Icon: null
+	Lookups: au
+	Live template: Perl5: Moose/au
+Text: await; Tail: ($future); Type: Future::AsyncAwait; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: await
+	PsiElement: Implicit sub: await($future)($future)
