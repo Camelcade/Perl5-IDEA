@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,10 +44,11 @@ import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.ScrollPaneFactory;
-import com.intellij.ui.TreeSpeedSearch;
+import com.intellij.ui.TreeUIHelper;
 import com.intellij.ui.treeStructure.Tree;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.tree.TreeUtil;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
 
@@ -86,13 +87,14 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     myTree.setRootVisible(contentRoots.length < 2);
     myTree.setShowsRootHandles(true);
     TreeUtil.installActions(myTree);
-    new TreeSpeedSearch(myTree);
+    TreeUIHelper.getInstance().installTreeSpeedSearch(myTree);
 
     myTreePanel = new JPanel(new GridBagLayout());
 
     ActionToolbar actionToolbar = ActionManager.getInstance().createActionToolbar("PerlContentEntries", myEditingActionsGroup, true);
     actionToolbar.setTargetComponent(null);
-    myTreePanel.add(new JLabel("Mark as:"), new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.WEST, 0, JBUI.insets(0, 10), 0, 0));
+    myTreePanel.add(new JLabel(PerlBundle.message("mark.as.action.group")),
+                    new GridBagConstraints(0, 0, 1, 1, 0, 0, GridBagConstraints.WEST, 0, JBUI.insets(0, 10), 0, 0));
     myTreePanel.add(actionToolbar.getComponent(),
                     new GridBagConstraints(1, 0, 1, 1, 1.0, 0.0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL,
                                            JBUI.emptyInsets(), 0, 0));
