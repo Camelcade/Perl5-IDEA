@@ -169,6 +169,8 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.FileSpecFunctionsProcessor"/>
     <packageProcessor key="Log::Log4perl"
                       implementationClass="com.perl5.lang.perl.extensions.log4perl.Log4PerlPackageProcessor"/>
+    <packageProcessor key="Future::AsyncAwait"
+                      implementationClass="com.perl5.lang.perl.extensions.futureAsyncAwait.FutureAsyncAwaitPackageProcessor"/>
 
     <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
     <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtension"/>
@@ -191,6 +193,7 @@
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.readonly.ReadonlyImplicitDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.log4perl.Log4PerlImplicitDeclarationsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.moo.MooImplicitSubsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.futureAsyncAwait.FutureAsyncAwaitImplicitDeclarationsProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

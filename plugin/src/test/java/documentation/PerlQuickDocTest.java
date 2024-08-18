@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,21 +56,28 @@ public class PerlQuickDocTest extends PerlQuickDocTestCase {
   }
 
   @Test
-  public void testAsyncSub() {
+  public void testAwaitSub() {
+    doTestFuture();
+  }
+
+  private void doTestFuture() {
     withFuture();
     doTest528();
+  }
+
+  @Test
+  public void testAsyncSub() {
+    doTestFuture();
   }
 
   @Test
   public void testAsyncSubExpr() {
-    withFuture();
-    doTest528();
+    doTestFuture();
   }
 
   @Test
   public void testAsyncMethod() {
-    withFuture();
-    doTest528();
+    doTestFuture();
   }
 
   @Test
