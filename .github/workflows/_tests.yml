@@ -62,6 +62,7 @@ jobs:
 
       - name: Run tests
         run: |
+          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -110,6 +111,7 @@ jobs:
 
       - name: Run tests
         run: |
+          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -161,6 +163,7 @@ jobs:
 
       - name: Run tests
         run: |
+          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -212,6 +215,7 @@ jobs:
 
       - name: Run tests
         run: |
+          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
