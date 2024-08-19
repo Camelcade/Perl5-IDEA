@@ -18,7 +18,6 @@ env:
   TEST_PERL_MODULES: Mojolicious HURRICUP/Devel-Camelcadedb-v2023.1.tar.gz Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic B::Debug Types::Serialiser
 
 jobs:
-
   integration-plenv:
     name: Integration (plenv)
     if: ${{ inputs.os != 'windows-latest' }}
@@ -263,6 +262,7 @@ jobs:
 
       - name: Run tests
         run: |
+          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -295,6 +295,7 @@ jobs:
 
       - name: Run tests
         run: |
+          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -324,6 +325,7 @@ jobs:
 
       - name: Run tests
         run: |
+          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
           ./gradlew test -PlightTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -353,6 +355,7 @@ jobs:
 
       - name: Run tests
         run: |
+          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
           ./gradlew test -PheavyTests=1 --console plain "-Pyoutrack.token=${{ env.YOUTRACK_TOKEN && env.YOUTRACK_TOKEN || 'skip' }}"
 
       - name: Upload Coverage Data
