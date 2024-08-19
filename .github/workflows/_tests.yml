@@ -61,7 +61,7 @@ jobs:
 
       - name: Run tests
         run: |
-          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
+          bash ./watcher.sh 1200 &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -71,6 +71,16 @@ jobs:
           name: coverage-integration-plenv-${{ inputs.os }}
           path: |
             **/jacoco/*.exec  
+
+      - name: Upload Snapshots
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: plenv-snapshot-${{ inputs.os }}
+          path: |
+            ./snapshot.hprof
+            ./jinfo.txt
+            ./jstack.txt
 
   integration-asdf:
     name: Integration (asdf)
@@ -110,7 +120,7 @@ jobs:
 
       - name: Run tests
         run: |
-          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
+          bash ./watcher.sh 1200 &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -120,6 +130,16 @@ jobs:
           name: coverage-integration-asdf-${{ inputs.os }}
           path: |
             **/jacoco/*.exec  
+
+      - name: Upload Snapshots
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: asdf-snapshot-${{ inputs.os }}
+          path: |
+            ./snapshot.hprof
+            ./jinfo.txt
+            ./jstack.txt
 
   integration-perlbrew:
     name: Integration (perlbrew)
@@ -162,7 +182,7 @@ jobs:
 
       - name: Run tests
         run: |
-          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
+          bash ./watcher.sh 1200 &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -172,6 +192,16 @@ jobs:
           name: coverage-integration-perlbrew-${{ inputs.os }}
           path: |
             **/jacoco/*.exec  
+
+      - name: Upload Snapshots
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: perlbrew-snapshot-${{ inputs.os }}
+          path: |
+            ./snapshot.hprof
+            ./jinfo.txt
+            ./jstack.txt
 
   integration-perlbrew-external-libs:
     name: Integration (perlbrew with libs)
@@ -214,7 +244,7 @@ jobs:
 
       - name: Run tests
         run: |
-          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
+          bash ./watcher.sh 1200 &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -224,6 +254,16 @@ jobs:
           name: coverage-integration-perlbrew-libs-${{ inputs.os }}
           path: |
             **/jacoco/*.exec  
+
+      - name: Upload Snapshots
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: perbrew-libs-snapshot-${{ inputs.os }}
+          path: |
+            ./snapshot.hprof
+            ./jinfo.txt
+            ./jstack.txt
 
   integration-system:
     name: Integration (system)
@@ -262,7 +302,7 @@ jobs:
 
       - name: Run tests
         run: |
-          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
+          bash ./watcher.sh 2400 &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -272,6 +312,16 @@ jobs:
           name: coverage-integration-system-${{ inputs.os }}
           path: |
             **/jacoco/*.exec
+
+      - name: Upload Snapshots
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: system-snapshot-${{ inputs.os }}
+          path: |
+            ./snapshot.hprof
+            ./jinfo.txt
+            ./jstack.txt
 
   integration-docker:
     name: Integration (docker)
@@ -295,7 +345,7 @@ jobs:
 
       - name: Run tests
         run: |
-          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
+          bash ./watcher.sh 1200 &
           ./gradlew test -PintegrationTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -305,6 +355,16 @@ jobs:
           name: coverage-integration-docker-${{ inputs.os }}
           path: |
             **/jacoco/*.exec  
+
+      - name: Upload Snapshots
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-snapshot-${{ inputs.os }}
+          path: |
+            ./snapshot.hprof
+            ./jinfo.txt
+            ./jstack.txt
 
   light-tests:
     name: Light
@@ -325,7 +385,7 @@ jobs:
 
       - name: Run tests
         run: |
-          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
+          bash ./watcher.sh 3600 &
           ./gradlew test -PlightTests=1 --console plain
 
       - name: Upload Coverage Data
@@ -335,6 +395,16 @@ jobs:
           name: light-tests-coverage-${{ inputs.os }}
           path: |
             **/jacoco/*.exec
+
+      - name: Upload Snapshots
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: light-snapshot-${{ inputs.os }}
+          path: |
+            ./snapshot.hprof
+            ./jinfo.txt
+            ./jstack.txt
 
   heavy-tests:
     name: Heavy
@@ -355,7 +425,7 @@ jobs:
 
       - name: Run tests
         run: |
-          bash -c "while :; do sleep 1200; jps -q | xargs -I {} -t bash -c 'jinfo {}; jstack -l -e {}'; done" &
+          bash ./watcher.sh 3600 &
           ./gradlew test -PheavyTests=1 --console plain "-Pyoutrack.token=${{ env.YOUTRACK_TOKEN && env.YOUTRACK_TOKEN || 'skip' }}"
 
       - name: Upload Coverage Data
@@ -365,3 +435,13 @@ jobs:
           name: heavy-tests-coverage-${{ inputs.os }}
           path: |
             **/jacoco/*.exec
+
+      - name: Upload Snapshots
+        if: ${{ always() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: heavy-snapshot-${{ inputs.os }}
+          path: |
+            ./snapshot.hprof
+            ./jinfo.txt
+            ./jstack.txt
