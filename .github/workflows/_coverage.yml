@@ -34,7 +34,7 @@ jobs:
 
       - name: Setup Gradle
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
 

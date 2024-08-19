@@ -56,7 +56,7 @@ jobs:
           rm -Rf ~/.plenv/cache ~/.plenv/build
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
 
@@ -105,7 +105,7 @@ jobs:
           ~/.asdf/bin/asdf reshim perl
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
 
@@ -157,7 +157,7 @@ jobs:
           perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }}@plugin_test cpanm --notest ${{ env.TEST_PERL_MODULES }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
 
@@ -209,7 +209,7 @@ jobs:
           perlbrew exec -q --with perl-${{ env.PERL_TEST_VERSION }}@plugin_test cpanm --notest ${{ env.TEST_PERL_MODULES }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
 
@@ -257,7 +257,7 @@ jobs:
         run: cpanm --notest  ${{ env.TEST_PERL_MODULES }}
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
 
@@ -289,7 +289,7 @@ jobs:
           java-version: 21
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
 
@@ -318,7 +318,7 @@ jobs:
           java-version: 21
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
 
@@ -347,7 +347,7 @@ jobs:
           java-version: 21
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
           cache-read-only: true
 
