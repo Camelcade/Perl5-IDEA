@@ -58,9 +58,7 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
       if (LOG.isDebugEnabled()) {
         LOG.debug(outputType + ": " + eventText);
       }
-      if (StringUtil.startsWith(eventText, PROCESS_START_MARKER_TEXT) ||
-          StringUtil.startsWith(eventText, "##teamcity") && StringUtil.contains(eventText, PROCESS_START_MARKER_TEXT) ||
-          SystemInfo.isWindows && StringUtil.contains(eventText, PROCESS_START_MARKER_TEXT)) {
+      if (StringUtil.contains(eventText, PROCESS_START_MARKER_TEXT)) {
         LOG.debug("Marking as ready and removing listener");
         ProcessHandler processHandler = event.getProcessHandler();
         markAsReady(processHandler);
