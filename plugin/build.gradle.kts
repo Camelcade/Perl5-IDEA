@@ -66,7 +66,9 @@ dependencies {
     ":plugin:plenv",
   ).forEach {
     testFixturesCompileOnly(project(it))
-  }
+ }
+  testFixturesCompileOnly("junit:junit:4.13.2")
+
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IU", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
