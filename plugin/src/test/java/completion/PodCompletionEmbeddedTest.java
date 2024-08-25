@@ -25,7 +25,7 @@ public class PodCompletionEmbeddedTest extends PerlLightTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
+    updateNamesCacheSynchronously();
   }
 
   @Override

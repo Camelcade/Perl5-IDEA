@@ -177,7 +177,7 @@ public class PerlNamesCache implements Disposable {
 
   public void forceCacheUpdate() {
     var application = ApplicationManager.getApplication();
-    LOG.assertTrue(!application.isDispatchThread() || application.isUnitTestMode());
+    application.assertIsNonDispatchThread();
     doUpdateCache();
   }
 
