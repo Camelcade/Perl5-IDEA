@@ -26,7 +26,7 @@ public class MojoCompletionTest extends MojoLightTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
+    updateNamesCacheSynchronously();
   }
 
   @Override
