@@ -230,6 +230,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -418,8 +419,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         perlProjectManager.addExternalLibrary(libdir);
 
         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
-        PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
       }));
+    updateNamesCacheSynchronously();
   }
 
   /**
@@ -464,9 +465,21 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         PerlSdkTable.getInstance().addJdk(testSdk, myPerlLightTestCaseDisposable);
         perlProjectManager.setProjectSdk(testSdk);
         perlProjectManager.addExternalLibrary(libdir);
-        CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
-        PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
       }));
+    updateNamesCacheSynchronously();
+  }
+
+  protected final void updateNamesCacheSynchronously() {
+    var app = ApplicationManager.getApplication();
+    app.invokeAndWait(() -> CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject()));
+    if (app.isDispatchThread()) {
+      Future<?> namesUpdate =
+        app.executeOnPooledThread(() -> PerlNamesCache.getInstance(getProject()).forceCacheUpdate());
+      PlatformTestUtil.waitWithEventsDispatching("Unable to update names in 5 seconds", namesUpdate::isDone, 5);
+    }
+    else {
+      PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
+    }
   }
 
   protected @NotNull String getTestLibPath() {
@@ -847,7 +860,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   public void doTestResolveWithoutInit(boolean reparse) {
     if (reparse) {
-      PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
+      updateNamesCacheSynchronously();
       FileContentUtil.reparseFiles(getProject(), Collections.emptyList(), true);
     }
     checkSerializedReferencesWithFile();
