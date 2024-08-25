@@ -343,3 +343,7 @@ intellijPlatform {
     }
   }
 }
+
+configurations.all {
+  resolutionStrategy.cacheDynamicVersionsFor(7, "days")
+}
