@@ -27,7 +27,7 @@ public abstract class PerlCompletionTestCase extends PerlLightTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
+    updateNamesCacheSynchronously();
     myState = CodeInsightSettings.getInstance().getState();
     disableAutoInsertion();
   }
