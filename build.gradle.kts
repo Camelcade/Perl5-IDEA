@@ -93,13 +93,19 @@ allprojects {
 
   dependencies {
     intellijPlatform {
-      instrumentationTools()
-      testFramework(TestFrameworkType.Platform)
+      val platformToolsVersion = properties("platformToolsVersion")
+      if (platformToolsVersion.get().isEmpty()) {
+        instrumentationTools()
+        testFramework(TestFrameworkType.Platform)
+      }
+      else {
+        javaCompiler(platformToolsVersion)
+        testFramework(TestFrameworkType.Platform, version = platformToolsVersion)
+      }
       jetbrainsRuntime()
     }
     testImplementation("org.opentest4j:opentest4j:1.3.0")
   }
-
 
   tasks {
     withType<JavaCompile> {
