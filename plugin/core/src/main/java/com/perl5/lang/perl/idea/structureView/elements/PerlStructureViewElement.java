@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -145,8 +145,8 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
 
     Set<String> implementedMethods = new HashSet<>();
 
-    if (psiElement instanceof PerlFile) {
-      FileViewProvider viewProvider = ((PerlFile)psiElement).getViewProvider();
+    if (psiElement instanceof PerlFile perlFile) {
+      FileViewProvider viewProvider = perlFile.getViewProvider();
       PsiFile podFile = viewProvider.getPsi(PodLanguage.INSTANCE);
       if (podFile != null && podFile.getChildren().length > 1) {
         result.add(new PodStructureViewElement(podFile));
@@ -178,7 +178,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
         });
       }
     }
-    if (psiElement instanceof PerlNamespaceDefinitionElement) {
+    if (psiElement instanceof PerlNamespaceDefinitionElement namespaceDefinitionElement) {
       // global variables
       for (PerlVariableDeclarationElement child : PsiTreeUtil.findChildrenOfType(psiElement, PerlVariableDeclarationElement.class)) {
         if (child.isGlobalDeclaration() && psiElement.isEquivalentTo(PerlPackageUtil.getNamespaceContainerForElement(child))) {
@@ -186,106 +186,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
         }
       }
 
-      Project project = psiElement.getProject();
-      GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
-
-      // imported scalars
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)psiElement).getImportedScalarDescriptors()) {
-        String canonicalName = exportDescritptor.getTargetCanonicalName();
-
-        Collection<PerlVariableDeclarationElement> variables = PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName);
-
-        for (PerlVariableDeclarationElement variable : variables) {
-          result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported(exportDescritptor));
-        }
-
-        // globs
-        Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
-        if (items.isEmpty()) {
-          items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
-        }
-
-        for (PerlGlobVariableElement item : items) {
-          result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
-        }
-      }
-
-      // imported arrays
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)psiElement).getImportedArrayDescriptors()) {
-        String canonicalName = exportDescritptor.getTargetCanonicalName();
-
-        Collection<PerlVariableDeclarationElement> variables = PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName);
-
-        for (PerlVariableDeclarationElement variable : variables) {
-          result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported(exportDescritptor));
-        }
-
-        // globs
-        Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
-        if (items.isEmpty()) {
-          items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
-        }
-
-        for (PerlGlobVariableElement item : items) {
-          result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
-        }
-      }
-
-      // imported hashes
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)psiElement).getImportedHashDescriptors()) {
-        String canonicalName = exportDescritptor.getTargetCanonicalName();
-
-        Collection<PerlVariableDeclarationElement> variables = PerlHashUtil.getGlobalHashDefinitions(project, canonicalName);
-
-        for (PerlVariableDeclarationElement variable : variables) {
-          result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported(exportDescritptor));
-        }
-
-        // globs
-        Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
-        if (items.isEmpty()) {
-          items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
-        }
-
-        for (PerlGlobVariableElement item : items) {
-          result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
-        }
-      }
-
-      // Imported subs
-      for (PerlExportDescriptor exportDescritptor : ((PerlNamespaceDefinitionElement)psiElement).getImportedSubsDescriptors()) {
-        String canonicalName = exportDescritptor.getTargetCanonicalName();
-
-        // declarations
-        Collection<PerlSubDeclarationElement> subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName, projectScope);
-        if (subDeclarations.isEmpty()) {
-          subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName);
-        }
-
-        for (PerlSubDeclarationElement item : subDeclarations) {
-          result.add(new PerlSubStructureViewElement(item).setImported(exportDescritptor));
-        }
-
-        // definitions
-        Collection<PerlSubDefinitionElement> subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName, projectScope);
-        if (subDefinitions.isEmpty()) {
-          subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName);
-        }
-
-        for (PerlSubDefinitionElement item : subDefinitions) {
-          result.add(new PerlSubStructureViewElement(item).setImported(exportDescritptor));
-        }
-
-        // globs
-        Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
-        if (items.isEmpty()) {
-          items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
-        }
-
-        for (PerlGlobVariableElement item : items) {
-          result.add(new PerlGlobStructureViewElement(item).setImported(exportDescritptor));
-        }
-      }
+      collectImportedThings(namespaceDefinitionElement, result);
 
       psiElement.accept(new PerlRecursiveVisitor() {
         @Override
@@ -323,26 +224,26 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
     }
 
     // inherited elements
-    if (psiElement instanceof PerlNamespaceDefinitionWithIdentifier) {
+    if (psiElement instanceof PerlNamespaceDefinitionWithIdentifier namespaceDefinitionWithIdentifier) {
       List<StructureViewTreeElement> inheritedResult = new ArrayList<>();
 
-      String packageName = ((PerlNamespaceDefinitionElement)psiElement).getNamespaceName();
+      String packageName = namespaceDefinitionWithIdentifier.getNamespaceName();
 
       if (packageName != null) {
         for (PsiElement element : PerlMro.getVariants(psiElement, packageName, true)) {
           if (element instanceof PerlIdentifierOwner identifierOwner && !implementedMethods.contains((identifierOwner).getName())) {
-            if (element instanceof PerlLightConstantDefinitionElement perlLightConstantDefinitionElement) {
-              inheritedResult.add(new PerlSubStructureViewElement(perlLightConstantDefinitionElement).setInherited());
-            }
-            else if (element instanceof PerlSubDefinitionElement subDefinitionElement) {
-              inheritedResult.add(new PerlSubStructureViewElement(subDefinitionElement).setInherited());
-            }
-            else if (element instanceof PerlSubDeclarationElement subDeclarationElement) {
-              inheritedResult.add(new PerlSubStructureViewElement(subDeclarationElement).setInherited());
-            }
-            else if (element instanceof PerlGlobVariableElement globVariableElement &&
-                     globVariableElement.isLeftSideOfAssignment() && globVariableElement.getName() != null) {
-              inheritedResult.add(new PerlGlobStructureViewElement(globVariableElement).setInherited());
+            switch (element) {
+              case PerlLightConstantDefinitionElement perlLightConstantDefinitionElement ->
+                inheritedResult.add(new PerlSubStructureViewElement(perlLightConstantDefinitionElement).setInherited());
+              case PerlSubDefinitionElement subDefinitionElement ->
+                inheritedResult.add(new PerlSubStructureViewElement(subDefinitionElement).setInherited());
+              case PerlSubDeclarationElement subDeclarationElement ->
+                inheritedResult.add(new PerlSubStructureViewElement(subDeclarationElement).setInherited());
+              case PerlGlobVariableElement globVariableElement
+                when globVariableElement.isLeftSideOfAssignment() && globVariableElement.getName() != null ->
+                inheritedResult.add(new PerlGlobStructureViewElement(globVariableElement).setInherited());
+              default -> {
+              }
             }
           }
         }
@@ -354,5 +255,110 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
     }
 
     return result;
+  }
+
+  private static void collectImportedThings(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement,
+                                            @NotNull List<? super StructureViewTreeElement> result) {
+    Project project = namespaceDefinitionElement.getProject();
+    GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
+
+    collectImportedScalars(namespaceDefinitionElement, project, result, projectScope);
+    collectImportedArrays(namespaceDefinitionElement, project, result, projectScope);
+    collectImportedHashes(namespaceDefinitionElement, project, result, projectScope);
+    collectImportedSubs(namespaceDefinitionElement, project, projectScope, result);
+  }
+
+  private static void collectImportedHashes(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement,
+                                            @NotNull Project project,
+                                            @NotNull List<? super StructureViewTreeElement> result,
+                                            @NotNull GlobalSearchScope projectScope) {
+    // imported hashes
+    for (PerlExportDescriptor exportDescritptor : namespaceDefinitionElement.getImportedHashDescriptors()) {
+      String canonicalName = exportDescritptor.getTargetCanonicalName();
+      addVariables(result, exportDescritptor, PerlHashUtil.getGlobalHashDefinitions(project, canonicalName));
+      addGlobs(project, result, projectScope, exportDescritptor, canonicalName);
+    }
+  }
+
+  private static void addGlobs(@NotNull Project project,
+                               @NotNull List<? super StructureViewTreeElement> result,
+                               @NotNull GlobalSearchScope projectScope,
+                               @NotNull PerlExportDescriptor exportDescripttor,
+                               @NotNull String canonicalName) {
+    // globs
+    Collection<PsiPerlGlobVariable> items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName, projectScope);
+    if (items.isEmpty()) {
+      items = PerlGlobUtil.getGlobsDefinitions(project, canonicalName);
+    }
+
+    for (PerlGlobVariableElement item : items) {
+      result.add(new PerlGlobStructureViewElement(item).setImported(exportDescripttor));
+    }
+  }
+
+  private static void addVariables(@NotNull List<? super StructureViewTreeElement> result,
+                                   @NotNull PerlExportDescriptor exportDescritptor,
+                                   @NotNull Collection<? extends PerlVariableDeclarationElement> variables) {
+    for (PerlVariableDeclarationElement variable : variables) {
+      result.add(new PerlVariableDeclarationStructureViewElement(variable).setImported(exportDescritptor));
+    }
+  }
+
+  private static void collectImportedArrays(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement,
+                                            @NotNull Project project,
+                                            @NotNull List<? super StructureViewTreeElement> result,
+                                            @NotNull GlobalSearchScope projectScope) {
+    // imported arrays
+    for (PerlExportDescriptor exportDescritptor : namespaceDefinitionElement.getImportedArrayDescriptors()) {
+      String canonicalName = exportDescritptor.getTargetCanonicalName();
+
+      addVariables(result, exportDescritptor, PerlArrayUtil.getGlobalArrayDefinitions(project, canonicalName));
+      addGlobs(project, result, projectScope, exportDescritptor, canonicalName);
+    }
+  }
+
+  private static void collectImportedScalars(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement,
+                                             @NotNull Project project,
+                                             @NotNull List<? super StructureViewTreeElement> result,
+                                             @NotNull GlobalSearchScope projectScope) {
+    // imported scalars
+    for (PerlExportDescriptor exportDescritptor : namespaceDefinitionElement.getImportedScalarDescriptors()) {
+      String canonicalName = exportDescritptor.getTargetCanonicalName();
+
+      addVariables(result, exportDescritptor, PerlScalarUtil.getGlobalScalarDefinitions(project, canonicalName));
+      addGlobs(project, result, projectScope, exportDescritptor, canonicalName);
+    }
+  }
+
+  private static void collectImportedSubs(@NotNull PerlNamespaceDefinitionElement psiElement,
+                                          @NotNull Project project,
+                                          @NotNull GlobalSearchScope projectScope,
+                                          @NotNull List<? super StructureViewTreeElement> result) {
+    // Imported subs
+    for (PerlExportDescriptor exportDescritptor : psiElement.getImportedSubsDescriptors()) {
+      String canonicalName = exportDescritptor.getTargetCanonicalName();
+
+      // declarations
+      Collection<PerlSubDeclarationElement> subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName, projectScope);
+      if (subDeclarations.isEmpty()) {
+        subDeclarations = PerlSubUtil.getSubDeclarations(project, canonicalName);
+      }
+
+      for (PerlSubDeclarationElement item : subDeclarations) {
+        result.add(new PerlSubStructureViewElement(item).setImported(exportDescritptor));
+      }
+
+      // definitions
+      Collection<PerlSubDefinitionElement> subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName, projectScope);
+      if (subDefinitions.isEmpty()) {
+        subDefinitions = PerlSubUtil.getSubDefinitions(project, canonicalName);
+      }
+
+      for (PerlSubDefinitionElement item : subDefinitions) {
+        result.add(new PerlSubStructureViewElement(item).setImported(exportDescritptor));
+      }
+
+      addGlobs(project, result, projectScope, exportDescritptor, canonicalName);
+    }
   }
 }
