@@ -23,6 +23,7 @@ import com.intellij.lang.Language;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
+import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -141,6 +142,8 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
       return Collections.emptyList();
     }
 
+    var isSmart = !DumbService.isDumb(psiElement.getProject());
+
     List<StructureViewTreeElement> result = new ArrayList<>();
 
     Set<String> implementedMethods = new HashSet<>();
@@ -178,6 +181,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
         });
       }
     }
+
     if (psiElement instanceof PerlNamespaceDefinitionElement namespaceDefinitionElement) {
       // global variables
       for (PerlVariableDeclarationElement child : PsiTreeUtil.findChildrenOfType(psiElement, PerlVariableDeclarationElement.class)) {
@@ -186,7 +190,9 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
         }
       }
 
-      collectImportedThings(namespaceDefinitionElement, result);
+      if (isSmart) {
+        collectImportedThings(namespaceDefinitionElement, result);
+      }
 
       psiElement.accept(new PerlRecursiveVisitor() {
         @Override
@@ -224,7 +230,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
     }
 
     // inherited elements
-    if (psiElement instanceof PerlNamespaceDefinitionWithIdentifier namespaceDefinitionWithIdentifier) {
+    if (isSmart && psiElement instanceof PerlNamespaceDefinitionWithIdentifier namespaceDefinitionWithIdentifier) {
       List<StructureViewTreeElement> inheritedResult = new ArrayList<>();
 
       String packageName = namespaceDefinitionWithIdentifier.getNamespaceName();
