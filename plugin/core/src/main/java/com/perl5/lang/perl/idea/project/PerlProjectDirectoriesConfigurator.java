@@ -80,6 +80,7 @@ public final class PerlProjectDirectoriesConfigurator implements Disposable, Bul
         return collector;
       }).expireWhen(project::isDisposed)
       .finishOnUiThread(ModalityState.defaultModalityState(), collector -> WriteAction.run(collector::commit))
+      .coalesceBy(project, PerlProjectDirectoriesConfigurator.class)
       .submit(AppExecutorUtil.getAppExecutorService());
   }
 
