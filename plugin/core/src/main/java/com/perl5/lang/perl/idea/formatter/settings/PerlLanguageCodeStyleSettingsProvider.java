@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.application.options.IndentOptionsEditor;
 import com.intellij.application.options.SmartIndentOptionsEditor;
 import com.intellij.lang.Language;
 import com.intellij.openapi.application.ApplicationBundle;
+import com.intellij.openapi.util.NlsContexts.Label;
 import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable;
 import com.intellij.psi.codeStyle.CodeStyleSettingsCustomizableOptions;
 import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
@@ -36,28 +37,30 @@ import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.
 
 
 public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider {
-  private static final String GROUP_QW = PerlBundle.message("perl.qw.list");
-  private static final String GROUP_QUOTATION = PerlBundle.message("perl.formatting.group.optional.quotation");
-  private static final String GROUP_DEREFERENCE = PerlBundle.message("perl.formatting.group.dereferencing");
-  private static final String GROUP_PARENTHESES = PerlBundle.message("perl.formatting.group.optional.parentheses");
-  private static final String GROUP_COMPOUND = PerlBundle.message("perl.formatting.group.compound");
-  private static final String GROUP_NAMESPACE = PerlBundle.message("perl.formatting.brace.style.namespace");
-  private static final String GROUP_SUB = PerlBundle.message("perl.formatting.brace.style.sub");
-  private static final String GROUP_VARIABLE_DECLARATION = PerlBundle.message("perl.formatting.wrap.variable.declarations");
-  private static final String GROUP_COMMENT = CodeStyleSettingsCustomizableOptions.getInstance().WRAPPING_COMMENTS;
-  private static final String GROUP_ANNOTATIONS = PerlBundle.message("perl.formatting.group.annotations");
-  private static final String GROUP_LIST = CodeStyleSettingsCustomizableOptions.getInstance().WRAPPING_ARRAY_INITIALIZER;
-  private static final String GROUP_ATTRIBUTES_WRAP = PerlBundle.message("perl.formatting.wrap.attributes");
-  private static final String GROUP_COMMA = PerlBundle.message("perl.formatting.comma.after.hash.value");
+  private static class Localization {
+    @SuppressWarnings("DialogTitleCapitalization") private final @Label String GROUP_QW = PerlBundle.message("perl.qw.list");
+    private final @Label String GROUP_QUOTATION = PerlBundle.message("perl.formatting.group.optional.quotation");
+    private final @Label String GROUP_DEREFERENCE = PerlBundle.message("perl.formatting.group.dereferencing");
+    private final @Label String GROUP_PARENTHESES = PerlBundle.message("perl.formatting.group.optional.parentheses");
+    private final @Label String GROUP_COMPOUND = PerlBundle.message("perl.formatting.group.compound");
+    private final @Label String GROUP_NAMESPACE = PerlBundle.message("perl.formatting.brace.style.namespace");
+    private final @Label String GROUP_SUB = PerlBundle.message("perl.formatting.brace.style.sub");
+    private final @Label String GROUP_VARIABLE_DECLARATION = PerlBundle.message("perl.formatting.wrap.variable.declarations");
+    private final @Label String GROUP_COMMENT = CodeStyleSettingsCustomizableOptions.getInstance().WRAPPING_COMMENTS;
+    private final @Label String GROUP_ANNOTATIONS = PerlBundle.message("perl.formatting.group.annotations");
+    private final @Label String GROUP_LIST = CodeStyleSettingsCustomizableOptions.getInstance().WRAPPING_ARRAY_INITIALIZER;
+    private final @Label String GROUP_ATTRIBUTES_WRAP = PerlBundle.message("perl.formatting.wrap.attributes");
+    private final @Label String GROUP_COMMA = PerlBundle.message("perl.formatting.comma.after.hash.value");
+  }
 
-  private static final String DEFAULT_CODE_SAMPLE = PerlBundle.message("perl.code.sample.nyi");
-  private static final String SPACING_CODE_SAMPLE = readCodeSample("spaces");
-  private static final String INDENT_CODE_SAMPLE = readCodeSample("indents");
-  private static final String WRAPPING_CODES_SAMPLE = readCodeSample("wrapping");
-  private static final String LANGUAGE_SPECIFIC_CODE_SAMPLE = readCodeSample("perl5");
+  static final String SPACING_CODE_SAMPLE = readCodeSample("spaces");
+  static final String INDENT_CODE_SAMPLE = readCodeSample("indents");
+  static final String WRAPPING_CODES_SAMPLE = readCodeSample("wrapping");
+  static final String LANGUAGE_SPECIFIC_CODE_SAMPLE = readCodeSample("perl5");
 
   @Override
   public void customizeSettings(@NotNull CodeStyleSettingsCustomizable consumer, @NotNull SettingsType settingsType) {
+    var localization = new Localization();
     var customizableOptions = CodeStyleSettingsCustomizableOptions.getInstance();
     if (settingsType == SPACING_SETTINGS) {
       consumer.showStandardOptions(
@@ -156,9 +159,10 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 PerlBundle.message("perl.formatting.within.array"),
                                 customizableOptions.SPACES_WITHIN);
 
+      @SuppressWarnings("DialogTitleCapitalization") var qwTitle = PerlBundle.message("perl.qw.list");
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "SPACE_WITHIN_QW_QUOTES",
-                                PerlBundle.message("perl.qw.list"),
+                                qwTitle,
                                 customizableOptions.SPACES_WITHIN);
     }
     else if (settingsType == WRAPPING_AND_BRACES_SETTINGS) {
@@ -209,17 +213,17 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_COMMENTS_ON_CONSEQUENT_LINES",
                                 PerlBundle.message("perl.formatting.align.comments.in.list"),
-                                GROUP_COMMENT);
+                                localization.GROUP_COMMENT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_ANNOTATION_TYPE_SPECIFIERS",
                                 PerlBundle.message("perl.formatting.align.type.specifiers"),
-                                GROUP_ANNOTATIONS);
+                                localization.GROUP_ANNOTATIONS);
 
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "VARIABLE_DECLARATION_WRAP",
-                                GROUP_VARIABLE_DECLARATION,
+                                localization.GROUP_VARIABLE_DECLARATION,
                                 null,
                                 AFTER, "METHOD_PARAMETERS_WRAP",
                                 customizableOptions.WRAP_OPTIONS, WRAP_VALUES);
@@ -227,57 +231,58 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_VARIABLE_DECLARATIONS",
                                 ApplicationBundle.message("wrapping.align.when.multiline"),
-                                GROUP_VARIABLE_DECLARATION
+                                localization.GROUP_VARIABLE_DECLARATION
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "BRACE_STYLE_NAMESPACE",
                                 customizableOptions.WRAPPING_BRACES,
-                                GROUP_NAMESPACE,
+                                localization.GROUP_NAMESPACE,
                                 BRACE_PLACEMENT_OPTIONS
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "BRACE_STYLE_SUB",
                                 customizableOptions.WRAPPING_BRACES,
-                                GROUP_SUB,
+                                localization.GROUP_SUB,
                                 BRACE_PLACEMENT_OPTIONS
       );
 
+      @SuppressWarnings("DialogTitleCapitalization") var ifElseTitle = PerlBundle.message("perl.formatting.compound.secondary");
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ELSE_ON_NEW_LINE",
-                                PerlBundle.message("perl.formatting.compound.secondary"),
-                                GROUP_COMPOUND
+                                ifElseTitle,
+                                localization.GROUP_COMPOUND
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "BRACE_STYLE_COMPOUND",
                                 customizableOptions.WRAPPING_BRACES,
-                                GROUP_COMPOUND,
+                                localization.GROUP_COMPOUND,
                                 BRACE_PLACEMENT_OPTIONS
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ATTRIBUTES_WRAP",
-                                GROUP_ATTRIBUTES_WRAP,
+                                localization.GROUP_ATTRIBUTES_WRAP,
                                 null,
                                 customizableOptions.WRAP_OPTIONS, WRAP_VALUES);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_ATTRIBUTES",
                                 ApplicationBundle.message("wrapping.align.when.multiline"),
-                                GROUP_ATTRIBUTES_WRAP
+                                localization.GROUP_ATTRIBUTES_WRAP
       );
 
       consumer.renameStandardOption("ARRAY_INITIALIZER_WRAP", PerlBundle.message("perl.formatting.align.list.elements"));
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_FAT_COMMA",
                                 PerlBundle.message("perl.formatting.align.fat.comma"),
-                                GROUP_LIST);
+                                localization.GROUP_LIST);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "QW_LIST_WRAP",
-                                GROUP_QW,
+                                localization.GROUP_QW,
                                 null,
                                 AFTER, "ARRAY_INITIALIZER_WRAP",
                                 customizableOptions.WRAP_OPTIONS, WRAP_VALUES
@@ -285,7 +290,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_QW_ELEMENTS",
                                 PerlBundle.message("perl.formatting.align.qw.elements"),
-                                GROUP_QW);
+                                localization.GROUP_QW);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "ALIGN_RIGHTWARD_CALLS",
@@ -297,47 +302,46 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_QUOTES",
                                 PerlBundle.message("perl.formatting.quotation.before.fatcomma"),
-                                GROUP_QUOTATION,
+                                localization.GROUP_QUOTATION,
                                 OPTIONS_DEFAULT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_QUOTES_HASH_INDEX",
                                 PerlBundle.message("perl.formatting.quotation.hash.index"),
-                                GROUP_QUOTATION,
+                                localization.GROUP_QUOTATION,
                                 OPTIONS_DEFAULT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_QUOTES_HEREDOC_OPENER",
                                 PerlBundle.message("perl.formatting.quotation.heredoc.opener"),
-                                GROUP_QUOTATION,
+                                localization.GROUP_QUOTATION,
                                 OPTIONS_DEFAULT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_DEREFERENCE",
                                 PerlBundle.message("perl.formatting.deref.indexes"),
-                                GROUP_DEREFERENCE,
+                                localization.GROUP_DEREFERENCE,
                                 OPTIONS_DEFAULT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_DEREFERENCE_HASHREF_ELEMENT",
                                 PerlBundle.message("perl.formatting.hashref.element"),
-                                GROUP_DEREFERENCE,
+                                localization.GROUP_DEREFERENCE,
                                 OPTIONS_HASHREF_ELEMENT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_DEREFERENCE_SIMPLE",
                                 PerlBundle.message("perl.formatting.simple.dereference"),
-                                GROUP_DEREFERENCE,
+                                localization.GROUP_DEREFERENCE,
                                 OPTIONS_SIMPLE_DEREF_STYLE);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_PARENTHESES",
                                 PerlBundle.message("perl.formatting.statement.modifiers"),
-                                GROUP_PARENTHESES,
+                                localization.GROUP_PARENTHESES,
                                 OPTIONS_DEFAULT);
 
-      //			consumer.showCustomOption(PerlCodeStyleSettings.class, "OPTIONAL_SEMI", PERL_OPTION_OPTIONAL_SEMI, OPTIONAL_ELEMENTS_GROUP, PerlCodeStyleSettings.OptionalConstructions.OPTIONS_DEFAULT);
-
+      //noinspection DialogTitleCapitalization
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "MAIN_FORMAT",
                                 PerlBundle.message("perl.formatting.main.format"),
@@ -347,7 +351,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_TRAILING_COMMA",
                                 PerlBundle.message("label.before.newline.hash.array"),
-                                GROUP_COMMA,
+                                localization.GROUP_COMMA,
                                 OPTIONS_DEFAULT);
     }
   }
@@ -384,7 +388,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
     else if (settingsType == LANGUAGE_SPECIFIC) {
       return LANGUAGE_SPECIFIC_CODE_SAMPLE;
     }
-    return DEFAULT_CODE_SAMPLE;
+    return PerlBundle.message("perl.code.sample.nyi");
   }
 
   @Override
