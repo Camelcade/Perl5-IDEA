@@ -164,22 +164,20 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     if (targetElement instanceof PerlHeredocOpener) {
       result.addAll(PerlInjectionMarkersService.getInstance(targetElement.getProject()).getSupportedMarkers());
     }
-    else if (targetElement instanceof PerlVariableDeclarationElement) {
-      PerlVariable declaredVariable = ((PerlVariableDeclarationElement)targetElement).getVariable();
-      if (declaredVariable instanceof PsiPerlScalarVariable) {
-        suggestedNames.addAll(SCALAR_BASE_NAMES);
-      }
-      else if (declaredVariable instanceof PsiPerlArrayVariable) {
-        suggestedNames.addAll(ARRAY_BASE_NAMES);
-      }
-      else if (declaredVariable instanceof PsiPerlHashVariable) {
-        suggestedNames.addAll(HASH_BASE_NAMES);
+    else if (targetElement instanceof PerlVariableDeclarationElement variableDeclarationElement) {
+      PerlVariable declaredVariable = variableDeclarationElement.getVariable();
+      switch (declaredVariable) {
+        case PsiPerlScalarVariable ignored -> suggestedNames.addAll(SCALAR_BASE_NAMES);
+        case PsiPerlArrayVariable ignored -> suggestedNames.addAll(ARRAY_BASE_NAMES);
+        case PsiPerlHashVariable ignored -> suggestedNames.addAll(HASH_BASE_NAMES);
+        default -> {
+        }
       }
       recommendedName = adjustNamesToBeUniqueFor(
         targetElement,
-        ((PerlVariableDeclarationElement)targetElement).getActualType(),
+        variableDeclarationElement.getActualType(),
         declaredVariable.getName(),
-        suggestAndAddRecommendedName((PerlVariableDeclarationElement)targetElement, contextElement, suggestedNames),
+        suggestAndAddRecommendedName(variableDeclarationElement, contextElement, suggestedNames),
         suggestedNames
       );
     }

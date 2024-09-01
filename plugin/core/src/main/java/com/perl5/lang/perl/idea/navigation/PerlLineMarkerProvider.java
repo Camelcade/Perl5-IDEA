@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,10 @@ import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import org.jetbrains.annotations.NotNull;
@@ -36,20 +39,20 @@ import java.util.List;
 public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implements PerlElementTypes {
   @Override
   protected void collectNavigationMarkers(@NotNull PsiElement element, @NotNull Collection<? super RelatedItemLineMarkerInfo<?>> result) {
-    if (element instanceof PerlNamespaceDefinitionWithIdentifier) {
-      addNamespaceMarkers((PerlNamespaceDefinitionWithIdentifier)element, result);
-    }
-    else if (element instanceof PerlSubDefinitionElement && ((PerlSubDefinitionElement)element).isMethod()) {
-      addSubDefinitionsMarkers((PerlSubDefinitionElement)element, result);
-    }
-    else if (element instanceof PerlPolyNamedElement) {
-      for (PerlDelegatingLightNamedElement<?> lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
-        if (lightNamedElement instanceof PerlNamespaceDefinitionWithIdentifier) {
-          addNamespaceMarkers((PerlNamespaceDefinitionWithIdentifier)lightNamedElement, result);
+    switch (element) {
+      case PerlNamespaceDefinitionWithIdentifier namespaceDefinition -> addNamespaceMarkers(namespaceDefinition, result);
+      case PerlSubDefinitionElement subDefinition when subDefinition.isMethod() -> addSubDefinitionsMarkers(subDefinition, result);
+      case PerlPolyNamedElement<?> polyNamedElement -> {
+        for (PerlDelegatingLightNamedElement<?> lightNamedElement : polyNamedElement.getLightElements()) {
+          if (lightNamedElement instanceof PerlNamespaceDefinitionWithIdentifier namespaceDefinition) {
+            addNamespaceMarkers(namespaceDefinition, result);
+          }
+          else if (lightNamedElement instanceof PerlSubDefinitionElement subDefinition && subDefinition.isMethod()) {
+            addSubDefinitionsMarkers(subDefinition, result);
+          }
         }
-        else if (lightNamedElement instanceof PerlSubDefinition && ((PerlSubDefinition)lightNamedElement).isMethod()) {
-          addSubDefinitionsMarkers((PerlSubDefinitionElement)lightNamedElement, result);
-        }
+      }
+      default -> {
       }
     }
   }

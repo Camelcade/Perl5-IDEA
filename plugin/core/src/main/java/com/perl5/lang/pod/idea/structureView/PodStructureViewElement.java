@@ -47,16 +47,12 @@ public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
   @Override
   public @Nullable String getPresentableText() {
     PsiElement element = getElement();
-    if (element == null) {
-      return null;
-    }
-    if (element instanceof PodFile) {
-      return PerlBundle.message("pod.structure.view.file.title");
-    }
-    else if (element instanceof ItemPresentation) {
-      return ((ItemPresentation)element).getPresentableText();
-    }
-    return null;
+    return switch (element) {
+      case null -> null;
+      case PodFile ignored -> PerlBundle.message("pod.structure.view.file.title");
+      case ItemPresentation presentation -> presentation.getPresentableText();
+      default -> null;
+    };
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -223,31 +223,23 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
    */
   @Contract("null->null")
   public static @Nullable PsiElement findPodElement(@Nullable PsiElement element) {
-    if (element == null) {
-      return null;
-    }
-    else if (element instanceof PerlBuiltInSubDefinition) {
-      String subName = StringUtil.notNullize(((PerlBuiltInSubDefinition)element).getName());
-      if ("default".equals(subName)) {
-        return PerlDocUtil.resolveDescriptor(SWITCH_DOC_LINK, element, false);
+    return switch (element) {
+      case null -> null;
+      case PerlBuiltInSubDefinition definition -> {
+        String subName = StringUtil.notNullize(definition.getName());
+        if ("default".equals(subName)) {
+          yield PerlDocUtil.resolveDescriptor(SWITCH_DOC_LINK, element, false);
+        }
+        else {
+          yield PerlDocUtil.getPerlFuncDocFromText(element, subName);
+        }
       }
-      else {
-        return PerlDocUtil.getPerlFuncDocFromText(element, subName);
-      }
-    }
-    else if (element instanceof PerlSubElement) {
-      return findPodElement((PerlSubElement)element);
-    }
-    else if (element instanceof PerlFileImpl) {
-      return findPodElement((PerlFileImpl)element);
-    }
-    else if (element instanceof PerlNamespaceDefinitionElement) {
-      return findPodElement((PerlNamespaceDefinitionElement)element);
-    }
-    else if (element instanceof PerlVariable) {
-      return PerlDocUtil.getPerlVarDoc((PerlVariable)element);
-    }
-    return null;
+      case PerlSubElement subElement -> findPodElement(subElement);
+      case PerlFileImpl file -> findPodElement(file);
+      case PerlNamespaceDefinitionElement definitionElement -> findPodElement(definitionElement);
+      case PerlVariable variable -> PerlDocUtil.getPerlVarDoc(variable);
+      default -> null;
+    };
   }
 
   /**

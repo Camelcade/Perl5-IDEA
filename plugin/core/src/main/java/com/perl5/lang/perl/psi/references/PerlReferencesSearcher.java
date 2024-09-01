@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlHeredocOpener;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
@@ -42,23 +42,26 @@ public class PerlReferencesSearcher extends QueryExecutorBase<PsiReference, Refe
   public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<? super PsiReference> consumer) {
     PsiElement element = queryParameters.getElementToSearch();
 
-    if (element instanceof PerlHeredocOpener) {
-      String heredocName = ((PerlHeredocOpener)element).getName();
-      if ("".equals(heredocName)) {
-        queryParameters.getOptimizer().searchWord("\n", queryParameters.getEffectiveSearchScope(), true, element);
-      }
-    }
-    else if (element instanceof PerlLightSubDefinitionElement) {
-      PerlPolyNamedElement<?> delegate = ((PerlLightSubDefinitionElement<?>)element).getDelegate();
-      var identifyingElement = ((PerlLightSubDefinitionElement<?>)element).getIdentifyingElement();
-      for (PerlDelegatingLightNamedElement<?> lightElement : delegate.getLightElements()) {
-        if (Objects.equals(identifyingElement, lightElement.getIdentifyingElement())) {
-          queryParameters.getOptimizer().searchWord(lightElement.getName(), queryParameters.getEffectiveSearchScope(), true, delegate);
+    switch (element) {
+      case PerlHeredocOpener heredocOpener -> {
+        String heredocName = heredocOpener.getName();
+        if ("".equals(heredocName)) {
+          queryParameters.getOptimizer().searchWord("\n", queryParameters.getEffectiveSearchScope(), true, element);
         }
       }
-    }
-    else if (element instanceof PerlNamespaceDefinition) {
-      queryParameters.getOptimizer().searchWord(__PACKAGE__, queryParameters.getEffectiveSearchScope(), true, element);
+      case PerlLightSubDefinitionElement<?> lightSubDefinition -> {
+        PerlPolyNamedElement<?> delegate = lightSubDefinition.getDelegate();
+        var identifyingElement = lightSubDefinition.getIdentifyingElement();
+        for (PerlDelegatingLightNamedElement<?> lightElement : delegate.getLightElements()) {
+          if (Objects.equals(identifyingElement, lightElement.getIdentifyingElement())) {
+            queryParameters.getOptimizer().searchWord(lightElement.getName(), queryParameters.getEffectiveSearchScope(), true, delegate);
+          }
+        }
+      }
+      case PerlNamespaceDefinitionElement namespaceDefinition ->
+        queryParameters.getOptimizer().searchWord(__PACKAGE__, queryParameters.getEffectiveSearchScope(), true, namespaceDefinition);
+      default -> {
+      }
     }
   }
 }

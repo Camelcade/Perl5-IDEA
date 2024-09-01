@@ -123,30 +123,34 @@ public abstract class PerlIntroduceTargetsHandler {
    */
   protected @NotNull String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
     PsiElement targetElement = target.getPlace();
-    if (targetElement == null) {
-      return reportEmptyPlace();
-    }
-    else if (targetElement instanceof PsiPerlPackageExpr) {
-      return "'" + PerlPackageUtil.getCanonicalNamespaceName(StringUtil.notNullize(targetElement.getText())) + "'";
-    }
-    else if (targetElement instanceof PsiPerlMatchRegex matchRegex) {
-      char openQuote = matchRegex.getOpenQuote();
-      PsiPerlPerlRegex regex = matchRegex.getRegex();
-      if (openQuote != 0 && regex != null) {
-        char closeQuote = PerlString.getQuoteCloseChar(openQuote);
-        PsiPerlPerlRegexModifiers modifiers = matchRegex.getPerlRegexModifiers();
-        String regexText = "qr " + openQuote + regex.getText() + closeQuote;
-        return modifiers == null ? regexText : regexText + modifiers.getText();
+    switch (targetElement) {
+      case null -> {
+        return reportEmptyPlace();
       }
-    }
-    else if (targetElement instanceof PsiPerlPerlRegexImpl) {
-      PsiElement container = targetElement.getParent();
-      if (container instanceof PerlReplacementRegex replacementRegex) {
-        char openQuote = replacementRegex.getOpenQuote();
-        if (openQuote > 0) {
+      case PsiPerlPackageExpr packageExpr -> {
+        return "'" + PerlPackageUtil.getCanonicalNamespaceName(StringUtil.notNullize(packageExpr.getText())) + "'";
+      }
+      case PsiPerlMatchRegex matchRegex -> {
+        char openQuote = matchRegex.getOpenQuote();
+        PsiPerlPerlRegex regex = matchRegex.getRegex();
+        if (openQuote != 0 && regex != null) {
           char closeQuote = PerlString.getQuoteCloseChar(openQuote);
-          return "qr " + openQuote + targetElement.getText() + closeQuote;
+          PsiPerlPerlRegexModifiers modifiers = matchRegex.getPerlRegexModifiers();
+          String regexText = "qr " + openQuote + regex.getText() + closeQuote;
+          return modifiers == null ? regexText : regexText + modifiers.getText();
         }
+      }
+      case PsiPerlPerlRegexImpl regex -> {
+        PsiElement container = regex.getParent();
+        if (container instanceof PerlReplacementRegex replacementRegex) {
+          char openQuote = replacementRegex.getOpenQuote();
+          if (openQuote > 0) {
+            char closeQuote = PerlString.getQuoteCloseChar(openQuote);
+            return "qr " + openQuote + regex.getText() + closeQuote;
+          }
+        }
+      }
+      default -> {
       }
     }
 
