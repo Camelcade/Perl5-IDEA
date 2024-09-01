@@ -129,20 +129,20 @@ public abstract class PerlIntroduceTargetsHandler {
     else if (targetElement instanceof PsiPerlPackageExpr) {
       return "'" + PerlPackageUtil.getCanonicalNamespaceName(StringUtil.notNullize(targetElement.getText())) + "'";
     }
-    else if (targetElement instanceof PsiPerlMatchRegex) {
-      char openQuote = ((PsiPerlMatchRegex)targetElement).getOpenQuote();
-      PsiPerlPerlRegex regex = ((PsiPerlMatchRegex)targetElement).getRegex();
+    else if (targetElement instanceof PsiPerlMatchRegex matchRegex) {
+      char openQuote = matchRegex.getOpenQuote();
+      PsiPerlPerlRegex regex = matchRegex.getRegex();
       if (openQuote != 0 && regex != null) {
         char closeQuote = PerlString.getQuoteCloseChar(openQuote);
-        PsiPerlPerlRegexModifiers modifiers = ((PsiPerlMatchRegex)targetElement).getPerlRegexModifiers();
+        PsiPerlPerlRegexModifiers modifiers = matchRegex.getPerlRegexModifiers();
         String regexText = "qr " + openQuote + regex.getText() + closeQuote;
         return modifiers == null ? regexText : regexText + modifiers.getText();
       }
     }
     else if (targetElement instanceof PsiPerlPerlRegexImpl) {
       PsiElement container = targetElement.getParent();
-      if (container instanceof PerlReplacementRegex) {
-        char openQuote = ((PerlReplacementRegex)container).getOpenQuote();
+      if (container instanceof PerlReplacementRegex replacementRegex) {
+        char openQuote = replacementRegex.getOpenQuote();
         if (openQuote > 0) {
           char closeQuote = PerlString.getQuoteCloseChar(openQuote);
           return "qr " + openQuote + targetElement.getText() + closeQuote;
