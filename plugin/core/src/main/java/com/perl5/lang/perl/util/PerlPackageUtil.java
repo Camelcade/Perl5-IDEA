@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
@@ -234,6 +235,24 @@ public final class PerlPackageUtil implements PerlElementTypes {
 
   public static @NotNull List<String> split(@Nullable String packageName) {
     return packageName == null ? Collections.emptyList() : StringUtil.split(getCanonicalNamespaceName(packageName), NAMESPACE_SEPARATOR);
+  }
+
+  @Contract("null -> null")
+  public static @Nullable @NlsSafe Pair<@Nullable String, @Nullable String> splitNames(@Nullable @NlsSafe String fqn) {
+    if (fqn == null || fqn.isEmpty()) {
+      return null;
+    }
+    if (fqn.endsWith(NAMESPACE_SEPARATOR)) {
+      return Pair.create(getCanonicalName(fqn), null);
+    }
+    var sepIndex = fqn.lastIndexOf(NAMESPACE_SEPARATOR);
+    if (sepIndex < 0) {
+      return Pair.create(null, fqn);
+    }
+    if (sepIndex == 0) {
+      return Pair.create(MAIN_NAMESPACE_NAME, fqn.substring(NAMESPACE_SEPARATOR.length()));
+    }
+    return Pair.create(fqn.substring(0, sepIndex), fqn.substring(sepIndex + NAMESPACE_SEPARATOR.length()));
   }
 
   /**
