@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -99,9 +99,9 @@ public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
       }
     }
 
-    if (result.size() == 1 && result.get(0).getValue() instanceof PodSectionOver) {
+    if (result.size() == 1 && result.getFirst().getValue() instanceof PodSectionOver) {
       // expanding over
-      StructureViewTreeElement childElement = result.get(0);
+      StructureViewTreeElement childElement = result.getFirst();
       if (childElement instanceof PodStructureViewElement) {
         return ((PodStructureViewElement)childElement).getChildrenBase();
       }

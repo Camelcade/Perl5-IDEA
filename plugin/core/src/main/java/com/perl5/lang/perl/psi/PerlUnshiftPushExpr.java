@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ public interface PerlUnshiftPushExpr extends PsiPerlExpr {
       return null;
     }
     List<PsiElement> argumentsList = ((PerlCallArguments)callArguments).getArgumentsList();
-    return argumentsList.isEmpty() ? null : argumentsList.get(0);
+    return argumentsList.isEmpty() ? null : argumentsList.getFirst();
   }
 
   /**

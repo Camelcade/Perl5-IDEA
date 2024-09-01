@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,8 +56,8 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
 public class PerlNameSuggestionProvider implements NameSuggestionProvider {
@@ -209,7 +209,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     }
     // fixme array_element if index is more than one
     // fixme we could analyze all elements
-    return suggestAndAddRecommendedName(elements.get(0), result);
+    return suggestAndAddRecommendedName(elements.getFirst(), result);
   }
 
   private @Nullable String suggestAndAddRecommendedName(@Nullable PsiElement expression, @NotNull Set<String> result) {
@@ -379,7 +379,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       List<String> namespaceVariants = getVariantsFromNamespaceName(valueText);
       result.addAll(namespaceVariants);
       if (!namespaceVariants.isEmpty() && STRING.equals(recommendedString)) {
-        recommendedString = namespaceVariants.get(0);
+        recommendedString = namespaceVariants.getFirst();
       }
     }
     else{
@@ -389,7 +389,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
         List<String> pathVariants = getVariantsFromPath(independentPath);
         result.addAll(pathVariants);
         if (!pathVariants.isEmpty() && STRING.equals(recommendedString)) {
-          recommendedString = pathVariants.get(0);
+          recommendedString = pathVariants.getFirst();
         }
       }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -109,7 +109,7 @@ public class PerlProfilerLightTest extends PerlLightTestCase {
     var virtualFiles =
       new ArrayList<>(FilenameIndex.getVirtualFilesByName("SubExpr.pm", GlobalSearchScope.allScope(getProject())));
     assertSize(1, virtualFiles);
-    return virtualFiles.get(0);
+    return virtualFiles.getFirst();
   }
 
   protected void doTestNavigation(@NotNull String frameName) {

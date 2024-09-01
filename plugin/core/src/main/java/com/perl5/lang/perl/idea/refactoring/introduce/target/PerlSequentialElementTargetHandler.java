@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -89,7 +89,7 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
 
   @Override
   protected final @NotNull List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
-    if (occurrences.size() == 1 && occurrences.get(0).isFullRange()) {
+    if (occurrences.size() == 1 && occurrences.getFirst().isFullRange()) {
       return super.replaceTarget(occurrences, replacement);
     }
     return replaceNonTrivialTarget(occurrences, replacement);
@@ -97,7 +97,7 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
 
   protected @NotNull List<PsiElement> replaceNonTrivialTarget(@NotNull List<PerlIntroduceTarget> occurrences,
                                                               @NotNull PsiElement replacement) {
-    PsiElement occurrencePlace = occurrences.get(0).getPlace();
+    PsiElement occurrencePlace = occurrences.getFirst().getPlace();
     if (occurrencePlace == null) {
       reportEmptyPlace();
       return Collections.emptyList();
@@ -112,7 +112,7 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
         LOG.error("Unable to detect children to replace, please report developers with source sample");
         return Collections.emptyList();
       }
-      elementsRangesToReplace.add(Pair.create(childrenInRange.get(0), ContainerUtil.getLastItem(childrenInRange)));
+      elementsRangesToReplace.add(Pair.create(childrenInRange.getFirst(), ContainerUtil.getLastItem(childrenInRange)));
     }
 
     List<PsiElement> result = new ArrayList<>();

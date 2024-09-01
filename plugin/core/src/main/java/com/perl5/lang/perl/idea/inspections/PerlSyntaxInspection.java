@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,9 +48,9 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import static com.perl5.lang.perl.internals.PerlVersion.*;
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.BITWISE_ASSIGN_OPERATORS_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.BITWISE_OPERATORS_TOKENSET;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlSyntaxInspection extends PerlInspection {
   @Override
@@ -90,7 +90,7 @@ public class PerlSyntaxInspection extends PerlInspection {
         }
         var sortableList = o.getExprList();
         if (sortableList.size() != 1 ||
-            !(sortableList.get(0) instanceof PsiPerlParenthesisedExpr parenthesizedExpression) ||
+            !(sortableList.getFirst() instanceof PsiPerlParenthesisedExpr parenthesizedExpression) ||
             parenthesizedExpression.getExpr() != null) {
           return;
         }

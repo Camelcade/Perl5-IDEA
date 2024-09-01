@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,7 +72,7 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
     }
 
     List<Descriptor> descriptors = collectDescriptors(firstElement, stopElement);
-    if (descriptors.isEmpty() || descriptors.size() == 1 && !descriptors.get(0).inject) {
+    if (descriptors.isEmpty() || descriptors.size() == 1 && !descriptors.getFirst().inject) {
       return;
     }
     injectDescriptors((PsiLanguageInjectionHost)parent, registrar, targetLanguage, descriptors);

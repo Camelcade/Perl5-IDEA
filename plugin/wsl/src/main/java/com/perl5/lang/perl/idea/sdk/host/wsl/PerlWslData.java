@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -149,7 +149,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
       // fixme these commands should be handled by osHandler?
       ProcessOutput output = distribution.executeOnWsl(TIMEOUT, "bash", "-cl", "\\which " + fileName);
       List<String> lines = output.getStdoutLines();
-      return lines.isEmpty() ? null : new File(lines.get(0));
+      return lines.isEmpty() ? null : new File(lines.getFirst());
     }
     catch (ExecutionException e) {
       LOG.warn("Error looking for " + fileName, e);

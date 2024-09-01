@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,8 +54,8 @@ public class MojoBaseProcessor extends BaseStrictWarningsProvidingProcessor impl
     if (allOptions != null) {
       allOptions.removeAll(getOptions().keySet());
 
-      if (!allOptions.isEmpty() && !MOJO_BASE.equals(allOptions.get(0))) {
-        loadedPackages.add(allOptions.get(0));
+      if (!allOptions.isEmpty() && !MOJO_BASE.equals(allOptions.getFirst())) {
+        loadedPackages.add(allOptions.getFirst());
       }
     }
 
@@ -83,7 +83,7 @@ public class MojoBaseProcessor extends BaseStrictWarningsProvidingProcessor impl
       else {
         allOptions.removeAll(getOptions().keySet());
         if (!allOptions.isEmpty()) {
-          currentList.add(allOptions.get(0));
+          currentList.add(allOptions.getFirst());
         }
       }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -87,7 +87,7 @@ public class PerlHeredocTargetsHandler extends PerlGenericStringTargetsHandler {
     CharSequence replacementChars = replacement.getNode().getChars();
     assert replacement instanceof PerlVariable : "Got " + replacement;
 
-    PsiElement psiElement = Objects.requireNonNull(occurrences.get(0).getPlace());
+    PsiElement psiElement = Objects.requireNonNull(occurrences.getFirst().getPlace());
     Set<TextRange> replacementRanges = new HashSet<>();
 
     PsiElement replacedString = replaceWithInterpolation(occurrences, replacementChars, psiElement, replacementRanges);

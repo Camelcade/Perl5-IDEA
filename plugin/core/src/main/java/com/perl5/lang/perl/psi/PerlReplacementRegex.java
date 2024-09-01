@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 public interface PerlReplacementRegex extends PerlRegexExpression {
   default @Nullable PsiPerlPerlRegex getMatchRegex() {
     List<PsiElement> parts = getParts();
-    return parts.isEmpty() ? null : ObjectUtils.tryCast(parts.get(0), PsiPerlPerlRegex.class);
+    return parts.isEmpty() ? null : ObjectUtils.tryCast(parts.getFirst(), PsiPerlPerlRegex.class);
   }
 
   default @Nullable PsiPerlRegexReplacement getReplaceRegex() {

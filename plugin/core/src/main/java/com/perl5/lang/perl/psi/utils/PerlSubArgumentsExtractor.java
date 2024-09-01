@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,7 +100,7 @@ public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement> {
               PsiPerlCallArguments callArguments = ((PsiPerlArrayShiftExpr)rightSideElement).getCallArguments();
               List<PsiElement> argumentsList =
                 callArguments == null ? null : ((PsiPerlCallArgumentsImpl)callArguments).getArgumentsList();
-              if (argumentsList == null || argumentsList.isEmpty() || ALL_ARGUMENTS_PATTERN.accepts(argumentsList.get(0))) {
+              if (argumentsList == null || argumentsList.isEmpty() || ALL_ARGUMENTS_PATTERN.accepts(argumentsList.getFirst())) {
                 addArgument = true;
                 sequenceIndex++;
               }

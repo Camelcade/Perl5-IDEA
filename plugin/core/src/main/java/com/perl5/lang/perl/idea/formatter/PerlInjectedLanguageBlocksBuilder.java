@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     if (shredRange.isEmpty()) {
       return;
     }
-    Entry lastEntry = myEntries.isEmpty() ? null : myEntries.get(myEntries.size() - 1);
+    Entry lastEntry = myEntries.isEmpty() ? null : myEntries.getLast();
     if (lastEntry != null && lastEntry.myHostRange.getEndOffset() > shredRange.getStartOffset()) {
       throw new IllegalArgumentException(
         "Non-sequential range added. Last range: " + lastEntry.myHostRange + " new entry " + shredRange);
@@ -131,7 +131,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
 
   private int getOffsetInHostDocument(int offsetInInjected) {
     if (offsetInInjected == injectedLength) {
-      return myEntries.get(myEntries.size() - 1).myHostRange.getEndOffset();
+      return myEntries.getLast().myHostRange.getEndOffset();
     }
     for (Entry entry : myEntries) {
       if (entry.myInjectedRange.contains(offsetInInjected)) {

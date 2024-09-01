@@ -2143,7 +2143,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     List<PerlIntroduceTarget> introduceTargets = PerlIntroduceTargetsHandler.getIntroduceTargets(getEditor(), getFile());
     assertTrue(introduceTargets.size() > 0);
     List<Pair<Integer, String>> macros = new ArrayList<>();
-    PerlIntroduceTargetOccurrencesCollector.collect(introduceTargets.get(introduceTargets.size() - 1)).forEach(it -> {
+    PerlIntroduceTargetOccurrencesCollector.collect(introduceTargets.getLast()).forEach(it -> {
       TextRange occurenceRange = it.getTextRange();
       macros.add(Pair.create(occurenceRange.getStartOffset(), "<occurrence>"));
       macros.add(Pair.create(occurenceRange.getEndOffset(), "</occurrence>"));
@@ -3140,7 +3140,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     if (result.size() != 1) {
       fail("Expected a single injector for " + host.getClass() + " got: " + result);
     }
-    return result.get(0);
+    return result.getFirst();
   }
 
   protected void doTestConfigurable(@NotNull UnnamedConfigurable configurable) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,11 +45,11 @@ class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
   @Override
   protected @NotNull List<PsiElement> replaceNonTrivialTarget(@NotNull List<PerlIntroduceTarget> occurrences,
                                                               @NotNull PsiElement replacement) {
-    PerlIntroduceTarget baseTarget = Objects.requireNonNull(occurrences.get(0));
+    PerlIntroduceTarget baseTarget = Objects.requireNonNull(occurrences.getFirst());
     PsiElement baseElement = Objects.requireNonNull(baseTarget.getPlace());
     List<PsiElement> sourceElements = PerlArrayUtil.collectListElements(baseElement);
 
-    PsiElement occurrencePlace = occurrences.get(0).getPlace();
+    PsiElement occurrencePlace = occurrences.getFirst().getPlace();
     if (occurrencePlace == null) {
       reportEmptyPlace();
       return Collections.emptyList();
@@ -101,10 +101,10 @@ class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
         LOG.error("Unable to detect children to replace, please report developers with source sample");
         return Collections.emptyList();
       }
-      PsiElement firstChildToReplace = childrenInRange.get(0);
+      PsiElement firstChildToReplace = childrenInRange.getFirst();
       PsiElement localContainerElement = firstChildToReplace.getParent();
       result.add(localContainerElement.addBefore(replacement, firstChildToReplace));
-      localContainerElement.deleteChildRange(firstChildToReplace, childrenInRange.get(childrenInRange.size() - 1));
+      localContainerElement.deleteChildRange(firstChildToReplace, childrenInRange.getLast());
     }
     return result;
   }

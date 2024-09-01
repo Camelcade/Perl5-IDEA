@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,7 +88,7 @@ abstract class PerlGenericStringsOccurrencesCollector extends PerlIntroduceTarge
     }
 
     boolean result = false;
-    Object firstChildToFind = myChildrenToFind.get(0);
+    Object firstChildToFind = myChildrenToFind.getFirst();
     boolean startsWithString = firstChildToFind instanceof String;
     int firstChildLenght = startsWithString ? ((String)firstChildToFind).length() : -1;
     boolean isSimpleString = myChildrenToFind.size() == 1;
