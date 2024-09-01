@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +62,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     }
 
     List<PerlSubArgument> arguments = getSubArgumentsList();
-    return !arguments.isEmpty() && arguments.get(0).isSelf(getProject());
+    return !arguments.isEmpty() && arguments.getFirst().isSelf(getProject());
   }
 
   @Override

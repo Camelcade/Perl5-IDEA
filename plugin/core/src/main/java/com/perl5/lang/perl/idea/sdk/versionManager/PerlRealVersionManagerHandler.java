@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -179,7 +179,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
           "",
           PerlBundle.message("perl.vm.perlbrew.choose.installation"),
           ArrayUtil.toStringArray(distributions),
-          distributions.get(0),
+          distributions.getFirst(),
           null)));
       if (selectionRef.get() == -1) {
         return;
@@ -187,7 +187,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       installation = distributions.get(selectionRef.get());
     }
     else {
-      installation = distributions.get(0);
+      installation = distributions.getFirst();
     }
 
     createInterpreter(installation, vmAdapter, sdkConsumer, project);
@@ -224,7 +224,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
       return;
     }
     PerlRealVersionManagerData<?, ?> versionManagerData = createData(vmAdapter, distributionId);
-    PerlSdkType.createAndAddSdk(perlPath.get(0), vmAdapter.getHostData(), versionManagerData, sdkConsumer, project);
+    PerlSdkType.createAndAddSdk(perlPath.getFirst(), vmAdapter.getHostData(), versionManagerData, sdkConsumer, project);
   }
 
   @Override

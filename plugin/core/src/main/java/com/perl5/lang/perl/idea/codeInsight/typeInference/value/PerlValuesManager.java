@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -406,8 +406,8 @@ public final class PerlValuesManager {
     PerlContextType targetContextType = PerlContextType.from(target);
     if (targetContextType == PerlContextType.SCALAR) {
       int startIndex = assignValueDescriptor.getStartIndex();
-      if (elements.size() == 1 && (PerlContextType.isScalar(elements.get(0)) || startIndex == -1)) {
-        return PerlScalarContextValue.create(from(elements.get(0)));
+      if (elements.size() == 1 && (PerlContextType.isScalar(elements.getFirst()) || startIndex == -1)) {
+        return PerlScalarContextValue.create(from(elements.getFirst()));
       }
       else if (elements.size() > 1 || PerlContextType.isList(ContainerUtil.getFirstItem(elements))) {
         return PerlArrayElementValue.create(

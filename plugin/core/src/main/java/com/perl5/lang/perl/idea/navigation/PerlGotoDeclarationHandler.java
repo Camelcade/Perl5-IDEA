@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -81,7 +81,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
         if (canonicalPath.contains(tokenText + ".")) {
           var psiFile = psiManager.findFile(fileItem);
           if (psiFile != null) {
-            result.add(0, psiFile);
+            result.addFirst(psiFile);
           }
         }
         else if (canonicalPath.contains(tokenText)) {

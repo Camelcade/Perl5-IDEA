@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ public class PerlUnmarkSourceRootAction extends PerlSourceRootAction {
     }
 
     if (virtualFiles.size() == 1) {
-      PerlSourceRootType type = perlModuleExtension.getRootType(virtualFiles.get(0));
+      PerlSourceRootType type = perlModuleExtension.getRootType(virtualFiles.getFirst());
       if (type == null) {
         return;
       }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,7 +103,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       return null;
     }
     List<PsiElement> elements = flattenAssignmentPart(getRightSide());
-    if (elements.size() != 1 || !elements.get(0).equals(value)) {
+    if (elements.size() != 1 || !elements.getFirst().equals(value)) {
       return null;
     }
     return getLeftSide();
@@ -329,7 +329,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       if (myElements.isEmpty()) {
         return null;
       }
-      PsiElement firstElement = myElements.get(0);
+      PsiElement firstElement = myElements.getFirst();
       PsiElement lastElement = Objects.requireNonNull(ContainerUtil.getLastItem(myElements));
       return firstElement.getContainingFile().getText().substring(
         firstElement.getTextRange().getStartOffset(), lastElement.getTextRange().getEndOffset());

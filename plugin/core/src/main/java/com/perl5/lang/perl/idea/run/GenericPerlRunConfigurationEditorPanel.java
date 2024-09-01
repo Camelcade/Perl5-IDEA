@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.*;
+import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.PREREQUISITES_JOINER;
+import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.PREREQUISITES_PARSER;
 
 public abstract class GenericPerlRunConfigurationEditorPanel<Configuration extends GenericPerlRunConfiguration>
   extends CommonProgramParametersPanel implements Perl5SdkManipulator {
@@ -192,8 +193,8 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   protected final void setupAnchor() {
     super.setupAnchor();
     List<PanelWithAnchor> components = new ArrayList<>(getLabeledComponents());
-    components.add(0, myScriptLabeledField);
-    components.add(0, this);
+    components.addFirst(myScriptLabeledField);
+    components.addFirst(this);
     myAnchor = UIUtil.mergeComponentsWithAnchor(components);
   }
 

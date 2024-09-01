@@ -165,7 +165,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   @Override
   public String suggestedName() {
     List<VirtualFile> targetFiles = computeTargetFiles();
-    return targetFiles.isEmpty() ? null : targetFiles.get(0).getName();
+    return targetFiles.isEmpty() ? null : targetFiles.getFirst().getName();
   }
 
   protected @NotNull List<VirtualFile> computeTargetFiles() {
@@ -177,7 +177,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     if (targetFiles.isEmpty()) {
       throw new ExecutionException(PerlBundle.message("perl.run.error.script.missing", getScriptPath()));
     }
-    return targetFiles.get(0);
+    return targetFiles.getFirst();
   }
 
   public @NotNull String getRequiredModules() {

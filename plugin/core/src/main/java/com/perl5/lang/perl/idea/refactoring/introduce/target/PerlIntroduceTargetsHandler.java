@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -165,7 +165,7 @@ public abstract class PerlIntroduceTargetsHandler {
         "Unexpected multiple occurrences: " + occurrences.stream().map(PerlIntroduceTarget::toString).collect(Collectors.joining("; ")));
       return Collections.emptyList();
     }
-    PsiElement occurrenceElement = Objects.requireNonNull(occurrences.get(0)).getPlace();
+    PsiElement occurrenceElement = Objects.requireNonNull(occurrences.getFirst()).getPlace();
     if (occurrenceElement != null && occurrenceElement.isValid()) {
       PsiElement occurrenceElementParent = occurrenceElement.getParent();
       if (occurrenceElementParent instanceof PerlHeredocElementImpl) {
@@ -395,7 +395,7 @@ public abstract class PerlIntroduceTargetsHandler {
     if (occurrences.isEmpty()) {
       LOG.warn("Empty occurrences passed to replacement");
     }
-    PsiElement targetPlace = Objects.requireNonNull(occurrences.get(0)).getPlace();
+    PsiElement targetPlace = Objects.requireNonNull(occurrences.getFirst()).getPlace();
     if (targetPlace == null) {
       return Collections.emptyList();
     }

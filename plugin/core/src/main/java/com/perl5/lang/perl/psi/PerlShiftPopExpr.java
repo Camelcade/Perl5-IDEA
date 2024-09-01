@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public interface PerlShiftPopExpr extends PsiPerlExpr {
       return PerlBuiltInVariablesService.getImplicitArray(getProject());
     }
     List<PsiElement> argumentsList = ((PerlCallArguments)callArguments).getArgumentsList();
-    return argumentsList.isEmpty() ? PerlBuiltInVariablesService.getImplicitArray(getProject()) : argumentsList.get(0);
+    return argumentsList.isEmpty() ? PerlBuiltInVariablesService.getImplicitArray(getProject()) : argumentsList.getFirst();
   }
 
   @Nullable

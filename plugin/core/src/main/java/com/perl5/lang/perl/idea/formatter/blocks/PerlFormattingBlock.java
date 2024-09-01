@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -168,7 +168,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     IElementType elementType = getElementType();
     if (elementType == SIGNATURE_ELEMENT && rawBlocks.size() == 1) {
       while (rawBlocks.size() == 1) {
-        rawBlocks = rawBlocks.get(0).getSubBlocks();
+        rawBlocks = rawBlocks.getFirst().getSubBlocks();
       }
       return rawBlocks;
     }

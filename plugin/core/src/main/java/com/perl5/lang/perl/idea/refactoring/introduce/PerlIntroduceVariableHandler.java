@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
     if (targets.size() > 1) {
       if (ApplicationManager.getApplication().isUnitTestMode()) {
-        selectOccurrences(targets.get(targets.size() - 1), editor, file);
+        selectOccurrences(targets.getLast(), editor, file);
       }
       else {
         IntroduceTargetChooser.showIntroduceTargetChooser(
@@ -87,7 +87,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       }
     }
     else {
-      selectOccurrences(targets.iterator().next(), editor, file);
+      selectOccurrences(targets.getFirst(), editor, file);
     }
   }
 
@@ -233,7 +233,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       return null;
     }
 
-    PsiElement anchorElement = Objects.requireNonNull(occurrences.get(0).getPlace());
+    PsiElement anchorElement = Objects.requireNonNull(occurrences.getFirst().getPlace());
     while (true) {
       if (anchorElement instanceof PerlHeredocElementImpl) {
         anchorElement = ((PerlHeredocElementImpl)anchorElement).getHeredocOpener();
@@ -315,7 +315,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         return null;
       }
 
-      PsiPerlVariableDeclarationElement declarationElement = declarations.get(0);
+      PsiPerlVariableDeclarationElement declarationElement = declarations.getFirst();
       PerlVariable declaredVariable = declarationElement.getVariable();
 
       Map<PsiElement, List<PerlIntroduceTarget>> occurrencesMap = new HashMap<>();

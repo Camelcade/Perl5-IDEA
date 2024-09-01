@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -152,7 +152,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     }).collect(Collectors.toList());
 
     if (groups.size() == 1) {
-      for (AnAction action : groups.get(0).getChildren(null)) {
+      for (AnAction action : groups.getFirst().getChildren(null)) {
         panelActionGroup.add(action);
       }
     }
@@ -193,7 +193,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     JComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
     List<Perl5SdkWrapper> allItems = mySdkManipulator.getAllSdkWrappers();
     if (itemToSelect == null || !allItems.contains(itemToSelect)) {
-      itemToSelect = allItems.isEmpty() ? null : allItems.get(0);
+      itemToSelect = allItems.isEmpty() ? null : allItems.getFirst();
     }
     sdkComboBox.setModel(new CollectionComboBoxModel<>(allItems, itemToSelect));
     mySdkManipulator.selectionChanged(itemToSelect);

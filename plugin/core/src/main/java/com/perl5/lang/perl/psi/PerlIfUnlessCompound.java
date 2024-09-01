@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public interface PerlIfUnlessCompound extends PerlConvertableCompoundSimple {
   @Override
   default @Nullable PsiPerlBlock getBlock() {
     List<PsiPerlConditionalBlock> conditionalBlockList = getConditionalBlockList();
-    return conditionalBlockList.isEmpty() ? null : conditionalBlockList.get(0).getBlock();
+    return conditionalBlockList.isEmpty() ? null : conditionalBlockList.getFirst().getBlock();
   }
 
   @Override
@@ -43,7 +43,7 @@ public interface PerlIfUnlessCompound extends PerlConvertableCompoundSimple {
     if (conditionalBlockList.size() != 1) {
       return null;
     }
-    return conditionalBlockList.get(0).getConditionExpr();
+    return conditionalBlockList.getFirst().getConditionExpr();
   }
 
   @NotNull

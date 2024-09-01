@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -635,7 +635,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       List<PsiPerlConditionalBlock> conditionBlocks = o.getConditionalBlockList();
 
       // if/unless branch
-      PsiPerlConditionalBlock mainBranch = conditionBlocks.isEmpty() ? null : conditionBlocks.remove(0);
+      PsiPerlConditionalBlock mainBranch = conditionBlocks.isEmpty() ? null : conditionBlocks.removeFirst();
       processConditionalBranch(mainBranch, conditionValue, o);
 
       // elsif branches

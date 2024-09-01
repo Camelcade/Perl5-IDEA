@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
 
     int lastOffsetInParent = Objects.requireNonNull(ContainerUtil.getLastItem(allChildren)).getTextRangeInParent().getEndOffset();
     List<PerlIntroduceTarget> result = new ArrayList<>();
-    int firstStringElementStartOffsetInParent = allChildren.get(0).getStartOffsetInParent();
+    int firstStringElementStartOffsetInParent = allChildren.getFirst().getStartOffsetInParent();
 
     for (PsiElement stringRun : allChildren) {
       IElementType stringRunElementType = PsiUtilCore.getElementType(stringRun);
@@ -97,7 +97,7 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
           }
         }
         else {
-          result.add(PerlIntroduceTarget.create(element, allChildren.get(0), stringRun));
+          result.add(PerlIntroduceTarget.create(element, allChildren.getFirst(), stringRun));
         }
       }
     }
@@ -127,8 +127,8 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
     int selectionStart = selectionRange.getStartOffset();
     int selectionEnd = selectionRange.getEndOffset();
 
-    if (allChildrenList.get(0).getTextRange().getStartOffset() >= selectionStart &&
-        allChildrenList.get(allChildrenList.size() - 1).getTextRange().getEndOffset() <= selectionEnd) {
+    if (allChildrenList.getFirst().getTextRange().getStartOffset() >= selectionStart &&
+        allChildrenList.getLast().getTextRange().getEndOffset() <= selectionEnd) {
       return Collections.singletonList(PerlIntroduceTarget.create(element));
     }
 
