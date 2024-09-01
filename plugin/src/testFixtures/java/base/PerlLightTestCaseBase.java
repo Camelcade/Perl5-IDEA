@@ -3281,13 +3281,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     StringBuilder tokenTypesMappings = new StringBuilder("Token types mappings:\n");
     elementTypesMappings.keySet().stream()
       .sorted(Comparator.comparing(Object::toString))
-      .forEach(elementType -> {
-        tokenTypesMappings.append("\t")
-          .append(elementType)
-          .append(": ")
-          .append(elementTypesMappings.get(elementType).stream().sorted().collect(Collectors.joining(", ")))
-          .append("\n");
-      });
+      .forEach(elementType -> tokenTypesMappings.append("\t")
+        .append(elementType)
+        .append(": ")
+        .append(elementTypesMappings.get(elementType).stream().sorted().collect(Collectors.joining(", ")))
+        .append("\n"));
 
     var textWithMacros = getEditorTextWithMacroses(getEditor(), macros);
     var result = String.join("================================\n", statText, tokenTypesMappings, tokensList, textWithMacros);

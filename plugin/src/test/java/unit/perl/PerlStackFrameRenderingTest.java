@@ -49,9 +49,8 @@ public class PerlStackFrameRenderingTest extends PerlLightTestCase {
   @Test
   public void test() {
     var result = new StringBuilder();
-    PerlStackFrame.doCustomizePresentation(myFrameDescriptor, (fragment, attributes) -> {
-      result.append(protectSpaces(fragment)).append(" - ").append(serialize(attributes)).append("\n");
-    });
+    PerlStackFrame.doCustomizePresentation(myFrameDescriptor, (fragment, attributes) ->
+      result.append(protectSpaces(fragment)).append(" - ").append(serialize(attributes)).append("\n"));
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
   }
 
