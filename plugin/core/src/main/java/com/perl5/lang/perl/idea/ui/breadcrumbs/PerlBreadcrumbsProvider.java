@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,14 +57,18 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
   }
 
   public static @Nullable PsiElement getStructuralParentElement(@NotNull PsiElement element) {
-    if (element instanceof PerlFile) {
-      return null;
-    }
-    if (element instanceof PerlNamespaceDefinitionElement) {
-      return element.getContainingFile();
-    }
-    else if (element instanceof PerlSubDefinitionElement) {
-      return PsiTreeUtil.getParentOfType(element, PerlNamespaceDefinitionElement.class);
+    switch (element) {
+      case PerlFile ignored -> {
+        return null;
+      }
+      case PerlNamespaceDefinitionElement namespaceDefinition -> {
+        return namespaceDefinition.getContainingFile();
+      }
+      case PerlSubDefinitionElement subDefinition -> {
+        return PsiTreeUtil.getParentOfType(subDefinition, PerlNamespaceDefinitionElement.class);
+      }
+      default -> {
+      }
     }
 
     PsiElement nearestParent =
@@ -104,25 +108,28 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
 
   @Override
   public @NotNull String getElementInfo(@NotNull PsiElement element) {
-    if (element instanceof PerlFile) {
-      return ((PerlFile)element).getName();
-    }
-    else if (element instanceof PerlSubDefinitionElement) {
-      return ((PerlSubDefinition)element).getSubName() + "()";
-    }
-    else if (element instanceof PerlNamespaceDefinitionElement) {
-      return Objects.requireNonNull(((PerlNamespaceDefinition)element).getNamespaceName());
-    }
-    else if (element instanceof PerlMethodModifier) {
-      ItemPresentation presentation = ((PerlMethodModifier)element).getPresentation();
-      if (presentation != null) {
-        return StringUtil.notNullize(presentation.getPresentableText());
+    switch (element) {
+      case PerlFile file -> {
+        return file.getName();
+      }
+      case PerlSubDefinitionElement subDefinition -> {
+        return subDefinition.getSubName() + "()";
+      }
+      case PerlNamespaceDefinitionElement namespaceDefinition -> {
+        return Objects.requireNonNull(namespaceDefinition.getNamespaceName());
+      }
+      case PerlMethodModifier methodModifier -> {
+        ItemPresentation presentation = methodModifier.getPresentation();
+        if (presentation != null) {
+          return StringUtil.notNullize(presentation.getPresentableText());
+        }
+      }
+      case PerlSubExpr ignored -> {
+        return "sub()";
+      }
+      default -> {
       }
     }
-    else if (element instanceof PerlSubExpr) {
-      return "sub()";
-    }
-
     throw new RuntimeException("Can't happen: " + element);
   }
 }

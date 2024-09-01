@@ -756,26 +756,23 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       return "null";
     }
     String iconString;
-    if (icon instanceof IconLoader.CachedImageIcon) {
-      iconString = ((IconLoader.CachedImageIcon)icon).getOriginalPath();
-    }
-    else if (icon instanceof CachedImageIcon cachedImageIcon) {
-      iconString = cachedImageIcon.getOriginalPath();
-    }
-    else if (icon instanceof DeferredIcon) {
-      return getIconText(((DeferredIcon)icon).getBaseIcon());
-    }
-    else if (icon instanceof RowIcon) {
-      List<String> iconStrings = new ArrayList<>();
-      for (Icon subIcon : ((RowIcon)icon).getAllIcons()) {
-        if (subIcon != null) {
-          iconStrings.add(getIconText(subIcon));
-        }
+    switch (icon) {
+      //noinspection deprecation
+      case IconLoader.CachedImageIcon imageIcon -> iconString = imageIcon.getOriginalPath();
+      case CachedImageIcon cachedImageIcon -> iconString = cachedImageIcon.getOriginalPath();
+      case DeferredIcon deferredIcon -> {
+        return getIconText(deferredIcon.getBaseIcon());
       }
-      return String.join("; ", iconStrings);
-    }
-    else {
-      iconString = icon.toString();
+      case RowIcon rowIcon -> {
+        List<String> iconStrings = new ArrayList<>();
+        for (Icon subIcon : rowIcon.getAllIcons()) {
+          if (subIcon != null) {
+            iconStrings.add(getIconText(subIcon));
+          }
+        }
+        return String.join("; ", iconStrings);
+      }
+      default -> iconString = icon.toString();
     }
     assertNotNull("Could not find an icon string in " + icon, iconString);
     return iconString.contains("/") ? iconString.substring(iconString.lastIndexOf('/')): iconString;
@@ -1863,16 +1860,17 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     for (Instruction instruction : controlFlow) {
       printInstruction(builder, instruction);
 
-      if (instruction instanceof PerlIteratorConditionInstruction) {
-      }
-      else if (instruction instanceof PartialConditionalInstructionImpl) {
-        builder.append("\n").append("Its ").append(((PartialConditionalInstructionImpl)instruction).getResult()).
-          append(" branch, condition: ").append(((PartialConditionalInstructionImpl)instruction).getConditionText());
-      }
-      else if (instruction instanceof ConditionalInstruction) {
-        ConditionalInstruction conditionalInstruction = (ConditionalInstruction)instruction;
-        builder.append("\n").append("Its ").append(conditionalInstruction.getResult()).
-          append(" branch, condition: ").append(getTextSafe(conditionalInstruction.getCondition()));
+      switch (instruction) {
+        case PerlIteratorConditionInstruction ignored -> {
+        }
+        case PartialConditionalInstructionImpl partialConditionalInstruction ->
+          builder.append("\n").append("Its ").append(partialConditionalInstruction.getResult()).
+            append(" branch, condition: ").append(partialConditionalInstruction.getConditionText());
+        case ConditionalInstruction conditionalInstruction ->
+          builder.append("\n").append("Its ").append(conditionalInstruction.getResult()).
+            append(" branch, condition: ").append(getTextSafe(conditionalInstruction.getCondition()));
+        default -> {
+        }
       }
       builder.append(PerlPsiUtil.DOUBLE_QUOTE).append("]");
 

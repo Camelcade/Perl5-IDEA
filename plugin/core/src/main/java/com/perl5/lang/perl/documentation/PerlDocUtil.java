@@ -375,17 +375,17 @@ public final class PerlDocUtil implements PerlElementTypes {
     }
     PsiElement run = podSection;
 
-    // detecting first section
     while (true) {
       PsiElement prevSibling = run.getPrevSibling();
+      //noinspection IfCanBeSwitch
       if (prevSibling == null) {
         break;
       }
       if (prevSibling instanceof PodSection && ((PodSection)prevSibling).hasContent()) {
         break;
       }
-      if (prevSibling instanceof PodTitledSection) {
-        podSection = (PodTitledSection)prevSibling;
+      if (prevSibling instanceof PodTitledSection section) {
+        podSection = section;
       }
       run = prevSibling;
     }

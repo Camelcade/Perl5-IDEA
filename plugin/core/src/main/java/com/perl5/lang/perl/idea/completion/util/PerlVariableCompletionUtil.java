@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -286,8 +286,8 @@ public class PerlVariableCompletionUtil {
         }
       };
 
-    if (perlVariable instanceof PsiPerlScalarVariable) {
-      return variable -> {
+    return switch (perlVariable) {
+      case PsiPerlScalarVariable ignored -> variable -> {
         if (variable.getActualType() == PerlVariableType.SCALAR) {
           return processVariableLookupElement(variable, '_', completionProcessor);
         }
@@ -299,9 +299,7 @@ public class PerlVariableCompletionUtil {
         }
         return completionProcessor.result();
       };
-    }
-    else if (perlVariable instanceof PsiPerlArrayVariable) {
-      return variable -> {
+      case PsiPerlArrayVariable ignored -> variable -> {
         if (variable.getActualType() == PerlVariableType.ARRAY) {
           return processVariableLookupElement(variable, '_', completionProcessor) &&
                  processVariableLookupElement(variable, '_', arrayElementCompletionProcessor);
@@ -311,17 +309,13 @@ public class PerlVariableCompletionUtil {
         }
         return completionProcessor.result();
       };
-    }
-    else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
-      return variable -> {
+      case PsiPerlArrayIndexVariable ignored -> variable -> {
         if (variable.getActualType() == PerlVariableType.ARRAY) {
           return processVariableLookupElement(variable, '_', completionProcessor);
         }
         return completionProcessor.result();
       };
-    }
-    else if (perlVariable instanceof PsiPerlHashVariable) {
-      return variable -> {
+      case PsiPerlHashVariable ignored -> variable -> {
         PerlVariableType variableType = variable.getActualType();
         if (variableType == PerlVariableType.HASH) {
           return processVariableLookupElement(variable, '_', completionProcessor) &&
@@ -332,26 +326,24 @@ public class PerlVariableCompletionUtil {
         }
         return completionProcessor.result();
       };
-    }
-    else if (perlVariable instanceof PerlGlobVariableElement) {
-      return variable -> processVariableLookupElement(variable, '_', completionProcessor);
-    }
-    return variable -> {
-      PerlVariableType variableType = variable.getActualType();
-      if (variableType == PerlVariableType.SCALAR) {
-        return processVariableLookupElement(variable, PerlVariableType.SCALAR.getSigil(), completionProcessor);
-      }
-      else if (variableType == PerlVariableType.ARRAY) {
-        return processVariableLookupElement(variable, PerlVariableType.ARRAY.getSigil(), completionProcessor) &&
-               processVariableLookupElement(variable, PerlVariableType.SCALAR.getSigil(), arrayElementCompletionProcessor) &&
-               processVariableLookupElement(variable, PerlVariableType.ARRAY.getSigil(), arrayElementCompletionProcessor);
-      }
-      else if (variable.getActualType() == PerlVariableType.HASH) {
-        return processVariableLookupElement(variable, PerlVariableType.HASH.getSigil(), completionProcessor) &&
-               processVariableLookupElement(variable, PerlVariableType.SCALAR.getSigil(), hashElementCompletionProcessor) &&
-               processVariableLookupElement(variable, PerlVariableType.ARRAY.getSigil(), hashElementCompletionProcessor);
-      }
-      return completionProcessor.result();
+      case PerlGlobVariableElement ignored -> variable -> processVariableLookupElement(variable, '_', completionProcessor);
+      default -> variable -> {
+        PerlVariableType variableType = variable.getActualType();
+        if (variableType == PerlVariableType.SCALAR) {
+          return processVariableLookupElement(variable, PerlVariableType.SCALAR.getSigil(), completionProcessor);
+        }
+        else if (variableType == PerlVariableType.ARRAY) {
+          return processVariableLookupElement(variable, PerlVariableType.ARRAY.getSigil(), completionProcessor) &&
+                 processVariableLookupElement(variable, PerlVariableType.SCALAR.getSigil(), arrayElementCompletionProcessor) &&
+                 processVariableLookupElement(variable, PerlVariableType.ARRAY.getSigil(), arrayElementCompletionProcessor);
+        }
+        else if (variable.getActualType() == PerlVariableType.HASH) {
+          return processVariableLookupElement(variable, PerlVariableType.HASH.getSigil(), completionProcessor) &&
+                 processVariableLookupElement(variable, PerlVariableType.SCALAR.getSigil(), hashElementCompletionProcessor) &&
+                 processVariableLookupElement(variable, PerlVariableType.ARRAY.getSigil(), hashElementCompletionProcessor);
+        }
+        return completionProcessor.result();
+      };
     };
   }
 
@@ -389,33 +381,33 @@ public class PerlVariableCompletionUtil {
     GlobalSearchScope resolveScope = variableNameElement.getResolveScope();
     String namespaceName = variableCompletionProcessor.getExplicitNamespaceName();
 
-    if (perlVariable instanceof PsiPerlScalarVariable) {
-      return PerlScalarUtil.processGlobalScalars(project, resolveScope, namespaceName, false, lookupGenerator) &&
-             PerlArrayUtil.processGlobalArrays(project, resolveScope, namespaceName, false, lookupGenerator) &&
-             PerlHashUtil.processGlobalHashes(project, resolveScope, namespaceName, false, lookupGenerator);
-    }
-    else if (perlVariable instanceof PsiPerlArrayVariable) {
-      return PerlArrayUtil.processGlobalArrays(project, resolveScope, namespaceName, false, lookupGenerator) &&
-             PerlHashUtil.processGlobalHashes(project, resolveScope, namespaceName, false, lookupGenerator);
-    }
-    else if (perlVariable instanceof PsiPerlArrayIndexVariable) {
-      // global arrays
-      return PerlArrayUtil.processGlobalArrays(project, resolveScope, namespaceName, false, lookupGenerator);
-    }
-    else if (perlVariable instanceof PsiPerlHashVariable) {
-      // global hashes
-      return PerlHashUtil.processGlobalHashes(project, resolveScope, namespaceName, false, lookupGenerator) &&
-             (!hasHashSlices(perlVariable) ||
-              PerlArrayUtil.processGlobalArrays(project, resolveScope, namespaceName, false, lookupGenerator));
-    }
-    else {
-      Processor<PerlGlobVariableElement> typeGlobProcessor = typeglob -> variableCompletionProcessor.process(
-        processVariableLookupElement(typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor));
-      return PerlScalarUtil.processGlobalScalars(project, resolveScope, namespaceName, false, lookupGenerator) &&
-             PerlArrayUtil.processGlobalArrays(project, resolveScope, namespaceName, false, lookupGenerator) &&
-             PerlHashUtil.processGlobalHashes(project, resolveScope, namespaceName, false, lookupGenerator) &&
-             PerlGlobUtil.processGlobs(project, resolveScope, namespaceName, false, typeGlobProcessor);
-    }
+    return switch (perlVariable) {
+      case PsiPerlScalarVariable ignored ->
+        PerlScalarUtil.processGlobalScalars(project, resolveScope, namespaceName, false, lookupGenerator) &&
+        PerlArrayUtil.processGlobalArrays(project, resolveScope, namespaceName, false, lookupGenerator) &&
+        PerlHashUtil.processGlobalHashes(project, resolveScope, namespaceName, false, lookupGenerator);
+
+      case PsiPerlArrayVariable ignored ->
+        PerlArrayUtil.processGlobalArrays(project, resolveScope, namespaceName, false, lookupGenerator) &&
+        PerlHashUtil.processGlobalHashes(project, resolveScope, namespaceName, false, lookupGenerator);
+
+      case PsiPerlArrayIndexVariable ignored ->
+        PerlArrayUtil.processGlobalArrays(project, resolveScope, namespaceName, false, lookupGenerator);
+
+      case PsiPerlHashVariable variable -> PerlHashUtil.processGlobalHashes(
+        project, resolveScope, namespaceName, false, lookupGenerator) &&
+                                           (!hasHashSlices(variable) ||
+                                            PerlArrayUtil.processGlobalArrays(project, resolveScope, namespaceName, false,
+                                                                              lookupGenerator));
+      default -> {
+        Processor<PerlGlobVariableElement> typeGlobProcessor = typeglob -> variableCompletionProcessor.process(
+          processVariableLookupElement(typeglob, perlVariable instanceof PsiPerlMethod, variableCompletionProcessor));
+        yield PerlScalarUtil.processGlobalScalars(project, resolveScope, namespaceName, false, lookupGenerator) &&
+              PerlArrayUtil.processGlobalArrays(project, resolveScope, namespaceName, false, lookupGenerator) &&
+              PerlHashUtil.processGlobalHashes(project, resolveScope, namespaceName, false, lookupGenerator) &&
+              PerlGlobUtil.processGlobs(project, resolveScope, namespaceName, false, typeGlobProcessor);
+      }
+    };
   }
 
   public static void processVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor,

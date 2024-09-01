@@ -156,29 +156,33 @@ public final class PerlValuesManager {
   }
 
   private static @NotNull PerlValue computeValue(@NotNull PsiElement element) {
-    if (element instanceof PerlVariableDeclarationExpr) {
-      if (((PerlVariableDeclarationExpr)element).isParenthesized()) {
-        return PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build();
+    switch (element) {
+      case PerlVariableDeclarationExpr declarationExpr -> {
+        if (declarationExpr.isParenthesized()) {
+          return PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build();
+        }
+        PsiElement[] children = element.getChildren();
+        return children.length == 1 ? from(children[0]) : UNKNOWN_VALUE;
       }
-      PsiElement[] children = element.getChildren();
-      return children.length == 1 ? from(children[0]) : UNKNOWN_VALUE;
-    }
-    if (element instanceof PerlReturnExpr) {
-      PsiPerlExpr expr = ((PerlReturnExpr)element).getReturnValueExpr();
-      return expr == null ? UNDEF_VALUE : from(expr);
-    }
-    else if (element instanceof PerlVariableMixin variableMixin) {
-      PerlVariableNameElement variableNameElement = variableMixin.getVariableNameElement();
-      return variableNameElement == null ? UNKNOWN_VALUE : PerlResolveUtil.inferVariableValue(variableMixin);
-    }
-    else if (element instanceof PerlString) {
-      return PerlScalarValue.create(ElementManipulators.getValueText(element));
-    }
-    else if (element instanceof PerlImplicitVariableDeclaration implicitVariableDeclaration) {
-      return implicitVariableDeclaration.getDeclaredValue();
-    }
-    else if (element instanceof PerlMethod method) {
-      return computeValue(method);
+      case PerlReturnExpr returnExpr -> {
+        PsiPerlExpr expr = returnExpr.getReturnValueExpr();
+        return expr == null ? UNDEF_VALUE : from(expr);
+      }
+      case PerlVariableMixin variableMixin -> {
+        PerlVariableNameElement variableNameElement = variableMixin.getVariableNameElement();
+        return variableNameElement == null ? UNKNOWN_VALUE : PerlResolveUtil.inferVariableValue(variableMixin);
+      }
+      case PerlString string -> {
+        return PerlScalarValue.create(ElementManipulators.getValueText(string));
+      }
+      case PerlImplicitVariableDeclaration implicitVariableDeclaration -> {
+        return implicitVariableDeclaration.getDeclaredValue();
+      }
+      case PerlMethod method -> {
+        return computeValue(method);
+      }
+      default -> {
+      }
     }
 
     IElementType elementType = PsiUtilCore.getElementType(element);
