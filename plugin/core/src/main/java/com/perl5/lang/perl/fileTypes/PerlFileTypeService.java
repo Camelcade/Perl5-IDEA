@@ -36,32 +36,30 @@ public class PerlFileTypeService implements Disposable {
   private static final Logger LOG = Logger.getInstance(PerlFileTypeService.class);
 
   private final NotNullLazyValue<LightDirectoryIndex<Function<VirtualFile, FileType>>> myDirectoryIndexProvider =
-    NotNullLazyValue.createValue(() -> {
-      return new LightDirectoryIndex<>(
-        this,
-        virtualFile -> null,
-        directoryIndex -> ReadAction.run(() -> {
-          for (Project project : ProjectManager.getInstance().getOpenProjects()) {
-            if (project.isDisposed()) {
-              continue;
-            }
-            for (PerlFileTypeProvider fileTypeProvider : PerlFileTypeProvider.EP_NAME.getExtensionList()) {
-              fileTypeProvider.addRoots(project, (root, function) -> {
-                if (!root.isValid()) {
-                  LOG.warn("Attempt to create a descriptor for invalid file for " + root);
-                  return;
-                }
-                if (!root.isDirectory()) {
-                  LOG.warn("Attempt to create root for non-directory: " + root);
-                  return;
-                }
-                directoryIndex.putInfo(root, function);
-              });
-            }
+    NotNullLazyValue.createValue(() -> new LightDirectoryIndex<>(
+      this,
+      virtualFile -> null,
+      directoryIndex -> ReadAction.run(() -> {
+        for (Project project : ProjectManager.getInstance().getOpenProjects()) {
+          if (project.isDisposed()) {
+            continue;
           }
-        })
-      );
-    });
+          for (PerlFileTypeProvider fileTypeProvider : PerlFileTypeProvider.EP_NAME.getExtensionList()) {
+            fileTypeProvider.addRoots(project, (root, function) -> {
+              if (!root.isValid()) {
+                LOG.warn("Attempt to create a descriptor for invalid file for " + root);
+                return;
+              }
+              if (!root.isDirectory()) {
+                LOG.warn("Attempt to create root for non-directory: " + root);
+                return;
+              }
+              directoryIndex.putInfo(root, function);
+            });
+          }
+        }
+      })
+    ));
 
   public PerlFileTypeService() {
     PerlFileTypeProvider.EP_NAME.addChangeListener(this::reset, this);
