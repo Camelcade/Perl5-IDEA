@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,17 +17,29 @@
 package com.perl5.lang.perl.debugger.protocol;
 
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.VisibleForTesting;
+
 import java.util.Arrays;
 
 public class PerlStackFrameDescriptor {
   public static final transient String EVAL_PREFIX = "(eval ";
 
-  @SuppressWarnings("unused") PerlLoadedFileDescriptor file;
+  @SuppressWarnings({"unused", "NotNullFieldNotInitialized"}) @NotNull PerlLoadedFileDescriptor file;
   @SuppressWarnings("unused") private int line;
   @SuppressWarnings("unused") private int main_size;
   @SuppressWarnings("unused") private PerlValueDescriptor[] lexicals;
   @SuppressWarnings("unused") private PerlValueDescriptor[] globals;
   @SuppressWarnings("unused") private PerlValueDescriptor[] args;
+
+  public PerlStackFrameDescriptor() {
+  }
+
+  @VisibleForTesting
+  public PerlStackFrameDescriptor(@NotNull PerlLoadedFileDescriptor file, int line) {
+    this.file = file;
+    this.line = line;
+  }
 
   public PerlLoadedFileDescriptor getFileDescriptor() {
     return file;

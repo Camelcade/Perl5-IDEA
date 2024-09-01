@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,22 +19,28 @@ package com.perl5.lang.perl.debugger.protocol;
 import com.intellij.openapi.util.NlsSafe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.VisibleForTesting;
 
 
 public class PerlLoadedFileDescriptor {
-  @SuppressWarnings("unused") private @NlsSafe String path;
-  @SuppressWarnings("unused") private @NlsSafe String name;
+  @SuppressWarnings({"unused", "NotNullFieldNotInitialized"}) private @NlsSafe @NotNull String path;
+  @SuppressWarnings("unused") private @NlsSafe @Nullable String name;
 
-  public @NotNull String getPath() {
+  public PerlLoadedFileDescriptor() {
+  }
+
+  @VisibleForTesting
+  public PerlLoadedFileDescriptor(@NotNull String path, @Nullable String name) {
+    this.path = path;
+    this.name = name;
+  }
+
+  public @NotNull @NlsSafe String getPath() {
     return path;
   }
 
-  public @Nullable String getName() {
+  public @Nullable @NlsSafe String getName() {
     return name;
-  }
-
-  public @NotNull @NlsSafe String getNameOrPath() {
-    return name == null ? path : name;
   }
 
   public @NotNull String getPresentableName() {
