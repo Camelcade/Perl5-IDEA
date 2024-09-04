@@ -44,6 +44,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.Map;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.*;
@@ -245,27 +246,31 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     myParentNamespaces.drop();
   }
 
-  public static class ExporterInfo implements Processor<PsiElement> {
+  public class ExporterInfo implements Processor<PsiElement> {
     private final @NotNull List<String> EXPORT = new ArrayList<>();
     private final @NotNull List<String> EXPORT_OK = new ArrayList<>();
     private final @NotNull Map<String, List<String>> EXPORT_TAGS = Collections.emptyMap();
+
+    public void extractExport(PsiElement element, String exportName, List<String> target) {
+      PsiElement rightSide = element.getFirstChild().getLastChild();
+      String variableName = element.getFirstChild().getFirstChild().getText();
+
+      // @EXPORT or @{namespace}::EXPORT
+      // @EXPORT_OK or @{namespace}::EXPORT_OK
+      Set<String> acceptedVariableName = Set.of("@" + exportName, "@" + getNamespaceName() + "::" + exportName);
+      if (acceptedVariableName.contains(variableName) && rightSide != null) {
+        target.clear();
+        target.addAll(getRightSideStrings(rightSide));
+      }
+    }
 
     @Override
     public boolean process(PsiElement element) {
       if (ASSIGN_STATEMENT.accepts(element)) {
         if (EXPORT_ASSIGN_STATEMENT.accepts(element)) {
-          PsiElement rightSide = element.getFirstChild().getLastChild();
-          if (rightSide != null) {
-            EXPORT.clear();
-            EXPORT.addAll(getRightSideStrings(rightSide));
-          }
-        }
-        else if (EXPORT_OK_ASSIGN_STATEMENT.accepts(element)) {
-          PsiElement rightSide = element.getFirstChild().getLastChild();
-          if (rightSide != null) {
-            EXPORT_OK.clear();
-            EXPORT_OK.addAll(getRightSideStrings(rightSide));
-          }
+          extractExport(element, "EXPORT", EXPORT);
+        } else if (EXPORT_OK_ASSIGN_STATEMENT.accepts(element)) {
+          extractExport(element, "EXPORT_OK", EXPORT_OK);
         }
       }
 
