@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -137,25 +137,25 @@ public final class PerlVersion implements Comparable<PerlVersion> {
   private void parseDottedVersion(String versionString, Matcher matcher) {
     List<String> versionChunks = mutableList(versionString.replace("v", "").replace('_', '.').split("\\."));
     myIsAlpha = matcher.group(1) != null;
-    myRevision = Integer.parseInt(versionChunks.remove(0));
+    myRevision = Integer.parseInt(versionChunks.removeFirst());
 
     if (versionChunks.isEmpty()) {
       return;
     }
-    if (versionChunks.get(0).length() > 3) {
+    if (versionChunks.getFirst().length() > 3) {
       throw new NumberFormatException();
     }
 
-    myMajor = Integer.parseInt(versionChunks.remove(0));
+    myMajor = Integer.parseInt(versionChunks.removeFirst());
 
     if (versionChunks.isEmpty()) {
       return;
     }
-    if (versionChunks.get(0).length() > 3) {
+    if (versionChunks.getFirst().length() > 3) {
       throw new NumberFormatException();
     }
 
-    myMinor = Integer.parseInt(versionChunks.remove(0));
+    myMinor = Integer.parseInt(versionChunks.removeFirst());
 
     if (versionChunks.isEmpty()) {
       return;

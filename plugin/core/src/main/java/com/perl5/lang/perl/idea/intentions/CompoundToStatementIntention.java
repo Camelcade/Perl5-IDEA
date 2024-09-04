@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -113,7 +113,7 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
     if (variableExpression instanceof PerlVariableDeclarationExpr) {
       List<PerlVariable> variables = ((PerlVariableDeclarationExpr)variableExpression).getVariables();
       if (variables.size() == 1) {
-        variableExpression = variables.get(0);
+        variableExpression = variables.getFirst();
       }
     }
 

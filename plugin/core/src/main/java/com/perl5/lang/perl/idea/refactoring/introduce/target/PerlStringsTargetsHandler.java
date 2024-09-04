@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,14 +48,14 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
 
   @Override
   protected @NotNull List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
-    if (occurrences.size() == 1 && occurrences.get(0).isFullRange()) {
+    if (occurrences.size() == 1 && occurrences.getFirst().isFullRange()) {
       return super.replaceTarget(occurrences, replacement);
     }
 
     CharSequence replacementChars = replacement.getNode().getChars();
     assert replacement instanceof PerlVariable : "Got " + replacement;
 
-    PsiElement psiElement = Objects.requireNonNull(occurrences.get(0).getPlace());
+    PsiElement psiElement = Objects.requireNonNull(occurrences.getFirst().getPlace());
     Set<TextRange> replacementRanges = new HashSet<>();
 
     PsiElement replacedString = psiElement instanceof PsiPerlStringSq ?

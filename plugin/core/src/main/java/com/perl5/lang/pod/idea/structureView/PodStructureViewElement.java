@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,16 +47,12 @@ public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
   @Override
   public @Nullable String getPresentableText() {
     PsiElement element = getElement();
-    if (element == null) {
-      return null;
-    }
-    if (element instanceof PodFile) {
-      return PerlBundle.message("pod.structure.view.file.title");
-    }
-    else if (element instanceof ItemPresentation) {
-      return ((ItemPresentation)element).getPresentableText();
-    }
-    return null;
+    return switch (element) {
+      case null -> null;
+      case PodFile ignored -> PerlBundle.message("pod.structure.view.file.title");
+      case ItemPresentation presentation -> presentation.getPresentableText();
+      default -> null;
+    };
   }
 
   @Override
@@ -99,9 +95,9 @@ public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
       }
     }
 
-    if (result.size() == 1 && result.get(0).getValue() instanceof PodSectionOver) {
+    if (result.size() == 1 && result.getFirst().getValue() instanceof PodSectionOver) {
       // expanding over
-      StructureViewTreeElement childElement = result.get(0);
+      StructureViewTreeElement childElement = result.getFirst();
       if (childElement instanceof PodStructureViewElement) {
         return ((PodStructureViewElement)childElement).getChildrenBase();
       }

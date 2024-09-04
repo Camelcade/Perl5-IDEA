@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ public class PerlDuckValue extends PerlListValue {
       return UNKNOWN_VALUE;
     }
 
-    var baseSubName = usedCallableNames.remove(0);
+    var baseSubName = usedCallableNames.removeFirst();
     var baseNamespaces = new HashSet<String>();
     PerlPackageUtil.processCallablesNamespaceNames(resolver, baseSubName, it -> {
       baseNamespaces.add(it.getNamespaceName());

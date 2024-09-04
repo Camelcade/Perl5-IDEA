@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public interface PerlImplicitArgumentExpr extends PsiPerlExpr {
       Logger.getInstance(PerlImplicitArgumentExpr.class).error(
         "Got more than one child from expression: " + this + "; " + getText() + "; " + filteredChildren);
     }
-    return filteredChildren.get(0);
+    return filteredChildren.getFirst();
   }
 
   /**

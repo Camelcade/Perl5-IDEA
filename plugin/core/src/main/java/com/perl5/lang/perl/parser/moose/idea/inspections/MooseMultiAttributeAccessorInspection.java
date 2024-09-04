@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,7 +67,7 @@ public class MooseMultiAttributeAccessorInspection extends PerlInspection {
           .distinct().collect(Collectors.toList());
         if (attributesIdentifiers.size() == 1) {
           // same identifier looks like an accessor
-          registerProblem(holder, attributesIdentifiers.get(0), PerlBundle.message("perl.inspection.multiattr.accessor"));
+          registerProblem(holder, attributesIdentifiers.getFirst(), PerlBundle.message("perl.inspection.multiattr.accessor"));
         }
       }
     };

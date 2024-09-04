@@ -171,7 +171,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     assertStoppedAtLine(debugSession, 8);
     List<XExecutionStack> stacks = Arrays.asList(debugSession.getSuspendContext().getExecutionStacks());
     assertEquals("Expected 1 stack, got: " + stacks, 1, stacks.size());
-    XExecutionStack mainStack = stacks.get(0);
+    XExecutionStack mainStack = stacks.getFirst();
     List<XStackFrame> frames = new ArrayList<>();
     mainStack.computeStackFrames(0, new XExecutionStack.XStackFrameContainer() {
       @Override

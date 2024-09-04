@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -112,7 +112,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
     if (listElements.isEmpty()) {
       return null;
     }
-    PsiElement namesContainer = listElements.get(0);
+    PsiElement namesContainer = listElements.getFirst();
     if (namesContainer instanceof PsiPerlAnonArray) {
       namesContainer = ((PsiPerlAnonArray)namesContainer).getExpr();
     }

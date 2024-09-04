@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ class PerlBeginStackElement extends PerlCallStackElement {
     try {
       var lineNumberInfo = cleanedFrameText.substring(beginStartSuffix + BEGIN_BLOCK_SUFFIX.length());
       var lineNumberParts = StringUtil.split(lineNumberInfo, ".");
-      lineNumber = Integer.parseInt(lineNumberParts.get(0));
+      lineNumber = Integer.parseInt(lineNumberParts.getFirst());
     }
     catch (NumberFormatException e) {
       LOG.warn("Unable to parse line number from: " + cleanedFrameText + "; " + e.getMessage());

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,9 +49,9 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
     this(handler);
     myVersionManagerPath = versionManagerPath;
     List<String> parts = StringUtil.split(distributionId, LIB_SEPARATOR);
-    myPerlVersionString = parts.remove(0);
+    myPerlVersionString = parts.removeFirst();
     if (!parts.isEmpty()) {
-      myLibName = parts.get(0);
+      myLibName = parts.getFirst();
     }
   }
 

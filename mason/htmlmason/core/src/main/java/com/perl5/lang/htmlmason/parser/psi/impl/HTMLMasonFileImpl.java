@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -545,28 +545,18 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
 
       PsiTreeUtil.processElements(HTMLMasonFileImpl.this, element ->
       {
-        if (element instanceof HTMLMasonOnceBlock) {
-          onceResult.add((HTMLMasonCompositeElement)element);
-        }
-        else if (element instanceof HTMLMasonSharedBlock) {
-          sharedResult.add((HTMLMasonCompositeElement)element);
-        }
-        else if (element instanceof HTMLMasonCleanupBlock) {
-          cleanupResult.add((HTMLMasonCompositeElement)element);
-        }
-        else if (element instanceof HTMLMasonInitBlock &&
-                 HTMLMasonFileImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class))) {
-          initResult.add((HTMLMasonCompositeElement)element);
-        }
-        else if (element instanceof HTMLMasonArgsBlock &&
-                 HTMLMasonFileImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class))) {
-          argsResult.add((HTMLMasonCompositeElement)element);
-        }
-        else if (element instanceof HTMLMasonMethodDefinition) {
-          methodsResult.add((HTMLMasonCompositeElement)element);
-        }
-        else if (element instanceof HTMLMasonSubcomponentDefitnition) {
-          subComponentsResult.add((HTMLMasonCompositeElement)element);
+        switch (element) {
+          case HTMLMasonOnceBlock block -> onceResult.add(block);
+          case HTMLMasonSharedBlock block -> sharedResult.add(block);
+          case HTMLMasonCleanupBlock block -> cleanupResult.add(block);
+          case HTMLMasonInitBlock block
+            when HTMLMasonFileImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)) -> initResult.add(block);
+          case HTMLMasonArgsBlock block
+            when HTMLMasonFileImpl.this.equals(PsiTreeUtil.getParentOfType(element, HTMLMasonArgsContainer.class)) -> argsResult.add(block);
+          case HTMLMasonMethodDefinition definition -> methodsResult.add(definition);
+          case HTMLMasonSubcomponentDefitnition defitnition -> subComponentsResult.add(defitnition);
+          default -> {
+          }
         }
 
         return true;

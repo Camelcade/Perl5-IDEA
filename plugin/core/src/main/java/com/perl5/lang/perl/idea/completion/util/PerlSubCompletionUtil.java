@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,16 +85,15 @@ public class PerlSubCompletionUtil {
   public static boolean processImportedEntityLookupElement(@NotNull PsiElement element,
                                                            @NotNull PerlExportDescriptor exportDescriptor,
                                                            @NotNull PerlCompletionProcessor completionProcessor) {
-    if (element instanceof PerlSubDefinitionElement subDefinitionElement) {
-      return processSubDefinitionLookupElement(subDefinitionElement, exportDescriptor, completionProcessor);
-    }
-    else if (element instanceof PerlSubDeclarationElement subDeclarationElement) {
-      return processSubDeclarationLookupElement(subDeclarationElement, exportDescriptor, completionProcessor);
-    }
-    else if (element instanceof PerlGlobVariableElement globVariableElement) {
-      return processGlobLookupElement(globVariableElement, exportDescriptor, completionProcessor);
-    }
-    throw new RuntimeException("Don't know how to make lookup element for " + element.getClass());
+    return switch (element) {
+      case PerlSubDefinitionElement subDefinitionElement ->
+        processSubDefinitionLookupElement(subDefinitionElement, exportDescriptor, completionProcessor);
+      case PerlSubDeclarationElement subDeclarationElement ->
+        processSubDeclarationLookupElement(subDeclarationElement, exportDescriptor, completionProcessor);
+      case PerlGlobVariableElement globVariableElement ->
+        processGlobLookupElement(globVariableElement, exportDescriptor, completionProcessor);
+      default -> throw new RuntimeException("Don't know how to make lookup element for " + element.getClass());
+    };
   }
 
   public static boolean processSubDeclarationLookupElement(@NotNull PerlSubDeclarationElement subDeclaration,
@@ -226,23 +225,21 @@ public class PerlSubCompletionUtil {
       completionProcessor.getLeafElement(), new PerlNamespaceItemProcessor<>() {
         @Override
         public boolean processItem(@NotNull PsiNamedElement element) {
-          if (element instanceof PerlImplicitSubDefinition implicitSubDefinition && implicitSubDefinition.isAnonymous()) {
-            return completionProcessor.result();
-          }
-          if (element instanceof PerlSubDefinitionElement subDefinitionElement &&
-              !subDefinitionElement.isAnonymous() && (isStatic && subDefinitionElement.isStatic() || subDefinitionElement.isMethod())) {
-            return processSubDefinitionLookupElement(subDefinitionElement, completionProcessor);
-          }
-          if (element instanceof PerlSubDeclarationElement subDeclarationElement &&
-              (isStatic && subDeclarationElement.isStatic() || subDeclarationElement.isMethod())) {
-            return processSubDeclarationLookupElement(subDeclarationElement, completionProcessor);
-          }
-          if (element instanceof PerlGlobVariableElement perlGlobVariableElement && perlGlobVariableElement.isLeftSideOfAssignment()) {
-            if (StringUtil.isNotEmpty(element.getName())) {
-              return processGlobLookupElement(perlGlobVariableElement, completionProcessor);
-            }
-          }
-          return completionProcessor.result();
+          return switch (element) {
+            case PerlImplicitSubDefinition implicitSubDefinition
+              when implicitSubDefinition.isAnonymous() -> completionProcessor.result();
+            case PerlSubDefinitionElement subDefinitionElement
+              when !subDefinitionElement.isAnonymous() &&
+                   (isStatic && subDefinitionElement.isStatic() || subDefinitionElement.isMethod()) ->
+              processSubDefinitionLookupElement(subDefinitionElement, completionProcessor);
+            case PerlSubDeclarationElement subDeclarationElement
+              when (isStatic && subDeclarationElement.isStatic() || subDeclarationElement.isMethod()) ->
+              processSubDeclarationLookupElement(subDeclarationElement, completionProcessor);
+            case PerlGlobVariableElement perlGlobVariableElement
+              when perlGlobVariableElement.isLeftSideOfAssignment() && StringUtil.isNotEmpty(element.getName()) ->
+              processGlobLookupElement(perlGlobVariableElement, completionProcessor);
+            default -> completionProcessor.result();
+          };
         }
 
         @Override

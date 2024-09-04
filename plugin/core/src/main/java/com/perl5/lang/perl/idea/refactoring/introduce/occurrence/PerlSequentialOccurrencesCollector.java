@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ class PerlSequentialOccurrencesCollector extends PerlIntroduceTargetOccurrencesC
       return false;
     }
 
-    PsiElement firstTargetChild = targetChildren.get(0);
+    PsiElement firstTargetChild = targetChildren.getFirst();
     for (int headIndex = 0; headIndex <= elementChildren.size() - targetChildren.size(); headIndex++) {
       if (!PerlPsiUtil.areElementsSame(firstTargetChild, elementChildren.get(headIndex))) {
         continue;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,15 +49,18 @@ public class PerlMooseExtendsStatementImpl extends PsiPerlStatementImpl implemen
     List<String> result = new ArrayList<>();
 
     PsiElement expr = getExpr();
-    if (expr != null) {
-      if (expr instanceof PerlString) {
-        String content = ElementManipulators.getValueText(expr);
+    if (expr == null) {
+      return result;
+    }
+    switch (expr) {
+      case PerlString perlString -> {
+        String content = ElementManipulators.getValueText(perlString);
         if (!content.isEmpty()) {
           result.add(content);
         }
       }
-      else if (expr instanceof PsiPerlCommaSequenceExpr) {
-        PsiElement element = expr.getFirstChild();
+      case PsiPerlCommaSequenceExpr sequenceExpr -> {
+        PsiElement element = sequenceExpr.getFirstChild();
         while (element != null) {
           if (element instanceof PerlString) {
             String content = ElementManipulators.getValueText(element);
@@ -68,15 +71,15 @@ public class PerlMooseExtendsStatementImpl extends PsiPerlStatementImpl implemen
           element = element.getNextSibling();
         }
       }
-      else if (expr instanceof PsiPerlStringList) {
-        for (PsiElement element : PerlPsiUtil.collectStringElements(expr.getFirstChild())) {
+      case PsiPerlStringList stringList -> {
+        for (PsiElement element : PerlPsiUtil.collectStringElements(stringList.getFirstChild())) {
           String content = element.getText();
           if (!content.isEmpty()) {
             result.add(content);
           }
         }
       }
-      else {
+      default -> {
         // todo we need to somehow mark statement as bad
       }
     }

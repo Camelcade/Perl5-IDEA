@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -123,30 +123,34 @@ public abstract class PerlIntroduceTargetsHandler {
    */
   protected @NotNull String createTargetExpressionText(@NotNull PerlIntroduceTarget target) {
     PsiElement targetElement = target.getPlace();
-    if (targetElement == null) {
-      return reportEmptyPlace();
-    }
-    else if (targetElement instanceof PsiPerlPackageExpr) {
-      return "'" + PerlPackageUtil.getCanonicalNamespaceName(StringUtil.notNullize(targetElement.getText())) + "'";
-    }
-    else if (targetElement instanceof PsiPerlMatchRegex) {
-      char openQuote = ((PsiPerlMatchRegex)targetElement).getOpenQuote();
-      PsiPerlPerlRegex regex = ((PsiPerlMatchRegex)targetElement).getRegex();
-      if (openQuote != 0 && regex != null) {
-        char closeQuote = PerlString.getQuoteCloseChar(openQuote);
-        PsiPerlPerlRegexModifiers modifiers = ((PsiPerlMatchRegex)targetElement).getPerlRegexModifiers();
-        String regexText = "qr " + openQuote + regex.getText() + closeQuote;
-        return modifiers == null ? regexText : regexText + modifiers.getText();
+    switch (targetElement) {
+      case null -> {
+        return reportEmptyPlace();
       }
-    }
-    else if (targetElement instanceof PsiPerlPerlRegexImpl) {
-      PsiElement container = targetElement.getParent();
-      if (container instanceof PerlReplacementRegex) {
-        char openQuote = ((PerlReplacementRegex)container).getOpenQuote();
-        if (openQuote > 0) {
+      case PsiPerlPackageExpr packageExpr -> {
+        return "'" + PerlPackageUtil.getCanonicalNamespaceName(StringUtil.notNullize(packageExpr.getText())) + "'";
+      }
+      case PsiPerlMatchRegex matchRegex -> {
+        char openQuote = matchRegex.getOpenQuote();
+        PsiPerlPerlRegex regex = matchRegex.getRegex();
+        if (openQuote != 0 && regex != null) {
           char closeQuote = PerlString.getQuoteCloseChar(openQuote);
-          return "qr " + openQuote + targetElement.getText() + closeQuote;
+          PsiPerlPerlRegexModifiers modifiers = matchRegex.getPerlRegexModifiers();
+          String regexText = "qr " + openQuote + regex.getText() + closeQuote;
+          return modifiers == null ? regexText : regexText + modifiers.getText();
         }
+      }
+      case PsiPerlPerlRegexImpl regex -> {
+        PsiElement container = regex.getParent();
+        if (container instanceof PerlReplacementRegex replacementRegex) {
+          char openQuote = replacementRegex.getOpenQuote();
+          if (openQuote > 0) {
+            char closeQuote = PerlString.getQuoteCloseChar(openQuote);
+            return "qr " + openQuote + regex.getText() + closeQuote;
+          }
+        }
+      }
+      default -> {
       }
     }
 
@@ -165,7 +169,7 @@ public abstract class PerlIntroduceTargetsHandler {
         "Unexpected multiple occurrences: " + occurrences.stream().map(PerlIntroduceTarget::toString).collect(Collectors.joining("; ")));
       return Collections.emptyList();
     }
-    PsiElement occurrenceElement = Objects.requireNonNull(occurrences.get(0)).getPlace();
+    PsiElement occurrenceElement = Objects.requireNonNull(occurrences.getFirst()).getPlace();
     if (occurrenceElement != null && occurrenceElement.isValid()) {
       PsiElement occurrenceElementParent = occurrenceElement.getParent();
       if (occurrenceElementParent instanceof PerlHeredocElementImpl) {
@@ -395,7 +399,7 @@ public abstract class PerlIntroduceTargetsHandler {
     if (occurrences.isEmpty()) {
       LOG.warn("Empty occurrences passed to replacement");
     }
-    PsiElement targetPlace = Objects.requireNonNull(occurrences.get(0)).getPlace();
+    PsiElement targetPlace = Objects.requireNonNull(occurrences.getFirst()).getPlace();
     if (targetPlace == null) {
       return Collections.emptyList();
     }

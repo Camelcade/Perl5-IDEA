@@ -103,11 +103,11 @@ public abstract class PerlAbstractTestRunConfiguration extends GenericPerlRunCon
   public String suggestedName() {
     List<VirtualFile> testsVirtualFiles = computeTargetFiles();
     if (testsVirtualFiles.size() > 1) {
-      VirtualFile firstTest = testsVirtualFiles.remove(0);
+      VirtualFile firstTest = testsVirtualFiles.removeFirst();
       return PerlBundle.message("perl.run.prove.configuration.name.multi", firstTest.getName(), testsVirtualFiles.size());
     }
     else if (testsVirtualFiles.size() == 1) {
-      return PerlBundle.message("perl.run.prove.configuration.name.single", testsVirtualFiles.get(0).getName());
+      return PerlBundle.message("perl.run.prove.configuration.name.single", testsVirtualFiles.getFirst().getName());
     }
     return super.suggestedName();
   }

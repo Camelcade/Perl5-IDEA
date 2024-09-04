@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -320,7 +320,7 @@ public final class PerlDocUtil implements PerlElementTypes {
       }
     });
 
-    return result.isEmpty() ? null : result.get(0);
+    return result.isEmpty() ? null : result.getFirst();
   }
 
   public static String renderPodFile(PodFileImpl file) {
@@ -375,17 +375,17 @@ public final class PerlDocUtil implements PerlElementTypes {
     }
     PsiElement run = podSection;
 
-    // detecting first section
     while (true) {
       PsiElement prevSibling = run.getPrevSibling();
+      //noinspection IfCanBeSwitch
       if (prevSibling == null) {
         break;
       }
       if (prevSibling instanceof PodSection && ((PodSection)prevSibling).hasContent()) {
         break;
       }
-      if (prevSibling instanceof PodTitledSection) {
-        podSection = (PodTitledSection)prevSibling;
+      if (prevSibling instanceof PodTitledSection section) {
+        podSection = section;
       }
       run = prevSibling;
     }
@@ -417,7 +417,7 @@ public final class PerlDocUtil implements PerlElementTypes {
       if (run instanceof PodLinkTarget) {
         String bcLink = ((PodLinkTarget)run).getPodLink();
         if (StringUtil.isNotEmpty(bcLink)) {
-          breadCrumbs.add(0, PodRenderUtil.getHTMLPsiLink(bcLink, ((PodLinkTarget)run).getPodLinkText()));
+          breadCrumbs.addFirst(PodRenderUtil.getHTMLPsiLink(bcLink, ((PodLinkTarget)run).getPodLinkText()));
         }
       }
       if (run instanceof PsiFile) {

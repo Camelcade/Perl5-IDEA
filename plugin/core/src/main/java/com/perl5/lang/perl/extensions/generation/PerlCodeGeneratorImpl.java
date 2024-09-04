@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -144,13 +144,13 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
       }
 
       if (!superArgs.isEmpty()) {
-        superArgs.remove(0);
+        superArgs.removeFirst();
       }
 
-      if (!arguments.isEmpty() && !arguments.get(0).isEmpty()) {
+      if (!arguments.isEmpty() && !arguments.getFirst().isEmpty()) {
         //noinspection StringConcatenationInsideStringBufferAppend
         code.append(
-          arguments.get(0).toStringShort() + "->SUPER::" + perlSubBase.getSubName() + "(" + StringUtil.join(superArgs, ", ") + ");\n");
+          arguments.getFirst().toStringShort() + "->SUPER::" + perlSubBase.getSubName() + "(" + StringUtil.join(superArgs, ", ") + ");\n");
       }
       code.append("}");
       return code.toString();

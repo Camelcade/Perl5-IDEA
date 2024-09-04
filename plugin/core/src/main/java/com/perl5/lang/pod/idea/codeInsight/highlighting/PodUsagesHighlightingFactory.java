@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,7 +84,7 @@ public class PodUsagesHighlightingFactory extends HighlightUsagesHandlerFactoryB
         }
 
         List<TextRange> readUsages = getReadUsages();
-        ReferencesSearch.search(allTargetSections.get(0), new LocalSearchScope(file)).forEach(
+        ReferencesSearch.search(allTargetSections.getFirst(), new LocalSearchScope(file)).forEach(
           (PsiReference it) -> readUsages.add(it.getRangeInElement().shiftRight(it.getElement().getTextRange().getStartOffset())));
       }
     };

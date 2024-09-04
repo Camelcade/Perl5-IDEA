@@ -756,26 +756,23 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       return "null";
     }
     String iconString;
-    if (icon instanceof IconLoader.CachedImageIcon) {
-      iconString = ((IconLoader.CachedImageIcon)icon).getOriginalPath();
-    }
-    else if (icon instanceof CachedImageIcon cachedImageIcon) {
-      iconString = cachedImageIcon.getOriginalPath();
-    }
-    else if (icon instanceof DeferredIcon) {
-      return getIconText(((DeferredIcon)icon).getBaseIcon());
-    }
-    else if (icon instanceof RowIcon) {
-      List<String> iconStrings = new ArrayList<>();
-      for (Icon subIcon : ((RowIcon)icon).getAllIcons()) {
-        if (subIcon != null) {
-          iconStrings.add(getIconText(subIcon));
-        }
+    switch (icon) {
+      //noinspection deprecation
+      case IconLoader.CachedImageIcon imageIcon -> iconString = imageIcon.getOriginalPath();
+      case CachedImageIcon cachedImageIcon -> iconString = cachedImageIcon.getOriginalPath();
+      case DeferredIcon deferredIcon -> {
+        return getIconText(deferredIcon.getBaseIcon());
       }
-      return String.join("; ", iconStrings);
-    }
-    else {
-      iconString = icon.toString();
+      case RowIcon rowIcon -> {
+        List<String> iconStrings = new ArrayList<>();
+        for (Icon subIcon : rowIcon.getAllIcons()) {
+          if (subIcon != null) {
+            iconStrings.add(getIconText(subIcon));
+          }
+        }
+        return String.join("; ", iconStrings);
+      }
+      default -> iconString = icon.toString();
     }
     assertNotNull("Could not find an icon string in " + icon, iconString);
     return iconString.contains("/") ? iconString.substring(iconString.lastIndexOf('/')): iconString;
@@ -1863,16 +1860,17 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     for (Instruction instruction : controlFlow) {
       printInstruction(builder, instruction);
 
-      if (instruction instanceof PerlIteratorConditionInstruction) {
-      }
-      else if (instruction instanceof PartialConditionalInstructionImpl) {
-        builder.append("\n").append("Its ").append(((PartialConditionalInstructionImpl)instruction).getResult()).
-          append(" branch, condition: ").append(((PartialConditionalInstructionImpl)instruction).getConditionText());
-      }
-      else if (instruction instanceof ConditionalInstruction) {
-        ConditionalInstruction conditionalInstruction = (ConditionalInstruction)instruction;
-        builder.append("\n").append("Its ").append(conditionalInstruction.getResult()).
-          append(" branch, condition: ").append(getTextSafe(conditionalInstruction.getCondition()));
+      switch (instruction) {
+        case PerlIteratorConditionInstruction ignored -> {
+        }
+        case PartialConditionalInstructionImpl partialConditionalInstruction ->
+          builder.append("\n").append("Its ").append(partialConditionalInstruction.getResult()).
+            append(" branch, condition: ").append(partialConditionalInstruction.getConditionText());
+        case ConditionalInstruction conditionalInstruction ->
+          builder.append("\n").append("Its ").append(conditionalInstruction.getResult()).
+            append(" branch, condition: ").append(getTextSafe(conditionalInstruction.getCondition()));
+        default -> {
+        }
       }
       builder.append(PerlPsiUtil.DOUBLE_QUOTE).append("]");
 
@@ -2143,7 +2141,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     List<PerlIntroduceTarget> introduceTargets = PerlIntroduceTargetsHandler.getIntroduceTargets(getEditor(), getFile());
     assertTrue(introduceTargets.size() > 0);
     List<Pair<Integer, String>> macros = new ArrayList<>();
-    PerlIntroduceTargetOccurrencesCollector.collect(introduceTargets.get(introduceTargets.size() - 1)).forEach(it -> {
+    PerlIntroduceTargetOccurrencesCollector.collect(introduceTargets.getLast()).forEach(it -> {
       TextRange occurenceRange = it.getTextRange();
       macros.add(Pair.create(occurenceRange.getStartOffset(), "<occurrence>"));
       macros.add(Pair.create(occurenceRange.getEndOffset(), "</occurrence>"));
@@ -3140,7 +3138,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     if (result.size() != 1) {
       fail("Expected a single injector for " + host.getClass() + " got: " + result);
     }
-    return result.get(0);
+    return result.getFirst();
   }
 
   protected void doTestConfigurable(@NotNull UnnamedConfigurable configurable) {
@@ -3281,13 +3279,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     StringBuilder tokenTypesMappings = new StringBuilder("Token types mappings:\n");
     elementTypesMappings.keySet().stream()
       .sorted(Comparator.comparing(Object::toString))
-      .forEach(elementType -> {
-        tokenTypesMappings.append("\t")
-          .append(elementType)
-          .append(": ")
-          .append(elementTypesMappings.get(elementType).stream().sorted().collect(Collectors.joining(", ")))
-          .append("\n");
-      });
+      .forEach(elementType -> tokenTypesMappings.append("\t")
+        .append(elementType)
+        .append(": ")
+        .append(elementTypesMappings.get(elementType).stream().sorted().collect(Collectors.joining(", ")))
+        .append("\n"));
 
     var textWithMacros = getEditorTextWithMacroses(getEditor(), macros);
     var result = String.join("================================\n", statText, tokenTypesMappings, tokensList, textWithMacros);

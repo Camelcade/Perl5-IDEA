@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -654,7 +654,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     char openQuote = buffer.charAt(currentPosition);
 
     List<IElementType> stringTokens = getStringTokens();
-    pushPreparsedToken(currentPosition++, currentPosition, stringTokens.get(0));
+    pushPreparsedToken(currentPosition++, currentPosition, stringTokens.getFirst());
 
     int contentStart = currentPosition;
     boolean hasEscape = false;

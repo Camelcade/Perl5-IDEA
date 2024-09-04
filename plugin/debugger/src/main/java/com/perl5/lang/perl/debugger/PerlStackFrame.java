@@ -32,14 +32,17 @@ import com.intellij.xdebugger.frame.XCompositeNode;
 import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.frame.XValueChildrenList;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.debugger.protocol.*;
 import com.perl5.lang.perl.debugger.values.PerlXMainGroup;
 import com.perl5.lang.perl.debugger.values.PerlXNamedValue;
 import com.perl5.lang.perl.debugger.values.PerlXValueGroup;
+import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
+import org.jetbrains.annotations.VisibleForTesting;
 
 import java.io.File;
 
@@ -84,9 +87,27 @@ public class PerlStackFrame extends XStackFrame {
 
   @Override
   public void customizePresentation(@NotNull ColoredTextContainer component) {
+    doCustomizePresentation(myFrameDescriptor, component);
+  }
+
+  @VisibleForTesting
+  public static void doCustomizePresentation(@NotNull PerlStackFrameDescriptor frameDescriptor, @NotNull ColoredTextContainer component) {
+    var fileDescriptor = frameDescriptor.getFileDescriptor();
+    var fqn = fileDescriptor.getName();
+    var nameChunks = PerlPackageUtil.splitNames(fqn);
+    var filePath = fileDescriptor.getPath();
+    @NlsSafe var namespaceName = nameChunks == null ? null : nameChunks.getFirst();
+    var subName = nameChunks == null ? null : nameChunks.getSecond();
+    var firstName = subName == null ? filePath : subName;
     @NlsSafe var frameName =
-      String.join(":", myFrameDescriptor.getFileDescriptor().getNameOrPath(), String.valueOf(myFrameDescriptor.getOneBasedLine()));
+      String.join(":", firstName, String.valueOf(frameDescriptor.getOneBasedLine()));
     component.append(frameName, SimpleTextAttributes.REGULAR_ATTRIBUTES);
+    if (namespaceName != null) {
+      component.append(", " + namespaceName, SimpleTextAttributes.REGULAR_ATTRIBUTES);
+    }
+    if (subName != null) {
+      component.append(" (" + filePath + ")", SimpleTextAttributes.GRAYED_ATTRIBUTES);
+    }
     component.setIcon(AllIcons.Debugger.Frame);
   }
 
@@ -136,12 +157,12 @@ public class PerlStackFrame extends XStackFrame {
     }
   }
 
-  public PerlExecutionStack getPerlExecutionStack() {
+  public @NotNull PerlExecutionStack getPerlExecutionStack() {
     return myPerlExecutionStack;
   }
 
   @TestOnly
-  public PerlStackFrameDescriptor getFrameDescriptor() {
+  public @NotNull PerlStackFrameDescriptor getFrameDescriptor() {
     return myFrameDescriptor;
   }
 
@@ -162,7 +183,7 @@ public class PerlStackFrame extends XStackFrame {
             );
 
             if (descriptor == null) {
-              callback.errorOccurred("Something bad happened on Perl side. Report to plugin devs.");
+              callback.errorOccurred(PerlBundle.message("dialog.message.something.bad.happened.on.perl.side.report.to.plugin.devs"));
             }
             else if (descriptor.isError()) {
               callback.errorOccurred(descriptor.getResult().getValue());

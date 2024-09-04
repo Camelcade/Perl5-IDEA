@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -125,7 +125,7 @@ public class PodFileUtil {
       return true;
     });
 
-    return result.isEmpty() ? null : result.get(0);
+    return result.isEmpty() ? null : result.getFirst();
   }
 
   public static void processPodFilesByDescriptor(@NotNull Project project,

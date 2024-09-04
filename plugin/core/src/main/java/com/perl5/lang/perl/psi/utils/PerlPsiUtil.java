@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -589,28 +589,18 @@ public final class PerlPsiUtil implements PerlElementTypes {
       return true;
     }
 
-    if (targetElement instanceof PerlString) {
-      return areStringElementsSame((PerlString)targetElement, elementToCompare);
-    }
-    else if (targetElement instanceof PerlSimpleRegex) {
-      return areMatchRegexElementsSame((PerlSimpleRegex)targetElement, elementToCompare);
-    }
-    else if (targetElement instanceof PerlCastExpression) {
-      return areCastElementsSame((PerlCastExpression)targetElement, elementToCompare);
-    }
-    else if (targetElement instanceof PsiPerlPerlRegex) {
-      return areRegexSame((PsiPerlPerlRegex)targetElement, elementToCompare);
-    }
-    else if (targetElement instanceof PerlMethodContainer) {
-      return areNestedCallsSame((PerlMethodContainer)targetElement, elementToCompare);
-    }
-    else if (targetElement instanceof PsiPerlPackageExpr) {
-      return elementToCompare instanceof PerlString ? areElementsSame(elementToCompare, targetElement) :
-             elementToCompare instanceof PsiPerlPackageExpr &&
-             StringUtil.equals(PerlPackageUtil.getCanonicalName(targetElement.getText()),
-                               PerlPackageUtil.getCanonicalName(elementToCompare.getText()));
-    }
-    return areGenericElementsSame(targetElement, elementToCompare);
+    return switch (targetElement) {
+      case PerlString string -> areStringElementsSame(string, elementToCompare);
+      case PerlSimpleRegex regex -> areMatchRegexElementsSame(regex, elementToCompare);
+      case PerlCastExpression expression -> areCastElementsSame(expression, elementToCompare);
+      case PsiPerlPerlRegex regex -> areRegexSame(regex, elementToCompare);
+      case PerlMethodContainer container -> areNestedCallsSame(container, elementToCompare);
+      case PsiPerlPackageExpr expr -> elementToCompare instanceof PerlString ? areElementsSame(elementToCompare, expr) :
+        elementToCompare instanceof PsiPerlPackageExpr &&
+        StringUtil.equals(PerlPackageUtil.getCanonicalName(expr.getText()),
+                          PerlPackageUtil.getCanonicalName(elementToCompare.getText()));
+      default -> areGenericElementsSame(targetElement, elementToCompare);
+    };
   }
 
   /**

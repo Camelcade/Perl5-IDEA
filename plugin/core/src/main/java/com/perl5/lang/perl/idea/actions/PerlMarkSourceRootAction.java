@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ public abstract class PerlMarkSourceRootAction extends PerlSourceRootAction {
     if (files.isEmpty() || !PerlProjectManager.isPerlEnabled(module)) {
       return false;
     }
-    return !myType.equals(PerlModuleExtension.getInstance(module).getRootType(files.get(0)));
+    return !myType.equals(PerlModuleExtension.getInstance(module).getRootType(files.getFirst()));
   }
 
   @Override

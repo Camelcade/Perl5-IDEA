@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -438,7 +438,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
   @Override
   public @NotNull List<Perl5SdkWrapper> getAllSdkWrappers() {
     List<Perl5SdkWrapper> defaultItems = new ArrayList<>(Perl5SdkManipulator.super.getAllSdkWrappers());
-    defaultItems.add(0, DISABLE_PERL_ITEM);
+    defaultItems.addFirst(DISABLE_PERL_ITEM);
     return defaultItems;
   }
 
