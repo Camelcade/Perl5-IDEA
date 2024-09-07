@@ -251,9 +251,23 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     private final @NotNull List<String> EXPORT_OK = new ArrayList<>();
     private final @NotNull Map<String, List<String>> EXPORT_TAGS = Collections.emptyMap();
 
+    // Deals with the following cases:
+    // use subs our @EXPORT_OK = qw( a b c );
+    public PsiElement findAssignExpr(PsiElement element) {
+      PsiElement target = element.getFirstChild();
+      while (target != null && !(target instanceof PsiPerlAssignExpr)) {
+        target = target.getNextSibling();
+      }
+      return target;
+    }
+
     public void extractExport(PsiElement element, String exportName, List<String> target) {
-      PsiElement rightSide = element.getFirstChild().getLastChild();
-      String variableName = element.getFirstChild().getFirstChild().getText();
+      PsiElement assignExpr = findAssignExpr(element);
+      PsiElement leftSide = assignExpr.getFirstChild();
+      PsiElement rightSide = assignExpr.getLastChild();
+      String variableName = leftSide instanceof PerlVariableDeclarationExpr ?
+        leftSide.getLastChild().getText() :
+        leftSide.getText();
 
       // @EXPORT or @{namespace}::EXPORT
       // @EXPORT_OK or @{namespace}::EXPORT_OK
