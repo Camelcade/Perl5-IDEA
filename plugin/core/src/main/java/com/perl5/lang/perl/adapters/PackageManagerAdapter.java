@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.text.StringUtil;
@@ -47,9 +48,9 @@ public abstract class PackageManagerAdapter {
   public static final @NlsSafe String CPANMINUS_PACKAGE_NAME = "App::cpanminus";
 
   private static final Logger LOG = Logger.getInstance(PackageManagerAdapter.class);
-  private static final MergingUpdateQueue QUEUE =
+  private static final AtomicNotNullLazyValue<MergingUpdateQueue> QUEUE_PROVIDER = AtomicNotNullLazyValue.createValue(() ->
     new MergingUpdateQueue("perl.installer.queue", 300, true, null, PerlPluginUtil.getUnloadAwareDisposable())
-      .usePassThroughInUnitTestMode();
+      .usePassThroughInUnitTestMode());
 
   private final @NotNull Sdk mySdk;
 
@@ -138,7 +139,7 @@ public abstract class PackageManagerAdapter {
    * @see #install(Collection, Runnable, boolean)
    */
   public final void queueInstall(@NotNull Collection<String> packageNames, boolean suppressTests) {
-    QUEUE.queue(new InstallUpdate(this, packageNames, suppressTests));
+    QUEUE_PROVIDER.get().queue(new InstallUpdate(this, packageNames, suppressTests));
   }
 
   /**
