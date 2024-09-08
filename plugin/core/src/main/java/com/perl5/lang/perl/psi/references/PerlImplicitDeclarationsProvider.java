@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +20,14 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.extensions.ExtensionPointName;
 import com.intellij.openapi.util.JDOMUtil;
 import com.intellij.openapi.util.text.StringUtil;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
+import com.perl5.lang.perl.psi.PerlAnnotationWithValue;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlImplicitSubDefinition;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
+import com.perl5.lang.perl.psi.utils.PerlAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -35,6 +40,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+
+import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY_VALUE;
 
 /**
  * Provides information about implicitly defined subs, e.g {@code Types::Standard}
@@ -49,6 +56,7 @@ public abstract class PerlImplicitDeclarationsProvider {
   private static final @NonNls String ARGUMENTS_ELEMENT = "arguments";
   private static final @NonNls String OPTIONAL_ELEMENT = "optional";
   private static final @NonNls String ARGUMENT_ELEMENT = "argument";
+  private static final @NonNls String RETURNS_ELEMENT = "returns";
 
   /**
    * @return path to XML resource with entities description or null if there is no one
@@ -122,7 +130,8 @@ public abstract class PerlImplicitDeclarationsProvider {
         declarationsService.getPsiManager(),
         subName,
         PerlPackageUtil.CORE_NAMESPACE,
-        readArguments(element.getChild(ARGUMENTS_ELEMENT), subName)
+        readArguments(element.getChild(ARGUMENTS_ELEMENT), subName),
+        readReturnValue(element)
       );
     }
     else {
@@ -130,10 +139,28 @@ public abstract class PerlImplicitDeclarationsProvider {
         declarationsService.getPsiManager(),
         subName,
         namespaceName,
-        readArguments(element.getChild(ARGUMENTS_ELEMENT), subName)
+        readArguments(element.getChild(ARGUMENTS_ELEMENT), subName),
+        readReturnValue(element)
       );
     }
     declarationsService.registerSub(subDefinition);
+  }
+
+  /**
+   * It is unclear how to generify reading the value, but this should be some generic logic for this. Probably we should attempt to lex
+   * the value as an {@code @returns} annotation argument and process it via some method. But this is good enough for now.
+   *
+   * @see PerlAnnotations#getReturnClass(PerlAnnotationWithValue)
+   */
+  private @NotNull PerlValue readReturnValue(@NotNull Element subElement) {
+    var returnsAttribute = subElement.getAttributeValue(RETURNS_ELEMENT);
+    if (returnsAttribute == null) {
+      return PerlValues.UNKNOWN_VALUE;
+    }
+    if (returnsAttribute.equals("*")) {
+      return NAMESPACE_ANY_VALUE;
+    }
+    return PerlScalarValue.create(PerlPackageUtil.getCanonicalName(returnsAttribute));
   }
 
   private @NotNull List<PerlSubArgument> readArguments(@Nullable Element argumentsElement, @NotNull String subName) {
