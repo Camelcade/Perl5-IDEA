@@ -24,9 +24,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.extensions.mojo.MojoLightDelegatingSubDefinition;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
@@ -94,9 +92,6 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
   @Override
   public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
-    if (object instanceof MojoLightDelegatingSubDefinition delegatingSubDefinition && delegatingSubDefinition.isValid()) {
-      return findPodElement(ObjectUtils.notNull(delegatingSubDefinition.getTargetSubElement(), delegatingSubDefinition));
-    }
     if (object instanceof PsiElement psiElement && psiElement.isValid()) {
       return findPodElement(psiElement);
     }
@@ -195,9 +190,6 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
 
   @Override
   public @Nullable @Nls String generateDoc(PsiElement element, @Nullable PsiElement originalElement) {
-    if (element instanceof MojoLightDelegatingSubDefinition delegatingSubDefinition) {
-      element = ObjectUtils.notNull(delegatingSubDefinition.getTargetSubElement(), element);
-    }
     return PodDocumentationProvider.doGenerateDoc(findPodElement(element));
   }
 

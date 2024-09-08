@@ -14,45 +14,23 @@
  * limitations under the License.
  */
 
-package lightElements;
-
+package unit.perl;
 
 import base.PerlLightTestCase;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
-public class PerlLightElementsTest extends PerlLightTestCase {
+
+public class PerlStubsTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
-    return "lightElements/perl";
+    return "unit/perl/stubs";
   }
 
   @Test
-  public void testMooseAttrs() {doTest();}
+  public void testMojoliciousLite_pl() { doTestStubs(); }
 
-  @Test
-  public void testMooRwpAttr() {doTest();}
-
-  @Test
-  public void testMooGeneratedClearer() {doTest();}
-
-  @Test
-  public void testMooGeneratedPredicate() {doTest();}
-
-  @Test
-  public void testConstants() {doTest();}
-
-  @Test
-  public void testExceptionClass() {doTest();}
-
-  @Test
-  public void testClassAccessor() {doTest();}
-
-  @Test
-  public void testMojoAttrs() {doTest();}
-
-  @Test
-  public void testMooseAttrsWithStandardTypes() {doTest();}
-
-  private void doTest() {
-    doTestLightElements();
+  @Override
+  protected @NotNull String computeAnswerFileName(@NotNull String appendix) {
+    return getTestName(true).replace('_', '.') + ".txt";
   }
 }

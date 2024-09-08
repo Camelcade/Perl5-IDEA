@@ -106,10 +106,6 @@
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.MroProcessor"/>
     <packageProcessor key="lib"
                       implementationClass="com.perl5.lang.perl.extensions.packageprocessor.impl.LibProcessor"/>
-    <packageProcessor key="Mojo::Base"
-                      implementationClass="com.perl5.lang.perl.extensions.mojo.MojoBaseProcessor"/>
-    <packageProcessor key="Mojolicious::Lite"
-                      implementationClass="com.perl5.lang.perl.extensions.mojo.MojoliciousLitePackageProcessor"/>
     <packageProcessor key="Moose"
                       implementationClass="com.perl5.lang.perl.extensions.moose.MooseProcessor"/>
     <packageProcessor key="Moose::Role"
