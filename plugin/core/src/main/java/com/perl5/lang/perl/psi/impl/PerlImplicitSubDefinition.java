@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,7 +45,15 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
                                    @NotNull String subName,
                                    @NotNull String namespaceName,
                                    @NotNull List<PerlSubArgument> argumentList) {
-    this(manager, subName, namespaceName, argumentList, null, null, false);
+    this(manager, subName, namespaceName, argumentList, null);
+  }
+
+  public PerlImplicitSubDefinition(@NotNull PsiManager manager,
+                                   @NotNull String subName,
+                                   @NotNull String namespaceName,
+                                   @NotNull List<PerlSubArgument> argumentList,
+                                   @Nullable PerlValue returnValue) {
+    this(manager, subName, namespaceName, argumentList, returnValue, false);
   }
 
   public PerlImplicitSubDefinition(@NotNull PsiManager manager,

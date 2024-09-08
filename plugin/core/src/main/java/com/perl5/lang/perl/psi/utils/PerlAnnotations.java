@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,8 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider;
+import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -64,6 +66,11 @@ public final class PerlAnnotations implements PerlElementTypes {
     return getAnyAnnotationByClass(host, PsiPerlAnnotationNoInject.class) != null;
   }
 
+  /**
+   * Requires some generic approach with method in `see` section
+   *
+   * @see PerlImplicitDeclarationsProvider#readReturnValue(Element)
+   */
   private static @Nullable String getReturnClass(@NotNull PerlAnnotationWithValue annotation) {
     PerlNamespaceElement namespaceElement = PsiTreeUtil.getChildOfType(annotation, PerlNamespaceElement.class);
     if (namespaceElement != null) {
