@@ -35,6 +35,8 @@
     <settings.configurable.extension implementation="com.perl5.lang.mojolicious.idea.modules.MojoSettingsConfigurableExtension"/>
     <packageProcessor key="Mojo::Base" implementationClass="com.perl5.lang.perl.extensions.mojo.MojoBaseProcessor"/>
     <packageProcessor key="Mojolicious::Lite" implementationClass="com.perl5.lang.perl.extensions.mojo.MojoliciousLitePackageProcessor"/>
+
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.mojo.MojoLiteImplicitSubsProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

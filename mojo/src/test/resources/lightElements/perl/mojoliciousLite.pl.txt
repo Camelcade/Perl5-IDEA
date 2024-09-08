@@ -1,16 +1,1 @@
 Poly-named provider: PerlUseStatementElement(USE_STATEMENT) at 0 in mojoliciousLite.pl
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::app; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::new at 4469 in Mojolicious.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::new; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::new at 4469 in Mojolicious.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::any; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::any($self) at 802 in Route.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::get; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::get($self) at 1011 in Route.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::options; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::options($self) at 1520 in Route.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::patch; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::patch($self) at 2003 in Route.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::post; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::post($self) at 2053 in Route.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::put; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::put($self) at 2103 in Route.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::websocket; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::websocket at 4005 in Route.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::under; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::under($self) at 3773 in Route.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::del; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Routes::Route::delete($self) at 877 in Route.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::group; navigated to: PerlUseStatementElement(USE_STATEMENT) at 0 in mojoliciousLite.pl
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::helper; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::helper($self) at 4384 in Mojolicious.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::hook; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::hook($self) at 4432 in Mojolicious.pm
-	MojoLightDelegatingSubDefinition(LIGHT_METHOD_DEFINITION)@main::plugin; navigated to: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::plugin($self) at 5374 in Mojolicious.pm
