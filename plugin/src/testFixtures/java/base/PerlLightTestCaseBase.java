@@ -274,6 +274,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   private int myCompletionResultEditorOffset = -1;
   private int myCompletionInvocationCount = 0;
 
+  protected static @NotNull BiPredicate<LookupElement, LookupElementPresentation> withType(@NonNls @NotNull String type) {
+    return (__, presentation) -> StringUtil.contains(StringUtil.notNullize(presentation.getTypeText()), type);
+  }
+
   /**
    * @return test data path relative to the module root
    */

@@ -324,24 +324,6 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   }
 
   @Test
-  public void testMainCompletionAll(){
-    doTestMainCompletion(false);
-  }
-
-  @Test
-  public void testMainCompletionSimple(){
-    doTestMainCompletion(true);
-  }
-
-  private void doTestMainCompletion(boolean value) {
-    PerlSharedSettings.getInstance(getProject()).SIMPLE_MAIN_RESOLUTION = value;
-    myFixture.copyFileToProject("second_app.pl");
-    initWithTextSmartWithoutErrors("use Mojolicious::Lite;\n" +
-                                   "<caret>");
-    doTestCompletionCheck("", withType("main"));
-  }
-
-  @Test
   public void testMainImportCompletionAll(){
     doTestMainImportCompletion(false);
   }
@@ -362,10 +344,6 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   public void testMultipleNamespaces(){
     doTestCompletion((__, presentation) -> StringUtil.startsWith(StringUtil.notNullize(presentation.getItemText()), "Some::Thing"));
   }
-
-  @Test
-  public void testMojoLite(){
-    doTestCompletion(withType("main"));}
 
   @Test
   public void testBlessedInference() {doTest();}
@@ -535,10 +513,6 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
 
   @Test
   public void testMooseAttrs() {doTest();}
-
-  @Test
-  public void testMojoAttrs() {doTest();}
-
 
   @Test
   public void testClassAccessor() {

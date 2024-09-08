@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -109,9 +109,6 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase {
   public void testMainInnerParent() { doFileTest(); }
 
   @Test
-  public void testMainMojolite() { doFileTest("Mojolicious::Lite"); }
-
-  @Test
   public void testMainParent(){doFileTest("Foo::Bar");}
 
   @Test
@@ -152,21 +149,6 @@ public class NamespaceParentsDetectionTest extends NamespaceTestCase {
   @Test
   public void testParentQQ() {
     doTest("superparent::duperparent");
-  }
-
-  @Test
-  public void testMojoBase() {
-    doTest("Mojo::Base");
-  }
-
-  @Test
-  public void testMojoBaseNoBase() {
-    doTest();
-  }
-
-  @Test
-  public void testMojoBaseSpecific() {
-    doTest("somebase1");
   }
 
   @Test
