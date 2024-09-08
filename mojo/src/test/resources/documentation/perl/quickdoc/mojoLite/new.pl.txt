@@ -1,7 +1,0 @@
-<p><a href="psi_element://Mojolicious">Mojolicious</a>: <a href="psi_element://Mojolicious%2FMETHODS">METHODS</a></p><h2>new</h2><div style="padding-bottom: 10px;"><pre><code>  my $app = Mojolicious-&gt;new;
-  my $app = Mojolicious-&gt;new(moniker =&gt; 'foo_bar');
-  my $app = Mojolicious-&gt;new({moniker =&gt; 'foo_bar'});</code></pre></div>
-<p style="padding-bottom: 10px;">Construct a new <a href="psi_element://Mojolicious">Mojolicious</a> application and call <a href="psi_element://Mojolicious%2Fstartup">startup</a>. Will
-automatically detect your home directory. Also sets up the renderer, static file
-server, a default set of plugins and an <a href="psi_element://Mojolicious%2Faround_dispatch">around_dispatch</a> hook with the
-default exception handling.</p>

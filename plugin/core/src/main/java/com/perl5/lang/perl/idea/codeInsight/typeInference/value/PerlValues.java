@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,6 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
-
-import java.util.Collections;
-import java.util.List;
 
 public class PerlValues {
   public static final PerlValue FIRST_ELEMENT_INDEX_VALUE = PerlScalarValue.create(0);
@@ -43,11 +40,6 @@ public class PerlValues {
    */
   public static final PerlValue FIRST_ARGUMENT_VALUE = PerlValuesManager.intern(
     PerlArrayElementValue.create(ARGUMENTS_VALUE, FIRST_ELEMENT_INDEX_VALUE));
-
-  public static final PerlValue DELEGATE_METHOD_ARGUMENTS = PerlSublistValue.createShiftValue(ARGUMENTS_VALUE);
-  public static final List<PerlValue> DELEGATE_METHOD_ARGUMENTS_LIST =    Collections.singletonList(DELEGATE_METHOD_ARGUMENTS);
-
-  public static final PerlValue DUMMY_SCALAR = PerlScalarValue.create("dummy");
 
   private PerlValues() {
   }

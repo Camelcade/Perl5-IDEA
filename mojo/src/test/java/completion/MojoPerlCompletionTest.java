@@ -23,6 +23,8 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import org.junit.Test;
 
+import static com.perl5.lang.perl.extensions.mojo.MojoliciousLitePackageProcessor.MOJOLICIOUS_LITE;
+
 public class MojoPerlCompletionTest extends MojoLightTestCase {
   @Override
   protected void setUp() throws Exception {
@@ -43,7 +45,7 @@ public class MojoPerlCompletionTest extends MojoLightTestCase {
 
   @Test
   public void testMojoLite() {
-    doTestCompletion(withType("main"));
+    doTestCompletion(withType(MOJOLICIOUS_LITE));
   }
 
   @Test
@@ -64,7 +66,7 @@ public class MojoPerlCompletionTest extends MojoLightTestCase {
     myFixture.copyFileToProject("second_app.pl");
     initWithTextSmartWithoutErrors("use Mojolicious::Lite;\n" +
                                    "<caret>");
-    doTestCompletionCheck("", withType("main"));
+    doTestCompletionCheck("", withType(MOJOLICIOUS_LITE));
   }
 
   @Test

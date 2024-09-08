@@ -1,39 +1,11 @@
-<p><a href="psi_element://Mojolicious%3A%3ARoutes%3A%3ARoute">Mojolicious::Routes::Route</a>: <a href="psi_element://Mojolicious%3A%3ARoutes%3A%3ARoute%2FMETHODS">METHODS</a></p><h2>any</h2><div style="padding-bottom: 10px;"><pre><code>  my $route = $r-&gt;any;
-  my $route = $r-&gt;any('/:foo');
-  my $route = $r-&gt;any('/:foo' =&gt; sub {...});
-  my $route = $r-&gt;any('/:foo' =&gt; sub {...} =&gt; 'name');
-  my $route = $r-&gt;any('/:foo' =&gt; {foo =&gt; 'bar'} =&gt; sub {...});
-  my $route = $r-&gt;any('/:foo' =&gt; [foo =&gt; qr/\w+/] =&gt; sub {...});
-  my $route = $r-&gt;any('/:foo' =&gt; (agent =&gt; qr/Firefox/) =&gt; sub {...});
-  my $route = $r-&gt;any(['GET', 'POST'] =&gt; '/:foo' =&gt; sub {...});
-  my $route = $r-&gt;any(['GET', 'POST'] =&gt; '/:foo' =&gt; [foo =&gt; qr/\w+/]);</code></pre></div>
-<p style="padding-bottom: 10px;">Generate <a href="psi_element://Mojolicious%3A%3ARoutes%3A%3ARoute">Mojolicious::Routes::Route</a> object matching any of the listed HTTP
-request methods or all.</p>
-<div style="padding-bottom: 10px;"><pre><code>  # Route with pattern and destination
-  $r-&gt;any('/user')-&gt;to('user#whatever');</code></pre></div>
-<p style="padding-bottom: 10px;">All arguments are optional, but some have to appear in a certain order, like the
-two supported array reference values, which contain the HTTP methods to match
-and restrictive placeholders.</p>
-<div style="padding-bottom: 10px;"><pre><code>  # Route with HTTP methods, pattern, restrictive placeholders and destination
-  $r-&gt;any(['DELETE', 'PUT'] =&gt; '/:foo' =&gt; [foo =&gt; qr/\w+/])-&gt;to('foo#bar');</code></pre></div>
-<p style="padding-bottom: 10px;">There are also two supported string values, containing the route pattern and the
-route name, defaulting to the pattern <code>/</code> and a name based on the pattern.</p>
-<div style="padding-bottom: 10px;"><pre><code>  # Route with pattern, name and destination
-  $r-&gt;any('/:foo' =&gt; 'foo_route')-&gt;to('foo#bar');</code></pre></div>
-<p style="padding-bottom: 10px;">An arbitrary number of key/value pairs in between the route pattern and name can
-be used to specify route conditions.</p>
-<div style="padding-bottom: 10px;"><pre><code>  # Route with pattern, condition and destination
-  $r-&gt;any('/' =&gt; (agent =&gt; qr/Firefox/))-&gt;to('foo#bar');</code></pre></div>
-<p style="padding-bottom: 10px;">A hash reference is used to specify optional placeholders and default values for
-the stash.</p>
-<div style="padding-bottom: 10px;"><pre><code>  # Route with pattern, optional placeholder and destination
-  $r-&gt;any('/:foo' =&gt; {foo =&gt; 'bar'})-&gt;to('foo#bar');</code></pre></div>
-<p style="padding-bottom: 10px;">And a code reference can be used to specify a <code>cb</code> value to be merged into the
-default values for the stash.</p>
-<div style="padding-bottom: 10px;"><pre><code>  # Route with pattern and a closure as destination
-  $r-&gt;any('/:foo' =&gt; sub {
-    my $c = shift;
-    $c-&gt;render(text =&gt; 'Hello World!');
-  });</code></pre></div>
-<p style="padding-bottom: 10px;">See <a href="psi_element://Mojolicious%3A%3AGuides%3A%3ATutorial">Mojolicious::Guides::Tutorial</a> and <a href="psi_element://Mojolicious%3A%3AGuides%3A%3ARouting">Mojolicious::Guides::Routing</a> for
-more information.</p>
+<p><a href="psi_element://Mojolicious%3A%3ALite">Mojolicious::Lite</a>: <a href="psi_element://Mojolicious%3A%3ALite%2FFUNCTIONS">FUNCTIONS</a></p><h2>any</h2><div style="padding-bottom: 10px;"><pre><code>  my $route = any '/:foo' =&gt; sub {...};
+  my $route = any '/:foo' =&gt; sub {...} =&gt; 'name';
+  my $route = any '/:foo' =&gt; {foo =&gt; 'bar'} =&gt; sub {...};
+  my $route = any '/:foo' =&gt; [foo =&gt; qr/\w+/] =&gt; sub {...};
+  my $route = any ['GET', 'POST'] =&gt; '/:foo' =&gt; sub {...};
+  my $route = any ['GET', 'POST'] =&gt; '/:foo' =&gt; [foo =&gt; qr/\w+/] =&gt; sub {...};
+  my $route = any
+    ['GET', 'POST'] =&gt; '/:foo' =&gt; (agent =&gt; qr/Firefox/) =&gt; sub {...};</code></pre></div>
+<p style="padding-bottom: 10px;">Generate route with <a href="psi_element://Mojolicious%3A%3ARoutes%3A%3ARoute%2Fany">any in Mojolicious::Routes::Route</a>, matching any of the
+listed HTTP request methods or all. See <a href="psi_element://Mojolicious%3A%3AGuides%3A%3ATutorial">Mojolicious::Guides::Tutorial</a> and
+<a href="psi_element://Mojolicious%3A%3AGuides%3A%3ARouting">Mojolicious::Guides::Routing</a> for more information.</p>

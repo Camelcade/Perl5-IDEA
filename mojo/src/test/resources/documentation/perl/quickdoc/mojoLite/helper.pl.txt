@@ -1,19 +1,2 @@
-<p><a href="psi_element://Mojolicious">Mojolicious</a>: <a href="psi_element://Mojolicious%2FMETHODS">METHODS</a></p><h2>helper</h2><div style="padding-bottom: 10px;"><pre><code>  $app-&gt;helper(foo =&gt; sub {...});</code></pre></div>
-<p style="padding-bottom: 10px;">Add or replace a helper that will be available as a method of the controller
-object and the application object, as well as a function in <code>ep</code> templates. For
-a full list of helpers that are available by default see
-<a href="psi_element://Mojolicious%3A%3APlugin%3A%3ADefaultHelpers">Mojolicious::Plugin::DefaultHelpers</a> and <a href="psi_element://Mojolicious%3A%3APlugin%3A%3ATagHelpers">Mojolicious::Plugin::TagHelpers</a>.</p>
-<div style="padding-bottom: 10px;"><pre><code>  # Helper
-  $app-&gt;helper(cache =&gt; sub { state $cache = {} });
-
-  # Application
-  $app-&gt;cache-&gt;{foo} = 'bar';
-  my $result = $app-&gt;cache-&gt;{foo};
-
-  # Controller
-  $c-&gt;cache-&gt;{foo} = 'bar';
-  my $result = $c-&gt;cache-&gt;{foo};
-
-  # Template
-  % cache-&gt;{foo} = 'bar';
-  %= cache-&gt;{foo}</code></pre></div>
+<p><a href="psi_element://Mojolicious%3A%3ALite">Mojolicious::Lite</a>: <a href="psi_element://Mojolicious%3A%3ALite%2FFUNCTIONS">FUNCTIONS</a></p><h2>helper</h2><div style="padding-bottom: 10px;"><pre><code>  helper foo =&gt; sub {...};</code></pre></div>
+<p style="padding-bottom: 10px;">Add a new helper with <a href="psi_element://Mojolicious%2Fhelper">helper in Mojolicious</a>.</p>
