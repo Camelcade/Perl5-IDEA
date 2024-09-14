@@ -512,7 +512,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   public void initWithFile(String targetFileName, String targetFileExtension, String sourceFileNameWithExtension) {
-    initWithFileContent(targetFileName, targetFileExtension, loadFile(new File(getTestDataPath(), sourceFileNameWithExtension)));
+    initWithFileContent(targetFileName, targetFileExtension, loadFileContent(sourceFileNameWithExtension));
+  }
+
+  protected @NotNull String loadFileContent(@NotNull String sourceFileNameWithExtension) {
+    return loadFile(new File(getTestDataPath(), sourceFileNameWithExtension));
   }
 
   public static @NotNull String loadFile(@NotNull File fileToLoad) {
