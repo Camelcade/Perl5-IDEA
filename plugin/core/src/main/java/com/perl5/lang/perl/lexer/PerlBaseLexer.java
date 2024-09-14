@@ -1046,7 +1046,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 
     while( offset < bufferEnd){
       int markerStartOffset = StringUtil.indexOf(buffer, closeMarker, offset);
-      if( markerStartOffset < 0){
+      if (markerStartOffset < 0 || markerStartOffset >= bufferEnd) {
         // no end marker text ahead
         break;
       }

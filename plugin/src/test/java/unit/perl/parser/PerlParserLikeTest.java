@@ -27,6 +27,9 @@ public abstract class PerlParserLikeTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testHeredocInRegexp() { doTest(false); }
+
+  @Test
   public void testSubSignatureDefault() { doTest(); }
 
   @Test
