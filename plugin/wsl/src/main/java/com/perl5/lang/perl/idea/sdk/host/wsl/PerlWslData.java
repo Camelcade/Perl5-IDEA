@@ -24,11 +24,14 @@ import com.intellij.execution.wsl.WslDistributionManager;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.progress.util.BackgroundTaskUtil;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.util.ObjectUtils;
+import com.intellij.util.concurrency.AppExecutorUtil;
 import com.intellij.util.xmlb.annotations.Attribute;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
@@ -165,7 +168,28 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   @Override
   protected @NotNull Process createProcess(@NotNull PerlCommandLine commandLine) throws ExecutionException {
-    return patchCommandLine(commandLine).createProcess();
+    Ref<ExecutionException> errorRef = Ref.create();
+    try {
+      var resultFuture = BackgroundTaskUtil.submitTask(
+        AppExecutorUtil.getAppExecutorService(),
+        PerlPluginUtil.getUnloadAwareDisposable(),
+        () -> {
+          try {
+            return patchCommandLine(commandLine).createProcess();
+          }
+          catch (ExecutionException e) {
+            errorRef.set(e);
+            return null;
+          }
+        }).getFuture();
+      if (!errorRef.isNull()) {
+        throw errorRef.get();
+      }
+      return resultFuture.get();
+    }
+    catch (InterruptedException | java.util.concurrent.ExecutionException e) {
+      throw new ExecutionException(e);
+    }
   }
 
   private PerlCommandLine patchCommandLine(@NotNull PerlCommandLine perlCommandLine) throws ExecutionException {
