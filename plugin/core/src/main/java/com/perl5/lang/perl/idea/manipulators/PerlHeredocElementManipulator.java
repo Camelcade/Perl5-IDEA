@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,10 @@
 
 package com.perl5.lang.perl.idea.manipulators;
 
-import com.intellij.application.options.CodeStyle;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.AbstractElementManipulator;
-import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
@@ -34,58 +30,29 @@ public class PerlHeredocElementManipulator extends AbstractElementManipulator<Pe
   @Override
   public PerlHeredocElementImpl handleContentChange(@NotNull PerlHeredocElementImpl element, @NotNull TextRange range, String newContent)
     throws IncorrectOperationException {
-    StringBuilder sb = new StringBuilder(newContent);
     if (element.getTextLength() == range.getEndOffset() && !StringUtil.endsWith(newContent, "\n")) {
-      sb.append("\n");
+      newContent += "\n";
     }
 
-    Project project = element.getProject();
+    var elementText = element.getText();
+    String indent = "";
     if (range.getStartOffset() > 0) {
-      sb.insert(0, getIndenter(project, range.getStartOffset()));
-      range = TextRange.from(0, range.getEndOffset());
+      var lineStart = StringUtil.skipWhitespaceBackward(elementText, range.getStartOffset() - 1);
+      if (lineStart < range.getStartOffset()) {
+        indent = elementText.substring(lineStart, range.getStartOffset());
+        range = TextRange.create(lineStart, range.getEndOffset());
+
+        newContent = prependLines(newContent, indent);
+      }
     }
 
-    normalizeIndentation(project, sb, element.getRealIndentSize());
-
-    String newElementText = range.replace(element.getText(), sb.toString());
+    String newElementText = range.replace(elementText, newContent);
     PerlHeredocElementImpl replacement = PerlElementFactory.createHeredocBodyReplacement(element, newElementText);
 
     return (PerlHeredocElementImpl)element.replace(replacement);
   }
 
-  private static @NotNull String getIndenter(@NotNull Project project, int indentSize) {
-    CommonCodeStyleSettings.IndentOptions indentOptions =
-      CodeStyle.getSettings(project).getCommonSettings(PerlLanguage.INSTANCE).getIndentOptions();
-
-    return StringUtil.repeat(indentOptions != null && indentOptions.USE_TAB_CHARACTER ? "\t" : " ", indentSize);
-  }
-
-  private static void normalizeIndentation(@NotNull Project project, @NotNull StringBuilder sb, int indentSize) {
-    int offset = 0;
-    int currentLineStart = 0;
-    int currentLineIndentSize = 0;
-    boolean hasNonSpaces = false;
-
-    while (offset < sb.length()) {
-      char currentChar = sb.charAt(offset++);
-      if (currentChar == '\n') {
-        if (hasNonSpaces && currentLineIndentSize < indentSize) {
-          int indentAdjustment = indentSize - currentLineIndentSize;
-          sb.insert(currentLineStart, getIndenter(project, indentAdjustment));
-          offset += indentAdjustment;
-        }
-        currentLineStart = offset;
-        hasNonSpaces = false;
-        currentLineIndentSize = 0;
-      }
-      else if (!hasNonSpaces) {
-        if (Character.isWhitespace(currentChar)) {
-          currentLineIndentSize++;
-        }
-        else {
-          hasNonSpaces = true;
-        }
-      }
-    }
+  private static @NotNull String prependLines(@NotNull String newContent, @NotNull String prefix) {
+    return prefix + String.join(prefix, StringUtil.split(newContent, "\n", false, true));
   }
 }

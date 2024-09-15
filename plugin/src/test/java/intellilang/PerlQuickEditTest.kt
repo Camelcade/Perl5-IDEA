@@ -18,6 +18,8 @@ package intellilang
 
 import base.PerlLightTestCase
 import com.intellij.codeInsight.intention.impl.QuickEditAction
+import com.intellij.openapi.editor.Editor
+import com.intellij.psi.PsiFile
 import com.intellij.testFramework.fixtures.InjectionTestFixture
 import org.jetbrains.annotations.NonNls
 import org.junit.Test
@@ -27,33 +29,8 @@ class PerlQuickEditTest : PerlLightTestCase() {
   private val injectionTestFixture: InjectionTestFixture get() = InjectionTestFixture(myFixture)
 
   @Test
-  fun testEditHeredoc() {
-    initWithTextSmart(
-      """
-      use v5.36;
-      
-      sub foo{
-          say <<~HTML;
-          <div>
-              <html><caret>
-              </html>
-          </div>
-          HTML
-      }""".trimIndent()
-    )
-    val originalEditor = injectionTestFixture.topLevelEditor
-    val quickEditHandler = QuickEditAction().invokeImpl(project, injectionTestFixture.topLevelEditor, injectionTestFixture.topLevelFile)
-    val fragmentFile = quickEditHandler.newFile
-    assertEquals(
-      """
-      <div>
-          <html>
-          </html>
-      </div>
-      """.trimIndent(), fragmentFile.text.trim()
-    )
-
-    myFixture.openFileInEditor(fragmentFile.virtualFile)
+  fun testEditHeredocMiddle() {
+    val (originalEditor, fragmentFile) = initFileWithTestSample()
 
     myFixture.editor.caretModel.moveToOffset(fragmentFile.text.indexAfter("<html>"))
     myFixture.type("\nhello there")
@@ -75,12 +52,117 @@ class PerlQuickEditTest : PerlLightTestCase() {
           say <<~HTML;
           <div>
               <html>
-          hello there
+              hello there
               </html>
           </div>
           HTML
       }""".trimIndent(), originalEditor.document.text
     )
+  }
+
+  @Test
+  fun testEditHeredocEnd() {
+    val (originalEditor, fragmentFile) = initFileWithTestSample()
+
+    myFixture.editor.caretModel.moveToOffset(fragmentFile.text.indexAfter("</div>"))
+    myFixture.type("\n\n\nhello there\n")
+    assertFalse(myFixture.editor.isDisposed)
+    assertEquals(
+      """
+      <div>
+          <html>
+          </html>
+      </div>
+      
+      
+      hello there
+      """.trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
+    )
+
+    assertEquals(
+      """
+      use v5.36;
+      
+      sub foo{
+          say <<~HTML;
+          <div>
+              <html>
+              </html>
+          </div>
+          
+          
+          hello there
+          
+          HTML
+      }""".trimIndent(), originalEditor.document.text
+    )
+  }
+
+  @Test
+  fun testEditHeredocStart() {
+    val (originalEditor, fragmentFile) = initFileWithTestSample()
+
+    myFixture.editor.caretModel.moveToOffset(fragmentFile.text.indexOf("<div>"))
+    myFixture.type("\n\n\nhello there\n\n")
+    assertFalse(myFixture.editor.isDisposed)
+    assertEquals(
+      """
+      hello there
+      
+      <div>
+          <html>
+          </html>
+      </div>""".trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
+    )
+
+    assertEquals(
+      """
+      use v5.36;
+      
+      sub foo{
+          say <<~HTML;
+          
+          
+          
+          hello there
+          
+          <div>
+              <html>
+              </html>
+          </div>
+          HTML
+      }""".trimIndent(), originalEditor.document.text
+    )
+  }
+
+  private fun initFileWithTestSample(): Pair<Editor, PsiFile> {
+    initWithTextSmart(
+      """
+        use v5.36;
+        
+        sub foo{
+            say <<~HTML;
+            <div>
+                <html><caret>
+                </html>
+            </div>
+            HTML
+        }""".trimIndent()
+    )
+    val originalEditor = injectionTestFixture.topLevelEditor
+    val quickEditHandler = QuickEditAction().invokeImpl(project, injectionTestFixture.topLevelEditor, injectionTestFixture.topLevelFile)
+    val fragmentFile = quickEditHandler.newFile
+    assertEquals(
+      """
+        <div>
+            <html>
+            </html>
+        </div>
+        """.trimIndent(), fragmentFile.text.trim()
+    )
+
+    myFixture.openFileInEditor(fragmentFile.virtualFile)
+    return Pair(originalEditor, fragmentFile)
   }
 
   private fun String.indexAfter(string: String): Int {
