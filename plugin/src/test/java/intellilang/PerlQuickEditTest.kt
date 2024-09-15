@@ -135,6 +135,40 @@ class PerlQuickEditTest : PerlLightTestCase() {
     )
   }
 
+  @Test
+  fun testReplaceHeredoc() {
+    val (originalEditor, fragmentFile) = initFileWithTestSample()
+
+    myFixture.editor.selectionModel.setSelection(0, myFixture.editor.document.text.length)
+    myFixture.type("hello there")
+    assertFalse(myFixture.editor.isDisposed)
+    assertEquals(
+      """
+      hello there
+      """.trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
+    )
+
+    assertEquals(
+      """
+      use v5.36;
+      
+      sub foo{
+          say <<~HTML;
+          
+          
+          
+          hello there
+          
+          <div>
+              <html>
+              </html>
+          </div>
+          HTML
+      }""".trimIndent(), originalEditor.document.text
+    )
+  }
+
+
   private fun initFileWithTestSample(): Pair<Editor, PsiFile> {
     initWithTextSmart(
       """

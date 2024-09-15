@@ -30,19 +30,20 @@ public class PerlHeredocElementManipulator extends AbstractElementManipulator<Pe
   @Override
   public PerlHeredocElementImpl handleContentChange(@NotNull PerlHeredocElementImpl element, @NotNull TextRange range, String newContent)
     throws IncorrectOperationException {
-    if (element.getTextLength() == range.getEndOffset() && !StringUtil.endsWith(newContent, "\n")) {
+    var contentRemoval = newContent.isEmpty();
+    if (element.getTextLength() == range.getEndOffset() && !contentRemoval && !StringUtil.endsWith(newContent, "\n")) {
       newContent += "\n";
     }
 
     var elementText = element.getText();
-    String indent = "";
     if (range.getStartOffset() > 0) {
       var lineStart = StringUtil.skipWhitespaceBackward(elementText, range.getStartOffset() - 1);
       if (lineStart < range.getStartOffset()) {
-        indent = elementText.substring(lineStart, range.getStartOffset());
+        if (!contentRemoval) {
+          var indent = elementText.substring(lineStart, range.getStartOffset());
+          newContent = prependLines(newContent, indent);
+        }
         range = TextRange.create(lineStart, range.getEndOffset());
-
-        newContent = prependLines(newContent, indent);
       }
     }
 
