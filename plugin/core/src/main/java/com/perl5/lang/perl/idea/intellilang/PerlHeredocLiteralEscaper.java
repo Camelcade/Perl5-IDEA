@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,8 +35,17 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
 
   @Override
   public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
-    outChars.append(rangeInsideHost.subSequence(myHost.getNode().getChars()));
-    return true;
+    var hostTextLength = myHost.getTextLength();
+    var effectiveRange = hostTextLength < rangeInsideHost.getEndOffset() ?
+      rangeInsideHost :
+      TextRange.create(rangeInsideHost.getStartOffset(), rangeInsideHost.getEndOffset() - 1);
+    if (!effectiveRange.isEmpty()) {
+      outChars.append(rangeInsideHost.subSequence(myHost.getNode().getChars()));
+      return true;
+    }
+    else {
+      return false;
+    }
   }
 
   @Override

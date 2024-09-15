@@ -154,15 +154,7 @@ class PerlQuickEditTest : PerlLightTestCase() {
       
       sub foo{
           say <<~HTML;
-          
-          
-          
-          hello there
-          
-          <div>
-              <html>
-              </html>
-          </div>
+      hello there
           HTML
       }""".trimIndent(), originalEditor.document.text
     )
