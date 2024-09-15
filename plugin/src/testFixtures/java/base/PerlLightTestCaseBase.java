@@ -1377,8 +1377,14 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected @NotNull PsiElement getElementAtCaretWithoutInjection() {
-    PsiElement result = getFile().getViewProvider().findElementAt(getEditor().getCaretModel().getOffset());
-    assertNotNull(result);
+    PsiElement result;
+    if (getFile().getText().isEmpty()) {
+      result = getFile();
+    }
+    else {
+      result = getFile().getViewProvider().findElementAt(getEditor().getCaretModel().getOffset());
+      assertNotNull(result);
+    }
     PsiFile leafFile = result.getContainingFile();
     if (InjectedLanguageManager.getInstance(getProject()).isInjectedFragment(leafFile)) {
       result = leafFile.getContext();
