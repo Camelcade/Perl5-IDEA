@@ -142,6 +142,46 @@ class PerlQuickEditTest : PerlLightTestCase() {
   }
 
   @Test
+  fun testEmptyHeredoc() {
+    val (originalEditor, fragmentFile) = initFileWithTestSample(
+      """
+      use v5.36;
+      
+      sub foo{
+          say <<~HTML;
+          <caret>
+          HTML
+      }""".trimIndent(),
+      ""
+    )
+
+    myFixture.type("\n hello\n  there\n")
+    assertFalse(myFixture.editor.isDisposed)
+    assertEquals(
+      """
+      
+       hello
+        there
+        
+      """.trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
+    )
+
+    assertEquals(
+      """
+      use v5.36;
+      
+      sub foo{
+          say <<~HTML;
+          
+           hello
+            there
+            
+          HTML
+      }""".trimIndent(), originalEditor.document.text
+    )
+  }
+
+  @Test
   fun testReplaceHeredoc() {
     val (originalEditor, fragmentFile) = initFileWithTestSample()
 
