@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.event.DocumentEvent;
 import com.intellij.openapi.util.ProperTextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiFile;
@@ -83,15 +84,16 @@ public class PerlInjectedFileChangesHandlerFactory implements InjectedFileChange
           var localInsideHost = new ProperTextRange(hostMarker.getStartOffset() - hostOffset, hostMarker.getEndOffset() - hostOffset);
           var localInsideFile = new ProperTextRange(fragmentMarker.getStartOffset(), fragmentMarker.getEndOffset());
 
-          // fixme we could optimize here and check if host text has been changed and update only really changed fragments, not all of them
-          if (currentHost != null && localInsideFile.getEndOffset() <= text.length() && !localInsideFile.isEmpty()) {
+          if (localInsideFile.getEndOffset() <= text.length() && !localInsideFile.isEmpty()) {
             var decodedText = localInsideFile.substring(text);
-            currentHost = ElementManipulators.handleContentChange(currentHost, localInsideHost, decodedText);
-            if (currentHost == null) {
-              failAndReport("Updating host returned null. Original host" + host +
-                            "; original text: " + originalText +
-                            "; updated range in host: " + localInsideHost +
-                            "; decoded text to replace: " + decodedText, e, null);
+            if (!StringUtil.equals(decodedText, localInsideHost.subSequence(currentHost.getText()))) {
+              currentHost = ElementManipulators.handleContentChange(currentHost, localInsideHost, decodedText);
+              if (currentHost == null) {
+                failAndReport("Updating host returned null. Original host" + host +
+                              "; original text: " + originalText +
+                              "; updated range in host: " + localInsideHost +
+                              "; decoded text to replace: " + decodedText, e, null);
+              }
             }
           }
         }
