@@ -32,32 +32,48 @@ import org.jetbrains.annotations.NotNull;
 public class PerlHeredocElementManipulator extends AbstractElementManipulator<PerlHeredocElementImpl> {
 
   @Override
-  public PerlHeredocElementImpl handleContentChange(@NotNull PerlHeredocElementImpl element, @NotNull TextRange range, String newContent)
+  public PerlHeredocElementImpl handleContentChange(final @NotNull PerlHeredocElementImpl element,
+                                                    final @NotNull TextRange range,
+                                                    final String newContent)
     throws IncorrectOperationException {
     var contentRemoval = newContent.isEmpty();
-    if (element.getTextLength() == range.getEndOffset() && !contentRemoval && !StringUtil.endsWith(newContent, "\n")) {
-      newContent += "\n";
+    var replacementContent = newContent;
+    var effectiveRange = range;
+    if (range.isEmpty()) {
+      // this handles empty heredoc update. We have a single empty shred pointing to the offset of closing \n
+      effectiveRange = TextRange.create(range.getStartOffset(), element.getTextLength() - 1);
     }
 
     var elementText = element.getText();
-    if (range.getStartOffset() > 0) {
-      var lineStart = StringUtil.skipWhitespaceBackward(elementText, range.getStartOffset() - 1);
-      if (lineStart < range.getStartOffset()) {
+    if (effectiveRange.getStartOffset() > 0) {
+      var lineStart = getLineStartOffset(elementText, effectiveRange);
+      if (lineStart < effectiveRange.getStartOffset()) {
         if (!contentRemoval) {
-          var indent = elementText.substring(lineStart, range.getStartOffset());
-          newContent = prependLines(newContent, indent);
+          var indent = elementText.substring(lineStart, effectiveRange.getStartOffset());
+          replacementContent = prependLines(replacementContent, indent);
         }
-        range = TextRange.create(lineStart, range.getEndOffset());
+        effectiveRange = TextRange.create(lineStart, effectiveRange.getEndOffset());
       }
     }
-    else if (range.getStartOffset() == 0) {
-      newContent = prependLines(newContent, getIndenter(element.getProject(), element.getRealIndentSize()));
+    else if (effectiveRange.getStartOffset() == 0) {
+      replacementContent = prependLines(newContent, getIndenter(element.getProject(), element.getRealIndentSize()));
     }
 
-    String newElementText = range.replace(elementText, newContent);
+    String newElementText = effectiveRange.replace(elementText, replacementContent);
     PerlHeredocElementImpl replacement = PerlElementFactory.createHeredocBodyReplacement(element, newElementText);
 
     return (PerlHeredocElementImpl)element.replace(replacement);
+  }
+
+  private static int getLineStartOffset(@NotNull String elementText, @NotNull TextRange effectiveRange) {
+    var startOffset = effectiveRange.getStartOffset();
+    if (startOffset == 0) {
+      return startOffset;
+    }
+    if (elementText.charAt(startOffset - 1) == '\n') {
+      return startOffset;
+    }
+    return StringUtil.skipWhitespaceBackward(elementText, startOffset - 1);
   }
 
   private static @NotNull String getIndenter(@NotNull Project project, int indentSize) {
@@ -68,6 +84,12 @@ public class PerlHeredocElementManipulator extends AbstractElementManipulator<Pe
   }
 
   private static @NotNull String prependLines(@NotNull String newContent, @NotNull String prefix) {
-    return prefix + String.join(prefix, StringUtil.split(newContent, "\n", false, true));
+    var result = new StringBuilder();
+    StringUtil.split(newContent, "\n", false, true)
+      .forEach(line -> {
+        result.append(prefix);
+        result.append(line);
+      });
+    return result.toString();
   }
 }

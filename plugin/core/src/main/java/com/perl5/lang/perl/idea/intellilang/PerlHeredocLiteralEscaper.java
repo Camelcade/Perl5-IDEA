@@ -36,16 +36,12 @@ public class PerlHeredocLiteralEscaper extends LiteralTextEscaper<PerlHeredocEle
   @Override
   public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
     var hostTextLength = myHost.getTextLength();
-    var effectiveRange = rangeInsideHost.getEndOffset() < hostTextLength ?
-      rangeInsideHost :
-      TextRange.create(rangeInsideHost.getStartOffset(), rangeInsideHost.getEndOffset() - 1);
-    if (!effectiveRange.isEmpty()) {
-      outChars.append(rangeInsideHost.subSequence(myHost.getNode().getChars()));
-      return true;
+    var endOffset = rangeInsideHost.getEndOffset();
+    if (endOffset == hostTextLength) {
+      endOffset--;
     }
-    else {
-      return false;
-    }
+    outChars.append(myHost.getNode().getChars().subSequence(rangeInsideHost.getStartOffset(), endOffset));
+    return true;
   }
 
   @Override

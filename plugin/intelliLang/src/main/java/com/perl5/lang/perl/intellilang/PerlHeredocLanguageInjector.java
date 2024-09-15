@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -107,7 +107,8 @@ public class PerlHeredocLanguageInjector extends PerlLiteralLanguageInjector {
     while (sourceOffset < sourceLength) {
       char currentChar = sourceText.charAt(sourceOffset);
       if (currentChar == '\n') {
-        registrar.addPlace(null, null, heredocElement, TextRange.from(sourceOffset, 1));
+        var suffix = sourceOffset + 1 < sourceLength ? null : "\n";
+        registrar.addPlace(null, suffix, heredocElement, TextRange.from(sourceOffset, 1));
         currentLineIndent = 0;
       }
       else if (Character.isWhitespace(currentChar) && currentLineIndent < indentSize) {
@@ -124,7 +125,9 @@ public class PerlHeredocLanguageInjector extends PerlLiteralLanguageInjector {
           }
         }
 
-        registrar.addPlace(null, null, heredocElement, TextRange.create(sourceOffset, sourceEnd));
+        var suffix = sourceEnd < sourceLength ? null : "\n";
+
+        registrar.addPlace(null, suffix, heredocElement, TextRange.create(sourceOffset, sourceEnd));
         sourceOffset = sourceEnd;
         currentLineIndent = 0;
         continue;

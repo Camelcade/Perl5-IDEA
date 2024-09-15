@@ -42,7 +42,7 @@ class PerlQuickEditTest : PerlLightTestCase() {
           hello
            there
           </html>
-      </div>""".trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
+      </div>""".trimIndent(), myFixture.editor.document.text.trim().trimLines()
     )
 
     assertEquals(
@@ -79,7 +79,7 @@ class PerlQuickEditTest : PerlLightTestCase() {
       
       hello
        there
-      """.trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
+      """.trimIndent(), myFixture.editor.document.text.trim().trimLines()
     )
 
     assertEquals(
@@ -117,7 +117,7 @@ class PerlQuickEditTest : PerlLightTestCase() {
       <div>
           <html>
           </html>
-      </div>""".trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
+      </div>""".trimIndent(), myFixture.editor.document.text.trim().trimLines()
     )
 
     assertEquals(
@@ -155,15 +155,13 @@ class PerlQuickEditTest : PerlLightTestCase() {
       ""
     )
 
-    myFixture.type("\n hello\n  there\n")
+    myFixture.type("\nhello\n  there\n")
     assertFalse(myFixture.editor.isDisposed)
     assertEquals(
       """
-      
-       hello
+      hello
         there
-        
-      """.trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
+      """.trimIndent(), myFixture.editor.document.text.trim().trimLines()
     )
 
     assertEquals(
@@ -173,11 +171,11 @@ class PerlQuickEditTest : PerlLightTestCase() {
       sub foo{
           say <<~HTML;
           
-           hello
+          hello
             there
             
           HTML
-      }""".trimIndent(), originalEditor.document.text
+      }""".trimIndent().trimLines(), originalEditor.document.text.trimLines()
     )
   }
 
@@ -192,7 +190,7 @@ class PerlQuickEditTest : PerlLightTestCase() {
       """
       hello
        there
-      """.trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
+      """.trimIndent(), myFixture.editor.document.text.trim().trimLines()
     )
 
     assertEquals(
@@ -242,6 +240,10 @@ class PerlQuickEditTest : PerlLightTestCase() {
   private fun String.indexAfter(string: String): Int {
     val r = indexOf(string)
     return if (r == -1) -1 else r + string.length
+  }
+
+  private fun String.trimLines(): String {
+    return replace(Regex("[ \t]+\n"), "\n")
   }
 
 }
