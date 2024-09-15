@@ -33,13 +33,14 @@ class PerlQuickEditTest : PerlLightTestCase() {
     val (originalEditor, fragmentFile) = initFileWithTestSample()
 
     myFixture.editor.caretModel.moveToOffset(fragmentFile.text.indexAfter("<html>"))
-    myFixture.type("\nhello there")
+    myFixture.type("\nhello\n there")
     assertFalse(myFixture.editor.isDisposed)
     assertEquals(
       """
       <div>
           <html>
-          hello there
+          hello
+           there
           </html>
       </div>""".trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
     )
@@ -52,7 +53,8 @@ class PerlQuickEditTest : PerlLightTestCase() {
           say <<~HTML;
           <div>
               <html>
-              hello there
+              hello
+               there
               </html>
           </div>
           HTML
@@ -65,7 +67,7 @@ class PerlQuickEditTest : PerlLightTestCase() {
     val (originalEditor, fragmentFile) = initFileWithTestSample()
 
     myFixture.editor.caretModel.moveToOffset(fragmentFile.text.indexAfter("</div>"))
-    myFixture.type("\n\n\nhello there\n")
+    myFixture.type("\n\n\nhello\n there\n")
     assertFalse(myFixture.editor.isDisposed)
     assertEquals(
       """
@@ -75,7 +77,8 @@ class PerlQuickEditTest : PerlLightTestCase() {
       </div>
       
       
-      hello there
+      hello
+       there
       """.trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
     )
 
@@ -91,7 +94,8 @@ class PerlQuickEditTest : PerlLightTestCase() {
           </div>
           
           
-          hello there
+          hello
+           there
           
           HTML
       }""".trimIndent(), originalEditor.document.text
@@ -103,11 +107,12 @@ class PerlQuickEditTest : PerlLightTestCase() {
     val (originalEditor, fragmentFile) = initFileWithTestSample()
 
     myFixture.editor.caretModel.moveToOffset(fragmentFile.text.indexOf("<div>"))
-    myFixture.type("\n\n\nhello there\n\n")
+    myFixture.type("\n\n\nhello\n there\n\n")
     assertFalse(myFixture.editor.isDisposed)
     assertEquals(
       """
-      hello there
+      hello
+       there
       
       <div>
           <html>
@@ -124,7 +129,8 @@ class PerlQuickEditTest : PerlLightTestCase() {
           
           
           
-          hello there
+          hello
+           there
           
           <div>
               <html>
@@ -140,11 +146,12 @@ class PerlQuickEditTest : PerlLightTestCase() {
     val (originalEditor, fragmentFile) = initFileWithTestSample()
 
     myFixture.editor.selectionModel.setSelection(0, myFixture.editor.document.text.length)
-    myFixture.type("hello there")
+    myFixture.type("hello\n there")
     assertFalse(myFixture.editor.isDisposed)
     assertEquals(
       """
-      hello there
+      hello
+       there
       """.trimIndent(), myFixture.editor.document.text.trim().replace(Regex("[ \t]+\n"), "\n")
     )
 
@@ -154,15 +161,16 @@ class PerlQuickEditTest : PerlLightTestCase() {
       
       sub foo{
           say <<~HTML;
-      hello there
+          hello
+           there
           HTML
       }""".trimIndent(), originalEditor.document.text
     )
   }
 
 
-  private fun initFileWithTestSample(): Pair<Editor, PsiFile> {
-    initWithTextSmart(
+  private fun initFileWithTestSample(
+    testSample: String =
       """
         use v5.36;
         
@@ -173,19 +181,19 @@ class PerlQuickEditTest : PerlLightTestCase() {
                 </html>
             </div>
             HTML
-        }""".trimIndent()
-    )
-    val originalEditor = injectionTestFixture.topLevelEditor
-    val quickEditHandler = QuickEditAction().invokeImpl(project, injectionTestFixture.topLevelEditor, injectionTestFixture.topLevelFile)
-    val fragmentFile = quickEditHandler.newFile
-    assertEquals(
-      """
+        }""".trimIndent(),
+    injectedSample: String = """
         <div>
             <html>
             </html>
         </div>
-        """.trimIndent(), fragmentFile.text.trim()
-    )
+        """.trimIndent()
+  ): Pair<Editor, PsiFile> {
+    initWithTextSmart(testSample)
+    val originalEditor = injectionTestFixture.topLevelEditor
+    val quickEditHandler = QuickEditAction().invokeImpl(project, injectionTestFixture.topLevelEditor, injectionTestFixture.topLevelFile)
+    val fragmentFile = quickEditHandler.newFile
+    assertEquals(injectedSample, fragmentFile.text.trim())
 
     myFixture.openFileInEditor(fragmentFile.virtualFile)
     return Pair(originalEditor, fragmentFile)

@@ -16,10 +16,14 @@
 
 package com.perl5.lang.perl.idea.manipulators;
 
+import com.intellij.application.options.CodeStyle;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.AbstractElementManipulator;
+import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.NotNull;
@@ -46,11 +50,21 @@ public class PerlHeredocElementManipulator extends AbstractElementManipulator<Pe
         range = TextRange.create(lineStart, range.getEndOffset());
       }
     }
+    else if (range.getStartOffset() == 0) {
+      newContent = prependLines(newContent, getIndenter(element.getProject(), element.getRealIndentSize()));
+    }
 
     String newElementText = range.replace(elementText, newContent);
     PerlHeredocElementImpl replacement = PerlElementFactory.createHeredocBodyReplacement(element, newElementText);
 
     return (PerlHeredocElementImpl)element.replace(replacement);
+  }
+
+  private static @NotNull String getIndenter(@NotNull Project project, int indentSize) {
+    CommonCodeStyleSettings.IndentOptions indentOptions =
+      CodeStyle.getSettings(project).getCommonSettings(PerlLanguage.INSTANCE).getIndentOptions();
+
+    return StringUtil.repeat(indentOptions != null && indentOptions.USE_TAB_CHARACTER ? "\t" : " ", indentSize);
   }
 
   private static @NotNull String prependLines(@NotNull String newContent, @NotNull String prefix) {
