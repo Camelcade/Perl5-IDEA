@@ -94,7 +94,8 @@ public class PerlHeredocLanguageInjector extends PerlLiteralLanguageInjector {
   private void addPlace(@NotNull PerlHeredocElementImpl heredocElement, @NotNull MultiHostRegistrar registrar) {
     int indentSize = heredocElement.getRealIndentSize();
     if (indentSize == 0) {
-      registrar.addPlace(null, null, heredocElement, ElementManipulators.getValueTextRange(heredocElement));
+      var elementRange = ElementManipulators.getValueTextRange(heredocElement);
+      registrar.addPlace(null, null, heredocElement, TextRange.create(elementRange.getStartOffset(), elementRange.getEndOffset() - 1));
       return;
     }
 
@@ -107,8 +108,13 @@ public class PerlHeredocLanguageInjector extends PerlLiteralLanguageInjector {
     while (sourceOffset < sourceLength) {
       char currentChar = sourceText.charAt(sourceOffset);
       if (currentChar == '\n') {
-        var suffix = sourceOffset + 1 < sourceLength ? null : "\n";
-        registrar.addPlace(null, suffix, heredocElement, TextRange.from(sourceOffset, 1));
+        String suffix = null;
+        int endOffset = sourceOffset + 1;
+        if (endOffset == sourceLength) {
+          suffix = "\n";
+          endOffset--;
+        }
+        registrar.addPlace(null, suffix, heredocElement, TextRange.create(sourceOffset, endOffset));
         currentLineIndent = 0;
       }
       else if (Character.isWhitespace(currentChar) && currentLineIndent < indentSize) {
@@ -125,7 +131,11 @@ public class PerlHeredocLanguageInjector extends PerlLiteralLanguageInjector {
           }
         }
 
-        var suffix = sourceEnd < sourceLength ? null : "\n";
+        String suffix = null;
+        if (sourceEnd == sourceLength) {
+          suffix = "\n";
+          sourceEnd--;
+        }
 
         registrar.addPlace(null, suffix, heredocElement, TextRange.create(sourceOffset, sourceEnd));
         sourceOffset = sourceEnd;
