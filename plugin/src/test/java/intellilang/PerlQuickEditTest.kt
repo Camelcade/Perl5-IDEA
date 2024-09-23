@@ -96,7 +96,8 @@ class PerlQuickEditTest : PerlLightTestCase() {
           
           hello
            there
-          
+
+
           HTML
       }""".trimIndent(), originalEditor.document.text
     )
