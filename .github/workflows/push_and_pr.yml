@@ -5,9 +5,9 @@ name: Project Validation
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev/243" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "dev/243" ]
   workflow_dispatch:
 
 concurrency:
