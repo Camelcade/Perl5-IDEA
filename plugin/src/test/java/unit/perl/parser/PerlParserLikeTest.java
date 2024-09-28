@@ -27,6 +27,9 @@ public abstract class PerlParserLikeTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testDoubleBuckConcat() { doTest(false); }
+
+  @Test
   public void testHeredocInRegexp() { doTest(false); }
 
   @Test
