@@ -880,11 +880,12 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <VARIABLE_UNBRACED>{
-        // we are here after a sigil, and we can't cast to the $OLD_PERL_VERSION variable $]
-        "$" / "]" {return getUnbracedVariableNameToken();}
-	// this is a subset of builtins, $;, $, for example, can't be dereferenced
-	"$" / [\{\"\'\[\]\`\\\!\%\&\(\+\-\.\/\<\=\>\|\~\?\:\*\^\@\_\$\:\w_\d]		{return processUnbracedScalarSigil();}
-	"{"											{return startBracedVariable();}
+        // followed by the built-in variable which can't be dereferenced, so this is a variable name
+        "$" / [\.\,\/\\\|\%\-\+\?\:\=\^\~\!\@\#\*\(\)\<\>0\;\[\]\&\`\'\"] {return getUnbracedVariableNameToken();}
+	// this is definitely a sigil
+	"$" / [\{\_\$\w_]		                                    {return processUnbracedScalarSigil();}
+
+	"{"									{return startBracedVariable();}
 	{VARIABLE_NAME}								{return getUnbracedVariableNameToken();}
 }
 

@@ -1,11 +1,11 @@
 Diagnostics:
           Passes: 456
-    Tokens count: 1777325
- Total rollbacks: 7595212
-     Rolled back: 226310 (12%) tokens
+    Tokens count: 1777318
+ Total rollbacks: 7595191
+     Rolled back: 226303 (12%) tokens
 
 Characters;Tokens
-7325468;1774509
+7325468;1774503
 223;10
 27;1
 24;1
@@ -402,7 +402,7 @@ Characters;Tokens
 240;4
 8;2
 8;2
-162;17
+162;16
 8;2
 22;4
 59;14
@@ -463,8 +463,8 @@ Characters;Tokens
 32;3
 
 Tokens;Rollbacks;Tokens rolled;% of tokens count;% of rollbacks;% of rolled back
-0;7442262;0;0%;97%;0%
-1;101498;101498;5%;1%;44%
+0;7442248;0;0%;97%;0%
+1;101491;101491;5%;1%;44%
 2;49466;98932;5%;0%;43%
 3;332;996;0%;0%;0%
 4;293;1172;0%;0%;0%
@@ -545,4 +545,3 @@ Tokens;Rollbacks;Tokens rolled;% of tokens count;% of rollbacks;% of rolled back
 276;1;276;0%;0%;0%
 311;1;311;0%;0%;0%
 450;1;450;0%;0%;0%
-        
