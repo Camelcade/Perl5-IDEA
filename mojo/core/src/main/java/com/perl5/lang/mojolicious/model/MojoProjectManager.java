@@ -30,6 +30,7 @@ import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.messages.MessageBusConnection;
 import com.intellij.util.ui.update.MergingUpdateQueue;
@@ -45,7 +46,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
 
 import java.util.*;
-import com.intellij.util.concurrency.Semaphore;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BooleanSupplier;
 
@@ -132,7 +132,8 @@ public class MojoProjectManager implements Disposable {
     LOG.debug("Attempting to update");
     if (!myUpdatingModel.getAndSet(true)) {
       try {
-        ReadAction.run(() -> {
+        //noinspection deprecation
+        ReadAction.nonBlocking(() -> {
           if (myProject.isDisposed()) {
             LOG.warn("Project is disposed");
             return;
@@ -142,18 +143,18 @@ public class MojoProjectManager implements Disposable {
             scheduleUpdate();
           }
           else {
-            try{
+            try {
               LOG.debug("Performing model update");
               doUpdateModel();
             }
             finally {
-              if( myTestSemaphore != null) {
+              if (myTestSemaphore != null) {
                 myTestSemaphore.up();
                 myTestSemaphore = null;
               }
             }
           }
-        });
+        }).executeSynchronously();
       }
       catch (ProcessCanceledException e) {
         LOG.debug("Update was cancelled, rescheduling");
