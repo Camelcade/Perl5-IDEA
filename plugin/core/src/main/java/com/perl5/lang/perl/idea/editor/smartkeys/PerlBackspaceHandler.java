@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
+import com.perl5.lang.perl.psi.PerlFile;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -37,6 +38,9 @@ public class PerlBackspaceHandler extends BackspaceHandlerDelegate {
 
   @Override
   public void beforeCharDeleted(char c, @NotNull PsiFile file, @NotNull Editor editor) {
+    if (!(file instanceof PerlFile)) {
+      return;
+    }
     CaretModel caretModel = editor.getCaretModel();
     int currentOffset = caretModel.getOffset() - 1;
     if (currentOffset < 0) {
