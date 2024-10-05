@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -400,6 +400,7 @@ public final class PerlResolveUtil {
    * @apiNote should be used for subs and subs expressions
    */
   public static @NotNull PerlValue computeReturnValueFromControlFlow(PsiElement subElement) {
+    var startTime = System.nanoTime();
     PerlOneOfValue.Builder valueBuilder = PerlOneOfValue.builder();
     Instruction[] instructions = PerlControlFlowBuilder.getFor(subElement);
     Instruction exitInstruction = instructions[instructions.length - 1];
@@ -415,7 +416,13 @@ public final class PerlResolveUtil {
       return CONTINUE;
     });
 
-    return valueBuilder.build();
+
+    var result = valueBuilder.build();
+    var duration = System.nanoTime() - startTime;
+    if (duration > 1000_000 && subElement instanceof PerlSubDefinitionElement sub) {
+      LOG.info(sub.getCanonicalName() + ";" + duration + ";" + instructions.length);
+    }
+    return result;
   }
 
   /**
