@@ -1873,10 +1873,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         }
         case PartialConditionalInstructionImpl partialConditionalInstruction ->
           builder.append("\n").append("Its ").append(partialConditionalInstruction.getResult()).
-            append(" branch, condition: ").append(partialConditionalInstruction.getConditionText());
+            append(" branch, condition: ").append(escape(partialConditionalInstruction.getConditionText()));
         case ConditionalInstruction conditionalInstruction ->
           builder.append("\n").append("Its ").append(conditionalInstruction.getResult()).
-            append(" branch, condition: ").append(getTextSafe(conditionalInstruction.getCondition()));
+            append(" branch, condition: ").append(escape(getTextSafe(conditionalInstruction.getCondition())));
         default -> {
         }
       }

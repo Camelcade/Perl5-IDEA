@@ -27,6 +27,9 @@ public class PerlControlFlowTest extends PerlLightTestCase {
   }
 
   @Test
+  public void testTernaryDieCondition() { doTest(); }
+
+  @Test
   public void testCheckOrDie() { doTest(); }
 
   @Test
