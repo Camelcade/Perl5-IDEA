@@ -36,7 +36,7 @@ buildscript {
 plugins {
   id("idea")
   id("jacoco")
-  id("org.jetbrains.intellij.platform") version "2.0.1"
+  id("org.jetbrains.intellij.platform") version "2.2.0"
   id("org.jetbrains.grammarkit") version "2022.3.2.2"
   id("com.github.kt3k.coveralls") version "2.12.2"
   id("org.sonarqube") version "6.0.1.5171"
@@ -126,6 +126,8 @@ allprojects {
       maxHeapSize = "2048m"
       outputs.upToDateWhen { false }
 
+      ignoreFailures = false
+
       if (project.hasProperty("overwrite")) {
         systemProperty("idea.tests.overwrite.data", "true")
       }
@@ -202,13 +204,18 @@ allprojects {
       buildSearchableOptions {
         enabled = false
       }
+      prepareJarSearchableOptions {
+        enabled = false
+      }
       verifyPlugin {
+        enabled = false
+      }
+      verifyPluginProjectConfiguration {
         enabled = false
       }
       publishPlugin {
         enabled = false
       }
-
     }
     if (isPlugin) {
       publishPlugin {
