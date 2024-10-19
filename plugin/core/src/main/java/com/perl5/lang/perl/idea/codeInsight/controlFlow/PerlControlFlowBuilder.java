@@ -675,7 +675,9 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       }
       children[0].accept(this);
       Instruction conditionInstruction = prevInstruction;
-      startConditionalNode(o, children[0], true);
+      if (conditionInstruction != null) {
+        startConditionalNode(o, children[0], true);
+      }
       children[1].accept(this);
       Instruction trueInstruction = prevInstruction;
       prevInstruction = conditionInstruction;

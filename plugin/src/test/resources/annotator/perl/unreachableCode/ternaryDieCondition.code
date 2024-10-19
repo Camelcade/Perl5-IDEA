@@ -1,1 +1,1 @@
-die("some") <error descr="Unreachable code">?</error> "one"<error descr="Unreachable code">:</error> "<error descr="Unreachable code">Two</error>";
+die("some") ? "<error descr="Unreachable code">one</error>": "<error descr="Unreachable code">Two</error>";
