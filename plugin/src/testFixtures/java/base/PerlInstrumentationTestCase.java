@@ -30,14 +30,13 @@ import java.util.stream.Stream;
 @Category(Light.class)
 public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
 
-  protected static final String PLUGIN_PATTERN_STRING = "/plugin/build/libs/plugin-.+?\\.jar!";
-  // this is wrong, should be build/libs/lang\\.embedded-.+?\\.jar!
-  protected static final String EMBEDDED_PATTERN_STRING = "/embedded/core/build/libs/core-.+?\\.jar";
-  protected static final String MOJO_PATTERN_STRING = "/mojo/core/build/libs/core-.+?\\.jar!";
-  protected static final String TT2_PATTERN_STRING = "/tt2/core/build/libs/core-.+?\\.jar!";
-  protected static final String MASON_FRAMEWORK_PATTERN_STRING = "/mason/framework/build/libs/lang\\.mason\\.framework-.+?\\.jar!";
-  protected static final String MASON_PATTERN_STRING = "/mason/htmlmason/core/build/libs/core-.+?\\.jar!";
-  protected static final String MASON2_PATTERN_STRING = "/mason/mason2/core/build/libs/core-.+?\\.jar!";
+  protected static final String PLUGIN_PATTERN_STRING = "lib/plugin-.+?\\.jar!";
+  protected static final String EMBEDDED_PATTERN_STRING = "lib/lang\\.embedded-.+?\\.jar";
+  protected static final String MOJO_PATTERN_STRING = "lib/lang\\.mojo-.+?\\.jar!";
+  protected static final String TT2_PATTERN_STRING = "lib/lang\\.tt2-.+?\\.jar!";
+  protected static final String MASON_FRAMEWORK_PATTERN_STRING = "lib/lang.mason.framework-.+?\\.jar!";
+  protected static final String MASON_PATTERN_STRING = "lib/lang.mason.htmlmason-.+?\\.jar!";
+  protected static final String MASON2_PATTERN_STRING = "lib/lang.mason.mason2-.+?\\.jar!";
 
   private final @NotNull Class<?> myClass;
 

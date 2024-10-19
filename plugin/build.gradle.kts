@@ -83,6 +83,7 @@ dependencies {
 }
 
 
+
 tasks {
   buildPlugin {
     archiveBaseName.set("lang.perl5")
@@ -93,5 +94,14 @@ tasks {
 
     intoChild(intellijPlatform.projectName.map { projectName -> "$projectName/perl" })
       .from(file("scripts"))
+  }
+
+  test {
+    dependencies {
+      intellijPlatform {
+        bundledModule("intellij.platform.coverage.agent")
+        bundledModule("intellij.profiler.common")
+      }
+    }
   }
 }
