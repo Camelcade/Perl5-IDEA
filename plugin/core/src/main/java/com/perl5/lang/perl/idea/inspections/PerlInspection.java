@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.codeInspection.LocalInspectionTool;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.codeInspection.util.InspectionMessage;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
@@ -33,22 +34,28 @@ public abstract class PerlInspection extends LocalInspectionTool {
 
   protected void registerProblem(@NotNull ProblemsHolder holder,
                                  @Nullable PsiElement element,
-                                 String message,
+                                 @NotNull @InspectionMessage String message,
                                  LocalQuickFix... quickFixes) {
     doRegisterProblem(holder, element, message, GENERIC_ERROR_OR_WARNING, quickFixes);
   }
 
-  protected void registerError(@NotNull ProblemsHolder holder, @Nullable PsiElement element, String message, LocalQuickFix... quickFixes) {
+  protected void registerError(@NotNull ProblemsHolder holder,
+                               @Nullable PsiElement element,
+                               @NotNull @InspectionMessage String message,
+                               LocalQuickFix... quickFixes) {
     doRegisterProblem(holder, element, message, GENERIC_ERROR, quickFixes);
   }
 
-  protected void markDeprecated(@NotNull ProblemsHolder holder, @Nullable PsiElement element, String message, LocalQuickFix... quickFixes) {
+  protected void markDeprecated(@NotNull ProblemsHolder holder,
+                                @Nullable PsiElement element,
+                                @NotNull @InspectionMessage String message,
+                                LocalQuickFix... quickFixes) {
     doRegisterProblem(holder, element, message, LIKE_DEPRECATED, quickFixes);
   }
 
   private void doRegisterProblem(@NotNull ProblemsHolder holder,
                                  @Nullable PsiElement element,
-                                 @NotNull String message,
+                                 @NotNull @InspectionMessage String message,
                                  @NotNull ProblemHighlightType highlightType,
                                  @NotNull LocalQuickFix... quickFixes) {
     if (element == null) {
