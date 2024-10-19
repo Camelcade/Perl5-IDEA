@@ -1,0 +1,1 @@
+foo die("something"), "<error descr="Unreachable code">Else</error>";

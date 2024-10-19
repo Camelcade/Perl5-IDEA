@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,39 @@ public class PerlUnreachableCodeInspectionTest extends PerlLightTestCase {
   protected String getBaseDataPath() {
     return "annotator/perl/unreachableCode";
   }
+
+  @Test
+  public void testCallDieParens() { doTest(); }
+
+  @Test
+  public void testCallDie() { doTest(); }
+
+  @Test
+  public void testCallDieFirst() { doTest(); }
+
+  @Test
+  public void testCallDieLast() { doTest(); }
+
+  @Test
+  public void testCallDieMid() { doTest(); }
+
+  @Test
+  public void testCheckOrDie() { doTest(); }
+
+  @Test
+  public void testPlusDie() { doTest(); }
+
+  @Test
+  public void testReturnDie() { doTest(); }
+
+  @Test
+  public void testTernaryDieCondition() { doTest(); }
+
+  @Test
+  public void testTernaryDieTrue() { doTest(); }
+
+  @Test
+  public void testTernaryDieFalse() { doTest(); }
 
   @Test
   public void testNestedSubExpr() {doTest();}

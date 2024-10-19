@@ -1,0 +1,1 @@
+-d or <error descr="Unreachable code">!</error>die "Not a directory: '$_'\n";

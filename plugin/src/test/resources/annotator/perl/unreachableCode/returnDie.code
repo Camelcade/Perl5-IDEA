@@ -1,0 +1,1 @@
+<error descr="Unreachable code">return</error> die 'bom';
