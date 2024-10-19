@@ -1,0 +1,1 @@
+foo "First", die("something"), "<error descr="Unreachable code">Last</error>";

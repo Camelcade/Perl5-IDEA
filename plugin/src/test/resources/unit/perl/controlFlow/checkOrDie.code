@@ -1,0 +1,1 @@
+-d or !die "Not a directory: '$_'\n";
