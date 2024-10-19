@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.codeInsight.intention.FileModifier;
 import com.intellij.codeInsight.intention.HighPriorityAction;
+import com.intellij.codeInsight.intention.preview.IntentionPreviewInfo;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.codeInspection.ProblemHighlightType;
@@ -334,6 +335,11 @@ public class PerlSyntaxInspection extends PerlInspection {
           @Override
           public @Nls @NotNull String getFamilyName() {
             return PerlBundle.message("perl.quickfix.change.language.level");
+          }
+
+          @Override
+          public @NotNull IntentionPreviewInfo generatePreview(@NotNull Project project, @NotNull ProblemDescriptor previewDescriptor) {
+            return IntentionPreviewInfo.EMPTY;
           }
 
           @Override
