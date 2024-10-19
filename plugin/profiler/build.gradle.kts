@@ -26,6 +26,7 @@ dependencies {
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IU", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+    bundledModule("intellij.profiler.common")
   }
 }
 

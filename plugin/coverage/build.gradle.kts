@@ -26,5 +26,6 @@ dependencies {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
     bundledPlugins(providers.gradleProperty("coveragePlugin").get())
+    bundledModule("intellij.platform.coverage.agent")
   }
 }
