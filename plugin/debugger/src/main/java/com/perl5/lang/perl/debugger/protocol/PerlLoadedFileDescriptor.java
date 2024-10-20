@@ -57,11 +57,9 @@ public class PerlLoadedFileDescriptor {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof PerlLoadedFileDescriptor)) {
+    if (!(o instanceof PerlLoadedFileDescriptor that)) {
       return false;
     }
-
-    PerlLoadedFileDescriptor that = (PerlLoadedFileDescriptor)o;
 
     return getPath().equals(that.getPath());
   }

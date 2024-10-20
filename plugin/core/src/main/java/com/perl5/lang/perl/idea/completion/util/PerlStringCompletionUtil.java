@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -171,8 +171,8 @@ public final class PerlStringCompletionUtil {
 
     PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
     // fixme we should allow lookup elements customization by package processor
-    if (packageProcessor instanceof PerlPackageOptionsProvider) {
-      Map<String, String> options = ((PerlPackageOptionsProvider)packageProcessor).getOptions();
+    if (packageProcessor instanceof PerlPackageOptionsProvider packageOptionsProvider) {
+      Map<String, String> options = packageOptionsProvider.getOptions();
 
       for (Map.Entry<String, String> option : options.entrySet()) {
         String lookupString = option.getKey();
@@ -182,7 +182,7 @@ public final class PerlStringCompletionUtil {
         }
       }
 
-      options = ((PerlPackageOptionsProvider)packageProcessor).getOptionsBundles();
+      options = packageOptionsProvider.getOptionsBundles();
 
       for (Map.Entry<String, String> option : options.entrySet()) {
         String lookupString = option.getKey();
@@ -193,7 +193,7 @@ public final class PerlStringCompletionUtil {
       }
     }
 
-    if (packageProcessor instanceof PerlPackageParentsProvider && ((PerlPackageParentsProvider)packageProcessor).hasPackageFilesOptions() &&
+    if (packageProcessor instanceof PerlPackageParentsProvider packageParentsProvider && packageParentsProvider.hasPackageFilesOptions() &&
         !PerlPackageUtil.processPackageFilesForPsiElement(baseElement, (packageName, file) ->
           typedStringsSet.contains(packageName) ||
           PerlPackageCompletionUtil.processPackageLookupElement(file, packageName, null, completionProcessor, false))) {

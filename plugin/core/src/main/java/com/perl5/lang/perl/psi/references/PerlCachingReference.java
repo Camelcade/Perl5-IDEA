@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,12 +62,11 @@ public abstract class PerlCachingReference<T extends PsiElement> extends PsiPoly
     if (this == o) {
       return true;
     }
-    if (!(o instanceof PerlCachingReference)) {
+    if (!(o instanceof PerlCachingReference<?> cachingReference)) {
       return false;
     }
-    PerlCachingReference<?> reference = (PerlCachingReference<?>)o;
-    return Objects.equals(myExplicitRange, reference.myExplicitRange) &&
-           Objects.equals(getElement(), reference.getElement());
+    return Objects.equals(myExplicitRange, cachingReference.myExplicitRange) &&
+           Objects.equals(getElement(), cachingReference.getElement());
   }
 
   @Override

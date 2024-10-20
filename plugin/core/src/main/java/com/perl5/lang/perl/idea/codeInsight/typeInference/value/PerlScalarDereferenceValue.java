@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,8 +48,8 @@ public class PerlScalarDereferenceValue extends PerlOperationValue {
   }
 
   private static @Nullable PerlValue doComputeResolve(@NotNull PerlValue referenceValue) {
-    if (referenceValue instanceof PerlReferenceValue) {
-      PerlValue referenceTarget = ((PerlReferenceValue)referenceValue).getTarget();
+    if (referenceValue instanceof PerlReferenceValue perlReferenceValue) {
+      PerlValue referenceTarget = perlReferenceValue.getTarget();
       if (referenceTarget.getContextType() == PerlContextType.SCALAR) {
         return referenceTarget;
       }

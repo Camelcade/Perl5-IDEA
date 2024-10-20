@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -249,8 +249,8 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
    */
   public void wrapSimpleDereference(PerlCastExpression o) {
     PsiElement referenceVariable = o.getLastChild();
-    if (referenceVariable instanceof PsiPerlScalarVariable) {
-      myFormattingOperations.add(new PerlFormattingSimpleDereferenceWrap(o, (PsiPerlScalarVariable)referenceVariable));
+    if (referenceVariable instanceof PsiPerlScalarVariable scalarVariable) {
+      myFormattingOperations.add(new PerlFormattingSimpleDereferenceWrap(o, scalarVariable));
     }
   }
 

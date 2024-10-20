@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,9 +57,9 @@ public class PerlCpanfileImportProvider implements PerlImportsProvider {
 
   @Override
   public boolean isApplicable(@Nullable PerlNamespaceDefinitionElement namespaceDefinitionElement) {
-    if (!(namespaceDefinitionElement instanceof PsiFile)) {
+    if (!(namespaceDefinitionElement instanceof PsiFile psiFile)) {
       return false;
     }
-    return ((PsiFile)namespaceDefinitionElement).getOriginalFile().getFileType() == PerlFileTypeCpanfile.INSTANCE;
+    return psiFile.getOriginalFile().getFileType() == PerlFileTypeCpanfile.INSTANCE;
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,8 +32,8 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitHeredocTeminator(this);
+    if (visitor instanceof PerlVisitor perlVisitor) {
+      perlVisitor.visitHeredocTeminator(this);
     }
     else {
       super.accept(visitor);

@@ -41,7 +41,7 @@ public class PodUnresolvableLinkInspection extends LocalInspectionTool {
         assert o instanceof PodFormatterL;
         PodFormatterL link = (PodFormatterL)o;
         for (PsiReference reference : link.getReferences()) {
-          if (reference instanceof PsiPolyVariantReference && ((PsiPolyVariantReference)reference).multiResolve(false).length == 0) {
+          if (reference instanceof PsiPolyVariantReference polyVariantReference && polyVariantReference.multiResolve(false).length == 0) {
             String error;
 
             if (reference instanceof PodLinkToFileReference) {

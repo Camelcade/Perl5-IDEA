@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,8 +56,8 @@ public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElem
 
     PerlSubArgumentsExtractor extractor = new PerlSubArgumentsExtractor();
     for (PsiElement statement : subBlock.getChildren()) {
-      if (statement instanceof PsiPerlStatement) {
-        if (!extractor.process((PsiPerlStatement)statement)) {
+      if (statement instanceof PsiPerlStatement perlStatement) {
+        if (!extractor.process(perlStatement)) {
           break;
         }
       }

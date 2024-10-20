@@ -41,10 +41,10 @@ public class PerlSmartGetterValue extends PerlOperationValue {
   protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedRealValue, @NotNull PerlValueResolver resolver) {
     LOG.assertTrue(resolver instanceof PerlSubValueResolver);
     PerlValue resolvedArguments = resolver.resolve(PerlValues.ARGUMENTS_VALUE);
-    if (!(resolvedArguments instanceof PerlArrayValue)) {
+    if (!(resolvedArguments instanceof PerlArrayValue arrayValue)) {
       return UNKNOWN_VALUE;
     }
-    List<PerlValue> argumentElements = ((PerlArrayValue)resolvedArguments).getElements();
+    List<PerlValue> argumentElements = arrayValue.getElements();
     if (argumentElements.isEmpty()) {
       return UNKNOWN_VALUE;
     }

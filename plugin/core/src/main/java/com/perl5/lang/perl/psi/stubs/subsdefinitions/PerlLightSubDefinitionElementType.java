@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementT
 
   @Override
   public @NotNull PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
-    if (psi instanceof PerlLightSubDefinitionElement && ((PerlLightSubDefinitionElement<?>)psi).isImplicit()) {
+    if (psi instanceof PerlLightSubDefinitionElement<?> lightSubDefinitionElement && lightSubDefinitionElement.isImplicit()) {
       return createStubElement(parentStub,
                                psi.getNamespaceName(),
                                psi.getSubName(),

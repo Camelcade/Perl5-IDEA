@@ -100,7 +100,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
     }
     PsiElement variable = sourceElement.getParent();
 
-    if (!(variable instanceof PerlVariable)) {
+    if (!(variable instanceof PerlVariable perlVariable)) {
       return;
     }
     PsiElement variableContainer = variable.getParent();
@@ -108,7 +108,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
     if (!(variableContainer instanceof PerlVariableDeclarationElement)) {
       return;
     }
-    PerlVariableDeclarationElement shadowedVariable = PerlResolveUtil.getLexicalDeclaration((PerlVariable)variable);
+    PerlVariableDeclarationElement shadowedVariable = PerlResolveUtil.getLexicalDeclaration(perlVariable);
     if (shadowedVariable != null) {
       result.add(shadowedVariable);
     }

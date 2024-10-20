@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,8 +64,8 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
 
     psi.getLightElements().forEach(lightPsi -> {
       StubElement<?> lightStubElement = lightPsi.getElementType().createStub(lightPsi, result);
-      if (lightStubElement instanceof PerlLightElementStub && lightPsi.isImplicit()) {
-        ((PerlLightElementStub)lightStubElement).setImplicit(true);
+      if (lightStubElement instanceof PerlLightElementStub lightElementStub && lightPsi.isImplicit()) {
+        lightElementStub.setImplicit(true);
       }
       lightNamedElements.add(lightStubElement);
     });

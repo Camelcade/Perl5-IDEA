@@ -180,12 +180,12 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
         myReachedOffsets.clear();
         myReachedOffsets.addAll(newOffsets);
       }
-      else if (value instanceof PerlArrayValue) {
-        ((PerlArrayValue)value).doComputeGet(this);
+      else if (value instanceof PerlArrayValue arrayValue) {
+        arrayValue.doComputeGet(this);
       }
-      else if (value instanceof PerlOneOfValue) {
+      else if (value instanceof PerlOneOfValue oneOfValue) {
         List<ElementSearchState> states = new SmartList<>();
-        ((PerlOneOfValue)value).forEach(it -> {
+        oneOfValue.forEach(it -> {
           ElementSearchState childState = new ElementSearchState(this);
           childState.processValue(it);
           states.add(childState);

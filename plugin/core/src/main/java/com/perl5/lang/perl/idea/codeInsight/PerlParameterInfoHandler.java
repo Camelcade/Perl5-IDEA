@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -189,17 +189,17 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
   }
 
   private static @Nullable PerlParameterInfo[] getTargetParameterInfo(@Nullable PsiElement target) {
-    if (!(target instanceof PerlSubDefinitionElement)) {
+    if (!(target instanceof PerlSubDefinitionElement subDefinitionElement)) {
       return null;
     }
-    return PerlParameterInfo.wrapArguments(((PerlSubDefinitionElement)target).getSubArgumentsListWithoutSelf());
+    return PerlParameterInfo.wrapArguments(subDefinitionElement.getSubArgumentsListWithoutSelf());
   }
 
   private static @Nullable PerlParameterInfo[] getMethodCallArguments(@NotNull PsiPerlCallArgumentsImpl arguments) {
     PsiElement run = arguments.getPrevSibling();
     while (run != null) {
-      if (run instanceof PerlMethodMixin) {
-        PerlSubNameElement subNameElement = ((PerlMethodMixin)run).getSubNameElement();
+      if (run instanceof PerlMethodMixin methodMixin) {
+        PerlSubNameElement subNameElement = methodMixin.getSubNameElement();
         if (subNameElement == null) {
           break;
         }

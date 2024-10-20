@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -130,8 +130,8 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
       Throwable throwable = e.getThrowable();
 
       while (throwable != null) {
-        if (throwable instanceof ExceptionWithAttachments) {
-          ContainerUtil.addAll(attachments, ((ExceptionWithAttachments)throwable).getAttachments());
+        if (throwable instanceof ExceptionWithAttachments exceptionWithAttachments) {
+          ContainerUtil.addAll(attachments, exceptionWithAttachments.getAttachments());
         }
         throwable = throwable.getCause();
       }

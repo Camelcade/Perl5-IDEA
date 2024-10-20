@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -109,13 +109,13 @@ public class PerlAnnotator extends PerlBaseAnnotator {
         holder.newAnnotation(HighlightSeverity.INFORMATION, chars).range(element).tooltip(sb.toString()).create();
       }
     }
-    else if (element instanceof PerlPolyNamedElement) {
+    else if (element instanceof PerlPolyNamedElement<?> polyNamedElement) {
       TextAttributesKey subAttribute = PerlSyntaxHighlighter.PERL_SUB_DEFINITION;
-      if (element instanceof PerlUseStatementElement &&
-          ((PerlUseStatementElement)element).getPackageProcessor() instanceof ConstantProcessor) {
+      if (element instanceof PerlUseStatementElement useStatementElement &&
+          useStatementElement.getPackageProcessor() instanceof ConstantProcessor) {
         subAttribute = PerlSyntaxHighlighter.PERL_CONSTANT;
       }
-      for (PerlDelegatingLightNamedElement<?> lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
+      for (PerlDelegatingLightNamedElement<?> lightNamedElement : polyNamedElement.getLightElements()) {
         if (lightNamedElement.isImplicit()) {
           continue;
         }

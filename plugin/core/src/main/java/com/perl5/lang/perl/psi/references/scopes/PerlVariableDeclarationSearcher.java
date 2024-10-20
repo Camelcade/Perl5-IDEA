@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,8 +48,8 @@ public class PerlVariableDeclarationSearcher implements PsiScopeProcessor {
 
   @Override
   public boolean execute(@NotNull PsiElement element, @NotNull ResolveState state) {
-    if (element instanceof PerlVariableDeclarationElement) {
-      PerlVariable variable = ((PerlVariableDeclarationElement)element).getVariable();
+    if (element instanceof PerlVariableDeclarationElement variableDeclarationElement) {
+      PerlVariable variable = variableDeclarationElement.getVariable();
       if (!variable.equals(myVariable)) {
         if (myVariableType == variable.getActualType() && StringUtil.equals(myName, variable.getName())) {
           PsiElement declarationStatement = PsiTreeUtil.getParentOfType(element, PerlStatement.class);

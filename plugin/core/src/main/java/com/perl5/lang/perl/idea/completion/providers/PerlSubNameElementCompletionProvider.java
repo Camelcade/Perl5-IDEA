@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,12 +34,11 @@ public class PerlSubNameElementCompletionProvider extends PerlCompletionProvider
                              @NotNull CompletionResultSet resultSet) {
     PsiElement element = parameters.getPosition();
 
-    if (!(element.getParent() instanceof PerlSubElement)) {
+    if (!(element.getParent() instanceof PerlSubElement subDefinitionBase)) {
       return;
     }
     PerlCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, resultSet, element);
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
-    PerlSubElement subDefinitionBase = (PerlSubElement)element.getParent();
     PerlSubCompletionUtil.processUnresolvedSubsLookups(subDefinitionBase, completionProcessor);
     logger.debug("Processed unresolved subs");
     PerlSubCompletionUtil.processWithNotOverriddenSubs(subDefinitionBase, completionProcessor);

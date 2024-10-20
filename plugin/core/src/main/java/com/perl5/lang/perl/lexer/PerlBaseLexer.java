@@ -254,7 +254,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
         Object userData = myBracesStack.peekAdditional();
         myBracesStack.pop();
         popState();
-        return userData instanceof IElementType ? (IElementType)userData : RIGHT_BRACE;
+        return userData instanceof IElementType elementType ? elementType : RIGHT_BRACE;
       }
     }
     yybegin(afterState);

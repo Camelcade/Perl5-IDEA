@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -106,8 +106,8 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
     PerlHashEntry fieldsEntry = exceptionSettings.get("fields");
     if (fieldsEntry != null && fieldsEntry.isComplete()) {
       PsiElement fieldsContainer = fieldsEntry.getNonNullValueElement();
-      if (fieldsContainer instanceof PsiPerlAnonArray) {
-        fieldsContainer = ((PsiPerlAnonArray)fieldsContainer).getExpr();
+      if (fieldsContainer instanceof PsiPerlAnonArray anonArray) {
+        fieldsContainer = anonArray.getExpr();
       }
       List<PsiElement> elements = PerlArrayUtil.collectListElements(fieldsContainer);
       if (!elements.isEmpty()) {

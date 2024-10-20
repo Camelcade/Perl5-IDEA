@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,11 +35,11 @@ public class PodGoToDeclarationHandler implements GotoDeclarationHandler {
     }
 
     PsiReference reference = TargetElementUtil.findReference(editor, offset);
-    if (!(reference instanceof PodLinkToSectionReference)) {
+    if (!(reference instanceof PodLinkToSectionReference linkToSectionReference)) {
       return null;
     }
 
-    return ContainerUtil.map(((PodLinkToSectionReference)reference).multiResolve(false), ResolveResult::getElement)
+    return ContainerUtil.map(linkToSectionReference.multiResolve(false), ResolveResult::getElement)
       .toArray(PsiElement.EMPTY_ARRAY);
   }
 }

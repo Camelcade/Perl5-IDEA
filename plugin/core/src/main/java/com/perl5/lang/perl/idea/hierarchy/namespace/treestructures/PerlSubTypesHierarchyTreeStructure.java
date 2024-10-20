@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,8 +43,8 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure {
   protected Object @NotNull [] buildChildren(@NotNull HierarchyNodeDescriptor descriptor) {
     List<PerlHierarchyNodeDescriptor> result = new ArrayList<>();
 
-    if (descriptor instanceof PerlHierarchyNodeDescriptor) {
-      PsiElement element = ((PerlHierarchyNodeDescriptor)descriptor).getPerlElement();
+    if (descriptor instanceof PerlHierarchyNodeDescriptor hierarchyNodeDescriptor) {
+      PsiElement element = hierarchyNodeDescriptor.getPerlElement();
       for (PsiElement childElement : getSubElements(element)) {
         result.add(createDescriptor(descriptor, childElement, false));
       }

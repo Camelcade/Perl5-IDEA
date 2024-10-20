@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,9 +33,9 @@ public class PerlFormattingReplaceWithText implements PerlFormattingOperation {
   public int apply() {
     int delta = 0;
 
-    if (myElementToChange.isValid() && myElementToChange instanceof LeafPsiElement) {
+    if (myElementToChange.isValid() && myElementToChange instanceof LeafPsiElement leafPsiElement) {
       delta = myNewElementContent.length() - myElementToChange.getNode().getTextLength();
-      ((LeafPsiElement)myElementToChange).replaceWithText(myNewElementContent);
+      leafPsiElement.replaceWithText(myNewElementContent);
     }
 
     return delta;

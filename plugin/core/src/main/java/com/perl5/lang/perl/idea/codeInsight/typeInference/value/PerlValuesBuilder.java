@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,12 +29,12 @@ public final class PerlValuesBuilder {
    * @return converts {@code baseValue} with {@code converter}. Handles cases with {@link PerlOneOfValue}
    */
   public static @NotNull PerlValue convert(@NotNull PerlValue baseValue, @NotNull Function<PerlValue, PerlValue> converter) {
-    if (!(baseValue instanceof PerlOneOfValue)) {
+    if (!(baseValue instanceof PerlOneOfValue oneOfValue)) {
       return converter.apply(baseValue);
     }
     ProgressManager.checkCanceled();
     PerlOneOfValue.Builder builder = builder();
-    ((PerlOneOfValue)baseValue).forEach(it -> builder.addVariant(converter.apply(it)));
+    oneOfValue.forEach(it -> builder.addVariant(converter.apply(it)));
     return builder.build();
   }
 

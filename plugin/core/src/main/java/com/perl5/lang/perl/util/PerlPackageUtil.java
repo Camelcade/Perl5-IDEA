@@ -279,7 +279,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
 
     // default value
     PsiFile file = element.getContainingFile();
-    if (file instanceof PerlFileImpl) {
+    if (file instanceof PerlFileImpl perlFile) {
       PsiElement contextParent = file.getContext();
       PsiElement realParent = file.getParent();
 
@@ -287,7 +287,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
         return getContextNamespaceName(contextParent);
       }
 
-      return ((PerlFileImpl)file).getNamespaceName();
+      return perlFile.getNamespaceName();
     }
     else {
       return MAIN_NAMESPACE_NAME;
@@ -642,8 +642,8 @@ public final class PerlPackageUtil implements PerlElementTypes {
 
     for (PerlUseStatementElement useStatement : PsiTreeUtil.findChildrenOfType(psiFile, PerlUseStatementElement.class)) {
       PerlPackageProcessor packageProcessor = useStatement.getPackageProcessor();
-      if (packageProcessor instanceof PerlLibProvider) {
-        ((PerlLibProvider)packageProcessor).addLibDirs(useStatement, result);
+      if (packageProcessor instanceof PerlLibProvider perlLibProvider) {
+        perlLibProvider.addLibDirs(useStatement, result);
       }
     }
 
@@ -806,17 +806,17 @@ public final class PerlPackageUtil implements PerlElementTypes {
 
     @Override
     public boolean process(PsiElement element) {
-      if (element instanceof PerlUseStatementElement) {
-        PerlPackageProcessor processor = ((PerlUseStatementElement)element).getPackageProcessor();
-        if (processor instanceof PerlPackageParentsProvider) {
-          ((PerlPackageParentsProvider)processor).changeParentsList((PerlUseStatementElement)element, myParentNamespaces);
+      if (element instanceof PerlUseStatementElement useStatementElement) {
+        PerlPackageProcessor processor = useStatementElement.getPackageProcessor();
+        if (processor instanceof PerlPackageParentsProvider packageParentsProvider) {
+          packageParentsProvider.changeParentsList((PerlUseStatementElement)element, myParentNamespaces);
         }
       }
-      else if (element instanceof PerlRuntimeParentsProvider) {
-        runtimeModifiers.add((PerlRuntimeParentsProvider)element);
+      else if (element instanceof PerlRuntimeParentsProvider runtimeParentsProvider) {
+        runtimeModifiers.add(runtimeParentsProvider);
       }
-      else if (element.getFirstChild() instanceof PerlRuntimeParentsProvider) {
-        runtimeModifiers.add((PerlRuntimeParentsProvider)element.getFirstChild());
+      else if (element.getFirstChild() instanceof PerlRuntimeParentsProvider runtimeParentsProvider) {
+        runtimeModifiers.add(runtimeParentsProvider);
       }
       else if (PerlElementPatterns.ISA_ASSIGN_STATEMENT.accepts(element)) {
         PsiElement assignExpr = element.getFirstChild();

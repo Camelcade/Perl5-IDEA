@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -136,8 +136,8 @@ public abstract class PerlClassAccessorHandler extends PerlSubCallHandler<PerlCl
           return false;
         }
 
-        if (element instanceof PerlSubCallElement &&
-            StringUtil.equals("follow_best_practice", ((PerlSubCallElement)element).getSubName())) {
+        if (element instanceof PerlSubCallElement subCallElement &&
+            StringUtil.equals("follow_best_practice", subCallElement.getSubName())) {
           result.set(Boolean.TRUE);
           return false;
         }

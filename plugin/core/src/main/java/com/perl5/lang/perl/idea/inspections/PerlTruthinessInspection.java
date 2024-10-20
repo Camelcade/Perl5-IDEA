@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,8 +96,8 @@ public class PerlTruthinessInspection extends PerlInspection {
         expression = children[0];
       }
     }
-    if (expression instanceof PsiPerlParenthesisedExpr) {
-      return getAmbiguousExpression(((PsiPerlParenthesisedExpr)expression).getExpr());
+    if (expression instanceof PsiPerlParenthesisedExpr parenthesisedExpr) {
+      return getAmbiguousExpression(parenthesisedExpr.getExpr());
     }
     return AMBIGUOUS_CONDITIONS.contains(PsiUtilCore.getElementType(expression)) ? expression : null;
   }

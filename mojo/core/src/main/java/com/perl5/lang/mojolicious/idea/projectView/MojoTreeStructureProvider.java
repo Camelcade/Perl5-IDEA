@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,16 +46,16 @@ public class MojoTreeStructureProvider implements TreeStructureProvider {
     }
 
     return ContainerUtil.map(children, node -> {
-      if (!(node instanceof PsiDirectoryNode)) {
+      if (!(node instanceof PsiDirectoryNode directoryNode)) {
         return node;
       }
 
-      MojoProject mojoProject = myMojoProjectManager.getMojoProject(((PsiDirectoryNode)node).getVirtualFile());
+      MojoProject mojoProject = myMojoProjectManager.getMojoProject(directoryNode.getVirtualFile());
       if (mojoProject == null) {
         return node;
       }
 
-      return new PsiDirectoryNode(node.getProject(), ((PsiDirectoryNode)node).getValue(), ((PsiDirectoryNode)node).getSettings()) {
+      return new PsiDirectoryNode(node.getProject(), directoryNode.getValue(), directoryNode.getSettings()) {
         @Override
         protected void updateImpl(@NotNull PresentationData data) {
           super.updateImpl(data);

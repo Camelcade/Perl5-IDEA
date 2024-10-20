@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,8 +72,8 @@ public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> 
 
   @Override
   public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
-    if (element instanceof PsiFile) {
-      String newName = PodFileUtil.getPackageName((PsiFile)element);
+    if (element instanceof PsiFile psiFile) {
+      String newName = PodFileUtil.getPackageName(psiFile);
       if (StringUtil.isNotEmpty(newName)) {
         return super.handleElementRename(newName);
       }

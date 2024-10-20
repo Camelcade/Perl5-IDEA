@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,7 +110,7 @@ public interface PodTitledSection extends PodSection,
   @Override
   default boolean isIndexed() {
     PsiElement titleBlock = getTitleElement();
-    if (titleBlock instanceof PodCompositeElement && ((PodCompositeElement)titleBlock).isIndexed()) {
+    if (titleBlock instanceof PodCompositeElement podCompositeElement && podCompositeElement.isIndexed()) {
       return true;
     }
     return PodSection.super.isIndexed();

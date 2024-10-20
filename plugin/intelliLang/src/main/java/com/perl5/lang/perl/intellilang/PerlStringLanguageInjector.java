@@ -51,30 +51,29 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.OPERATOR_ASSI
 public class PerlStringLanguageInjector extends PerlLiteralLanguageInjector {
   @Override
   public void getLanguagesToInject(@NotNull MultiHostRegistrar registrar, @NotNull PsiElement host) {
-    if (!(host instanceof PerlStringMixin) || !((PerlStringMixin)host).isValidHost() || PerlAnnotations.isInjectionSuppressed(host)) {
+    if (!(host instanceof PerlStringMixin stringMixin) || !stringMixin.isValidHost() || PerlAnnotations.isInjectionSuppressed(host)) {
       return;
     }
-    PerlStringMixin perlString = (PerlStringMixin)host;
 
     // before element
-    PerlAnnotationInject injectAnnotation = PerlAnnotations.getAnyAnnotationByClass(perlString, PerlAnnotationInject.class);
+    PerlAnnotationInject injectAnnotation = PerlAnnotations.getAnyAnnotationByClass(stringMixin, PerlAnnotationInject.class);
     if (injectAnnotation != null) {
-      injectByAnnotation(perlString, registrar, injectAnnotation);
+      injectByAnnotation(stringMixin, registrar, injectAnnotation);
     }
 
     // program context
     if (Registry.is("perl5.eval.auto.injection", true)) {
-      PsiElement context = getPerlInjectionContext(perlString);
+      PsiElement context = getPerlInjectionContext(stringMixin);
       if (context != null) {
-        injectLanguage(perlString, registrar, PerlLanguage.INSTANCE);
+        injectLanguage(stringMixin, registrar, PerlLanguage.INSTANCE);
       }
     }
   }
 
   @Contract("null->null;!null->!null")
   public static @Nullable PsiElement getInjectionContextOrSelf(@Nullable PsiElement context) {
-    if (context instanceof PsiLanguageInjectionHost) {
-      return Objects.requireNonNullElse(getPerlInjectionContext((PsiLanguageInjectionHost)context), context);
+    if (context instanceof PsiLanguageInjectionHost injectionHost) {
+      return Objects.requireNonNullElse(getPerlInjectionContext(injectionHost), context);
     }
     return context;
   }

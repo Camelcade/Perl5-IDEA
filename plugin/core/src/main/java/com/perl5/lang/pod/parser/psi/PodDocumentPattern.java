@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,8 +55,8 @@ public class PodDocumentPattern {
   }
 
   protected boolean acceptsHeading(@NotNull PsiElement element) {
-    if (getHeadingPattern() != null && element instanceof PodTitledSection && ((PodTitledSection)element).isHeading()) {
-      String title = ((PodTitledSection)element).getTitleText();
+    if (getHeadingPattern() != null && element instanceof PodTitledSection titledSection && titledSection.isHeading()) {
+      String title = titledSection.getTitleText();
       if (StringUtil.isNotEmpty(title)) {
         return matches(title, getHeadingPattern(), myExactMatch);
       }
@@ -75,8 +75,8 @@ public class PodDocumentPattern {
   }
 
   protected boolean acceptsIndex(@NotNull PsiElement element) {
-    if (getIndexKey() != null && element instanceof PodFormatterX) {
-      return getIndexKey().equals(((PodFormatterX)element).getTitleText());
+    if (getIndexKey() != null && element instanceof PodFormatterX formatterX) {
+      return getIndexKey().equals(formatterX.getTitleText());
     }
     return false;
   }

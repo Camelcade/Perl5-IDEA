@@ -41,11 +41,11 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
   @Override
   public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement elementAtCursor) throws IncorrectOperationException {
     PerlConvertableCompound compound = getCompound(elementAtCursor);
-    if (compound instanceof PerlForeachCompound) {
-      convertForCompound((PerlForeachCompound)compound);
+    if (compound instanceof PerlForeachCompound perlForeachCompound) {
+      convertForCompound(perlForeachCompound);
     }
-    else if (compound instanceof PerlConvertableCompoundSimple) {
-      convertSimpleCompound((PerlConvertableCompoundSimple)compound);
+    else if (compound instanceof PerlConvertableCompoundSimple perlConvertableCompoundSimple) {
+      convertSimpleCompound(perlConvertableCompoundSimple);
     }
   }
 
@@ -110,22 +110,21 @@ public class CompoundToStatementIntention extends PsiElementBaseIntentionAction 
     }
 
     PsiPerlExpr variableExpression = foreachIterator.getExpr();
-    if (variableExpression instanceof PerlVariableDeclarationExpr) {
-      List<PerlVariable> variables = ((PerlVariableDeclarationExpr)variableExpression).getVariables();
+    if (variableExpression instanceof PerlVariableDeclarationExpr variableDeclarationExpr) {
+      List<PerlVariable> variables = variableDeclarationExpr.getVariables();
       if (variables.size() == 1) {
         variableExpression = variables.getFirst();
       }
     }
 
     // replacing variables in statement to $_
-    if (variableExpression instanceof PerlVariable) {
+    if (variableExpression instanceof PerlVariable perlVariable) {
       TextRange statementExprTextRange = statementExpr.getTextRange();
-      PerlVariable finalVariable = (PerlVariable)variableExpression;
       List<PerlVariable> varsToReplace = new ArrayList<>();
       statementExpr.accept(new PerlRecursiveVisitor() {
         @Override
         public void visitPerlVariable(@NotNull PerlVariable o) {
-          if (PerlVariableUtil.equals(o, finalVariable)) {
+          if (PerlVariableUtil.equals(o, perlVariable)) {
             varsToReplace.add(o);
           }
           super.visitPerlVariable(o);

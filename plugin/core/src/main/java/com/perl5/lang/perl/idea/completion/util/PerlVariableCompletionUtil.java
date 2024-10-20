@@ -163,9 +163,9 @@ public class PerlVariableCompletionUtil {
     PsiElement perlVariable = variableNameElement.getParent();
     final Set<String> collectedNames = new HashSet<>();
 
-    if (lexicalScope != null && perlVariable instanceof PerlVariable) {
+    if (lexicalScope != null && perlVariable instanceof PerlVariable variable) {
       final int minOffset = variableNameElement.getTextOffset();
-      final PerlVariableType actualType = ((PerlVariable)perlVariable).getActualType();
+      final PerlVariableType actualType = variable.getActualType();
 
       lexicalScope.accept(new PerlCompletionRecursiveVisitor(completionProcessor) {
         @Override
@@ -209,10 +209,9 @@ public class PerlVariableCompletionUtil {
       });
 
     PsiScopeProcessor processor = (element, __) -> {
-      if (!(element instanceof PerlVariableDeclarationElement)) {
+      if (!(element instanceof PerlVariableDeclarationElement variable)) {
         return true;
       }
-      PerlVariableDeclarationElement variable = (PerlVariableDeclarationElement)element;
       PsiElement declarationStatement = PsiTreeUtil.getParentOfType(variable, PerlStatement.class);
       if (PsiTreeUtil.isAncestor(declarationStatement, perlVariable, false)) {
         return true;

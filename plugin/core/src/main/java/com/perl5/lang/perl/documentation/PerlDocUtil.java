@@ -381,7 +381,7 @@ public final class PerlDocUtil implements PerlElementTypes {
       if (prevSibling == null) {
         break;
       }
-      if (prevSibling instanceof PodSection && ((PodSection)prevSibling).hasContent()) {
+      if (prevSibling instanceof PodSection prevPodSection && prevPodSection.hasContent()) {
         break;
       }
       if (prevSibling instanceof PodTitledSection section) {
@@ -414,10 +414,10 @@ public final class PerlDocUtil implements PerlElementTypes {
     List<String> breadCrumbs = new ArrayList<>();
     run = podSection.getParent();
     while (true) {
-      if (run instanceof PodLinkTarget) {
-        String bcLink = ((PodLinkTarget)run).getPodLink();
+      if (run instanceof PodLinkTarget podLinkTarget) {
+        String bcLink = podLinkTarget.getPodLink();
         if (StringUtil.isNotEmpty(bcLink)) {
-          breadCrumbs.addFirst(PodRenderUtil.getHTMLPsiLink(bcLink, ((PodLinkTarget)run).getPodLinkText()));
+          breadCrumbs.addFirst(PodRenderUtil.getHTMLPsiLink(bcLink, podLinkTarget.getPodLinkText()));
         }
       }
       if (run instanceof PsiFile) {
@@ -434,8 +434,8 @@ public final class PerlDocUtil implements PerlElementTypes {
 
     String closeTag = "";
 
-    if (podSection instanceof PodSectionItem) {
-      if (((PodSectionItem)podSection).isBulleted()) {
+    if (podSection instanceof PodSectionItem podSectionItem) {
+      if (podSectionItem.isBulleted()) {
         builder.append("<ul style=\"fon-size:200%;\">");
         closeTag = "</ul>";
       }
@@ -471,10 +471,10 @@ public final class PerlDocUtil implements PerlElementTypes {
 
     @Override
     public boolean execute(@NotNull PsiElement element) {
-      if (element instanceof PodTitledSection && ((PodTitledSection)element).isHeading()) {
-        adjustLevelTo(((PodTitledSection)element).getHeadingLevel());
+      if (element instanceof PodTitledSection podTitledSection && podTitledSection.isHeading()) {
+        adjustLevelTo(podTitledSection.getHeadingLevel());
         myBuilder.append("<li style=\"margin-top:3px;margin-bottom:2px;\">");
-        myBuilder.append(PodRenderUtil.getHTMLPsiLink(((PodTitledSection)element)));
+        myBuilder.append(PodRenderUtil.getHTMLPsiLink(podTitledSection));
         myBuilder.append("</li>");
       }
 

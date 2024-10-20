@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,8 +49,8 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
 
   @Override
   protected String getQualifiedName(PsiElement psiElement) {
-    if (psiElement instanceof PerlIdentifierOwner) {
-      return ((PerlIdentifierOwner)psiElement).getPresentableName();
+    if (psiElement instanceof PerlIdentifierOwner identifierOwner) {
+      return identifierOwner.getPresentableName();
     }
 
     return null;
@@ -58,10 +58,10 @@ public class PerlHierarchyBrowser extends TypeHierarchyBrowserBase {
 
   @Override
   protected @Nullable PsiElement getElementFromDescriptor(@NotNull HierarchyNodeDescriptor descriptor) {
-    if (!(descriptor instanceof PerlHierarchyNodeDescriptor)) {
+    if (!(descriptor instanceof PerlHierarchyNodeDescriptor hierarchyNodeDescriptor)) {
       return null;
     }
-    return ((PerlHierarchyNodeDescriptor)descriptor).getPerlElement();
+    return hierarchyNodeDescriptor.getPerlElement();
   }
 
   @Override

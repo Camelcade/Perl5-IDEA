@@ -113,8 +113,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
       PsiElement signatureElement = signatureContainer.getFirstChild();
 
       while (signatureElement != null) {
-        if (signatureElement instanceof PerlSignatureElement) {
-          processSignatureElement(((PerlSignatureElement)signatureElement).getDeclarationElement(), arguments);
+        if (signatureElement instanceof PerlSignatureElement perlSignatureElement) {
+          processSignatureElement(perlSignatureElement.getDeclarationElement(), arguments);
         }
         else {
           processSignatureElement(signatureElement, arguments);
@@ -127,8 +127,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
   }
 
   protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments) {
-    if (signatureElement instanceof PerlVariableDeclarationElement) {
-      PerlVariable variable = ((PerlVariableDeclarationElement)signatureElement).getVariable();
+    if (signatureElement instanceof PerlVariableDeclarationElement variableDeclarationElement) {
+      PerlVariable variable = variableDeclarationElement.getVariable();
       PerlSubArgument newArgument = PerlSubArgument.mandatory(variable.getActualType(), variable.getName());
       newArgument.setOptional(signatureElement.getNextSibling() != null);
       arguments.add(newArgument);
@@ -139,8 +139,8 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitPerlSubDefinitionElement(this);
+    if (visitor instanceof PerlVisitor perlVisitor) {
+      perlVisitor.visitPerlSubDefinitionElement(this);
     }
     else {
       super.accept(visitor);

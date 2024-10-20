@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -169,8 +169,8 @@ public class PerlSubAnnotations {
       else if (annotation instanceof PsiPerlAnnotationOverride) {
         result.setIsOverride();
       }
-      else if (annotation instanceof PsiPerlAnnotationReturns) {
-        result.setReturnValue(((PsiPerlAnnotationReturns)annotation).getValue());
+      else if (annotation instanceof PsiPerlAnnotationReturns annotationReturns) {
+        result.setReturnValue(annotationReturns.getValue());
       }
     }
 

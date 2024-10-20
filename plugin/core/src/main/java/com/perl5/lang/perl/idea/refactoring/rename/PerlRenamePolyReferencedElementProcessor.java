@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,8 +42,8 @@ public abstract class PerlRenamePolyReferencedElementProcessor extends RenamePsi
       boolean globScanned = element instanceof PerlGlobVariableElement;
 
       for (PsiReference reference : ReferencesSearch.search(element, element.getUseScope()).findAll()) {
-        if (reference instanceof PsiPolyVariantReference) {
-          for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
+        if (reference instanceof PsiPolyVariantReference polyVariantReference) {
+          for (ResolveResult resolveResult : polyVariantReference.multiResolve(false)) {
             PsiElement resolveResultElement = resolveResult.getElement();
             if (!allRenames.containsKey(resolveResultElement)) {
               allRenames.put(resolveResultElement, newName);

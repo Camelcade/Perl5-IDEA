@@ -84,8 +84,8 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
 
   public static @NotNull PerlRealVersionManagerData<?, ?> notNullFrom(@NotNull Sdk sdk) {
     PerlVersionManagerData<?, ?> data = PerlVersionManagerData.notNullFrom(sdk);
-    if (data instanceof PerlRealVersionManagerData) {
-      return (PerlRealVersionManagerData<?, ?>)data;
+    if (data instanceof PerlRealVersionManagerData<?, ?> realVersionManagerData) {
+      return realVersionManagerData;
     }
     throw new NullPointerException("Additional data supposed to be " + PerlRealVersionManagerData.class.getSimpleName() + " not " + data);
   }

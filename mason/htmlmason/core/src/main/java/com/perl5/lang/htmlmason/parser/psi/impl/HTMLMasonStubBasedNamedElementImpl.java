@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,8 +55,8 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement<?
     }
 
     PsiElement nameIdentifier = getNameIdentifier();
-    if (nameIdentifier instanceof LeafPsiElement) {
-      ((LeafPsiElement)nameIdentifier).replaceWithText(name);
+    if (nameIdentifier instanceof LeafPsiElement leafPsiElement) {
+      leafPsiElement.replaceWithText(name);
     }
 
     return this;
@@ -111,8 +111,8 @@ public abstract class HTMLMasonStubBasedNamedElementImpl<T extends StubElement<?
       PerlPsiUtil.processElementsFromStubs(
         rootStub,
         psi -> {
-          if (psi instanceof HTMLMasonArgsBlock) {
-            result.add(((HTMLMasonArgsBlock)psi));
+          if (psi instanceof HTMLMasonArgsBlock argsBlock) {
+            result.add(argsBlock);
           }
           return true;
         },

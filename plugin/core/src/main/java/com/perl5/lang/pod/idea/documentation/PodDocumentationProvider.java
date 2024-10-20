@@ -58,14 +58,14 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
 
   @Override
   public PsiElement getDocumentationElementForLookupItem(PsiManager psiManager, Object object, PsiElement element) {
-    if (object instanceof LiveTemplateLookupElementImpl) {
-      String lookupString = ((LiveTemplateLookupElementImpl)object).getLookupString();
+    if (object instanceof LiveTemplateLookupElementImpl templateLookupElement) {
+      String lookupString = templateLookupElement.getLookupString();
       if (lookupString.startsWith("=")) {
         return PerlDocUtil.resolveDoc("perlpod", lookupString, element, true);
       }
     }
-    else if (object instanceof PodSection) {
-      return (PodSection)object;
+    else if (object instanceof PodSection podSection) {
+      return podSection;
     }
     return super.getDocumentationElementForLookupItem(psiManager, object, element);
   }

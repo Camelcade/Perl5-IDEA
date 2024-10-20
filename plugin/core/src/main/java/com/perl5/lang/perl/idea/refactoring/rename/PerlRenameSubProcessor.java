@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,8 +62,8 @@ public class PerlRenameSubProcessor extends RenamePsiElementProcessor {
       return null;
     }
 
-    if (element instanceof PerlSubElement && ((PerlSubElement)element).isMethod()) {
-      return suggestSuperMethod((PerlSubElement)element);
+    if (element instanceof PerlSubElement subElement && subElement.isMethod()) {
+      return suggestSuperMethod(subElement);
     }
 
     return super.substituteElementToRename(element, editor);
@@ -101,12 +101,12 @@ public class PerlRenameSubProcessor extends RenamePsiElementProcessor {
       .processCallables(subElement.getProject(), GlobalSearchScope.allScope(subElement.getProject()), canonicalName, relatedItems::add);
 
     for (PsiElement relatedItem : new ArrayList<>(relatedItems)) {
-      if (relatedItem instanceof PerlSubElement && ((PerlSubElement)relatedItem).isMethod()) {
-        relatedItems.addAll(PerlSubUtil.collectOverridingSubs((PerlSubElement)relatedItem));
+      if (relatedItem instanceof PerlSubElement perlSubElement && perlSubElement.isMethod()) {
+        relatedItems.addAll(PerlSubUtil.collectOverridingSubs(perlSubElement));
       }
       // following is the hack until #1730 is fixed
-      if (!(relatedItem instanceof PerlClassAccessorMethod) ||
-          !relatedItems.contains(((PerlClassAccessorMethod)relatedItem).getPairedMethod())) {
+      if (!(relatedItem instanceof PerlClassAccessorMethod classAccessorMethod) ||
+          !relatedItems.contains(classAccessorMethod.getPairedMethod())) {
         relatedItems.add(relatedItem);
       }
     }

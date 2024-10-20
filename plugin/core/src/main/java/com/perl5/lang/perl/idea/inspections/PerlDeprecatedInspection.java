@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public class PerlDeprecatedInspection extends PerlInspection {
 
         if (!(container instanceof PerlSubElement)) {
           PerlResolveUtil.processResolveTargets((psiElement, reference) -> {
-            if (psiElement instanceof PerlDeprecatable && ((PerlDeprecatable)psiElement).isDeprecated()) {
+            if (psiElement instanceof PerlDeprecatable perlDeprecatable && perlDeprecatable.isDeprecated()) {
               markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
               return false;
             }
@@ -60,21 +60,19 @@ public class PerlDeprecatedInspection extends PerlInspection {
       @Override
       public void visitVariableNameElement(@NotNull PerlVariableNameElement o) {
         PsiElement parent = o.getParent();
-        if (parent instanceof PerlVariable) {
-          if (((PerlVariable)parent).isDeclaration()) {
-            if (((PerlVariable)parent).isDeprecated()) {
-              markDeprecated(holder, o, PerlBundle.message("perl.deprecated.variable"));
-            }
+        if (parent instanceof PerlVariable perlVariable) {
+          if (perlVariable.isDeclaration() && perlVariable.isDeprecated()) {
+            markDeprecated(holder, o, PerlBundle.message("perl.deprecated.variable"));
           }
 
           PerlResolveUtil.processResolveTargets((psiElement, reference) -> {
             String message = null;
-            if (psiElement instanceof PerlNamespaceDefinitionElement &&
-                ((PerlNamespaceDefinitionElement)psiElement).isDeprecated()) {
+            if (psiElement instanceof PerlNamespaceDefinitionElement namespaceDefinitionElement &&
+                namespaceDefinitionElement.isDeprecated()) {
               message = PerlBundle.message("perl.deprecated.namespace");
             }
-            else if (psiElement instanceof PerlVariableDeclarationElement &&
-                     ((PerlVariableDeclarationElement)psiElement)
+            else if (psiElement instanceof PerlVariableDeclarationElement variableDeclarationElement &&
+                     variableDeclarationElement
                        .isDeprecated()) {
               message = PerlBundle.message("perl.deprecated.variable");
             }

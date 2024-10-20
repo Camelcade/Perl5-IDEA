@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,8 +61,8 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
       new ComboBoxTableRenderer<>(ArrayUtil.toStringArray(languageIds)) {
         @Override
         public boolean isCellEditable(EventObject event) {
-          if (event instanceof MouseEvent) {
-            return ((MouseEvent)event).getClickCount() >= 1;
+          if (event instanceof MouseEvent mouseEvent) {
+            return mouseEvent.getClickCount() >= 1;
           }
 
           return true;

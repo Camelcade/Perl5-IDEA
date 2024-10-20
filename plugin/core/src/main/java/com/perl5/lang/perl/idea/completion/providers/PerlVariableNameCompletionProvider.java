@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,8 +47,8 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
     if (variableNameElement instanceof PerlVariableNameElement) {
       resultSet = resultSet.withPrefixMatcher(getVariableNamePrefix(variableNameElement, parameters.getOffset()));
       PsiElement variable = variableNameElement.getParent();
-      if (variable instanceof PerlVariable) {
-        namespaceName = ((PerlVariable)variable).getExplicitNamespaceName();
+      if (variable instanceof PerlVariable perlVariable) {
+        namespaceName = perlVariable.getExplicitNamespaceName();
       }
     }
 

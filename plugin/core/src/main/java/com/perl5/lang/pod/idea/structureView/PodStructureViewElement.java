@@ -78,8 +78,8 @@ public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
     List<StructureViewTreeElement> result = new ArrayList<>();
 
     PsiElement container = null;
-    if (psiElement instanceof PodSection) {
-      container = ((PodSection)psiElement).getContentBlock();
+    if (psiElement instanceof PodSection podSection) {
+      container = podSection.getContentBlock();
     }
 
     if (container == null) {
@@ -98,8 +98,8 @@ public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
     if (result.size() == 1 && result.getFirst().getValue() instanceof PodSectionOver) {
       // expanding over
       StructureViewTreeElement childElement = result.getFirst();
-      if (childElement instanceof PodStructureViewElement) {
-        return ((PodStructureViewElement)childElement).getChildrenBase();
+      if (childElement instanceof PodStructureViewElement structureViewElement) {
+        return structureViewElement.getChildrenBase();
       }
     }
 

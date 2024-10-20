@@ -212,8 +212,8 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
     List<CommandDescriptor> existingCommands = new ArrayList<>();
     List<OptionDescriptor> existingOptions = new ArrayList<>();
     commandModel.forEach(it -> {
-      if (it.descriptor instanceof CommandDescriptor) {
-        existingCommands.add((CommandDescriptor)it.descriptor);
+      if (it.descriptor instanceof CommandDescriptor commandDescriptor) {
+        existingCommands.add(commandDescriptor);
       }
       else {
         existingOptions.add(it.descriptor);

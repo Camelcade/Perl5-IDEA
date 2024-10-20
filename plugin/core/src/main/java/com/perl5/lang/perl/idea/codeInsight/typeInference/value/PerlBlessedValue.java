@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,8 +78,8 @@ public final class PerlBlessedValue extends PerlParametrizedOperationValue {
 
   private static @Nullable PerlValue computeResolve(@NotNull PerlValue resolvedValue,
                                                     @NotNull PerlValue resolvedBless) {
-    if (resolvedValue instanceof PerlReferenceValue) {
-      return PerlReferenceValue.create(((PerlReferenceValue)resolvedValue).getTarget(), resolvedBless);
+    if (resolvedValue instanceof PerlReferenceValue referenceValue) {
+      return PerlReferenceValue.create(referenceValue.getTarget(), resolvedBless);
     }
     return null;
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,8 +65,8 @@ public class PerlArraySliceValue extends PerlParametrizedOperationValue {
       return null;
     }
     PerlArrayValue.Builder builder = PerlArrayValue.builder();
-    if (indexValue instanceof PerlArrayValue) {
-      ((PerlArrayValue)indexValue).forEach(key -> builder.addElement(((PerlArrayValue)arrayValue).get(key)));
+    if (indexValue instanceof PerlArrayValue perlArrayValue) {
+      perlArrayValue.forEach(key -> builder.addElement(((PerlArrayValue)arrayValue).get(key)));
     }
     else {
       return null;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.Key;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.execution.PortMapping;
@@ -81,8 +80,8 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
   protected @NotNull ProcessHandler startProcess() throws ExecutionException {
     ProcessHandler processHandler = super.startProcess();
     RunProfile runProfile = getEnvironment().getRunProfile();
-    if (runProfile instanceof GenericPerlRunConfiguration) {
-      myHostData = PerlHostData.notNullFrom(((GenericPerlRunConfiguration)runProfile).getEffectiveSdk());
+    if (runProfile instanceof GenericPerlRunConfiguration genericPerlRunConfiguration) {
+      myHostData = PerlHostData.notNullFrom(genericPerlRunConfiguration.getEffectiveSdk());
     }
     else {
       myHostData = PerlHostHandler.getDefaultHandler().createData();

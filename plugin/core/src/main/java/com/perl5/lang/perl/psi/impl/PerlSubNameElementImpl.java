@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,8 +32,8 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences imp
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitSubNameElement(this);
+    if (visitor instanceof PerlVisitor perlVisitor) {
+      perlVisitor.visitSubNameElement(this);
     }
     else {
       super.accept(visitor);
@@ -49,7 +49,7 @@ public class PerlSubNameElementImpl extends PerlLeafPsiElementWithReferences imp
   public boolean isBuiltIn() {
     for (PsiReference reference : getReferences()) {
       PsiElement target = reference.resolve();
-      if (target instanceof PerlImplicitSubDefinition && ((PerlImplicitSubDefinition)target).isBuiltIn()) {
+      if (target instanceof PerlImplicitSubDefinition implicitSubDefinition && implicitSubDefinition.isBuiltIn()) {
         return true;
       }
     }

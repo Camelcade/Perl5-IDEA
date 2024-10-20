@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,8 +37,8 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
   }
 
   private @NotNull String getNamspaceName() {
-    if (myElement instanceof PerlNamespaceElement) {
-      return ((PerlNamespaceElement)myElement).getCanonicalName();
+    if (myElement instanceof PerlNamespaceElement namespaceElement) {
+      return namespaceElement.getCanonicalName();
     }
     return getRangeInElement().substring(myElement.getText());
   }
@@ -64,7 +64,7 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
 
   @Override
   public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
-    if (myElement instanceof PerlNamespaceElement && ((PerlNamespaceElement)myElement).isTag()) {
+    if (myElement instanceof PerlNamespaceElement namespaceElement && namespaceElement.isTag()) {
       return myElement;
     }
     return super.handleElementRename(newElementName);

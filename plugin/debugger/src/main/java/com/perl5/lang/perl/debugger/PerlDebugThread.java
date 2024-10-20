@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -254,8 +254,8 @@ public class PerlDebugThread extends Thread {
       final PerlDebuggingEvent newEvent = myGson.fromJson(response, PerlDebuggingEvent.class);
 
       if (newEvent != null) {
-        if (newEvent instanceof PerlDebuggingEventReady) {
-          if (((PerlDebuggingEventReady)newEvent).isValid()) {
+        if (newEvent instanceof PerlDebuggingEventReady debuggingEventReady) {
+          if (debuggingEventReady.isValid()) {
             isReady = true;
             setUpDebugger();
           }

@@ -61,7 +61,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
   public @Nullable Runnable getPostRenameCallback(@NotNull PsiElement element,
                                                   final @NotNull String newName,
                                                   @NotNull RefactoringElementListener elementListener) {
-    if (element instanceof PerlNamespaceDefinitionWithIdentifier && isFileToBeRenamed((PerlNamespaceDefinitionWithIdentifier)element)) {
+    if (element instanceof PerlNamespaceDefinitionWithIdentifier definitionWithIdentifier && isFileToBeRenamed(definitionWithIdentifier)) {
       final PsiFile file = element.getContainingFile();
 
       return new Runnable() {

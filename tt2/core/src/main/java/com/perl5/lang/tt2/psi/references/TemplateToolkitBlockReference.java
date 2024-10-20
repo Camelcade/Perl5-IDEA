@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,8 @@ public class TemplateToolkitBlockReference extends PerlCachingReference<PsiEleme
 
     PsiTreeUtil.processElements(element.getContainingFile(), element1 ->
     {
-      if (element1 instanceof TemplateToolkitNamedBlock && StringUtil.equals(((TemplateToolkitNamedBlock)element1).getName(), targetName)) {
+      if (element1 instanceof TemplateToolkitNamedBlock templateToolkitNamedBlock &&
+          StringUtil.equals(templateToolkitNamedBlock.getName(), targetName)) {
         result.add(new PsiElementResolveResult(element1));
       }
       return true;

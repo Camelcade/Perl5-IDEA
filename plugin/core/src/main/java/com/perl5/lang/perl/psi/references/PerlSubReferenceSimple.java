@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -151,8 +151,8 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
 
     for (PsiElement element : relatedItems) {
       if (!isAutoloaded() &&
-          element instanceof PerlIdentifierOwner &&
-          PerlSubUtil.SUB_AUTOLOAD.equals(((PerlIdentifierOwner)element).getName())) {
+          element instanceof PerlIdentifierOwner identifierOwner &&
+          PerlSubUtil.SUB_AUTOLOAD.equals(identifierOwner.getName())) {
         setAutoloaded();
       }
 
@@ -168,7 +168,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
         setDefined();
       }
 
-      if (!isXSub() && element instanceof PerlSubElement && ((PerlSubElement)element).isXSub()) {
+      if (!isXSub() && element instanceof PerlSubElement perlSubElement && perlSubElement.isXSub()) {
         setXSub();
       }
 
@@ -185,8 +185,8 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
   @Override
   public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     PsiElement target = resolve();
-    if (target instanceof PerlRenameUsagesHelper) {
-      newElementName = ((PerlRenameUsagesHelper)target).getSubstitutedUsageName(newElementName, myElement);
+    if (target instanceof PerlRenameUsagesHelper renameUsagesHelper) {
+      newElementName = renameUsagesHelper.getSubstitutedUsageName(newElementName, myElement);
     }
     return super.handleElementRename(newElementName);
   }

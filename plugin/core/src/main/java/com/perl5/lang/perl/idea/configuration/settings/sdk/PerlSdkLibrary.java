@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,9 +61,9 @@ public class PerlSdkLibrary extends SyntheticLibrary implements ItemPresentation
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof PerlSdkLibrary)) return false;
-
-    PerlSdkLibrary library = (PerlSdkLibrary)o;
+    if (!(o instanceof PerlSdkLibrary library)) {
+      return false;
+    }
 
     if (!myRoots.equals(library.myRoots)) {
       return false;

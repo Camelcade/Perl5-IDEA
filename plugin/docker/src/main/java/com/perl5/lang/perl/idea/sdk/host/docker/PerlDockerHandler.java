@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -125,8 +125,8 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
   @TestOnly
   static @NotNull PerlDockerHandler getInstance() {
     for (PerlHostHandler<?, ?> handler : PerlHostHandler.all()) {
-      if (handler instanceof PerlDockerHandler) {
-        return (PerlDockerHandler)handler;
+      if (handler instanceof PerlDockerHandler perlDockerHandler) {
+        return perlDockerHandler;
       }
     }
     throw new NullPointerException();

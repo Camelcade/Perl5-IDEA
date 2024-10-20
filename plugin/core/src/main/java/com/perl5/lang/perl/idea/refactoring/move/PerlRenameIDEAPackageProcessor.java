@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,9 +25,8 @@ import org.jetbrains.annotations.NotNull;
 public class PerlRenameIDEAPackageProcessor extends PerlRenameDirectoryProcessor {
   @Override
   public boolean canProcessElement(@NotNull PsiElement element) {
-    if (element instanceof PsiDirectoryContainer)    // package
-    {
-      for (PsiDirectory dir : ((PsiDirectoryContainer)element).getDirectories()) {
+    if (element instanceof PsiDirectoryContainer directoryContainer) {    // package
+      for (PsiDirectory dir : directoryContainer.getDirectories()) {
         if (!canProcessDir(dir)) {
           return false;
         }
@@ -40,9 +39,8 @@ public class PerlRenameIDEAPackageProcessor extends PerlRenameDirectoryProcessor
 
   @Override
   protected void renamePsiElement(PsiElement element, String newName) {
-    if (element instanceof PsiDirectoryContainer)    // package
-    {
-      for (PsiDirectory dir : ((PsiDirectoryContainer)element).getDirectories()) {
+    if (element instanceof PsiDirectoryContainer container) {    // package
+      for (PsiDirectory dir : container.getDirectories()) {
         super.renamePsiElement(dir, newName);
       }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -90,10 +90,10 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
     }
 
     protected @NotNull List<PsiElement> collectReferenceTargets(@Nullable PsiReference reference) {
-      if (reference instanceof PsiPolyVariantReference) {
+      if (reference instanceof PsiPolyVariantReference polyVariantReference) {
         List<PsiElement> result = new ArrayList<>();
 
-        for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
+        for (ResolveResult resolveResult : polyVariantReference.multiResolve(false)) {
           PsiElement element = resolveResult.getElement();
           if (element != null) {
             result.add(element);
@@ -120,11 +120,11 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
     @Override
     public void computeUsages(@NotNull List<? extends PsiElement> targets) {
       for (PsiElement target : targets) {
-        if (myFile.equals(target.getContainingFile()) && target instanceof PsiNameIdentifierOwner) {
-          PsiElement nameIdentifier = ((PsiNameIdentifierOwner)target).getNameIdentifier();
+        if (myFile.equals(target.getContainingFile()) && target instanceof PsiNameIdentifierOwner nameIdentifierOwner) {
+          PsiElement nameIdentifier = nameIdentifierOwner.getNameIdentifier();
           if (nameIdentifier != null) {
-            TextRange rangeInIdentifier = target instanceof PerlIdentifierRangeProvider
-                                          ? ((PerlIdentifierRangeProvider)target).getRangeInIdentifier()
+            TextRange rangeInIdentifier = target instanceof PerlIdentifierRangeProvider identifierRangeProvider
+              ? identifierRangeProvider.getRangeInIdentifier()
                                           : ElementManipulators.getValueTextRange(nameIdentifier);
             myWriteUsages.add(computeHighlightingRange(nameIdentifier, rangeInIdentifier));
           }

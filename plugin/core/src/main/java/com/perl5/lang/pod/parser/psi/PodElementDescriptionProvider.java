@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,8 +80,8 @@ public class PodElementDescriptionProvider extends PerlElementDescriptionProvide
 
   @Override
   protected @Nullable String getLongName(@NotNull PsiElement element) {
-    if (element instanceof PodTitledSection) {
-      return ((PodTitledSection)element).getTitleTextWithoutIndexes();
+    if (element instanceof PodTitledSection titledSection) {
+      return titledSection.getTitleTextWithoutIndexes();
     }
     LOG.warn("Unhandled long name for " + element);
     return "Unhandled long name for " + element;

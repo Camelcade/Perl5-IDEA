@@ -419,9 +419,9 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
                                                 @NotNull StringBuilder result,
                                                 @NotNull String prefix) {
     result.append(prefix).append(node);
-    if (node instanceof XValueNodeImpl) {
-      result.append("-").append(XValuePresentationUtil.computeValueText(((XValueNodeImpl)node).getValuePresentation()));
-      var valueContainer = ((XValueNodeImpl)node).getValueContainer();
+    if (node instanceof XValueNodeImpl xValueNode) {
+      result.append("-").append(XValuePresentationUtil.computeValueText(xValueNode.getValuePresentation()));
+      var valueContainer = xValueNode.getValueContainer();
       if (valueContainer.canNavigateToSource()) {
         result.append("; navigates to source");
       }

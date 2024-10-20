@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ public class MojoHelperHandler extends PerlSubCallHandlerWithEmptyData {
     }
 
     PsiElement bodyElement = listElements.get(1);
-    if (!(bodyElement instanceof PerlSubExpr)) {
+    if (!(bodyElement instanceof PerlSubExpr perlSubExpr)) {
       return Collections.emptyList();
     }
 
@@ -60,7 +60,7 @@ public class MojoHelperHandler extends PerlSubCallHandlerWithEmptyData {
     }
 
     return Collections.singletonList(new MojoHelperDefinition(
-      psiElement, subName, LIGHT_METHOD_DEFINITION, identifierElement, MOJO_CONTROLLER_NS, (PerlSubExpr)bodyElement));
+      psiElement, subName, LIGHT_METHOD_DEFINITION, identifierElement, MOJO_CONTROLLER_NS, perlSubExpr));
   }
 
   @Override

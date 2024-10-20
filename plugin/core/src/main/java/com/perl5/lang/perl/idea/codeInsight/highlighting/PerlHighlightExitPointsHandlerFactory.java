@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,9 @@ import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.lexer.PerlTokenSets.LOOP_CONTROL_KEYWORDS;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.RESERVED_EXIT;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.RESERVED_RETURN;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.LOOP_CONTROL_KEYWORDS;
 
 public class PerlHighlightExitPointsHandlerFactory extends HighlightUsagesHandlerFactoryBase {
   private static final TokenSet EXIT_KEYWORDS = TokenSet.create(
@@ -55,8 +55,9 @@ public class PerlHighlightExitPointsHandlerFactory extends HighlightUsagesHandle
         EXIT_KEYWORDS.contains(PsiUtilCore.getElementType(target))) {
       return new PerlHighlightExitPointsHandler(editor, file, target);
     }
-    else if (LOOP_CONTROL_KEYWORDS.contains(PsiUtilCore.getElementType(target)) && target.getParent() instanceof PerlFlowControlExpr) {
-      PsiElement flowTarget = ((PerlFlowControlExpr)target.getParent()).getTargetScope();
+    else if (LOOP_CONTROL_KEYWORDS.contains(PsiUtilCore.getElementType(target)) &&
+             target.getParent() instanceof PerlFlowControlExpr perlFlowControlExpr) {
+      PsiElement flowTarget = perlFlowControlExpr.getTargetScope();
       if (flowTarget instanceof PerlSubDefinition) {
         return new PerlHighlightExitPointsHandler(editor, file, target);
       }

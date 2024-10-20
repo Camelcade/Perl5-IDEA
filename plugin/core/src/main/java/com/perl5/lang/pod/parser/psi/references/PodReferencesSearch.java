@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,10 +34,10 @@ public class PodReferencesSearch extends QueryExecutorBase<PsiReference, Referen
   @Override
   public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<? super PsiReference> consumer) {
     final PsiElement element = queryParameters.getElementToSearch();
-    if (!(element instanceof PodTitledSection)) {
+    if (!(element instanceof PodTitledSection podTitledSection)) {
       return;
     }
-    final String textTitle = ((PodTitledSection)element).getTitleText();
+    final String textTitle = podTitledSection.getTitleText();
     if (!StringUtil.isNotEmpty(textTitle)) {
       return;
     }

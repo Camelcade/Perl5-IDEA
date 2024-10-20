@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -197,8 +197,8 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
         return this;
       }
 
-      if (variant instanceof PerlOneOfValue) {
-        for (PerlValue value : ((PerlOneOfValue)variant).myVariants) {
+      if (variant instanceof PerlOneOfValue oneOfValue) {
+        for (PerlValue value : oneOfValue.myVariants) {
           if (myVariants.size() >= MAX_VARIANTS_NUMBER) {
             break;
           }

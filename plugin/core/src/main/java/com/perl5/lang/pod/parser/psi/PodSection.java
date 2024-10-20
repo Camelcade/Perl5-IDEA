@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ public interface PodSection extends PodCompositeElement, PodRenderableElement {
   @Override
   default boolean isIndexed() {
     PsiElement contentBlock = getContentBlock();
-    if (contentBlock instanceof PodCompositeElement && ((PodCompositeElement)contentBlock).isIndexed()) {
+    if (contentBlock instanceof PodCompositeElement podCompositeElement && podCompositeElement.isIndexed()) {
       return true;
     }
     return PodCompositeElement.super.isIndexed();

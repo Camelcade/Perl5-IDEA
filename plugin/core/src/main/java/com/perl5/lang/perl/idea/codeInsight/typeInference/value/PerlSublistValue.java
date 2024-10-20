@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,10 +111,10 @@ public class PerlSublistValue extends PerlOperationValue {
   }
 
   private static @Nullable PerlValue computeResolve(@NotNull PerlValue listValue, int startOffset, int endOffset) {
-    if (!(listValue instanceof PerlArrayValue)) {
+    if (!(listValue instanceof PerlArrayValue arrayValue)) {
       return null;
     }
-    List<PerlValue> elements = ((PerlArrayValue)listValue).getElements();
+    List<PerlValue> elements = arrayValue.getElements();
     int listSize = elements.size();
     if (listSize < startOffset + endOffset) {
       return null;
@@ -143,10 +143,10 @@ public class PerlSublistValue extends PerlOperationValue {
 
   public static PerlValue create(@NotNull PerlValue listValue, int startOffset, int endOffset) {
     PerlSublistValue result;
-    if (listValue instanceof PerlSublistValue) {
-      result = new PerlSublistValue(((PerlSublistValue)listValue).getBaseValue(),
-                                    ((PerlSublistValue)listValue).getStartOffset() + startOffset,
-                                    ((PerlSublistValue)listValue).getEndOffset() + endOffset);
+    if (listValue instanceof PerlSublistValue sublistValue) {
+      result = new PerlSublistValue(sublistValue.getBaseValue(),
+                                    sublistValue.getStartOffset() + startOffset,
+                                    sublistValue.getEndOffset() + endOffset);
     }
     else{
       result = new PerlSublistValue(listValue, startOffset, endOffset);

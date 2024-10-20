@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,11 +61,11 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
     if (keyValue.isUnknown() || keyValue.isUndef()) {
       return null;
     }
-    if (hashValue instanceof PerlHashValue) {
-      return ((PerlHashValue)hashValue).get(keyValue);
+    if (hashValue instanceof PerlHashValue perlHashValue) {
+      return perlHashValue.get(keyValue);
     }
-    else if (hashValue instanceof PerlDeferredHashValue) {
-      return ((PerlDeferredHashValue)hashValue).tryGet(keyValue);
+    else if (hashValue instanceof PerlDeferredHashValue perlDeferredHashValue) {
+      return perlDeferredHashValue.tryGet(keyValue);
     }
     return null;
   }

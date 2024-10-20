@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,11 +32,11 @@ public class PerlWarningTreeNode extends PerlAbstractWarningTreeElement {
     List<PerlWarningTreeLeaf> result = new ArrayList<>();
 
     for (PerlAbstractWarningTreeElement subElement : subElements) {
-      if (subElement instanceof PerlWarningTreeNode) {
-        result.addAll(((PerlWarningTreeNode)subElement).collectChildLeafs());
+      if (subElement instanceof PerlWarningTreeNode warningTreeNode) {
+        result.addAll(warningTreeNode.collectChildLeafs());
       }
-      else if (subElement instanceof PerlWarningTreeLeaf) {
-        result.add((PerlWarningTreeLeaf)subElement);
+      else if (subElement instanceof PerlWarningTreeLeaf warningTreeLeaf) {
+        result.add(warningTreeLeaf);
       }
       else {
         throw new RuntimeException("Unknown type of warnings tree: " + subElement.getClass());
@@ -51,8 +51,8 @@ public class PerlWarningTreeNode extends PerlAbstractWarningTreeElement {
     result.add(this);
 
     for (PerlAbstractWarningTreeElement subElement : subElements) {
-      if (subElement instanceof PerlWarningTreeNode) {
-        result.addAll(((PerlWarningTreeNode)subElement).collectChildNodes());
+      if (subElement instanceof PerlWarningTreeNode warningTreeNode) {
+        result.addAll(warningTreeNode.collectChildNodes());
       }
       else if (!(subElement instanceof PerlWarningTreeLeaf)) {
         throw new RuntimeException("Unknown type of warnings tree: " + subElement.getClass());

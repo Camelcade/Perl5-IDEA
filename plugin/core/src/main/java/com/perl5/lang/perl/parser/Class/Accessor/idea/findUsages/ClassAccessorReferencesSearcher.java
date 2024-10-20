@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,11 +33,11 @@ public class ClassAccessorReferencesSearcher extends QueryExecutorBase<PsiRefere
   @Override
   public void processQuery(@NotNull ReferencesSearch.SearchParameters queryParameters, @NotNull Processor<? super PsiReference> consumer) {
     PsiElement element = queryParameters.getElementToSearch();
-    if (element instanceof PerlClassAccessorMethod) {
+    if (element instanceof PerlClassAccessorMethod classAccessorMethod) {
       queryParameters.getOptimizer()
-        .searchWord(((PerlClassAccessorMethod)element).getSubName(), queryParameters.getEffectiveSearchScope(), true, element);
+        .searchWord(classAccessorMethod.getSubName(), queryParameters.getEffectiveSearchScope(), true, element);
 
-      PerlClassAccessorMethod pairedMethod = ((PerlClassAccessorMethod)element).getPairedMethod();
+      PerlClassAccessorMethod pairedMethod = classAccessorMethod.getPairedMethod();
       if (pairedMethod != null) {
         queryParameters.getOptimizer().searchWord(pairedMethod.getSubName(), queryParameters.getEffectiveSearchScope(), true, pairedMethod);
       }

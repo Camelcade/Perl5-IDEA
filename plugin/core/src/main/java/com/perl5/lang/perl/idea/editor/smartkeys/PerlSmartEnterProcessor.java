@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,8 +43,8 @@ public class PerlSmartEnterProcessor extends SmartEnterProcessor {
     PsiElement element = psiFile.getViewProvider().findElementAt(offset > 0 ? offset - 1 : offset, PerlLanguage.INSTANCE);
 
     while (element != null && !(element instanceof PsiFile)) {
-      if (element instanceof PsiPerlStatement && !StringUtil.endsWithChar(element.getNode().getChars(), ';')) {
-        if (isBlockOwnerFallback((PsiPerlStatement)element)) {
+      if (element instanceof PsiPerlStatement perlStatement && !StringUtil.endsWithChar(element.getNode().getChars(), ';')) {
+        if (isBlockOwnerFallback(perlStatement)) {
           addBlock(editor, element);
           return false;
         }
@@ -52,7 +52,7 @@ public class PerlSmartEnterProcessor extends SmartEnterProcessor {
           addSemicolon(editor, element);
         }
       }
-      else if (element instanceof PerlBlockOwner && ((PerlBlockOwner)element).getBlock() == null) {
+      else if (element instanceof PerlBlockOwner blockOwner && blockOwner.getBlock() == null) {
         addBlock(editor, element);
         return false;
       }
@@ -70,10 +70,10 @@ public class PerlSmartEnterProcessor extends SmartEnterProcessor {
       return false;
     }
     PsiPerlExpr expr = statement.getExpr();
-    if (!(expr instanceof PsiPerlSubCall)) {
+    if (!(expr instanceof PsiPerlSubCall perlSubCall)) {
       return false;
     }
-    PsiPerlMethod method = ((PsiPerlSubCall)expr).getMethod();
+    PsiPerlMethod method = perlSubCall.getMethod();
     if (method == null || method.getNamespaceElement() != null) {
       return false;
     }

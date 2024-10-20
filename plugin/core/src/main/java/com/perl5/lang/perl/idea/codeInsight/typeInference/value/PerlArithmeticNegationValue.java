@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,13 +48,13 @@ public class PerlArithmeticNegationValue extends PerlOperationValue {
   }
 
   private static @Nullable PerlValue doComputeResolve(@NotNull PerlValue target) {
-    if (target instanceof PerlArithmeticNegationValue) {
-      return ((PerlArithmeticNegationValue)target).getBaseValue();
+    if (target instanceof PerlArithmeticNegationValue arithmeticNegationValue) {
+      return arithmeticNegationValue.getBaseValue();
     }
-    if (!(target instanceof PerlScalarValue) || !target.isDeterministic()) {
+    if (!(target instanceof PerlScalarValue scalarValue) || !target.isDeterministic()) {
       return null;
     }
-    String value = ((PerlScalarValue)target).getValue();
+    String value = scalarValue.getValue();
     if (StringUtil.isEmpty(value)) {
       return UNKNOWN_VALUE;
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -157,17 +157,12 @@ class PerlDockerFileSystem extends PerlPluggableVirtualFileSystem {
     }
 
     @Override
-    public boolean equals(Object o) {
-      if (this == o) {
-        return true;
-      }
-      if (!(o instanceof PerlDockerVirtualFile)) {
+    public final boolean equals(Object o) {
+      if (!(o instanceof PerlDockerVirtualFile virtualFile)) {
         return false;
       }
 
-      PerlDockerVirtualFile file = (PerlDockerVirtualFile)o;
-
-      return myDescriptor.equals(file.myDescriptor);
+      return myDescriptor.equals(virtualFile.myDescriptor);
     }
 
     @Override

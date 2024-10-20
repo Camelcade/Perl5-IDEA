@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -98,14 +98,12 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
     if (this == o) {
       return true;
     }
-    if (!(o instanceof PerlImplicitNamespaceDefinition)) {
+    if (!(o instanceof PerlImplicitNamespaceDefinition that)) {
       return false;
     }
     if (!super.equals(o)) {
       return false;
     }
-
-    PerlImplicitNamespaceDefinition that = (PerlImplicitNamespaceDefinition)o;
 
     return getNamespaceName().equals(that.getNamespaceName());
   }

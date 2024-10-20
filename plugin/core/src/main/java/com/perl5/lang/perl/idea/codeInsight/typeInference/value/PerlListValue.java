@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,11 +122,11 @@ abstract class PerlListValue extends PerlValue {
     }
 
     public Self addElement(@NotNull PerlValue element) {
-      if (element instanceof PerlArrayValue) {
-        myElements.addAll(((PerlArrayValue)element).getElements());
+      if (element instanceof PerlArrayValue arrayValue) {
+        myElements.addAll(arrayValue.getElements());
       }
-      else if (element instanceof PerlHashValue) {
-        myElements.addAll(((PerlHashValue)element).getElements());
+      else if (element instanceof PerlHashValue hashValue) {
+        myElements.addAll(hashValue.getElements());
       }
       else {
         myElements.add(element);

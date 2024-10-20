@@ -231,22 +231,22 @@ public final class PerlValuesManager {
     }
     else if (element instanceof PsiPerlHashIndex) {
       PsiElement parent = element.getParent();
-      if (parent instanceof PsiPerlDerefExpr) {
+      if (parent instanceof PsiPerlDerefExpr derefExpr) {
         return PerlHashElementValue.create(
-          PerlHashDereferenceValue.create(from(((PsiPerlDerefExpr)parent).getPreviousElement(element))),
+          PerlHashDereferenceValue.create(from(derefExpr.getPreviousElement(element))),
           from(((PsiPerlHashIndex)element).getExpr()));
       }
     }
     else if (element instanceof PsiPerlArrayIndex) {
       PsiElement parent = element.getParent();
-      if (parent instanceof PsiPerlDerefExpr) {
+      if (parent instanceof PsiPerlDerefExpr derefExpr) {
         return PerlArrayElementValue.create(
-          PerlArrayDereferenceValue.create(from(((PsiPerlDerefExpr)parent).getPreviousElement(element))),
+          PerlArrayDereferenceValue.create(from(derefExpr.getPreviousElement(element))),
           from(((PsiPerlArrayIndex)element).getExpr()));
       }
     }
-    else if (element instanceof PsiPerlPrefixUnaryExpr) {
-      PsiPerlExpr target = ((PsiPerlPrefixUnaryExpr)element).getExpr();
+    else if (element instanceof PsiPerlPrefixUnaryExpr prefixUnaryExpr) {
+      PsiPerlExpr target = prefixUnaryExpr.getExpr();
       IElementType firstChildElementType = PsiUtilCore.getElementType(element.getFirstChild());
       if (firstChildElementType == OPERATOR_MINUS) {
         return PerlArithmeticNegationValue.create(from(target));
@@ -255,64 +255,64 @@ public final class PerlValuesManager {
         return from(target);
       }
     }
-    else if (element instanceof PsiPerlRefExpr) {
-      return PerlReferenceValue.create(from(((PsiPerlRefExpr)element).getExpr()));
+    else if (element instanceof PsiPerlRefExpr perlRefExpr) {
+      return PerlReferenceValue.create(from(perlRefExpr.getExpr()));
     }
-    else if (element instanceof PsiPerlHashElement) {
+    else if (element instanceof PsiPerlHashElement perlHashElement) {
       return PerlHashElementValue.create(
-        from(((PsiPerlHashElement)element).getExpr()), from(((PsiPerlHashElement)element).getHashIndex().getExpr()));
+        from(perlHashElement.getExpr()), from(perlHashElement.getHashIndex().getExpr()));
     }
-    else if (element instanceof PsiPerlArrayElement) {
+    else if (element instanceof PsiPerlArrayElement perlArrayElement) {
       return PerlArrayElementValue.create(
-        from(((PsiPerlArrayElement)element).getExpr()), from(((PsiPerlArrayElement)element).getArrayIndex().getExpr())
+        from(perlArrayElement.getExpr()), from(perlArrayElement.getArrayIndex().getExpr())
       );
     }
-    else if (element instanceof PsiPerlHashSlice) {
+    else if (element instanceof PsiPerlHashSlice hashSlice) {
       return PerlHashSliceValue.create(
-        from(((PsiPerlHashSlice)element).getExpr()), listContext(from(((PsiPerlHashSlice)element).getHashIndex().getExpr())));
+        from(hashSlice.getExpr()), listContext(from(hashSlice.getHashIndex().getExpr())));
     }
-    else if (element instanceof PsiPerlArraySlice) {
+    else if (element instanceof PsiPerlArraySlice arraySlice) {
       return PerlArraySliceValue.create(
-        from(((PsiPerlArraySlice)element).getExpr()), listContext(from(((PsiPerlArraySlice)element).getArrayIndex().getExpr())));
+        from(arraySlice.getExpr()), listContext(from(arraySlice.getArrayIndex().getExpr())));
     }
-    else if (element instanceof PsiPerlScalarCastExpr) {
-      PsiPerlExpr expr = ((PsiPerlScalarCastExpr)element).getExpr();
+    else if (element instanceof PsiPerlScalarCastExpr scalarCastExpr) {
+      PsiPerlExpr expr = scalarCastExpr.getExpr();
       if (expr == null) {
         expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlScalarCastExpr)element).getBlock());
       }
       return PerlScalarDereferenceValue.create(from(expr));
     }
-    else if (element instanceof PsiPerlArrayCastExpr) {
-      PsiPerlExpr expr = ((PsiPerlArrayCastExpr)element).getExpr();
+    else if (element instanceof PsiPerlArrayCastExpr arrayCastExpr) {
+      PsiPerlExpr expr = arrayCastExpr.getExpr();
       if (expr == null) {
         expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlArrayCastExpr)element).getBlock());
       }
       return PerlArrayDereferenceValue.create(from(expr));
     }
-    else if (element instanceof PsiPerlHashCastExpr) {
-      PsiPerlExpr expr = ((PsiPerlHashCastExpr)element).getExpr();
+    else if (element instanceof PsiPerlHashCastExpr hashCastExpr) {
+      PsiPerlExpr expr = hashCastExpr.getExpr();
       if (expr == null) {
         expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlHashCastExpr)element).getBlock());
       }
       return PerlHashDereferenceValue.create(from(expr));
     }
-    else if (element instanceof PsiPerlBlessExpr) {
-      PerlValue targetValue = from(((PsiPerlBlessExpr)element).getReferenceExpression());
-      PsiElement blessExpression = ((PsiPerlBlessExpr)element).getBlessExpression();
+    else if (element instanceof PsiPerlBlessExpr perlBlessExpr) {
+      PerlValue targetValue = from(perlBlessExpr.getReferenceExpression());
+      PsiElement blessExpression = perlBlessExpr.getBlessExpression();
       PerlValue blessValue = blessExpression != null ? from(blessExpression) : PerlPackageUtil.getContextType(element);
       return PerlBlessedValue.create(targetValue, blessValue);
     }
-    else if (element instanceof PsiPerlArrayUnshiftExpr) {
-      return PerlScalarContextValue.create(PerlUnshiftValue.create((PsiPerlArrayUnshiftExpr)element));
+    else if (element instanceof PsiPerlArrayUnshiftExpr unshiftExpr) {
+      return PerlScalarContextValue.create(PerlUnshiftValue.create(unshiftExpr));
     }
-    else if (element instanceof PsiPerlArrayPushExpr) {
-      return PerlScalarContextValue.create(PerlPushValue.create((PsiPerlArrayPushExpr)element));
+    else if (element instanceof PsiPerlArrayPushExpr pushExpr) {
+      return PerlScalarContextValue.create(PerlPushValue.create(pushExpr));
     }
-    else if (element instanceof PsiPerlArrayShiftExpr) {
-      return createShiftPopValue((PsiPerlArrayShiftExpr)element, FIRST_ELEMENT_INDEX_VALUE);
+    else if (element instanceof PsiPerlArrayShiftExpr shiftExpr) {
+      return createShiftPopValue(shiftExpr, FIRST_ELEMENT_INDEX_VALUE);
     }
-    else if (element instanceof PsiPerlArrayPopExpr) {
-      return createShiftPopValue((PsiPerlArrayPopExpr)element, LAST_ELEMENT_INDEX_VALUE);
+    else if (element instanceof PsiPerlArrayPopExpr popExpr) {
+      return createShiftPopValue(popExpr, LAST_ELEMENT_INDEX_VALUE);
     }
     return UNKNOWN_VALUE;
   }
@@ -345,12 +345,12 @@ public final class PerlValuesManager {
         return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, true);
       }
       String superContext = isSuper ? PerlPackageUtil.getContextNamespaceName(perlMethod) : null;
-      if (!(derefExpression instanceof PerlDerefExpression)) {
+      if (!(derefExpression instanceof PerlDerefExpression perlDerefExpression)) {
         LOG.warn("Expected deref expression, got " + derefExpression);
         return UNKNOWN_VALUE;
       }
 
-      PsiElement previousValue = ((PerlDerefExpression)derefExpression).getPreviousElement(parentElement);
+      PsiElement previousValue = perlDerefExpression.getPreviousElement(parentElement);
       if (previousValue == null) { // first in chain
         return new PerlCallStaticValue(
           PerlScalarValue.create(PerlPackageUtil.getContextNamespaceName(perlMethod)), subNameValue, callArguments, false);
@@ -377,8 +377,8 @@ public final class PerlValuesManager {
   public static @NotNull PerlValue createShiftPopArgumentValue(@NotNull PerlShiftPopExpr shiftPopExpr) {
     PsiElement target = shiftPopExpr.getTarget();
     PerlValue targetValue;
-    if (target instanceof PerlBuiltInVariable) {
-      targetValue = PerlResolveUtil.inferVariableValue((PerlBuiltInVariable)target, shiftPopExpr);
+    if (target instanceof PerlBuiltInVariable builtInVariable) {
+      targetValue = PerlResolveUtil.inferVariableValue(builtInVariable, shiftPopExpr);
     }
     else {
       targetValue = from(target);

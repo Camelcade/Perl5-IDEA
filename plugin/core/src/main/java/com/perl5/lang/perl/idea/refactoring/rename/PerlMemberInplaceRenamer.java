@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,8 +67,8 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {
   protected Collection<PsiReference> collectRefs(SearchScope referencesSearchScope) {
     Set<PsiReference> references = new HashSet<>(super.collectRefs(referencesSearchScope));
 
-    if (myElementToRename instanceof PerlSubElement) {
-      for (PsiElement relatedItem : PerlRenameSubProcessor.computeRelatedItems((PerlSubElement)myElementToRename)) {
+    if (myElementToRename instanceof PerlSubElement subElement) {
+      for (PsiElement relatedItem : PerlRenameSubProcessor.computeRelatedItems(subElement)) {
         if (!relatedItem.equals(myElementToRename)) {
           references.addAll(ReferencesSearch.search(relatedItem, referencesSearchScope).findAll());
         }

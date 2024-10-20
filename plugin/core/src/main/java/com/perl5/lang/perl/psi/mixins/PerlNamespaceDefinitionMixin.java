@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -222,10 +222,10 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
 
     @Override
     public boolean process(PsiElement element) {
-      if (element instanceof PerlUseStatementElement) {
-        PerlPackageProcessor packageProcessor = ((PerlUseStatementElement)element).getPackageProcessor();
-        if (packageProcessor instanceof PerlMroProvider) {
-          myResult = ((PerlMroProvider)packageProcessor).getMroType((PerlUseStatementElement)element);
+      if (element instanceof PerlUseStatementElement useStatementElement) {
+        PerlPackageProcessor packageProcessor = useStatementElement.getPackageProcessor();
+        if (packageProcessor instanceof PerlMroProvider mroProvider) {
+          myResult = mroProvider.getMroType((PerlUseStatementElement)element);
           return false;
         }
       }

@@ -92,8 +92,8 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
     PerlPolyNamedElement<?> polyNamedElement = PsiTreeUtil.getParentOfType(nearestParent, PerlPolyNamedElement.class);
     if (polyNamedElement != null) {
       for (PerlDelegatingLightNamedElement<?> lightNamedElement : polyNamedElement.getLightElements()) {
-        if (lightNamedElement instanceof PerlSubDefinitionElement &&
-            exprBlock.equals(((PerlSubDefinitionElement)lightNamedElement).getSubDefinitionBody())) {
+        if (lightNamedElement instanceof PerlSubDefinitionElement subDefinitionElement &&
+            exprBlock.equals(subDefinitionElement.getSubDefinitionBody())) {
           return lightNamedElement;
         }
       }

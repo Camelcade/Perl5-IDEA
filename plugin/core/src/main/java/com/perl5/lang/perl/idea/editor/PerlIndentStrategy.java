@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,13 +27,13 @@ import org.jetbrains.annotations.NotNull;
 public class PerlIndentStrategy implements IndentStrategy {
   @Override
   public boolean canIndent(int indentationStartOffset, int indentationEndOffset, @NotNull PsiElement element) {
-    if (element instanceof PerlHeredocElementImpl) {
-      return ((PerlHeredocElementImpl)element).isIndentable();
+    if (element instanceof PerlHeredocElementImpl heredocElement) {
+      return heredocElement.isIndentable();
     }
 
     PsiElement parentElement = element.getParent();
-    if (parentElement instanceof PerlHeredocElementImpl) {
-      return ((PerlHeredocElementImpl)parentElement).isIndentable();
+    if (parentElement instanceof PerlHeredocElementImpl heredocElement) {
+      return heredocElement.isIndentable();
     }
 
     return !PerlIndentProcessor.INSTANCE.getAbsoluteUnindentableTokens().contains(PsiUtilCore.getElementType(element));
