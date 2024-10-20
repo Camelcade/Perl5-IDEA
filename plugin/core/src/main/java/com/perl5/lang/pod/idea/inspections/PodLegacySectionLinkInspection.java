@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.PerlBundle;
 import com.perl5.lang.pod.parser.psi.PodVisitor;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
 import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
@@ -47,7 +48,8 @@ public class PodLegacySectionLinkInspection extends LocalInspectionTool {
         PsiLinkSection sectionelement = link.getLinkSectionElement();
         if (link.getLinkNameElement() == null && isSectionLegacy(sectionelement)) {
           holder.registerProblem(sectionelement,
-                                 "Section \"" + PodRenderUtil.renderPsiElementAsText(sectionelement) + "\" should have a slash before it",
+                                 PerlBundle.message("inspection.message.section.should.have.slash.before.it",
+                                                    PodRenderUtil.renderPsiElementAsText(sectionelement)),
                                  ProblemHighlightType.LIKE_DEPRECATED);
         }
         super.visitPodFormatLink(o);

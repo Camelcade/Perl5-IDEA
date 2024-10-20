@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiReference;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +36,7 @@ public class PerlUnresolvedLabelInspection extends PerlInspection {
         if (reference != null) {
           PsiElement declaration = reference.resolve();
           if (declaration == null) {
-            registerProblem(holder, o, "Unable to find label declaration (possible deprecated usage)");
+            registerProblem(holder, o, PerlBundle.message("inspection.message.unable.to.find.label.declaration.possible.deprecated.usage"));
           }
         }
       }
