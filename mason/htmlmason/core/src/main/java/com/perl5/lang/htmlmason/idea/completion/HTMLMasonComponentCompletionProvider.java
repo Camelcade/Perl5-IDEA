@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,40 +42,52 @@ public class HTMLMasonComponentCompletionProvider extends CompletionProvider<Com
     PsiElement parent = position.getParent();
     PsiFile file = position.getContainingFile();
 
-    if (parent instanceof PerlString && file instanceof HTMLMasonFileImpl) {
-      PsiReference[] references = parent.getReferences();
-      for (PsiReference reference : references) {
-        TextRange refRange = reference.getRangeInElement();
-        if (refRange.contains(position.getStartOffsetInParent())) {
-          Project project = position.getProject();
+    if (!(parent instanceof PerlString) || !(file instanceof HTMLMasonFileImpl htmlMasonFile)) {
+      return;
+    }
+    PsiReference[] references = parent.getReferences();
+    for (PsiReference reference : references) {
+      TextRange refRange = reference.getRangeInElement();
+      if (refRange.contains(position.getStartOffsetInParent())) {
+        Project project = position.getProject();
 
-          String fullPrefix = refRange.substring(parent.getText())
-            .replace(CompletionInitializationContext.DUMMY_IDENTIFIER, "")
-            .replace(CompletionInitializationContext.DUMMY_IDENTIFIER_TRIMMED, "");
+        String fullPrefix = refRange.substring(parent.getText())
+          .replace(CompletionInitializationContext.DUMMY_IDENTIFIER, "")
+          .replace(CompletionInitializationContext.DUMMY_IDENTIFIER_TRIMMED, "");
 
-          final CompletionResultSet finalResultSet = result.withPrefixMatcher(fullPrefix);
+        final CompletionResultSet finalResultSet = result.withPrefixMatcher(fullPrefix);
 
-          if (reference instanceof HTMLMasonMethodReference) {
-            PsiElement firstReferenceTarget = references[0].resolve();
-            if (firstReferenceTarget instanceof HTMLMasonFileImpl) {
-              HTMLMasonCompletionUtil.fillWithMethods(finalResultSet, (HTMLMasonFileImpl)firstReferenceTarget);
-            }
-          }
-          else {
-            HTMLMasonCompletionUtil.fillWithComponentSlugs(finalResultSet);
-            HTMLMasonCompletionUtil.fillWithSubcomponents(finalResultSet, (HTMLMasonFileImpl)file);
-            if (!StringUtil.startsWith(fullPrefix, "/")) {
-              HTMLMasonCompletionUtil.fillWithRelativeSubcomponents(finalResultSet, project, (HTMLMasonFileImpl)file);
-            }
-            else {
-              HTMLMasonCompletionUtil.fillWithAbsoluteSubcomponents(finalResultSet, project);
-            }
-          }
-
-          result.stopHere();
-          break;
+        if (reference instanceof HTMLMasonMethodReference) {
+          processMethodReference(references, finalResultSet);
         }
+        else {
+          processSubcomponentReference(project, htmlMasonFile, fullPrefix, finalResultSet);
+        }
+
+        result.stopHere();
+        break;
       }
+    }
+  }
+
+  private static void processSubcomponentReference(@NotNull Project project,
+                                                   @NotNull HTMLMasonFileImpl file,
+                                                   @NotNull String fullPrefix,
+                                                   @NotNull CompletionResultSet resultSet) {
+    HTMLMasonCompletionUtil.fillWithComponentSlugs(resultSet);
+    HTMLMasonCompletionUtil.fillWithSubcomponents(resultSet, file);
+    if (!StringUtil.startsWith(fullPrefix, "/")) {
+      HTMLMasonCompletionUtil.fillWithRelativeSubcomponents(resultSet, project, file);
+    }
+    else {
+      HTMLMasonCompletionUtil.fillWithAbsoluteSubcomponents(resultSet, project);
+    }
+  }
+
+  private static void processMethodReference(@NotNull PsiReference[] references, @NotNull CompletionResultSet resultSet) {
+    PsiElement firstReferenceTarget = references[0].resolve();
+    if (firstReferenceTarget instanceof HTMLMasonFileImpl masonFile) {
+      HTMLMasonCompletionUtil.fillWithMethods(resultSet, masonFile);
     }
   }
 }
