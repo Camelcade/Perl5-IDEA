@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.debugger.protocol;
 
 
+import com.google.gson.annotations.Expose;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.VisibleForTesting;
 
@@ -25,12 +26,12 @@ import java.util.Arrays;
 public class PerlStackFrameDescriptor {
   public static final transient String EVAL_PREFIX = "(eval ";
 
-  @SuppressWarnings({"unused", "NotNullFieldNotInitialized"}) @NotNull PerlLoadedFileDescriptor file;
-  @SuppressWarnings("unused") private int line;
-  @SuppressWarnings("unused") private int main_size;
-  @SuppressWarnings("unused") private PerlValueDescriptor[] lexicals;
-  @SuppressWarnings("unused") private PerlValueDescriptor[] globals;
-  @SuppressWarnings("unused") private PerlValueDescriptor[] args;
+  @Expose @NotNull PerlLoadedFileDescriptor file;
+  @Expose private int line;
+  @Expose private int main_size;
+  @Expose private PerlValueDescriptor[] lexicals;
+  @Expose private PerlValueDescriptor[] globals;
+  @Expose private PerlValueDescriptor[] args;
 
   public PerlStackFrameDescriptor() {
   }

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.debugger.protocol;
 
+import com.google.gson.annotations.Expose;
 import com.intellij.openapi.util.NlsSafe;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -23,8 +24,8 @@ import org.jetbrains.annotations.VisibleForTesting;
 
 
 public class PerlLoadedFileDescriptor {
-  @SuppressWarnings({"unused", "NotNullFieldNotInitialized"}) private @NlsSafe @NotNull String path;
-  @SuppressWarnings("unused") private @NlsSafe @Nullable String name;
+  @Expose private @NlsSafe @NotNull String path;
+  @Expose private @NlsSafe @Nullable String name;
 
   public PerlLoadedFileDescriptor() {
   }
