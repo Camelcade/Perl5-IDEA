@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.PerlBundle;
 import com.perl5.lang.pod.parser.psi.PodVisitor;
 import com.perl5.lang.pod.parser.psi.mixin.PodSectionOver;
 import com.perl5.lang.pod.psi.PsiItemSection;
@@ -37,7 +38,8 @@ public class PodOverlessItemInspection extends LocalInspectionTool {
         if (PsiTreeUtil.getParentOfType(o, PodSectionOver.class) == null) {
           PsiElement openTag = o.getFirstChild();
           if (openTag != null) {
-            holder.registerProblem(openTag, "List item outside over block", ProblemHighlightType.GENERIC_ERROR);
+            holder.registerProblem(openTag, PerlBundle.message("inspection.message.list.item.outside.over.block"),
+                                   ProblemHighlightType.GENERIC_ERROR);
           }
         }
         super.visitItemSection(o);

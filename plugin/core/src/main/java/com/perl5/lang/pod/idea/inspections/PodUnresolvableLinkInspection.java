@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiPolyVariantReference;
 import com.intellij.psi.PsiReference;
+import com.perl5.PerlBundle;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.PodVisitor;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
@@ -44,14 +45,14 @@ public class PodUnresolvableLinkInspection extends LocalInspectionTool {
             String error;
 
             if (reference instanceof PodLinkToFileReference) {
-              String fileName = "UNKNONW";
+              String fileName = "UNKNOWN";
               PodLinkDescriptor descriptor = link.getLinkDescriptor();
 
               if (descriptor != null && descriptor.getName() != null) {
                 fileName = descriptor.getName();
               }
 
-              error = "Can't find POD or PM file by: " + fileName;
+              error = PerlBundle.message("inspection.message.can.t.find.pod.or.pm.file.by", fileName);
             }
             else if (reference instanceof PodLinkToSectionReference) {
               String fileName = "UNKNONW";
@@ -61,10 +62,10 @@ public class PodUnresolvableLinkInspection extends LocalInspectionTool {
                 fileName = descriptor.getSection();
               }
 
-              error = "Can't find POD section: " + fileName;
+              error = PerlBundle.message("inspection.message.can.t.find.pod.section", fileName);
             }
             else {
-              error = "Can't find reference target";
+              error = PerlBundle.message("inspection.message.can.t.find.reference.target");
             }
 
             holder.registerProblem(reference, error, ProblemHighlightType.GENERIC_ERROR_OR_WARNING);

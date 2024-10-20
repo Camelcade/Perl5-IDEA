@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
@@ -43,7 +44,7 @@ public class PerlUnresolvedVariableInspection extends PerlInspection {
         PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
 
         if (!PerlResolveUtil.isResolvable(variableNameElement)) {
-          registerProblem(holder, variableNameElement, "Unable to find variable declaration.");
+          registerProblem(holder, variableNameElement, PerlBundle.message("inspection.message.unable.to.find.variable.declaration"));
         }
       }
     };

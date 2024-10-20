@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -40,7 +41,7 @@ public class PerlMultipleNamespaceDefinitionsInspection extends PerlInspection {
             PerlPackageUtil.getNamespaceDefinitions(project, GlobalSearchScope.projectScope(project), o.getNamespaceName()).size() > 1 &&
             o.getNameIdentifier() != null
           ) {
-          registerProblem(holder, o.getNameIdentifier(), "Multiple namespace definitions found");
+          registerProblem(holder, o.getNameIdentifier(), PerlBundle.message("inspection.message.multiple.namespace.definitions.found"));
         }
       }
 
