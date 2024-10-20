@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,9 +65,11 @@ public class HTMLMasonSubcomponentElementType
     return new HTMLMasonSubcomponentDefinitionStubImpl(parentStub, this, PerlStubSerializationUtil.readString(dataStream));
   }
 
+  /**
+   * @implNote we don't need to index this stub, only store
+   */
   @Override
   public void indexStub(@NotNull HTMLMasonSubcomponentDefinitionStub stub, @NotNull IndexSink sink) {
-
   }
 
   @Override
