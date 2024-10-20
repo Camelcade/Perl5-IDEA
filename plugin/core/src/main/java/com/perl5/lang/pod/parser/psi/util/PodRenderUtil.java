@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,8 +66,8 @@ public class PodRenderUtil implements PodElementTypes {
 
     PsiElement run = firstElement;
     while (run != null) {
-      if (run instanceof PodRenderableElement) {
-        ((PodRenderableElement)run).renderElementAsHTML(builder, context);
+      if (run instanceof PodRenderableElement renderableElement) {
+        renderableElement.renderElementAsHTML(builder, context);
       }
       else if (run.getNode().getElementType() != POD_OUTER) {
         if (context.isHtmlSafe()) {
@@ -87,7 +87,7 @@ public class PodRenderUtil implements PodElementTypes {
   }
 
   public static void trimBuilderNewlines(StringBuilder builder) {
-    while (builder.length() > 0 && builder.charAt(builder.length() - 1) == '\n') {
+    while (!builder.isEmpty() && builder.charAt(builder.length() - 1) == '\n') {
       builder.deleteCharAt(builder.length() - 1);
     }
   }
@@ -122,8 +122,8 @@ public class PodRenderUtil implements PodElementTypes {
 
     PsiElement run = firstElement;
     while (run != null) {
-      if (run instanceof PodRenderableElement) {
-        ((PodRenderableElement)run).renderElementAsText(builder, context);
+      if (run instanceof PodRenderableElement renderableElement) {
+        renderableElement.renderElementAsText(builder, context);
       }
       else if (run.getNode().getElementType() != POD_OUTER) {
         String text = run.getText();
@@ -204,8 +204,8 @@ public class PodRenderUtil implements PodElementTypes {
 
     PsiFile psiFile = element.getContainingFile();
 
-    if (psiFile instanceof PodLinkTarget) {
-      String fileLink = ((PodLinkTarget)psiFile).getPodLink();
+    if (psiFile instanceof PodLinkTarget podLinkTarget) {
+      String fileLink = podLinkTarget.getPodLink();
       if (StringUtil.isNotEmpty(fileLink)) {
         return fileLink + "/" + elementLink;
       }

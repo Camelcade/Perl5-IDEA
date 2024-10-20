@@ -207,8 +207,8 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   @Override
   public @NotNull List<String> getParentNamespacesNames() {
     StubElement<?> stub = getGreenStub();
-    if (stub instanceof PerlFileStub) {
-      return ((PerlFileStub)stub).getParentNamespacesNames();
+    if (stub instanceof PerlFileStub perlFileStub) {
+      return perlFileStub.getParentNamespacesNames();
     }
     return myParentNamespaces.getValue();
   }

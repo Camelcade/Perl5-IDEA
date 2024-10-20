@@ -73,8 +73,8 @@ abstract class PerlGenericStringsOccurrencesCollector extends PerlIntroduceTarge
     }
 
     List<PsiElement> elementChildren;
-    if (element instanceof PerlString) {
-      elementChildren = ((PerlString)element).getAllChildrenList();
+    if (element instanceof PerlString perlString) {
+      elementChildren = perlString.getAllChildrenList();
     }
     else if (isTargetableHeredocElement(element)) {
       elementChildren = ((PerlHeredocElementImpl)element).getAllChildrenList();
@@ -147,8 +147,8 @@ abstract class PerlGenericStringsOccurrencesCollector extends PerlIntroduceTarge
           PsiElement elementToCompare = elementChildren.get(elementIndex);
 
           TextRange elementToCompareTextRange = elementToCompare.getTextRange();
-          if (childToFind instanceof PsiElement) {
-            if (!PerlPsiUtil.areElementsSame((PsiElement)childToFind, elementToCompare)) {
+          if (childToFind instanceof PsiElement psiElement) {
+            if (!PerlPsiUtil.areElementsSame(psiElement, elementToCompare)) {
               endOffset = -1;
               break;
             }

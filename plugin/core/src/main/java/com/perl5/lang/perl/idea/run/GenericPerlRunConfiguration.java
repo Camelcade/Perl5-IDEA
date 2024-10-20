@@ -120,11 +120,11 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   public final @Nullable PerlRunProfileState getState(@NotNull Executor executor, @NotNull ExecutionEnvironment executionEnvironment)
     throws ExecutionException {
     var runner = executionEnvironment.getRunner();
-    if (!(runner instanceof GenericPerlProgramRunner)) {
+    if (!(runner instanceof GenericPerlProgramRunner genericPerlProgramRunner)) {
       LOG.error("GenericPerlProgramRunner expected, got " + runner);
       throw new ExecutionException("Wrong runner used to run perl configuration, please report to Perl plugin developers");
     }
-    return ((GenericPerlProgramRunner)runner).createState(executionEnvironment);
+    return genericPerlProgramRunner.createState(executionEnvironment);
   }
 
   /**

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,8 +44,8 @@ public class PerlElementDescriptionProvider extends PerlElementDescriptionProvid
 
   @Override
   protected @Nullable String getShortName(@NotNull PsiElement element) {
-    if (element instanceof PsiNamedElement) {
-      return ((PsiNamedElement)element).getName();
+    if (element instanceof PsiNamedElement namedElement) {
+      return namedElement.getName();
     }
     return null;
   }
@@ -64,7 +64,7 @@ public class PerlElementDescriptionProvider extends PerlElementDescriptionProvid
     else if (element instanceof PerlLightConstantDefinitionElement) {
       return PerlBundle.message("perl.type.constant");
     }
-    else if (element instanceof PerlMethodDefinition || element instanceof PerlSubDefinition && ((PerlSubDefinition)element).isMethod()) {
+    else if (element instanceof PerlMethodDefinition || element instanceof PerlSubDefinition subDefinition && subDefinition.isMethod()) {
       return PerlBundle.message("perl.type.method");
     }
     else if (element instanceof PerlSubDeclarationElement) {
@@ -91,8 +91,8 @@ public class PerlElementDescriptionProvider extends PerlElementDescriptionProvid
     else if (element instanceof PerlGlobVariableElement) {
       return PerlBundle.message("perl.type.typeglob");
     }
-    else if (element instanceof PerlVariableDeclarationElement) {
-      PerlVariableType actualType = ((PerlVariableDeclarationElement)element).getVariable().getActualType();
+    else if (element instanceof PerlVariableDeclarationElement variableDeclarationElement) {
+      PerlVariableType actualType = variableDeclarationElement.getVariable().getActualType();
       if (actualType == PerlVariableType.ARRAY) {
         return PerlBundle.message("perl.type.array");
       }

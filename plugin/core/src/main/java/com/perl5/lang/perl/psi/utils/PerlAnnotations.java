@@ -162,8 +162,8 @@ public final class PerlAnnotations implements PerlElementTypes {
     }
 
     while (run != null) {
-      if (run instanceof PerlAnnotationContainer) {
-        PerlAnnotation annotation = ((PerlAnnotationContainer)run).getAnnotation();
+      if (run instanceof PerlAnnotationContainer annotationContainer) {
+        PerlAnnotation annotation = annotationContainer.getAnnotation();
         if (annotation != null) {
           if (!annotationProcessor.process(annotation)) {
             return;

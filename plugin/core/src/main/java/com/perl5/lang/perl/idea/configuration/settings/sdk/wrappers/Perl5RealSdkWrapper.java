@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,11 +49,11 @@ public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof Perl5RealSdkWrapper)) return false;
+    if (!(o instanceof Perl5RealSdkWrapper realSdkWrapper)) {
+      return false;
+    }
 
-    Perl5RealSdkWrapper wrapper = (Perl5RealSdkWrapper)o;
-
-    return getSdk().equals(wrapper.getSdk());
+    return getSdk().equals(realSdkWrapper.getSdk());
   }
 
   @Override

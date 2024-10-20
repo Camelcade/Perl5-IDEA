@@ -45,8 +45,8 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
     ResolveResult[] results = multiResolve(false);
     String currentContent = ElementManipulators.getValueText(myElement);
 
-    if (results.length == 1 && results[0].getElement() instanceof HTMLMasonFileImpl) {
-      return handleFilePathChange((HTMLMasonFileImpl)results[0].getElement(), currentContent, newElementName);
+    if (results.length == 1 && results[0].getElement() instanceof HTMLMasonFileImpl htmlMasonFile) {
+      return handleFilePathChange(htmlMasonFile, currentContent, newElementName);
     }
     else if (HTMLMasonNamedElement.HTML_MASON_IDENTIFIER_PATTERN.matcher(newElementName).matches()) {
       String newContent = newElementName + currentContent.substring(getRangeInElement().getLength());
@@ -69,8 +69,8 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
     {
       PsiFile psiFile = myElement.getContainingFile();
 
-      if (psiFile instanceof HTMLMasonFileImpl) {
-        VirtualFile virtualFile = ((HTMLMasonFileImpl)psiFile).getComponentVirtualFile();
+      if (psiFile instanceof HTMLMasonFileImpl htmlMasonFile) {
+        VirtualFile virtualFile = htmlMasonFile.getComponentVirtualFile();
 
         if (virtualFile != null) {
           componentRoot = virtualFile.getParent();
@@ -102,11 +102,11 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
 
   @Override
   public PsiElement bindToElement(@NotNull PsiElement element) throws IncorrectOperationException {
-    if (element instanceof HTMLMasonFileImpl) {
+    if (element instanceof HTMLMasonFileImpl htmlMasonFile) {
       handleFilePathChange(
-        (HTMLMasonFileImpl)element,
+        htmlMasonFile,
         ElementManipulators.getValueText(myElement),
-        ((HTMLMasonFileImpl)element).getName()
+        htmlMasonFile.getName()
       );
     }
     return myElement;
@@ -120,8 +120,8 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
     String nameOrPath = getRangeInElement().substring(getElement().getText());
     final PsiFile file = getElement().getContainingFile();
 
-    if (file instanceof HTMLMasonFileImpl) {
-      for (HTMLMasonCompositeElement subcontinentDefinition : ((HTMLMasonFileImpl)file).getSubComponentsDefinitions()) {
+    if (file instanceof HTMLMasonFileImpl htmlMasonFile) {
+      for (HTMLMasonCompositeElement subcontinentDefinition : htmlMasonFile.getSubComponentsDefinitions()) {
         assert subcontinentDefinition instanceof HTMLMasonSubcomponentDefitnition;
         if (StringUtil.equals(((HTMLMasonSubcomponentDefitnition)subcontinentDefinition).getName(), nameOrPath)) {
           if (result == null) {

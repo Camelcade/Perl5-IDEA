@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,9 @@ import org.jetbrains.annotations.NotNull;
 public class HTMLMasonFlagsReferencesProvider extends PsiReferenceProvider {
   @Override
   public PsiReference @NotNull [] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
-    if (element instanceof PerlString && element.getNextSibling() == null && element.getChildren().length == 0) {
+    if (element instanceof PerlString perlString && element.getNextSibling() == null && element.getChildren().length == 0) {
       return new PsiReference[]{new HTMLMasonComponentReference(
-        (PerlString)element,
+        perlString,
         ElementManipulators.getValueTextRange(element)
       )};
     }

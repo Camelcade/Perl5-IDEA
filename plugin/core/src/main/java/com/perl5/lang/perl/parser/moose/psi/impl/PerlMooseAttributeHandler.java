@@ -113,8 +113,8 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
       return null;
     }
     PsiElement namesContainer = listElements.getFirst();
-    if (namesContainer instanceof PsiPerlAnonArray) {
-      namesContainer = ((PsiPerlAnonArray)namesContainer).getExpr();
+    if (namesContainer instanceof PsiPerlAnonArray anonArray) {
+      namesContainer = anonArray.getExpr();
     }
     List<PsiElement> identifiers = ContainerUtil.filter(PerlArrayUtil.collectListElements(namesContainer),
                                                         subCallElement::isAcceptableIdentifierElement);
@@ -273,9 +273,9 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
           ));
         }
       }
-      else if (handlesEntry.valueElement instanceof PsiPerlAnonArray) {
+      else if (handlesEntry.valueElement instanceof PsiPerlAnonArray anonArray) {
         // handle handles ARRAY
-        List<PsiElement> delegatesIdentifiers = PerlArrayUtil.collectListElements(((PsiPerlAnonArray)handlesEntry.valueElement).getExpr());
+        List<PsiElement> delegatesIdentifiers = PerlArrayUtil.collectListElements(anonArray.getExpr());
         for (PsiElement identifier : delegatesIdentifiers) {
           if (!subCallElement.isAcceptableIdentifierElement(identifier)) {
             continue;

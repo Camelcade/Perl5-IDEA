@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class HTMLMasonPathsNotification implements EditorNotificationProvider, D
     }
     else {
       PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
-      if (psiFile instanceof HTMLMasonFileImpl && ((HTMLMasonFileImpl)psiFile).getComponentRoot() == null) {
+      if (psiFile instanceof HTMLMasonFileImpl htmlMasonFile && htmlMasonFile.getComponentRoot() == null) {
         return fileEditor -> createNotificationPanel(HtmlMasonBundle.message("link.label.component.not.under.one.configured.roots"));
       }
     }

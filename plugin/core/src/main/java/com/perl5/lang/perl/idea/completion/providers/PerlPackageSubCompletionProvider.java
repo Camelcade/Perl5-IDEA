@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,11 +35,11 @@ public class PerlPackageSubCompletionProvider extends PerlCompletionProvider {
                                 @NotNull ProcessingContext context,
                                 @NotNull CompletionResultSet result) {
     PsiElement method = parameters.getPosition().getParent();
-    if (!(method instanceof PsiPerlMethod)) {
+    if (!(method instanceof PsiPerlMethod perlMethod)) {
       LOG.warn("Expected PsiPerlMethod, got psiElement=[" + method.getClass() + "]; text=[" + method.getText() + "]");
       return;
     }
-    String explicitNamespace = ((PsiPerlMethod)method).getExplicitNamespaceName();
+    String explicitNamespace = perlMethod.getExplicitNamespaceName();
     String currentPrefixMatcher = result.getPrefixMatcher().getPrefix();
     String newPrefixMathcer = explicitNamespace == null
                               ? currentPrefixMatcher
@@ -48,7 +48,7 @@ public class PerlPackageSubCompletionProvider extends PerlCompletionProvider {
 
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, parameters.getPosition());
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
-    if (!((PsiPerlMethod)method).isObjectMethod()) {
+    if (!perlMethod.isObjectMethod()) {
       PerlPackageCompletionUtil.processAllNamespacesNames(completionProcessor, false, false);
       logger.debug("Processed all namespace names");
     }

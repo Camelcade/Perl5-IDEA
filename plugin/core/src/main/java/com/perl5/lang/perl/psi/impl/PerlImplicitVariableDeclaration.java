@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -105,8 +105,8 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitPerlVariableDeclarationElement(this);
+    if (visitor instanceof PerlVisitor perlVisitor) {
+      perlVisitor.visitPerlVariableDeclarationElement(this);
     }
     else {
       visitor.visitElement(this);

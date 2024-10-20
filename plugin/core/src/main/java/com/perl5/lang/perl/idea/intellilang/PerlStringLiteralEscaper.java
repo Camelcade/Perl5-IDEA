@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,8 +74,8 @@ public class PerlStringLiteralEscaper extends LiteralTextEscaper<PerlStringMixin
       int startOffsetInParent = run.getStartOffsetInParent();
       IElementType runType = PsiUtilCore.getElementType(run);
       CharSequence runChars;
-      if (run instanceof PerlCharSubstitution) {
-        int point = ((PerlCharSubstitution)run).getCodePoint();
+      if (run instanceof PerlCharSubstitution charSubstitution) {
+        int point = charSubstitution.getCodePoint();
         runChars = Character.isValidCodePoint(point) ? String.valueOf(Character.toChars(point)) : run.getText();
       }
       else {

@@ -81,12 +81,12 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
       throw new ExecutionException(message);
     }
     var perlProfilerConfigurationState = executorSettings.getState();
-    if (!(perlProfilerConfigurationState instanceof PerlProfilerConfigurationState)) {
+    if (!(perlProfilerConfigurationState instanceof PerlProfilerConfigurationState profilerConfigurationState)) {
       LOG.error("PerlProfilerConfigurationState expected, got: " + perlProfilerConfigurationState);
       throw new ExecutionException("Wrong profiler configuration state: " + perlProfilerConfigurationState);
     }
 
-    return new PerlProfilerRunProfileState(executionEnvironment, (PerlProfilerConfigurationState)perlProfilerConfigurationState);
+    return new PerlProfilerRunProfileState(executionEnvironment, profilerConfigurationState);
   }
 
   @Override
@@ -100,11 +100,11 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
   protected void doExecute(@NotNull RunProfileState state,
                            @NotNull ExecutionEnvironment environment,
                            @NotNull AsyncPromise<RunContentDescriptor> result) throws ExecutionException {
-    if (!(state instanceof PerlProfilerRunProfileState)) {
+    if (!(state instanceof PerlProfilerRunProfileState profilerRunProfileState)) {
       LOG.error("PerlProfilerRunProfileState expected, got " + state);
       throw new ExecutionException("Incorrect run configuration state, see logs for details");
     }
-    var profileResultsPath = ((PerlProfilerRunProfileState)state).getProfilingResultsPath();
+    var profileResultsPath = profilerRunProfileState.getProfilingResultsPath();
     LOG.info("Profiling results saved in: " + profileResultsPath);
     if (FileUtil.isAncestor(PathManager.getSystemPath(), profileResultsPath.toString(), true)) {
       try {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,8 +49,8 @@ public class PerlNoStatementElement extends PerlUseStatementElementBase {
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitNoStatement(this);
+    if (visitor instanceof PerlVisitor perlVisitor) {
+      perlVisitor.visitNoStatement(this);
     }
     else {
       super.accept(visitor);

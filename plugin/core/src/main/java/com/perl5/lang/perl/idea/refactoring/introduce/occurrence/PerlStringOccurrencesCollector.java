@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,10 +63,10 @@ class PerlStringOccurrencesCollector extends PerlGenericStringsOccurrencesCollec
   @Override
   protected @NotNull Pair<PsiElement, PsiElement> getChildrenRangeToCollect(@NotNull PerlIntroduceTarget target) {
     PsiElement targetElement = target.getPlace();
-    if (!(targetElement instanceof PerlString)) {
+    if (!(targetElement instanceof PerlString perlString)) {
       throw new RuntimeException("Expected PerlString thing with partial range, got: " + target);
     }
 
-    return Pair.create(((PerlString)targetElement).getFirstContentToken(), ((PerlString)targetElement).getCloseQuoteElement());
+    return Pair.create(perlString.getFirstContentToken(), perlString.getCloseQuoteElement());
   }
 }

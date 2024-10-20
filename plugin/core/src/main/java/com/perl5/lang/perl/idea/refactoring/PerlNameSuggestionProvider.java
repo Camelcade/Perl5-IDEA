@@ -211,8 +211,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   }
 
   private @Nullable String suggestAndAddRecommendedName(@Nullable PsiElement expression, @NotNull Set<String> result) {
-    if (expression instanceof PsiPerlParenthesisedExpr) {
-      return suggestAndAddRecommendedName(((PsiPerlParenthesisedExpr)expression).getExpr(), result);
+    if (expression instanceof PsiPerlParenthesisedExpr parenthesisedExpr) {
+      return suggestAndAddRecommendedName(parenthesisedExpr.getExpr(), result);
     }
     String recommendation = null;
     IElementType expressionType = PsiUtilCore.getElementType(expression);
@@ -284,22 +284,22 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     PsiElement element = children[children.length - 1];
     PsiElement baseElement = children[children.length - 2];
 
-    if (element instanceof PsiPerlHashIndex) {
+    if (element instanceof PsiPerlHashIndex hashIndex) {
       recommendation = Objects.requireNonNull(join(HASH, ELEMENT));
       result.add(recommendation);
       result.add(join(HASH, ITEM));
 
-      recommendation = suggestNamesForElements(baseElement, true, ((PsiPerlHashIndex)element).getExpr(), result, recommendation);
+      recommendation = suggestNamesForElements(baseElement, true, hashIndex.getExpr(), result, recommendation);
     }
-    else if (element instanceof PsiPerlArrayIndex) {
+    else if (element instanceof PsiPerlArrayIndex arrayIndex) {
       recommendation = Objects.requireNonNull(join(ARRAY, ELEMENT));
       result.add(recommendation);
       result.add(join(ARRAY, ITEM));
 
-      recommendation = suggestNamesForElements(baseElement, true, ((PsiPerlArrayIndex)element).getExpr(), result, recommendation);
+      recommendation = suggestNamesForElements(baseElement, true, arrayIndex.getExpr(), result, recommendation);
     }
-    else if (element instanceof PerlSubCallElement) {
-      recommendation = suggestAndGetForCall((PerlSubCallElement)element, result, recommendation);
+    else if (element instanceof PerlSubCallElement subCallElement) {
+      recommendation = suggestAndGetForCall(subCallElement, result, recommendation);
     }
     else if (element instanceof PsiPerlParenthesisedCallArguments) {
       recommendation = join(getBaseName(baseElement), RESULT);
@@ -429,8 +429,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       PsiElement[] blockChildren = element.getChildren();
       if (blockChildren.length == 1) {
         PsiElement perlStatement = blockChildren[0];
-        if (perlStatement instanceof PerlStatementMixin &&
-            !((PerlStatementMixin)perlStatement).hasModifier()) {
+        if (perlStatement instanceof PerlStatementMixin statementMixin &&
+            !statementMixin.hasModifier()) {
           return getBaseName(((PsiPerlStatement)perlStatement).getExpr());
         }
       }
@@ -706,8 +706,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     }
 
     PerlResolveUtil.treeWalkUp(baseElement, (element, __) -> {
-      if (element instanceof PerlVariable && ((PerlVariable)element).getActualType() == variableType) {
-        ContainerUtil.addIfNotNull(names, ((PerlVariable)element).getName());
+      if (element instanceof PerlVariable perlVariable && perlVariable.getActualType() == variableType) {
+        ContainerUtil.addIfNotNull(names, perlVariable.getName());
       }
       return true;
     });

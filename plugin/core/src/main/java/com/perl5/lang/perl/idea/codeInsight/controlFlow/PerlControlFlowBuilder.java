@@ -183,8 +183,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   }
 
   public static Instruction[] getFor(@NotNull PsiElement element) {
-    if (element instanceof PerlControlFlowOwner) {
-      return ((PerlControlFlowOwner)element).getControlFlow();
+    if (element instanceof PerlControlFlowOwner controlFlowOwner) {
+      return controlFlowOwner.getControlFlow();
     }
     return CachedValuesManager.getCachedValue(
       element, () -> CachedValueProvider.Result.create(new PerlControlFlowBuilder().build(element).getInstructions(), element));
@@ -258,14 +258,14 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
    * @return nested block if any
    */
   private static @NotNull PsiElement getNestedBlockOrElement(@NotNull PsiElement element) {
-    if (element instanceof PerlSubDefinitionElement) {
-      PsiPerlBlock body = ((PerlSubDefinitionElement)element).getSubDefinitionBody();
+    if (element instanceof PerlSubDefinitionElement subDefinitionElement) {
+      PsiPerlBlock body = subDefinitionElement.getSubDefinitionBody();
       if (body != null) {
         return body;
       }
     }
-    else if (element instanceof PerlBlockOwner) {
-      PsiPerlBlock block = ((PerlBlockOwner)element).getBlock();
+    else if (element instanceof PerlBlockOwner blockOwner) {
+      PsiPerlBlock block = blockOwner.getBlock();
       if (block != null) {
         return block;
       }
@@ -727,7 +727,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
     @Override
     public void visitExpr(@NotNull PsiPerlExpr o) {
       List<Instruction> instructionsToLink = new ArrayList<>();
-      if (!(o instanceof PerlDieScope) || ((PerlDieScope)o).includeInControlFlow()) {
+      if (!(o instanceof PerlDieScope perlDieScope) || perlDieScope.includeInControlFlow()) {
         PsiElement run = o.getFirstChild();
         PsiElement lastRun = null;
         while (run != null) {
@@ -852,12 +852,12 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     @Override
     public void visitStatement(@NotNull PsiPerlStatement o) {
-      if (!(o instanceof PerlStatementMixin)) {
+      if (!(o instanceof PerlStatementMixin perlStatementMixin)) {
         super.visitStatement(o);
         return;
       }
 
-      PsiPerlStatementModifier modifier = ((PerlStatementMixin)o).getModifier();
+      PsiPerlStatementModifier modifier = perlStatementMixin.getModifier();
       PsiPerlExpr statementExpression = o.getExpr();
 
       /**
@@ -1020,8 +1020,8 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
 
     private @Nullable PsiElement getWhenOrDefaultScope(@NotNull PsiPerlContinueExpr o) {
       PsiPerlStatement enclosingStatement = PsiTreeUtil.getParentOfType(o, PsiPerlStatement.class);
-      if (enclosingStatement instanceof PerlStatementMixin &&
-          ((PerlStatementMixin)enclosingStatement).getModifier() instanceof PsiPerlWhenStatementModifier) {
+      if (enclosingStatement instanceof PerlStatementMixin statementMixin &&
+          statementMixin.getModifier() instanceof PsiPerlWhenStatementModifier) {
         return enclosingStatement;
       }
       return PsiTreeUtil.getParentOfType(o, PsiPerlWhenCompound.class, PsiPerlDefaultCompound.class);
@@ -1039,7 +1039,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       if (element instanceof LeafPsiElement) {
         return;
       }
-      if (!(element instanceof PerlDieScope) || ((PerlDieScope)element).includeInControlFlow()) {
+      if (!(element instanceof PerlDieScope perlDieScope) || perlDieScope.includeInControlFlow()) {
         element.acceptChildren(this);
       }
       startNodeSmart(element);

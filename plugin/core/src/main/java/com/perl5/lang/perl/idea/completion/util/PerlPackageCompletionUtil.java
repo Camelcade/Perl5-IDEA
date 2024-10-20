@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -209,10 +209,10 @@ public class PerlPackageCompletionUtil {
       return;
     }
     completionProcessor.processSingle(LookupElementBuilder.create(virtualFile, virtualFile.getNameWithoutExtension()));
-    if (!(originalFile instanceof PerlFileImpl)) {
+    if (!(originalFile instanceof PerlFileImpl perlFile)) {
       return;
     }
-    String packageName = ((PerlFileImpl)originalFile).getFilePackageName();
+    String packageName = perlFile.getFilePackageName();
     if (packageName != null) {
       completionProcessor.processSingle(LookupElementBuilder.create(originalFile, packageName));
     }

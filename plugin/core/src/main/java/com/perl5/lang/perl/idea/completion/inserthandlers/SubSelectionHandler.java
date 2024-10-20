@@ -41,8 +41,8 @@ public class SubSelectionHandler implements InsertHandler<LookupElement>, PerlEl
     EditorModificationUtilEx.insertStringAtCaret(editor, "()");
 
     // todo we need hint with prototype here, but prototypes handling NYI
-    if (!(subDefitnition instanceof PerlSubDefinitionElement &&
-          ((PerlSubDefinitionElement)subDefitnition).getSubArgumentsList().isEmpty())) {
+    if (!(subDefitnition instanceof PerlSubDefinitionElement subDefinitionElement &&
+          subDefinitionElement.getSubArgumentsList().isEmpty())) {
       editor.getCaretModel().moveCaretRelatively(-1, 0, false, false, true);
     }
   }

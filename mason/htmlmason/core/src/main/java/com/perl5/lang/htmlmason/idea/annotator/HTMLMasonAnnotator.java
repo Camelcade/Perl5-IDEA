@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@ import org.jetbrains.annotations.NotNull;
 public class HTMLMasonAnnotator extends PerlBaseAnnotator {
   @Override
   public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
-    if (element instanceof HTMLMasonNamedElement) {
-      PsiElement nameIdentifier = ((HTMLMasonNamedElement)element).getNameIdentifier();
+    if (element instanceof HTMLMasonNamedElement namedElement) {
+      PsiElement nameIdentifier = namedElement.getNameIdentifier();
 
       if (nameIdentifier != null) {
         createInfoAnnotation(holder, nameIdentifier, null, PerlSyntaxHighlighter.PERL_SUB_DEFINITION);

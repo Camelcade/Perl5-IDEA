@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -115,8 +115,8 @@ public class PerlHeredocReference extends PerlCachingReference<PerlHeredocTermin
       if (element == null || element.getNode().getStartOffset() >= lineEndOffset) {
         return false;
       }
-      if (element != myAnchor && element instanceof PerlHeredocOpener) {
-        myResult = (PerlHeredocOpener)element;
+      if (element != myAnchor && element instanceof PerlHeredocOpener heredocOpener) {
+        myResult = heredocOpener;
         return false;
       }
       return true;

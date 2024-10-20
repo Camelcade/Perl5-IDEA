@@ -66,7 +66,7 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
                                             @NotNull MultiHostRegistrar registrar,
                                             @NotNull Language targetLanguage) {
     PsiElement parent = firstElement.getParent();
-    if (!(parent instanceof PsiLanguageInjectionHost)) {
+    if (!(parent instanceof PsiLanguageInjectionHost injectionHost)) {
       LOG.error("Failed attempt to inject: parent: " + parent + "; firstElement: " + firstElement + "; stopElement: " + stopElement);
       return;
     }
@@ -75,7 +75,7 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
     if (descriptors.isEmpty() || descriptors.size() == 1 && !descriptors.getFirst().inject) {
       return;
     }
-    injectDescriptors((PsiLanguageInjectionHost)parent, registrar, targetLanguage, descriptors);
+    injectDescriptors(injectionHost, registrar, targetLanguage, descriptors);
   }
 
   private void injectDescriptors(@NotNull PsiLanguageInjectionHost injectionHost,
@@ -112,8 +112,8 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
       IElementType elementType = PsiUtilCore.getElementType(run);
       boolean shouldIgnore = ELEMENTS_TO_IGNORE.contains(elementType);
       boolean shouldReplace = !shouldIgnore && ELEMENTS_TO_REPLACE_WITH_DUMMY.contains(elementType);
-      if (!shouldIgnore && !shouldReplace && run instanceof PerlCharSubstitution) {
-        var codePoint = ((PerlCharSubstitution)run).getCodePoint();
+      if (!shouldIgnore && !shouldReplace && run instanceof PerlCharSubstitution charSubstitution) {
+        var codePoint = charSubstitution.getCodePoint();
         shouldReplace = !Character.isValidCodePoint(codePoint);
       }
 
@@ -153,8 +153,8 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
    * @return a text suffix for replacing node {@code elementToReplace} to be replaced. E.g. {@code $somevar} => {@code somevar}
    */
   private @NotNull String buildReplacement(@NotNull PsiElement elementToReplace) {
-    if (elementToReplace instanceof PerlVariable) {
-      return ((PerlVariable)elementToReplace).getName();
+    if (elementToReplace instanceof PerlVariable perlVariable) {
+      return perlVariable.getName();
     }
     else if (PerlTokenSets.STRING_CHAR_UNRENDERABLE_ALIASES.contains(PsiUtilCore.getElementType(elementToReplace))) {
       return " ";

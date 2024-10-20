@@ -419,8 +419,8 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
       mySdkProjectSettingsPanel.remove(component);
     }
 
-    if (sdkWrapper instanceof Perl5RealSdkWrapper) {
-      PerlHostHandler<?, ?> perlHostHandler = PerlHostHandler.from(((Perl5RealSdkWrapper)sdkWrapper).getSdk());
+    if (sdkWrapper instanceof Perl5RealSdkWrapper realSdkWrapper) {
+      PerlHostHandler<?, ?> perlHostHandler = PerlHostHandler.from(realSdkWrapper.getSdk());
       if (perlHostHandler != null) {
         myHostProjectConfigurable = myHostConfigurablesMap.computeIfAbsent(perlHostHandler, it -> it.getSettingsConfigurable(myProject));
         if (myHostProjectConfigurable != null) {

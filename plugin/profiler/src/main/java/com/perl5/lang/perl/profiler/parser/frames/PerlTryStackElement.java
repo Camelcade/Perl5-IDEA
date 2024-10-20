@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,16 +71,16 @@ class PerlTryStackElement extends PerlCallStackElement {
           psiFile.accept(new PerlRecursiveVisitor() {
             @Override
             public void visitTrycatchCompound(@NotNull PsiPerlTrycatchCompound o) {
-              if (o instanceof NavigatablePsiElement) {
-                result.add(new PerlTargetElementWrapper((NavigatablePsiElement)o));
+              if (o instanceof NavigatablePsiElement navigatablePsiElement) {
+                result.add(new PerlTargetElementWrapper(navigatablePsiElement));
               }
               super.visitTrycatchCompound(o);
             }
 
             @Override
             public void visitTryExpr(@NotNull PsiPerlTryExpr o) {
-              if (o instanceof NavigatablePsiElement) {
-                result.add(new PerlTargetElementWrapper((NavigatablePsiElement)o));
+              if (o instanceof NavigatablePsiElement navigatablePsiElement) {
+                result.add(new PerlTargetElementWrapper(navigatablePsiElement));
               }
               super.visitTryExpr(o);
             }

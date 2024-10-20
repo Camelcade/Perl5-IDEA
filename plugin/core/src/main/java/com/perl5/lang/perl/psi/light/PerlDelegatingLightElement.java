@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -256,16 +256,11 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof PerlDelegatingLightElement)) {
+    if (!(o instanceof PerlDelegatingLightElement<?> lightElement)) {
       return false;
     }
 
-    PerlDelegatingLightElement<?> element = (PerlDelegatingLightElement<?>)o;
-
-    return getDelegate().equals(element.getDelegate());
+    return myDelegate.equals(lightElement.myDelegate);
   }
 
   @Override

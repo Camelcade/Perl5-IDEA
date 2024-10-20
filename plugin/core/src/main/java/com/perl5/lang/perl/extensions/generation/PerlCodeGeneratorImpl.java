@@ -60,8 +60,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
 
   @Override
   public @Nullable String getOverrideCodeText(PsiElement subBase) {
-    if (subBase instanceof PerlSubElement) {
-      PerlSubElement perlSubBase = (PerlSubElement)subBase;
+    if (subBase instanceof PerlSubElement perlSubBase) {
       StringBuilder code = new StringBuilder();
       code.append("#@override\n");
 
@@ -91,9 +90,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
       List<String> superArgs = new ArrayList<>();
       List<PerlSubArgument> arguments = Collections.emptyList();
 
-      if (perlSubBase instanceof PerlSubDefinitionElement) {
+      if (perlSubBase instanceof PerlSubDefinitionElement subDefinitionElement) {
         //noinspection unchecked
-        arguments = ((PerlSubDefinitionElement)perlSubBase).getSubArgumentsList();
+        arguments = subDefinitionElement.getSubArgumentsList();
 
         if (!arguments.isEmpty()) {
           boolean useShift = false;

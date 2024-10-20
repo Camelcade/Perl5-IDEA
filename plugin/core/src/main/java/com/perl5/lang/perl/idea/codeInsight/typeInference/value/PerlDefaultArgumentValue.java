@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,10 +48,10 @@ public class PerlDefaultArgumentValue extends PerlParametrizedOperationValue {
                                               @NotNull PerlValueResolver resolver) {
     if (resolver instanceof PerlSubValueResolver) {
       PerlValue resolvedArguments = resolver.resolve(PerlValues.ARGUMENTS_VALUE);
-      if (!(resolvedArguments instanceof PerlArrayValue)) {
+      if (!(resolvedArguments instanceof PerlArrayValue arrayValue)) {
         return resolvedDefaultValue;
       }
-      List<PerlValue> argumentElements = ((PerlArrayValue)resolvedArguments).getElements();
+      List<PerlValue> argumentElements = arrayValue.getElements();
       return argumentElements.size() <= myArgumentIndex ? resolvedDefaultValue : resolvedMainValue;
     }
     else {

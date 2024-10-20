@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -144,11 +144,9 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
       if (this == o) {
         return true;
       }
-      if (!(o instanceof WslVirtualFile)) {
+      if (!(o instanceof WslVirtualFile file)) {
         return false;
       }
-
-      WslVirtualFile file = (WslVirtualFile)o;
 
       return getOriginalFile().equals(file.getOriginalFile());
     }

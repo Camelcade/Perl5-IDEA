@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,10 +43,10 @@ public class PerlVariableCompletionProvider extends PerlCompletionProvider {
     PsiElement method = subName.getParent();
 
     String namespaceName = null;
-    if (!(method instanceof PsiPerlMethod) || ((PsiPerlMethod)method).isObjectMethod()) {
+    if (!(method instanceof PsiPerlMethod psiPerlMethod) || psiPerlMethod.isObjectMethod()) {
       return;
     }
-    namespaceName = ((PsiPerlMethod)method).getExplicitNamespaceName();
+    namespaceName = psiPerlMethod.getExplicitNamespaceName();
     if (StringUtil.isNotEmpty(namespaceName)) {
       resultSet = resultSet.withPrefixMatcher(PerlPackageUtil.join(namespaceName, resultSet.getPrefixMatcher().getPrefix()));
     }

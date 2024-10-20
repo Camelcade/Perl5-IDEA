@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,16 +76,16 @@ public class PerlProfilerDumpWriter implements ProfilerDumpWriter {
 
   public static @Nullable ProfilerDumpWriter create(@NotNull File originalFile,
                                                     @NotNull ProfilerDumpFileParsingResult parsingResult) {
-    if (!(parsingResult instanceof Success)) {
+    if (!(parsingResult instanceof Success success)) {
       return null;
     }
 
-    var profilerData = ((Success)parsingResult).getData();
-    if (!(profilerData instanceof NewCallTreeOnlyProfilerData)) {
+    var profilerData = success.getData();
+    if (!(profilerData instanceof NewCallTreeOnlyProfilerData treeOnlyProfilerData)) {
       return null;
     }
 
-    var treeBuilder = ((NewCallTreeOnlyProfilerData)profilerData).getBuilder();
+    var treeBuilder = treeOnlyProfilerData.getBuilder();
     return new PerlProfilerDumpWriter(originalFile, treeBuilder);
   }
 }

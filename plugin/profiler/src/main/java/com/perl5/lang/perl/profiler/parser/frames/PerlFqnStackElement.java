@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,8 +38,8 @@ class PerlFqnStackElement extends PerlCallStackElement {
   protected @NotNull List<NavigatablePsiElement> computeNavigatables(@NotNull Project project, @NotNull Sdk perlSdk) {
     List<NavigatablePsiElement> result = new ArrayList<>();
     PerlPackageUtil.processCallables(project, GlobalSearchScope.allScope(project), getFrameText(), it -> {
-      if (it instanceof NavigatablePsiElement) {
-        result.add((NavigatablePsiElement)it);
+      if (it instanceof NavigatablePsiElement navigatablePsiElement) {
+        result.add(navigatablePsiElement);
       }
       return true;
     });

@@ -282,9 +282,9 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
       var settings = executorGroup.getRegisteredSettings(executor.getId());
       assertNotNull(settings);
       var configurationState = settings.getState();
-      if (configurationState instanceof PerlProfilerConfigurationState) {
+      if (configurationState instanceof PerlProfilerConfigurationState profilerConfigurationState) {
         assertNull(result);
-        result = Pair.create(executor, (PerlProfilerConfigurationState)configurationState);
+        result = Pair.create(executor, profilerConfigurationState);
       }
     }
     assertNotNull(result);
@@ -322,8 +322,8 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     var profilerRunConfigurationsManager = ProfilerRunConfigurationsManager.getInstance();
     var configurations = profilerRunConfigurationsManager.getConfigurations();
     for (ProfilerConfigurationState configuration : configurations) {
-      if (configuration instanceof PerlProfilerConfigurationState) {
-        stateModifier.accept((PerlProfilerConfigurationState)configuration);
+      if (configuration instanceof PerlProfilerConfigurationState profilerConfigurationState) {
+        stateModifier.accept(profilerConfigurationState);
         break;
       }
     }

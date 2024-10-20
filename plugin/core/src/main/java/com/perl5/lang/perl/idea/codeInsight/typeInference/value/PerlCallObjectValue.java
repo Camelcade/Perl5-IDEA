@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -138,16 +138,14 @@ public final class PerlCallObjectValue extends PerlCallValue {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof PerlCallObjectValue)) {
+    if (!(o instanceof PerlCallObjectValue callObjectValue)) {
       return false;
     }
     if (!super.equals(o)) {
       return false;
     }
 
-    PerlCallObjectValue value = (PerlCallObjectValue)o;
-
-    return mySuperContext != null ? mySuperContext.equals(value.mySuperContext) : value.mySuperContext == null;
+    return mySuperContext != null ? mySuperContext.equals(callObjectValue.mySuperContext) : callObjectValue.mySuperContext == null;
   }
 
   @Override

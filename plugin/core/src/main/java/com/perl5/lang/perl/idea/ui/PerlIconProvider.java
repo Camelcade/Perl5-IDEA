@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,11 +42,11 @@ public class PerlIconProvider extends IconProvider {
     if (element instanceof PerlSubExpr) {
       return PerlIcons.ANON_SUB_ICON;
     }
-    if (element instanceof PerlVariable) {
-      return getIcon(((PerlVariable)element).getActualType());
+    if (element instanceof PerlVariable perlVariable) {
+      return getIcon(perlVariable.getActualType());
     }
-    else if (element instanceof PerlVariableDeclarationElement) {
-      return getIcon(((PerlVariableDeclarationElement)element).getActualType());
+    else if (element instanceof PerlVariableDeclarationElement variableDeclarationElement) {
+      return getIcon(variableDeclarationElement.getActualType());
     }
     IElementType elementType = PsiUtilCore.getElementType(element);
     if (elementType == AFTER_MODIFIER) {

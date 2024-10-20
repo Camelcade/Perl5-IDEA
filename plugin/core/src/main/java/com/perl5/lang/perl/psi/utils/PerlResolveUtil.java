@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -109,8 +109,8 @@ public final class PerlResolveUtil {
     }
 
     // checking implicit variables fixme: decide, move processchildren to here or move this one to processDeclarations?
-    if (element instanceof PerlImplicitVariablesProvider) {
-      for (PerlVariableDeclarationElement wrapper : ((PerlImplicitVariablesProvider)element).getImplicitVariables()) {
+    if (element instanceof PerlImplicitVariablesProvider implicitVariablesProvider) {
+      for (PerlVariableDeclarationElement wrapper : implicitVariablesProvider.getImplicitVariables()) {
         ProgressManager.checkCanceled();
         if (!processor.execute(wrapper, resolveState)) {
           return false;
@@ -128,8 +128,8 @@ public final class PerlResolveUtil {
    * @return variable in declaration term or null if there is no such one
    */
   public static @Nullable PerlVariableDeclarationElement getLexicalDeclaration(@NotNull PerlVariable variable) {
-    if (variable instanceof PerlVariableDeclarationElement) {
-      return (PerlVariableDeclarationElement)variable;
+    if (variable instanceof PerlVariableDeclarationElement variableDeclarationElement) {
+      return variableDeclarationElement;
     }
     if (variable.getExplicitNamespaceName() != null) {
       return null;
@@ -168,8 +168,8 @@ public final class PerlResolveUtil {
     }
 
     for (PsiReference reference : references) {
-      if (reference instanceof PsiPolyVariantReference) {
-        for (ResolveResult resolveResult : ((PsiPolyVariantReference)reference).multiResolve(false)) {
+      if (reference instanceof PsiPolyVariantReference polyVariantReference) {
+        for (ResolveResult resolveResult : polyVariantReference.multiResolve(false)) {
           PsiElement targetElement = resolveResult.getElement();
           if (targetElement != null && !processor.process(targetElement, reference)) {
             return false;
@@ -427,8 +427,8 @@ public final class PerlResolveUtil {
       return false;
     }
 
-    if (reference instanceof PsiPolyVariantReference) {
-      return ((PsiPolyVariantReference)reference).multiResolve(false).length > 0;
+    if (reference instanceof PsiPolyVariantReference polyVariantReference) {
+      return polyVariantReference.multiResolve(false).length > 0;
     }
     return reference.resolve() != null;
   }

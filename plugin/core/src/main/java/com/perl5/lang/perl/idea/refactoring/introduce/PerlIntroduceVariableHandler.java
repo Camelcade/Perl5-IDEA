@@ -146,8 +146,8 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     }
 
     PsiFile targetExpressionFile = targetExpressionElement.getContainingFile();
-    if (targetExpressionFile instanceof PerlFile) {
-      ((PerlFile)targetExpressionFile).setFileContext(target.getPlace());
+    if (targetExpressionFile instanceof PerlFile perlFile) {
+      perlFile.setFileContext(target.getPlace());
     }
 
     PerlVariableType variableType = PerlIntroduceTargetsHandler.computeVariableType(target);
@@ -235,8 +235,8 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
     PsiElement anchorElement = Objects.requireNonNull(occurrences.getFirst().getPlace());
     while (true) {
-      if (anchorElement instanceof PerlHeredocElementImpl) {
-        anchorElement = ((PerlHeredocElementImpl)anchorElement).getHeredocOpener();
+      if (anchorElement instanceof PerlHeredocElementImpl heredocElement) {
+        anchorElement = heredocElement.getHeredocOpener();
         if (anchorElement == null) {
           LOG.error("Unable to find here-doc opener");
           return null;
@@ -290,8 +290,8 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
           targetPlaceParent = targetPlaceParent.getParent();
         }
 
-        if (targetPlaceParent.equals(anchor) && targetPlaceParent instanceof PsiPerlStatementImpl
-            && !((PsiPerlStatementImpl)targetPlaceParent).hasModifier()) {
+        if (targetPlaceParent.equals(anchor) && targetPlaceParent instanceof PsiPerlStatementImpl perlStatement
+            && !perlStatement.hasModifier()) {
           targetPlaceParent.delete();
         }
       }
@@ -302,13 +302,13 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
         return null;
       }
       PsiElement variableDeclaration = assignment.getFirstChild();
-      if (!(variableDeclaration instanceof PerlVariableDeclarationExpr)) {
+      if (!(variableDeclaration instanceof PerlVariableDeclarationExpr variableDeclarationExpr)) {
         LOG.error("Unable to find declarationBlock in " + introducedStatement.getText());
         return null;
       }
 
       List<PsiPerlVariableDeclarationElement> declarations =
-        ((PerlVariableDeclarationExpr)variableDeclaration).getVariableDeclarationElementList();
+        variableDeclarationExpr.getVariableDeclarationElementList();
 
       if (declarations.size() != 1) {
         LOG.error("Single variable declarationBlock expected: " + introducedStatement.getText());

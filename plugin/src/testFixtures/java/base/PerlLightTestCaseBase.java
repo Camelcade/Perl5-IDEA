@@ -543,8 +543,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     getFile().accept(new PerlRecursiveVisitor() {
       @Override
       public void visitElement(@NotNull PsiElement element) {
-        if (element instanceof PsiErrorElement) {
-          foundErrors.add(Pair.create(element.getTextOffset(), ((PsiErrorElement)element).getErrorDescription()));
+        if (element instanceof PsiErrorElement errorElement) {
+          foundErrors.add(Pair.create(element.getTextOffset(), errorElement.getErrorDescription()));
         }
         super.visitElement(element);
       }
@@ -730,11 +730,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       ;
 
       Object lookupObject = lookupElement.getObject();
-      if (lookupObject instanceof PsiElement) {
-        sb.append("\n\tPsiElement: ").append(serializePsiElement((PsiElement)lookupObject));
+      if (lookupObject instanceof PsiElement psiElement) {
+        sb.append("\n\tPsiElement: ").append(serializePsiElement(psiElement));
       }
-      else if (lookupObject instanceof VirtualFile) {
-        sb.append("\n\tVirtualFile: ").append(((VirtualFile)lookupObject).getName());
+      else if (lookupObject instanceof VirtualFile virtualFile) {
+        sb.append("\n\tVirtualFile: ").append(virtualFile.getName());
       }
       else if (lookupObject instanceof PerlExportDescriptor) {
         sb.append("\n\tExport: ").append(lookupObject);
@@ -745,8 +745,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       else if (lookupObject instanceof String) {
         sb.append("\n\tString: ").append(lookupObject);
       }
-      else if (lookupElement instanceof LiveTemplateLookupElementImpl) {
-        sb.append("\n\tLive template: ").append(((LiveTemplateLookupElementImpl)lookupElement).getTemplate());
+      else if (lookupElement instanceof LiveTemplateLookupElementImpl templateLookupElement) {
+        sb.append("\n\tLive template: ").append(templateLookupElement.getTemplate());
       }
       else {
         sb.append("\n\t").append(lookupObject.getClass().getSimpleName());
@@ -797,11 +797,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       if (!(file.getFileType() instanceof PerlPluginBaseFileType)) {
         return false;
       }
-      if (file instanceof VirtualFileWindow) {
-        file = ((VirtualFileWindow)file).getDelegate();
+      if (file instanceof VirtualFileWindow virtualFileWindow) {
+        file = virtualFileWindow.getDelegate();
       }
-      if (file instanceof LightVirtualFile) {
-        file = ((LightVirtualFile)file).getOriginalFile();
+      if (file instanceof LightVirtualFile lightVirtualFile) {
+        file = lightVirtualFile.getOriginalFile();
       }
       return !Objects.equals(openedVirtualFile, file);
     }, getTestRootDisposable());
@@ -883,8 +883,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     PsiElement sourceElement = reference.getElement();
 
     List<ResolveResult> resolveResults;
-    if (reference instanceof PsiPolyVariantReference) {
-      resolveResults = Arrays.asList(((PsiPolyVariantReference)reference).multiResolve(false));
+    if (reference instanceof PsiPolyVariantReference polyVariantReference) {
+      resolveResults = Arrays.asList(polyVariantReference.multiResolve(false));
     }
     else {
       PsiElement target = reference.resolve();
@@ -1160,8 +1160,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     }
     StringBuilder sb = new StringBuilder();
     sb.append(element);
-    if (element instanceof PerlSubDefinitionElement) {
-      String argumentsList = ((PerlSubDefinitionElement)element).getSubArgumentsList().stream()
+    if (element instanceof PerlSubDefinitionElement subDefinitionElement) {
+      String argumentsList = subDefinitionElement.getSubArgumentsList().stream()
         .map(this::serializeSubArgument)
         .collect(Collectors.joining(", "));
       if (StringUtil.isNotEmpty(argumentsList)) {
@@ -1197,17 +1197,17 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     getFile().accept(new PsiRecursiveElementVisitor() {
       @Override
       public void visitElement(@NotNull PsiElement element) {
-        if (element instanceof PerlPolyNamedElement) {
+        if (element instanceof PerlPolyNamedElement<?> polyNamedElement) {
           sb.append("Poly-named provider: ").append(serializePsiElement(element)).append("\n");
-          for (PerlDelegatingLightNamedElement<?> namedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
+          for (PerlDelegatingLightNamedElement<?> namedElement : polyNamedElement.getLightElements()) {
             sb.append("\t").append(serializePsiElement(namedElement)).append("\n");
           }
           sb.append("\n");
         }
 
-        if (element instanceof PerlImplicitVariablesProvider) {
+        if (element instanceof PerlImplicitVariablesProvider implicitVariablesProvider) {
           sb.append("Implicit variables provider: ").append(serializePsiElement(element)).append("\n");
-          for (PerlVariableDeclarationElement declarationElement : ((PerlImplicitVariablesProvider)element).getImplicitVariables()) {
+          for (PerlVariableDeclarationElement declarationElement : implicitVariablesProvider.getImplicitVariables()) {
             sb.append("\t").append(serializePsiElement(declarationElement)).append("\n");
           }
 
@@ -1524,13 +1524,13 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     ItemPresentation presentation = currentElement.getPresentation();
     sb.append(serializePresentation(presentation));
 
-    if (value instanceof PsiElement) {
-      sb.append(" -> ").append(serializePsiElement((PsiElement)value));
+    if (value instanceof PsiElement psiElement) {
+      sb.append(" -> ").append(serializePsiElement(psiElement));
     }
     sb.append("\n");
 
-    if (currentElement instanceof SortableTreeElement) {
-      sb.append(prefix).append("SortKey: ").append(((SortableTreeElement)currentElement).getAlphaSortKey()).append("\n");
+    if (currentElement instanceof SortableTreeElement sortableTreeElement) {
+      sb.append(prefix).append("SortKey: ").append(sortableTreeElement.getAlphaSortKey()).append("\n");
     }
 
     // filters
@@ -1605,8 +1605,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       .append("; ")
       .append(getIconText(presentation.getIcon(true)));
 
-    if (presentation instanceof PerlItemPresentationBase) {
-      sb.append("; ").append(((PerlItemPresentationBase)presentation).getTextAttributesKey());
+    if (presentation instanceof PerlItemPresentationBase itemPresentationBase) {
+      sb.append("; ").append(itemPresentationBase.getTextAttributesKey());
     }
     return sb.toString();
   }
@@ -1919,18 +1919,17 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   private String doGetInstructionText(@NotNull Instruction instruction) {
-    if (instruction instanceof PerlAssignInstruction) {
-      PerlAssignInstruction assignInstruction = (PerlAssignInstruction)instruction;
+    if (instruction instanceof PerlAssignInstruction assignInstruction) {
       PerlAssignExpression.PerlAssignValueDescriptor rightSide = assignInstruction.getRightSide();
       return assignInstruction.getLeftSide().getText() + " "
              + assignInstruction.getOperation().getText() + " "
              + rightSide.getText() + (rightSide.getStartIndex() == 0 ? "" : " [" + rightSide.getStartIndex() + "]");
     }
-    else if (instruction instanceof PerlIterateInstruction) {
+    else if (instruction instanceof PerlIterateInstruction iterateInstruction) {
       return "iterate " +
-             getTextSafe(((PerlIterateInstruction)instruction).getSourceElement()) +
+             getTextSafe(iterateInstruction.getSourceElement()) +
              " using " +
-             getTextSafe(((PerlIterateInstruction)instruction).getTargetElement());
+             getTextSafe(iterateInstruction.getTargetElement());
     }
     else {
       PsiElement element = instruction.getElement();
@@ -1939,7 +1938,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
       String elementText = element.getText();
       if (StringUtil.isEmpty(elementText)) {
-        return element instanceof PsiNamedElement ? ((PsiNamedElement)element).getName() : "empty text, unnamed";
+        return element instanceof PsiNamedElement namedElement ? namedElement.getName() : "empty text, unnamed";
       }
       return elementText;
     }
@@ -2038,11 +2037,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         .append('"').append(element.getText()).append("\"; ")
         .append(element.getTextRange()).append("; ");
 
-      if (usage instanceof ReadWriteAccessUsageInfo2UsageAdapter) {
-        if (((ReadWriteAccessUsageInfo2UsageAdapter)usage).isAccessedForReading()) {
+      if (usage instanceof ReadWriteAccessUsageInfo2UsageAdapter usageAdapter) {
+        if (usageAdapter.isAccessedForReading()) {
           sb.append("reading; ");
         }
-        if (((ReadWriteAccessUsageInfo2UsageAdapter)usage).isAccessedForWriting()) {
+        if (usageAdapter.isAccessedForWriting()) {
           sb.append("writing; ");
         }
       }
@@ -2063,7 +2062,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   private @NotNull String getUsageGroups(@NotNull Usage usage, @NotNull UsageGroupingRule groupingRule) {
     StringBuilder sb = new StringBuilder();
     groupingRule.getParentGroupsFor(usage, UsageTarget.EMPTY_ARRAY).forEach(usageGroup -> {
-      if (sb.length() > 0) {
+      if (!sb.isEmpty()) {
         sb.append("\n");
       }
       sb.append("    ").append(serializeUsageGroup(usageGroup));
@@ -2072,8 +2071,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   private @NotNull String serializeUsageGroup(@NotNull UsageGroup usageGroup) {
-    if (usageGroup instanceof PsiElementUsageGroupBase) {
-      return "PsiElement: " + serializePsiElement(((PsiElementUsageGroupBase<?>)usageGroup).getElement());
+    if (usageGroup instanceof PsiElementUsageGroupBase<?> usageGroupBase) {
+      return "PsiElement: " + serializePsiElement(usageGroupBase.getElement());
     }
     return usageGroup.getClass().getSimpleName() + ": " + usageGroup.getPresentableGroupText() + "; " + getIconText(usageGroup.getIcon());
   }
@@ -2097,8 +2096,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     Editor editor = getEditor();
 
     TemplateManagerImpl.setTemplateTesting(getTestRootDisposable());
-    if (editor instanceof EditorWindow) {
-      editor = ((EditorWindow)editor).getDelegate();
+    if (editor instanceof EditorWindow editorWindow) {
+      editor = editorWindow.getDelegate();
     }
     new PerlIntroduceVariableHandler().invoke(getProject(), editor, getFile(), null);
     assertNoErrorElements();
@@ -2161,8 +2160,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     initWithFileSmartWithoutErrors();
     TemplateManagerImpl.setTemplateTesting(getTestRootDisposable());
     Editor editor = getEditor();
-    if (editor instanceof EditorWindow) {
-      editor = ((EditorWindow)editor).getDelegate();
+    if (editor instanceof EditorWindow editorWindow) {
+      editor = editorWindow.getDelegate();
     }
     handler.doRename(myFixture.getElementAtCaret(), editor, getEditorDataContext());
     List<String> names = myFixture.getLookupElementStrings();
@@ -2182,8 +2181,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     Editor editor = getEditor();
 
     TemplateManagerImpl.setTemplateTesting(getTestRootDisposable());
-    if (editor instanceof EditorWindow) {
-      editor = ((EditorWindow)editor).getDelegate();
+    if (editor instanceof EditorWindow editorWindow) {
+      editor = editorWindow.getDelegate();
     }
     new PerlIntroduceVariableHandler().invoke(getProject(), editor, getFile(), null);
     assertNoErrorElements();
@@ -2381,8 +2380,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         if (element instanceof PsiDirectory) {
           itemsResult.add("PsiDirectory");
         }
-        else if (element instanceof NavigationItem) {
-          itemsResult.add(serializePresentation(((NavigationItem)element).getPresentation()));
+        else if (element instanceof NavigationItem navigationItem) {
+          itemsResult.add(serializePresentation(navigationItem.getPresentation()));
         }
         else {
           itemsResult.add(element.toString());
@@ -2582,9 +2581,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         assertNotNull(itemsToShow);
         List<String> hintElements = new ArrayList<>();
         for (Object itemToShow : itemsToShow) {
-          if (itemToShow instanceof PerlParameterInfo) {
-            String itemString = serializeSubArgument(((PerlParameterInfo)itemToShow).getArgument());
-            if (((PerlParameterInfo)itemToShow).isSelected()) {
+          if (itemToShow instanceof PerlParameterInfo parameterInfo) {
+            String itemString = serializeSubArgument(parameterInfo.getArgument());
+            if (parameterInfo.isSelected()) {
               itemString = "<" + itemString + ">";
             }
             hintElements.add(itemString);
@@ -2697,8 +2696,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     removeVirtualFileFilter();
     for (PsiElement element : targetElements) {
       sb.append("\t").append(serializePsiElement(element)).append("\n");
-      if (element instanceof NavigationItem) {
-        sb.append("\t\t").append(serializePresentation(((NavigationItem)element).getPresentation())).append("\n");
+      if (element instanceof NavigationItem navigationItem) {
+        sb.append("\t\t").append(serializePresentation(navigationItem.getPresentation())).append("\n");
       }
     }
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
@@ -3176,8 +3175,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     String text = myFixture.getDocument(myFixture.getFile()).getText();
     StringBuilder b = new StringBuilder();
     for (GutterMark gutterMarker : allMarkers) {
-      if (gutterMarker instanceof LineMarkerInfo.LineMarkerGutterIconRenderer) {
-        LineMarkerInfo<?> lineMarkerInfo = ((LineMarkerInfo.LineMarkerGutterIconRenderer<?>)gutterMarker).getLineMarkerInfo();
+      if (gutterMarker instanceof LineMarkerInfo.LineMarkerGutterIconRenderer<?> iconRenderer) {
+        LineMarkerInfo<?> lineMarkerInfo = iconRenderer.getLineMarkerInfo();
         b.append(lineMarkerInfo.startOffset).append(" - ").append(lineMarkerInfo.endOffset).append(": ")
           .append('\'')
           .append(text, lineMarkerInfo.startOffset, lineMarkerInfo.endOffset)
@@ -3186,12 +3185,12 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
           .append(lineMarkerInfo.getLineMarkerTooltip())
           .append("\n");
 
-        if (!(lineMarkerInfo instanceof RelatedItemLineMarkerInfo)) {
+        if (!(lineMarkerInfo instanceof RelatedItemLineMarkerInfo<?> markerInfo)) {
           b.append("Uknown targets: ").append(lineMarkerInfo.getClass().getSimpleName()).append("\n");
           continue;
         }
 
-        Collection<? extends GotoRelatedItem> gotoRelatedItems = ((RelatedItemLineMarkerInfo<?>)lineMarkerInfo).createGotoRelatedItems();
+        Collection<? extends GotoRelatedItem> gotoRelatedItems = markerInfo.createGotoRelatedItems();
         b.append("Targets: ").append(gotoRelatedItems.size()).append("\n");
         List<String> targetsTexts = new ArrayList<>();
         for (GotoRelatedItem gotoRelatedItem : gotoRelatedItems) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -91,9 +91,9 @@ public class PerlExportDescriptor {
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
-    if (!(o instanceof PerlExportDescriptor)) return false;
-
-    PerlExportDescriptor that = (PerlExportDescriptor)o;
+    if (!(o instanceof PerlExportDescriptor that)) {
+      return false;
+    }
 
     if (mySigil != that.mySigil) return false;
     if (!getImportedName().equals(that.getImportedName())) return false;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,8 +53,8 @@ public class TemplateToolkitBlocksCompletionProvider extends CompletionProvider<
     }
 
     PsiTreeUtil.processElements(element.getContainingFile(), element1 -> {
-      if (element1 instanceof TemplateToolkitNamedBlock) {
-        String blockName = ((TemplateToolkitNamedBlock)element1).getName();
+      if (element1 instanceof TemplateToolkitNamedBlock templateToolkitNamedBlock) {
+        String blockName = templateToolkitNamedBlock.getName();
         if (StringUtil.isNotEmpty(blockName)) {
           result.addElement(
             LookupElementBuilder.create(element1, blockName)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,9 +51,9 @@ public class HTMLMasonMethodReference extends HTMLMasonStringReference {
       if (references.length == 2) {
         PsiReference componentReference = references[0];
         PsiElement startComponent = componentReference.resolve();
-        if (startComponent instanceof HTMLMasonFileImpl) {
+        if (startComponent instanceof HTMLMasonFileImpl htmlMasonFile) {
           HTMLMasonMethodDefinition methodDefinition =
-            ((HTMLMasonFileImpl)startComponent).findMethodDefinitionByNameInThisOrParents(methodName);
+            htmlMasonFile.findMethodDefinitionByNameInThisOrParents(methodName);
           if (methodDefinition != null) {
             return new ResolveResult[]{new PsiElementResolveResult(methodDefinition)};
           }

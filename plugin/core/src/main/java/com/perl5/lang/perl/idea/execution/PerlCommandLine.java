@@ -79,17 +79,17 @@ public class PerlCommandLine extends GeneralCommandLine {
 
   public PerlCommandLine(@NotNull GeneralCommandLine original) {
     super(original);
-    if (original instanceof PerlCommandLine) {
-      mySdk = ((PerlCommandLine)original).mySdk;
-      myHostData = ((PerlCommandLine)original).myHostData;
-      myVersionManagerData = ((PerlCommandLine)original).myVersionManagerData;
-      myUsePty = ((PerlCommandLine)original).myUsePty;
-      myConsoleTitle = ((PerlCommandLine)original).myConsoleTitle;
-      myConsoleIcon = ((PerlCommandLine)original).myConsoleIcon;
-      myProcessListeners = new ArrayList<>(((PerlCommandLine)original).myProcessListeners);
-      myProject = ((PerlCommandLine)original).myProject;
-      myModule = ((PerlCommandLine)original).myModule;
-      myIsUserCommandLine = ((PerlCommandLine)original).myIsUserCommandLine;
+    if (original instanceof PerlCommandLine perlCommandLine) {
+      mySdk = perlCommandLine.mySdk;
+      myHostData = perlCommandLine.myHostData;
+      myVersionManagerData = perlCommandLine.myVersionManagerData;
+      myUsePty = perlCommandLine.myUsePty;
+      myConsoleTitle = perlCommandLine.myConsoleTitle;
+      myConsoleIcon = perlCommandLine.myConsoleIcon;
+      myProcessListeners = new ArrayList<>(perlCommandLine.myProcessListeners);
+      myProject = perlCommandLine.myProject;
+      myModule = perlCommandLine.myModule;
+      myIsUserCommandLine = perlCommandLine.myIsUserCommandLine;
     }
   }
 

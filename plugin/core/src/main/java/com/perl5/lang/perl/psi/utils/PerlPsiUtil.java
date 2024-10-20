@@ -140,8 +140,8 @@ public final class PerlPsiUtil implements PerlElementTypes {
    */
   public static void processStringElements(PsiElement startWith, Processor<PerlStringContentElement> processor) {
     while (startWith != null) {
-      if (startWith instanceof PerlStringContentElement) {
-        processor.process((PerlStringContentElement)startWith);
+      if (startWith instanceof PerlStringContentElement stringContentElement) {
+        processor.process(stringContentElement);
       }
 
       if (startWith.getFirstChild() != null) {
@@ -167,8 +167,8 @@ public final class PerlPsiUtil implements PerlElementTypes {
       if (run instanceof PerlString) {
         result.add(ElementManipulators.getValueText(run));
       }
-      else if (run instanceof PerlStringList) {
-        result.addAll(((PerlStringList)run).getStringContents());
+      else if (run instanceof PerlStringList stringList) {
+        result.addAll(stringList.getStringContents());
       }
       else {
         if (run instanceof ASTWrapperPsiElement) {
@@ -290,8 +290,8 @@ public final class PerlPsiUtil implements PerlElementTypes {
       return true;
     };
 
-    if (rootElement instanceof StubBasedPsiElement) {
-      Stub rootElementStub = ((StubBasedPsiElement<?>)rootElement).getStub();
+    if (rootElement instanceof StubBasedPsiElement<?> stubBasedPsiElement) {
+      Stub rootElementStub = stubBasedPsiElement.getStub();
 
       if (rootElementStub != null) {
         processElementsFromStubs(
@@ -335,8 +335,8 @@ public final class PerlPsiUtil implements PerlElementTypes {
       }
     }
 
-    if (stub instanceof PerlPolyNamedElementStub) {
-      for (PsiElement child : ((PerlPolyNamedElementStub<?>)stub).getPsi().getLightElements()) {
+    if (stub instanceof PerlPolyNamedElementStub<?> polyNamedElementStub) {
+      for (PsiElement child : polyNamedElementStub.getPsi().getLightElements()) {
         ProgressManager.checkCanceled();
         if (!processor.process(child)) {
           return false;
@@ -370,8 +370,8 @@ public final class PerlPsiUtil implements PerlElementTypes {
       }
     }
 
-    if (element instanceof PerlPolyNamedElement) {
-      for (PerlDelegatingLightNamedElement<?> lightNamedElement : ((PerlPolyNamedElement<?>)element).getLightElements()) {
+    if (element instanceof PerlPolyNamedElement<?> perlPolyNamedElement) {
+      for (PerlDelegatingLightNamedElement<?> lightNamedElement : perlPolyNamedElement.getLightElements()) {
         ProgressManager.checkCanceled();
         if (!processor.process(lightNamedElement)) {
           return false;
@@ -456,8 +456,8 @@ public final class PerlPsiUtil implements PerlElementTypes {
     ProgressManager.checkCanceled();
     if (element instanceof PerlLoop) {
       PsiElement prevElement = getPrevSignificantSibling(element);
-      if (prevElement instanceof PerlLabelDeclaration) {
-        if (!processor.process((PerlLabelDeclaration)prevElement)) {
+      if (prevElement instanceof PerlLabelDeclaration labelDeclaration) {
+        if (!processor.process(labelDeclaration)) {
           return;
         }
       }
@@ -479,8 +479,8 @@ public final class PerlPsiUtil implements PerlElementTypes {
     PsiElement run = element.getFirstChild();
     while (run != null) {
       ProgressManager.checkCanceled();
-      if (run instanceof PerlLabelDeclaration) {
-        if (!processor.process((PerlLabelDeclaration)run)) {
+      if (run instanceof PerlLabelDeclaration perlLabelDeclaration) {
+        if (!processor.process(perlLabelDeclaration)) {
           return;
         }
       }
@@ -500,8 +500,8 @@ public final class PerlPsiUtil implements PerlElementTypes {
    * @return check result
    */
   public static boolean isSelfShortcut(PsiElement element) {
-    if (element instanceof PsiPerlParenthesisedExpr) {
-      return isSelfShortcut(((PsiPerlParenthesisedExpr)element).getExpr());
+    if (element instanceof PsiPerlParenthesisedExpr parenthesisedExpr) {
+      return isSelfShortcut(parenthesisedExpr.getExpr());
     }
 
     if (element == null ||
@@ -517,8 +517,8 @@ public final class PerlPsiUtil implements PerlElementTypes {
     }
 
     PsiElement statementContainer = statement.getParent();
-    if (!(statementContainer instanceof PsiPerlBlockImpl &&
-          ((PsiPerlBlockImpl)statementContainer).getContainer() instanceof PerlSubDefinitionElement)) {
+    if (!(statementContainer instanceof PsiPerlBlockImpl perlBlock &&
+          perlBlock.getContainer() instanceof PerlSubDefinitionElement)) {
       return false;
     }
 
@@ -619,21 +619,21 @@ public final class PerlPsiUtil implements PerlElementTypes {
    * @return true iff nested calls are semantically equal
    */
   private static boolean areNestedCallsSame(@NotNull PerlMethodContainer targetElement, @NotNull PsiElement elementToCompare) {
-    if (!(elementToCompare instanceof PerlMethodContainer)) {
+    if (!(elementToCompare instanceof PerlMethodContainer methodContainer)) {
       return false;
     }
-    if (!areElementsSame(targetElement.getMethod(), ((PerlMethodContainer)elementToCompare).getMethod())) {
+    if (!areElementsSame(targetElement.getMethod(), methodContainer.getMethod())) {
       return false;
     }
-    return areElementsSame(targetElement.getCallArgumentsList(), ((PerlMethodContainer)elementToCompare).getCallArgumentsList());
+    return areElementsSame(targetElement.getCallArgumentsList(), methodContainer.getCallArgumentsList());
   }
 
   /**
    * @return true iff regexps are semantically equal
    */
   private static boolean areRegexSame(@NotNull PsiPerlPerlRegex targetElement, @NotNull PsiElement elementTocompare) {
-    if (elementTocompare instanceof PerlSimpleRegex) {
-      return areElementsSame(targetElement, ((PerlSimpleRegex)elementTocompare).getRegex());
+    if (elementTocompare instanceof PerlSimpleRegex simpleRegex) {
+      return areElementsSame(targetElement, simpleRegex.getRegex());
     }
     if (!(elementTocompare instanceof PsiPerlPerlRegex)) {
       return false;
@@ -687,14 +687,14 @@ public final class PerlPsiUtil implements PerlElementTypes {
     if (isMatchRegex(elementToCompare)) {
       return areElementsSame(targetElement.getRegex(), elementToCompare);
     }
-    if (!(elementToCompare instanceof PerlSimpleRegex)) {
+    if (!(elementToCompare instanceof PerlSimpleRegex simpleRegex)) {
       return false;
     }
-    if (!areElementsSame(targetElement.getRegex(), ((PerlSimpleRegex)elementToCompare).getRegex())) {
+    if (!areElementsSame(targetElement.getRegex(), simpleRegex.getRegex())) {
       return false;
     }
     PerlRegexpModifiers targetModifiers = PerlRegexpModifiers.create(targetElement.getPerlRegexModifiers());
-    PerlRegexpModifiers elementModifiers = PerlRegexpModifiers.create(((PerlSimpleRegex)elementToCompare).getPerlRegexModifiers());
+    PerlRegexpModifiers elementModifiers = PerlRegexpModifiers.create(simpleRegex.getPerlRegexModifiers());
     return targetModifiers == null && elementModifiers == null ||
            targetModifiers != null && targetModifiers.areRegexpComparable(elementModifiers);
   }
@@ -730,10 +730,10 @@ public final class PerlPsiUtil implements PerlElementTypes {
       return null;
     }
     PsiElement[] children = block.getChildren();
-    if (children.length != 1 || !(children[0] instanceof PerlStatementMixin) || ((PerlStatementMixin)children[0]).getModifier() != null) {
+    if (children.length != 1 || !(children[0] instanceof PerlStatementMixin statementMixin) || statementMixin.getModifier() != null) {
       return null;
     }
-    return ((PerlStatementMixin)children[0]).getExpr();
+    return statementMixin.getExpr();
   }
 
   /**
@@ -749,7 +749,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
         && !targetString.getClass().equals(elementToCompare.getClass())) {
       return false;
     }
-    if (!(elementToCompare instanceof PerlString)) {
+    if (!(elementToCompare instanceof PerlString perlString)) {
       return false;
     }
 
@@ -777,9 +777,9 @@ public final class PerlPsiUtil implements PerlElementTypes {
 
     // traversal comparison
     PsiElement targetRun = targetString.getFirstContentToken();
-    PsiElement runToCompare = ((PerlString)elementToCompare).getFirstContentToken();
+    PsiElement runToCompare = perlString.getFirstContentToken();
     PsiElement targetCloseQuoteElement = targetString.getCloseQuoteElement();
-    PsiElement elementToCompareCloseQuoteElement = ((PerlString)elementToCompare).getCloseQuoteElement();
+    PsiElement elementToCompareCloseQuoteElement = perlString.getCloseQuoteElement();
 
     while (targetRun != null && runToCompare != null) {
       if (targetRun.equals(targetCloseQuoteElement) && runToCompare.equals(elementToCompareCloseQuoteElement)) {
@@ -854,11 +854,11 @@ public final class PerlPsiUtil implements PerlElementTypes {
   @Contract("null->null")
   public static @Nullable StubElement<?> getStubFromElement(@Nullable PsiElement element) {
     StubElement<?> stubElement = null;
-    if (element instanceof PsiFileImpl) {
-      stubElement = ((PsiFileImpl)element).getStub();
+    if (element instanceof PsiFileImpl psiFile) {
+      stubElement = psiFile.getStub();
     }
-    else if (element instanceof StubBasedPsiElement) {
-      stubElement = ((StubBasedPsiElement<?>)element).getStub();
+    else if (element instanceof StubBasedPsiElement<?> stubBasedPsiElement) {
+      stubElement = stubBasedPsiElement.getStub();
     }
     return stubElement;
   }
@@ -890,7 +890,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
   public static boolean processSubElements(@Nullable PsiElement rootElement, @NotNull PsiElementProcessor<PerlSubElement> processor) {
     StubElement<?> stubElement = getStubFromElement(rootElement);
     if (stubElement != null) {
-      return processElementsFromStubs(stubElement, it -> !(it instanceof PerlSubElement) || processor.execute((PerlSubElement)it), null);
+      return processElementsFromStubs(stubElement, it -> !(it instanceof PerlSubElement subElement) || processor.execute(subElement), null);
     }
     return processElementsFromPsi(rootElement, it -> !(it instanceof PerlSubElement) || processor.execute((PerlSubElement)it), null);
   }

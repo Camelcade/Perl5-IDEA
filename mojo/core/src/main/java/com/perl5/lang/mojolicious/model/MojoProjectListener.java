@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ public interface MojoProjectListener {
 
   default void projectCreated(@NotNull MojoProject project) {
     MojoProjectManager.LOG.debug("project created event: " + project);
-    if (project instanceof MojoApp) {
-      applicationCreated((MojoApp)project);
+    if (project instanceof MojoApp mojoApp) {
+      applicationCreated(mojoApp);
     }
     else {
       pluginCreated((MojoPlugin)project);
@@ -41,8 +41,8 @@ public interface MojoProjectListener {
    */
   default void projectDeleted(@NotNull MojoProject project) {
     MojoProjectManager.LOG.debug("project deleted event: " + project);
-    if (project instanceof MojoApp) {
-      applicationDeleted((MojoApp)project);
+    if (project instanceof MojoApp mojoApp) {
+      applicationDeleted(mojoApp);
     }
     else {
       pluginDeleted((MojoPlugin)project);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,8 +31,8 @@ public class MasonAbstractBlockImpl extends PerlCompositeElementImpl implements 
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof Mason2Visitor) {
-      ((Mason2Visitor)visitor).visitMasonAbstractBlock(this);
+    if (visitor instanceof Mason2Visitor mason2Visitor) {
+      mason2Visitor.visitMasonAbstractBlock(this);
     }
     else {
       super.accept(visitor);

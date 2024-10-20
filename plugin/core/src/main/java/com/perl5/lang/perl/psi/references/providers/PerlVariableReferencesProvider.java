@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public class PerlVariableReferencesProvider extends PsiReferenceProvider {
   public PsiReference @NotNull [] getReferencesByElement(@NotNull PsiElement element, @NotNull ProcessingContext context) {
     PsiElement parent = element.getParent();
 
-    if (parent instanceof PerlVariable && !((PerlVariable)parent).isDeclaration()) {
+    if (parent instanceof PerlVariable perlVariable && !perlVariable.isDeclaration()) {
       String elementText = element.getText();
       if (PerlPackageUtil.isFullQualifiedName(elementText)) {
         Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(elementText);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,8 +57,8 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitNamespaceElement(this);
+    if (visitor instanceof PerlVisitor perlVisitor) {
+      perlVisitor.visitNamespaceElement(this);
     }
     else {
       super.accept(visitor);
@@ -119,8 +119,8 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
     PsiReference[] references = getReferences();
 
     for (PsiReference reference : references) {
-      if (reference instanceof PerlNamespaceReference) {
-        ResolveResult[] results = ((PerlNamespaceReference)reference).multiResolve(false);
+      if (reference instanceof PerlNamespaceReference namespaceReference) {
+        ResolveResult[] results = namespaceReference.multiResolve(false);
 
         for (ResolveResult result : results) {
           PsiElement targetElement = result.getElement();
@@ -141,15 +141,15 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
     PsiReference[] references = getReferences();
 
     for (PsiReference reference : references) {
-      if (reference instanceof PerlNamespaceFileReference) {
-        ResolveResult[] results = ((PerlNamespaceFileReference)reference).multiResolve(false);
+      if (reference instanceof PerlNamespaceFileReference namespaceFileReference) {
+        ResolveResult[] results = namespaceFileReference.multiResolve(false);
 
         for (ResolveResult result : results) {
           PsiElement targetElement = result.getElement();
           assert targetElement != null;
 
-          if (targetElement instanceof PerlFileImpl) {
-            namespaceFiles.add((PerlFileImpl)targetElement);
+          if (targetElement instanceof PerlFileImpl perlFile) {
+            namespaceFiles.add(perlFile);
           }
         }
       }

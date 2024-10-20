@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,8 +58,8 @@ import static com.intellij.formatting.WrapType.*;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.*;
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PurePerlFormattingContext extends PerlBaseFormattingContext {
   private static final Logger LOG = Logger.getInstance(PurePerlFormattingContext.class);
@@ -274,22 +274,22 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
 
   @Override
   public @Nullable Spacing getSpacing(@Nullable ASTBlock parent, @Nullable Block child1, @NotNull Block child2) {
-    if (parent instanceof PerlSyntheticBlock) {
-      parent = ((PerlSyntheticBlock)parent).getRealBlock();
+    if (parent instanceof PerlSyntheticBlock syntheticBlock) {
+      parent = syntheticBlock.getRealBlock();
     }
 
-    if (child1 instanceof PerlSyntheticBlock) {
-      child1 = ((PerlSyntheticBlock)child1).getLastRealBlock();
+    if (child1 instanceof PerlSyntheticBlock syntheticBlock) {
+      child1 = syntheticBlock.getLastRealBlock();
     }
 
-    if (child2 instanceof PerlSyntheticBlock) {
-      child2 = ((PerlSyntheticBlock)child2).getFirstRealBlock();
+    if (child2 instanceof PerlSyntheticBlock syntheticBlock) {
+      child2 = syntheticBlock.getFirstRealBlock();
     }
 
-    if (child1 instanceof ASTBlock && child2 instanceof ASTBlock) {
-      ASTNode child1Node = ((ASTBlock)child1).getNode();
+    if (child1 instanceof ASTBlock astBlock1 && child2 instanceof ASTBlock astBlock2) {
+      ASTNode child1Node = astBlock1.getNode();
       IElementType child1Type = PsiUtilCore.getElementType(child1Node);
-      ASTNode child2Node = ((ASTBlock)child2).getNode();
+      ASTNode child2Node = astBlock2.getNode();
       IElementType child2Type = PsiUtilCore.getElementType(child2Node);
 
       ASTNode parentNode = parent != null ? parent.getNode() :
@@ -746,9 +746,9 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
     // trying to get alignment from the last child if incomplete
     if (newChildIndex == subBlocks.size()) {
       Block lastBlock = ContainerUtil.getLastItem(subBlocks);
-      if (lastBlock instanceof PerlAstBlock && lastBlock.isIncomplete()) {
+      if (lastBlock instanceof PerlAstBlock astBlock && lastBlock.isIncomplete()) {
         List<Block> lastBlockSubBlocks = lastBlock.getSubBlocks();
-        return getChildAlignment((PerlAstBlock)lastBlock, lastBlockSubBlocks.size());
+        return getChildAlignment(astBlock, lastBlockSubBlocks.size());
       }
     }
 

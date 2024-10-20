@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,8 @@ import java.util.Map;
 public class PerlCopyrightsVariablesProvider extends CopyrightVariablesProvider {
   @Override
   public void collectVariables(@NotNull Map<String, Object> context, Project project, Module module, @NotNull PsiFile file) {
-    if (file instanceof PerlFileImpl) {
-      context.put("perlfile", new PerlFileInfo((PerlFileImpl)file));
+    if (file instanceof PerlFileImpl perlFile) {
+      context.put("perlfile", new PerlFileInfo(perlFile));
     }
   }
 }

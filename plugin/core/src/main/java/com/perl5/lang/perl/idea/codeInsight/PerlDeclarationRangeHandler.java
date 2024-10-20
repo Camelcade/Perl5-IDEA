@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,19 +28,19 @@ import org.jetbrains.annotations.NotNull;
 public class PerlDeclarationRangeHandler implements DeclarationRangeHandler<PsiElement> {
   @Override
   public @NotNull TextRange getDeclarationRange(@NotNull PsiElement container) {
-    if (container instanceof PerlSubDefinitionElement) {
-      PsiPerlBlock body = ((PerlSubDefinitionElement)container).getSubDefinitionBody();
+    if (container instanceof PerlSubDefinitionElement subDefinitionElement) {
+      PsiPerlBlock body = subDefinitionElement.getSubDefinitionBody();
       if (body == null) {
         return TextRange.EMPTY_RANGE;
       }
       return TextRange.create(container.getNode().getStartOffset(), body.getTextOffset());
     }
-    else if (container instanceof PerlNamespaceDefinitionWithIdentifier) {
-      PsiPerlBlock block = ((PerlNamespaceDefinitionWithIdentifier)container).getBlock();
+    else if (container instanceof PerlNamespaceDefinitionWithIdentifier namespaceDefinitionWithIdentifier) {
+      PsiPerlBlock block = namespaceDefinitionWithIdentifier.getBlock();
       if (block != null) {
         return TextRange.create(container.getNode().getStartOffset(), block.getTextOffset());
       }
-      PsiPerlNamespaceContent content = ((PerlNamespaceDefinitionWithIdentifier)container).getNamespaceContent();
+      PsiPerlNamespaceContent content = namespaceDefinitionWithIdentifier.getNamespaceContent();
       if (content != null) {
         return TextRange.create(container.getNode().getStartOffset(), content.getTextOffset());
       }

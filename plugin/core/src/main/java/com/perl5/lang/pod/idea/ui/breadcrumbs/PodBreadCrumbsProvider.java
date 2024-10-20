@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,7 +57,7 @@ public class PodBreadCrumbsProvider implements BreadcrumbsProvider {
     if (parentSection == null) {
       return null;
     }
-    if (parentSection instanceof PodSectionItem && ((PodSectionItem)parentSection).isBulleted() ||
+    if (parentSection instanceof PodSectionItem podSectionItem && podSectionItem.isBulleted() ||
         StringUtil.isEmpty(parentSection.getTitleText())) {
       return getStructuralParentElement(parentSection);
     }
@@ -66,8 +66,8 @@ public class PodBreadCrumbsProvider implements BreadcrumbsProvider {
 
   @Override
   public @NotNull String getElementInfo(@NotNull PsiElement element) {
-    if (element instanceof PodTitledSection) {
-      return Objects.requireNonNull(((PodTitledSection)element).getTitleText());
+    if (element instanceof PodTitledSection titledSection) {
+      return Objects.requireNonNull(titledSection.getTitleText());
     }
 
     throw new RuntimeException();

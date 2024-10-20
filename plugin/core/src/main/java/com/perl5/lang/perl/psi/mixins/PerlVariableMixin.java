@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,8 +122,8 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
   public boolean isDeprecated() {
     PsiElement parent = getParent();
 
-    if (parent instanceof PerlVariableDeclarationElement) {
-      return ((PerlVariableDeclarationElement)parent).isDeprecated();
+    if (parent instanceof PerlVariableDeclarationElement variableDeclarationElement) {
+      return variableDeclarationElement.isDeprecated();
     }
 
     PerlVariableNameElement variableNameElement = getVariableNameElement();
@@ -133,7 +133,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
     Ref<Boolean> resultRef = Ref.create();
     PerlResolveUtil.processResolveTargets((targetElement, __) -> {
-      if (targetElement instanceof PerlVariableDeclarationElement && ((PerlVariableDeclarationElement)targetElement).isDeprecated()) {
+      if (targetElement instanceof PerlVariableDeclarationElement variableDeclarationElement && variableDeclarationElement.isDeprecated()) {
         resultRef.set(true);
         return false;
       }
@@ -173,8 +173,8 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
 
     Ref<PerlVariableDeclarationElement> resultRef = Ref.create();
     PerlResolveUtil.processResolveTargets((target, __) -> {
-      if (target instanceof PerlVariableDeclarationElement) {
-        resultRef.set((PerlVariableDeclarationElement)target);
+      if (target instanceof PerlVariableDeclarationElement variableDeclarationElement) {
+        resultRef.set(variableDeclarationElement);
         return false;
       }
       return true;

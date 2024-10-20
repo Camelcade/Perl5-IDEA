@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,10 +34,10 @@ import org.jetbrains.annotations.Nullable;
 class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
   @Override
   protected @Nullable UsageGroup getParentGroupFor(@NotNull Usage usage, UsageTarget @NotNull [] targets) {
-    if (!(usage instanceof PsiElementUsage)) {
+    if (!(usage instanceof PsiElementUsage psiElementUsage)) {
       return null;
     }
-    PsiElement element = ((PsiElementUsage)usage).getElement();
+    PsiElement element = psiElementUsage.getElement();
     if (element == null || !element.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
       return null;
     }
@@ -50,16 +50,16 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
     }
     PsiElement structuralParentElement = PerlBreadcrumbsProvider.getStructuralParentElement(element);
 
-    if (structuralParentElement instanceof PerlFile) {
-      structuralParentElement = ((PerlFile)structuralParentElement).getNamespaceDefinitionElement();
+    if (structuralParentElement instanceof PerlFile perlFile) {
+      structuralParentElement = perlFile.getNamespaceDefinitionElement();
     }
 
     if (structuralParentElement == null) {
       return null;
     }
 
-    if (structuralParentElement instanceof PerlSubDefinitionElement) {
-      String name = StringUtil.notNullize(((PerlSubDefinitionElement)structuralParentElement).getCanonicalName());
+    if (structuralParentElement instanceof PerlSubDefinitionElement subDefinitionElement) {
+      String name = StringUtil.notNullize(subDefinitionElement.getCanonicalName());
       return new PsiNamedElementUsageGroupBase<>((PerlSubDefinitionElement)structuralParentElement) {
         @Override
         public @NotNull String getPresentableGroupText() {
@@ -68,8 +68,8 @@ class PerlUsageGroupingRule extends SingleParentUsageGroupingRule {
       };
     }
 
-    if (structuralParentElement instanceof PerlNamespaceDefinitionElement) {
-      return new PsiNamedElementUsageGroupBase<>((PerlNamespaceDefinitionElement)structuralParentElement);
+    if (structuralParentElement instanceof PerlNamespaceDefinitionElement namespaceDefinitionElement) {
+      return new PsiNamedElementUsageGroupBase<>(namespaceDefinitionElement);
     }
 
     if (structuralParentElement instanceof PerlMethodModifier) {

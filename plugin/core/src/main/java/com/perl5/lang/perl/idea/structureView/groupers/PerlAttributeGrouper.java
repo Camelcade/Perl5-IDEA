@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,21 +43,21 @@ public class PerlAttributeGrouper implements Grouper, ActionPresentation {
 
   @Override
   public @NotNull Collection<Group> group(@NotNull AbstractTreeNode<?> parent, @NotNull Collection<TreeElement> children) {
-    if (children.isEmpty() || parent instanceof GroupWrapper && ((GroupWrapper)parent).getValue() instanceof AttributeGroup) {
+    if (children.isEmpty() || parent instanceof GroupWrapper groupWrapper && groupWrapper.getValue() instanceof AttributeGroup) {
       return Collections.emptyList();
     }
 
     Map<PerlSubCallElement, AttributeGroup> groupMap = FactoryMap.create(AttributeGroup::new);
 
     for (TreeElement childTreeElement : children) {
-      if (!(childTreeElement instanceof PerlStructureViewElement)) {
+      if (!(childTreeElement instanceof PerlStructureViewElement structureViewElement)) {
         continue;
       }
-      Object value = ((PerlStructureViewElement)childTreeElement).getValue();
-      if (!(value instanceof PerlLightMethodDefinitionElement<?>)) {
+      Object value = structureViewElement.getValue();
+      if (!(value instanceof PerlLightMethodDefinitionElement<?> lightMethodDefinitionElement)) {
         continue;
       }
-      PsiElement delegate = ((PerlLightMethodDefinitionElement<?>)value).getDelegate();
+      PsiElement delegate = lightMethodDefinitionElement.getDelegate();
       if (!PerlMooseAttributeHandler.isMooseAttributeWrapper(delegate)) {
         continue;
       }

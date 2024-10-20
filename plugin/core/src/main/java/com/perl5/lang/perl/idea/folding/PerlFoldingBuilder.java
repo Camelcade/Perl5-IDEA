@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -215,9 +215,9 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
           int importsNumber = 0;
 
           while (currentStatement != null) {
-            if (currentStatement instanceof PerlUseStatementElementBase &&
-                !((PerlUseStatementElementBase)currentStatement).isPragma() &&
-                !((PerlUseStatementElementBase)currentStatement).isVersion()
+            if (currentStatement instanceof PerlUseStatementElementBase useStatementElementBase &&
+                !useStatementElementBase.isPragma() &&
+                !useStatementElementBase.isVersion()
                 || currentStatement.getFirstChild() instanceof PerlRequireExpr) {
               blockEnd = currentStatement.getTextOffset() + currentStatement.getTextLength();
               importsNumber++;
@@ -415,10 +415,10 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
     @Override
     public void visitAnonHash(@NotNull PsiPerlAnonHash o) {
       PsiElement parent = o.getParent();
-      if (parent instanceof PerlUseStatementElementBase) {
+      if (parent instanceof PerlUseStatementElementBase useStatementElementBase) {
         addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2,
-                         ((PerlUseStatementElementBase)parent).getArgumentsFoldingText(),
-                         ((PerlUseStatementElementBase)parent).isFoldedByDefault());
+                         useStatementElementBase.getArgumentsFoldingText(),
+                         useStatementElementBase.isFoldedByDefault());
       }
       else {
         addDescriptorFor(myDescriptors, myDocument, o, 0, 0, 2, null, false);

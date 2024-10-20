@@ -69,11 +69,11 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
   protected void doExecute(@NotNull RunProfileState state,
                            @NotNull ExecutionEnvironment env,
                            @NotNull AsyncPromise<RunContentDescriptor> result) throws ExecutionException {
-    if (!(state instanceof PerlDebugProfileStateBase)) {
+    if (!(state instanceof PerlDebugProfileStateBase perlDebugProfileStateBase)) {
       LOG.error("PerlDebugProfileStateBase expected, got " + state + " for " + env);
       throw new ExecutionException("Incorrect run state");
     }
-    var executionResult = ((PerlDebugProfileStateBase)state).execute(env.getExecutor(), this);
+    var executionResult = perlDebugProfileStateBase.execute(env.getExecutor(), this);
     ApplicationManager.getApplication().invokeLater(() -> {
       try {
         XDebugSession xDebugSession = XDebuggerManager.getInstance(env.getProject()).startSession(env, new XDebugProcessStarter() {

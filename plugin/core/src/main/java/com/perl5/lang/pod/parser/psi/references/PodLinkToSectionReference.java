@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,8 +59,8 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
 
     if (descriptor.getName() != null && !descriptor.isSameFile()) {
       for (PsiReference reference : podLink.getReferences()) {
-        if (reference instanceof PodLinkToFileReference) {
-          for (ResolveResult resolveResult : ((PodLinkToFileReference)reference).multiResolve(false)) {
+        if (reference instanceof PodLinkToFileReference linkToFileReference) {
+          for (ResolveResult resolveResult : linkToFileReference.multiResolve(false)) {
             targetFiles.add((PsiFile)resolveResult.getElement());
           }
         }

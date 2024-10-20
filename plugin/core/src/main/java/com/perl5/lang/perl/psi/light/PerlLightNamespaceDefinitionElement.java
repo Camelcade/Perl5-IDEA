@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -119,8 +119,8 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitPerlNamespaceDefinitionWithIdentifier(this);
+    if (visitor instanceof PerlVisitor perlVisitor) {
+      perlVisitor.visitPerlNamespaceDefinitionWithIdentifier(this);
     }
     else {
       super.accept(visitor);
@@ -132,14 +132,12 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
     if (this == o) {
       return true;
     }
-    if (!(o instanceof PerlLightNamespaceDefinitionElement)) {
+    if (!(o instanceof PerlLightNamespaceDefinitionElement element)) {
       return false;
     }
     if (!super.equals(o)) {
       return false;
     }
-
-    PerlLightNamespaceDefinitionElement element = (PerlLightNamespaceDefinitionElement)o;
 
     if (getMroType() != element.getMroType()) {
       return false;

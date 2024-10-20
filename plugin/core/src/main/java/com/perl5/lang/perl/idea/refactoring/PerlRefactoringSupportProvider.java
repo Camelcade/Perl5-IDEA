@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,8 +55,8 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider {
     if (!isInplaceAllowed(element, context)) {
       return false;
     }
-    else if (element instanceof PerlRenameUsagesHelper) {
-      return ((PerlRenameUsagesHelper)element).isInplaceRefactoringAllowed();
+    else if (element instanceof PerlRenameUsagesHelper renameUsagesHelper) {
+      return renameUsagesHelper.isInplaceRefactoringAllowed();
     }
     return true;
   }
@@ -70,8 +70,8 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider {
     }
     else {
       return !(element instanceof PerlNamespaceDefinition) ||
-             !(context instanceof PerlNamespaceElement) ||
-             !((PerlNamespaceElement)context).isTag();
+             !(context instanceof PerlNamespaceElement perlNamespaceElement) ||
+             !perlNamespaceElement.isTag();
     }
   }
 

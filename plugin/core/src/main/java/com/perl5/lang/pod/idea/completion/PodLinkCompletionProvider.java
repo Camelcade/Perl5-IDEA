@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -200,11 +200,11 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
 
         PsiElement indexTarget = ((PodFormatterX)o).getIndexTarget();
         String targetPresentableText;
-        if (indexTarget instanceof PodFile) {
-          targetPresentableText = cleanItemText(((PodFile)indexTarget).getPodLinkText());
+        if (indexTarget instanceof PodFile podFile) {
+          targetPresentableText = cleanItemText(podFile.getPodLinkText());
         }
-        else if (indexTarget instanceof PodCompositeElement) {
-          targetPresentableText = cleanItemText(((PodCompositeElement)indexTarget).getPresentableText());
+        else if (indexTarget instanceof PodCompositeElement podCompositeElement) {
+          targetPresentableText = cleanItemText(podCompositeElement.getPresentableText());
         }
         else {
           LOG.warn("Unhandled index target: " + indexTarget);

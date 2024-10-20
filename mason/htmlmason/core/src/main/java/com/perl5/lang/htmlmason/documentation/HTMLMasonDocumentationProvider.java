@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,10 +28,10 @@ import org.jetbrains.annotations.Nullable;
 public class HTMLMasonDocumentationProvider extends AbstractDocumentationProvider {
   @Override
   public @Nullable String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
-    if (element instanceof HTMLMasonFileImpl) {
+    if (element instanceof HTMLMasonFileImpl masonFile) {
       return HtmlMasonBundle.message("file.quick.navigation.info",
-                                     StringUtil.notNullize(((HTMLMasonFileImpl)element).getAbsoluteComponentPath()),
-                                     HTMLMasonUtil.getArgumentsListAsString((HTMLMasonFileImpl)element));
+                                     StringUtil.notNullize(masonFile.getAbsoluteComponentPath()),
+                                     HTMLMasonUtil.getArgumentsListAsString(masonFile));
     }
     return null;
   }

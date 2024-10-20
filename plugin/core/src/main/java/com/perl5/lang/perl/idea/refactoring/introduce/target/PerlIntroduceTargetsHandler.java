@@ -250,8 +250,8 @@ public abstract class PerlIntroduceTargetsHandler {
     if (run == null) {
       run = PsiTreeUtil.findElementOfClassAtOffset(file, caretOffset, PerlHeredocElementImpl.class, false);
     }
-    if (run instanceof PsiPerlParenthesisedExpr) {
-      run = ((PsiPerlParenthesisedExpr)run).getExpr();
+    if (run instanceof PsiPerlParenthesisedExpr parenthesisedExpr) {
+      run = parenthesisedExpr.getExpr();
     }
     return run;
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
 
     Map<VirtualFile, PerlSourceRootType> roots = myProjectManager.getAllModulesRoots();
     return ContainerUtil.map2List(children, node -> {
-      if (!(node instanceof PsiDirectoryNode)) {
+      if (!(node instanceof PsiDirectoryNode directoryNode)) {
         return node;
       }
 
@@ -58,11 +58,11 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
       }
 
       // fixme support different roots here
-      VirtualFile virtualFile = ((PsiDirectoryNode)node).getVirtualFile();
+      VirtualFile virtualFile = directoryNode.getVirtualFile();
       if (virtualFile != null && roots.containsKey(virtualFile)) {
         PerlSourceRootType rootType = roots.get(virtualFile);
         ModuleSourceRootEditHandler<?> handler = rootType.getEditHandler();
-        node = new PsiDirectoryNode(node.getProject(), ((PsiDirectoryNode)node).getValue(), ((PsiDirectoryNode)node).getSettings()) {
+        node = new PsiDirectoryNode(node.getProject(), directoryNode.getValue(), directoryNode.getSettings()) {
           @Override
           protected void updateImpl(@NotNull PresentationData data) {
             super.updateImpl(data);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,8 +61,8 @@ public class PerlIndentionSuppresor implements TemplateOptionalProcessor {
   @Override
   public boolean isEnabled(Template template) {
     // fixme this is probably bad. Doesn't work if it's custom group
-    if (template instanceof TemplateImpl) {
-      return ((TemplateImpl)template).getGroupName().startsWith("Perl5");
+    if (template instanceof TemplateImpl templateImpl) {
+      return templateImpl.getGroupName().startsWith("Perl5");
     }
     return false;
   }

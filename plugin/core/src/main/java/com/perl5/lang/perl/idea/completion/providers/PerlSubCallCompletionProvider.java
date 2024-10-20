@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ public class PerlSubCallCompletionProvider extends PerlCompletionProvider {
     }
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, resultSet, position);
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
-    if (perlValue instanceof PerlCallStaticValue && !((PerlCallStaticValue)perlValue).hasExplicitNamespace()) {
+    if (perlValue instanceof PerlCallStaticValue callStaticValue && !callStaticValue.hasExplicitNamespace()) {
       PerlSubCompletionUtil.processBuiltInSubsLookupElements(completionProcessor);
       logger.debug("Processed built-in subs");
     }

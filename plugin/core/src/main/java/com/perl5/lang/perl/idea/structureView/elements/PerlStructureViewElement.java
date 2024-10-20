@@ -82,14 +82,14 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
   @Override
   public @NotNull String getAlphaSortKey() {
     PsiElement element = getElement();
-    if (!(element instanceof PsiNamedElement)) {
+    if (!(element instanceof PsiNamedElement psiNamedElement)) {
       return "";
     }
     PerlExportDescriptor exportDescriptor = getExportDescriptor();
     if (exportDescriptor != null) {
       return exportDescriptor.getImportedName();
     }
-    String name = ((PsiNamedElement)element).getName();
+    String name = psiNamedElement.getName();
     if (name == null) {
       name = "Empty named " + element;
     }
@@ -107,7 +107,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
     ItemPresentation itemPresentation = createPresentation();
 
     if ((isInherited() || isImported()) && itemPresentation instanceof PerlItemPresentationBase) {
-      if (getValue() instanceof PerlDeprecatable && ((PerlDeprecatable)getValue()).isDeprecated()) {
+      if (getValue() instanceof PerlDeprecatable deprecatable && deprecatable.isDeprecated()) {
         ((PerlItemPresentationBase)itemPresentation).setAttributesKey(PerlSyntaxHighlighter.UNUSED_DEPRECATED);
       }
       else {
@@ -115,10 +115,10 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
       }
     }
 
-    if (isImported() && itemPresentation instanceof PerlItemPresentationSimple) {
+    if (isImported() && itemPresentation instanceof PerlItemPresentationSimple presentationSimple) {
       PerlExportDescriptor exportDescriptor = getExportDescriptor();
       assert exportDescriptor != null;
-      ((PerlItemPresentationSimple)itemPresentation).setPresentableText(exportDescriptor.getImportedName());
+      presentationSimple.setPresentableText(exportDescriptor.getImportedName());
     }
 
     return itemPresentation;
@@ -127,8 +127,8 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
   protected @NotNull ItemPresentation createPresentation() {
     ItemPresentation result = null;
     PsiElement element = getElement();
-    if (element instanceof NavigationItem) {
-      result = ((NavigationItem)element).getPresentation();
+    if (element instanceof NavigationItem navigationItem) {
+      result = navigationItem.getPresentation();
     }
 
     return result == null ? new PerlItemPresentationSimple(element, "FIXME") : result;

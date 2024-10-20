@@ -156,8 +156,8 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
 
     if (parentFile != null) {
       PsiFile file = PsiManager.getInstance(getProject()).findFile(parentFile);
-      if (file instanceof HTMLMasonFileImpl) {
-        return (HTMLMasonFileImpl)file;
+      if (file instanceof HTMLMasonFileImpl htmlMasonFile) {
+        return htmlMasonFile;
       }
     }
 
@@ -192,9 +192,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
       for (HTMLMasonFlagsStatement statement : StubIndex.getElements(
         HTMLMasonFlagsStubIndex.KEY, parentPath, project, scope, HTMLMasonFlagsStatement.class)) {
         PsiFile file = statement.getContainingFile();
-        if (file instanceof HTMLMasonFileImpl &&
-            (isEquals || isRelative && currentFile.equals(((HTMLMasonFileImpl)file).getParentComponent()))) {
-          result.add((HTMLMasonFileImpl)file);
+        if (file instanceof HTMLMasonFileImpl htmlMasonFile &&
+            (isEquals || isRelative && currentFile.equals(htmlMasonFile.getParentComponent()))) {
+          result.add(htmlMasonFile);
         }
       }
     }
@@ -221,9 +221,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
       VirtualFile autoHandlerVirtualFile = dir.findChild(autoHandlerName);
       if (autoHandlerVirtualFile != null) {
         PsiFile autoHandlerPsiFile = manager.findFile(autoHandlerVirtualFile);
-        if (autoHandlerPsiFile instanceof HTMLMasonFileImpl &&
-            this.equals(((HTMLMasonFileImpl)autoHandlerPsiFile).getParentComponent())) {
-          result.add((HTMLMasonFileImpl)autoHandlerPsiFile);
+        if (autoHandlerPsiFile instanceof HTMLMasonFileImpl htmlMasonFile &&
+            this.equals(htmlMasonFile.getParentComponent())) {
+          result.add(htmlMasonFile);
         }
         return;
       }
@@ -237,8 +237,8 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
       }
       else if (!StringUtil.equals(file.getName(), autoHandlerName)) {
         PsiFile psiFile = manager.findFile(file);
-        if (psiFile instanceof HTMLMasonFileImpl && this.equals(((HTMLMasonFileImpl)psiFile).getParentComponent())) {
-          result.add((HTMLMasonFileImpl)psiFile);
+        if (psiFile instanceof HTMLMasonFileImpl htmlMasonFile && this.equals(htmlMasonFile.getParentComponent())) {
+          result.add(htmlMasonFile);
         }
       }
     }
@@ -480,8 +480,8 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
       final List<HTMLMasonCompositeElement> result = new ArrayList<>();
       PerlPsiUtil.processElementsFromStubs(parentStub, psi ->
       {
-        if (psi instanceof HTMLMasonMethodDefinition) {
-          result.add(((HTMLMasonMethodDefinition)psi));
+        if (psi instanceof HTMLMasonMethodDefinition methodDefinition) {
+          result.add(methodDefinition);
         }
         return true;
       }, null);
@@ -503,8 +503,8 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
         rootStub,
         psi ->
         {
-          if (psi instanceof HTMLMasonArgsBlock) {
-            result.add(((HTMLMasonArgsBlock)psi));
+          if (psi instanceof HTMLMasonArgsBlock argsBlock) {
+            result.add(argsBlock);
           }
           return true;
         },
@@ -595,8 +595,8 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   protected static class FlagsStatementStubSeeker extends FlagsStatementSeeker<PsiElement> {
     @Override
     public boolean process(PsiElement psi) {
-      if (psi instanceof HTMLMasonFlagsStatement) {
-        myResult = ((HTMLMasonFlagsStatement)psi);
+      if (psi instanceof HTMLMasonFlagsStatement flagsStatement) {
+        myResult = flagsStatement;
         return false;
       }
       return true;
@@ -606,8 +606,8 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
   protected static class FlagsStatementPsiSeeker extends FlagsStatementSeeker<PsiElement> {
     @Override
     public boolean process(PsiElement element) {
-      if (element instanceof HTMLMasonFlagsStatement) {
-        myResult = (HTMLMasonFlagsStatement)element;
+      if (element instanceof HTMLMasonFlagsStatement flagsStatement) {
+        myResult = flagsStatement;
         return false;
       }
       return true;

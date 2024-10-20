@@ -187,10 +187,10 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
     for (TreePath treePath : selectionPaths) {
       final DefaultMutableTreeNode node = (DefaultMutableTreeNode)treePath.getLastPathComponent();
       final Object nodeDescriptor = node.getUserObject();
-      if (!(nodeDescriptor instanceof FileNodeDescriptor)) {
+      if (!(nodeDescriptor instanceof FileNodeDescriptor fileNodeDescriptor)) {
         return VirtualFile.EMPTY_ARRAY;
       }
-      final FileElement fileElement = ((FileNodeDescriptor)nodeDescriptor).getElement();
+      final FileElement fileElement = fileNodeDescriptor.getElement();
       final VirtualFile file = fileElement.getFile();
       if (file != null) {
         selected.add(file);
@@ -228,14 +228,14 @@ public class PerlContentEntriesTreeEditor implements UnnamedConfigurable, Dispos
                                       boolean hasFocus) {
       super.customizeCellRenderer(tree, value, selected, expanded, leaf, row, hasFocus);
       final Object userObject = ((DefaultMutableTreeNode)value).getUserObject();
-      if (!(userObject instanceof NodeDescriptor)) {
+      if (!(userObject instanceof NodeDescriptor<?> nodeDescriptor)) {
         return;
       }
-      final Object element = ((NodeDescriptor<?>)userObject).getElement();
-      if (!(element instanceof FileElement)) {
+      final Object element = nodeDescriptor.getElement();
+      if (!(element instanceof FileElement fileElement)) {
         return;
       }
-      final VirtualFile file = ((FileElement)element).getFile();
+      final VirtualFile file = fileElement.getFile();
       if (file == null || !file.isDirectory()) {
         return;
       }

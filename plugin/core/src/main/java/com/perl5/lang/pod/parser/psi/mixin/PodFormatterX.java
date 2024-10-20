@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -120,8 +120,8 @@ public class PodFormatterX extends PodStubBasedTitledSection implements PodForma
     if (indexTarget == null) {
       Logger.getInstance(PodFormatterX.class).warn("Can't find a target element for " + getText());
     }
-    if (indexTarget instanceof PodTitledSection) {
-      return !StringUtil.equals(((PodTitledSection)indexTarget).getTitleText(), getTitleText());
+    if (indexTarget instanceof PodTitledSection titledSection) {
+      return !StringUtil.equals(titledSection.getTitleText(), getTitleText());
     }
     return true;
   }

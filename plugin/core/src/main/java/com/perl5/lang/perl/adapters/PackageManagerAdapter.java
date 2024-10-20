@@ -255,10 +255,10 @@ public abstract class PackageManagerAdapter {
 
     @Override
     public boolean canEat(Update update) {
-      if (!(update instanceof InstallUpdate)) {
+      if (!(update instanceof InstallUpdate installUpdate)) {
         return super.canEat(update);
       }
-      myPackages.addAll(((InstallUpdate)update).myPackages);
+      myPackages.addAll(installUpdate.myPackages);
       return true;
     }
   }

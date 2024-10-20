@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -118,8 +118,8 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   @Override
   public void navigate(boolean requestFocus) {
     PsiElement nameIdentifier = getNameIdentifier();
-    if (nameIdentifier instanceof NavigatablePsiElement) {
-      ((NavigatablePsiElement)nameIdentifier).navigate(requestFocus);
+    if (nameIdentifier instanceof NavigatablePsiElement navigatablePsiElement) {
+      navigatablePsiElement.navigate(requestFocus);
     }
     else {
       super.navigate(requestFocus);
@@ -156,22 +156,14 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
 
   @Override
   public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (!(o instanceof PerlDelegatingLightNamedElement)) {
+    if (!(o instanceof PerlDelegatingLightNamedElement<?> namedElement)) {
       return false;
     }
     if (!super.equals(o)) {
       return false;
     }
 
-    PerlDelegatingLightNamedElement<?> element = (PerlDelegatingLightNamedElement<?>)o;
-
-    if (myIsImplicit != element.myIsImplicit) {
-      return false;
-    }
-    return myName.equals(element.myName);
+    return myIsImplicit == namedElement.myIsImplicit && myName.equals(namedElement.myName);
   }
 
   @Override
@@ -184,8 +176,8 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
 
   @Override
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor) {
-      ((PerlVisitor)visitor).visitLightNamedElement(this);
+    if (visitor instanceof PerlVisitor perlVisitor) {
+      perlVisitor.visitLightNamedElement(this);
     }
     else {
       super.accept(visitor);
