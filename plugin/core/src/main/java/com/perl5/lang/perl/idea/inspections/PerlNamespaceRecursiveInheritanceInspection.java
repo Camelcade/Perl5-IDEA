@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,10 @@
 package com.perl5.lang.perl.idea.inspections;
 
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -48,20 +50,21 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
 
         String packageName = o.getNamespaceName();
 
-        if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
+        if (StringUtil.isEmpty(packageName) || PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
           return;
         }
 
         if (hasRecursiveInheritance(o, new HashSet<>())) {
-          registerError(holder, o.getContainingFile(), "Namespace " + packageName + " has recursive inheritance");
-          registerError(holder, nameIdentifier, "Namespace " + packageName + " has recursive inheritance");
+          registerError(holder, o.getContainingFile(),
+                        PerlBundle.message("inspection.message.namespace.has.recursive.inheritance", packageName));
+          registerError(holder, nameIdentifier, PerlBundle.message("inspection.message.namespace.has.recursive.inheritance", packageName));
         }
       }
     };
   }
 
   private static boolean hasRecursiveInheritance(@NotNull PerlNamespaceDefinitionElement definition,
-                                                 @NotNull Set<String> passedWay) {
+                                                 @NotNull Set<? super String> passedWay) {
     passedWay.add(definition.getNamespaceName());
     for (PerlNamespaceDefinitionElement element : definition.getParentNamespaceDefinitions()) {
       if (passedWay.contains(element.getNamespaceName())) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.openapi.util.NlsSafe;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.mro.PerlMroC3;
 import com.perl5.lang.perl.psi.mro.PerlMroDfs;
@@ -36,6 +37,7 @@ public interface PerlNamespaceDefinition extends PerlDeprecatable {
    *
    * @return canonical package name
    */
+  @NlsSafe
   @Nullable
   String getNamespaceName();
 
