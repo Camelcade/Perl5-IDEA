@@ -30,6 +30,7 @@ public final class PerlParserProxy {
     return PerlParserGenerated.file_item(b, l);
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean block_content(PsiBuilder b, int l) {
     return PerlParserGenerated.block_content(b, l);
   }
