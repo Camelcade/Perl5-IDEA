@@ -121,7 +121,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
   }
 
 
-  protected static boolean isOperatorToken(PsiBuilder b, @SuppressWarnings("unused") int l) {
+  static boolean isOperatorToken(PsiBuilder b, @SuppressWarnings("unused") int l) {
     return PerlTokenSets.OPERATORS_TOKENSET.contains(b.getTokenType());
   }
 
@@ -367,6 +367,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
   /**
    * Helper method to pass package [version] in use statement
    */
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean passPackageAndVersion(@NotNull PerlBuilder b, int l) {
     assert GeneratedParserUtilBase.consumeTokenFast(b, PACKAGE);
     PerlParserGenerated.perl_version(b, l);
@@ -399,7 +400,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
     return false;
   }
 
-  public static boolean parseBareString(@NotNull PsiBuilder b, int l) {
+  public static boolean parseBareString(@NotNull PsiBuilder b, int ignored) {
     IElementType type = b.getTokenType();
     if (type != STRING_CONTENT && type != STRING_SPECIAL_ESCAPE_CHAR) {
       return false;
