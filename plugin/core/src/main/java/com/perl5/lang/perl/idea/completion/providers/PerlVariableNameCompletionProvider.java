@@ -105,7 +105,7 @@ public class PerlVariableNameCompletionProvider extends PerlCompletionProvider {
 
   private String getVariableNamePrefix(@NotNull PsiElement insertedElement, int offsetInFile) {
     String substr = insertedElement.getText().substring(0, offsetInFile - insertedElement.getTextRange().getStartOffset());
-    if (substr.length() == 0 || Character.isWhitespace(substr.charAt(substr.length() - 1))) {
+    if (substr.isEmpty() || Character.isWhitespace(substr.charAt(substr.length() - 1))) {
       return "";
     }
 

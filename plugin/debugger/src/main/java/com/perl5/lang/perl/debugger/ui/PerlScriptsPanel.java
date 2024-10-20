@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -151,7 +151,7 @@ public class PerlScriptsPanel extends JPanel {
   private void bulkChangeNow(final List<? extends PerlLoadedFileDescriptor> toAdd,
                              final List<? extends PerlLoadedFileDescriptor> toRemove) {
     List<PerlLoadedFileDescriptor> currentEntries = myModel.getItems();
-    if (toRemove.size() > 0) {
+    if (!toRemove.isEmpty()) {
       // first find all indices to be removed, then remove them in reverse order by overwriting with
       // the last element and then removing the last element
       int removeSize = toRemove.size();

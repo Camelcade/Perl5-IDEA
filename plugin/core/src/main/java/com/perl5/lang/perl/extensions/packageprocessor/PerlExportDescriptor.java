@@ -38,7 +38,7 @@ public class PerlExportDescriptor {
 
   private PerlExportDescriptor(@NotNull String realPackage, @NotNull String realName, @NotNull String importedName) {
     myRealPackage = realPackage;
-    if (realName.length() > 0 && StringUtil.containsChar(ALL_SIGILS, realName.charAt(0)))  // canonical export
+    if (!realName.isEmpty() && StringUtil.containsChar(ALL_SIGILS, realName.charAt(0)))  // canonical export
     {
       mySigil = realName.charAt(0);
       myRealName = realName.substring(1);

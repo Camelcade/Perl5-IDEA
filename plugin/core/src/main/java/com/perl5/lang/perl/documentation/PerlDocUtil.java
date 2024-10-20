@@ -136,7 +136,7 @@ public final class PerlDocUtil implements PerlElementTypes {
     assert text != null;
     String anchor = "Modifiers";
 
-    if (text.length() > 0) {
+    if (!text.isEmpty()) {
       char firstChar = text.charAt(0);
       if (StringUtil.containsChar("msixpn", firstChar)) {
         anchor = String.valueOf(firstChar);

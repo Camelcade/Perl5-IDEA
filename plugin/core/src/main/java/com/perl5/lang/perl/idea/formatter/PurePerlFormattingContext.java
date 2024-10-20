@@ -301,7 +301,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
       if (ALL_QUOTE_OPENERS.contains(child1Type) && child2Node != null) {
         CharSequence openerChars = child2Node.getChars();
         int spaces = 0;
-        if (openerChars.length() > 0 && Character.isUnicodeIdentifierPart(openerChars.charAt(0))) {
+        if (!openerChars.isEmpty() && Character.isUnicodeIdentifierPart(openerChars.charAt(0))) {
           spaces = 1;
         }
         return Spacing.createSpacing(spaces, spaces, 0, true, 1);

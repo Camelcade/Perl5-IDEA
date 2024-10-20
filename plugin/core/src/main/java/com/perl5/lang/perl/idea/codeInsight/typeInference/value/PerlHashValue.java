@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,7 +71,7 @@ public class PerlHashValue extends PerlMapValue {
     List<PerlValue> elements = getElements();
     StringBuilder sb = new StringBuilder();
     for (int i = 0, size = elements.size(); i < size; i++) {
-      if (sb.length() > 0) {
+      if (!sb.isEmpty()) {
         sb.append(",\n");
       }
       sb.append(elements.get(i++).getPresentableText()).append(" => ").append(elements.get(i));
