@@ -187,7 +187,11 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
       }
       return resultFuture.get();
     }
-    catch (InterruptedException | java.util.concurrent.ExecutionException e) {
+    catch (InterruptedException e) {
+      Thread.currentThread().interrupt();
+      throw new ExecutionException(e);
+    }
+    catch (java.util.concurrent.ExecutionException e) {
       throw new ExecutionException(e);
     }
   }
