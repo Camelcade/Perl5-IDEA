@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,18 +27,18 @@ public final class PerlParserProxy {
   }
 
   public static boolean file_item(PsiBuilder b, int l) {
-    return PerlParserImpl.file_item(b, l);
+    return PerlParserGenerated.file_item(b, l);
   }
 
   public static boolean block_content(PsiBuilder b, int l) {
-    return PerlParserImpl.block_content(b, l);
+    return PerlParserGenerated.block_content(b, l);
   }
 
   public static boolean method_signature(PsiBuilder b, int l) {
-    return PerlParserImpl.method_signature(b, l);
+    return PerlParserGenerated.method_signature(b, l);
   }
 
   public static boolean expr(PsiBuilder b, int l, int p) {
-    return PerlParserImpl.expr(b, l, p);
+    return PerlParserGenerated.expr(b, l, p);
   }
 }

@@ -24,6 +24,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -444,7 +445,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
     return processIncFilesForPsiElement(
       element,
       (file, classRoot) -> {
-        String relativePath = VfsUtil.getRelativePath(file, classRoot);
+        String relativePath = VfsUtilCore.getRelativePath(file, classRoot);
         String packageName = getPackageNameByPath(relativePath);
         return processor.process(packageName, file);
       },
@@ -618,7 +619,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
       if (targetFile == null) {
         continue;
       }
-      String foundRelativePath = VfsUtil.getRelativePath(targetFile, classRoot);
+      String foundRelativePath = VfsUtilCore.getRelativePath(targetFile, classRoot);
 
       if (StringUtil.isNotEmpty(foundRelativePath) && StringUtil.equals(foundRelativePath, relativePath)) {
         return targetFile;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
@@ -38,7 +38,7 @@ public class SubSelectionHandler implements InsertHandler<LookupElement>, PerlEl
     }
 
     PsiElement subDefitnition = item.getPsiElement();
-    EditorModificationUtil.insertStringAtCaret(editor, "()");
+    EditorModificationUtilEx.insertStringAtCaret(editor, "()");
 
     // todo we need hint with prototype here, but prototypes handling NYI
     if (!(subDefitnition instanceof PerlSubDefinitionElement &&

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.tt2.idea.editor;
 
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -81,7 +81,7 @@ public class TemplateToolkitTypedHandler extends TypedHandlerDelegate implements
     }
 
     if (StringUtil.equals(file.getText().subSequence(startOffset, offset), openTagPrefix)) {
-      EditorModificationUtil.insertStringAtCaret(editor, c + "  " + settings.END_TAG, false, true, 2);
+      EditorModificationUtilEx.insertStringAtCaret(editor, c + "  " + settings.END_TAG, false, true, 2);
       return Result.STOP;
     }
     return null;

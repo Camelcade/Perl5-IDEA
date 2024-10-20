@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -105,7 +105,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
   }
 
   public static boolean parseExpressionLevel(PsiBuilder b, int l, int g) {
-    return PerlParserImpl.expr(b, l, g);
+    return PerlParserGenerated.expr(b, l, g);
   }
 
 
@@ -241,7 +241,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
     assert b instanceof PerlBuilder;
     boolean flagBackup = ((PerlBuilder)b).setSpecialVariableNamesAllowed(false);
 
-    if (PerlParserImpl.scalar_variable(b, l)) {
+    if (PerlParserGenerated.scalar_variable(b, l)) {
       m.done(VARIABLE_DECLARATION_ELEMENT);
       r = true;
     }
@@ -325,7 +325,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
    */
   public static boolean parseCustomCallExpr(PsiBuilder b, int l, Parser tokenParser) {
     PsiBuilder.Marker m = b.mark();
-    if (parseCustomMethod(b, l, tokenParser) && PerlParserImpl.any_call_arguments(b, l)) {
+    if (parseCustomMethod(b, l, tokenParser) && PerlParserGenerated.any_call_arguments(b, l)) {
       m.done(SUB_CALL);
       return true;
     }
@@ -356,7 +356,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
         assert b instanceof PerlBuilder;
         PerlParserUtil.passPackageAndVersion((PerlBuilder)b, l);
         ((PerlBuilder)b).setUseVarsContent(true);
-        PerlParserImpl.expr(b, l, -1);
+        PerlParserGenerated.expr(b, l, -1);
         ((PerlBuilder)b).setUseVarsContent(false);
         return true;
       }
@@ -368,8 +368,8 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
    * Helper method to pass package [version] in use statement
    */
   public static boolean passPackageAndVersion(@NotNull PerlBuilder b, int l) {
-    assert PerlParserUtil.consumeTokenFast(b, PACKAGE);
-    PerlParserImpl.perl_version(b, l);
+    assert GeneratedParserUtilBase.consumeTokenFast(b, PACKAGE);
+    PerlParserGenerated.perl_version(b, l);
     return true;
   }
 
@@ -378,7 +378,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
       return false;
     }
     PsiBuilder.Marker mark = b.mark();
-    if (PerlParserImpl.parse_use_statement(b, l)) {
+    if (PerlParserGenerated.parse_use_statement(b, l)) {
       mark.done(PerlStubElementTypes.USE_STATEMENT);
       return true;
     }
@@ -391,7 +391,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
       return false;
     }
     PsiBuilder.Marker mark = b.mark();
-    if (PerlParserImpl.parse_no_statement(b, l)) {
+    if (PerlParserGenerated.parse_no_statement(b, l)) {
       mark.done(PerlStubElementTypes.NO_STATEMENT);
       return true;
     }

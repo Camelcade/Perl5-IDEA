@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.mason2.idea.editor;
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -74,7 +74,7 @@ public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2Ele
     if (lineStartElement != null && lineStartElement.getNode().getElementType() == MASON_LINE_OPENER) {
       PsiElement nextElement = file.findElementAt(offset - 1);
       if (nextElement != null && nextElement.getNode().getElementType() == RIGHT_BRACE) {
-        EditorModificationUtil.insertStringAtCaret(editor, "\n\n% ", false, true, 1);
+        EditorModificationUtilEx.insertStringAtCaret(editor, "\n\n% ", false, true, 1);
       }
     }
   }
@@ -86,19 +86,19 @@ public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2Ele
     }
     IElementType elementType = element.getNode().getElementType();
     if (elementType == MASON_BLOCK_OPENER && !isNextElement(element, MASON_BLOCK_CLOSER)) {
-      EditorModificationUtil.insertStringAtCaret(editor, KEYWORD_BLOCK_CLOSER, false, false);
+      EditorModificationUtilEx.insertStringAtCaret(editor, KEYWORD_BLOCK_CLOSER, false, false);
     }
     else if (elementType == MASON_CALL_OPENER && !isNextElement(element, MASON_CALL_CLOSER)) {
-      EditorModificationUtil.insertStringAtCaret(editor, KEYWORD_CALL_CLOSER, false, false);
+      EditorModificationUtilEx.insertStringAtCaret(editor, KEYWORD_CALL_CLOSER, false, false);
     }
     else if (elementType == MASON_METHOD_OPENER) {
-      EditorModificationUtil.insertStringAtCaret(editor, ">\n" + KEYWORD_METHOD_CLOSER, false, false);
+      EditorModificationUtilEx.insertStringAtCaret(editor, ">\n" + KEYWORD_METHOD_CLOSER, false, false);
     }
     else if (elementType == MASON_FILTER_OPENER) {
-      EditorModificationUtil.insertStringAtCaret(editor, ">\n" + KEYWORD_FILTER_CLOSER, false, false);
+      EditorModificationUtilEx.insertStringAtCaret(editor, ">\n" + KEYWORD_FILTER_CLOSER, false, false);
     }
     else if (elementType == MASON_OVERRIDE_OPENER) {
-      EditorModificationUtil.insertStringAtCaret(editor, ">\n" + KEYWORD_OVERRIDE_CLOSER, false, false);
+      EditorModificationUtilEx.insertStringAtCaret(editor, ">\n" + KEYWORD_OVERRIDE_CLOSER, false, false);
     }
   }
 
@@ -110,10 +110,10 @@ public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2Ele
     String elementText = element.getText();
     String closeTag;
     if ((closeTag = SIMPLE_COMPLETION_MAP.get(elementText)) != null) {
-      EditorModificationUtil.insertStringAtCaret(editor, closeTag, false, false);
+      EditorModificationUtilEx.insertStringAtCaret(editor, closeTag, false, false);
     }
     else if (elementText.equals(KEYWORD_FLAGS_OPENER_UNCLOSED)) {
-      EditorModificationUtil.insertStringAtCaret(editor, " extends => '' " + KEYWORD_FLAGS_CLOSER, false, true, 13);
+      EditorModificationUtilEx.insertStringAtCaret(editor, " extends => '' " + KEYWORD_FLAGS_CLOSER, false, true, 13);
     }
   }
 

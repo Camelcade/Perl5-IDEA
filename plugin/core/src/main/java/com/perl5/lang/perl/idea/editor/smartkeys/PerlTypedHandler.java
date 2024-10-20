@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.intellij.codeInsight.completion.CompletionType;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
@@ -212,13 +212,13 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
         if (COMPLEX_QUOTE_OPENERS.contains(quotePrefixType) && StringUtil.containsChar(HANDLED_BY_BRACE_MATCHER, openChar)) {
           iterator.advance();
           if (iterator.atEnd() || !QUOTE_OPEN_ANY.contains(iterator.getTokenType())) {
-            EditorModificationUtil.insertStringAtCaret(editor, Character.toString(closeChar) + openChar, false, false);
+            EditorModificationUtilEx.insertStringAtCaret(editor, Character.toString(closeChar) + openChar, false, false);
           }
         }
         else if (SIMPLE_QUOTE_OPENERS.contains(quotePrefixType) &&
                  StringUtil.containsChar(HANDLED_BY_BRACE_MATCHER, openChar) &&
                  !PerlEditorUtil.areMarkersBalanced((EditorEx)editor, offset, openChar)) {
-          EditorModificationUtil.insertStringAtCaret(editor, Character.toString(closeChar), false, false);
+          EditorModificationUtilEx.insertStringAtCaret(editor, Character.toString(closeChar), false, false);
           return Result.STOP;
         }
         return Result.CONTINUE;
@@ -234,14 +234,14 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
         }
       }
 
-      EditorModificationUtil.insertStringAtCaret(editor, textToAppend.toString(), false, false);
+      EditorModificationUtilEx.insertStringAtCaret(editor, textToAppend.toString(), false, false);
     }
     else if (elementTokenType == STRING_SPECIAL_HEX && perlCodeInsightSettings.AUTO_BRACE_HEX_SUBSTITUTION ||
              elementTokenType == STRING_SPECIAL_OCT && perlCodeInsightSettings.AUTO_BRACE_OCT_SUBSTITUTION) {
-      EditorModificationUtil.insertStringAtCaret(editor, "{}", false, 1);
+      EditorModificationUtilEx.insertStringAtCaret(editor, "{}", false, 1);
     }
     else if (elementTokenType == STRING_SPECIAL_UNICODE) {
-      EditorModificationUtil.insertStringAtCaret(editor, "{}", false, 1);
+      EditorModificationUtilEx.insertStringAtCaret(editor, "{}", false, 1);
       AutoPopupController.getInstance(project).scheduleAutoPopup(editor, CompletionType.BASIC, null);
     }
     else if (elementTokenType == LEFT_BRACE) {
@@ -258,7 +258,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
       iterator.retreat();
       if (PerlEditorUtil.getPreviousTokenType(iterator, true) == PACKAGE &&
           (currentOffset == text.length() || text.charAt(currentOffset) != '>')) {
-        EditorModificationUtil.insertStringAtCaret(editor, ">");
+        EditorModificationUtilEx.insertStringAtCaret(editor, ">");
         AutoPopupController.getInstance(project).scheduleAutoPopup(editor, CompletionType.BASIC, null);
       }
     }
@@ -287,7 +287,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     PsiPerlSignatureContent wrappingSignature = PsiTreeUtil.getParentOfType(elementAtOffset, PsiPerlSignatureContent.class);
     if (wrappingSignature != null) {
       int signatureOffset = wrappingSignature.getNode().getStartOffset();
-      EditorModificationUtil.insertStringAtCaret(editor, " ", false, true);
+      EditorModificationUtilEx.insertStringAtCaret(editor, " ", false, true);
       Project project = file.getProject();
       PsiDocumentManager.getInstance(project).commitDocument(document);
       CodeStyleManager.getInstance(project).reformatText(file, signatureOffset, offset);

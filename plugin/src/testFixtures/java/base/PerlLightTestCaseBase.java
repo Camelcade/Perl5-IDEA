@@ -1012,7 +1012,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       WriteCommandAction.runWriteCommandAction(getProject(), () -> {
         caretModel.moveToOffset(offset);
         if (StringUtil.isNotEmpty(textToType)) {
-          EditorModificationUtil.insertStringAtCaret(editor, textToType);
+          EditorModificationUtilEx.insertStringAtCaret(editor, textToType);
         }
         textBeforeAction.set(document.getText());
         myFixture.testAction(new ExpandLiveTemplateByTabAction());
@@ -2952,7 +2952,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void doTestReparseWithoutInit(@NotNull String textToInsert, @NotNull Language language) {
-    doTestReparseWithoutInit(() -> EditorModificationUtil.insertStringAtCaret(getEditor(), textToInsert), language);
+    doTestReparseWithoutInit(() -> EditorModificationUtilEx.insertStringAtCaret(getEditor(), textToInsert), language);
   }
 
   protected void doTestReparseWithoutInit(@NotNull Runnable documentModifier,

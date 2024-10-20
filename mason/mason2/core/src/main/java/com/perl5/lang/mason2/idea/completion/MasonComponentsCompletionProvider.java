@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
@@ -63,12 +63,12 @@ public class MasonComponentsCompletionProvider extends PerlCompletionProvider {
         final VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(psiFile);
         VirtualFile containingDir;
         if (containingFile != null && (containingDir = containingFile.getParent()) != null) {
-          VfsUtil.processFilesRecursively(containingDir, new MasonRootsProcessor(containingDir) {
+          VfsUtilCore.processFilesRecursively(containingDir, new MasonRootsProcessor(containingDir) {
             @Override
             public boolean process(VirtualFile virtualFile) {
               FileType fileType = virtualFile.getFileType();
               if (fileType instanceof MasonPurePerlComponentFileType && !containingFile.equals(virtualFile)) {
-                String relativePath = VfsUtil.getRelativePath(virtualFile, getRoot());
+                String relativePath = VfsUtilCore.getRelativePath(virtualFile, getRoot());
                 if (StringUtil.isNotEmpty(relativePath)) {
                   finalResultSet.addElement(LookupElementBuilder
                                               .create(virtualFile, relativePath)
@@ -84,12 +84,12 @@ public class MasonComponentsCompletionProvider extends PerlCompletionProvider {
 
 
       for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
-        VfsUtil.processFilesRecursively(componentRoot, new MasonRootsProcessor(componentRoot) {
+        VfsUtilCore.processFilesRecursively(componentRoot, new MasonRootsProcessor(componentRoot) {
           @Override
           public boolean process(VirtualFile virtualFile) {
             FileType fileType = virtualFile.getFileType();
             if (fileType instanceof MasonPurePerlComponentFileType) {
-              String relativePath = VfsUtil.getRelativePath(virtualFile, getRoot());
+              String relativePath = VfsUtilCore.getRelativePath(virtualFile, getRoot());
               if (StringUtil.isNotEmpty(relativePath)) {
                 finalResultSet.addElement(LookupElementBuilder
                                             .create(virtualFile, "/" + relativePath)

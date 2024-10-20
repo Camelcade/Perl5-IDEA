@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.util.ClearableLazyValue;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -95,7 +95,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
     if (containingFile != null && containingFile.getFileType() == PerlFileTypePackage.INSTANCE) {
       VirtualFile innermostSourceRoot = PerlPackageUtil.getClosestIncRoot(getProject(), containingFile);
       if (innermostSourceRoot != null) {
-        String relativePath = VfsUtil.getRelativePath(containingFile, innermostSourceRoot);
+        String relativePath = VfsUtilCore.getRelativePath(containingFile, innermostSourceRoot);
         return PerlPackageUtil.getPackageNameByPath(relativePath);
       }
     }
@@ -162,7 +162,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
       fileRoot = fileIndex.getSourceRootForFile(virtualFile);
     }
 
-    return fileRoot == null ? parentFile.getPresentableUrl() : VfsUtil.getRelativePath(parentFile, fileRoot);
+    return fileRoot == null ? parentFile.getPresentableUrl() : VfsUtilCore.getRelativePath(parentFile, fileRoot);
   }
 
   @Override

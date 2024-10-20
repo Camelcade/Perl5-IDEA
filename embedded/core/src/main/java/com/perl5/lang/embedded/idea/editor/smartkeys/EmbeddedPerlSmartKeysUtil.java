@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.embedded.idea.editor.smartkeys;
 
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +38,7 @@ public final class EmbeddedPerlSmartKeysUtil implements PerlElementTypes {
       var highlighter = editor.getHighlighter();
       var highlighterIterator = highlighter.createIterator(offset - 2);
       if (highlighterIterator.getTokenType() == EMBED_MARKER_OPEN && !hasCloseMarkerAhead(highlighterIterator)) {
-        EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
+        EditorModificationUtilEx.insertStringAtCaret(editor, marker, false, false);
       }
     }
   }

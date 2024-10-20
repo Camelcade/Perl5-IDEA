@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -315,7 +315,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
   @SuppressWarnings("UnusedReturnValue")
   public static boolean parseBlockContent(PsiBuilder b, int l, PsiBuilder.Marker outerMarker, IElementType blockTokenType) {
     boolean r = false;
-    while (!b.eof() && TemplateToolkitParser.element(b, l)) {
+    while (!b.eof() && TemplateToolkitParserGenerated.element(b, l)) {
       LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
       if (latestDoneMarker != null && latestDoneMarker.getTokenType() == END_DIRECTIVE) {
         r = true;
@@ -360,7 +360,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
       perlMarker.drop();
     }
 
-    if (TemplateToolkitParser.element(b, l)) {
+    if (TemplateToolkitParserGenerated.element(b, l)) {
       LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
 
       if (latestDoneMarker != null && latestDoneMarker.getTokenType() == END_DIRECTIVE) {
@@ -392,7 +392,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
   public static boolean parseIfSequence(PsiBuilder b, int l, PsiBuilder.Marker branchMarker, IElementType branchTokenType) {
     while (!b.eof()) {
       PsiBuilder.Marker currentMarker = b.mark();
-      if (TemplateToolkitParser.element(b, l)) {
+      if (TemplateToolkitParserGenerated.element(b, l)) {
         LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
         if (latestDoneMarker != null) {
           if (latestDoneMarker.getTokenType() == END_DIRECTIVE) {
@@ -439,7 +439,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
   public static boolean parseTryCatchBlock(PsiBuilder b, int l, PsiBuilder.Marker branchMarker, IElementType branchTokenType) {
     while (!b.eof()) {
       PsiBuilder.Marker currentMarker = b.mark();
-      if (TemplateToolkitParser.element(b, l)) {
+      if (TemplateToolkitParserGenerated.element(b, l)) {
         LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
         if (latestDoneMarker != null) {
           if (latestDoneMarker.getTokenType() == END_DIRECTIVE) {
@@ -487,7 +487,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
     PsiBuilder.Marker branchMarker = null;
     while (!b.eof()) {
       PsiBuilder.Marker currentMarker = b.mark();
-      if (TemplateToolkitParser.element(b, l)) {
+      if (TemplateToolkitParserGenerated.element(b, l)) {
         LighterASTNode latestDoneMarker = b.getLatestDoneMarker();
         if (latestDoneMarker != null) {
           if (latestDoneMarker.getTokenType() == END_DIRECTIVE) {

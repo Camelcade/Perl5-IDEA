@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import com.intellij.openapi.components.PersistentStateComponent;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.AtomicClearableLazyValue;
 import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.intellij.util.xmlb.annotations.Transient;
@@ -45,7 +44,7 @@ public class PerlInjectionMarkersService implements PersistentStateComponent<Per
   private Map<String, String> myCustomMarkersMap = Collections.emptyMap();
 
   private final transient ClearableLazyValue<Map<String, Language>> myLanguageMapProvider =
-    AtomicClearableLazyValue.create(this::computeMarkersMap);
+    ClearableLazyValue.create(this::computeMarkersMap);
 
   @Override
   public @Nullable PerlInjectionMarkersService getState() {

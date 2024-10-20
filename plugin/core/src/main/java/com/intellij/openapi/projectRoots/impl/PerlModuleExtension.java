@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.intellij.openapi.projectRoots.impl;
 import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.components.PathMacroManager;
 import com.intellij.openapi.components.PersistentStateComponentWithModificationTracker;
-import com.intellij.openapi.components.impl.ModulePathMacroManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.roots.ModifiableRootModel;
@@ -154,7 +153,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   public @Nullable Element getState() {
     Element perlConfig = new Element(PERL_CONFIG);
 
-    PathMacroManager macroManager = ModulePathMacroManager.getInstance(myModule);
+    PathMacroManager macroManager = PathMacroManager.getInstance(myModule);
 
     for (VirtualFile root : myRoots.keySet()) {
       if (!root.isValid() || !root.isDirectory()) {
@@ -192,7 +191,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     if (state == null) {
       return;
     }
-    PathMacroManager macroManager = ModulePathMacroManager.getInstance(myModule);
+    PathMacroManager macroManager = PathMacroManager.getInstance(myModule);
     for (Element pathElement : state.getChildren(ELEMENT_PATH)) {
       JpsModuleSourceRootPropertiesSerializer<?> serializer =
         getSerializer(it -> it != null && it.getTypeId().equals(pathElement.getAttributeValue(ATTRIBUTE_TYPE)));

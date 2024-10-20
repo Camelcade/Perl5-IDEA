@@ -19,7 +19,6 @@ package com.perl5.lang.htmlmason.parser.psi.impl;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
@@ -126,7 +125,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
 
         VirtualFile componentRoot = HTMLMasonUtil.getComponentRoot(getProject(), startDir);
         if (componentRoot != null) {
-          while (VfsUtil.isAncestor(componentRoot, startDir, false)) {
+          while (VfsUtilCore.isAncestor(componentRoot, startDir, false)) {
             if ((parentFile = startDir.findFileByRelativePath(settings.autoHandlerName)) != null) {
               break;
             }

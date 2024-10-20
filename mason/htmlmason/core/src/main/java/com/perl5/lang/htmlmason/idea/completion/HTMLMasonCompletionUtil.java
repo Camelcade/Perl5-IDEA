@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
@@ -82,7 +82,7 @@ public final class HTMLMasonCompletionUtil {
     VirtualFile containingFile = component.getComponentVirtualFile();
     VirtualFile root;
     if (containingFile != null && (root = containingFile.getParent()) != null) {
-      VfsUtil.processFilesRecursively(root, new ComponentsFilesCollector("", root, resultSet, project));
+      VfsUtilCore.processFilesRecursively(root, new ComponentsFilesCollector("", root, resultSet, project));
     }
   }
 
@@ -90,7 +90,7 @@ public final class HTMLMasonCompletionUtil {
     HTMLMasonSettings masonSettings = HTMLMasonSettings.getInstance(project);
 
     for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
-      VfsUtil.processFilesRecursively(componentRoot, new ComponentsFilesCollector("/", componentRoot, resultSet, project));
+      VfsUtilCore.processFilesRecursively(componentRoot, new ComponentsFilesCollector("/", componentRoot, resultSet, project));
     }
   }
 
@@ -113,7 +113,7 @@ public final class HTMLMasonCompletionUtil {
     @Override
     public boolean process(VirtualFile virtualFile) {
       if (virtualFile.getFileType() == HTMLMasonFileType.INSTANCE) {
-        String relPath = VfsUtil.getRelativePath(virtualFile, myRoot);
+        String relPath = VfsUtilCore.getRelativePath(virtualFile, myRoot);
         if (StringUtil.isNotEmpty(relPath)) {
           LookupElementBuilder newElement = LookupElementBuilder
             .create(virtualFile, myPrefix + relPath)
