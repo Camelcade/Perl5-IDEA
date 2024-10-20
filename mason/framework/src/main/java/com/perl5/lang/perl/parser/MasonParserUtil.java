@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
@@ -42,12 +43,12 @@ public class MasonParserUtil {
   }
 
   public static boolean endOrRecover(@NotNull PsiBuilder b, @NotNull IElementType toElement, @NotNull String errorMessage) {
-    return PerlParserUtil.consumeToken(b, toElement) || recoverToGreedy(b, toElement, errorMessage);
+    return GeneratedParserUtilBase.consumeToken(b, toElement) || recoverToGreedy(b, toElement, errorMessage);
   }
 
   public static boolean recoverToGreedy(@NotNull PsiBuilder b, @NotNull IElementType toElement, @NotNull String errorMessage) {
     boolean r = recoverTo(b, toElement, errorMessage);
-    r = r || PerlParserUtil.consumeToken(b, toElement);
+    r = r || GeneratedParserUtilBase.consumeToken(b, toElement);
     return r;
   }
 

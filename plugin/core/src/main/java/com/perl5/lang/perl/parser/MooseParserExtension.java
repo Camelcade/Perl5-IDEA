@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -122,11 +122,11 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
     }
     PerlBuilder.Marker m = b.mark();
     PsiBuilder.Marker sm = b.mark();
-    PerlParserUtil.consumeToken(b, RESERVED_HAS);
+    consumeToken(b, RESERVED_HAS);
     sm.collapse(SUB_NAME);
     sm.precede().done(METHOD);
 
-    if (PerlParserImpl.any_call_arguments(b, l + 1)) {
+    if (PerlParserGenerated.any_call_arguments(b, l + 1)) {
       m.done(SUB_CALL);
       return true;
     }
@@ -137,8 +137,8 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
   private static boolean parseAnnotatedSimpleStatement(PerlBuilder b, int l, IElementType keywordToken, IElementType statementToken) {
     PerlBuilder.Marker m = b.mark();
 
-    if (PerlParserUtil.consumeToken(b, keywordToken)) {
-      if (PerlParserImpl.expr(b, l, -1)) {
+    if (consumeToken(b, keywordToken)) {
+      if (PerlParserGenerated.expr(b, l, -1)) {
         PerlParserUtil.parseStatementModifier(b, l);
         m.done(statementToken);
         return true;
@@ -158,7 +158,7 @@ public class MooseParserExtension extends PerlParserExtension implements MooseEl
 
     PerlBuilder.Marker m = b.mark();
     b.advanceLexer();
-    if (PerlParserImpl.expr(b, l, -1)) {
+    if (PerlParserGenerated.expr(b, l, -1)) {
       PerlParserUtil.parseStatementModifier(b, l);
       m.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
       return true;

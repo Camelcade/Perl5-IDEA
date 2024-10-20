@@ -18,7 +18,7 @@ package com.perl5.lang.pod.parser.psi.util;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
@@ -95,7 +95,7 @@ public class PodFileUtil {
   }
 
   public static @Nullable String getPackageNameFromVirtualFile(VirtualFile file, VirtualFile classRoot) {
-    String relativePath = VfsUtil.getRelativePath(file, classRoot);
+    String relativePath = VfsUtilCore.getRelativePath(file, classRoot);
     if (relativePath != null) {
       return StringUtil.join(relativePath.replaceAll(PM_OR_POD_EXTENSION_PATTERN, "").split("/"), PerlPackageUtil.NAMESPACE_SEPARATOR);
     }

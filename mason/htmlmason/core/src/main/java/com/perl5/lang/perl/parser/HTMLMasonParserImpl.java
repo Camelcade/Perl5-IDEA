@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
+import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -76,14 +77,14 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
       b.advanceLexer();
       if (PerlParserProxy.expr(b, l, -1)) {
         // parseStatement filter
-        if (PerlParserUtil.consumeToken(b, HTML_MASON_EXPR_FILTER_PIPE)) {
+        if (GeneratedParserUtilBase.consumeToken(b, HTML_MASON_EXPR_FILTER_PIPE)) {
           while ((tokenType = b.getTokenType()) == HTML_MASON_DEFAULT_ESCAPER_NAME || tokenType == HTML_MASON_ESCAPER_NAME) {
             b.advanceLexer();
 
-            while (PerlParserUtil.consumeToken(b, HTML_MASON_DEFAULT_ESCAPER_NAME)) {
+            while (GeneratedParserUtilBase.consumeToken(b, HTML_MASON_DEFAULT_ESCAPER_NAME)) {
             }
 
-            if (!PerlParserUtil.consumeToken(b, COMMA)) {
+            if (!GeneratedParserUtilBase.consumeToken(b, COMMA)) {
               break;
             }
           }
@@ -128,9 +129,9 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
       }
       else {
         PsiBuilder.Marker tagMarker = b.mark();
-        if (PerlParserUtil.consumeToken(b, HTML_MASON_CALL_CLOSE_TAG_START)) {
+        if (GeneratedParserUtilBase.consumeToken(b, HTML_MASON_CALL_CLOSE_TAG_START)) {
           string_bare(b, l);
-          if (!PerlParserUtil.consumeToken(b, HTML_MASON_TAG_CLOSER)) {
+          if (!GeneratedParserUtilBase.consumeToken(b, HTML_MASON_TAG_CLOSER)) {
             b.mark().error(HtmlMasonBundle.message("parsing.error.incomplete.close.tag"));
           }
           tagMarker.done(HTML_MASON_CALL_CLOSE_TAG);
@@ -186,13 +187,13 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
     }
     else if (tokenType == HTML_MASON_DOC_OPENER) {
       b.advanceLexer();
-      PerlParserUtil.consumeToken(b, COMMENT_BLOCK);
+      GeneratedParserUtilBase.consumeToken(b, COMMENT_BLOCK);
       r = MasonParserUtil.endOrRecover(b, HTML_MASON_DOC_CLOSER);
     }
     else if (tokenType == HTML_MASON_TEXT_OPENER) {
       PsiBuilder.Marker stringMarker = b.mark();
       b.advanceLexer();
-      PerlParserUtil.consumeToken(b, STRING_CONTENT);
+      GeneratedParserUtilBase.consumeToken(b, STRING_CONTENT);
       r = MasonParserUtil.endOrRecover(b, HTML_MASON_TEXT_CLOSER);
       stringMarker.done(HTML_MASON_TEXT_BLOCK);
     }
@@ -217,7 +218,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
     boolean r;
     PsiBuilder.Marker innerMarker = b.mark();
 
-    if (PerlParserUtil.consumeToken(b, HTML_MASON_ARGS_OPENER)) {
+    if (GeneratedParserUtilBase.consumeToken(b, HTML_MASON_ARGS_OPENER)) {
       while (parseArgument(b, l) || parseHardNewline(b)) {
       }
     }
@@ -241,7 +242,7 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
 
   public static boolean parseArgument(PsiBuilder b, int l) {
     boolean r = variable_declaration_element(b, l);
-    if (r && PerlParserUtil.consumeToken(b, FAT_COMMA)) {
+    if (r && GeneratedParserUtilBase.consumeToken(b, FAT_COMMA)) {
       r = expr(b, l, -1);
     }
     return r;
@@ -253,9 +254,9 @@ public class HTMLMasonParserImpl extends PerlParserImpl implements HTMLMasonPars
     PsiBuilder.Marker methodMarker = b.mark();
     b.advanceLexer();
     PsiBuilder.Marker subMarker = b.mark();
-    if (PerlParserUtil.consumeToken(b, IDENTIFIER)) {
+    if (GeneratedParserUtilBase.consumeToken(b, IDENTIFIER)) {
       subMarker.collapse(SUB_NAME);
-      if (PerlParserUtil.consumeToken(b, HTML_MASON_TAG_CLOSER)) {
+      if (GeneratedParserUtilBase.consumeToken(b, HTML_MASON_TAG_CLOSER)) {
         PsiBuilder.Marker blockMarker = b.mark();
         PerlParserProxy.block_content(b, l);
 

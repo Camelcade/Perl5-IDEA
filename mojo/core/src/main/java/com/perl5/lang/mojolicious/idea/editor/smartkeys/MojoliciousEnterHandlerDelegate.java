@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.codeInsight.editorActions.enter.EnterHandlerDelegateAdapter;
 import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.openapi.editor.actionSystem.EditorActionHandler;
 import com.intellij.openapi.util.Ref;
 import com.intellij.psi.FileViewProvider;
@@ -89,7 +89,7 @@ public class MojoliciousEnterHandlerDelegate extends EnterHandlerDelegateAdapter
 
     IElementType tokenType = PsiUtilCore.getElementType(element);
     if (tokenType == MOJO_LINE_OPENER && element.getNode().getStartOffset() < offset) {
-      EditorModificationUtil.insertStringAtCaret(editor, KEYWORD_MOJO_LINE_OPENER + " ", false, true);
+      EditorModificationUtilEx.insertStringAtCaret(editor, KEYWORD_MOJO_LINE_OPENER + " ", false, true);
     }
   }
 }

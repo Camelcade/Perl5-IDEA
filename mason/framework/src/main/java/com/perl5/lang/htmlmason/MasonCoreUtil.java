@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.htmlmason;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.newvfs.impl.FakeVirtualFile;
 import com.intellij.psi.PsiElement;
@@ -41,12 +41,9 @@ public class MasonCoreUtil {
         file = file.getParent();
       }
 
-      if (file != null) {
-        //noinspection unchecked
-        for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
-          if (VfsUtil.isAncestor(componentRoot, file, false)) {
-            return componentRoot;
-          }
+      for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
+        if (VfsUtilCore.isAncestor(componentRoot, file, false)) {
+          return componentRoot;
         }
       }
     }
@@ -54,27 +51,27 @@ public class MasonCoreUtil {
   }
 
   /**
-   * Returns real containing virtual file, not the Light one
+   * Returns a real containing virtual file, not the Light one
    *
    * @return virtual file or null
    */
   public static @Nullable VirtualFile getContainingVirtualFile(PsiFile psiFile) {
     VirtualFile originalFile = psiFile.getViewProvider().getVirtualFile();
 
-    if (originalFile instanceof LightVirtualFile) {
+    if (originalFile instanceof LightVirtualFile lightVirtualFile) {
       if (psiFile.getUserData(IndexingDataKeys.VIRTUAL_FILE) != null) {
         originalFile = psiFile.getUserData(IndexingDataKeys.VIRTUAL_FILE);
       }
-      else if (((LightVirtualFile)originalFile).getOriginalFile() != null) {
-        originalFile = ((LightVirtualFile)originalFile).getOriginalFile();
+      else if (lightVirtualFile.getOriginalFile() != null) {
+        originalFile = lightVirtualFile.getOriginalFile();
       }
     }
     return originalFile instanceof LightVirtualFile || originalFile == null || !originalFile.exists() ? null : originalFile;
   }
 
   public static void fillVariablesList(PsiElement parent,
-                                       List<PerlVariableDeclarationElement> targetList,
-                                       List<VariableDescription> sourceList) {
+                                       List<? super PerlVariableDeclarationElement> targetList,
+                                       List<? extends VariableDescription> sourceList) {
     for (VariableDescription variableDescription : sourceList) {
       String variableType = variableDescription.variableType;
       if (StringUtil.isEmpty(variableType)) {

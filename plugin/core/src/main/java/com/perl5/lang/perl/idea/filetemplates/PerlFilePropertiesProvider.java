@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.filetemplates;
 
 import com.intellij.ide.fileTemplates.DefaultTemplatePropertiesProvider;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -33,7 +33,7 @@ public class PerlFilePropertiesProvider implements DefaultTemplatePropertiesProv
     VirtualFile newInnermostRoot = PerlPackageUtil.getClosestIncRoot(directory.getProject(), directoryFile);
 
     if (newInnermostRoot != null) {
-      String newRelativePath = VfsUtil.getRelativePath(directoryFile, newInnermostRoot);
+      String newRelativePath = VfsUtilCore.getRelativePath(directoryFile, newInnermostRoot);
       props.put("PERL_PACKAGE_PREFIX",
                 newRelativePath == null || newRelativePath.isEmpty() ? "" : PerlPackageUtil.getPackageNameByPath(newRelativePath));
     }

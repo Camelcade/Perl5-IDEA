@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.EP;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.Service;
-import com.intellij.openapi.util.AtomicClearableLazyValue;
 import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.util.KeyedExtensionCollector;
 import com.intellij.util.KeyedLazyInstance;
@@ -32,7 +31,7 @@ public final class PerlPackageProcessorService implements Disposable {
   public static final KeyedExtensionCollector<PerlPackageProcessor, String> EP =
     new KeyedExtensionCollector<>("com.perl5.packageProcessor");
 
-  private final ClearableLazyValue<Integer> myVersionProvider = AtomicClearableLazyValue.createAtomic(() -> {
+  private final ClearableLazyValue<Integer> myVersionProvider = ClearableLazyValue.createAtomic(() -> {
     int version = 0;
     for (KeyedLazyInstance<PerlPackageProcessor> instance : Objects.requireNonNull(EP.getPoint()).getExtensionList()) {
       version += instance.getInstance().getVersion();

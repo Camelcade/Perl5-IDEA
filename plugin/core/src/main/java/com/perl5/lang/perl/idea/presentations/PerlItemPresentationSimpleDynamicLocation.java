@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.presentations;
 
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -50,7 +50,7 @@ public class PerlItemPresentationSimpleDynamicLocation extends PerlItemPresentat
       VirtualFile innerMostClassRoot = PerlPackageUtil.getClosestIncRoot(containingFile.getProject(), virtualFile);
 
       if (innerMostClassRoot != null) {
-        String relativePath = VfsUtil.getRelativePath(virtualFile, innerMostClassRoot);
+        String relativePath = VfsUtilCore.getRelativePath(virtualFile, innerMostClassRoot);
         return PerlPackageUtil.getPackageNameByPath(relativePath);
       }
     }
@@ -58,7 +58,7 @@ public class PerlItemPresentationSimpleDynamicLocation extends PerlItemPresentat
     // trying to get project's root directory
     VirtualFile innerMostSourceRoot = ProjectRootManagerEx.getInstanceEx(containingFile.getProject()).getFileIndex().getContentRootForFile(virtualFile);
     if (innerMostSourceRoot != null) {
-      return VfsUtil.getRelativePath(virtualFile, innerMostSourceRoot);
+      return VfsUtilCore.getRelativePath(virtualFile, innerMostSourceRoot);
     } else {
       return virtualFile.getPath();
     }

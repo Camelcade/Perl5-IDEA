@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.codeInsight.completion.InsertHandler;
 import com.intellij.codeInsight.completion.InsertionContext;
 import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.editor.CaretModel;
-import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
@@ -38,7 +38,7 @@ public class PerlInsertHandlers {
     @Override
     public void handleInsert(final @NotNull InsertionContext context, @NotNull LookupElement item) {
       adjustCaretForBracedVariableName(context);
-      EditorModificationUtil.insertStringAtCaret(context.getEditor(), "[]", false, true, 1);
+      EditorModificationUtilEx.insertStringAtCaret(context.getEditor(), "[]", false, true, 1);
     }
   }
 
@@ -62,7 +62,7 @@ public class PerlInsertHandlers {
     @Override
     public void handleInsert(final @NotNull InsertionContext context, @NotNull LookupElement item) {
       adjustCaretForBracedVariableName(context);
-      EditorModificationUtil.insertStringAtCaret(context.getEditor(), "{}", false, true, 1);
+      EditorModificationUtilEx.insertStringAtCaret(context.getEditor(), "{}", false, true, 1);
     }
   }
 }

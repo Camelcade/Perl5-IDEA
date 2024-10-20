@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,7 +64,7 @@ public final class MasonVirtualFileListener implements VirtualFileListener {
     Set<VirtualFile> rootsSet = new HashSet<>(componentsRoots);
     if (changedFile.isDirectory()) {
       if (changedFile.getUserData(FORCE_REINDEX) != null ||
-          VfsUtil.isUnder(changedFile, rootsSet) ||        // moved to component root
+          VfsUtilCore.isUnder(changedFile, rootsSet) ||        // moved to component root
           containsAtLeastOneFile(changedFile, componentsRoots)
       ) {
         Mason2Util.reindexProjectFile(getProject(), changedFile);
@@ -73,7 +73,7 @@ public final class MasonVirtualFileListener implements VirtualFileListener {
     else if (changedFile.getFileType() instanceof MasonPurePerlComponentFileType)    // Mason file has been moved
     {
       if (changedFile.getUserData(FORCE_REINDEX) != null ||
-          VfsUtil.isUnder(changedFile, rootsSet)
+          VfsUtilCore.isUnder(changedFile, rootsSet)
       ) {
         FileBasedIndex.getInstance().requestReindex(changedFile);
       }
@@ -140,7 +140,7 @@ public final class MasonVirtualFileListener implements VirtualFileListener {
 
     Set<VirtualFile> rootsSet = new HashSet<>(componentsRoots);
     if (movedFile.isDirectory()) {
-      if (VfsUtil.isUnder(movedFile, rootsSet) ||    // moved from component root
+      if (VfsUtilCore.isUnder(movedFile, rootsSet) ||    // moved from component root
           containsAtLeastOneFile(movedFile, componentsRoots) // contains component root
       ) {
         movedFile.putUserData(FORCE_REINDEX, true);
@@ -148,7 +148,7 @@ public final class MasonVirtualFileListener implements VirtualFileListener {
     }
     else if (movedFile.getFileType() instanceof MasonPurePerlComponentFileType)    // Mason file has been moved
     {
-      if (VfsUtil.isUnder(movedFile, rootsSet)) {
+      if (VfsUtilCore.isUnder(movedFile, rootsSet)) {
         movedFile.putUserData(FORCE_REINDEX, true);
       }
     }
@@ -160,7 +160,7 @@ public final class MasonVirtualFileListener implements VirtualFileListener {
 
   private static boolean containsAtLeastOneFile(VirtualFile root, List<VirtualFile> files) {
     for (VirtualFile file : files) {
-      if (VfsUtil.isAncestor(root, file, false)) {
+      if (VfsUtilCore.isAncestor(root, file, false)) {
         return true;
       }
     }

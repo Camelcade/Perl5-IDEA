@@ -16,7 +16,7 @@
 
 package com.perl5.lang.perl.idea.refactoring.rename;
 
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -52,7 +52,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
       VirtualFile classRoot = PerlPackageUtil.getClosestIncRoot(namespaceDefinition.getProject(), virtualFile);
 
       return classRoot != null &&
-             currentPackageName.equals(PerlPackageUtil.getPackageNameByPath(VfsUtil.getRelativePath(virtualFile, classRoot)));
+             currentPackageName.equals(PerlPackageUtil.getPackageNameByPath(VfsUtilCore.getRelativePath(virtualFile, classRoot)));
     }
     return false;
   }

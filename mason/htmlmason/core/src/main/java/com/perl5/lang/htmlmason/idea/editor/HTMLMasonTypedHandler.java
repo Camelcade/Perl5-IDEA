@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.htmlmason.idea.editor;
 import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -65,25 +65,25 @@ public class HTMLMasonTypedHandler extends TypedHandlerDelegate
     }
     IElementType elementType = element.getNode().getElementType();
     if (elementType == HTML_MASON_BLOCK_OPENER && !isNextElement(element, HTML_MASON_BLOCK_CLOSER)) {
-      EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_BLOCK_CLOSER, false, false);
+      EditorModificationUtilEx.insertStringAtCaret(editor, " " + KEYWORD_BLOCK_CLOSER, false, false);
     }
     else if (elementType == HTML_MASON_CALL_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER)) {
-      EditorModificationUtil.insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER, false, false);
+      EditorModificationUtilEx.insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER, false, false);
     }
     else if (elementType == HTML_MASON_CALL_FILTERING_OPENER && !isNextElement(element, HTML_MASON_CALL_CLOSER)) {
-      EditorModificationUtil
-        .insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER + KEYWORD_CALL_CLOSE_TAG_START + KEYWORD_TAG_CLOSER, false, false);
+      EditorModificationUtilEx.insertStringAtCaret(editor, " " + KEYWORD_CALL_CLOSER + KEYWORD_CALL_CLOSE_TAG_START + KEYWORD_TAG_CLOSER,
+                                                   false, false);
     }
     else if (elementType == HTML_MASON_METHOD_OPENER) {
       String closeTag = getCloseTag(project, element.getText());
       if (closeTag != null) {
-        EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
+        EditorModificationUtilEx.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
       }
     }
     else if (elementType == HTML_MASON_DEF_OPENER) {
       String closeTag = getCloseTag(project, element.getText());
       if (closeTag != null) {
-        EditorModificationUtil.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
+        EditorModificationUtilEx.insertStringAtCaret(editor, ">\n" + closeTag, false, false);
       }
     }
   }
@@ -97,10 +97,10 @@ public class HTMLMasonTypedHandler extends TypedHandlerDelegate
     String elementText = element.getText();
     String closeTag;
     if (elementText.equals(KEYWORD_FLAGS)) {
-      EditorModificationUtil.insertStringAtCaret(editor, "\ninherit => ''\n" + KEYWORD_FLAGS_CLOSER, false, true, 13);
+      EditorModificationUtilEx.insertStringAtCaret(editor, "\ninherit => ''\n" + KEYWORD_FLAGS_CLOSER, false, true, 13);
     }
     else if ((closeTag = getCloseTag(project, "<%" + elementText + ">")) != null) {
-      EditorModificationUtil.insertStringAtCaret(editor, closeTag, false, false);
+      EditorModificationUtilEx.insertStringAtCaret(editor, closeTag, false, false);
     }
   }
 

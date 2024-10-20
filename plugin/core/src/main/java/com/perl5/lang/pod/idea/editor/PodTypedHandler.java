@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.pod.idea.editor;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
@@ -132,7 +132,7 @@ public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElem
         CharSequence documentChars = editor.getDocument().getCharsSequence();
 
         if (elementType == POD_IDENTIFIER && StringUtil.containsChar(POD_COMMANDS, documentChars.charAt(prevCharOffset))) {
-          EditorModificationUtil.insertStringAtCaret(editor, ">", false, false, 0);
+          EditorModificationUtilEx.insertStringAtCaret(editor, ">", false, false, 0);
         }
         else if (elementType == POD_ANGLE_LEFT || POD_COMMANDS_TOKENSET.contains(elementType)) {
           extendAngles(element.getParent());

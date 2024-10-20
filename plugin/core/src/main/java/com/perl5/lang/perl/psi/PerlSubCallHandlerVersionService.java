@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,13 @@ package com.perl5.lang.perl.psi;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.components.Service;
-import com.intellij.openapi.util.AtomicClearableLazyValue;
 import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.util.KeyedLazyInstance;
 import org.jetbrains.annotations.NotNull;
 
 @Service
 public final class PerlSubCallHandlerVersionService implements Disposable {
-  private final ClearableLazyValue<Integer> myVersionProvider = AtomicClearableLazyValue.createAtomic(() -> {
+  private final ClearableLazyValue<Integer> myVersionProvider = ClearableLazyValue.createAtomic(() -> {
     int version = 0;
     for (KeyedLazyInstance<PerlSubCallHandler<?>> instance : PerlSubCallHandler.getExtensionPoint().getExtensions()) {
       version += instance.getInstance().getVersion();

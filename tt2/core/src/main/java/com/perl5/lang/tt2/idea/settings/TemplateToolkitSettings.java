@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import com.intellij.openapi.project.RootsChangeRescanningInfo;
 import com.intellij.openapi.roots.ex.ProjectRootManagerEx;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.EmptyRunnable;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiFileSystemItem;
@@ -144,7 +144,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
    */
   public boolean isVirtualFileUnderRoot(@NotNull VirtualFile file) {
     for (VirtualFile root : getTemplateRoots()) {
-      if (VfsUtil.isAncestor(root, file, true)) {
+      if (VfsUtilCore.isAncestor(root, file, true)) {
         return true;
       }
     }

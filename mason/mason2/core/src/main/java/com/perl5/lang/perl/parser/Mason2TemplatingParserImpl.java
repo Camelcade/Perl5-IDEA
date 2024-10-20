@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
+import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
 
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
@@ -37,14 +38,14 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
       b.advanceLexer();
       if (PerlParserProxy.expr(b, l, -1)) {
         // parseStatement filter
-        if (PerlParserUtil.consumeToken(b, MASON_EXPR_FILTER_PIPE)) {
+        if (GeneratedParserUtilBase.consumeToken(b, MASON_EXPR_FILTER_PIPE)) {
           while (b.getTokenType() == IDENTIFIER) {
             PsiBuilder.Marker fm = b.mark();
             b.advanceLexer();
             fm.collapse(SUB_NAME);
             fm.precede().done(METHOD);
 
-            if (!PerlParserUtil.consumeToken(b, COMMA)) {
+            if (!GeneratedParserUtilBase.consumeToken(b, COMMA)) {
               break;
             }
           }
@@ -86,13 +87,13 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
     }
     else if (tokenType == MASON_DOC_OPENER) {
       b.advanceLexer();
-      PerlParserUtil.consumeToken(b, COMMENT_BLOCK);
+      GeneratedParserUtilBase.consumeToken(b, COMMENT_BLOCK);
       r = MasonParserUtil.endOrRecover(b, MASON_DOC_CLOSER);
     }
     else if (tokenType == MASON_TEXT_OPENER) {
       b.advanceLexer();
       PsiBuilder.Marker stringMarker = b.mark();
-      if (PerlParserUtil.consumeToken(b, STRING_CONTENT)) {
+      if (GeneratedParserUtilBase.consumeToken(b, STRING_CONTENT)) {
         stringMarker.done(MASON_TEXT_BLOCK);
       }
       else {
@@ -115,13 +116,13 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
       b.advanceLexer();
       IElementType closeToken = RESERVED_OPENER_TO_CLOSER_MAP.get(tokenType);
 
-      if (PerlParserUtil.consumeToken(b, SUB_NAME) && PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER)) {
+      if (GeneratedParserUtilBase.consumeToken(b, SUB_NAME) && GeneratedParserUtilBase.consumeToken(b, MASON_TAG_CLOSER)) {
         PsiBuilder.Marker blockMarker = b.mark();
         PerlParserProxy.block_content(b, l);
         blockMarker.done(BLOCK_BRACELESS);
         blockMarker.setCustomEdgeTokenBinders(WhitespacesBinders.GREEDY_LEFT_BINDER, WhitespacesBinders.GREEDY_RIGHT_BINDER);
 
-        if (r = PerlParserUtil.consumeToken(b, closeToken)) {
+        if (r = GeneratedParserUtilBase.consumeToken(b, closeToken)) {
           statementMarker.done(RESERVED_TO_STATEMENT_MAP.get(tokenType));
           statementMarker = null;
         }
@@ -174,10 +175,10 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
     PsiBuilder.Marker methodMarker = b.mark();
     b.advanceLexer();
     PsiBuilder.Marker subMarker = b.mark();
-    if (PerlParserUtil.consumeToken(b, SUB_NAME)) {
+    if (GeneratedParserUtilBase.consumeToken(b, SUB_NAME)) {
       subMarker.collapse(SUB_NAME);
       PerlParserProxy.method_signature(b, l);
-      if (PerlParserUtil.consumeToken(b, MASON_TAG_CLOSER)) {
+      if (GeneratedParserUtilBase.consumeToken(b, MASON_TAG_CLOSER)) {
         PsiBuilder.Marker blockMarker = b.mark();
         PerlParserProxy.block_content(b, l);
 

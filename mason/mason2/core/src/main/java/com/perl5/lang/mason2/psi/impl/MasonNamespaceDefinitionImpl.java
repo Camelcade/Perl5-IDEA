@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.mason2.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.IStubElementType;
@@ -127,7 +128,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     if (containingFile != null) {
       VirtualFile containingRoot = Mason2Util.getComponentRoot(getProject(), containingFile);
       if (containingRoot != null) {
-        return VfsUtil.getRelativePath(containingFile, containingRoot);
+        return VfsUtilCore.getRelativePath(containingFile, containingRoot);
       }
     }
     return null;
@@ -278,7 +279,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
     VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(getContainingFile());
 
     if (componentRoot != null && containingFile != null) {
-      String componentPath = VfsUtil.getRelativePath(containingFile, componentRoot);
+      String componentPath = VfsUtilCore.getRelativePath(containingFile, componentRoot);
 
       if (componentPath != null) {
         return VfsUtil.VFS_SEPARATOR_CHAR + componentPath;

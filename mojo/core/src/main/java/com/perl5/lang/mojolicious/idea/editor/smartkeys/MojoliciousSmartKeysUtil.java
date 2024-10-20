@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.mojolicious.idea.editor.smartkeys;
 
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.EditorModificationUtil;
+import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.TokenSet;
@@ -49,7 +49,7 @@ public class MojoliciousSmartKeysUtil implements MojoliciousElementTypes, PerlEl
     if (hasCloseMarkerAhead(highlighterIterator)) {
       return false;
     }
-    EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
+    EditorModificationUtilEx.insertStringAtCaret(editor, marker, false, false);
     return true;
   }
 
@@ -85,7 +85,7 @@ public class MojoliciousSmartKeysUtil implements MojoliciousElementTypes, PerlEl
       return false;
     }
 
-    EditorModificationUtil.insertStringAtCaret(editor, marker, false, false);
+    EditorModificationUtilEx.insertStringAtCaret(editor, marker, false, false);
     return true;
   }
 

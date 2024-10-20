@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.refactoring.move;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.intellij.psi.PsiElement;
@@ -77,7 +77,7 @@ public class PerlMoveFileHandler extends MoveFileHandler {
     VirtualFile newInnermostRoot = PerlPackageUtil.getClosestIncRoot(project, virtualFile);
 
     if (newInnermostRoot != null && originalPackageName != null) {
-      String newRelativePath = VfsUtil.getRelativePath(virtualFile, newInnermostRoot);
+      String newRelativePath = VfsUtilCore.getRelativePath(virtualFile, newInnermostRoot);
       String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
 
       final RenameRefactoring[] refactoring = {null};

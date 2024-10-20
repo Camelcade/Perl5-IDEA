@@ -27,7 +27,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.xmlb.annotations.Tag;
@@ -208,8 +208,8 @@ public abstract class PerlAbstractTestRunConfiguration extends GenericPerlRunCon
       }
       String virtualFilePath = testVirtualFile.getPath();
       String effectivePath;
-      if (workingDirectory != null && VfsUtil.isAncestor(workingDirectory, testVirtualFile, true)) {
-        effectivePath = VfsUtil.getRelativePath(testVirtualFile, workingDirectory);
+      if (workingDirectory != null && VfsUtilCore.isAncestor(workingDirectory, testVirtualFile, true)) {
+        effectivePath = VfsUtilCore.getRelativePath(testVirtualFile, workingDirectory);
       }
       else {
         effectivePath = perlHostData.getRemotePath(virtualFilePath);

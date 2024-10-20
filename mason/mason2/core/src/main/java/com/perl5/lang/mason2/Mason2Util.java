@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.mason2;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
+import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.search.GlobalSearchScope;
@@ -52,7 +53,7 @@ public class Mason2Util {
       VirtualFile componentRoot = getComponentRoot(project, componentFile);
       if (componentRoot != null) {
         //noinspection ConstantConditions
-        return getClassnameFromPath(VfsUtil.getRelativePath(componentFile, componentRoot));
+        return getClassnameFromPath(VfsUtilCore.getRelativePath(componentFile, componentRoot));
       }
     }
 
@@ -111,7 +112,7 @@ public class Mason2Util {
   }
 
   public static void reindexProjectFile(Project project, VirtualFile virtualFile) {
-    if (VfsUtil.isAncestor(project.getBaseDir(), virtualFile, false)) {
+    if (VfsUtilCore.isAncestor(project.getBaseDir(), virtualFile, false)) {
       reindexProjectRoots(project, Collections.singletonList(PerlFileUtil.getPathRelativeToContentRoot(virtualFile, project)));
     }
   }
@@ -129,7 +130,7 @@ public class Mason2Util {
       final FileBasedIndex index = FileBasedIndex.getInstance();
 
       for (String root : rootsToReindex) {
-        VirtualFile componentRoot = VfsUtil.findRelativeFile(root, projectRoot);
+        VirtualFile componentRoot = VfsUtilCore.findRelativeFile(root, projectRoot);
         if (componentRoot != null) {
           for (VirtualFile file : VfsUtil.collectChildrenRecursively(componentRoot)) {
             if (file.getFileType() instanceof MasonPurePerlComponentFileType) {
