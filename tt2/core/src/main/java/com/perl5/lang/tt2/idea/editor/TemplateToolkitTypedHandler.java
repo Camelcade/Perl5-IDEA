@@ -71,7 +71,7 @@ public class TemplateToolkitTypedHandler extends TypedHandlerDelegate implements
     }
 
     String openTagPrefix = openTag.substring(0, openTag.length() - 1);
-    if (openTagPrefix.length() == 0) {
+    if (openTagPrefix.isEmpty()) {
       return null;
     }
 

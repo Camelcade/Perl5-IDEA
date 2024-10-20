@@ -236,7 +236,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
       code.append(getSetterCode(name));
     }
 
-    if (code.length() > 0) {
+    if (!code.isEmpty()) {
       insertCodeAfterElement(anchor, code.toString(), editor);
     }
   }
@@ -249,7 +249,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
       code.append(getGetterCode(name));
     }
 
-    if (code.length() > 0) {
+    if (!code.isEmpty()) {
       insertCodeAfterElement(anchor, code.toString(), editor);
     }
   }
@@ -263,7 +263,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
       code.append(getSetterCode(name));
     }
 
-    if (code.length() > 0) {
+    if (!code.isEmpty()) {
       insertCodeAfterElement(anchor, code.toString(), editor);
     }
   }
@@ -300,7 +300,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
                                                            PsiDocumentManager.getInstance(anchor.getProject());
                                                          final Document document = manager.getDocument(anchor.getContainingFile());
 
-                                                         if (code.length() > 0 && document != null) {
+                                                         if (!code.isEmpty() && document != null) {
                                                            manager.doPostponedOperationsAndUnblockDocument(document);
 
                                                            PsiFile newFile =

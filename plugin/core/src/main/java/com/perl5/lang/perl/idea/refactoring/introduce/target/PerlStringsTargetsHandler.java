@@ -91,7 +91,7 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
       TextRange rangeInElement = occurrence.getTextRangeInElement();
       TextRange rangeInContent = rangeInElement.shiftLeft(valueOffset);
 
-      if (result.length() > 0) {
+      if (!result.isEmpty()) {
         result.append(CONCATENATION);
       }
 
@@ -108,7 +108,7 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
       positionInContent = rangeInContent.getEndOffset();
     }
     if (positionInContent < valueText.length()) {
-      if (result.length() > 0) {
+      if (!result.isEmpty()) {
         result.append(CONCATENATION);
       }
       result.append(quoteTextSafelyWithSingleQuotes(valueText.subSequence(positionInContent, valueText.length()), prefix, suffix));

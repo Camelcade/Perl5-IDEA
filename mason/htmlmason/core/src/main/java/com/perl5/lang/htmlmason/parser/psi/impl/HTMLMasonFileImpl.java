@@ -187,7 +187,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     // indexed children
     for (String parentPath : StubIndex.getInstance().getAllKeys(HTMLMasonFlagsStubIndex.KEY, project)) {
       boolean isEquals = StringUtil.equals(relativePath, parentPath);
-      boolean isRelative = parentPath.length() == 0 || parentPath.charAt(0) != VFS_SEPARATOR_CHAR;
+      boolean isRelative = parentPath.isEmpty() || parentPath.charAt(0) != VFS_SEPARATOR_CHAR;
 
       for (HTMLMasonFlagsStatement statement : StubIndex.getElements(
         HTMLMasonFlagsStubIndex.KEY, parentPath, project, scope, HTMLMasonFlagsStatement.class)) {

@@ -144,7 +144,7 @@ public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
     }
     else if (LIST_MODIFYING_EXPR.contains(parentExpressionType)) {
       List<PsiElement> children = PerlArrayUtil.collectListElements(expression);
-      if (children.size() > 0 && PsiTreeUtil.isAncestor(children.getFirst(), originalElement, false)) {
+      if (!children.isEmpty() && PsiTreeUtil.isAncestor(children.getFirst(), originalElement, false)) {
         return Access.ReadWrite;
       }
     }

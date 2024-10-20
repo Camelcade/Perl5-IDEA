@@ -31,7 +31,7 @@ public interface PerlBlessExpr extends PsiPerlExpr {
    */
   default @Nullable PsiElement getReferenceExpression() {
     List<PsiElement> unpackedChildren = PerlArrayUtil.collectChildrenList(this);
-    return unpackedChildren.size() > 0 ? unpackedChildren.getFirst() : null;
+    return !unpackedChildren.isEmpty() ? unpackedChildren.getFirst() : null;
   }
 
   /**

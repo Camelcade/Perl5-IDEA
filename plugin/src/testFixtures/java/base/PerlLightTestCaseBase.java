@@ -2146,7 +2146,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected void doTestIntroduceVariableOccurances() {
     initWithFileSmartWithoutErrors();
     List<PerlIntroduceTarget> introduceTargets = PerlIntroduceTargetsHandler.getIntroduceTargets(getEditor(), getFile());
-    assertTrue(introduceTargets.size() > 0);
+    assertTrue(!introduceTargets.isEmpty());
     List<Pair<Integer, String>> macros = new ArrayList<>();
     PerlIntroduceTargetOccurrencesCollector.collect(introduceTargets.getLast()).forEach(it -> {
       TextRange occurenceRange = it.getTextRange();
@@ -2371,7 +2371,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       if (elements.length == 0) {
         continue;
       }
-      if (sb.length() > 0) {
+      if (!sb.isEmpty()) {
         sb.append(SEPARATOR_NEWLINES);
       }
       sb.append(acceptableName).append("\n");
@@ -2554,7 +2554,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     CaretModel caretModel = editor.getCaretModel();
     StringBuilder sb = new StringBuilder();
     for (Integer offset : offsets) {
-      if (sb.length() > 0) {
+      if (!sb.isEmpty()) {
         sb.append(SEPARATOR_NEWLINES);
       }
       caretModel.moveToOffset(offset);
@@ -2675,7 +2675,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     for (PsiFile file : fileViewProvider.getAllFiles()) {
       assertInstanceOf(file, PsiFileImpl.class);
       StubElement<?> stub = ((PsiFileImpl)file).getStub();
-      if (sb.length() > 0) {
+      if (!sb.isEmpty()) {
         sb.append(SEPARATOR_NEWLINES);
       }
       sb.append(file.getLanguage()).append("\n");
@@ -2820,7 +2820,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
     StringBuilder sb = new StringBuilder();
     for (String actionName : actionNames) {
-      if (sb.length() > 0) {
+      if (!sb.isEmpty()) {
         initWithFileSmartWithoutErrors();
         sb.append(SEPARATOR_NEWLINES);
       }

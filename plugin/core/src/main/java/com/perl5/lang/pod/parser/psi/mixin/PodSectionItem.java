@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -129,7 +129,7 @@ public class PodSectionItem extends PodTitledSectionMixin {
 
       StringBuilder elementBuilder = new StringBuilder();
       super.renderElementContentAsHTML(elementBuilder, context);
-      if (elementBuilder.length() > 0) {
+      if (!elementBuilder.isEmpty()) {
         builder.append("<dd style=\"padding-top:6px;\">");
         builder.append(elementBuilder);
         builder.append("</dd>");
