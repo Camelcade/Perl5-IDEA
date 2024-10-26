@@ -28,6 +28,7 @@ import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugProcessStarter;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.debugger.PerlDebugProcess;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
@@ -53,8 +54,7 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
   }
 
   @Override
-  protected @Nullable PerlRunProfileState createState(@NotNull ExecutionEnvironment executionEnvironment)
-    throws ExecutionException {
+  protected @Nullable PerlRunProfileState createState(@NotNull ExecutionEnvironment executionEnvironment) {
     return new PerlDebugProfileState(executionEnvironment);
   }
 
@@ -71,14 +71,14 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
                            @NotNull AsyncPromise<RunContentDescriptor> result) throws ExecutionException {
     if (!(state instanceof PerlDebugProfileStateBase perlDebugProfileStateBase)) {
       LOG.error("PerlDebugProfileStateBase expected, got " + state + " for " + env);
-      throw new ExecutionException("Incorrect run state");
+      throw new ExecutionException(PerlBundle.message("dialog.message.incorrect.run.state"));
     }
     var executionResult = perlDebugProfileStateBase.execute(env.getExecutor(), this);
     ApplicationManager.getApplication().invokeLater(() -> {
       try {
         XDebugSession xDebugSession = XDebuggerManager.getInstance(env.getProject()).startSession(env, new XDebugProcessStarter() {
           @Override
-          public @NotNull XDebugProcess start(@NotNull XDebugSession session) throws ExecutionException {
+          public @NotNull XDebugProcess start(@NotNull XDebugSession session) {
             return new PerlDebugProcess(session, (PerlDebugProfileStateBase)state, executionResult);
           }
         });
