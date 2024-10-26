@@ -1,0 +1,7 @@
+baseProfile: "Project Quality"
+inspections:
+  - group: ALL
+    ignore:
+      - "**/gen/**"
+      - "**/test/resources/**"
+      - "**/testData/**"
