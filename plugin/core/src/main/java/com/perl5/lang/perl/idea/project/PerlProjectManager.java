@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,8 +46,6 @@ import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.*;
-import com.intellij.util.containers.ContainerUtil;
-import com.intellij.util.containers.ContainerUtil.ImmutableMapBuilder;
 import com.intellij.util.containers.FactoryMap;
 import com.intellij.util.messages.MessageBusConnection;
 import com.perl5.PerlBundle;
@@ -139,12 +137,11 @@ public class PerlProjectManager implements Disposable {
   private void resetProjectCaches() {
     myModulesRootsProvider.clear();
     myAllModulesMapProvider = AtomicNotNullLazyValue.createValue(() -> {
-      ImmutableMapBuilder<VirtualFile, PerlSourceRootType> builder = ContainerUtil.immutableMapBuilder();
+      Map<VirtualFile, PerlSourceRootType> map = new HashMap<>();
       for (Module module : ModuleManager.getInstance(myProject).getModules()) {
-        PerlModuleExtension.getInstance(module).getRoots().forEach(builder::put);
+        PerlModuleExtension.getInstance(module).getRoots().forEach(map::put);
       }
-
-      return builder.build();
+      return Collections.unmodifiableMap(map);
     });
     mySdkProvider = NullableLazyValue.atomicLazyNullable(() -> PerlSdkTable.getInstance().findJdk(myPerlSettings.getPerlInterpreter()));
     myExternalLibraryRootsProvider = AtomicNotNullLazyValue.createValue(() -> {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,224 +13,218 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.idea.intellilang
 
-package com.perl5.lang.perl.idea.intellilang;
+import com.perl5.lang.perl.PerlLanguage
 
-import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.PerlLanguage;
+object PerlDefaultInjectionMarkers {
+  const val PERL5_MARKER: String = "PERL5"
 
-import java.util.Map;
-
-public final class PerlDefaultInjectionMarkers {
-  private PerlDefaultInjectionMarkers() {
-  }
-
-  public static final String PERL5_MARKER = "PERL5";
-
-  public static final Map<String, String> DEFAULT_MARKERS = ContainerUtil.<String, String>immutableMapBuilder()
-    .put("ACTIONSCRIPT", "ECMA Script Level 4")
-    .put("ADB", "AndroidDataBinding")
-    .put("AGSL", "AGSL")
-    .put("AIDL", "AIDL")
-    .put("ANGULAR", "AngularJS")
-    .put("ANGULAR2", "ANGULAR2")
-    .put("APACHE_CONFIG", "ApacheConfig")
-    .put("APPLEJS", "Apple JS")
-    .put("ASP", "Asp")
-    .put("ASPECT_JS", "AspectJS")
-    .put("ASTRO", "Astro")
-    .put("AZURE", "AZURE")
-    .put("BIGQUERY", "BigQuery")
-    .put("BLADE", "Blade")
-    .put("CASSANDRA", "CassandraQL")
-    .put("CFML", "CFML")
-    .put("CGO", "cgo")
-    .put("CHAMELEON", "Chameleon")
-    .put("CLICKHOUSE", "ClickHouse")
-    .put("CMAKE", "CMake")
-    .put("CMAKE_CACHE", "CMakeCache")
-    .put("COCKROACH", "Cockroach")
-    .put("COFFESCRIPT", "COFFEESCRIPT")
-    .put("COMMAND_LINE", "CommandLine")
-    .put("COMPOSER_LOG", "Composer Log")
-    .put("CONCEPT", "Concept")
-    .put("COOKIE", "Cookie")
-    .put("COUCHBASE", "CouchbaseQuery")
-    .put("CSS", "CSS")
-    .put("CSS_VALUE", "CSS VALUE")
-    .put("CYTHON", "Cython")
-    .put("DART", "Dart")
-    .put("DART_IN_HTML", "Dart in Html")
-    .put("DATALORE", "Datalore")
-    .put("DATALORE_PYTHON", "DatalorePython")
-    .put("DB2", "DB2")
-    .put("DB2IS", "DB2_IS")
-    .put("DB2ZOS", "DB2_ZOS")
-    .put("DERBY", "Derby")
-    .put("DEVICE_SPEC", "DeviceSpec")
-    .put("DJANGO", "Django")
-    .put("DOCKERFILE", "Dockerfile")
-    .put("DOXYGEN", "Doxygen")
-    .put("DQL", "DQL")
-    .put("DROOLS", "Drools")
-    .put("DTD", "DTD")
-    .put("ECMA6", "ECMAScript 6")
-    .put("EDITOR_CONFIG", "EditorConfig")
-    .put("EJS", "EJS")
-    .put("EL", "EL")
-    .put("EPP", "Embedded Puppet")
-    .put("ERB", "RHTML")
-    .put("EXASOL", "Exasol")
-    .put("FACELETS", "Facelets")
-    .put("FLOWJS", "Flow JS")
-    .put("FREEMARKER", "FTL")
-    .put("GDB", "GDB")
-    .put("GHERKIN", "Gherkin")
-    .put("GO", "go")
-    .put("GOBUILD", "GoBuild")
-    .put("GOFUZZ", "GoFuzzCorpus")
-    .put("GOTPL", "GoTemplate")
-    .put("GQL", "GQL")
-    .put("GREENPLUM", "Greenplum")
-    .put("GROOVY", "Groovy")
-    .put("GSP", "GSP")
-    .put("GSQL", "GenericSQL")
-    .put("GWT", "GWT JavaScript")
-    .put("GWTCSS", "GWT-CSS")
-    .put("H2", "H2")
-    .put("HAML", "Haml")
-    .put("HBL", "Handlebars")
-    .put("HCL", "HCL")
-    .put("HEXDUMP", "HEXDUMP")
-    .put("HIL", "HIL")
-    .put("HIVEQL", "HiveQL")
-    .put("HJSON", "HelmJSON")
-    .put("HSQLDB", "HSQLDB")
-    .put("HTEXT", "HelmTEXT")
-    .put("HTML", "HTML")
-    .put("HTTP", "HTTP Request")
-    .put("HYAML", "HelmYAML")
-    .put("IGNORE", "IgnoreLang")
-    .put("INI", "Ini")
-    .put("JADE", "Jade")
-    .put("JAVA", "JAVA")
-    .put("JINJA2", "Jinja2")
-    .put("JKTMETA", "JKTMeta")
-    .put("JPAQL", "JPAQL")
-    .put("JQL", "JQL")
-    .put("JQUERYCSS", "JQuery-CSS")
-    .put("JS", "JavaScript")
-    .put("JS15", "JavaScript 1.5")
-    .put("JS16", "JavaScript 1.6")
-    .put("JS17", "JavaScript 1.7")
-    .put("JS18", "JavaScript 1.8")
-    .put("JSHELL", "JShellLanguage")
-    .put("JSON", "JSON")
-    .put("JSONPATH", "JSONPath")
-    .put("JSP", "JSP")
-    .put("JSPX", "JSPX")
-    .put("JSX", "JSX Harmony")
-    .put("JUPYTERPYTHON", "JupyterPython")
-    .put("JYPYTER", "Jupyter")
-    .put("LESS", "LESS")
-    .put("LINKER", "LinkerScript")
-    .put("LIQUID", "liquid")
-    .put("LLDB", "LLDB")
-    .put("LOCALE", "Locale")
-    .put("LOGCAT", "LogcatFilter")
-    .put("LOMBOK", "Lombok.Config")
-    .put("MAKEFILE", "Makefile")
-    .put("MANIFEST", "Manifest")
-    .put("MARIA", "MariaDB")
-    .put("MARKDOWN", "Markdown")
-    .put("MDX", "MDX")
-    .put("MDXJS", "MdxJS")
-    .put("METAJSON", "Metadata JSON")
-    .put("MONGO", "MongoDB")
-    .put("MONGOJS", "MongoJS")
-    .put("MONGOJSON", "MongoDB-JSON")
-    .put("MXML", "Mxml")
-    .put("MYSQL", "MySQL")
-    .put("NASHORNJS", "Nashorn JS")
-    .put("OBJECTIVEC", "ObjectiveC")
-    .put("OGNL", "OGNL")
-    .put("OSQL", "Oracle")
-    .put("OSQLP", "OracleSqlPlus")
-    .put("PBX", "pbx")
-    .put(PERL5_MARKER, PerlLanguage.INSTANCE.getID())
-    .put("PGSQL", "PostgreSQL")
-    .put("PHP", "InjectablePHP")
-    .put("PHPT", "PHPT")
-    .put("PLAN9", "plan9_x86")
-    .put("PLAY", "Play")
-    .put("PLIST", "Plist")
-    .put("POSTCSS", "PostCSS")
-    .put("PRISMA", "Prisma")
-    .put("PROPERTIES", "Properties")
-    .put("PROTOBUF", "protobuf")
-    .put("PUPPET", "Puppet")
-    .put("PYTHON", "Python")
-    .put("QML", "QML")
-    .put("QUARTO", "Quarto")
-    .put("QUTE", "Qute")
-    .put("R", "R")
-    .put("RBS", "ruby.rbs")
-    .put("RDOC", "RDOC")
-    .put("REDIS", "Redis")
-    .put("REDSHIFT", "Redshift")
-    .put("REGEXP", "RegExp")
-    .put("RELAXNG", "RELAX-NG")
-    .put("RENDERSCRIPT", "Renderscript")
-    .put("REST", "ReST")
-    .put("RMARKDOWN", "RMarkdown")
-    .put("ROOMSQL", "RoomSql")
-    .put("ROXYGEN", "Roxygen")
-    .put("RUBY", "ruby")
-    .put("SASS", "SASS")
-    .put("SCSS", "SCSS")
-    .put("SHELL", "Shell Script")
-    .put("SJS", "SvelteJS")
-    .put("SLIM", "Slim")
-    .put("SMALI", "Smali")
-    .put("SMARTY", "Smarty")
-    .put("SMARTYCONFIG", "SmartyConfig")
-    .put("SNOWFLAKE", "Snowflake")
-    .put("SPACEBARS", "Spacebars")
-    .put("SPARKSQL", "SparkSQL")
-    .put("SPEC", "Specification")
-    .put("SPEL", "SpEL")
-    .put("SPI", "SPI")
-    .put("SQL", "SQL")
-    .put("SQL92", "SQL92")
-    .put("SQLITE", "SQLite")
-    .put("STS", "SvelteTS")
-    .put("STYLUS", "Stylus")
-    .put("SVG", "SVG")
-    .put("SWIFT", "Swift")
-    .put("SYBASE", "Sybase")
-    .put("TERRAFORM", "Terraform Config")
-    .put("TEXT", "TEXT")
-    .put("TEXTMATE", "textmate")
-    .put("TOML", "TOML")
-    .put("TS", "TypeScript")
-    .put("TSJSX", "TypeScript JSX")
-    .put("TSQL", "TSQL")
-    .put("TWIG", "Twig")
-    .put("VCPKG", "VCPKG")
-    .put("VERTICA", "Vertica")
-    .put("VGO", "vgo")
-    .put("VJS", "VueJS")
-    .put("VTL", "VTL")
-    .put("VTS", "VueTS")
-    .put("WERF", "WerfYAML")
-    .put("XHTML", "XHTML")
-    .put("XIB", "XIB")
-    .put("XML", "XML")
-    .put("XPATH", "XPath")
-    .put("XPATH2", "XPath2")
-    .put("XSLT", "$XSLT")
-    .put("YAML", "yaml")
-    .put("YOUTRACK", "YouTrack")
-    .put("ZEPPELIN", "Zeppelin")
-    .build();
+  @JvmField
+  val DEFAULT_MARKERS: Map<String, String> = mapOf(
+    "ACTIONSCRIPT" to "ECMA Script Level 4",
+    "ADB" to "AndroidDataBinding",
+    "AGSL" to "AGSL",
+    "AIDL" to "AIDL",
+    "ANGULAR" to "AngularJS",
+    "ANGULAR2" to "ANGULAR2",
+    "APACHE_CONFIG" to "ApacheConfig",
+    "APPLEJS" to "Apple JS",
+    "ASP" to "Asp",
+    "ASPECT_JS" to "AspectJS",
+    "ASTRO" to "Astro",
+    "AZURE" to "AZURE",
+    "BIGQUERY" to "BigQuery",
+    "BLADE" to "Blade",
+    "CASSANDRA" to "CassandraQL",
+    "CFML" to "CFML",
+    "CGO" to "cgo",
+    "CHAMELEON" to "Chameleon",
+    "CLICKHOUSE" to "ClickHouse",
+    "CMAKE" to "CMake",
+    "CMAKE_CACHE" to "CMakeCache",
+    "COCKROACH" to "Cockroach",
+    "COFFESCRIPT" to "COFFEESCRIPT",
+    "COMMAND_LINE" to "CommandLine",
+    "COMPOSER_LOG" to "Composer Log",
+    "CONCEPT" to "Concept",
+    "COOKIE" to "Cookie",
+    "COUCHBASE" to "CouchbaseQuery",
+    "CSS" to "CSS",
+    "CSS_VALUE" to "CSS VALUE",
+    "CYTHON" to "Cython",
+    "DART" to "Dart",
+    "DART_IN_HTML" to "Dart in Html",
+    "DATALORE" to "Datalore",
+    "DATALORE_PYTHON" to "DatalorePython",
+    "DB2" to "DB2",
+    "DB2IS" to "DB2_IS",
+    "DB2ZOS" to "DB2_ZOS",
+    "DERBY" to "Derby",
+    "DEVICE_SPEC" to "DeviceSpec",
+    "DJANGO" to "Django",
+    "DOCKERFILE" to "Dockerfile",
+    "DOXYGEN" to "Doxygen",
+    "DQL" to "DQL",
+    "DROOLS" to "Drools",
+    "DTD" to "DTD",
+    "ECMA6" to "ECMAScript 6",
+    "EDITOR_CONFIG" to "EditorConfig",
+    "EJS" to "EJS",
+    "EL" to "EL",
+    "EPP" to "Embedded Puppet",
+    "ERB" to "RHTML",
+    "EXASOL" to "Exasol",
+    "FACELETS" to "Facelets",
+    "FLOWJS" to "Flow JS",
+    "FREEMARKER" to "FTL",
+    "GDB" to "GDB",
+    "GHERKIN" to "Gherkin",
+    "GO" to "go",
+    "GOBUILD" to "GoBuild",
+    "GOFUZZ" to "GoFuzzCorpus",
+    "GOTPL" to "GoTemplate",
+    "GQL" to "GQL",
+    "GREENPLUM" to "Greenplum",
+    "GROOVY" to "Groovy",
+    "GSP" to "GSP",
+    "GSQL" to "GenericSQL",
+    "GWT" to "GWT JavaScript",
+    "GWTCSS" to "GWT-CSS",
+    "H2" to "H2",
+    "HAML" to "Haml",
+    "HBL" to "Handlebars",
+    "HCL" to "HCL",
+    "HEXDUMP" to "HEXDUMP",
+    "HIL" to "HIL",
+    "HIVEQL" to "HiveQL",
+    "HJSON" to "HelmJSON",
+    "HSQLDB" to "HSQLDB",
+    "HTEXT" to "HelmTEXT",
+    "HTML" to "HTML",
+    "HTTP" to "HTTP Request",
+    "HYAML" to "HelmYAML",
+    "IGNORE" to "IgnoreLang",
+    "INI" to "Ini",
+    "JADE" to "Jade",
+    "JAVA" to "JAVA",
+    "JINJA2" to "Jinja2",
+    "JKTMETA" to "JKTMeta",
+    "JPAQL" to "JPAQL",
+    "JQL" to "JQL",
+    "JQUERYCSS" to "JQuery-CSS",
+    "JS" to "JavaScript",
+    "JS15" to "JavaScript 1.5",
+    "JS16" to "JavaScript 1.6",
+    "JS17" to "JavaScript 1.7",
+    "JS18" to "JavaScript 1.8",
+    "JSHELL" to "JShellLanguage",
+    "JSON" to "JSON",
+    "JSONPATH" to "JSONPath",
+    "JSP" to "JSP",
+    "JSPX" to "JSPX",
+    "JSX" to "JSX Harmony",
+    "JUPYTERPYTHON" to "JupyterPython",
+    "JYPYTER" to "Jupyter",
+    "LESS" to "LESS",
+    "LINKER" to "LinkerScript",
+    "LIQUID" to "liquid",
+    "LLDB" to "LLDB",
+    "LOCALE" to "Locale",
+    "LOGCAT" to "LogcatFilter",
+    "LOMBOK" to "Lombok.Config",
+    "MAKEFILE" to "Makefile",
+    "MANIFEST" to "Manifest",
+    "MARIA" to "MariaDB",
+    "MARKDOWN" to "Markdown",
+    "MDX" to "MDX",
+    "MDXJS" to "MdxJS",
+    "METAJSON" to "Metadata JSON",
+    "MONGO" to "MongoDB",
+    "MONGOJS" to "MongoJS",
+    "MONGOJSON" to "MongoDB-JSON",
+    "MXML" to "Mxml",
+    "MYSQL" to "MySQL",
+    "NASHORNJS" to "Nashorn JS",
+    "OBJECTIVEC" to "ObjectiveC",
+    "OGNL" to "OGNL",
+    "OSQL" to "Oracle",
+    "OSQLP" to "OracleSqlPlus",
+    "PBX" to "pbx",
+    PERL5_MARKER to PerlLanguage.INSTANCE.getID(),
+    "PGSQL" to "PostgreSQL",
+    "PHP" to "InjectablePHP",
+    "PHPT" to "PHPT",
+    "PLAN9" to "plan9_x86",
+    "PLAY" to "Play",
+    "PLIST" to "Plist",
+    "POSTCSS" to "PostCSS",
+    "PRISMA" to "Prisma",
+    "PROPERTIES" to "Properties",
+    "PROTOBUF" to "protobuf",
+    "PUPPET" to "Puppet",
+    "PYTHON" to "Python",
+    "QML" to "QML",
+    "QUARTO" to "Quarto",
+    "QUTE" to "Qute",
+    "R" to "R",
+    "RBS" to "ruby.rbs",
+    "RDOC" to "RDOC",
+    "REDIS" to "Redis",
+    "REDSHIFT" to "Redshift",
+    "REGEXP" to "RegExp",
+    "RELAXNG" to "RELAX-NG",
+    "RENDERSCRIPT" to "Renderscript",
+    "REST" to "ReST",
+    "RMARKDOWN" to "RMarkdown",
+    "ROOMSQL" to "RoomSql",
+    "ROXYGEN" to "Roxygen",
+    "RUBY" to "ruby",
+    "SASS" to "SASS",
+    "SCSS" to "SCSS",
+    "SHELL" to "Shell Script",
+    "SJS" to "SvelteJS",
+    "SLIM" to "Slim",
+    "SMALI" to "Smali",
+    "SMARTY" to "Smarty",
+    "SMARTYCONFIG" to "SmartyConfig",
+    "SNOWFLAKE" to "Snowflake",
+    "SPACEBARS" to "Spacebars",
+    "SPARKSQL" to "SparkSQL",
+    "SPEC" to "Specification",
+    "SPEL" to "SpEL",
+    "SPI" to "SPI",
+    "SQL" to "SQL",
+    "SQL92" to "SQL92",
+    "SQLITE" to "SQLite",
+    "STS" to "SvelteTS",
+    "STYLUS" to "Stylus",
+    "SVG" to "SVG",
+    "SWIFT" to "Swift",
+    "SYBASE" to "Sybase",
+    "TERRAFORM" to "Terraform Config",
+    "TEXT" to "TEXT",
+    "TEXTMATE" to "textmate",
+    "TOML" to "TOML",
+    "TS" to "TypeScript",
+    "TSJSX" to "TypeScript JSX",
+    "TSQL" to "TSQL",
+    "TWIG" to "Twig",
+    "VCPKG" to "VCPKG",
+    "VERTICA" to "Vertica",
+    "VGO" to "vgo",
+    "VJS" to "VueJS",
+    "VTL" to "VTL",
+    "VTS" to "VueTS",
+    "WERF" to "WerfYAML",
+    "XHTML" to "XHTML",
+    "XIB" to "XIB",
+    "XML" to "XML",
+    "XPATH" to "XPath",
+    "XPATH2" to "XPath2",
+    "XSLT" to "\$XSLT",
+    "YAML" to "yaml",
+    "YOUTRACK" to "YouTrack",
+    "ZEPPELIN" to "Zeppelin"
+  )
 }

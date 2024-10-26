@@ -25,7 +25,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.xml.XmlTokenType;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProvider;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
@@ -36,13 +35,12 @@ import java.util.Map;
 
 
 public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2ElementTypes, XmlTokenType, PerlElementTypes {
-  private static final Map<String, String> SIMPLE_COMPLETION_MAP = ContainerUtil.<String, String>immutableMapBuilder()
-    .put(KEYWORD_DOC_OPENER_UNCLOSED, KEYWORD_DOC_CLOSER)
-    .put(KEYWORD_CLASS_OPENER_UNCLOSED, KEYWORD_CLASS_CLOSER)
-    .put(KEYWORD_INIT_OPENER_UNCLOSED, KEYWORD_INIT_CLOSER)
-    .put(KEYWORD_PERL_OPENER_UNCLOSED, KEYWORD_PERL_CLOSER)
-    .put(KEYWORD_TEXT_OPENER_UNCLOSED, KEYWORD_TEXT_CLOSER)
-    .build();
+  private static final Map<String, String> SIMPLE_COMPLETION_MAP = Map.of(
+    KEYWORD_DOC_OPENER_UNCLOSED, KEYWORD_DOC_CLOSER,
+    KEYWORD_CLASS_OPENER_UNCLOSED, KEYWORD_CLASS_CLOSER,
+    KEYWORD_INIT_OPENER_UNCLOSED, KEYWORD_INIT_CLOSER,
+    KEYWORD_PERL_OPENER_UNCLOSED, KEYWORD_PERL_CLOSER,
+    KEYWORD_TEXT_OPENER_UNCLOSED, KEYWORD_TEXT_CLOSER);
 
   @Override
   public @NotNull Result charTyped(char c, final @NotNull Project project, final @NotNull Editor editor, @NotNull PsiFile file) {
