@@ -133,28 +133,26 @@ public class MojoProjectManager implements Disposable {
     if (!myUpdatingModel.getAndSet(true)) {
       try {
         //noinspection deprecation
-        ReadAction.nonBlocking(() -> {
+        var isFinished = ReadAction.nonBlocking(() -> {
           if (myProject.isDisposed()) {
             LOG.warn("Project is disposed");
-            return;
+            return true;
           }
           if (DumbService.getInstance(myProject).isDumb()) {
             LOG.debug("Dumb mode, rescheduling");
             scheduleUpdate();
+            return false;
           }
           else {
-            try {
-              LOG.debug("Performing model update");
-              doUpdateModel();
-            }
-            finally {
-              if (myTestSemaphore != null) {
-                myTestSemaphore.up();
-                myTestSemaphore = null;
-              }
-            }
+            LOG.debug("Performing model update");
+            doUpdateModel();
+            return true;
           }
         }).executeSynchronously();
+        if (myTestSemaphore != null && isFinished) {
+          myTestSemaphore.up();
+          myTestSemaphore = null;
+        }
       }
       catch (ProcessCanceledException e) {
         LOG.debug("Update was cancelled, rescheduling");
@@ -293,12 +291,7 @@ public class MojoProjectManager implements Disposable {
   public BooleanSupplier updateInTestMode() {
     var semaphore = new Semaphore(1);
     myTestSemaphore = semaphore;
-    try {
-      updateModel();
-      return semaphore::isUp;
-    }
-    finally {
-      myTestSemaphore = null;
-    }
+    updateModel();
+    return semaphore::isUp;
   }
 }
