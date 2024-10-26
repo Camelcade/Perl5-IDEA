@@ -86,7 +86,7 @@ public class PerlUnreachableCodeInspection extends PerlInspection {
           return;
         }
         var elementRange = element.getTextRange();
-        if (elementRange.isEmpty()) {
+        if (elementRange == null || elementRange.isEmpty()) {
           return;
         }
         var rangesIterator = reachableRanges.iterator();
