@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.intentions;
 
 import com.intellij.codeInsight.intention.FileModifier;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
@@ -39,6 +40,11 @@ public class StringToHeredocIntention extends StringToLastHeredocIntention {
   public @Nullable FileModifier getFileModifierForPreview(@NotNull PsiFile target) {
     return new StringToHeredocIntention() {
       @Override
+      public boolean startInWriteAction() {
+        return true;
+      }
+
+      @Override
       public void invoke(@NotNull Project project, Editor editor, @NotNull PsiElement element) throws IncorrectOperationException {
         var oldMarker = ourMarker;
         try {
@@ -50,6 +56,16 @@ public class StringToHeredocIntention extends StringToLastHeredocIntention {
         }
       }
     };
+  }
+
+  @Override
+  public boolean startInWriteAction() {
+    return false;
+  }
+
+  @Override
+  public @Nullable PsiElement getElementToMakeWritable(@NotNull PsiFile currentFile) {
+    return currentFile;
   }
 
   @Override
@@ -70,7 +86,7 @@ public class StringToHeredocIntention extends StringToLastHeredocIntention {
       return;
     }
     ourMarker = markerText;
-    doInvoke(project, editor, element);
+    WriteAction.run(() -> doInvoke(project, editor, element));
   }
 
   @Override
