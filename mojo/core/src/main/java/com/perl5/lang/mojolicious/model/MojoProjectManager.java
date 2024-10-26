@@ -182,20 +182,18 @@ public class MojoProjectManager implements Disposable {
       return;
     }
 
-    if (LOG.isDebugEnabled()) {
-      LOG.debug("Current projects: " + newProjects);
-      LOG.debug("Old projects: " + newProjects);
-    }
+    LOG.debug("Current projects: ", newProjects);
+    LOG.debug("Old projects: ", oldProjects);
     MojoProjectListener projectListener = myProject.getMessageBus().syncPublisher(MOJO_PROJECT_TOPIC);
     Collection<MojoProject> removedProjects = ContainerUtil.subtract(oldProjects, newProjects);
-    if (LOG.isDebugEnabled() && !removedProjects.isEmpty()) {
-      LOG.debug("Projects removed: " + removedProjects);
+    if (!removedProjects.isEmpty()) {
+      LOG.debug("Projects removed: ", removedProjects);
     }
     removedProjects.forEach(projectListener::projectDeleted);
     myModel = new Model(newProjects);
     Collection<MojoProject> createdProjects = ContainerUtil.subtract(newProjects, oldProjects);
-    if (LOG.isDebugEnabled() && !createdProjects.isEmpty()) {
-      LOG.debug("Projects created: " + createdProjects);
+    if (!createdProjects.isEmpty()) {
+      LOG.debug("Projects created: ", createdProjects);
     }
     createdProjects.forEach(projectListener::projectCreated);
     LOG.debug("Model updated");
@@ -295,7 +293,12 @@ public class MojoProjectManager implements Disposable {
   public BooleanSupplier updateInTestMode() {
     var semaphore = new Semaphore(1);
     myTestSemaphore = semaphore;
-    updateModel();
-    return semaphore::isUp;
+    try {
+      updateModel();
+      return semaphore::isUp;
+    }
+    finally {
+      myTestSemaphore = null;
+    }
   }
 }
