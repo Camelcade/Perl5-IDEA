@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ internal class PerlStartMarker(delegate: PsiBuilder.Marker, perlDebugBuilder: Pe
     LOG.assertTrue(delegate is PsiBuilderImpl.StartMarker, "Expected start marker, got " + delegate.javaClass)
   }
 
-  public override fun clean() {
+  override fun clean() {
     myDelegate.clean()
   }
 
@@ -53,11 +53,11 @@ internal class PerlStartMarker(delegate: PsiBuilder.Marker, perlDebugBuilder: Pe
     return myDelegate.endIndex
   }
 
-  public override fun setLexemeIndex(lexemeIndex: Int, done: Boolean) {
+  override fun setLexemeIndex(lexemeIndex: Int, done: Boolean) {
     myDelegate.setLexemeIndex(lexemeIndex, done)
   }
 
-  public override fun getLexemeIndex(done: Boolean): Int {
+  override fun getLexemeIndex(done: Boolean): Int {
     return myDelegate.getLexemeIndex(done)
   }
 
