@@ -20,9 +20,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
 class Dancer2PackageProcessor : DancerPackageProcessor() {
-  private val myExportDescriptors: ImmutableList<PerlExportDescriptor> by lazy {
+  override protected val myExportDescriptors: ImmutableList<PerlExportDescriptor> by lazy {
     PerlDancer2DSL.DSL_KEYWORDS.map { PerlExportDescriptor.create("Dancer2::Core::DSL", it) }.toImmutableList()
   }
-
-  override fun getExportDescriptors(): List<PerlExportDescriptor> = myExportDescriptors
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,33 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.packageprocessor.impl
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
+import com.perl5.lang.perl.extensions.packageprocessor.PerlUtfProvider
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlUtfProvider;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class DancerPackageProcessor extends BaseStrictWarningsProvidingProcessor implements PerlUtfProvider {
-  private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<>();
-
-  static {
-    for (String keyword : PerlDancerDSL.DSL_KEYWORDS) {
-      EXPORT_DESCRIPTORS.add(PerlExportDescriptor.create("Dancer", keyword));
-    }
+open class DancerPackageProcessor : BaseStrictWarningsProvidingProcessor(), PerlUtfProvider {
+  open protected val myExportDescriptors: ImmutableList<PerlExportDescriptor> by lazy {
+    PerlDancerDSL.DSL_KEYWORDS.map { PerlExportDescriptor.create("Dancer", it) }.toImmutableList()
   }
 
-  @Override
-  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    return getExportDescriptors();
-  }
-
-  public List<PerlExportDescriptor> getExportDescriptors() {
-    return EXPORT_DESCRIPTORS;
-  }
+  override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> = myExportDescriptors
 }
