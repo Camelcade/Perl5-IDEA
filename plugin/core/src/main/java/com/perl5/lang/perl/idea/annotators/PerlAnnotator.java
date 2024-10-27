@@ -21,6 +21,7 @@ import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
@@ -38,7 +39,6 @@ import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -46,14 +46,14 @@ import java.util.function.Consumer;
 import static com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter.*;
 
 public class PerlAnnotator extends PerlBaseAnnotator {
-  private static final Map<Class<? extends PerlVariable>, TextAttributesKey> VARIABLE_KEYS_MAP = new HashMap<>();
-
-  static {
-    VARIABLE_KEYS_MAP.put(PsiPerlScalarVariableImpl.class, PERL_SCALAR_BUILTIN);
-    VARIABLE_KEYS_MAP.put(PsiPerlArrayIndexVariableImpl.class, PERL_SCALAR_BUILTIN);
-    VARIABLE_KEYS_MAP.put(PsiPerlHashVariableImpl.class, PERL_HASH_BUILTIN);
-    VARIABLE_KEYS_MAP.put(PsiPerlArrayVariableImpl.class, PERL_ARRAY_BUILTIN);
-  }
+  private static final NotNullLazyValue<Map<Class<? extends PerlVariable>, TextAttributesKey>> VARIABLE_KEYS_MAP =
+    NotNullLazyValue.createValue(
+      () -> Map.of(
+        PsiPerlScalarVariableImpl.class, PERL_SCALAR_BUILTIN,
+        PsiPerlArrayIndexVariableImpl.class, PERL_SCALAR_BUILTIN,
+        PsiPerlHashVariableImpl.class, PERL_HASH_BUILTIN,
+        PsiPerlArrayVariableImpl.class, PERL_ARRAY_BUILTIN)
+    );
 
   @Override
   public void annotate(final @NotNull PsiElement element, @NotNull AnnotationHolder holder) {
@@ -68,7 +68,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
       defaultSilentProducer.accept(PERL_GLOB_BUILTIN);
     }
     else if (element instanceof PerlVariable perlVariable && perlVariable.isBuiltIn()) {
-      defaultSilentProducer.accept(VARIABLE_KEYS_MAP.get(element.getClass()));
+      defaultSilentProducer.accept(VARIABLE_KEYS_MAP.get().get(element.getClass()));
     }
     else if (elementType == LABEL_DECLARATION || elementType == LABEL_EXPR) {
       createInfoAnnotation(holder, element.getFirstChild(), null, PerlSyntaxHighlighter.PERL_LABEL);
