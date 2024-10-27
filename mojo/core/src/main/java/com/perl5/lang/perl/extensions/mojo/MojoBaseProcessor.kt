@@ -13,79 +13,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.mojo
 
-package com.perl5.lang.perl.extensions.mojo;
+import com.perl5.lang.perl.extensions.packageprocessor.*
+import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
 
-import com.perl5.lang.perl.extensions.packageprocessor.*;
-import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
+private const val MOJO_BASE: String = "Mojo::Base"
+private const val IO_HANDLE: String = "IO::Handle"
 
-import java.util.*;
+class MojoBaseProcessor : BaseStrictWarningsProvidingProcessor(), PerlUtfProvider, PerlFeaturesProvider, PerlPackageOptionsProvider,
+                          PerlPackageParentsProvider, PerlPackageLoader {
 
-
-public class MojoBaseProcessor extends BaseStrictWarningsProvidingProcessor implements
-                                                                            PerlUtfProvider,
-                                                                            PerlFeaturesProvider,
-                                                                            PerlPackageOptionsProvider,
-                                                                            PerlPackageParentsProvider,
-                                                                            PerlPackageLoader {
-  public static final String MOJO_BASE = "Mojo::Base";
-  public static final String IO_HANDLE = "IO::Handle";
-
-  protected static final Map<String, String> OPTIONS = new HashMap<>();
-
-  static {
-    OPTIONS.put("-strict", "strict,warnings,utf8,v5.10,IO::Handle");
-    OPTIONS.put("-base", "strict,warnings,utf8,v5.10,IO::Handle,acts as parent");
+  protected val OPTIONS: Map<String, String> by lazy {
+    mapOf(
+      "-strict" to "strict,warnings,utf8,v5.10,IO::Handle",
+      "-base" to "strict,warnings,utf8,v5.10,IO::Handle,acts as parent"
+    )
   }
 
-  @Override
-  public @NotNull List<String> getLoadedPackageNames(PerlUseStatementElement useStatement) {
-    List<String> loadedPackages = new ArrayList<>(Collections.singletonList(IO_HANDLE));
-    List<String> allOptions = useStatement.getImportParameters();
+  override fun getLoadedPackageNames(useStatement: PerlUseStatementElement): MutableList<String> {
+    val loadedPackages: MutableList<String> = mutableListOf(IO_HANDLE)
+    val allOptions = useStatement.getImportParameters() ?: return loadedPackages
 
-    if (allOptions != null) {
-      allOptions.removeAll(getOptions().keySet());
+    allOptions -= getOptions().keys
 
-      if (!allOptions.isEmpty() && !MOJO_BASE.equals(allOptions.getFirst())) {
-        loadedPackages.add(allOptions.getFirst());
-      }
+    if (allOptions.isNotEmpty() && MOJO_BASE != allOptions.first()) {
+      loadedPackages += allOptions.first()
     }
 
-    return loadedPackages;
+    return loadedPackages
   }
 
-  @Override
-  public @NotNull Map<String, String> getOptions() {
-    return OPTIONS;
-  }
+  override fun getOptions(): Map<String, String> = OPTIONS
 
-  @Override
-  public @NotNull Map<String, String> getOptionsBundles() {
-    return Collections.emptyMap();
-  }
+  override fun getOptionsBundles(): Map<String, String> = emptyMap()
 
-  @Override
-  public void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<? super String> currentList) {
-    List<String> allOptions = useStatement.getImportParameters();
+  override fun changeParentsList(useStatement: PerlUseStatementElement, currentList: MutableList<in String>) {
+    val allOptions = useStatement.getImportParameters() ?: return
 
-    if (allOptions != null) {
-      if (allOptions.contains("-base")) {
-        currentList.add(MOJO_BASE);
-      }
-      else {
-        allOptions.removeAll(getOptions().keySet());
-        if (!allOptions.isEmpty()) {
-          currentList.add(allOptions.getFirst());
-        }
+    if ("-base" in allOptions) {
+      currentList += MOJO_BASE
+    }
+    else {
+      allOptions -= getOptions().keys
+      if (!allOptions.isEmpty()) {
+        currentList += allOptions.first()
       }
     }
   }
 
-
-  @Override
-  public boolean hasPackageFilesOptions() {
-    return true;
-  }
+  override fun hasPackageFilesOptions(): Boolean = true
 }
