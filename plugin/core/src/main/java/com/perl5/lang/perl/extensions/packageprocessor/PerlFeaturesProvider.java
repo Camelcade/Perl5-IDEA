@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,17 +18,23 @@ package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Marks a package processor that it can modify %^H (see use feature)
  */
 public interface PerlFeaturesProvider {
   /**
-   * Modifies outer block's features table
+   * Modifies outer block's features table.
    *
    * @param useStatement         use statement reference
    * @param currentFeaturesTable features table of outer block
    * @return new features table
+   * @implNote this is a stub for future use
    */
-  PerlFeaturesTable getFeaturesTable(PerlUseStatementElement useStatement, PerlFeaturesTable currentFeaturesTable);
+  @SuppressWarnings("unused")
+  default @NotNull PerlFeaturesTable getFeaturesTable(@NotNull PerlUseStatementElement useStatement,
+                                                      @NotNull PerlFeaturesTable currentFeaturesTable) {
+    return currentFeaturesTable.clone();
+  }
 }

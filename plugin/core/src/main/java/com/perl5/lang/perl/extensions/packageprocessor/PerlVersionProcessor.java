@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
@@ -49,12 +48,6 @@ public final class PerlVersionProcessor implements PerlPackageProcessor, PerlFea
   @Override
   public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
     return Collections.emptyList();
-  }
-
-  @Override
-  public PerlFeaturesTable getFeaturesTable(PerlUseStatementElement useStatement, PerlFeaturesTable currentFeaturesTable) {
-    // fixme implement modification
-    return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
   }
 
   public static PerlVersionProcessor getInstance() {
