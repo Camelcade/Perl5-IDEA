@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,32 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.role.tiny
 
-package com.perl5.lang.perl.extensions.role.tiny;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
+import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor
+import com.perl5.lang.perl.parser.moose.MooseSyntax.*
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
+import kotlinx.collections.immutable.toImmutableList
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static com.perl5.lang.perl.parser.moose.MooseSyntax.*;
-
-public class RoleTinyProcessor extends BaseStrictWarningsProvidingProcessor {
-  static final List<PerlExportDescriptor> EXPORTS;
-
-  static {
-    List<PerlExportDescriptor> exports = new ArrayList<>();
-    Arrays.asList(MOOSE_KEYWORD_AFTER, MOOSE_KEYWORD_AROUND, MOOSE_KEYWORD_BEFORE, MOOSE_KEYWORD_REQUIRES, MOOSE_KEYWORD_WITH).forEach(
-      it -> exports.add(PerlExportDescriptor.create("Role::Tiny", it)));
-    EXPORTS = List.copyOf(exports);
+class RoleTinyProcessor : BaseStrictWarningsProvidingProcessor() {
+  private val myExports: List<PerlExportDescriptor> by lazy {
+    listOf(
+      MOOSE_KEYWORD_AFTER,
+      MOOSE_KEYWORD_AROUND,
+      MOOSE_KEYWORD_BEFORE,
+      MOOSE_KEYWORD_REQUIRES,
+      MOOSE_KEYWORD_WITH
+    ).map { keyword -> PerlExportDescriptor.create("Role::Tiny", keyword) }
+      .toImmutableList()
   }
 
-  @Override
-  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    return EXPORTS;
-  }
+  override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> = myExports
+
 }
