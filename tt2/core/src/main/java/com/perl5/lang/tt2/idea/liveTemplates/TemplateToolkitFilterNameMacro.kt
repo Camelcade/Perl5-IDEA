@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,61 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.tt2.idea.liveTemplates
 
-package com.perl5.lang.tt2.idea.liveTemplates;
+import com.intellij.codeInsight.lookup.LookupElement
+import com.intellij.codeInsight.lookup.LookupElementBuilder
+import com.intellij.codeInsight.template.Expression
+import com.intellij.codeInsight.template.ExpressionContext
+import com.intellij.codeInsight.template.Macro
+import com.intellij.codeInsight.template.Result
+import com.intellij.util.containers.toArray
+import com.perl5.lang.tt2.TemplateToolkitFilterNames
+import com.perl5.lang.tt2.idea.liveTemplates.LookupElements.LOOKUP_ELEMENTS
 
-import com.intellij.codeInsight.lookup.LookupElement;
-import com.intellij.codeInsight.lookup.LookupElementBuilder;
-import com.intellij.codeInsight.template.Expression;
-import com.intellij.codeInsight.template.ExpressionContext;
-import com.intellij.codeInsight.template.Macro;
-import com.intellij.codeInsight.template.Result;
-import com.perl5.lang.tt2.TemplateToolkitFilterNames;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class TemplateToolkitFilterNameMacro extends Macro implements TemplateToolkitFilterNames {
-  public static final LookupElement[] LOOKUP_ELEMENTS;
-
-  static {
-    List<LookupElement> list = new ArrayList<>();
-    for (String filterName : FILTER_NAMES) {
-      list.add(LookupElementBuilder.create(filterName));
-    }
-    LOOKUP_ELEMENTS = list.toArray(LookupElement.EMPTY_ARRAY);
+object LookupElements {
+  @JvmStatic
+  val LOOKUP_ELEMENTS: Array<LookupElement> by lazy {
+    TemplateToolkitFilterNames.FILTER_NAMES.map { LookupElementBuilder.create(it) }.toArray(LookupElement.EMPTY_ARRAY)
   }
+}
 
-  @Override
-  public String getName() {
-    return "tt2FilterName";
-  }
+class TemplateToolkitFilterNameMacro : Macro(), TemplateToolkitFilterNames {
 
-  @Override
-  public String getPresentableName() {
-    return "tt2FilterName()";
-  }
+  override fun getName(): String = "tt2FilterName"
 
-  @Override
-  public @NotNull String getDefaultValue() {
-    return "filtername";
-  }
+  override fun getPresentableName(): String = "tt2FilterName()"
 
-  @Override
-  public @Nullable Result calculateResult(@NotNull Expression[] params, ExpressionContext context) {
-    return null;
-  }
+  override fun getDefaultValue(): String = "filtername"
 
-  @Override
-  public @Nullable Result calculateQuickResult(@NotNull Expression[] params, ExpressionContext context) {
-    return calculateResult(params, context);
-  }
+  override fun calculateResult(params: Array<Expression>, context: ExpressionContext?): Result? = null
 
-  @Override
-  public @Nullable LookupElement[] calculateLookupItems(@NotNull Expression[] params, ExpressionContext context) {
-    return LOOKUP_ELEMENTS;
-  }
+  override fun calculateQuickResult(params: Array<Expression>, context: ExpressionContext?): Result? = calculateResult(params, context)
+
+  override fun calculateLookupItems(params: Array<Expression>, context: ExpressionContext?): Array<LookupElement> = LOOKUP_ELEMENTS
 }
