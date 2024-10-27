@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,60 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.moo
 
-package com.perl5.lang.perl.extensions.moo;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageLoader
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider
+import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor
+import com.perl5.lang.perl.parser.moose.MooseSyntax.*
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
+import com.perl5.lang.perl.util.PerlPackageUtil
+import kotlinx.collections.immutable.PersistentList
+import kotlinx.collections.immutable.persistentListOf
+import kotlinx.collections.immutable.toImmutableList
+import org.jetbrains.annotations.NonNls
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageLoader;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
+class MooProcessor : BaseStrictWarningsProvidingProcessor(), PerlPackageParentsProvider, PerlPackageLoader {
+  private val mooObject: @NonNls String = PerlPackageUtil.join(PerlPackageUtil.PACKAGE_MOO, "Object")
+  private val loadedClasses: PersistentList<String> = persistentListOf(mooObject)
+  private val parentClasses: PersistentList<String> = loadedClasses
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import static com.perl5.lang.perl.parser.moose.MooseSyntax.*;
-
-
-public class MooProcessor extends BaseStrictWarningsProvidingProcessor implements PerlPackageParentsProvider,
-                                                                                  PerlPackageLoader {
-  public static final @NonNls String MOO_OBJECT = PerlPackageUtil.PACKAGE_MOO + PerlPackageUtil.NAMESPACE_SEPARATOR + "Object";
-  protected static final List<String> LOADED_CLASSES = Collections.singletonList(MOO_OBJECT);
-  protected static final List<String> PARENT_CLASSES = LOADED_CLASSES;
-
-  static final List<PerlExportDescriptor> EXPORTS;
-
-  static {
-    List<PerlExportDescriptor> exports = new ArrayList<>();
-    Arrays.asList(
-      MOOSE_KEYWORD_AFTER, MOOSE_KEYWORD_AROUND, MOOSE_KEYWORD_BEFORE, MOOSE_KEYWORD_EXTENDS, MOOSE_KEYWORD_HAS, MOOSE_KEYWORD_WITH
-    ).forEach(it -> exports.add(PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOO, it)));
-    EXPORTS = List.copyOf(exports);
+  private val myExports: List<PerlExportDescriptor> by lazy {
+    listOf(
+      MOOSE_KEYWORD_AFTER,
+      MOOSE_KEYWORD_AROUND,
+      MOOSE_KEYWORD_BEFORE,
+      MOOSE_KEYWORD_EXTENDS,
+      MOOSE_KEYWORD_HAS,
+      MOOSE_KEYWORD_WITH
+    ).map { keyword -> PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOO, keyword) }
+      .toImmutableList()
   }
 
-  @Override
-  public @NotNull List<String> getLoadedPackageNames(PerlUseStatementElement useStatement) {
-    return LOADED_CLASSES;
+  override fun getLoadedPackageNames(useStatement: PerlUseStatementElement?): List<String> = loadedClasses
+
+  override fun changeParentsList(useStatement: PerlUseStatementElement, currentList: MutableList<in String>) {
+    currentList.apply {
+      clear()
+      addAll(parentClasses)
+    }
   }
 
-  @Override
-  public void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<? super String> currentList) {
-    currentList.clear();
-    currentList.addAll(PARENT_CLASSES);
-  }
+  override fun hasPackageFilesOptions(): Boolean = false
 
-  @Override
-  public boolean hasPackageFilesOptions() {
-    return false;
-  }
-
-  @Override
-  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    return EXPORTS;
-  }
+  override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> = myExports
 }
