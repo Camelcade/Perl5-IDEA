@@ -34,7 +34,7 @@ class MojoBaseProcessor : BaseStrictWarningsProvidingProcessor(), PerlUtfProvide
 
   override fun getLoadedPackageNames(useStatement: PerlUseStatementElement): MutableList<String> {
     val loadedPackages: MutableList<String> = mutableListOf(IO_HANDLE)
-    val allOptions = useStatement.getImportParameters() ?: return loadedPackages
+    val allOptions = useStatement.importParameters ?: return loadedPackages
 
     allOptions -= getOptions().keys
 
@@ -50,7 +50,7 @@ class MojoBaseProcessor : BaseStrictWarningsProvidingProcessor(), PerlUtfProvide
   override fun getOptionsBundles(): Map<String, String> = emptyMap()
 
   override fun changeParentsList(useStatement: PerlUseStatementElement, currentList: MutableList<in String>) {
-    val allOptions = useStatement.getImportParameters() ?: return
+    val allOptions = useStatement.importParameters ?: return
 
     if ("-base" in allOptions) {
       currentList += MOJO_BASE
