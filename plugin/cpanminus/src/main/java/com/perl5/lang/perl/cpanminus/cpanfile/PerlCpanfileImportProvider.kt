@@ -13,53 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.cpanminus.cpanfile
 
-package com.perl5.lang.perl.cpanminus.cpanfile;
+import com.intellij.psi.PsiFile
+import com.perl5.lang.perl.extensions.imports.PerlImportsProvider
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement
+import kotlinx.collections.immutable.toImmutableList
 
-import com.intellij.psi.PsiFile;
-import com.perl5.lang.perl.extensions.imports.PerlImportsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+private const val NAMESPACE = "Module::CPANfile::Environment"
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+class PerlCpanfileImportProvider : PerlImportsProvider {
 
-public class PerlCpanfileImportProvider implements PerlImportsProvider {
-  private static final String NAMESPACE = "Module::CPANfile::Environment";
-  private static final List<String> BINDINGS = Arrays.asList(
-    "on",
-    "requires",
-    "recommends",
-    "suggests",
-    "conflicts",
-    "feature",
-    "osname",
-    "mirror",
-    "configure_requires",
-    "build_requires",
-    "test_requires",
-    "author_requires"
-  );
-
-  private static final List<PerlExportDescriptor> DESCRIPTORS = new ArrayList<>();
-
-  static {
-    BINDINGS.forEach(name -> DESCRIPTORS.add(PerlExportDescriptor.create(NAMESPACE, name)));
+  private val myDescriptors: List<PerlExportDescriptor> by lazy {
+    listOf(
+      "on",
+      "requires",
+      "recommends",
+      "suggests",
+      "conflicts",
+      "feature",
+      "osname",
+      "mirror",
+      "configure_requires",
+      "build_requires",
+      "test_requires",
+      "author_requires"
+    ).map { name -> PerlExportDescriptor.create(NAMESPACE, name) }
+      .toImmutableList()
   }
 
-  @Override
-  public @NotNull List<PerlExportDescriptor> getExportDescriptors(PerlNamespaceDefinitionElement namespaceElement) {
-    return DESCRIPTORS;
-  }
+  override fun getExportDescriptors(namespaceElement: PerlNamespaceDefinitionElement): List<PerlExportDescriptor> = myDescriptors
 
-  @Override
-  public boolean isApplicable(@Nullable PerlNamespaceDefinitionElement namespaceDefinitionElement) {
-    if (!(namespaceDefinitionElement instanceof PsiFile psiFile)) {
-      return false;
-    }
-    return psiFile.getOriginalFile().getFileType() == PerlFileTypeCpanfile.INSTANCE;
-  }
+  override fun isApplicable(namespaceDefinitionElement: PerlNamespaceDefinitionElement?): Boolean =
+    (namespaceDefinitionElement as? PsiFile)?.getOriginalFile()?.getFileType() === PerlFileTypeCpanfile.INSTANCE
 }
