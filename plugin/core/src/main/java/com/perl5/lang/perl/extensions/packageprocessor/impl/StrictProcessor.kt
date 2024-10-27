@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,40 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.packageprocessor.impl
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-
-
-public class StrictProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider {
-  protected static final Map<String, String> OPTIONS = new HashMap<>();
-
-  static {
-    OPTIONS.put("vars", "generates a compile-time error if you access a variable that was neither explicitly declared");
-    OPTIONS.put("refs", "generates a runtime error if you use symbolic references");
-    OPTIONS.put("subs", "generates a compile-time error if you try to use a bareword identifier that's not a subroutine");
+class StrictProcessor : PerlPragmaProcessorBase(), PerlPackageOptionsProvider {
+  private val myOptions: Map<String, String> by lazy {
+    mapOf(
+      "vars" to "generates a compile-time error if you access a variable that was neither explicitly declared",
+      "refs" to "generates a runtime error if you use symbolic references",
+      "subs" to "generates a compile-time error if you try to use a bareword identifier that's not a subroutine"
+    )
   }
 
-  @Override
-  public @NotNull Map<String, String> getOptions() {
-    return OPTIONS;
-  }
+  override fun getOptions(): Map<String, String> = myOptions
 
-  @Override
-  public @NotNull Map<String, String> getOptionsBundles() {
-    return Collections.emptyMap();
-  }
+  override fun getOptionsBundles(): Map<String, String> = emptyMap()
 
-  @Override
-  public boolean isStrictEnabled(@NotNull PerlUseStatementElement useStatement) {
-    return true;
-  }
+  override fun isStrictEnabled(useStatement: PerlUseStatementElement): Boolean = true
 }
