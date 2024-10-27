@@ -26,12 +26,11 @@ class ListMoreUtilsProcessor : PerlPackageProcessorBase() {
   }
 
   override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> =
-    useStatement.getImportParameters()?.let { parameters ->
-      parameters.distinct()
-        .map { parameter -> EXPORT_OK_DESCRIPTORS.get(parameter) }
-        .filterNotNull()
-        .toImmutableList()
-    } ?: emptyList()
+    useStatement.importParameters
+      ?.distinct()
+      ?.map { parameter -> EXPORT_OK_DESCRIPTORS.get(parameter) }
+      ?.filterNotNull()?.toImmutableList()
+      ?: emptyList()
 
   override fun addExports(
     useStatement: PerlUseStatementElement,
