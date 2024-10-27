@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -109,7 +109,7 @@ class PerlDockerFileTransfer extends PerlHostFileTransfer<PerlDockerData> {
   }
 
   @Override
-  public @NotNull List<VirtualFile> listFiles(@NotNull String remotePath) throws IOException {
+  public @NotNull List<VirtualFile> listFiles(@NotNull String remotePath) {
     VirtualFile root = new PerlDockerFileSystem(this).refreshAndFindFileByPath(remotePath);
     return root == null ? Collections.emptyList() : Collections.unmodifiableList(Arrays.asList(root.getChildren()));
   }

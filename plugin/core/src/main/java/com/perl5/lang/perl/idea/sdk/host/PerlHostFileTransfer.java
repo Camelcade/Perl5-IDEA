@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -171,7 +171,7 @@ public abstract class PerlHostFileTransfer<HostData extends PerlHostData<?, ?>> 
    * @implNote we need this method to optimize working with docker and/or ssh. Using virtual file system may cause additional container
    * start or additional connection created.
    */
-  public abstract @NotNull List<VirtualFile> listFiles(@NotNull String remotePath) throws IOException;
+  public abstract @NotNull List<VirtualFile> listFiles(@NotNull String remotePath);
 
   /**
    * synchronizes {@code remotePath} with local cache
