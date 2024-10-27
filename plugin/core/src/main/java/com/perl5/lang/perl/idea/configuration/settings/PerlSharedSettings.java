@@ -49,7 +49,6 @@ import static com.perl5.lang.perl.util.PerlUtil.mutableList;
   storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE)
 
 )
-
 public final class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings> {
   public List<String> selfNames = mutableList(DEFAULT_SELF_NAME, "this", "class", "proto");
 
@@ -77,6 +76,7 @@ public final class PerlSharedSettings implements PersistentStateComponent<PerlSh
   @Transient
   private final Project myProject;
 
+  @SuppressWarnings("unused")
   private PerlSharedSettings() {
     this(null);
   }
@@ -126,7 +126,7 @@ public final class PerlSharedSettings implements PersistentStateComponent<PerlSh
   }
 
   @Contract("null->false")
-  public final boolean isStrictProvider(@Nullable String packageName) {
+  public boolean isStrictProvider(@Nullable String packageName) {
     return packageName != null && myStrictProvidersSet.getValue().contains(packageName);
   }
 
@@ -137,7 +137,7 @@ public final class PerlSharedSettings implements PersistentStateComponent<PerlSh
   }
 
   @Contract("null->false")
-  public final boolean isWarningsProvider(@Nullable String packageName) {
+  public boolean isWarningsProvider(@Nullable String packageName) {
     return packageName != null && myWarningsProvidersSet.getValue().contains(packageName);
   }
 
