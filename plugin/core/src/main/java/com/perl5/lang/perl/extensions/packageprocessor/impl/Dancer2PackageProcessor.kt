@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.packageprocessor.impl
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
+import kotlinx.collections.immutable.ImmutableList
+import kotlinx.collections.immutable.toImmutableList
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-
-import java.util.ArrayList;
-import java.util.List;
-
-
-public class Dancer2PackageProcessor extends DancerPackageProcessor {
-  private static final List<PerlExportDescriptor> EXPORT_DESCRIPTORS = new ArrayList<>();
-
-  static {
-    for (String keyword : PerlDancer2DSL.DSL_KEYWORDS) {
-      EXPORT_DESCRIPTORS.add(PerlExportDescriptor.create("Dancer2::Core::DSL", keyword));
-    }
+class Dancer2PackageProcessor : DancerPackageProcessor() {
+  private val myExportDescriptors: ImmutableList<PerlExportDescriptor> by lazy {
+    PerlDancer2DSL.DSL_KEYWORDS.map { PerlExportDescriptor.create("Dancer2::Core::DSL", it) }.toImmutableList()
   }
 
-  @Override
-  public List<PerlExportDescriptor> getExportDescriptors() {
-    return EXPORT_DESCRIPTORS;
-  }
+  override fun getExportDescriptors(): List<PerlExportDescriptor> = myExportDescriptors
 }

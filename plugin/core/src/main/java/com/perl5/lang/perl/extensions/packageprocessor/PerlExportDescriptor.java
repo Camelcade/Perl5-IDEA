@@ -145,7 +145,7 @@ public class PerlExportDescriptor {
     return mySigil + myImportedName + " => " + mySigil + PerlPackageUtil.join(myRealPackage, myRealName);
   }
 
-  public static PerlExportDescriptor create(@NonNls @NotNull String sourcePackageName, @NonNls @NotNull String sourceSubName) {
+  public static @NotNull PerlExportDescriptor create(@NonNls @NotNull String sourcePackageName, @NonNls @NotNull String sourceSubName) {
     return new PerlExportDescriptor(sourcePackageName, sourceSubName, sourceSubName);
   }
 
