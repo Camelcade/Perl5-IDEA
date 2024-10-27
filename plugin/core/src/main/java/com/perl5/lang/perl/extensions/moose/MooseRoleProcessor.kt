@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,38 +13,39 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.moose
 
-package com.perl5.lang.perl.extensions.moose;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
+import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor
+import com.perl5.lang.perl.parser.moose.MooseSyntax
+import com.perl5.lang.perl.parser.moose.MooseSyntax.*
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
+import com.perl5.lang.perl.util.PerlPackageUtil
+import kotlinx.collections.immutable.toImmutableList
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
+internal val MOOSE_ROLE_EXPORTS: List<PerlExportDescriptor> by lazy {
+  (listOf(
+    PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_CARP, "confess"),
+    PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_SCALAR_UTIL, "blessed"),
+    PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_CLASS_MOP_MIXIN, MooseSyntax.MOOSE_KEYWORD_META)
+  ) + listOf(
+    MOOSE_KEYWORD_AFTER,
+    MOOSE_KEYWORD_AROUND,
+    MOOSE_KEYWORD_AUGMENT,
+    MOOSE_KEYWORD_BEFORE,
+    MOOSE_KEYWORD_EXCLUDES,
+    MOOSE_KEYWORD_EXTENDS,
+    MOOSE_KEYWORD_HAS,
+    MOOSE_KEYWORD_INNER,
+    MOOSE_KEYWORD_OVERRIDE,
+    MOOSE_KEYWORD_REQUIRES,
+    MOOSE_KEYWORD_SUPER,
+    MOOSE_KEYWORD_WITH
+  ).map { keyword -> PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOOSE_ROLE, keyword) })
+    .toImmutableList()
+}
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+open class MooseRoleProcessor : BaseStrictWarningsProvidingProcessor() {
 
-import static com.perl5.lang.perl.parser.moose.MooseSyntax.*;
-import static com.perl5.lang.perl.util.PerlPackageUtil.*;
-
-public class MooseRoleProcessor extends BaseStrictWarningsProvidingProcessor {
-  static final List<PerlExportDescriptor> EXPORTS;
-
-  static {
-    List<PerlExportDescriptor> exports = new ArrayList<>();
-    exports.add(PerlExportDescriptor.create(PACKAGE_CARP, "confess"));
-    exports.add(PerlExportDescriptor.create(PACKAGE_SCALAR_UTIL, "blessed"));
-    exports.add(PerlExportDescriptor.create(PACKAGE_CLASS_MOP_MIXIN, MOOSE_KEYWORD_META));
-    Arrays.asList(MOOSE_KEYWORD_AFTER, MOOSE_KEYWORD_AROUND, MOOSE_KEYWORD_AUGMENT, MOOSE_KEYWORD_BEFORE, MOOSE_KEYWORD_EXCLUDES,
-                  MOOSE_KEYWORD_EXTENDS, MOOSE_KEYWORD_HAS, MOOSE_KEYWORD_INNER, MOOSE_KEYWORD_OVERRIDE,
-                  MOOSE_KEYWORD_REQUIRES, MOOSE_KEYWORD_SUPER, MOOSE_KEYWORD_WITH).forEach(
-      it -> exports.add(PerlExportDescriptor.create(PACKAGE_MOOSE_ROLE, it)));
-    EXPORTS = List.copyOf(exports);
-  }
-
-  @Override
-  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    return EXPORTS;
-  }
+  override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> = MOOSE_ROLE_EXPORTS
 }
