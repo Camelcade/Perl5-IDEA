@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,49 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.packageprocessor.impl
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlFeaturesProvider
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase
+import com.perl5.lang.perl.internals.PerlFeaturesTable
+import kotlinx.collections.immutable.toImmutableMap
 
-import com.intellij.openapi.util.text.StringUtil;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlFeaturesProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPragmaProcessorBase;
-import com.perl5.lang.perl.internals.PerlFeaturesTable;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
-public class FeatureProcessor extends PerlPragmaProcessorBase implements PerlPackageOptionsProvider, PerlFeaturesProvider {
-  protected static final Map<String, String> OPTIONS = new HashMap<>();
-  protected static final Map<String, String> OPTIONS_BUNDLES = new HashMap<>();
-
-  static {
-    OPTIONS.putAll(PerlFeaturesTable.AVAILABLE_FEATURES);
+class FeatureProcessor : PerlPragmaProcessorBase(), PerlPackageOptionsProvider, PerlFeaturesProvider {
+  private val myOptions: Map<String, String> by lazy {
+    PerlFeaturesTable.AVAILABLE_FEATURES.toImmutableMap()
+  }
+  private val myOptionsBundles: Map<String, String> by lazy {
+    PerlFeaturesTable.AVAILABLE_FEATURES_BUNDLES.entries
+      .associate { (version, features) -> ":$version" to features.joinToString(" ") }
+      .toImmutableMap()
   }
 
-  static {
-    for (Map.Entry<String, List<String>> option : PerlFeaturesTable.AVAILABLE_FEATURES_BUNDLES.entrySet()) {
-      OPTIONS_BUNDLES.put(":" + option.getKey(), StringUtil.join(option.getValue(), " "));
-    }
-  }
+  override fun getOptions(): Map<String, String> = myOptions
 
-  @Override
-  public @NotNull Map<String, String> getOptions() {
-    return OPTIONS;
-  }
+  override fun getOptionsBundles(): Map<String, String> = myOptionsBundles
 
-  @Override
-  public @NotNull Map<String, String> getOptionsBundles() {
-    return OPTIONS_BUNDLES;
-  }
-
-  @Override
-  public PerlFeaturesTable getFeaturesTable(PerlUseStatementElement useStatement, PerlFeaturesTable currentFeaturesTable) {
-    // fixme implement modification
-    return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
-  }
 }
