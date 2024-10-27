@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,39 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.packageprocessor.impl
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
-public class ParentProcessor extends BaseProcessor implements PerlPackageOptionsProvider {
-  protected static final Map<String, String> OPTIONS = new HashMap<>();
-
-  static {
-    OPTIONS.put("-norequire", "suppresses attempt to require a package file");
+class ParentProcessor : BaseProcessor(), PerlPackageOptionsProvider {
+  protected val myOptions: Map<String, String> by lazy {
+    mapOf("-norequire" to "suppresses attempt to require a package file")
   }
 
-  @Override
-  public @NotNull Map<String, String> getOptions() {
-    return OPTIONS;
-  }
+  override fun getOptions(): Map<String, String> = myOptions
 
-  @Override
-  public @NotNull Map<String, String> getOptionsBundles() {
-    return Collections.emptyMap();
-  }
+  override fun getOptionsBundles(): Map<String, String> = emptyMap()
 
-  @Override
-  public void changeParentsList(@NotNull PerlUseStatementElement useStatement, @NotNull List<? super String> currentList) {
-    super.changeParentsList(useStatement, currentList);
-    currentList.removeAll(getOptions().keySet());
+  override fun changeParentsList(useStatement: PerlUseStatementElement, currentList: MutableList<in String>) {
+    super.changeParentsList(useStatement, currentList)
+    currentList -= getOptions().keys
   }
 }
