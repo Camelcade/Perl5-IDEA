@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,41 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.packageprocessor.impl
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
+import kotlinx.collections.immutable.toImmutableMap
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageOptionsProvider;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-public class TestMoreProcessor extends PerlPackageProcessorBase implements PerlPackageOptionsProvider {
-  private static final Map<String, String> OPTIONS = new HashMap<>();
-
-  static {
-    OPTIONS.put("no_plan", "");
-    OPTIONS.put("skip_all", "Skip all tests");
-    OPTIONS.put("tests", "Number of tests expected");
+class TestMoreProcessor : PerlPackageProcessorBase(), PerlPackageOptionsProvider {
+  private val myOptions: Map<String, String> by lazy {
+    mapOf(
+      "no_plan" to "",
+      "skip_all" to "Skip all tests",
+      "tests" to "Number of tests expected"
+    ).toImmutableMap()
   }
 
-  @Override
-  protected @Nullable List<String> getImportParameters(@NotNull PerlUseStatementElement useStatement) {
-    return null; // this will cause descriptors to ignore parameters above
-  }
+  override fun getImportParameters(useStatement: PerlUseStatementElement): List<String>? =
+    null // this will cause descriptors to ignore parameters above
 
-  @Override
-  public @NotNull Map<String, String> getOptions() {
-    return OPTIONS;
-  }
+  override fun getOptions(): Map<String, String> = myOptions
 
-  @Override
-  public @NotNull Map<String, String> getOptionsBundles() {
-    return Collections.emptyMap();
-  }
+  override fun getOptionsBundles(): Map<String, String> = emptyMap()
 }
