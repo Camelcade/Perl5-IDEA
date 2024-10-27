@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.refactoring;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -118,10 +119,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static final String GREPPED = "filtered";
   private static final String STRING_LIST_NAME = "string_list";
 
-  private static final Map<IElementType, String> FIXED_NAMES;
-  private static final TokenSet ELEMENTS_WITH_BASE_NAMES;
-
-  static {
+  private static final NotNullLazyValue<Map<IElementType, String>> FIXED_NAMES = NotNullLazyValue.createValue(() -> {
     Map<IElementType, String> namesMap = new HashMap<>();
     namesMap.put(STRING_LIST, STRING_LIST_NAME);
     namesMap.put(COMMA_SEQUENCE_EXPR, LIST);
@@ -131,16 +129,14 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     namesMap.put(PerlElementTypes.ANON_ARRAY, ANON_ARRAY);
     namesMap.put(PerlElementTypes.ANON_HASH, ANON_HASH);
     namesMap.put(NUMBER_CONSTANT, NUMBER);
-    FIXED_NAMES = Collections.unmodifiableMap(namesMap);
-
-    ELEMENTS_WITH_BASE_NAMES = TokenSet.orSet(
-      TokenSet.create(FIXED_NAMES.keySet().toArray(IElementType.EMPTY_ARRAY)),
-      PerlTokenSets.CAST_EXPRESSIONS,
-      PerlTokenSets.SLICES,
-      REGEX_OPERATIONS
-    );
-  }
-
+    return Collections.unmodifiableMap(namesMap);
+  });
+  private static final NotNullLazyValue<TokenSet> ELEMENTS_WITH_BASE_NAMES = NotNullLazyValue.createValue(() -> TokenSet.orSet(
+    TokenSet.create(FIXED_NAMES.get().keySet().toArray(IElementType.EMPTY_ARRAY)),
+    PerlTokenSets.CAST_EXPRESSIONS,
+    PerlTokenSets.SLICES,
+    REGEX_OPERATIONS
+  ));
 
   @Override
   public @Nullable SuggestedNameInfo getSuggestedNames(@Nullable PsiElement targetElement,
@@ -265,7 +261,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       result.addAll(ANON_ARRAY_BASE_NAMES);
     }
 
-    if (ELEMENTS_WITH_BASE_NAMES.contains(expressionType)) {
+    if (ELEMENTS_WITH_BASE_NAMES.get().contains(expressionType)) {
       recommendation = getBaseName(expression);
     }
     /*
@@ -406,7 +402,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
     IElementType elementType = PsiUtilCore.getElementType(element);
 
-    String fixedName = FIXED_NAMES.get(elementType);
+    String fixedName = FIXED_NAMES.get().get(elementType);
     if (fixedName != null) {
       return fixedName;
     }
