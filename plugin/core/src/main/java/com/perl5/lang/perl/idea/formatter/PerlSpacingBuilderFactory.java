@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
@@ -220,7 +220,7 @@ public class PerlSpacingBuilderFactory {
       .between(CUSTOM_EXPR_KEYWORDS, PARENTHESISED_EXPR).spaces(0)
       .between(CUSTOM_EXPR_KEYWORDS, LEFT_PAREN).spaces(0)
       .after(CUSTOM_EXPR_KEYWORDS).spaces(1)
-      .after(MOOSE_RESERVED_TOKENSET).spaces(1)
+      .after(MOOSE_RESERVED_TOKENSET.get()).spaces(1)
 
       .between(OPERATOR_HEREDOC, STRING_BARE).spaces(0)
       .after(OPERATOR_HEREDOC).spaceIf(perlSettings.SPACE_AFTER_HEREDOC_OPERATOR)

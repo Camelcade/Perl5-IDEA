@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,8 +21,8 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.PerlElementTypesGenerated;
 import com.perl5.lang.perl.psi.utils.PerlAnnotations;
 
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.parser.MooseParserExtension.MOOSE_RESERVED_TOKENSET;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
@@ -267,7 +267,7 @@ public final class PerlTokenSets {
 
   public static final TokenSet KEYWORDS_TOKENSET = TokenSet.orSet(
     DEFAULT_KEYWORDS_TOKENSET,
-    MOOSE_RESERVED_TOKENSET,
+    MOOSE_RESERVED_TOKENSET.get(),
     METHOD_SIGNATURES_KEYWORDS_TOKENSET,
     FUNCTION_PARAMETERS_KEYWORDS_TOKENSET,
     TRY_CATCH_KEYWORDS_TOKENSET
