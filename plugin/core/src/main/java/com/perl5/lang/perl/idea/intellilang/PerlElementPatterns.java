@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,20 +21,11 @@ import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
-public class PerlElementPatterns<T extends PsiElement, Self extends PsiElementPattern<T, Self>> extends PsiElementPattern<T, Self> {
-  public PerlElementPatterns(Class<T> aClass) {
-    super(aClass);
-  }
-
-  public PerlElementPatterns(@NotNull InitialPatternCondition<T> condition) {
-    super(condition);
+public final class PerlElementPatterns {
+  private PerlElementPatterns() {
   }
 
   public static class Capture<T extends PsiElement> extends PsiElementPattern.Capture<T> {
-    public Capture(Class<T> aClass) {
-      super(aClass);
-    }
-
     public Capture(@NotNull InitialPatternCondition<T> condition) {
       super(condition);
     }
