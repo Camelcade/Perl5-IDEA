@@ -28,5 +28,5 @@ class MooseXRoleParametrized : MooseRoleProcessor() {
     )).toImmutableList()
   }
 
-  public override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> = myExports
+  override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> = myExports
 }
