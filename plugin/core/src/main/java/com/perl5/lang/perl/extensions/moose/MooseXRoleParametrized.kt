@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,28 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.moose
 
-package com.perl5.lang.perl.extensions.moose;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
+import com.perl5.lang.perl.util.PerlPackageUtil
+import kotlinx.collections.immutable.toImmutableList
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED;
-
-public class MooseXRoleParametrized extends MooseRoleProcessor {
-  private static final List<PerlExportDescriptor> EXPORTS = new ArrayList<>(MooseRoleProcessor.EXPORTS);
-
-  static {
-    EXPORTS.add(PerlExportDescriptor.create(PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "parameter"));
-    EXPORTS.add(PerlExportDescriptor.create(PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "role"));
+class MooseXRoleParametrized : MooseRoleProcessor() {
+  private val myExports: List<PerlExportDescriptor> by lazy {
+    (MOOSE_ROLE_EXPORTS + listOf(
+      PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "parameter"),
+      PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "role")
+    )).toImmutableList()
   }
 
-  @Override
-  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    return EXPORTS;
-  }
+  public override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> = myExports
 }
