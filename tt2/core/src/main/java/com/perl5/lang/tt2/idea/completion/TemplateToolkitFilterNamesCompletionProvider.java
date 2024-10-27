@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionProvider;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.util.ProcessingContext;
-import com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitFilterNameMacro;
+import com.perl5.lang.tt2.idea.liveTemplates.LookupElements;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -31,6 +31,6 @@ public class TemplateToolkitFilterNamesCompletionProvider extends CompletionProv
   protected void addCompletions(@NotNull CompletionParameters parameters,
                                 @NotNull ProcessingContext context,
                                 @NotNull CompletionResultSet result) {
-    result.addAllElements(Arrays.asList(TemplateToolkitFilterNameMacro.LOOKUP_ELEMENTS));
+    result.addAllElements(Arrays.asList(LookupElements.getLOOKUP_ELEMENTS()));
   }
 }
