@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
   }
 
   @Override
-  public @NotNull List<VirtualFile> listFiles(@NotNull String remotePath) throws IOException {
+  public @NotNull List<VirtualFile> listFiles(@NotNull String remotePath) {
     var localPath = myHostData.getLocalPath(remotePath);
     if (localPath == null) {
       LOG.info("Unable to get local path for: " + remotePath + " in " + myHostData);
