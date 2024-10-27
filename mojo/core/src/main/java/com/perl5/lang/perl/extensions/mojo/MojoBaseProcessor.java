@@ -18,7 +18,6 @@ package com.perl5.lang.perl.extensions.mojo;
 
 import com.perl5.lang.perl.extensions.packageprocessor.*;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
-import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,11 +38,6 @@ public class MojoBaseProcessor extends BaseStrictWarningsProvidingProcessor impl
   static {
     OPTIONS.put("-strict", "strict,warnings,utf8,v5.10,IO::Handle");
     OPTIONS.put("-base", "strict,warnings,utf8,v5.10,IO::Handle,acts as parent");
-  }
-
-  @Override
-  public PerlFeaturesTable getFeaturesTable(PerlUseStatementElement useStatement, PerlFeaturesTable currentFeaturesTable) {
-    return currentFeaturesTable.clone();
   }
 
   @Override

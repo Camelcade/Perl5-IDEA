@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlFeaturesProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlMroProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageLoader;
-import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import org.jetbrains.annotations.NotNull;
@@ -46,11 +45,5 @@ public class ModernPerlPackageProcessor extends BaseStrictWarningsProvidingProce
   @Override
   public @NotNull List<String> getLoadedPackageNames(PerlUseStatementElement useStatement) {
     return LOADED_PACKAGES;
-  }
-
-  @Override
-  public PerlFeaturesTable getFeaturesTable(PerlUseStatementElement useStatement, PerlFeaturesTable currentFeaturesTable) {
-    // fixme implement modification
-    return currentFeaturesTable == null ? new PerlFeaturesTable() : currentFeaturesTable.clone();
   }
 }

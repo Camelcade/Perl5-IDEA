@@ -20,7 +20,6 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlFeaturesProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlUtfProvider;
 import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor;
-import com.perl5.lang.perl.internals.PerlFeaturesTable;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -56,11 +55,6 @@ public class MojoliciousLitePackageProcessor extends BaseStrictWarningsProviding
                          @NotNull Set<? super String> export,
                          @NotNull Set<? super String> exportOk) {
     export.addAll(AUTOEXPORTED_SUBS);
-  }
-
-  @Override
-  public PerlFeaturesTable getFeaturesTable(PerlUseStatementElement useStatement, PerlFeaturesTable currentFeaturesTable) {
-    return currentFeaturesTable.clone();
   }
 
   @Override
