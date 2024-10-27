@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,40 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.extensions.packageprocessor.impl
 
-package com.perl5.lang.perl.extensions.packageprocessor.impl;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
+import kotlinx.collections.immutable.toImmutableList
 
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.*;
-import java.util.stream.Collectors;
-
-public class ListMoreUtilsProcessor extends PerlPackageProcessorBase {
-  private static final Map<String, PerlExportDescriptor> EXPORT_OK_DESCRIPTORS = new HashMap<>();
-
-  static {
-    for (String keyword : ListMoreUtilsExports.EXPORT_OK) {
-      EXPORT_OK_DESCRIPTORS.put(keyword, PerlExportDescriptor.create("List::MoreUtils::PP", keyword));
-    }
+class ListMoreUtilsProcessor : PerlPackageProcessorBase() {
+  private val EXPORT_OK_DESCRIPTORS: Map<String, PerlExportDescriptor> by lazy {
+    ListMoreUtilsExports.EXPORT_OK.associate { it to PerlExportDescriptor.create("List::MoreUtils::PP", it) }
   }
 
-  @Override
-  public @NotNull List<PerlExportDescriptor> getImports(@NotNull PerlUseStatementElement useStatement) {
-    List<String> parameters = useStatement.getImportParameters();
-    if (parameters == null) {
-      return Collections.emptyList();
-    }
-    return parameters.stream().distinct().map(EXPORT_OK_DESCRIPTORS::get).filter(Objects::nonNull).collect(Collectors.toList());
-  }
+  override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> =
+    useStatement.getImportParameters()?.let { parameters ->
+      parameters.distinct()
+        .map { parameter -> EXPORT_OK_DESCRIPTORS.get(parameter) }
+        .filterNotNull()
+        .toImmutableList()
+    } ?: emptyList()
 
-  @Override
-  public void addExports(@NotNull PerlUseStatementElement useStatement,
-                         @NotNull Set<? super String> export,
-                         @NotNull Set<? super String> exportOk) {
-    super.addExports(useStatement, export, exportOk);
-    exportOk.addAll(ListMoreUtilsExports.EXPORT_OK);
+  override fun addExports(
+    useStatement: PerlUseStatementElement,
+    export: MutableSet<in String>,
+    exportOk: MutableSet<in String>
+  ) {
+    super.addExports(useStatement, export, exportOk)
+    exportOk.addAll(ListMoreUtilsExports.EXPORT_OK)
   }
 }
