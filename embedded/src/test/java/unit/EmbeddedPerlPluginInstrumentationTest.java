@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,15 +29,15 @@ import java.util.Collection;
 @RunWith(Parameterized.class)
 public class EmbeddedPerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
 
-  public EmbeddedPerlPluginInstrumentationTest(@NotNull String ignoredName, @NotNull Class<?> cls) {
-    super(cls);
+  public EmbeddedPerlPluginInstrumentationTest(@NotNull String ignoredName, @NotNull Class<?> cls, @NotNull String patternString) {
+    super(cls, patternString);
   }
 
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][]{
-      {"plugin.core", PerlParserDefinition.class},
-      {"embedded", EmbeddedPerlParserDefinition.class}
+      {"plugin.core", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
+      {"embedded", EmbeddedPerlParserDefinition.class, EMBEDDED_PATTERN_STRING}
     });
   }
 }
