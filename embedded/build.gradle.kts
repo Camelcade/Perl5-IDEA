@@ -16,26 +16,32 @@
 fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
-  listOf(
-    ":plugin:core",
-    ":lang.embedded:core",
-  ).forEach {
-    compileOnly(project(it))
-    testCompileOnly(project(it))
-    testRuntimeOnly(project(it))
-  }
+  // packaging, which modules to include into this one
   listOf(
     ":lang.embedded:core",
   ).forEach {
-    runtimeOnly(project(it))
     intellijPlatform{
       pluginModule(implementation(project(it)))
     }
   }
+
+  // additional compilation dependencies
+  listOf(
+    ":plugin:core",
+  ).forEach {
+    compileOnly(project(it))
+    testCompileOnly(project(it))
+  }
+
+  // Test dependencies
   testImplementation(testFixtures(project(":plugin")))
+
+  // Plugin dependencies
   intellijPlatform {
     localPlugin(project(":plugin"))
   }
+
+  // Useinstaller handling
   intellijPlatform{
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
