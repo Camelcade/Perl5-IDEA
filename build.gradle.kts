@@ -66,7 +66,7 @@ allprojects {
   if (name == "test-utils") {
     return@allprojects
   }
-  val isPlugin = pluginProjectsNames.contains(project.name)
+  val isPlugin = project.name in pluginProjectsNames
 
   apply(plugin = "org.jetbrains.grammarkit")
   apply(plugin = if (isPlugin) "org.jetbrains.intellij.platform" else "org.jetbrains.intellij.platform.module")
@@ -88,8 +88,8 @@ allprojects {
   }
 
   version = properties("pluginVersion").get().ifEmpty { properties("platformVersion").get() } +
-            properties("pluginBranch").get().ifEmpty { properties("platformBranch").get() } +
-            properties("pluginBuild").get().ifEmpty { properties("platformBuild").get() }
+    properties("pluginBranch").get().ifEmpty { properties("platformBranch").get() } +
+    properties("pluginBuild").get().ifEmpty { properties("platformBuild").get() }
 
   dependencies {
     intellijPlatform {
@@ -108,7 +108,7 @@ allprojects {
       targetCompatibility = properties("javaTargetVersion").get()
     }
 
-    withType<KotlinCompile>{
+    withType<KotlinCompile> {
       kotlinOptions.jvmTarget = properties("javaTargetVersion").get()
     }
 
@@ -167,9 +167,11 @@ allprojects {
 
       if (isCI.get()) {
         testLogging {
-          events.addAll(listOf(
-            TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED, TestLogEvent.STANDARD_OUT, TestLogEvent.STANDARD_ERROR
-          ))
+          events.addAll(
+            listOf(
+              TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED, TestLogEvent.STANDARD_OUT, TestLogEvent.STANDARD_ERROR
+            )
+          )
           exceptionFormat = TestExceptionFormat.FULL
         }
       }
@@ -177,7 +179,7 @@ allprojects {
 
     val isRoot = project == rootProject
 
-    if( isRoot ){
+    if (isRoot) {
       buildPlugin {
         enabled = false
       }
@@ -198,18 +200,14 @@ allprojects {
       }
 
     }
-    if( isPlugin ){
+    if (isPlugin) {
       publishPlugin {
         if (project.hasProperty("eap")) {
           channels.set(listOf("EAP"))
         }
         token.set(properties("jbToken").orElse(""))
       }
-    }
-  }
 
-  if (pluginProjectsNames.contains(name)) {
-    tasks {
       patchPluginXml {
         pluginDescription.set(properties("descriptionFile").flatMap {
           providers.fileContents(layout.projectDirectory.file(it)).asText
@@ -262,7 +260,6 @@ tasks {
 
   register("generateLexers") { }
 
-
   runIde {
     project.properties.forEach { (key, value) ->
       if (key.startsWith("pass.")) {
@@ -270,10 +267,6 @@ tasks {
         println("Passing $passedKey => $value")
         systemProperty(passedKey, value.toString())
       }
-    }
-
-    if (project.hasProperty("traverseUI")) {
-      args("traverseUI", rootDir.resolve("resources/search/searchableOptions.xml"))
     }
 
     jvmArgs("-Xmx2048m")
