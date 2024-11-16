@@ -60,5 +60,5 @@ jobs:
         run: ./gradlew :coveralls --console plain
 
       - name: Perform SonarCube Analysis
-        if: ${{ env.COVERALLS_REPO_TOKEN }}
+        if: ${{ env.COVERALLS_REPO_TOKEN && env.SONAR_TOKEN }}
         run: ./gradlew sonarqube --info --console plain
