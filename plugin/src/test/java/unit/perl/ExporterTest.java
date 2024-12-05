@@ -33,6 +33,8 @@ public class ExporterTest extends NamespaceTestCase {
   @Test
   public void testExport() {
     doTest("export.pl", "Foo", new String[]{"this", "is", "the", "end"}, new String[]{});
+    doTest("boolean.pl", "boolean", new String[]{"true", "false", "boolean"}, new String[]{"isTrue", "isFalse", "isBoolean"});
+    doTest("Opcode.pm", "Opcode", new String[]{}, new String[]{"opset", "opset_to_hex", "opdump"});
   }
 
   @Test
