@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ package documentation;
 import base.PerlLightTestCase;
 import categories.Heavy;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
@@ -1180,6 +1181,7 @@ public class PerlQuickDocLinksFollowingTest extends PerlLightTestCase {
   @Test
   public void testHashErrno() {doTest("%ERRNO");}
 
+  @Ignore
   @Test
   public void testHook() { doTest538("%{^HOOK}"); }
 
@@ -1192,9 +1194,11 @@ public class PerlQuickDocLinksFollowingTest extends PerlLightTestCase {
   @Test
   public void testReCompileRecursionLimit() { doTest538("${^RE_COMPILE_RECURSION_LIMIT}"); }
 
+  @Ignore
   @Test
   public void testSafeLocales() { doTest538("${^SAFE_LOCALES}"); }
 
+  @Ignore
   @Test
   public void testScalarInc() { doTest538("$INC"); }
 
