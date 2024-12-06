@@ -1,6 +1,8 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.jetbrains.intellij.platform.gradle.Constants.Tasks.INSTRUMENT_CODE
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import org.jetbrains.intellij.platform.gradle.tasks.InstrumentCodeTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.kt3k.gradle.plugin.coveralls.CoverallsTask
 
@@ -244,14 +246,29 @@ tasks {
       it.tasks.named<JacocoReport>("jacocoTestReport").map { task -> task.executionData }
     })
 
-    executionData(File("coverage").walkTopDown().filter { it.extension == "exec" }.toList())
+    val files = File("coverage").walkTopDown().filter { it.extension == "exec" }.toList()
 
-    additionalSourceDirs.setFrom(allprojects.map {
+    println("\nFound following coverage data files:")
+    files.sorted().forEach { println(it) }
+
+    executionData(files)
+
+    val sourcesDirs = allprojects.map {
       it.sourceSets.main.map { sourceSet -> sourceSet.allSource.srcDirs }
-    })
-    sourceDirectories.setFrom(allprojects.map {
-      it.sourceSets.main.map { sourceSet -> sourceSet.allSource.srcDirs }
-    })
+    }
+    println("\nFound following source dirs:")
+    sourcesDirs.flatMap { it.get().asSequence() }.sorted().forEach { println(it) }
+
+    additionalSourceDirs.setFrom(sourcesDirs)
+    sourceDirectories.setFrom(sourcesDirs)
+
+    val classDirs = allprojects.map {
+      it.tasks.named<InstrumentCodeTask>(INSTRUMENT_CODE).map { it -> it.outputDirectory }
+    }
+    println("\nFound following class dirs:")
+    classDirs.map { it.get().get().toString() }.sorted().forEach { println(it) }
+
+    classDirectories.from(classDirs)
 
     reports {
       html.required.set(true) // human readable
