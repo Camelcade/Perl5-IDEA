@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,25 +32,48 @@ import org.jetbrains.annotations.NotNull;
 public class PerlHeredocElementManipulator extends AbstractElementManipulator<PerlHeredocElementImpl> {
 
   @Override
-  public PerlHeredocElementImpl handleContentChange(@NotNull PerlHeredocElementImpl element, @NotNull TextRange range, String newContent)
+  public PerlHeredocElementImpl handleContentChange(final @NotNull PerlHeredocElementImpl element,
+                                                    final @NotNull TextRange range,
+                                                    final String newContent)
     throws IncorrectOperationException {
-    StringBuilder sb = new StringBuilder(newContent);
-    if (element.getTextLength() == range.getEndOffset() && !StringUtil.endsWith(newContent, "\n")) {
-      sb.append("\n");
+    var contentRemoval = newContent.isEmpty();
+    var replacementContent = newContent;
+    var effectiveRange = range;
+    if (range.isEmpty()) {
+      // this handles empty heredoc update. We have a single empty shred pointing to the offset of closing \n
+      effectiveRange = TextRange.create(range.getStartOffset(), element.getTextLength() - 1);
     }
 
-    Project project = element.getProject();
-    if (range.getStartOffset() > 0) {
-      sb.insert(0, getIndenter(project, range.getStartOffset()));
-      range = TextRange.from(0, range.getEndOffset());
+    var elementText = element.getText();
+    if (effectiveRange.getStartOffset() > 0) {
+      var lineStart = getLineStartOffset(elementText, effectiveRange);
+      if (lineStart < effectiveRange.getStartOffset()) {
+        if (!contentRemoval) {
+          var indent = elementText.substring(lineStart, effectiveRange.getStartOffset());
+          replacementContent = prependLines(replacementContent, indent);
+        }
+        effectiveRange = TextRange.create(lineStart, effectiveRange.getEndOffset());
+      }
+    }
+    else if (effectiveRange.getStartOffset() == 0) {
+      replacementContent = prependLines(newContent, getIndenter(element.getProject(), element.getRealIndentSize()));
     }
 
-    normalizeIndentation(project, sb, element.getRealIndentSize());
-
-    String newElementText = range.replace(element.getText(), sb.toString());
+    String newElementText = effectiveRange.replace(elementText, replacementContent);
     PerlHeredocElementImpl replacement = PerlElementFactory.createHeredocBodyReplacement(element, newElementText);
 
     return (PerlHeredocElementImpl)element.replace(replacement);
+  }
+
+  private static int getLineStartOffset(@NotNull String elementText, @NotNull TextRange effectiveRange) {
+    var startOffset = effectiveRange.getStartOffset();
+    if (startOffset == 0) {
+      return startOffset;
+    }
+    if (elementText.charAt(startOffset - 1) == '\n') {
+      return startOffset;
+    }
+    return StringUtil.skipWhitespaceBackward(elementText, startOffset - 1);
   }
 
   private static @NotNull String getIndenter(@NotNull Project project, int indentSize) {
@@ -60,32 +83,13 @@ public class PerlHeredocElementManipulator extends AbstractElementManipulator<Pe
     return StringUtil.repeat(indentOptions != null && indentOptions.USE_TAB_CHARACTER ? "\t" : " ", indentSize);
   }
 
-  private static void normalizeIndentation(@NotNull Project project, @NotNull StringBuilder sb, int indentSize) {
-    int offset = 0;
-    int currentLineStart = 0;
-    int currentLineIndentSize = 0;
-    boolean hasNonSpaces = false;
-
-    while (offset < sb.length()) {
-      char currentChar = sb.charAt(offset++);
-      if (currentChar == '\n') {
-        if (hasNonSpaces && currentLineIndentSize < indentSize) {
-          int indentAdjustment = indentSize - currentLineIndentSize;
-          sb.insert(currentLineStart, getIndenter(project, indentAdjustment));
-          offset += indentAdjustment;
-        }
-        currentLineStart = offset;
-        hasNonSpaces = false;
-        currentLineIndentSize = 0;
-      }
-      else if (!hasNonSpaces) {
-        if (Character.isWhitespace(currentChar)) {
-          currentLineIndentSize++;
-        }
-        else {
-          hasNonSpaces = true;
-        }
-      }
-    }
+  private static @NotNull String prependLines(@NotNull String newContent, @NotNull String prefix) {
+    var result = new StringBuilder();
+    StringUtil.split(newContent, "\n", false, true)
+      .forEach(line -> {
+        result.append(prefix);
+        result.append(line);
+      });
+    return result.toString();
   }
 }
