@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,12 @@
 
 package com.perl5.lang.perl.idea.configuration.module;
 
+import com.intellij.openapi.ui.VerticalFlowLayout;
+
+import javax.swing.*;
+
 public class PerlProjectGeneratorPeer extends PerlProjectGeneratorPeerBase<PerlProjectGenerationSettings> {
   public PerlProjectGeneratorPeer() {
-    super(new PerlProjectGenerationSettings());
+    super(new PerlProjectGenerationSettings(), new JPanel(new VerticalFlowLayout()));
   }
 }
