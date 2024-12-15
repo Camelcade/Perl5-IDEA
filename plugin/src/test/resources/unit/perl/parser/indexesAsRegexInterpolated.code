@@ -1,0 +1,17 @@
+$test[/1/];
+"otherthing$test[/1/]";
+`otherthing$test[/1/]`;
+s{\A$gitPath[/]}{};
+m{\A$gitPath[/]};
+qq{\A$gitPath[/]};
+qx{\A$gitPath[/]};
+qr{\A$gitPath[/]};
+
+$test{/1/};
+"otherthing$test{/1/}";
+`otherthing$test{/1/}`;
+s{\A$gitPath{/}}{};
+m{\A$gitPath{/}};
+qq{\A$gitPath{/}};
+qx{\A$gitPath{/}};
+qr{\A$gitPath{/}};
