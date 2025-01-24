@@ -151,14 +151,14 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
 
   @Override
   public String toString() {
-    List<String> variants = ContainerUtil.map(myVariants, PerlValue::toString);
+    List<String> variants = new ArrayList<>(ContainerUtil.map(myVariants, PerlValue::toString));
     ContainerUtil.sort(variants);
     return "OneOf: [" + StringUtil.join(variants, ", ") + "]";
   }
 
   @Override
   public @NotNull String getPresentableText() {
-    List<String> variants = ContainerUtil.map(myVariants, PerlValue::getPresentableText);
+    List<String> variants = new ArrayList<>(ContainerUtil.map(myVariants, PerlValue::getPresentableText));
     ContainerUtil.sort(variants);
     return PerlBundle.message("perl.value.oneof.static.presentable", StringUtil.join(variants, ",\n"));
   }

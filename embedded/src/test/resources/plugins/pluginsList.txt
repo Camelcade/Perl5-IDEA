@@ -6,8 +6,11 @@ JUnit
 PerforceDirectPlugin
 Subversion
 TestNG-J
+com.android.tools.gradle.dcl
 com.intellij
 com.intellij.completion.ml.ranking
+com.intellij.completion.ml.ranking.models
+com.intellij.compose
 com.intellij.configurationScript
 com.intellij.copyright
 com.intellij.dev
@@ -17,12 +20,10 @@ com.intellij.java
 com.intellij.java-i18n
 com.intellij.java.ide
 com.intellij.ko
-com.intellij.llmInstaller
 com.intellij.marketplace
 com.intellij.marketplace.ml
-com.intellij.ml.inline.completion
 com.intellij.modules.json
-com.intellij.platform.ide.provisioner
+com.intellij.notebooks.core
 com.intellij.platform.images
 com.intellij.plugins.eclipsekeymap
 com.intellij.plugins.netbeanskeymap
@@ -30,8 +31,8 @@ com.intellij.plugins.visualstudiokeymap
 com.intellij.properties
 com.intellij.searcheverywhere.ml
 com.intellij.settingsSync
+com.intellij.stats.completion
 com.intellij.tasks
-com.intellij.tracing.ide
 com.intellij.turboComplete
 com.intellij.zh
 com.jetbrains.codeWithMe
@@ -43,6 +44,7 @@ com.perl5
 com.perl5.lang.embedded
 hg4idea
 intellij.indexing.shared.core
+intellij.jupyter
 intellij.platform.ijent.impl
 intellij.webp
 org.editorconfig.editorconfigjetbrains
@@ -50,6 +52,7 @@ org.intellij.groovy
 org.intellij.intelliLang
 org.intellij.plugins.markdown
 org.intellij.qodana
+org.jetbrains.completion.full.line
 org.jetbrains.debugger.streams
 org.jetbrains.idea.eclipse
 org.jetbrains.idea.gradle.dsl
@@ -59,6 +62,7 @@ org.jetbrains.idea.maven.server.api
 org.jetbrains.idea.reposearch
 org.jetbrains.java.decompiler
 org.jetbrains.kotlin
+org.jetbrains.platform.debugger.streams
 org.jetbrains.plugins.emojipicker
 org.jetbrains.plugins.github
 org.jetbrains.plugins.gitlab
@@ -67,6 +71,7 @@ org.jetbrains.plugins.gradle.analysis
 org.jetbrains.plugins.gradle.dependency.updater
 org.jetbrains.plugins.gradle.maven
 org.jetbrains.plugins.javaFX
+org.jetbrains.plugins.kotlin.jupyter
 org.jetbrains.plugins.terminal
 org.jetbrains.plugins.textmate
 org.jetbrains.plugins.yaml
