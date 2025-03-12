@@ -98,7 +98,6 @@ allprojects {
     intellijPlatform {
       val platformToolsVersion = properties("platformToolsVersion")
       if (platformToolsVersion.get().isEmpty()) {
-        instrumentationTools()
         testFramework(TestFrameworkType.Platform)
       }
       else {
