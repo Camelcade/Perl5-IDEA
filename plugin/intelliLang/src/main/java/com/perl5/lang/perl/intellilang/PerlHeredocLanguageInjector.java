@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2024 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,7 +94,8 @@ public class PerlHeredocLanguageInjector extends PerlLiteralLanguageInjector {
   private void addPlace(@NotNull PerlHeredocElementImpl heredocElement, @NotNull MultiHostRegistrar registrar) {
     int indentSize = heredocElement.getRealIndentSize();
     if (indentSize == 0) {
-      registrar.addPlace(null, null, heredocElement, ElementManipulators.getValueTextRange(heredocElement));
+      var elementRange = ElementManipulators.getValueTextRange(heredocElement);
+      registrar.addPlace(null, null, heredocElement, TextRange.create(elementRange.getStartOffset(), elementRange.getEndOffset() - 1));
       return;
     }
 
@@ -107,7 +108,13 @@ public class PerlHeredocLanguageInjector extends PerlLiteralLanguageInjector {
     while (sourceOffset < sourceLength) {
       char currentChar = sourceText.charAt(sourceOffset);
       if (currentChar == '\n') {
-        registrar.addPlace(null, null, heredocElement, TextRange.from(sourceOffset, 1));
+        String suffix = null;
+        int endOffset = sourceOffset + 1;
+        if (endOffset == sourceLength) {
+          suffix = "\n";
+          endOffset--;
+        }
+        registrar.addPlace(null, suffix, heredocElement, TextRange.create(sourceOffset, endOffset));
         currentLineIndent = 0;
       }
       else if (Character.isWhitespace(currentChar) && currentLineIndent < indentSize) {
@@ -124,7 +131,13 @@ public class PerlHeredocLanguageInjector extends PerlLiteralLanguageInjector {
           }
         }
 
-        registrar.addPlace(null, null, heredocElement, TextRange.create(sourceOffset, sourceEnd));
+        String suffix = null;
+        if (sourceEnd == sourceLength) {
+          suffix = "\n";
+          sourceEnd--;
+        }
+
+        registrar.addPlace(null, suffix, heredocElement, TextRange.create(sourceOffset, sourceEnd));
         sourceOffset = sourceEnd;
         currentLineIndent = 0;
         continue;
