@@ -91,6 +91,9 @@ Text: IGNORE; Tail: null; Type: inject with .ignore (IgnoreLang); Icon: /ignore_
 Text: JAVA; Tail: null; Type: inject with Java; Icon: /java.svg; Type Icon: null
 	Lookups: JAVA
 	String: JAVA
+Text: JKTMETA; Tail: null; Type: inject with JKTMeta; Icon: null; Type Icon: null
+	Lookups: JKTMETA
+	String: JKTMETA
 Text: JPAQL; Tail: null; Type: inject with JPA QL; Icon: /JPA_QL.svg; Type Icon: null
 	Lookups: JPAQL
 	String: JPAQL
@@ -118,6 +121,9 @@ Text: JSP; Tail: null; Type: inject with JSP; Icon: JspFileType; Type Icon: null
 Text: JSPX; Tail: null; Type: inject with JSPX; Icon: /jspx.svg; Type Icon: null
 	Lookups: JSPX
 	String: JSPX
+Text: JYPYTER; Tail: null; Type: inject with Jupyter; Icon: /jupyterNotebook.svg; Type Icon: null
+	Lookups: JYPYTER
+	String: JYPYTER
 Text: LESS; Tail: null; Type: inject with Less; Icon: /less.svg; Type Icon: null
 	Lookups: LESS
 	String: LESS
