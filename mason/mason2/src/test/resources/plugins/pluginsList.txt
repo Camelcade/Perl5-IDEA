@@ -44,6 +44,7 @@ com.perl5
 com.perl5.lang.mason.framework
 com.perl5.lang.mason.mason2
 hg4idea
+intellij.git.commit.modal
 intellij.indexing.shared.core
 intellij.jupyter
 intellij.platform.ijent.impl
