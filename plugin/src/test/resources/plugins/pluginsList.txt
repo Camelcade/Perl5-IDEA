@@ -112,6 +112,7 @@ com.perl5
 hg4idea
 idea.plugin.protoeditor
 intellij.charts
+intellij.git.commit.modal
 intellij.grid.plugin
 intellij.indexing.shared
 intellij.indexing.shared.core
