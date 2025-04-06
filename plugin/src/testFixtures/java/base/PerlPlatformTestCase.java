@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,6 +62,7 @@ import com.intellij.util.ui.tree.TreeUtil;
 import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.cpan.adapter.CpanAdapter;
 import com.perl5.lang.perl.cpanminus.adapter.CpanminusAdapter;
+import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.idea.project.PerlProjectDirectoriesConfigurator;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
@@ -157,6 +158,9 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       });
 
       Disposer.dispose(myPerlTestCaseDisposable);
+      var namesCache = PerlNamesCache.getInstance(getProject());
+      namesCache.stopQueue();
+      PlatformTestUtil.waitWithEventsDispatching("Unable to finish names update in 10 secs", () -> !namesCache.isUpdating(), 10);
     }
     finally {
       super.tearDown();
