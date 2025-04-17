@@ -124,6 +124,9 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     super.setUp();
     myInterpreterConfigurator.setUpPerlInterpreter(myProject);
     PerlRunUtil.setUpForTests(myPerlTestCaseDisposable);
+    LOG.info("Ensuring SDK is indexed");
+    CodeInsightTestFixtureImpl.ensureIndexesUpToDate(myProject);
+    LOG.info("SDK is claimed to be indexed");
   }
 
   protected void disposeOnPerlTearDown(@NotNull Disposable disposable) {
