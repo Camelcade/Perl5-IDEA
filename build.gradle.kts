@@ -36,7 +36,7 @@ buildscript {
 plugins {
   id("idea")
   id("jacoco")
-  id("org.jetbrains.intellij.platform") version "2.2.0"
+  id("org.jetbrains.intellij.platform") version "2.5.0"
   id("org.jetbrains.grammarkit") version "2022.3.2.2"
   id("com.github.kt3k.coveralls") version "2.12.2"
   id("org.sonarqube") version "6.0.1.5171"
@@ -98,7 +98,6 @@ allprojects {
     intellijPlatform {
       val platformToolsVersion = properties("platformToolsVersion")
       if (platformToolsVersion.get().isEmpty()) {
-        instrumentationTools()
         testFramework(TestFrameworkType.Platform)
       }
       else {

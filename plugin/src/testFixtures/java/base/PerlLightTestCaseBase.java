@@ -2863,8 +2863,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected <V, T extends RunAnythingProvider<V>> void doTestRunAnythingProvider(@NotNull String pattern,
                                                                                  @NotNull T provider) {
     DataContext dataContext = SimpleDataContext.getProjectContext(getProject());
-    List<RunAnythingItem> completionItems = ContainerUtil.map(provider.getValues(dataContext, pattern),
-                                                              it -> provider.getMainListItem(dataContext, it));
+    List<RunAnythingItem> completionItems = new ArrayList<>(ContainerUtil.map(provider.getValues(dataContext, pattern),
+                                                              it -> provider.getMainListItem(dataContext, it)));
     V matchingValue = provider.findMatchingValue(dataContext, pattern);
     StringBuilder sb = new StringBuilder();
     sb.append("Matching value:\n\t").append(matchingValue).append("\n");
@@ -2987,7 +2987,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     String newText = getEditorText();
     TextRange changedRange = ChangedPsiRangeUtil.getChangedPsiRange(psiFile, (FileElement)fileNode, newText);
     Assert.assertNotNull("No changes", changedRange);
-    Couple<ASTNode> roots = BlockSupportImpl.findReparseableRoots((PsiFileImpl)psiFile, fileNode, changedRange, newText);
+    Couple<ASTNode> roots = BlockSupportImpl.findReparseableNodeAndReparseIt((PsiFileImpl)psiFile, fileNode, changedRange, newText);
 
     StringBuilder result = new StringBuilder("Reparsing block").append(SEPARATOR_NEWLINES);
 

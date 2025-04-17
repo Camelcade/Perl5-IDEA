@@ -33,8 +33,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
+import static com.intellij.psi.xml.XmlTokenType.XML_DATA_CHARACTERS;
 
-public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2ElementTypes, XmlTokenType, PerlElementTypes {
+
+public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2ElementTypes, PerlElementTypes {
   private static final Map<String, String> SIMPLE_COMPLETION_MAP = Map.of(
     KEYWORD_DOC_OPENER_UNCLOSED, KEYWORD_DOC_CLOSER,
     KEYWORD_CLASS_OPENER_UNCLOSED, KEYWORD_CLASS_CLOSER,

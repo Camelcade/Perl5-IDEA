@@ -37,7 +37,9 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.List;
 import java.util.Map;
@@ -109,6 +111,8 @@ public class PerlMoveFileHandler extends MoveFileHandler {
   }
 
   @Override
-  public void retargetUsages(List<UsageInfo> usageInfos, Map<PsiElement, PsiElement> oldToNewMap) {
+  public void retargetUsages(@Unmodifiable @NotNull List<? extends UsageInfo> usageInfos,
+                             @NotNull Map<PsiElement, PsiElement> oldToNewMap) {
+
   }
 }

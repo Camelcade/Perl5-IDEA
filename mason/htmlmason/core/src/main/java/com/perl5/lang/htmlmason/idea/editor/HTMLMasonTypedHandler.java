@@ -40,7 +40,7 @@ import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 
 
 public class HTMLMasonTypedHandler extends TypedHandlerDelegate
-  implements XmlTokenType, PerlElementTypes {
+  implements PerlElementTypes {
   private static final Logger LOG = Logger.getInstance(HTMLMasonTypedHandler.class);
 
   @Override
