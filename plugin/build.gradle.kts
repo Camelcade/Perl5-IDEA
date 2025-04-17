@@ -48,7 +48,7 @@ dependencies {
     compileOnly(project(it))
     testCompileOnly(project(it))
     runtimeOnly(project(it))
-    intellijPlatform{
+    intellijPlatform {
       pluginModule(implementation(project(it)))
     }
   }
@@ -66,7 +66,7 @@ dependencies {
     ":plugin:plenv",
   ).forEach {
     testFixturesCompileOnly(project(it))
- }
+  }
   testFixturesCompileOnly("junit:junit:4.13.2")
 
   intellijPlatform {
@@ -77,6 +77,7 @@ dependencies {
       properties("intelliLangPlugin").get(),
       properties("remoteRunPlugin").get(),
       properties("coveragePlugin").get(),
+      "XPathView",
       "org.jetbrains.plugins.terminal",
     )
   }
@@ -99,8 +100,16 @@ tasks {
   test {
     dependencies {
       intellijPlatform {
-        bundledModule("intellij.platform.coverage.agent")
-        bundledModule("intellij.profiler.common")
+        listOf(
+          "com.intellij.css",
+          "com.intellij.database",
+          "com.intellij.java",
+          "org.intellij.plugins.markdown",
+        ).forEach { bundledPlugin(it) }
+        listOf(
+          "intellij.platform.coverage.agent",
+          "intellij.profiler.common",
+        ).forEach { bundledModule(it) }
       }
     }
   }
