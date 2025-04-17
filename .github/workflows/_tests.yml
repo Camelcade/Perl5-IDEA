@@ -107,7 +107,7 @@ jobs:
         env:
           ASDF_PERL_VERSION: ${{ env.PERL_TEST_VERSION }}
         run: |
-          git clone --depth 1 https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.11.2 && ~/.asdf/bin/asdf plugin add perl || ~/.asdf/bin/asdf update          
+          git clone --depth 1 https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.15.0 && ~/.asdf/bin/asdf plugin add perl || ~/.asdf/bin/asdf update          
           bash -c '~/.asdf/bin/asdf install perl ${{ env.PERL_TEST_VERSION }} --noman -j 8 || true'
           ~/.asdf/bin/asdf exec cpan install App::cpanminus <<<yes
           ~/.asdf/bin/asdf exec cpanm --notest  ${{ env.TEST_PERL_MODULES }} 
