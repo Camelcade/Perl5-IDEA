@@ -306,7 +306,7 @@ tasks {
 
 
 val coverageReportFile = project.buildDir.resolve("reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
-sonarqube {
+sonar {
   properties {
     property("sonar.projectKey", "Camelcade_Perl5-IDEA")
     property("sonar.organization", "camelcade")
