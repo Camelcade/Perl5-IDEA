@@ -34,6 +34,7 @@ buildscript {
 }
 
 plugins {
+  id("com.hurricup.gradle.fixcompress")
   id("idea")
   id("jacoco")
   id("org.jetbrains.intellij.platform") version "2.5.0"
