@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.lang.Language;
 import com.intellij.lang.injection.MultiHostInjector;
 import com.intellij.lang.injection.MultiHostRegistrar;
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
@@ -43,13 +44,13 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
  * Common ancestor for heredocs and strings
  */
 public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
-  private static final TokenSet ELEMENTS_TO_IGNORE = TokenSet.create(
+  private static final NotNullLazyValue<TokenSet> ELEMENTS_TO_IGNORE = NotNullLazyValue.createValue(() -> TokenSet.create(
     STRING_SPECIAL_LCFIRST, STRING_SPECIAL_TCFIRST, STRING_SPECIAL_LOWERCASE_START,
     STRING_SPECIAL_UPPERCASE_START, STRING_SPECIAL_FOLDCASE_START,
     STRING_SPECIAL_QUOTE_START, STRING_SPECIAL_MODIFIER_END
-  );
+  ));
 
-  private static final TokenSet ELEMENTS_TO_REPLACE_WITH_DUMMY = TokenSet.orSet(
+  private static final NotNullLazyValue<TokenSet> ELEMENTS_TO_REPLACE_WITH_DUMMY = NotNullLazyValue.createValue(() -> TokenSet.orSet(
     PerlTokenSets.STRING_CHAR_UNRENDERABLE_ALIASES, TokenSet.create(
       STRING_SPECIAL_BACKREF,
       SCALAR_VARIABLE, ARRAY_VARIABLE, ARRAY_INDEX_VARIABLE,
@@ -57,7 +58,7 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
       ARRAY_ELEMENT, HASH_ELEMENT,
       DEREF_EXPR,
       ARRAY_SLICE, HASH_SLICE, HASH_ARRAY_SLICE
-    ));
+    )));
 
   private static final Logger LOG = Logger.getInstance(PerlLiteralLanguageInjector.class);
 
@@ -110,8 +111,8 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
     Descriptor currentDescriptor = null;
     while (true) {
       IElementType elementType = PsiUtilCore.getElementType(run);
-      boolean shouldIgnore = ELEMENTS_TO_IGNORE.contains(elementType);
-      boolean shouldReplace = !shouldIgnore && ELEMENTS_TO_REPLACE_WITH_DUMMY.contains(elementType);
+      boolean shouldIgnore = ELEMENTS_TO_IGNORE.get().contains(elementType);
+      boolean shouldReplace = !shouldIgnore && ELEMENTS_TO_REPLACE_WITH_DUMMY.get().contains(elementType);
       if (!shouldIgnore && !shouldReplace && run instanceof PerlCharSubstitution charSubstitution) {
         var codePoint = charSubstitution.getCodePoint();
         shouldReplace = !Character.isValidCodePoint(codePoint);
