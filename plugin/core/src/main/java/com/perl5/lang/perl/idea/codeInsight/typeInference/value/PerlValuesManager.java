@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
+import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.util.RecursionManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
@@ -57,12 +58,12 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
  */
 public final class PerlValuesManager {
   private static final Logger LOG = Logger.getInstance(PerlValuesManager.class);
-  private static final TokenSet ONE_OF_VALUES = TokenSet.create(
+  private static final NotNullLazyValue<TokenSet> ONE_OF_VALUES = NotNullLazyValue.createValue(() -> TokenSet.create(
     AND_EXPR, OR_EXPR, LP_AND_EXPR, LP_OR_XOR_EXPR, PARENTHESISED_EXPR
-  );
-  private static final TokenSet LIST_VALUES = TokenSet.create(
+  ));
+  private static final NotNullLazyValue<TokenSet> LIST_VALUES = NotNullLazyValue.createValue(() -> TokenSet.create(
     STRING_LIST, COMMA_SEQUENCE_EXPR
-  );
+  ));
   private static final PsiCacheKey<PerlValue, PsiElement> VALUE_KEY = PsiCacheKey.create(
     "perl5.value", it -> RecursionManager.doPreventingRecursion(it, true, () -> intern(computeValue(it)))
   );
@@ -214,10 +215,10 @@ public final class PerlValuesManager {
       }
       return builder.build();
     }
-    else if (ONE_OF_VALUES.contains(elementType)) {
+    else if (ONE_OF_VALUES.get().contains(elementType)) {
       return PerlOneOfValue.builder().addVariants(element.getChildren()).build();
     }
-    else if (LIST_VALUES.contains(elementType)) {
+    else if (LIST_VALUES.get().contains(elementType)) {
       return PerlArrayValue.builder().addPsiElements(PerlArrayUtil.collectListElements(element)).build();
     }
     else if (elementType == ANON_ARRAY) {
@@ -229,20 +230,20 @@ public final class PerlValuesManager {
     else if (elementType == NUMBER_CONSTANT) {
       return PerlScalarValue.create(element.getText());
     }
-    else if (element instanceof PsiPerlHashIndex) {
+    else if (element instanceof PsiPerlHashIndex hashIndex) {
       PsiElement parent = element.getParent();
       if (parent instanceof PsiPerlDerefExpr derefExpr) {
         return PerlHashElementValue.create(
           PerlHashDereferenceValue.create(from(derefExpr.getPreviousElement(element))),
-          from(((PsiPerlHashIndex)element).getExpr()));
+          from(hashIndex.getExpr()));
       }
     }
-    else if (element instanceof PsiPerlArrayIndex) {
+    else if (element instanceof PsiPerlArrayIndex index) {
       PsiElement parent = element.getParent();
       if (parent instanceof PsiPerlDerefExpr derefExpr) {
         return PerlArrayElementValue.create(
           PerlArrayDereferenceValue.create(from(derefExpr.getPreviousElement(element))),
-          from(((PsiPerlArrayIndex)element).getExpr()));
+          from(index.getExpr()));
       }
     }
     else if (element instanceof PsiPerlPrefixUnaryExpr prefixUnaryExpr) {
@@ -278,21 +279,21 @@ public final class PerlValuesManager {
     else if (element instanceof PsiPerlScalarCastExpr scalarCastExpr) {
       PsiPerlExpr expr = scalarCastExpr.getExpr();
       if (expr == null) {
-        expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlScalarCastExpr)element).getBlock());
+        expr = PerlPsiUtil.getSingleBlockExpression(scalarCastExpr.getBlock());
       }
       return PerlScalarDereferenceValue.create(from(expr));
     }
     else if (element instanceof PsiPerlArrayCastExpr arrayCastExpr) {
       PsiPerlExpr expr = arrayCastExpr.getExpr();
       if (expr == null) {
-        expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlArrayCastExpr)element).getBlock());
+        expr = PerlPsiUtil.getSingleBlockExpression(arrayCastExpr.getBlock());
       }
       return PerlArrayDereferenceValue.create(from(expr));
     }
     else if (element instanceof PsiPerlHashCastExpr hashCastExpr) {
       PsiPerlExpr expr = hashCastExpr.getExpr();
       if (expr == null) {
-        expr = PerlPsiUtil.getSingleBlockExpression(((PsiPerlHashCastExpr)element).getBlock());
+        expr = PerlPsiUtil.getSingleBlockExpression(hashCastExpr.getBlock());
       }
       return PerlHashDereferenceValue.create(from(expr));
     }

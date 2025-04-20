@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import com.intellij.openapi.editor.highlighter.EditorHighlighter;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.PsiElement;
@@ -56,7 +57,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
   // these chars are automatically closed by IDEA and we can't control this
   private static final String HANDLED_BY_BRACE_MATCHER = "{([";
 
-  private static final TokenSet AUTO_OPENED_TOKENS = TokenSet.create(
+  private static final NotNullLazyValue<TokenSet> AUTO_OPENED_TOKENS = NotNullLazyValue.createValue(() -> TokenSet.create(
     RESERVED_USE,
     RESERVED_NO,
     RESERVED_PACKAGE,
@@ -66,7 +67,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     ANNOTATION_SCALAR,
     ANNOTATION_ARRAY,
     ANNOTATION_HASH
-  );
+  ));
 
 
   @Override
@@ -347,7 +348,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     return typedChar == '^' && PRE_VARIABLE_NAME_TOKENS.contains(elementType) ||
            typedChar == '>' && elementType == OPERATOR_MINUS ||
            typedChar == ':' && elementType == COLON ||
-           typedChar == ' ' && (AUTO_OPENED_TOKENS.contains(elementType) || PerlStringList.isListElement(element)) ||
+           typedChar == ' ' && (AUTO_OPENED_TOKENS.get().contains(elementType) || PerlStringList.isListElement(element)) ||
            typedChar == '{' && (elementType == STRING_SPECIAL_UNICODE || SIGILS.contains(elementType)) ||
            StringUtil.containsChar("$@%#", typedChar);
   }
