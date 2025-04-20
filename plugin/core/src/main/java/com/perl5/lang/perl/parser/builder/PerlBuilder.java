@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 
 /**
@@ -64,7 +64,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
         return null;
       }
 
-      if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(rawTokenType)) {
+      if (!PerlTokenSetsEx.getWHITE_SPACE_AND_COMMENTS().contains(rawTokenType)) {
         steps -= step;
       }
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,8 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.psi.PerlStringList;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
@@ -152,7 +152,7 @@ public final class PerlArrayUtil implements PerlElementTypes {
   }
 
   public static @NotNull List<PsiElement> collectListElements(@Nullable PsiElement rootElement, @NotNull List<PsiElement> result) {
-    if (rootElement == null || PerlParserDefinition.COMMENTS.contains(PsiUtilCore.getElementType(rootElement))) {
+    if (rootElement == null || PerlTokenSetsEx.getCOMMENTS().contains(PsiUtilCore.getElementType(rootElement))) {
       return result;
     }
 

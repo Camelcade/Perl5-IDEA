@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScopeMember;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import org.jetbrains.annotations.NotNull;
@@ -58,7 +58,7 @@ public interface PerlVariableDeclarationExpr extends PsiPerlExpr, PerlNamespaceE
     PsiElement run = getFirstChild();
     while ((run = run.getNextSibling()) != null) {
       IElementType elementType = PsiUtilCore.getElementType(run);
-      if (!PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(elementType)) {
+      if (!PerlTokenSetsEx.getMEANINGLESS_TOKENS().contains(elementType)) {
         return elementType == LEFT_PAREN;
       }
     }

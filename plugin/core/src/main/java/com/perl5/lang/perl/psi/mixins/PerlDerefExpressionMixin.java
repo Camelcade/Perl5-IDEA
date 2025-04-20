@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.psi.PsiPerlDerefExpr;
 import com.perl5.lang.perl.psi.impl.PsiPerlExprImpl;
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +40,7 @@ public abstract class PerlDerefExpressionMixin extends PsiPerlExprImpl implement
     }
     currentElement = currentElement.getPrevSibling();
     IElementType currentElementType;
-    while (PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(currentElementType = PsiUtilCore.getElementType(currentElement))
+    while (PerlTokenSetsEx.getWHITE_SPACE_AND_COMMENTS().contains(currentElementType = PsiUtilCore.getElementType(currentElement))
            || currentElementType == OPERATOR_DEREFERENCE) {
       currentElement = currentElement.getPrevSibling();
     }
