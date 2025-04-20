@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,7 +94,7 @@ public final class PerlAnnotations implements PerlElementTypes {
   public static PerlValue getParameterValue(@NotNull PerlAnnotationWithValue annotation) {
     String returnClass = getReturnClass(annotation);
     return returnClass == null ? UNKNOWN_VALUE :
-           returnClass.equals(NAMESPACE_ANY) ? NAMESPACE_ANY_VALUE : PerlScalarValue.create(returnClass);
+      returnClass.equals(NAMESPACE_ANY) ? NAMESPACE_ANY_VALUE.get() : PerlScalarValue.create(returnClass);
   }
 
   /**

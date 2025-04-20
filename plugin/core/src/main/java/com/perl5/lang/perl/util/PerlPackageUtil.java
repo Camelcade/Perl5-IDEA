@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
@@ -93,7 +94,8 @@ public final class PerlPackageUtil implements PerlElementTypes {
   public static final char NAMESPACE_SEPARATOR_LEGACY = '\'';
 
   public static final String NAMESPACE_ANY = "*";
-  public static final PerlValue NAMESPACE_ANY_VALUE = PerlScalarValue.create(NAMESPACE_ANY);
+  public static final AtomicNotNullLazyValue<PerlValue> NAMESPACE_ANY_VALUE =
+    AtomicNotNullLazyValue.createValue(() -> PerlScalarValue.create(NAMESPACE_ANY));
 
   public static final String __PACKAGE__ = "__PACKAGE__";
   public static final String PACKAGE_CARP = "Carp";

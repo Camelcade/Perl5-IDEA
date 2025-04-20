@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY_VALUE;
+
 
 /**
  * Provides information about implicitly defined subs, e.g {@code Types::Standard}
@@ -158,7 +159,7 @@ public abstract class PerlImplicitDeclarationsProvider {
       return PerlValues.UNKNOWN_VALUE;
     }
     if (returnsAttribute.equals("*")) {
-      return NAMESPACE_ANY_VALUE;
+      return NAMESPACE_ANY_VALUE.get();
     }
     return PerlScalarValue.create(PerlPackageUtil.getCanonicalName(returnsAttribute));
   }
