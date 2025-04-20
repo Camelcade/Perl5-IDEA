@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +36,7 @@ public class PerlEditorUtil {
   public static @NotNull HighlighterIterator moveToPreviousMeaningfulToken(@NotNull HighlighterIterator iterator, boolean ignoreComments) {
     while (!iterator.atEnd()) {
       IElementType tokenType = iterator.getTokenType();
-      if (tokenType != TokenType.WHITE_SPACE && !(ignoreComments && PerlParserDefinition.COMMENTS.contains(tokenType))) {
+      if (tokenType != TokenType.WHITE_SPACE && !(ignoreComments && PerlTokenSetsEx.getCOMMENTS().contains(tokenType))) {
         break;
       }
       iterator.retreat();
@@ -51,7 +51,7 @@ public class PerlEditorUtil {
     iterator.advance();
     while (!iterator.atEnd()) {
       IElementType tokenType = iterator.getTokenType();
-      if (tokenType != TokenType.WHITE_SPACE && !(ignoreComments && PerlParserDefinition.COMMENTS.contains(tokenType))) {
+      if (tokenType != TokenType.WHITE_SPACE && !(ignoreComments && PerlTokenSetsEx.getCOMMENTS().contains(tokenType))) {
         break;
       }
       iterator.advance();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ import com.perl5.lang.htmlmason.lexer.HTMLMasonLexerAdapter;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.HTMLMasonParserImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,7 +44,7 @@ import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 
 public class HTMLMasonParserDefinition extends PerlParserDefinition {
 
-  public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
+  public static final TokenSet COMMENTS = TokenSet.orSet(PerlTokenSetsEx.getCOMMENTS(),
                                                          TokenSet.create(
                                                            HTML_MASON_LINE_OPENER,
                                                            HTML_MASON_PERL_OPENER,

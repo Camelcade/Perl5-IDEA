@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
@@ -69,7 +69,7 @@ public class PerlUsePackageQuickFix implements LocalQuickFix {
           PsiElement nextStatement = baseUseStatement;
 
           while ((nextStatement = nextStatement.getNextSibling()) != null
-                 && PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(nextStatement.getNode().getElementType())
+                 && PerlTokenSetsEx.getWHITE_SPACE_AND_COMMENTS().contains(nextStatement.getNode().getElementType())
           ) {
 
           }

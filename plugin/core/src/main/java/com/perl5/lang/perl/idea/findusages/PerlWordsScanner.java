@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,13 +23,13 @@ import com.intellij.psi.impl.source.tree.TreeUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
 public class PerlWordsScanner extends DefaultWordsScanner implements PsiBasedWordScanner {
@@ -44,11 +44,11 @@ public class PerlWordsScanner extends DefaultWordsScanner implements PsiBasedWor
       NUMBER_VERSION, VERSION_ELEMENT, SUB_PROTOTYPE_TOKEN
     ));
   private static final @NotNull TokenSet COMMENTS_TOKENSET = TokenSet.andNot(
-    TokenSet.orSet(PerlParserDefinition.COMMENTS, TokenSet.create(POD)),
+    TokenSet.orSet(PerlTokenSetsEx.getCOMMENTS(), TokenSet.create(POD)),
     TokenSet.create(HEREDOC_END)
   );
-  private static final TokenSet IDENTIFIERS_TOKENSET = PerlParserDefinition.IDENTIFIERS;
-  private static final TokenSet LITERALS_TOKENSET = PerlParserDefinition.LITERALS;
+  private static final TokenSet IDENTIFIERS_TOKENSET = PerlTokenSetsEx.getIDENTIFIERS();
+  private static final TokenSet LITERALS_TOKENSET = PerlTokenSetsEx.getLITERALS();
 
 
   public PerlWordsScanner() {

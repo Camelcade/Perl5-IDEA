@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,15 +18,15 @@ package com.perl5.lang.embedded.idea.findusages;
 
 import com.intellij.lang.cacheBuilder.DefaultWordsScanner;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
-import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 
 
 public class EmbeddedPerlWordsScanner extends DefaultWordsScanner {
   public EmbeddedPerlWordsScanner() {
     super(new EmbeddedPerlLexerAdapter(null, false),
-          PerlParserDefinition.IDENTIFIERS,
-          PerlParserDefinition.COMMENTS,
-          PerlParserDefinition.LITERALS);
+          PerlTokenSetsEx.getIDENTIFIERS(),
+          PerlTokenSetsEx.getCOMMENTS(),
+          PerlTokenSetsEx.getLITERALS());
     setMayHaveFileRefsInLiterals(true);
   }
 }

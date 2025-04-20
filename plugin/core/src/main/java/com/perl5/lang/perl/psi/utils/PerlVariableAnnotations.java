@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,9 @@ import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.psi.util.*;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.PerlElementTypesGenerated;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
@@ -186,7 +186,7 @@ public class PerlVariableAnnotations {
   public static boolean processPotentialTargets(@NotNull PerlAnnotationType typeAnnotation,
                                                 @NotNull Processor<? super PerlVariableDeclarationElement> declarationElementProcessor) {
     PsiElement run = typeAnnotation.getAnnotationContainer();
-    while (run != null && PerlParserDefinition.WHITE_SPACE_AND_REAL_COMMENTS.contains(PsiUtilCore.getElementType(run))) {
+    while (run != null && PerlTokenSetsEx.getWHITE_SPACE_AND_REAL_COMMENTS().contains(PsiUtilCore.getElementType(run))) {
       run = run.getNextSibling();
     }
 

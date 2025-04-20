@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.Mason2ParserImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -32,7 +33,7 @@ import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.*;
 
 public class Mason2ParserDefinition extends PerlParserDefinition {
 
-  public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
+  public static final TokenSet COMMENTS = TokenSet.orSet(PerlTokenSetsEx.getCOMMENTS(),
                                                          TokenSet.create(
                                                            MASON_LINE_OPENER,
                                                            MASON_TEMPLATE_BLOCK_HTML

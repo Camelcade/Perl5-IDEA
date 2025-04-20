@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,8 +38,8 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
@@ -60,7 +60,6 @@ import java.util.List;
 
 import static com.intellij.psi.TokenType.NEW_LINE_INDENT;
 import static com.intellij.psi.TokenType.WHITE_SPACE;
-import static com.perl5.lang.perl.PerlParserDefinition.MEANINGLESS_TOKENS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 
 public final class PerlPsiUtil implements PerlElementTypes {
@@ -439,7 +438,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
 
 
   public static boolean isCommentOrSpace(PsiElement element) {
-    return element != null && MEANINGLESS_TOKENS.contains(PsiUtilCore.getElementType(element));
+    return element != null && PerlTokenSetsEx.getMEANINGLESS_TOKENS().contains(PsiUtilCore.getElementType(element));
   }
 
   /**
@@ -899,7 +898,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
    * @return removes meaningless elements from the {@code source} list
    */
   public static @NotNull <T extends PsiElement> List<T> cleanupChildren(@NotNull T[] source) {
-    return ContainerUtil.filter(source, it -> !PerlParserDefinition.WHITE_SPACE_AND_COMMENTS.contains(PsiUtilCore.getElementType(it)));
+    return ContainerUtil.filter(source, it -> !PerlTokenSetsEx.getWHITE_SPACE_AND_COMMENTS().contains(PsiUtilCore.getElementType(it)));
   }
 
   /**

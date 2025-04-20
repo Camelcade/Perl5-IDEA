@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
 import com.perl5.lang.embedded.psi.impl.EmbeddedPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
@@ -38,7 +39,7 @@ import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.*;
 public class EmbeddedPerlParserDefinition extends PerlParserDefinition {
   public static final IFileElementType FILE = new PerlFileElementType("Embedded Perl5", EmbeddedPerlLanguage.INSTANCE);
 
-  public static final TokenSet COMMENTS = TokenSet.orSet(PerlParserDefinition.COMMENTS,
+  public static final TokenSet COMMENTS = TokenSet.orSet(PerlTokenSetsEx.getCOMMENTS(),
                                                          TokenSet.create(
                                                            EMBED_TEMPLATE_BLOCK_HTML,
                                                            EMBED_MARKER_OPEN,

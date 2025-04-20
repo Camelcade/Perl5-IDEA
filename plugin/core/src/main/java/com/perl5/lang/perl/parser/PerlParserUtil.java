@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,9 +24,9 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.Contract;
@@ -62,7 +62,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
     "(?:" + BASIC_IDENTIFIER_PATTERN_TEXT + PACKAGE_SEPARATOR_PATTERN_TEXT + ")*+" +
     ")" +
     "(" + BASIC_IDENTIFIER_PATTERN_TEXT + ")");
-  public static final WhitespacesAndCommentsBinder PERL_LEADING_COMMENTS_BINDER = leadingCommentsBinder(PerlParserDefinition.REAL_COMMENTS);
+  public static final WhitespacesAndCommentsBinder PERL_LEADING_COMMENTS_BINDER = leadingCommentsBinder(PerlTokenSetsEx.getREAL_COMMENTS());
 
   /**
    * Wrapper for Builder class in order to implement additional per parser information in PerlBuilder

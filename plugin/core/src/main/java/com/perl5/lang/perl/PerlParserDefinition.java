@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,13 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
-import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
@@ -41,39 +40,8 @@ import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlLexer.*;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
 public class PerlParserDefinition implements ParserDefinition, PerlElementTypes, PerlLexerAwareParserDefinition {
-  public static final TokenSet WHITE_SPACES = TokenSet.create(
-    TokenType.WHITE_SPACE
-  );
-
-  public static final TokenSet REAL_COMMENTS = TokenSet.create(
-    COMMENT_LINE, COMMENT_BLOCK, COMMENT_ANNOTATION
-  );
-
-  public static final TokenSet COMMENTS = TokenSet.orSet(
-    HEREDOC_BODIES_TOKENSET,
-    REAL_COMMENTS,
-    TokenSet.create(
-      HEREDOC_END, HEREDOC_END_INDENTABLE
-    )
-  );
-
-  public static final TokenSet WHITE_SPACE_AND_REAL_COMMENTS = TokenSet.orSet(WHITE_SPACES, REAL_COMMENTS);
-
-  public static final TokenSet WHITE_SPACE_AND_COMMENTS = TokenSet.orSet(WHITE_SPACES, COMMENTS);
-
-  public static final TokenSet MEANINGLESS_TOKENS = TokenSet.orSet(
-    WHITE_SPACE_AND_COMMENTS,
-    TokenSet.create(POD)
-  );
-
-  // fixme inline this
-  public static final TokenSet LITERALS = PerlTokenSets.STRING_CONTENT_TOKENSET;
-  public static final TokenSet IDENTIFIERS = TokenSet.orSet(
-    PerlTokenSets.VARIABLE_NAMES,
-    TokenSet.create(SUB_NAME, QUALIFYING_PACKAGE, PACKAGE, IDENTIFIER));
 
   @Override
   public @NotNull Lexer createLexer(Project project) {
@@ -82,17 +50,17 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes,
 
   @Override
   public @NotNull TokenSet getWhitespaceTokens() {
-    return WHITE_SPACES;
+    return PerlTokenSetsEx.getWHITE_SPACES();
   }
 
   @Override
   public @NotNull TokenSet getCommentTokens() {
-    return COMMENTS;
+    return PerlTokenSetsEx.getCOMMENTS();
   }
 
   @Override
   public @NotNull TokenSet getStringLiteralElements() {
-    return LITERALS;
+    return PerlTokenSetsEx.getLITERALS();
   }
 
   @Override
