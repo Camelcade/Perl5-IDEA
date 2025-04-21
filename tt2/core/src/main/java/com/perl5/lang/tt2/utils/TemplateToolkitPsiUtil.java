@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.tt2.TemplateToolkitParserDefinition;
+import com.perl5.lang.tt2.elementTypes.TemplateToolkitTokenSets;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.Nullable;
@@ -36,7 +36,7 @@ public class TemplateToolkitPsiUtil {
 
       IElementType tokenType = result.getNode().getElementType();
 
-      if (!TemplateToolkitParserDefinition.WHITESPACES_AND_COMMENTS.contains(tokenType)) {
+      if (!TemplateToolkitTokenSets.WHITESPACES_AND_COMMENTS.contains(tokenType)) {
         break;
       }
       result = result.getPrevSibling();

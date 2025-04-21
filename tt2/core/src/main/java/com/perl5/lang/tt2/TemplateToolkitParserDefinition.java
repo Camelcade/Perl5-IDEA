@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
+import com.perl5.lang.tt2.elementTypes.TemplateToolkitTokenSets;
 import com.perl5.lang.tt2.lexer.TemplateToolkitLexerAdapter;
 import com.perl5.lang.tt2.parser.TemplateToolkitParser;
 import com.perl5.lang.tt2.psi.impl.TemplateToolkitFileImpl;
@@ -36,22 +36,6 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class TemplateToolkitParserDefinition implements ParserDefinition, TemplateToolkitElementTypes {
-  public static final TokenSet WHITE_SPACES = TokenSet.create(
-    TokenType.WHITE_SPACE
-  );
-  public static final TokenSet COMMENTS = TokenSet.create(
-    TT2_HTML,
-    LINE_COMMENT,
-    BLOCK_COMMENT
-  );
-
-  public static final TokenSet WHITESPACES_AND_COMMENTS = TokenSet.orSet(
-    WHITE_SPACES, COMMENTS
-  );
-
-  public static final TokenSet LITERALS = TokenSet.create(
-    TT2_STRING_CONTENT
-  );
 
   @Override
   public @NotNull Lexer createLexer(Project project) {
@@ -70,17 +54,17 @@ public class TemplateToolkitParserDefinition implements ParserDefinition, Templa
 
   @Override
   public @NotNull TokenSet getWhitespaceTokens() {
-    return WHITE_SPACES;
+    return TemplateToolkitTokenSets.WHITE_SPACES;
   }
 
   @Override
   public @NotNull TokenSet getCommentTokens() {
-    return COMMENTS;
+    return TemplateToolkitTokenSets.COMMENTS;
   }
 
   @Override
   public @NotNull TokenSet getStringLiteralElements() {
-    return LITERALS;
+    return TemplateToolkitTokenSets.LITERALS;
   }
 
   @Override
