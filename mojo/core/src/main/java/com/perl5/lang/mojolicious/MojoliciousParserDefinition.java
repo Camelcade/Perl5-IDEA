@@ -34,38 +34,18 @@ import com.perl5.lang.mojolicious.lexer.MojoliciousLexerAdapter;
 import com.perl5.lang.mojolicious.psi.impl.MojoliciousFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
-import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.MojoliciousParser;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.FILE;
 
 
 public class MojoliciousParserDefinition extends PerlParserDefinition {
-  public static final TokenSet COMMENTS = TokenSet.orSet(PerlTokenSetsEx.getCOMMENTS(),
-                                                         TokenSet.create(
-                                                           MOJO_TEMPLATE_BLOCK_HTML,
-
-                                                           MOJO_BLOCK_OPENER,
-                                                           MOJO_BLOCK_CLOSER,
-                                                           MOJO_BLOCK_NOSPACE_CLOSER,
-
-                                                           MOJO_LINE_OPENER,
-                                                           MOJO_LINE_EXPR_OPENER,
-                                                           MOJO_LINE_EXPR_ESCAPED_OPENER,
-
-                                                           MOJO_BLOCK_EXPR_OPENER,
-                                                           MOJO_BLOCK_EXPR_ESCAPED_OPENER,
-
-                                                           MOJO_BLOCK_OPENER_TAG,
-                                                           MOJO_LINE_OPENER_TAG
-                                                         ));
-
   @Override
   public @NotNull TokenSet getCommentTokens() {
-    return COMMENTS;
+    return MojoTokenSets.COMMENTS;
   }
 
   @Override
