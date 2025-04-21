@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,16 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.mojolicious
 
-package com.perl5.lang.mojolicious;
+import com.intellij.psi.tree.TokenSet
 
-import com.intellij.psi.tree.TokenSet;
-
-import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;
-
-public final class MojoTokenSets {
-  private MojoTokenSets() {
-  }
-
-  public static final TokenSet LINE_OPENERS = TokenSet.create(MOJO_LINE_OPENER, MOJO_LINE_EXPR_OPENER, MOJO_LINE_EXPR_ESCAPED_OPENER);
+object MojoTokenSets {
+  @JvmField
+  val LINE_OPENERS: TokenSet = TokenSet.create(
+    MojoliciousElementTypes.MOJO_LINE_OPENER,
+    MojoliciousElementTypes.MOJO_LINE_EXPR_OPENER,
+    MojoliciousElementTypes.MOJO_LINE_EXPR_ESCAPED_OPENER
+  )
 }
