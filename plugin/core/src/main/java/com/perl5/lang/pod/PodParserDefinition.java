@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,22 +24,17 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
-import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
+import com.perl5.lang.pod.lexer.PodTokenSetsEx;
 import com.perl5.lang.pod.parser.PodParser;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
 import org.jetbrains.annotations.NotNull;
 
 public class PodParserDefinition implements ParserDefinition, PodElementTypes {
-
-  public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
-  public static final TokenSet ALL_WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE, POD_NEWLINE);
-  public static final TokenSet COMMENTS = TokenSet.create(POD_OUTER);
-
   @Override
   public @NotNull Lexer createLexer(Project project) {
     return new PodLexerAdapter();
@@ -47,12 +42,12 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes {
 
   @Override
   public @NotNull TokenSet getWhitespaceTokens() {
-    return WHITE_SPACES;
+    return PodTokenSetsEx.WHITE_SPACES;
   }
 
   @Override
   public @NotNull TokenSet getCommentTokens() {
-    return COMMENTS;
+    return PodTokenSetsEx.COMMENTS;
   }
 
   @Override
