@@ -22,23 +22,16 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.mason2.elementType.Mason2TokenSets;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.Mason2ParserImpl;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.*;
+import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.PP_FILE;
 
 
 public class Mason2ParserDefinition extends PerlParserDefinition {
-
-  public static final TokenSet COMMENTS = TokenSet.orSet(PerlTokenSetsEx.getCOMMENTS(),
-                                                         TokenSet.create(
-                                                           MASON_LINE_OPENER,
-                                                           MASON_TEMPLATE_BLOCK_HTML
-                                                         ));
-
   @Override
   public @NotNull IFileElementType getFileNodeType() {
     return PP_FILE;
@@ -51,7 +44,7 @@ public class Mason2ParserDefinition extends PerlParserDefinition {
 
   @Override
   public @NotNull TokenSet getCommentTokens() {
-    return COMMENTS;
+    return Mason2TokenSets.COMMENTS;
   }
 
   @Override
