@@ -26,29 +26,19 @@ import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
+import com.perl5.lang.embedded.psi.EmbeddedPerlTokenSets;
 import com.perl5.lang.embedded.psi.impl.EmbeddedPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
-import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
-import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.*;
+import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_TEMPLATE_BLOCK_HTML;
 
 
 public class EmbeddedPerlParserDefinition extends PerlParserDefinition {
-  public static final IFileElementType FILE = new PerlFileElementType("Embedded Perl5", EmbeddedPerlLanguage.INSTANCE);
-
-  public static final TokenSet COMMENTS = TokenSet.orSet(PerlTokenSetsEx.getCOMMENTS(),
-                                                         TokenSet.create(
-                                                           EMBED_TEMPLATE_BLOCK_HTML,
-                                                           EMBED_MARKER_OPEN,
-                                                           EMBED_MARKER_CLOSE
-                                                         ));
-
   @Override
   public @NotNull TokenSet getCommentTokens() {
-    return COMMENTS;
+    return EmbeddedPerlTokenSets.COMMENTS;
   }
 
   @Override
@@ -58,7 +48,7 @@ public class EmbeddedPerlParserDefinition extends PerlParserDefinition {
 
   @Override
   public @NotNull IFileElementType getFileNodeType() {
-    return FILE;
+    return EmbeddedPerlTokenSets.FILE;
   }
 
   @Override

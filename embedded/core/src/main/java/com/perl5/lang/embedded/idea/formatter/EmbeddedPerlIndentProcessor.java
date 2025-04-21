@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.embedded.idea.formatter;
 
 import com.intellij.formatting.Indent;
-import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
+import com.perl5.lang.embedded.psi.EmbeddedPerlTokenSets;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +28,7 @@ public class EmbeddedPerlIndentProcessor extends PerlIndentProcessor {
 
   @Override
   public @Nullable Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
-    if (block.getElementType() == EmbeddedPerlParserDefinition.FILE) {
+    if (block.getElementType() == EmbeddedPerlTokenSets.FILE) {
       return Indent.getNoneIndent();
     }
     return super.getChildIndent(block, newChildIndex);
