@@ -16,12 +16,38 @@
 package com.perl5.lang.mojolicious
 
 import com.intellij.psi.tree.TokenSet
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.*
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx
+
 
 object MojoTokenSets {
   @JvmField
   val LINE_OPENERS: TokenSet = TokenSet.create(
-    MojoliciousElementTypes.MOJO_LINE_OPENER,
-    MojoliciousElementTypes.MOJO_LINE_EXPR_OPENER,
-    MojoliciousElementTypes.MOJO_LINE_EXPR_ESCAPED_OPENER
+    MOJO_LINE_OPENER,
+    MOJO_LINE_EXPR_OPENER,
+    MOJO_LINE_EXPR_ESCAPED_OPENER
   )
+
+  @JvmField
+  val COMMENTS: TokenSet = TokenSet.orSet(
+    PerlTokenSetsEx.COMMENTS,
+    TokenSet.create(
+      MOJO_TEMPLATE_BLOCK_HTML,
+
+      MOJO_BLOCK_OPENER,
+      MOJO_BLOCK_CLOSER,
+      MOJO_BLOCK_NOSPACE_CLOSER,
+
+      MOJO_LINE_OPENER,
+      MOJO_LINE_EXPR_OPENER,
+      MOJO_LINE_EXPR_ESCAPED_OPENER,
+
+      MOJO_BLOCK_EXPR_OPENER,
+      MOJO_BLOCK_EXPR_ESCAPED_OPENER,
+
+      MOJO_BLOCK_OPENER_TAG,
+      MOJO_LINE_OPENER_TAG
+    )
+  )
+
 }
