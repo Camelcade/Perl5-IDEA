@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.tt2.TemplateToolkitBundle;
-import com.perl5.lang.tt2.TemplateToolkitParserDefinition;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
+import com.perl5.lang.tt2.elementTypes.TemplateToolkitTokenSets;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 import org.jetbrains.annotations.NotNull;
 
@@ -100,7 +100,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
         break;
       }
 
-      boolean isLastToken = TemplateToolkitParserDefinition.WHITE_SPACES.contains(b.rawLookup(1));
+      boolean isLastToken = TemplateToolkitTokenSets.WHITE_SPACES.contains(b.rawLookup(1));
 
       PsiBuilder.Marker m = b.mark();
       b.advanceLexer();
@@ -556,7 +556,7 @@ public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implement
       if (tokenType == TT2_SEMI) {
         return true;
       }
-      if (!TemplateToolkitParserDefinition.WHITESPACES_AND_COMMENTS.contains(tokenType)) {
+      if (!TemplateToolkitTokenSets.WHITESPACES_AND_COMMENTS.contains(tokenType)) {
         return false;
       }
       offset--;
