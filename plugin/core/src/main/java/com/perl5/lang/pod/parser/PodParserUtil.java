@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.util.NlsContexts.ParsingError;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.pod.PodParserDefinition;
 import com.perl5.lang.pod.lexer.PodElementTypes;
+import com.perl5.lang.pod.lexer.PodTokenSetsEx;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -65,7 +65,7 @@ public class PodParserUtil extends GeneratedParserUtilBase implements PodElement
 
     if (tokenType == POD_IDENTIFIER) {
       PsiBuilder.Marker m = b.mark();
-      while (!b.eof() && !PodParserDefinition.ALL_WHITE_SPACES.contains(b.rawLookup(1))) {
+      while (!b.eof() && !PodTokenSetsEx.ALL_WHITE_SPACES.contains(b.rawLookup(1))) {
         b.advanceLexer();
       }
       b.advanceLexer();
