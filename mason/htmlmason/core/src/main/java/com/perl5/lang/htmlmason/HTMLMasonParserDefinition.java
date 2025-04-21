@@ -29,12 +29,12 @@ import com.intellij.psi.impl.source.tree.TreeUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.lang.htmlmason.elementType.HTMLMasonTokenSets;
 import com.perl5.lang.htmlmason.lexer.HTMLMasonLexer;
 import com.perl5.lang.htmlmason.lexer.HTMLMasonLexerAdapter;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
-import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.HTMLMasonParserImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,15 +43,6 @@ import java.util.Objects;
 import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 
 public class HTMLMasonParserDefinition extends PerlParserDefinition {
-
-  public static final TokenSet COMMENTS = TokenSet.orSet(PerlTokenSetsEx.getCOMMENTS(),
-                                                         TokenSet.create(
-                                                           HTML_MASON_LINE_OPENER,
-                                                           HTML_MASON_PERL_OPENER,
-                                                           HTML_MASON_PERL_CLOSER,
-                                                           HTML_MASON_TEMPLATE_BLOCK_HTML
-                                                         ));
-
   @Override
   public @NotNull Lexer createLexer(Project project) {
     return new HTMLMasonLexerAdapter(project, false);
@@ -69,7 +60,7 @@ public class HTMLMasonParserDefinition extends PerlParserDefinition {
 
   @Override
   public @NotNull TokenSet getCommentTokens() {
-    return COMMENTS;
+    return HTMLMasonTokenSets.COMMENTS;
   }
 
   @Override
