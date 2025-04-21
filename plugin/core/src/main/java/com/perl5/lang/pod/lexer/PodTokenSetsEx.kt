@@ -18,13 +18,14 @@ package com.perl5.lang.pod.lexer
 
 import com.intellij.psi.TokenType
 import com.intellij.psi.tree.TokenSet
+import com.perl5.lang.perl.lexer.PerlTokenSetsEx
 import com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER
 import com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_NEWLINE
 
 
 object PodTokenSetsEx {
   @JvmField
-  val WHITE_SPACES: TokenSet = TokenSet.create(TokenType.WHITE_SPACE)
+  val WHITE_SPACES: TokenSet = PerlTokenSetsEx.WHITE_SPACES
 
   @JvmField
   val ALL_WHITE_SPACES: TokenSet = TokenSet.create(TokenType.WHITE_SPACE, POD_NEWLINE)
