@@ -24,15 +24,15 @@ import com.perl5.lang.perl.parser.PerlElementTypesGenerated.*
 
 object PerlTokenSetsEx {
   @JvmStatic
-  val WHITE_SPACES: TokenSet? = TokenSet.create(TokenType.WHITE_SPACE)
+  val WHITE_SPACES: TokenSet = TokenSet.create(TokenType.WHITE_SPACE)
 
   @JvmStatic
-  val REAL_COMMENTS: TokenSet? = TokenSet.create(
+  val REAL_COMMENTS: TokenSet = TokenSet.create(
     COMMENT_LINE, COMMENT_BLOCK, COMMENT_ANNOTATION
   )
 
   @JvmStatic
-  val COMMENTS: TokenSet? = TokenSet.orSet(
+  val COMMENTS: TokenSet = TokenSet.orSet(
     HEREDOC_BODIES_TOKENSET,
     REAL_COMMENTS,
     TokenSet.create(
@@ -41,13 +41,13 @@ object PerlTokenSetsEx {
   )
 
   @JvmStatic
-  val WHITE_SPACE_AND_REAL_COMMENTS: TokenSet? = TokenSet.orSet(WHITE_SPACES, REAL_COMMENTS)
+  val WHITE_SPACE_AND_REAL_COMMENTS: TokenSet = TokenSet.orSet(WHITE_SPACES, REAL_COMMENTS)
 
   @JvmStatic
-  val WHITE_SPACE_AND_COMMENTS: TokenSet? = TokenSet.orSet(WHITE_SPACES, COMMENTS)
+  val WHITE_SPACE_AND_COMMENTS: TokenSet = TokenSet.orSet(WHITE_SPACES, COMMENTS)
 
   @JvmStatic
-  val MEANINGLESS_TOKENS: TokenSet? = TokenSet.orSet(
+  val MEANINGLESS_TOKENS: TokenSet = TokenSet.orSet(
     WHITE_SPACE_AND_COMMENTS,
     TokenSet.create(POD)
   )
@@ -57,7 +57,7 @@ object PerlTokenSetsEx {
   val LITERALS: TokenSet = PerlTokenSets.STRING_CONTENT_TOKENSET
 
   @JvmStatic
-  val IDENTIFIERS: TokenSet? = TokenSet.orSet(
+  val IDENTIFIERS: TokenSet = TokenSet.orSet(
     PerlTokenSets.VARIABLE_NAMES,
     TokenSet.create(SUB_NAME, QUALIFYING_PACKAGE, PACKAGE, IDENTIFIER)
   )
