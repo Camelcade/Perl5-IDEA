@@ -18,11 +18,18 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun properties(key: String) = providers.gradleProperty(key)
 
-val genRoot = project.file("src/main/gen")
 
-sourceSets {
-  main {
-    java.srcDirs(genRoot)
+project.file("src/main/gen").let { genRoot ->
+  sourceSets {
+    main {
+      java.srcDirs(genRoot)
+    }
+  }
+
+  idea {
+    module {
+      generatedSourceDirs.add(genRoot)
+    }
   }
 }
 

@@ -20,18 +20,24 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun properties(key: String) = providers.gradleProperty(key)
 
-val genRoot = project.file("src/main/gen")
+val genRoot = project.file("src/main/gen").also { genRoot ->
+  sourceSets {
+    main {
+      java.srcDirs(genRoot)
+    }
+  }
 
-dependencies{
-  intellijPlatform{
-    val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+  idea {
+    module {
+      generatedSourceDirs.add(genRoot)
+    }
   }
 }
 
-sourceSets {
-  main {
-    java.srcDirs(genRoot)
+dependencies {
+  intellijPlatform {
+    val platformVersionProvider: Provider<String> by rootProject.extra
+    create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
   }
 }
 
