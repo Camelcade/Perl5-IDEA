@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea;
 
 import com.intellij.patterns.PsiElementPattern;
+import com.intellij.patterns.StandardPatterns;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
@@ -162,7 +163,12 @@ public final class PerlElementPatterns {
   );
 
   public static final PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_VARIABLE =
-    psiElement(PsiPerlArrayVariable.class).withText("@EXPORT");
+    psiElement(PsiPerlArrayVariable.class).withText(
+      StandardPatterns.string().andOr(
+        StandardPatterns.string().endsWith("::EXPORT"),
+        StandardPatterns.string().equalTo("@EXPORT")
+      )
+    );
   public static final PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_DECLARATION =
     psiElement(PsiPerlVariableDeclarationGlobal.class)
       .withChild(
@@ -177,7 +183,11 @@ public final class PerlElementPatterns {
     );
 
   public static final PsiElementPattern.Capture<PsiPerlArrayVariable> EXPORT_OK_VARIABLE =
-    psiElement(PsiPerlArrayVariable.class).withText("@EXPORT_OK");
+    psiElement(PsiPerlArrayVariable.class).withText(
+      StandardPatterns.string().andOr(
+        StandardPatterns.string().endsWith("::EXPORT_OK"),
+        StandardPatterns.string().equalTo("@EXPORT_OK")
+      ));
   public static final PsiElementPattern.Capture<PsiPerlVariableDeclarationGlobal> EXPORT_OK_DECLARATION =
     psiElement(PsiPerlVariableDeclarationGlobal.class)
       .withChild(
