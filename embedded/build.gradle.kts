@@ -34,7 +34,7 @@ dependencies {
   }
 
   // Test dependencies
-  testImplementation(testFixtures(project(":plugin")))
+  testImplementation(testFixtures(project(":plugin:testFixtures")))
 
   // Plugin dependencies
   intellijPlatform {

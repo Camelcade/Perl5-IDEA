@@ -1,5 +1,3 @@
-import kotlin.text.toBoolean
-
 /*
  * Copyright 2015-2021 Alexandr Evstigneev
  *
@@ -18,6 +16,16 @@ import kotlin.text.toBoolean
 fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
+  // packaging, which modules to include into this one
+  listOf(
+    ":lang.mason.mason2:core",
+  ).forEach {
+    intellijPlatform {
+      pluginModule(implementation(project(it)))
+    }
+  }
+
+  // compilation dependencies
   listOf(
     ":plugin:core",
     ":lang.mason.mason2:core",
@@ -25,22 +33,16 @@ dependencies {
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
-    testRuntimeOnly(project(it))
   }
-  listOf(
-    ":lang.mason.mason2:core",
-  ).forEach {
-    runtimeOnly(project(it))
-    intellijPlatform{
-      pluginModule(implementation(project(it)))
-    }
-  }
-  testImplementation(testFixtures(project(":plugin")))
+  testImplementation(testFixtures(project(":plugin:testFixtures")))
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
-    listOf(project(":plugin"), project(":lang.mason.framework")).forEach { localPlugin(it) }
+    listOf(
+      project(":plugin"),
+      project(":lang.mason.framework")
+    ).forEach { localPlugin(it) }
   }
 }
 
