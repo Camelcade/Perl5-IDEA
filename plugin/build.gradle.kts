@@ -18,10 +18,6 @@ import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
 
 fun properties(key: String) = providers.gradleProperty(key)
 
-plugins {
-  id("java-test-fixtures")
-}
-
 dependencies {
   listOf(
     ":plugin:asdf",
@@ -52,22 +48,6 @@ dependencies {
       pluginModule(implementation(project(it)))
     }
   }
-
-  listOf(
-    ":plugin:asdf",
-    ":plugin:berrybrew",
-    ":plugin:core",
-    ":plugin:cpan",
-    ":plugin:cpanminus",
-    ":plugin:docker",
-    ":plugin:idea",
-    ":plugin:perlInstall",
-    ":plugin:perlbrew",
-    ":plugin:plenv",
-  ).forEach {
-    testFixturesCompileOnly(project(it))
-  }
-  testFixturesCompileOnly("junit:junit:4.13.2")
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
