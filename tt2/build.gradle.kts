@@ -16,21 +16,22 @@
 fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
+  // packaging, which modules to include into this one
+  listOf(
+    ":lang.tt2:core",
+  ).forEach {
+    intellijPlatform {
+      pluginModule(implementation(project(it)))
+    }
+  }
+
+  // dependencies
   listOf(
     ":plugin:core",
     ":lang.tt2:core",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
-    testRuntimeOnly(project(it))
-  }
-  listOf(
-    ":lang.tt2:core",
-  ).forEach {
-    runtimeOnly(project(it))
-    intellijPlatform{
-      pluginModule(implementation(project(it)))
-    }
   }
   testImplementation(testFixtures(project(":plugin:testFixtures")))
   intellijPlatform {

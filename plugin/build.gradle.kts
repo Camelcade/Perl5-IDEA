@@ -43,11 +43,11 @@ dependencies {
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
-    runtimeOnly(project(it))
     intellijPlatform {
       pluginModule(implementation(project(it)))
     }
   }
+  testImplementation(testFixtures(project(":plugin:testFixtures")))
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
