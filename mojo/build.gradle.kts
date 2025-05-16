@@ -39,7 +39,7 @@ dependencies {
       pluginModule(implementation(project(it)))
     }
   }
-  testImplementation(testFixtures(project(":plugin")))
+  testImplementation(testFixtures(project(":plugin:testFixtures")))
 }
 
 

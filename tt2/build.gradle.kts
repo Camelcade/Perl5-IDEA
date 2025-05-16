@@ -1,5 +1,3 @@
-import kotlin.text.toBoolean
-
 /*
  * Copyright 2015-2021 Alexandr Evstigneev
  *
@@ -34,7 +32,7 @@ dependencies {
       pluginModule(implementation(project(it)))
     }
   }
-  testImplementation(testFixtures(project(":plugin")))
+  testImplementation(testFixtures(project(":plugin:testFixtures")))
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())

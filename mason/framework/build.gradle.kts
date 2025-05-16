@@ -21,7 +21,7 @@ dependencies {
     testCompileOnly(project(it))
     testRuntimeOnly(project(it))
   }
-  testImplementation(testFixtures(project(":plugin")))
+  testImplementation(testFixtures(project(":plugin:testFixtures")))
   intellijPlatform {
     intellijPlatform{
       val platformVersionProvider: Provider<String> by rootProject.extra

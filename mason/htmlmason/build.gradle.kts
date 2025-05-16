@@ -34,7 +34,7 @@ dependencies {
       pluginModule(implementation(project(it)))
     }
   }
-  testImplementation(testFixtures(project(":plugin")))
+  testImplementation(testFixtures(project(":plugin:testFixtures")))
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
