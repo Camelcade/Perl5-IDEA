@@ -305,10 +305,6 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return psiElement;
   }
 
-  private @NotNull DataContext createDataContext() {
-    return createDataContext(it -> null);
-  }
-
   protected @NotNull DataContext createDataContext(@NotNull Function<String, Object> additionalData) {
     return dataId -> {
       if (CommonDataKeys.PROJECT.is(dataId)) {
