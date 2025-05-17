@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   @Override
   public final void serialize(@NotNull Stub stub, @NotNull StubOutputStream dataStream) throws IOException {
     List<StubElement<?>> childrenStubs = ContainerUtil.filter(stub.getLightNamedElementsStubs(), it ->
-      !(it instanceof PerlLightElementStub) || !((PerlLightElementStub)it).isImplicit());
+      !(it instanceof PerlLightElementStub elementStub) || !elementStub.isImplicit());
     dataStream.writeVarInt(childrenStubs.size());
     serializeStub(stub, dataStream);
     //noinspection rawtypes
