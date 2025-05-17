@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.Function;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
@@ -48,13 +49,13 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
 
   public PerlDelegatingLightNamedElement(@NotNull Delegate delegate,
                                          @NotNull String name,
-                                         @NotNull IStubElementType<?, ?> elementType) {
+                                         @NotNull IElementType elementType) {
     this(delegate, name, elementType, null);
   }
 
   public PerlDelegatingLightNamedElement(@NotNull Delegate delegate,
                                          @NotNull String name,
-                                         @NotNull IStubElementType<?, ?> elementType,
+                                         @NotNull IElementType elementType,
                                          @Nullable PsiElement nameIdentifier) {
     super(delegate, elementType);
     myName = name;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.perl5.lang.perl.extensions.packageprocessor.impl;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorBase;
 import com.perl5.lang.perl.parser.Exception.Class.psi.light.PerlLightExceptionClassDefinition;
 import com.perl5.lang.perl.psi.PsiPerlAnonArray;
@@ -68,7 +67,7 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
                                                                                          @NotNull PerlUseStatementStub useStatementStub) {
     return useStatementStub.getLightNamedElementsStubs().stream()
       .map(childStub -> {
-        IStubElementType<?, ?> stubType = childStub.getStubType();
+        var stubType = childStub.getElementType();
         if (stubType == LIGHT_NAMESPACE_DEFINITION) {
           return new PerlLightExceptionClassDefinition(useStatementElement, (PerlNamespaceDefinitionStub)childStub);
         }

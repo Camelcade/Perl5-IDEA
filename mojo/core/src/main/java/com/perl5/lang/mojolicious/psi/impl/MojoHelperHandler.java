@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,7 +67,7 @@ public class MojoHelperHandler extends PerlSubCallHandlerWithEmptyData {
   public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlSubCallElement psiElement,
                                                                                                    @NotNull PerlSubCallElementStub stubElement) {
     return stubElement.getLightNamedElementsStubs().stream()
-      .filter(childStub -> childStub.getStubType() == LIGHT_METHOD_DEFINITION)
+      .filter(childStub -> childStub.getElementType() == LIGHT_METHOD_DEFINITION)
       .map(childStub -> new MojoHelperDefinition(psiElement, (PerlSubDefinitionStub)childStub))
       .collect(Collectors.toList());
   }
