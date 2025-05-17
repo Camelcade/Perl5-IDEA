@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
@@ -87,7 +86,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
                                                                                                    @NotNull PerlSubCallElementStub stubElement) {
     return stubElement.getLightNamedElementsStubs().stream()
       .map(childStub -> {
-        IStubElementType<?, ?> stubType = childStub.getStubType();
+        var stubType = childStub.getElementType();
         if (stubType == LIGHT_METHOD_DEFINITION) {
           return new PerlLightMethodDefinitionElement<>(psiElement, (PerlSubDefinitionStub)childStub);
         }

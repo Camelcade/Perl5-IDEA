@@ -91,9 +91,16 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     //noinspection rawtypes
     for (StubElement childStub : childrenStubs) {
       dataStream.writeVarInt(getSerializationId(childStub)); // serialization id
-      //noinspection unchecked
-      childStub.getStubType().serialize(childStub, dataStream);
+      getSerializer(childStub).serialize(childStub, dataStream);
     }
+  }
+
+  @SuppressWarnings("rawtypes")
+  private static ObjectStubSerializer getSerializer(@NotNull StubElement<?> childStub) {
+    var elementType = childStub.getElementType();
+    LOG.assertTrue(elementType instanceof ObjectStubSerializer,
+                   "Don't know how to serialize:" + elementType + "; " + elementType.getClass());
+    return (ObjectStubSerializer)elementType;
   }
 
   protected void serializeStub(@NotNull Stub stub, @NotNull StubOutputStream dataStream) throws IOException {
@@ -119,11 +126,7 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
 
   @Override
   public final void indexStub(@NotNull Stub stub, @NotNull IndexSink sink) {
-    stub.getLightNamedElementsStubs().forEach(childStub -> {
-      @SuppressWarnings("rawtypes") var typedStub = (StubElement)childStub;
-      //noinspection unchecked
-      typedStub.getStubType().indexStub(typedStub, sink);
-    });
+    stub.getLightNamedElementsStubs().forEach(childStub -> getSerializer(childStub).indexStub(childStub, sink));
     doIndexStub(stub, sink);
   }
 
@@ -138,11 +141,11 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
   }
 
   private static int getSerializationId(@NotNull StubElement<?> stubElement) {
-    int id = DIRECT_MAP.getInt(stubElement.getStubType());
+    int id = DIRECT_MAP.getInt(stubElement.getElementType());
     if (id > 0) {
       return id;
     }
-    throw new IllegalArgumentException("Unregistered stub element class:" + stubElement.getStubType());
+    throw new IllegalArgumentException("Unregistered stub element class:" + stubElement.getElementType());
   }
 
   private static @NotNull IStubElementType<?, ?> getElementTypeById(int id) {

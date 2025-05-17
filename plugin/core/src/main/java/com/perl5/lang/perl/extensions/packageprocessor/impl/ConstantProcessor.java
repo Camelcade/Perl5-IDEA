@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,7 +76,7 @@ public class ConstantProcessor extends PerlPragmaProcessorBase {
   public @NotNull List<PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlUseStatementElement useStatementElement,
                                                                                          @NotNull PerlUseStatementStub useStatementStub) {
     return useStatementStub.getLightNamedElementsStubs().stream()
-      .filter(childStub -> childStub.getStubType() == LIGHT_SUB_DEFINITION)
+      .filter(childStub -> childStub.getElementType() == LIGHT_SUB_DEFINITION)
       .map(childStub -> new PerlLightConstantDefinitionElement(useStatementElement, (PerlSubDefinitionStub)childStub))
       .collect(Collectors.toList());
   }
