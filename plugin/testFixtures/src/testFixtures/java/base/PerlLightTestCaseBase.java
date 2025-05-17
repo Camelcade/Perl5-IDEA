@@ -110,7 +110,6 @@ import com.intellij.openapi.fileTypes.LanguageFileType;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
-import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
@@ -192,11 +191,9 @@ import com.perl5.lang.perl.idea.refactoring.introduce.target.PerlIntroduceTarget
 import com.perl5.lang.perl.idea.refactoring.rename.PerlMemberInplaceRenameHandler;
 import com.perl5.lang.perl.idea.sdk.PerlConfig;
 import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
-import com.perl5.lang.perl.idea.sdk.PerlSdkType;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.implementation.PerlImplementationHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
-import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
@@ -206,7 +203,6 @@ import com.perl5.lang.perl.psi.mixins.PerlStringMixin;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlRunUtil;
 import com.perl5.lang.pod.PodLanguage;
 import junit.framework.AssertionFailedError;
 import kotlin.collections.CollectionsKt;
@@ -350,20 +346,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    */
   protected final void addTearDownListener(@NotNull Disposable disposable) {
     Disposer.register(getTestRootDisposable(), disposable);
-  }
-
-  protected void addSdk() {
-    PerlSdkType.createSdk(
-      "/usr/bin/perl",
-      PerlHostHandler.getDefaultHandler().createData(),
-      PerlVersionManagerHandler.getDefaultHandler().createData(),
-      this::onSdkCreation);
-  }
-
-  private void onSdkCreation(@NotNull Sdk sdk) {
-    PerlSdkTable.getInstance().addJdk(sdk, myPerlLightTestCaseDisposable);
-    PerlProjectManager.getInstance(getProject()).setProjectSdk(sdk);
-    PerlRunUtil.refreshSdkDirs(sdk, getProject());
   }
 
   /**
