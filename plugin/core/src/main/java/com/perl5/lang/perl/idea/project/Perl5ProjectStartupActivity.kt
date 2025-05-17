@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,12 @@
 
 package com.perl5.lang.perl.idea.project
 
-import com.intellij.ide.startup.ServiceNotReadyException
 import com.intellij.notification.BrowseNotificationAction
 import com.intellij.notification.Notification
 import com.intellij.notification.NotificationType
 import com.intellij.notification.Notifications
 import com.intellij.openapi.application.ApplicationManager
 import com.intellij.openapi.diagnostic.Logger
-import com.intellij.openapi.project.DumbService
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
 import com.intellij.util.FileContentUtil
@@ -71,12 +69,7 @@ class Perl5ProjectStartupActivity : ProjectActivity {
     if (project.isDisposed()) {
       return
     }
-    try {
-      PerlNamesCache.getInstance(project).forceCacheUpdate()
-      ApplicationManager.getApplication().invokeLater(FileContentUtil::reparseOpenedFiles)
-    } catch (e: ServiceNotReadyException) {
-      log.warn(e)
-      DumbService.getInstance(project).smartInvokeLater { scheduleNamesUpdateWithReparse(project) }
-    }
+    PerlNamesCache.getInstance(project).forceCacheUpdate()
+    ApplicationManager.getApplication().invokeLater(FileContentUtil::reparseOpenedFiles)
   }
 }
