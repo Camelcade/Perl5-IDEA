@@ -1469,7 +1469,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     PsiFile psiFile = getFile();
     final VirtualFile virtualFile = psiFile.getVirtualFile();
     final FileEditor fileEditor = FileEditorManager.getInstance(getProject()).getSelectedEditor(virtualFile);
-    final StructureViewBuilder builder = LanguageStructureViewBuilder.INSTANCE.getStructureViewBuilder(psiFile);
+    final StructureViewBuilder builder = LanguageStructureViewBuilder.getInstance().getStructureViewBuilder(psiFile);
     assertNotNull(builder);
 
     StructureView structureView = builder.createStructureView(fileEditor, getProject());
@@ -3109,7 +3109,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       configurable.apply();
     }
     catch (ConfigurationException e) {
-      fail(e.getMessage());
+      fail(e.getMessageHtml().toString());
     }
     assertFalse(configurable.isModified());
     if (!(configurable instanceof Disposable)) {
