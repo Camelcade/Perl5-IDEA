@@ -2301,22 +2301,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
-  protected void doTestGoToByModel(@NotNull FilteringGotoByModel<?> model) {
-    doTestGoToByModel(model, it -> true);
-  }
-
-  protected void doTestGoToByModel(@NotNull FilteringGotoByModel<?> model, @NotNull String name) {
-    doTestGoToByModel(model, name::equals);
-  }
-
-  protected void doTestGoToByModel(@NotNull FilteringGotoByModel<?> model, @NotNull String... names) {
-    doTestGoToByModel(model, it -> ArrayUtil.contains(names, it));
-  }
-
-  protected void doTestGoToByModel(@NotNull FilteringGotoByModel<?> model, @NotNull Condition<String> nameFilter) {
-    doTestGoToByModel(model, false, nameFilter);
-  }
-
   protected FilteringGotoByModel<?> getGoToClassModel() {
     return new GotoClassModel2(getProject());
   }
