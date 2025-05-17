@@ -2648,8 +2648,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void withPerl532() { addTestLibrary("perl5320"); }
 
-  protected void withPerl536() { addTestLibrary("perl5360"); }
-
   protected void withPerl538() { addTestLibrary("perl5380"); }
 
   protected void withCpanfile() { addTestLibrary("cpanfile"); }
