@@ -113,9 +113,6 @@ import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.projectRoots.impl.ProjectJdkImpl;
-import com.intellij.openapi.roots.ContentEntry;
-import com.intellij.openapi.roots.ModifiableRootModel;
-import com.intellij.openapi.roots.ModuleRootManager;
 import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.util.*;
 import com.intellij.openapi.util.io.FileUtil;
@@ -403,28 +400,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
       }));
     updateNamesCacheSynchronously();
-  }
-
-  /**
-   * Adds a {@code contentRootFile} as a content entry to the current module
-   *
-   * @apiNote adding modules is not allowed in the light tests
-   */
-  protected void addContentEntry(@NotNull VirtualFile contentRootFile) {
-    ModuleRootManager moduleRootManager = ModuleRootManager.getInstance(getModule());
-    assertNotNull(moduleRootManager);
-    ModifiableRootModel modifiableModel = moduleRootManager.getModifiableModel();
-    modifiableModel.addContentEntry(contentRootFile);
-    WriteAction.run(modifiableModel::commit);
-    addPerlTearDownListener(() -> {
-      ModifiableRootModel modifiableModel1 = moduleRootManager.getModifiableModel();
-      for (ContentEntry modelContentEntry : modifiableModel1.getContentEntries()) {
-        if (contentRootFile.equals(modelContentEntry.getFile())) {
-          modifiableModel1.removeContentEntry(modelContentEntry);
-        }
-      }
-      WriteAction.run(modifiableModel1::commit);
-    });
   }
 
   protected void setUpLibrary() {
