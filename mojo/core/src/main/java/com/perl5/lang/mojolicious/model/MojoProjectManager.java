@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,6 @@ import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.DumbService;
 import com.intellij.openapi.project.Project;
@@ -153,10 +152,6 @@ public class MojoProjectManager implements Disposable {
           myTestSemaphore.up();
           myTestSemaphore = null;
         }
-      }
-      catch (ProcessCanceledException e) {
-        LOG.debug("Update was cancelled, rescheduling");
-        scheduleUpdate();
       }
       finally {
         myUpdatingModel.set(false);
