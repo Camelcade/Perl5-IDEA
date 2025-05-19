@@ -20,9 +20,11 @@ import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
+import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import org.jetbrains.annotations.NotNull;
@@ -30,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 
-public class PerlStubBasedPsiElementBase<T extends StubElement<?>> extends StubBasedPsiElementBase<T> {
+public class PerlStubBasedPsiElementBase<T extends StubElement<?>> extends StubBasedPsiElementBase<T> implements StubBasedPsiElement<T> {
   public PerlStubBasedPsiElementBase(@NotNull T stub, @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
   }
@@ -41,7 +43,12 @@ public class PerlStubBasedPsiElementBase<T extends StubElement<?>> extends StubB
 
   @Override
   public String toString() {
-    return getClass().getSimpleName() + "(" + getElementType() + ")";
+    return getClass().getSimpleName() + "(" + getIElementType() + ")";
+  }
+
+  @Override
+  public final IElementType getIElementType() {
+    return getElementTypeImpl();
   }
 
   @Override
