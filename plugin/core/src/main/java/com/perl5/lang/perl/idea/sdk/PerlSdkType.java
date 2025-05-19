@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 
 public class PerlSdkType extends SdkType {
@@ -109,7 +108,7 @@ public class PerlSdkType extends SdkType {
       List<VirtualFile> filesToRefresh = pathsToRefresh.stream()
         .map(it -> VfsUtil.findFileByIoFile(new File(it), true))
         .filter(Objects::nonNull)
-        .collect(Collectors.toList());
+        .toList();
 
       if (!filesToRefresh.isEmpty()) {
         PerlRunUtil.setProgressText(PerlBundle.message("perl.progress.refreshing.filesystem"));

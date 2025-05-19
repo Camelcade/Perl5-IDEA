@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   private static final Logger LOG = Logger.getInstance(PerlIntroduceVariableHandler.class);
@@ -185,7 +184,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     List<PsiElement> psiOccurrences = psiOccurrencesPointers.stream()
       .map(SmartPsiElementPointer::getElement)
       .filter(Objects::nonNull)
-      .collect(Collectors.toList());
+      .toList();
 
 
     if (!new PerlVariableIntroducer(variableDeclaration,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,6 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MooseMultiAttributeAccessorInspection extends PerlInspection {
   @Override
@@ -64,7 +63,7 @@ public class MooseMultiAttributeAccessorInspection extends PerlInspection {
         accessors.forEach(it -> registerProblem(holder, it.getNameIdentifier(), PerlBundle.message("perl.inspection.multiattr.accessor")));
         List<PsiElement> attributesIdentifiers = attributes.stream()
           .map(PerlDelegatingLightNamedElement::getNameIdentifier)
-          .distinct().collect(Collectors.toList());
+          .distinct().toList();
         if (attributesIdentifiers.size() == 1) {
           // same identifier looks like an accessor
           registerProblem(holder, attributesIdentifiers.getFirst(), PerlBundle.message("perl.inspection.multiattr.accessor"));

@@ -2760,7 +2760,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       return;
     }
 
-    List<String> actionNames = actions.stream().map(AnAction::toString).filter(namePredicate).collect(Collectors.toList());
+    List<String> actionNames = actions.stream().map(AnAction::toString).filter(namePredicate).toList();
     if (actionNames.isEmpty()) {
       if (shouldHaveSurrounders) {
         fail("No suitable surrounders found: " + actions);
