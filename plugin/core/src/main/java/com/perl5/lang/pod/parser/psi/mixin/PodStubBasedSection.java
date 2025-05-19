@@ -18,12 +18,15 @@ package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.extapi.psi.StubBasedPsiElementBase;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.parser.psi.PodSection;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class PodStubBasedSection extends StubBasedPsiElementBase<PodSectionStub> implements PodSection {
+public abstract class PodStubBasedSection extends StubBasedPsiElementBase<PodSectionStub>
+  implements PodSection, StubBasedPsiElement<PodSectionStub> {
   public PodStubBasedSection(@NotNull PodSectionStub stub,
                              @NotNull IStubElementType nodeType) {
     super(stub, nodeType);
@@ -34,7 +37,12 @@ public abstract class PodStubBasedSection extends StubBasedPsiElementBase<PodSec
   }
 
   @Override
+  public final IElementType getIElementType() {
+    return getElementTypeImpl();
+  }
+
+  @Override
   public String toString() {
-    return getClass().getSimpleName() + "(" + getElementType() + ")";
+    return getClass().getSimpleName() + "(" + getIElementType() + ")";
   }
 }
