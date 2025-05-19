@@ -1378,7 +1378,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         previewBuilder.append(PREVIEW_SEPARATOR).append(getIntentionPreview(action));
         myFixture.launchAction(action);
       });
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections() + previewBuilder.toString());
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections() + previewBuilder);
   }
 
   protected void doTestAnnotationQuickFix(@NotNull String fileName,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -116,7 +116,7 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
 
     PsiElement statement = PerlElementFactory.createStatement(elementToReplace.getProject(), result.toString());
     if (statement == null) {
-      LOG.error("Unable create a replacement statement from: " + elementToReplace.getText() + "\n text: " + result.toString());
+      LOG.error("Unable create a replacement statement from: " + elementToReplace.getText() + "\n text: " + result);
       replacementRanges.clear();
       return elementToReplace;
     }
