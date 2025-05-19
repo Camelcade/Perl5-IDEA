@@ -189,6 +189,7 @@ public class PerlSdkType extends SdkType {
   }
 
 
+  @SuppressWarnings("deprecation")
   @Override
   public @Nullable String suggestHomePath() {
     throw new RuntimeException("unsupported");
