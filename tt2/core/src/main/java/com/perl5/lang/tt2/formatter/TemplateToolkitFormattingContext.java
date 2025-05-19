@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,11 +35,11 @@ import java.util.Map;
 import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes.TT2_PERL_CODE;
 import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes.TT2_RAWPERL_CODE;
 import static com.perl5.lang.tt2.formatter.TemplateToolkitFormattingTokenSets.*;
-import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.ALL_OPERATORS_TOKENSET;
 import static com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements.KEYWORDS_TOKENSET;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 
-final class TemplateToolkitFormattingContext extends PerlBaseFormattingContext {
+public final class TemplateToolkitFormattingContext extends PerlBaseFormattingContext {
   private final Map<ASTNode, Alignment> myAssignAlignmentMap = new HashMap<>();
   private final NotNullLazyValue<PurePerlFormattingContext> myPurePerlContextProvider = NotNullLazyValue.createValue(
     () -> new PurePerlFormattingContext(getFormattingContext()) {
@@ -54,7 +54,7 @@ final class TemplateToolkitFormattingContext extends PerlBaseFormattingContext {
       }
     });
 
-  public TemplateToolkitFormattingContext(@NotNull FormattingContext formattingContext) {
+  TemplateToolkitFormattingContext(@NotNull FormattingContext formattingContext) {
     super(formattingContext);
   }
 

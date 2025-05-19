@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,8 +26,8 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-class PerlSMTRunnerConsoleProperties extends SMTRunnerConsoleProperties {
-  public PerlSMTRunnerConsoleProperties(@NotNull RunConfiguration config,
+public class PerlSMTRunnerConsoleProperties extends SMTRunnerConsoleProperties {
+  PerlSMTRunnerConsoleProperties(@NotNull RunConfiguration config,
                                         @NotNull String testFrameworkName,
                                         @NotNull Executor executor) {
     super(config, testFrameworkName, executor);

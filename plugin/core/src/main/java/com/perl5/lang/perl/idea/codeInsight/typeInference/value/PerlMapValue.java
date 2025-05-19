@@ -62,7 +62,7 @@ public abstract class PerlMapValue extends PerlListValue {
    * @implNote we have two different maps: deterministic and deferred.
    * Deterministic means that all keys and values has scalar context
    */
-  static class Builder extends PerlListValue.Builder<Builder> {
+  public static class Builder extends PerlListValue.Builder<Builder> {
     private Builder() {
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-final class PerlUnknownValue extends PerlSpecialValue {
+public final class PerlUnknownValue extends PerlSpecialValue {
   static final PerlUnknownValue INSTANCE = new PerlUnknownValue();
 
   private PerlUnknownValue() {
