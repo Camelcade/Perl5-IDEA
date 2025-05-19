@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -83,7 +83,7 @@ public class PerlDocumentBasedFormattingModel extends DocumentBasedFormattingMod
           else {
             createWhiteSpace(whiteSpaceLength, buffer);
           }
-          buffer.append(afterWhiteSpace.toString());
+          buffer.append(afterWhiteSpace);
           insideWhiteSpace = true;
           whiteSpaceLength = 0;
           afterWhiteSpace = new StringBuilder();
@@ -114,7 +114,7 @@ public class PerlDocumentBasedFormattingModel extends DocumentBasedFormattingMod
     }
     if (line > 0 && !afterWhiteSpace.isEmpty()) {
       createWhiteSpace(whiteSpaceLength + shift, buffer);
-      buffer.append(afterWhiteSpace.toString());
+      buffer.append(afterWhiteSpace);
     }
     getDocument().replaceString(elementRange.getStartOffset(), elementRange.getEndOffset(), buffer.toString());
     return buffer.length();

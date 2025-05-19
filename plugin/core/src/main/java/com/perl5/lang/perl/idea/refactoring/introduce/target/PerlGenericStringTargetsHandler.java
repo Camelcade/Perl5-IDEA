@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -180,7 +180,7 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
     }
 
     return prefix + openQuote +
-           target.getTextRangeInElement().subSequence(targetPlace.getNode().getChars()).toString() +
+           target.getTextRangeInElement().subSequence(targetPlace.getNode().getChars()) +
            PerlString.getQuoteCloseChar(openQuote);
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -75,7 +75,7 @@ public class PerlHierarchyNodeDescriptor extends HierarchyNodeDescriptor {
 
   protected void adjustAppearance(CompositeAppearance appearance, ItemPresentation presentation) {
     appearance.getEnding().addText(" "
-                                   + "(" + ((PerlNamespaceDefinitionElement)getPerlElement()).getMroType().toString() + "), "
+                                   + "(" + ((PerlNamespaceDefinitionElement)getPerlElement()).getMroType() + "), "
                                    + presentation.getLocationString(),
                                    HierarchyNodeDescriptor.getPackageNameAttributes());
   }

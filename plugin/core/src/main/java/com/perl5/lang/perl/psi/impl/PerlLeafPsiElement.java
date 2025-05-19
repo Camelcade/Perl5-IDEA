@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,6 +41,6 @@ public class PerlLeafPsiElement extends LeafPsiElement implements PerlReferenceO
 
   @Override
   public String toString() {
-    return getClass().getSimpleName() + "(" + getNode().getElementType().toString() + ")";
+    return getClass().getSimpleName() + "(" + getNode().getElementType() + ")";
   }
 }
