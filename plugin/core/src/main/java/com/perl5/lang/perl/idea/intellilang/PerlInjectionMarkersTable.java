@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -92,7 +92,7 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
           if (cellEditor != null) {
             cellEditor.stopCellEditing();
           }
-          final MyModel model = getModel();
+            var model = getMyModel();
 
           int indexToEdit = -1;
 
@@ -118,14 +118,13 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
     return panel;
   }
 
-  @Override
-  public MyModel getModel() {
+  private MyModel getMyModel() {
     return (MyModel)super.getModel();
   }
 
   @Override
   public boolean isModified() {
-    return !new HashSet<>(computeItems()).equals(new HashSet<>(getModel().getItems()));
+    return !new HashSet<>(computeItems()).equals(new HashSet<>(getMyModel().getItems()));
   }
 
   private List<Item> computeItems() {
@@ -137,7 +136,7 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
 
   @Override
   public void reset() {
-    getModel().setItems(computeItems());
+    getMyModel().setItems(computeItems());
   }
 
   @Override
@@ -147,7 +146,7 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
     }
 
     Map<String, String> result = new HashMap<>();
-    getModel().getItems().forEach(item -> result.putIfAbsent(item.marker, item.languageId));
+    getMyModel().getItems().forEach(item -> result.putIfAbsent(item.marker, item.languageId));
     PerlInjectionMarkersService.getInstance(myProject).setCustomMarkersMap(result);
     FileContentUtil.reparseOpenedFiles();
   }

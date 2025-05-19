@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -442,7 +442,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
     return commandsMap.isEmpty() ? Collections.emptySet() : Collections.unmodifiableSet(commandsMap);
   }
 
-  private static class OptionDescriptor {
+  public static class OptionDescriptor {
     private static final OptionDescriptor UNKNOWN = new OptionDescriptor("", null, null, null);
     final @NotNull String value;
     final @Nullable String placeholder;
@@ -504,7 +504,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
     final @NotNull OptionDescriptor descriptor;
     final @NotNull List<String> parameters = new ArrayList<>();
 
-    public CommandElement(@NotNull OptionDescriptor descriptor) {
+    private CommandElement(@NotNull OptionDescriptor descriptor) {
       this.descriptor = descriptor;
     }
 

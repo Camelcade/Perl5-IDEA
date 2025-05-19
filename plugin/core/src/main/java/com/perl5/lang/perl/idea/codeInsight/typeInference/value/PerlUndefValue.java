@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.perl5.lang.perl.lexer.PerlBaseLexer;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
-final class PerlUndefValue extends PerlSpecialValue {
+public final class PerlUndefValue extends PerlSpecialValue {
   static final PerlUndefValue INSTANCE = new PerlUndefValue();
 
   private PerlUndefValue() {

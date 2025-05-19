@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,14 +46,14 @@ public final class YoutrackApi {
     }
   }
 
-  private abstract static class YoutrackCustomField {
+  public abstract static class YoutrackCustomField {
     @SuppressWarnings("unused") @Expose
     public final String name;
     @SuppressWarnings("unused") @Expose
     @SerializedName("$type")
     public final String type;
 
-    public YoutrackCustomField(String name, String type) {
+    protected YoutrackCustomField(String name, String type) {
       this.name = name;
       this.type = type;
     }
@@ -70,11 +70,11 @@ public final class YoutrackApi {
   }
 
 
-  static final class YoutrackProject {
+  public static final class YoutrackProject {
     @SuppressWarnings("unused") @Expose
     public final String id;
 
-    public YoutrackProject(String id) {
+    YoutrackProject(String id) {
       this.id = id;
     }
   }

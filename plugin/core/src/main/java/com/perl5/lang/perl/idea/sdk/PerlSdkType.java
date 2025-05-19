@@ -332,9 +332,12 @@ public class PerlSdkType extends SdkType {
     sdkConsumer.accept(newSdk);
   }
 
-  private static class VersionDescriptor {
+  public static class VersionDescriptor {
     private String version;
     private String platform;
+
+    private VersionDescriptor() {
+    }
 
     private static @Nullable VersionDescriptor create(@NotNull List<String> perlResponse) {
       if (perlResponse.size() != 3 || !StringUtil.equals("perl", perlResponse.get(0))) {

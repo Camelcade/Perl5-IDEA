@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,14 +57,14 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
   }
 
 
-  private class ArgumentsPanel extends GenericPerlRunConfigurationEditorPanel<PerlAbstractTestRunConfiguration> {
+  protected class ArgumentsPanel extends GenericPerlRunConfigurationEditorPanel<PerlAbstractTestRunConfiguration> {
     private JComboBox<Integer> myJobsCombobox;
     private LabeledComponent<JComboBox<Integer>> myLabeledJobsCombobox;
 
     private RawCommandLineEditor myTestScriptArgumentsEditor;
     private LabeledComponent<RawCommandLineEditor> myLabeledTestScriptArgumentsEditor;
 
-    public ArgumentsPanel(@NotNull Project project) {
+    protected ArgumentsPanel(@NotNull Project project) {
       super(project);
     }
 
@@ -103,7 +103,7 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
     protected void applyTo(PerlAbstractTestRunConfiguration runConfiguration) {
       super.applyTo(runConfiguration);
       Object item = myJobsCombobox.getSelectedItem();
-      runConfiguration.setJobsNumber(item instanceof Integer ? (Integer)item : PerlTestRunConfiguration.DEFAULT_JOBS_NUMBER);
+      runConfiguration.setJobsNumber(item instanceof Integer integer ? integer : PerlTestRunConfiguration.DEFAULT_JOBS_NUMBER);
       runConfiguration.setTestScriptParameters(myTestScriptArgumentsEditor.getText());
     }
 

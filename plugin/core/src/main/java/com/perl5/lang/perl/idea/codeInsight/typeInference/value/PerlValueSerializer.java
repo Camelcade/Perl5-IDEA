@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,11 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.Collection;
 
-final class PerlValueSerializer {
+public final class PerlValueSerializer {
   private final @NotNull StubOutputStream myOutputStream;
   private final Object2IntOpenHashMap<PerlValue> myDryMap = new Object2IntOpenHashMap<>();
 
-  public PerlValueSerializer(@NotNull StubOutputStream outputStream) {
+  PerlValueSerializer(@NotNull StubOutputStream outputStream) {
     myOutputStream = outputStream;
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -118,7 +118,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     return new Builder();
   }
 
-  static class Builder extends PerlListValue.Builder<Builder> {
+  public static class Builder extends PerlListValue.Builder<Builder> {
     private Builder() {
     }
 
