@@ -21,15 +21,12 @@ import com.intellij.notification.Notification
 import com.intellij.notification.NotificationType
 import com.intellij.notification.Notifications
 import com.intellij.openapi.application.ApplicationManager
-import com.intellij.openapi.diagnostic.Logger
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
 import com.intellij.util.FileContentUtil
 import com.perl5.PerlBundle
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings
 import com.perl5.lang.perl.util.PerlPluginUtil
-
-private val log = Logger.getInstance(Perl5ProjectStartupActivity::class.java)
 
 class Perl5ProjectStartupActivity : ProjectActivity {
   override suspend fun execute(project: Project) {

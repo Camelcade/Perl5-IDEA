@@ -18,6 +18,7 @@ package com.hurricup.gradle
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
+@Suppress("unused")
 class FixCompressPlugin : Plugin<Project> {
   override fun apply(project: Project) {
 
