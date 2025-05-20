@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,14 +20,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiDocumentManager;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
-import com.intellij.util.indexing.FileBasedIndex;
-import com.intellij.util.indexing.FileBasedIndexImpl;
-import com.intellij.util.indexing.FileBasedIndexProjectHandler;
 import com.perl5.lang.htmlmason.MasonCoreUtil;
-import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
 import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
@@ -38,7 +33,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -109,39 +103,5 @@ public class Mason2Util {
     }
 
     return result;
-  }
-
-  public static void reindexProjectFile(Project project, VirtualFile virtualFile) {
-    if (VfsUtilCore.isAncestor(project.getBaseDir(), virtualFile, false)) {
-      reindexProjectRoots(project, Collections.singletonList(PerlFileUtil.getPathRelativeToContentRoot(virtualFile, project)));
-    }
-  }
-
-  public static void reindexProjectRoots(Project project, List<String> rootsToReindex) {
-    if (rootsToReindex.isEmpty()) {
-      return;
-    }
-
-    PsiDocumentManager.getInstance(project).commitAllDocuments();
-
-    VirtualFile projectRoot = project.getBaseDir();
-
-    if (projectRoot != null) {
-      final FileBasedIndex index = FileBasedIndex.getInstance();
-
-      for (String root : rootsToReindex) {
-        VirtualFile componentRoot = VfsUtilCore.findRelativeFile(root, projectRoot);
-        if (componentRoot != null) {
-          for (VirtualFile file : VfsUtil.collectChildrenRecursively(componentRoot)) {
-            if (file.getFileType() instanceof MasonPurePerlComponentFileType) {
-              index.requestReindex(file);
-            }
-          }
-        }
-      }
-      if (index instanceof FileBasedIndexImpl) {
-        FileBasedIndexProjectHandler.scheduleReindexingInDumbMode(project);
-      }
-    }
   }
 }

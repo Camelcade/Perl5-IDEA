@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.*;
 import com.intellij.util.indexing.FileBasedIndex;
-import com.perl5.lang.mason2.Mason2Util;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import org.jetbrains.annotations.NotNull;
@@ -54,7 +53,7 @@ public final class MasonVirtualFileListener implements VirtualFileListener {
     processFileChange(event.getFile());
   }
 
-  private void processFileChange(VirtualFile changedFile) {
+  private void processFileChange(@NotNull VirtualFile changedFile) {
     List<VirtualFile> componentsRoots = getComponentsRoots();
     if (componentsRoots.isEmpty()) {
       return;
@@ -67,7 +66,7 @@ public final class MasonVirtualFileListener implements VirtualFileListener {
           VfsUtilCore.isUnder(changedFile, rootsSet) ||        // moved to component root
           containsAtLeastOneFile(changedFile, componentsRoots)
       ) {
-        Mason2Util.reindexProjectFile(getProject(), changedFile);
+        FileBasedIndex.getInstance().requestReindex(changedFile);
       }
     }
     else if (changedFile.getFileType() instanceof MasonPurePerlComponentFileType)    // Mason file has been moved
