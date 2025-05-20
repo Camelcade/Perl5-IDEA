@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler {
     final RefactoringSupportProvider
       supportProvider = element == null ? null : LanguageRefactoringSupport.INSTANCE.forLanguage(element.getLanguage());
     return editor.getSettings().isVariableInplaceRenameEnabled()
-           && supportProvider instanceof PerlRefactoringSupportProvider &&
-           ((PerlRefactoringSupportProvider)supportProvider).isPerlInplaceRenameAvailable(element, nameSuggestionContext);
+           && supportProvider instanceof PerlRefactoringSupportProvider provider &&
+           provider.isPerlInplaceRenameAvailable(element, nameSuggestionContext);
   }
 }
