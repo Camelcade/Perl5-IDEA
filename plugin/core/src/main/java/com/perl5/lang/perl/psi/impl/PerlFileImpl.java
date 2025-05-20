@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
@@ -206,11 +205,12 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
 
   @Override
   public @NotNull List<String> getParentNamespacesNames() {
-    StubElement<?> stub = getGreenStub();
-    if (stub instanceof PerlFileStub perlFileStub) {
-      return perlFileStub.getParentNamespacesNames();
-    }
-    return myParentNamespaces.getValue();
+    return withGreenStubOrAst(stub -> {
+      if (stub instanceof PerlFileStub perlFileStub) {
+        return perlFileStub.getParentNamespacesNames();
+      }
+      return Collections.emptyList();
+    }, ast -> myParentNamespaces.getValue());
   }
 
   @Override
