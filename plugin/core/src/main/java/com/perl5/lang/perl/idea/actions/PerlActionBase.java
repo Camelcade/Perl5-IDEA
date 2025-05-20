@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,7 +64,7 @@ public abstract class PerlActionBase extends AnAction implements PerlAction {
     final boolean enabled = isEnabled(event);
     var eventPresentation = event.getPresentation();
     eventPresentation.setEnabled(enabled);
-    if (alwaysHideDisabled() || ActionPlaces.isPopupPlace(event.getPlace())) {
+    if (alwaysHideDisabled() || (event.getUiKind() instanceof ActionUiKind.Popup)) {
       eventPresentation.setVisible(enabled);
     }
     else {
