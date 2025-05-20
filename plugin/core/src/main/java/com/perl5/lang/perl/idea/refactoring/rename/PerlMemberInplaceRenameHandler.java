@@ -50,7 +50,7 @@ public class PerlMemberInplaceRenameHandler extends MemberInplaceRenameHandler {
       element = PsiTreeUtil.getParentOfType(nameSuggestionContext, PsiNamedElement.class);
     }
     final RefactoringSupportProvider
-      supportProvider = element == null ? null : LanguageRefactoringSupport.INSTANCE.forLanguage(element.getLanguage());
+      supportProvider = element == null ? null : LanguageRefactoringSupport.getInstance().forLanguage(element.getLanguage());
     return editor.getSettings().isVariableInplaceRenameEnabled()
            && supportProvider instanceof PerlRefactoringSupportProvider provider &&
            provider.isPerlInplaceRenameAvailable(element, nameSuggestionContext);
