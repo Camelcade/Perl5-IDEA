@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
     }
 
     Map<VirtualFile, PerlSourceRootType> roots = myProjectManager.getAllModulesRoots();
-    return ContainerUtil.map2List(children, node -> {
+    return ContainerUtil.map(children, node -> {
       if (!(node instanceof PsiDirectoryNode directoryNode)) {
         return node;
       }
