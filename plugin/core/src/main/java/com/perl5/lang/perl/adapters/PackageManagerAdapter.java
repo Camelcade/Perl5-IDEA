@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,17 +40,22 @@ import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.TestOnly;
 import org.jetbrains.annotations.VisibleForTesting;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 public abstract class PackageManagerAdapter {
   public static final @NlsSafe String CPANMINUS_PACKAGE_NAME = "App::cpanminus";
 
   private static final Logger LOG = Logger.getInstance(PackageManagerAdapter.class);
   private static final AtomicNotNullLazyValue<MergingUpdateQueue> QUEUE_PROVIDER = AtomicNotNullLazyValue.createValue(() ->
-    new MergingUpdateQueue("perl.installer.queue", 300, true, null, PerlPluginUtil.getUnloadAwareDisposable())
-      .usePassThroughInUnitTestMode());
+                                                                                                                        new MergingUpdateQueue(
+                                                                                                                          "perl.installer.queue",
+                                                                                                                          300, true, null,
+                                                                                                                          PerlPluginUtil.getUnloadAwareDisposable()));
 
   private final @NotNull Sdk mySdk;
 
@@ -261,5 +266,10 @@ public abstract class PackageManagerAdapter {
       myPackages.addAll(installUpdate.myPackages);
       return true;
     }
+  }
+
+  @TestOnly
+  public static void waitForAllExecuted() throws TimeoutException {
+    QUEUE_PROVIDER.getValue().waitForAllExecuted(2, TimeUnit.MINUTES);
   }
 }
