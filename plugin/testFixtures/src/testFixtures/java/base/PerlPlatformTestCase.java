@@ -85,6 +85,8 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
@@ -516,11 +518,26 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     var installAction = actionFunction.apply(sdk, semaphore::up);
     assertNotNull(installAction);
     runActionWithTestEvent(installAction);
+    waitForMergingQueueToFinish();
     waitForAllDescriptorsToFinish();
     PlatformTestUtil.waitWithEventsDispatching("Install action hasn't finished in time", semaphore::isUp, MAX_PROCESS_WAIT_TIME_SECONDS);
     var sdkRefreshSemaphore = PerlRunUtil.getSdkRefreshSemaphore();
     waitWithEventsDispatching("Sdk refresh hasn't finished", sdkRefreshSemaphore::isUp);
     return getPackageFile(contextPsiFile, packageName);
+  }
+
+  private static void waitForMergingQueueToFinish() {
+    var flag = new AtomicBoolean(false);
+    ApplicationManager.getApplication().executeOnPooledThread(() -> {
+      try {
+        PackageManagerAdapter.waitForAllExecuted();
+        flag.set(true);
+      }
+      catch (TimeoutException e) {
+        fail(e.getMessage());
+      }
+    });
+    PlatformTestUtil.waitWithEventsDispatching("Merging update queue did not finish in time", flag::get, MAX_PROCESS_WAIT_TIME_SECONDS);
   }
 
   protected @NotNull VirtualFile openAndGetModuleFileInEditor(@NotNull String path) {
