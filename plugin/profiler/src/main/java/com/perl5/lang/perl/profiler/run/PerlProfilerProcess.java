@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.perl5.lang.perl.profiler.run;
 import com.intellij.execution.configurations.RunProfile;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.execution.ui.RunContentDescriptor;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.profiler.FileBasedProfilerProcess;
@@ -35,8 +34,6 @@ import java.io.File;
 import java.util.Objects;
 
 public class PerlProfilerProcess extends FileBasedProfilerProcess<PerlTargetProcess> {
-  private static final Logger LOG = Logger.getInstance(PerlProfilerProcess.class);
-
   private final @NotNull ExecutionEnvironment myExecutionEnvironment;
   private final @NotNull PerlProfilerRunProfileState myPerlProfilerRunProfileState;
   private final long myStartTime = System.currentTimeMillis();
@@ -57,11 +54,6 @@ public class PerlProfilerProcess extends FileBasedProfilerProcess<PerlTargetProc
     var dumpFile = myPerlProfilerRunProfileState.getDumpFile();
     var parsingResult = dumpParser.parse(dumpFile.getParentFile(), indicator);
     return asProfilerState(parsingResult, PerlProfilerDumpWriter.create(dumpFile, parsingResult));
-  }
-
-  @Override
-  protected @NotNull Logger getLOG() {
-    return LOG;
   }
 
   @Override
