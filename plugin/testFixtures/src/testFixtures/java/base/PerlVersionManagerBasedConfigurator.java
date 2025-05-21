@@ -33,6 +33,9 @@ abstract class PerlVersionManagerBasedConfigurator extends PerlInterpreterConfig
       sdk -> PerlProjectManager.getInstance(project).setProjectSdk(sdk),
       project
     );
+    if (PerlProjectManager.getInstance(project).getProjectSdk() == null) {
+      throw new RuntimeException("Unable to detect sdk for project");
+    }
   }
 
   protected abstract @NotNull String getPathToVersionManager();
