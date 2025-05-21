@@ -43,10 +43,10 @@ import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.FILES_JOI
 import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.FILES_PARSER;
 
 class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<PerlAbstractTestRunConfiguration> {
-  private final @NotNull PerlAbstractTestRunConfigurationProducer myProducer;
+  private final @NotNull PerlAbstractTestRunConfigurationProducer<PerlAbstractTestRunConfiguration> myProducer;
 
   public PerlTestRunConfigurationEditor(@NotNull Project project,
-                                        @NotNull PerlAbstractTestRunConfigurationProducer producer) {
+                                        @NotNull PerlAbstractTestRunConfigurationProducer<PerlAbstractTestRunConfiguration> producer) {
     super(project);
     myProducer = producer;
   }
