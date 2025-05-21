@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.perl5.lang.perl.coverage;
 
 import com.intellij.coverage.*;
 import com.intellij.coverage.view.CoverageViewExtension;
-import com.intellij.coverage.view.CoverageViewManager;
 import com.intellij.coverage.view.DirectoryCoverageViewExtension;
 import com.intellij.execution.configurations.RunConfigurationBase;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
@@ -57,6 +56,7 @@ public class PerlCoverageEngine extends CoverageEngine {
     return new PerlCoverageEnabledConfiguration(conf);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public @Nullable CoverageSuite createCoverageSuite(@NotNull CoverageRunner covRunner,
                                                      @NotNull String name,
@@ -72,6 +72,7 @@ public class PerlCoverageEngine extends CoverageEngine {
                                  trackTestFolders, covRunner, project);
   }
 
+  @SuppressWarnings("deprecation")
   @Override
   public @Nullable CoverageSuite createCoverageSuite(@NotNull CoverageRunner covRunner,
                                                      @NotNull String name,
@@ -106,15 +107,8 @@ public class PerlCoverageEngine extends CoverageEngine {
   }
 
   @Override
-  public CoverageViewExtension createCoverageViewExtension(Project project,
-                                                           CoverageSuitesBundle suiteBundle,
-                                                           CoverageViewManager.StateBean stateBean) {
-    return new DirectoryCoverageViewExtension(project, getCoverageAnnotator(project), suiteBundle, stateBean);
-  }
-
-  @Override
-  public boolean acceptedByFilters(@NotNull PsiFile psiFile, @NotNull CoverageSuitesBundle suite) {
-    return true;
+  public CoverageViewExtension createCoverageViewExtension(Project project, CoverageSuitesBundle suiteBundle) {
+    return new DirectoryCoverageViewExtension(project, getCoverageAnnotator(project), suiteBundle);
   }
 
   @Override
