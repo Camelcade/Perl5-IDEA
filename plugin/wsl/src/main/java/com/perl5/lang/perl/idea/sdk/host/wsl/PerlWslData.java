@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Objects;
 
@@ -142,7 +143,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
 
   @Override
   public @Nullable String doGetRemotePath(@NotNull String localPathName) {
-    return computeSafeOnWsl(() -> getDistribution().getWslPath(localPathName));
+    return computeSafeOnWsl(() -> getDistribution().getWslPath(Path.of(localPathName)));
   }
 
   @Override
