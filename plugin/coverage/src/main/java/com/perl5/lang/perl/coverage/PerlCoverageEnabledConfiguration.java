@@ -25,8 +25,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfiguration {
 
   public PerlCoverageEnabledConfiguration(RunConfigurationBase configuration) {
-    super(configuration);
-    setCoverageRunner(CoverageRunner.getInstance(PerlCoverageRunner.class));
+    super(configuration, CoverageRunner.getInstance(PerlCoverageRunner.class));
   }
 
   @Override
