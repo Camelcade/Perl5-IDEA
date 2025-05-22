@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.codeInsight.controlFlow;
 
 import com.intellij.codeInsight.controlflow.*;
 import com.intellij.codeInsight.controlflow.impl.TransparentInstructionImpl;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.ClearableLazyValue;
@@ -56,6 +57,7 @@ import java.util.stream.Collectors;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlControlFlowBuilder extends ControlFlowBuilder {
+  private static final Logger LOG = Logger.getInstance(PerlControlFlowBuilder.class);
   public static final Set<String> DIE_SUBS = ContainerUtil.newHashSet(
     "die",
     "croak",
