@@ -274,14 +274,14 @@ public class PerlProjectManager implements Disposable {
     return !myProject.isDefault() && getProjectSdk() != null;
   }
 
-  public void setExternalLibraries(@NotNull List<VirtualFile> roots) {
+  public void setExternalLibraries(@NotNull List<? extends VirtualFile> roots) {
     WriteAction.run(() -> {
       myPerlSettings.setExternalLibrariesPaths(Collections.emptyList());
       addExternalLibraries(roots);
     });
   }
 
-  public void addExternalLibraries(@NotNull List<VirtualFile> roots) {
+  public void addExternalLibraries(@NotNull List<? extends VirtualFile> roots) {
     WriteAction.run(
       () -> {
         List<String> paths = new ArrayList<>(myPerlSettings.getExternalLibrariesPaths());
@@ -351,10 +351,6 @@ public class PerlProjectManager implements Disposable {
     return project == null ? null : getInstance(project).getProjectSdk();
   }
 
-  public static @Nullable String getInterpreterPath(@Nullable Module module) {
-    return getInterpreterPath(getSdk(module));
-  }
-
   /**
    * Migration method for 2018.3. Updates sdk path to interpreter path, not bin dir
    *
@@ -374,10 +370,6 @@ public class PerlProjectManager implements Disposable {
       modificator.commitChanges();
     }
     return homePath;
-  }
-
-  public static @Nullable String getInterpreterPath(@Nullable Project project) {
-    return getInterpreterPath(getSdk(project));
   }
 
   public static @Nullable Sdk getSdk(@NotNull Project project, @Nullable VirtualFile virtualFile) {
