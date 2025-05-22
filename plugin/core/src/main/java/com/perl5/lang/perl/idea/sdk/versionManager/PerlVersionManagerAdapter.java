@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -175,7 +175,7 @@ public abstract class PerlVersionManagerAdapter {
 
   private void notifyUser(@NotNull String message) {
     ApplicationManager.getApplication().invokeLater(() -> {
-      if (ModalityState.current() != ModalityState.NON_MODAL) {
+      if (ModalityState.current() != ModalityState.nonModal()) {
         Messages.showErrorDialog(message, getErrorNotificationTitle());
       }
       else {
