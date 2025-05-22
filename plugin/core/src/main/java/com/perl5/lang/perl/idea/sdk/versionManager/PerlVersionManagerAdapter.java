@@ -29,6 +29,8 @@ import com.intellij.openapi.application.ModalityState;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.NlsContexts.DialogMessage;
+import com.intellij.openapi.util.NlsContexts.DialogTitle;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
@@ -171,17 +173,19 @@ public abstract class PerlVersionManagerAdapter {
     return PerlBundle.message("perl.vm.notification.group");
   }
 
-  protected abstract @NotNull String getErrorNotificationTitle();
+  protected abstract @DialogTitle @NotNull String getErrorNotificationTitle();
 
-  private void notifyUser(@NotNull String message) {
+  private void notifyUser(@DialogMessage @NotNull String message) {
     ApplicationManager.getApplication().invokeLater(() -> {
+      //noinspection DialogTitleCapitalization
+      var dialogTitle = getErrorNotificationTitle();
       if (ModalityState.current() != ModalityState.nonModal()) {
-        Messages.showErrorDialog(message, getErrorNotificationTitle());
+        Messages.showErrorDialog(message, dialogTitle);
       }
       else {
         Notifications.Bus.notify(new Notification(
           getNotificationGroup(),
-          getErrorNotificationTitle(),
+          dialogTitle,
           message,
           NotificationType.ERROR
         ));

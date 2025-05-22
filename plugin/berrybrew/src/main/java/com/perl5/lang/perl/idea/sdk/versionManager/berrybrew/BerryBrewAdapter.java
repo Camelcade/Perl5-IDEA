@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.sdk.versionManager.berrybrew;
 
 import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
@@ -96,7 +97,7 @@ class BerryBrewAdapter extends PerlVersionManagerAdapter {
   }
 
   @Override
-  protected @NotNull String getErrorNotificationTitle() {
+  protected @NlsContexts.DialogTitle @NotNull String getErrorNotificationTitle() {
     return PerlBundle.message("perl.vm.berrybrew.notification.title");
   }
 }

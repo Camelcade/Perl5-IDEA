@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.google.common.annotations.VisibleForTesting;
 import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
@@ -116,7 +117,7 @@ public class AsdfAdapter extends PerlVersionManagerAdapter {
   }
 
   @Override
-  protected @NotNull String getErrorNotificationTitle() {
+  protected @NlsContexts.DialogTitle @NotNull String getErrorNotificationTitle() {
     return PerlBundle.message("perl.vm.plenv.notification.title");
   }
 
