@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,14 +19,8 @@ package com.perl5.lang.perl.coverage;
 import com.intellij.coverage.CoverageRunner;
 import com.intellij.execution.configurations.RunConfigurationBase;
 import com.intellij.execution.configurations.coverage.CoverageEnabledConfiguration;
-import com.intellij.openapi.application.PathManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
 
 public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfiguration {
 
@@ -39,23 +33,6 @@ public class PerlCoverageEnabledConfiguration extends CoverageEnabledConfigurati
   public @NotNull GenericPerlRunConfiguration getConfiguration() {
     return (GenericPerlRunConfiguration)super.getConfiguration();
   }
-
-  /*
-  @Override
-  protected @Nullable String createCoverageFile() {
-    CoverageRunner coverageRunner = getCoverageRunner();
-    if (coverageRunner == null) {
-      return null;
-    }
-    String coverageRootPath = PathManager.getSystemPath() + File.separator + "coverage";
-    GenericPerlRunConfiguration perlRunConfiguration = getConfiguration();
-    Project project = perlRunConfiguration.getProject();
-    return coverageRootPath + File.separator +
-           FileUtil.sanitizeFileName(project.getName()) +
-           this.coverageFileNameSeparator() +
-           FileUtil.sanitizeFileName(perlRunConfiguration.getName());
-  }
-  */
 
   @Override
   protected String coverageFileNameSeparator() {
