@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,8 +64,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.util.*;
 
-import static com.intellij.ProjectTopics.PROJECT_ROOTS;
-
 public class PerlProjectManager implements Disposable {
   private final @NotNull Project myProject;
   private final PerlLocalSettings myPerlSettings;
@@ -98,7 +96,7 @@ public class PerlProjectManager implements Disposable {
         }
       }
     });
-    connection.subscribe(PROJECT_ROOTS, new ModuleRootListener() {
+    connection.subscribe(ModuleRootListener.TOPIC, new ModuleRootListener() {
       @Override
       public void rootsChanged(@NotNull ModuleRootEvent event) {
         resetProjectCaches();

@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.project;
 
-import com.intellij.ProjectTopics;
 import com.intellij.ide.lightEdit.LightEdit;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
@@ -64,7 +63,7 @@ public class PerlNamesCache implements Disposable {
       return;
     }
     MessageBusConnection connection = project.getMessageBus().connect(this);
-    connection.subscribe(ProjectTopics.PROJECT_ROOTS, new ModuleRootListener() {
+    connection.subscribe(ModuleRootListener.TOPIC, new ModuleRootListener() {
       @Override
       public void rootsChanged(@NotNull ModuleRootEvent event) {
         queueUpdate();
