@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.project;
 
-import com.intellij.ProjectTopics;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootEvent;
@@ -42,7 +41,7 @@ public class PerlDirectoryIndex implements Disposable {
     myIndex = createIndexForRoots(() -> PerlProjectManager.getInstance(project).getAllLibraryRoots());
     myRootComputator = createRootComputator(myIndex);
     MessageBusConnection connection = project.getMessageBus().connect(this);
-    connection.subscribe(ProjectTopics.PROJECT_ROOTS, new ModuleRootListener() {
+    connection.subscribe(ModuleRootListener.TOPIC, new ModuleRootListener() {
       @Override
       public void rootsChanged(@NotNull ModuleRootEvent event) {
         myIndex.resetIndex();
