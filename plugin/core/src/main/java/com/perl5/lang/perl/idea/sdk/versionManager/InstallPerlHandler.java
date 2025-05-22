@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -121,7 +121,7 @@ public abstract class InstallPerlHandler {
     private final @NotNull PerlInstallForm myForm;
 
     public MyDialog(@Nullable Project project, @Nullable PerlInstallFormOptions optionsPanel, @NotNull List<String> distributions) {
-      super(project, true, IdeModalityType.PROJECT);
+      super(project, true, IdeModalityType.IDE);
       myForm = new PerlInstallForm(optionsPanel, this, distributions);
       if (project == null) {
         myForm.disableChooseCheckbox();
