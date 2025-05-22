@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ public final class TemplateToolkitIcons {
   public static final Icon TTK2_ICON = load("/icons/template_toolkit_gutter_icon.png");
   public static final Icon TTK2_MODIFIER = load("/icons/tt-modifier.png");
   public static final Icon TTK2_BLOCK_ICON = load("/icons/template_toolkit_block_gutter_icon.png");
-  public static final Icon TTK2_ROOT = new LayeredIcon(PerlIcons.TEMPLATE_ROOT, TTK2_MODIFIER);
+  public static final Icon TTK2_ROOT = LayeredIcon.layeredIcon(() -> new Icon[]{PerlIcons.TEMPLATE_ROOT, TTK2_MODIFIER});
 
   private static @NotNull Icon load(@NotNull String resourcePath) {
     return IconLoader.getIcon(resourcePath, TemplateToolkitIcons.class);
