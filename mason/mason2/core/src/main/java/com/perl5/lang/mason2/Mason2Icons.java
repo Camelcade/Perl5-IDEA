@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,5 +26,5 @@ public class Mason2Icons {
   public static final Icon MASON_PURE_PERL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
   public static final Icon MASON_TOP_LEVEL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
   public static final Icon MASON_INTERNAL_COMPONENT_ICON = PerlIcons.PERL_SCRIPT_FILE_ICON;
-  public static final Icon ROOT_ICON = new LayeredIcon(PerlIcons.TEMPLATE_ROOT, PerlIcons.CAMEL_MODIFIER);
+  public static final Icon ROOT_ICON = LayeredIcon.layeredIcon(() -> new Icon[]{PerlIcons.TEMPLATE_ROOT, PerlIcons.CAMEL_MODIFIER});
 }

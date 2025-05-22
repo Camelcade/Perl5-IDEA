@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.util.List;
 
 public class PerlUnmarkSourceRootAction extends PerlSourceRootAction {
@@ -64,11 +65,13 @@ public class PerlUnmarkSourceRootAction extends PerlSourceRootAction {
 
       ModuleSourceRootEditHandler<?> handler = type.getEditHandler();
       presentation.setText(handler.getUnmarkRootButtonText());
-      presentation.setIcon(new LayeredIcon(handler.getRootIcon(), AllIcons.RunConfigurations.InvalidConfigurationLayer));
+      presentation.setIcon(
+        LayeredIcon.layeredIcon(() -> new Icon[]{handler.getRootIcon(), AllIcons.RunConfigurations.InvalidConfigurationLayer}));
     }
     else {
       presentation.setText(PerlBundle.message("perl.action.unmark.multi"));
-      presentation.setIcon(new LayeredIcon(PerlIcons.PERL_LANGUAGE_ICON, AllIcons.RunConfigurations.InvalidConfigurationLayer));
+      presentation.setIcon(
+        LayeredIcon.layeredIcon(() -> new Icon[]{PerlIcons.PERL_LANGUAGE_ICON, AllIcons.RunConfigurations.InvalidConfigurationLayer}));
     }
   }
 
