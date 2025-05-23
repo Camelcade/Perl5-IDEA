@@ -77,7 +77,6 @@ import org.jetbrains.annotations.Nullable;
 import org.jetbrains.concurrency.Promise;
 import org.junit.Assume;
 import org.junit.experimental.categories.Category;
-import org.junit.runner.Description;
 import org.junit.runner.RunWith;
 
 import java.io.File;
@@ -170,16 +169,6 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     finally {
       super.tearDown();
     }
-  }
-
-  /**
-   * As far as we can't provide additional rules, because of hacky way main rule works, you should
-   * put additional logic in here
-   *
-   * @param description test method description
-   */
-  @SuppressWarnings("unused")
-  protected void doEvaluate(@NotNull Description description) {
   }
 
   protected @Nullable Sdk getSdk() {
