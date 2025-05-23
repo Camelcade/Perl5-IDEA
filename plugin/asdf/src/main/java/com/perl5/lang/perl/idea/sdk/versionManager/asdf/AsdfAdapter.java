@@ -118,7 +118,7 @@ public class AsdfAdapter extends PerlVersionManagerAdapter {
 
   @Override
   protected @NlsContexts.DialogTitle @NotNull String getErrorNotificationTitle() {
-    return PerlBundle.message("perl.vm.plenv.notification.title");
+    return PerlBundle.message("perl.vm.asdf.notification.title");
   }
 
   @Contract("null->null")
