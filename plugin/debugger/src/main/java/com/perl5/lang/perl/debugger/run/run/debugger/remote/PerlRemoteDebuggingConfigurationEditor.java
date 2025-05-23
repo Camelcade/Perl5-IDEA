@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,7 +111,7 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
     remoteRoot.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(remoteRoot);
 
-    myPerlRole = new ComboBox<String>(new CollectionComboBoxModel<>(new ArrayList<>(PerlDebugOptionsSets.ROLE_OPTIONS.keySet()))) {
+    myPerlRole = new ComboBox<>(new CollectionComboBoxModel<>(new ArrayList<>(PerlDebugOptionsSets.ROLE_OPTIONS.keySet()))) {
       @Override
       public void setRenderer(ListCellRenderer renderer) {
         super.setRenderer(new ColoredListCellRenderer<>() {

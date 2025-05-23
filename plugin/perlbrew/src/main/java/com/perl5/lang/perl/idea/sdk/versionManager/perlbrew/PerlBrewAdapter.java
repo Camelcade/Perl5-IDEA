@@ -156,7 +156,7 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
       return null;
     }
 
-    var result = new ArrayList<String>(PRE_DEFINED_VERSIONS);
+    var result = new ArrayList<>(PRE_DEFINED_VERSIONS);
     output.stream()
       .map(s -> s.trim().replace(".tar.bz2", ""))
       .filter(StringUtil::isNotEmpty)
