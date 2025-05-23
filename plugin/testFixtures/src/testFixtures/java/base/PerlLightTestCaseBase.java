@@ -139,7 +139,10 @@ import com.intellij.psi.util.PsiUtilBase;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.refactoring.rename.inplace.VariableInplaceRenameHandler;
 import com.intellij.refactoring.util.NonCodeSearchDescriptionLocation;
-import com.intellij.testFramework.*;
+import com.intellij.testFramework.LightVirtualFile;
+import com.intellij.testFramework.ParsingTestCase;
+import com.intellij.testFramework.PlatformTestUtil;
+import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.testFramework.fixtures.CodeInsightTestUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
@@ -282,7 +285,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   @Override
   protected final String getTestDataPath() {
     File file = new File(TEST_RESOURCES_ROOT, getBaseDataPath());
-    return file.exists() ? file.getAbsolutePath(): "";
+    return file.exists() ? file.getAbsolutePath() : "";
   }
 
   @Override
@@ -753,7 +756,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       default -> iconString = icon.toString();
     }
     assertNotNull("Could not find an icon string in " + icon, iconString);
-    return iconString.contains("/") ? iconString.substring(iconString.lastIndexOf('/')): iconString;
+    return iconString.contains("/") ? iconString.substring(iconString.lastIndexOf('/')) : iconString;
   }
 
   protected @Nullable PsiFile getTopLevelFile() {
@@ -1589,11 +1592,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void doTestTypeHierarchyWithoutInit(@NotNull PsiElement psiElement) {
-    MapDataContext dataContext = new MapDataContext();
-    dataContext.put(CommonDataKeys.PROJECT, getProject());
-    dataContext.put(CommonDataKeys.EDITOR, getEditor());
-    dataContext.put(CommonDataKeys.PSI_ELEMENT, psiElement);
-    dataContext.put(CommonDataKeys.PSI_FILE, getFile());
+    var dataContext = SimpleDataContext.builder()
+      .add(CommonDataKeys.PROJECT, getProject())
+      .add(CommonDataKeys.EDITOR, getEditor())
+      .add(CommonDataKeys.PSI_ELEMENT, psiElement)
+      .add(CommonDataKeys.PSI_FILE, getFile()).build();
 
     HierarchyProvider hierarchyProvider =
       BrowseHierarchyActionBase.findProvider(LanguageTypeHierarchy.INSTANCE, psiElement, getFile(), dataContext);
@@ -1882,8 +1885,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       .append(System.lineSeparator())
       .append("{")
       .append(instructionClass.getSimpleName().isEmpty()
-              ? instructionClass.getSuperclass().getSimpleName()
-              : instructionClass.getSimpleName())
+                ? instructionClass.getSuperclass().getSimpleName()
+                : instructionClass.getSimpleName())
       .append("}");
   }
 
@@ -2208,7 +2211,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     if (documentationElement == null) {
       LOG.warn("No documentation element found for " + elementObject);
     }
-    String generatedDoc = documentationElement == null ? "": StringUtil.notNullize(documentationProvider.generateDoc(documentationElement, elementAtCaret));
+    String generatedDoc =
+      documentationElement == null ? "" : StringUtil.notNullize(documentationProvider.generateDoc(documentationElement, elementAtCaret));
     assertNotNull("No document generated for " + documentationElement, generatedDoc);
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), generatedDoc);
   }
@@ -2289,8 +2293,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected void doTestReturnValue() {
     initWithFileSmart(getTestName(true));
     addVirtualFileFilter();
-    PsiElement element = TargetElementUtil.getInstance().getNamedElement(getFile().findElementAt(getEditor().getCaretModel().getOffset()), 0);
-    if( element == null){
+    PsiElement element =
+      TargetElementUtil.getInstance().getNamedElement(getFile().findElementAt(getEditor().getCaretModel().getOffset()), 0);
+    if (element == null) {
       element = getElementAtCaret(PerlSubElement.class);
     }
     assertNotNull(element);
@@ -2372,7 +2377,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       SyntaxHighlighter activeSyntaxHighlighter =
         highlighterIterator instanceof LayeredHighlighterIterator layeredIterator ?
           layeredIterator.getActiveSyntaxHighlighter() :
-        ((LexerEditorHighlighter)editorHighlighter).getSyntaxHighlighter();
+          ((LexerEditorHighlighter)editorHighlighter).getSyntaxHighlighter();
       TextAttributesKey[] highlights = activeSyntaxHighlighter.getTokenHighlights(highlighterIterator.getTokenType());
       if (highlights.length > 0) {
         if (!sb.isEmpty()) {
@@ -2806,7 +2811,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
                                                                                  @NotNull T provider) {
     DataContext dataContext = SimpleDataContext.getProjectContext(getProject());
     List<RunAnythingItem> completionItems = new ArrayList<>(ContainerUtil.map(provider.getValues(dataContext, pattern),
-                                                              it -> provider.getMainListItem(dataContext, it)));
+                                                                              it -> provider.getMainListItem(dataContext, it)));
     V matchingValue = provider.findMatchingValue(dataContext, pattern);
     StringBuilder sb = new StringBuilder();
     sb.append("Matching value:\n\t").append(matchingValue).append("\n");
