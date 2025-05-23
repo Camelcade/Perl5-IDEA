@@ -358,7 +358,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    *
    * @param removeAutomatically if true, this source root going to be unmarked automatically in the perl test tearDown
    */
-  protected void markAsLibRoot(@NotNull VirtualFile libDir, boolean removeAutomatically) {
+  protected void markAsLibRoot(@NotNull VirtualFile libDir, @SuppressWarnings("SameParameterValue") boolean removeAutomatically) {
     markAsPerlRoot(libDir, removeAutomatically, PerlLibrarySourceRootType.INSTANCE);
   }
 
@@ -561,7 +561,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     return myCompletionInvocationCount;
   }
 
-  protected void setCompletionInvocationCount(int completionInvocationCount) {
+  protected void setCompletionInvocationCount(@SuppressWarnings("SameParameterValue") int completionInvocationCount) {
     myCompletionInvocationCount = completionInvocationCount;
   }
 
@@ -1277,7 +1277,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     testFoldingRegions(verificationFileName, false, fileType);
   }
 
-  protected void testFoldingRegions(@NotNull String verificationFileName, boolean doCheckCollapseStatus, LanguageFileType fileType) {
+  protected void testFoldingRegions(@NotNull String verificationFileName,
+                                    @SuppressWarnings("SameParameterValue") boolean doCheckCollapseStatus,
+                                    LanguageFileType fileType) {
     String expectedContent;
     try {
       expectedContent = FileUtilRt.loadFile(
@@ -1334,7 +1336,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     return Objects.requireNonNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
   }
 
-  protected @NotNull <T extends PsiElement> T getTopLevelFileElementAtCaret(@NotNull Class<T> clazz) {
+  protected @NotNull <T extends PsiElement> T getTopLevelFileElementAtCaret(@SuppressWarnings("SameParameterValue") @NotNull Class<T> clazz) {
     int offset = getTopLevelEditor().getCaretModel().getOffset();
     var topLevelFile = getTopLevelFile();
     assertNotNull(topLevelFile);
@@ -1342,7 +1344,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     return Objects.requireNonNull(PsiTreeUtil.getParentOfType(focused, clazz, false));
   }
 
-  protected <T extends PsiElement> T getElementAtCaretWithoutInjection(@NotNull Class<T> clazz) {
+  protected <T extends PsiElement> T getElementAtCaretWithoutInjection(@SuppressWarnings("SameParameterValue") @NotNull Class<T> clazz) {
     return Objects.requireNonNull(PsiTreeUtil.getParentOfType(getElementAtCaretWithoutInjection(), clazz, false));
   }
 
@@ -1366,7 +1368,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void doTestMassQuickFixes(@NotNull String fileName,
-                                      @NotNull Class<? extends LocalInspectionTool> inspectionClass,
+                                      @SuppressWarnings("SameParameterValue") @NotNull Class<? extends LocalInspectionTool> inspectionClass,
                                       @NotNull String quickfixNamePrefix) {
     initWithFileSmart(fileName);
     //noinspection unchecked
@@ -1382,7 +1384,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected void doTestAnnotationQuickFix(@NotNull String fileName,
-                                          @NotNull Class<? extends LocalInspectionTool> inspectionClass,
+                                          @SuppressWarnings("SameParameterValue") @NotNull Class<? extends LocalInspectionTool> inspectionClass,
                                           @NotNull String quickFixNamePrefix) {
     initWithFileSmartWithoutErrors(fileName);
     doTestAnnotationQuickFixWithoutInitialization(inspectionClass, quickFixNamePrefix);
@@ -1839,7 +1841,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       printInstruction(builder, instruction);
 
       switch (instruction) {
-        case PerlIteratorConditionInstruction ignored -> {
+        case PerlIteratorConditionInstruction ignored -> //noinspection DuplicateBranchesInSwitch
+        {
         }
         case PartialConditionalInstructionImpl partialConditionalInstruction ->
           builder.append("\n").append("Its ").append(partialConditionalInstruction.getResult()).
@@ -2367,8 +2370,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     StringBuilder sb = new StringBuilder();
     while (!highlighterIterator.atEnd()) {
       SyntaxHighlighter activeSyntaxHighlighter =
-        highlighterIterator instanceof LayeredHighlighterIterator ?
-        ((LayeredHighlighterIterator)highlighterIterator).getActiveSyntaxHighlighter() :
+        highlighterIterator instanceof LayeredHighlighterIterator layeredIterator ?
+          layeredIterator.getActiveSyntaxHighlighter() :
         ((LexerEditorHighlighter)editorHighlighter).getSyntaxHighlighter();
       TextAttributesKey[] highlights = activeSyntaxHighlighter.getTokenHighlights(highlighterIterator.getTokenType());
       if (highlights.length > 0) {
