@@ -1049,7 +1049,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    * Add markers with offsets for caret and selection
    */
   private void addCaretInfo(@NotNull Caret caret,
-                            @NotNull List<Pair<Integer, String>> macroses) {
+                            @NotNull List<? super Pair<Integer, String>> macroses) {
     macroses.add(Pair.create(caret.getOffset(), "<caret>"));
     if (caret.hasSelection()) {
       macroses.add(Pair.create(caret.getSelectionStart(), "<selection>"));
@@ -1071,7 +1071,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     return macroses;
   }
 
-  private @NotNull String getEditorTextWithMacroses(@NotNull Editor editor, @NotNull List<Pair<Integer, String>> macros) {
+  private @NotNull String getEditorTextWithMacroses(@NotNull Editor editor, @NotNull List<? extends Pair<Integer, String>> macros) {
     ContainerUtil.sort(macros, Comparator.comparingInt(pair -> pair.first));
     StringBuilder sb = new StringBuilder(editor.getDocument().getText());
 
@@ -1487,7 +1487,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   private void serializeTree(@NotNull StructureViewTreeElement currentElement,
                              @NotNull StructureViewModel structureViewModel,
                              @NotNull StringBuilder sb,
-                             @Nullable Collection<Pair<Grouper, Group>> groups,
+                             @Nullable Collection<? extends Pair<Grouper, Group>> groups,
                              @NotNull String prefix,
                              @NotNull Set<Object> recursionSet
   ) {
@@ -1653,9 +1653,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   private @Nullable String serializeTreeStructure(@NotNull HierarchyTreeStructure treeStructure,
                                                   @Nullable HierarchyNodeDescriptor currentElement,
-                                                  @NotNull Function<HierarchyNodeDescriptor, PsiElement> elementProvider,
+                                                  @NotNull Function<? super HierarchyNodeDescriptor, ? extends PsiElement> elementProvider,
                                                   @NotNull String prefix,
-                                                  @NotNull Set<HierarchyNodeDescriptor> recursionSet
+                                                  @NotNull Set<? super HierarchyNodeDescriptor> recursionSet
   ) {
     if (currentElement == null) {
       return null;
@@ -1729,7 +1729,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   private void appendDescriptors(@NotNull String sectionLabel,
                                  @NotNull StringBuilder sb,
-                                 @NotNull List<PerlExportDescriptor> exportDescriptors) {
+                                 @NotNull List<? extends PerlExportDescriptor> exportDescriptors) {
     if (exportDescriptors.isEmpty()) {
       return;
     }
@@ -2318,7 +2318,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doTestGoToByModel(@NotNull FilteringGotoByModel<?> model,
                                    boolean includeNonProjectFiles,
-                                   @NotNull Condition<String> nameFilter) {
+                                   @NotNull Condition<? super String> nameFilter) {
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject());
     List<String> acceptableNames = new ArrayList<>(ContainerUtil.filter(model.getNames(includeNonProjectFiles), nameFilter));
     ContainerUtil.sort(acceptableNames);
@@ -2753,7 +2753,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     CodeInsightTestUtil.doInlineRename(new PerlMemberInplaceRenameHandler(), newName, myFixture);
   }
 
-  protected void doTestSurrounders(Predicate<String> namePredicate, boolean shouldHaveSurrounders) {
+  protected void doTestSurrounders(Predicate<? super String> namePredicate, boolean shouldHaveSurrounders) {
     initWithFileSmartWithoutErrors();
     List<AnAction> actions = ReadAction.compute(() -> SurroundWithHandler.buildSurroundActions(getProject(), getEditor(), getFile()));
     if (actions == null) {
