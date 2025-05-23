@@ -116,7 +116,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   @com.intellij.testFramework.Parameterized.Parameters(name = "{0}")
-  public static Iterable<Object[]> realData(Class<?> clazz) {
+  public static Iterable<Object[]> realData(@SuppressWarnings("unused") Class<?> clazz) {
     return ContainerUtil.map(PerlConfigurators.getConfigurators(), it -> new Object[]{it.getConfigurator()});
   }
 
@@ -296,7 +296,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return psiElement;
   }
 
-  protected @NotNull DataContext createDataContext(@NotNull Function<String, Object> additionalData) {
+  protected @NotNull DataContext createDataContext(@NotNull Function<? super String, Object> additionalData) {
     return dataId -> {
       if (CommonDataKeys.PROJECT.is(dataId)) {
         return getProject();
@@ -412,7 +412,8 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return sb.toString();
   }
 
-  protected void runTestConfigurationWithExecutorAndCheckResultsWithFile(GenericPerlRunConfiguration runConfiguration, String executorId) {
+  protected void runTestConfigurationWithExecutorAndCheckResultsWithFile(GenericPerlRunConfiguration runConfiguration,
+                                                                         @SuppressWarnings("SameParameterValue") String executorId) {
     Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
     try {
       execResult = PlatformTestUtil.executeConfiguration(runConfiguration, executorId, null);
@@ -500,7 +501,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   private @NotNull PsiFile installPackageAndGetPackageFile(@NotNull PsiFile contextPsiFile,
                                                            @NotNull String packageName,
-                                                           @NotNull BiFunction<Sdk, Runnable, AnAction> actionFunction) {
+                                                           @NotNull BiFunction<? super Sdk, Runnable, ? extends AnAction> actionFunction) {
     var sdk = getSdk();
     assertNotNull(sdk);
     var semaphore = new Semaphore(1);
