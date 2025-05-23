@@ -18,7 +18,7 @@ public class TestTerminalBufferWatcher {
     myBuffer = buffer;
   }
 
-  public boolean awaitBuffer(@NotNull BooleanSupplier awaitCondition, long timeoutMillis) {
+  public void awaitBuffer(@NotNull BooleanSupplier awaitCondition, long timeoutMillis) {
     CountDownLatch latch = new CountDownLatch(1);
     AtomicBoolean ok = new AtomicBoolean(false);
     TerminalModelListener listener = () -> {
@@ -30,7 +30,7 @@ public class TestTerminalBufferWatcher {
     myBuffer.addModelListener(listener);
     if (awaitCondition.getAsBoolean()) {
       myBuffer.removeModelListener(listener);
-      return true;
+      return;
     }
     try {
       latch.await(timeoutMillis, TimeUnit.MILLISECONDS);
@@ -42,7 +42,7 @@ public class TestTerminalBufferWatcher {
     finally {
       myBuffer.removeModelListener(listener);
     }
-    return ok.get();
+    ok.get();
   }
 
   public String getScreenLines() {
