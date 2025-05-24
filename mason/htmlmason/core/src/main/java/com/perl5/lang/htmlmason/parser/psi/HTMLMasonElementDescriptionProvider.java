@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 public class HTMLMasonElementDescriptionProvider implements ElementDescriptionProvider {
   @Override
   public @Nullable String getElementDescription(@NotNull PsiElement element, @NotNull ElementDescriptionLocation location) {
-    if (!(element instanceof HTMLMasonNamedElement)) {
+    if (!(element instanceof HTMLMasonNamedElement namedElement)) {
       return null;
     }
     if (location == UsageViewLongNameLocation.INSTANCE) {
@@ -42,10 +42,10 @@ public class HTMLMasonElementDescriptionProvider implements ElementDescriptionPr
              ((PsiNamedElement)element).getName();
     }
     else if (location == UsageViewNodeTextLocation.INSTANCE) {
-      return ((HTMLMasonNamedElement)element).getName() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity)element);
+      return namedElement.getName() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity)element);
     }
     else if (location == UsageViewShortNameLocation.INSTANCE) {
-      return ((HTMLMasonNamedElement)element).getName() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity)element);
+      return namedElement.getName() + HTMLMasonUtil.getArgumentsListAsString((HTMLMasonParametrizedEntity)element);
     }
     else if (element instanceof HTMLMasonMethodDefinition) {
       if (location == UsageViewTypeLocation.INSTANCE) {
