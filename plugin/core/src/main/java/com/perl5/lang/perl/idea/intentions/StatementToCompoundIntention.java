@@ -60,15 +60,14 @@ public class StatementToCompoundIntention extends PsiElementBaseIntentionAction 
     TextRange modifierRangeInStatement = TextRange.from(modifier.getStartOffsetInParent(), modifier.getTextLength());
     String statementText = modifierRangeInStatement.replace(statement.getText(), "");
 
-    StringBuilder newCode = new StringBuilder();
-    newCode.append(keyword.getText())
-      .append("(")
-      .append(conditionText)
-      .append("){\n")
-      .append(statementText)
-      .append("\n}");
+    String newCode = keyword.getText() +
+                     "(" +
+                     conditionText +
+                     "){\n" +
+                     statementText +
+                     "\n}";
 
-    PerlFileImpl fakeFile = PerlElementFactory.createFile(project, newCode.toString());
+    PerlFileImpl fakeFile = PerlElementFactory.createFile(project, newCode);
     PsiElement[] children = fakeFile.getChildren();
     assert children.length == 1;
     statement.replace(children[0]);
