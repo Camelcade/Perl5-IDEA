@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -92,10 +92,6 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 
   protected void insertElementAfter(PsiElement element, PsiElement anchor) {
     myFormattingOperations.add(new PerlFormattingInsertAfter(element, anchor));
-  }
-
-  protected void insertElementBefore(PsiElement element, PsiElement anchor) {
-    myFormattingOperations.add(new PerlFormattingInsertBefore(element, anchor));
   }
 
   protected boolean isStringQuotable(PsiPerlStringBare o) {
@@ -208,14 +204,14 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
     PsiElement parent = o.getParent();
     boolean isSimpleScalarCast = isSimpleScalarCast(o);
 
-    if (o instanceof PsiPerlScalarCastExpr) {
+    if (o instanceof PsiPerlScalarCastExpr scalarCastExpression) {
       boolean isInsideHashOrArrayElement = parent instanceof PsiPerlArrayElement || parent instanceof PsiPerlHashElement;
 
       if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == SUPPRESS &&
           isInsideHashOrArrayElement &&
           isSimpleScalarCast) // convert $$var{key} to $var->{key}
       {
-        myFormattingOperations.add(new PerlFormattingScalarDerefExpand((PsiPerlScalarCastExpr)o));
+        myFormattingOperations.add(new PerlFormattingScalarDerefExpand(scalarCastExpression));
       }
       else if (!isSimpleScalarCast && myPerlSettings.OPTIONAL_DEREFERENCE_SIMPLE == SUPPRESS)    // need to convert ${var} to $var
       {
@@ -263,10 +259,10 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
         PsiElement openBraceElement = PerlPsiUtil.getPrevSignificantSibling(statementElement);
         if (openBraceElement != null && openBraceElement.getNode().getElementType() == LEFT_BRACE) {
           PsiElement referenceVariable = statementElement.getFirstChild();
-          if (referenceVariable instanceof PsiPerlScalarVariable) {
+          if (referenceVariable instanceof PsiPerlScalarVariable scalarVariable) {
             PsiElement optionalSemi = PerlPsiUtil.getPrevSignificantSibling(referenceVariable);
             if (optionalSemi == null || optionalSemi.getNode().getElementType() == SEMICOLON && optionalSemi.getNextSibling() == null) {
-              myFormattingOperations.add(new PerlFormattingSimpleDereferenceUnwrap(o, (PsiPerlScalarVariable)referenceVariable));
+              myFormattingOperations.add(new PerlFormattingSimpleDereferenceUnwrap(o, scalarVariable));
             }
           }
         }
@@ -281,14 +277,14 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
     }
     if (myPerlSettings.OPTIONAL_DEREFERENCE_HASHREF_ELEMENT == FORCE) {
       PsiElement scalarVariableElement = o.getFirstChild();
-      if (scalarVariableElement instanceof PsiPerlScalarVariable) {
+      if (scalarVariableElement instanceof PsiPerlScalarVariable scalarVariable) {
         PsiElement derefElement = PerlPsiUtil.getNextSignificantSibling(scalarVariableElement);
         if (derefElement != null && derefElement.getNode().getElementType() == OPERATOR_DEREFERENCE) {
           PsiElement probableIndexElement = PerlPsiUtil.getNextSignificantSibling(derefElement);
 
           if (probableIndexElement instanceof PsiPerlHashIndex || probableIndexElement instanceof PsiPerlArrayIndex) {
             myFormattingOperations
-              .add(new PerlFormattingScalarDerefCollapse((PsiPerlScalarVariable)scalarVariableElement, probableIndexElement));
+              .add(new PerlFormattingScalarDerefCollapse(scalarVariable, probableIndexElement));
           }
         }
       }
