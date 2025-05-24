@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -154,18 +154,19 @@ abstract class PerlGenericStringsOccurrencesCollector extends PerlIntroduceTarge
             }
             endOffset = elementToCompareTextRange.getEndOffset();
           }
-          else if (childToFind instanceof String && STRING_CONTENT_TOKENSET.contains(PsiUtilCore.getElementType(elementToCompare))) {
+          else if (childToFind instanceof String stringChild &&
+                   STRING_CONTENT_TOKENSET.contains(PsiUtilCore.getElementType(elementToCompare))) {
             String textToCompare = elementToCompare.getText();
             if (!isLast) {
-              if (!StringUtil.equals((String)childToFind, textToCompare)) {
+              if (!StringUtil.equals(stringChild, textToCompare)) {
                 endOffset = -1;
                 break;
               }
               endOffset = elementToCompareTextRange.getEndOffset();
             }
             else {
-              if (StringUtil.startsWith(textToCompare, (String)childToFind)) {
-                endOffset = elementToCompareTextRange.getStartOffset() + ((String)childToFind).length();
+              if (StringUtil.startsWith(textToCompare, stringChild)) {
+                endOffset = elementToCompareTextRange.getStartOffset() + stringChild.length();
               }
             }
           }

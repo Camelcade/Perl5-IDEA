@@ -58,8 +58,8 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
     PsiElement psiElement = Objects.requireNonNull(occurrences.getFirst().getPlace());
     Set<TextRange> replacementRanges = new HashSet<>();
 
-    PsiElement replacedString = psiElement instanceof PsiPerlStringSq ?
-                                replaceWithConcatenation(occurrences, replacementChars, (PsiPerlStringSq)psiElement, replacementRanges) :
+    PsiElement replacedString = psiElement instanceof PsiPerlStringSq sqString ?
+      replaceWithConcatenation(occurrences, replacementChars, sqString, replacementRanges) :
                                 replaceWithInterpolation(occurrences, replacementChars, psiElement, replacementRanges);
     return ContainerUtil.filter(replacedString.getChildren(), it -> replacementRanges.contains(it.getTextRangeInParent()));
   }

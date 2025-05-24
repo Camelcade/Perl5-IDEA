@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -182,8 +182,8 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     Language baseLanguage = fileViewProvider.getBaseLanguage();
     ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(baseLanguage);
     Lexer lexer = parserDefinition.createLexer(psiElement.getProject());
-    int alternativeInitialState = parserDefinition instanceof PerlLexerAwareParserDefinition ?
-                                  ((PerlLexerAwareParserDefinition)parserDefinition).getLexerStateFor(context, elementType) : 0;
+    int alternativeInitialState = parserDefinition instanceof PerlLexerAwareParserDefinition lexerAwareParserDefinition ?
+      lexerAwareParserDefinition.getLexerStateFor(context, elementType) : 0;
     return alternativeInitialState == 0 ? lexer : createLexerWithCustomInitialState(alternativeInitialState, lexer);
   }
 }

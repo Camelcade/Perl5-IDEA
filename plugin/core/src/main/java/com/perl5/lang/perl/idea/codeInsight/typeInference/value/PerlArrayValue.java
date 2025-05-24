@@ -45,12 +45,12 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
   }
 
   public @NotNull PerlValue get(@NotNull PerlValue indexValue) {
-    if (!(indexValue instanceof PerlScalarValue) || !isDeterministic()) {
+    if (!(indexValue instanceof PerlScalarValue scalarValue) || !isDeterministic()) {
       return UNKNOWN_VALUE;
     }
     int index;
     try {
-      index = Integer.parseInt(((PerlScalarValue)indexValue).getValue());
+      index = Integer.parseInt(scalarValue.getValue());
     }
     catch (NumberFormatException ignore) {
       return UNKNOWN_VALUE;

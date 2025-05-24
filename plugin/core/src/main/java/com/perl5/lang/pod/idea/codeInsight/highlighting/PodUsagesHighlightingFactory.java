@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,7 @@ public class PodUsagesHighlightingFactory extends HighlightUsagesHandlerFactoryB
 
     PsiElement targetElement = TargetElementUtil.findTargetElement(editor, REFERENCED_ELEMENT_ACCEPTED | ELEMENT_NAME_ACCEPTED);
 
-    if (!(targetElement instanceof PodTitledSection)) {
+    if (!(targetElement instanceof PodTitledSection section)) {
       return null;
     }
     return new HighlightUsagesHandlerBase<>(editor, file) {
@@ -69,7 +69,7 @@ public class PodUsagesHighlightingFactory extends HighlightUsagesHandlerFactoryB
 
       @Override
       public void computeUsages(@NotNull List<? extends PsiElement> targets) {
-        List<PodTitledSection> allTargetSections = PodLinkToSectionReference.getAllSynonymousSections((PodTitledSection)targetElement);
+        List<PodTitledSection> allTargetSections = PodLinkToSectionReference.getAllSynonymousSections(section);
         if (allTargetSections.isEmpty()) {
           return;
         }

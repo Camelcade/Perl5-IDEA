@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -126,8 +126,8 @@ public class TemplateToolkitFileViewProvider extends MultiplePsiFilesPerDocument
   }
 
   public static Language calcTemplateLanguage(@Nullable PsiManager manager, @Nullable VirtualFile file) {
-    while (file instanceof LightVirtualFile) {
-      VirtualFile originalFile = ((LightVirtualFile)file).getOriginalFile();
+    while (file instanceof LightVirtualFile lightVirtualFile) {
+      VirtualFile originalFile = lightVirtualFile.getOriginalFile();
       if (originalFile == null || originalFile == file) {
         break;
       }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ public class PerlCoverageRunner extends CoverageRunner {
 
   @Override
   public ProjectData loadCoverageData(@NotNull File sessionDataFile, @Nullable CoverageSuite baseCoverageSuite) {
-    if (!(baseCoverageSuite instanceof PerlCoverageSuite)) {
+    if (!(baseCoverageSuite instanceof PerlCoverageSuite perlCoverageSuite)) {
       return null;
     }
     if (ApplicationManager.getApplication().isDispatchThread()) {
@@ -73,7 +73,7 @@ public class PerlCoverageRunner extends CoverageRunner {
       return projectDataRef.get();
     }
     else {
-      return doLoadCoverageData(sessionDataFile, (PerlCoverageSuite)baseCoverageSuite);
+      return doLoadCoverageData(sessionDataFile, perlCoverageSuite);
     }
   }
 

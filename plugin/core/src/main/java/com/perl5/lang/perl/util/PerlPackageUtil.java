@@ -811,7 +811,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
       if (element instanceof PerlUseStatementElement useStatementElement) {
         PerlPackageProcessor processor = useStatementElement.getPackageProcessor();
         if (processor instanceof PerlPackageParentsProvider packageParentsProvider) {
-          packageParentsProvider.changeParentsList((PerlUseStatementElement)element, myParentNamespaces);
+          packageParentsProvider.changeParentsList(useStatementElement, myParentNamespaces);
         }
       }
       else if (element instanceof PerlRuntimeParentsProvider runtimeParentsProvider) {

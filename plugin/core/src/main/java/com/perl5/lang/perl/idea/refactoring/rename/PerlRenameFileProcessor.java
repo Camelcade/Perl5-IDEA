@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ import org.jetbrains.annotations.Nullable;
 public class PerlRenameFileProcessor extends RenamePsiFileProcessor {
   @Override
   public boolean canProcessElement(@NotNull PsiElement element) {
-    return element instanceof PerlFileImpl && ((PerlFileImpl)element).getVirtualFile().getFileType() == PerlFileTypePackage.INSTANCE;
+    return element instanceof PerlFileImpl perlFile && perlFile.getVirtualFile().getFileType() == PerlFileTypePackage.INSTANCE;
   }
 
   @Override

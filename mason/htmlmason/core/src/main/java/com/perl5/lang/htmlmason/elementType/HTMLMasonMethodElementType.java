@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,6 +80,6 @@ public class HTMLMasonMethodElementType extends IStubElementType<HTMLMasonMethod
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
-    return psi instanceof HTMLMasonMethodDefinition && StringUtil.isNotEmpty(((HTMLMasonMethodDefinition)psi).getName());
+    return psi instanceof HTMLMasonMethodDefinition methodDefinition && StringUtil.isNotEmpty(methodDefinition.getName());
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ import java.util.Map;
 public class PerlRenameDirectoryProcessor extends RenamePsiFileProcessor {
   @Override
   public boolean canProcessElement(@NotNull PsiElement element) {
-    return element instanceof PsiDirectory && canProcessDir((PsiDirectory)element);
+    return element instanceof PsiDirectory directory && canProcessDir(directory);
   }
 
   protected boolean canProcessDir(PsiDirectory dir) {

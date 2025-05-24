@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,8 +58,8 @@ public class PerlMemberInplaceRenamer extends MemberInplaceRenamer {
   @Override
   protected @NotNull TextRange getRangeToRename(@NotNull PsiElement element) {
     PsiElement namedElement = TargetElementUtil.getInstance().getNamedElement(element, 0);
-    return namedElement instanceof PerlIdentifierRangeProvider
-           ? ((PerlIdentifierRangeProvider)namedElement).getRangeInIdentifier()
+    return namedElement instanceof PerlIdentifierRangeProvider rangeProvider
+      ? rangeProvider.getRangeInIdentifier()
            : ElementManipulators.getValueTextRange(element);
   }
 

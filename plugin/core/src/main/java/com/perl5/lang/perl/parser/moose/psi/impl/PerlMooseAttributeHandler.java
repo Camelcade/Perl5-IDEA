@@ -375,8 +375,8 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
 
   @SuppressWarnings("BooleanMethodIsAlwaysInverted")
   public static boolean isMooseAttributeWrapper(@Nullable PsiElement psiElement) {
-    return psiElement instanceof PerlSubCallElement &&
-           ((PerlSubCallElement)psiElement).getHandler() instanceof PerlMooseAttributeHandler;
+    return psiElement instanceof PerlSubCallElement subCallElement &&
+           subCallElement.getHandler() instanceof PerlMooseAttributeHandler;
   }
 
   public static PerlMooseAttributeHandler notNullFrom(@NotNull PerlSubCallElement subCallElement) {

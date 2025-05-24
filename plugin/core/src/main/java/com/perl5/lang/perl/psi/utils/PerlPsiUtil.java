@@ -249,7 +249,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
                                                             final @NotNull Class<? extends PsiElement> psiClass
   ) {
 
-    Stub stub = currentElement instanceof StubBasedPsiElement ? ((StubBasedPsiElement<?>)currentElement).getStub() : null;
+    Stub stub = currentElement instanceof StubBasedPsiElement<?> stubBasedElement ? stubBasedElement.getStub() : null;
     if (stub != null && stubClass != null) {
       Stub parentStub = getParentStubOfType(stub, stubClass);
       return parentStub == null ? null : ((StubBase<?>)parentStub).getPsi();
@@ -611,7 +611,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
     }
 
     PsiElement elementParent = element.getParent();
-    return elementParent instanceof PerlReplacementRegex && element.equals(((PerlReplacementRegex)elementParent).getMatchRegex());
+    return elementParent instanceof PerlReplacementRegex regex && element.equals(regex.getMatchRegex());
   }
 
   /**
@@ -891,7 +891,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
     if (stubElement != null) {
       return processElementsFromStubs(stubElement, it -> !(it instanceof PerlSubElement subElement) || processor.execute(subElement), null);
     }
-    return processElementsFromPsi(rootElement, it -> !(it instanceof PerlSubElement) || processor.execute((PerlSubElement)it), null);
+    return processElementsFromPsi(rootElement, it -> !(it instanceof PerlSubElement element) || processor.execute(element), null);
   }
 
   /**

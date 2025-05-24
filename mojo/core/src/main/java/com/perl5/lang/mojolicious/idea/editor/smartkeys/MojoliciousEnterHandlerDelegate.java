@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,10 +49,10 @@ public class MojoliciousEnterHandlerDelegate extends EnterHandlerDelegateAdapter
                                 @NotNull DataContext dataContext,
                                 @Nullable EditorActionHandler originalHandler) {
     FileViewProvider viewProvider = file.getViewProvider();
-    if (viewProvider instanceof MojoliciousFileViewProvider) {
+    if (viewProvider instanceof MojoliciousFileViewProvider mojoFileViewProvider) {
       if (!(MojoliciousSmartKeysUtil.addCloseMarker(editor, "\n" + KEYWORD_MOJO_BLOCK_CLOSER) ||
             MojoliciousSmartKeysUtil.addEndMarker(editor, "\n% end\n"))) {
-        addOutlineMarkerIfNeeded(editor, (MojoliciousFileViewProvider)viewProvider, caretOffset.get());
+        addOutlineMarkerIfNeeded(editor, mojoFileViewProvider, caretOffset.get());
       }
     }
     return Result.Continue;

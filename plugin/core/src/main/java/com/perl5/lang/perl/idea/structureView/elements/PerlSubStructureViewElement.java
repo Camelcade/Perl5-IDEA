@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public class PerlSubStructureViewElement extends PerlStructureViewElement {
 
   public boolean isMethod() {
     PsiElement element = getElement();
-    return element instanceof PerlSubElement && ((PerlSubElement)element).isMethod();
+    return element instanceof PerlSubElement subElement && subElement.isMethod();
   }
 
   public boolean isConstant() {return getElement() instanceof PerlLightConstantDefinitionElement;}
