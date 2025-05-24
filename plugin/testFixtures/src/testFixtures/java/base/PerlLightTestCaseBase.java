@@ -531,7 +531,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     doFormatTest("");
   }
 
-  protected void doFormatTest(@NotNull String answerSuffix) {
+  protected void doFormatTest(@SuppressWarnings("SameParameterValue") @NotNull String answerSuffix) {
     doFormatTest(getTestName(true), answerSuffix);
   }
 
