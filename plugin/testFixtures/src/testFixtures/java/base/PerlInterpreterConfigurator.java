@@ -23,7 +23,6 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler;
-import org.apache.commons.lang.NotImplementedException;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlInterpreterConfigurator {
@@ -57,6 +56,6 @@ public abstract class PerlInterpreterConfigurator {
   }
 
   protected @NotNull String getInterpreterPath() {
-    throw new NotImplementedException();
+    throw new RuntimeException("Not implemented");
   }
 }
