@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -85,7 +85,7 @@ public class PerlDebugThread extends Thread {
   private ServerSocket myServerSocket;
   private OutputStream myOutputStream;
   private InputStream myInputStream;
-  private AtomicBoolean myStop = new AtomicBoolean(false);
+  private final AtomicBoolean myStop = new AtomicBoolean(false);
   private final List<PerlLineBreakPointDescriptor> breakpointsDescriptorsQueue = new CopyOnWriteArrayList<>();
   private boolean isReady = false;
   private int transactionId = 0;
@@ -262,7 +262,7 @@ public class PerlDebugThread extends Thread {
           else {
             var errorMessage = PerlBundle.message(
               "perl.debugger.incorrect.version.message", DEBUG_PACKAGE, MODULE_VERSION_PREFIX,
-              ((PerlDebuggingEventReady)newEvent).version);
+              debuggingEventReady.version);
             Notification notification = new Notification(
               PerlDebugProcess.PERL_DEBUGGER_NOTIFICATION_GROUP_ID,
               PerlBundle.message("perl.debugger.incorrect.version.title", DEBUG_PACKAGE),

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
 
   private static @Nullable PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
                                                     @NotNull PerlValue resolvedIndexValue) {
-    return resolvedArrayValue instanceof PerlArrayValue ? ((PerlArrayValue)resolvedArrayValue).get(resolvedIndexValue) : null;
+    return resolvedArrayValue instanceof PerlArrayValue arrayValue ? arrayValue.get(resolvedIndexValue) : null;
   }
 
   @Override

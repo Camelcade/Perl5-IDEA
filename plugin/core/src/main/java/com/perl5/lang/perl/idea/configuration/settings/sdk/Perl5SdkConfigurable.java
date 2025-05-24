@@ -201,7 +201,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
 
   public @Nullable Sdk getSelectedSdk() {
     Perl5SdkWrapper selectedWrapper = getSelectedSdkWrapper();
-    return selectedWrapper instanceof Perl5RealSdkWrapper ? ((Perl5RealSdkWrapper)selectedWrapper).getSdk() : null;
+    return selectedWrapper instanceof Perl5RealSdkWrapper realSdkWrapper ? realSdkWrapper.getSdk() : null;
   }
 
   public @Nullable Perl5SdkWrapper getSelectedSdkWrapper() {

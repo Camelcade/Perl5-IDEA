@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -252,7 +252,7 @@ public final class PerlVersion implements Comparable<PerlVersion> {
 
   @Override
   public boolean equals(Object o) {
-    return o instanceof PerlVersion && (this == o || this.getDoubleVersion() == ((PerlVersion)o).getDoubleVersion());
+    return o instanceof PerlVersion perlVersion && (this == o || this.getDoubleVersion() == perlVersion.getDoubleVersion());
   }
 
   @Override

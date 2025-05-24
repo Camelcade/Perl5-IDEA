@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,9 +103,9 @@ public class PerlSubDeclarationElementType extends IStubElementType<PerlSubDecla
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
-    return psi instanceof PerlSubDeclarationElement &&
-           StringUtil.isNotEmpty(((PerlSubDeclarationElement)psi).getNamespaceName()) &&
-           StringUtil.isNotEmpty(((PerlSubDeclarationElement)psi).getSubName())
+    return psi instanceof PerlSubDeclarationElement subDeclarationElement &&
+           StringUtil.isNotEmpty(subDeclarationElement.getNamespaceName()) &&
+           StringUtil.isNotEmpty(subDeclarationElement.getSubName())
       ;
   }
 }

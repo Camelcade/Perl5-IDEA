@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,13 +41,13 @@ public class PerlRefactoringSupportProvider extends RefactoringSupportProvider {
   @Override
   public boolean isInplaceRenameAvailable(@NotNull PsiElement element, PsiElement context) {
     SearchScope useScope = element.getUseScope();
-    return useScope instanceof LocalSearchScope
-           && element instanceof PsiNameIdentifierOwner
+    return useScope instanceof LocalSearchScope localSearchScope
+           && element instanceof PsiNameIdentifierOwner identifierOwner
            && !(element instanceof PerlRenameUsagesHelper)
            && isInplaceAllowed(element, context)
-           && !(((PsiNameIdentifierOwner)element).getNameIdentifier() instanceof PerlStringContentElement)
+           && !(identifierOwner.getNameIdentifier() instanceof PerlStringContentElement)
            && element.getContainingFile().getLanguage() == PerlLanguage.INSTANCE
-           && !(((LocalSearchScope)useScope).getScope()[0] instanceof PsiFile)
+           && !(localSearchScope.getScope()[0] instanceof PsiFile)
       ;
   }
 

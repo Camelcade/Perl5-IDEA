@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -106,12 +106,12 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
 
     ItemPresentation itemPresentation = createPresentation();
 
-    if ((isInherited() || isImported()) && itemPresentation instanceof PerlItemPresentationBase) {
+    if ((isInherited() || isImported()) && itemPresentation instanceof PerlItemPresentationBase presentationBase) {
       if (getValue() instanceof PerlDeprecatable deprecatable && deprecatable.isDeprecated()) {
-        ((PerlItemPresentationBase)itemPresentation).setAttributesKey(PerlSyntaxHighlighter.UNUSED_DEPRECATED);
+        presentationBase.setAttributesKey(PerlSyntaxHighlighter.UNUSED_DEPRECATED);
       }
       else {
-        ((PerlItemPresentationBase)itemPresentation).setAttributesKey(CodeInsightColors.NOT_USED_ELEMENT_ATTRIBUTES);
+        presentationBase.setAttributesKey(CodeInsightColors.NOT_USED_ELEMENT_ATTRIBUTES);
       }
     }
 

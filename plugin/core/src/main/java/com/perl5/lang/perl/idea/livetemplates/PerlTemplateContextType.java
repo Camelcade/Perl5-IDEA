@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -126,7 +126,7 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
       }
 
       PsiElement ifStatement = PerlPsiUtil.getPrevSignificantSibling(statement);
-      return ifStatement instanceof PerlIfUnlessCompound && ((PerlIfUnlessCompound)ifStatement).getUnconditionalBlock() == null;
+      return ifStatement instanceof PerlIfUnlessCompound compound && compound.getUnconditionalBlock() == null;
     }
   }
 
@@ -146,10 +146,10 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
         return false;
       }
 
-      PsiElement perlLoop = PerlPsiUtil.getPrevSignificantSibling(statement);
-      return perlLoop instanceof PerlLoop &&
-             ((PerlLoop)perlLoop).canHaveContinueBlock() &&
-             ((PerlLoop)perlLoop).getContinueBlock() == null;
+      PsiElement possibleLoop = PerlPsiUtil.getPrevSignificantSibling(statement);
+      return possibleLoop instanceof PerlLoop perlLoop &&
+             perlLoop.canHaveContinueBlock() &&
+             perlLoop.getContinueBlock() == null;
     }
   }
 

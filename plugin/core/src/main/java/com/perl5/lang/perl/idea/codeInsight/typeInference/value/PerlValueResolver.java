@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,14 +73,14 @@ public abstract class PerlValueResolver {
     if (this == o) {
       return true;
     }
-    if (!(o instanceof PerlValueResolver)) {
+    if (!(o instanceof PerlValueResolver valueResolver)) {
       return false;
     }
 
-    if (!myResolveScope.equals(((PerlValueResolver)o).myResolveScope)) {
+    if (!myResolveScope.equals(valueResolver.myResolveScope)) {
       return false;
     }
-    return Objects.equals(myContextFile, ((PerlValueResolver)o).myContextFile);
+    return Objects.equals(myContextFile, valueResolver.myContextFile);
   }
 
   @Override

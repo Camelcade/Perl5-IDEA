@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -82,8 +82,8 @@ public class PerlMooseAugmentStatementElementType extends IStubElementType<PerlM
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement element = node.getPsi();
-    return element instanceof PerlMooseAugmentStatement &&
+    return element instanceof PerlMooseAugmentStatement augmentStatement &&
            element.isValid() &&
-           StringUtil.isNotEmpty(((PerlMooseAugmentStatement)element).getSubName());
+           StringUtil.isNotEmpty(augmentStatement.getSubName());
   }
 }

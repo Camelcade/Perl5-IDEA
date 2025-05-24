@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -327,9 +327,9 @@ public abstract class PerlIntroduceTargetsHandler {
    */
   @Contract("null->false")
   public static boolean isTargetableHeredocElement(@Nullable PsiElement element) {
-    return element instanceof PerlHeredocElementImpl &&
+    return element instanceof PerlHeredocElementImpl heredocElement &&
            PsiUtilCore.getElementType(element) != HEREDOC &&
-           ((PerlHeredocElementImpl)element).getHeredocOpener() != null;
+           heredocElement.getHeredocOpener() != null;
   }
 
   private static @NotNull List<PerlIntroduceTarget> computeIntroduceTargetsFromSelection(@NotNull Editor editor, @NotNull PsiFile file) {

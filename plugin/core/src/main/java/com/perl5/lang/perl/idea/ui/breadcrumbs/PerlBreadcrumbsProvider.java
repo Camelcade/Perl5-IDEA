@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,9 +45,10 @@ public class PerlBreadcrumbsProvider implements BreadcrumbsProvider {
   public boolean acceptElement(@NotNull PsiElement element) {
     return element instanceof PerlFile ||
            element instanceof PerlMethodModifier ||
-           element instanceof PerlSubDefinitionElement && ((PerlSubDefinitionElement)element).getSubName() != null ||
+           element instanceof PerlSubDefinitionElement subDefinitionElement && subDefinitionElement.getSubName() != null ||
            element instanceof PerlSubExpr && (!(element.getParent() instanceof PerlBlockOwner)) ||
-           element instanceof PerlNamespaceDefinitionElement && ((PerlNamespaceDefinitionElement)element).getNamespaceName() != null;
+           element instanceof PerlNamespaceDefinitionElement namespaceDefinitionElement &&
+           namespaceDefinitionElement.getNamespaceName() != null;
   }
 
   @Override

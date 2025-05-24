@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,6 +80,7 @@ public class HTMLMasonSubcomponentElementType
   @Override
   public boolean shouldCreateStub(ASTNode node) {
     PsiElement psi = node.getPsi();
-    return psi instanceof HTMLMasonSubcomponentDefitnition && StringUtil.isNotEmpty(((HTMLMasonSubcomponentDefitnition)psi).getName());
+    return psi instanceof HTMLMasonSubcomponentDefitnition subcomponentDefitnition &&
+           StringUtil.isNotEmpty(subcomponentDefitnition.getName());
   }
 }

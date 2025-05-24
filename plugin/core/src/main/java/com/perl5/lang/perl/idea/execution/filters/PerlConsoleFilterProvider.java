@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ public class PerlConsoleFilterProvider extends ConsoleDependentFilterProvider {
   public Filter @NotNull [] getDefaultFilters(@NotNull ConsoleView consoleView,
                                               @NotNull Project project,
                                               @NotNull GlobalSearchScope scope) {
-    return consoleView instanceof PerlHostDataProvider ? createFilters(project, (PerlHostDataProvider)consoleView) : Filter.EMPTY_ARRAY;
+    return consoleView instanceof PerlHostDataProvider hostDataProvider ? createFilters(project, hostDataProvider) : Filter.EMPTY_ARRAY;
   }
 
   private Filter @NotNull [] createFilters(@NotNull Project project, PerlHostDataProvider hostDataProvider) {

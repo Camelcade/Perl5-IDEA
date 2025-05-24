@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,8 +56,8 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
 
   @Override
   public @Nullable PerlFile collectInformation(@NotNull PsiFile file) {
-    return file instanceof PerlFile && file.isPhysical() && PerlSharedSettings.getInstance(file.getProject()).PERL_CRITIC_ENABLED
-           ? (PerlFile)file : null;
+    return file instanceof PerlFile perlFile && file.isPhysical() && PerlSharedSettings.getInstance(file.getProject()).PERL_CRITIC_ENABLED
+      ? perlFile : null;
   }
 
   @RequiresReadLock

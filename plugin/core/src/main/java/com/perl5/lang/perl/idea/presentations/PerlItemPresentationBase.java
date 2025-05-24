@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public abstract class PerlItemPresentationBase implements ColoredItemPresentatio
 
   public PerlItemPresentationBase(PsiElement element) {
     myElement = element;
-    myAttributesKey = myElement instanceof PerlDeprecatable && ((PerlDeprecatable)myElement).isDeprecated()
+    myAttributesKey = myElement instanceof PerlDeprecatable deprecatable && deprecatable.isDeprecated()
                       ? CodeInsightColors.DEPRECATED_ATTRIBUTES
                       : null;
   }

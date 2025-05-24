@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -198,7 +198,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
     return FORCE_AS_FUNC_TOKENSET.contains(elementType) ||
            !FORCE_AS_OPERATORS_TOKENSET.contains(elementType) && (
              PerlTokenSets.DEFAULT_KEYWORDS_TOKENSET.contains(elementType) ||
-             element instanceof PerlSubNameElement && ((PerlSubNameElement)element).isBuiltIn()
+             element instanceof PerlSubNameElement subNameElement && subNameElement.isBuiltIn()
            );
   }
 

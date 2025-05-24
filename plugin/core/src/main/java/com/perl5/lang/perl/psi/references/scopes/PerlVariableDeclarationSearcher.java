@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ public class PerlVariableDeclarationSearcher implements PsiScopeProcessor {
           PsiElement declarationStatement = PsiTreeUtil.getParentOfType(element, PerlStatement.class);
 
           if (!PsiTreeUtil.isAncestor(declarationStatement, myVariable, false)) {
-            myResult = (PerlVariableDeclarationElement)element;
+            myResult = variableDeclarationElement;
             return false;
           }
         }
