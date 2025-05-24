@@ -20,7 +20,6 @@ import com.intellij.formatting.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.formatter.PurePerlFormattingContext;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -51,7 +50,7 @@ public class PerlSyntheticBlock implements PerlAstBlock {
     if (subBlocks.isEmpty()) {
       throw new IllegalArgumentException("Subblocks should not be empty");
     }
-    mySubBlocks = ContainerUtil.immutableList(new ArrayList<>(subBlocks));
+    mySubBlocks = List.copyOf(new ArrayList<>(subBlocks));
     myRealBlock = realBlock;
     myWrap = wrap;
     myAlignment = alignment;
