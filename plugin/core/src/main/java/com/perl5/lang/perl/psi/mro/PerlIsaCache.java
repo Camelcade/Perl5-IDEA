@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,13 +39,13 @@ final class PerlIsaCache implements PsiModificationTracker.Listener, Disposable 
 
   @Nullable List<String> get(@Nullable String namespaceName) {
     var cachedValue = myCache.get(namespaceName);
-    return cachedValue == null ? null : ContainerUtil.immutableList(cachedValue);
+    return cachedValue == null ? null : List.copyOf(cachedValue);
   }
 
   @NotNull List<String> put(@Nullable String namespaceName, @NotNull List<String> linearIsa) {
     var internedValue = INTERNER.intern(linearIsa);
     myCache.put(namespaceName, internedValue);
-    return ContainerUtil.immutableList(internedValue);
+    return List.copyOf(internedValue);
   }
 
   @Override
