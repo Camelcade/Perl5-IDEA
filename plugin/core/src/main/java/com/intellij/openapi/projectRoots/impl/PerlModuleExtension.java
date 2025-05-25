@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,8 +56,8 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
   private static final String ATTRIBUTE_TYPE = "type";
   private final boolean myIsWritable;
   private long myModificationTracker;
-  private PerlModuleExtension myOriginal;
-  private Module myModule;
+  private final PerlModuleExtension myOriginal;
+  private final Module myModule;
   private Map<VirtualFile, PerlSourceRootType> myRoots = new LinkedHashMap<>();
 
   public PerlModuleExtension(Module module) {
