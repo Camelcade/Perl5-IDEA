@@ -259,7 +259,7 @@ public abstract class PackageManagerAdapter {
     }
 
     @Override
-    public boolean canEat(Update update) {
+    public boolean canEat(@NotNull Update update) {
       if (!(update instanceof InstallUpdate installUpdate)) {
         return super.canEat(update);
       }

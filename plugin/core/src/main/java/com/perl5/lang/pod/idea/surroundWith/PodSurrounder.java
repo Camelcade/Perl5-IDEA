@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public abstract class PodSurrounder implements Surrounder {
   }
 
   @Override
-  public boolean isApplicable(@NotNull PsiElement[] elements) {
+  public boolean isApplicable(@NotNull PsiElement @NotNull [] elements) {
     return true;
   }
 
@@ -59,7 +59,7 @@ public abstract class PodSurrounder implements Surrounder {
 
 
   @Override
-  public @Nullable TextRange surroundElements(@NotNull Project project, @NotNull Editor editor, @NotNull PsiElement[] elements)
+  public @Nullable TextRange surroundElements(@NotNull Project project, @NotNull Editor editor, @NotNull PsiElement @NotNull [] elements)
     throws IncorrectOperationException {
     SelectionModel selectionModel = editor.getSelectionModel();
     if (!selectionModel.hasSelection()) {

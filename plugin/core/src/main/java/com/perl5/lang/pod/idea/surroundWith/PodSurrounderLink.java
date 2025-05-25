@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ class PodSurrounderLink extends PodSurrounder {
   }
 
   @Override
-  public @Nullable TextRange surroundElements(@NotNull Project project, @NotNull Editor editor, @NotNull PsiElement[] elements)
+  public @Nullable TextRange surroundElements(@NotNull Project project, @NotNull Editor editor, @NotNull PsiElement @NotNull [] elements)
     throws IncorrectOperationException {
     TextRange range = super.surroundElements(project, editor, elements);
     AutoPopupController.getInstance(project).scheduleAutoPopup(editor);

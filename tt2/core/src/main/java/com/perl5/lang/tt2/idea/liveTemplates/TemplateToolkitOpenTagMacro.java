@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ public class TemplateToolkitOpenTagMacro extends Macro implements TemplateToolki
   }
 
   @Override
-  public @Nullable Result calculateQuickResult(@NotNull Expression[] params, ExpressionContext context) {
+  public @Nullable Result calculateQuickResult(@NotNull Expression @NotNull [] params, ExpressionContext context) {
     return getResultByTokenType(context.getProject(), TemplateToolkitPsiUtil.getLastOpenMarker(context.getEditor()));
   }
 
@@ -51,7 +51,7 @@ public class TemplateToolkitOpenTagMacro extends Macro implements TemplateToolki
 
 
   @Override
-  public @Nullable Result calculateResult(@NotNull Expression[] params, ExpressionContext context) {
+  public @Nullable Result calculateResult(@NotNull Expression @NotNull [] params, ExpressionContext context) {
     return calculateQuickResult(params, context);
   }
 

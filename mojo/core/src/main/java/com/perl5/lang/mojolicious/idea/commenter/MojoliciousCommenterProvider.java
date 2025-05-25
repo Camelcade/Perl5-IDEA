@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,17 +24,21 @@ import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.templateLanguages.MultipleLangCommentProvider;
 import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProvider;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
 public class MojoliciousCommenterProvider implements MultipleLangCommentProvider {
   @Override
-  public @Nullable Commenter getLineCommenter(PsiFile file, Editor editor, Language lineStartLanguage, Language lineEndLanguage) {
+  public @Nullable Commenter getLineCommenter(@NotNull PsiFile file,
+                                              @NotNull Editor editor,
+                                              @NotNull Language lineStartLanguage,
+                                              @NotNull Language lineEndLanguage) {
     return LanguageCommenters.INSTANCE.forLanguage(lineStartLanguage);
   }
 
   @Override
-  public boolean canProcess(PsiFile file, FileViewProvider viewProvider) {
+  public boolean canProcess(@NotNull PsiFile file, @NotNull FileViewProvider viewProvider) {
     return viewProvider instanceof MojoliciousFileViewProvider;
   }
 }
