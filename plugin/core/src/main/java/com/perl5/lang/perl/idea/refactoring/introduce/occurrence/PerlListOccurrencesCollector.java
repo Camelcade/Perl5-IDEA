@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
 import java.util.List;
 
 class PerlListOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollector {
@@ -33,8 +32,7 @@ class PerlListOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollect
   PerlListOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     super(target);
     List<PsiElement> targetChildren = PerlArrayUtil.collectListElements(getTargetElement());
-    myElementsToSearch = Collections.unmodifiableList(
-      ContainerUtil.filter(targetChildren, it -> getTarget().getTextRange().contains(it.getTextRange())));
+    myElementsToSearch = ContainerUtil.filter(targetChildren, it -> getTarget().getTextRange().contains(it.getTextRange()));
     assert !myElementsToSearch.isEmpty() : "Empty elements for " + target;
   }
 
