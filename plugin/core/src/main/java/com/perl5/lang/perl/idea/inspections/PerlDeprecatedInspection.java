@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public class PerlDeprecatedInspection extends PerlInspection {
   @Override
   public @NotNull PsiElementVisitor buildVisitor(final @NotNull ProblemsHolder holder, boolean isOnTheFly) {
     return new PerlVisitor() {
-      private Set<PsiElement> myMarkedElements = new HashSet<>();
+      private final Set<PsiElement> myMarkedElements = new HashSet<>();
 
       @Override
       public void visitSubNameElement(@NotNull PerlSubNameElement o) {
