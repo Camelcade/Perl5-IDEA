@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ import java.util.Collections;
 public class TemplateToolkitFileReferenceHelper extends FileReferenceHelper {
 
   @Override
-  public @Nullable PsiFileSystemItem findRoot(Project project, @NotNull VirtualFile file) {
+  public @Nullable PsiFileSystemItem findRoot(@NotNull Project project, @NotNull VirtualFile file) {
     VirtualFile root = file;
     VirtualFile parent;
     while ((parent = root.getParent()) != null) {
@@ -46,7 +46,7 @@ public class TemplateToolkitFileReferenceHelper extends FileReferenceHelper {
   }
 
   @Override
-  public @NotNull Collection<PsiFileSystemItem> getContexts(Project project, @NotNull VirtualFile file) {
+  public @NotNull Collection<PsiFileSystemItem> getContexts(@NotNull Project project, @NotNull VirtualFile file) {
     PsiFileSystemItem item = getPsiFileSystemItem(project, file);
     return item == null ? Collections.emptyList() : Collections.singleton(item);
   }
@@ -65,7 +65,7 @@ public class TemplateToolkitFileReferenceHelper extends FileReferenceHelper {
   }
 
   @Override
-  public boolean isMine(Project project, @NotNull VirtualFile file) {
+  public boolean isMine(@NotNull Project project, @NotNull VirtualFile file) {
     return file.getFileType() == TemplateToolkitFileType.INSTANCE;
   }
 }

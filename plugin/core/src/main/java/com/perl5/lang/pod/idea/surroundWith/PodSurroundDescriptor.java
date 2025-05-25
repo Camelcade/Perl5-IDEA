@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ public class PodSurroundDescriptor implements SurroundDescriptor {
   );
 
   @Override
-  public @NotNull PsiElement[] getElementsToSurround(PsiFile file, int startOffset, int endOffset) {
+  public @NotNull PsiElement @NotNull [] getElementsToSurround(PsiFile file, int startOffset, int endOffset) {
     PsiElement startElement = file.findElementAt(startOffset);
     if (startElement == null || !startElement.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
       return PsiElement.EMPTY_ARRAY;
@@ -71,7 +71,7 @@ public class PodSurroundDescriptor implements SurroundDescriptor {
   }
 
   @Override
-  public @NotNull Surrounder[] getSurrounders() {
+  public @NotNull Surrounder @NotNull [] getSurrounders() {
     return new Surrounder[]{
       new PodSurrounderBold(),
       new PodSurrounderCode(),
