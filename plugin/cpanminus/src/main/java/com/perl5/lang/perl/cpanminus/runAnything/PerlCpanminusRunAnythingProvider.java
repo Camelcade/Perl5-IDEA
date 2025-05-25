@@ -300,7 +300,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
     return PerlIcons.PERL_LANGUAGE_ICON;
   }
 
-  public @NotNull Collection<RunAnythingHelpItem> getHelpItems(@NotNull DataContext dataContext) {
+  public @NotNull Collection<RunAnythingHelpItem> getHelpItems() {
     List<RunAnythingHelpItem> result = new ArrayList<>();
     for (CommandDescriptor commandDescriptor : myCommandDescriptors) {
       CommandElement blankElement = CommandElement.createBlank(commandDescriptor);
