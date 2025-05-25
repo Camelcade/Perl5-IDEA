@@ -105,7 +105,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
     Map<String, OptionDescriptor> allOptionsMap = new HashMap<>();
 
     readOptions(xmlElement.getChild(OPTIONS_KEY), allOptionsMap);
-    myOptionDescriptors = allOptionsMap.values().isEmpty() ? Collections.emptySet() :
+    myOptionDescriptors = allOptionsMap.isEmpty() ? Collections.emptySet() :
                           Collections.unmodifiableSet(new HashSet<>(allOptionsMap.values()));
     LOG.debug("Found " + myOptionDescriptors.size() + " options");
 
