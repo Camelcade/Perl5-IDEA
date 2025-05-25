@@ -14,6 +14,7 @@
   ~ limitations under the License.
   -->
 
+<!--suppress PluginXmlPluginLogo -->
 <idea-plugin url="https://github.com/hurricup/Perl5-IDEA">
   <id>com.perl5.lang.mason.framework</id>
   <name>Mason Framework</name>
