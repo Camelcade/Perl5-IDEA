@@ -56,6 +56,6 @@ public abstract class PerlInterpreterConfigurator {
   }
 
   protected @NotNull String getInterpreterPath() {
-    throw new RuntimeException("Not implemented");
+    throw new UnsupportedOperationException("Not implemented");
   }
 }
