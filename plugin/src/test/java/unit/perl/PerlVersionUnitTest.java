@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,10 @@ public class PerlVersionUnitTest extends PerlLightTestCase {
     PerlVersion version510x = new PerlVersion("v5.10");
     PerlVersion version514 = new PerlVersion("v5.14");
 
-    assertEquals(version514.compareTo(version510), 1);
+    assertEquals(1, version514.compareTo(version510));
     //noinspection EqualsWithItself
-    assertEquals(version510.compareTo(version510), 0);
-    assertEquals(version510.compareTo(version514), -1);
+    assertEquals(0, version510.compareTo(version510));
+    assertEquals(-1, version510.compareTo(version514));
 
     assertTrue(version514.greaterThan(version510));
     assertEquals(version510, version510);
