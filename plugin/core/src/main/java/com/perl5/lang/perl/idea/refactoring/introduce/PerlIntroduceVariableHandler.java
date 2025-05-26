@@ -214,7 +214,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    * @return anchor statement to add a declaration statement before. Or null if anchor can't be found
    */
   private @Nullable PsiElement computeAnchor(@NotNull PerlIntroduceTarget target,
-                                             @NotNull List<PerlIntroduceTarget> occurrences) {
+                                             @NotNull List<? extends PerlIntroduceTarget> occurrences) {
     PsiElement enclosingScope = PerlIntroduceTargetOccurrencesCollector.computeTargetScope(target);
     if (enclosingScope == null) {
       LOG.error("Unable find enclosing scope for " + target);
@@ -261,10 +261,10 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
    * @return variable introduced by the statement
    */
   private @Nullable PerlVariableDeclarationElement introduceVariable(@NotNull PerlIntroduceTarget target,
-                                                                     @NotNull Pair<PsiElement, PsiElement> declarationBlock,
-                                                                     @NotNull List<PerlIntroduceTarget> occurrences,
+                                                                     @NotNull Pair<? extends PsiElement, ? extends PsiElement> declarationBlock,
+                                                                     @NotNull List<? extends PerlIntroduceTarget> occurrences,
                                                                      @NotNull PsiElement anchor,
-                                                                     @NotNull List<SmartPsiElementPointer<PsiElement>> psiOccurrences) {
+                                                                     @NotNull List<? super SmartPsiElementPointer<PsiElement>> psiOccurrences) {
     Project project = declarationBlock.first.getProject();
     return WriteCommandAction.writeCommandAction(project).compute(() -> {
       final RefactoringEventData afterData = new RefactoringEventData();
