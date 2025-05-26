@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,18 +32,14 @@ class PerlHighlightingLexerTest : PerlLightTestCase() {
   override fun getBaseDataPath(): @NonNls String? = "unit/perl/lexer"
 
   @Test
-  fun testHeredocInRegexp() {
-    doTestLexer();
-  }
+  fun testHeredocInRegexp(): Unit = doTestLexer()
 
   @Test
-  fun testHeredocInRegexpSublexed() {
-    doTestLexer("heredocInRegexp", true);
-  }
+  fun testHeredocInRegexpSublexed(): Unit = doTestLexer("heredocInRegexp", true)
 
   private fun doTestLexer(sourceName: String? = null, forceSubLexing: Boolean = false) {
     val testFileText = loadFileContent("${sourceName ?: getTestName(true)}${realDataFileExtension}")
-    val lexer = PerlMergingLexerAdapter(PerlLexingContext.create(project).withEnforcedSublexing(forceSubLexing));
+    val lexer = PerlMergingLexerAdapter(PerlLexingContext.create(project).withEnforcedSublexing(forceSubLexing))
     lexer.start(testFileText)
     val sb = StringBuilder()
     while (lexer.tokenType != null) {
