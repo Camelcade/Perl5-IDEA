@@ -200,6 +200,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       Application application = ApplicationManager.getApplication();
       if (application.isUnitTestMode()) {
         DataContext originalContext = renamingContext;
+        //noinspection removal
         renamingContext = dataId -> PsiElementRenameHandler.DEFAULT_NAME.getName().equals(dataId)
                                     ? "dialog_test_name"
                                     : originalContext.getData(dataId);
