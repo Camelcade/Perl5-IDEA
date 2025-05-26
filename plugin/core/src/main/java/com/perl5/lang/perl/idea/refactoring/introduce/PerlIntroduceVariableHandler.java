@@ -24,6 +24,7 @@ import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.NlsContexts.DialogMessage;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Pass;
 import com.intellij.openapi.util.TextRange;
@@ -334,7 +335,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
     return "perl.introduce.variable";
   }
 
-  protected void showErrorMessage(@NotNull Project project, Editor editor, @NotNull String message) {
+  protected void showErrorMessage(@NotNull Project project, Editor editor, @DialogMessage @NotNull String message) {
     CommonRefactoringUtil
       .showErrorHint(project, editor, message, RefactoringBundle.message("introduce.variable.title"), null);
   }
