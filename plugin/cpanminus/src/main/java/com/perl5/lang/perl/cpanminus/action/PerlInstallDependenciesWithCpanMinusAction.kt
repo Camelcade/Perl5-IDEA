@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import com.perl5.lang.perl.cpanminus.cpanfile.PerlFileTypeCpanfile
 import com.perl5.lang.perl.idea.actions.PerlActionBase
 import com.perl5.lang.perl.idea.project.PerlProjectManager
 
-private val log = Logger.getInstance(PerlInstallDependenciesWithCpanMinusAction::class.java);
+private val log = Logger.getInstance(PerlInstallDependenciesWithCpanMinusAction::class.java)
 
 class PerlInstallDependenciesWithCpanMinusAction :
   PerlActionBase(PerlCpanminusBundle.message("install.dependencies.with.cpanminus"), PerlIcons.METACPAN) {
