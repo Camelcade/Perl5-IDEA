@@ -24,6 +24,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
@@ -213,16 +214,16 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
       while (b.getTokenType() == TokenType.BAD_CHARACTER) {
         b.advanceLexer();
       }
-      m.error("Unexpected token");
+      m.error(PerlBundle.message("parsing.error.unexpected.token"));
     }
     else if (tokenType == RIGHT_PAREN) {
-      m.error("Unopened closing parenthesis");
+      m.error(PerlBundle.message("parsing.error.unopened.closing.parenthesis"));
     }
     else if (tokenType == RIGHT_BRACKET) {
-      m.error("Unopened closing bracket");
+      m.error(PerlBundle.message("parsing.error.unopened.closing.bracket"));
     }
     else {
-      m.error("Unexpected token");
+      m.error(PerlBundle.message("parsing.error.unexpected.token"));
     }
 
     return true;
