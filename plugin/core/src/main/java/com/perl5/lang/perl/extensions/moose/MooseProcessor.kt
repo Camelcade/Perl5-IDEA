@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageLoader
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider
 import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor
-import com.perl5.lang.perl.parser.moose.MooseSyntax
 import com.perl5.lang.perl.parser.moose.MooseSyntax.*
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
 import com.perl5.lang.perl.util.PerlPackageUtil
@@ -36,7 +35,7 @@ open class MooseProcessor : BaseStrictWarningsProvidingProcessor(), PerlPackageP
     (listOf(
       PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_CARP, "confess"),
       PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_SCALAR_UTIL, "blessed"),
-      PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_CLASS_MOP_MIXIN, MooseSyntax.MOOSE_KEYWORD_META)
+      PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_CLASS_MOP_MIXIN, MOOSE_KEYWORD_META)
     ) +
       listOf(
         MOOSE_KEYWORD_AFTER,
