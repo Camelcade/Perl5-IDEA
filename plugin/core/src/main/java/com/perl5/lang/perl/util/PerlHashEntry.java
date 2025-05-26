@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@ package com.perl5.lang.perl.util;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 /**
  * Represents hash pair - key and value
@@ -53,7 +55,7 @@ public class PerlHashEntry {
     PerlHashEntry pair = (PerlHashEntry)o;
 
     if (!keyElement.equals(pair.keyElement)) return false;
-    return valueElement != null ? valueElement.equals(pair.valueElement) : pair.valueElement == null;
+    return Objects.equals(valueElement, pair.valueElement);
   }
 
   @Override

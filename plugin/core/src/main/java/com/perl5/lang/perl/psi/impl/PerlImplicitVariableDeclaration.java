@@ -36,6 +36,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 
 public class PerlImplicitVariableDeclaration extends PerlImplicitElement
@@ -297,7 +298,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
     if (!myDeclaredValue.equals(that.myDeclaredValue)) {
       return false;
     }
-    return myNamespaceName != null ? myNamespaceName.equals(that.myNamespaceName) : that.myNamespaceName == null;
+    return Objects.equals(myNamespaceName, that.myNamespaceName);
   }
 
   @Override

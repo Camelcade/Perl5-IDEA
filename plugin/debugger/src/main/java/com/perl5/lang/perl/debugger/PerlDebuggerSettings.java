@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,10 +39,7 @@ import org.jetbrains.annotations.TestOnly;
 
 import javax.swing.*;
 import javax.swing.table.TableCellEditor;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings> {
   @Tag("dataRenderers")
@@ -118,10 +115,10 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
 
       Item item = (Item)o;
 
-      if (namespaceName != null ? !namespaceName.equals(item.namespaceName) : item.namespaceName != null) {
+      if (!Objects.equals(namespaceName, item.namespaceName)) {
         return false;
       }
-      return renderExpression != null ? renderExpression.equals(item.renderExpression) : item.renderExpression == null;
+      return Objects.equals(renderExpression, item.renderExpression);
     }
 
     @Override

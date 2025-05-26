@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,8 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
 
 public abstract class PerlImplicitElement extends LightElement {
   private final @Nullable PsiElement myParent;
@@ -69,7 +71,7 @@ public abstract class PerlImplicitElement extends LightElement {
 
     PerlImplicitElement element = (PerlImplicitElement)o;
 
-    return myParent != null ? myParent.equals(element.myParent) : element.myParent == null;
+    return Objects.equals(myParent, element.myParent);
   }
 
   @Override
