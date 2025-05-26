@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 
 open class DancerPackageProcessor : BaseStrictWarningsProvidingProcessor(), PerlUtfProvider {
-  open protected val myExportDescriptors: ImmutableList<PerlExportDescriptor> by lazy {
+  protected open val myExportDescriptors: ImmutableList<PerlExportDescriptor> by lazy {
     PerlDancerDSL.DSL_KEYWORDS.map { PerlExportDescriptor.create("Dancer", it) }.toImmutableList()
   }
 
