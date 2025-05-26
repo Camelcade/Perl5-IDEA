@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,8 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PsiPerlCallArgumentsImpl;
 import com.perl5.lang.perl.util.PerlArrayUtil;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,21 +76,9 @@ public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement> {
       boolean processNextStatement = true;
       PsiElement run = variableDeclaration.getFirstChild();
       while (run != null) {
-        PerlSubArgument newArgument = null;
+        var nextArgument = getArgument(run, variableClass);
 
-        if (run instanceof PerlVariableDeclarationElement variableDeclarationElement) {
-          PerlVariable variable = variableDeclarationElement.getVariable();
-          newArgument = PerlSubArgument.mandatory(
-            variable.getActualType(),
-            variable.getName(),
-            variableClass
-          );
-        }
-        else if (run.getNode().getElementType() == UNDEF_EXPR) {
-          newArgument = myArguments.isEmpty() ? PerlSubArgument.self() : PerlSubArgument.empty();
-        }
-
-        if (newArgument != null) {
+        if (nextArgument != null) {
           // we've found argument of left side
           if (rightSideElements.size() > sequenceIndex) {
             PsiElement rightSideElement = rightSideElements.get(sequenceIndex);
@@ -117,7 +107,7 @@ public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement> {
             }
 
             if (addArgument) {
-              myArguments.add(newArgument);
+              myArguments.add(nextArgument);
             }
           }
         }
@@ -128,6 +118,21 @@ public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement> {
       return processNextStatement;
     }
     return false;
+  }
+
+  private @Nullable PerlSubArgument getArgument(@NotNull PsiElement run, @NotNull String variableClass) {
+    if (run instanceof PerlVariableDeclarationElement variableDeclarationElement) {
+      PerlVariable variable = variableDeclarationElement.getVariable();
+      return PerlSubArgument.mandatory(
+        variable.getActualType(),
+        variable.getName(),
+        variableClass
+      );
+    }
+    else if (run.getNode().getElementType() == UNDEF_EXPR) {
+      return myArguments.isEmpty() ? PerlSubArgument.self() : PerlSubArgument.empty();
+    }
+    return null;
   }
 
   public List<PerlSubArgument> getArguments() {
