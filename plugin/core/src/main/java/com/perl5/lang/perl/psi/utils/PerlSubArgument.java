@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.OPERATOR_ASSIGN;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.SIGNATURE_ELEMENT;
@@ -134,7 +135,7 @@ public class PerlSubArgument {
     return myArgumentType == argument.myArgumentType &&
            myArgumentName.equals(argument.myArgumentName) &&
            myVariableClass.equals(argument.myVariableClass) &&
-           (myIsOptional != null ? myIsOptional.equals(argument.myIsOptional) : argument.myIsOptional == null);
+           (Objects.equals(myIsOptional, argument.myIsOptional));
   }
 
   @Override

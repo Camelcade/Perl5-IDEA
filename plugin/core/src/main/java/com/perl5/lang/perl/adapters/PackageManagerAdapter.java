@@ -173,7 +173,7 @@ public abstract class PackageManagerAdapter {
     if (!mySdk.equals(adapter.mySdk)) {
       return false;
     }
-    return myProject != null ? myProject.equals(adapter.myProject) : adapter.myProject == null;
+    return Objects.equals(myProject, adapter.myProject);
   }
 
   @Override
