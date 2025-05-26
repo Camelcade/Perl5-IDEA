@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -45,7 +46,8 @@ public class PerlClashedNamespacesInspection extends PerlInspection {
 
         // fixme we should check that this is not in SDK
         if (PerlPackageUtil.isBuiltIn(packageName)) {
-          registerProblem(holder, nameIdentifier, "Namespace definition clashes with built-in namespace");
+          registerProblem(holder, nameIdentifier,
+                          PerlBundle.message("inspection.message.namespace.definition.clashes.with.built.in.namespace"));
         }
       }
 
