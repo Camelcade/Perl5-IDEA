@@ -126,7 +126,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
   }
 
   private void performIntroduce(@NotNull PerlIntroduceTarget target,
-                                @NotNull List<PerlIntroduceTarget> occurrences,
+                                @NotNull List<? extends PerlIntroduceTarget> occurrences,
                                 @NotNull OccurrencesChooser.ReplaceChoice replaceChoice,
                                 @NotNull Editor editor,
                                 @NotNull PsiFile file) {
