@@ -2204,7 +2204,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     int offset = getEditor().getCaretModel().getOffset();
     PsiElement elementAtCaret = getFile().findElementAt(offset);
     PsiElement providerSource = ObjectUtils.notNull(elementAtCaret, getFile());
-    DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(providerSource);
+    @SuppressWarnings("removal") DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(providerSource);
     assertNotNull("Unable to find documentation provider for " + providerSource, documentationProvider);
     PsiElement documentationElement =
       documentationProvider.getDocumentationElementForLookupItem(PsiManager.getInstance(getProject()), elementObject, elementAtCaret);
@@ -2673,9 +2673,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     PsiFile file = getFile();
     PsiElement elementAtCaret = file != null ? file.findElementAt(editor.getCaretModel().getOffset()) : null;
     assertNotNull(elementAtCaret);
-    PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(editor, file);
+    @SuppressWarnings("removal") PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(editor, file);
     assertNotNull(targetElement);
-    DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(targetElement, elementAtCaret);
+    @SuppressWarnings("removal") DocumentationProvider documentationProvider =
+      DocumentationManager.getProviderFromElement(targetElement, elementAtCaret);
     assertNotNull(documentationProvider);
     String generatedDoc = StringUtil.notNullize(documentationProvider.generateDoc(targetElement, elementAtCaret));
     return Pair.create(targetElement, generatedDoc);
@@ -2710,7 +2711,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    */
   private @Nullable PsiElement getLinkTarget(@NotNull PsiElement psiElement, @NotNull String refText) {
     PsiManager manager = psiElement.getManager();
-    DocumentationProvider provider = DocumentationManager.getProviderFromElement(psiElement);
+    @SuppressWarnings("removal") DocumentationProvider provider = DocumentationManager.getProviderFromElement(psiElement);
     PsiElement targetElement = provider.getDocumentationElementForLink(manager, refText, psiElement);
     if (targetElement == null) {
       for (DocumentationProvider documentationProvider : DocumentationProvider.EP_NAME.getExtensionList()) {
