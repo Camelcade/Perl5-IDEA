@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,26 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.parser.moose
 
-package com.perl5.lang.perl.parser.moose;
+import org.jetbrains.annotations.NonNls
 
-import org.jetbrains.annotations.NonNls;
-
-public final class MooseSyntax {
-  public static final @NonNls String MOOSE_KEYWORD_AFTER = "after";
-  public static final @NonNls String MOOSE_KEYWORD_AROUND = "around";
-  public static final @NonNls String MOOSE_KEYWORD_AUGMENT = "augment";
-  public static final @NonNls String MOOSE_KEYWORD_BEFORE = "before";
-  public static final @NonNls String MOOSE_KEYWORD_EXCLUDES = "excludes";
-  public static final @NonNls String MOOSE_KEYWORD_EXTENDS = "extends";
-  public static final @NonNls String MOOSE_KEYWORD_HAS = "has";
-  public static final @NonNls String MOOSE_KEYWORD_INNER = "inner";
-  public static final @NonNls String MOOSE_KEYWORD_META = "meta";
-  public static final @NonNls String MOOSE_KEYWORD_OVERRIDE = "override";
-  public static final @NonNls String MOOSE_KEYWORD_REQUIRES = "requires";
-  public static final @NonNls String MOOSE_KEYWORD_SUPER = "super";
-  public static final @NonNls String MOOSE_KEYWORD_WITH = "with";
-
-  private MooseSyntax() {
-  }
+object MooseSyntax {
+  const val MOOSE_KEYWORD_AFTER: @NonNls String = "after"
+  const val MOOSE_KEYWORD_AROUND: @NonNls String = "around"
+  const val MOOSE_KEYWORD_AUGMENT: @NonNls String = "augment"
+  const val MOOSE_KEYWORD_BEFORE: @NonNls String = "before"
+  const val MOOSE_KEYWORD_EXCLUDES: @NonNls String = "excludes"
+  const val MOOSE_KEYWORD_EXTENDS: @NonNls String = "extends"
+  const val MOOSE_KEYWORD_HAS: @NonNls String = "has"
+  const val MOOSE_KEYWORD_INNER: @NonNls String = "inner"
+  const val MOOSE_KEYWORD_META: @NonNls String = "meta"
+  const val MOOSE_KEYWORD_OVERRIDE: @NonNls String = "override"
+  const val MOOSE_KEYWORD_REQUIRES: @NonNls String = "requires"
+  const val MOOSE_KEYWORD_SUPER: @NonNls String = "super"
+  const val MOOSE_KEYWORD_WITH: @NonNls String = "with"
 }
