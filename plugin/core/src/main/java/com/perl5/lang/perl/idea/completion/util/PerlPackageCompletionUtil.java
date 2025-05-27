@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,6 +111,7 @@ public class PerlPackageCompletionUtil {
   /**
    * @return package lookup element with automatic re-opening auto-compeltion
    */
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processPackageLookupElementWithAutocomplete(@Nullable PerlNamespaceDefinitionElement namespaceDefinitionElement,
                                                                     @NotNull String packageName,
                                                                     @Nullable Icon icon,
@@ -125,6 +126,7 @@ public class PerlPackageCompletionUtil {
       }, false);
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processAllNamespacesNames(@NotNull PerlCompletionProcessor completionProcessor) {
     return processAllNamespacesNames(completionProcessor, false, true);
   }

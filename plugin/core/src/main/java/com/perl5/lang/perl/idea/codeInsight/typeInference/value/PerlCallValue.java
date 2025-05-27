@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -152,6 +152,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
    * Processes all possible call targets: subs declarations, definitions and typeglobs with {@code processor}
    * @param contextElement invocation point. Context element, necessary to compute additional imports
    */
+  @SuppressWarnings("UnusedReturnValue")
   public final boolean processCallTargets(@NotNull PsiElement contextElement,
                                           @NotNull Processor<? super PsiNamedElement> processor) {
     Project project = contextElement.getProject();
