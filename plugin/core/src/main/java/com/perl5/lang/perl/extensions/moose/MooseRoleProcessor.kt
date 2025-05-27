@@ -17,7 +17,19 @@ package com.perl5.lang.perl.extensions.moose
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
 import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor
-import com.perl5.lang.perl.parser.moose.MooseSyntax.*
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_AFTER
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_AROUND
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_AUGMENT
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_BEFORE
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_EXCLUDES
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_EXTENDS
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_HAS
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_INNER
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_META
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_OVERRIDE
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_REQUIRES
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_SUPER
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_WITH
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
 import com.perl5.lang.perl.util.PerlPackageUtil
 import kotlinx.collections.immutable.toImmutableList

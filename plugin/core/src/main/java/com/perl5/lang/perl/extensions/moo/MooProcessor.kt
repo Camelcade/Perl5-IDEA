@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,12 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageLoader
 import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageParentsProvider
 import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor
-import com.perl5.lang.perl.parser.moose.MooseSyntax.*
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_AFTER
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_AROUND
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_BEFORE
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_EXTENDS
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_HAS
+import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_WITH
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
 import com.perl5.lang.perl.util.PerlPackageUtil
 import kotlinx.collections.immutable.PersistentList
