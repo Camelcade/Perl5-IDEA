@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -154,11 +154,6 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
       code.append("}");
       return code.toString();
     }
-    return null;
-  }
-
-  @Override
-  public @Nullable String getMethodModifierCodeText(PsiElement subBase, String modifierType) {
     return null;
   }
 
