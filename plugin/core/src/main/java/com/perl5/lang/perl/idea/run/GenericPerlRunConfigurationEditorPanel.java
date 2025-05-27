@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,7 +96,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     createPrerequisitesField();
   }
 
-  protected void createPrerequisitesField(){
+  protected void createPrerequisitesField() {
     myRequiredModulesLabeledField = createLabeledComponent(
       new ExpandableTextField(PREREQUISITES_PARSER, PREREQUISITES_JOINER),
       PerlBundle.message("label.required.modules"),
@@ -104,10 +104,10 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   }
 
   protected static @NotNull <T extends JComponent> LabeledComponent<T> createLabeledComponent(@NotNull T component,
-                                                                                            @NotNull @NlsContexts.Label String label,
-                                                                                            @Nullable @NlsContexts.Tooltip String tooltip) {
+                                                                                              @NotNull @NlsContexts.Label String label,
+                                                                                              @Nullable @NlsContexts.Tooltip String tooltip) {
     var labeledComponent = LabeledComponent.create(component, label, BorderLayout.WEST);
-    if( tooltip != null){
+    if (tooltip != null) {
       labeledComponent.setToolTipText(tooltip);
       component.setToolTipText(tooltip);
     }
@@ -115,7 +115,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   }
 
   protected @NotNull List<LabeledComponent<?>> getLabeledComponents() {
-    return Arrays.asList( myLabeledPerlArgumentsPanel, myLabeledConsoleCharset,myRequiredModulesLabeledField);
+    return Arrays.asList(myLabeledPerlArgumentsPanel, myLabeledConsoleCharset, myRequiredModulesLabeledField);
   }
 
   protected @NotNull String getProgramArgumentsLabel() {
@@ -138,11 +138,12 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   protected @NotNull TextFieldWithBrowseButton createTextFieldForScript() {
     TextFieldWithBrowseButton fieldWithBrowseButton = new TextFieldWithBrowseButton();
     fieldWithBrowseButton.addBrowseFolderListener(
-      PerlBundle.message("perl.run.config.select.script.header"),
-      PerlBundle.message("perl.run.config.select.script.prompt"),
       myProject,
-      FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor().withFileFilter(
-        getRunConfigurationProducer()::isOurFile), TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
+      FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor()
+        .withFileFilter(getRunConfigurationProducer()::isOurFile)
+        .withTitle(PerlBundle.message("perl.run.config.select.script.header"))
+        .withDescription(PerlBundle.message("perl.run.config.select.script.prompt")),
+      TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
     return fieldWithBrowseButton;
   }
 
