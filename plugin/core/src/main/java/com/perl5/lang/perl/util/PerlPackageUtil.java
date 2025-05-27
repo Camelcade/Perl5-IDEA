@@ -784,6 +784,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
            PerlGlobNamespaceStubIndex.getInstance().processElements(project, packageName, searchScope, processor);
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processCallablesNamespaceNames(@NotNull PerlValueResolver resolver,
                                                        @NotNull String callableName,
                                                        @NotNull Processor<? super PerlCallableElement> processor) {

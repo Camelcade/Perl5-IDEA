@@ -47,7 +47,7 @@ public class PerlEditorUtil {
   /**
    * Iterates forward until atEnd or non-space token
    */
-  public static @NotNull HighlighterIterator moveToNextMeaningfulToken(@NotNull HighlighterIterator iterator, boolean ignoreComments) {
+  public static void moveToNextMeaningfulToken(@NotNull HighlighterIterator iterator, boolean ignoreComments) {
     iterator.advance();
     while (!iterator.atEnd()) {
       IElementType tokenType = iterator.getTokenType();
@@ -56,7 +56,6 @@ public class PerlEditorUtil {
       }
       iterator.advance();
     }
-    return iterator;
   }
 
   /**

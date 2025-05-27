@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,6 +69,7 @@ public interface PerlCompletionProcessor {
   /**
    * Should be used for a single custom-created elements. For mass update, please, check texts before creation a lookup
    */
+  @SuppressWarnings("UnusedReturnValue")
   boolean processSingle(@NotNull LookupElementBuilder lookupElement);
 
   @Contract(pure = true)

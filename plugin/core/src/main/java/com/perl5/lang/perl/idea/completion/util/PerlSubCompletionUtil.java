@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -143,6 +143,7 @@ public class PerlSubCompletionUtil {
     );
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processUnresolvedSubsLookups(@NotNull PerlSubElement subDefinition,
                                                      @NotNull PerlCompletionProcessor completionProcessor) {
     final String packageName = subDefinition.getNamespaceName();
@@ -274,6 +275,7 @@ public class PerlSubCompletionUtil {
   /**
    * Processes all subs applicable at current context. Declarations, imports, built-ins.
    */
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processContextSubsLookupElements(@NotNull PerlSimpleCompletionProcessor completionProcessor) {
     if (!PerlSubCompletionUtil.processBuiltInSubsLookupElements(completionProcessor)) {
       return false;

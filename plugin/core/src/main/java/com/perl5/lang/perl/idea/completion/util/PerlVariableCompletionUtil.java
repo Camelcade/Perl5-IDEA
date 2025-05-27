@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -357,6 +357,7 @@ public class PerlVariableCompletionUtil {
     "ISA", "EXPORT", "EXPORT_OK", "EXPORT_TAGS", "EXPORT_FAIL", "VERSION"
   );
 
+  @SuppressWarnings("UnusedReturnValue")
   public static boolean processFullQualifiedVariables(@NotNull PerlVariableCompletionProcessor variableCompletionProcessor) {
     if (!variableCompletionProcessor.isFullQualified() && variableCompletionProcessor.getCompletionParameters().getInvocationCount() == 0) {
       return variableCompletionProcessor.result();

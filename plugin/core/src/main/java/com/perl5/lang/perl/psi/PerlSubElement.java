@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,6 +77,7 @@ public interface PerlSubElement extends PerlSub, PerlCallableElement {
     return false;
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   default boolean processDirectOverridingSubs(@NotNull Processor<PerlSubDefinitionElement> processor) {
     String packageName = getNamespaceName();
     String subName = getSubName();

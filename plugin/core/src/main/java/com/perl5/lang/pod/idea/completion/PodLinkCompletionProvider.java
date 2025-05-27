@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -82,6 +82,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
     completionProcessor.logStatus(getClass());
   }
 
+  @SuppressWarnings("UnusedReturnValue")
   protected boolean processFilesCompletions(@NotNull PerlCompletionProcessor completionProcessor) {
     PodFormatterL linkElement = (PodFormatterL)completionProcessor.getLeafElement();
     final Set<String> foundPods = new HashSet<>();

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -147,11 +147,11 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   }
 
   @Contract("null, _, _ -> null")
-  private @Nullable String suggestAndAddRecommendedName(@Nullable PsiElement targetElement,
-                                                        @Nullable PsiElement contextElement,
-                                                        @NotNull Set<String> result) {
+  private void suggestAndAddRecommendedName(@Nullable PsiElement targetElement,
+                                            @Nullable PsiElement contextElement,
+                                            @NotNull Set<String> result) {
     if (targetElement == null || !targetElement.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
-      return null;
+      return;
     }
 
     String recommendedName = null;
@@ -179,7 +179,11 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     }
 
     result.addAll(suggestedNames);
-    return recommendedName == null ? suggestedNames.isEmpty() ? null : suggestedNames.iterator().next() : recommendedName;
+    if (recommendedName == null) {
+      if (!suggestedNames.isEmpty()) {
+        suggestedNames.iterator().next();
+      }
+    }
   }
 
   /**
