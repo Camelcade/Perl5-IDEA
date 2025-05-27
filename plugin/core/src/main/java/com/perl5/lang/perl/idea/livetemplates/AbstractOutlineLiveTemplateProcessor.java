@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,9 @@ public abstract class AbstractOutlineLiveTemplateProcessor implements TemplateOp
   /**
    * Returns outline marker text to insert
    */
-  protected abstract @NotNull String getOutlineMarker();
+  protected @NotNull String getOutlineMarker() {
+    return "% ";
+  }
 
   /**
    * Attempts to find an outline marker by the first psi element in the line.
