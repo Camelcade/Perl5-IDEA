@@ -3,7 +3,6 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.intellij.platform.gradle.Constants.Tasks.INSTRUMENT_CODE
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.intellij.platform.gradle.tasks.InstrumentCodeTask
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.kt3k.gradle.plugin.coveralls.CoverallsTask
 
 /*
@@ -111,15 +110,17 @@ allprojects {
     testImplementation("org.opentest4j:opentest4j:1.3.0")
   }
 
+  kotlin {
+    compilerOptions {
+      jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(properties("javaTargetVersion").get()))
+    }
+  }
+
   tasks {
     withType<JavaCompile> {
       options.encoding = "UTF-8"
       sourceCompatibility = properties("javaVersion").get()
       targetCompatibility = properties("javaTargetVersion").get()
-    }
-
-    withType<KotlinCompile> {
-      kotlinOptions.jvmTarget = properties("javaTargetVersion").get()
     }
 
     test {
