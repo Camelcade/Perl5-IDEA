@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,16 +30,6 @@ public interface PerlCodeGenerator {
    */
   @Nullable
   String getOverrideCodeText(PsiElement subBase);
-
-  /**
-   * Returns code for Moose method modifier
-   *
-   * @param subBase method to modify
-   * @return generated code
-   */
-  @Nullable
-  String getMethodModifierCodeText(PsiElement subBase, String modifierType);
-
 
   /**
    * Generating and inserting overridden method
