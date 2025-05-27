@@ -98,10 +98,10 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
     }
 
     myLocalProjectRootComponent = new TextFieldWithBrowseButton();
-    myLocalProjectRootComponent.addBrowseFolderListener(PerlBundle.message("perl.run.option.select.local.root"), null,
-                                                        myProject,
-                                                        FileChooserDescriptorFactory.createSingleFolderDescriptor(),
-                                                        TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
+    myLocalProjectRootComponent.addBrowseFolderListener(
+      myProject,
+      FileChooserDescriptorFactory.createSingleFolderDescriptor().withTitle(PerlBundle.message("perl.run.option.select.local.root")),
+      TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
     var localRoot = LabeledComponent.create(myLocalProjectRootComponent, PerlBundle.message("perl.run.option.local.root"));
     localRoot.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(localRoot);
