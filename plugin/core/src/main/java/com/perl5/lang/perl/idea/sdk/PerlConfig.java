@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.xmlb.annotations.Tag;
@@ -57,7 +56,7 @@ public final class PerlConfig {
   }
 
   private PerlConfig(@NotNull Map<String, String> config) {
-    myConfig = Collections.unmodifiableMap(new HashMap<>(config));
+    myConfig = new HashMap<>(config);
   }
 
   @Contract("null->null")

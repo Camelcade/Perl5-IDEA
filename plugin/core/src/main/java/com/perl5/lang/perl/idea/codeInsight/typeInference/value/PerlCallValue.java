@@ -40,7 +40,9 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
@@ -55,7 +57,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
                           @NotNull PerlValue subNameValue,
                           @NotNull List<PerlValue> arguments) {
     super(namespaceNameValue, subNameValue);
-    myArguments = Collections.unmodifiableList(new ArrayList<>(arguments));
+    myArguments = List.copyOf(arguments);
   }
 
   PerlCallValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
