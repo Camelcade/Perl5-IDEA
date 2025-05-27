@@ -113,7 +113,7 @@ public class MojoProjectManager implements Disposable {
   }
 
   public @NotNull List<MojoProject> getMojoProjects() {
-    return Collections.unmodifiableList(new ArrayList<>(myModel.myProjectRoots.values()));
+    return List.copyOf(myModel.myProjectRoots.values());
   }
 
   /**

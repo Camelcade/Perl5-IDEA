@@ -50,12 +50,14 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class PodLinkCompletionProvider extends CompletionProvider<CompletionParameters> implements PodElementTypes {
   private static final Logger LOG = Logger.getInstance(PodLinkCompletionProvider.class);
-  private static final List<String> TO_ESCAPE = Collections.unmodifiableList(Arrays.asList("<", ">", "/", "|"));
-  private static final List<String> ESCAPE_TO = Collections.unmodifiableList(Arrays.asList("E<lt>", "E<gt>", "E<sol>", "E<verbar>"));
+  private static final List<String> TO_ESCAPE = List.of("<", ">", "/", "|");
+  private static final List<String> ESCAPE_TO = List.of("E<lt>", "E<gt>", "E<sol>", "E<verbar>");
 
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,24 +38,16 @@ import com.perl5.lang.pod.parser.psi.references.PodSubReference;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class PodTitleCompletionProvider extends CompletionProvider<CompletionParameters> implements PodElementPatterns {
   public static final String COPYRIGHT_AND_LICENSE = "COPYRIGHT AND LICENSE";
-  public static final List<String> DEFAULT_POD_SECTIONS = Collections.unmodifiableList(Arrays.asList(
-    "VERSION",
-    "SYNOPSIS",
-    "API",
-    "DESCRIPTION",
-    "INSTALLATION",
-    "NAME",
-    "AUTHORS",
-    "CONTRIBUTORS",
-    COPYRIGHT_AND_LICENSE,
-    "METHODS",
-    "ATTRIBUTES",
-    "FUNCTIONS"
-  ));
+  public static final List<String> DEFAULT_POD_SECTIONS =
+    List.of("VERSION", "SYNOPSIS", "API", "DESCRIPTION", "INSTALLATION", "NAME", "AUTHORS", "CONTRIBUTORS", COPYRIGHT_AND_LICENSE,
+            "METHODS", "ATTRIBUTES", "FUNCTIONS");
 
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
