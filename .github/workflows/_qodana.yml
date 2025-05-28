@@ -20,7 +20,7 @@ jobs:
           QODANA_LINTER: ${{ env.QODANA_TOKEN == '' && 'jetbrains/qodana-jvm-community' || 'jetbrains/qodana-jvm' }}
         with:
           use-caches: false
-          args: --baseline,.qodana/qodana.sarif.json,--linter,${{ env.QODANA_LINTER }}
+          args: --baseline,.qodana/qodana.sarif.json,--linter,${{ env.QODANA_LINTER }},--property,idea.kotlin.plugin.use.k2=false
 
       - uses: github/codeql-action/upload-sarif@v3
         with:
