@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,8 +84,11 @@ public class Perl5SdkPanel {
         actionGroupPopup.show(new RelativePoint(toolbar, getPopupPoint()));
       }
 
+      /**
+       * @implNote this is a copypaste from {@link com.intellij.openapi.project.DumbAwareAction#getPopupPoint} and seems there is no replacement.
+       */
       private Point getPopupPoint() {
-        int dH = UIUtil.isUnderWin10LookAndFeel() ? JBUI.scale(1) : 0;
+        @SuppressWarnings("removal") int dH = UIUtil.isUnderWin10LookAndFeel() ? JBUI.scale(1) : 0;
         return new Point(JBUI.scale(2), toolbar.getHeight() - dH);
       }
     });
