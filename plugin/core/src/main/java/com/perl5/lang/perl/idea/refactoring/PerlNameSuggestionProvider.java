@@ -149,7 +149,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   @Contract("null, _, _ -> null")
   private void suggestAndAddRecommendedName(@Nullable PsiElement targetElement,
                                             @Nullable PsiElement contextElement,
-                                            @NotNull Set<String> result) {
+                                            @NotNull Set<? super String> result) {
     if (targetElement == null || !targetElement.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
       return;
     }
@@ -173,7 +173,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
         targetElement,
         variableDeclarationElement.getActualType(),
         declaredVariable.getName(),
-        suggestAndAddRecommendedName(variableDeclarationElement, contextElement, suggestedNames),
+        suggestAndAddRecommendedNameForVariable(variableDeclarationElement, contextElement, suggestedNames),
         suggestedNames
       );
     }
@@ -190,9 +190,9 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
    * Attempts for figure out a variable name from {@code declaration} and/or {@code contextElement}. Adds suggestions to the {@code result}
    * and return recommended name if any
    */
-  private @Nullable String suggestAndAddRecommendedName(@NotNull PerlVariableDeclarationElement declaration,
-                                                        @Nullable PsiElement contextElement,
-                                                        @NotNull Set<String> result) {
+  private @Nullable String suggestAndAddRecommendedNameForVariable(@NotNull PerlVariableDeclarationElement declaration,
+                                                                   @Nullable PsiElement ignoredContextElement,
+                                                                   @NotNull Set<? super String> result) {
     PerlAssignExpression assignmentExpression = PerlAssignExpression.getAssignmentExpression(declaration);
     if (assignmentExpression == null) {
       return null;
@@ -210,7 +210,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return suggestAndAddRecommendedName(elements.getFirst(), result);
   }
 
-  private @Nullable String suggestAndAddRecommendedName(@Nullable PsiElement expression, @NotNull Set<String> result) {
+  private @Nullable String suggestAndAddRecommendedName(@Nullable PsiElement expression, @NotNull Set<? super String> result) {
     if (expression instanceof PsiPerlParenthesisedExpr parenthesisedExpr) {
       return suggestAndAddRecommendedName(parenthesisedExpr.getExpr(), result);
     }
@@ -279,35 +279,38 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   }
 
   private String suggestAndGetForDereference(@NotNull PsiElement expression,
-                                             @NotNull Set<String> result, String recommendation) {
+                                             @NotNull Set<? super String> result,
+                                             @SuppressWarnings("SameParameterValue") String initialRecommendation) {
     PsiElement[] children = expression.getChildren();
     PsiElement element = children[children.length - 1];
     PsiElement baseElement = children[children.length - 2];
 
     if (element instanceof PsiPerlHashIndex hashIndex) {
-      recommendation = Objects.requireNonNull(join(HASH, ELEMENT));
+      var recommendation = Objects.requireNonNull(join(HASH, ELEMENT));
       result.add(recommendation);
       result.add(join(HASH, ITEM));
 
-      recommendation = suggestNamesForElements(baseElement, true, hashIndex.getExpr(), result, recommendation);
+      return suggestNamesForElements(baseElement, true, hashIndex.getExpr(), result, recommendation);
     }
     else if (element instanceof PsiPerlArrayIndex arrayIndex) {
-      recommendation = Objects.requireNonNull(join(ARRAY, ELEMENT));
+      var recommendation = Objects.requireNonNull(join(ARRAY, ELEMENT));
       result.add(recommendation);
       result.add(join(ARRAY, ITEM));
 
-      recommendation = suggestNamesForElements(baseElement, true, arrayIndex.getExpr(), result, recommendation);
+      return suggestNamesForElements(baseElement, true, arrayIndex.getExpr(), result, recommendation);
     }
     else if (element instanceof PerlSubCallElement subCallElement) {
-      recommendation = suggestAndGetForCall(subCallElement, result, recommendation);
+      return suggestAndGetForCall(subCallElement, result, initialRecommendation);
     }
     else if (element instanceof PsiPerlParenthesisedCallArguments) {
-      recommendation = join(getBaseName(baseElement), RESULT);
+      return join(getBaseName(baseElement), RESULT);
     }
-    return recommendation;
+    return initialRecommendation;
   }
 
-  private static String suggestAndGetForCall(@NotNull PerlSubCallElement subCall, @NotNull Set<String> result, String recommendation) {
+  private static String suggestAndGetForCall(@NotNull PerlSubCallElement subCall,
+                                             @NotNull Set<? super String> result,
+                                             String recommendation) {
     PsiPerlMethod method = subCall.getMethod();
     if (method == null) {
       return recommendation;
@@ -344,7 +347,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
 
   private String suggestAndGetGrepMapSortNames(@Nullable PsiElement expression,
                                                @NotNull String prefix,
-                                               @NotNull Set<String> result) {
+                                               @NotNull Set<? super String> result) {
     String recommendedName = join(prefix, VALUE);
     result.add(recommendedName);
     String fullName = getBaseName(expression);
@@ -355,7 +358,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return recommendedName;
   }
 
-  private static String suggestAndAddNameForString(@NotNull PerlString expression, @NotNull Set<String> result) {
+  private static String suggestAndAddNameForString(@NotNull PerlString expression, @NotNull Set<? super String> result) {
     result.add(STRING);
     if (expression instanceof PsiPerlStringXq) {
       result.add(COMMAND_OUTPUT);
@@ -463,7 +466,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
   private static @NotNull String suggestNamesForElements(@Nullable PsiElement baseExpr,
                                                          boolean derefBase,
                                                          @Nullable PsiElement indexExpr,
-                                                         @NotNull Set<String> result,
+                                                         @NotNull Set<? super String> result,
                                                          @NotNull String recommendation) {
     String singularName = null;
     String baseExprName = getBaseName(baseExpr);
@@ -578,8 +581,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     return Objects.requireNonNull(EP_NAME.findExtension(PerlNameSuggestionProvider.class));
   }
 
-  public static void suggestNames(@NotNull PerlVariableDeclarationElement variableDeclarationElement, @NotNull Set<String> result) {
-    getInstance().suggestAndAddRecommendedName((PsiElement)variableDeclarationElement, null, result);
+  public static void suggestNames(@NotNull PerlVariableDeclarationElement variableDeclarationElement, @NotNull Set<? super String> result) {
+    getInstance().suggestAndAddRecommendedName(variableDeclarationElement, null, result);
   }
 
   @Contract("null->null")
