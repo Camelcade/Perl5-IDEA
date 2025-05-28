@@ -27,6 +27,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilBase;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -66,7 +67,7 @@ public abstract class AbstractOutlineLiveTemplateProcessor implements TemplateOp
 
   @Override
   public @Nls String getOptionName() {
-    return "Please report a bug";
+    return PerlBundle.message("please.report.a.bug");
   }
 
   @Override
