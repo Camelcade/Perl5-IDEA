@@ -40,7 +40,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -55,7 +54,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
 
   protected PerlCallValue(@NotNull PerlValue namespaceNameValue,
                           @NotNull PerlValue subNameValue,
-                          @NotNull List<PerlValue> arguments) {
+                          @NotNull List<? extends PerlValue> arguments) {
     super(namespaceNameValue, subNameValue);
     myArguments = List.copyOf(arguments);
   }
@@ -204,7 +203,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
   protected static boolean processExportDescriptors(@NotNull Project project,
                                                     @NotNull GlobalSearchScope searchScope,
                                                     @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor,
-                                                    @NotNull Set<PerlExportDescriptor> exportDescriptors) {
+                                                    @NotNull Set<? extends PerlExportDescriptor> exportDescriptors) {
     if (exportDescriptors.isEmpty()) {
       return true;
     }
@@ -239,11 +238,8 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     }
 
     // exports
-    Set<PerlExportDescriptor> exportDescriptors = new HashSet<>();
-    PerlNamespaceDefinitionElement.processExportDescriptors(project, effectiveScope, currentNamespaceName, (__, it) -> {
-      exportDescriptors.add(it);
-      return true;
-    });
+    Set<PerlExportDescriptor> exportDescriptors =
+      PerlNamespaceDefinitionElement.getExportDescriptors(project, effectiveScope, currentNamespaceName);
     return processExportDescriptors(project, effectiveScope, processor, exportDescriptors);
   }
 
@@ -317,8 +313,8 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
   protected static boolean processExportDescriptorsItems(@NotNull Project project,
                                                          @NotNull GlobalSearchScope searchScope,
                                                          @NotNull Set<String> subNames,
-                                                         @NotNull Processor<PsiNamedElement> processorWrapper,
-                                                         @NotNull Set<PerlExportDescriptor> exportDescriptors) {
+                                                         @NotNull Processor<? super PsiNamedElement> processorWrapper,
+                                                         @NotNull Set<? extends PerlExportDescriptor> exportDescriptors) {
     for (PerlExportDescriptor exportDescriptor : exportDescriptors) {
       if (subNames.contains(exportDescriptor.getImportedName()) &&
           !PerlPackageUtil.processCallables(project, searchScope, exportDescriptor.getTargetCanonicalName(), processorWrapper)) {
