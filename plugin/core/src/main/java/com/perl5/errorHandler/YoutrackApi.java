@@ -74,7 +74,7 @@ public final class YoutrackApi {
     @SuppressWarnings("unused") @Expose
     public final String id;
 
-    YoutrackProject(String id) {
+    YoutrackProject(@SuppressWarnings("SameParameterValue") String id) {
       this.id = id;
     }
   }
