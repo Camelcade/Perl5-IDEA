@@ -51,6 +51,7 @@ public abstract class AbstractOutlineLiveTemplateProcessor implements TemplateOp
   /**
    * Returns outline marker text to insert
    */
+  @SuppressWarnings("SameReturnValue")
   protected @NotNull String getOutlineMarker() {
     return "% ";
   }
