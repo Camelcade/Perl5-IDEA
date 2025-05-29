@@ -216,7 +216,6 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
   @Contract("null->null")
   public static @Nullable PsiElement findPodElement(@Nullable PsiElement element) {
     return switch (element) {
-      case null -> null;
       case PerlBuiltInSubDefinition definition -> {
         String subName = StringUtil.notNullize(definition.getName());
         if ("default".equals(subName)) {
@@ -230,7 +229,7 @@ public class PerlDocumentationProvider extends PerlDocumentationProviderBase imp
       case PerlFileImpl file -> findPodElement(file);
       case PerlNamespaceDefinitionElement definitionElement -> findPodElement(definitionElement);
       case PerlVariable variable -> PerlDocUtil.getPerlVarDoc(variable);
-      default -> null;
+      case null, default -> null;
     };
   }
 
