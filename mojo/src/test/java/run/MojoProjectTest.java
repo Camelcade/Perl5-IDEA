@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,7 +52,6 @@ public class MojoProjectTest extends PerlPlatformTestCase {
       fail("Expected an application, got: " + projects);
     }
     assertInstanceOf(projects.getFirst(), MojoApp.class);
-    LOG.info("Got: " + projects.getFirst());
   }
 
   private @NotNull List<MojoProject> runMojoGenerateActionAndGetProjects(@NotNull MojoGenerateAction action) {
@@ -87,7 +86,6 @@ public class MojoProjectTest extends PerlPlatformTestCase {
       fail("Expected a plugin, got: " + projects);
     }
     assertInstanceOf(projects.getFirst(), MojoPlugin.class);
-    LOG.info("Got: " + projects.getFirst());
   }
 
   private void assertMojoAvailable() {
