@@ -228,7 +228,8 @@ public class PerlSubCompletionUtil {
         public boolean processItem(@NotNull PsiNamedElement element) {
           return switch (element) {
             case PerlImplicitSubDefinition implicitSubDefinition
-              when implicitSubDefinition.isAnonymous() -> completionProcessor.result();
+              when implicitSubDefinition.isAnonymous() -> //noinspection DuplicateBranchesInSwitch
+              completionProcessor.result();
             case PerlSubDefinitionElement subDefinitionElement
               when !subDefinitionElement.isAnonymous() &&
                    (isStatic && subDefinitionElement.isStatic() || subDefinitionElement.isMethod()) ->
