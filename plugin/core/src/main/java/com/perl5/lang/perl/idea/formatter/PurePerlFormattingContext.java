@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -109,9 +109,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
     }
 
     ASTNode prevLineComment = getPreviousLineElement(prevNode, COMMENT_LINE, true);
-    if (prevLineComment != null && LOG.isDebugEnabled()) {
-      LOG.debug("Delegating to previous line comment: ", commentNode, " - ", commentNode.getChars());
-    }
+    logDelegation(commentNode, prevLineComment);
     Alignment alignment = prevLineComment == null ? null : getLineCommentAlignment(prevLineComment);
     if (alignment == null) {
       alignment = Alignment.createAlignment(true);
@@ -138,15 +136,19 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
     }
 
     ASTNode prevLineAnnotation = getPreviousLineElement(prevNode, COMMENT_ANNOTATION, false);
-    if (prevLineAnnotation != null && LOG.isDebugEnabled()) {
-      LOG.debug("Delegating to previous line comment: ", commentAnnotationNode, " - ", commentAnnotationNode.getChars());
-    }
+    logDelegation(commentAnnotationNode, prevLineAnnotation);
     Alignment alignment = prevLineAnnotation == null ? null : getAnnotationTypeAlignment(prevLineAnnotation);
     if (alignment == null) {
       alignment = Alignment.createAlignment(true);
     }
     myAnnotationTypesAlignmentMap.put(annotationLine, alignment);
     return alignment;
+  }
+
+  private static void logDelegation(@NotNull ASTNode commentAnnotationNode, @Nullable ASTNode prevLineAnnotation) {
+    if (prevLineAnnotation != null && LOG.isDebugEnabled()) {
+      LOG.debug("Delegating to previous line comment: ", commentAnnotationNode, " - ", commentAnnotationNode.getChars());
+    }
   }
 
   /**
