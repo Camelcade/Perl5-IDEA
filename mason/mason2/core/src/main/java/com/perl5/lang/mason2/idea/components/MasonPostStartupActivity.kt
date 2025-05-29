@@ -17,14 +17,14 @@ package com.perl5.lang.mason2.idea.components
 
 import com.intellij.openapi.Disposable
 import com.intellij.openapi.project.Project
-import com.intellij.openapi.startup.StartupActivity
+import com.intellij.openapi.startup.ProjectActivity
 import com.intellij.openapi.util.Disposer
 import com.intellij.openapi.vfs.LocalFileSystem
 import com.perl5.lang.mason2.MasonPluginUtil
 import com.perl5.lang.mason2.idea.vfs.MasonVirtualFileListener
 
-class MasonPostStartupActivity : StartupActivity.Background {
-  override fun runActivity(project: Project) =
+internal class MasonPostStartupActivity : ProjectActivity {
+  override suspend fun execute(project: Project) =
     MasonVirtualFileListener(project).let { listener ->
       LocalFileSystem.getInstance().addVirtualFileListener(listener)
       Disposer.register(
