@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,6 +71,10 @@ public class PerlScriptsPanel extends JPanel {
   }
 
   private void init() {
+    add(new JBScrollPane(createList()), BorderLayout.CENTER);
+  }
+
+  private @NotNull JBList<PerlLoadedFileDescriptor> createList() {
     final JBList<PerlLoadedFileDescriptor> jbList = new JBList<>(myModel);
     jbList.setCellRenderer(new SimpleListCellRenderer<>() {
       @Override
@@ -106,8 +110,7 @@ public class PerlScriptsPanel extends JPanel {
         }
       }
     });
-
-    add(new JBScrollPane(jbList), BorderLayout.CENTER);
+    return jbList;
   }
 
   public void clear() {
