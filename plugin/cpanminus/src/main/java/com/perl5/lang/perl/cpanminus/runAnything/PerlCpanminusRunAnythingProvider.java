@@ -379,6 +379,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
         LOG.warn("Element with empty value: " + optionElement.getText());
       }
       else if (allOptionsMap.containsKey(value)) {
+        //noinspection LoggingSimilarMessage
         LOG.warn("Duplicate option: " + optionElement.getText());
       }
       else {
