@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,9 +54,7 @@ public class PerlElementTypeFactory {
     return switch (name) {
       case "PARSABLE_STRING_USE_VARS" -> new PerlUseVarsStringElementType();
       case "COMMENT_ANNOTATION" -> new PerlAnnotationElementType(name);
-      case "HEREDOC_QQ" -> new PerlHeredocElementType(name, PerlHeredocElementImpl.class);
-      case "HEREDOC_QX" -> new PerlHeredocElementType(name, PerlHeredocElementImpl.class);
-      case "HEREDOC" -> new PerlHeredocElementType(name, PerlHeredocElementImpl.class);
+      case "HEREDOC_QQ", "HEREDOC_QX", "HEREDOC" -> new PerlHeredocElementType(name, PerlHeredocElementImpl.class);
       case "SUB_DEFINITION" -> PerlStubElementTypes.SUB_DEFINITION;
       case "METHOD_DEFINITION" -> PerlStubElementTypes.METHOD_DEFINITION;
       case "FUNC_DEFINITION" -> PerlStubElementTypes.FUNC_DEFINITION;
