@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -111,11 +111,10 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
 
   public static @Nullable String doGenerateDoc(@Nullable PsiElement element) {
     return switch (element) {
-      case null -> null;
       case PodFile ignored -> StringUtil.nullize(PerlDocUtil.renderPodFile((PodFileImpl)element));
       case PodFormatterX x -> generateDocByIndex(x);
       case PodSection section -> PerlDocUtil.renderElement(section);
-      default -> null;
+      case null, default -> null;
     };
   }
 
