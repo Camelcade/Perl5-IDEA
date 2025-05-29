@@ -37,13 +37,7 @@ public final class YoutrackApi {
   private YoutrackApi() {
   }
 
-  static final class YoutrackCustomFieldValue {
-    @SuppressWarnings("unused") @Expose
-    public final String name;
-
-    public YoutrackCustomFieldValue(String name) {
-      this.name = name;
-    }
+  record YoutrackCustomFieldValue(@SuppressWarnings("unused") @Expose String name) {
   }
 
   public abstract static class YoutrackCustomField {
