@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.mason2.idea.components
 
-package com.perl5.lang.mason2.idea.components;
+import com.intellij.openapi.Disposable
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.startup.StartupActivity
+import com.intellij.openapi.util.Disposer
+import com.intellij.openapi.vfs.LocalFileSystem
+import com.perl5.lang.mason2.MasonPluginUtil
+import com.perl5.lang.mason2.idea.vfs.MasonVirtualFileListener
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.startup.StartupActivity;
-import com.intellij.openapi.util.Disposer;
-import com.intellij.openapi.vfs.LocalFileSystem;
-import com.perl5.lang.mason2.MasonPluginUtil;
-import com.perl5.lang.mason2.idea.vfs.MasonVirtualFileListener;
-import org.jetbrains.annotations.NotNull;
-
-public class MasonPostStartupActivity implements StartupActivity.Background {
-  @Override
-  public void runActivity(@NotNull Project project) {
-    MasonVirtualFileListener listener = new MasonVirtualFileListener(project);
-    LocalFileSystem.getInstance().addVirtualFileListener(listener);
-    Disposer.register(MasonPluginUtil.getUnloadAwareDisposable(project),
-                      () -> LocalFileSystem.getInstance().removeVirtualFileListener(listener));
-  }
+class MasonPostStartupActivity : StartupActivity.Background {
+  override fun runActivity(project: Project) =
+    MasonVirtualFileListener(project).let { listener ->
+      LocalFileSystem.getInstance().addVirtualFileListener(listener)
+      Disposer.register(
+        MasonPluginUtil.getUnloadAwareDisposable(project),
+        Disposable { LocalFileSystem.getInstance().removeVirtualFileListener(listener) })
+    }
 }
