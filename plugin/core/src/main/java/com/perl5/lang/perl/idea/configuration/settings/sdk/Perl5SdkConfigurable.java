@@ -93,26 +93,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   private void initPanel() {
     myPanel = new Perl5SdkPanel();
 
-    // combo box
-    JComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
-    sdkComboBox.setModel(new CollectionComboBoxModel<>(mySdkManipulator.getAllSdkWrappers()));
-    sdkComboBox.setRenderer(new ColoredListCellRenderer<>() {
-      @Override
-      protected void customizeCellRenderer(@NotNull JList<? extends Perl5SdkWrapper> list,
-                                           Perl5SdkWrapper wrapper,
-                                           int index,
-                                           boolean selected,
-                                           boolean hasFocus) {
-        if (wrapper != null) {
-          wrapper.customizeRenderer(this);
-        }
-      }
-    });
-    sdkComboBox.addItemListener(e -> {
-      if (e.getStateChange() == ItemEvent.SELECTED) {
-        mySdkManipulator.selectionChanged((Perl5SdkWrapper)e.getItem());
-      }
-    });
+    configureSdkCombobox();
     myConnection.subscribe(PerlSdkTable.PERL_TABLE_TOPIC, this);
 
     // add sdk button
@@ -187,6 +168,28 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
         PerlSdkTable.getInstance().removeJdk(getSelectedSdk());
       }
     }, KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0), 0);
+  }
+
+  private void configureSdkCombobox() {
+    JComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
+    sdkComboBox.setModel(new CollectionComboBoxModel<>(mySdkManipulator.getAllSdkWrappers()));
+    sdkComboBox.setRenderer(new ColoredListCellRenderer<>() {
+      @Override
+      protected void customizeCellRenderer(@NotNull JList<? extends Perl5SdkWrapper> list,
+                                           Perl5SdkWrapper wrapper,
+                                           int index,
+                                           boolean selected,
+                                           boolean hasFocus) {
+        if (wrapper != null) {
+          wrapper.customizeRenderer(this);
+        }
+      }
+    });
+    sdkComboBox.addItemListener(e -> {
+      if (e.getStateChange() == ItemEvent.SELECTED) {
+        mySdkManipulator.selectionChanged((Perl5SdkWrapper)e.getItem());
+      }
+    });
   }
 
   private void updateSdkModel(@Nullable Perl5SdkWrapper itemToSelect) {
