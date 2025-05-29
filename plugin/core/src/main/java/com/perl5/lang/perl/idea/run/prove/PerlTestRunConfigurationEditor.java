@@ -124,14 +124,7 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
     protected @NotNull TextFieldWithBrowseButton createTextFieldForScript() {
       TextFieldWithBrowseButton fieldWithBrowseButton = new TextFieldWithBrowseButton(new ExpandableTextField(FILES_PARSER, FILES_JOINER));
       fieldWithBrowseButton.addActionListener(e -> {
-        FileChooserDescriptor fileChooserDescriptor = new FileChooserDescriptor(true, true, false, false, false, true) {
-          @Override
-          public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
-            return getRunConfigurationProducer().isOurFile(file);
-          }
-        };
-        fileChooserDescriptor.setTitle(PerlBundle.message("perl.run.prove.config.select.script.header"));
-        fileChooserDescriptor.setDescription(PerlBundle.message("perl.run.prove.config.select.script.prompt"));
+        var fileChooserDescriptor = createFileChooserDescriptor();
 
         List<VirtualFile> filesToSelect = GenericPerlRunConfiguration.computeVirtualFilesFromPaths(fieldWithBrowseButton.getText());
         final FileChooserDialog chooser =
@@ -140,6 +133,18 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
         fieldWithBrowseButton.setText(StringUtil.join(ContainerUtil.map(choosenFiles, VirtualFile::getPath), " "));
       });
       return fieldWithBrowseButton;
+    }
+
+    private @NotNull FileChooserDescriptor createFileChooserDescriptor() {
+      FileChooserDescriptor fileChooserDescriptor = new FileChooserDescriptor(true, true, false, false, false, true) {
+        @Override
+        public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
+          return getRunConfigurationProducer().isOurFile(file);
+        }
+      };
+      fileChooserDescriptor.setTitle(PerlBundle.message("perl.run.prove.config.select.script.header"));
+      fileChooserDescriptor.setDescription(PerlBundle.message("perl.run.prove.config.select.script.prompt"));
+      return fileChooserDescriptor;
     }
 
     @Override
