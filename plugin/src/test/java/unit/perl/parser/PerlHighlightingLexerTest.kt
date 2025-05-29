@@ -25,7 +25,7 @@ import org.junit.Test
 import java.lang.reflect.Modifier
 
 class PerlHighlightingLexerTest : PerlLightTestCase() {
-  val lexerStates = PerlLexer::class.java.declaredFields
+  private val lexerStates = PerlLexer::class.java.declaredFields
     .filter { Modifier.isStatic(it.modifiers) && it.type == Int::class.java && it.canAccess(null) }
     .associate { it.getInt(null) to it.name }
 
