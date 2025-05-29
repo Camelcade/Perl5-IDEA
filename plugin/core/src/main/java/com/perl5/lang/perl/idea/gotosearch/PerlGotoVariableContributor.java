@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ public class PerlGotoVariableContributor extends PerlChooseByNameContributor {
                                                                                    String pattern,
                                                                                    Project project,
                                                                                    boolean includeNonProjectItems) {
-    if (name.length() <= 0) {
+    if (name.isEmpty()) {
       return Collections.emptyList();
     }
     GlobalSearchScope scope =
