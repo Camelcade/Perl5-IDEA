@@ -368,7 +368,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
   /**
    * Helper method to pass package [version] in use statement
    */
-  @SuppressWarnings("UnusedReturnValue")
+  @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
   public static boolean passPackageAndVersion(@NotNull PerlBuilder b, int l) {
     assert GeneratedParserUtilBase.consumeTokenFast(b, PACKAGE);
     PerlParserGenerated.perl_version(b, l);
