@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -157,7 +157,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   public boolean isInitialState() {
     return super.isInitialState() &&
            !myFormatWaiting &&
-           !myIsHeredocLike &&
+           !isHeredocLike() &&
            heredocQueue.isEmpty() &&
            myBracesStack.isEmpty() &&
            myBracketsStack.isEmpty() &&
@@ -198,6 +198,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   /**
    * We've met one of the $ / [${]
    */
+  @SuppressWarnings("SameReturnValue")
   protected IElementType processUnbracedScalarSigil() {
     myCurrentSigilToken = SIGIL_SCALAR;
     return SIGIL_SCALAR;
@@ -270,12 +271,13 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     return startBracketedBlockWithState(YYINITIAL);
   }
 
-  protected IElementType startBracketedBlockWithState(int blockState) {
+  protected IElementType startBracketedBlockWithState(@SuppressWarnings("SameParameterValue") int blockState) {
     myBracketsStack.push(0);
     pushState();
     return getLeftBracket(blockState);
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType getLeftBracket(int newState) {
     if (!myBracketsStack.isEmpty()) {
       myBracketsStack.incLast();
@@ -284,7 +286,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     return LEFT_BRACKET;
   }
 
-  @SuppressWarnings("Duplicates")
+  @SuppressWarnings({"Duplicates", "SameReturnValue"})
   protected IElementType getRightBracket(int afterState) {
     if (!myBracketsStack.isEmpty()) {
       if (myBracketsStack.decLast() == 0) {
@@ -295,10 +297,6 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     }
     yybegin(afterState);
     return RIGHT_BRACKET;
-  }
-
-  protected IElementType startParethesizedBlock(int afterState) {
-    return startParethesizedBlock(afterState, YYINITIAL, null);
   }
 
   protected IElementType startParethesizedBlock(int afterState, int afterParenState) {
@@ -312,6 +310,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     return getLeftParen(afterParenState);
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType getLeftParen(int newState) {
     if (!myParensStack.isEmpty()) {
       myParensStack.incLast();
@@ -320,7 +319,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     return LEFT_PAREN;
   }
 
-  @SuppressWarnings("Duplicates")
+  @SuppressWarnings({"Duplicates", "SameReturnValue"})
   protected IElementType getRightParen(int afterState) {
     if (!myParensStack.isEmpty()) {
       if (myParensStack.decLast() == 0) {
@@ -399,7 +398,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
     myParensStack.clear();
     heredocQueue.clear();
     myFormatWaiting = false;
-    myIsHeredocLike = false;
+    setHeredocLike(false);
     myHasTryCatch = null;
     setSingleOpenQuoteChar((char)0);
 
@@ -424,6 +423,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   /**
    * Fast method for lexing spaces with or without newlines. Lexer invokes this method after lexing first space character.
    */
+  @SuppressWarnings("SameReturnValue")
   protected final @NotNull IElementType captureSpaces() {
     var bufferEnd = getBufferEnd();
     var currentOffset = getTokenEnd() - 1;
@@ -456,6 +456,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   /**
    * Fast method for lexing line comment
    */
+  @SuppressWarnings("SameReturnValue")
   protected final @NotNull IElementType captureComment() {
     var bufferEnd = getBufferEnd();
     var currentOffset = getTokenEnd();
@@ -474,6 +475,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   /**
    * Fast {@code __END__} block capture method. Invoked on the first character match after the block beginning.
    */
+  @SuppressWarnings("SameReturnValue")
   protected final @NotNull IElementType captureEndBlock(){
     int offset = getTokenStart();
     var bufferEnd = getBufferEnd();
@@ -1183,6 +1185,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
    * @param heredocElementType element type for heredoc body
    * @return string token type
    */
+  @SuppressWarnings("SameReturnValue")
   public IElementType captureBareHeredocMarker(IElementType heredocElementType, boolean isIndentable) {
     yybegin(AFTER_VALUE);
     heredocQueue.add(new PerlHeredocQueueElement(heredocElementType, yytext(), isIndentable));
@@ -1202,6 +1205,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
    *
    * @return PACKAGE element type
    */
+  @SuppressWarnings("SameReturnValue")
   protected IElementType registerUse() {
     if (StringUtil.equals(yytext(), "TryCatch")) {
       myHasTryCatch = true;
