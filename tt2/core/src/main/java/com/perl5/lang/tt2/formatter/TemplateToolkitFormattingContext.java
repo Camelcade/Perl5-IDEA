@@ -207,7 +207,7 @@ public final class TemplateToolkitFormattingContext extends PerlBaseFormattingCo
    *
    * @return check result
    */
-  protected boolean isLast(@NotNull ASTNode node) {
+  private boolean isLast(@NotNull ASTNode node) {
     if (node.getTreeNext() == null) {
       return true;
     }

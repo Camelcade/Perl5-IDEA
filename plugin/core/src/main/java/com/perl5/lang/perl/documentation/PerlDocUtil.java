@@ -332,7 +332,7 @@ public final class PerlDocUtil implements PerlElementTypes {
     return builder.toString();
   }
 
-  protected static void renderFileToc(PsiFile file, final StringBuilder builder) {
+  private static void renderFileToc(PsiFile file, final StringBuilder builder) {
     PodTocBuilder tocBuilder = new PodTocBuilder(builder);
     PsiTreeUtil.processElements(file, tocBuilder);
     tocBuilder.adjustLevelTo(0);
