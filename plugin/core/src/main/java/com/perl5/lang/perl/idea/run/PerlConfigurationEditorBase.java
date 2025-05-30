@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ import java.util.Objects;
 
 
 public abstract class PerlConfigurationEditorBase<Settings extends PerlDebugOptions> extends SettingsEditor<Settings> {
-  protected Project myProject;
+  protected final Project myProject;
 
   private JTextField myScriptCharset;
   private ComboBox<String> myStartMode;

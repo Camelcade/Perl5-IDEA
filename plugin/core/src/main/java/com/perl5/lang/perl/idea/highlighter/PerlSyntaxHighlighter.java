@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -113,7 +113,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
   public static final TextAttributesKey PERL_HASH_BUILTIN = createTextAttributesKey("PERL_HASH_BUILTIN", PERL_HASH);
   public static final TextAttributesKey PERL_CONSTANT = createTextAttributesKey("PERL_CONSTANT", DefaultLanguageHighlighterColors.CONSTANT);
   private static final Map<IElementType, TextAttributesKey> COLORS_MAP = new HashMap<>();
-  public static TextAttributesKey UNUSED_DEPRECATED;
+  public static final TextAttributesKey UNUSED_DEPRECATED;
 
   static {
     EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();

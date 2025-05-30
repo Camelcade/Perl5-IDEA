@@ -36,7 +36,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerlUsePackageQuickFix implements LocalQuickFix {
-  String myPackageName;
+  final String myPackageName;
 
   public PerlUsePackageQuickFix(String packageName) {
     myPackageName = packageName;

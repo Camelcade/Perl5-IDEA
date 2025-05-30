@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,7 +103,7 @@ public class PerlHeredocReference extends PerlCachingReference<PerlHeredocTermin
 
   private static class HeredocSeeker extends PerlPsiUtil.HeredocProcessor {
     protected PerlHeredocOpener myResult = null;
-    protected PsiElement myAnchor;
+    protected final PsiElement myAnchor;
 
     public HeredocSeeker(int lineEndOffset, @Nullable PsiElement anchor) {
       super(lineEndOffset);

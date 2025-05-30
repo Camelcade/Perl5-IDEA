@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,8 +48,8 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
 
   public String autoHandlerName = "autohandler";
   public String defaultHandlerName = "dhandler";
-  public List<String> substitutedExtensions = new ArrayList<>();
-  public List<HTMLMasonCustomTag> customTags = new ArrayList<>();
+  public final List<String> substitutedExtensions = new ArrayList<>();
+  public final List<HTMLMasonCustomTag> customTags = new ArrayList<>();
 
   private final transient ClearableLazyValue<List<FileNameMatcher>> myLazyMatchersProvider
     = ClearableLazyValue.createAtomic(this::computeMatchers);

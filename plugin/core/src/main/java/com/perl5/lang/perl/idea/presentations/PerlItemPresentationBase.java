@@ -28,7 +28,7 @@ import javax.swing.*;
 
 
 public abstract class PerlItemPresentationBase implements ColoredItemPresentation {
-  PsiElement myElement;
+  final PsiElement myElement;
   TextAttributesKey myAttributesKey;
 
   public PerlItemPresentationBase(PsiElement element) {
