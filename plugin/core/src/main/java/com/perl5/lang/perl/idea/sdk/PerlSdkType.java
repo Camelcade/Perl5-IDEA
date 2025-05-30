@@ -269,17 +269,6 @@ public class PerlSdkType extends SdkType {
       interpreterPath, "-MConfig", "-e", "print q{perl}.chr(10);do {print;print chr(10)} for @Config{qw/version archname/}"));
   }
 
-
-  /**
-   * @deprecated use {@link #INSTANCE} instead
-   */
-  // use INSTANCE instead
-  @Deprecated
-  public static @NotNull PerlSdkType getInstance() {
-    return INSTANCE;
-  }
-
-
   public static void createAndAddSdk(@NotNull String interpreterPath,
                                      @NotNull PerlHostData<?, ?> hostData,
                                      @NotNull PerlVersionManagerData<?, ?> versionManagerData,
