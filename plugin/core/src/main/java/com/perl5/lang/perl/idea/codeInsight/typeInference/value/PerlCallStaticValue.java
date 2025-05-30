@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -121,7 +121,7 @@ public final class PerlCallStaticValue extends PerlCallValue {
       String namespaceName = containingNamespace == null ? null : containingNamespace.getNamespaceName();
       if (!StringUtil.isEmpty(namespaceName)) {
         processExportDescriptorsItems(
-          project, searchScope, subNames, processor::process, PerlImportsProvider.getAllExportDescriptors(containingNamespace));
+          project, searchScope, subNames, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace));
       }
     }
 
