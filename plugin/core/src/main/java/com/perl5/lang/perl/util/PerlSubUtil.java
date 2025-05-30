@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -222,7 +222,7 @@ public final class PerlSubUtil implements PerlElementTypes {
                                                     @NotNull GlobalSearchScope searchScope,
                                                     @NotNull String packageName,
                                                     @NotNull Processor<? super PerlCallableElement> processor) {
-    return processSubDefinitionsInPackage(project, packageName, searchScope, processor::process) &&
-           processSubDeclarationsInPackage(project, packageName, searchScope, processor::process);
+    return processSubDefinitionsInPackage(project, packageName, searchScope, processor) &&
+           processSubDeclarationsInPackage(project, packageName, searchScope, processor);
   }
 }

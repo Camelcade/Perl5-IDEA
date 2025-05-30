@@ -762,10 +762,10 @@ public final class PerlPackageUtil implements PerlElementTypes {
                                          @NotNull GlobalSearchScope searchScope,
                                          @NotNull String canonicalName,
                                          @NotNull Processor<? super PerlCallableElement> processor) {
-    if (!PerlSubUtil.processSubDefinitions(project, canonicalName, searchScope, processor::process)) {
+    if (!PerlSubUtil.processSubDefinitions(project, canonicalName, searchScope, processor)) {
       return false;
     }
-    if (!PerlSubUtil.processSubDeclarations(project, canonicalName, searchScope, processor::process)) {
+    if (!PerlSubUtil.processSubDeclarations(project, canonicalName, searchScope, processor)) {
       return false;
     }
     for (PerlGlobVariableElement target : PerlGlobUtil.getGlobsDefinitions(project, canonicalName, searchScope)) {
