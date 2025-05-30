@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ public class Perl5RegexpHost implements RegExpLanguageHost {
   private static final DefaultRegExpPropertiesProvider PROPERTIES_PROVIDER = DefaultRegExpPropertiesProvider.getInstance();
 
   @Override
-  public boolean characterNeedsEscaping(char c) {
+  public boolean characterNeedsEscaping(char c, boolean isInClass) {
     return false;
   }
 
