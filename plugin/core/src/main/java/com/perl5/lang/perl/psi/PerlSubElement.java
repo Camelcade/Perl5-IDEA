@@ -77,7 +77,7 @@ public interface PerlSubElement extends PerlSub, PerlCallableElement {
     return false;
   }
 
-  @SuppressWarnings("UnusedReturnValue")
+  @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
   default boolean processDirectOverridingSubs(@NotNull Processor<PerlSubDefinitionElement> processor) {
     String packageName = getNamespaceName();
     String subName = getSubName();
