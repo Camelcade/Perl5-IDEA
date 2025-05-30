@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,6 +54,7 @@ public class PerlTimeLogger {
   public void debug(@NotNull Object... data) {
     if (myLogger.isDebugEnabled()) {
       long newLastTime = System.currentTimeMillis();
+      //noinspection LoggingSimilarMessage
       myLogger.debug((newLastTime - myLastTime) + " ms. ", data);
       myLastTime = newLastTime;
     }
@@ -62,6 +63,7 @@ public class PerlTimeLogger {
   public void trace(@NotNull Object... data) {
     if (myLogger.isTraceEnabled()) {
       long newLastTime = System.currentTimeMillis();
+      //noinspection LoggingSimilarMessage
       myLogger.debug((newLastTime - myLastTime) + " ms. ", data);
       myLastTime = newLastTime;
     }
