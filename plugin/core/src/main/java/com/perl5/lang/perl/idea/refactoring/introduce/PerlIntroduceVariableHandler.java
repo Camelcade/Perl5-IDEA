@@ -272,12 +272,12 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       final RefactoringEventData afterData = new RefactoringEventData();
       afterData.addElement(declarationBlock.first);
       project.getMessageBus().syncPublisher(RefactoringEventListener.REFACTORING_EVENT_TOPIC)
-        .refactoringStarted(getRefactoringId(), afterData);
+        .refactoringStarted("perl.introduce.variable", afterData);
 
       PsiElement introducedStatement = anchor.getParent().addRangeBefore(declarationBlock.first, declarationBlock.second, anchor);
 
       project.getMessageBus().syncPublisher(RefactoringEventListener.REFACTORING_EVENT_TOPIC)
-        .refactoringDone(getRefactoringId(), afterData);
+        .refactoringDone("perl.introduce.variable", afterData);
 
       if (introducedStatement == null) {
         LOG.error("No statement been introduced from " + declarationBlock.first.getContainingFile().getText());
@@ -329,10 +329,6 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
       return SmartPointerManager.createPointer(declarationElement);
     }).getElement();
-  }
-
-  private @NotNull String getRefactoringId() {
-    return "perl.introduce.variable";
   }
 
   protected void showErrorMessage(@NotNull Project project, Editor editor, @DialogMessage @NotNull String message) {
