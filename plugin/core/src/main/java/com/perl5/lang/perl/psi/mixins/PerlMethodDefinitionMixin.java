@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,6 +96,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
     }
   }
 
+  @SuppressWarnings("SameReturnValue")
   public static @NotNull String getDefaultInvocantName() {
     // fixme see #717
     return DEFAULT_SELF_SCALAR_NAME;
