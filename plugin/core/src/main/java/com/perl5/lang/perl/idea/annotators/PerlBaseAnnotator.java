@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ import org.jetbrains.annotations.Nullable;
 
 
 public abstract class PerlBaseAnnotator implements Annotator, PerlElementTypes {
-  EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
+  final EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
 
   public TextAttributes adjustTextAttributes(TextAttributes textAttributes, boolean isDeprecated) {
     if (isDeprecated) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   public static final String DEFAULT_END_TAG = "%]";
   public static final String DEFAULT_OUTLINE_TAG = "%%";
 
-  public List<String> substitutedExtensions = new ArrayList<>();
+  public final List<String> substitutedExtensions = new ArrayList<>();
   public String START_TAG = DEFAULT_START_TAG;
   public String END_TAG = DEFAULT_END_TAG;
   public String OUTLINE_TAG = DEFAULT_OUTLINE_TAG;

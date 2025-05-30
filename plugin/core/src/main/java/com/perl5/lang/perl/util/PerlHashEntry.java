@@ -26,8 +26,8 @@ import java.util.Objects;
  * Represents hash pair - key and value
  */
 public class PerlHashEntry {
-  public @NotNull PsiElement keyElement;
-  public @Nullable PsiElement valueElement;
+  public final @NotNull PsiElement keyElement;
+  public final @Nullable PsiElement valueElement;
 
   private PerlHashEntry(@NotNull PsiElement keyElement, @Nullable PsiElement valueElement) {
     this.keyElement = keyElement;

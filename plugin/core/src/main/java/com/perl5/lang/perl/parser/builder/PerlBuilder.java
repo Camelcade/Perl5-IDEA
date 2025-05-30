@@ -32,8 +32,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 
   // flags that sq strings should be converted to the use_vars_lazy_parsable_strings
   boolean isUseVarsContent = false;
-  // flag shows that we are in the interpolated string. Involves additional checkings like space between $var and {hash_key}
-  boolean isInterpolated = false;
   // flag allowes special variable names
   boolean isSpecialVariableNamesAllowed = true;
 
@@ -78,10 +76,6 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
 
   public void setUseVarsContent(boolean newState) {
     isUseVarsContent = newState;
-  }
-
-  public boolean isInterpolated() {
-    return isInterpolated;
   }
 
   public boolean setSpecialVariableNamesAllowed(boolean specialVariableNamesAllowed) {

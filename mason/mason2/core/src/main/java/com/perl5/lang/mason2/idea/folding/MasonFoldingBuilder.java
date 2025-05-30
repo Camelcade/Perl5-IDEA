@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,7 +76,7 @@ public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder implements 
 
   public static class MasonFoldingRegionsCollector extends Mason2RecursiveVisitor {
     protected final Document myDocument;
-    protected List<FoldingDescriptor> myDescriptors;
+    protected final List<FoldingDescriptor> myDescriptors;
 
     public MasonFoldingRegionsCollector(@NotNull Document document, @NotNull List<FoldingDescriptor> result) {
       myDocument = document;

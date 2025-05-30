@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
 
 
 public class Mason2TemplatingCodeGeneratorImpl extends PerlCodeGeneratorImpl {
-  public static PerlCodeGenerator INSTANCE = new Mason2TemplatingCodeGeneratorImpl();
+  public static final PerlCodeGenerator INSTANCE = new Mason2TemplatingCodeGeneratorImpl();
 
 
   @Override

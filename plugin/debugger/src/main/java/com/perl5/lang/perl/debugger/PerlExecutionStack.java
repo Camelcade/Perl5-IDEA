@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import java.util.List;
 
 public class PerlExecutionStack extends XExecutionStack {
   private final PerlSuspendContext mySuspendContext;
-  List<PerlStackFrame> myPerlStackFrames = new ArrayList<>();
+  final List<PerlStackFrame> myPerlStackFrames = new ArrayList<>();
 
   public PerlExecutionStack(PerlStackFrameDescriptor[] frames, PerlSuspendContext suspendContext) {
     super("");

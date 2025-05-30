@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -333,9 +333,9 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
 
   public static class FoldingRegionsCollector extends PerlRecursiveVisitor {
     protected final Document myDocument;
-    protected List<FoldingDescriptor> myDescriptors = new ArrayList<>();
-    protected ArrayList<PerlNamespaceElementContainer> myImports = new ArrayList<>();
-    protected ArrayList<PsiComment> myComments = new ArrayList<>();
+    protected final List<FoldingDescriptor> myDescriptors = new ArrayList<>();
+    protected final ArrayList<PerlNamespaceElementContainer> myImports = new ArrayList<>();
+    protected final ArrayList<PsiComment> myComments = new ArrayList<>();
 
     public FoldingRegionsCollector(Document document) {
       myDocument = document;

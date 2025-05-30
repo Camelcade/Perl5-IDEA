@@ -167,7 +167,7 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
   }
 
   private static class Descriptor {
-    int startOffset;
+    final int startOffset;
     int endOffset;
     final boolean inject;
     final StringBuilder text = new StringBuilder();
