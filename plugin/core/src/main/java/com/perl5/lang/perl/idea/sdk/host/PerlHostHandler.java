@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -151,6 +151,23 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
       return;
     }
 
+    final var descriptor = createDescriptor(dialogTitle, nameValidator, pathValidator);
+    customizeFileChooser(descriptor, fileSystem);
+    Ref<String> pathRef = Ref.create();
+    ApplicationManager.getApplication().invokeAndWait(() -> FileChooser.chooseFiles(descriptor, null, defaultFile, chosen -> {
+      String selectedPath = chosen.getFirst().getPath();
+      if (StringUtil.isEmpty(pathValidator.apply(selectedPath))) {
+        pathRef.set(selectedPath);
+      }
+    }));
+    if (!pathRef.isNull()) {
+      selectionConsumer.accept(pathRef.get());
+    }
+  }
+
+  private @NotNull FileChooserDescriptor createDescriptor(@NotNull String dialogTitle,
+                                                          @NotNull Predicate<String> nameValidator,
+                                                          @NotNull Function<String, String> pathValidator) {
     final FileChooserDescriptor descriptor = new FileChooserDescriptor(true, isChooseFolders(), false, false, false, false) {
       @Override
       public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
@@ -168,17 +185,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
       }
     };
     descriptor.setTitle(dialogTitle);
-    customizeFileChooser(descriptor, fileSystem);
-    Ref<String> pathRef = Ref.create();
-    ApplicationManager.getApplication().invokeAndWait(() -> FileChooser.chooseFiles(descriptor, null, defaultFile, chosen -> {
-      String selectedPath = chosen.getFirst().getPath();
-      if (StringUtil.isEmpty(pathValidator.apply(selectedPath))) {
-        pathRef.set(selectedPath);
-      }
-    }));
-    if (!pathRef.isNull()) {
-      selectionConsumer.accept(pathRef.get());
-    }
+    return descriptor;
   }
 
   /**
