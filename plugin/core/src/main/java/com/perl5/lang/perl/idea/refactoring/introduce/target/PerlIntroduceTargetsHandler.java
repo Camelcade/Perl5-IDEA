@@ -192,6 +192,7 @@ public abstract class PerlIntroduceTargetsHandler {
     return Collections.emptyList();
   }
 
+  @SuppressWarnings("SameReturnValue")
   static @NotNull String reportEmptyPlace() {
     LOG.error("Invalid target");
     return "'Something went wrong, please, report to developers with source sample'";
