@@ -101,7 +101,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
       return null;
     }
 
-    byte[] sourceBytes = ReadAction.compute(()->sourcePsiFile.getPerlContentInBytes());
+    byte[] sourceBytes = ReadAction.compute(sourcePsiFile::getPerlContentInBytes);
     if (sourceBytes == null) {
       return null;
     }
