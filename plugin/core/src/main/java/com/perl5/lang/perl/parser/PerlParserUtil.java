@@ -132,7 +132,7 @@ public final class PerlParserUtil extends GeneratedParserUtilBase implements Per
    */
   public static boolean recoverStatement(PsiBuilder b, @SuppressWarnings("unused") int l) {
     assert b instanceof PerlBuilder;
-    return ((PerlBuilder)b).getPerlParser().getStatementRecoveryConsumableTokenSet().contains(b.getTokenType());
+    return PerlParserTokenSets.STATEMENT_RECOVERY_CONSUMABLE_TOKENS.contains(b.getTokenType());
   }
 
   /**
