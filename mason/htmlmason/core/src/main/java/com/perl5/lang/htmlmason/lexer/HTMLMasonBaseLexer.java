@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,17 +56,20 @@ public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements 
     return this;
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType processCloseTagFallback() {
     yybegin(NON_CLEAR_LINE);
     return HTML_MASON_TEMPLATE_BLOCK_HTML;
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType processMethodCloseTag() {
     yybegin(AFTER_PERL_BLOCK);
     setPerlToInitial();
     return HTML_MASON_METHOD_CLOSER;
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType processDefCloseTag() {
     yybegin(AFTER_PERL_BLOCK);
     setPerlToInitial();
@@ -90,17 +93,20 @@ public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements 
     return processCloseTagFallback();
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType processArgsOpenTag(int state) {
     yybegin(state);
     startPerlExpression();
     return HTML_MASON_ARGS_OPENER;
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType processPerlOpenTag(int state) {
     yybegin(state);
     return HTML_MASON_PERL_OPENER;
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType processArgsCloser() {
     endPerlExpression();
     yybegin(AFTER_PERL_BLOCK);
@@ -118,6 +124,7 @@ public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements 
     return delegateLexing();
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType processPerlCloser() {
     yybegin(AFTER_PERL_BLOCK);
     return HTML_MASON_PERL_CLOSER;
@@ -134,11 +141,13 @@ public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements 
     return delegateLexing();
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType processMethodOpenTag() {
     yybegin(PARAMETRIZED_OPENER);
     return HTML_MASON_METHOD_OPENER;
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType processDefOpenTag() {
     yybegin(PARAMETRIZED_OPENER);
     return HTML_MASON_DEF_OPENER;
@@ -177,6 +186,7 @@ public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements 
     return processOpenTagFallback();
   }
 
+  @SuppressWarnings("SameReturnValue")
   protected IElementType processOpenTagFallback() {
     pushback();
     startPerlExpression();
