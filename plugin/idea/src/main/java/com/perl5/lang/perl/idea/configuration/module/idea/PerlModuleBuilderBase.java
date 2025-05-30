@@ -86,17 +86,7 @@ public abstract class PerlModuleBuilderBase<Settings extends PerlProjectGenerati
 
   @Override
   public final ModuleWizardStep[] createWizardSteps(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
-    if (!isStepAvailable(wizardContext, modulesProvider)) {
-      return ModuleWizardStep.EMPTY_ARRAY;
-    }
     getSettings().setProject(wizardContext.getProject());
     return new ModuleWizardStep[]{new PerlDelegatingModuleWizardStep(getPeer())};
-  }
-
-  /**
-   * @return true iff we should add a peer-based step
-   */
-  protected boolean isStepAvailable(@NotNull WizardContext wizardContext, @NotNull ModulesProvider modulesProvider) {
-    return true;
   }
 }
