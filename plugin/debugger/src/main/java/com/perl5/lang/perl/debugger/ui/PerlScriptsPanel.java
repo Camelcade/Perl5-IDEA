@@ -74,6 +74,7 @@ public class PerlScriptsPanel extends JPanel {
     add(new JBScrollPane(createList()), BorderLayout.CENTER);
   }
 
+  @SuppressWarnings("ExtractMethodRecommender")
   private @NotNull JBList<PerlLoadedFileDescriptor> createList() {
     final JBList<PerlLoadedFileDescriptor> jbList = new JBList<>(myModel);
     jbList.setCellRenderer(new SimpleListCellRenderer<>() {
