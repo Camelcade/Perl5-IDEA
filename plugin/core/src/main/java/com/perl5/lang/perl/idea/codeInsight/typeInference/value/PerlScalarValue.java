@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ public final class PerlScalarValue extends PerlValue {
   }
 
   @Override
-  protected final @NotNull PerlContextType getContextType() {
+  protected @NotNull PerlContextType getContextType() {
     return PerlContextType.SCALAR;
   }
 
