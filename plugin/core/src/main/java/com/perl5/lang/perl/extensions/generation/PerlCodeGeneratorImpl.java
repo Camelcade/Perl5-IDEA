@@ -331,6 +331,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
            "}\n";
   }
 
+  @SuppressWarnings("SameReturnValue")
   public static String getConstructorCode() {
     return """
 
