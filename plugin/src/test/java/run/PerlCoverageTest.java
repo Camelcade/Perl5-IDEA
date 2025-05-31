@@ -50,7 +50,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
-@SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlCoverageTest extends PerlPlatformTestCase {
   @Override
   protected void setUp() throws Exception {

@@ -24,7 +24,6 @@ import com.perl5.lang.perl.idea.sdk.PerlConfig;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
-@SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlAutoConfigurationTest extends PerlPlatformTestCase {
   @Override
   protected String getBaseDataPath() {

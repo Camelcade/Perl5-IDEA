@@ -16,6 +16,7 @@
 
 package base;
 
+import categories.CategoriesFilter;
 import categories.Integration;
 import com.intellij.execution.actions.ConfigurationContext;
 import com.intellij.execution.actions.ConfigurationFromContext;
@@ -54,6 +55,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.*;
+import com.intellij.testFramework.Parameterized.Parameters;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.concurrency.Semaphore;
@@ -109,14 +111,18 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
 
   @Parameter public @NotNull PerlInterpreterConfigurator myInterpreterConfigurator;
 
+  /**
+   * @implNote Without this fake method Junit base class just throws on test creation
+   */
   @org.junit.runners.Parameterized.Parameters(name = "sdk: {0}")
   public static Iterable<Object[]> fakeData() {
     return Collections.emptyList();
   }
 
-  @com.intellij.testFramework.Parameterized.Parameters(name = "{0}")
+  @Parameters(name = "{0}")
   public static Iterable<Object[]> realData(@SuppressWarnings("unused") Class<?> clazz) {
-    return ContainerUtil.map(PerlConfigurators.getConfigurators(), it -> new Object[]{it.getConfigurator()});
+    return !CategoriesFilter.shouldRun(clazz) ? Collections.emptyList() :
+      ContainerUtil.map(PerlConfigurators.getConfigurators(), it -> new Object[]{it.getConfigurator()});
   }
 
   @Override

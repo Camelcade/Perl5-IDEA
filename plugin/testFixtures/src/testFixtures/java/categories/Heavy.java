@@ -17,5 +17,8 @@
 package categories;
 
 
+/**
+ * Marks long running tests, running on CI. In case you need to use this with parametrized tests, see {@link CategoriesFilter#shouldRun(Class)}
+ */
 public interface Heavy {
 }

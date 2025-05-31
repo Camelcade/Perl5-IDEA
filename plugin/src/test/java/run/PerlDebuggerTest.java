@@ -64,7 +64,6 @@ import java.util.function.Consumer;
 
 import static base.PerlLightTestCaseBase.SEPARATOR_NEWLINES;
 
-@SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlDebuggerTest extends PerlPlatformTestCase {
   @Override
   protected String getBaseDataPath() {

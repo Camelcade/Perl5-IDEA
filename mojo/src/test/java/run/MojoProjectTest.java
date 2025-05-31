@@ -33,7 +33,6 @@ import org.junit.Test;
 
 import java.util.List;
 
-@SuppressWarnings("UnconstructableJUnitTestCase")
 public class MojoProjectTest extends PerlPlatformTestCase {
   @Test
   public void testGenerateAppAction() {

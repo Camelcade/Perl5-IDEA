@@ -17,6 +17,7 @@
 package completion;
 
 import base.HTMLMasonLightTestCase;
+import categories.CategoriesFilter;
 import categories.Heavy;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -51,7 +52,7 @@ public class HtmlMasonCompletionTest extends HTMLMasonLightTestCase {
 
   @com.intellij.testFramework.Parameterized.Parameters(name = "{0}")
   public static Iterable<Object[]> realData(Class<?> clazz) {
-    return Arrays.asList(new Object[][]{
+    return !CategoriesFilter.shouldRun(clazz) ? Collections.emptyList() : Arrays.asList(new Object[][]{
       {"include"},
       {"includeAbsolute"},
       {"includeBadSlug"},
