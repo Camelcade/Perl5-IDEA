@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package run;
 
-import base.PerlInterpreterConfigurator;
 import base.PerlLightTestCaseBase;
 import base.PerlPlatformTestCase;
 import com.intellij.execution.configurations.RunConfiguration;
@@ -67,11 +66,6 @@ import static base.PerlLightTestCaseBase.SEPARATOR_NEWLINES;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlDebuggerTest extends PerlPlatformTestCase {
-
-  public PerlDebuggerTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
-    super(interpreterConfigurator);
-  }
-
   @Override
   protected String getBaseDataPath() {
     return "run/debugger";

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package run;
 
-import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
@@ -60,10 +59,6 @@ import java.util.function.Consumer;
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlProfilerTest extends PerlPlatformTestCase {
   private Element myConfigurations;
-
-  public PerlProfilerTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
-    super(interpreterConfigurator);
-  }
 
   @Override
   protected void setUp() throws Exception {
