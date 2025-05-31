@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,15 +29,12 @@ import java.util.Collection;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public final class TemplateToolkitLiveTemplateTest extends TemplateToolkitPostfixLiveTemplateTestCase {
-  private final boolean myIsExpanding;
+  @Parameter public String myName;
+  @Parameter(1) public boolean myIsExpanding;
 
   @Override
   protected String getBaseDataPath() {
     return myIsExpanding ? "liveTemplates/expand": "liveTemplates/expandContext";
-  }
-
-  public TemplateToolkitLiveTemplateTest(@NotNull String name, boolean isExpanding) {
-    myIsExpanding = isExpanding;
   }
 
   @Test
