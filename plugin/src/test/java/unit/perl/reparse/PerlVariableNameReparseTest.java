@@ -23,6 +23,7 @@ import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -30,13 +31,8 @@ import java.util.Collection;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class PerlVariableNameReparseTest extends PerlLightTestCase {
-  private final @NotNull String myName;
-  private final @NotNull String mySigil;
-
-  public PerlVariableNameReparseTest(@NotNull String name, @NotNull String sigil) {
-    myName = name;
-    mySigil = sigil;
-  }
+  @Parameter public @NotNull String myName;
+  @Parameter(1) public @NotNull String mySigil;
 
   @Override
   protected String getBaseDataPath() {
@@ -46,7 +42,6 @@ public class PerlVariableNameReparseTest extends PerlLightTestCase {
   public @NotNull String getSigil() {
     return mySigil;
   }
-
 
   @Test
   public void testName() { doTest("<sigil>scalar_n<caret>ame"); }
