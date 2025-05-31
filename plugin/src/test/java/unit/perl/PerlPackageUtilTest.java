@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -29,15 +30,9 @@ import java.util.Collections;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class PerlPackageUtilTest extends PerlLightTestCase {
-  private final @Nullable String myFqn;
-  private final @Nullable String myPackageName;
-  private final @Nullable String mySubName;
-
-  public PerlPackageUtilTest(@Nullable String fqn, @Nullable String packageName, @Nullable String subName) {
-    myFqn = fqn;
-    myPackageName = packageName;
-    mySubName = subName;
-  }
+  @Parameter public @Nullable String myFqn;
+  @Parameter(1) public @Nullable String myPackageName;
+  @Parameter(2) public @Nullable String mySubName;
 
   @Test
   public void test() {
