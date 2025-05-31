@@ -21,18 +21,14 @@ import com.intellij.openapi.util.io.FileUtil;
 import org.jetbrains.annotations.NotNull;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public abstract class PerlReparseMultiTestCase extends PerlLightTestCase {
 
-  private final @NotNull String myName;
-  private final @NotNull String myCodeSample;
-
-  protected PerlReparseMultiTestCase(@NotNull String name, @NotNull String codeSample) {
-    myName = name;
-    myCodeSample = codeSample;
-  }
+  @Parameter public @NotNull String myName;
+  @Parameter(1) public @NotNull String myCodeSample;
 
   protected @NotNull String buildCodeSample() {
     return myCodeSample;
