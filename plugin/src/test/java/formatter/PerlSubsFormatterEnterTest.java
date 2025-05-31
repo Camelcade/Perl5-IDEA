@@ -20,6 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Collection;
 
@@ -29,13 +30,8 @@ import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.
 @RunWith(Parameterized.class)
 public class PerlSubsFormatterEnterTest extends PerlFormatterTestCase {
 
-  private final String myResultAppendix;
-  private final String myPerTestCode;
-
-  public PerlSubsFormatterEnterTest(@NotNull String resultAppendix, @NotNull String perTestCode) {
-    myResultAppendix = resultAppendix;
-    myPerTestCode = perTestCode;
-  }
+  @Parameter public String myResultAppendix;
+  @Parameter(1) public String myPerTestCode;
 
   @Override
   public @NotNull String getPerTestCode() {
