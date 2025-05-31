@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,11 +32,6 @@ public abstract class PerlFormatterTestCase extends PerlLightTestCase {
     assertNotNull(options);
     options.INDENT_SIZE = 4;
     options.CONTINUATION_INDENT_SIZE = 8;
-  }
-
-  protected void doWrappingFormatTest() {
-    getSettings().RIGHT_MARGIN = 20;
-    doFormatTest();
   }
 
   protected void doWrappingTestSingleSource(@NotNull String sourceFile) {
