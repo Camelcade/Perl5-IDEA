@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,20 +37,12 @@ import com.perl5.lang.perl.intellilang.PerlInjectionSupport;
 import com.perl5.lang.perl.makeMaker.PerlMakeMakerDirectoryConfigurationProvider;
 import com.perl5.lang.perl.moduleBuild.PerlModuleBuildDirectoryConfigurationProvider;
 import com.perl5.lang.perl.profiler.PerlProfilerBundle;
-import org.jetbrains.annotations.NotNull;
-import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-@RunWith(Parameterized.class)
 public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
-
-  public PerlPluginInstrumentationTest(@NotNull String ignoredName, @NotNull Class<?> cls, @NotNull String patternString) {
-    super(cls, patternString);
-  }
-
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][]{

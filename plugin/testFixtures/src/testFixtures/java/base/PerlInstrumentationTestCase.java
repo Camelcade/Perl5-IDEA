@@ -22,30 +22,30 @@ import com.intellij.util.lang.PathClassLoader;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
 
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 @SuppressWarnings("JUnitMixedFramework")
 @Category(Light.class)
+@RunWith(Parameterized.class)
 public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
 
-  protected static final String PLUGIN_PATTERN_STRING = "lib/plugin-.+?\\.jar!";
-  protected static final String EMBEDDED_PATTERN_STRING = "lib/lang\\.embedded-.+?\\.jar";
-  protected static final String MOJO_PATTERN_STRING = "lib/lang\\.mojo-.+?\\.jar!";
-  protected static final String TT2_PATTERN_STRING = "lib/lang\\.tt2-.+?\\.jar!";
-  protected static final String MASON_FRAMEWORK_PATTERN_STRING = "lib/lang.mason.framework-.+?\\.jar!";
-  protected static final String MASON_PATTERN_STRING = "lib/lang.mason.htmlmason-.+?\\.jar!";
-  protected static final String MASON2_PATTERN_STRING = "lib/lang.mason.mason2-.+?\\.jar!";
+  protected static final Pattern PLUGIN_PATTERN_STRING = Pattern.compile("lib/plugin-.+?\\.jar!");
+  protected static final Pattern EMBEDDED_PATTERN_STRING = Pattern.compile("lib/lang\\.embedded-.+?\\.jar");
+  protected static final Pattern MOJO_PATTERN_STRING = Pattern.compile("lib/lang\\.mojo-.+?\\.jar!");
+  protected static final Pattern TT2_PATTERN_STRING = Pattern.compile("lib/lang\\.tt2-.+?\\.jar!");
+  protected static final Pattern MASON_FRAMEWORK_PATTERN_STRING = Pattern.compile("lib/lang.mason.framework-.+?\\.jar!");
+  protected static final Pattern MASON_PATTERN_STRING = Pattern.compile("lib/lang.mason.htmlmason-.+?\\.jar!");
+  protected static final Pattern MASON2_PATTERN_STRING = Pattern.compile("lib/lang.mason.mason2-.+?\\.jar!");
 
-  private final @NotNull Class<?> myClass;
+  @Parameterized.Parameter() public @NotNull String myName;
 
-  private final @NotNull Pattern myClassPathPattern;
+  @Parameterized.Parameter(1) public @NotNull Class<?> myClass;
 
-  protected PerlInstrumentationTestCase(@NotNull Class<?> aClass, @NotNull String patternString) {
-    myClass = aClass;
-    myClassPathPattern = Pattern.compile(patternString);
-  }
+  @Parameterized.Parameter(2) public @NotNull Pattern myClassPathPattern;
 
   @Test
   public void testDependencyInstrumentation() {
