@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -35,7 +36,8 @@ import java.util.Collections;
 public class HtmlMasonCompletionTest extends HTMLMasonLightTestCase {
 
   private static final String COMPONENTS_ROOT_NAME = "components";
-  private final @NotNull String mySampleName;
+  @Parameter()
+  public @NotNull String mySampleName;
 
   @Override
   protected String getBaseDataPath() {
@@ -64,10 +66,6 @@ public class HtmlMasonCompletionTest extends HTMLMasonLightTestCase {
       {"filterRequest"},
       {"inherit"},
     });
-  }
-
-  public HtmlMasonCompletionTest(@NotNull String sampleName) {
-    mySampleName = sampleName;
   }
 
   @Override
