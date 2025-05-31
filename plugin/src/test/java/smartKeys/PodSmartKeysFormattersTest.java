@@ -23,6 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -30,11 +31,7 @@ import java.util.Collection;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class PodSmartKeysFormattersTest extends PerlSmartKeysTestCase {
-  private final @NotNull String myFormatter;
-
-  public PodSmartKeysFormattersTest(@NotNull String formatter) {
-    myFormatter = formatter;
-  }
+  @Parameter public @NotNull String myFormatter;
 
   @Override
   protected String getBaseDataPath() {
