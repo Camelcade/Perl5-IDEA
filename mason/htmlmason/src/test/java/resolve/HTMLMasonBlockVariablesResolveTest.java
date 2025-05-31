@@ -30,11 +30,13 @@ import java.util.Collection;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class HTMLMasonBlockVariablesResolveTest extends HTMLMasonVariableResolveTestCase {
-  private final boolean myAddCustomVariable;
 
-  public HTMLMasonBlockVariablesResolveTest(@NotNull String baseDataPath, boolean addCustomVariable) {
-    super(baseDataPath);
-    myAddCustomVariable = addCustomVariable;
+  @Parameterized.Parameter() public @NotNull String myDataPath;
+  @Parameterized.Parameter(1) public boolean myAddCustomVariable;
+
+  @Override
+  protected @NotNull String getCustomizedBaseDataPath() {
+    return myDataPath;
   }
 
   @Override
