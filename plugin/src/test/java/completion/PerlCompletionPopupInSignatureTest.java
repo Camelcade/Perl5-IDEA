@@ -23,17 +23,16 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Collection;
 
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class PerlCompletionPopupInSignatureTest extends PerlCompletionPopupTestCase {
-  private final @NotNull String myPerTestCode;
 
-  public PerlCompletionPopupInSignatureTest(@NotNull String name, @NotNull String perTestCode) {
-    myPerTestCode = perTestCode;
-  }
+  @Parameter public @NotNull String myName;
+  @Parameter(1) public @NotNull String myPerTestCode;
 
   @Override
   protected String getBaseDataPath() {
