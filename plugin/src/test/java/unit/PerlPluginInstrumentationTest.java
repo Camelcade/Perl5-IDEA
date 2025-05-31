@@ -17,6 +17,7 @@
 package unit;
 
 import base.PerlInstrumentationTestCase;
+import categories.CategoriesFilter;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.carton.PerlCartonDirectoryConfigurationProvider;
 import com.perl5.lang.perl.coverage.PerlCoverageEnabledConfiguration;
@@ -41,11 +42,12 @@ import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
-    return Arrays.asList(new Object[][]{
+    return !CategoriesFilter.shouldRun(PerlPluginInstrumentationTest.class) ? Collections.emptyList() : Arrays.asList(new Object[][]{
       {"asdf", AsdfTestUtil.getInstrumentationTestClass(), PLUGIN_PATTERN_STRING},
       {"berrybrew", BerryBrewTestUtil.getInstrumentationTestClass(), PLUGIN_PATTERN_STRING},
       {"carton", PerlCartonDirectoryConfigurationProvider.class, PLUGIN_PATTERN_STRING},

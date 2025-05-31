@@ -150,20 +150,23 @@ allprojects {
           include("**/" + properties("runtest").get() + ".class")
         }
 
+        var excludeCategories = mutableListOf<String>()
         if (project.hasProperty("integrationTests")) {
-          excludeCategories("categories.Light")
-          excludeCategories("categories.Heavy")
+          excludeCategories += listOf("categories.Light", "categories.Heavy")
         }
         else if (project.hasProperty("heavyTests")) {
-          excludeCategories("categories.Light")
-          excludeCategories("categories.Integration")
+          excludeCategories += listOf("categories.Light", "categories.Integration")
         }
         else if (project.hasProperty("lightTests")) {
-          excludeCategories("categories.Heavy")
-          excludeCategories("categories.Integration")
+          excludeCategories += listOf("categories.Heavy", "categories.Integration")
         }
         else if (!project.hasProperty("allTests")) {
-          excludeCategories("categories.Integration")
+          excludeCategories += listOf("categories.Integration")
+        }
+
+        if (excludeCategories.isNotEmpty()) {
+          excludeCategories(*excludeCategories.toTypedArray())
+          systemProperty("junit.exclude.categories", excludeCategories.joinToString(","))
         }
       }
 

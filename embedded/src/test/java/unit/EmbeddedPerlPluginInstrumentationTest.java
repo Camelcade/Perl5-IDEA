@@ -17,18 +17,22 @@
 package unit;
 
 import base.PerlInstrumentationTestCase;
+import categories.CategoriesFilter;
 import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
 import com.perl5.lang.perl.PerlParserDefinition;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 
 public class EmbeddedPerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
 
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
-    return Arrays.asList(new Object[][]{
+    return !CategoriesFilter.shouldRun(EmbeddedPerlPluginInstrumentationTest.class) ?
+      Collections.emptyList() :
+      Arrays.asList(new Object[][]{
       {"plugin.core", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
       {"embedded", EmbeddedPerlParserDefinition.class, EMBEDDED_PATTERN_STRING}
     });

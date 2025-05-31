@@ -39,7 +39,6 @@ import org.junit.Test;
 
 import java.util.function.BiFunction;
 
-@SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlRunTest extends PerlPlatformTestCase {
   @Override
   protected void setUp() throws Exception {

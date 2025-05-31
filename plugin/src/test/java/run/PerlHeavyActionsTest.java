@@ -53,7 +53,6 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
-@SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlHeavyActionsTest extends PerlPlatformTestCase {
   @Override
   protected String getBaseDataPath() {
