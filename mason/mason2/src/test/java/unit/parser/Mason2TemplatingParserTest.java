@@ -30,14 +30,16 @@ import static base.Mason2LightTestCase.componentsExtensionsData;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class Mason2TemplatingParserTest extends PerlParserTestBase {
-
-  public Mason2TemplatingParserTest(@NotNull String fileExt) {
-    super(fileExt);
-  }
+  @Parameterized.Parameter public @NotNull String myFileExt;
 
   @Override
   protected String getBaseDataPath() {
     return "unit/template/parser";
+  }
+
+  @Override
+  public String getFileExtension() {
+    return myFileExt;
   }
 
   @Override
