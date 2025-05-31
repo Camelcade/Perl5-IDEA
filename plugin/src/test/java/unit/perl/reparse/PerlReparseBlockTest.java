@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package unit.perl.reparse;
 
 import categories.Heavy;
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runners.Parameterized;
@@ -30,10 +29,6 @@ public class PerlReparseBlockTest extends PerlReparseMultiTestCase {
   @Override
   protected String getBaseDataPath() {
     return "unit/perl/reparse/block";
-  }
-
-  public PerlReparseBlockTest(@NotNull String name, @NotNull String codeSample) {
-    super(name, codeSample);
   }
 
   @Test
