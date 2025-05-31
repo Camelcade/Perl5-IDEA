@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,13 +28,21 @@ import org.junit.Test;
 public abstract class HTMLMasonVariableResolveTestCase extends HTMLMasonLightTestCase {
   private final @NotNull String myBaseDataPath;
 
+  public HTMLMasonVariableResolveTestCase() {
+    this("fake path");
+  }
+
   public HTMLMasonVariableResolveTestCase(@NotNull String baseDataPath) {
     myBaseDataPath = baseDataPath;
   }
 
   @Override
   protected @NotNull String getBaseDataPath() {
-    return FileUtil.join("resolve", myBaseDataPath);
+    return FileUtil.join("resolve", getCustomizedBaseDataPath());
+  }
+
+  protected @NotNull String getCustomizedBaseDataPath() {
+    return myBaseDataPath;
   }
 
   @Test
