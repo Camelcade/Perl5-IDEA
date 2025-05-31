@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +20,12 @@ import base.PerlInstrumentationTestCase;
 import com.perl5.lang.htmlmason.HTMLMasonParserDefinition;
 import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.MasonParserUtil;
-import org.jetbrains.annotations.NotNull;
-import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
 
-@RunWith(Parameterized.class)
 public class HtmlMasonPluginInstrumentationTest extends PerlInstrumentationTestCase {
-  public HtmlMasonPluginInstrumentationTest(@NotNull String ignoredName, @NotNull Class<?> cls, @NotNull String patternString) {
-    super(cls, patternString);
-  }
-
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
     return Arrays.asList(new Object[][]{
