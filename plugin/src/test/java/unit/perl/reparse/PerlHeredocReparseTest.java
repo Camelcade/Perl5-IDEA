@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,11 +29,7 @@ import java.util.Collection;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class PerlHeredocReparseTest extends PerlLightTestCase {
-  private final @NotNull String mySampleFileNameSuffix;
-
-  public PerlHeredocReparseTest(@NotNull String sampleFileNameSuffix) {
-    mySampleFileNameSuffix = sampleFileNameSuffix;
-  }
+  @Parameter public @NotNull String mySampleFileNameSuffix;
 
   @Override
   protected String getBaseDataPath() {
