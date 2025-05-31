@@ -27,11 +27,7 @@ import java.util.Collection;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class Mason2TemplatingSyntaxHighlightingTest extends Mason2TopLevelComponentTestCase {
-  private final @NotNull String myExtension;
-
-  public Mason2TemplatingSyntaxHighlightingTest(@NotNull String extension) {
-    myExtension = extension;
-  }
+  @Parameterized.Parameter public @NotNull String myExtension;
 
   @Override
   public String getFileExtension() {
@@ -67,6 +63,7 @@ public class Mason2TemplatingSyntaxHighlightingTest extends Mason2TopLevelCompon
     doTest(true);
   }
 
+  @SuppressWarnings("SameParameterValue")
   private void doTest(boolean checkErrors) {
     doTestHighlighter(checkErrors);
   }
