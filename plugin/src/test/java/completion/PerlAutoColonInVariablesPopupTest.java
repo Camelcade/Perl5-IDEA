@@ -23,6 +23,7 @@ import org.junit.Assume;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,23 +32,11 @@ import java.util.function.Function;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class PerlAutoColonInVariablesPopupTest extends PerlCompletionPopupTestCase {
-  private final @NotNull String myName;
-  private final boolean myIsAutocolonEnabled;
-  private final boolean myShouldHavePopupOnFirstColon;
-  private final boolean myShouldHavePopupOnSecondColon;
-  private final @NotNull Function<? super String, String> myContentWrapper;
-
-  public PerlAutoColonInVariablesPopupTest(@NotNull String name,
-                                           boolean isAutocolonEnabled,
-                                           boolean shouldHavePopupOnFirstColon,
-                                           boolean shouldHavePopupOnSecondColon,
-                                           @NotNull Function<? super String, String> contentWrapper) {
-    myName = name;
-    myIsAutocolonEnabled = isAutocolonEnabled;
-    myShouldHavePopupOnFirstColon = shouldHavePopupOnFirstColon;
-    myShouldHavePopupOnSecondColon = shouldHavePopupOnSecondColon;
-    myContentWrapper = contentWrapper;
-  }
+  @Parameter public @NotNull String myName;
+  @Parameter(1) public boolean myIsAutocolonEnabled;
+  @Parameter(2) public boolean myShouldHavePopupOnFirstColon;
+  @Parameter(3) public boolean myShouldHavePopupOnSecondColon;
+  @Parameter(4) public @NotNull Function<? super String, String> myContentWrapper;
 
   @Override
   protected String getBaseDataPath() {
