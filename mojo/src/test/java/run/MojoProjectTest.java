@@ -18,7 +18,6 @@ package run;
 
 import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.TestDialogManager;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.perl5.lang.mojolicious.MojoUtil;
@@ -37,8 +36,6 @@ import java.util.List;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class MojoProjectTest extends PerlPlatformTestCase {
-  private static final Logger LOG = Logger.getInstance(MojoProjectTest.class);
-
   public MojoProjectTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
     super(interpreterConfigurator);
   }
