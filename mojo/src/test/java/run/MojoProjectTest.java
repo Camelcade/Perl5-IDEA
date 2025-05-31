@@ -16,7 +16,6 @@
 
 package run;
 
-import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
 import com.intellij.openapi.ui.TestDialogManager;
 import com.intellij.testFramework.PlatformTestUtil;
@@ -36,10 +35,6 @@ import java.util.List;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class MojoProjectTest extends PerlPlatformTestCase {
-  public MojoProjectTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
-    super(interpreterConfigurator);
-  }
-
   @Test
   public void testGenerateAppAction() {
     assertMojoAvailable();

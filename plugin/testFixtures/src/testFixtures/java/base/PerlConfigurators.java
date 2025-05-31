@@ -20,9 +20,10 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+
+import static org.junit.Assert.fail;
 
 public enum PerlConfigurators {
   DOCKER_SYSTEM(PerlSystemDockerInterpreterConfigurator.INSTANCE),
@@ -47,7 +48,7 @@ public enum PerlConfigurators {
   public static @NotNull List<PerlConfigurators> getConfigurators() {
     var explicitConfigurators = System.getenv(ENV_VARIABLE_NAME);
     if (StringUtil.isEmpty(explicitConfigurators)) {
-      return Arrays.asList(PerlConfigurators.values());
+      fail("Pass the list of configurators via " + ENV_VARIABLE_NAME + " env variable, separated by comma");
     }
     var requestedConfigurators = StringUtil.split(explicitConfigurators, ",");
     return ContainerUtil.map(requestedConfigurators, it -> Objects.requireNonNull(PerlConfigurators.valueOf(it)));

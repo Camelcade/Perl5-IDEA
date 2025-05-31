@@ -78,6 +78,7 @@ import org.jetbrains.concurrency.Promise;
 import org.junit.Assume;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.io.File;
 import java.io.IOException;
@@ -100,15 +101,13 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected static final Logger LOG = Logger.getInstance(PerlPlatformTestCase.class);
   private static final Key<CapturingProcessAdapter> ADAPTER_KEY = Key.create("process.adapter");
   public static final @NotNull String PERL_TEST_VERSION =
-    ObjectUtils.notNull(System.getenv("PERL_TEST_VERSION"), System.getProperty("perl.test.version"));
+    Objects.requireNonNull(
+      ObjectUtils.coalesce(System.getenv("PERL_TEST_VERSION"), System.getProperty("perl.test.version")),
+      "Pass the perl version to test via environment variable PERL_TEST_VERSION or property perl.test.version");
 
   protected final Disposable myPerlTestCaseDisposable = Disposer.newDisposable();
 
-  private final @NotNull PerlInterpreterConfigurator myInterpreterConfigurator;
-
-  public PerlPlatformTestCase(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
-    myInterpreterConfigurator = interpreterConfigurator;
-  }
+  @Parameter public @NotNull PerlInterpreterConfigurator myInterpreterConfigurator;
 
   @org.junit.runners.Parameterized.Parameters(name = "sdk: {0}")
   public static Iterable<Object[]> fakeData() {

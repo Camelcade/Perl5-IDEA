@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package run;
 
-import base.PerlInterpreterConfigurator;
 import base.PerlPlatformTestCase;
 import com.intellij.execution.executors.DefaultRunExecutor;
 import com.intellij.execution.process.CapturingProcessAdapter;
@@ -42,10 +41,6 @@ import java.util.function.BiFunction;
 
 @SuppressWarnings("UnconstructableJUnitTestCase")
 public class PerlRunTest extends PerlPlatformTestCase {
-  public PerlRunTest(@NotNull PerlInterpreterConfigurator interpreterConfigurator) {
-    super(interpreterConfigurator);
-  }
-
   @Override
   protected void setUp() throws Exception {
     super.setUp();
