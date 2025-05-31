@@ -21,6 +21,7 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -29,13 +30,8 @@ import java.util.Collection;
 @RunWith(Parameterized.class)
 public class PerlFunctionParametersParserTestCase extends PerlParserTestBase {
 
-  private final @NotNull String myDataDirName;
-  private final boolean myIsFunction;
-
-  public PerlFunctionParametersParserTestCase(@NotNull String dataDirName, boolean isFunction) {
-    myDataDirName = dataDirName;
-    myIsFunction = isFunction;
-  }
+  @Parameter public @NotNull String myDataDirName;
+  @Parameter(1) public boolean myIsFunction;
 
   @Override
   protected final String getBaseDataPath() {
