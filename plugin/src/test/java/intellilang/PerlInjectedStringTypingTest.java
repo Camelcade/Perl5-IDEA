@@ -22,6 +22,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -30,13 +31,8 @@ import java.util.function.Function;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class PerlInjectedStringTypingTest extends PerlLightTestCase {
-  private final @NotNull String myName;
-  private final @NotNull Function<String, String> myContentModifier;
-
-  public PerlInjectedStringTypingTest(@NotNull String name, @NotNull Function<String, String> contentModifier) {
-    myName = name;
-    myContentModifier = contentModifier;
-  }
+  @Parameter public @NotNull String myName;
+  @Parameter(1) public @NotNull Function<String, String> myContentModifier;
 
   @Override
   protected String getBaseDataPath() {
