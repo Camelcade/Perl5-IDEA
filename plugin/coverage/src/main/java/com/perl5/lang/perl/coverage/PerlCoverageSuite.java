@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,29 +18,25 @@ package com.perl5.lang.perl.coverage;
 
 import com.intellij.coverage.BaseCoverageSuite;
 import com.intellij.coverage.CoverageEngine;
-import com.intellij.coverage.CoverageFileProvider;
-import com.intellij.coverage.CoverageRunner;
 import com.intellij.execution.configurations.RunConfigurationBase;
-import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
+import java.util.Date;
 import java.util.Objects;
 
 public class PerlCoverageSuite extends BaseCoverageSuite {
   public PerlCoverageSuite() {
   }
 
-  public PerlCoverageSuite(String name,
-                           @Nullable CoverageFileProvider fileProvider,
-                           long lastCoverageTimeStamp,
-                           boolean coverageByTestEnabled,
-                           boolean tracingEnabled,
-                           boolean trackTestFolders,
-                           CoverageRunner coverageRunner, Project project) {
-    super(name, fileProvider, lastCoverageTimeStamp, coverageByTestEnabled, tracingEnabled, trackTestFolders, coverageRunner, project);
+  public PerlCoverageSuite(@NotNull PerlCoverageEnabledConfiguration config) {
+    super(config.createSuiteName(),
+          config.getConfiguration().getProject(),
+          config.getCoverageRunner(),
+          config.createFileProvider(),
+          new Date().getTime());
   }
+
 
   @Override
   public @NotNull GenericPerlRunConfiguration getConfiguration() {

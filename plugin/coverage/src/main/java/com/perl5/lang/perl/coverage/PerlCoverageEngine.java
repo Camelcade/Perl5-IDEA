@@ -35,7 +35,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -56,20 +55,27 @@ public class PerlCoverageEngine extends CoverageEngine {
     return new PerlCoverageEnabledConfiguration(conf);
   }
 
+  @Override
+  public @Nullable CoverageSuite createCoverageSuite(@NotNull CoverageEnabledConfiguration config) {
+    if (config instanceof PerlCoverageEnabledConfiguration perlConfig) {
+      return new PerlCoverageSuite(perlConfig);
+    }
+    return null;
+  }
+
   @SuppressWarnings("deprecation")
   @Override
-  public @Nullable CoverageSuite createCoverageSuite(@NotNull CoverageRunner covRunner,
+  public @Nullable CoverageSuite createCoverageSuite(@NotNull CoverageRunner runner,
                                                      @NotNull String name,
-                                                     @NotNull CoverageFileProvider coverageDataFileProvider,
-                                                     @Nullable String[] filters,
+                                                     @NotNull CoverageFileProvider fileProvider,
+                                                     String @Nullable [] filters,
                                                      long lastCoverageTimeStamp,
                                                      @Nullable String suiteToMerge,
                                                      boolean coverageByTestEnabled,
-                                                     boolean tracingEnabled,
+                                                     boolean branchCoverage,
                                                      boolean trackTestFolders,
                                                      Project project) {
-    return new PerlCoverageSuite(name, coverageDataFileProvider, lastCoverageTimeStamp, coverageByTestEnabled, tracingEnabled,
-                                 trackTestFolders, covRunner, project);
+    throw new UnsupportedOperationException("Use createCoverageSuite(CoverageEnabledConfiguration)");
   }
 
   @SuppressWarnings("deprecation")
@@ -78,12 +84,7 @@ public class PerlCoverageEngine extends CoverageEngine {
                                                      @NotNull String name,
                                                      @NotNull CoverageFileProvider coverageDataFileProvider,
                                                      @NotNull CoverageEnabledConfiguration config) {
-    if (config instanceof PerlCoverageEnabledConfiguration) {
-      GenericPerlRunConfiguration perlRunConfiguration = (GenericPerlRunConfiguration)config.getConfiguration();
-      return createCoverageSuite(covRunner, name, coverageDataFileProvider, null, new Date().getTime(), null, false, false, true,
-                                 perlRunConfiguration.getProject());
-    }
-    return null;
+    throw new UnsupportedOperationException("Use createCoverageSuite(CoverageEnabledConfiguration)");
   }
 
   @Override
