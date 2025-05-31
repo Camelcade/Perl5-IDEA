@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.perl5.lang.perl.debugger.protocol.PerlStackFrameDescriptor;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized.Parameter;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,13 +34,8 @@ import java.util.Collections;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class PerlStackFrameRenderingTest extends PerlLightTestCase {
-  private final @NotNull String myName;
-  private final @NotNull PerlStackFrameDescriptor myFrameDescriptor;
-
-  public PerlStackFrameRenderingTest(@NotNull String name, @NotNull PerlStackFrameDescriptor frameDescriptor) {
-    myName = name;
-    myFrameDescriptor = frameDescriptor;
-  }
+  @Parameter public @NotNull String myName;
+  @Parameter(1) public @NotNull PerlStackFrameDescriptor myFrameDescriptor;
 
   @Override
   protected String getBaseDataPath() {
