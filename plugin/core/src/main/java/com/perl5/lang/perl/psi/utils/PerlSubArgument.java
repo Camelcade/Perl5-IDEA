@@ -218,7 +218,7 @@ public class PerlSubArgument {
     return mandatoryScalar(DEFAULT_SELF_NAME);
   }
 
-  public static void serializeList(@NotNull StubOutputStream dataStream, List<PerlSubArgument> arguments) throws IOException {
+  public static void serializeList(@NotNull StubOutputStream dataStream, List<? extends PerlSubArgument> arguments) throws IOException {
     dataStream.writeVarInt(arguments.size());
     for (PerlSubArgument argument : arguments) {
       argument.serialize(dataStream);

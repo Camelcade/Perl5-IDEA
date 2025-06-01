@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -142,7 +142,7 @@ public final class PerlResolveUtil {
    * Processing all targets of all references of all {@code sourceElements}
    */
   @SuppressWarnings("UnusedReturnValue")
-  public static boolean processResolveTargets(@NotNull PairProcessor<PsiElement, PsiReference> processor,
+  public static boolean processResolveTargets(@NotNull PairProcessor<? super PsiElement, ? super PsiReference> processor,
                                               PsiElement... sourceElements) {
     if (sourceElements == null) {
       return true;
@@ -161,7 +161,7 @@ public final class PerlResolveUtil {
   /**
    * Processing target elements of {@code references}
    */
-  public static boolean processResolveTargets(@NotNull PairProcessor<PsiElement, PsiReference> processor,
+  public static boolean processResolveTargets(@NotNull PairProcessor<? super PsiElement, ? super PsiReference> processor,
                                               @Nullable PsiReference... references) {
     if (references == null) {
       return true;
