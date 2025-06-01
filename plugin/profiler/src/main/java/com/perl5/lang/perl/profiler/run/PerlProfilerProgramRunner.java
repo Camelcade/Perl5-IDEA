@@ -99,7 +99,7 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
   @Override
   protected void doExecute(@NotNull RunProfileState state,
                            @NotNull ExecutionEnvironment environment,
-                           @NotNull AsyncPromise<RunContentDescriptor> result) throws ExecutionException {
+                           @NotNull AsyncPromise<? super RunContentDescriptor> result) throws ExecutionException {
     if (!(state instanceof PerlProfilerRunProfileState profilerRunProfileState)) {
       LOG.error("PerlProfilerRunProfileState expected, got " + state);
       throw new ExecutionException("Incorrect run configuration state, see logs for details");
@@ -122,8 +122,8 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
     profileResultsPath.toFile().mkdirs();
 
     result.then(descriptor -> {
-      if (descriptor != null) {
-        var profilerProcess = new PerlProfilerProcess(environment, descriptor, profilerRunProfileState);
+      if (descriptor instanceof RunContentDescriptor runContentDescriptor) {
+        var profilerProcess = new PerlProfilerProcess(environment, runContentDescriptor, profilerRunProfileState);
         ProfilerToolWindowManager.getInstance(environment.getProject()).addProfilerProcessTab(profilerProcess, false);
       }
       return descriptor;

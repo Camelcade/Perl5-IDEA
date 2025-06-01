@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -151,5 +151,5 @@ public abstract class GenericPerlProgramRunner extends AsyncProgramRunner<Runner
 
   protected abstract void doExecute(@NotNull RunProfileState state,
                                     @NotNull ExecutionEnvironment environment,
-                                    @NotNull AsyncPromise<RunContentDescriptor> result) throws ExecutionException;
+                                    @NotNull AsyncPromise<? super RunContentDescriptor> result) throws ExecutionException;
 }

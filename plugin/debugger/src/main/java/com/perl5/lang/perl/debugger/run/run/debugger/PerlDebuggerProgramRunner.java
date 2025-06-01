@@ -68,7 +68,7 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
   @Override
   protected void doExecute(@NotNull RunProfileState state,
                            @NotNull ExecutionEnvironment env,
-                           @NotNull AsyncPromise<RunContentDescriptor> result) throws ExecutionException {
+                           @NotNull AsyncPromise<? super RunContentDescriptor> result) throws ExecutionException {
     if (!(state instanceof PerlDebugProfileStateBase perlDebugProfileStateBase)) {
       LOG.error("PerlDebugProfileStateBase expected, got " + state + " for " + env);
       throw new ExecutionException(PerlBundle.message("dialog.message.incorrect.run.state"));

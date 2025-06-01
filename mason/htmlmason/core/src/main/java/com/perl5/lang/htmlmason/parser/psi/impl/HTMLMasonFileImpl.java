@@ -208,9 +208,9 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
 
   protected void collectAutoHandledFiles(@NotNull PsiManager manager,
                                          @Nullable VirtualFile dir,
-                                         @NotNull List<HTMLMasonFileImpl> result,
+                                         @NotNull List<? super HTMLMasonFileImpl> result,
                                          @NotNull String autoHandlerName,
-                                         @Nullable Set<VirtualFile> recursionMap) {
+                                         @Nullable Set<? super VirtualFile> recursionMap) {
     if (dir == null) {
       return;
     }
@@ -465,7 +465,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     return seeker.getResult();
   }
 
-  protected boolean processMethodDefinitions(Processor<HTMLMasonMethodDefinition> processor) {
+  protected boolean processMethodDefinitions(Processor<? super HTMLMasonMethodDefinition> processor) {
     for (HTMLMasonCompositeElement methodDefinition : getMethodsDefinitions()) {
       assert methodDefinition instanceof HTMLMasonMethodDefinition : "got " + methodDefinition + " instead of method definition";
       if (!processor.process((HTMLMasonMethodDefinition)methodDefinition)) {

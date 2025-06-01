@@ -278,7 +278,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
 
   private @NotNull XDebugSession debugScript(@NotNull String directoryName,
                                              @NotNull String scriptName,
-                                             @Nullable Consumer<GenericPerlRunConfiguration> configurator) {
+                                             @Nullable Consumer<? super GenericPerlRunConfiguration> configurator) {
     copyDirToModule(directoryName);
     GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration(scriptName);
     if (configurator != null) {
