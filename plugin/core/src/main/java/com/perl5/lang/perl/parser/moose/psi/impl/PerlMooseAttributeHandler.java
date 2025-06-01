@@ -163,7 +163,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
 
   private @NotNull List<PerlDelegatingLightNamedElement<?>> createMooseAttributes(@NotNull PerlSubCallElement subCallElement,
                                                                                   @NotNull List<? extends PsiElement> identifiers,
-                                                                                  @NotNull List<PsiElement> listElements) {
+                                                                                  @NotNull List<? extends PsiElement> listElements) {
 
     List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
     String packageName = PerlPackageUtil.getContextNamespaceName(subCallElement);

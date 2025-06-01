@@ -383,7 +383,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
   public static boolean processChildNamespaces(@NotNull String parentPackageName,
                                                @NotNull Project project,
                                                @NotNull GlobalSearchScope scope,
-                                               @NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+                                               @NotNull Processor<? super PerlNamespaceDefinitionElement> processor) {
     return PerlNamespaceDescendantsIndex.getInstance().processElements(project, parentPackageName, scope, processor) &&
            PerlLightNamespaceDescendantsIndex.getInstance().processLightElements(project, parentPackageName, scope, processor);
   }
@@ -443,7 +443,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
   }
 
   public static boolean processPackageFilesForPsiElement(@NotNull PsiElement element,
-                                                         @NotNull PairProcessor<String, VirtualFile> processor) {
+                                                         @NotNull PairProcessor<? super String, ? super VirtualFile> processor) {
     return processIncFilesForPsiElement(
       element,
       (file, classRoot) -> {
@@ -473,7 +473,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
   }
 
   public static void processNotOverridedMethods(final PerlNamespaceDefinitionElement namespaceDefinition,
-                                                Processor<PerlSubElement> processor) {
+                                                Processor<? super PerlSubElement> processor) {
     if (namespaceDefinition != null) {
       PsiFile containingFile = namespaceDefinition.getContainingFile();
       String packageName = namespaceDefinition.getNamespaceName();
@@ -499,9 +499,9 @@ public final class PerlPackageUtil implements PerlElementTypes {
   }
 
   public static void processParentClassesSubs(PerlNamespaceDefinitionElement childClass,
-                                              Set<String> processedSubsNames,
-                                              Set<PerlNamespaceDefinitionElement> recursionMap,
-                                              Processor<PerlSubElement> processor
+                                              Set<? super String> processedSubsNames,
+                                              Set<? super PerlNamespaceDefinitionElement> recursionMap,
+                                              Processor<? super PerlSubElement> processor
   ) {
     if (childClass == null || recursionMap.contains(childClass)) {
       return;
@@ -571,18 +571,6 @@ public final class PerlPackageUtil implements PerlElementTypes {
   public static @Nullable PsiFile resolvePackageNameToPsi(@NotNull PsiFile psiFile, String canonicalPackageName) {
     // resolves to a psi file
     return resolveRelativePathToPsi(psiFile, getPackagePathByName(canonicalPackageName));
-  }
-
-  /**
-   * Resolving canonical package to a virtual file
-   *
-   * @param psiFile              base file
-   * @param canonicalPackageName package name in canonical form
-   * @return vartual file
-   */
-  public static @Nullable VirtualFile resolvePackageNameToVirtualFile(@NotNull PsiFile psiFile, String canonicalPackageName) {
-    // resolves to a psi file
-    return resolveRelativePathToVirtualFile(psiFile, getPackagePathByName(canonicalPackageName));
   }
 
   /**
