@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ public abstract class PerlSubDefinitionMixin extends PerlSubDefinitionBase imple
 
 
   @Override
-  protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments) {
+  protected boolean processSignatureElement(PsiElement signatureElement, List<? super PerlSubArgument> arguments) {
     if (!super.processSignatureElement(signatureElement, arguments)) {
       if (signatureElement instanceof PsiPerlSubSignatureElementIgnore) {
         PerlSubArgument newArgument = PerlSubArgument.empty();

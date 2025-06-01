@@ -46,7 +46,7 @@ public class PerlBuiltInNamespacesService {
   }
 
   @SuppressWarnings("UnusedReturnValue")
-  public boolean processNamespaces(@NotNull Processor<PerlNamespaceDefinitionElement> processor) {
+  public boolean processNamespaces(@NotNull Processor<? super PerlNamespaceDefinitionElement> processor) {
     for (PerlBuiltInNamespaceDefinition namespaceDefinition : myNamespacesMap.values()) {
       if (!processor.process(namespaceDefinition)) {
         return false;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ public abstract class PerlMro {
    * @param result               list of package names to populate
    */
   public abstract void getLinearISA(@NotNull Project project,
-                                    @NotNull List<PerlNamespaceDefinitionElement> namespaceDefinitions,
+                                    @NotNull List<? extends PerlNamespaceDefinitionElement> namespaceDefinitions,
                                     @NotNull Set<String> recursionMap,
                                     @NotNull List<String> result);
 

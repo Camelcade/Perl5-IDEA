@@ -112,8 +112,8 @@ public class PerlBuiltInVariablesService {
     return null;
   }
 
-  private static boolean processVariables(@NotNull Map<String, PerlBuiltInVariable> variableMap,
-                                          @NotNull Processor<PerlVariableDeclarationElement> processor) {
+  private static boolean processVariables(@NotNull Map<String, ? extends PerlBuiltInVariable> variableMap,
+                                          @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
     for (PerlBuiltInVariable variable : variableMap.values()) {
       ProgressManager.checkCanceled();
       if (!processor.process(variable)) {
