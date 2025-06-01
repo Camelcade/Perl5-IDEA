@@ -56,7 +56,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
   }
 
   @Override
-  protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments) {
+  protected boolean processSignatureElement(PsiElement signatureElement, List<? super PerlSubArgument> arguments) {
     if (signatureElement instanceof PsiPerlMethodSignatureInvocant) {
       PerlVariable variable = PsiTreeUtil.findChildOfType(signatureElement, PerlVariable.class);
       if (variable != null) {

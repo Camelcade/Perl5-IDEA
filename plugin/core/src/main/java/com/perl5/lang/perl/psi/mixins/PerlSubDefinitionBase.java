@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -126,7 +126,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     return arguments;
   }
 
-  protected boolean processSignatureElement(PsiElement signatureElement, List<PerlSubArgument> arguments) {
+  protected boolean processSignatureElement(PsiElement signatureElement, List<? super PerlSubArgument> arguments) {
     if (signatureElement instanceof PerlVariableDeclarationElement variableDeclarationElement) {
       PerlVariable variable = variableDeclarationElement.getVariable();
       PerlSubArgument newArgument = PerlSubArgument.mandatory(variable.getActualType(), variable.getName());

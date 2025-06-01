@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -144,7 +144,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
     FLAGS |= FLAG_IMPORTED;
   }
 
-  public @NotNull List<ResolveResult> getResolveResults(Collection<PsiElement> relatedItems) {
+  public @NotNull List<ResolveResult> getResolveResults(Collection<? extends PsiElement> relatedItems) {
     List<ResolveResult> result = new ArrayList<>();
 
     resetFlags();

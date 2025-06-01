@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -84,7 +84,7 @@ public class PerlImplicitDeclarationsService {
     return subDefinition;
   }
 
-  private static <T extends PerlPackageMember> void doRegister(@NotNull Map<String, T> targetMap, @NotNull T entity) {
+  private static <T extends PerlPackageMember> void doRegister(@NotNull Map<? super String, T> targetMap, @NotNull T entity) {
     String canonicalName = entity.getCanonicalName();
     LOG.assertTrue(!targetMap.containsKey(canonicalName), "Multiple registrations for: " + entity);
     targetMap.put(canonicalName, entity);
@@ -179,7 +179,7 @@ public class PerlImplicitDeclarationsService {
     return processVariables(myHashesMap, processor);
   }
 
-  private static boolean processVariables(@NotNull Map<String, PerlImplicitVariableDeclaration> variablesMap,
+  private static boolean processVariables(@NotNull Map<String, ? extends PerlImplicitVariableDeclaration> variablesMap,
                                           @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
     for (PerlImplicitVariableDeclaration variableDeclaration : variablesMap.values()) {
       ProgressManager.checkCanceled();

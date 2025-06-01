@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -72,15 +72,15 @@ public class PerlVariableReference extends PerlCachingReference<PsiElement> {
     return PsiElementResolveResult.createResults(result);
   }
 
-  private void addGlobalVariables(@NotNull PerlVariable variable, @NotNull List<PsiElement> result) {
+  private void addGlobalVariables(@NotNull PerlVariable variable, @NotNull List<? super PsiElement> result) {
     result.addAll(variable.getGlobalDeclarations());
   }
 
-  private void addRelatedGlobs(@NotNull PerlVariable variable, @NotNull List<PsiElement> result) {
+  private void addRelatedGlobs(@NotNull PerlVariable variable, @NotNull List<? super PsiElement> result) {
     result.addAll(variable.getRelatedGlobs());
   }
 
-  private void addImportedVariables(@NotNull PerlVariable perlVariable, @NotNull List<PsiElement> result) {
+  private void addImportedVariables(@NotNull PerlVariable perlVariable, @NotNull List<? super PsiElement> result) {
     PerlVariableType actualType = perlVariable.getActualType();
     Project project = perlVariable.getProject();
     PerlNamespaceDefinitionElement namespaceContainer = PerlPackageUtil.getNamespaceContainerForElement(perlVariable);

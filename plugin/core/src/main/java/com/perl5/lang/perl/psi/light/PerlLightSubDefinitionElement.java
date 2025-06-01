@@ -47,7 +47,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   private final @Nullable String myNamespaceName;
   private final @NotNull NullableLazyValue<PerlSubAnnotations> myAnnotationsProvider;
   private @NotNull NotNullLazyValue<List<PerlSubArgument>> mySubArgumentsProvider;
-  private @NotNull NotNullLazyValue<PerlValue> myReturnValueFromCodeProvider;
+  private @NotNull NotNullLazyValue<? extends PerlValue> myReturnValueFromCodeProvider;
   // fixme should we actualize this on fly, like identifier?
   private @Nullable PsiPerlBlock mySubDefinitionBody;
 
@@ -58,7 +58,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
                                        @Nullable String namespaceName,
                                        @NotNull List<PerlSubArgument> subArguments,
                                        @Nullable PerlSubAnnotations annotations,
-                                       @NotNull NotNullLazyValue<PerlValue> returnValueFromCodeProvider,
+                                       @NotNull NotNullLazyValue<? extends PerlValue> returnValueFromCodeProvider,
                                        @Nullable PsiPerlBlock subDefinitionBody) {
     super(delegate, name, elementType, nameIdentifier);
     myNamespaceName = namespaceName;
@@ -92,7 +92,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
     myReturnValueFromCodeProvider = AtomicNotNullLazyValue.createValue(stub::getReturnValueFromCode);
   }
 
-  protected final void setSubArgumentsProvider(@NotNull NotNullFactory<List<PerlSubArgument>> provider) {
+  protected final void setSubArgumentsProvider(@NotNull NotNullFactory<? extends List<PerlSubArgument>> provider) {
     mySubArgumentsProvider = AtomicNotNullLazyValue.createValue(provider);
   }
 
