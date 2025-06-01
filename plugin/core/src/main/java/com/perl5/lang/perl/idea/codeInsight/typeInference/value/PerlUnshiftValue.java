@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -82,7 +82,7 @@ public class PerlUnshiftValue extends PerlParametrizedOperationValue {
   }
 
   static @NotNull PerlValue create(@NotNull PerlUnshiftPushExpr unshiftPushExpr,
-                                   @NotNull BiFunction<PerlValue, PerlValue, PerlValue> function) {
+                                   @NotNull BiFunction<? super PerlValue, ? super PerlValue, ? extends PerlValue> function) {
     PsiElement target = unshiftPushExpr.getTarget();
     if (target == null) {
       return UNKNOWN_VALUE;

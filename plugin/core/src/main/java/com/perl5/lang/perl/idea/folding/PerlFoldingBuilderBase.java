@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public abstract class PerlFoldingBuilderBase extends FoldingBuilderEx {
    * Checks if {@code element}'s range adjusted by {@code endMargin} and {@code startMargin} covers more than {@code minLines}. If it does,
    * creates a folding descriptor and putting it into {@code result} list.
    */
-  protected static void addDescriptorFor(@NotNull List<FoldingDescriptor> result,
+  protected static void addDescriptorFor(@NotNull List<? super FoldingDescriptor> result,
                                          @NotNull Document document,
                                          @NotNull PsiElement element,
                                          int startMargin,

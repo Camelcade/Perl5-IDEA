@@ -462,7 +462,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   /**
    * @return paths of {@code virtualFiles} joined with pipe, reverse of {@link #computeVirtualFilesFromPaths(String)}
    */
-  public static @NotNull String computePathsFromVirtualFiles(@NotNull List<VirtualFile> virtualFiles) {
+  public static @NotNull String computePathsFromVirtualFiles(@NotNull List<? extends VirtualFile> virtualFiles) {
     return FILES_JOINER.fun(ContainerUtil.map(virtualFiles, VirtualFile::getPath));
   }
 

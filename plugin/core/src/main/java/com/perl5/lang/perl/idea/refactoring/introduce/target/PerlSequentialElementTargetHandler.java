@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -88,14 +88,15 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
   }
 
   @Override
-  protected final @NotNull List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+  protected final @NotNull List<PsiElement> replaceTarget(@NotNull List<? extends PerlIntroduceTarget> occurrences,
+                                                          @NotNull PsiElement replacement) {
     if (occurrences.size() == 1 && occurrences.getFirst().isFullRange()) {
       return super.replaceTarget(occurrences, replacement);
     }
     return replaceNonTrivialTarget(occurrences, replacement);
   }
 
-  protected @NotNull List<PsiElement> replaceNonTrivialTarget(@NotNull List<PerlIntroduceTarget> occurrences,
+  protected @NotNull List<PsiElement> replaceNonTrivialTarget(@NotNull List<? extends PerlIntroduceTarget> occurrences,
                                                               @NotNull PsiElement replacement) {
     PsiElement occurrencePlace = occurrences.getFirst().getPlace();
     if (occurrencePlace == null) {
@@ -144,7 +145,7 @@ abstract class PerlSequentialElementTargetHandler extends PerlIntroduceTargetsHa
    */
   final @NotNull List<PsiElement> replaceSequenceWithFlatter(@NotNull PsiElement baseElement,
                                                              @NotNull PsiElement replacement,
-                                                             @NotNull List<PsiElement> sequenceElement) {
+                                                             @NotNull List<? extends PsiElement> sequenceElement) {
     Set<TextRange> replacementsRanges = new HashSet<>();
     StringBuilder sb = new StringBuilder("(");
     for (PsiElement element : sequenceElement) {

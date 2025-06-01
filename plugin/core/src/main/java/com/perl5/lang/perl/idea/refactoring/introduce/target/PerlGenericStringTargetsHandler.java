@@ -185,10 +185,10 @@ abstract class PerlGenericStringTargetsHandler extends PerlIntroduceTargetsHandl
   }
 
   @NotNull
-  PsiElement replaceWithInterpolation(@NotNull List<PerlIntroduceTarget> occurrences,
+  PsiElement replaceWithInterpolation(@NotNull List<? extends PerlIntroduceTarget> occurrences,
                                       @NotNull CharSequence replacementText,
                                       @NotNull PsiElement elementToReplace,
-                                      @NotNull Set<TextRange> replacementRanges) {
+                                      @NotNull Set<? super TextRange> replacementRanges) {
     assert replacementText.length() > 1 : "Got " + replacementText;
     CharSequence safeReplacementText = braceVariableText(replacementText);
 

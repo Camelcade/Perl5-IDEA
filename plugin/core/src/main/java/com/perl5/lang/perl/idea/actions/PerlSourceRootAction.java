@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public abstract class PerlSourceRootAction extends MarkRootActionBase {
     return roots;
   }
 
-  protected abstract boolean isEnabled(@NotNull List<VirtualFile> files, @NotNull Module module);
+  protected abstract boolean isEnabled(@NotNull List<? extends VirtualFile> files, @NotNull Module module);
 
   @Override
   protected void modifyRoots(VirtualFile file, ContentEntry entry) {

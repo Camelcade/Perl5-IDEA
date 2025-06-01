@@ -75,11 +75,11 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
    * @param disposable          session-bound things may be attached to this disposable, which is going to be disposed by parent configurable
    */
   public void chooseFileInteractively(@NotNull String dialogTitle,
-                                      @Nullable Function<PerlHostData<?, ?>, File> defaultPathFunction,
+                                      @Nullable Function<? super PerlHostData<?, ?>, ? extends File> defaultPathFunction,
                                       boolean useDefaultIfExists,
-                                      @NotNull Predicate<String> nameValidator,
-                                      @NotNull Function<String, String> pathValidator,
-                                      @NotNull BiConsumer<String, PerlHostData<?, ?>> selectionConsumer,
+                                      @NotNull Predicate<? super String> nameValidator,
+                                      @NotNull Function<? super String, String> pathValidator,
+                                      @NotNull BiConsumer<? super String, ? super PerlHostData<?, ?>> selectionConsumer,
                                       @NotNull Disposable disposable) {
     Data hostData = createDataInteractively();
     if (hostData == null) {
@@ -104,9 +104,9 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   protected void chooseFileInteractively(@NotNull String dialogTitle,
                                          @Nullable File defaultPath,
                                          boolean useDefaultIfExists,
-                                         @NotNull Predicate<String> nameValidator,
-                                         @NotNull Function<String, String> pathValidator,
-                                         @NotNull Consumer<String> selectionConsumer,
+                                         @NotNull Predicate<? super String> nameValidator,
+                                         @NotNull Function<? super String, String> pathValidator,
+                                         @NotNull Consumer<? super String> selectionConsumer,
                                          @NotNull Data hostData) {
     Ref<String> pathRef = Ref.create();
     ApplicationManager.getApplication().invokeAndWait(
@@ -139,9 +139,9 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   protected void chooseFileInteractively(@NotNull String dialogTitle,
                                          @Nullable File defaultPath,
                                          boolean useDefaultIfExists,
-                                         @NotNull Predicate<String> nameValidator,
-                                         @NotNull Function<String, String> pathValidator,
-                                         @NotNull Consumer<String> selectionConsumer,
+                                         @NotNull Predicate<? super String> nameValidator,
+                                         @NotNull Function<? super String, String> pathValidator,
+                                         @NotNull Consumer<? super String> selectionConsumer,
                                          @NotNull Data hostData,
                                          @NotNull VirtualFileSystem fileSystem) {
     VirtualFile defaultFile = defaultPath == null ? null : fileSystem.findFileByPath(defaultPath.getPath());
@@ -166,8 +166,8 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   }
 
   private @NotNull FileChooserDescriptor createDescriptor(@NotNull String dialogTitle,
-                                                          @NotNull Predicate<String> nameValidator,
-                                                          @NotNull Function<String, String> pathValidator) {
+                                                          @NotNull Predicate<? super String> nameValidator,
+                                                          @NotNull Function<? super String, String> pathValidator) {
     final FileChooserDescriptor descriptor = new FileChooserDescriptor(true, isChooseFolders(), false, false, false, false) {
       @Override
       public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {

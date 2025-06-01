@@ -169,8 +169,8 @@ public class PerlSdkType extends SdkType {
    */
   private static void syncAndCollectException(@NotNull PerlHostFileTransfer<?> fileTransfer,
                                               @Nullable File fileToCopy,
-                                              @NotNull List<String> pathsToRefresh,
-                                              @NotNull List<Exception> exceptionsThrown,
+                                              @NotNull List<? super String> pathsToRefresh,
+                                              @NotNull List<? super Exception> exceptionsThrown,
                                               boolean stubOnly) {
     if (fileToCopy == null) {
       return;
@@ -272,7 +272,7 @@ public class PerlSdkType extends SdkType {
   public static void createAndAddSdk(@NotNull String interpreterPath,
                                      @NotNull PerlHostData<?, ?> hostData,
                                      @NotNull PerlVersionManagerData<?, ?> versionManagerData,
-                                     @Nullable Consumer<Sdk> sdkConsumer,
+                                     @Nullable Consumer<? super Sdk> sdkConsumer,
                                      @Nullable Project project) {
     createSdk(interpreterPath, hostData, versionManagerData, sdk -> {
       PerlSdkTable.getInstance().addJdk(sdk);
@@ -292,7 +292,7 @@ public class PerlSdkType extends SdkType {
   public static void createSdk(@NotNull String interpreterPath,
                                @NotNull PerlHostData<?, ?> hostData,
                                @NotNull PerlVersionManagerData<?, ?> versionManagerData,
-                               @NotNull Consumer<Sdk> sdkConsumer) {
+                               @NotNull Consumer<? super Sdk> sdkConsumer) {
     VersionDescriptor perlVersionDescriptor = PerlSdkType.getPerlVersionDescriptor(interpreterPath, hostData, versionManagerData);
     if (perlVersionDescriptor == null) {
       ApplicationManager.getApplication().invokeLater(

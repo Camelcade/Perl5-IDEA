@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,8 @@ public final class PerlValuesBuilder {
   /**
    * @return converts {@code baseValue} with {@code converter}. Handles cases with {@link PerlOneOfValue}
    */
-  public static @NotNull PerlValue convert(@NotNull PerlValue baseValue, @NotNull Function<PerlValue, PerlValue> converter) {
+  public static @NotNull PerlValue convert(@NotNull PerlValue baseValue,
+                                           @NotNull Function<? super PerlValue, ? extends PerlValue> converter) {
     if (!(baseValue instanceof PerlOneOfValue oneOfValue)) {
       return converter.apply(baseValue);
     }
@@ -39,7 +40,7 @@ public final class PerlValuesBuilder {
   }
 
   public static @NotNull PerlValue convert(@NotNull PerlValue baseValue, @NotNull PerlValue parameterValue,
-                                           @NotNull BiFunction<PerlValue, PerlValue, PerlValue> converter) {
+                                           @NotNull BiFunction<? super PerlValue, ? super PerlValue, ? extends PerlValue> converter) {
     return convert(baseValue, first -> convert(parameterValue, second -> converter.apply(first, second)));
   }
 }

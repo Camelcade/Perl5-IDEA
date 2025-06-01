@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,8 +52,8 @@ import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
 import java.util.*;
+import java.util.List;
 
 import static com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkConfigurable.DISABLE_PERL_ITEM;
 
@@ -270,7 +270,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     ).choose(null, this::processChosenFiles);
   }
 
-  private void processChosenFiles(@NotNull List<VirtualFile> virtualFiles) {
+  private void processChosenFiles(@NotNull List<? extends VirtualFile> virtualFiles) {
     Ref<Boolean> notifyInternals = new Ref<>(false);
 
     List<VirtualFile> rootsToAdd = new ArrayList<>();

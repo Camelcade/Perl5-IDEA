@@ -80,7 +80,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
    * @param comments list of collected comments
    * @param document document to search in
    */
-  private List<FoldingDescriptor> getCommentsDescriptors(@NotNull List<PsiComment> comments, @NotNull Document document) {
+  private List<FoldingDescriptor> getCommentsDescriptors(@NotNull List<? extends PsiComment> comments, @NotNull Document document) {
     List<FoldingDescriptor> descriptors = new ArrayList<>();
 
     TokenSet commentExcludedTokens = getCommentExcludedTokens();
@@ -193,7 +193,7 @@ public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlEl
    *
    * @param imports list of collected imports
    */
-  private List<FoldingDescriptor> getImportDescriptors(@NotNull List<PerlNamespaceElementContainer> imports) {
+  private List<FoldingDescriptor> getImportDescriptors(@NotNull List<? extends PerlNamespaceElementContainer> imports) {
     List<FoldingDescriptor> descriptors;
     descriptors = new ArrayList<>();
 

@@ -61,7 +61,7 @@ public class PerlDirectoryIndex implements Disposable {
     return result;
   }
 
-  private @NotNull LightDirectoryIndex<PerlDirectoryIndexEntry> createIndexForRoots(Supplier<List<VirtualFile>> libraryRootsSupplier) {
+  private @NotNull LightDirectoryIndex<PerlDirectoryIndexEntry> createIndexForRoots(Supplier<? extends List<VirtualFile>> libraryRootsSupplier) {
     return new LightDirectoryIndex<>(this, PerlDirectoryIndexEntry.EMPTY,
                                      it -> libraryRootsSupplier.get().forEach(root -> it.putInfo(root, new PerlDirectoryIndexEntry(root))));
   }
@@ -71,7 +71,7 @@ public class PerlDirectoryIndex implements Disposable {
     myIndex.resetIndex();
   }
 
-  private static Function<VirtualFile, VirtualFile> createRootComputator(@NotNull LightDirectoryIndex<PerlDirectoryIndexEntry> index) {
+  private static Function<VirtualFile, VirtualFile> createRootComputator(@NotNull LightDirectoryIndex<? extends PerlDirectoryIndexEntry> index) {
     return virtualFile -> {
       if (virtualFile == null) {
         return null;

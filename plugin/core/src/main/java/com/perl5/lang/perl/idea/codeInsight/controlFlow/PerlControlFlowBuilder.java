@@ -473,7 +473,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
       visitNextRedo(o, myLoopRedoInstructions);
     }
 
-    private void visitNextRedo(@NotNull PerlFlowControlExpr o, @NotNull Map<PsiElement, Instruction> targetMap) {
+    private void visitNextRedo(@NotNull PerlFlowControlExpr o, @NotNull Map<PsiElement, ? extends Instruction> targetMap) {
       PsiElement targetLoop = o.getTargetScope();
 
       Instruction loopInstruction = targetMap.get(targetLoop);

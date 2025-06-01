@@ -42,7 +42,7 @@ public final class PerlCallObjectValue extends PerlCallValue {
 
   private PerlCallObjectValue(@NotNull PerlValue namespaceNameValue,
                               @NotNull PerlValue subNameValue,
-                              @NotNull List<PerlValue> arguments,
+                              @NotNull List<? extends PerlValue> arguments,
                               @Nullable String superContext) {
     super(namespaceNameValue, subNameValue, arguments);
     mySuperContext = superContext;

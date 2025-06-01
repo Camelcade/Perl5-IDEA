@@ -563,7 +563,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
    *
    * @param alignmentsMap map for caching line-based values
    */
-  private @Nullable Alignment getLineBasedAlignment(@NotNull ASTNode childNode, @NotNull Map<Integer, Alignment> alignmentsMap) {
+  private @Nullable Alignment getLineBasedAlignment(@NotNull ASTNode childNode, @NotNull Map<? super Integer, Alignment> alignmentsMap) {
     int nodeLine = getNodeLine(childNode);
     if (nodeLine < 0) {
       return null;

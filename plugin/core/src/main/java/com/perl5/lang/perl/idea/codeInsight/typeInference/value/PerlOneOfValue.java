@@ -34,7 +34,7 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
 
   private final @NotNull Set<PerlValue> myVariants;
 
-  private PerlOneOfValue(@NotNull Set<PerlValue> variants) {
+  private PerlOneOfValue(@NotNull Set<? extends PerlValue> variants) {
     myVariants = Collections.unmodifiableSet(variants);
   }
 

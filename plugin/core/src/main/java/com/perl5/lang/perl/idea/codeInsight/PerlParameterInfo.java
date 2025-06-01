@@ -69,7 +69,7 @@ public class PerlParameterInfo {
     );
   }
 
-  public static PerlParameterInfo[] wrapArguments(List<PerlSubArgument> arguments) {
+  public static PerlParameterInfo[] wrapArguments(List<? extends PerlSubArgument> arguments) {
     List<PerlParameterInfo> parameterInfos = ContainerUtil.map(arguments, PerlParameterInfo::new);
     return parameterInfos.toArray(EMPTY_ARRAY);
   }
