@@ -18,13 +18,10 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
-import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.lexer.PerlLexer;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,8 +32,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.OPERATOR_ASSIGN;
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.SIGNATURE_ELEMENT;
 import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
 
 
@@ -147,10 +142,6 @@ public class PerlSubArgument {
     return result;
   }
 
-  public static PerlSubArgument optional(@NotNull PerlVariableType variableType, @NotNull String variableName) {
-    return create(variableType, variableName, true);
-  }
-
   public static PerlSubArgument optionalScalar(@NotNull String variableName) {
     return create(PerlVariableType.SCALAR, variableName, true);
   }
@@ -223,19 +214,5 @@ public class PerlSubArgument {
     for (PerlSubArgument argument : arguments) {
       argument.serialize(dataStream);
     }
-  }
-
-  /**
-   * @return true iff {@code psiElement} is default value of sub/method/modifier parameter specified in signature
-   */
-  @Contract("null->false")
-  public static boolean isDefaultValue(@Nullable PsiElement psiElement) {
-    if (psiElement == null) {
-      return false;
-    }
-    if (PsiUtilCore.getElementType(psiElement.getParent()) != SIGNATURE_ELEMENT) {
-      return false;
-    }
-    return PsiUtilCore.getElementType(PerlPsiUtil.getPrevSignificantSibling(psiElement)) == OPERATOR_ASSIGN;
   }
 }
