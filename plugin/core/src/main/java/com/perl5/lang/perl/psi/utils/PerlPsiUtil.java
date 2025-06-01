@@ -137,7 +137,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
    *
    * @param startWith element to start with (inclusive)
    */
-  public static void processStringElements(PsiElement startWith, Processor<PerlStringContentElement> processor) {
+  public static void processStringElements(PsiElement startWith, Processor<? super PerlStringContentElement> processor) {
     while (startWith != null) {
       if (startWith instanceof PerlStringContentElement stringContentElement) {
         processor.process(stringContentElement);
@@ -161,7 +161,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
     return result;
   }
 
-  private static void collectStringContentsRecursively(PsiElement run, List<String> result) {
+  private static void collectStringContentsRecursively(PsiElement run, List<? super String> result) {
     while (run != null) {
       if (run instanceof PerlString) {
         result.add(ElementManipulators.getValueText(run));
@@ -381,7 +381,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
     return true;
   }
 
-  public static boolean iteratePsiElementsRight(PsiElement element, Processor<PsiElement> processor) {
+  public static boolean iteratePsiElementsRight(PsiElement element, Processor<? super PsiElement> processor) {
     if (element == null || element instanceof PsiFile) {
       return false;
     }
@@ -399,7 +399,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
     return iteratePsiElementsRightDown(run, processor) && iteratePsiElementsRight(element.getParent(), processor);
   }
 
-  public static boolean iteratePsiElementsRightDown(@NotNull PsiElement element, @NotNull Processor<PsiElement> processor) {
+  public static boolean iteratePsiElementsRightDown(@NotNull PsiElement element, @NotNull Processor<? super PsiElement> processor) {
     boolean result = processor.process(element);
     if (result) {
       // checking children
@@ -419,7 +419,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
     return result;
   }
 
-  public static boolean processNamespaceStatements(@NotNull PsiElement rootElement, Processor<PsiElement> processor) {
+  public static boolean processNamespaceStatements(@NotNull PsiElement rootElement, Processor<? super PsiElement> processor) {
     PsiElement run = rootElement.getFirstChild();
     boolean result = true;
     while (run != null && result) {
@@ -447,7 +447,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
    * @param element   element to start from
    * @param processor processor to process elements
    */
-  public static void processNextRedoLastLabelDeclarations(PsiElement element, Processor<PerlLabelDeclaration> processor) {
+  public static void processNextRedoLastLabelDeclarations(PsiElement element, Processor<? super PerlLabelDeclaration> processor) {
     if (element == null || element instanceof PerlLabelScope) {
       return;
     }
@@ -470,7 +470,7 @@ public final class PerlPsiUtil implements PerlElementTypes {
    * @param element   element to start from
    * @param processor processor to process elements
    */
-  public static void processGotoLabelDeclarations(PsiElement element, Processor<PerlLabelDeclaration> processor) {
+  public static void processGotoLabelDeclarations(PsiElement element, Processor<? super PerlLabelDeclaration> processor) {
     if (element == null) {
       return;
     }
@@ -562,7 +562,8 @@ public final class PerlPsiUtil implements PerlElementTypes {
   /**
    * True iff all elements from provided lists are semantically equals
    */
-  public static boolean areElementsSame(@NotNull List<PsiElement> targetElements, @NotNull List<PsiElement> elementsToCompare) {
+  public static boolean areElementsSame(@NotNull List<? extends PsiElement> targetElements,
+                                        @NotNull List<? extends PsiElement> elementsToCompare) {
     if (targetElements.size() != elementsToCompare.size()) {
       return false;
     }
@@ -886,7 +887,8 @@ public final class PerlPsiUtil implements PerlElementTypes {
   }
 
   @SuppressWarnings("UnusedReturnValue")
-  public static boolean processSubElements(@Nullable PsiElement rootElement, @NotNull PsiElementProcessor<PerlSubElement> processor) {
+  public static boolean processSubElements(@Nullable PsiElement rootElement,
+                                           @NotNull PsiElementProcessor<? super PerlSubElement> processor) {
     StubElement<?> stubElement = getStubFromElement(rootElement);
     if (stubElement != null) {
       return processElementsFromStubs(stubElement, it -> !(it instanceof PerlSubElement subElement) || processor.execute(subElement), null);

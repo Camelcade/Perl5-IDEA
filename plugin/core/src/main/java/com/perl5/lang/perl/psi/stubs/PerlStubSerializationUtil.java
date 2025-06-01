@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -62,7 +62,8 @@ public class PerlStubSerializationUtil {
     return result;
   }
 
-  public static void writeStringListMap(@NotNull StubOutputStream dataStream, Map<String, List<String>> stringListMap) throws IOException {
+  public static void writeStringListMap(@NotNull StubOutputStream dataStream, Map<String, ? extends List<String>> stringListMap)
+    throws IOException {
     dataStream.writeVarInt(stringListMap.size());
     for (String key : stringListMap.keySet()) {
       dataStream.writeName(key);
