@@ -832,13 +832,6 @@ public final class PerlPsiUtil implements PerlElementTypes {
   }
 
   /**
-   * @return true iff element is inside the qw list
-   */
-  public static boolean isInStringList(@NotNull PsiElement element) {
-    return PsiUtilCore.getElementType(element.getParent()) == STRING_LIST;
-  }
-
-  /**
    * @return a single quoted string with content. Attempts to select proper quotes
    */
   public static @NotNull String createSingleQuotedString(@NotNull String content) {
