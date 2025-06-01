@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -239,7 +239,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       this(Collections.singletonList(element), 0);
     }
 
-    public PerlAssignValueDescriptor(@NotNull List<PsiElement> elements) {
+    public PerlAssignValueDescriptor(@NotNull List<? extends PsiElement> elements) {
       this(elements, 0);
     }
 
@@ -247,12 +247,12 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       this(Collections.singletonList(element), startIndex);
     }
 
-    public PerlAssignValueDescriptor(@NotNull List<PsiElement> elements, int startIndex) {
+    public PerlAssignValueDescriptor(@NotNull List<? extends PsiElement> elements, int startIndex) {
       myElements = unflattenElements(elements);
       myStartIndex = startIndex;
     }
 
-    private List<PsiElement> unflattenElements(@NotNull List<PsiElement> sourceElements) {
+    private List<PsiElement> unflattenElements(@NotNull List<? extends PsiElement> sourceElements) {
       if (sourceElements.isEmpty()) {
         return Collections.emptyList();
       }

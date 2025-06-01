@@ -46,7 +46,7 @@ public interface PerlNamespaceDefinitionElement extends PerlNamespaceDefinition,
   Project getProject() throws PsiInvalidElementAccessException;
 
   @SuppressWarnings("UnusedReturnValue")
-  default boolean processExportDescriptors(@NotNull PerlNamespaceEntityProcessor<PerlExportDescriptor> processor) {
+  default boolean processExportDescriptors(@NotNull PerlNamespaceEntityProcessor<? super PerlExportDescriptor> processor) {
     String namespaceName = getNamespaceName();
     if (StringUtil.isEmpty(namespaceName)) {
       return true;

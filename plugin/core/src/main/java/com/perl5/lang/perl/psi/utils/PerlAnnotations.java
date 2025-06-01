@@ -136,7 +136,8 @@ public final class PerlAnnotations implements PerlElementTypes {
   /**
    * Checking the tree before the {@code element} and looking for annotations in code. Each annotation is processed by {@code annotationProcessor}
    */
-  public static void processElementAnnotations(@NotNull PsiElement element, @NotNull Processor<PerlAnnotation> annotationProcessor) {
+  public static void processElementAnnotations(@NotNull PsiElement element,
+                                               @NotNull Processor<? super PerlAnnotation> annotationProcessor) {
     if (element instanceof PsiFile) {
       return;
     }
