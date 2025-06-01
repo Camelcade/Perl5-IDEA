@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -165,7 +165,7 @@ public abstract class PerlAbstractTestRunConfiguration extends GenericPerlRunCon
     PerlRunUtil.updatePerl5Opt(environment, perlArgumentsList);
 
     List<String> harnessOptions = new ArrayList<>();
-    harnessOptions.add(HARNESS_OPTIONS_JOBS + Integer.toString(perlRunProfileState.isParallelRunAllowed() ? getJobsNumber() : 1));
+    harnessOptions.add(HARNESS_OPTIONS_JOBS + (perlRunProfileState.isParallelRunAllowed() ? getJobsNumber() : 1));
     harnessOptions.add(HARNESS_OPTIONS_FORMATTER + HARNESS_OPTIONS_FORMATTER_CLASS);
 
     environment.put(HARNESS_OPTIONS, String.join(HARNESS_OPTIONS_SEPARATOR, harnessOptions));
