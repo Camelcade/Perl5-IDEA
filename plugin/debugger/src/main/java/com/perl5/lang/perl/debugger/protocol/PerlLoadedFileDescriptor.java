@@ -44,8 +44,7 @@ public class PerlLoadedFileDescriptor {
     return name;
   }
 
-  @NlsSafe
-  public @NotNull String getPresentableName() {
+  public @NlsSafe @NotNull String getPresentableName() {
     return isEval() && name != null ? name : path;
   }
 
