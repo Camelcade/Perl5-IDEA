@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,10 +55,10 @@ public final class PerlVariableUtil {
    *
    * @param onePerName if true, only one variable per name is going to the processor
    */
-  public static boolean processGlobalVariables(@NotNull StubIndexKey<String, PerlVariableDeclarationElement> indexKey,
+  public static boolean processGlobalVariables(@NotNull StubIndexKey<? super String, PerlVariableDeclarationElement> indexKey,
                                                @NotNull Project project,
                                                @NotNull GlobalSearchScope scope,
-                                               @NotNull Processor<PerlVariableDeclarationElement> processor,
+                                               @NotNull Processor<? super PerlVariableDeclarationElement> processor,
                                                @NotNull String textKey,
                                                boolean onePerName) {
     Set<String> uniqueNames = onePerName ? new HashSet<>() : null;
@@ -79,7 +79,7 @@ public final class PerlVariableUtil {
   public static boolean processGlobalVariables(@NotNull StubIndexKey<String, PerlVariableDeclarationElement> indexKey,
                                                @NotNull Project project,
                                                @NotNull GlobalSearchScope scope,
-                                               @NotNull Processor<PerlVariableDeclarationElement> processor,
+                                               @NotNull Processor<? super PerlVariableDeclarationElement> processor,
                                                boolean processAll) {
     for (String variableName : PerlStubUtil.getAllKeys(indexKey, scope)) {
       if (!processGlobalVariables(indexKey, project, scope, processor, variableName, !processAll)) {

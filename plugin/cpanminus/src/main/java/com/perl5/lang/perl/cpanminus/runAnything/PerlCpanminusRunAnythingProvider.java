@@ -125,7 +125,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
     return new RunAnythingHelpItem(getItemPresentableText(value), getCommand(value), getItemDescription(value), getIcon(value));
   }
 
-  protected @NotNull String getItemPresentableText(@NotNull List<CommandElement> value) {
+  protected @NotNull String getItemPresentableText(@NotNull List<? extends CommandElement> value) {
     if (value.isEmpty()) {
       return getCommand();
     }
@@ -140,7 +140,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
     return lastElementDescriptor.value + " <" + lastElementDescriptor.placeholder + ">";
   }
 
-  protected @Nullable String getItemDescription(@NotNull List<CommandElement> value) {
+  protected @Nullable String getItemDescription(@NotNull List<? extends CommandElement> value) {
     if (value.isEmpty()) {
       return null;
     }
@@ -366,7 +366,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
   }
 
   private static void readOptions(@Nullable Element optionsElement,
-                                  @NotNull Map<String, OptionDescriptor> allOptionsMap) {
+                                  @NotNull Map<? super String, ? super OptionDescriptor> allOptionsMap) {
     if (optionsElement == null) {
       return;
     }
@@ -398,7 +398,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
   }
 
   private static @NotNull Set<String> readCommands(@Nullable Element commandsElement,
-                                                   @NotNull Map<String, OptionDescriptor> allOptionsMap) {
+                                                   @NotNull Map<? super String, OptionDescriptor> allOptionsMap) {
     if (commandsElement == null) {
       return Collections.emptySet();
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -225,7 +225,7 @@ public class PerlCopyrightTest extends PerlLightTestCase {
     CopyrightManager.getInstance(getProject()).getOptions().setOptions(PerlFileTypePackage.INSTANCE.getName(), options);
   }
 
-  private void modifyLanguageOptions(@NotNull Consumer<LanguageOptions> optionsConfigurator) {
+  private void modifyLanguageOptions(@NotNull Consumer<? super LanguageOptions> optionsConfigurator) {
     LanguageOptions options = getLanguageOptions();
     optionsConfigurator.accept(options);
     setLanguageOptions(options);

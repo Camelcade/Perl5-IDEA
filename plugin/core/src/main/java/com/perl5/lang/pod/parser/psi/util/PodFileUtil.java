@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -130,7 +130,7 @@ public class PodFileUtil {
 
   public static void processPodFilesByDescriptor(@NotNull Project project,
                                                  @NotNull PodLinkDescriptor descriptor,
-                                                 @NotNull Processor<PsiFile> processor) {
+                                                 @NotNull Processor<? super PsiFile> processor) {
     if (descriptor.getName() == null) {
       return;
     }
