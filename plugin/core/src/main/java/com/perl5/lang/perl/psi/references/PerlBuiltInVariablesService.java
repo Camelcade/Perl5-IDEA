@@ -133,11 +133,4 @@ public class PerlBuiltInVariablesService {
   public static @NotNull PerlBuiltInVariable getImplicitArray(@NotNull Project project) {
     return Objects.requireNonNull(getInstance(project).getArray("_"));
   }
-
-  /**
-   * @return {@code $_}
-   */
-  public static @NotNull PerlBuiltInVariable getImplicitScalar(@NotNull Project project) {
-    return Objects.requireNonNull(getInstance(project).getScalar("_"));
-  }
 }
