@@ -153,11 +153,11 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     checkProfilingResultsWithFile(runScriptWithProfilingAndWait("simple", "testscript_manual.pl"));
   }
 
-  protected void checkProfilingResultsWithFile(Pair<Pair<ExecutionEnvironment, RunContentDescriptor>, Pair<Executor, PerlProfilerConfigurationState>> executionResult) {
+  protected void checkProfilingResultsWithFile(Pair<? extends Pair<ExecutionEnvironment, RunContentDescriptor>, ? extends Pair<Executor, PerlProfilerConfigurationState>> executionResult) {
     checkProfilingResultsWithFile(getCallTreeBuilder(getProfilingResults(executionResult)));
   }
 
-  private @NotNull ProfilerState getProfilingResults(Pair<Pair<ExecutionEnvironment, RunContentDescriptor>, Pair<Executor, PerlProfilerConfigurationState>> executionResult) {
+  private @NotNull ProfilerState getProfilingResults(Pair<? extends Pair<ExecutionEnvironment, RunContentDescriptor>, ? extends Pair<Executor, PerlProfilerConfigurationState>> executionResult) {
     return getProfilingResults(executionResult.first.first.getRunProfile(), executionResult.second.second);
   }
 

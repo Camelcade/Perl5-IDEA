@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import java.util.function.Function;
 public class HTMLMasonFileTypeProvider implements PerlFileTypeProvider {
 
   @Override
-  public void addRoots(@NotNull Project project, BiConsumer<VirtualFile, Function<VirtualFile, FileType>> rootConsumer) {
+  public void addRoots(@NotNull Project project, BiConsumer<? super VirtualFile, Function<VirtualFile, FileType>> rootConsumer) {
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
     for (VirtualFile root : settings.getComponentsRoots()) {
       rootConsumer.accept(root, virtualFile -> {

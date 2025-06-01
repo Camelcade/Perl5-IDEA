@@ -157,7 +157,7 @@ public final class MasonVirtualFileListener implements VirtualFileListener {
     return myProject;
   }
 
-  private static boolean containsAtLeastOneFile(VirtualFile root, List<VirtualFile> files) {
+  private static boolean containsAtLeastOneFile(VirtualFile root, List<? extends VirtualFile> files) {
     for (VirtualFile file : files) {
       if (VfsUtilCore.isAncestor(root, file, false)) {
         return true;

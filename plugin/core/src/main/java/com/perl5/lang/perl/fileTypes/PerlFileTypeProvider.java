@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,5 +33,5 @@ public interface PerlFileTypeProvider {
    * @param project project for settings
    * @param rootConsumer function should return a custom fileType or null
    */
-  void addRoots(@NotNull Project project, BiConsumer<VirtualFile, Function<VirtualFile, FileType>> rootConsumer);
+  void addRoots(@NotNull Project project, BiConsumer<? super VirtualFile, Function<VirtualFile, FileType>> rootConsumer);
 }
