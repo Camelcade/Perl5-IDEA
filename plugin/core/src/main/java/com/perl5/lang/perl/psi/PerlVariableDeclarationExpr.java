@@ -42,6 +42,7 @@ public interface PerlVariableDeclarationExpr extends PsiPerlExpr, PerlNamespaceE
   @Nullable
   String getDeclarationType();
 
+  @SuppressWarnings("override")
   @NotNull
   List<PsiPerlVariableDeclarationElement> getVariableDeclarationElementList();
 
