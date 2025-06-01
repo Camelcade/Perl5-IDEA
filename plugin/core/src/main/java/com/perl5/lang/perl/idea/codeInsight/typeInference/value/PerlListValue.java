@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import java.util.List;
 abstract class PerlListValue extends PerlValue {
   private final @NotNull List<PerlValue> myElements;
 
-  protected PerlListValue(@NotNull List<PerlValue> elements) {
+  protected PerlListValue(@NotNull List<? extends PerlValue> elements) {
     myElements = elements.isEmpty() ? Collections.emptyList() : Collections.unmodifiableList(elements);
   }
 
@@ -59,7 +59,7 @@ abstract class PerlListValue extends PerlValue {
   }
 
   protected abstract @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver,
-                                                       @NotNull List<PerlValue> resolvedElements);
+                                                       @NotNull List<? extends PerlValue> resolvedElements);
 
   @Override
   protected final @NotNull PerlContextType getContextType() {
@@ -87,7 +87,7 @@ abstract class PerlListValue extends PerlValue {
   /**
    * @return true iff all {@code values} are deterministic
    */
-  static boolean isDeterministic(@NotNull Collection<PerlValue> values) {
+  static boolean isDeterministic(@NotNull Collection<? extends PerlValue> values) {
     for (PerlValue value : values) {
       if (!value.isDeterministic()) {
         return false;
@@ -109,13 +109,13 @@ abstract class PerlListValue extends PerlValue {
     protected Builder() {
     }
 
-    public Self addPsiElements(@NotNull List<PsiElement> psiElements) {
+    public Self addPsiElements(@NotNull List<? extends PsiElement> psiElements) {
       psiElements.forEach(it -> addElement(PerlValuesManager.from(it)));
       //noinspection unchecked
       return (Self)this;
     }
 
-    public Self addElements(@NotNull List<PerlValue> elements) {
+    public Self addElements(@NotNull List<? extends PerlValue> elements) {
       elements.forEach(this::addElement);
       //noinspection unchecked
       return (Self)this;

@@ -48,7 +48,7 @@ public final class PerlValueSerializer {
     myDryMap.put(value, myDryMap.size() + 1);
   }
 
-  void writeValuesList(@NotNull Collection<PerlValue> elements) throws IOException {
+  void writeValuesList(@NotNull Collection<? extends PerlValue> elements) throws IOException {
     writeVarInt(elements.size());
     for (PerlValue element : elements) {
       writeValue(element);

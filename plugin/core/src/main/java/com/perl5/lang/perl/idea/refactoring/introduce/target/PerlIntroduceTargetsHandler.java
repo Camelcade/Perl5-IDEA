@@ -163,7 +163,8 @@ public abstract class PerlIntroduceTargetsHandler {
    * @return list of inserted elements
    * @apiNote all occurrences should be from the same element. This api implemented for multi-replacements
    */
-  protected @NotNull List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+  protected @NotNull List<PsiElement> replaceTarget(@NotNull List<? extends PerlIntroduceTarget> occurrences,
+                                                    @NotNull PsiElement replacement) {
     if (occurrences.size() > 1) {
       LOG.error(
         "Unexpected multiple occurrences: " + occurrences.stream().map(PerlIntroduceTarget::toString).collect(Collectors.joining("; ")));
@@ -395,7 +396,7 @@ public abstract class PerlIntroduceTargetsHandler {
    * @return list of inserted elements
    * @apiNote all occurrences should be from the same element. This api implemented for multi-replacements
    */
-  public static @NotNull List<PsiElement> replaceOccurences(@NotNull List<PerlIntroduceTarget> occurrences,
+  public static @NotNull List<PsiElement> replaceOccurences(@NotNull List<? extends PerlIntroduceTarget> occurrences,
                                                             @NotNull PsiElement replacement) {
     if (occurrences.isEmpty()) {
       LOG.warn("Empty occurrences passed to replacement");

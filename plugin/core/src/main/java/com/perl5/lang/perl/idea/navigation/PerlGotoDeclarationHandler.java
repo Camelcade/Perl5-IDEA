@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,7 +55,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
   /**
    * Adds files references by {@link sourceElement} string content element
    */
-  private void addStringFileTargets(@NotNull PsiElement sourceElement, ArrayList<PsiElement> result) {
+  private void addStringFileTargets(@NotNull PsiElement sourceElement, ArrayList<? super PsiElement> result) {
     if (!(sourceElement instanceof PerlStringContentElement)) {
       return;
     }

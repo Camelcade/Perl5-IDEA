@@ -43,7 +43,7 @@ public abstract class PerlMapValue extends PerlListValue {
   }
 
   @Override
-  protected @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver, @NotNull List<PerlValue> resolvedElements) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver, @NotNull List<? extends PerlValue> resolvedElements) {
     return builder().addElements(resolvedElements).build();
   }
 

@@ -38,7 +38,7 @@ public final class PerlCallStaticValue extends PerlCallValue {
 
   public PerlCallStaticValue(@NotNull PerlValue namespaceNameValue,
                              @NotNull PerlValue subNameValue,
-                             @NotNull List<PerlValue> arguments,
+                             @NotNull List<? extends PerlValue> arguments,
                              boolean hasExplicitNamespace) {
     super(namespaceNameValue, subNameValue, arguments);
     myHasExplicitNamespace = hasExplicitNamespace;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ public class PerlDuckValue extends PerlListValue {
   }
 
   @Override
-  protected @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver, @NotNull List<PerlValue> resolvedElements) {
+  protected @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver, @NotNull List<? extends PerlValue> resolvedElements) {
     if (isEmpty() || !isDuckTypingEnabled()) {
       return UNKNOWN_VALUE;
     }
@@ -86,8 +86,8 @@ public class PerlDuckValue extends PerlListValue {
   private static void processNamespacesWithAllCallables(@Nullable String namespaceName,
                                                         @NotNull Set<String> callableNames,
                                                         @NotNull PerlValueResolver resolver,
-                                                        @NotNull Set<String> recursionControlSet,
-                                                        @NotNull Consumer<String> namespaceNameConsumer) {
+                                                        @NotNull Set<? super String> recursionControlSet,
+                                                        @NotNull Consumer<? super String> namespaceNameConsumer) {
     if (StringUtil.isEmpty(namespaceName) || !recursionControlSet.add(namespaceName)) {
       return;
     }

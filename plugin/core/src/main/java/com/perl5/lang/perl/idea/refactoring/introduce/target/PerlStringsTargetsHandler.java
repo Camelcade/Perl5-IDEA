@@ -47,7 +47,8 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
   }
 
   @Override
-  protected @NotNull List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+  protected @NotNull List<PsiElement> replaceTarget(@NotNull List<? extends PerlIntroduceTarget> occurrences,
+                                                    @NotNull PsiElement replacement) {
     if (occurrences.size() == 1 && occurrences.getFirst().isFullRange()) {
       return super.replaceTarget(occurrences, replacement);
     }
@@ -64,10 +65,10 @@ class PerlStringsTargetsHandler extends PerlGenericStringTargetsHandler {
     return ContainerUtil.filter(replacedString.getChildren(), it -> replacementRanges.contains(it.getTextRangeInParent()));
   }
 
-  private @NotNull PsiElement replaceWithConcatenation(@NotNull List<PerlIntroduceTarget> occurrences,
+  private @NotNull PsiElement replaceWithConcatenation(@NotNull List<? extends PerlIntroduceTarget> occurrences,
                                                        @NotNull CharSequence replacementText,
                                                        @NotNull PsiPerlStringSq elementToReplace,
-                                                       @NotNull Set<TextRange> replacementRanges) {
+                                                       @NotNull Set<? super TextRange> replacementRanges) {
     TextRange valueTextRange = ElementManipulators.getValueTextRange(elementToReplace);
     CharSequence valueText = valueTextRange.subSequence(elementToReplace.getNode().getChars());
     int valueOffset = valueTextRange.getStartOffset();

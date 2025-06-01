@@ -154,7 +154,7 @@ public class PerlPackageCompletionUtil {
   public static boolean processFirstNamespaceForEachName(@NotNull PerlCompletionProcessor completionProcessor,
                                                          @NotNull Project project,
                                                          @NotNull GlobalSearchScope searchScope,
-                                                         @NotNull Processor<PerlNamespaceDefinitionElement> namespaceProcessor) {
+                                                         @NotNull Processor<? super PerlNamespaceDefinitionElement> namespaceProcessor) {
     PerlTimeLogger logger = PerlTimeLogger.create(LOG);
     Collection<String> names = PerlPackageUtil.getKnownNamespaceNames(searchScope);
     logger.debug("Collected all namespaces names: ", names.size());

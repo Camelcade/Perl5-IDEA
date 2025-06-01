@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -329,7 +329,7 @@ public class PerlSyntaxInspection extends PerlInspection {
         };
       }
 
-      private @NotNull LocalQuickFix[] buildChangePerlVersionQuickFixes(@NotNull Predicate<PerlVersion> versionPredicate) {
+      private @NotNull LocalQuickFix[] buildChangePerlVersionQuickFixes(@NotNull Predicate<? super PerlVersion> versionPredicate) {
         List<LocalQuickFix> result = new ArrayList<>();
         result.add(new LocalQuickFix() {
           @Override

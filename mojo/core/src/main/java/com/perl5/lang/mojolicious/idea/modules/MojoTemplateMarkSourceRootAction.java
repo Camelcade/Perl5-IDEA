@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ public class MojoTemplateMarkSourceRootAction extends PerlMarkSourceRootAction {
   }
 
   @Override
-  protected boolean isEnabled(@NotNull List<VirtualFile> files, @NotNull Module module) {
+  protected boolean isEnabled(@NotNull List<? extends VirtualFile> files, @NotNull Module module) {
     return MojoUtil.isMojoAvailable(module) && super.isEnabled(files, module);
   }
 }

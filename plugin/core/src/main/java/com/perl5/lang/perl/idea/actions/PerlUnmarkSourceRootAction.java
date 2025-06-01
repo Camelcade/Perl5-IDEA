@@ -86,7 +86,7 @@ public class PerlUnmarkSourceRootAction extends PerlSourceRootAction {
   }
 
   @Override
-  protected boolean isEnabled(@NotNull List<VirtualFile> files, @NotNull Module module) {
+  protected boolean isEnabled(@NotNull List<? extends VirtualFile> files, @NotNull Module module) {
     PerlModuleExtension perlModuleExtension = PerlModuleExtension.getInstance(module);
     for (VirtualFile file : files) {
       if (perlModuleExtension.getRootType(file) != null) {

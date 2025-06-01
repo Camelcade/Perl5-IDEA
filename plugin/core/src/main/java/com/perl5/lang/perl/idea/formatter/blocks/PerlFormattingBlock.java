@@ -93,7 +93,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     return processSubBlocks(blocks.isEmpty() ? Collections.emptyList() : blocks);
   }
 
-  private void buildSubBlocksForNode(@NotNull List<Block> blocks, @NotNull ASTNode node) {
+  private void buildSubBlocksForNode(@NotNull List<? super Block> blocks, @NotNull ASTNode node) {
     TextRange formattedRange = myContext.getTextRange();
 
     ASTNode run = node.getFirstChildNode();
@@ -177,7 +177,7 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlElementTyp
     return rawBlocks;
   }
 
-  private @NotNull List<Block> processCommaSequenceBlocks(@NotNull List<Block> rawBlocks) {
+  private @NotNull List<Block> processCommaSequenceBlocks(@NotNull List<? extends Block> rawBlocks) {
     List<Block> result = new ArrayList<>();
     List<Block> blocksToGroup = new ArrayList<>();
     boolean[] hasFatComma = new boolean[]{false};

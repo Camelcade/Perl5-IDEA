@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -73,7 +73,7 @@ public class PerlUnicodeNamesCompletionProvider extends PerlCompletionProvider {
     }
   }
 
-  private void lazyCache(@NotNull PerlSimpleCompletionProcessor completionProcessor, @NotNull Map<String, String> cache) {
+  private void lazyCache(@NotNull PerlSimpleCompletionProcessor completionProcessor, @NotNull Map<? super String, ? super String> cache) {
     if (!completionProcessor.result()) {
       return;
     }

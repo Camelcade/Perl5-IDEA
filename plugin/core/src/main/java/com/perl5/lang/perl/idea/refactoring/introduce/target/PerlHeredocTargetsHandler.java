@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -83,7 +83,8 @@ public class PerlHeredocTargetsHandler extends PerlGenericStringTargetsHandler {
   }
 
   @Override
-  protected @NotNull List<PsiElement> replaceTarget(@NotNull List<PerlIntroduceTarget> occurrences, @NotNull PsiElement replacement) {
+  protected @NotNull List<PsiElement> replaceTarget(@NotNull List<? extends PerlIntroduceTarget> occurrences,
+                                                    @NotNull PsiElement replacement) {
     CharSequence replacementChars = replacement.getNode().getChars();
     assert replacement instanceof PerlVariable : "Got " + replacement;
 

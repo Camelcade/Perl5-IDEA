@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
   }
 
   @Override
-  protected @NotNull List<PsiElement> replaceNonTrivialTarget(@NotNull List<PerlIntroduceTarget> occurrences,
+  protected @NotNull List<PsiElement> replaceNonTrivialTarget(@NotNull List<? extends PerlIntroduceTarget> occurrences,
                                                               @NotNull PsiElement replacement) {
     PerlIntroduceTarget baseTarget = Objects.requireNonNull(occurrences.getFirst());
     PsiElement baseElement = Objects.requireNonNull(baseTarget.getPlace());
