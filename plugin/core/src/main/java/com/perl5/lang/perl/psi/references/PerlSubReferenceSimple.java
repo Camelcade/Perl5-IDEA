@@ -140,10 +140,6 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
     FLAGS |= FLAG_CONSTANT;
   }
 
-  public void setImported() {
-    FLAGS |= FLAG_IMPORTED;
-  }
-
   public @NotNull List<ResolveResult> getResolveResults(Collection<? extends PsiElement> relatedItems) {
     List<ResolveResult> result = new ArrayList<>();
 

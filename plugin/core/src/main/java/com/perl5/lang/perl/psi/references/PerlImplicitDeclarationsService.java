@@ -21,7 +21,6 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlImplicitSubDefinition;
@@ -31,7 +30,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -73,15 +71,6 @@ public class PerlImplicitDeclarationsService {
 
   public void registerSub(@NotNull PerlImplicitSubDefinition subDefinition) {
     doRegister(mySubsMap, subDefinition);
-  }
-
-  public @NotNull PerlImplicitSubDefinition registerAnonSub(@NotNull String namespaceName,
-                                                            @NotNull String baseName,
-                                                            @Nullable PerlValue returnValue) {
-    PerlImplicitSubDefinition subDefinition = new PerlImplicitSubDefinition(
-      myPsiManager, baseName, namespaceName, Collections.emptyList(), returnValue, true);
-    doRegister(mySubsMap, subDefinition);
-    return subDefinition;
   }
 
   private static <T extends PerlPackageMember> void doRegister(@NotNull Map<? super String, T> targetMap, @NotNull T entity) {
