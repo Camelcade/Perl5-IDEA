@@ -76,8 +76,8 @@ public abstract class PodSurrounder implements Surrounder {
     StringBuilder sb = new StringBuilder();
     while (!highlighterIterator.atEnd() && highlighterIterator.getStart() <= endOffset) {
       IElementType tokenType = highlighterIterator.getTokenType();
-      int effectiveTokenStart = highlighterIterator.getStart() < startOffset ? startOffset : highlighterIterator.getStart();
-      int effectiveTokenEnd = highlighterIterator.getEnd() > endOffset ? endOffset : highlighterIterator.getEnd();
+      int effectiveTokenStart = Math.max(highlighterIterator.getStart(), startOffset);
+      int effectiveTokenEnd = Math.min(highlighterIterator.getEnd(), endOffset);
       CharSequence text = documentChars.subSequence(effectiveTokenStart, effectiveTokenEnd);
       if (tokenType == POD_SYMBOL) {
         if (StringUtil.equals(text, "<")) {
