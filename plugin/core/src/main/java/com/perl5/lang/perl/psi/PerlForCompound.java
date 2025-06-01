@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,12 +32,15 @@ public interface PerlForCompound extends PerlLoop, PerlCompound {
   @Override
   default @Nullable PsiPerlContinueBlock getContinueBlock() {return null;}
 
+  @SuppressWarnings("override")
   @Nullable
   PsiPerlForCondition getForCondition();
 
+  @SuppressWarnings("override")
   @Nullable
   PsiPerlForInit getForInit();
 
+  @SuppressWarnings("override")
   @Nullable
   PsiPerlForMutator getForMutator();
 }

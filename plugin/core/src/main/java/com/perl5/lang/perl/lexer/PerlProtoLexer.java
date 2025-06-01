@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,25 +34,42 @@ public abstract class PerlProtoLexer implements FlexLexer {
   protected final IntArrayList myStateStack = new IntArrayList();
   private IElementType myLastTokenType = null;
 
+  @SuppressWarnings("override")
   public abstract void setTokenStart(int position);
 
+  @SuppressWarnings("override")
   public abstract void setTokenEnd(int position);
 
+  @SuppressWarnings("override")
   public abstract CharSequence getBuffer();
 
+  @SuppressWarnings("override")
   public abstract int getBufferStart();
 
+  @SuppressWarnings("override")
   public abstract int getBufferEnd();
 
+  @SuppressWarnings("override")
   public abstract int getNextTokenStart();
 
   protected void pushback() {
     yypushback(yylength());
   }
 
+  @SuppressWarnings("override")
   public abstract void yypushback(int number);
 
+  @SuppressWarnings("override")
   public abstract int yylength();
+
+  @SuppressWarnings("override")
+  public abstract IElementType perlAdvance() throws IOException;
+
+  @SuppressWarnings("override")
+  public abstract int getRealLexicalState();
+
+  @SuppressWarnings("override")
+  public abstract CharSequence yytext();
 
   public boolean hasPreparsedTokens() {
     return !myPreparsedTokensList.isEmpty();
@@ -88,13 +105,6 @@ public abstract class PerlProtoLexer implements FlexLexer {
   protected @Nullable IElementType getLastTokenType() {
     return myLastTokenType;
   }
-
-  public abstract IElementType perlAdvance() throws IOException;
-
-  public abstract int getRealLexicalState();
-
-  public abstract CharSequence yytext();
-
 
   /**
    * Reading tokens from parsed queue, setting start and end and returns them one by one

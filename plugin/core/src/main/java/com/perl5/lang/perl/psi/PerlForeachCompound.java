@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,9 +29,11 @@ public interface PerlForeachCompound extends PerlConvertableCompound, PerlLoop, 
     return PerlConvertableCompound.super.isConvertableToModifier() && getContinueBlock() == null;
   }
 
+  @SuppressWarnings("override")
   @Nullable
   PsiPerlForeachIterator getForeachIterator();
 
+  @SuppressWarnings("override")
   @Nullable
   PsiPerlConditionExpr getConditionExpr();
 }
