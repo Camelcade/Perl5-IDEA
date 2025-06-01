@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,10 +48,9 @@ public class PodStructureViewElement extends PsiTreeElementBase<PsiElement> {
   public @Nullable String getPresentableText() {
     PsiElement element = getElement();
     return switch (element) {
-      case null -> null;
       case PodFile ignored -> PerlBundle.message("pod.structure.view.file.title");
       case ItemPresentation presentation -> presentation.getPresentableText();
-      default -> null;
+      case null, default -> null;
     };
   }
 
