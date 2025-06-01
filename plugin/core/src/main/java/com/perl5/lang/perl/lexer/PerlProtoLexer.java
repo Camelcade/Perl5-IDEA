@@ -217,21 +217,6 @@ public abstract class PerlProtoLexer implements FlexLexer {
     myPreparsedTokensList.add(token);
   }
 
-  /**
-   * Adds preparsed token to the queue with consistency control
-   *
-   * @param token token to add
-   */
-  protected void unshiftPreparsedToken(CustomToken token) {
-    if (!myPreparsedTokensList.isEmpty() && myPreparsedTokensList.getFirst().getTokenStart() != token.getTokenEnd()) {
-      LOG.error("Tokens list size=" + myPreparsedTokensList.size() +
-                "; new token end=" + token.getTokenEnd() +
-                (myPreparsedTokensList.isEmpty() ? "" : " first token start=" + myPreparsedTokensList.getFirst().getTokenStart()));
-    }
-
-    myPreparsedTokensList.addFirst(token);
-  }
-
   protected void resetInternals() {
     myLastTokenType = null;
     myPreparsedTokensList.clear();
