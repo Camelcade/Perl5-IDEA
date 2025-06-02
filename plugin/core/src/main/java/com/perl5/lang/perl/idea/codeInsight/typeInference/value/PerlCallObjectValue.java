@@ -184,26 +184,28 @@ public final class PerlCallObjectValue extends PerlCallValue {
     return create(namespaceValue, name, Collections.emptyList(), superContext);
   }
 
-  public static @NotNull PerlCallObjectValue create(@NotNull String namespace, @NotNull String name, @NotNull List<PerlValue> arguments) {
+  public static @NotNull PerlCallObjectValue create(@NotNull String namespace,
+                                                    @NotNull String name,
+                                                    @NotNull List<? extends PerlValue> arguments) {
     return create(PerlScalarValue.create(namespace), name, arguments, null);
   }
 
   public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceNameValue,
                                                     @NotNull String name,
-                                                    @NotNull List<PerlValue> arguments) {
+                                                    @NotNull List<? extends PerlValue> arguments) {
     return create(namespaceNameValue, PerlScalarValue.create(name), arguments, null);
   }
 
   public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceNameValue,
                                                     @NotNull String name,
-                                                    @NotNull List<PerlValue> arguments,
+                                                    @NotNull List<? extends PerlValue> arguments,
                                                     @Nullable String superContext) {
     return create(namespaceNameValue, PerlScalarValue.create(name), arguments, superContext);
   }
 
   public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceNameValue,
                                                     @NotNull PerlValue nameValue,
-                                                    @NotNull List<PerlValue> arguments,
+                                                    @NotNull List<? extends PerlValue> arguments,
                                                     @Nullable String superContext) {
     return PerlValuesManager.intern(new PerlCallObjectValue(namespaceNameValue, nameValue, arguments, superContext));
   }

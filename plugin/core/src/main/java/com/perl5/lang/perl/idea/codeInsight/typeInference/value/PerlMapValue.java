@@ -29,7 +29,7 @@ import java.util.Map;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public abstract class PerlMapValue extends PerlListValue {
-  protected PerlMapValue(@NotNull List<PerlValue> elements) {
+  protected PerlMapValue(@NotNull List<? extends PerlValue> elements) {
     super(elements);
   }
 

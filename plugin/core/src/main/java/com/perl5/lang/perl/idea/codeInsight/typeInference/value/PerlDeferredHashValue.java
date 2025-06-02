@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public final class PerlDeferredHashValue extends PerlMapValue {
-  public PerlDeferredHashValue(@NotNull List<PerlValue> elements) {
+  public PerlDeferredHashValue(@NotNull List<? extends PerlValue> elements) {
     super(elements);
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ public interface Perl5SettingsConfigurableExtension {
     return EP_NAME.getExtensionList().stream();
   }
 
-  static void forEach(Consumer<Perl5SettingsConfigurableExtension> consumer) {
+  static void forEach(Consumer<? super Perl5SettingsConfigurableExtension> consumer) {
     for (Perl5SettingsConfigurableExtension extension : EP_NAME.getExtensionList()) {
       consumer.accept(extension);
     }

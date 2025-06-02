@@ -37,7 +37,8 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 
 public class PerlDuckValue extends PerlListValue {
   private static final Set<String> GENERIC_NAMES = Set.of("new", "isa", "DOES", "can", "VERSION", "IntellijIdeaRulezzz");
-  private PerlDuckValue(@NotNull List<PerlValue> elements) {
+
+  private PerlDuckValue(@NotNull List<? extends PerlValue> elements) {
     super(elements);
   }
 

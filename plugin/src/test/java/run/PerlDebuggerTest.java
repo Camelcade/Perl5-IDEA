@@ -272,7 +272,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     return debugTestScript(it -> it.setStartMode(PerlDebugOptionsSets.DEBUGGER_STARTUP_RUN));
   }
 
-  private @NotNull XDebugSession debugTestScript(@Nullable Consumer<GenericPerlRunConfiguration> configurator) {
+  private @NotNull XDebugSession debugTestScript(@Nullable Consumer<? super GenericPerlRunConfiguration> configurator) {
     return debugScript("simple", "testscript.pl", configurator);
   }
 

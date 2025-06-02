@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -87,7 +87,7 @@ public final class PerlScalarUtil implements PerlElementTypes {
                                                    @NotNull GlobalSearchScope scope,
                                                    @NotNull String canonicalName,
                                                    boolean processAll,
-                                                   @NotNull Processor<PerlVariableDeclarationElement> processor) {
+                                                   @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
     return PerlImplicitDeclarationsService.getInstance(project).processScalars(canonicalName, processor) &&
            PerlVariableUtil.processGlobalVariables(KEY_SCALAR, project, scope, processor, canonicalName, !processAll);
   }
@@ -97,7 +97,7 @@ public final class PerlScalarUtil implements PerlElementTypes {
                                              @NotNull GlobalSearchScope scope,
                                              @Nullable String namespaceName,
                                              boolean processAll,
-                                             @NotNull Processor<PerlVariableDeclarationElement> processor) {
+                                             @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
     if (namespaceName == null) {
       return PerlImplicitDeclarationsService.getInstance(project).processScalars(processor) &&
              PerlVariableUtil.processGlobalVariables(KEY_SCALAR, project, scope, processor, processAll);

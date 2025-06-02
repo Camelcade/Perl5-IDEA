@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ public class PerlLightMethodDefinitionElement<Delegate extends PerlPolyNamedElem
                                           @Nullable String packageName,
                                           @NotNull List<PerlSubArgument> subArguments,
                                           @Nullable PerlSubAnnotations annotations,
-                                          @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProfider,
+                                          @NotNull AtomicNotNullLazyValue<? extends PerlValue> returnValueFromCodeProfider,
                                           @Nullable PsiPerlBlock subDefinitionBody) {
     super(delegate, name, elementType, nameIdentifier, packageName, subArguments, annotations, returnValueFromCodeProfider,
           subDefinitionBody);

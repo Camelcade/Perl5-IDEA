@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -82,7 +82,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
   @Override
   public void createSdkInteractively(@Nullable Project project,
                                      @NotNull PerlHostHandler<?, ?> hostHandler,
-                                     @Nullable Consumer<Sdk> sdkConsumer, @NotNull Disposable disposable) {
+                                     @Nullable Consumer<? super Sdk> sdkConsumer, @NotNull Disposable disposable) {
     hostHandler.chooseFileInteractively(
       PerlBundle.message("perl.vm.choose.executable", StringUtil.capitalize(getPresentableName())),
       hostData -> suggestDefaultVersionManagerPath(hostData, disposable),
@@ -143,7 +143,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
   private void createSdkInteractively(@Nullable Project project,
                                       @Nullable String selectedPath,
                                       @Nullable PerlHostData<?, ?> perlHostData,
-                                      @Nullable Consumer<Sdk> sdkConsumer) {
+                                      @Nullable Consumer<? super Sdk> sdkConsumer) {
     if (StringUtil.isEmpty(selectedPath) || perlHostData == null) {
       return;
     }
@@ -209,7 +209,7 @@ public abstract class PerlRealVersionManagerHandler<Data extends PerlRealVersion
    */
   public void createInterpreter(@NotNull String distributionId,
                                 @NotNull PerlVersionManagerAdapter vmAdapter,
-                                @Nullable Consumer<Sdk> sdkConsumer,
+                                @Nullable Consumer<? super Sdk> sdkConsumer,
                                 @Nullable Project project) {
     List<String> perlPath = vmAdapter.execWith(distributionId, "perl", PERL_LE, PERL_CTRL_X);
     if (perlPath == null || perlPath.size() != 1) {

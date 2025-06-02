@@ -64,7 +64,8 @@ public abstract class PerlValueResolver {
     return perlValue;
   }
 
-  public @NotNull PerlValue resolve(@NotNull PerlValue unresolvedParameter, @NotNull Function<PerlValue, PerlValue> converter) {
+  public @NotNull PerlValue resolve(@NotNull PerlValue unresolvedParameter,
+                                    @NotNull Function<? super PerlValue, ? extends PerlValue> converter) {
     return PerlValuesBuilder.convert(resolve(unresolvedParameter), converter);
   }
 
