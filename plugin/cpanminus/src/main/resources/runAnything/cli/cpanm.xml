@@ -5,7 +5,7 @@
   ~ you may not use this file except in compliance with the License.
   ~ You may obtain a copy of the License at
   ~
-  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~ https://www.apache.org/licenses/LICENSE-2.0
   ~
   ~ Unless required by applicable law or agreed to in writing, software
   ~ distributed under the License is distributed on an "AS IS" BASIS,
@@ -28,7 +28,7 @@
     <option value="--showdeps" description="Only display direct dependencies"/>
     <option value="--reinstall" description="Reinstall the distribution even if you already have the latest version installed"/>
     <option value="--mirror" parameterPlaceholder="url"
-            description="Specify the base URL for the mirror (e.g. http://cpan.cpantesters.org/)"/>
+            description="Specify the base URL for the mirror (e.g. https://cpan.cpantesters.org/)"/>
     <option value="--mirror-only" parameterPlaceholder="url" description="Use the mirror's index file instead of the CPAN Meta DB"/>
     <option value="--from" alias="-M" parameterPlaceholder="url" description="Use only this mirror base URL and its index file"/>
     <option value="--prompt" description="Prompt when configure/build/test fails"/>
