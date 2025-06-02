@@ -169,6 +169,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
                                                           @NotNull Predicate<? super String> nameValidator,
                                                           @NotNull Function<? super String, String> pathValidator) {
     final FileChooserDescriptor descriptor = new FileChooserDescriptor(true, isChooseFolders(), false, false, false, false) {
+      @SuppressWarnings("deprecation")
       @Override
       public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
         return super.isFileVisible(file, showHiddenFiles) && (file.isDirectory() || nameValidator.test(file.getName()));
