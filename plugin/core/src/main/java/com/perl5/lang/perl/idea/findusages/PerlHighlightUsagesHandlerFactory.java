@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import com.intellij.psi.impl.source.tree.injected.InjectedLanguageEditorUtil;
-import com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Consumer;
@@ -53,7 +52,7 @@ public class PerlHighlightUsagesHandlerFactory implements HighlightUsagesHandler
     PsiElement target = injectedLanguageManager.findInjectedElementAt(file, offset);
     if (target != null && target.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
       //noinspection deprecation
-      editor = InjectedLanguageUtil.getEditorForInjectedLanguageNoCommit(editor, file, offset);
+      editor = com.intellij.psi.impl.source.tree.injected.InjectedLanguageUtil.getEditorForInjectedLanguageNoCommit(editor, file, offset);
       file = target.getContainingFile();
       offset = TargetElementUtil.adjustOffset(file, editor.getDocument(), editor.getCaretModel().getOffset());
     }

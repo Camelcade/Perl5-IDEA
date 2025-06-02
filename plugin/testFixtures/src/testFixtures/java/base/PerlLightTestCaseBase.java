@@ -25,8 +25,6 @@ import com.intellij.codeInsight.controlflow.Instruction;
 import com.intellij.codeInsight.daemon.GutterMark;
 import com.intellij.codeInsight.daemon.LineMarkerInfo;
 import com.intellij.codeInsight.daemon.RelatedItemLineMarkerInfo;
-import com.intellij.codeInsight.documentation.DocumentationComponent;
-import com.intellij.codeInsight.documentation.DocumentationManager;
 import com.intellij.codeInsight.editorActions.SelectWordHandler;
 import com.intellij.codeInsight.generation.surroundWith.SurroundWithHandler;
 import com.intellij.codeInsight.highlighting.BraceMatchingUtil;
@@ -2204,7 +2202,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     int offset = getEditor().getCaretModel().getOffset();
     PsiElement elementAtCaret = getFile().findElementAt(offset);
     PsiElement providerSource = ObjectUtils.notNull(elementAtCaret, getFile());
-    @SuppressWarnings("removal") DocumentationProvider documentationProvider = DocumentationManager.getProviderFromElement(providerSource);
+    @SuppressWarnings("removal") DocumentationProvider documentationProvider =
+      com.intellij.codeInsight.documentation.DocumentationManager.getProviderFromElement(providerSource);
     assertNotNull("Unable to find documentation provider for " + providerSource, documentationProvider);
     PsiElement documentationElement =
       documentationProvider.getDocumentationElementForLookupItem(PsiManager.getInstance(getProject()), elementObject, elementAtCaret);
@@ -2673,10 +2672,11 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     PsiFile file = getFile();
     PsiElement elementAtCaret = file != null ? file.findElementAt(editor.getCaretModel().getOffset()) : null;
     assertNotNull(elementAtCaret);
-    @SuppressWarnings("removal") PsiElement targetElement = DocumentationManager.getInstance(getProject()).findTargetElement(editor, file);
+    @SuppressWarnings("removal") PsiElement targetElement =
+      com.intellij.codeInsight.documentation.DocumentationManager.getInstance(getProject()).findTargetElement(editor, file);
     assertNotNull(targetElement);
     @SuppressWarnings("removal") DocumentationProvider documentationProvider =
-      DocumentationManager.getProviderFromElement(targetElement, elementAtCaret);
+      com.intellij.codeInsight.documentation.DocumentationManager.getProviderFromElement(targetElement, elementAtCaret);
     assertNotNull(documentationProvider);
     String generatedDoc = StringUtil.notNullize(documentationProvider.generateDoc(targetElement, elementAtCaret));
     return Pair.create(targetElement, generatedDoc);
@@ -2711,7 +2711,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    */
   private @Nullable PsiElement getLinkTarget(@NotNull PsiElement psiElement, @NotNull String refText) {
     PsiManager manager = psiElement.getManager();
-    @SuppressWarnings("removal") DocumentationProvider provider = DocumentationManager.getProviderFromElement(psiElement);
+    @SuppressWarnings("removal") DocumentationProvider provider =
+      com.intellij.codeInsight.documentation.DocumentationManager.getProviderFromElement(psiElement);
     PsiElement targetElement = provider.getDocumentationElementForLink(manager, refText, psiElement);
     if (targetElement == null) {
       for (DocumentationProvider documentationProvider : DocumentationProvider.EP_NAME.getExtensionList()) {
