@@ -60,8 +60,6 @@ public class PerlAutoColonInVariablesPopupTest extends PerlCompletionPopupTestCa
     return myShouldHavePopupOnFirstColon;
   }
 
-  ;
-
   protected boolean shouldHavePopupOnSecondColon() {
     return myShouldHavePopupOnSecondColon;
   }
