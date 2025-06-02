@@ -31,7 +31,7 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 public final class PerlArrayValue extends PerlListValue implements Iterable<PerlValue> {
   public static final PerlArrayValue EMPTY_ARRAY = PerlValuesManager.intern(new PerlArrayValue(Collections.emptyList()));
 
-  private PerlArrayValue(@NotNull List<PerlValue> elements) {
+  private PerlArrayValue(@NotNull List<? extends PerlValue> elements) {
     super(elements);
   }
 

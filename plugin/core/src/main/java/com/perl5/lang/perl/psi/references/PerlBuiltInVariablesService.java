@@ -73,24 +73,24 @@ public class PerlBuiltInVariablesService {
     return myHashes.get(name);
   }
 
-  public boolean processScalars(@NotNull Processor<PerlVariableDeclarationElement> processor) {
+  public boolean processScalars(@NotNull Processor<? super PerlVariableDeclarationElement> processor) {
     return processVariables(myScalars, processor);
   }
 
-  public boolean processArrays(@NotNull Processor<PerlVariableDeclarationElement> processor) {
+  public boolean processArrays(@NotNull Processor<? super PerlVariableDeclarationElement> processor) {
     return processVariables(myArrays, processor);
   }
 
-  public boolean processHashes(@NotNull Processor<PerlVariableDeclarationElement> processor) {
+  public boolean processHashes(@NotNull Processor<? super PerlVariableDeclarationElement> processor) {
     return processVariables(myHashes, processor);
   }
 
   @SuppressWarnings("UnusedReturnValue")
-  public boolean processVariables(@NotNull Processor<PerlVariableDeclarationElement> processor) {
+  public boolean processVariables(@NotNull Processor<? super PerlVariableDeclarationElement> processor) {
     return processScalars(processor) && processArrays(processor) && processHashes(processor) && processGlobs(processor);
   }
 
-  public boolean processGlobs(@NotNull Processor<PerlVariableDeclarationElement> processor) {
+  public boolean processGlobs(@NotNull Processor<? super PerlVariableDeclarationElement> processor) {
     return processVariables(myGlobs, processor);
   }
 

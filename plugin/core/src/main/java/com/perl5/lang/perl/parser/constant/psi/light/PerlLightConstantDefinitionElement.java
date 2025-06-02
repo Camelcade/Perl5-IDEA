@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,7 +40,7 @@ public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionEl
                                             @Nullable String packageName,
                                             @NotNull List<PerlSubArgument> subArguments,
                                             @Nullable PerlSubAnnotations annotations,
-                                            @NotNull AtomicNotNullLazyValue<PerlValue> returnValueFromCodeProvider) {
+                                            @NotNull AtomicNotNullLazyValue<? extends PerlValue> returnValueFromCodeProvider) {
     super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations, returnValueFromCodeProvider, null);
   }
 

@@ -102,7 +102,7 @@ public final class PerlArrayUtil implements PerlElementTypes {
                                                   @NotNull GlobalSearchScope scope,
                                                   @NotNull String canonicalName,
                                                   boolean processAll,
-                                                  @NotNull Processor<PerlVariableDeclarationElement> processor) {
+                                                  @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
     return PerlImplicitDeclarationsService.getInstance(project).processArrays(canonicalName, processor) &&
            PerlVariableUtil.processGlobalVariables(KEY_ARRAY, project, scope, processor, canonicalName, processAll);
   }
@@ -112,7 +112,7 @@ public final class PerlArrayUtil implements PerlElementTypes {
                                             @NotNull GlobalSearchScope scope,
                                             @Nullable String namespaceName,
                                             boolean processAll,
-                                            @NotNull Processor<PerlVariableDeclarationElement> processor) {
+                                            @NotNull Processor<? super PerlVariableDeclarationElement> processor) {
     if( namespaceName == null){
       return PerlImplicitDeclarationsService.getInstance(project).processArrays( processor) &&
              PerlVariableUtil.processGlobalVariables(KEY_ARRAY, project, scope, processor, processAll);
