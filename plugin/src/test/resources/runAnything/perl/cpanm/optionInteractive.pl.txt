@@ -7,7 +7,7 @@ Completion items:
 	[--installdeps]; [Only install dependencies]; /perl5language.png; [cpanm --interactive --installdeps]
 	[--local-lib <path>]; [Specify the install base to install modules]; /perl5language.png; [cpanm --interactive --local-lib <path>]
 	[--local-lib-contained <path>]; [Specify the install base to install all non-core modules]; /perl5language.png; [cpanm --interactive --local-lib-contained <path>]
-	[--mirror <url>]; [Specify the base URL for the mirror (e.g. http://cpan.cpantesters.org/)]; /perl5language.png; [cpanm --interactive --mirror <url>]
+	[--mirror <url>]; [Specify the base URL for the mirror (e.g. https://cpan.cpantesters.org/)]; /perl5language.png; [cpanm --interactive --mirror <url>]
 	[--mirror-only <url>]; [Use the mirror's index file instead of the CPAN Meta DB]; /perl5language.png; [cpanm --interactive --mirror-only <url>]
 	[--notest]; [Do not run unit tests]; /perl5language.png; [cpanm --interactive --notest]
 	[--prompt]; [Prompt when configure/build/test fails]; /perl5language.png; [cpanm --interactive --prompt]
