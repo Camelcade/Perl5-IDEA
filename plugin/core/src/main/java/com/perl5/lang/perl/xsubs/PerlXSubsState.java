@@ -35,7 +35,6 @@ import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
 import com.intellij.openapi.progress.util.ProgressIndicatorUtils;
-import com.intellij.openapi.progress.util.ReadTask;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectUtil;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -141,8 +140,8 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   }
 
   public void rescanFiles(@Nullable Runnable callback) {
-    //noinspection deprecation
-    ProgressIndicatorUtils.scheduleWithWriteActionPriority(new ReadTask() {
+    //noinspection deprecation this requires migration to kotlin
+    ProgressIndicatorUtils.scheduleWithWriteActionPriority(new com.intellij.openapi.progress.util.ReadTask() {
       @Override
       public void computeInReadAction(@NotNull ProgressIndicator indicator) throws ProcessCanceledException {
         if (!PerlProjectManager.isPerlEnabled(myProject)) {
