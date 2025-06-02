@@ -136,6 +136,7 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
 
     private @NotNull FileChooserDescriptor createFileChooserDescriptor() {
       FileChooserDescriptor fileChooserDescriptor = new FileChooserDescriptor(true, true, false, false, false, true) {
+        @SuppressWarnings("deprecation")
         @Override
         public boolean isFileVisible(VirtualFile file, boolean showHiddenFiles) {
           return getRunConfigurationProducer().isOurFile(file);
