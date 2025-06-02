@@ -13,7 +13,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
+<!--suppress LiveTemplateI18n -->
 <templateSet group="Perl5: POD">
     <template name="=head1" value="=head1 $TEXT$&#10;&#10;$END$&#10;" description="=head1" toReformat="true"
               toShortenFQNames="true">

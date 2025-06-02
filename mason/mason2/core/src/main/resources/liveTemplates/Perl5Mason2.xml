@@ -15,6 +15,7 @@
   ~ limitations under the License.
   -->
 
+<!--suppress LiveTemplateI18n -->
 <templateSet group="Perl5 Mason2">
     <template name="%method" value="&lt;%method $NAME$ ($SIGNATURE$)&gt;&#10;$END$&#10;&lt;/%method&gt;"
               description="Mason &lt;%method&gt;" toReformat="true" toShortenFQNames="true">

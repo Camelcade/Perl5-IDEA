@@ -14,6 +14,7 @@
   ~ limitations under the License.
   -->
 
+<!--suppress LiveTemplateI18n -->
 <templateSet group="Template Toolkit 2 Postfix">
     <template name="if" value="IF $COND$" description="IF condition" toReformat="false" toShortenFQNames="true">
         <variable name="COND" expression="&quot;condition&quot;" defaultValue="" alwaysStopAt="true"/>

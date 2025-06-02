@@ -14,6 +14,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
+<!--suppress LiveTemplateI18n -->
 <templateSet group="Perl5">
     <template name="sql" value="my $query = &lt;&lt;'SQL';&#10;    $END$&#10;SQL&#10;" description="query"
               toReformat="true" toShortenFQNames="true">

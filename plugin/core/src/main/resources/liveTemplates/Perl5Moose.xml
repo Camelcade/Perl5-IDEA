@@ -14,6 +14,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
+<!--suppress LiveTemplateI18n -->
 <templateSet group="Perl5: Moose">
     <template name="ex" value="extends '$CLASSNAME$'$VERSION$;&#10;$END$"
               description="extends statement with version" toReformat="true" toShortenFQNames="true">
