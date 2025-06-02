@@ -14,6 +14,7 @@
   ~ limitations under the License.
   -->
 
+<!--suppress LiveTemplateI18n -->
 <templateSet group="Template Toolkit 2">
     <template name="ge" value="$OPENTAG$ GET $VAR$ $CLOSETAG$" description="GET directive" toReformat="false" toShortenFQNames="true">
         <variable name="VAR" expression="&quot;element&quot;" defaultValue="" alwaysStopAt="true"/>

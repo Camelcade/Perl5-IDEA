@@ -15,6 +15,7 @@
   ~ limitations under the License.
   -->
 
+<!--suppress LiveTemplateI18n -->
 <templateSet group="Perl5 HTML::Mason">
     <template name="%method" value="&lt;%method $NAME$&gt;&#10;$END$&#10;&lt;/%method&gt;"
               description="HTML::Mason &lt;%method&gt;" toReformat="true" toShortenFQNames="true">

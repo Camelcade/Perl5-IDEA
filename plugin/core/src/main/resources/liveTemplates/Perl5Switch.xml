@@ -14,7 +14,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
+<!--suppress LiveTemplateI18n -->
 <templateSet group="Perl5: Switch">
   <template name="sw" value="switch ($VAL$)&#10;{&#10;    $SELECTION$$END$&#10;}" description="switch block"
               toReformat="true" toShortenFQNames="true">

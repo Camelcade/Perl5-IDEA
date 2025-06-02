@@ -13,7 +13,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
+<!--suppress LiveTemplateI18n -->
 <templateSet group="Perl5">
     <template name="tr" value="try{&#10;    $SELECTION$$END$&#10;}" description="Try block" toReformat="true"
               toShortenFQNames="true">

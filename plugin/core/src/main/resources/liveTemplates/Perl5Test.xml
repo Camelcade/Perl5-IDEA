@@ -14,7 +14,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-
+<!--suppress LiveTemplateI18n -->
 <templateSet group="Perl5: Test::More">
     <template name="st" value="subtest $NAME$ =&gt; sub{&#10;    $SELECTION$$END$&#10;};" description="subtest"
               toReformat="true" toShortenFQNames="true">
