@@ -31,7 +31,6 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationEditor;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationEditorPanel;
-import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationProducer;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -43,10 +42,10 @@ import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.FILES_JOI
 import static com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration.FILES_PARSER;
 
 class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<PerlAbstractTestRunConfiguration> {
-  private final @NotNull PerlAbstractTestRunConfigurationProducer<PerlAbstractTestRunConfiguration> myProducer;
+  private final @NotNull PerlAbstractTestRunConfigurationProducer<? extends PerlAbstractTestRunConfiguration> myProducer;
 
   public PerlTestRunConfigurationEditor(@NotNull Project project,
-                                        @NotNull PerlAbstractTestRunConfigurationProducer<PerlAbstractTestRunConfiguration> producer) {
+                                        @NotNull PerlAbstractTestRunConfigurationProducer<? extends PerlAbstractTestRunConfiguration> producer) {
     super(project);
     myProducer = producer;
   }
@@ -148,7 +147,7 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
     }
 
     @Override
-    protected final @NotNull GenericPerlRunConfigurationProducer<PerlAbstractTestRunConfiguration> getRunConfigurationProducer() {
+    protected final @NotNull PerlAbstractTestRunConfigurationProducer<? extends PerlAbstractTestRunConfiguration> getRunConfigurationProducer() {
       return myProducer;
     }
   }

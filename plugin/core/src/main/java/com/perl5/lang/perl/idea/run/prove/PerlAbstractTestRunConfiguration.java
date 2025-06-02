@@ -97,7 +97,7 @@ public abstract class PerlAbstractTestRunConfiguration extends GenericPerlRunCon
     return new PerlTestRunConfigurationEditor(getProject(), getRunConfigurationProducer());
   }
 
-  protected abstract @NotNull PerlAbstractTestRunConfigurationProducer getRunConfigurationProducer();
+  protected abstract @NotNull PerlAbstractTestRunConfigurationProducer<? extends PerlAbstractTestRunConfiguration> getRunConfigurationProducer();
 
   @Override
   public String suggestedName() {
