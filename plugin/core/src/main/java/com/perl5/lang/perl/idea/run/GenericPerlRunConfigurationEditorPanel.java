@@ -249,5 +249,5 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   /**
    * @return a run configuration producer for the run configuration
    */
-  protected abstract @NotNull GenericPerlRunConfigurationProducer<Configuration> getRunConfigurationProducer();
+  protected abstract @NotNull GenericPerlRunConfigurationProducer<? extends Configuration> getRunConfigurationProducer();
 }
