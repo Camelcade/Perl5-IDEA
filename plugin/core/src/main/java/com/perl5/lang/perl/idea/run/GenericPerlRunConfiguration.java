@@ -122,7 +122,8 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     var runner = executionEnvironment.getRunner();
     if (!(runner instanceof GenericPerlProgramRunner genericPerlProgramRunner)) {
       LOG.error("GenericPerlProgramRunner expected, got " + runner);
-      throw new ExecutionException("Wrong runner used to run perl configuration, please report to Perl plugin developers");
+      throw new ExecutionException(
+        PerlBundle.message("dialog.message.wrong.runner.used.to.run.perl.configuration.please.report.to.perl.plugin.developers"));
     }
     return genericPerlProgramRunner.createState(executionEnvironment);
   }
@@ -313,7 +314,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     if (myDebugPort == null) {
       myDebugPort = NetUtils.tryToFindAvailableSocketPort();
       if (myDebugPort == -1) {
-        throw new ExecutionException("No free port to work on");
+        throw new ExecutionException(PerlBundle.message("dialog.message.no.free.port.to.work.on"));
       }
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,23 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5
 
-package com.perl5;
+import com.intellij.DynamicBundle
+import org.jetbrains.annotations.Nls
+import org.jetbrains.annotations.PropertyKey
 
-import com.intellij.DynamicBundle;
-import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.PropertyKey;
+const val PATH_TO_BUNDLE: String = "messages.PerlBundle"
 
-public class PerlBundle extends DynamicBundle {
-  private static final PerlBundle INSTANCE = new PerlBundle();
-  public static final String PATH_TO_BUNDLE = "messages.PerlBundle";
+object PerlBundle : DynamicBundle(PATH_TO_BUNDLE) {
 
-  private PerlBundle() {
-    super(PATH_TO_BUNDLE);
-  }
-
-  public static @Nls @NotNull String message(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, @NotNull Object... params) {
-    return INSTANCE.getMessage(key, params);
-  }
+  @JvmStatic
+  fun message(key: @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String, vararg params: Any): @Nls String = getMessage(key, *params)
 }

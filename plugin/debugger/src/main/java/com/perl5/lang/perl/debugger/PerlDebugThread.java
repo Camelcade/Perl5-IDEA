@@ -67,7 +67,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static com.perl5.PerlBundle.PATH_TO_BUNDLE;
+import static com.perl5.PerlBundleKt.PATH_TO_BUNDLE;
 import static com.perl5.lang.perl.debugger.protocol.PerlDebuggingEventReady.MODULE_VERSION_PREFIX;
 import static com.perl5.lang.perl.debugger.run.run.debugger.PerlDebugProfileState.DEBUG_PACKAGE;
 
