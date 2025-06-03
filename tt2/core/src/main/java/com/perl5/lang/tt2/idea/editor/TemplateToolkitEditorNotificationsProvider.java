@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,7 +56,7 @@ public class TemplateToolkitEditorNotificationsProvider implements EditorNotific
   private @NotNull EditorNotificationPanel createNotificationPanel() {
     EditorNotificationPanel panel = new EditorNotificationPanel();
     panel.setText(TemplateToolkitBundle.message("tt2.error.file.not.in.root"));
-    panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
+    panel.createActionLabel(TemplateToolkitBundle.message("link.label.configure"), () -> Perl5SettingsConfigurable.open(myProject));
     return panel;
   }
 }

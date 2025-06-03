@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.tt2.idea.liveTemplates;
 
 import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiErrorElement;
@@ -25,6 +26,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.lang.tt2.TemplateToolkitBundle;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
@@ -35,7 +37,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public abstract class TemplateToolkitTemplateContextType extends TemplateContextType implements TemplateToolkitElementTypes {
-  public TemplateToolkitTemplateContextType(@NotNull String presentableName) {
+  public TemplateToolkitTemplateContextType(@NlsContexts.Label @NotNull String presentableName) {
     super(presentableName);
   }
 
@@ -64,7 +66,7 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
       this(TemplateToolkitLanguage.NAME);
     }
 
-    public Generic(String presentableName) {
+    public Generic(@NlsContexts.Label String presentableName) {
       super(presentableName);
     }
 
@@ -76,10 +78,10 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class Postfix extends TemplateToolkitTemplateContextType.Generic {
     public Postfix() {
-      super("Postfix");
+      super(TemplateToolkitBundle.message("label.postfix"));
     }
 
-    public Postfix(String presentableName) {
+    public Postfix(@NlsContexts.Label String presentableName) {
       super(presentableName);
     }
 
@@ -102,10 +104,10 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class CommandPosition extends TemplateToolkitTemplateContextType.Generic {
     public CommandPosition() {
-      this("Directive");
+      this(TemplateToolkitBundle.message("label.directive"));
     }
 
-    public CommandPosition(String presentableName) {
+    public CommandPosition(@NlsContexts.Label String presentableName) {
       super(presentableName);
     }
 
@@ -117,10 +119,10 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class CommandPositionElsif extends TemplateToolkitTemplateContextType.CommandPosition {
     public CommandPositionElsif() {
-      this("ELSIF/ELSE branch");
+      this(TemplateToolkitBundle.message("label.elsif.else.branch"));
     }
 
-    public CommandPositionElsif(String presentableName) {
+    public CommandPositionElsif(@NlsContexts.Label String presentableName) {
       super(presentableName);
     }
 
@@ -135,10 +137,10 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class CommandPositionCase extends TemplateToolkitTemplateContextType.CommandPosition {
     public CommandPositionCase() {
-      this("CASE branch");
+      this(TemplateToolkitBundle.message("label.case.branch"));
     }
 
-    public CommandPositionCase(String presentableName) {
+    public CommandPositionCase(@NlsContexts.Label String presentableName) {
       super(presentableName);
     }
 
@@ -150,10 +152,10 @@ public abstract class TemplateToolkitTemplateContextType extends TemplateContext
 
   public static class CommandPositionCatch extends TemplateToolkitTemplateContextType.CommandPosition {
     public CommandPositionCatch() {
-      this("CATCH/FINAL branch");
+      this(TemplateToolkitBundle.message("label.catch.final.branch"));
     }
 
-    public CommandPositionCatch(String presentableName) {
+    public CommandPositionCatch(@NlsContexts.Label String presentableName) {
       super(presentableName);
     }
 
