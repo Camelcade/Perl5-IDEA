@@ -13,22 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.mason2
 
-package com.perl5.lang.mason2.idea.livetemplates;
+import com.intellij.DynamicBundle
+import org.jetbrains.annotations.Nls
+import org.jetbrains.annotations.PropertyKey
 
-import com.intellij.psi.PsiFile;
-import com.perl5.lang.htmlmason.idea.livetemplates.AbstractMasonTemplateContextType;
-import com.perl5.lang.mason2.Mason2Bundle;
-import com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl;
+private const val PATH_TO_BUNDLE = "messages.MasonBundle"
 
-
-public class MasonTemplateContextType extends AbstractMasonTemplateContextType {
-  public MasonTemplateContextType() {
-    super(Mason2Bundle.message("label.mason2.template"));
-  }
-
-  @Override
-  protected boolean isMyFile(PsiFile file) {
-    return file instanceof MasonTemplatingFileImpl;
-  }
+object Mason2Bundle : DynamicBundle(PATH_TO_BUNDLE) {
+  @JvmStatic
+  fun message(key: @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String, vararg params: Any): @Nls String = getMessage(key, *params)
 }

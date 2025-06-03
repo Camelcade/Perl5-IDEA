@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.perl5.lang.mason2.filetypes;
 
 import com.intellij.lang.Language;
+import com.perl5.lang.mason2.Mason2Bundle;
 import com.perl5.lang.mason2.Mason2Icons;
 import com.perl5.lang.mason2.Mason2Language;
 import com.perl5.lang.perl.fileTypes.PurePerlFileType;
@@ -45,7 +46,7 @@ public class MasonPurePerlComponentFileType extends PurePerlFileType {
 
   @Override
   public @NotNull String getDescription() {
-    return "Mason2 pure Perl component";
+    return Mason2Bundle.message("label.mason2.pure.perl.component");
   }
 
   @Override

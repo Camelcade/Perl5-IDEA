@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotificationProvider;
+import com.perl5.lang.mason2.Mason2Bundle;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
@@ -50,12 +51,12 @@ public class MasonPathsNotification implements EditorNotificationProvider, DumbA
       return null;
     }
     if (MasonSettings.getInstance(myProject).getComponentsRoots().isEmpty()) {
-      return fileEditor -> createNotificationPanel("Mason2 components roots are not configured");
+      return fileEditor -> createNotificationPanel(Mason2Bundle.message("label.mason2.components.roots.are.not.configured"));
     }
     else {
       PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
       if (psiFile instanceof MasonFileImpl masonFile && masonFile.getComponentRoot() == null) {
-        return fileEditor -> createNotificationPanel("Component is not under one of configured roots");
+        return fileEditor -> createNotificationPanel(Mason2Bundle.message("label.component.not.under.one.configured.roots"));
       }
     }
     return null;
@@ -64,7 +65,7 @@ public class MasonPathsNotification implements EditorNotificationProvider, DumbA
   private @NotNull EditorNotificationPanel createNotificationPanel(@NotNull @NlsContexts.Label String message) {
     EditorNotificationPanel panel = new EditorNotificationPanel();
     panel.setText(message);
-    panel.createActionLabel("Configure", () -> Perl5SettingsConfigurable.open(myProject));
+    panel.createActionLabel(Mason2Bundle.message("link.label.configure"), () -> Perl5SettingsConfigurable.open(myProject));
     return panel;
   }
 }
