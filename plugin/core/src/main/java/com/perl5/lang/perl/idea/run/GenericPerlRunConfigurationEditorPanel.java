@@ -38,6 +38,7 @@ import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SdkManipulator;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5RealSdkWrapper;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers.Perl5SdkWrapper;
 import net.miginfocom.swing.MigLayout;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -118,6 +119,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     return Arrays.asList(myLabeledPerlArgumentsPanel, myLabeledConsoleCharset, myRequiredModulesLabeledField);
   }
 
+  @Nls
   protected @NotNull String getProgramArgumentsLabel() {
     return PerlBundle.message("perl.run.option.script.arguments");
   }
@@ -165,6 +167,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     return scriptField;
   }
 
+  @NlsContexts.Label
   protected @NotNull String getScriptFieldLabelText() {
     return PerlBundle.message("perl.run.option.script");
   }
