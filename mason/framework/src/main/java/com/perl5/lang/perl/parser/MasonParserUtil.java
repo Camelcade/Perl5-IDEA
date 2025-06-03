@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,9 @@ package com.perl5.lang.perl.parser;
 
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.MasonFrameworkBundle;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -39,20 +41,25 @@ public class MasonParserUtil {
   }
 
   public static boolean endOrRecover(@NotNull PsiBuilder b, @NotNull IElementType toElement) {
-    return endOrRecover(b, toElement, "Error");
+    return endOrRecover(b, toElement, MasonFrameworkBundle.message("parsing.error.error"));
   }
 
-  public static boolean endOrRecover(@NotNull PsiBuilder b, @NotNull IElementType toElement, @NotNull String errorMessage) {
+  public static boolean endOrRecover(@NotNull PsiBuilder b,
+                                     @NotNull IElementType toElement,
+                                     @NlsContexts.ParsingError @NotNull String errorMessage) {
     return GeneratedParserUtilBase.consumeToken(b, toElement) || recoverToGreedy(b, toElement, errorMessage);
   }
 
-  public static boolean recoverToGreedy(@NotNull PsiBuilder b, @NotNull IElementType toElement, @NotNull String errorMessage) {
+  public static boolean recoverToGreedy(@NotNull PsiBuilder b,
+                                        @NotNull IElementType toElement,
+                                        @NlsContexts.ParsingError @NotNull String errorMessage) {
     boolean r = recoverTo(b, toElement, errorMessage);
     r = r || GeneratedParserUtilBase.consumeToken(b, toElement);
     return r;
   }
 
-  public static boolean recoverTo(@NotNull PsiBuilder b, @NotNull IElementType toElement, @NotNull String errorMessage) {
+  public static boolean recoverTo(@NotNull PsiBuilder b, @NotNull IElementType toElement,
+                                  @NlsContexts.ParsingError @NotNull String errorMessage) {
     // recover bad code
     PsiBuilder.Marker errorMarker = b.mark();
     while (!b.eof() && b.getTokenType() != toElement) {

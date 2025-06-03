@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.htmlmason.idea.configuration;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.TableUtil;
 import com.intellij.ui.ToolbarDecorator;
@@ -27,10 +28,12 @@ import com.intellij.util.ui.ColumnInfo;
 import com.intellij.util.ui.FormBuilder;
 import com.intellij.util.ui.JBUI;
 import com.intellij.util.ui.ListTableModel;
+import com.perl5.lang.MasonFrameworkBundle;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.util.PerlConfigurationUtil;
 import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -41,12 +44,12 @@ import javax.swing.table.TableModel;
 public abstract class AbstractMasonSettingsConfigurable implements Configurable {
 
   protected final Project myProject;
-  protected final String myWindowTitle;
+  protected final @NotNull @Nls String myWindowTitle;
 
   protected ListTableModel<VariableDescription> myGlobalsModel;
   protected JBTable myGlobalsTable;
 
-  public AbstractMasonSettingsConfigurable(Project project, String windowTitle) {
+  public AbstractMasonSettingsConfigurable(Project project, @NotNull @Nls String windowTitle) {
     myProject = project;
     myWindowTitle = windowTitle;
   }
@@ -102,7 +105,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
   }
 
   private abstract static class MyStringColumnInfo extends ColumnInfo<VariableDescription, String> {
-    public MyStringColumnInfo(String name) {
+    public MyStringColumnInfo(@NlsContexts.ColumnName String name) {
       super(name);
     }
 
@@ -114,7 +117,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
 
   private final class MyVariableNameColumnInfo extends MyStringColumnInfo {
     public MyVariableNameColumnInfo() {
-      super("Variable name");
+      super(MasonFrameworkBundle.message("column.name.variable.name"));
     }
 
     @Override
@@ -132,7 +135,8 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
           }
         }
         else {
-          Messages.showErrorDialog("Incorrect variable name: " + value, "Incorrect Variable Name");
+          Messages.showErrorDialog(MasonFrameworkBundle.message("dialog.message.incorrect.variable.name", value),
+                                   MasonFrameworkBundle.message("dialog.title.incorrect.variable.name"));
         }
       }
     }
@@ -149,7 +153,7 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
 
   private static final class MyVariableTypeColumnInfo extends MyStringColumnInfo {
     public MyVariableTypeColumnInfo() {
-      super("Variable type");
+      super(MasonFrameworkBundle.message("column.name.variable.type"));
     }
 
     @Override
@@ -169,7 +173,8 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
           variableDescription.variableType = value;
         }
         else {
-          Messages.showErrorDialog("Incorrect package name: " + value, "Incorrect Package Name");
+          Messages.showErrorDialog(MasonFrameworkBundle.message("dialog.message.incorrect.package.name", value),
+                                   MasonFrameworkBundle.message("dialog.title.incorrect.package.name"));
         }
       }
     }
