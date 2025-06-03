@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.mojolicious.filetypes;
 
+import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.MojoliciousLanguage;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
@@ -40,7 +41,7 @@ public class MojoliciousFileType extends PerlFileType {
 
   @Override
   public @NotNull String getDescription() {
-    return "Mojolicious Perl5 template";
+    return MojoBundle.message("label.mojolicious.perl5.template");
   }
 
   @Override

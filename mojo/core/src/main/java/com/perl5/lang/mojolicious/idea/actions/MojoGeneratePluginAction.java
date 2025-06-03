@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.mojolicious.idea.actions;
 
+import com.intellij.openapi.util.NlsContexts;
 import com.perl5.lang.mojolicious.MojoBundle;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.mojolicious.model.MojoPlugin;
@@ -39,7 +40,7 @@ public class MojoGeneratePluginAction extends MojoGenerateAction {
   }
 
   @Override
-  protected @NotNull String getPromptTitle() {
+  protected @NlsContexts.DialogTitle @NotNull String getPromptTitle() {
     return MojoBundle.message("mojo.action.generate.plugin.prompt.title");
   }
 

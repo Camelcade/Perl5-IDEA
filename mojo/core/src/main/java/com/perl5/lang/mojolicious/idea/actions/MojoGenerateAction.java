@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.concurrency.Semaphore;
@@ -147,12 +148,12 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
   /**
    * @return title for name prompt dialog
    */
-  protected abstract @NotNull String getPromptTitle();
+  protected abstract @NlsContexts.DialogTitle @NotNull String getPromptTitle();
 
   /**
    * @return message for name prompt dialog
    */
-  protected abstract @NotNull String getPromptMessage();
+  protected abstract @NlsContexts.DialogMessage @NotNull String getPromptMessage();
 
   /**
    * @return a command that should be used to generate entity
