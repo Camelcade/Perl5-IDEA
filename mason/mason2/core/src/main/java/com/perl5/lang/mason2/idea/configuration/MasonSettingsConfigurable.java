@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,9 @@ import com.intellij.ui.components.JBList;
 import com.intellij.util.ui.FormBuilder;
 import com.intellij.util.ui.JBUI;
 import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettingsConfigurable;
+import com.perl5.lang.mason2.Mason2Bundle;
 import com.perl5.lang.perl.util.PerlConfigurationUtil;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
@@ -40,10 +42,10 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
   protected JBList<String> myAutobaseList;
 
   public MasonSettingsConfigurable(Project myProject) {
-    this(myProject, "Mason2");
+    this(myProject, Mason2Bundle.message("mason2"));
   }
 
-  public MasonSettingsConfigurable(Project myProject, String windowTitile) {
+  public MasonSettingsConfigurable(Project myProject, @Nls String windowTitile) {
     super(myProject, windowTitile);
     mySettings = MasonSettings.getInstance(myProject);
   }
@@ -107,8 +109,8 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
         .setAddAction(anActionButton -> {
           String fileName = Messages.showInputDialog(
             myProject,
-            "Type new Autobase filename:",
-            "New Autobase Filename",
+            Mason2Bundle.message("dialog.message.type.new.autobase.filename"),
+            Mason2Bundle.message("dialog.title.new.autobase.filename"),
             Messages.getQuestionIcon(),
             "",
             null);

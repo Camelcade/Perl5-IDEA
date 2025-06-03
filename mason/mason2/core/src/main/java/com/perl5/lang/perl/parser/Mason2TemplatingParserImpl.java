@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
+import com.perl5.lang.mason2.Mason2Bundle;
 
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
@@ -132,7 +133,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
         statementMarker.drop();
       }
 
-      r = r || MasonParserUtil.recoverToGreedy(b, closeToken, "Error");
+      r = r || MasonParserUtil.recoverToGreedy(b, closeToken, Mason2Bundle.message("parsing.error.error"));
     }
 
     if (r) {
@@ -162,7 +163,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
         m.done(MASON_SIMPLE_DEREF_EXPR);
       }
       else {
-        m.error("Error parsing filter expression");
+        m.error(Mason2Bundle.message("parsing.error.error.parsing.filter.expression"));
       }
       return true;
     }
@@ -196,7 +197,7 @@ public class Mason2TemplatingParserImpl extends Mason2ParserImpl {
       methodMarker.rollbackTo();
     }
 
-    return r || MasonParserUtil.recoverToGreedy(b, closeToken, "Error");
+    return r || MasonParserUtil.recoverToGreedy(b, closeToken, Mason2Bundle.message("parsing.error.error"));
   }
 
   protected static boolean parsePerlBlock(PsiBuilder b, int l, IElementType closeToken) {
