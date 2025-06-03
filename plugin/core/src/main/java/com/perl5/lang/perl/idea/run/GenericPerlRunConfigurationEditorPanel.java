@@ -119,8 +119,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     return Arrays.asList(myLabeledPerlArgumentsPanel, myLabeledConsoleCharset, myRequiredModulesLabeledField);
   }
 
-  @Nls
-  protected @NotNull String getProgramArgumentsLabel() {
+  protected @Nls @NotNull String getProgramArgumentsLabel() {
     return PerlBundle.message("perl.run.option.script.arguments");
   }
 
@@ -167,8 +166,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
     return scriptField;
   }
 
-  @NlsContexts.Label
-  protected @NotNull String getScriptFieldLabelText() {
+  protected @NlsContexts.Label @NotNull String getScriptFieldLabelText() {
     return PerlBundle.message("perl.run.option.script");
   }
 
