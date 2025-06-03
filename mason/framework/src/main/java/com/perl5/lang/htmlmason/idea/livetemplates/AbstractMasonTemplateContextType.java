@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,13 +22,14 @@ import com.intellij.codeInsight.template.XmlContextType;
 import com.intellij.lang.Language;
 import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.lang.xhtml.XHTMLLanguage;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 
 public abstract class AbstractMasonTemplateContextType extends TemplateContextType {
-  public AbstractMasonTemplateContextType(@NotNull String presentableName) {
+  public AbstractMasonTemplateContextType(@NlsContexts.Label @NotNull String presentableName) {
     super(presentableName);
   }
 
