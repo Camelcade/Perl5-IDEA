@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,6 +38,7 @@ import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.util.PerlConfigurationUtil;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,10 +67,10 @@ public class HTMLMasonSettingsConfigurable extends AbstractMasonSettingsConfigur
   protected JBTable myCustomTagsTable;
 
   public HTMLMasonSettingsConfigurable(Project myProject) {
-    this(myProject, "HTML::Mason");
+    this(myProject, HtmlMasonBundle.message("html.mason"));
   }
 
-  public HTMLMasonSettingsConfigurable(Project myProject, String windowTitile) {
+  public HTMLMasonSettingsConfigurable(Project myProject, @Nls String windowTitile) {
     super(myProject, windowTitile);
     mySettings = HTMLMasonSettings.getInstance(myProject);
   }
