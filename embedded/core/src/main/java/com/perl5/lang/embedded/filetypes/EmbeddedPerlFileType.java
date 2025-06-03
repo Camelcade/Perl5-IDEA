@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.embedded.filetypes;
 
+import com.perl5.lang.embedded.EmbeddedPerlBundle;
 import com.perl5.lang.embedded.EmbeddedPerlIcons;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
@@ -40,7 +41,7 @@ public class EmbeddedPerlFileType extends PerlFileType {
 
   @Override
   public @NotNull String getDescription() {
-    return "Embedded perl file";
+    return EmbeddedPerlBundle.message("label.embedded.perl.file");
   }
 
   @Override
