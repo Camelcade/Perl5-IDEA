@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.openapi.fileTypes.ex.FileTypeIdentifiableByVirtualFile;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import com.perl5.lang.perl.fileTypes.PerlPluginBaseFileType;
+import com.perl5.lang.tt2.TemplateToolkitBundle;
 import com.perl5.lang.tt2.TemplateToolkitIcons;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import org.jetbrains.annotations.NotNull;
@@ -43,7 +44,7 @@ public class TemplateToolkitFileType extends PerlPluginBaseFileType implements F
 
   @Override
   public @NotNull String getDescription() {
-    return "Template toolkit template";
+    return TemplateToolkitBundle.message("label.template.toolkit.template");
   }
 
   @Override
