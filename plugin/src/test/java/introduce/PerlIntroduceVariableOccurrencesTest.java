@@ -459,6 +459,6 @@ public class PerlIntroduceVariableOccurrencesTest extends PerlLightTestCase {
   public void testCodeDerefUnbraced() {doTest();}
 
   protected void doTest() {
-    doTestIntroduceVariableOccurances();
+    doTestIntroduceVariableOccurrences();
   }
 }

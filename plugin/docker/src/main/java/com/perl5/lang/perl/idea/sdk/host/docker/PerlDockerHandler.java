@@ -129,6 +129,6 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
         return perlDockerHandler;
       }
     }
-    throw new NullPointerException();
+    throw new IllegalStateException("PerlDockerHandler is not registered");
   }
 }

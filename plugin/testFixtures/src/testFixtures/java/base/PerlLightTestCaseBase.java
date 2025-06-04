@@ -340,7 +340,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   /**
-   * Registers disposable to be disposed after teaar down of the fixture and nullizing the module
+   * Registers disposable to be disposed after tear down of the fixture and nullifying the module
    */
   protected final void addTearDownListener(@NotNull Disposable disposable) {
     Disposer.register(getTestRootDisposable(), disposable);
@@ -2117,15 +2117,15 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
   }
 
-  protected void doTestIntroduceVariableOccurances() {
+  protected void doTestIntroduceVariableOccurrences() {
     initWithFileSmartWithoutErrors();
     List<PerlIntroduceTarget> introduceTargets = PerlIntroduceTargetsHandler.getIntroduceTargets(getEditor(), getFile());
     assertTrue(!introduceTargets.isEmpty());
     List<Pair<Integer, String>> macros = new ArrayList<>();
     PerlIntroduceTargetOccurrencesCollector.collect(introduceTargets.getLast()).forEach(it -> {
-      TextRange occurenceRange = it.getTextRange();
-      macros.add(Pair.create(occurenceRange.getStartOffset(), "<occurrence>"));
-      macros.add(Pair.create(occurenceRange.getEndOffset(), "</occurrence>"));
+      TextRange occurrenceRange = it.getTextRange();
+      macros.add(Pair.create(occurrenceRange.getStartOffset(), "<occurrence>"));
+      macros.add(Pair.create(occurrenceRange.getEndOffset(), "</occurrence>"));
     });
     UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(getTopLevelEditor(), macros));
   }
