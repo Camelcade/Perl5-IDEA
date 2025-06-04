@@ -24,6 +24,8 @@ import com.intellij.openapi.actionSystem.DataContext;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.JDOMUtil;
+import com.intellij.openapi.util.NlsContexts;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.containers.ContainerUtil;
@@ -32,6 +34,7 @@ import com.perl5.lang.perl.idea.execution.PerlCommandLine;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jdom.Element;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -57,8 +60,8 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
   private static final String DESCRIPTION_KEY = "description";
 
   private final @NotNull String myCommand;
-  private final @NotNull String myHelpGroupName;
-  private final @NotNull String myCompletionGroupName;
+  private final @NlsSafe @NotNull String myHelpGroupName;
+  private final @NlsSafe @NotNull String myCompletionGroupName;
   private final @NotNull Set<String> myCommands;
   private final @NotNull Set<OptionDescriptor> myOptionDescriptors;
   private final @NotNull Set<CommandDescriptor> myCommandDescriptors;
@@ -125,7 +128,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
     return new RunAnythingHelpItem(getItemPresentableText(value), getCommand(value), getItemDescription(value), getIcon(value));
   }
 
-  protected @NotNull String getItemPresentableText(@NotNull List<? extends CommandElement> value) {
+  protected @Nls @NotNull String getItemPresentableText(@NotNull List<? extends CommandElement> value) {
     if (value.isEmpty()) {
       return getCommand();
     }
@@ -140,7 +143,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
     return lastElementDescriptor.value + " <" + lastElementDescriptor.placeholder + ">";
   }
 
-  protected @Nullable String getItemDescription(@NotNull List<? extends CommandElement> value) {
+  protected @NlsContexts.DetailedDescription @Nullable String getItemDescription(@NotNull List<? extends CommandElement> value) {
     if (value.isEmpty()) {
       return null;
     }
@@ -314,7 +317,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
   /**
    * @return command this provider serves
    */
-  public @NotNull String getCommand() {
+  public @NlsSafe @NotNull String getCommand() {
     return myCommand;
   }
 
@@ -372,7 +375,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
     }
     for (Element optionElement : optionsElement.getChildren(OPTION_KEY)) {
       String value = optionElement.getAttributeValue(VALUE_KEY);
-      String description = optionElement.getAttributeValue(DESCRIPTION_KEY);
+      @NlsSafe String description = optionElement.getAttributeValue(DESCRIPTION_KEY);
       String parameterPlaceholder = optionElement.getAttributeValue(PARAMETER_PLACEHOLDER_KEY);
       String alias = optionElement.getAttributeValue(ALIAS_KEY);
       if (StringUtil.isEmpty(value)) {
@@ -405,7 +408,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
     Set<String> commandsMap = new HashSet<>();
     for (Element commandElement : commandsElement.getChildren(COMMAND_KEY)) {
       String value = commandElement.getAttributeValue(VALUE_KEY);
-      String description = commandElement.getAttributeValue(DESCRIPTION_KEY);
+      @NlsSafe String description = commandElement.getAttributeValue(DESCRIPTION_KEY);
       String parameterPlaceholder = commandElement.getAttributeValue(PARAMETER_PLACEHOLDER_KEY);
       String alias = commandElement.getAttributeValue(ALIAS_KEY);
       Set<OptionDescriptor> applicableOptions = new HashSet<>();
@@ -445,12 +448,13 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
 
   public static class OptionDescriptor {
     private static final OptionDescriptor UNKNOWN = new OptionDescriptor("", null, null, null);
-    final @NotNull String value;
-    final @Nullable String placeholder;
-    final @Nullable String description;
+    final @NlsSafe @NotNull String value;
+    final @NlsSafe @Nullable String placeholder;
+    final @NlsContexts.DetailedDescription @Nullable String description;
     final @Nullable String alias;
 
-    protected OptionDescriptor(@NotNull String value, @Nullable String placeholder, @Nullable String description, @Nullable String alias) {
+    protected OptionDescriptor(@NotNull String value, @Nullable String placeholder,
+                               @NlsContexts.DetailedDescription @Nullable String description, @Nullable String alias) {
       this.value = value;
       this.placeholder = StringUtil.nullize(placeholder);
       this.description = StringUtil.nullize(description);
@@ -480,7 +484,7 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
 
     public CommandDescriptor(@NotNull String value,
                              @Nullable String placeholder,
-                             @Nullable String description,
+                             @NlsContexts.DetailedDescription @Nullable String description,
                              @Nullable String alias,
                              @NotNull Set<OptionDescriptor> applicableOptions) {
       super(value, placeholder, description, alias);

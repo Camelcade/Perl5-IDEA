@@ -26,6 +26,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
 import com.intellij.openapi.ui.Messages;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiDocumentManager;
@@ -33,6 +34,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.ui.SpeedSearchComparator;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.idea.codeInsight.PerlMethodMember;
@@ -213,7 +215,7 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
         }
       };
 
-    chooser.setTitle("Override/Implement Method");
+    chooser.setTitle(PerlBundle.message("dialog.title.override.implement.method"));
     chooser.setCopyJavadocVisible(false);
     chooser.show();
     if (chooser.getExitCode() != DialogWrapper.OK_EXIT_CODE) {
@@ -227,7 +229,8 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
   public void generateSetters(PsiElement anchor, Editor editor) {
     StringBuilder code = new StringBuilder();
 
-    for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated setters names:", "Generating Setters")) {
+    for (String name : askFieldsNames(anchor.getProject(), PerlBundle.message("dialog.message.type.comma.separated.setters.names"),
+                                      PerlBundle.message("dialog.title.generating.setters"))) {
       code.append(getSetterCode(name));
     }
 
@@ -240,7 +243,8 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
   public void generateGetters(PsiElement anchor, Editor editor) {
     StringBuilder code = new StringBuilder();
 
-    for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated getters names:", "Generating Getters")) {
+    for (String name : askFieldsNames(anchor.getProject(), PerlBundle.message("dialog.message.type.comma.separated.getters.names"),
+                                      PerlBundle.message("dialog.title.generating.getters"))) {
       code.append(getGetterCode(name));
     }
 
@@ -253,7 +257,8 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
   public void generateGettersAndSetters(PsiElement anchor, Editor editor) {
     StringBuilder code = new StringBuilder();
 
-    for (String name : askFieldsNames(anchor.getProject(), "Type comma-separated accessors names:", "Generating Getters and Setters")) {
+    for (String name : askFieldsNames(anchor.getProject(), PerlBundle.message("dialog.message.type.comma.separated.accessors.names"),
+                                      PerlBundle.message("dialog.title.generating.getters.setters"))) {
       code.append(getGetterCode(name));
       code.append(getSetterCode(name));
     }
@@ -268,10 +273,9 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
     insertCodeAfterElement(anchor, getConstructorCode(), editor);
   }
 
-  protected List<String> askFieldsNames(
-    Project project,
-    String promptText,
-    String promptTitle
+  protected List<String> askFieldsNames(@NotNull Project project,
+                                        @NlsContexts.DialogMessage String promptText,
+                                        @NlsContexts.DialogTitle String promptTitle
   ) {
     Set<String> result = new HashSet<>();
     String name = Messages.showInputDialog(project, promptText, promptTitle, Messages.getQuestionIcon(), "", null);
@@ -334,14 +338,14 @@ public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
   @SuppressWarnings("SameReturnValue")
   public static String getConstructorCode() {
     return """
-
+      
       sub new
       {
         my ($proto) = @_;
         my $self = bless {}, $proto;
         return $self;
       }
-
+      
       """;
   }
 

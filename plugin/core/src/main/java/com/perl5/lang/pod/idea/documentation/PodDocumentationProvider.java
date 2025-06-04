@@ -19,6 +19,7 @@ package com.perl5.lang.pod.idea.documentation;
 import com.intellij.codeInsight.template.impl.LiveTemplateLookupElementImpl;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -109,7 +110,7 @@ public class PodDocumentationProvider extends PerlDocumentationProviderBase impl
     return super.getDocumentationElementForLink(psiManager, link, context);
   }
 
-  public static @Nullable String doGenerateDoc(@Nullable PsiElement element) {
+  public static @NlsSafe @Nullable String doGenerateDoc(@Nullable PsiElement element) {
     return switch (element) {
       case PodFile ignored -> StringUtil.nullize(PerlDocUtil.renderPodFile((PodFileImpl)element));
       case PodFormatterX x -> generateDocByIndex(x);

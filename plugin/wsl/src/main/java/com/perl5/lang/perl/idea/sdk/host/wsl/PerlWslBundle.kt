@@ -13,27 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.idea.sdk.host.wsl
 
-package com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers;
+import com.intellij.DynamicBundle
+import org.jetbrains.annotations.Nls
+import org.jetbrains.annotations.PropertyKey
 
-import com.intellij.openapi.util.NlsSafe;
-import com.intellij.ui.ColoredListCellRenderer;
-import org.jetbrains.annotations.NotNull;
+private const val PATH_TO_BUNDLE = "messages.WslBundle"
 
-public class Perl5TextSdkWrapper implements Perl5SdkWrapper {
-  private final @NlsSafe @NotNull String myText;
+object PerlWslBundle : DynamicBundle(PATH_TO_BUNDLE) {
 
-  public Perl5TextSdkWrapper(@NotNull String text) {
-    myText = text;
-  }
-
-  @Override
-  public void customizeRenderer(@NotNull ColoredListCellRenderer<Perl5SdkWrapper> renderer) {
-    renderer.append(myText);
-  }
-
-  @Override
-  public String toString() {
-    return "Text: " + myText;
-  }
+  @JvmStatic
+  fun message(key: @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String, vararg params: Any): @Nls String =
+    getMessage(key, *params)
 }

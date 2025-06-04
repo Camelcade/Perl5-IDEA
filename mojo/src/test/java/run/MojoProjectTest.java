@@ -34,6 +34,7 @@ import org.junit.Test;
 import java.util.List;
 
 public class MojoProjectTest extends PerlPlatformTestCase {
+  @SuppressWarnings("HardCodedStringLiteral")
   @Test
   public void testGenerateAppAction() {
     assertMojoAvailable();
@@ -68,6 +69,7 @@ public class MojoProjectTest extends PerlPlatformTestCase {
     return mojoProjectManager;
   }
 
+  @SuppressWarnings("HardCodedStringLiteral")
   @Test
   public void testGeneratePluginAction() {
     assertMojoAvailable();

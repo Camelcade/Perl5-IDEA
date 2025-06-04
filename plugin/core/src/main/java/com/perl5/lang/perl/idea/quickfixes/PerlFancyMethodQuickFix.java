@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.quickfixes;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.psi.PsiElement;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlMethod;
@@ -31,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public class PerlFancyMethodQuickFix implements LocalQuickFix {
-  final String myNewForm;
+  final @NlsSafe String myNewForm;
 
   public PerlFancyMethodQuickFix(String newForm) {
     super();

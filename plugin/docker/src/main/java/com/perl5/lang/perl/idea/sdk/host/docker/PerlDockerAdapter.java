@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -241,7 +241,7 @@ class PerlDockerAdapter {
     File script = createCommandScript(commandLine);
     String dockerScriptPath = myData.getRemotePath(script.getPath());
     if (StringUtil.isEmpty(dockerScriptPath)) {
-      throw new ExecutionException("Unable to map path for " + script.getPath() + " in " + myData);
+      throw new ExecutionException(PerlDockerBundle.message("dialog.message.unable.to.map.path.for.in", script.getPath(), myData));
     }
 
     return dockerCommandLine.withParameters(myData.getImageName(), "sh", dockerScriptPath).createProcess();

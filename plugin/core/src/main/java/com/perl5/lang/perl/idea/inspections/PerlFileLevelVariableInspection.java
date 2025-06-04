@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.inspections;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -38,7 +39,7 @@ public class PerlFileLevelVariableInspection extends PerlVariableInspectionBase 
       PerlVariable variable = variableDeclarationWrapper.getVariable();
       holder.registerProblem(
         variable,
-        "File level variable:" + variable.getText(),
+        PerlBundle.message("inspection.message.file.level.variable", variable.getText()),
         ProblemHighlightType.GENERIC_ERROR_OR_WARNING);
     }
   }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,9 +43,9 @@ public class PerlCoverageAnnotator extends SimpleCoverageAnnotator {
       return null;
     }
     if (info.coveredLineCount == 0) {
-      return info instanceof DirCoverageInfo ? null : "no lines covered";
+      return info instanceof DirCoverageInfo ? null : PerlCoverageBundle.message("no.lines.covered");
     }
-    return (int)((double)info.coveredLineCount * 100. / (double)info.totalLineCount) + "% lines covered";
+    return PerlCoverageBundle.message("0.lines.covered", (int)((double)info.coveredLineCount * 100. / (double)info.totalLineCount));
   }
 
   @Override
@@ -53,6 +53,6 @@ public class PerlCoverageAnnotator extends SimpleCoverageAnnotator {
     if (info.totalFilesCount == 0 || info.coveredFilesCount == 0) {
       return null;
     }
-    return info.coveredFilesCount + " of " + info.totalFilesCount + " files";
+    return PerlCoverageBundle.message("0.of.1.files", info.coveredFilesCount, info.totalFilesCount);
   }
 }

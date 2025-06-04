@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.fileTypes;
 
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,7 +36,7 @@ public class PerlFileTypePackage extends PurePerlFileType {
 
   @Override
   public @NotNull String getDescription() {
-    return "Perl5 package";
+    return PerlBundle.message("label.perl5.package");
   }
 
   @Override

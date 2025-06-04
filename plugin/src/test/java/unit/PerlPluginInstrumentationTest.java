@@ -37,7 +37,7 @@ import com.perl5.lang.perl.idea.terminal.PerlLocalTerminalCustomizer;
 import com.perl5.lang.perl.intellilang.PerlInjectionSupport;
 import com.perl5.lang.perl.makeMaker.PerlMakeMakerDirectoryConfigurationProvider;
 import com.perl5.lang.perl.moduleBuild.PerlModuleBuildDirectoryConfigurationProvider;
-import com.perl5.lang.perl.profiler.PerlProfilerBundle;
+import com.perl5.lang.perl.profiler.run.PerlProfilerProcess;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
@@ -65,7 +65,7 @@ public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
       {"perlInstall", PerlInstallHandlerBase.class, PLUGIN_PATTERN_STRING},
       {"perlbrew", PerlBrewTestUtil.getInstrumentationTestClass(), PLUGIN_PATTERN_STRING},
       {"plenv", PlenvTestUtil.getInstrumentationTestClass(), PLUGIN_PATTERN_STRING},
-      {"profiler", PerlProfilerBundle.class, PLUGIN_PATTERN_STRING},
+      {"profiler", PerlProfilerProcess.class, PLUGIN_PATTERN_STRING},
       {"terminal", PerlLocalTerminalCustomizer.class, PLUGIN_PATTERN_STRING},
       {"wsl", PerlWslInputFilterProvider.class, PLUGIN_PATTERN_STRING},
     });

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.annotators;
 
+import com.intellij.openapi.util.NlsSafe;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.regex.Matcher;
@@ -35,7 +36,7 @@ public final class PerlCriticErrorDescriptor {
     myLine = line;
   }
 
-  public String getMessage() {
+  public @NlsSafe String getMessage() {
     return myMessage.toString();
   }
 

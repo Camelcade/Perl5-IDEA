@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,10 @@
 
 package com.perl5.lang.perl.idea.run.debugger;
 
+import com.perl5.PerlBundle;
+import org.jetbrains.annotations.Nls;
+import org.jetbrains.annotations.NonNls;
+
 import java.util.Map;
 
 /**
@@ -25,14 +29,14 @@ public final class PerlDebugOptionsSets {
   private PerlDebugOptionsSets() {
   }
 
-  public static final String DEBUGGER_STARTUP_COMPILE = "COMPILE";
-  public static final String DEBUGGER_STARTUP_RUN = "RUN";
-  public static final String DEBUGGER_STARTUP_BREAKPOINT = "BREAKPOINT";
+  public static final @NonNls String DEBUGGER_STARTUP_COMPILE = "COMPILE";
+  public static final @NonNls String DEBUGGER_STARTUP_RUN = "RUN";
+  public static final @NonNls String DEBUGGER_STARTUP_BREAKPOINT = "BREAKPOINT";
 
-  public static final Map<String, String> STARTUP_OPTIONS = Map.of(
-    DEBUGGER_STARTUP_COMPILE, "Stop as soon as possible",
-    DEBUGGER_STARTUP_RUN, "Stop after compilation (use and BEGIN blocks are done)",
-    DEBUGGER_STARTUP_BREAKPOINT, "Stop at first breakpoint"
+  public static final Map<String, @Nls String> STARTUP_OPTIONS = Map.of(
+    DEBUGGER_STARTUP_COMPILE, PerlBundle.message("stop.as.soon.as.possible"),
+    DEBUGGER_STARTUP_RUN, PerlBundle.message("stop.after.compilation.use.and.begin.blocks.are.done"),
+    DEBUGGER_STARTUP_BREAKPOINT, PerlBundle.message("stop.at.first.breakpoint")
   );
   public static final Map<String, String> ROLE_OPTIONS = Map.of(
     PerlDebugOptions.ROLE_SERVER, "IDE connects to the perl process",
