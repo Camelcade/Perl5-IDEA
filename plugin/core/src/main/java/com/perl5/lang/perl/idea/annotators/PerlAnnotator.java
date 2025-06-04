@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,12 @@
 package com.perl5.lang.perl.idea.annotators;
 
 
+import com.intellij.codeInspection.util.InspectionMessage;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
@@ -58,11 +60,13 @@ public class PerlAnnotator extends PerlBaseAnnotator {
   @Override
   public void annotate(final @NotNull PsiElement element, @NotNull AnnotationHolder holder) {
     IElementType elementType = PsiUtilCore.getElementType(element);
-    BiConsumer<String, TextAttributesKey> defaultAnnotationProducer = (msg, key) -> createInfoAnnotation(holder, element, msg, key);
+    BiConsumer<@InspectionMessage String, TextAttributesKey> defaultAnnotationProducer =
+      (var msg, var key) -> createInfoAnnotation(holder, element, msg, key);
     Consumer<TextAttributesKey> defaultSilentProducer = (key) -> createInfoAnnotation(holder, element, null, key);
 
     if (elementType == NYI_STATEMENT) {
-      defaultAnnotationProducer.accept("Unimplemented statement", CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
+      defaultAnnotationProducer.accept(PerlBundle.message("inspection.message.unimplemented.statement"),
+                                       CodeInsightColors.TODO_DEFAULT_ATTRIBUTES);
     }
     else if (element instanceof PerlGlobVariableElement globalVariableElement && globalVariableElement.isBuiltIn()) {
       defaultSilentProducer.accept(PERL_GLOB_BUILTIN);
@@ -94,7 +98,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
     else if (element instanceof PerlCharSubstitution charSubstitution) {
       int codePoint = charSubstitution.getCodePoint();
       if (codePoint >= 0) {
-        StringBuilder sb = new StringBuilder("<ul>");
+        @NlsSafe StringBuilder sb = new StringBuilder("<ul>");
         @NonNls String chars = charSubstitution.getNonIgnorableChars();
         if (StringUtil.isEmptyOrSpaces(chars)) {
           chars = PerlBundle.message("perl.annotator.char.non.printable");
@@ -161,10 +165,11 @@ public class PerlAnnotator extends PerlBaseAnnotator {
             perlSubReference.multiResolve(false);
 
             if (perlSubReference.isConstant()) {
-              defaultAnnotationProducer.accept("Constant", PerlSyntaxHighlighter.PERL_CONSTANT);
+              defaultAnnotationProducer.accept(PerlBundle.message("inspection.message.constant"), PerlSyntaxHighlighter.PERL_CONSTANT);
             }
             else if (perlSubReference.isAutoloaded()) {
-              defaultAnnotationProducer.accept("Auto-loaded sub", PerlSyntaxHighlighter.PERL_AUTOLOAD);
+              defaultAnnotationProducer.accept(PerlBundle.message("inspection.message.auto.loaded.sub"),
+                                               PerlSyntaxHighlighter.PERL_AUTOLOAD);
             }
             else if (perlSubReference.isXSub()) {
               defaultAnnotationProducer.accept("XSub", PerlSyntaxHighlighter.PERL_XSUB);

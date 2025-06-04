@@ -32,6 +32,7 @@ import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -68,7 +69,7 @@ public class PerlCoverageRunner extends CoverageRunner {
 
       ProgressManager.getInstance().runProcessWithProgressSynchronously(
         () -> projectDataRef.set(doLoadCoverageData(sessionDataFile, (PerlCoverageSuite)baseCoverageSuite)),
-        "Loading Coverage Data...", true, baseCoverageSuite.getProject());
+        PerlCoverageBundle.message("dialog.title.loading.coverage.data"), true, baseCoverageSuite.getProject());
 
       return projectDataRef.get();
     }
@@ -220,7 +221,7 @@ public class PerlCoverageRunner extends CoverageRunner {
     return projectData;
   }
 
-  private static void showError(@NotNull Project project, @NotNull String message) {
+  private static void showError(@NotNull Project project, @NlsSafe @NotNull String message) {
     ReadAction.run(() -> {
       if (!project.isDisposed()) {
         LOG.warn("Error loading coverage: " + message);

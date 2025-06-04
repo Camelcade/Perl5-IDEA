@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.intellij.ui.CollectionListModel;
 import com.intellij.ui.ToolbarDecorator;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.ui.JBUI;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
@@ -65,7 +66,7 @@ public class PerlConfigurationUtil {
           }
 
           BaseListPopupStep<FileNameMatcher> fileNameMatcherBaseListPopupStep =
-            new BaseListPopupStep<>("Select Extension", possibleItems, itemsIcons) {
+            new BaseListPopupStep<>(PerlBundle.message("popup.title.select.extension"), possibleItems, itemsIcons) {
               @Override
               public PopupStep<?> onChosen(FileNameMatcher selectedValue, boolean finalChoice) {
                 substitutedExtensionsModel.add(selectedValue.getPresentableString());

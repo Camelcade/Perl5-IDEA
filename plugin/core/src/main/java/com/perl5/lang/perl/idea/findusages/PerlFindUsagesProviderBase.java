@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiNamedElement;
 import com.intellij.usageView.UsageViewNodeTextLocation;
 import com.intellij.usageView.UsageViewUtil;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -61,6 +62,6 @@ public abstract class PerlFindUsagesProviderBase implements FindUsagesProvider {
   @Override
   public @NotNull String getNodeText(@NotNull PsiElement element, boolean useFullName) {
     LOG.warn("Unhandled element " + element);
-    return "Unhandled element " + element;
+    return PerlBundle.message("unhandled.element.0", element);
   }
 }

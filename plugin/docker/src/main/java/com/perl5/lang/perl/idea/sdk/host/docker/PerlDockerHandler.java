@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.messages.MessagesService;
 import com.intellij.openapi.util.NlsActions.ActionText;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.util.ArrayUtil;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
@@ -80,7 +81,7 @@ class PerlDockerHandler extends PerlHostWithFileSystemHandler<PerlDockerData, Pe
     return hostData;
   }
 
-  private void showErrorDialog(@NotNull String message) {
+  private void showErrorDialog(@NlsContexts.DialogMessage @NotNull String message) {
     ApplicationManager.getApplication().invokeAndWait(() -> Messages.showErrorDialog(
       message,
       PerlDockerBundle.message("perl.host.handler.docker.error.list.images.title")

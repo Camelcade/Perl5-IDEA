@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.configuration.settings.sdk.wrappers;
 
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.SdkType;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
@@ -75,8 +76,8 @@ public class Perl5RealSdkWrapper implements Perl5SdkWrapper {
   }
 
   private static void renderPair(@NotNull ColoredListCellRenderer<Perl5SdkWrapper> renderer,
-                                 @NotNull String primary,
-                                 @Nullable String secondary) {
+                                 @NlsSafe @NotNull String primary,
+                                 @NlsSafe @Nullable String secondary) {
     renderer.append(StringUtil.capitalize(primary));
     if (secondary != null) {
       renderer.append(secondary, SimpleTextAttributes.GRAY_ATTRIBUTES);

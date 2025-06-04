@@ -17,10 +17,12 @@
 package com.perl5.lang.perl.internals;
 
 import com.intellij.openapi.diagnostic.Logger;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.perl5.PerlBundle;
 import org.apache.groovy.util.Maps;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -60,7 +62,7 @@ public final class PerlVersion implements Comparable<PerlVersion> {
     V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26, V5_28, V5_30, V5_32, V5_34, V5_36, V5_38
   );
 
-  public static final Map<PerlVersion, String> PERL_VERSION_DESCRIPTIONS = Maps.of(
+  public static final Map<PerlVersion, @Nls String> PERL_VERSION_DESCRIPTIONS = Maps.of(
     V5_10, PerlBundle.message("perl.version.description.5.10"),
     V5_12, PerlBundle.message("perl.version.description.5.12"),
     V5_14, PerlBundle.message("perl.version.description.5.14"),
@@ -203,7 +205,7 @@ public final class PerlVersion implements Comparable<PerlVersion> {
     return version;
   }
 
-  public String getStrictDottedVersion() {
+  public @NlsSafe String getStrictDottedVersion() {
     List<String> result = new ArrayList<>(Collections.singletonList(Integer.toString(myRevision)));
 
     if (myMajor > 0 || myMinor > 0 || !myExtraChunks.isEmpty()) {

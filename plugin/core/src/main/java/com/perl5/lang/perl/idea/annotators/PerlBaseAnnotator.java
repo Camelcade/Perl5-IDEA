@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.idea.annotators;
 
+import com.intellij.codeInspection.util.InspectionMessage;
 import com.intellij.lang.annotation.AnnotationBuilder;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
@@ -43,7 +44,7 @@ public abstract class PerlBaseAnnotator implements Annotator, PerlElementTypes {
 
   public static void createInfoAnnotation(@NotNull AnnotationHolder holder,
                                           @Nullable PsiElement element,
-                                          @Nullable String message,
+                                          @InspectionMessage @Nullable String message,
                                           @NotNull TextAttributesKey key) {
     if (element == null) {
       return;
