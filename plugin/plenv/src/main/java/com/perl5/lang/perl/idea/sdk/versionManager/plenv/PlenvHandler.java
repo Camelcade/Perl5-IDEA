@@ -89,7 +89,7 @@ class PlenvHandler extends PerlRealVersionManagerHandler<PlenvData, PlenvHandler
         return plenvHandler;
       }
     }
-    throw new NullPointerException();
+    throw new IllegalStateException("PlenvHandler is not registered");
   }
 
   @Override

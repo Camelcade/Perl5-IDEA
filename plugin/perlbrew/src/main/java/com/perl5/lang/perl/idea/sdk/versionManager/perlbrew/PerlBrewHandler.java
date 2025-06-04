@@ -106,7 +106,7 @@ class PerlBrewHandler extends PerlRealVersionManagerHandler<PerlBrewData, PerlBr
         return perlBrewHandler;
       }
     }
-    throw new NullPointerException();
+    throw new IllegalStateException("PerlBrewHandler is not registered");
   }
 
   @Override
