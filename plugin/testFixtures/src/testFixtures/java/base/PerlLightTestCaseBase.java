@@ -2184,7 +2184,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    * @return a builtin keyword for from the test name. E.g: {@code testScalar} => {@code scalar}, {@code testFiletestx} => {@code -x}
    */
   protected @NotNull String getBuiltInFromTestName() {
-    return getBuiltInFromName(getTestName(true));
+    String name = getTestName(true);
+    return isFileTestTest() ? "-" + name.substring(name.length() - 1) : name;
   }
 
   /**
@@ -2193,13 +2194,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    * {@code filetestUpper}.
    */
   protected @NotNull String getBuiltInFromName(@NotNull String name) {
-    if (name.startsWith("filetestLower")) {
-      return "-" + name.substring("filetestLower".length());
-    }
-    if (name.startsWith("filetestUpper")) {
-      return "-" + name.substring("filetestUpper".length());
-    }
-    return name;
+    return name.startsWith("filetest") ? "-" + name.substring(name.length() - 1) : name;
   }
 
   protected boolean isFileTestTest() {
