@@ -59,6 +59,11 @@ public class PerlQuickDocBuiltInTest extends PerlLightTestCase {
     return getBuiltInFromName(myName);
   }
 
+  @Override
+  protected boolean isFileTestTest() {
+    return isFileTestName(myName);
+  }
+
   @Test
   public void test() {doTest();}
 
