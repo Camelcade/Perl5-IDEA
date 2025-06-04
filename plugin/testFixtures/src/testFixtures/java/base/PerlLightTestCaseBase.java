@@ -2184,8 +2184,22 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    * @return a builtin keyword for from the test name. E.g: {@code testScalar} => {@code scalar}, {@code testFiletestx} => {@code -x}
    */
   protected @NotNull String getBuiltInFromTestName() {
-    String name = getTestName(true);
-    return isFileTestTest() ? "-" + name.substring(name.length() - 1) : name;
+    return getBuiltInFromName(getTestName(true));
+  }
+
+  /**
+   * Computes a builtin name from the given test name or parameter.
+   * Handles filetest builtins prefixed with {@code filetestLower} or
+   * {@code filetestUpper}.
+   */
+  protected @NotNull String getBuiltInFromName(@NotNull String name) {
+    if (name.startsWith("filetestLower")) {
+      return "-" + name.substring("filetestLower".length());
+    }
+    if (name.startsWith("filetestUpper")) {
+      return "-" + name.substring("filetestUpper".length());
+    }
+    return name;
   }
 
   protected boolean isFileTestTest() {
