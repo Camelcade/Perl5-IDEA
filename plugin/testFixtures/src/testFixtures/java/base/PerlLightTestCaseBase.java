@@ -340,7 +340,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   /**
-   * Registers disposable to be disposed after teaar down of the fixture and nullizing the module
+   * Registers disposable to be disposed after tear down of the fixture and nullifying the module
    */
   protected final void addTearDownListener(@NotNull Disposable disposable) {
     Disposer.register(getTestRootDisposable(), disposable);
