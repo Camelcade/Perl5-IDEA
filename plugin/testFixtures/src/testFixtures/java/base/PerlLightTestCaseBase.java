@@ -2193,11 +2193,20 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
    * {@code filetestUpper}.
    */
   protected @NotNull String getBuiltInFromName(@NotNull String name) {
-    return name.startsWith("filetest") ? "-" + name.substring(name.length() - 1) : name;
+    return isFileTestTest() ? "-" + name.substring(name.length() - 1) : name;
+  }
+
+  /**
+   * Checks if the supplied builtin corresponds to a filetest operator.
+   * Filetest builtins are prefixed with {@code filetestLower} or
+   * {@code filetestUpper}.
+   */
+  protected boolean isFileTestName(@NotNull String name) {
+    return name.startsWith("filetest");
   }
 
   protected boolean isFileTestTest() {
-    return getTestName(true).startsWith("filetest");
+    return isFileTestName(getTestName(true));
   }
 
   protected void doTestCompletionQuickDoc(@NotNull String elementPattern) {
