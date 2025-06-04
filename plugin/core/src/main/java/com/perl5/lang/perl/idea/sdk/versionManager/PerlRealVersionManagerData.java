@@ -87,7 +87,8 @@ public abstract class PerlRealVersionManagerData<Data extends PerlRealVersionMan
     if (data instanceof PerlRealVersionManagerData<?, ?> realVersionManagerData) {
       return realVersionManagerData;
     }
-    throw new NullPointerException("Additional data supposed to be " + PerlRealVersionManagerData.class.getSimpleName() + " not " + data);
+    throw new IllegalStateException(
+      "Additional data supposed to be " + PerlRealVersionManagerData.class.getSimpleName() + " not " + data);
   }
 
   @Override

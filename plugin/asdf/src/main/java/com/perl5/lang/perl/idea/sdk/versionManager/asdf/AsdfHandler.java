@@ -89,7 +89,7 @@ class AsdfHandler extends PerlRealVersionManagerHandler<AsdfData, AsdfHandler> {
         return asdfHandler;
       }
     }
-    throw new NullPointerException();
+    throw new IllegalStateException("AsdfHandler is not registered");
   }
 
   @Override
