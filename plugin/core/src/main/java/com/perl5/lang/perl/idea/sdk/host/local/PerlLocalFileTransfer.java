@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ class PerlLocalFileTransfer extends PerlHostFileTransfer<PerlLocalHostData> {
   }
 
   @Override
-  protected void doStubFiles(@NotNull String remoteDir, String localDir) throws IOException {
+  protected void doStubFiles(@NotNull String remoteDir, String localDir) {
   }
 
   @Override

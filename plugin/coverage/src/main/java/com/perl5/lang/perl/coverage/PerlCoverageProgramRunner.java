@@ -49,8 +49,7 @@ public class PerlCoverageProgramRunner extends GenericPerlProgramRunner {
   }
 
   @Override
-  protected @Nullable PerlRunProfileState createState(@NotNull ExecutionEnvironment executionEnvironment)
-    throws ExecutionException {
+  protected @Nullable PerlRunProfileState createState(@NotNull ExecutionEnvironment executionEnvironment) {
     return new PerlCoverageProfileState(executionEnvironment);
   }
 

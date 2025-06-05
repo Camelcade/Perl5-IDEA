@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,11 +36,11 @@ class PerlWslFileTransfer extends PerlHostFileTransfer<PerlWslData> {
   }
 
   @Override
-  protected void doSyncPath(@NotNull String remotePath, String localPath) throws IOException {
+  protected void doSyncPath(@NotNull String remotePath, String localPath) {
   }
 
   @Override
-  protected void doStubFiles(@NotNull String remoteDir, String localDir) throws IOException {
+  protected void doStubFiles(@NotNull String remoteDir, String localDir) {
   }
 
   @Override

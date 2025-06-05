@@ -134,7 +134,7 @@ public class PerlDebugThread extends Thread {
       textToPrint + "\n", ConsoleViewContentType.SYSTEM_OUTPUT);
   }
 
-  private void prepareAndConnect() throws ExecutionException, IOException, InterruptedException {
+  private void prepareAndConnect() throws ExecutionException, IOException {
     myScriptListPanel.clear();
     myEvalsListPanel.clear();
     WriteAction.runAndWait(myPerlRemoteFileSystem::dropFiles);
