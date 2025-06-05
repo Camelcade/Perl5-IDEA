@@ -31,6 +31,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.util.InvalidDataException;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.WriteExternalException;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
@@ -193,7 +194,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
     myRequiredModules = PREREQUISITES_JOINER.fun(PREREQUISITES_PARSER.fun(requiredModules));
   }
 
-  public String getConsoleCharset() {
+  public @NlsSafe String getConsoleCharset() {
     return myConsoleCharset;
   }
 
