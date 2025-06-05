@@ -22,6 +22,7 @@ import com.intellij.openapi.fileChooser.FileChooserFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.LabeledComponent;
 import com.intellij.openapi.ui.TextFieldWithBrowseButton;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.RawCommandLineEditor;
@@ -115,7 +116,7 @@ class PerlTestRunConfigurationEditor extends GenericPerlRunConfigurationEditor<P
     }
 
     @Override
-    protected @NotNull String getScriptFieldLabelText() {
+    protected @NotNull @NlsContexts.Label String getScriptFieldLabelText() {
       return PerlBundle.message("perl.run.prove.option.script.label");
     }
 
