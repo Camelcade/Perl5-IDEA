@@ -62,7 +62,7 @@ public abstract class PerlProtoLexer implements FlexLexer {
   @SuppressWarnings("override")
   public abstract int yylength();
 
-  @SuppressWarnings("override")
+  @SuppressWarnings({"override", "RedundantThrows"})
   public abstract IElementType perlAdvance() throws IOException;
 
   @SuppressWarnings("override")

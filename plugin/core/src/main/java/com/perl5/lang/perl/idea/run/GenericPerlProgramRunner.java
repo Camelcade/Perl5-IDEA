@@ -52,8 +52,7 @@ public abstract class GenericPerlProgramRunner extends AsyncProgramRunner<Runner
                                                                                                                    ExecutionException;
 
   @Override
-  protected @NotNull Promise<RunContentDescriptor> execute(@NotNull ExecutionEnvironment environment, @NotNull RunProfileState state)
-    throws ExecutionException {
+  protected @NotNull Promise<RunContentDescriptor> execute(@NotNull ExecutionEnvironment environment, @NotNull RunProfileState state) {
     FileDocumentManager.getInstance().saveAllDocuments();
     AsyncPromise<RunContentDescriptor> result = new AsyncPromise<>();
     var missingModules = getMissingModules(environment);
