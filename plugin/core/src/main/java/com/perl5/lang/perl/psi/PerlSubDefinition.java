@@ -40,8 +40,7 @@ public interface PerlSubDefinition extends PerlSub {
     return subArguments;
   }
 
-  @NlsSafe
-  default String getSubArgumentsListAsString() {
+  default @NlsSafe String getSubArgumentsListAsString() {
     return PerlSubUtil.getArgumentsListAsString(getSubArgumentsListWithoutSelf());
   }
 }

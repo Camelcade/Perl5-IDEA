@@ -539,8 +539,7 @@ public final class PerlRunUtil {
    *
    * @return old indicator text
    */
-  @NlsSafe
-  public static @Nullable String setProgressText(@Nullable @Nls String newText) {
+  public static @NlsSafe @Nullable String setProgressText(@Nullable @Nls String newText) {
     ProgressIndicator indicator = ProgressManager.getInstance().getProgressIndicator();
     if (indicator != null) {
       String oldText = indicator.getText();
