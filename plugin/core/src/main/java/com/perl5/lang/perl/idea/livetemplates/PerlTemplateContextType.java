@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.livetemplates;
 
 import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiWhiteSpace;
@@ -37,7 +38,7 @@ import org.jetbrains.annotations.NotNull;
 
 
 public abstract class PerlTemplateContextType extends TemplateContextType {
-  protected PerlTemplateContextType(@NotNull String presentableName) {
+  protected PerlTemplateContextType(@NlsContexts.Label @NotNull String presentableName) {
     super(presentableName);
   }
 
@@ -98,7 +99,7 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
       this(PerlBundle.message("perl.template.context.prefix"));
     }
 
-    public Prefix(@NotNull String presentableName) {
+    public Prefix(@NlsContexts.Label @NotNull String presentableName) {
       super(presentableName);
     }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,11 +16,14 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.ComboboxSpeedSearch;
 import com.intellij.ui.SimpleTextAttributes;
 import com.intellij.util.ObjectUtils;
+import com.perl5.PerlBundle;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -54,7 +57,7 @@ public class PerlInstallForm {
     myDistributionsComboBox.setRenderer(new ColoredListCellRenderer<>() {
       @Override
       protected void customizeCellRenderer(@NotNull JList<? extends String> list,
-                                           @Nullable String value,
+                                           @Nls @Nullable String value,
                                            int index,
                                            boolean selected,
                                            boolean hasFocus) {
@@ -63,7 +66,7 @@ public class PerlInstallForm {
         }
         setIcon(myHelper.getIcon(value));
         if (myHelper.isInstalled(value)) {
-          append(myHelper.cleanDistributionItem(value)).append(" (installed)", SimpleTextAttributes.GRAY_ATTRIBUTES);
+          append(myHelper.cleanDistributionItem(value)).append(PerlBundle.message("installed"), SimpleTextAttributes.GRAY_ATTRIBUTES);
         }
         else {
           append(value);
@@ -115,10 +118,10 @@ public class PerlInstallForm {
                                            boolean selected,
                                            boolean hasFocus) {
         if (value == 1) {
-          append("Single thread");
+          append(PerlBundle.message("single.thread"));
         }
         else {
-          append(Integer.toString(value)).append(" threads");
+          append(Integer.toString(value)).append(PerlBundle.message("threads"));
         }
       }
     });
@@ -135,6 +138,7 @@ public class PerlInstallForm {
     /**
      * Cleans {@code rawItem} from tech information, like {@code '(installed)'}
      */
+    @NlsSafe
     String cleanDistributionItem(@NotNull String rawItem);
 
     /**

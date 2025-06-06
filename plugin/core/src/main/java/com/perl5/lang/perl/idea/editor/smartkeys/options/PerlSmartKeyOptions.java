@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,8 @@ public class PerlSmartKeyOptions extends BeanConfigurable<Perl5CodeInsightSettin
   public JComponent createComponent() {
     JComponent panel = super.createComponent();
     if (panel != null) {
-      panel.setBorder(IdeBorderFactory.PlainSmallWithIndent.createTitledBorder(null, "Perl5", 0, 0, null, null));
+      panel.setBorder(
+        IdeBorderFactory.PlainSmallWithIndent.createTitledBorder(null, PerlBundle.message("border.title.perl5"), 0, 0, null, null));
     }
 
     return panel;

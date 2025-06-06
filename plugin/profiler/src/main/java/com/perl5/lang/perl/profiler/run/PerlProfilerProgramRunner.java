@@ -29,6 +29,7 @@ import com.intellij.profiler.ProfilerToolWindowManager;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
+import com.perl5.lang.perl.profiler.PerlProfilerBundle;
 import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
@@ -70,20 +71,21 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
 
     var executorSettings = getExecutorSettings(executionEnvironment.getExecutor().getId());
     if (executorSettings == null) {
-      var message = "Unable to find executor settings";
+      var message = PerlProfilerBundle.message("dialog.message.unable.to.find.executor.settings");
       LOG.error(message);
       throw new ExecutionException(message);
     }
     var runProfile = executionEnvironment.getRunProfile();
     if (!executorSettings.canRun(runProfile)) {
-      var message = "Unable to run " + runProfile + " with " + executorSettings;
+      var message = PerlProfilerBundle.message("dialog.message.unable.to.run.with", runProfile, executorSettings);
       LOG.error(message);
       throw new ExecutionException(message);
     }
     var perlProfilerConfigurationState = executorSettings.getState();
     if (!(perlProfilerConfigurationState instanceof PerlProfilerConfigurationState profilerConfigurationState)) {
       LOG.error("PerlProfilerConfigurationState expected, got: " + perlProfilerConfigurationState);
-      throw new ExecutionException("Wrong profiler configuration state: " + perlProfilerConfigurationState);
+      throw new ExecutionException(
+        PerlProfilerBundle.message("dialog.message.wrong.profiler.configuration.state", perlProfilerConfigurationState));
     }
 
     return new PerlProfilerRunProfileState(executionEnvironment, profilerConfigurationState);
@@ -102,7 +104,7 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
                            @NotNull AsyncPromise<? super RunContentDescriptor> result) throws ExecutionException {
     if (!(state instanceof PerlProfilerRunProfileState profilerRunProfileState)) {
       LOG.error("PerlProfilerRunProfileState expected, got " + state);
-      throw new ExecutionException("Incorrect run configuration state, see logs for details");
+      throw new ExecutionException(PerlProfilerBundle.message("dialog.message.incorrect.run.configuration.state.see.logs.for.details"));
     }
     var profileResultsPath = profilerRunProfileState.getProfilingResultsPath();
     LOG.info("Profiling results saved in: " + profileResultsPath);
@@ -112,7 +114,8 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
         FileUtil.delete(profileResultsPath);
       }
       catch (IOException e) {
-        throw new ExecutionException("Error removing old profiling data at " + profileResultsPath, e);
+        throw new ExecutionException(PerlProfilerBundle.message("dialog.message.error.removing.old.profiling.data.at", profileResultsPath),
+                                     e);
       }
     }
     else {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.searches.ReferencesSearch;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlLabelDeclaration;
 import org.jetbrains.annotations.NotNull;
@@ -32,7 +33,8 @@ public class PerlUnusedLabelInspection extends PerlInspection {
       @Override
       public void visitLabelDeclaration(@NotNull PsiPerlLabelDeclaration o) {
         if (ReferencesSearch.search(o).findFirst() == null) {
-          holder.registerProblem(o, "Unused label declaration (possibly deprecated usage)", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
+          holder.registerProblem(o, PerlBundle.message("inspection.message.unused.label.declaration.possibly.deprecated.usage"),
+                                 ProblemHighlightType.LIKE_UNUSED_SYMBOL);
         }
         super.visitLabelDeclaration(o);
       }

@@ -26,6 +26,7 @@ import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.NlsActions.ActionText;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.text.StringUtil;
@@ -74,7 +75,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
    * @param selectionConsumer   a callback for selected result. Accepts path selected and the host data
    * @param disposable          session-bound things may be attached to this disposable, which is going to be disposed by parent configurable
    */
-  public void chooseFileInteractively(@NotNull String dialogTitle,
+  public void chooseFileInteractively(@NlsContexts.DialogTitle @NotNull String dialogTitle,
                                       @Nullable Function<? super PerlHostData<?, ?>, ? extends File> defaultPathFunction,
                                       boolean useDefaultIfExists,
                                       @NotNull Predicate<? super String> nameValidator,
@@ -101,7 +102,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   /**
    * Choose a file if host does not provide a file system
    */
-  protected void chooseFileInteractively(@NotNull String dialogTitle,
+  protected void chooseFileInteractively(@NlsContexts.DialogTitle @NotNull String dialogTitle,
                                          @Nullable File defaultPath,
                                          boolean useDefaultIfExists,
                                          @NotNull Predicate<? super String> nameValidator,
@@ -136,7 +137,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   /**
    * Choose a file if host provides a file system
    */
-  protected void chooseFileInteractively(@NotNull String dialogTitle,
+  protected void chooseFileInteractively(@NlsContexts.DialogTitle @NotNull String dialogTitle,
                                          @Nullable File defaultPath,
                                          boolean useDefaultIfExists,
                                          @NotNull Predicate<? super String> nameValidator,
@@ -165,7 +166,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
     }
   }
 
-  private @NotNull FileChooserDescriptor createDescriptor(@NotNull String dialogTitle,
+  private @NotNull FileChooserDescriptor createDescriptor(@NlsContexts.DialogTitle @NotNull String dialogTitle,
                                                           @NotNull Predicate<? super String> nameValidator,
                                                           @NotNull Function<? super String, String> pathValidator) {
     final FileChooserDescriptor descriptor = new FileChooserDescriptor(true, isChooseFolders(), false, false, false, false) {

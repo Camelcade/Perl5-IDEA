@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi.properties;
+package com.perl5.lang.perl.debugger
 
-import com.intellij.openapi.util.NlsContexts;
-import com.intellij.psi.PsiNameIdentifierOwner;
-import org.jetbrains.annotations.Nullable;
+import com.intellij.DynamicBundle
+import org.jetbrains.annotations.Nls
+import org.jetbrains.annotations.PropertyKey
 
+private const val PATH_TO_BUNDLE = "messages.PerlDebuggerBundle"
 
-public interface PerlIdentifierOwner extends PsiNameIdentifierOwner {
-  /**
-   * @return name for element presentation
-   */
-  default @NlsContexts.Label @Nullable String getPresentableName() { return getName(); }
+object PerlDebuggerBundle : DynamicBundle(PATH_TO_BUNDLE) {
+  @JvmStatic
+  fun message(key: @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String, vararg params: Any): @Nls String = getMessage(key, *params)
 }

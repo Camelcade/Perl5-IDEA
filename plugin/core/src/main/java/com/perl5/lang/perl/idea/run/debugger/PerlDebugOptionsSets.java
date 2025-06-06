@@ -38,8 +38,8 @@ public final class PerlDebugOptionsSets {
     DEBUGGER_STARTUP_RUN, PerlBundle.message("stop.after.compilation.use.and.begin.blocks.are.done"),
     DEBUGGER_STARTUP_BREAKPOINT, PerlBundle.message("stop.at.first.breakpoint")
   );
-  public static final Map<String, String> ROLE_OPTIONS = Map.of(
-    PerlDebugOptions.ROLE_SERVER, "IDE connects to the perl process",
-    PerlDebugOptions.ROLE_CLIENT, "Perl process connects to the IDE"
+  public static final Map<String, @Nls String> ROLE_OPTIONS = Map.of(
+    PerlDebugOptions.ROLE_SERVER, PerlBundle.message("ide.connects.to.the.perl.process"),
+    PerlDebugOptions.ROLE_CLIENT, PerlBundle.message("perl.process.connects.to.the.ide")
   );
 }

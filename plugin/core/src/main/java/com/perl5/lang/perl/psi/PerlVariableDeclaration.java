@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,6 +16,8 @@
 
 package com.perl5.lang.perl.psi;
 
+import com.intellij.openapi.util.NlsContexts;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.properties.PerlPackageMember;
@@ -33,10 +35,12 @@ public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMe
    *
    * @return package name for current element
    */
+  @NlsSafe
   @Override
   @Nullable
   String getNamespaceName();
 
+  @NlsSafe
   String getVariableName();
 
   default @NotNull PerlValue getDeclaredValue() {
@@ -71,7 +75,7 @@ public interface PerlVariableDeclaration extends PerlDeprecatable, PerlPackageMe
    * @return fqn or null if name is missing
    */
   @Override
-  default @Nullable String getCanonicalName() {
+  default @NlsContexts.Label @Nullable String getCanonicalName() {
     String variableName = getVariableName();
     if (StringUtil.isEmpty(variableName)) {
       return null;

@@ -19,13 +19,13 @@ package actions;
 import base.PerlLightTestCase;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.ui.TestDialogManager;
-import org.jetbrains.annotations.Nls;
+import com.intellij.openapi.util.NlsSafe;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class PerlActionTestCase extends PerlLightTestCase {
   protected abstract @NotNull AnAction getAction();
 
-  protected void doTest(@Nls @NotNull String testDialogInput) {
+  protected void doTest(@NlsSafe @NotNull String testDialogInput) {
     TestDialogManager.setTestInputDialog(message -> testDialogInput);
     doTest();
   }

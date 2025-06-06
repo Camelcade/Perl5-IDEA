@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.breakpoints.XLineBreakpointType;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
+import com.perl5.lang.perl.debugger.PerlDebuggerBundle;
 import com.perl5.lang.perl.debugger.PerlDebuggerEditorsProvider;
 import com.perl5.lang.perl.fileTypes.PerlFileType;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PerlLineBreakpointType extends XLineBreakpointType<PerlLineBreakpointProperties> {
   public PerlLineBreakpointType() {
-    super("perl_line_breakpoint", "Perl Line Breakpoint");
+    super("perl_line_breakpoint", PerlDebuggerBundle.message("perl.line.breakpoint"));
   }
 
   @Override
