@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
+import com.perl5.lang.perl.profiler.PerlProfilerBundle;
 import com.perl5.lang.perl.profiler.configuration.PerlProfilerConfigurationState;
 import org.jetbrains.annotations.NotNull;
 
@@ -82,7 +83,7 @@ public class PerlProfilerRunProfileState extends PerlRunProfileState {
     var dumpLocalPath = getDumpFile().getAbsolutePath();
     var remotePath = hostData.getRemotePath(dumpLocalPath);
     if (StringUtil.isEmpty(remotePath)) {
-      throw new ExecutionException("Unable to compute remote path for: " + dumpLocalPath);
+      throw new ExecutionException(PerlProfilerBundle.message("dialog.message.unable.to.compute.remote.path.for", dumpLocalPath));
     }
     var nytProfOptions = "stmts=0:calls=2:savesrc=0:slowops=1:sigexit=1:addpid=1" +
                          ":file=" + StringUtil.escapeChar(FileUtil.toSystemIndependentName(remotePath), ':') +

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.search.searches.ReferencesSearch;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
@@ -52,7 +53,8 @@ public class PerlUnusedSubInspection extends PerlInspection {
         if (subNameElement != null &&
             !EXCLUSIONS.contains(o.getName()) &&
             ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null) {
-          holder.registerProblem(subNameElement, "Unused sub definition", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
+          holder.registerProblem(subNameElement, PerlBundle.message("inspection.message.unused.sub.definition"),
+                                 ProblemHighlightType.LIKE_UNUSED_SYMBOL);
         }
       }
 
@@ -67,7 +69,8 @@ public class PerlUnusedSubInspection extends PerlInspection {
         if (subNameElement != null &&
             !EXCLUSIONS.contains(o.getName()) &&
             ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null) {
-          holder.registerProblem(subNameElement, "Unused sub declaration", ProblemHighlightType.LIKE_UNUSED_SYMBOL);
+          holder.registerProblem(subNameElement, PerlBundle.message("inspection.message.unused.sub.declaration"),
+                                 ProblemHighlightType.LIKE_UNUSED_SYMBOL);
         }
       }
     };

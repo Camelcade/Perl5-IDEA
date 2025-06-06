@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
 import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
@@ -69,7 +70,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
       NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
         .create(AllIcons.Gutter.ImplementingMethod)
         .setTargets(parentNamespaces)
-        .setTooltipText("Parent classes");
+        .setTooltipText(PerlBundle.message("tooltip.parent.classes"));
 
       result.add(getMarkerInfo(builder, nameIdentifier));
     }
@@ -79,7 +80,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
       NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
         .create(AllIcons.Gutter.ImplementedMethod)
         .setTargets(childNamespaces)
-        .setTooltipText("Subclasses");
+        .setTooltipText(PerlBundle.message("tooltip.subclasses"));
 
       result.add(getMarkerInfo(builder, nameIdentifier));
     }
@@ -108,7 +109,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
           .create(AllIcons.Gutter.OverridingMethod)
           .setTarget(parentSub)
-          .setTooltipText("Overriding method");
+          .setTooltipText(PerlBundle.message("tooltip.overriding.method"));
 
         result.add(getMarkerInfo(builder, nameIdentifier));
       }
@@ -119,7 +120,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
           .create(AllIcons.Gutter.OverridenMethod)
           .setTargets(overridingSubs)
-          .setTooltipText("Overridden methods");
+          .setTooltipText(PerlBundle.message("tooltip.overridden.methods"));
 
         result.add(getMarkerInfo(builder, nameIdentifier));
       }

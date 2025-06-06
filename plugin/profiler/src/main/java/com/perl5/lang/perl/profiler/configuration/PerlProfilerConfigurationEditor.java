@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.profiler.configuration;
 import com.intellij.ui.EnumComboBoxModel;
 import com.intellij.ui.SimpleListCellRenderer;
 import com.intellij.util.ui.FormBuilder;
+import com.perl5.lang.perl.profiler.PerlProfilerBundle;
 import com.perl5.lang.perl.profiler.run.PerlProfilerStartupMode;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,8 +44,8 @@ public class PerlProfilerConfigurationEditor {
         setText(value.getExplanation());
       }
     });
-    formBuilder.addLabeledComponent("Profiler startup mode:", myStartModeComboBox);
-    formBuilder.addLabeledComponent("Disable perl optimizer:", myOptimizerCheckBox);
+    formBuilder.addLabeledComponent(PerlProfilerBundle.message("label.profiler.startup.mode"), myStartModeComboBox);
+    formBuilder.addLabeledComponent(PerlProfilerBundle.message("label.disable.perl.optimizer"), myOptimizerCheckBox);
     myPanel.add(formBuilder.getPanel(), BorderLayout.NORTH);
   }
 }

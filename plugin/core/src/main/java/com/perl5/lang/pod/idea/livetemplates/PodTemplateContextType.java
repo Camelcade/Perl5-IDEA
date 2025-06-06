@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.pod.idea.livetemplates;
 
 import com.intellij.codeInsight.template.TemplateActionContext;
 import com.intellij.codeInsight.template.TemplateContextType;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -26,6 +27,7 @@ import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
+import com.perl5.PerlBundle;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.mixin.PodOverSectionContent;
@@ -35,7 +37,7 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class PodTemplateContextType extends TemplateContextType implements PodElementTypes {
 
-  public PodTemplateContextType(@NotNull String presentableName) {
+  public PodTemplateContextType(@NlsContexts.Label @NotNull String presentableName) {
     super(presentableName);
   }
 
@@ -69,7 +71,7 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
       this(PodLanguage.NAME);
     }
 
-    public Generic(String presentableName) {
+    public Generic(@NlsContexts.Label String presentableName) {
       super(presentableName);
     }
 
@@ -81,10 +83,10 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
 
   public static class CommandPosition extends PodTemplateContextType.Generic {
     public CommandPosition() {
-      this("Command position");
+      this(PerlBundle.message("label.command.position"));
     }
 
-    public CommandPosition(String presentableName) {
+    public CommandPosition(@NlsContexts.Label String presentableName) {
       super(presentableName);
     }
 
@@ -130,7 +132,7 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
   }
 
   public static class InsideOver extends CommandPosition {
-    public InsideOver(String presentableName) {
+    public InsideOver(@NlsContexts.Label String presentableName) {
       super(presentableName);
     }
 
@@ -147,7 +149,7 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
 
   public static class InsideOverBulleted extends InsideOver {
     public InsideOverBulleted() {
-      super("Inside =over block, bulleted");
+      super(PerlBundle.message("label.inside.over.block.bulleted"));
     }
 
     @Override
@@ -163,7 +165,7 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
 
   public static class InsideOverNotBulleted extends InsideOver {
     public InsideOverNotBulleted() {
-      super("Inside =over block, not bulleted");
+      super(PerlBundle.message("label.inside.over.block.not.bulleted"));
     }
 
     @Override

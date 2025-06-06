@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,8 +19,8 @@ package com.perl5.lang.perl.fileTypes;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import com.intellij.openapi.util.NlsSafe;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,7 +36,7 @@ public abstract class PerlPluginBaseFileType extends LanguageFileType {
   }
 
   @Override
-  public @Nls @NotNull String getDisplayName() {
+  public @NlsSafe @NotNull String getDisplayName() {
     return getName();
   }
 }

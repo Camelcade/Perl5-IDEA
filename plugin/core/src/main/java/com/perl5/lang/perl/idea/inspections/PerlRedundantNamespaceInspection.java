@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElementVisitor;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
@@ -42,7 +43,7 @@ public class PerlRedundantNamespaceInspection extends PerlInspection {
               if (!namespaceElement.getTextRange().isEmpty()) {
                 holder.registerProblem(
                   namespaceElement,
-                  "Redundant namespace qualifier",
+                  PerlBundle.message("inspection.message.redundant.namespace.qualifier"),
                   ProblemHighlightType.LIKE_UNUSED_SYMBOL
                 );
               }

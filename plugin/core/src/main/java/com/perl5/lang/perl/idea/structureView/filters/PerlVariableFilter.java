@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.structureView.filters;
 
 import com.intellij.ide.util.treeView.smartTree.ActionPresentation;
 import com.intellij.ide.util.treeView.smartTree.ActionPresentationData;
+import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.structureView.elements.PerlStructureViewElement;
 import com.perl5.lang.perl.idea.structureView.elements.PerlVariableDeclarationStructureViewElement;
@@ -35,7 +36,7 @@ public class PerlVariableFilter extends PerlFilter {
 
   @Override
   public @NotNull ActionPresentation getPresentation() {
-    return new ActionPresentationData("Show variables", null, PerlIcons.SCALAR_GUTTER_ICON);
+    return new ActionPresentationData(PerlBundle.message("action.show.variables.text"), null, PerlIcons.SCALAR_GUTTER_ICON);
   }
 
   @Override

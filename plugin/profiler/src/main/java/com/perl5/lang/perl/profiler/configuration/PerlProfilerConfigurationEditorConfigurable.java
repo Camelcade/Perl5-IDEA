@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.profiler.configuration;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.openapi.util.ClearableLazyValue;
+import com.perl5.lang.perl.profiler.PerlProfilerBundle;
 import com.perl5.lang.perl.profiler.run.PerlProfilerStartupMode;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -55,7 +56,7 @@ class PerlProfilerConfigurationEditorConfigurable implements UnnamedConfigurable
     var editor = getEditor();
     var startMode = editor.myStartModeComboBox.getSelectedItem();
     if (startMode == null) {
-      throw new ConfigurationException("Please, select a startup mode");
+      throw new ConfigurationException(PerlProfilerBundle.message("dialog.message.please.select.startup.mode"));
     }
     myState.setStartupMode((PerlProfilerStartupMode)startMode);
     myState.setOptimizerDisabled(editor.myOptimizerCheckBox.isSelected());

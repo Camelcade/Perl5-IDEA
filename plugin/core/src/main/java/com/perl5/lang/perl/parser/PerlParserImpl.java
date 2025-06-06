@@ -21,6 +21,7 @@ import com.intellij.lang.PsiParser;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import com.perl5.PerlBundle;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
 import com.perl5.lang.perl.util.PerlTimeLogger;
@@ -137,7 +138,7 @@ public class PerlParserImpl extends PerlParserGenerated {
       return true;
     }
 
-    b.mark().error("Semicolon expected");
+    b.mark().error(PerlBundle.message("parsing.error.semicolon.expected"));
 
     return true;
   }
