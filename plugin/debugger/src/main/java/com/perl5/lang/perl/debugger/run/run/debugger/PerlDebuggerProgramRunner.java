@@ -28,8 +28,8 @@ import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugProcessStarter;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
-import com.perl5.PerlBundle;
 import com.perl5.lang.perl.debugger.PerlDebugProcess;
+import com.perl5.lang.perl.debugger.PerlDebuggerBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
@@ -71,7 +71,7 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
                            @NotNull AsyncPromise<? super RunContentDescriptor> result) throws ExecutionException {
     if (!(state instanceof PerlDebugProfileStateBase perlDebugProfileStateBase)) {
       LOG.error("PerlDebugProfileStateBase expected, got " + state + " for " + env);
-      throw new ExecutionException(PerlBundle.message("dialog.message.incorrect.run.state"));
+      throw new ExecutionException(PerlDebuggerBundle.message("dialog.message.incorrect.run.state"));
     }
     var executionResult = perlDebugProfileStateBase.execute(env.getExecutor(), this);
     ApplicationManager.getApplication().invokeLater(() -> {

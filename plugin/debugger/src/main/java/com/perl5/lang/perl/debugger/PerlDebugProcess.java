@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,6 @@ import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
 import com.intellij.xdebugger.evaluation.XDebuggerEditorsProvider;
 import com.intellij.xdebugger.frame.XSuspendContext;
 import com.intellij.xdebugger.ui.XDebugTabLayouter;
-import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointHandler;
@@ -121,8 +120,8 @@ public class PerlDebugProcess extends XDebugProcess {
     else {
       Notifications.Bus.notify(new Notification(
         PERL_DEBUGGER_NOTIFICATION_GROUP_ID,
-        PerlBundle.message("perl.run.pause.unavailable.title"),
-        PerlBundle.message("perl.run.pause.unavailable.content"),
+        PerlDebuggerBundle.message("perl.run.pause.unavailable.title"),
+        PerlDebuggerBundle.message("perl.run.pause.unavailable.content"),
         NotificationType.INFORMATION
       ));
     }
@@ -173,13 +172,13 @@ public class PerlDebugProcess extends XDebugProcess {
       @Override
       public void registerAdditionalContent(@NotNull RunnerLayoutUi ui) {
         Content content =
-          ui.createContent("PerlSourceList", myDebugThread.getScriptListPanel(), PerlBundle.message("loaded.sources"),
+          ui.createContent("PerlSourceList", myDebugThread.getScriptListPanel(), PerlDebuggerBundle.message("loaded.sources"),
                            PerlIcons.PERL_SCRIPT_FILE_ICON, null);
         content.setCloseable(false);
         ui.addContent(content);
 
         content =
-          ui.createContent("PerlEvalsList", myDebugThread.getEvalsListPanel(), PerlBundle.message("compiled.evals"),
+          ui.createContent("PerlEvalsList", myDebugThread.getEvalsListPanel(), PerlDebuggerBundle.message("compiled.evals"),
                            PerlIcons.PERL_LANGUAGE_ICON, null);
         content.setCloseable(false);
         ui.addContent(content);

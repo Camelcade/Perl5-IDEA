@@ -27,7 +27,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
 import com.intellij.ui.DocumentAdapter;
-import com.perl5.PerlBundle;
+import com.perl5.lang.perl.debugger.PerlDebuggerBundle;
 import com.perl5.lang.perl.idea.run.PerlConfigurationEditorBase;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptionsSets;
 import org.jetbrains.annotations.NotNull;
@@ -100,14 +100,15 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
     myLocalProjectRootComponent = new TextFieldWithBrowseButton();
     myLocalProjectRootComponent.addBrowseFolderListener(
       myProject,
-      FileChooserDescriptorFactory.createSingleFolderDescriptor().withTitle(PerlBundle.message("perl.run.option.select.local.root")),
+      FileChooserDescriptorFactory.createSingleFolderDescriptor()
+        .withTitle(PerlDebuggerBundle.message("perl.run.option.select.local.root")),
       TextComponentAccessor.TEXT_FIELD_WHOLE_TEXT);
-    var localRoot = LabeledComponent.create(myLocalProjectRootComponent, PerlBundle.message("perl.run.option.local.root"));
+    var localRoot = LabeledComponent.create(myLocalProjectRootComponent, PerlDebuggerBundle.message("perl.run.option.local.root"));
     localRoot.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(localRoot);
 
     myRemoteProjectRootComponent = new JTextField();
-    var remoteRoot = LabeledComponent.create(myRemoteProjectRootComponent, PerlBundle.message("perl.run.option.remote.root"));
+    var remoteRoot = LabeledComponent.create(myRemoteProjectRootComponent, PerlDebuggerBundle.message("perl.run.option.remote.root"));
     remoteRoot.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(remoteRoot);
 
@@ -124,7 +125,8 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
     };
     myPerlRole.addActionListener(e -> updateCommandLine());
 
-    LabeledComponent<?> perlRole = LabeledComponent.create(myPerlRole, PerlBundle.message("perl.run.option.debugger.connection.mode"));
+    LabeledComponent<?> perlRole =
+      LabeledComponent.create(myPerlRole, PerlDebuggerBundle.message("perl.run.option.debugger.connection.mode"));
     perlRole.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(perlRole);
 
@@ -138,7 +140,7 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
     myDebuggingHost = new JTextField();
     myDebuggingHost.getDocument().addDocumentListener(documentAdapter);
     LabeledComponent<JTextField> debuggingHost =
-      LabeledComponent.create(myDebuggingHost, PerlBundle.message("perl.run.option.debugger.host"));
+      LabeledComponent.create(myDebuggingHost, PerlDebuggerBundle.message("perl.run.option.debugger.host"));
     debuggingHost.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(debuggingHost);
 
@@ -154,11 +156,11 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
     myDebuggingPort = new JFormattedTextField(formatter);
     myDebuggingPort.getDocument().addDocumentListener(documentAdapter);
     LabeledComponent<JFormattedTextField> debuggingPort =
-      LabeledComponent.create(myDebuggingPort, PerlBundle.message("perl.run.option.debugger.port"));
+      LabeledComponent.create(myDebuggingPort, PerlDebuggerBundle.message("perl.run.option.debugger.port"));
     debuggingPort.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(debuggingPort);
 
-    myIsReconnectCheckbox = new JCheckBox(PerlBundle.message("perl.run.option.debugger.reconnect"));
+    myIsReconnectCheckbox = new JCheckBox(PerlDebuggerBundle.message("perl.run.option.debugger.reconnect"));
     debugPanel.add(myIsReconnectCheckbox);
 
     myGeneratedCommandLine = new JTextField();
@@ -171,7 +173,7 @@ class PerlRemoteDebuggingConfigurationEditor extends PerlConfigurationEditorBase
       }
     });
     LabeledComponent<JTextField> labeledComponent =
-      LabeledComponent.create(myGeneratedCommandLine, PerlBundle.message("perl.run.option.debugger.command.line"));
+      LabeledComponent.create(myGeneratedCommandLine, PerlDebuggerBundle.message("perl.run.option.debugger.command.line"));
     labeledComponent.setLabelLocation(BorderLayout.WEST);
     debugPanel.add(labeledComponent);
 

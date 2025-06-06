@@ -31,7 +31,6 @@ import com.intellij.util.xmlb.annotations.Attribute;
 import com.intellij.util.xmlb.annotations.Tag;
 import com.intellij.xdebugger.settings.DebuggerSettingsCategory;
 import com.intellij.xdebugger.settings.XDebuggerSettings;
-import com.perl5.PerlBundle;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -138,7 +137,7 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
 
   private static class ClassColumnInfo extends ColumnInfo<Item, String> {
     public ClassColumnInfo() {
-      super(PerlBundle.message("perl.debugger.settings.class.column.title"));
+      super(PerlDebuggerBundle.message("perl.debugger.settings.class.column.title"));
     }
 
     @Override
@@ -159,7 +158,7 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
 
   private static class RendererColumnInfo extends ColumnInfo<Item, String> {
     public RendererColumnInfo() {
-      super(PerlBundle.message("perl.debugger.settings.renderer.column.title"));
+      super(PerlDebuggerBundle.message("perl.debugger.settings.renderer.column.title"));
     }
 
     @Override
@@ -190,13 +189,13 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
 
     @Override
     public @Nls(capitalization = Nls.Capitalization.Title) String getDisplayName() {
-      return PerlBundle.message("perl.debugger.settings.type.renderers.title");
+      return PerlDebuggerBundle.message("perl.debugger.settings.type.renderers.title");
     }
 
     @Override
     public @Nullable JComponent createComponent() {
       JTextPane textPane = new JTextPane();
-      textPane.setText(PerlBundle.message("perl.debugger.settings.type.renderers.explanation"));
+      textPane.setText(PerlDebuggerBundle.message("perl.debugger.settings.type.renderers.explanation"));
       JPanel panel = FormBuilder.createFormBuilder()
         .addComponent(textPane)
         .addComponent(ToolbarDecorator.createDecorator(this).setAddAction(action -> {

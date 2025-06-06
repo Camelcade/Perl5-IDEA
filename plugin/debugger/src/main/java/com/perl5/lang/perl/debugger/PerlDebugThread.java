@@ -34,7 +34,6 @@ import com.intellij.util.TimeoutUtil;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.impl.XDebugSessionImpl;
-import com.perl5.PerlBundle;
 import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakPointDescriptor;
 import com.perl5.lang.perl.debugger.protocol.*;
 import com.perl5.lang.perl.debugger.run.run.debugger.PerlDebugProfileStateBase;
@@ -67,7 +66,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
 
-import static com.perl5.PerlBundleKt.PATH_TO_BUNDLE;
+import static com.perl5.lang.perl.debugger.PerlDebuggerBundleKt.PATH_TO_BUNDLE;
 import static com.perl5.lang.perl.debugger.protocol.PerlDebuggingEventReady.MODULE_VERSION_PREFIX;
 import static com.perl5.lang.perl.debugger.run.run.debugger.PerlDebugProfileState.DEBUG_PACKAGE;
 
@@ -128,7 +127,7 @@ public class PerlDebugThread extends Thread {
   }
 
   private void print(@NotNull @PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, @NotNull Object... params) {
-    String textToPrint = PerlBundle.message(key, params);
+    String textToPrint = PerlDebuggerBundle.message(key, params);
     LOG.debug("Printing: ", textToPrint);
     ((ConsoleView)myExecutionResult.getExecutionConsole()).print(
       textToPrint + "\n", ConsoleViewContentType.SYSTEM_OUTPUT);
@@ -260,12 +259,12 @@ public class PerlDebugThread extends Thread {
             setUpDebugger();
           }
           else {
-            var errorMessage = PerlBundle.message(
+            var errorMessage = PerlDebuggerBundle.message(
               "perl.debugger.incorrect.version.message", DEBUG_PACKAGE, MODULE_VERSION_PREFIX,
               debuggingEventReady.version);
             Notification notification = new Notification(
               PerlDebugProcess.PERL_DEBUGGER_NOTIFICATION_GROUP_ID,
-              PerlBundle.message("perl.debugger.incorrect.version.title", DEBUG_PACKAGE),
+              PerlDebuggerBundle.message("perl.debugger.incorrect.version.title", DEBUG_PACKAGE),
               errorMessage,
               NotificationType.ERROR
             );
