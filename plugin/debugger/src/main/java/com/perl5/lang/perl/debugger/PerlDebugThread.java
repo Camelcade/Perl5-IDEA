@@ -179,7 +179,7 @@ public class PerlDebugThread extends Thread {
   /**
    * @return true iff we've reached end of stream (interrupted from the script's side)
    */
-  private boolean doRun() throws InterruptedException {
+  private boolean doRun() {
     try {
       prepareAndConnect();
       if (myStop.get()) {
@@ -233,11 +233,6 @@ public class PerlDebugThread extends Thread {
         ((XDebugSessionImpl)mySession).reset();
         ReadAction.run(mySession::initBreakpoints);
       }
-    }
-    catch (InterruptedException e) {
-      LOG.warn(e);
-      setStop();
-      Thread.currentThread().interrupt();
     }
     finally {
       LOG.debug("Stopping process from run");
