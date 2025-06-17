@@ -52,3 +52,6 @@ Text: XPATH2; Tail: null; Type: inject with XPath2; Icon: /xpath.svg; Type Icon:
 Text: XPATH; Tail: null; Type: inject with XPath; Icon: /xpath.svg; Type Icon: null
 	Lookups: XPATH
 	String: XPATH
+Text: XSLT; Tail: null; Type: inject with $XSLT; Icon: null; Type Icon: null
+	Lookups: XSLT
+	String: XSLT
