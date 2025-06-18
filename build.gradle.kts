@@ -104,6 +104,7 @@ allprojects {
         javaCompiler(platformToolsVersion)
         testFramework(TestFrameworkType.Platform, version = platformToolsVersion)
       }
+      testFramework(TestFrameworkType.Bundled)
       jetbrainsRuntime()
     }
     testImplementation("junit:junit:4.13.2")
