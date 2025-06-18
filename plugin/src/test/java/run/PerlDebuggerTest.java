@@ -324,7 +324,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
   }
 
   private void setBreakPoint(@NotNull VirtualFile scriptVirtualFile, int line) {
-    XDebuggerUtil.getInstance().toggleLineBreakpoint(getProject(), scriptVirtualFile, line);
+    XDebuggerTestUtil.toggleBreakpoint(getProject(), scriptVirtualFile, line);
   }
 
   private void waitForDebugger(@NotNull XDebugSession debugSession) {
