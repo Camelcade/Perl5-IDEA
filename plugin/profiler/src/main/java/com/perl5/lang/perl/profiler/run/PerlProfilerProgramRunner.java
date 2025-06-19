@@ -24,6 +24,7 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.intellij.openapi.application.PathManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.io.NioFiles;
 import com.intellij.profiler.DefaultProfilerExecutorGroup;
 import com.intellij.profiler.ProfilerToolWindowManager;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
@@ -111,7 +112,7 @@ public class PerlProfilerProgramRunner extends GenericPerlProgramRunner {
     if (FileUtil.isAncestor(PathManager.getSystemPath(), profileResultsPath.toString(), true)) {
       try {
         // fxime we probably should fix permissions here
-        FileUtil.delete(profileResultsPath);
+        NioFiles.deleteRecursively(profileResultsPath);
       }
       catch (IOException e) {
         throw new ExecutionException(PerlProfilerBundle.message("dialog.message.error.removing.old.profiling.data.at", profileResultsPath),
