@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,8 +18,8 @@ package com.perl5.lang.perl.profiler.parser;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.BaseProcessHandler;
-import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessListener;
 import com.intellij.execution.process.ProcessOutputType;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressIndicator;
@@ -93,7 +93,7 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
     try {
       BaseProcessHandler<?> processHandler = PerlHostData.createProcessHandler(perlCommandLine);
       Ref<@NlsSafe String> errorRef = Ref.create();
-      processHandler.addProcessListener(new ProcessAdapter() {
+      processHandler.addProcessListener(new ProcessListener() {
         @Override
         public void processTerminated(@NotNull ProcessEvent event) {
           if (event.getExitCode() != 0) {

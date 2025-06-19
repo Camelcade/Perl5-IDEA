@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.adapters;
 
-import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.application.ApplicationManager;
@@ -120,7 +120,7 @@ public abstract class PackageManagerAdapter {
         .withSdk(getSdk())
         .withProject(getProject())
         .withConsoleTitle(PerlBundle.message("perl.cpan.console.installing", StringUtil.join(packageNames, ", ")))
-        .withProcessListener(new ProcessAdapter() {
+        .withProcessListener(new ProcessListener() {
           @Override
           public void processTerminated(@NotNull ProcessEvent event) {
             PerlRunUtil.refreshSdkDirs(mySdk, myProject, () -> {

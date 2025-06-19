@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -304,7 +304,7 @@ public abstract class PerlHostData<Data extends PerlHostData<Data, Handler>, Han
     final Map<String, String> environment = commandLine.getEnvironment();
     ProcessHandler handler = hostData.doCreateConsoleProcessHandler(commandLine);
     commandLine.getProcessListeners().forEach(handler::addProcessListener);
-    handler.addProcessListener(new ProcessAdapter() {
+    handler.addProcessListener(new ProcessListener() {
       @Override
       public void startNotified(@NotNull ProcessEvent event) {
         String perl5Opt = environment.get(PerlRunUtil.PERL5OPT);
