@@ -80,6 +80,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
   protected static final String SUB_SIGNATURE = "Sub.Signature";
 
   private static final AtomicNotNullLazyValue<Boolean> ourListenersInitializer = AtomicNotNullLazyValue.createValue(()->{
+    //noinspection deprecation
     PerlParserExtension.EP_NAME.addChangeListener(PerlBaseLexer::refreshExtensions, PerlPluginUtil.getUnloadAwareDisposable());
     refreshExtensions();
     return true;
