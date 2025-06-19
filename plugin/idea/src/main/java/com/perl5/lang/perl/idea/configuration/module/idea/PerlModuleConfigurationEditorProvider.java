@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,11 +22,12 @@ import com.intellij.openapi.module.ModuleType;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationEditorProvider;
 import com.intellij.openapi.roots.ui.configuration.ModuleConfigurationState;
 import com.perl5.lang.perl.idea.modules.PerlModuleType;
+import org.jetbrains.annotations.NotNull;
 
 
 public class PerlModuleConfigurationEditorProvider implements ModuleConfigurationEditorProvider {
   @Override
-  public ModuleConfigurationEditor[] createEditors(ModuleConfigurationState state) {
+  public ModuleConfigurationEditor @NotNull [] createEditors(ModuleConfigurationState state) {
     Module module = state.getCurrentRootModel().getModule();
     if (ModuleType.get(module) instanceof PerlModuleType) {
       return new ModuleConfigurationEditor[]{

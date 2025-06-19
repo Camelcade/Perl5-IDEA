@@ -21,6 +21,7 @@ import com.intellij.openapi.options.UnnamedConfigurable;
 import com.intellij.ui.IdeBorderFactory;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
@@ -47,7 +48,7 @@ public class PerlSmartKeyOptions extends BeanConfigurable<Perl5CodeInsightSettin
   }
 
   @Override
-  public JComponent createComponent() {
+  public @NotNull JComponent createComponent() {
     JComponent panel = super.createComponent();
     if (panel != null) {
       panel.setBorder(
