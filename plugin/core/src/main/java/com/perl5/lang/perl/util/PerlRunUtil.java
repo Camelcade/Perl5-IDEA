@@ -20,7 +20,6 @@ import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.Executor;
 import com.intellij.execution.executors.DefaultRunExecutor;
-import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
 import com.intellij.execution.process.ProcessListener;
@@ -429,7 +428,7 @@ public final class PerlRunUtil {
     try {
       processHandler = PerlHostData.createConsoleProcessHandler(perlCommandLine.withPty(!isUnitTestMode));
       if (isUnitTestMode) {
-        processHandler.addProcessListener(new ProcessAdapter() {
+        processHandler.addProcessListener(new ProcessListener() {
           @Override
           public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
             LOG.info(outputType + ": " + event.getText());
@@ -492,7 +491,7 @@ public final class PerlRunUtil {
     Sdk finalSdk = sdk;
     Set<String> missingPackages = new HashSet<>();
 
-    return new ProcessAdapter() {
+    return new ProcessListener() {
       @Override
       public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
         String text = event.getText();

@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessListener;
 import com.intellij.execution.process.ProcessOutput;
@@ -90,7 +89,7 @@ public abstract class PerlVersionManagerAdapter {
     return new PerlCommandLine(getVersionManagerPath(), command)
       .withProject(project)
       .withHostData(myHostData)
-      .withProcessListener(new ProcessAdapter() {
+      .withProcessListener(new ProcessListener() {
         @Override
         public void processTerminated(@NotNull ProcessEvent event) {
           PerlRunUtil.refreshSdkDirs(project);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,9 +18,9 @@ package com.perl5.lang.perl.debugger.run.run.debugger;
 
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.configurations.RunProfile;
-import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
 import com.intellij.execution.process.ProcessHandler;
+import com.intellij.execution.process.ProcessListener;
 import com.intellij.execution.runners.ExecutionEnvironment;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
@@ -50,7 +50,7 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
   public static final String PERL5_DEBUG_ROLE = "PERL5_DEBUG_ROLE";
   private static final String CAMELCADEDB_DEV_MODE = "CAMELCADEDB_DEV_MODE";
 
-  private static final ProcessAdapter READY_PROCESS_MARKER = new ProcessAdapter() {
+  private static final ProcessListener READY_PROCESS_MARKER = new ProcessListener() {
     @Override
     public void onTextAvailable(@NotNull ProcessEvent event, @NotNull Key outputType) {
       String eventText = event.getText();

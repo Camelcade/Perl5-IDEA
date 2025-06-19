@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.idea.sdk.versionManager;
 
-import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.progress.ProgressIndicator;
 import com.intellij.openapi.progress.Task;
@@ -78,7 +78,7 @@ public abstract class InstallPerlHandler {
         String distributionId = installForm.getSelectedDistributionId();
         String targetName = optionsForm.getTargetName(distributionId);
 
-        vmAdapter.installPerl(project, distributionId, optionsForm.buildParametersList(), new ProcessAdapter() {
+        vmAdapter.installPerl(project, distributionId, optionsForm.buildParametersList(), new ProcessListener() {
           @Override
           public void processTerminated(@NotNull ProcessEvent event) {
             if (!createInterpreter || event.getExitCode() != 0) {

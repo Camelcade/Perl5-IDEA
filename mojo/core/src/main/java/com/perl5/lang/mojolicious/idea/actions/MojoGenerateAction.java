@@ -17,8 +17,8 @@
 package com.perl5.lang.mojolicious.idea.actions;
 
 import com.intellij.execution.ExecutionException;
-import com.intellij.execution.process.ProcessAdapter;
 import com.intellij.execution.process.ProcessEvent;
+import com.intellij.execution.process.ProcessListener;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.openapi.diagnostic.Logger;
@@ -96,7 +96,7 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
     var targetDirectoryPath = targetDirectory.getPath();
     var callbackTestSemaphore = myCallbackTestSemaphore;
 
-    var processListener = new ProcessAdapter() {
+    var processListener = new ProcessListener() {
       @Override
       public void processTerminated(@NotNull ProcessEvent event) {
         targetDirectory.refresh(true, false);
