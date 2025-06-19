@@ -18,9 +18,7 @@ package com.perl5.lang.perl.coverage;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
-import com.intellij.coverage.CoverageEngine;
-import com.intellij.coverage.CoverageRunner;
-import com.intellij.coverage.CoverageSuite;
+import com.intellij.coverage.*;
 import com.intellij.execution.ExecutionException;
 import com.intellij.execution.process.ProcessOutput;
 import com.intellij.notification.Notification;
@@ -60,22 +58,24 @@ public class PerlCoverageRunner extends CoverageRunner {
   private static final Logger LOG = Logger.getInstance(PerlCoverageRunner.class);
 
   @Override
-  public ProjectData loadCoverageData(@NotNull File sessionDataFile, @Nullable CoverageSuite baseCoverageSuite) {
+  protected @NotNull CoverageLoadingResult loadCoverageData(@NotNull File sessionDataFile,
+                                                            @Nullable CoverageSuite baseCoverageSuite,
+                                                            @NotNull CoverageLoadErrorReporter reporter) {
     if (!(baseCoverageSuite instanceof PerlCoverageSuite perlCoverageSuite)) {
       return null;
     }
+    final Ref<ProjectData> projectDataRef = new Ref<>();
     if (ApplicationManager.getApplication().isDispatchThread()) {
-      final Ref<ProjectData> projectDataRef = new Ref<>();
 
       ProgressManager.getInstance().runProcessWithProgressSynchronously(
         () -> projectDataRef.set(doLoadCoverageData(sessionDataFile, (PerlCoverageSuite)baseCoverageSuite)),
         PerlCoverageBundle.message("dialog.title.loading.coverage.data"), true, baseCoverageSuite.getProject());
 
-      return projectDataRef.get();
     }
     else {
-      return doLoadCoverageData(sessionDataFile, perlCoverageSuite);
+      projectDataRef.set(doLoadCoverageData(sessionDataFile, perlCoverageSuite));
     }
+    return new SuccessCoverageLoadingResult(projectDataRef.get());
   }
 
   private static @Nullable ProjectData doLoadCoverageData(@NotNull File sessionDataFile, @NotNull PerlCoverageSuite perlCoverageSuite) {
