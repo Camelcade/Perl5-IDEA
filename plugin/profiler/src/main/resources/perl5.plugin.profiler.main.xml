@@ -14,8 +14,9 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.profiler">
+<idea-plugin>
   <dependencies>
+    <module name="perl5.plugin.core.main"/>
     <module name="intellij.profiler.common"/>
     <plugin id="com.intellij.modules.ultimate"/>
   </dependencies>

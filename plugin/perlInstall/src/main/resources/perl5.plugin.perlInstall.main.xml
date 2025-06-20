@@ -1,0 +1,5 @@
+<idea-plugin>
+  <dependencies>
+    <module name="perl5.plugin.core.main"/>
+  </dependencies>
+</idea-plugin>

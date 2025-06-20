@@ -14,10 +14,12 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.idea.sdk.versionManager.berrybrew">
+<idea-plugin>
+  <dependencies>
+    <module name="perl5.plugin.core.main"/>
+  </dependencies>
   <extensions defaultExtensionNs="com.perl5">
-    <versionManagerHandler key="berrybrew"
-                           implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.berrybrew.BerryBrewHandler"/>
+    <directoryConfigurationProvider implementation="com.perl5.lang.perl.makeMaker.PerlMakeMakerDirectoryConfigurationProvider"/>
   </extensions>
   <extensions defaultExtensionNs="com.intellij">
   </extensions>

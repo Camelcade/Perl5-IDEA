@@ -14,17 +14,13 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.debugger">
+<idea-plugin>
+  <dependencies>
+    <module name="perl5.plugin.core.main"/>
+  </dependencies>
   <extensions defaultExtensionNs="com.perl5">
+    <directoryConfigurationProvider implementation="com.perl5.lang.perl.carton.PerlCartonDirectoryConfigurationProvider"/>
   </extensions>
   <extensions defaultExtensionNs="com.intellij">
-    <virtualFileSystem key="perl5_remote" implementationClass="com.perl5.lang.perl.debugger.PerlRemoteFileSystem"/>
-    <programRunner implementation="com.perl5.lang.perl.debugger.run.run.debugger.PerlDebuggerProgramRunner"/>
-    <xdebugger.breakpointType
-        implementation="com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointType"/>
-    <xdebugger.settings implementation="com.perl5.lang.perl.debugger.PerlDebuggerSettings"/>
-
-    <configurationType implementation="com.perl5.lang.perl.debugger.run.run.debugger.remote.PerlRemoteDebuggingConfigurationType"/>
-    <notificationGroup displayType="BALLOON" id="PERL_DEBUGGER" bundle="messages.PerlBundle" key="perl.debugger.notification.group"/>
   </extensions>
 </idea-plugin>

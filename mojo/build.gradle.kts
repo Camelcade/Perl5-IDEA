@@ -18,17 +18,15 @@ fun properties(key: String) = providers.gradleProperty(key)
 dependencies {
   // packaging, which modules to include into this one
   listOf(
-    ":lang.mojo:core",
+    ":lang.mojo.core",
   ).forEach {
-    intellijPlatform {
-      pluginModule(implementation(project(it)))
-    }
+    runtimeOnly(project(it))
   }
 
   // dependencies
   listOf(
-    ":plugin:core",
-    ":lang.mojo:core",
+    ":plugin.core",
+    ":lang.mojo.core",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
@@ -41,7 +39,7 @@ dependencies {
     bundledPlugins(properties("remoteRunPlugin").get())
   }
 
-  testImplementation(testFixtures(project(":plugin:testFixtures")))
+  testImplementation(testFixtures(project(":plugin.testFixtures")))
 }
 
 

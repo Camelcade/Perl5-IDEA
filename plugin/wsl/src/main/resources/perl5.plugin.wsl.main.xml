@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2020 Alexandr Evstigneev
+  ~ Copyright 2015-2019 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,10 +14,20 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.makeMaker">
+<idea-plugin>
+  <dependencies>
+    <plugin id="com.intellij.modules.ultimate"/>
+    <module name="perl5.plugin.core.main"/>
+  </dependencies>
+
+  <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products  -->
   <extensions defaultExtensionNs="com.perl5">
-    <directoryConfigurationProvider implementation="com.perl5.lang.perl.makeMaker.PerlMakeMakerDirectoryConfigurationProvider"/>
+    <hostHandler key="wsl"
+                 implementationClass="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslHandler"/>
   </extensions>
+
   <extensions defaultExtensionNs="com.intellij">
+    <consoleInputFilterProvider implementation="com.perl5.lang.perl.idea.sdk.host.wsl.PerlWslInputFilterProvider"/>
   </extensions>
 </idea-plugin>

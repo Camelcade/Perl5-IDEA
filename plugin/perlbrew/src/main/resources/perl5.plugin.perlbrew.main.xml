@@ -14,17 +14,26 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.cpan">
+<idea-plugin>
+  <dependencies>
+    <module name="perl5.plugin.core.main"/>
+  </dependencies>
   <extensions defaultExtensionNs="com.perl5">
-    <packageManagerAdapterFactory implementation="com.perl5.lang.perl.cpan.adapter.CpanAdapter$Factory" order="last"/>
+    <versionManagerHandler key="perlbrew"
+                           implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewHandler"/>
   </extensions>
-
   <extensions defaultExtensionNs="com.intellij">
   </extensions>
 
   <actions>
-    <action id="perl5.install.with.cpan" class="com.perl5.lang.perl.cpan.action.PerlInstallPackagesWithCpanAction">
-      <add-to-group group-id="perl5.install"/>
+    <action id="perl5.perlbrew.createlib" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewCreateLibraryAction"
+            icon="/icons/perlbrew.png">
+      <add-to-group group-id="perl5.tools" anchor="last"/>
+    </action>
+
+    <action id="perl5.perlbrew.install.patchperl"
+            class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewInstallPatchPerlAction" icon="/icons/perlbrew.png">
+      <add-to-group group-id="perl5.install" anchor="last"/>
     </action>
   </actions>
 </idea-plugin>

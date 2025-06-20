@@ -18,23 +18,22 @@ fun properties(key: String) = providers.gradleProperty(key)
 dependencies {
   // packaging, which modules to include into this one
   listOf(
-    ":lang.embedded:core",
+    ":lang.embedded.core",
   ).forEach {
-    intellijPlatform{
-      pluginModule(implementation(project(it)))
-    }
+    runtimeOnly(project(it))
+    testCompileOnly(project(it))
   }
 
   // additional compilation dependencies
   listOf(
-    ":plugin:core",
+    ":plugin.core",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
   }
 
   // Test dependencies
-  testImplementation(testFixtures(project(":plugin:testFixtures")))
+  testImplementation(testFixtures(project(":plugin.testFixtures")))
 
   // Plugin dependencies
   intellijPlatform {
@@ -45,12 +44,5 @@ dependencies {
   intellijPlatform{
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
-  }
-}
-
-
-tasks {
-  buildPlugin {
-    archiveBaseName.set("lang.perl5.embedded")
   }
 }

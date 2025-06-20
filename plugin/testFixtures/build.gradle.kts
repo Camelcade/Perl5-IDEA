@@ -6,16 +6,16 @@ plugins {
 
 dependencies {
   listOf(
-    ":plugin:asdf",
-    ":plugin:berrybrew",
-    ":plugin:core",
-    ":plugin:cpan",
-    ":plugin:cpanminus",
-    ":plugin:docker",
-    ":plugin:idea",
-    ":plugin:perlInstall",
-    ":plugin:perlbrew",
-    ":plugin:plenv",
+    ":plugin.asdf",
+    ":plugin.berrybrew",
+    ":plugin.core",
+    ":plugin.cpan",
+    ":plugin.cpanminus",
+    ":plugin.docker",
+    ":plugin.idea",
+    ":plugin.perlInstall",
+    ":plugin.perlbrew",
+    ":plugin.plenv",
   ).forEach {
     testFixturesCompileOnly(project(it))
   }

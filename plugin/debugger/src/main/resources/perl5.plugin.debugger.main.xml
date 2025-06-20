@@ -14,30 +14,20 @@
   ~ limitations under the License.
   -->
 
-<!--suppress PluginXmlPluginLogo -->
-<idea-plugin url="https://github.com/hurricup/Perl5-IDEA">
-  <id>com.perl5.lang.mason.framework</id>
-  <name>Mason Framework</name>
-  <vendor email="hurricup@gmail.com" url="https://github.com/hurricup">Alexandr Evstigneev</vendor>
-  <category>Custom Languages</category>
-
-  <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-       on how to target different products  -->
-
+<idea-plugin>
   <dependencies>
-    <plugin id="com.perl5"/>
-    <plugin id="com.intellij.modules.lang"/>
     <module name="perl5.plugin.core.main"/>
   </dependencies>
-
   <extensions defaultExtensionNs="com.perl5">
   </extensions>
-
   <extensions defaultExtensionNs="com.intellij">
-    <errorHandler implementation="com.perl5.lang.MasonFrameworkYoutrackErrorHandler"/>
+    <virtualFileSystem key="perl5_remote" implementationClass="com.perl5.lang.perl.debugger.PerlRemoteFileSystem"/>
+    <programRunner implementation="com.perl5.lang.perl.debugger.run.run.debugger.PerlDebuggerProgramRunner"/>
+    <xdebugger.breakpointType
+        implementation="com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointType"/>
+    <xdebugger.settings implementation="com.perl5.lang.perl.debugger.PerlDebuggerSettings"/>
+
+    <configurationType implementation="com.perl5.lang.perl.debugger.run.run.debugger.remote.PerlRemoteDebuggingConfigurationType"/>
+    <notificationGroup displayType="BALLOON" id="PERL_DEBUGGER" bundle="messages.PerlBundle" key="perl.debugger.notification.group"/>
   </extensions>
-
-  <actions>
-  </actions>
-
 </idea-plugin>

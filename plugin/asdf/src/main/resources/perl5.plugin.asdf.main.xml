@@ -14,7 +14,11 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.idea.sdk.versionManager.asdf">
+<idea-plugin>
+  <dependencies>
+    <module name="perl5.plugin.core.main"/>
+    <module name="perl5.plugin.perlInstall.main"/>
+  </dependencies>
   <extensions defaultExtensionNs="com.perl5">
     <versionManagerHandler key="asdf"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.asdf.AsdfHandler"/>

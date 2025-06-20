@@ -14,10 +14,20 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.carton">
+<idea-plugin>
+  <dependencies>
+    <module name="perl5.plugin.core.main"/>
+  </dependencies>
   <extensions defaultExtensionNs="com.perl5">
-    <directoryConfigurationProvider implementation="com.perl5.lang.perl.carton.PerlCartonDirectoryConfigurationProvider"/>
+    <packageManagerAdapterFactory implementation="com.perl5.lang.perl.cpan.adapter.CpanAdapter$Factory" order="last"/>
   </extensions>
+
   <extensions defaultExtensionNs="com.intellij">
   </extensions>
+
+  <actions>
+    <action id="perl5.install.with.cpan" class="com.perl5.lang.perl.cpan.action.PerlInstallPackagesWithCpanAction">
+      <add-to-group group-id="perl5.install"/>
+    </action>
+  </actions>
 </idea-plugin>

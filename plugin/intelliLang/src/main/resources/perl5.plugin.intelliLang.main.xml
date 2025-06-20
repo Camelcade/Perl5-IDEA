@@ -14,14 +14,13 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.intellilang">
-
-  <resource-bundle>messages.PerlIntelliLangBundle</resource-bundle>
-
-
+<idea-plugin>
   <dependencies>
+    <module name="perl5.plugin.core.main"/>
     <plugin id="org.intellij.intelliLang"/>
   </dependencies>
+
+  <resource-bundle>messages.PerlIntelliLangBundle</resource-bundle>
 
   <extensions defaultExtensionNs="org.intellij.intelliLang">
     <languageSupport implementation="com.perl5.lang.perl.intellilang.PerlInjectionSupport"/>

@@ -19,33 +19,28 @@ fun properties(key: String) = providers.gradleProperty(key)
 dependencies {
   // packaging, which modules to include into this one
   listOf(
-    ":lang.mason.htmlmason:core",
+    ":lang.mason.htmlmason.core",
   ).forEach {
-    intellijPlatform {
-      pluginModule(implementation(project(it)))
-    }
+    runtimeOnly(project(it))
   }
 
   // compilation dependencies
   listOf(
-    ":plugin:core",
-    ":lang.mason.htmlmason:core",
+    ":plugin.core",
+    ":lang.mason.htmlmason.core",
     ":lang.mason.framework",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
   }
-  testImplementation(testFixtures(project(":plugin:testFixtures")))
+  testImplementation(testFixtures(project(":plugin.testFixtures")))
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
-    listOf(project(":plugin"), project(":lang.mason.framework")).forEach { localPlugin(it) }
-  }
-}
-
-tasks {
-  buildPlugin {
-    archiveBaseName.set("lang.htmlmason")
+    listOf(
+      ":plugin",
+      ":lang.mason.framework"
+    ).forEach { localPlugin(project(it)) }
   }
 }
