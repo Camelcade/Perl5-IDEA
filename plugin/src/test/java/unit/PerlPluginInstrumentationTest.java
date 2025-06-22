@@ -38,36 +38,43 @@ import com.perl5.lang.perl.intellilang.PerlInjectionSupport;
 import com.perl5.lang.perl.makeMaker.PerlMakeMakerDirectoryConfigurationProvider;
 import com.perl5.lang.perl.moduleBuild.PerlModuleBuildDirectoryConfigurationProvider;
 import com.perl5.lang.perl.profiler.run.PerlProfilerProcess;
+import org.jetbrains.annotations.NotNull;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.regex.Pattern;
 
 public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
+  private static @NotNull Object[] buildData(@NotNull String moduleName, @NotNull Object clazz) {
+    return new Object[]{
+      moduleName, clazz, Pattern.compile("lib/modules/perl5\\.plugin\\." + moduleName + "\\.main\\.jar!")
+    };
+  }
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
     return !CategoriesFilter.shouldRun(PerlPluginInstrumentationTest.class) ? Collections.emptyList() : Arrays.asList(new Object[][]{
-      {"asdf", AsdfTestUtil.getInstrumentationTestClass(), PLUGIN_PATTERN_STRING},
-      {"berrybrew", BerryBrewTestUtil.getInstrumentationTestClass(), PLUGIN_PATTERN_STRING},
-      {"carton", PerlCartonDirectoryConfigurationProvider.class, PLUGIN_PATTERN_STRING},
-      {"copyright", PerlCopyrightsVariablesProvider.class, PLUGIN_PATTERN_STRING},
-      {"core", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
-      {"coverage", PerlCoverageEnabledConfiguration.class, PLUGIN_PATTERN_STRING},
-      {"cpan", PerlInstallPackagesWithCpanAction.class, PLUGIN_PATTERN_STRING},
-      {"cpanminus", PerlInstallCpanmAction.class, PLUGIN_PATTERN_STRING},
-      {"debugger", PerlDebuggerProgramRunner.class, PLUGIN_PATTERN_STRING},
-      {"docker", PerlDockerTestUtil.getInstrumentationTestClass(), PLUGIN_PATTERN_STRING},
-      {"idea", PerlIdeaTestUtil.getInstrumentationTestClass(), PLUGIN_PATTERN_STRING},
-      {"intelliLang", PerlInjectionSupport.class, PLUGIN_PATTERN_STRING},
-      {"makeMaker", PerlMakeMakerDirectoryConfigurationProvider.class, PLUGIN_PATTERN_STRING},
-      {"moduleBuild", PerlModuleBuildDirectoryConfigurationProvider.class, PLUGIN_PATTERN_STRING},
-      {"perlInstall", PerlInstallHandlerBase.class, PLUGIN_PATTERN_STRING},
-      {"perlbrew", PerlBrewTestUtil.getInstrumentationTestClass(), PLUGIN_PATTERN_STRING},
-      {"plenv", PlenvTestUtil.getInstrumentationTestClass(), PLUGIN_PATTERN_STRING},
-      {"profiler", PerlProfilerProcess.class, PLUGIN_PATTERN_STRING},
-      {"terminal", PerlLocalTerminalCustomizer.class, PLUGIN_PATTERN_STRING},
-      {"wsl", PerlWslInputFilterProvider.class, PLUGIN_PATTERN_STRING},
+      buildData("asdf", AsdfTestUtil.getInstrumentationTestClass()),
+      buildData("berrybrew", BerryBrewTestUtil.getInstrumentationTestClass()),
+      buildData("carton", PerlCartonDirectoryConfigurationProvider.class),
+      buildData("copyright", PerlCopyrightsVariablesProvider.class),
+      buildData("core", PerlParserDefinition.class),
+      buildData("coverage", PerlCoverageEnabledConfiguration.class),
+      buildData("cpan", PerlInstallPackagesWithCpanAction.class),
+      buildData("cpanminus", PerlInstallCpanmAction.class),
+      buildData("debugger", PerlDebuggerProgramRunner.class),
+      buildData("docker", PerlDockerTestUtil.getInstrumentationTestClass()),
+      buildData("idea", PerlIdeaTestUtil.getInstrumentationTestClass()),
+      buildData("intelliLang", PerlInjectionSupport.class),
+      buildData("makeMaker", PerlMakeMakerDirectoryConfigurationProvider.class),
+      buildData("moduleBuild", PerlModuleBuildDirectoryConfigurationProvider.class),
+      buildData("perlInstall", PerlInstallHandlerBase.class),
+      buildData("perlbrew", PerlBrewTestUtil.getInstrumentationTestClass()),
+      buildData("plenv", PlenvTestUtil.getInstrumentationTestClass()),
+      buildData("profiler", PerlProfilerProcess.class),
+      buildData("terminal", PerlLocalTerminalCustomizer.class),
+      buildData("wsl", PerlWslInputFilterProvider.class),
     });
   }
 }

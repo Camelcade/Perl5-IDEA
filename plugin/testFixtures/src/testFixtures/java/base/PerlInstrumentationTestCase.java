@@ -33,13 +33,14 @@ import java.util.stream.Stream;
 @RunWith(Parameterized.class)
 public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
 
-  protected static final Pattern PLUGIN_PATTERN_STRING = Pattern.compile("lib/plugin-.+?\\.jar!");
-  protected static final Pattern EMBEDDED_PATTERN_STRING = Pattern.compile("lib/lang\\.embedded-.+?\\.jar");
-  protected static final Pattern MOJO_PATTERN_STRING = Pattern.compile("lib/lang\\.mojo-.+?\\.jar!");
-  protected static final Pattern TT2_PATTERN_STRING = Pattern.compile("lib/lang\\.tt2-.+?\\.jar!");
-  protected static final Pattern MASON_FRAMEWORK_PATTERN_STRING = Pattern.compile("lib/lang.mason.framework-.+?\\.jar!");
-  protected static final Pattern MASON_PATTERN_STRING = Pattern.compile("lib/lang.mason.htmlmason-.+?\\.jar!");
-  protected static final Pattern MASON2_PATTERN_STRING = Pattern.compile("lib/lang.mason.mason2-.+?\\.jar!");
+  protected static final Pattern PLUGIN_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.plugin\\.core\\.main\\.jar!");
+  protected static final Pattern EMBEDDED_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.embedded\\.core\\.main\\.jar");
+  protected static final Pattern MOJO_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.mojo\\.core\\.main\\.jar!");
+  protected static final Pattern TT2_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.tt2\\.core\\.main\\.jar!");
+  protected static final Pattern MASON_FRAMEWORK_PATTERN_STRING = Pattern.compile("lib/perl5\\.lang\\.mason\\.framework\\.main\\.jar!");
+  protected static final Pattern MASON_PATTERN_STRING =
+    Pattern.compile("lib/modules/perl5\\.lang\\.mason\\.htmlmason\\.core\\.main\\.jar!");
+  protected static final Pattern MASON2_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.mason\\.mason2\\.core\\.main\\.jar!");
 
   @Parameterized.Parameter() public @NotNull String myName;
 
