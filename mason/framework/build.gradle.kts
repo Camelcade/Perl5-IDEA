@@ -16,12 +16,12 @@
 fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
-  listOf(":plugin:core").forEach {
+  listOf(":plugin.core").forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
     testRuntimeOnly(project(it))
   }
-  testImplementation(testFixtures(project(":plugin:testFixtures")))
+  testImplementation(testFixtures(project(":plugin.testFixtures")))
   intellijPlatform {
     intellijPlatform{
       val platformVersionProvider: Provider<String> by rootProject.extra

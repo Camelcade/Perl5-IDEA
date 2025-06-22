@@ -20,34 +20,31 @@ fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
   listOf(
-    ":plugin:asdf",
-    ":plugin:berrybrew",
-    ":plugin:carton",
-    ":plugin:copyright",
-    ":plugin:core",
-    ":plugin:coverage",
-    ":plugin:cpan",
-    ":plugin:cpanminus",
-    ":plugin:debugger",
-    ":plugin:docker",
-    ":plugin:idea",
-    ":plugin:intelliLang",
-    ":plugin:makeMaker",
-    ":plugin:moduleBuild",
-    ":plugin:perlInstall",
-    ":plugin:perlbrew",
-    ":plugin:plenv",
-    ":plugin:profiler",
-    ":plugin:terminal",
-    ":plugin:wsl",
+    ":plugin.asdf",
+    ":plugin.berrybrew",
+    ":plugin.carton",
+    ":plugin.copyright",
+    ":plugin.core",
+    ":plugin.coverage",
+    ":plugin.cpan",
+    ":plugin.cpanminus",
+    ":plugin.debugger",
+    ":plugin.docker",
+    ":plugin.idea",
+    ":plugin.intelliLang",
+    ":plugin.makeMaker",
+    ":plugin.moduleBuild",
+    ":plugin.perlbrew",
+    ":plugin.perlInstall",
+    ":plugin.plenv",
+    ":plugin.profiler",
+    ":plugin.terminal",
+    ":plugin.wsl",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
-    intellijPlatform {
-      pluginModule(implementation(project(it)))
-    }
   }
-  testImplementation(testFixtures(project(":plugin:testFixtures")))
+  testImplementation(testFixtures(project(":plugin.testFixtures")))
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
@@ -66,10 +63,6 @@ dependencies {
 
 
 tasks {
-  buildPlugin {
-    archiveBaseName.set("lang.perl5")
-  }
-
   withType<PrepareSandboxTask> {
     inputs.dir("scripts")
 
