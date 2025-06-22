@@ -14,15 +14,22 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.coverage">
+<idea-plugin>
   <dependencies>
-    <plugin id="com.intellij.modules.coverage"/>
+    <plugin id="org.jetbrains.plugins.remote-run"/>
+    <plugin id="com.intellij.modules.ultimate"/>
+    <module name="perl5.plugin.core.main"/>
   </dependencies>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <programRunner implementation="com.perl5.lang.perl.coverage.PerlCoverageProgramRunner"/>
-    <coverageEngine implementation="com.perl5.lang.perl.coverage.PerlCoverageEngine"/>
-    <coverageRunner implementation="com.perl5.lang.perl.coverage.PerlCoverageRunner"/>
-    <projectService serviceImplementation="com.perl5.lang.perl.coverage.PerlCoverageAnnotator"/>
+
+  <extensions defaultExtensionNs="com.perl5">
+    <hostHandler key="docker"
+                 implementationClass="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerHandler"/>
   </extensions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.sdk.host.docker.PerlDockerProjectSettings"/>
+  </extensions>
+
+
 </idea-plugin>

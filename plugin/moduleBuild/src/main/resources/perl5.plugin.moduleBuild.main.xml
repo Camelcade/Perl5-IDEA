@@ -14,7 +14,10 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.moduleBuild">
+<idea-plugin>
+  <dependencies>
+    <module name="perl5.plugin.core.main"/>
+  </dependencies>
   <resource-bundle>messages.ModuleBuildBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.perl5">

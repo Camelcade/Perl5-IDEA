@@ -41,7 +41,7 @@ dependencies {
     ":plugin.terminal",
     ":plugin.wsl",
   ).forEach {
-    compileOnly(project(it))
+    runtimeOnly(project(it))
     testCompileOnly(project(it))
   }
   testImplementation(testFixtures(project(":plugin.testFixtures")))
