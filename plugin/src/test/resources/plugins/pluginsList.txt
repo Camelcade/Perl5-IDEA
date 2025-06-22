@@ -4,9 +4,11 @@ com.intellij
 com.intellij.copyright
 com.intellij.css
 com.intellij.java
+com.intellij.modules.ultimate
 com.intellij.platform.images
 com.jetbrains.plugins.webDeployment
 com.perl5
+intellij.grid.plugin
 org.intellij.intelliLang
 org.intellij.plugins.markdown
 org.jetbrains.plugins.remote-run

@@ -1,4 +1,5 @@
 com.intellij
+com.intellij.modules.ultimate
 com.jetbrains.plugins.webDeployment
 com.perl5
 com.perl5.lang.mojo
