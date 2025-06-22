@@ -20,9 +20,7 @@ dependencies {
   listOf(
     ":lang.tt2.core",
   ).forEach {
-    intellijPlatform {
-      pluginModule(implementation(project(it)))
-    }
+    runtimeOnly(project(it))
   }
 
   // dependencies
