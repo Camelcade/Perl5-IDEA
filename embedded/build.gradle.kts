@@ -20,9 +20,8 @@ dependencies {
   listOf(
     ":lang.embedded.core",
   ).forEach {
-    intellijPlatform{
-      pluginModule(implementation(project(it)))
-    }
+    runtimeOnly(project(it))
+    testCompileOnly(project(it))
   }
 
   // additional compilation dependencies
