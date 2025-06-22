@@ -20,9 +20,7 @@ dependencies {
   listOf(
     ":lang.mason.mason2.core",
   ).forEach {
-    intellijPlatform {
-      pluginModule(implementation(project(it)))
-    }
+    runtimeOnly(project(it))
   }
 
   // compilation dependencies
