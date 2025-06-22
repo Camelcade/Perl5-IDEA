@@ -212,7 +212,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
       session.awaitBufferCondition(() -> session.getScreenLines().contains(controlLine), MAX_PROCESS_WAIT_TIME_MS);
     }
     catch (IOException | ExecutionException e) {
-      fail(e.getMessage());
+      throw new RuntimeException(e);
     }
     finally {
       terminalProjectOptionsProvider.setShellPath(currentShellPath);
