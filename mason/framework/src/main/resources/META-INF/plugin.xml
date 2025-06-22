@@ -24,8 +24,11 @@
   <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products  -->
 
-  <depends>com.perl5</depends>
-  <depends>com.intellij.modules.lang</depends>
+  <dependencies>
+    <plugin id="com.perl5"/>
+    <plugin id="com.intellij.modules.lang"/>
+    <module name="perl5.plugin.core.main"/>
+  </dependencies>
 
   <extensions defaultExtensionNs="com.perl5">
   </extensions>
