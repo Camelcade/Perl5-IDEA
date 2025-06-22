@@ -65,9 +65,6 @@ val pluginProjectsNames = setOf(
 )
 
 allprojects {
-  if (name == "test-utils") {
-    return@allprojects
-  }
   val isPlugin = project.name in pluginProjectsNames
 
   apply(plugin = "org.jetbrains.grammarkit")
