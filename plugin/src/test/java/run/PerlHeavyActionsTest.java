@@ -50,7 +50,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 import java.util.regex.Pattern;
 
 public class PerlHeavyActionsTest extends PerlPlatformTestCase {
@@ -211,7 +210,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
       assertNotNull(controlLine);
       session.awaitBufferCondition(() -> session.getScreenLines().contains(controlLine), MAX_PROCESS_WAIT_TIME_MS);
     }
-    catch (IOException | ExecutionException e) {
+    catch (IOException e) {
       throw new RuntimeException(e);
     }
     finally {
