@@ -30,9 +30,3 @@ dependencies {
     localPlugin(project(":plugin"))
   }
 }
-
-tasks {
-  buildPlugin {
-    archiveBaseName.set("lang.mason.framework")
-  }
-}

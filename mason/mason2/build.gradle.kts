@@ -45,9 +45,3 @@ dependencies {
     ).forEach { localPlugin(project(it)) }
   }
 }
-
-tasks {
-  buildPlugin {
-    archiveBaseName.set("lang.mason2")
-  }
-}

@@ -47,10 +47,3 @@ dependencies {
     create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
   }
 }
-
-
-tasks {
-  buildPlugin {
-    archiveBaseName.set("lang.perl5.embedded")
-  }
-}
