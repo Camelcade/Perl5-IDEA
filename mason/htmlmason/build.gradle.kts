@@ -21,9 +21,7 @@ dependencies {
   listOf(
     ":lang.mason.htmlmason.core",
   ).forEach {
-    intellijPlatform {
-      pluginModule(implementation(project(it)))
-    }
+    runtimeOnly(project(it))
   }
 
   // compilation dependencies
