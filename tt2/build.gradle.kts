@@ -18,7 +18,7 @@ fun properties(key: String) = providers.gradleProperty(key)
 dependencies {
   // packaging, which modules to include into this one
   listOf(
-    ":lang.tt2:core",
+    ":lang.tt2.core",
   ).forEach {
     intellijPlatform {
       pluginModule(implementation(project(it)))
@@ -27,13 +27,13 @@ dependencies {
 
   // dependencies
   listOf(
-    ":plugin:core",
-    ":lang.tt2:core",
+    ":plugin.core",
+    ":lang.tt2.core",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
   }
-  testImplementation(testFixtures(project(":plugin:testFixtures")))
+  testImplementation(testFixtures(project(":plugin.testFixtures")))
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
