@@ -56,6 +56,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.testFramework.*;
 import com.intellij.testFramework.Parameterized.Parameters;
+import com.intellij.testFramework.common.ThreadLeakTracker;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
 import com.intellij.util.concurrency.Semaphore;
@@ -133,6 +134,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     LOG.info("Ensuring SDK is indexed");
     CodeInsightTestFixtureImpl.ensureIndexesUpToDate(myProject);
     LOG.info("SDK is claimed to be indexed");
+    ThreadLeakTracker.longRunningThreadCreated(ApplicationManager.getApplication(), "SystemPropertyWatcher");
   }
 
   protected void disposeOnPerlTearDown(@NotNull Disposable disposable) {
