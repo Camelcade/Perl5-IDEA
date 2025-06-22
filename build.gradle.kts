@@ -194,31 +194,28 @@ allprojects {
     val isRoot = project == rootProject
 
     if (isRoot) {
-      buildPlugin {
-        enabled = false
-      }
-      prepareTestSandbox {
-        enabled = false
-      }
-      patchPluginXml {
-        enabled = false
-      }
-      buildSearchableOptions {
-        enabled = false
-      }
-      prepareJarSearchableOptions {
-        enabled = false
-      }
-      verifyPlugin {
-        enabled = false
-      }
-      verifyPluginProjectConfiguration {
-        enabled = false
-      }
-      publishPlugin {
-        enabled = false
+      listOf(
+        "buildPlugin",
+        "buildSearchableOptions",
+        "classes",
+        "compileJava",
+        "compileKotlin",
+//        "composedJar", // disabling these tasks fails the build, because preparesandbox wants jar anyways
+//        "generateManifest",
+        "instrumentCode",
+//        "instrumentedJar",
+//        "jar",
+        "patchPluginXml",
+        "prepareJarSearchableOptions",
+        "processResources",
+        "publishPlugin",
+        "verifyPlugin",
+        "verifyPluginProjectConfiguration",
+      ).forEach {
+        project.tasks.named(it).configure { enabled = false }
       }
     }
+
     if (isPlugin) {
       publishPlugin {
         if (project.hasProperty("eap")) {
