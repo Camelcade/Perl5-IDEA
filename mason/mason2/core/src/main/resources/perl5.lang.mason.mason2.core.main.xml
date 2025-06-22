@@ -1,0 +1,109 @@
+<idea-plugin>
+  <dependencies>
+    <plugin id="com.perl5.lang.mason.framework"/>
+    <module name="perl5.plugin.core.main"/>
+  </dependencies>
+
+  <resource-bundle>messages.MasonBundle</resource-bundle>
+
+  <extensions defaultExtensionNs="com.perl5">
+    <settings.configurable.extension implementation="com.perl5.lang.mason2.idea.configuration.Mason2SettingsConfigurableExtension"/>
+  </extensions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <errorHandler implementation="com.perl5.lang.mason2.MasonYoutrackErrorHandler"/>
+    <!--Mason2 settings -->
+    <projectService serviceImplementation="com.perl5.lang.mason2.idea.configuration.MasonSettings"/>
+
+    <annotator language="Perl5" implementationClass="com.perl5.lang.mason2.idea.annotator.MasonAnnotator"
+               order="after PERL_SUBS_ANNOTATOR"/>
+    <stubElementTypeHolder class="com.perl5.lang.mason2.elementType.Mason2ElementTypes"/>
+    <lang.fileViewProviderFactory language="Mason2"
+                                  implementationClass="com.perl5.lang.mason2.psi.Mason2FileViewProviderFactory"/>
+
+    <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex"/>
+    <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex"/>
+
+    <projectStructure.sourceRootEditHandler
+        implementation="com.perl5.lang.mason2.idea.configuration.Mason2SourceRootTypeEditHandler"/>
+
+    <completion.contributor language="Perl5"
+                            implementationClass="com.perl5.lang.mason2.idea.completion.MasonCompletionContributor"/>
+
+    <liveTemplateContext contextId="PERL5_MASON"
+                         implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplateContextType"/>
+    <liveTemplatePreprocessor implementation="com.perl5.lang.mason2.idea.livetemplates.MasonTemplatePreprocessor"/>
+    <defaultLiveTemplates file="liveTemplates/Perl5Mason2.xml"/>
+
+    <editorNotificationProvider
+        implementation="com.perl5.lang.mason2.idea.editor.notification.MasonPathsNotification"/>
+
+
+    <lang.parserDefinition language="Mason2"
+                           implementationClass="com.perl5.lang.mason2.Mason2ParserDefinition"/>
+    <typeHierarchyProvider language="Mason2 Templating Language"
+                           implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTemplatingTypeHierarchyProvider"/>
+    <typeHierarchyProvider language="Mason2"
+                           implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTypeHierarchyProvider"/>
+    <fileType implementationClass="com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType" fieldName="INSTANCE"
+              name="Mason2 Pure Perl5 Component" language="Mason2" extensions="mp"/>
+    <fileType implementationClass="com.perl5.lang.mason2.filetypes.MasonInternalComponentFileType" fieldName="INSTANCE"
+              name="Mason2 Internal Component" language="Mason2 Templating Language" extensions="mi"/>
+    <editorHighlighterProvider filetype="Mason2 Pure Perl5 Component"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+    <editorHighlighterProvider filetype="Mason2 Internal Component"
+                               implementationClass="com.perl5.lang.mason2.filetypes.MasonEditorHighlighterProvider"/>
+    <fileType implementationClass="com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType" fieldName="INSTANCE"
+              name="Mason2 Top-Level Component" language="Mason2 Templating Language" extensions="mc"/>
+    <editorHighlighterProvider filetype="Mason2 Top-Level Component"
+                               implementationClass="com.perl5.lang.mason2.filetypes.MasonEditorHighlighterProvider"/>
+
+    <lang.syntaxHighlighterFactory language="Mason2"
+                                   implementationClass="com.perl5.lang.mason2.idea.highlighter.MasonSyntaxHighlighterFactory"/>
+    <typedHandler implementation="com.perl5.lang.mason2.idea.editor.MasonTypedHandler" order="first"/>
+    <lang.findUsagesProvider language="Mason2"
+                             implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
+    <lang.foldingBuilder language="Mason2"
+                         implementationClass="com.perl5.lang.mason2.idea.folding.MasonFoldingBuilder"/>
+    <lang.formatter language="Mason2"
+                    implementationClass="com.perl5.lang.mason2.idea.formatter.MasonFormattingModelBuilder"/>
+    <lang.indentStrategy language="Mason2"
+                         implementationClass="com.perl5.lang.mason2.idea.editor.MasonIndentStrategy"/>
+
+    <lang.namesValidator language="Mason2"
+                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+    <editorHighlighterProvider filetype="Mason2 top-level component"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+
+    <lang.refactoringSupport language="Mason2"
+                             implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
+    <lang.psiStructureViewFactory language="Mason2"
+                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+
+    <lang.braceMatcher language="Mason2"
+                       implementationClass="com.perl5.lang.mason2.idea.editor.MasonBraceMatcher"/>
+    <preFormatProcessor implementation="com.perl5.lang.mason2.idea.formatter.MasonPreFormatProcessor"/>
+
+    <lang.findUsagesProvider language="Mason2 Templating Language"
+                             implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
+    <lang.parserDefinition language="Mason2 Templating Language"
+                           implementationClass="com.perl5.lang.mason2.Mason2TemplatingParserDefinition"/>
+    <lang.ast.factory language="Mason2 Templating Language" implementationClass="com.perl5.lang.mason2.Mason2TemplatingAstFactory"/>
+    <lang.fileViewProviderFactory language="Mason2 Templating Language"
+                                  implementationClass="com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProviderFactory"/>
+    <lang.findUsagesProvider language="Mason2 Templating Language"
+                             implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.mason2.idea.highlighter.Mason2TemplateLanguageErrorFilter"/>
+    <liveTemplateOptionalProcessor
+        implementation="com.perl5.lang.mason2.idea.livetemplates.MasonLiveTemplatesProcessor"/>
+    <backgroundPostStartupActivity implementation="com.perl5.lang.mason2.idea.components.MasonPostStartupActivity"/>
+    <!--Mason2 settings end -->
+  </extensions>
+
+  <actions>
+    <action id="Perl.MarkMason2Root" class="com.perl5.lang.mason2.idea.configuration.Mason2MarkSourceRootAction">
+      <add-to-group group-id="MarkRootGroup"/>
+    </action>
+  </actions>
+</idea-plugin>
