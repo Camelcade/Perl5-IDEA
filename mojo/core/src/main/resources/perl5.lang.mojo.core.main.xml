@@ -1,0 +1,98 @@
+<idea-plugin>
+  <dependencies>
+    <module name="perl5.plugin.core.main"/>
+  </dependencies>
+
+  <resource-bundle>messages.MojoBundle</resource-bundle>
+
+  <extensions defaultExtensionNs="com.perl5">
+    <subCallHandler key="helper" implementationClass="com.perl5.lang.mojolicious.psi.impl.MojoHelperHandler"/>
+
+    <importsProvider implementation="com.perl5.lang.mojolicious.extensions.MojoImplicitImportsProvider"/>
+    <settings.configurable.extension implementation="com.perl5.lang.mojolicious.idea.modules.MojoSettingsConfigurableExtension"/>
+    <packageProcessor key="Mojo::Base" implementationClass="com.perl5.lang.perl.extensions.mojo.MojoBaseProcessor"/>
+    <packageProcessor key="Mojolicious::Lite" implementationClass="com.perl5.lang.perl.extensions.mojo.MojoliciousLitePackageProcessor"/>
+
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.mojo.MojoLiteImplicitSubsProvider"/>
+  </extensions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <errorHandler implementation="com.perl5.lang.mojolicious.MojoYoutrackErrorHandler"/>
+    <internalFileTemplate name="Perl5 mojolicious"/>
+
+    <stubElementTypeHolder class="com.perl5.lang.mojolicious.MojoliciousElementTypes"/>
+
+    <fileType implementationClass="com.perl5.lang.mojolicious.filetypes.MojoliciousFileType" fieldName="INSTANCE"
+              name="Mojolicious Perl5 Template"
+              language="Mojolicious Perl"
+              extensions="ep"/>
+    <editorHighlighterProvider filetype="Mojolicious Perl5 Template"
+                               implementationClass="com.perl5.lang.mojolicious.filetypes.MojoliciousEditorHighlighterProvider"/>
+    <lang.parserDefinition language="Mojolicious Perl"
+                           implementationClass="com.perl5.lang.mojolicious.MojoliciousParserDefinition"/>
+    <lang.fileViewProviderFactory language="Mojolicious Perl"
+                                  implementationClass="com.perl5.lang.mojolicious.psi.MojoliciousFileViewProviderFactory"/>
+    <lang.syntaxHighlighterFactory language="Mojolicious Perl"
+                                   implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousSyntaxHighlighterFactory"/>
+    <lang.findUsagesProvider language="Mojolicious Perl"
+                             implementationClass="com.perl5.lang.mojolicious.idea.findusages.MojoliciousFindUsagesProvider"/>
+    <lang.formatter language="Mojolicious Perl"
+                    implementationClass="com.perl5.lang.mojolicious.idea.formatter.MojoliciousFormattingModelBuilder"/>
+
+    <lang.namesValidator language="Mojolicious Perl"
+                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
+
+    <typedHandler implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousTypedHandler"
+                  order="first"/>
+    <enterHandlerDelegate
+        implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousEnterHandlerDelegate"
+        id="MojoliciousPerlEnterHandler" order="after PerlEnterHandler"/>
+
+    <lang.refactoringSupport language="Mojolicious Perl"
+                             implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
+
+    <lang.psiStructureViewFactory language="Mojolicious Perl"
+                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+    <lang.braceMatcher language="Mojolicious Perl"
+                       implementationClass="com.perl5.lang.mojolicious.idea.editor.MojoBraceMatcher"/>
+    <lang.foldingBuilder language="Mojolicious Perl"
+                         implementationClass="com.perl5.lang.mojolicious.idea.folding.MojoliciousFoldingBuilder"/>
+    <preFormatProcessor implementation="com.perl5.lang.mojolicious.idea.formatter.MojoliciousPreFormatProcessor"/>
+    <multiLangCommenter
+        implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
+
+    <lang.commenter language="Mojolicious Perl"
+                    implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousTemplateLanguageErrorFilter"/>
+    <liveTemplateOptionalProcessor
+        implementation="com.perl5.lang.mojolicious.idea.liveTemplates.MojoliciousLiveTemplateProcessor"/>
+    <elementDescriptionProvider implementation="com.perl5.lang.mojolicious.psi.MojoElementDescriptionProvider" id="perl5.mojo"
+                                order="before perl5"/>
+    <projectStructure.sourceRootEditHandler
+        implementation="com.perl5.lang.mojolicious.idea.modules.MojoTemplateSourceRootEditHandler"/>
+
+    <projectService serviceImplementation="com.perl5.lang.mojolicious.model.MojoProjectManager"/>
+    <postStartupActivity implementation="com.perl5.lang.mojolicious.model.MojoProjectManagerStarter"/>
+
+    <treeStructureProvider implementation="com.perl5.lang.mojolicious.idea.projectView.MojoTreeStructureProvider"/>
+  </extensions>
+
+  <actions>
+    <action id="perl5.mojo.install" class="com.perl5.lang.mojolicious.idea.actions.InstallMojoliciousAction">
+      <add-to-group group-id="perl5.install"/>
+    </action>
+
+    <group id="perl5.mojo.NewGroup">
+      <add-to-group group-id="NewGroup" relative-to-action="Perl5.NewFile" anchor="after"/>
+      <action id="perl5.mojo.new.file" class="com.perl5.lang.mojolicious.idea.ide.MojoCreateFileFromTemplateAction"/>
+      <action id="perl5.mojo.generate.app" class="com.perl5.lang.mojolicious.idea.actions.MojoGenerateAppAction"/>
+      <action id="perl5.mojo.generate.lite.app" class="com.perl5.lang.mojolicious.idea.actions.MojoGenerateLiteAppAction"/>
+      <action id="perl5.mojo.generate.plugin" class="com.perl5.lang.mojolicious.idea.actions.MojoGeneratePluginAction"/>
+    </group>
+
+    <action id="perl5.mojo.mark.root" class="com.perl5.lang.mojolicious.idea.modules.MojoTemplateMarkSourceRootAction">
+      <add-to-group group-id="MarkRootGroup"/>
+    </action>
+  </actions>
+</idea-plugin>

@@ -20,9 +20,7 @@ dependencies {
   listOf(
     ":lang.mojo.core",
   ).forEach {
-    intellijPlatform {
-      pluginModule(implementation(project(it)))
-    }
+    runtimeOnly(project(it))
   }
 
   // dependencies
