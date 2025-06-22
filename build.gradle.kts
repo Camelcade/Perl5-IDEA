@@ -1,9 +1,15 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.gradle.jvm.tasks.Jar
+import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB
+import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB_MODULES
 import org.jetbrains.intellij.platform.gradle.Constants.Tasks.INSTRUMENT_CODE
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.intellij.platform.gradle.tasks.InstrumentCodeTask
+import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
 import org.kt3k.gradle.plugin.coveralls.CoverallsTask
+import java.nio.file.Files
+import kotlin.io.path.moveTo
 
 /*
  * Copyright 2015-2021 Alexandr Evstigneev
@@ -193,6 +199,33 @@ allprojects {
 
     val isRoot = project == rootProject
 
+    listOf(
+      "composedJar",
+      "instrumentedJar",
+      "jar",
+    ).forEach {
+      project.tasks.named<Jar>(it).configure {
+        archiveVersion = ""
+        archiveBaseName = archiveBaseName(project.name)
+      }
+    }
+
+    if (isRoot || isPlugin) {
+      project.tasks.register<Task>("normalizeSandbox") {
+        dependsOn(project.tasks.named("prepareSandbox"))
+        doLast {
+          normalizeSandbox(project, "prepareSandbox")
+        }
+      }
+      listOf(
+        "buildSearchableOptions",
+        "runIde",
+        "buildPlugin",
+      ).forEach {
+        project.tasks.named(it).configure { dependsOn(project.tasks.named("normalizeSandbox")) }
+      }
+    }
+
     if (isRoot) {
       listOf(
         "buildPlugin",
@@ -217,6 +250,22 @@ allprojects {
     }
 
     if (isPlugin) {
+      jarSearchableOptions {
+        archiveVersion = ""
+      }
+
+      project.tasks.register<Task>("normalizeTestSandbox") {
+        dependsOn(project.tasks.named("prepareTestSandbox"))
+        doLast {
+          normalizeSandbox(project, "prepareTestSandbox")
+        }
+      }
+
+      listOf(
+        "test",
+      ).forEach {
+        project.tasks.named(it).configure { dependsOn(project.tasks.named("normalizeTestSandbox")) }
+      }
       publishPlugin {
         if (project.hasProperty("eap")) {
           channels.set(listOf("EAP"))
@@ -371,3 +420,35 @@ intellijPlatform {
 configurations.all {
   resolutionStrategy.cacheDynamicVersionsFor(7, "days")
 }
+
+fun normalizeSandbox(project: Project, taskName: String) {
+  project.logger.info("Normalizing $taskName results for ${project.name}")
+  val pluginsRootPath = project.tasks.named<PrepareSandboxTask>(taskName).get().defaultDestinationDirectory.get().asFile.toPath()
+  project.logger.info("\tPlugins root $pluginsRootPath")
+  for (pluginName in pluginProjectsNames) {
+    val pluginRootPath = pluginsRootPath.resolve(pluginName)
+    if (!Files.exists(pluginRootPath)) {
+      continue
+    }
+    project.logger.info("\tProcessing $pluginRootPath")
+    val mainJarName = "${archiveBaseName(pluginName)}.jar"
+    val pluginLibPath = pluginRootPath.resolve(LIB)
+    val pluginLibModulesPath = pluginRootPath.resolve(LIB_MODULES)
+    Files.createDirectories(pluginLibModulesPath)
+    Files.list(pluginLibPath).use {
+      it.filter {
+        val fileName = it.fileName.toString()
+        fileName.endsWith(".jar") &&
+          fileName.startsWith(archiveBasePrefix(pluginName)) &&
+          fileName != mainJarName &&
+          !fileName.contains("searchableOptions")
+      }.forEach {
+        project.logger.info("\t\tMoving $it to $pluginLibModulesPath")
+        it.moveTo(pluginLibModulesPath.resolve(it.fileName))
+      }
+    }
+  }
+}
+
+fun archiveBasePrefix(projectName: String) = "${rootProject.name}.${projectName}"
+fun archiveBaseName(projectName: String) = "${archiveBasePrefix(projectName)}.main"
