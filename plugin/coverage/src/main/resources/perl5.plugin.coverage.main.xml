@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2015-2020 Alexandr Evstigneev
+  ~ Copyright 2015-2019 Alexandr Evstigneev
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -14,11 +14,16 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.idea.sdk.versionManager.plenv">
-  <extensions defaultExtensionNs="com.perl5">
-    <versionManagerHandler key="plenv"
-                           implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvHandler"/>
-  </extensions>
+<idea-plugin>
+  <dependencies>
+    <plugin id="com.intellij.modules.coverage"/>
+    <module name="perl5.plugin.core.main"/>
+  </dependencies>
+
   <extensions defaultExtensionNs="com.intellij">
+    <programRunner implementation="com.perl5.lang.perl.coverage.PerlCoverageProgramRunner"/>
+    <coverageEngine implementation="com.perl5.lang.perl.coverage.PerlCoverageEngine"/>
+    <coverageRunner implementation="com.perl5.lang.perl.coverage.PerlCoverageRunner"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.coverage.PerlCoverageAnnotator"/>
   </extensions>
 </idea-plugin>

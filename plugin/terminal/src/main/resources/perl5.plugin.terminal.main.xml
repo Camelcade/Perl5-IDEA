@@ -14,8 +14,9 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin package="com.perl5.lang.perl.idea.terminal">
+<idea-plugin>
   <dependencies>
+    <module name="perl5.plugin.core.main"/>
     <plugin id="org.jetbrains.plugins.terminal"/>
   </dependencies>
   <extensions defaultExtensionNs="org.jetbrains.plugins.terminal">
