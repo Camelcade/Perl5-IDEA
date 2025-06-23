@@ -35,6 +35,13 @@ val genRoot = project.file("src/main/gen").also { genRoot ->
 }
 
 dependencies {
+  listOf(
+    ":plugin.common",
+  ).forEach {
+    compileOnly(project(it))
+    testCompileOnly(project(it))
+  }
+
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())

@@ -1,5 +1,9 @@
 <idea-plugin>
   <resource-bundle>messages.PerlBundle</resource-bundle>
+  <dependencies>
+    <module name="perl5.plugin.common.main"/>
+    <module name="intellij.platform.backend"/>
+  </dependencies>
   <extensionPoints>
     <extensionPoint qualifiedName="com.perl5.packageProcessor" beanClass="com.intellij.util.KeyedLazyInstanceEP" dynamic="true">
       <with attribute="implementationClass"
