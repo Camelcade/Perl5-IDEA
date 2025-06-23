@@ -37,6 +37,7 @@ val genRoot = project.file("src/main/gen").also { genRoot ->
 dependencies {
   listOf(
     ":plugin.core",
+    ":lang.tt2.common",
   ).forEach {
     compileOnly(project(it))
   }
