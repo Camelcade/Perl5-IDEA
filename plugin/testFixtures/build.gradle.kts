@@ -8,10 +8,12 @@ dependencies {
   listOf(
     ":plugin.asdf",
     ":plugin.berrybrew",
+    ":plugin.common",
     ":plugin.core",
     ":plugin.cpan",
     ":plugin.cpanminus",
     ":plugin.docker",
+    ":plugin.frontend",
     ":plugin.idea",
     ":plugin.perlInstall",
     ":plugin.perlbrew",

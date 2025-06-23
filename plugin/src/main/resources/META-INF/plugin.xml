@@ -22,26 +22,30 @@
 
   <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products  -->
+  <dependencies>
+    <plugin id="com.intellij.modules.lang"/>
+  </dependencies>
 
-  <depends>com.intellij.modules.lang</depends>
-  <incompatible-with>com.intellij.jetbrains.client</incompatible-with>
   <content>
     <module name="perl5.plugin.asdf.main"/>
     <module name="perl5.plugin.berrybrew.main"/>
     <module name="perl5.plugin.carton.main"/>
+    <module name="perl5.plugin.common.main" loading="required"/>
     <module name="perl5.plugin.copyright.main"/>
-    <module name="perl5.plugin.core.main" loading="required"/>
+    <module name="perl5.plugin.core.main"/>
     <module name="perl5.plugin.coverage.main"/>
     <module name="perl5.plugin.cpan.main"/>
     <module name="perl5.plugin.cpanminus.main"/>
     <module name="perl5.plugin.debugger.main"/>
     <module name="perl5.plugin.docker.main"/>
+    <module name="perl5.plugin.frontend.main"/>
+    <module name="perl5.plugin.frontend.split.main"/>
     <module name="perl5.plugin.idea.main"/>
     <module name="perl5.plugin.intelliLang.main"/>
     <module name="perl5.plugin.makeMaker.main"/>
     <module name="perl5.plugin.moduleBuild.main"/>
-    <module name="perl5.plugin.perlbrew.main"/>
     <module name="perl5.plugin.perlInstall.main"/>
+    <module name="perl5.plugin.perlbrew.main"/>
     <module name="perl5.plugin.plenv.main"/>
     <module name="perl5.plugin.profiler.main"/>
     <module name="perl5.plugin.terminal.main"/>
