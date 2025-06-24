@@ -30,7 +30,10 @@
   </dependencies>
 
   <content>
-    <module name="perl5.lang.mojo.core.main" loading="required"/>
+    <module name="perl5.lang.mojo.common.main" loading="required"/>
+    <module name="perl5.lang.mojo.core.main"/>
+    <module name="perl5.lang.mojo.frontend.main"/>
+    <module name="perl5.lang.mojo.frontend.split.main"/>
   </content>
 
 </idea-plugin>

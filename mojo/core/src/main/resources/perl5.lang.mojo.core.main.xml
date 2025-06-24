@@ -1,6 +1,7 @@
 <idea-plugin>
   <dependencies>
     <module name="perl5.plugin.core.main"/>
+    <module name="perl5.lang.mojo.common.main"/>
   </dependencies>
 
   <resource-bundle>messages.MojoBundle</resource-bundle>

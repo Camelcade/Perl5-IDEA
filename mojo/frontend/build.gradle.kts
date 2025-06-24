@@ -13,36 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
-  // packaging, which modules to include into this one
   listOf(
+    ":plugin.common",
     ":lang.mojo.common",
-    ":lang.mojo.core",
-    ":lang.mojo.frontend",
-    ":lang.mojo.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-  }
-
-  // dependencies
-  listOf(
-    ":plugin.core",
-    ":lang.mojo.core",
   ).forEach {
     compileOnly(project(it))
-    testCompileOnly(project(it))
   }
-
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IU", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
-    localPlugin(project(":plugin"))
-    bundledPlugins(properties("remoteRunPlugin").get())
+    create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
   }
-
-  testImplementation(testFixtures(project(":plugin.testFixtures")))
 }
-
-
