@@ -2,6 +2,7 @@
   <dependencies>
     <plugin id="com.perl5.lang.mason.framework"/>
     <module name="perl5.plugin.core.main"/>
+    <module name="perl5.lang.mason.htmlmason.common.main"/>
   </dependencies>
 
   <resource-bundle>messages.HtmlMasonBundle</resource-bundle>
