@@ -1,0 +1,6 @@
+<idea-plugin>
+  <dependencies>
+    <module name="intellij.platform.frontend.split"/>
+    <module name="perl5.lang.embedded.frontend.main"/>
+  </dependencies>
+</idea-plugin>
