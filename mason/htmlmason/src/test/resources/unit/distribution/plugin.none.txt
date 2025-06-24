@@ -1,0 +1,26 @@
+Plugin: com.perl5.lang.mason.htmlmason
+Jar files:
+- lib/perl5.plugin.testFixtures.main.jar
+- lib/perl5.lang.mason.htmlmason.main.jar
+- lib/plugin.testFixtures-252.23309.22-EAP-SNAPSHOT-test-fixtures.jar
+- lib/junit-4.13.2.jar
+- lib/opentest4j-1.3.0.jar
+- lib/hamcrest-core-1.3.jar
+Content modules:
+ - perl5.lang.mason.htmlmason.common.main (REQUIRED); lib/modules/perl5.lang.mason.htmlmason.common.main.jar
+  - Dependencies:
+    - Plugin(id=com.perl5.lang.mason.framework)
+    - Module(name=perl5.plugin.common.main)
+ - perl5.lang.mason.htmlmason.core.main (OPTIONAL); lib/modules/perl5.lang.mason.htmlmason.core.main.jar
+  - Dependencies:
+    - Plugin(id=com.perl5.lang.mason.framework)
+    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.lang.mason.htmlmason.common.main)
+ - perl5.lang.mason.htmlmason.frontend.main (OPTIONAL); lib/modules/perl5.lang.mason.htmlmason.frontend.main.jar
+  - Dependencies:
+    - Module(name=intellij.platform.frontend)
+    - Module(name=perl5.lang.mason.htmlmason.common.main)
+ - perl5.lang.mason.htmlmason.frontend.split.main (OPTIONAL); lib/modules/perl5.lang.mason.htmlmason.frontend.split.main.jar
+  - Dependencies:
+    - Module(name=intellij.platform.frontend.split)
+    - Module(name=perl5.lang.mason.htmlmason.frontend.main)
