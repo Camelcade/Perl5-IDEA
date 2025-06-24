@@ -13,39 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
-  // packaging, which modules to include into this one
   listOf(
+    ":plugin.common",
     ":lang.embedded.common",
-    ":lang.embedded.core",
-    ":lang.embedded.frontend",
-    ":lang.embedded.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-    testCompileOnly(project(it))
-  }
-
-  // additional compilation dependencies
-  listOf(
-    ":plugin.core",
   ).forEach {
     compileOnly(project(it))
-    testCompileOnly(project(it))
   }
-
-  // Test dependencies
-  testImplementation(testFixtures(project(":plugin.testFixtures")))
-
-  // Plugin dependencies
   intellijPlatform {
-    localPlugin(project(":plugin"))
-  }
-
-  // Useinstaller handling
-  intellijPlatform{
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+    create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
   }
 }

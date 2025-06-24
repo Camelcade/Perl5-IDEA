@@ -30,6 +30,9 @@
   </dependencies>
 
   <content>
-    <module name="perl5.lang.embedded.core.main" loading="required"/>
+    <module name="perl5.lang.embedded.common.main" loading="required"/>
+    <module name="perl5.lang.embedded.core.main"/>
+    <module name="perl5.lang.embedded.frontend.main"/>
+    <module name="perl5.lang.embedded.frontend.split.main"/>
   </content>
 </idea-plugin>
