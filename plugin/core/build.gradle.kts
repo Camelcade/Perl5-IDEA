@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.grammarkit.tasks.GenerateParserTask
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-fun properties(key: String) = providers.gradleProperty(key)
 
 val genRoot = project.file("src/main/gen").also { genRoot ->
   sourceSets {
@@ -44,63 +42,70 @@ dependencies {
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
-    bundledModules(
-      "intellij.spellchecker"
+
+    create(
+      type = provider { IntelliJPlatformType.IntellijIdeaCommunity },
+      version = platformVersionProvider,
+      useInstaller = providers.gradleProperty("useInstaller").map { it.toBoolean() },
     )
+
+    bundledModule("intellij.spellchecker")
   }
 }
 
 tasks {
-  val generatePerlParserTask = register<GenerateParserTask>("generatePerl5Parser") {
-    sourceFile.set(file("grammar/Perl5.bnf"))
-    pathToParser.set("/com/perl5/lang/perl/parser/PerlParserGenerated.java")
-    pathToPsiRoot.set("/com/perl5/lang/perl/psi")
+  val generatePerl5Parser by registering(GenerateParserTask::class) {
+    sourceFile = file("grammar/Perl5.bnf")
+    pathToParser = "/com/perl5/lang/perl/parser/PerlParserGenerated.java"
+    pathToPsiRoot = "/com/perl5/lang/perl/psi"
   }
 
-  val generatePodParserTask = register<GenerateParserTask>("generatePodParser") {
-    sourceFile.set(file("grammar/Pod.bnf"))
-    pathToParser.set("/com/perl5/lang/pod/parser/PodParserGenerated.java")
-    pathToPsiRoot.set("/com/perl5/lang/pod/psi")
+  val generatePodParser by registering(GenerateParserTask::class) {
+    sourceFile = file("grammar/Pod.bnf")
+    pathToParser = "/com/perl5/lang/pod/parser/PodParserGenerated.java"
+    pathToPsiRoot = "/com/perl5/lang/pod/psi"
   }
 
-  val generatePerlLexerTask = register<GenerateLexerTask>("generatePerlLexer") {
-    sourceFile.set(file("grammar/Perl.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/perl/lexer/"))
+  val generatePerlLexer by registering(GenerateLexerTask::class) {
+    sourceFile = file("grammar/Perl.flex")
+    targetOutputDir = file("src/main/gen/com/perl5/lang/perl/lexer/")
 
-    dependsOn(generatePerlParserTask)
+    dependsOn(generatePerl5Parser)
   }
-  val generatePodLexerTask = register<GenerateLexerTask>("generatePodLexer") {
-    sourceFile.set(file("grammar/Pod.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/pod/lexer/"))
+  val generatePodLexer by registering(GenerateLexerTask::class) {
+    sourceFile = file("grammar/Pod.flex")
+    targetOutputDir = file("src/main/gen/com/perl5/lang/pod/lexer/")
 
-    dependsOn(generatePodParserTask)
+    dependsOn(generatePodParser)
   }
-  rootProject.tasks.findByName("generateLexers")?.dependsOn(
-    generatePerlLexerTask,
-    generatePodLexerTask
-  )
+
+  rootProject.tasks.named { it == "generateLexers" }.configureEach {
+    dependsOn(
+      generatePerlLexer,
+      generatePodLexer,
+    )
+  }
 
   withType<GenerateLexerTask> {
-    skeleton.set(rootProject.file(properties("lexer_skeleton").get()))
-    purgeOldFiles.set(true)
+    skeleton = providers.gradleProperty("lexer_skeleton").map { rootProject.file(it) }
+    purgeOldFiles = true
   }
 
   withType<GenerateParserTask> {
-    targetRootOutputDir.set(genRoot)
-    purgeOldFiles.set(true)
+    targetRootOutputDir = genRoot
+    purgeOldFiles = true
   }
 
   withType<JavaCompile> {
     dependsOn(
-      generatePerlLexerTask,
-      generatePodLexerTask
+      generatePerlLexer,
+      generatePodLexer
     )
   }
   withType<KotlinCompile> {
     dependsOn(
-      generatePerlLexerTask,
-      generatePodLexerTask
+      generatePerlLexer,
+      generatePodLexer
     )
   }
 }

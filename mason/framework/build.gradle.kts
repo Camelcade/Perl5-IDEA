@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-fun properties(key: String) = providers.gradleProperty(key)
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 dependencies {
   listOf(":plugin.core").forEach {
@@ -22,11 +22,16 @@ dependencies {
     testRuntimeOnly(project(it))
   }
   testImplementation(testFixtures(project(":plugin.testFixtures")))
+
   intellijPlatform {
-    intellijPlatform{
-      val platformVersionProvider: Provider<String> by rootProject.extra
-      create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
-    }
+    val platformVersionProvider: Provider<String> by rootProject.extra
+
+    create(
+      type = provider { IntelliJPlatformType.IntellijIdeaCommunity },
+      version = platformVersionProvider,
+      useInstaller = providers.gradleProperty("useInstaller").map { it.toBoolean() },
+    )
+
     localPlugin(project(":plugin"))
   }
 }

@@ -1,7 +1,5 @@
-import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
-
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +13,8 @@ import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-fun properties(key: String) = providers.gradleProperty(key)
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
 
 dependencies {
   listOf(
@@ -51,19 +49,32 @@ dependencies {
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IU", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+
+    create(
+      type = provider { IntelliJPlatformType.IntellijIdeaUltimate },
+      version = platformVersionProvider,
+      useInstaller = providers.gradleProperty("useInstaller").map { it.toBoolean() },
+    )
+
     bundledPlugins(
       "com.intellij.copyright",
-      properties("intelliLangPlugin").get(),
-      properties("remoteRunPlugin").get(),
-      properties("coveragePlugin").get(),
       "XPathView",
       "org.jetbrains.plugins.terminal",
+      "com.intellij.css",
+      "com.intellij.database",
+      "com.intellij.java",
+      "org.intellij.plugins.markdown",
+    )
+    bundledPlugin(providers.gradleProperty("intelliLangPlugin"))
+    bundledPlugin(providers.gradleProperty("remoteRunPlugin"))
+    bundledPlugin(providers.gradleProperty("coveragePlugin"))
+
+    bundledModules(
+      "intellij.platform.coverage.agent",
+      "intellij.profiler.common",
     )
   }
 }
-
-
 
 tasks {
   withType<PrepareSandboxTask> {
@@ -71,22 +82,5 @@ tasks {
 
     intoChild(intellijPlatform.projectName.map { projectName -> "$projectName/perl" })
       .from(file("scripts"))
-  }
-
-  test {
-    dependencies {
-      intellijPlatform {
-        listOf(
-          "com.intellij.css",
-          "com.intellij.database",
-          "com.intellij.java",
-          "org.intellij.plugins.markdown",
-        ).forEach { bundledPlugin(it) }
-        listOf(
-          "intellij.platform.coverage.agent",
-          "intellij.profiler.common",
-        ).forEach { bundledModule(it) }
-      }
-    }
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.grammarkit.tasks.GenerateParserTask
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-fun properties(key: String) = providers.gradleProperty(key)
 
 val genRoot = project.file("src/main/gen").also { genRoot ->
   sourceSets {
@@ -41,39 +39,44 @@ dependencies {
   ).forEach {
     compileOnly(project(it))
   }
+
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
-  }
 
+    create(
+      type = provider { IntelliJPlatformType.IntellijIdeaCommunity },
+      version = platformVersionProvider,
+      useInstaller = providers.gradleProperty("useInstaller").map { it.toBoolean() },
+    )
+  }
 }
 
 tasks {
-  val generateParserTask = register<GenerateParserTask>("generateTT2Parser") {
-    sourceFile.set(file("grammar/TemplateToolkit.bnf"))
-    pathToParser.set("/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java")
-    pathToPsiRoot.set("/com/perl5/lang/tt2/psi")
-    targetRootOutputDir.set(genRoot)
-    purgeOldFiles.set(true)
+  val generateTT2Parser by registering(GenerateParserTask::class) {
+    sourceFile = file("grammar/TemplateToolkit.bnf")
+    pathToParser = "/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java"
+    pathToPsiRoot = "/com/perl5/lang/tt2/psi"
+    targetRootOutputDir = genRoot
+    purgeOldFiles = true
   }
 
-  val generateLexerTask = register<GenerateLexerTask>("generateTT2Lexer") {
-    sourceFile.set(file("grammar/TemplateToolkit.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/tt2/lexer/"))
-    skeleton.set(rootProject.file(properties("lexer_skeleton").get()))
-    purgeOldFiles.set(true)
+  val generateTT2Lexer by registering(GenerateLexerTask::class) {
+    sourceFile = file("grammar/TemplateToolkit.flex")
+    targetOutputDir = file("src/main/gen/com/perl5/lang/tt2/lexer/")
+    skeleton = providers.gradleProperty("lexer_skeleton").map { rootProject.file(it) }
+    purgeOldFiles = true
 
-    dependsOn(generateParserTask)
+    dependsOn(generateTT2Parser)
   }
 
-  rootProject.tasks.findByName("generateLexers")?.dependsOn(
-    generateLexerTask
-  )
+  rootProject.tasks.named { it == "generateLexers" }.configureEach {
+    dependsOn(generateTT2Lexer)
+  }
 
   withType<JavaCompile> {
-    dependsOn(generateLexerTask)
+    dependsOn(generateTT2Lexer)
   }
-  withType<KotlinCompile>{
-    dependsOn(generateLexerTask)
+  withType<KotlinCompile> {
+    dependsOn(generateTT2Lexer)
   }
 }
