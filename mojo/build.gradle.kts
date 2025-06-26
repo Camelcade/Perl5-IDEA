@@ -16,16 +16,6 @@
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 dependencies {
-  // packaging, which modules to include into this one
-  listOf(
-    ":lang.mojo.common",
-    ":lang.mojo.core",
-    ":lang.mojo.frontend",
-    ":lang.mojo.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-  }
-
   // dependencies
   listOf(
     ":plugin.core",
@@ -46,6 +36,16 @@ dependencies {
 
     localPlugin(project(":plugin"))
     bundledPlugin(providers.gradleProperty("remoteRunPlugin"))
+
+    // packaging, which modules to include into this one
+    listOf(
+      ":lang.mojo.common",
+      ":lang.mojo.core",
+      ":lang.mojo.frontend",
+      ":lang.mojo.frontend.split",
+    ).forEach {
+      pluginModule(project(it))
+    }
   }
 
   testImplementation(testFixtures(project(":plugin.testFixtures")))

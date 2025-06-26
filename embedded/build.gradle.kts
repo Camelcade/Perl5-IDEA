@@ -16,17 +16,6 @@
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 dependencies {
-  // packaging, which modules to include into this one
-  listOf(
-    ":lang.embedded.common",
-    ":lang.embedded.core",
-    ":lang.embedded.frontend",
-    ":lang.embedded.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-    testCompileOnly(project(it))
-  }
-
   // additional compilation dependencies
   listOf(
     ":plugin.core",
@@ -41,6 +30,17 @@ dependencies {
   // Plugin dependencies
   intellijPlatform {
     localPlugin(project(":plugin"))
+
+    // packaging, which modules to include into this one
+    listOf(
+      ":lang.embedded.common",
+      ":lang.embedded.core",
+      ":lang.embedded.frontend",
+      ":lang.embedded.frontend.split",
+    ).forEach {
+      pluginModule(project(it))
+      testCompileOnly(project(it))
+    }
   }
 
   intellijPlatform {

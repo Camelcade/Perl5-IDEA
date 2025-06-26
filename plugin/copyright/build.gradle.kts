@@ -16,14 +16,6 @@
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 dependencies {
-  listOf(
-    ":plugin.core",
-  ).forEach {
-    compileOnly(project(it))
-    testCompileOnly(project(it))
-    runtimeOnly(project(it))
-  }
-
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
 
@@ -34,5 +26,13 @@ dependencies {
     )
 
     bundledPlugins("com.intellij.copyright")
+
+    listOf(
+      ":plugin.core",
+    ).forEach {
+      compileOnly(project(it))
+      testCompileOnly(project(it))
+      pluginModule(project(it))
+    }
   }
 }

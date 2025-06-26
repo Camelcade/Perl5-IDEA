@@ -16,16 +16,6 @@
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 dependencies {
-  // packaging, which modules to include into this one
-  listOf(
-    ":lang.tt2.common",
-    ":lang.tt2.core",
-    ":lang.tt2.frontend",
-    ":lang.tt2.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-  }
-
   // dependencies
   listOf(
     ":plugin.core",
@@ -46,5 +36,15 @@ dependencies {
     )
 
     localPlugin(project(":plugin"))
+
+    // packaging, which modules to include into this one
+    listOf(
+      ":lang.tt2.common",
+      ":lang.tt2.core",
+      ":lang.tt2.frontend",
+      ":lang.tt2.frontend.split",
+    ).forEach {
+      pluginModule(project(it))
+    }
   }
 }

@@ -17,34 +17,6 @@ import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
 
 dependencies {
-  listOf(
-    ":plugin.asdf",
-    ":plugin.berrybrew",
-    ":plugin.carton",
-    ":plugin.common",
-    ":plugin.copyright",
-    ":plugin.core",
-    ":plugin.coverage",
-    ":plugin.cpan",
-    ":plugin.cpanminus",
-    ":plugin.debugger",
-    ":plugin.docker",
-    ":plugin.frontend",
-    ":plugin.frontend.split",
-    ":plugin.idea",
-    ":plugin.intelliLang",
-    ":plugin.makeMaker",
-    ":plugin.moduleBuild",
-    ":plugin.perlInstall",
-    ":plugin.perlbrew",
-    ":plugin.plenv",
-    ":plugin.profiler",
-    ":plugin.terminal",
-    ":plugin.wsl",
-  ).forEach {
-    runtimeOnly(project(it))
-    testCompileOnly(project(it))
-  }
   testImplementation(testFixtures(project(":plugin.testFixtures")))
 
   intellijPlatform {
@@ -73,6 +45,35 @@ dependencies {
       "intellij.platform.coverage.agent",
       "intellij.profiler.common",
     )
+
+    listOf(
+      ":plugin.asdf",
+      ":plugin.berrybrew",
+      ":plugin.carton",
+      ":plugin.common",
+      ":plugin.copyright",
+      ":plugin.core",
+      ":plugin.coverage",
+      ":plugin.cpan",
+      ":plugin.cpanminus",
+      ":plugin.debugger",
+      ":plugin.docker",
+      ":plugin.frontend",
+      ":plugin.frontend.split",
+      ":plugin.idea",
+      ":plugin.intelliLang",
+      ":plugin.makeMaker",
+      ":plugin.moduleBuild",
+      ":plugin.perlInstall",
+      ":plugin.perlbrew",
+      ":plugin.plenv",
+      ":plugin.profiler",
+      ":plugin.terminal",
+      ":plugin.wsl",
+    ).forEach {
+      testCompileOnly(project(it))
+      pluginModule(project(it))
+    }
   }
 }
 

@@ -16,16 +16,6 @@
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 dependencies {
-  // packaging, which modules to include into this one
-  listOf(
-    ":lang.mason.mason2.common",
-    ":lang.mason.mason2.core",
-    ":lang.mason.mason2.frontend",
-    ":lang.mason.mason2.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-  }
-
   // compilation dependencies
   listOf(
     ":plugin.core",
@@ -50,5 +40,15 @@ dependencies {
       ":plugin",
       ":lang.mason.framework"
     ).forEach { localPlugin(project(it)) }
+
+    // packaging, which modules to include into this one
+    listOf(
+      ":lang.mason.mason2.common",
+      ":lang.mason.mason2.core",
+      ":lang.mason.mason2.frontend",
+      ":lang.mason.mason2.frontend.split",
+    ).forEach {
+      pluginModule(project(it))
+    }
   }
 }

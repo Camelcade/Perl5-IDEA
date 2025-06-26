@@ -16,15 +16,6 @@
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 dependencies {
-  listOf(
-    ":plugin.core",
-    ":plugin.perlInstall",
-  ).forEach {
-    compileOnly(project(it))
-    testCompileOnly(project(it))
-    runtimeOnly(project(it))
-  }
-
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
 
@@ -33,5 +24,14 @@ dependencies {
       version = platformVersionProvider,
       useInstaller = providers.gradleProperty("useInstaller").map { it.toBoolean() },
     )
+
+    listOf(
+      ":plugin.core",
+      ":plugin.perlInstall",
+    ).forEach {
+      compileOnly(project(it))
+      testCompileOnly(project(it))
+      pluginModule(project(it))
+    }
   }
 }
