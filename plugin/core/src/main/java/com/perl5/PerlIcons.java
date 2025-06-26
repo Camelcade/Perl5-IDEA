@@ -17,6 +17,7 @@
 package com.perl5;
 
 
+import com.intellij.icons.AllIcons;
 import com.intellij.openapi.util.IconLoader;
 import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.ui.LayeredIcon;
@@ -42,8 +43,8 @@ public final class PerlIcons {
   public static final Icon PERL_OPTION = load("/icons/option.png");
   public static final Icon PERL_OPTIONS = load("/icons/options.png");
   public static final Icon TEMPLATE_ROOT = load("/icons/templateRoot.png");
-  public static final Icon PM_FILE = load("/icons/perl5.png");
-  public static final Icon PERL_SCRIPT_FILE_ICON = load("/icons/perl5classic.png");
+  public static final Icon PM_FILE = AllIcons.FileTypes.Perl;
+  public static final Icon PERL_SCRIPT_FILE_ICON = AllIcons.FileTypes.Perl;
   public static final Icon CAMEL_MODIFIER = load("/icons/camel_modifier.png");
   public static final Icon POD_FILE = PERL_LANGUAGE_ICON;
   public static final Icon TEST_FILE = load("/icons/file-test.png");
