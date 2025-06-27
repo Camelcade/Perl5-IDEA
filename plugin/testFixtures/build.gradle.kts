@@ -32,3 +32,20 @@ dependencies {
     )
   }
 }
+
+tasks {
+  listOf(
+    "composedJar",
+    "instrumentedJar",
+    "jar",
+    "prepareSandbox",
+    "prepareTestSandbox",
+    "processResources",
+  ).forEach {
+    project.tasks.named(it).configure { enabled = false }
+  }
+  testFixturesJar {
+    archiveVersion = ""
+  }
+}
+
