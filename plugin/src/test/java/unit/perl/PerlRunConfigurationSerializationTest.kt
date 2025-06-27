@@ -40,8 +40,8 @@ class PerlRunConfigurationSerializationTest : PerlLightTestCase() {
   <option name="initCode" value="" />
   <option name="nonInteractiveModeEnabled" value="false" />
   <option name="passParentEnvs" value="true" />
-  <option name="perlArguments" value="wrong=${'$'}PROJECT_DIR$/wrong" />
-  <option name="programParameters" value="mypath=${'$'}PROJECT_DIR$/blib1" />
+  <option name="perlArguments" value="${'$'}PROJECT_DIR$/wrong" />
+  <option name="programParameters" value="${'$'}PROJECT_DIR$/blib1" />
   <option name="projectPathOnTarget" />
   <option name="requiredModules" value="" />
   <option name="scriptCharset" value="utf8" />
@@ -67,9 +67,9 @@ class PerlRunConfigurationSerializationTest : PerlLightTestCase() {
     assertEquals(configFile, JDOMUtil.write(rootElement))
   }
 
-  private fun assertNoMacroValue(stringValue: String, expectedSuffix: String) = {
+  private fun assertNoMacroValue(stringValue: String, expectedSuffix: String) {
     assertFalse("Looks like $stringValue contains the macro", stringValue.contains('$'))
     assertTrue("Value $stringValue should end with $expectedSuffix", stringValue.endsWith(expectedSuffix))
-    assertEquals(FileUtil.toSystemIndependentName("${project.basePath!!}expectedSuffix"), FileUtil.toSystemIndependentName(stringValue))
+    assertEquals(FileUtil.toSystemIndependentName("${project.basePath!!}$expectedSuffix"), FileUtil.toSystemIndependentName(stringValue))
   }
 }

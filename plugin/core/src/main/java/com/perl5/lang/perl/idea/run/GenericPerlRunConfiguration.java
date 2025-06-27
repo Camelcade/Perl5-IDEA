@@ -108,6 +108,9 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
 
   @Override
   public void readExternal(@NotNull Element element) throws InvalidDataException {
+    // this is actually redundant thing. For some reason expanding done by the platform, but collapsing need to be done manually. But this
+    // feels really unreliable and bad for testing. So, we'll do it manually.
+    PathMacroManager.getInstance(getProject()).expandPaths(element);
     super.readExternal(element);
     XmlSerializer.deserializeInto(this, element);
   }
