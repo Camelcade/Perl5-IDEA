@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,18 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 dependencies {
-  listOf(
-    ":plugin.core",
-    ":plugin.perlInstall",
-  ).forEach {
-    compileOnly(project(it))
-    testCompileOnly(project(it))
-    runtimeOnly(project(it))
-  }
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
+
+    create(
+      type = provider { IntelliJPlatformType.IntellijIdeaCommunity },
+      version = platformVersionProvider,
+      useInstaller = providers.gradleProperty("useInstaller").map { it.toBoolean() },
+    )
+
+    listOf(
+      ":plugin.core",
+      ":plugin.perlInstall",
+    ).forEach {
+      compileOnly(project(it))
+      testCompileOnly(project(it))
+      pluginModule(project(it))
+    }
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,8 @@
  * limitations under the License.
  */
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
-fun properties(key: String) = providers.gradleProperty(key)
-
 
 project.file("src/main/gen").let { genRoot ->
   sourceSets {
@@ -39,28 +37,33 @@ dependencies {
   ).forEach {
     compileOnly(project(it))
   }
-  intellijPlatform{
+
+  intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+
+    create(
+      type = provider { IntelliJPlatformType.IntellijIdeaCommunity },
+      version = platformVersionProvider,
+      useInstaller = providers.gradleProperty("useInstaller").map { it.toBoolean() },
+    )
   }
 }
 
 tasks {
-  val generateLexerTask = register<GenerateLexerTask>("generateEmbeddedPerlLexer") {
-    sourceFile.set(file("grammar/EmbeddedPerl.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/embedded/lexer/"))
-    skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
-    purgeOldFiles.set(true)
+  val generateEmbeddedPerlLexer by registering(GenerateLexerTask::class) {
+    sourceFile = file("grammar/EmbeddedPerl.flex")
+    targetOutputDir = file("src/main/gen/com/perl5/lang/embedded/lexer/")
+    skeleton = providers.gradleProperty("templating_lexer_skeleton").map { rootProject.file(it) }
+    purgeOldFiles = true
   }
 
-  rootProject.tasks.findByName("generateLexers")?.dependsOn(
-    generateLexerTask
-  )
-
+  rootProject.tasks.named { it == "generateLexers" }.configureEach {
+    dependsOn(generateEmbeddedPerlLexer)
+  }
   withType<JavaCompile> {
-    dependsOn(generateLexerTask)
+    dependsOn(generateEmbeddedPerlLexer)
   }
-  withType<KotlinCompile>{
-    dependsOn(generateLexerTask)
+  withType<KotlinCompile> {
+    dependsOn(generateEmbeddedPerlLexer)
   }
 }

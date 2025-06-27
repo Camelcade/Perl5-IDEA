@@ -1,7 +1,6 @@
 /**
- * Hack plugin to put a proper version of commons-compress into the classpath of the gradle process
+ * Hack plugin to put a proper version of commons-compress into the classpath of the Gradle process.
  */
-
 plugins {
   `kotlin-dsl`
   `java-gradle-plugin`

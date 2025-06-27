@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,19 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-fun properties(key: String) = providers.gradleProperty(key)
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 dependencies {
-  // packaging, which modules to include into this one
-  listOf(
-    ":lang.mojo.common",
-    ":lang.mojo.core",
-    ":lang.mojo.frontend",
-    ":lang.mojo.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-  }
-
   // dependencies
   listOf(
     ":plugin.core",
@@ -37,12 +27,26 @@ dependencies {
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IU", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+
+    create(
+      type = provider { IntelliJPlatformType.IntellijIdeaUltimate },
+      version = platformVersionProvider,
+      useInstaller = providers.gradleProperty("useInstaller").map { it.toBoolean() },
+    )
+
     localPlugin(project(":plugin"))
-    bundledPlugins(properties("remoteRunPlugin").get())
+    bundledPlugin(providers.gradleProperty("remoteRunPlugin"))
+
+    // packaging, which modules to include into this one
+    listOf(
+      ":lang.mojo.common",
+      ":lang.mojo.core",
+      ":lang.mojo.frontend",
+      ":lang.mojo.frontend.split",
+    ).forEach {
+      pluginModule(project(it))
+    }
   }
 
   testImplementation(testFixtures(project(":plugin.testFixtures")))
 }
-
-

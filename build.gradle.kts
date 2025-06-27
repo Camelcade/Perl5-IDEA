@@ -1,18 +1,5 @@
-import org.gradle.api.tasks.testing.logging.TestExceptionFormat
-import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.gradle.jvm.tasks.Jar
-import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB
-import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB_MODULES
-import org.jetbrains.intellij.platform.gradle.Constants.Tasks.INSTRUMENT_CODE
-import org.jetbrains.intellij.platform.gradle.TestFrameworkType
-import org.jetbrains.intellij.platform.gradle.tasks.InstrumentCodeTask
-import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
-import org.kt3k.gradle.plugin.coveralls.CoverallsTask
-import java.nio.file.Files
-import kotlin.io.path.moveTo
-
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +13,20 @@ import kotlin.io.path.moveTo
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import org.gradle.api.tasks.testing.logging.TestExceptionFormat
+import org.gradle.api.tasks.testing.logging.TestLogEvent
+import org.gradle.jvm.tasks.Jar
+import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB
+import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB_MODULES
+import org.jetbrains.intellij.platform.gradle.Constants.Tasks.INSTRUMENT_CODE
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+import org.jetbrains.intellij.platform.gradle.TestFrameworkType
+import org.jetbrains.intellij.platform.gradle.tasks.InstrumentCodeTask
+import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.kt3k.gradle.plugin.coveralls.CoverallsTask
+import java.nio.file.Files
+import kotlin.io.path.moveTo
 
 fun properties(key: String) = providers.gradleProperty(key)
 fun environment(key: String) = providers.environmentVariable(key)
@@ -42,7 +43,7 @@ plugins {
   id("com.hurricup.gradle.fixcompress")
   id("idea")
   id("jacoco")
-  id("org.jetbrains.intellij.platform") version "2.6.0"
+  id("org.jetbrains.intellij.platform") version "2.6.1-SNAPSHOT"
   id("org.jetbrains.grammarkit") version "2022.3.2.2"
   id("com.github.kt3k.coveralls") version "2.12.2"
   id("org.sonarqube") version "6.2.0.5505"
@@ -116,7 +117,7 @@ allprojects {
 
   kotlin {
     compilerOptions {
-      jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(properties("javaTargetVersion").get()))
+      jvmTarget = properties("javaTargetVersion").map { JvmTarget.fromTarget(it) }
     }
   }
 
@@ -188,84 +189,14 @@ allprojects {
       if (isCI.get()) {
         testLogging {
           events.addAll(
-            listOf(
-              TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED, TestLogEvent.STANDARD_OUT, TestLogEvent.STANDARD_ERROR
-            )
+            listOf(TestLogEvent.PASSED, TestLogEvent.SKIPPED, TestLogEvent.FAILED, TestLogEvent.STANDARD_OUT, TestLogEvent.STANDARD_ERROR)
           )
           exceptionFormat = TestExceptionFormat.FULL
         }
       }
     }
 
-    val isRoot = project == rootProject
-
-    listOf(
-      "composedJar",
-      "instrumentedJar",
-      "jar",
-    ).forEach {
-      project.tasks.named<Jar>(it).configure {
-        archiveVersion = ""
-        archiveBaseName = archiveBaseName(project.name)
-      }
-    }
-
-    if (isRoot || isPlugin) {
-      project.tasks.register<Task>("normalizeSandbox") {
-        dependsOn(project.tasks.named("prepareSandbox"))
-        doLast {
-          normalizeSandbox(project, "prepareSandbox")
-        }
-      }
-      listOf(
-        "buildSearchableOptions",
-        "runIde",
-        "buildPlugin",
-      ).forEach {
-        project.tasks.named(it).configure { dependsOn(project.tasks.named("normalizeSandbox")) }
-      }
-    }
-
-    if (isRoot) {
-      listOf(
-        "buildPlugin",
-        "buildSearchableOptions",
-        "classes",
-        "compileJava",
-        "compileKotlin",
-//        "composedJar", // disabling these tasks fails the build, because preparesandbox wants jar anyways
-//        "generateManifest",
-        "instrumentCode",
-//        "instrumentedJar",
-//        "jar",
-        "patchPluginXml",
-        "prepareJarSearchableOptions",
-        "processResources",
-        "publishPlugin",
-        "verifyPlugin",
-        "verifyPluginProjectConfiguration",
-      ).forEach {
-        project.tasks.named(it).configure { enabled = false }
-      }
-    }
-
     if (isPlugin) {
-      jarSearchableOptions {
-        archiveVersion = ""
-      }
-
-      project.tasks.register<Task>("normalizeTestSandbox") {
-        dependsOn(project.tasks.named("prepareTestSandbox"))
-        doLast {
-          normalizeSandbox(project, "prepareTestSandbox")
-        }
-      }
-
-      listOf(
-        "test",
-      ).forEach {
-        project.tasks.named(it).configure { dependsOn(project.tasks.named("normalizeTestSandbox")) }
-      }
       publishPlugin {
         if (project.hasProperty("eap")) {
           channels.set(listOf("EAP"))
@@ -274,20 +205,26 @@ allprojects {
       }
 
       patchPluginXml {
-        pluginDescription.set(properties("descriptionFile").flatMap {
+        pluginDescription = properties("descriptionFile").flatMap {
           providers.fileContents(layout.projectDirectory.file(it)).asText
-        })
+        }
 
-        changeNotes.set(properties("changesFile").flatMap {
+        changeNotes = properties("changesFile").flatMap {
           providers.fileContents(layout.projectDirectory.file(it)).asText
-        })
+        }
+      }
+    }
+
+    if (!isPlugin) {
+      composedJar {
+        archiveBaseName = "${project.rootProject.name}.${project.name}.main"
       }
     }
   }
 }
 
 tasks {
-  val jacocoRootReport = register<JacocoReport>("jacocoRootReport") {
+  val jacocoRootReport by registering(JacocoReport::class) {
     group = "verification"
     description = "Generates an aggregate report from all projects"
 
@@ -326,9 +263,9 @@ tasks {
     classDirectories.from(classDirs)
 
     reports {
-      html.required.set(true) // human readable
-      xml.required.set(true) // required by coveralls
-      csv.required.set(false)
+      html.required = true // human readable
+      xml.required = true // required by coveralls
+      csv.required = false
     }
   }
 
@@ -338,7 +275,7 @@ tasks {
     dependsOn(jacocoRootReport)
   }
 
-  register("generateLexers") { }
+  val generateLexers by registering
 
   runIde {
     project.properties.forEach { (key, value) ->
@@ -354,7 +291,7 @@ tasks {
 }
 
 
-val coverageReportFile = project.buildDir.resolve("reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
+val coverageReportFile = project.layout.buildDirectory.file("reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
 sonar {
   properties {
     property("sonar.projectKey", "Camelcade_Perl5-IDEA")
@@ -372,36 +309,56 @@ coveralls {
 }
 
 intellijPlatform {
-  val pluginList = mutableListOf<String>()
-  val bundledPluginList = mutableListOf(properties("intelliLangPlugin").get(),)
+  val ideType = properties("runWith")
+    .map { IntelliJPlatformType.fromCode(it) }
+    .orElse(IntelliJPlatformType.IntellijIdeaUltimate)
 
-  if (!isCI.get()) {
-    pluginList.add("PsiViewer:${properties("psiViewerVersion").get()}")
+  val ideVersion = ideType.flatMap { type ->
+    when (type) {
+      IntelliJPlatformType.CLion -> properties("clionVersion")
+
+      IntelliJPlatformType.PyCharmCommunity,
+      IntelliJPlatformType.PyCharmProfessional -> properties("pycharmVersion")
+
+      else -> platformVersionProvider
+    }
   }
 
-  val runWith = properties("runWith").orElse("")
-  val (ideType, ideVersion) = when (runWith.get()) {
-    "CL" -> {
-      "CL" to properties("clionVersion").get()
-    }
-    "PC" -> {
-      "PC" to properties("pycharmVersion").get()
-    }
-    "PY" -> {
-      bundledPluginList.add("Docker")
-      bundledPluginList.add(properties("remoteRunPlugin").get())
-      "PY" to properties("pycharmVersion").get()
-    }
-    else -> {
-      bundledPluginList.add("Docker")
-      bundledPluginList.add(properties("coveragePlugin").get())
-      bundledPluginList.add(properties("remoteRunPlugin").get())
-      "IU" to platformVersionProvider.get()
+  val pluginList = isCI.map { isCI ->
+    val psiViewerVersion = properties("psiViewerVersion")
+    when (isCI) {
+      true -> listOf("PsiViewer:${psiViewerVersion.get()}")
+      false -> emptyList()
     }
   }
+
+  val bundledPluginList = ideType.map { type ->
+    when (type) {
+      IntelliJPlatformType.CLion -> emptyList()
+
+      IntelliJPlatformType.PyCharmCommunity -> emptyList()
+
+      IntelliJPlatformType.PyCharmProfessional -> listOf(
+        "Docker",
+        properties("remoteRunPlugin").get(),
+      )
+
+      else -> listOf(
+        "Docker",
+        properties("coveragePlugin").get(),
+        properties("remoteRunPlugin").get(),
+      )
+    }
+  }
+
   dependencies {
     intellijPlatform {
-      create(ideType, ideVersion, useInstaller = properties("useInstaller").get().toBoolean())
+      create(
+        type = ideType,
+        version = ideVersion,
+        useInstaller = properties("useInstaller").map { it.toBoolean() },
+      )
+
       listOf(
         project(":plugin"),
         project(":lang.tt2"),
@@ -411,7 +368,9 @@ intellijPlatform {
         project(":lang.mason.htmlmason"),
         project(":lang.mason.mason2"),
       ).forEach { localPlugin(it) }
+
       plugins(pluginList)
+      bundledPlugin(properties("intelliLangPlugin"))
       bundledPlugins(bundledPluginList)
     }
   }
@@ -420,35 +379,3 @@ intellijPlatform {
 configurations.all {
   resolutionStrategy.cacheDynamicVersionsFor(7, "days")
 }
-
-fun normalizeSandbox(project: Project, taskName: String) {
-  project.logger.info("Normalizing $taskName results for ${project.name}")
-  val pluginsRootPath = project.tasks.named<PrepareSandboxTask>(taskName).get().defaultDestinationDirectory.get().asFile.toPath()
-  project.logger.info("\tPlugins root $pluginsRootPath")
-  for (pluginName in pluginProjectsNames) {
-    val pluginRootPath = pluginsRootPath.resolve(pluginName)
-    if (!Files.exists(pluginRootPath)) {
-      continue
-    }
-    project.logger.info("\tProcessing $pluginRootPath")
-    val mainJarName = "${archiveBaseName(pluginName)}.jar"
-    val pluginLibPath = pluginRootPath.resolve(LIB)
-    val pluginLibModulesPath = pluginRootPath.resolve(LIB_MODULES)
-    Files.createDirectories(pluginLibModulesPath)
-    Files.list(pluginLibPath).use {
-      it.filter {
-        val fileName = it.fileName.toString()
-        fileName.endsWith(".jar") &&
-          fileName.startsWith(archiveBasePrefix(pluginName)) &&
-          fileName != mainJarName &&
-          !fileName.contains("searchableOptions")
-      }.forEach {
-        project.logger.info("\t\tMoving $it to $pluginLibModulesPath")
-        it.moveTo(pluginLibModulesPath.resolve(it.fileName))
-      }
-    }
-  }
-}
-
-fun archiveBasePrefix(projectName: String) = "${rootProject.name}.${projectName}"
-fun archiveBaseName(projectName: String) = "${archiveBasePrefix(projectName)}.main"

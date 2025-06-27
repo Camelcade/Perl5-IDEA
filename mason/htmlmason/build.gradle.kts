@@ -1,6 +1,5 @@
-
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-fun properties(key: String) = providers.gradleProperty(key)
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 dependencies {
-  // packaging, which modules to include into this one
-  listOf(
-    ":lang.mason.htmlmason.common",
-    ":lang.mason.htmlmason.core",
-    ":lang.mason.htmlmason.frontend",
-    ":lang.mason.htmlmason.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-  }
-
   // compilation dependencies
   listOf(
     ":plugin.core",
@@ -40,10 +29,26 @@ dependencies {
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+
+    create(
+      type = provider { IntelliJPlatformType.IntellijIdeaCommunity },
+      version = platformVersionProvider,
+      useInstaller = providers.gradleProperty("useInstaller").map { it.toBoolean() },
+    )
+
     listOf(
       ":plugin",
       ":lang.mason.framework"
     ).forEach { localPlugin(project(it)) }
+
+    // packaging, which modules to include into this one
+    listOf(
+      ":lang.mason.htmlmason.common",
+      ":lang.mason.htmlmason.core",
+      ":lang.mason.htmlmason.frontend",
+      ":lang.mason.htmlmason.frontend.split",
+    ).forEach {
+      pluginModule(project(it))
+    }
   }
 }
