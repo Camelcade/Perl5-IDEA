@@ -26,6 +26,7 @@ import com.intellij.execution.runners.RunConfigurationWithSuppressedDefaultRunAc
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
+import com.intellij.openapi.components.PathMacroManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
@@ -115,6 +116,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   public void writeExternal(@NotNull Element element) throws WriteExternalException {
     super.writeExternal(element);
     XmlSerializer.serializeInto(this, element);
+    PathMacroManager.getInstance(getProject()).collapsePathsRecursively(element);
   }
 
   @Override
