@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,10 @@ import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.VisibleForTesting;
 
-class PerlRunConfiguration extends GenericPerlRunConfiguration {
+@VisibleForTesting
+public class PerlRunConfiguration extends GenericPerlRunConfiguration {
   public PerlRunConfiguration(Project project,
                               @NotNull ConfigurationFactory factory,
                               String name) {
