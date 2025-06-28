@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -94,12 +94,6 @@ public final class PerlIcons {
     return NotNullLazyValue.createValue(() -> createIconWithModifier(baseIcon, modifierIcon));
   }
 
-  public static @NotNull NotNullLazyValue<Icon> createLazyIconWithModifier(@NotNull Icon baseIcon,
-                                                                           @NotNull Icon modifierIcon,
-                                                                           float modifierScale) {
-    return NotNullLazyValue.createValue(() -> createIconWithModifier(baseIcon, modifierIcon, modifierScale));
-  }
-
   public static @NotNull Icon createIconWithModifier(@NotNull Icon baseIcon, @NotNull Icon modifierIcon) {
     return createIconWithModifier(baseIcon, modifierIcon, 0.5f);
   }
@@ -111,7 +105,7 @@ public final class PerlIcons {
    */
   private static @NotNull Icon createIconWithModifier(@NotNull Icon baseIcon,
                                                       @NotNull Icon modifierIcon,
-                                                      float modifierScale) {
+                                                      @SuppressWarnings("SameParameterValue") float modifierScale) {
     LayeredIcon result = new LayeredIcon(2);
     result.setIcon(baseIcon, 0);
     Icon modifier = IconUtil.scale(modifierIcon, null, modifierScale);
