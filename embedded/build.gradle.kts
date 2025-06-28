@@ -19,7 +19,7 @@ dependencies {
   // packaging, which modules to include into this one
   listOf(
     ":lang.embedded.common",
-    ":lang.embedded.core",
+    ":lang.embedded.backend",
     ":lang.embedded.frontend",
     ":lang.embedded.frontend.split",
   ).forEach {
@@ -29,7 +29,7 @@ dependencies {
 
   // additional compilation dependencies
   listOf(
-    ":plugin.core",
+    ":plugin.backend",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))

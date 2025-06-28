@@ -9,9 +9,9 @@ Content modules:
  - perl5.lang.tt2.common.main (REQUIRED); lib/modules/perl5.lang.tt2.common.main.jar
   - Dependencies:
     - Module(name=perl5.plugin.common.main)
- - perl5.lang.tt2.core.main (OPTIONAL); lib/modules/perl5.lang.tt2.core.main.jar
+ - perl5.lang.tt2.backend.main (OPTIONAL); lib/modules/perl5.lang.tt2.backend.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
     - Module(name=perl5.lang.tt2.common.main)
  - perl5.lang.tt2.frontend.main (OPTIONAL); lib/modules/perl5.lang.tt2.frontend.main.jar
   - Dependencies:

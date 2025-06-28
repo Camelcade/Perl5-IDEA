@@ -32,7 +32,7 @@
     <module name="perl5.plugin.carton.main"/>
     <module name="perl5.plugin.common.main" loading="required"/>
     <module name="perl5.plugin.copyright.main"/>
-    <module name="perl5.plugin.core.main"/>
+    <module name="perl5.plugin.backend.main"/>
     <module name="perl5.plugin.coverage.main"/>
     <module name="perl5.plugin.cpan.main"/>
     <module name="perl5.plugin.cpanminus.main"/>

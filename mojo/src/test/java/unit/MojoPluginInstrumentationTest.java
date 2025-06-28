@@ -30,8 +30,8 @@ public class MojoPluginInstrumentationTest extends PerlInstrumentationTestCase {
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
     return !CategoriesFilter.shouldRun(MojoPluginInstrumentationTest.class) ? Collections.emptyList() : Arrays.asList(new Object[][]{
-      {"plugin.core", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
-      {"mojo.core", MojoliciousParserDefinition.class, MOJO_PATTERN_STRING},
+      {"plugin.backend", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
+      {"mojo.backend", MojoliciousParserDefinition.class, MOJO_PATTERN_STRING},
     });
   }
 }

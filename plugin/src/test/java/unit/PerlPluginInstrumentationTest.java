@@ -59,7 +59,7 @@ public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
       buildData("berrybrew", BerryBrewTestUtil.getInstrumentationTestClass()),
       buildData("carton", PerlCartonDirectoryConfigurationProvider.class),
       buildData("copyright", PerlCopyrightsVariablesProvider.class),
-      buildData("core", PerlParserDefinition.class),
+      buildData("backend", PerlParserDefinition.class),
       buildData("coverage", PerlCoverageEnabledConfiguration.class),
       buildData("cpan", PerlInstallPackagesWithCpanAction.class),
       buildData("cpanminus", PerlInstallCpanmAction.class),

@@ -9,7 +9,7 @@ dependencies {
     ":plugin.asdf",
     ":plugin.berrybrew",
     ":plugin.common",
-    ":plugin.core",
+    ":plugin.backend",
     ":plugin.cpan",
     ":plugin.cpanminus",
     ":plugin.docker",

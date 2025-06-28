@@ -31,7 +31,7 @@ public class HtmlMasonPluginInstrumentationTest extends PerlInstrumentationTestC
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
     return !CategoriesFilter.shouldRun(HtmlMasonPluginInstrumentationTest.class) ? Collections.emptyList() : Arrays.asList(new Object[][]{
-      {"plugin.core", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
+      {"plugin.backend", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
       {"mason.framework", MasonParserUtil.class, MASON_FRAMEWORK_PATTERN_STRING},
       {"htmlmason", HTMLMasonParserDefinition.class, MASON_PATTERN_STRING},
     });

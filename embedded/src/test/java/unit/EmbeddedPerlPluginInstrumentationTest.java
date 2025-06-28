@@ -33,7 +33,7 @@ public class EmbeddedPerlPluginInstrumentationTest extends PerlInstrumentationTe
     return !CategoriesFilter.shouldRun(EmbeddedPerlPluginInstrumentationTest.class) ?
       Collections.emptyList() :
       Arrays.asList(new Object[][]{
-      {"plugin.core", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
+        {"plugin.backend", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
       {"embedded", EmbeddedPerlParserDefinition.class, EMBEDDED_PATTERN_STRING}
     });
   }

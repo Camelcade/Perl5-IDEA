@@ -19,7 +19,7 @@ dependencies {
   // packaging, which modules to include into this one
   listOf(
     ":lang.mojo.common",
-    ":lang.mojo.core",
+    ":lang.mojo.backend",
     ":lang.mojo.frontend",
     ":lang.mojo.frontend.split",
   ).forEach {
@@ -28,8 +28,8 @@ dependencies {
 
   // dependencies
   listOf(
-    ":plugin.core",
-    ":lang.mojo.core",
+    ":plugin.backend",
+    ":lang.mojo.backend",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))

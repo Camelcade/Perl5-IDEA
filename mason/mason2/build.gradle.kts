@@ -19,7 +19,7 @@ dependencies {
   // packaging, which modules to include into this one
   listOf(
     ":lang.mason.mason2.common",
-    ":lang.mason.mason2.core",
+    ":lang.mason.mason2.backend",
     ":lang.mason.mason2.frontend",
     ":lang.mason.mason2.frontend.split",
   ).forEach {
@@ -28,8 +28,8 @@ dependencies {
 
   // compilation dependencies
   listOf(
-    ":plugin.core",
-    ":lang.mason.mason2.core",
+    ":plugin.backend",
+    ":lang.mason.mason2.backend",
     ":lang.mason.framework",
   ).forEach {
     compileOnly(project(it))
