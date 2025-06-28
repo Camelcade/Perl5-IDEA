@@ -16,7 +16,7 @@
 
 dependencies {
   listOf(
-    ":plugin.backend",
+    ":plugin.common", ":plugin.backend",
     ":plugin.perlInstall",
   ).forEach {
     compileOnly(project(it))

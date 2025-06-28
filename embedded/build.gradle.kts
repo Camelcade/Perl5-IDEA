@@ -29,9 +29,9 @@ dependencies {
 
   // additional compilation dependencies
   listOf(
+    ":plugin.common",
     ":plugin.backend",
   ).forEach {
-    compileOnly(project(it))
     testCompileOnly(project(it))
   }
 

@@ -17,7 +17,7 @@ fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
   listOf(
-    ":plugin.backend",
+    ":plugin.common", ":plugin.backend",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))

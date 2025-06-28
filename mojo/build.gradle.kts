@@ -28,10 +28,9 @@ dependencies {
 
   // dependencies
   listOf(
-    ":plugin.backend",
+    ":plugin.common", ":plugin.backend",
     ":lang.mojo.backend",
   ).forEach {
-    compileOnly(project(it))
     testCompileOnly(project(it))
   }
 
