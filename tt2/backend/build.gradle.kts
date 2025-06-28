@@ -36,7 +36,7 @@ val genRoot = project.file("src/main/gen").also { genRoot ->
 
 dependencies {
   listOf(
-    ":plugin.backend",
+    ":plugin.common", ":plugin.backend",
     ":lang.tt2.common",
   ).forEach {
     compileOnly(project(it))

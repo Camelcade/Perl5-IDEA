@@ -28,10 +28,9 @@ dependencies {
 
   // dependencies
   listOf(
-    ":plugin.backend",
+    ":plugin.common", ":plugin.backend",
     ":lang.tt2.backend",
   ).forEach {
-    compileOnly(project(it))
     testCompileOnly(project(it))
   }
   testImplementation(testFixtures(project(":plugin.testFixtures")))

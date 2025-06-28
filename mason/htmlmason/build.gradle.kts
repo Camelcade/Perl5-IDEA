@@ -29,11 +29,10 @@ dependencies {
 
   // compilation dependencies
   listOf(
-    ":plugin.backend",
+    ":plugin.common", ":plugin.backend",
     ":lang.mason.htmlmason.backend",
     ":lang.mason.framework",
   ).forEach {
-    compileOnly(project(it))
     testCompileOnly(project(it))
   }
   testImplementation(testFixtures(project(":plugin.testFixtures")))
