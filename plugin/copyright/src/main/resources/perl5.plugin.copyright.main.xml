@@ -17,7 +17,7 @@
 <idea-plugin>
   <dependencies>
     <plugin id="com.intellij.copyright"/>
-    <module name="perl5.plugin.core.main"/>
+    <module name="perl5.plugin.backend.main"/>
   </dependencies>
   <extensions defaultExtensionNs="com.intellij.copyright">
     <updater filetype="Perl5 Package" implementationClass="com.perl5.lang.perl.idea.copyright.PerlUpdateCopyrightsProvider"/>

@@ -18,7 +18,7 @@
   <dependencies>
     <plugin id="org.jetbrains.plugins.remote-run"/>
     <plugin id="com.intellij.modules.ultimate"/>
-    <module name="perl5.plugin.core.main"/>
+    <module name="perl5.plugin.backend.main"/>
   </dependencies>
 
 

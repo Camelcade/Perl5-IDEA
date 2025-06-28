@@ -8,41 +8,41 @@ Jar files:
 Content modules:
  - perl5.plugin.asdf.main (OPTIONAL); lib/modules/perl5.plugin.asdf.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
     - Module(name=perl5.plugin.perlInstall.main)
  - perl5.plugin.berrybrew.main (OPTIONAL); lib/modules/perl5.plugin.berrybrew.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.carton.main (OPTIONAL); lib/modules/perl5.plugin.carton.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.common.main (REQUIRED); lib/modules/perl5.plugin.common.main.jar
  - perl5.plugin.copyright.main (OPTIONAL); lib/modules/perl5.plugin.copyright.main.jar
   - Dependencies:
     - Plugin(id=com.intellij.copyright)
-    - Module(name=perl5.plugin.core.main)
- - perl5.plugin.core.main (OPTIONAL); lib/modules/perl5.plugin.core.main.jar
+    - Module(name=perl5.plugin.backend.main)
+ - perl5.plugin.backend.main (OPTIONAL); lib/modules/perl5.plugin.backend.main.jar
   - Dependencies:
     - Module(name=perl5.plugin.common.main)
     - Module(name=intellij.platform.backend)
  - perl5.plugin.coverage.main (OPTIONAL); lib/modules/perl5.plugin.coverage.main.jar
   - Dependencies:
     - Plugin(id=com.intellij.modules.coverage)
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.cpan.main (OPTIONAL); lib/modules/perl5.plugin.cpan.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.cpanminus.main (OPTIONAL); lib/modules/perl5.plugin.cpanminus.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.debugger.main (OPTIONAL); lib/modules/perl5.plugin.debugger.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.docker.main (OPTIONAL); lib/modules/perl5.plugin.docker.main.jar
   - Dependencies:
     - Plugin(id=org.jetbrains.plugins.remote-run)
     - Plugin(id=com.intellij.modules.ultimate)
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.frontend.main (OPTIONAL); lib/modules/perl5.plugin.frontend.main.jar
   - Dependencies:
     - Module(name=intellij.platform.frontend)
@@ -54,37 +54,37 @@ Content modules:
  - perl5.plugin.idea.main (OPTIONAL); lib/modules/perl5.plugin.idea.main.jar
   - Dependencies:
     - Plugin(id=com.intellij.modules.java)
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.intelliLang.main (OPTIONAL); lib/modules/perl5.plugin.intelliLang.main.jar
   - Dependencies:
     - Plugin(id=org.intellij.intelliLang)
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.makeMaker.main (OPTIONAL); lib/modules/perl5.plugin.makeMaker.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.moduleBuild.main (OPTIONAL); lib/modules/perl5.plugin.moduleBuild.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.perlInstall.main (OPTIONAL); lib/modules/perl5.plugin.perlInstall.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.perlbrew.main (OPTIONAL); lib/modules/perl5.plugin.perlbrew.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.plenv.main (OPTIONAL); lib/modules/perl5.plugin.plenv.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
     - Module(name=perl5.plugin.perlInstall.main)
  - perl5.plugin.profiler.main (OPTIONAL); lib/modules/perl5.plugin.profiler.main.jar
   - Dependencies:
     - Plugin(id=com.intellij.modules.ultimate)
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
     - Module(name=intellij.profiler.common)
  - perl5.plugin.terminal.main (OPTIONAL); lib/modules/perl5.plugin.terminal.main.jar
   - Dependencies:
     - Plugin(id=org.jetbrains.plugins.terminal)
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.wsl.main (OPTIONAL); lib/modules/perl5.plugin.wsl.main.jar
   - Dependencies:
     - Plugin(id=com.intellij.modules.ultimate)
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)

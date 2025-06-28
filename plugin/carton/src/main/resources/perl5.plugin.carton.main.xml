@@ -16,7 +16,7 @@
 
 <idea-plugin>
   <dependencies>
-    <module name="perl5.plugin.core.main"/>
+    <module name="perl5.plugin.backend.main"/>
   </dependencies>
   <extensions defaultExtensionNs="com.perl5">
     <directoryConfigurationProvider implementation="com.perl5.lang.perl.carton.PerlCartonDirectoryConfigurationProvider"/>

@@ -19,7 +19,7 @@ dependencies {
   // packaging, which modules to include into this one
   listOf(
     ":lang.tt2.common",
-    ":lang.tt2.core",
+    ":lang.tt2.backend",
     ":lang.tt2.frontend",
     ":lang.tt2.frontend.split",
   ).forEach {
@@ -28,8 +28,8 @@ dependencies {
 
   // dependencies
   listOf(
-    ":plugin.core",
-    ":lang.tt2.core",
+    ":plugin.backend",
+    ":lang.tt2.backend",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))

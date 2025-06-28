@@ -16,7 +16,7 @@
 
 <idea-plugin>
   <dependencies>
-    <module name="perl5.plugin.core.main"/>
+    <module name="perl5.plugin.backend.main"/>
     <module name="intellij.profiler.common"/>
     <plugin id="com.intellij.modules.ultimate"/>
   </dependencies>

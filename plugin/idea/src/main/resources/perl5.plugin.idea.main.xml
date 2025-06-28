@@ -17,7 +17,7 @@
 <idea-plugin>
     <dependencies>
         <plugin id="com.intellij.modules.java"/>
-      <module name="perl5.plugin.core.main"/>
+      <module name="perl5.plugin.backend.main"/>
     </dependencies>
     <extensions defaultExtensionNs="com.intellij">
         <moduleBuilder builderClass="com.perl5.lang.perl.idea.configuration.module.idea.PerlModuleBuilder"/>

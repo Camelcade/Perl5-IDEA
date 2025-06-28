@@ -9,9 +9,9 @@ Content modules:
  - perl5.lang.mojo.common.main (REQUIRED); lib/modules/perl5.lang.mojo.common.main.jar
   - Dependencies:
     - Module(name=perl5.plugin.common.main)
- - perl5.lang.mojo.core.main (OPTIONAL); lib/modules/perl5.lang.mojo.core.main.jar
+ - perl5.lang.mojo.backend.main (OPTIONAL); lib/modules/perl5.lang.mojo.backend.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.core.main)
+    - Module(name=perl5.plugin.backend.main)
     - Module(name=perl5.lang.mojo.common.main)
  - perl5.lang.mojo.frontend.main (OPTIONAL); lib/modules/perl5.lang.mojo.frontend.main.jar
   - Dependencies:

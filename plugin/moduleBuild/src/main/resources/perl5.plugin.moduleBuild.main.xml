@@ -16,7 +16,7 @@
 
 <idea-plugin>
   <dependencies>
-    <module name="perl5.plugin.core.main"/>
+    <module name="perl5.plugin.backend.main"/>
   </dependencies>
   <resource-bundle>messages.ModuleBuildBundle</resource-bundle>
 

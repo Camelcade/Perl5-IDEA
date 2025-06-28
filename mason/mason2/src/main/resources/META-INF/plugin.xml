@@ -32,7 +32,7 @@
 
   <content>
     <module name="perl5.lang.mason.mason2.common.main" loading="required"/>
-    <module name="perl5.lang.mason.mason2.core.main"/>
+    <module name="perl5.lang.mason.mason2.backend.main"/>
     <module name="perl5.lang.mason.mason2.frontend.main"/>
     <module name="perl5.lang.mason.mason2.frontend.split.main"/>
   </content>

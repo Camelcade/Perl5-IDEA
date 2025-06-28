@@ -25,7 +25,7 @@ dependencies {
     ":plugin.carton",
     ":plugin.common",
     ":plugin.copyright",
-    ":plugin.core",
+    ":plugin.backend",
     ":plugin.coverage",
     ":plugin.cpan",
     ":plugin.cpanminus",

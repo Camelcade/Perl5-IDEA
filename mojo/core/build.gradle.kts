@@ -35,7 +35,7 @@ project.file("src/main/gen").let { genRoot ->
 
 
 dependencies {
-  listOf(":plugin.core").forEach {
+  listOf(":plugin.backend").forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
   }

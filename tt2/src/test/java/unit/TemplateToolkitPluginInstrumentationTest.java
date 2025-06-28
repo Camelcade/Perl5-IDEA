@@ -32,7 +32,7 @@ public class TemplateToolkitPluginInstrumentationTest extends PerlInstrumentatio
     return !CategoriesFilter.shouldRun(TemplateToolkitPluginInstrumentationTest.class) ?
       Collections.emptyList() :
       Arrays.asList(new Object[][]{
-      {"plugin.core", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
+        {"plugin.backend", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
       {"tt2", TemplateToolkitParserDefinition.class, TT2_PATTERN_STRING}
     });
   }

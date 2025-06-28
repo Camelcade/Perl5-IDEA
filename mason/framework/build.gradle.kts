@@ -16,7 +16,7 @@
 fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
-  listOf(":plugin.core").forEach {
+  listOf(":plugin.backend").forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
     testRuntimeOnly(project(it))
