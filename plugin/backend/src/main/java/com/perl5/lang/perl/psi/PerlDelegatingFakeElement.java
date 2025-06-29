@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -278,13 +278,13 @@ public class PerlDelegatingFakeElement extends FakePsiElement {
 
   @Override
   @Contract(pure = true)
-  public @Nullable PsiReference getReference() {
+  public final @Nullable PsiReference getReference() {
     return myDelegate.getReference();
   }
 
   @Override
   @Contract(pure = true)
-  public PsiReference @NotNull [] getReferences() {
+  public final PsiReference @NotNull [] getReferences() {
     return myDelegate.getReferences();
   }
 

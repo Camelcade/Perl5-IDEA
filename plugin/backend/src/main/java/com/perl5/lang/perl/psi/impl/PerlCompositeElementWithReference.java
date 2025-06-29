@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiReference;
+import com.intellij.util.ArrayUtil;
 import com.perl5.lang.perl.psi.PerlReferenceOwner;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,14 +29,13 @@ public abstract class PerlCompositeElementWithReference extends PerlCompositeEle
   }
 
   @Override
-  public PsiReference @NotNull [] getReferences() {
-    return getReferencesWithCache();
+  public final PsiReference @NotNull [] getReferences() {
+    return PerlReferenceOwner.getReferencesWithCache(this);
   }
 
   @Override
-  public PsiReference getReference() {
-    PsiReference[] references = getReferences();
-    return references.length == 0 ? null : references[0];
+  public final PsiReference getReference() {
+    return ArrayUtil.getFirstElement(getReferences());
   }
 
   @Override

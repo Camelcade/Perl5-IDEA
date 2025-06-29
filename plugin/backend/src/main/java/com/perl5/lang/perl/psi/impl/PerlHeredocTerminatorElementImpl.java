@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
+import com.perl5.lang.perl.psi.PerlReferenceOwner;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
@@ -42,7 +43,7 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
 
   @Override
   public final PsiReference @NotNull [] getReferences() {
-    return getReferencesWithCache();
+    return PerlReferenceOwner.getReferencesWithCache(this);
   }
 
   @Override

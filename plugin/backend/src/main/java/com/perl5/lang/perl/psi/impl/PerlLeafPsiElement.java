@@ -30,7 +30,7 @@ public class PerlLeafPsiElement extends LeafPsiElement implements PerlReferenceO
 
   @Override
   public final PsiReference @NotNull [] getReferences() {
-    return getReferencesWithCache();
+    return PerlReferenceOwner.getReferencesWithCache(this);
   }
 
   @Override
