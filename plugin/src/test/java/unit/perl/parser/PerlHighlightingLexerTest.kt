@@ -29,7 +29,7 @@ class PerlHighlightingLexerTest : PerlLightTestCase() {
     .filter { Modifier.isStatic(it.modifiers) && it.type == Int::class.java && it.canAccess(null) }
     .associate { it.getInt(null) to it.name }
 
-  override fun getBaseDataPath(): @NonNls String? = "unit/perl/lexer"
+  override fun getBaseDataPath(): @NonNls String = "unit/perl/lexer"
 
   @Test
   fun testHeredocInRegexp(): Unit = doTestLexer()
@@ -52,6 +52,6 @@ class PerlHighlightingLexerTest : PerlLightTestCase() {
       }
       lexer.advance()
     }
-    assertSameLinesWithFile(getTestResultsFilePath(), sb.toString())
+    assertSameLinesWithFile(testResultsFilePath, sb.toString())
   }
 }

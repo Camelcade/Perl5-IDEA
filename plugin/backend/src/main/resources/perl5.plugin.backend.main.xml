@@ -193,15 +193,8 @@
                                 implementationClass="com.perl5.lang.perl.idea.generation.handlers.PerlOverrideMethodHandler"/>
     <psi.referenceContributor language="Perl5"
                               implementation="com.perl5.lang.perl.psi.references.PerlReferencesContributor"/>
-    <psi.referenceProvider language="Perl5" providerClass="com.perl5.lang.perl.psi.references.providers.PerlHeredocReferenceProvider"/>
-    <psi.referenceProvider language="Perl5"
-                           providerClass="com.perl5.lang.perl.psi.references.providers.PerlNamespaceElementReferenceProvider"/>
-    <psi.referenceProvider language="Perl5"
-                           providerClass="com.perl5.lang.perl.psi.references.providers.PerlStringContentElementReferenceProvider"/>
-    <psi.referenceProvider language="Perl5 POD"
-                           providerClass="com.perl5.lang.pod.parser.psi.references.providers.PodIdentifierReferenceProvider"/>
-    <psi.referenceProvider language="Perl5 POD"
-                           providerClass="com.perl5.lang.pod.parser.psi.references.providers.PodFormatterLReferenceProvider"/>
+    <psi.referenceContributor language="Perl5 POD"
+                              implementation="com.perl5.lang.perl.psi.references.PodReferenceContributor"/>
 
     <editorNotificationProvider
         implementation="com.perl5.lang.perl.idea.editor.notification.PerlInterpreterEditorNotification"/>

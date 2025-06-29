@@ -52,7 +52,7 @@ open class PerlDistributionTestCase : PerlLightTestCaseBase() {
       }
     }
 
-    assertSameLinesWithFile(getTestResultsFilePath(), result.toString())
+    assertSameLinesWithFile(testResultsFilePath, result.toString())
   }
 
 }
