@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,21 +16,14 @@
 
 package com.perl5.lang.mason2.psi.impl;
 
-import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason2.psi.MasonMethodModifierName;
 import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
-import com.perl5.lang.perl.psi.references.PerlSubReferenceSuper;
 import org.jetbrains.annotations.NotNull;
 
 
 public class MasonMethodModifierNameImpl extends PerlSubNameElementImpl implements MasonMethodModifierName {
   public MasonMethodModifierNameImpl(@NotNull IElementType type, CharSequence text) {
     super(type, text);
-  }
-
-  @Override
-  public PsiReference @NotNull [] computeReferences() {
-    return new PsiReference[]{new PerlSubReferenceSuper(this)};
   }
 }
