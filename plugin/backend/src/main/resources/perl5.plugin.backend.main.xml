@@ -196,6 +196,8 @@
     <psi.referenceProvider language="Perl5" providerClass="com.perl5.lang.perl.psi.references.providers.PerlHeredocReferenceProvider"/>
     <psi.referenceProvider language="Perl5"
                            providerClass="com.perl5.lang.perl.psi.references.providers.PerlNamespaceElementReferenceProvider"/>
+    <psi.referenceProvider language="Perl5 POD"
+                           providerClass="com.perl5.lang.pod.parser.psi.references.providers.PodIdentifierReferenceProvider"/>
 
     <editorNotificationProvider
         implementation="com.perl5.lang.perl.idea.editor.notification.PerlInterpreterEditorNotification"/>
