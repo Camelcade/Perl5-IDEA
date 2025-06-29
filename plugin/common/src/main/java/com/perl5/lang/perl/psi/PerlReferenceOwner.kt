@@ -13,27 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi
 
-package com.perl5.lang.perl.psi;
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiReference
+import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import org.jetbrains.annotations.NotNull;
-
-
-public interface PerlReferenceOwner extends PsiElement {
-  static PsiReference @NotNull [] getReferencesWithCache(@NotNull PerlReferenceOwner referenceOwner) {
-    return referenceOwner.hasReferences() ?
-      ReferenceProvidersRegistry.getReferencesFromProviders(referenceOwner) :
-      PsiReference.EMPTY_ARRAY;
-  }
-
+interface PerlReferenceOwner : PsiElement {
   /**
    * Indicates that element must have a reference
-   * This is partially duplicates logic of {@link com.intellij.psi.PsiReferenceProvider#acceptsHints}, but faster
+   * This is partially duplicates logic of [com.intellij.psi.PsiReferenceProvider.acceptsHints], but faster
    */
-  default boolean hasReferences() {
-    return false;
+  fun hasReferences(): Boolean = false
+
+  companion object {
+    @JvmStatic
+    fun getReferencesWithCache(referenceOwner: PerlReferenceOwner): Array<PsiReference> =
+      if (referenceOwner.hasReferences()) ReferenceProvidersRegistry.getReferencesFromProviders(referenceOwner) else PsiReference.EMPTY_ARRAY
   }
 }
