@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,20 +17,10 @@
 package com.perl5.lang.tt2.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiFileSystemItem;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.impl.providers.FileReferenceSet;
-import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.tt2.psi.TemplateToolkitString;
 import com.perl5.lang.tt2.psi.impl.TemplateToolkitCompositeElementImpl;
-import com.perl5.lang.tt2.psi.references.TemplateToolkitBlockReference;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.*;
 
 
 public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementImpl implements TemplateToolkitString {
@@ -39,41 +29,9 @@ public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementI
     PROCESS_DIRECTIVE,
     WRAPPER_DIRECTIVE
   );
-  protected static final TokenSet FILES_TARGETED_CONTAINERS = TokenSet.create(
-    INSERT_DIRECTIVE,
-    INCLUDE_DIRECTIVE,
-    PROCESS_DIRECTIVE,
-    WRAPPER_DIRECTIVE
-  );
 
   public TemplateToolkitStringMixin(@NotNull ASTNode node) {
     super(node);
-  }
-
-  @Override
-  public PsiReference @NotNull [] computeReferences() {
-    List<PsiReference> references = new ArrayList<>();
-    IElementType parentElementType = PsiUtilCore.getElementType(getParent());
-
-    if (FILES_TARGETED_CONTAINERS.contains(parentElementType)) {
-      references.addAll(Arrays.asList(new FileReferenceSet(TemplateToolkitStringMixin.this) {
-        @Override
-        public @NotNull Collection<PsiFileSystemItem> computeDefaultContexts() {
-          String path = getPathString();
-          PsiFile containingFile = getContainingFile();
-          if (StringUtil.startsWith(path, ".") && containingFile != null && containingFile.getParent() != null) {
-            return Collections.singletonList(containingFile.getParent());
-          }
-          return super.computeDefaultContexts();
-        }
-      }.getAllReferences()));
-    }
-
-    if (BLOCK_NAME_TARGETED_CONTAINERS.contains(parentElementType)) {
-      references.add(new TemplateToolkitBlockReference(TemplateToolkitStringMixin.this));
-    }
-
-    return references.toArray(PsiReference.EMPTY_ARRAY);
   }
 
   @Override
