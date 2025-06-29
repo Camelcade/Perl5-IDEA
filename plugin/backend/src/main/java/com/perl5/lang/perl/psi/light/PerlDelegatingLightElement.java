@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,12 +66,12 @@ public class PerlDelegatingLightElement<Delegate extends PsiElement> extends Lig
   }
 
   @Override
-  public PsiReference getReference() {
+  public final PsiReference getReference() {
     return getDelegate().getReference();
   }
 
   @Override
-  public PsiReference @NotNull [] getReferences() {
+  public final PsiReference @NotNull [] getReferences() {
     return getDelegate().getReferences();
   }
 

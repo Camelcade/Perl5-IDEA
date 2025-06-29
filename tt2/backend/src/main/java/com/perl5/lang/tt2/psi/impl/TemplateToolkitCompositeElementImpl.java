@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.tt2.psi.impl;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiReference;
+import com.perl5.lang.perl.psi.PerlReferenceOwner;
 import com.perl5.lang.tt2.psi.TemplateToolkitCompositeElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,7 +31,7 @@ public class TemplateToolkitCompositeElementImpl extends ASTWrapperPsiElement im
 
   @Override
   public final PsiReference @NotNull [] getReferences() {
-    return getReferencesWithCache();
+    return PerlReferenceOwner.getReferencesWithCache(this);
   }
 
   @Override

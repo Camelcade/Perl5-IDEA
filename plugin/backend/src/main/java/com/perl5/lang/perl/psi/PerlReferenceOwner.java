@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,22 +19,12 @@ package com.perl5.lang.perl.psi;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
 import org.jetbrains.annotations.NotNull;
 
 
 public interface PerlReferenceOwner extends PsiElement {
-  /**
-   * default getReferences[] method should call this one
-   */
-  default PsiReference @NotNull [] getReferencesWithCache() {
-    return hasReferences() ?
-           CachedValuesManager.getCachedValue(
-             this,
-             () -> CachedValueProvider.Result.create(computeReferences(),
-                                                     getReferencesCacheDependencies())) :
-           PsiReference.EMPTY_ARRAY;
+  static PsiReference @NotNull [] getReferencesWithCache(@NotNull PerlReferenceOwner referenceOwner) {
+    return referenceOwner.hasReferences() ? referenceOwner.computeReferences() : PsiReference.EMPTY_ARRAY;
   }
 
   /**
@@ -49,14 +39,5 @@ public interface PerlReferenceOwner extends PsiElement {
    */
   default PsiReference @NotNull [] computeReferences() {
     return ReferenceProvidersRegistry.getReferencesFromProviders(this);
-  }
-
-  /**
-   * Returns dependencies array for references caching
-   *
-   * @return ref array
-   */
-  default Object[] getReferencesCacheDependencies() {
-    return new Object[]{this};
   }
 }
