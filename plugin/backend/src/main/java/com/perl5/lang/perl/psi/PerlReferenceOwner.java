@@ -24,20 +24,16 @@ import org.jetbrains.annotations.NotNull;
 
 public interface PerlReferenceOwner extends PsiElement {
   static PsiReference @NotNull [] getReferencesWithCache(@NotNull PerlReferenceOwner referenceOwner) {
-    return referenceOwner.hasReferences() ? referenceOwner.computeReferences() : PsiReference.EMPTY_ARRAY;
+    return referenceOwner.hasReferences() ?
+      ReferenceProvidersRegistry.getReferencesFromProviders(referenceOwner) :
+      PsiReference.EMPTY_ARRAY;
   }
 
   /**
    * Indicates that element must have a reference
+   * This is partially duplicates logic of {@link com.intellij.psi.PsiReferenceProvider#acceptsHints}, but faster
    */
   default boolean hasReferences() {
     return false;
-  }
-
-  /**
-   * Computing references for psi element
-   */
-  default PsiReference @NotNull [] computeReferences() {
-    return ReferenceProvidersRegistry.getReferencesFromProviders(this);
   }
 }
