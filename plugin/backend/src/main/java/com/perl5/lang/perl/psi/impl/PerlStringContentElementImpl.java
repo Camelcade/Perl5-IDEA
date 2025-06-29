@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,50 +16,16 @@
 
 package com.perl5.lang.perl.psi.impl;
 
-import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiReference;
-import com.intellij.psi.impl.source.resolve.reference.ReferenceProvidersRegistry;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
-import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.PsiPerlStatement;
-import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 
 public class PerlStringContentElementImpl extends PerlLeafPsiElementWithReferences implements PerlStringContentElement {
   public PerlStringContentElementImpl(@NotNull IElementType type, CharSequence text) {
     super(type, text);
-  }
-
-  @Override
-  public PsiReference @NotNull [] computeReferences() {
-    List<PsiReference> result = new ArrayList<>();
-    String valueText = ElementManipulators.getValueText(this);
-    if (PerlString.looksLikePackage(valueText)) {
-      result.add(new PerlNamespaceReference(PerlStringContentElementImpl.this));
-    }
-    else {
-      PerlReferencesProvider referencesProvider =
-        PsiTreeUtil.getParentOfType(PerlStringContentElementImpl.this, PerlReferencesProvider.class, true, PsiPerlStatement.class);
-
-      if (referencesProvider != null) {
-        PsiReference[] references = referencesProvider.getReferences(PerlStringContentElementImpl.this);
-        if (references != null) {
-          result.addAll(Arrays.asList(references));
-        }
-      }
-    }
-    result.addAll(Arrays.asList(ReferenceProvidersRegistry.getReferencesFromProviders(PerlStringContentElementImpl.this)));
-    return result.toArray(PsiReference.EMPTY_ARRAY);
   }
 
   @Override
