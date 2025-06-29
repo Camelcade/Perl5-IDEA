@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,5 +46,5 @@ class PerlCpanfileImportProvider : PerlImportsProvider {
   override fun getExportDescriptors(namespaceElement: PerlNamespaceDefinitionElement): List<PerlExportDescriptor> = myDescriptors
 
   override fun isApplicable(namespaceDefinitionElement: PerlNamespaceDefinitionElement?): Boolean =
-    (namespaceDefinitionElement as? PsiFile)?.getOriginalFile()?.getFileType() === PerlFileTypeCpanfile.INSTANCE
+    (namespaceDefinitionElement as? PsiFile)?.originalFile?.fileType === PerlFileTypeCpanfile.INSTANCE
 }

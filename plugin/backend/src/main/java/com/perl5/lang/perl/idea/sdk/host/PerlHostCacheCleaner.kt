@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,17 +43,17 @@ private val log = Logger.getInstance(PerlHostCacheCleaner::class.java)
 class PerlHostCacheCleaner : ProjectActivity {
   override suspend fun execute(project: Project) {
     val application = ApplicationManager.getApplication()
-    if (!application.isUnitTestMode() && application.isDispatchThread()) {
+    if (!application.isUnitTestMode && application.isDispatchThread) {
       log.error("This supposed to be invoked from pooled thread")
       return
     }
     val cacheRoot = VfsUtil.findFileByIoFile(File(PerlPluginUtil.getRemotesCachePath()), true)
-    val cacheDirs = cacheRoot?.getChildren()
+    val cacheDirs = cacheRoot?.children
     if (cacheDirs == null || cacheDirs.isEmpty()) {
       return
     }
     val existingCaches = cacheDirs.toMutableSet()
-    PerlSdkTable.getInstance().getInterpreters().forEach { sdk ->
+    PerlSdkTable.getInstance().interpreters.forEach { sdk ->
       val sdkCacheRoot = PerlHostData.notNullFrom(sdk).getLocalCacheRoot()
       if (StringUtil.isEmpty(sdkCacheRoot)) {
         return
@@ -86,7 +86,7 @@ class PerlHostCacheCleaner : ProjectActivity {
                 PerlRunUtil.setProgressText(
                   PerlBundle.message(
                     "perl.cache.cleaner.deleting",
-                    StringUtil.shortenPathWithEllipsis(FileUtil.toSystemDependentName(it.getPath()), 50)
+                    StringUtil.shortenPathWithEllipsis(FileUtil.toSystemDependentName(it.path), 50)
                   )
                 )
                 WriteAction.runAndWait<IOException> { it.delete(this) }

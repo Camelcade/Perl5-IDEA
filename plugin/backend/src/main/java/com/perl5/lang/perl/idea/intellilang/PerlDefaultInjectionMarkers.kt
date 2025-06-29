@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -151,7 +151,7 @@ object PerlDefaultInjectionMarkers {
     "OSQL" to "Oracle",
     "OSQLP" to "OracleSqlPlus",
     "PBX" to "pbx",
-    PERL5_MARKER to PerlLanguage.INSTANCE.getID(),
+    PERL5_MARKER to PerlLanguage.INSTANCE.id,
     "PGSQL" to "PostgreSQL",
     "PHP" to "InjectablePHP",
     "PHPT" to "PHPT",

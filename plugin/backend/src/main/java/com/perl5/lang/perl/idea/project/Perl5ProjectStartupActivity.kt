@@ -30,7 +30,7 @@ import com.perl5.lang.perl.util.PerlPluginUtil
 
 class Perl5ProjectStartupActivity : ProjectActivity {
   override suspend fun execute(project: Project) {
-    if (project.isDefault()) {
+    if (project.isDefault) {
       return
     }
     val settings = PerlApplicationSettings.getInstance()
@@ -52,7 +52,7 @@ class Perl5ProjectStartupActivity : ProjectActivity {
 
       Notifications.Bus.notify(notification)
     }
-    if (!ApplicationManager.getApplication().isUnitTestMode()) {
+    if (!ApplicationManager.getApplication().isUnitTestMode) {
       scheduleNamesUpdateWithReparse(project)
     }
   }
@@ -63,7 +63,7 @@ class Perl5ProjectStartupActivity : ProjectActivity {
 
 
   private fun initNamesWithReparse(project: Project) {
-    if (project.isDisposed()) {
+    if (project.isDisposed) {
       return
     }
     PerlNamesCache.getInstance(project).forceCacheUpdate()
