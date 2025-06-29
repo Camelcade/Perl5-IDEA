@@ -23,7 +23,6 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlReferenceOwner;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.references.PerlHeredocReference;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements PerlHeredocTerminatorElement {
@@ -50,11 +49,6 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
   public final PsiReference getReference() {
     PsiReference[] references = getReferences();
     return references.length == 0 ? null : references[0];
-  }
-
-  @Override
-  public PsiReference @NotNull [] computeReferences() {
-    return new PsiReference[]{new PerlHeredocReference(this)};
   }
 
   @Override
