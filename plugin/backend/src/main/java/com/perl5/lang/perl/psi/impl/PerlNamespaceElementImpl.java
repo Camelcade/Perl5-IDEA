@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,10 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
+import com.perl5.lang.perl.psi.PerlNamespaceElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.references.PerlNamespaceFileReference;
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -38,21 +41,6 @@ import static com.perl5.lang.perl.util.PerlCorePackages.CORE_PACKAGES_PRAGMAS;
 public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences implements PerlNamespaceElement {
   public PerlNamespaceElementImpl(@NotNull IElementType type, CharSequence text) {
     super(type, text);
-  }
-
-  @Override
-  public PsiReference @NotNull [] computeReferences() {
-    PsiElement nameSpaceContainer = getParent();
-
-    if (nameSpaceContainer instanceof PerlUseStatementElementBase || nameSpaceContainer instanceof PsiPerlRequireExpr) {
-      return new PsiReference[]{new PerlNamespaceFileReference(this)};
-    }
-    else if (nameSpaceContainer instanceof PerlNamespaceDefinitionWithIdentifier) {
-      return PsiReference.EMPTY_ARRAY;
-    }
-    else {
-      return new PsiReference[]{new PerlNamespaceReference(this)};
-    }
   }
 
   @Override
