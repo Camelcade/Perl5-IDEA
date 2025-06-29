@@ -66,6 +66,8 @@
 
     <fileContextProvider implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileContextProvider"/>
     <psi.fileReferenceHelper implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileReferenceHelper"/>
+    <psi.referenceContributor language="Template Toolkit 2"
+                              implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitReferenceContributor"/>
 
     <projectStructure.sourceRootEditHandler
         implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSourceRootEditHandler"/>
