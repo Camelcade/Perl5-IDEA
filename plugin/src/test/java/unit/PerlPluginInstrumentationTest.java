@@ -54,7 +54,7 @@ public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
   }
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
-    return !CategoriesFilter.shouldRun(PerlPluginInstrumentationTest.class) ? Collections.emptyList() : Arrays.asList(new Object[][]{
+    return !CategoriesFilter.shouldRun(PerlPluginInstrumentationTest.class) ? Collections.emptyList() : Arrays.asList(
       buildData("asdf", AsdfTestUtil.getInstrumentationTestClass()),
       buildData("berrybrew", BerryBrewTestUtil.getInstrumentationTestClass()),
       buildData("carton", PerlCartonDirectoryConfigurationProvider.class),
@@ -74,7 +74,6 @@ public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
       buildData("plenv", PlenvTestUtil.getInstrumentationTestClass()),
       buildData("profiler", PerlProfilerProcess.class),
       buildData("terminal", PerlLocalTerminalCustomizer.class),
-      buildData("wsl", PerlWslInputFilterProvider.class),
-    });
+      buildData("wsl", PerlWslInputFilterProvider.class));
   }
 }
