@@ -42,7 +42,7 @@ open class PerlDistributionTestCase : PerlLightTestCaseBase() {
     pluginDescriptor.contentModules.forEach { moduleDescriptor ->
       result.append(
         " - ${moduleDescriptor.moduleName} (${moduleDescriptor.moduleLoadingRule}); ${
-          moduleDescriptor.jarFiles!!.map { file -> relativizer(file) }.joinToString()
+          moduleDescriptor.jarFiles!!.joinToString { file -> relativizer(file) }
         }\n"
       )
       val dependencies = moduleDescriptor.moduleDependencies.plugins.map { "    - $it\n" } +

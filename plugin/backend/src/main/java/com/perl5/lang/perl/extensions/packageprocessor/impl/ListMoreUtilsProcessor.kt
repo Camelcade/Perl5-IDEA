@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,8 +28,8 @@ class ListMoreUtilsProcessor : PerlPackageProcessorBase() {
   override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> =
     useStatement.importParameters
       ?.distinct()
-      ?.map { parameter -> EXPORT_OK_DESCRIPTORS.get(parameter) }
-      ?.filterNotNull()?.toImmutableList()
+      ?.mapNotNull { parameter -> EXPORT_OK_DESCRIPTORS.get(parameter) }
+      ?.toImmutableList()
       ?: emptyList()
 
   override fun addExports(
