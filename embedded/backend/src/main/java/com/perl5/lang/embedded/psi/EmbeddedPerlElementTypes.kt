@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,27 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.embedded.psi
 
-package com.perl5.lang.embedded.psi;
+import com.intellij.psi.templateLanguages.TemplateDataElementType
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.embedded.EmbeddedPerlLanguage
+import com.perl5.lang.pod.elementTypes.PodTemplatingElementType
 
-import com.intellij.psi.templateLanguages.TemplateDataElementType;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.embedded.EmbeddedPerlLanguage;
-import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
+object EmbeddedPerlElementTypes {
+  @JvmField
+  val EMBED_TEMPLATE_BLOCK_HTML: IElementType = EmbeddedPerlTemplateTokenType()
 
+  @JvmField
+  val EMBED_OUTER_ELEMENT_TYPE: IElementType = EmbeddedPerlTokenType("EMBED_OUTER_ELEMENT_TYPE")
 
-public final class EmbeddedPerlElementTypes {
-  private EmbeddedPerlElementTypes() {
-  }
+  @JvmField
+  val EMBED_HTML_TEMPLATE_DATA: IElementType = TemplateDataElementType(
+    "EMBED_HTML_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE, EMBED_TEMPLATE_BLOCK_HTML,
+    EMBED_OUTER_ELEMENT_TYPE
+  )
 
-  public static final IElementType EMBED_TEMPLATE_BLOCK_HTML = new EmbeddedPerlTemplateTokenType();
-  public static final IElementType EMBED_OUTER_ELEMENT_TYPE = new EmbeddedPerlTokenType("EMBED_OUTER_ELEMENT_TYPE");
-  public static final IElementType EMBED_HTML_TEMPLATE_DATA =
-    new TemplateDataElementType("EMBED_HTML_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE, EMBED_TEMPLATE_BLOCK_HTML,
-                                EMBED_OUTER_ELEMENT_TYPE);
-  public static final IElementType EMBED_POD_TEMPLATE_DATA =
-    new PodTemplatingElementType("EMBED_POD_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE);
+  @JvmField
+  val EMBED_POD_TEMPLATE_DATA: IElementType = PodTemplatingElementType("EMBED_POD_TEMPLATE_DATA", EmbeddedPerlLanguage.INSTANCE)
 
-  public static final IElementType EMBED_MARKER_OPEN = new EmbeddedPerlTokenType("EMBED_MARKER_OPEN");
-  public static final IElementType EMBED_MARKER_CLOSE = new EmbeddedPerlTokenType("EMBED_MARKER_CLOSE");
+  @JvmField
+  val EMBED_MARKER_OPEN: IElementType = EmbeddedPerlTokenType("EMBED_MARKER_OPEN")
+
+  @JvmField
+  val EMBED_MARKER_CLOSE: IElementType = EmbeddedPerlTokenType("EMBED_MARKER_CLOSE")
 }
