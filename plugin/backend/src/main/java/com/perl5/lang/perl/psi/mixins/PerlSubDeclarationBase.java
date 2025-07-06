@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
@@ -38,7 +38,7 @@ public abstract class PerlSubDeclarationBase extends PerlSubBase<PerlSubDeclarat
     super(node);
   }
 
-  public PerlSubDeclarationBase(@NotNull PerlSubDeclarationStub stub, @NotNull IStubElementType nodeType) {
+  public PerlSubDeclarationBase(@NotNull PerlSubDeclarationStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 
