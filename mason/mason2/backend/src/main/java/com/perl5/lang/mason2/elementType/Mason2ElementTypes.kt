@@ -13,150 +13,211 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.mason2.elementType
 
-package com.perl5.lang.mason2.elementType;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.intellij.psi.templateLanguages.TemplateDataElementType
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.mason2.Mason2Language
+import com.perl5.lang.mason2.Mason2SyntaxElements
+import com.perl5.lang.mason2.Mason2TemplatingLanguage
+import com.perl5.lang.mason2.psi.impl.*
+import com.perl5.lang.perl.psi.stubs.PerlFileElementType
+import com.perl5.lang.pod.elementTypes.PodTemplatingElementType
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.templateLanguages.TemplateDataElementType;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mason2.Mason2Language;
-import com.perl5.lang.mason2.Mason2SyntaxElements;
-import com.perl5.lang.mason2.Mason2TemplatingLanguage;
-import com.perl5.lang.mason2.psi.impl.*;
-import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
-import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
-import org.jetbrains.annotations.NotNull;
+interface Mason2ElementTypes : Mason2SyntaxElements {
+  companion object {
+    @JvmField
+    val MASON_TEMPLATE_BLOCK_HTML: IElementType = MasonTemplateTokenType()
 
+    @JvmField
+    val MASON_OUTER_ELEMENT_TYPE: IElementType = MasonTemplatingTokenType("MASON_OUTER_ELEMENT_TYPE")
 
-public interface Mason2ElementTypes extends Mason2SyntaxElements {
-  IElementType MASON_TEMPLATE_BLOCK_HTML = new MasonTemplateTokenType();
-  IElementType MASON_OUTER_ELEMENT_TYPE = new MasonTemplatingTokenType("MASON_OUTER_ELEMENT_TYPE");
-  IElementType MASON_HTML_TEMPLATE_DATA = new TemplateDataElementType(
-    "MASON_HTML_TEMPLATE_DATA",
-    Mason2TemplatingLanguage.INSTANCE,
-    MASON_TEMPLATE_BLOCK_HTML,
-    MASON_OUTER_ELEMENT_TYPE
-  );
-  IElementType MASON_POD_TEMPLATE_DATA = new PodTemplatingElementType("MASON_POD_TEMPLATE_DATA", Mason2TemplatingLanguage.INSTANCE);
+    @JvmField
+    val MASON_HTML_TEMPLATE_DATA: IElementType = TemplateDataElementType(
+      "MASON_HTML_TEMPLATE_DATA",
+      Mason2TemplatingLanguage.INSTANCE,
+      MASON_TEMPLATE_BLOCK_HTML,
+      MASON_OUTER_ELEMENT_TYPE
+    )
 
-  IElementType MASON_FILTERED_BLOCK_OPENER = new MasonTemplatingTokenType(KEYWORD_FILTERED_BLOCK_OPENER);
-  IElementType MASON_FILTERED_BLOCK_CLOSER = new MasonTemplatingTokenType(KEYWORD_FILTERED_BLOCK_CLOSER);
-  IElementType MASON_METHOD_MODIFIER_NAME = new MasonTemplatingTokenTypeEx("MASON_METHOD_MODIFIER_NAME") {
-    @Override
-    public @NotNull ASTNode createLeafNode(@NotNull CharSequence leafText) {
-      return new MasonMethodModifierNameImpl(this, leafText);
+    @JvmField
+    val MASON_POD_TEMPLATE_DATA: IElementType = PodTemplatingElementType("MASON_POD_TEMPLATE_DATA", Mason2TemplatingLanguage.INSTANCE)
+
+    @JvmField
+    val MASON_FILTERED_BLOCK_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_FILTERED_BLOCK_OPENER)
+
+    @JvmField
+    val MASON_FILTERED_BLOCK_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_FILTERED_BLOCK_CLOSER)
+
+    @JvmField
+    val MASON_METHOD_MODIFIER_NAME: IElementType = object : MasonTemplatingTokenTypeEx("MASON_METHOD_MODIFIER_NAME") {
+      override fun createLeafNode(leafText: CharSequence): ASTNode = MasonMethodModifierNameImpl(this, leafText)
     }
-  };
-  IElementType MASON_SELF_POINTER = new MasonTemplatingTokenType(KEYWORD_SELF_POINTER);
 
-  IElementType MASON_BLOCK_OPENER = new MasonTemplatingTokenType(KEYWORD_BLOCK_OPENER);
+    @JvmField
+    val MASON_SELF_POINTER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_SELF_POINTER)
 
-  IElementType MASON_BLOCK_CLOSER = new MasonTemplatingTokenType(KEYWORD_BLOCK_CLOSER);
-  IElementType MASON_TAG_CLOSER = new MasonTemplatingTokenType(">");
+    @JvmField
+    val MASON_BLOCK_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_BLOCK_OPENER)
 
-  IElementType MASON_CALL_OPENER = new MasonTemplatingTokenType(KEYWORD_CALL_OPENER);
-  IElementType MASON_CALL_CLOSER = new MasonTemplatingTokenType(KEYWORD_CALL_CLOSER);
+    @JvmField
+    val MASON_BLOCK_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_BLOCK_CLOSER)
 
-  IElementType MASON_LINE_OPENER = new MasonTemplatingTokenType("%");
-  IElementType MASON_EXPR_FILTER_PIPE = new MasonTemplatingTokenType("|");
+    @JvmField
+    val MASON_TAG_CLOSER: IElementType = MasonTemplatingTokenType(">")
 
-  IElementType MASON_METHOD_OPENER = new MasonTemplatingTokenType(KEYWORD_METHOD_OPENER);
-  IElementType MASON_METHOD_CLOSER = new MasonTemplatingTokenType(KEYWORD_METHOD_CLOSER);
+    @JvmField
+    val MASON_CALL_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_CALL_OPENER)
 
-  IElementType MASON_CLASS_OPENER = new MasonTemplatingTokenType(KEYWORD_CLASS_OPENER);
-  IElementType MASON_CLASS_CLOSER = new MasonTemplatingTokenType(KEYWORD_CLASS_CLOSER);
+    @JvmField
+    val MASON_CALL_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_CALL_CLOSER)
 
-  IElementType MASON_DOC_OPENER = new MasonTemplatingTokenType(KEYWORD_DOC_OPENER);
-  IElementType MASON_DOC_CLOSER = new MasonTemplatingTokenType(KEYWORD_DOC_CLOSER);
+    @JvmField
+    val MASON_LINE_OPENER: IElementType = MasonTemplatingTokenType("%")
 
-  IElementType MASON_FLAGS_OPENER = new MasonTemplatingTokenType(KEYWORD_FLAGS_OPENER);
-  IElementType MASON_FLAGS_CLOSER = new MasonTemplatingTokenType(KEYWORD_FLAGS_CLOSER);
+    @JvmField
+    val MASON_EXPR_FILTER_PIPE: IElementType = MasonTemplatingTokenType("|")
 
-  IElementType MASON_INIT_OPENER = new MasonTemplatingTokenType(KEYWORD_INIT_OPENER);
-  IElementType MASON_INIT_CLOSER = new MasonTemplatingTokenType(KEYWORD_INIT_CLOSER);
+    @JvmField
+    val MASON_METHOD_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_METHOD_OPENER)
 
-  IElementType MASON_PERL_OPENER = new MasonTemplatingTokenType(KEYWORD_PERL_OPENER);
-  IElementType MASON_PERL_CLOSER = new MasonTemplatingTokenType(KEYWORD_PERL_CLOSER);
+    @JvmField
+    val MASON_METHOD_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_METHOD_CLOSER)
 
-  IElementType MASON_TEXT_OPENER = new MasonTemplatingTokenType(KEYWORD_TEXT_OPENER);
-  IElementType MASON_TEXT_CLOSER = new MasonTemplatingTokenType(KEYWORD_TEXT_CLOSER);
+    @JvmField
+    val MASON_CLASS_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_CLASS_OPENER)
 
-  IElementType MASON_FILTER_OPENER = new MasonTemplatingTokenType(KEYWORD_FILTER_OPENER);
-  IElementType MASON_FILTER_CLOSER = new MasonTemplatingTokenType(KEYWORD_FILTER_CLOSER);
+    @JvmField
+    val MASON_CLASS_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_CLASS_CLOSER)
 
-  IElementType MASON_AFTER_OPENER = new MasonTemplatingTokenType(KEYWORD_AFTER_OPENER);
-  IElementType MASON_AFTER_CLOSER = new MasonTemplatingTokenType(KEYWORD_AFTER_CLOSER);
+    @JvmField
+    val MASON_DOC_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_DOC_OPENER)
 
-  IElementType MASON_AUGMENT_OPENER = new MasonTemplatingTokenType(KEYWORD_AUGMENT_OPENER);
-  IElementType MASON_AUGMENT_CLOSER = new MasonTemplatingTokenType(KEYWORD_AUGMENT_CLOSER);
+    @JvmField
+    val MASON_DOC_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_DOC_CLOSER)
 
-  IElementType MASON_AROUND_OPENER = new MasonTemplatingTokenType(KEYWORD_AROUND_OPENER);
-  IElementType MASON_AROUND_CLOSER = new MasonTemplatingTokenType(KEYWORD_AROUND_CLOSER);
+    @JvmField
+    val MASON_FLAGS_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_FLAGS_OPENER)
 
-  IElementType MASON_BEFORE_OPENER = new MasonTemplatingTokenType(KEYWORD_BEFORE_OPENER);
-  IElementType MASON_BEFORE_CLOSER = new MasonTemplatingTokenType(KEYWORD_BEFORE_CLOSER);
+    @JvmField
+    val MASON_FLAGS_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_FLAGS_CLOSER)
 
-  IElementType MASON_OVERRIDE_OPENER = new MasonTemplatingTokenType(KEYWORD_OVERRIDE_OPENER);
-  IElementType MASON_OVERRIDE_CLOSER = new MasonTemplatingTokenType(KEYWORD_OVERRIDE_CLOSER);
+    @JvmField
+    val MASON_INIT_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_INIT_OPENER)
 
-  IElementType MASON_NAMESPACE_DEFINITION = new MasonNamespaceElementType("MASON_PACKAGE");
+    @JvmField
+    val MASON_INIT_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_INIT_CLOSER)
 
-  IElementType MASON_AUGMENT_MODIFIER = new MasonAugmentMethodModifierElementType("MASON_AUGMENT_MODIFIER");
-  IElementType MASON_OVERRIDE_DEFINITION = new MasonOverrideElementType("MASON_OVERRIDE_DEFINITION");
-  IElementType MASON_METHOD_DEFINITION = new MasonMethodDefinitionElementType("MASON_METHOD_DEFINITION");
-  IElementType MASON_FILTER_DEFINITION = new MasonFilterDefinitionElementType("MASON_FILTER_DEFINITION");
+    @JvmField
+    val MASON_PERL_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_PERL_OPENER)
 
-  IElementType MASON_AFTER_MODIFIER = new MasonMethodModifierElementType("MASON_AFTER_MODIFIER");
-  IElementType MASON_BEFORE_MODIFIER = new MasonMethodModifierElementType("MASON_BEFOE_MODIFIER");
+    @JvmField
+    val MASON_PERL_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_PERL_CLOSER)
 
-  IElementType MASON_FLAGS_STATEMENT = new MasonTemplatingElementType("FLAGS_STATEMENT") {
-    @Override
-    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-      return new MasonFlagsStatementImpl(node);
+    @JvmField
+    val MASON_TEXT_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_TEXT_OPENER)
+
+    @JvmField
+    val MASON_TEXT_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_TEXT_CLOSER)
+
+    @JvmField
+    val MASON_FILTER_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_FILTER_OPENER)
+
+    @JvmField
+    val MASON_FILTER_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_FILTER_CLOSER)
+
+    @JvmField
+    val MASON_AFTER_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_AFTER_OPENER)
+
+    @JvmField
+    val MASON_AFTER_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_AFTER_CLOSER)
+
+    @JvmField
+    val MASON_AUGMENT_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_AUGMENT_OPENER)
+
+    @JvmField
+    val MASON_AUGMENT_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_AUGMENT_CLOSER)
+
+    @JvmField
+    val MASON_AROUND_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_AROUND_OPENER)
+
+    @JvmField
+    val MASON_AROUND_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_AROUND_CLOSER)
+
+    @JvmField
+    val MASON_BEFORE_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_BEFORE_OPENER)
+
+    @JvmField
+    val MASON_BEFORE_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_BEFORE_CLOSER)
+
+    @JvmField
+    val MASON_OVERRIDE_OPENER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_OVERRIDE_OPENER)
+
+    @JvmField
+    val MASON_OVERRIDE_CLOSER: IElementType = MasonTemplatingTokenType(Mason2SyntaxElements.KEYWORD_OVERRIDE_CLOSER)
+
+    @JvmField
+    val MASON_NAMESPACE_DEFINITION: IElementType = MasonNamespaceElementType("MASON_PACKAGE")
+
+    @JvmField
+    val MASON_AUGMENT_MODIFIER: IElementType = MasonAugmentMethodModifierElementType("MASON_AUGMENT_MODIFIER")
+
+    @JvmField
+    val MASON_OVERRIDE_DEFINITION: IElementType = MasonOverrideElementType("MASON_OVERRIDE_DEFINITION")
+
+    @JvmField
+    val MASON_METHOD_DEFINITION: IElementType = MasonMethodDefinitionElementType("MASON_METHOD_DEFINITION")
+
+    @JvmField
+    val MASON_FILTER_DEFINITION: IElementType = MasonFilterDefinitionElementType("MASON_FILTER_DEFINITION")
+
+    @JvmField
+    val MASON_AFTER_MODIFIER: IElementType = MasonMethodModifierElementType("MASON_AFTER_MODIFIER")
+
+    @JvmField
+    val MASON_BEFORE_MODIFIER: IElementType = MasonMethodModifierElementType("MASON_BEFOE_MODIFIER")
+
+    @JvmField
+    val MASON_FLAGS_STATEMENT: IElementType = object : MasonTemplatingElementType("FLAGS_STATEMENT") {
+      override fun getPsiElement(node: ASTNode): PsiElement = MasonFlagsStatementImpl(node)
     }
-  };
-  IElementType MASON_CALL_STATEMENT = new MasonTemplatingElementType("MASON_CALL_STATEMENT") {
-    @Override
-    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-      return new MasonCallStatementImpl(node);
-    }
-  };
 
-  IElementType MASON_AROUND_MODIFIER = new MasonTemplatingElementType("MASON_AROUND_MODIFIER") {
-    @Override
-    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-      return new MasonAroundMethodModifierImpl(node);
+    @JvmField
+    val MASON_CALL_STATEMENT: IElementType = object : MasonTemplatingElementType("MASON_CALL_STATEMENT") {
+      override fun getPsiElement(node: ASTNode): PsiElement = MasonCallStatementImpl(node)
     }
-  };
 
-  IElementType MASON_ABSTRACT_BLOCK = new MasonTemplatingElementType("MASON_ABSTRACT_BLOCK") {
-    @Override
-    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-      return new MasonAbstractBlockImpl(node);
+    @JvmField
+    val MASON_AROUND_MODIFIER: IElementType = object : MasonTemplatingElementType("MASON_AROUND_MODIFIER") {
+      override fun getPsiElement(node: ASTNode): PsiElement = MasonAroundMethodModifierImpl(node)
     }
-  };
 
-  IElementType MASON_TEXT_BLOCK = new MasonTemplatingElementType("MASON_TEXT_BLOCK") {
-    @Override
-    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-      return new MasonTextBlockImpl(node);
+    @JvmField
+    val MASON_ABSTRACT_BLOCK: IElementType = object : MasonTemplatingElementType("MASON_ABSTRACT_BLOCK") {
+      override fun getPsiElement(node: ASTNode): PsiElement = MasonAbstractBlockImpl(node)
     }
-  };
 
-  IElementType MASON_FILTERED_BLOCK = new MasonTemplatingElementType("MASON_FILTERED_BLOCK") {
-    @Override
-    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-      return new MasonFilteredBlockImpl(node);
+    @JvmField
+    val MASON_TEXT_BLOCK: IElementType = object : MasonTemplatingElementType("MASON_TEXT_BLOCK") {
+      override fun getPsiElement(node: ASTNode): PsiElement = MasonTextBlockImpl(node)
     }
-  };
 
-  IElementType MASON_SIMPLE_DEREF_EXPR = new MasonTemplatingElementType("MASON_DEREF_EXPRESSION") {
-    @Override
-    public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-      return new MasonSimpleDerefExpressionImpl(node);
+    @JvmField
+    val MASON_FILTERED_BLOCK: IElementType = object : MasonTemplatingElementType("MASON_FILTERED_BLOCK") {
+      override fun getPsiElement(node: ASTNode): PsiElement = MasonFilteredBlockImpl(node)
     }
-  };
-  PerlFileElementType PP_FILE = new PerlFileElementType("Mason PP component", Mason2Language.INSTANCE);
-  PerlFileElementType COMPONENT_FILE = new PerlFileElementType("Mason component", Mason2TemplatingLanguage.INSTANCE);
+
+    @JvmField
+    val MASON_SIMPLE_DEREF_EXPR: IElementType = object : MasonTemplatingElementType("MASON_DEREF_EXPRESSION") {
+      override fun getPsiElement(node: ASTNode): PsiElement = MasonSimpleDerefExpressionImpl(node)
+    }
+
+    @JvmField
+    val PP_FILE: PerlFileElementType = PerlFileElementType("Mason PP component", Mason2Language.INSTANCE)
+
+    @JvmField
+    val COMPONENT_FILE: PerlFileElementType = PerlFileElementType("Mason component", Mason2TemplatingLanguage.INSTANCE)
+  }
 }
