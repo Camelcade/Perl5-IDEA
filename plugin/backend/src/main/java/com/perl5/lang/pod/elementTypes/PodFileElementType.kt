@@ -13,15 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.pod.elementTypes
 
-package com.perl5.lang.pod.elementTypes;
+import com.intellij.psi.tree.IFileElementType
+import com.perl5.lang.pod.PodLanguage
+import org.jetbrains.annotations.NonNls
 
-import com.intellij.psi.tree.IFileElementType;
-import com.perl5.lang.pod.PodLanguage;
-import org.jetbrains.annotations.NonNls;
-
-public class PodFileElementType extends IFileElementType {
-  public PodFileElementType(@NonNls String debugName) {
-    super(debugName, PodLanguage.INSTANCE);
-  }
-}
+class PodFileElementType(debugName: @NonNls String) : IFileElementType(debugName, PodLanguage.INSTANCE)
