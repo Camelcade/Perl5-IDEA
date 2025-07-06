@@ -17,7 +17,7 @@
 package com.perl5.lang.embedded.idea.formatter;
 
 import com.intellij.formatting.Indent;
-import com.perl5.lang.embedded.psi.EmbeddedPerlTokenSets;
+import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +28,7 @@ public class EmbeddedPerlIndentProcessor extends PerlIndentProcessor {
 
   @Override
   public @Nullable Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
-    if (block.getElementType() == EmbeddedPerlTokenSets.FILE) {
+    if (block.getElementType() == EmbeddedPerlElementTypes.FILE) {
       return Indent.getNoneIndent();
     }
     return super.getChildIndent(block, newChildIndex);

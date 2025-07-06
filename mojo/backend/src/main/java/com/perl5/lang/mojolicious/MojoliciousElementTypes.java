@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.perl5.lang.mojolicious;
 
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.perl.psi.stubs.PerlFileElementType;
 import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 
@@ -50,5 +49,5 @@ public interface MojoliciousElementTypes extends MojoliciousSyntaxElements {
   IElementType MOJO_BEGIN = new MojoliciousTokenType(KEYWORD_MOJO_BEGIN);
   IElementType MOJO_END = new MojoliciousTokenType(KEYWORD_MOJO_END);
 
-  IFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousLanguage.INSTANCE);
+  PerlFileElementType FILE = new PerlFileElementType("Mojolicious Perl5 Template", MojoliciousLanguage.INSTANCE);
 }

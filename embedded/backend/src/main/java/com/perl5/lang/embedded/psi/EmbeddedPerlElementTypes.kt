@@ -18,9 +18,13 @@ package com.perl5.lang.embedded.psi
 import com.intellij.psi.templateLanguages.TemplateDataElementType
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.embedded.EmbeddedPerlLanguage
+import com.perl5.lang.perl.psi.stubs.PerlFileElementType
 import com.perl5.lang.pod.elementTypes.PodTemplatingElementType
 
 object EmbeddedPerlElementTypes {
+  @JvmField
+  val FILE: PerlFileElementType = PerlFileElementType("Embedded Perl5", EmbeddedPerlLanguage.INSTANCE)
+
   @JvmField
   val EMBED_TEMPLATE_BLOCK_HTML: IElementType = EmbeddedPerlTemplateTokenType()
 

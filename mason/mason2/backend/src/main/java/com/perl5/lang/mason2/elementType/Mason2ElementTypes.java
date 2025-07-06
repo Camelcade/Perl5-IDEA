@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.mason2.Mason2Language;
 import com.perl5.lang.mason2.Mason2SyntaxElements;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
@@ -158,6 +157,6 @@ public interface Mason2ElementTypes extends Mason2SyntaxElements {
       return new MasonSimpleDerefExpressionImpl(node);
     }
   };
-  IFileElementType PP_FILE = new PerlFileElementType("Mason PP component", Mason2Language.INSTANCE);
-  IFileElementType COMPONENT_FILE = new PerlFileElementType("Mason component", Mason2TemplatingLanguage.INSTANCE);
+  PerlFileElementType PP_FILE = new PerlFileElementType("Mason PP component", Mason2Language.INSTANCE);
+  PerlFileElementType COMPONENT_FILE = new PerlFileElementType("Mason component", Mason2TemplatingLanguage.INSTANCE);
 }

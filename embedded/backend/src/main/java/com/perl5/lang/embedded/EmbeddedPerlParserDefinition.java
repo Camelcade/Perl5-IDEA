@@ -26,6 +26,7 @@ import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
 import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
+import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
 import com.perl5.lang.embedded.psi.EmbeddedPerlTokenSets;
 import com.perl5.lang.embedded.psi.impl.EmbeddedPerlFileImpl;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -48,7 +49,7 @@ public class EmbeddedPerlParserDefinition extends PerlParserDefinition {
 
   @Override
   public @NotNull IFileElementType getFileNodeType() {
-    return EmbeddedPerlTokenSets.FILE;
+    return EmbeddedPerlElementTypes.FILE;
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,18 +16,12 @@
 
 package com.perl5.lang.pod.elementTypes;
 
-import com.intellij.psi.stubs.PsiFileStub;
-import com.intellij.psi.tree.IStubFileElementType;
+import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NonNls;
 
-public class PodFileElementType extends IStubFileElementType<PsiFileStub<?>> {
+public class PodFileElementType extends IFileElementType {
   public PodFileElementType(@NonNls String debugName) {
     super(debugName, PodLanguage.INSTANCE);
-  }
-
-  @Override
-  public int getStubVersion() {
-    return super.getStubVersion() + 2;
   }
 }

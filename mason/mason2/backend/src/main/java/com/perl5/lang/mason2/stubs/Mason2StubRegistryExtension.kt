@@ -14,24 +14,16 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded.psi
+package com.perl5.lang.mason2.stubs
 
-import com.intellij.psi.tree.TokenSet
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_CLOSE
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_OPEN
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_TEMPLATE_BLOCK_HTML
-import com.perl5.lang.perl.lexer.PerlTokenSetsEx
+import com.intellij.psi.stubs.StubRegistry
+import com.intellij.psi.stubs.StubRegistryExtension
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes
+import com.perl5.lang.perl.psi.stubs.PerlFileStubserializer
 
-
-object EmbeddedPerlTokenSets {
-
-  @JvmField
-  val COMMENTS: TokenSet = TokenSet.orSet(
-    PerlTokenSetsEx.COMMENTS,
-    TokenSet.create(
-      EMBED_TEMPLATE_BLOCK_HTML,
-      EMBED_MARKER_OPEN,
-      EMBED_MARKER_CLOSE
-    )
-  )
+class Mason2StubRegistryExtension : StubRegistryExtension {
+  override fun register(registry: StubRegistry) {
+    listOf(Mason2ElementTypes.PP_FILE, Mason2ElementTypes.COMPONENT_FILE)
+      .forEach { registry.registerStubSerializer(it, PerlFileStubserializer(it)) }
+  }
 }

@@ -14,24 +14,17 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.embedded.psi
+package com.perl5.lang.pod.parser.psi.stubs
 
-import com.intellij.psi.tree.TokenSet
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_CLOSE
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_OPEN
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_TEMPLATE_BLOCK_HTML
-import com.perl5.lang.perl.lexer.PerlTokenSetsEx
+import com.intellij.psi.StubBuilder
+import com.intellij.psi.stubs.DefaultStubBuilder
+import com.intellij.psi.stubs.LanguageStubDefinition
 
+private const val baseVersion = 3
 
-object EmbeddedPerlTokenSets {
-
-  @JvmField
-  val COMMENTS: TokenSet = TokenSet.orSet(
-    PerlTokenSetsEx.COMMENTS,
-    TokenSet.create(
-      EMBED_TEMPLATE_BLOCK_HTML,
-      EMBED_MARKER_OPEN,
-      EMBED_MARKER_CLOSE
-    )
-  )
+class PodStubDefinition : LanguageStubDefinition {
+  override val builder: StubBuilder
+    get() = DefaultStubBuilder()
+  override val stubVersion: Int
+    get() = baseVersion
 }
