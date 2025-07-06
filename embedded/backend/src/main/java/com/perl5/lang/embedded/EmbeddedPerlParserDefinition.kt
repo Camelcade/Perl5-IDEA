@@ -13,59 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.embedded
 
-package com.perl5.lang.embedded;
+import com.intellij.lang.ASTNode
+import com.intellij.lexer.Lexer
+import com.intellij.openapi.project.Project
+import com.intellij.psi.FileViewProvider
+import com.intellij.psi.PsiFile
+import com.intellij.psi.tree.IElementType
+import com.intellij.psi.tree.IFileElementType
+import com.intellij.psi.tree.TokenSet
+import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer
+import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter
+import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes
+import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_TEMPLATE_BLOCK_HTML
+import com.perl5.lang.embedded.psi.EmbeddedPerlTokenSets
+import com.perl5.lang.embedded.psi.impl.EmbeddedPerlFileImpl
+import com.perl5.lang.perl.PerlParserDefinition
+import com.perl5.lang.perl.lexer.PerlTemplatingLexer
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.embedded.lexer.EmbeddedPerlLexer;
-import com.perl5.lang.embedded.lexer.EmbeddedPerlLexerAdapter;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
-import com.perl5.lang.embedded.psi.EmbeddedPerlTokenSets;
-import com.perl5.lang.embedded.psi.impl.EmbeddedPerlFileImpl;
-import com.perl5.lang.perl.PerlParserDefinition;
-import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
-import org.jetbrains.annotations.NotNull;
+class EmbeddedPerlParserDefinition : PerlParserDefinition() {
+  override fun getCommentTokens(): TokenSet = EmbeddedPerlTokenSets.COMMENTS
 
-import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_TEMPLATE_BLOCK_HTML;
+  override fun createLexer(project: Project?): Lexer = EmbeddedPerlLexerAdapter(project, false)
 
+  override fun getFileNodeType(): IFileElementType = EmbeddedPerlElementTypes.FILE
 
-public class EmbeddedPerlParserDefinition extends PerlParserDefinition {
-  @Override
-  public @NotNull TokenSet getCommentTokens() {
-    return EmbeddedPerlTokenSets.COMMENTS;
-  }
+  override fun createFile(viewProvider: FileViewProvider): PsiFile = EmbeddedPerlFileImpl(viewProvider)
 
-  @Override
-  public @NotNull Lexer createLexer(Project project) {
-    return new EmbeddedPerlLexerAdapter(project, false);
-  }
+  override fun getLexerStateFor(contextNode: ASTNode, elementType: IElementType): Int =
+    PerlTemplatingLexer.packState(super.getLexerStateFor(contextNode, elementType), getTemplatingStateFor(elementType))
 
-  @Override
-  public @NotNull IFileElementType getFileNodeType() {
-    return EmbeddedPerlElementTypes.FILE;
-  }
-
-  @Override
-  public @NotNull PsiFile createFile(@NotNull FileViewProvider viewProvider) {
-    return new EmbeddedPerlFileImpl(viewProvider);
-  }
-
-  @Override
-  public int getLexerStateFor(@NotNull ASTNode contextNode, @NotNull IElementType elementType) {
-    return PerlTemplatingLexer.packState(super.getLexerStateFor(contextNode, elementType), getTemplatingStateFor(elementType));
-  }
-
-  private int getTemplatingStateFor(@NotNull IElementType tokenType) {
-    if (tokenType == EMBED_TEMPLATE_BLOCK_HTML) {
-      return EmbeddedPerlLexer.YYINITIAL;
-    }
-    return EmbeddedPerlLexer.PERL;
-  }
+  private fun getTemplatingStateFor(tokenType: IElementType): Int =
+    if (tokenType === EMBED_TEMPLATE_BLOCK_HTML) EmbeddedPerlLexer.YYINITIAL else EmbeddedPerlLexer.PERL
 }
