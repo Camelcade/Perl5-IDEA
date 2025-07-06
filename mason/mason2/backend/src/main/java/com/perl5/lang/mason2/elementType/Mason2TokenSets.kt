@@ -17,8 +17,8 @@
 package com.perl5.lang.mason2.elementType
 
 import com.intellij.psi.tree.TokenSet
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes.MASON_LINE_OPENER
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes.MASON_TEMPLATE_BLOCK_HTML
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes.Companion.MASON_LINE_OPENER
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes.Companion.MASON_TEMPLATE_BLOCK_HTML
 import com.perl5.lang.perl.lexer.PerlTokenSetsEx
 
 
