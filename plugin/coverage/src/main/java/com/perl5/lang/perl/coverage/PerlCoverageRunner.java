@@ -62,7 +62,7 @@ public class PerlCoverageRunner extends CoverageRunner {
                                                             @Nullable CoverageSuite baseCoverageSuite,
                                                             @NotNull CoverageLoadErrorReporter reporter) {
     if (!(baseCoverageSuite instanceof PerlCoverageSuite perlCoverageSuite)) {
-      return null;
+      return new FailedCoverageLoadingResult("Wrong type of coverage suite: " + baseCoverageSuite.getClass().getCanonicalName());
     }
     final Ref<ProjectData> projectDataRef = new Ref<>();
     if (ApplicationManager.getApplication().isDispatchThread()) {
