@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,5 +20,5 @@ import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider
 import org.jetbrains.annotations.NonNls
 
 class MojoLiteImplicitSubsProvider : PerlImplicitDeclarationsProvider() {
-  override fun getDataFileName(): @NonNls String? = "perlData/MojoliciousLite.xml"
+  override fun getDataFileName(): @NonNls String = "perlData/MojoliciousLite.xml"
 }

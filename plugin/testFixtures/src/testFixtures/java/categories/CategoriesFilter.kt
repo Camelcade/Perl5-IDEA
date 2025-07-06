@@ -33,10 +33,7 @@ object CategoriesFilter {
     return filter.shouldRun(desc)
   }
 
-  private fun parseCategoryList(prop: String?): Set<Class<*>> = prop?.let {
-    it.trim()
-      .split(",")
-      .map { Class.forName(it.trim()) }
-      .toSet()
-  } ?: emptySet()
+  private fun parseCategoryList(prop: String?): Set<Class<*>> = prop?.trim()?.split(",")
+    ?.map { className -> Class.forName(className.trim()) }
+    ?.toSet() ?: emptySet()
 }

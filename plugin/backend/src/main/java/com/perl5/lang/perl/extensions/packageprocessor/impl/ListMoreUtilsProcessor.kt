@@ -22,13 +22,13 @@ import kotlinx.collections.immutable.toImmutableList
 
 class ListMoreUtilsProcessor : PerlPackageProcessorBase() {
   private val EXPORT_OK_DESCRIPTORS: Map<String, PerlExportDescriptor> by lazy {
-    ListMoreUtilsExports.EXPORT_OK.associate { it to PerlExportDescriptor.create("List::MoreUtils::PP", it) }
+    ListMoreUtilsExports.EXPORT_OK.associateWith { PerlExportDescriptor.create("List::MoreUtils::PP", it) }
   }
 
   override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> =
     useStatement.importParameters
       ?.distinct()
-      ?.mapNotNull { parameter -> EXPORT_OK_DESCRIPTORS.get(parameter) }
+      ?.mapNotNull { parameter -> EXPORT_OK_DESCRIPTORS[parameter] }
       ?.toImmutableList()
       ?: emptyList()
 

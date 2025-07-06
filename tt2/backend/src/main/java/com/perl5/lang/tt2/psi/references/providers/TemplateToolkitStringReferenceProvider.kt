@@ -44,7 +44,7 @@ class TemplateToolkitStringReferenceProvider : PsiReferenceProvider() {
         references.addAll(object : FileReferenceSet(element) {
           override fun computeDefaultContexts(): MutableCollection<PsiFileSystemItem?> {
             val path = pathString
-            val containingFile = getContainingFile()
+            val containingFile = this.containingFile
             if (StringUtil.startsWith(path, ".") && containingFile != null && containingFile.parent != null) {
               return mutableListOf(containingFile.parent)
             }

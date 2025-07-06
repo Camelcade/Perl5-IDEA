@@ -44,8 +44,9 @@ class PerlPsiBuilderFactory private constructor() {
       val adjusted = language ?: tokenType.language
       val parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(adjusted)
                              ?: throw AssertionError(
-                               "ParserDefinition absent for language: '" + adjusted.id + "' (" + adjusted.javaClass.getName() + "), " +
-                               "for elementType: '" + tokenType.debugName + "' (" + tokenType.javaClass.getName() + ")")
+                               "ParserDefinition absent for language: '" + adjusted.id + "' (" + adjusted.javaClass.name + "), " +
+                                 "for elementType: '" + tokenType.debugName + "' (" + tokenType.javaClass.name + ")"
+                             )
       return parserDefinition
     }
 
@@ -63,8 +64,8 @@ class PerlPsiBuilderFactory private constructor() {
   }
 
   class PerlBuilderDiagnostics {
-    val rollbacks: HashMap<Int, AtomicInteger> = hashMapOf<Int, AtomicInteger>()
-    val passes: MutableList<Pair<Int, Int>> = mutableListOf<Pair<Int, Int>>()
+    val rollbacks: MutableMap<Int, AtomicInteger> = hashMapOf()
+    val passes: MutableList<Pair<Int, Int>> = mutableListOf()
 
     override fun toString(): String {
       var totalRollbacks = 0
