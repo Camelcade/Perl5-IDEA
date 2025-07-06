@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.psi.stubs;
 
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlSub;
 import com.perl5.lang.perl.psi.PerlSubElement;
@@ -35,7 +35,7 @@ public abstract class PerlSubStub<Psi extends PerlSubElement> extends StubBase<P
                      final String namespaceName,
                      final String subName,
                      PerlSubAnnotations annotations,
-                     IStubElementType elementType) {
+                     IElementType elementType) {
     super(parent, elementType);
     myNamespaceName = namespaceName;
     mySubName = subName;

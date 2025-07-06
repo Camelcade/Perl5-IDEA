@@ -2,7 +2,7 @@
 package com.perl5.lang.perl.psi.impl;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+import com.intellij.psi.tree.IElementType;import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -19,7 +19,7 @@ public class PsiPerlSubDeclarationImpl extends PerlSubDeclarationBase implements
     super(node);
   }
 
-  public PsiPerlSubDeclarationImpl(PerlSubDeclarationStub stub, IStubElementType stubType) {
+  public PsiPerlSubDeclarationImpl(PerlSubDeclarationStub stub, IElementType stubType) {
     super(stub, stubType);
   }
 

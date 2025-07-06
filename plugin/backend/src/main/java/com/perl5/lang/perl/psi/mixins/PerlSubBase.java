@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.psi.PerlDeprecatable;
@@ -51,7 +51,7 @@ public abstract class PerlSubBase<Stub extends PerlSubStub<?>> extends PerlStubB
     super(node);
   }
 
-  public PerlSubBase(@NotNull Stub stub, @NotNull IStubElementType nodeType) {
+  public PerlSubBase(@NotNull Stub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

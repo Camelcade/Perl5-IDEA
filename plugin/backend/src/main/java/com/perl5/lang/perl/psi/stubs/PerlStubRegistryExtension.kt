@@ -18,6 +18,8 @@ package com.perl5.lang.perl.psi.stubs
 
 import com.intellij.psi.stubs.StubRegistry
 import com.intellij.psi.stubs.StubRegistryExtension
+import com.perl5.lang.perl.lexer.PerlElementTypes
+import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubSerializingFactory
 import com.perl5.lang.pod.lexer.PodElementTypes
 import com.perl5.lang.pod.parser.psi.stubs.PodFileStubSerializer
 
@@ -25,5 +27,11 @@ class PerlStubRegistryExtension : StubRegistryExtension {
   override fun register(registry: StubRegistry) {
     PerlStubElementTypes.FILE.let { registry.registerStubSerializer(it, PerlFileStubserializer(it)) }
     PodElementTypes.FILE.let { registry.registerStubSerializer(it, PodFileStubSerializer()) }
+
+    listOf(
+      PerlElementTypes.SUB_DECLARATION to ::PerlSubDeclarationStubSerializingFactory,
+    ).forEach { (elementType, factory) ->
+      registry.registerStubSerializingFactory(elementType, factory(elementType))
+    }
   }
 }
