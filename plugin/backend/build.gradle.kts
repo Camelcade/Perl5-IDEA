@@ -16,7 +16,6 @@
 
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.grammarkit.tasks.GenerateParserTask
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 fun properties(key: String) = providers.gradleProperty(key)
 
@@ -91,16 +90,18 @@ tasks {
     purgeOldFiles.set(true)
   }
 
-  withType<JavaCompile> {
-    dependsOn(
-      generatePerlLexerTask,
-      generatePodLexerTask
-    )
-  }
-  withType<KotlinCompile> {
-    dependsOn(
-      generatePerlLexerTask,
-      generatePodLexerTask
-    )
-  }
+  /*
+    withType<JavaCompile> {
+      dependsOn(
+        generatePerlLexerTask,
+        generatePodLexerTask
+      )
+    }
+    withType<KotlinCompile> {
+      dependsOn(
+        generatePerlLexerTask,
+        generatePodLexerTask
+      )
+    }
+  */
 }
