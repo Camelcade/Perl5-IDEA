@@ -23,5 +23,5 @@ class HtmlMasonPluginDistributionTest : PerlDistributionTestCase() {
   override fun getTestLibPath(): String = TEST_LIB_PATH_FROM_NESTED
 
   @Test
-  fun testPlugin() = testDistribution("com.perl5.lang.mason.htmlmason")
+  fun testPlugin(): Unit = testDistribution("com.perl5.lang.mason.htmlmason")
 }

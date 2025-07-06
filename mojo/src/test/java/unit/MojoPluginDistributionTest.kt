@@ -21,5 +21,5 @@ import org.junit.Test
 
 class MojoPluginDistributionTest : PerlDistributionTestCase() {
   @Test
-  fun testPlugin() = testDistribution("com.perl5.lang.mojo")
+  fun testPlugin(): Unit = testDistribution("com.perl5.lang.mojo")
 }
