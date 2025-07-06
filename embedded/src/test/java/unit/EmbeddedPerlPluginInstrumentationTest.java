@@ -18,7 +18,7 @@ package unit;
 
 import base.PerlInstrumentationTestCase;
 import categories.CategoriesFilter;
-import com.perl5.lang.embedded.EmbeddedPerlParserDefinition;
+import com.perl5.lang.embedded.EmbeddedPerlAstFactory;
 import com.perl5.lang.perl.PerlParserDefinition;
 import org.junit.runners.Parameterized;
 
@@ -34,7 +34,7 @@ public class EmbeddedPerlPluginInstrumentationTest extends PerlInstrumentationTe
       Collections.emptyList() :
       Arrays.asList(new Object[][]{
         {"plugin.backend", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
-      {"embedded", EmbeddedPerlParserDefinition.class, EMBEDDED_PATTERN_STRING}
+        {"embedded", EmbeddedPerlAstFactory.class, EMBEDDED_PATTERN_STRING}
     });
   }
 }
