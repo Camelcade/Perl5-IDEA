@@ -17,7 +17,10 @@
 package com.perl5.lang.htmlmason.elementType
 
 import com.intellij.psi.tree.TokenSet
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*
+import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.HTML_MASON_LINE_OPENER
+import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.HTML_MASON_PERL_CLOSER
+import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.HTML_MASON_PERL_OPENER
+import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.HTML_MASON_TEMPLATE_BLOCK_HTML
 import com.perl5.lang.perl.lexer.PerlTokenSetsEx
 
 

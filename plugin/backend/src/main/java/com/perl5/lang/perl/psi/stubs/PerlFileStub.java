@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.psi.stubs.PsiFileStubImpl;
-import com.intellij.psi.tree.IStubFileElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
@@ -54,7 +54,7 @@ public class PerlFileStub extends PsiFileStubImpl<PerlFile> implements PerlNames
   }
 
   @Override
-  public final @NotNull IStubFileElementType<?> getType() {
+  public @NotNull IElementType getFileElementType() {
     return myElementType;
   }
 

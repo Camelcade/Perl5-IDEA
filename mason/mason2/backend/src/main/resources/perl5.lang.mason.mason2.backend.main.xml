@@ -17,7 +17,13 @@
 
     <annotator language="Perl5" implementationClass="com.perl5.lang.mason2.idea.annotator.MasonAnnotator"
                order="after PERL_SUBS_ANNOTATOR"/>
+
     <stubElementTypeHolder class="com.perl5.lang.mason2.elementType.Mason2ElementTypes"/>
+    <stubElementRegistryExtension implementation="com.perl5.lang.mason2.stubs.Mason2StubRegistryExtension"/>
+    <languageStubDefinition language="Mason2" implementationClass="com.perl5.lang.perl.psi.stubs.PerlStubDefinition"/>
+    <languageStubDefinition language="Mason2 Templating Language"
+                            implementationClass="com.perl5.lang.perl.psi.stubs.PerlTemplatingStubDefinition"/>
+
     <lang.fileViewProviderFactory language="Mason2"
                                   implementationClass="com.perl5.lang.mason2.psi.Mason2FileViewProviderFactory"/>
 
