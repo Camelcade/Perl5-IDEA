@@ -177,7 +177,7 @@ interface Mason2ElementTypes : Mason2SyntaxElements {
     val MASON_AFTER_MODIFIER: IElementType = MasonMethodModifierElementType("MASON_AFTER_MODIFIER")
 
     @JvmField
-    val MASON_BEFORE_MODIFIER: IElementType = MasonMethodModifierElementType("MASON_BEFOE_MODIFIER")
+    val MASON_BEFORE_MODIFIER: IElementType = MasonMethodModifierElementType("MASON_BEFORE_MODIFIER")
 
     @JvmField
     val MASON_FLAGS_STATEMENT: IElementType = object : MasonTemplatingElementType("FLAGS_STATEMENT") {
