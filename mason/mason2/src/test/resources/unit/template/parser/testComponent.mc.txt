@@ -760,7 +760,7 @@ Mason2 template file
                 PerlVariableNameElementImpl(Perl5: SCALAR_NAME)('m')
           PsiElement(Perl5: ;)(';')
         PsiElement(Mason2: </%perl>)('</%perl>')
-      MasonMethodModifierImpl(Mason2: MASON_BEFOE_MODIFIER)
+      MasonMethodModifierImpl(Mason2: MASON_BEFORE_MODIFIER)
         PsiElement(Mason2: <%before)('<%before')
         PerlSubNameElementImpl(Perl5: subname)('navbar1')
         PsiElement(Mason2: >)('>')
