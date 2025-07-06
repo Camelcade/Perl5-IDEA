@@ -154,7 +154,7 @@ allprojects {
           include("**/" + properties("runtest").get() + ".class")
         }
 
-        var excludeCategories = mutableListOf<String>()
+        val excludeCategories = mutableListOf<String>()
         if (project.hasProperty("integrationTests")) {
           excludeCategories += listOf("categories.Light", "categories.Heavy")
         }

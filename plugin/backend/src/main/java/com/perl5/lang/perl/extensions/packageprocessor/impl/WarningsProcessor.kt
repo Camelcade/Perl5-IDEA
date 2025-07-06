@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,16 +25,16 @@ class WarningsProcessor : PerlPragmaProcessorBase(), PerlPackageOptionsProvider 
   private val OPTIONS: Map<String, String> by lazy {
     (mapOf("FATAL" to "FATALITY!") +
       PerlWarningTree.LEAF_OPTIONS.entries.associate { entry ->
-        entry.key to entry.value.getMinVersion().getStrictDottedVersion()
+        entry.key to entry.value.minVersion.strictDottedVersion
       }
       ).toImmutableMap()
   }
   private val OPTIONS_BUNDLES: Map<String, String> by lazy {
     PerlWarningTree.NODE_OPTIONS.entries.associate { entry ->
       val joinedOptions = entry.value.collectChildLeafs()
-        .joinToString(" ") { leaf -> leaf.getStringIdentifier() + "(" + leaf.getMinVersion().getStrictDottedVersion() + ")" }
+        .joinToString(" ") { leaf -> leaf.getStringIdentifier() + "(" + leaf.minVersion.strictDottedVersion + ")" }
 
-      entry.key to "${entry.value.getMinVersion().getStrictDottedVersion()}, $joinedOptions"
+      entry.key to "${entry.value.minVersion.strictDottedVersion}, $joinedOptions"
     }.toImmutableMap()
 
   }

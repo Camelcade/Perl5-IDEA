@@ -15,7 +15,6 @@
  */
 package com.perl5.lang.mason2.idea.components
 
-import com.intellij.openapi.Disposable
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
 import com.intellij.openapi.util.Disposer
@@ -27,8 +26,8 @@ internal class MasonPostStartupActivity : ProjectActivity {
   override suspend fun execute(project: Project) =
     MasonVirtualFileListener(project).let { listener ->
       LocalFileSystem.getInstance().addVirtualFileListener(listener)
-      Disposer.register(
-        MasonPluginUtil.getUnloadAwareDisposable(project),
-        Disposable { LocalFileSystem.getInstance().removeVirtualFileListener(listener) })
+      Disposer.register(MasonPluginUtil.getUnloadAwareDisposable(project)) {
+        LocalFileSystem.getInstance().removeVirtualFileListener(listener)
+      }
     }
 }

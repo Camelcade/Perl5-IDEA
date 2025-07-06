@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ private const val IO_HANDLE: String = "IO::Handle"
 class MojoBaseProcessor : BaseStrictWarningsProvidingProcessor(), PerlUtfProvider, PerlFeaturesProvider, PerlPackageOptionsProvider,
                           PerlPackageParentsProvider, PerlPackageLoader {
 
-  protected val OPTIONS: Map<String, String> by lazy {
+  private val OPTIONS: Map<String, String> by lazy {
     mapOf(
       "-strict" to "strict,warnings,utf8,v5.10,IO::Handle",
       "-base" to "strict,warnings,utf8,v5.10,IO::Handle,acts as parent"

@@ -61,13 +61,8 @@ class PerlCgiPackageProcessor : PerlPackageProcessorBase() {
     exportOk.addAll(PerlSubUtil.getSubDefinitionsInPackage(useStatement.project, "CGI").mapNotNull { it.subName })
   }
 
-  override fun getImportParameters(useStatement: PerlUseStatementElement): MutableList<String>? {
-    val realParameters = super.getImportParameters(useStatement)
-    if( realParameters == null){
-      return null
-    }
-    return expandTags(realParameters).toMutableList()
-  }
+  override fun getImportParameters(useStatement: PerlUseStatementElement): MutableList<String>? =
+    super.getImportParameters(useStatement)?.let { expandTags(it).toMutableList() }
 
   private fun expandTags(imports: List<String>): Set<String>{
     val result: MutableSet<String> = mutableSetOf()
