@@ -16,7 +16,17 @@
 package com.perl5.lang.mojolicious
 
 import com.intellij.psi.tree.TokenSet
-import com.perl5.lang.mojolicious.MojoliciousElementTypes.*
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.Companion.MOJO_BLOCK_CLOSER
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.Companion.MOJO_BLOCK_EXPR_ESCAPED_OPENER
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.Companion.MOJO_BLOCK_EXPR_OPENER
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.Companion.MOJO_BLOCK_NOSPACE_CLOSER
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.Companion.MOJO_BLOCK_OPENER
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.Companion.MOJO_BLOCK_OPENER_TAG
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.Companion.MOJO_LINE_EXPR_ESCAPED_OPENER
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.Companion.MOJO_LINE_EXPR_OPENER
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.Companion.MOJO_LINE_OPENER
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.Companion.MOJO_LINE_OPENER_TAG
+import com.perl5.lang.mojolicious.MojoliciousElementTypes.Companion.MOJO_TEMPLATE_BLOCK_HTML
 import com.perl5.lang.perl.lexer.PerlTokenSetsEx
 
 
