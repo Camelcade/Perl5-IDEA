@@ -13,94 +13,54 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.stubs
 
-package com.perl5.lang.perl.psi.stubs;
+import com.intellij.psi.stubs.PsiFileStubImpl
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.perl.psi.PerlFile
+import com.perl5.lang.perl.psi.PerlNamespaceDefinition
+import com.perl5.lang.perl.psi.mro.PerlMroType
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations
 
-import com.intellij.psi.stubs.PsiFileStubImpl;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.psi.PerlFile;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
-import com.perl5.lang.perl.psi.mro.PerlMroType;
-import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData;
-import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+class PerlFileStub : PsiFileStubImpl<PerlFile>, PerlNamespaceDefinition {
+  val data: PerlNamespaceDefinitionData
+  private val myElementType: PerlFileElementType
 
-import java.util.List;
-import java.util.Map;
-
-public class PerlFileStub extends PsiFileStubImpl<PerlFile> implements PerlNamespaceDefinition {
-  private final PerlNamespaceDefinitionData myData;
-  private final PerlFileElementType myElementType;
-
-  public PerlFileStub(@NotNull PerlFile file, @NotNull PerlFileElementType elementType) {
-    super(file);
-    myElementType = elementType;
-    myData = new PerlNamespaceDefinitionData(file);
+  constructor(file: PerlFile, elementType: PerlFileElementType) : super(file) {
+    myElementType = elementType
+    this.data = PerlNamespaceDefinitionData(file)
   }
 
-  public PerlFileStub(@NotNull PerlNamespaceDefinitionData data, @NotNull PerlFileElementType elementType) {
-    super(null);
-    myData = data;
-    myElementType = elementType;
+  constructor(data: PerlNamespaceDefinitionData, elementType: PerlFileElementType) : super(null) {
+    this.data = data
+    myElementType = elementType
   }
 
-  /**
-   * @return true iff this stub is empty and contains no useful data
-   * @see PerlNamespaceDefinitionData#isEmpty()
-   */
-  public boolean isEmpty() {
-    return myData.isEmpty();
-  }
+  val isEmpty: Boolean
+    /**
+     * @return true iff this stub is empty and contains no useful data
+     * @see PerlNamespaceDefinitionData.isEmpty
+     */
+    get() = data.isEmpty
 
-  @Override
-  public @NotNull IElementType getFileElementType() {
-    return myElementType;
-  }
+  override fun getFileElementType(): IElementType = myElementType
 
-  public PerlNamespaceDefinitionData getData() {
-    return myData;
-  }
+  override fun getNamespaceName(): String = data.namespaceName
 
-  @Override
-  public @NotNull String getNamespaceName() {
-    return myData.getNamespaceName();
-  }
+  override fun getMroType(): PerlMroType = data.mroType
 
-  @Override
-  public @NotNull PerlMroType getMroType() {
-    return myData.getMroType();
-  }
+  override fun getParentNamespacesNames(): MutableList<String?> = data.parentNamespacesNames
 
-  @Override
-  public @NotNull List<String> getParentNamespacesNames() {
-    return myData.getParentNamespacesNames();
-  }
+  override fun getAnnotations(): PerlNamespaceAnnotations? = data.annotations
 
-  @Override
-  public @Nullable PerlNamespaceAnnotations getAnnotations() {
-    return myData.getAnnotations();
-  }
+  override fun getEXPORT(): MutableList<String> = data.export
 
-  @Override
-  public @NotNull List<String> getEXPORT() {
-    return myData.getEXPORT();
-  }
+  override fun getEXPORT_OK(): MutableList<String> = data.exporT_OK
 
-  @Override
-  public @NotNull List<String> getEXPORT_OK() {
-    return myData.getEXPORT_OK();
-  }
+  override fun getEXPORT_TAGS(): MutableMap<String, MutableList<String>> = data.exporT_TAGS
 
-  @Override
-  public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
-    return myData.getEXPORT_TAGS();
-  }
-
-  @Override
-  public String toString() {
-    return super.toString() + "\n" +
-           myData + "\n" +
-           "\tType: " + myElementType;
-  }
+  override fun toString(): String = super.toString() + "\n" +
+    this.data + "\n" +
+    "\tType: " + myElementType
 }
