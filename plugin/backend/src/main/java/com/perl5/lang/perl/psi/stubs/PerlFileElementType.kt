@@ -13,32 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.stubs
 
-package com.perl5.lang.perl.psi.stubs;
+import com.intellij.lang.*
+import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IFileElementType
+import com.perl5.lang.perl.parser.builder.PerlPsiBuilderFactory.Companion.createBuilder
 
-import com.intellij.lang.*;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IFileElementType;
-import com.perl5.lang.perl.parser.builder.PerlPsiBuilderFactory;
-import org.jetbrains.annotations.NotNull;
+class PerlFileElementType(debugName: String, language: Language?) : IFileElementType(debugName, language) {
+  override fun doParseContents(chameleon: ASTNode, psi: PsiElement): ASTNode? =
+    getParser(psi).parse(this, getBuilder(psi, chameleon)).firstChildNode
 
-public final class PerlFileElementType extends IFileElementType {
+  private fun getParser(psi: PsiElement): PsiParser =
+    LanguageParserDefinitions.INSTANCE.forLanguage(getLanguageForParser(psi)).createParser(psi.project)
 
-  public PerlFileElementType(String debugName, Language language) {
-    super(debugName, language);
-  }
-
-  @Override
-  protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi) {
-    return getParser(psi).parse(this, getBuilder(psi, chameleon)).getFirstChildNode();
-  }
-
-  private @NotNull PsiParser getParser(PsiElement psi) {
-    return LanguageParserDefinitions.INSTANCE.forLanguage(getLanguageForParser(psi)).createParser(psi.getProject());
-  }
-
-  private @NotNull PsiBuilder getBuilder(PsiElement psi, ASTNode chameleon) {
-    return PerlPsiBuilderFactory.Companion.createBuilder(
-      psi.getProject(), chameleon, null, getLanguageForParser(psi), chameleon.getChars());
-  }
+  private fun getBuilder(psi: PsiElement, chameleon: ASTNode): PsiBuilder = createBuilder(
+    psi.project, chameleon, null, getLanguageForParser(psi), chameleon.chars
+  )
 }
