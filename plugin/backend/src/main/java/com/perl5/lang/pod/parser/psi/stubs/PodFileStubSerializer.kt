@@ -21,9 +21,9 @@ import com.intellij.psi.stubs.*
 class PodFileStubSerializer : StubSerializer<PsiFileStub<*>> {
   override fun getExternalId(): String = StubSerializerId.DEFAULT_EXTERNAL_ID
 
-  override fun serialize(stub: PsiFileStub<*>, dataStream: StubOutputStream) = Unit
+  override fun serialize(stub: PsiFileStub<*>, dataStream: StubOutputStream): Unit = Unit
 
   override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): PsiFileStub<*> = PsiFileStubImpl(null)
 
-  override fun indexStub(stub: PsiFileStub<*>, sink: IndexSink) = Unit
+  override fun indexStub(stub: PsiFileStub<*>, sink: IndexSink): Unit = Unit
 }

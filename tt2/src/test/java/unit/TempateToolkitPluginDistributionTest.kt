@@ -21,5 +21,5 @@ import org.junit.Test
 
 class TempateToolkitPluginDistributionTest : PerlDistributionTestCase() {
   @Test
-  fun testPlugin() = testDistribution("com.perl5.lang.tt2")
+  fun testPlugin(): Unit = testDistribution("com.perl5.lang.tt2")
 }

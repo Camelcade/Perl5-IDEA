@@ -20,7 +20,7 @@ import com.intellij.DynamicBundle
 import org.jetbrains.annotations.Nls
 import org.jetbrains.annotations.PropertyKey
 
-const val PATH_TO_BUNDLE = "messages.PerlDebuggerBundle"
+const val PATH_TO_BUNDLE: String = "messages.PerlDebuggerBundle"
 
 object PerlDebuggerBundle : DynamicBundle(PATH_TO_BUNDLE) {
   @JvmStatic

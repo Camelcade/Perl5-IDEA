@@ -28,7 +28,7 @@ abstract class PerlTestEnvironmentTestCase : PerlLightTestCaseBase() {
   override fun getBaseDataPath(): @NonNls String? = "plugins"
 
   @Test
-  fun testPluginsList() =
+  fun testPluginsList(): Unit =
     assertSameLinesWithFile(
       testResultsFilePath,
       PluginManager.getLoadedPlugins().map { it.pluginId.idString }.sorted().joinToString("\n")

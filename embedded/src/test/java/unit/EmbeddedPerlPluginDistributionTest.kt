@@ -21,5 +21,5 @@ import org.junit.Test
 
 class EmbeddedPerlPluginDistributionTest : PerlDistributionTestCase() {
   @Test
-  fun testPlugin() = testDistribution("com.perl5.lang.embedded")
+  fun testPlugin(): Unit = testDistribution("com.perl5.lang.embedded")
 }
