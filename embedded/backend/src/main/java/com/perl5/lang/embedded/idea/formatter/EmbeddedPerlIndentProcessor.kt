@@ -13,24 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.embedded.idea.formatter
 
-package com.perl5.lang.embedded.idea.formatter;
+import com.intellij.formatting.Indent
+import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes
+import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor
+import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock
 
-import com.intellij.formatting.Indent;
-import com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes;
-import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
-import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-public class EmbeddedPerlIndentProcessor extends PerlIndentProcessor {
-  public static final EmbeddedPerlIndentProcessor INSTANCE = new EmbeddedPerlIndentProcessor();
-
-  @Override
-  public @Nullable Indent getChildIndent(@NotNull PerlAstBlock block, int newChildIndex) {
-    if (block.getElementType() == EmbeddedPerlElementTypes.FILE) {
-      return Indent.getNoneIndent();
-    }
-    return super.getChildIndent(block, newChildIndex);
-  }
+object EmbeddedPerlIndentProcessor : PerlIndentProcessor() {
+  override fun getChildIndent(block: PerlAstBlock, newChildIndex: Int): Indent? =
+    if (block.elementType === EmbeddedPerlElementTypes.FILE) Indent.getNoneIndent() else super.getChildIndent(block, newChildIndex)
 }
