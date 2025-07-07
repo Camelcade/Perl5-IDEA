@@ -13,24 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.mason2.elementType
 
-package com.perl5.lang.mason2.elementType;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.perl5.lang.mason2.Mason2TemplatingLanguage
+import com.perl5.lang.mason2.psi.impl.MasonOverrideDefinition
+import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideElementType
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.mason2.Mason2TemplatingLanguage;
-import com.perl5.lang.mason2.psi.impl.MasonOverrideDefinition;
-import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideElementType;
-import org.jetbrains.annotations.NotNull;
-
-
-public class MasonOverrideElementType extends PerlMooseOverrideElementType {
-  public MasonOverrideElementType(String name) {
-    super(name, Mason2TemplatingLanguage.INSTANCE);
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new MasonOverrideDefinition(node);
-  }
+class MasonOverrideElementType(name: String) : PerlMooseOverrideElementType(name, Mason2TemplatingLanguage.INSTANCE) {
+  override fun getPsiElement(node: ASTNode): PsiElement = MasonOverrideDefinition(node)
 }
