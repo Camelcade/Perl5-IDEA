@@ -13,34 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.mason2.psi.impl
 
-package com.perl5.lang.mason2.psi.impl;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement
+import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import org.jetbrains.annotations.NotNull;
+open class MasonMethodDefinition : PsiPerlMethodDefinitionImpl, PerlImplicitVariablesProvider {
+  constructor(node: ASTNode?) : super(node)
 
-import java.util.List;
+  constructor(stub: PerlSubDefinitionStub?, nodeType: IElementType?) : super(stub, nodeType)
 
-
-public class MasonMethodDefinition extends PsiPerlMethodDefinitionImpl implements PerlImplicitVariablesProvider {
-  public MasonMethodDefinition(ASTNode node) {
-    super(node);
-  }
-
-  public MasonMethodDefinition(PerlSubDefinitionStub stub, IElementType nodeType) {
-    super(stub, nodeType);
-  }
-
-  @Override
-  public @NotNull List<PerlVariableDeclarationElement> getImplicitVariables() {
-    if (myImplicitVariables == null) {
-      myImplicitVariables = buildImplicitVariables();
-    }
-    return myImplicitVariables;
-  }
+  override fun getImplicitVariables(): MutableList<PerlVariableDeclarationElement?> =
+    myImplicitVariables ?: run { myImplicitVariables = buildImplicitVariables(); myImplicitVariables }
 }
