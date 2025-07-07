@@ -13,22 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.stubs.subsdefinitions
 
-package com.perl5.lang.perl.psi.stubs.subsdefinitions;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.perl5.lang.perl.psi.impl.PsiPerlFuncDefinitionImpl
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.impl.PsiPerlFuncDefinitionImpl;
-import org.jetbrains.annotations.NotNull;
-
-
-public class PerlFuncDefinitionElementType extends PerlSubDefinitionElementType {
-  public PerlFuncDefinitionElementType(String name) {
-    super(name);
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PsiPerlFuncDefinitionImpl(node);
-  }
+class PerlFuncDefinitionElementType(name: String) : PerlSubDefinitionElementType(name) {
+  override fun getPsiElement(node: ASTNode): PsiElement = PsiPerlFuncDefinitionImpl(node)
 }
