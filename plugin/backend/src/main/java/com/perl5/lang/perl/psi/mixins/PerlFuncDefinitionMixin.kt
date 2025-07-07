@@ -13,26 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.mixins
 
-package com.perl5.lang.perl.psi.mixins;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import org.jetbrains.annotations.NotNull;
+abstract class PerlFuncDefinitionMixin : PerlSubDefinitionBase {
+  constructor(node: ASTNode) : super(node)
 
+  constructor(stub: PerlSubDefinitionStub, nodeType: IElementType) : super(stub, nodeType)
 
-public abstract class PerlFuncDefinitionMixin extends PerlSubDefinitionBase {
-  public PerlFuncDefinitionMixin(@NotNull ASTNode node) {
-    super(node);
-  }
-
-  public PerlFuncDefinitionMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IElementType nodeType) {
-    super(stub, nodeType);
-  }
-
-  @Override
-  public boolean isMethod() {
-    return false;
-  }
+  override fun isMethod(): Boolean = false
 }
