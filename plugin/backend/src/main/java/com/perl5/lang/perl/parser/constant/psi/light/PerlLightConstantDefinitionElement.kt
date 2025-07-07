@@ -13,53 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.parser.constant.psi.light
 
-package com.perl5.lang.perl.parser.constant.psi.light;
+import com.intellij.openapi.util.AtomicNotNullLazyValue
+import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IElementType
+import com.perl5.PerlIcons
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
+import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
+import com.perl5.lang.perl.psi.utils.PerlSubArgument
+import javax.swing.Icon
 
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+class PerlLightConstantDefinitionElement : PerlLightSubDefinitionElement<PerlUseStatementElement?> {
+  constructor(
+    wrapper: PerlUseStatementElement,
+    subName: String,
+    elementType: IElementType,
+    nameIdentifier: PsiElement,
+    packageName: String?,
+    subArguments: MutableList<PerlSubArgument>,
+    annotations: PerlSubAnnotations?,
+    returnValueFromCodeProvider: AtomicNotNullLazyValue<out PerlValue?>
+  ) : super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations, returnValueFromCodeProvider, null)
 
-import javax.swing.*;
-import java.util.List;
+  constructor(delegate: PerlUseStatementElement, stub: PerlSubDefinitionStub) : super(delegate, stub)
 
-public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionElement<PerlUseStatementElement> {
-  public PerlLightConstantDefinitionElement(@NotNull PerlUseStatementElement wrapper,
-                                            @NotNull String subName,
-                                            @NotNull IElementType elementType,
-                                            @NotNull PsiElement nameIdentifier,
-                                            @Nullable String packageName,
-                                            @NotNull List<PerlSubArgument> subArguments,
-                                            @Nullable PerlSubAnnotations annotations,
-                                            @NotNull AtomicNotNullLazyValue<? extends PerlValue> returnValueFromCodeProvider) {
-    super(wrapper, subName, elementType, nameIdentifier, packageName, subArguments, annotations, returnValueFromCodeProvider, null);
-  }
+  override fun getIcon(flags: Int): Icon = PerlIcons.CONSTANT_GUTTER_ICON
 
-  public PerlLightConstantDefinitionElement(@NotNull PerlUseStatementElement delegate, @NotNull PerlSubDefinitionStub stub) {
-    super(delegate, stub);
-  }
+  override fun isMethod(): Boolean = true
 
-  @Override
-  public @Nullable Icon getIcon(int flags) {
-    return PerlIcons.CONSTANT_GUTTER_ICON;
-  }
-
-  @Override
-  public boolean isMethod() {
-    return true;
-  }
-
-  @Override
-  public boolean isStatic() {
-    return true;
-  }
+  override fun isStatic(): Boolean = true
 }
