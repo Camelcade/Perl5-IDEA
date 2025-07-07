@@ -13,11 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.stubs.subsdefinitions
 
-package com.perl5.lang.perl.psi.stubs.subsdefinitions;
-
-public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementType {
-  public PerlLightSubDefinitionElementType(String name) {
-    super(name);
-  }
-}
+open class PerlLightSubDefinitionElementType(name: String) : PerlSubDefinitionElementType(name)
