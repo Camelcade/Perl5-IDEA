@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.mason2.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
@@ -43,7 +43,7 @@ public class MasonOverrideDefinition extends PerlMooseOverrideStatement implemen
     super(node);
   }
 
-  public MasonOverrideDefinition(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public MasonOverrideDefinition(@NotNull PerlSubDefinitionStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -66,7 +66,7 @@ public class MasonOverrideDefinition extends PerlMooseOverrideStatement implemen
   }
 
   @Override
-  protected String getSubNameHeavy() {
+  protected @Nullable String getSubNameHeavy() {
     PsiElement subNameElement = getNameIdentifier();
     // fixme manipulator?
     return subNameElement == null ? null : subNameElement.getNode().getText();

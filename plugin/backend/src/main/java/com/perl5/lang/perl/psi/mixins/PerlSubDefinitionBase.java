@@ -22,7 +22,7 @@ import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation;
@@ -51,7 +51,7 @@ public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitio
     super(node);
   }
 
-  public PerlSubDefinitionBase(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public PerlSubDefinitionBase(@NotNull PerlSubDefinitionStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

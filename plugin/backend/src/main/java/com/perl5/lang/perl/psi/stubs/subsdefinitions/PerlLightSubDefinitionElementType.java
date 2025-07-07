@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,65 +16,8 @@
 
 package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubElement;
-import com.intellij.psi.stubs.StubIndexKey;
-import com.intellij.util.IncorrectOperationException;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.light.PerlLightSubDefinitionElement;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
-import java.util.List;
-
 public class PerlLightSubDefinitionElementType extends PerlSubDefinitionElementType {
   public PerlLightSubDefinitionElementType(String name) {
     super(name);
-  }
-
-  @Override
-  public final PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
-    throw new IncorrectOperationException("Light elements should be created by wrappers, not element types");
-  }
-
-  @Override
-  protected StubIndexKey<String, ? extends PsiElement> getDirectKey() {
-    return PerlLightSubDefinitionsIndex.KEY;
-  }
-
-  @Override
-  protected StubIndexKey<String, ? extends PsiElement> getReverseKey() {
-    return PerlLightSubDefinitionsReverseIndex.KEY;
-  }
-
-  @Override
-  protected StubIndexKey<String, ? extends PsiElement> getCallableNameKey() {
-    return PerlLightCallableNamesIndex.KEY;
-  }
-
-  @Override
-  public @NotNull PerlSubDefinitionStub createStub(@NotNull PerlSubDefinitionElement psi, StubElement parentStub) {
-    if (psi instanceof PerlLightSubDefinitionElement<?> lightSubDefinitionElement && lightSubDefinitionElement.isImplicit()) {
-      return createStubElement(parentStub,
-                               psi.getNamespaceName(),
-                               psi.getSubName(),
-                               Collections.emptyList(),
-                               psi.getReturnValueFromCode(),
-                               null);
-    }
-    return super.createStub(psi, parentStub);
-  }
-
-  @Override
-  protected @NotNull PerlSubDefinitionStub createStubElement(StubElement<?> parentStub,
-                                                             String packageName,
-                                                             String functionName,
-                                                             @NotNull List<PerlSubArgument> arguments,
-                                                             @NotNull PerlValue returnValueFromCode,
-                                                             PerlSubAnnotations annotations) {
-    return new PerlLightSubDefinitionStub(parentStub, packageName, functionName, arguments, annotations, returnValueFromCode, this);
   }
 }

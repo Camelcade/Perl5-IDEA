@@ -18,14 +18,11 @@ package com.perl5.lang.perl.parser.moose.stubs;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionElementType;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -38,20 +35,6 @@ public class PerlMooseOverrideElementType extends PerlSubDefinitionElementType i
 
   public PerlMooseOverrideElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
     super(debugName, language);
-  }
-
-  @Override
-  public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new PerlMooseOverrideStatement(stub, this);
-  }
-
-  @Override
-  public boolean shouldCreateStub(ASTNode node) {
-    PsiElement psi = node.getPsi();
-
-    return psi instanceof PerlMooseOverrideStatement overrideStatement &&
-           psi.isValid() &&
-           StringUtil.isNotEmpty(overrideStatement.getSubName());
   }
 
   @Override

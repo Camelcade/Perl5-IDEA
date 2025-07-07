@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlMethodDefinition;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -42,7 +42,7 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
     super(node);
   }
 
-  public PerlMethodDefinitionMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public PerlMethodDefinitionMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

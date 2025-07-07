@@ -17,9 +17,9 @@
 package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.PsiFileStubImpl;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.stubs.PerlLightElementStub;
@@ -41,7 +41,7 @@ public class PerlLightSubDefinitionStub extends PerlSubDefinitionStub implements
                                     @NotNull List<PerlSubArgument> arguments,
                                     PerlSubAnnotations annotations,
                                     @NotNull PerlValue returnValueFromCode,
-                                    IStubElementType elementType) {
+                                    IElementType elementType) {
     super(new PsiFileStubImpl<>(null), packageName, subName, arguments, annotations, returnValueFromCode, elementType);
     myParent = parent;
   }

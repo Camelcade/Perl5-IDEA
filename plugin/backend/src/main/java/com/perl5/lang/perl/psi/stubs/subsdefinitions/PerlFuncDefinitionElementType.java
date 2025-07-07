@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,6 @@ package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlFuncDefinitionImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -26,11 +25,6 @@ import org.jetbrains.annotations.NotNull;
 public class PerlFuncDefinitionElementType extends PerlSubDefinitionElementType {
   public PerlFuncDefinitionElementType(String name) {
     super(name);
-  }
-
-  @Override
-  public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new PsiPerlFuncDefinitionImpl(stub, this);
   }
 
   @Override

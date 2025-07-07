@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.stubs.*;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
@@ -38,8 +39,8 @@ import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.*;
 public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElementStub<Psi>, Psi extends PerlPolyNamedElement<Stub>>
   extends IStubElementType<Stub, Psi> implements PsiElementProvider {
   private static final Logger LOG = Logger.getInstance(PerlPolyNamedElementType.class);
-  private static final Object2IntOpenHashMap<IStubElementType<?, ?>> DIRECT_MAP = new Object2IntOpenHashMap<>();
-  private static final Int2ObjectOpenHashMap<IStubElementType<?, ?>> REVERSE_MAP = new Int2ObjectOpenHashMap<>();
+  private static final Object2IntOpenHashMap<IElementType> DIRECT_MAP = new Object2IntOpenHashMap<>();
+  private static final Int2ObjectOpenHashMap<IElementType> REVERSE_MAP = new Int2ObjectOpenHashMap<>();
 
   static {
     // 0 is reserved for n/a
@@ -57,13 +58,22 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     super(debugName, PerlLanguage.INSTANCE);
   }
 
+  @SuppressWarnings("rawtypes")
   @Override
   public @NotNull Stub createStub(@NotNull Psi psi, StubElement<?> parentStub) {
     List<StubElement<?>> lightNamedElements = new ArrayList<>();
     Stub result = createStub(psi, parentStub, lightNamedElements);
 
     psi.getLightElements().forEach(lightPsi -> {
-      StubElement<?> lightStubElement = lightPsi.getElementType().createStub(lightPsi, result);
+      var lightElementType = lightPsi.getElementType();
+      StubElement<?> lightStubElement;
+      if (lightElementType instanceof IStubElementType stubElementType) {
+        lightStubElement = stubElementType.createStub(lightPsi, result);
+      }
+      else {
+        lightStubElement = ((StubElementFactory)getStubSerializer(lightElementType)).createStub(lightPsi, result);
+      }
+
       if (lightStubElement instanceof PerlLightElementStub lightElementStub && lightPsi.isImplicit()) {
         lightElementStub.setImplicit(true);
       }
@@ -91,16 +101,31 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     //noinspection rawtypes
     for (StubElement childStub : childrenStubs) {
       dataStream.writeVarInt(getSerializationId(childStub)); // serialization id
-      getSerializer(childStub).serialize(childStub, dataStream);
+      getStubSerializer(childStub).serialize(childStub, dataStream);
     }
   }
 
   @SuppressWarnings("rawtypes")
-  private static ObjectStubSerializer getSerializer(@NotNull StubElement<?> childStub) {
+  private static ObjectStubSerializer getStubSerializer(@NotNull StubElement<?> childStub) {
     var elementType = childStub.getElementType();
-    LOG.assertTrue(elementType instanceof ObjectStubSerializer,
+    if (elementType instanceof IStubElementType<?, ?> stubElementType) {
+      return stubElementType;
+    }
+    ObjectStubSerializer<?, com.intellij.psi.stubs.Stub> serializer =
+      StubElementRegistryService.getInstance().getStubSerializer(elementType);
+    LOG.assertTrue(serializer != null,
                    "Don't know how to serialize:" + elementType + "; " + elementType.getClass());
-    return (ObjectStubSerializer)elementType;
+    return serializer;
+  }
+
+  @SuppressWarnings("rawtypes")
+  private static @NotNull StubSerializer getStubSerializer(@NotNull IElementType elementType) {
+    if (elementType instanceof IStubElementType<?, ?> stubElementType) {
+      return stubElementType;
+    }
+    else {
+      return (StubSerializer)StubElementRegistryService.getInstance().getStubSerializer(elementType);
+    }
   }
 
   protected void serializeStub(@NotNull Stub stub, @NotNull StubOutputStream dataStream) throws IOException {
@@ -114,7 +139,7 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     Stub result = deserialize(dataStream, parentStub, childStubs);
 
     for (int i = 0; i < size; i++) {
-      childStubs.add(getElementTypeById(dataStream.readVarInt()).deserialize(dataStream, result));
+      childStubs.add((StubElement<?>)getStubSerializer(getElementTypeById(dataStream.readVarInt())).deserialize(dataStream, result));
     }
 
     return result;
@@ -126,7 +151,7 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
 
   @Override
   public final void indexStub(@NotNull Stub stub, @NotNull IndexSink sink) {
-    stub.getLightNamedElementsStubs().forEach(childStub -> getSerializer(childStub).indexStub(childStub, sink));
+    stub.getLightNamedElementsStubs().forEach(childStub -> getStubSerializer(childStub).indexStub(childStub, sink));
     doIndexStub(stub, sink);
   }
 
@@ -148,9 +173,9 @@ public abstract class PerlPolyNamedElementType<Stub extends PerlPolyNamedElement
     throw new IllegalArgumentException("Unregistered stub element class:" + stubElement.getElementType());
   }
 
-  private static @NotNull IStubElementType<?, ?> getElementTypeById(int id) {
+  private static @NotNull IElementType getElementTypeById(int id) {
     assert id > 0;
-    IStubElementType<?, ?> type = REVERSE_MAP.get(id);
+    var type = REVERSE_MAP.get(id);
     if (type != null) {
       return type;
     }

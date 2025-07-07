@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,20 +21,13 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.psi.impl.MasonMethodDefinition;
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlMethodDefinitionElementType;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import org.jetbrains.annotations.NotNull;
 
 
 public class MasonMethodDefinitionElementType extends PerlMethodDefinitionElementType implements PsiElementProvider {
   public MasonMethodDefinitionElementType(String name) {
     super(name, Mason2TemplatingLanguage.INSTANCE);
-  }
-
-  @Override
-  public PerlSubDefinitionElement createPsi(@NotNull PerlSubDefinitionStub stub) {
-    return new MasonMethodDefinition(stub, this);
   }
 
   @Override

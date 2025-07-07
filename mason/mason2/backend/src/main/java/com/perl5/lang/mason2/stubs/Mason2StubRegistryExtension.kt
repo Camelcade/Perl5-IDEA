@@ -19,11 +19,20 @@ package com.perl5.lang.mason2.stubs
 import com.intellij.psi.stubs.StubRegistry
 import com.intellij.psi.stubs.StubRegistryExtension
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes.Companion.MASON_FILTER_DEFINITION
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes.Companion.MASON_METHOD_DEFINITION
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes.Companion.MASON_OVERRIDE_DEFINITION
 import com.perl5.lang.perl.psi.stubs.PerlFileStubserializer
 
 class Mason2StubRegistryExtension : StubRegistryExtension {
   override fun register(registry: StubRegistry) {
     listOf(Mason2ElementTypes.PP_FILE, Mason2ElementTypes.COMPONENT_FILE)
       .forEach { registry.registerStubSerializer(it, PerlFileStubserializer(it)) }
+
+    listOf(
+      MASON_OVERRIDE_DEFINITION to ::MasonOverrideStubSerializingFactory,
+      MASON_METHOD_DEFINITION to ::MasonMethodDefinitionStubSerializingFactory,
+      MASON_FILTER_DEFINITION to ::MasonFilterDefinitionStubSerializingFactory,
+    ).forEach { (elementType, factory) -> registry.registerStubSerializingFactory(elementType, factory(elementType)) }
   }
 }

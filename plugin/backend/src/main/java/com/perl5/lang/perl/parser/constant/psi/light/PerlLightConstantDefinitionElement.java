@@ -18,7 +18,7 @@ package com.perl5.lang.perl.parser.constant.psi.light;
 
 import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
@@ -35,7 +35,7 @@ import java.util.List;
 public class PerlLightConstantDefinitionElement extends PerlLightSubDefinitionElement<PerlUseStatementElement> {
   public PerlLightConstantDefinitionElement(@NotNull PerlUseStatementElement wrapper,
                                             @NotNull String subName,
-                                            @NotNull IStubElementType<?, ?> elementType,
+                                            @NotNull IElementType elementType,
                                             @NotNull PsiElement nameIdentifier,
                                             @Nullable String packageName,
                                             @NotNull List<PerlSubArgument> subArguments,

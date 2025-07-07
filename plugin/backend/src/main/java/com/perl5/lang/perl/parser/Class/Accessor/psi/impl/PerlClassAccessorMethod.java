@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.parser.Class.Accessor.psi.impl;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.Function;
 import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
@@ -45,7 +45,7 @@ public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<Pe
   public PerlClassAccessorMethod(@NotNull PerlSubCallElement delegate,
                                  @NotNull String baseName,
                                  @NotNull Function<String, String> nameComputation,
-                                 @NotNull IStubElementType<?, ?> elementType,
+                                 @NotNull IElementType elementType,
                                  @NotNull PsiElement nameIdentifier,
                                  @Nullable String packageName,
                                  @Nullable PerlSubAnnotations annotations) {
