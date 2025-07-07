@@ -13,43 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.mixins
 
-package com.perl5.lang.perl.psi.mixins;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.perl.psi.PsiPerlSubDefinition
+import com.perl5.lang.perl.psi.PsiPerlSubSignatureElementIgnore
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
+import com.perl5.lang.perl.psi.utils.PerlSubArgument
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.psi.PsiPerlSubDefinition;
-import com.perl5.lang.perl.psi.PsiPerlSubSignatureElementIgnore;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import org.jetbrains.annotations.NotNull;
+abstract class PerlSubDefinitionMixin : PerlSubDefinitionBase, PsiPerlSubDefinition {
+  constructor(node: ASTNode) : super(node)
 
-import java.util.List;
+  constructor(stub: PerlSubDefinitionStub, nodeType: IElementType) : super(stub, nodeType)
 
-
-public abstract class PerlSubDefinitionMixin extends PerlSubDefinitionBase implements PsiPerlSubDefinition {
-  public PerlSubDefinitionMixin(@NotNull ASTNode node) {
-    super(node);
-  }
-
-  public PerlSubDefinitionMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IElementType nodeType) {
-    super(stub, nodeType);
-  }
-
-
-  @Override
-  protected boolean processSignatureElement(PsiElement signatureElement, List<? super PerlSubArgument> arguments) {
-    if (!super.processSignatureElement(signatureElement, arguments)) {
-      if (signatureElement instanceof PsiPerlSubSignatureElementIgnore) {
-        PerlSubArgument newArgument = PerlSubArgument.empty();
-        newArgument.setOptional(signatureElement.getNextSibling() != null);
-        arguments.add(newArgument);
-      }
-      else {
-        return false;
-      }
+  override fun processSignatureElement(signatureElement: PsiElement?, arguments: MutableList<PerlSubArgument>): Boolean {
+    if (super.processSignatureElement(signatureElement, arguments)) {
+      return true
     }
-    return true;
+    if (signatureElement !is PsiPerlSubSignatureElementIgnore) {
+      return false
+    }
+    val newArgument = PerlSubArgument.empty()
+    newArgument.isOptional = signatureElement.nextSibling != null
+    arguments.add(newArgument)
+    return true
   }
 }
