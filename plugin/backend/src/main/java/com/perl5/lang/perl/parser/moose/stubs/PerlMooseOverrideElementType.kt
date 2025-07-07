@@ -13,32 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.parser.moose.stubs
 
-package com.perl5.lang.perl.parser.moose.stubs;
+import com.intellij.lang.ASTNode
+import com.intellij.lang.Language
+import com.intellij.psi.PsiElement
+import com.perl5.lang.perl.lexer.PerlElementTypes
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionElementType
+import org.jetbrains.annotations.NonNls
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionElementType;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+open class PerlMooseOverrideElementType : PerlSubDefinitionElementType, PerlElementTypes, PsiElementProvider {
+  constructor(name: String) : super(name)
 
+  constructor(debugName: @NonNls String, language: Language?) : super(debugName, language)
 
-public class PerlMooseOverrideElementType extends PerlSubDefinitionElementType implements PerlElementTypes, PsiElementProvider {
-  public PerlMooseOverrideElementType(String name) {
-    super(name);
-  }
-
-  public PerlMooseOverrideElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
-    super(debugName, language);
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PerlMooseOverrideStatement(node);
-  }
+  override fun getPsiElement(node: ASTNode): PsiElement = PerlMooseOverrideStatement(node)
 }
