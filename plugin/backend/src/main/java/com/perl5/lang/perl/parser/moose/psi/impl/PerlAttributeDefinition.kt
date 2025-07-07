@@ -13,68 +13,55 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.parser.moose.psi.impl
 
-package com.perl5.lang.perl.parser.moose.psi.impl;
+import com.intellij.openapi.util.TextRange
+import com.intellij.openapi.util.text.StringUtil
+import com.intellij.psi.ElementManipulators
+import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IElementType
+import com.intellij.util.Function
+import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement
+import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement
+import com.perl5.lang.perl.psi.properties.PerlPodAwareElement
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
+import com.perl5.lang.perl.psi.utils.PerlSubArgument
 
-import com.intellij.openapi.util.TextRange;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.ElementManipulator;
-import com.intellij.psi.ElementManipulators;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.Function;
-import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
-import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
-import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
-import com.perl5.lang.perl.psi.properties.PerlPodAwareElement;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+class PerlAttributeDefinition : PerlLightMethodDefinitionElement<PerlSubCallElement>, PerlIdentifierRangeProvider, PerlPodAwareElement {
+  constructor(
+    wrapper: PerlSubCallElement,
+    name: String,
+    elementType: IElementType,
+    nameIdentifier: PsiElement?,
+    packageName: String?,
+    subArguments: MutableList<PerlSubArgument?>,
+    annotations: PerlSubAnnotations?
+  ) : super(wrapper, name, elementType, nameIdentifier, packageName, subArguments, annotations)
 
-import java.util.List;
+  constructor(
+    wrapper: PerlSubCallElement,
+    stub: PerlSubDefinitionStub
+  ) : super(wrapper, stub)
 
-public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<PerlSubCallElement>
-  implements PerlIdentifierRangeProvider, PerlPodAwareElement {
-  public static final Function<String, String> DEFAULT_NAME_COMPUTATION =
-    name -> StringUtil.startsWith(name, "+") ? name.substring(1) : name;
+  override fun getNameComputation(): Function<String, String> = DEFAULT_NAME_COMPUTATION
 
-  public PerlAttributeDefinition(@NotNull PerlSubCallElement wrapper,
-                                 @NotNull String name,
-                                 @NotNull IElementType elementType,
-                                 @Nullable PsiElement nameIdentifier,
-                                 @Nullable String packageName,
-                                 @NotNull List<PerlSubArgument> subArguments,
-                                 @Nullable PerlSubAnnotations annotations) {
-    super(wrapper, name, elementType, nameIdentifier, packageName, subArguments, annotations);
+  override fun getRangeInIdentifier(): TextRange {
+    val nameIdentifier = getNameIdentifier() ?: return TextRange.EMPTY_RANGE
+    val manipulator = ElementManipulators.getNotNullManipulator<PsiElement?>(nameIdentifier)
+    val defaultRange = manipulator.getRangeInElement(nameIdentifier)
+    return if (StringUtil.startsWith(defaultRange.subSequence(nameIdentifier.node.chars), "+"))
+      TextRange.create(defaultRange.startOffset + 1, defaultRange.endOffset)
+    else
+      defaultRange
   }
 
-  public PerlAttributeDefinition(@NotNull PerlSubCallElement wrapper,
-                                 @NotNull PerlSubDefinitionStub stub) {
-    super(wrapper, stub);
-  }
+  override fun getPodAnchor(): PsiElement = delegate
 
-  @Override
-  public @NotNull Function<String, String> getNameComputation() {
-    return DEFAULT_NAME_COMPUTATION;
-  }
-
-  @Override
-  public @NotNull TextRange getRangeInIdentifier() {
-    PsiElement nameIdentifier = getNameIdentifier();
-    if (nameIdentifier == null) {
-      return TextRange.EMPTY_RANGE;
-    }
-    ElementManipulator<PsiElement> manipulator = ElementManipulators.getNotNullManipulator(nameIdentifier);
-    TextRange defaultRange = manipulator.getRangeInElement(nameIdentifier);
-    return StringUtil.startsWith(defaultRange.subSequence(nameIdentifier.getNode().getChars()), "+")
-           ? TextRange.create(defaultRange.getStartOffset() + 1, defaultRange.getEndOffset())
-           : defaultRange;
-  }
-
-  @Override
-  public @NotNull PsiElement getPodAnchor() {
-    return getDelegate();
+  companion object {
+    @JvmField
+    val DEFAULT_NAME_COMPUTATION: Function<String, String> =
+      Function { name: String -> if (StringUtil.startsWith(name, "+")) name.substring(1) else name }
   }
 }
