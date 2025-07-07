@@ -13,35 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.mason2.psi.impl
 
-package com.perl5.lang.mason2.psi.impl;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import org.jetbrains.annotations.NotNull;
+private const val YIELD_VARIABLE_NAME: String = "\$yield"
 
-import java.util.ArrayList;
-import java.util.List;
+class MasonFilterDefinition : MasonMethodDefinition {
+  constructor(node: ASTNode?) : super(node)
 
+  constructor(stub: PerlSubDefinitionStub?, nodeType: IElementType?) : super(stub, nodeType)
 
-public class MasonFilterDefinition extends MasonMethodDefinition {
-  protected static final String YIELD_VARIABLE_NAME = "$yield";
-
-  public MasonFilterDefinition(ASTNode node) {
-    super(node);
-  }
-
-  public MasonFilterDefinition(PerlSubDefinitionStub stub, IElementType nodeType) {
-    super(stub, nodeType);
-  }
-
-  @Override
-  protected @NotNull List<PerlVariableDeclarationElement> buildImplicitVariables() {
-    List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>(super.buildImplicitVariables());
-    newImplicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, YIELD_VARIABLE_NAME));
-    return newImplicitVariables;
+  override fun buildImplicitVariables(): MutableList<PerlVariableDeclarationElement?> {
+    val newImplicitVariables: MutableList<PerlVariableDeclarationElement?> =
+      ArrayList<PerlVariableDeclarationElement?>(super.buildImplicitVariables())
+    newImplicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, YIELD_VARIABLE_NAME))
+    return newImplicitVariables
   }
 }
