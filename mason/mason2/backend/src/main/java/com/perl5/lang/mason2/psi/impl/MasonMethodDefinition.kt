@@ -27,6 +27,5 @@ open class MasonMethodDefinition : PsiPerlMethodDefinitionImpl, PerlImplicitVari
 
   constructor(stub: PerlSubDefinitionStub?, nodeType: IElementType?) : super(stub, nodeType)
 
-  override fun getImplicitVariables(): MutableList<PerlVariableDeclarationElement?> =
-    myImplicitVariables ?: run { myImplicitVariables = buildImplicitVariables(); myImplicitVariables }
+  override fun getImplicitVariables(): List<PerlVariableDeclarationElement> = myImplicitVariables
 }

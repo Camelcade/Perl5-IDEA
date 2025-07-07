@@ -13,66 +13,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.mixins
 
-package com.perl5.lang.perl.psi.mixins;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IElementType
+import com.intellij.psi.util.PsiTreeUtil
+import com.perl5.lang.perl.psi.PerlMethodDefinition
+import com.perl5.lang.perl.psi.PerlVariable
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement
+import com.perl5.lang.perl.psi.PsiPerlMethodSignatureInvocant
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
+import com.perl5.lang.perl.psi.utils.PerlSubArgument
+import com.perl5.lang.perl.util.PerlScalarUtil
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
-import com.perl5.lang.perl.psi.PerlMethodDefinition;
-import com.perl5.lang.perl.psi.PerlVariable;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.PsiPerlMethodSignatureInvocant;
-import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+abstract class PerlMethodDefinitionMixin : PerlSubDefinitionBase, PerlMethodDefinition {
+  protected val myImplicitVariables: List<PerlVariableDeclarationElement> by lazy { buildImplicitVariables() }
 
-import java.util.Collections;
-import java.util.List;
+  constructor(node: ASTNode) : super(node)
 
-import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_SCALAR_NAME;
+  constructor(stub: PerlSubDefinitionStub, nodeType: IElementType) : super(stub, nodeType)
 
+  protected open fun buildImplicitVariables(): List<PerlVariableDeclarationElement> =
+    listOf(PerlImplicitVariableDeclaration.createInvocant(this))
 
-public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase implements PerlMethodDefinition {
-  protected List<PerlVariableDeclarationElement> myImplicitVariables;
+  override fun isMethod(): Boolean = true
 
-  public PerlMethodDefinitionMixin(@NotNull ASTNode node) {
-    super(node);
-  }
-
-  public PerlMethodDefinitionMixin(@NotNull PerlSubDefinitionStub stub, @NotNull IElementType nodeType) {
-    super(stub, nodeType);
-  }
-
-  protected @NotNull List<PerlVariableDeclarationElement> buildImplicitVariables() {
-    return Collections.singletonList(PerlImplicitVariableDeclaration.createInvocant(this));
-  }
-
-  @Override
-  public boolean isMethod() {
-    return true;
-  }
-
-  @Override
-  protected boolean processSignatureElement(@Nullable PsiElement signatureElement,
-                                            @SuppressWarnings("BoundedWildcard") @NotNull List<PerlSubArgument> arguments) {
-    if (signatureElement instanceof PsiPerlMethodSignatureInvocant) {
-      PerlVariable variable = PsiTreeUtil.findChildOfType(signatureElement, PerlVariable.class);
+  override fun processSignatureElement(signatureElement: PsiElement?, arguments: MutableList<PerlSubArgument>): Boolean {
+    if (signatureElement is PsiPerlMethodSignatureInvocant) {
+      val variable = PsiTreeUtil.findChildOfType(signatureElement, PerlVariable::class.java)
       if (variable != null) {
-        arguments.add(PerlSubArgument.mandatory(variable.getActualType(), variable.getName()));
+        arguments.add(PerlSubArgument.mandatory(variable.getActualType(), variable.getName()!!))
       }
     }
-    else if (signatureElement instanceof PerlVariableDeclarationElement) {
+    else if (signatureElement is PerlVariableDeclarationElement) {
       if (arguments.isEmpty()) {
-        arguments.add(PerlSubArgument.mandatoryScalar(getDefaultInvocantName().substring(1)));
+        arguments.add(PerlSubArgument.mandatoryScalar(defaultInvocantName.substring(1)))
       }
 
-      return super.processSignatureElement(signatureElement, arguments);
+      return super.processSignatureElement(signatureElement, arguments)
     }
-    return false;
+    return false
   }
 
   /**
@@ -80,27 +62,23 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
    *
    * @return check result
    */
-  private boolean hasExplicitInvocant() {
-    PsiElement signatureContainer = getSignatureContent();
-    return signatureContainer != null && signatureContainer.getFirstChild() instanceof PsiPerlMethodSignatureInvocant;
+  private fun hasExplicitInvocant(): Boolean {
+    val signatureContainer: PsiElement? = getSignatureContent()
+    return signatureContainer != null && signatureContainer.firstChild is PsiPerlMethodSignatureInvocant
   }
 
-  @Override
-  public @NotNull List<PerlVariableDeclarationElement> getImplicitVariables() {
-    if (hasExplicitInvocant()) {
-      return Collections.emptyList();
-    }
-    else {
-      if (myImplicitVariables == null) {
-        myImplicitVariables = buildImplicitVariables();
-      }
-      return myImplicitVariables;
-    }
+  override fun getImplicitVariables(): List<PerlVariableDeclarationElement> = if (hasExplicitInvocant()) {
+    emptyList()
+  }
+  else {
+    myImplicitVariables
   }
 
-  @SuppressWarnings("SameReturnValue")
-  public static @NotNull String getDefaultInvocantName() {
+  companion object {
     // fixme see #717
-    return DEFAULT_SELF_SCALAR_NAME;
+    @JvmStatic
+    val defaultInvocantName: String
+      get() =
+        PerlScalarUtil.DEFAULT_SELF_SCALAR_NAME
   }
 }
