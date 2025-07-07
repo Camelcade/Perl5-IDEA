@@ -13,142 +13,140 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.parser.Class.Accessor.psi.impl
 
-package com.perl5.lang.perl.parser.Class.Accessor.psi.impl;
+import com.intellij.openapi.util.NotNullFactory
+import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IElementType
+import com.intellij.util.Function
+import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement
+import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
+import com.perl5.lang.perl.psi.utils.PerlSubArgument
+import org.jetbrains.annotations.NonNls
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.Function;
-import com.perl5.lang.perl.extensions.PerlRenameUsagesHelper;
-import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
-import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+private const val GETTER_PREFIX: @NonNls String = "get_"
+private const val SETTER_PREFIX: @NonNls String = "set_"
 
-import java.util.Collections;
-import java.util.List;
-
-public class PerlClassAccessorMethod extends PerlLightMethodDefinitionElement<PerlSubCallElement>
-  implements PerlRenameUsagesHelper {
-  private static final @NonNls String GETTER_PREFIX = "get_";
-  private static final @NonNls String SETTER_PREFIX = "set_";
-
-  public static final Function<String, String> SIMPLE_COMPUTATION = name -> name;
-  public static final Function<String, String> GETTER_COMPUTATION = name -> GETTER_PREFIX + name;
-  public static final Function<String, String> SETTER_COMPUTATION = name -> SETTER_PREFIX + name;
-
-  public PerlClassAccessorMethod(@NotNull PerlSubCallElement delegate,
-                                 @NotNull String baseName,
-                                 @NotNull Function<String, String> nameComputation,
-                                 @NotNull IElementType elementType,
-                                 @NotNull PsiElement nameIdentifier,
-                                 @Nullable String packageName,
-                                 @Nullable PerlSubAnnotations annotations) {
-    super(delegate,
-          nameComputation.fun(baseName),
-          elementType,
-          nameIdentifier,
-          packageName,
-          Collections.emptyList(),
-          annotations
-    );
-    setNameComputation(nameComputation);
-    setSubArgumentsProvider(() -> {
-      if (isFollowBestPractice()) {
+class PerlClassAccessorMethod : PerlLightMethodDefinitionElement<PerlSubCallElement?>, PerlRenameUsagesHelper {
+  constructor(
+    delegate: PerlSubCallElement,
+    baseName: String,
+    nameComputation: Function<String, String>,
+    elementType: IElementType,
+    nameIdentifier: PsiElement,
+    packageName: String?,
+    annotations: PerlSubAnnotations?
+  ) : super(
+    delegate,
+    nameComputation.`fun`(baseName),
+    elementType,
+    nameIdentifier,
+    packageName,
+    emptyList(),
+    annotations
+  ) {
+    setNameComputation(nameComputation)
+    setSubArgumentsProvider(NotNullFactory {
+      if (this.isFollowBestPractice) {
         if (hasSetterName()) {
-          return List.of(PerlSubArgument.self(), PerlSubArgument.mandatoryScalar(PerlSubArgument.NEW_VALUE_VALUE));
+          return@NotNullFactory listOf<PerlSubArgument>(
+            PerlSubArgument.self(),
+            PerlSubArgument.mandatoryScalar(PerlSubArgument.NEW_VALUE_VALUE)
+          )
         }
       }
       else {
-        return List.of(PerlSubArgument.self(), PerlSubArgument.optionalScalar(PerlSubArgument.NEW_VALUE_VALUE));
+        return@NotNullFactory listOf<PerlSubArgument?>(
+          PerlSubArgument.self(),
+          PerlSubArgument.optionalScalar(PerlSubArgument.NEW_VALUE_VALUE)
+        )
       }
-      return Collections.emptyList();
-    });
+      emptyList()
+    })
   }
 
-  public PerlClassAccessorMethod(@NotNull PerlSubCallElement delegate,
-                                 @NotNull PerlSubDefinitionStub stub) {
-    super(delegate, stub);
+  constructor(
+    delegate: PerlSubCallElement,
+    stub: PerlSubDefinitionStub
+  ) : super(delegate, stub) {
     if (hasGetterName()) {
-      setNameComputation(GETTER_COMPUTATION);
+      nameComputation = GETTER_COMPUTATION
     }
     else if (hasSetterName()) {
-      setNameComputation(SETTER_COMPUTATION);
+      nameComputation = SETTER_COMPUTATION
     }
     else {
-      setNameComputation(SIMPLE_COMPUTATION);
+      nameComputation = SIMPLE_COMPUTATION
     }
   }
 
-  public boolean isFollowBestPractice() {
-    return PerlClassAccessorHandler.isFollowBestPractice(getDelegate());
-  }
+  private val isFollowBestPractice: Boolean
+    get() = PerlClassAccessorHandler.isFollowBestPractice(delegate)
 
-  public boolean hasGetterName() {
-    return isFollowBestPractice() && getSubName().startsWith(GETTER_PREFIX);
-  }
+  private fun hasGetterName(): Boolean = this.isFollowBestPractice && subName.startsWith(GETTER_PREFIX)
 
-  public boolean hasSetterName() {
-    return isFollowBestPractice() && getSubName().startsWith(SETTER_PREFIX);
-  }
+  private fun hasSetterName(): Boolean = this.isFollowBestPractice && subName.startsWith(SETTER_PREFIX)
 
-  @Override
-  public @NotNull String getName() {
-    return getBaseName();
-  }
+  override fun getName(): String = this.baseName
 
-  public @NotNull String getBaseName() {
-    String name = getSubName();
-    return isFollowBestPractice() ?
-           hasGetterName() ? name.substring(GETTER_PREFIX.length()) : name.substring(SETTER_PREFIX.length()) :
-           name;
-  }
-
-  public String getGetterName() {
-    return isFollowBestPractice() && hasSetterName() ? GETTER_PREFIX + getBaseName() : getSubName();
-  }
-
-  public String getSetterName() {
-    return isFollowBestPractice() && hasGetterName() ? SETTER_PREFIX + getBaseName() : getSubName();
-  }
-
-  public @Nullable PerlClassAccessorMethod getPairedMethod() {
-    if (!isFollowBestPractice()) {
-      return null;
+  private val baseName: String
+    get() {
+      val name = subName
+      return if (this.isFollowBestPractice) if (hasGetterName()) name.substring(GETTER_PREFIX.length)
+      else name.substring(
+        SETTER_PREFIX.length
+      )
+      else name
     }
-    String baseName = getBaseName();
-    for (PerlDelegatingLightNamedElement<?> element : getDelegate().getLightElements()) {
-      if (element instanceof PerlClassAccessorMethod perlClassAccessorMethod &&
-          baseName.equals(perlClassAccessorMethod.getBaseName()) &&
-          !element.equals(this)
-      ) {
-        return perlClassAccessorMethod;
+
+  private val getterName: String?
+    get() = if (this.isFollowBestPractice && hasSetterName()) GETTER_PREFIX + this.baseName else subName
+
+  private val setterName: String?
+    get() = if (this.isFollowBestPractice && hasGetterName()) SETTER_PREFIX + this.baseName else subName
+
+  val pairedMethod: PerlClassAccessorMethod?
+    get() {
+      if (!this.isFollowBestPractice) {
+        return null
+      }
+      val baseName = this.baseName
+      for (element in delegate.lightElements) {
+        if (element is PerlClassAccessorMethod &&
+          baseName == element.baseName && (element != this)
+        ) {
+          return element
+        }
+      }
+      return null
+    }
+
+  override fun getSubstitutedUsageName(newName: String, element: PsiElement): String {
+    if (this.isFollowBestPractice) {
+      val currentValue = element.text
+      if (this.getterName == currentValue) {
+        return GETTER_PREFIX + newName
+      }
+      else if (this.setterName == currentValue) {
+        return SETTER_PREFIX + newName
       }
     }
-    return null;
+    return newName
   }
 
-  @Override
-  public @NotNull String getSubstitutedUsageName(@NotNull String newName, @NotNull PsiElement element) {
-    if (isFollowBestPractice()) {
-      String currentValue = element.getText();
-      if (getGetterName().equals(currentValue)) {
-        return GETTER_PREFIX + newName;
-      }
-      else if (getSetterName().equals(currentValue)) {
-        return SETTER_PREFIX + newName;
-      }
-    }
-    return newName;
-  }
+  override fun isInplaceRefactoringAllowed(): Boolean = !this.isFollowBestPractice
 
-  @Override
-  public boolean isInplaceRefactoringAllowed() {
-    return !isFollowBestPractice();
+  companion object {
+    @JvmField
+    val SIMPLE_COMPUTATION: Function<String, String> = Function { name: String -> name }
+
+    @JvmField
+    val GETTER_COMPUTATION: Function<String, String> = Function { name: String -> GETTER_PREFIX + name }
+
+    @JvmField
+    val SETTER_COMPUTATION: Function<String, String> = Function { name: String -> SETTER_PREFIX + name }
   }
 }
