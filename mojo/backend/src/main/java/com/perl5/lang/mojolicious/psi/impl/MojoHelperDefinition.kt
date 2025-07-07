@@ -13,43 +13,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.mojolicious.psi.impl
 
-package com.perl5.lang.mojolicious.psi.impl;
+import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.mojolicious.MojoIcons
+import com.perl5.lang.perl.psi.PerlSubExpr
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement
+import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
+import javax.swing.Icon
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mojolicious.MojoIcons;
-import com.perl5.lang.perl.psi.PerlSubExpr;
-import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
-import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+class MojoHelperDefinition : PerlLightMethodDefinitionElement<PerlSubCallElement> {
+  constructor(
+    wrapper: PerlSubCallElement,
+    name: String,
+    elementType: IElementType,
+    nameIdentifier: PsiElement,
+    packageName: String?,
+    elementSub: PerlSubExpr
+  ) : super(wrapper, name, elementType, nameIdentifier, packageName, elementSub)
 
-import javax.swing.*;
+  constructor(wrapper: PerlSubCallElement, stub: PerlSubDefinitionStub) : super(wrapper, stub)
 
-public class MojoHelperDefinition extends PerlLightMethodDefinitionElement<PerlSubCallElement> {
-  public MojoHelperDefinition(@NotNull PerlSubCallElement wrapper,
-                              @NotNull String name,
-                              @NotNull IElementType elementType,
-                              @NotNull PsiElement nameIdentifier,
-                              @Nullable String packageName,
-                              @NotNull PerlSubExpr elementSub) {
-    super(wrapper, name, elementType, nameIdentifier, packageName, elementSub);
-  }
+  override fun isStatic(): Boolean = true
 
-  public MojoHelperDefinition(@NotNull PerlSubCallElement wrapper,
-                              @NotNull PerlSubDefinitionStub stub) {
-    super(wrapper, stub);
-  }
-
-  @Override
-  public boolean isStatic() {
-    return true;
-  }
-
-  @Override
-  public @Nullable Icon getIcon(int flags) {
-    return MojoIcons.MOJO_FILE;
-  }
+  override fun getIcon(flags: Int): Icon = MojoIcons.MOJO_FILE
 }
