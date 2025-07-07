@@ -13,25 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.mason2.elementType
 
-package com.perl5.lang.mason2.elementType;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.perl5.lang.mason2.Mason2TemplatingLanguage
+import com.perl5.lang.mason2.psi.impl.MasonMethodDefinition
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlMethodDefinitionElementType
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.mason2.Mason2TemplatingLanguage;
-import com.perl5.lang.mason2.psi.impl.MasonMethodDefinition;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlMethodDefinitionElementType;
-import org.jetbrains.annotations.NotNull;
-
-
-public class MasonMethodDefinitionElementType extends PerlMethodDefinitionElementType implements PsiElementProvider {
-  public MasonMethodDefinitionElementType(String name) {
-    super(name, Mason2TemplatingLanguage.INSTANCE);
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new MasonMethodDefinition(node);
-  }
+open class MasonMethodDefinitionElementType(name: String) : PerlMethodDefinitionElementType(name, Mason2TemplatingLanguage.INSTANCE),
+                                                            PsiElementProvider {
+  override fun getPsiElement(node: ASTNode): PsiElement = MasonMethodDefinition(node)
 }
