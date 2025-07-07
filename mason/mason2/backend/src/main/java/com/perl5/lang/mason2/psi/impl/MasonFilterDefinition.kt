@@ -28,10 +28,6 @@ class MasonFilterDefinition : MasonMethodDefinition {
 
   constructor(stub: PerlSubDefinitionStub?, nodeType: IElementType?) : super(stub, nodeType)
 
-  override fun buildImplicitVariables(): MutableList<PerlVariableDeclarationElement?> {
-    val newImplicitVariables: MutableList<PerlVariableDeclarationElement?> =
-      ArrayList<PerlVariableDeclarationElement?>(super.buildImplicitVariables())
-    newImplicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, YIELD_VARIABLE_NAME))
-    return newImplicitVariables
-  }
+  override fun buildImplicitVariables(): List<PerlVariableDeclarationElement> =
+    super.buildImplicitVariables() + listOf(PerlImplicitVariableDeclaration.createLexical(this, YIELD_VARIABLE_NAME))
 }
