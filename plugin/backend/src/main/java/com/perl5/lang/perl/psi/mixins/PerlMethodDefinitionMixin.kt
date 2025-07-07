@@ -28,6 +28,7 @@ import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -56,7 +57,8 @@ public abstract class PerlMethodDefinitionMixin extends PerlSubDefinitionBase im
   }
 
   @Override
-  protected boolean processSignatureElement(PsiElement signatureElement, List<? super PerlSubArgument> arguments) {
+  protected boolean processSignatureElement(@Nullable PsiElement signatureElement,
+                                            @SuppressWarnings("BoundedWildcard") @NotNull List<PerlSubArgument> arguments) {
     if (signatureElement instanceof PsiPerlMethodSignatureInvocant) {
       PerlVariable variable = PsiTreeUtil.findChildOfType(signatureElement, PerlVariable.class);
       if (variable != null) {
