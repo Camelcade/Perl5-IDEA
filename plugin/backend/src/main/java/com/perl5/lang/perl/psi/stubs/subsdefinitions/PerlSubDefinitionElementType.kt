@@ -13,34 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.stubs.subsdefinitions
 
-package com.perl5.lang.perl.psi.stubs.subsdefinitions;
+import com.intellij.lang.ASTNode
+import com.intellij.lang.Language
+import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.perl.PerlLanguage
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider
+import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl
+import org.jetbrains.annotations.NonNls
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+open class PerlSubDefinitionElementType : IElementType, PsiElementProvider {
+  constructor(name: String) : super(name, PerlLanguage.INSTANCE)
 
+  constructor(debugName: @NonNls String, language: Language?) : super(debugName, language)
 
-public class PerlSubDefinitionElementType extends IElementType
-  implements PsiElementProvider {
-
-  public PerlSubDefinitionElementType(String name) {
-    super(name, PerlLanguage.INSTANCE);
-  }
-
-  public PerlSubDefinitionElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
-    super(debugName, language);
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PsiPerlSubDefinitionImpl(node);
-  }
+  override fun getPsiElement(node: ASTNode): PsiElement = PsiPerlSubDefinitionImpl(node)
 }
