@@ -13,136 +13,83 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.mixins
 
-package com.perl5.lang.perl.psi.mixins;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.intellij.psi.StubBasedPsiElement
+import com.intellij.psi.tree.IElementType
+import com.intellij.util.IncorrectOperationException
+import com.perl5.PerlIcons
+import com.perl5.lang.perl.parser.PerlElementTypesGenerated
+import com.perl5.lang.perl.psi.PerlDeprecatable
+import com.perl5.lang.perl.psi.PerlNamespaceElement
+import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase
+import com.perl5.lang.perl.psi.PerlSubElement
+import com.perl5.lang.perl.psi.properties.PerlLabelScope
+import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer
+import com.perl5.lang.perl.psi.stubs.PerlSubStub
+import com.perl5.lang.perl.psi.utils.PerlAnnotations
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
+import com.perl5.lang.perl.util.PerlPackageUtil
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.StubBasedPsiElement;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.util.IncorrectOperationException;
-import com.perl5.PerlIcons;
-import com.perl5.lang.perl.psi.PerlDeprecatable;
-import com.perl5.lang.perl.psi.PerlNamespaceElement;
-import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
-import com.perl5.lang.perl.psi.PerlSubElement;
-import com.perl5.lang.perl.psi.properties.PerlLabelScope;
-import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
-import com.perl5.lang.perl.psi.stubs.PerlSubStub;
-import com.perl5.lang.perl.psi.utils.PerlAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+abstract class PerlSubBase<Stub : PerlSubStub<*>> : PerlStubBasedPsiElementBase<Stub>, PerlSubElement, StubBasedPsiElement<Stub>,
+                                                    PerlNamespaceElementContainer, PerlDeprecatable, PerlLabelScope {
+  constructor(node: ASTNode) : super(node)
 
-import javax.swing.*;
+  constructor(stub: Stub, nodeType: IElementType) : super(stub, nodeType)
 
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.SUB_NAME;
-
-
-public abstract class PerlSubBase<Stub extends PerlSubStub<?>> extends PerlStubBasedPsiElementBase<Stub>
-  implements PerlSubElement,
-             StubBasedPsiElement<Stub>,
-             PerlNamespaceElementContainer,
-             PerlDeprecatable,
-             PerlLabelScope {
-  public PerlSubBase(@NotNull ASTNode node) {
-    super(node);
-  }
-
-  public PerlSubBase(@NotNull Stub stub, @NotNull IElementType nodeType) {
-    super(stub, nodeType);
-  }
-
-  @Override
-  public @Nullable String getNamespaceName() {
-    Stub stub = getGreenStub();
+  override fun getNamespaceName(): String? {
+    val stub = getGreenStub()
     if (stub != null) {
-      return stub.getNamespaceName();
+      return stub.namespaceName
     }
 
-    String namespace = getExplicitNamespaceName();
+    var namespace = getExplicitNamespaceName()
     if (namespace == null) {
-      namespace = PerlPackageUtil.getContextNamespaceName(this);
+      namespace = PerlPackageUtil.getContextNamespaceName(this)
     }
 
-    return namespace;
+    return namespace
   }
 
 
-  @Override
-  public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
-    return PerlPsiUtil.renameNamedElement(this, name);
-  }
+  @Throws(IncorrectOperationException::class)
+  override fun setName(name: String): PsiElement? = PerlPsiUtil.renameNamedElement(this, name)
 
-  @Override
-  public String getName() {
-    return getSubName();
-  }
+  override fun getName(): String? = getSubName()
 
-  @Override
-  public String getSubName() {
-    Stub stub = getGreenStub();
+  override fun getSubName(): String? {
+    val stub = getGreenStub()
     if (stub != null) {
-      return stub.getSubName();
+      return stub.subName
     }
 
-    return getSubNameHeavy();
+    return subNameHeavy
   }
 
-  protected @Nullable String getSubNameHeavy() {
-    PsiElement subNameElement = getNameIdentifier();
-    // fixme manipulator?
-    return subNameElement == null ? null : subNameElement.getText();
-  }
+  protected open val subNameHeavy: String?
+    get() = nameIdentifier?.text
 
-  @Override
-  public @Nullable String getExplicitNamespaceName() {
-    PerlNamespaceElement namespaceElement = getNamespaceElement();
-    return namespaceElement != null ? namespaceElement.getCanonicalName() : null;
-  }
+  override fun getExplicitNamespaceName(): String? = namespaceElement?.getCanonicalName()
 
-  @Override
-  public @Nullable PsiElement getNameIdentifier() {
-    return findChildByType(SUB_NAME);
-  }
+  override fun getNameIdentifier(): PsiElement? = findChildByType(PerlElementTypesGenerated.SUB_NAME)
 
-  @Override
-  public @Nullable PerlNamespaceElement getNamespaceElement() {
-    return findChildByClass(PerlNamespaceElement.class);
-  }
+  override fun getNamespaceElement(): PerlNamespaceElement? = findChildByClass(PerlNamespaceElement::class.java)
 
-  @Override
-  public @Nullable PerlSubAnnotations getAnnotations() {
-    Stub stub = getGreenStub();
+  override fun getAnnotations(): PerlSubAnnotations? {
+    val stub = getGreenStub()
     if (stub != null) {
-      return stub.getAnnotations();
+      return stub.annotations
     }
-    return PerlSubAnnotations.createFromAnnotationsList(PerlAnnotations.collectAnnotations(this));
+    return PerlSubAnnotations.createFromAnnotationsList(PerlAnnotations.collectAnnotations(this))
   }
 
-  @Override
-  public @Nullable Icon getIcon(int flags) {
-    if (isMethod()) {
-      return PerlIcons.METHOD_GUTTER_ICON;
-    }
-    else {
-      return PerlIcons.SUB_GUTTER_ICON;
-    }
-  }
+  override fun getIcon(flags: Int) = if (isMethod()) PerlIcons.METHOD_GUTTER_ICON else PerlIcons.SUB_GUTTER_ICON
 
-  @Override
-  public int getTextOffset() {
-    PsiElement nameIdentifier = getNameIdentifier();
 
-    return nameIdentifier == null
-           ? super.getTextOffset()
-           : nameIdentifier.getTextOffset();
-  }
+  override fun getTextOffset(): Int = this.nameIdentifier?.textOffset ?: super.getTextOffset()
 
-  @Override
-  public String toString() {
-    return super.toString() + "@" + (isValid() ? getCanonicalName() : "!INVALID!");
-  }
+  override fun toString(): String = super.toString() + "@" + (if (isValid()) getCanonicalName() else "!INVALID!")
 }
