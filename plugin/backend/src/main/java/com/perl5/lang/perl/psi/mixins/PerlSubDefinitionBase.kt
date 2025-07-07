@@ -13,153 +13,119 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.mixins
 
-package com.perl5.lang.perl.psi.mixins;
+import com.intellij.codeInsight.controlflow.Instruction
+import com.intellij.lang.ASTNode
+import com.intellij.navigation.ItemPresentation
+import com.intellij.openapi.util.ClearableLazyValue
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiElementVisitor
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation
+import com.perl5.lang.perl.lexer.PerlElementTypes
+import com.perl5.lang.perl.psi.*
+import com.perl5.lang.perl.psi.properties.PerlLexicalScope
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
+import com.perl5.lang.perl.psi.utils.PerlResolveUtil
+import com.perl5.lang.perl.psi.utils.PerlSubArgument
+import java.util.function.Supplier
 
-import com.intellij.codeInsight.controlflow.Instruction;
-import com.intellij.lang.ASTNode;
-import com.intellij.navigation.ItemPresentation;
-import com.intellij.openapi.util.ClearableLazyValue;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
-import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+abstract class PerlSubDefinitionBase : PerlSubBase<PerlSubDefinitionStub>, PerlSubDefinitionElement, PerlLexicalScope, PerlElementTypes,
+                                       PerlControlFlowOwner {
+  private val myControlFlow = PerlControlFlowBuilder.createLazy(this)
+  private val myReturnValueFromCode = ClearableLazyValue.create<PerlValue?>(
+    Supplier { PerlResolveUtil.computeReturnValueFromControlFlow(this) })
 
-import java.util.ArrayList;
-import java.util.List;
+  constructor(node: ASTNode) : super(node)
 
+  constructor(stub: PerlSubDefinitionStub, nodeType: IElementType) : super(stub, nodeType)
 
-public abstract class PerlSubDefinitionBase extends PerlSubBase<PerlSubDefinitionStub> implements PerlSubDefinitionElement,
-                                                                                                  PerlLexicalScope,
-                                                                                                  PerlElementTypes,
-                                                                                                  PerlControlFlowOwner {
-  private final ClearableLazyValue<Instruction[]> myControlFlow = PerlControlFlowBuilder.createLazy(this);
-  private final ClearableLazyValue<PerlValue> myReturnValueFromCode = ClearableLazyValue.create(
-    () -> PerlResolveUtil.computeReturnValueFromControlFlow(this));
-
-  public PerlSubDefinitionBase(@NotNull ASTNode node) {
-    super(node);
-  }
-
-  public PerlSubDefinitionBase(@NotNull PerlSubDefinitionStub stub, @NotNull IElementType nodeType) {
-    super(stub, nodeType);
-  }
-
-  @Override
-  public boolean isMethod() {
-    if (super.isMethod()) {
-      return true;
+  override fun isMethod(): Boolean {
+    if (super<PerlSubBase>.isMethod()) {
+      return true
     }
 
-    List<PerlSubArgument> arguments = getSubArgumentsList();
-    return !arguments.isEmpty() && arguments.getFirst().isSelf(getProject());
+    val arguments = getSubArgumentsList()
+    return !arguments.isEmpty() && arguments.first().isSelf(getProject()) == true
   }
 
-  @Override
-  public @NotNull List<PerlSubArgument> getSubArgumentsList() {
-    PerlSubDefinitionStub stub = getGreenStub();
+  override fun getSubArgumentsList(): List<PerlSubArgument> {
+    val stub = getGreenStub()
     if (stub != null) {
-      return new ArrayList<>(stub.getSubArgumentsList());
+      return ArrayList<PerlSubArgument>(stub.getSubArgumentsList())
     }
 
-    List<PerlSubArgument> arguments = getPerlSubArgumentsFromSignature();
+    return perlSubArgumentsFromSignature ?: this.perlSubArgumentsFromBody
+  }
 
-    if (arguments == null) {
-      arguments = getPerlSubArgumentsFromBody();
+  override fun getReturnValueFromCode(): PerlValue {
+    val returnValue = super<PerlSubDefinitionElement>.getReturnValueFromCode()
+    if (!returnValue.isUnknown) {
+      return returnValue
     }
-
-    return arguments;
+    val greenStub = getGreenStub()
+    return greenStub?.getReturnValueFromCode() ?: myReturnValueFromCode.getValue()
   }
 
-  @Override
-  public @NotNull PerlValue getReturnValueFromCode() {
-    PerlValue returnValue = PerlSubDefinitionElement.super.getReturnValueFromCode();
-    if (!returnValue.isUnknown()) {
-      return returnValue;
-    }
-    PerlSubDefinitionStub greenStub = getGreenStub();
-    return greenStub != null ?
-           greenStub.getReturnValueFromCode() : myReturnValueFromCode.getValue();
-  }
-
-  @Override
-  public ItemPresentation getPresentation() {
-    return new PerlItemPresentationSimpleDynamicLocation(this, getPresentableName());
-  }
+  override fun getPresentation(): ItemPresentation = PerlItemPresentationSimpleDynamicLocation(this, presentableName)
 
   /**
    * Returns list of arguments defined in signature
    *
    * @return list of arguments or null if there is no signature
    */
-  private @Nullable List<PerlSubArgument> getPerlSubArgumentsFromSignature() {
-    List<PerlSubArgument> arguments = null;
-    PsiElement signatureContainer = getSignatureContent();
+  private val perlSubArgumentsFromSignature: List<PerlSubArgument>?
+    get() {
+      var arguments: MutableList<PerlSubArgument>? = null
+      val signatureContainer: PsiElement? = getSignatureContent()
 
-    if (signatureContainer != null) {
-      arguments = new ArrayList<>();
-      //noinspection unchecked
+      if (signatureContainer != null) {
+        arguments = ArrayList()
 
-      PsiElement signatureElement = signatureContainer.getFirstChild();
+        var signatureElement = signatureContainer.firstChild
 
-      while (signatureElement != null) {
-        if (signatureElement instanceof PerlSignatureElement perlSignatureElement) {
-          processSignatureElement(perlSignatureElement.getDeclarationElement(), arguments);
+        while (signatureElement != null) {
+          if (signatureElement is PerlSignatureElement) {
+            processSignatureElement(signatureElement.getDeclarationElement(), arguments)
+          }
+          else {
+            processSignatureElement(signatureElement, arguments)
+          }
+          signatureElement = signatureElement.nextSibling
         }
-        else {
-          processSignatureElement(signatureElement, arguments);
-        }
-        signatureElement = signatureElement.getNextSibling();
       }
+
+      return arguments
     }
 
-    return arguments;
-  }
-
-  protected boolean processSignatureElement(PsiElement signatureElement, List<? super PerlSubArgument> arguments) {
-    if (signatureElement instanceof PerlVariableDeclarationElement variableDeclarationElement) {
-      PerlVariable variable = variableDeclarationElement.getVariable();
-      PerlSubArgument newArgument = PerlSubArgument.mandatory(variable.getActualType(), variable.getName());
-      newArgument.setOptional(signatureElement.getNextSibling() != null);
-      arguments.add(newArgument);
-      return true;
+  protected open fun processSignatureElement(signatureElement: PsiElement?, arguments: MutableList<PerlSubArgument>): Boolean {
+    if (signatureElement is PerlVariableDeclarationElement) {
+      val variable = signatureElement.getVariable()
+      val newArgument = PerlSubArgument.mandatory(variable.getActualType(), variable.getName()!!)
+      newArgument.isOptional = signatureElement.nextSibling != null
+      arguments.add(newArgument)
+      return true
     }
-    return false;
+    return false
   }
 
-  @Override
-  public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof PerlVisitor perlVisitor) {
-      perlVisitor.visitPerlSubDefinitionElement(this);
+  override fun accept(visitor: PsiElementVisitor): Unit =
+    if (visitor is PerlVisitor) {
+      visitor.visitPerlSubDefinitionElement(this)
     }
     else {
-      super.accept(visitor);
+      super.accept(visitor)
     }
-  }
 
-  @Override
-  public @Nullable PsiPerlBlock getSubDefinitionBody() {
-    return getBlock();
-  }
+  override fun getSubDefinitionBody(): PsiPerlBlock? = block
 
-  @Override
-  public @NotNull Instruction[] getControlFlow() {
-    return myControlFlow.getValue();
-  }
+  override fun getControlFlow(): Array<Instruction> = myControlFlow.getValue()
 
-  @Override
-  public void subtreeChanged() {
-    myControlFlow.drop();
-    myReturnValueFromCode.drop();
+  override fun subtreeChanged() {
+    myControlFlow.drop()
+    myReturnValueFromCode.drop()
   }
 }
