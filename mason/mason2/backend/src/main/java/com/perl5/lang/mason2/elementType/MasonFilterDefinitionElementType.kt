@@ -13,23 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.mason2.elementType
 
-package com.perl5.lang.mason2.elementType;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.perl5.lang.mason2.psi.impl.MasonFilterDefinition
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.mason2.psi.impl.MasonFilterDefinition;
-import org.jetbrains.annotations.NotNull;
-
-
-public class MasonFilterDefinitionElementType extends MasonMethodDefinitionElementType {
-  public MasonFilterDefinitionElementType(String name) {
-    super(name);
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new MasonFilterDefinition(node);
-  }
+class MasonFilterDefinitionElementType(name: String) : MasonMethodDefinitionElementType(name) {
+  override fun getPsiElement(node: ASTNode): PsiElement = MasonFilterDefinition(node)
 }
 
