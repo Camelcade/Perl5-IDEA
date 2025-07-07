@@ -13,51 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.stubs.subsdefinitions
 
-package com.perl5.lang.perl.psi.stubs.subsdefinitions;
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.psi.PerlSubDefinition
+import com.perl5.lang.perl.psi.PerlSubDefinitionElement
+import com.perl5.lang.perl.psi.stubs.PerlSubStub
+import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
+import com.perl5.lang.perl.psi.utils.PerlSubArgument
 
-import com.intellij.psi.stubs.StubElement;
-import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.psi.PerlSubDefinition;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.stubs.PerlSubStub;
-import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import org.jetbrains.annotations.NotNull;
+open class PerlSubDefinitionStub(
+  parent: StubElement<*>?,
+  packageName: String?,
+  subName: String,
+  private val myArguments: List<PerlSubArgument>,
+  annotations: PerlSubAnnotations?,
+  private val myReturnValueFromCode: PerlValue,
+  elementType: IElementType
+) : PerlSubStub<PerlSubDefinitionElement?>(parent, packageName, subName, annotations, elementType), PerlSubDefinition {
+  override fun getReturnValueFromCode(): PerlValue = myReturnValueFromCode
 
-import java.util.List;
+  override fun getSubArgumentsList(): List<PerlSubArgument> = myArguments
 
-public class PerlSubDefinitionStub extends PerlSubStub<PerlSubDefinitionElement> implements PerlSubDefinition {
-  private final @NotNull List<PerlSubArgument> myArguments;
-  private final @NotNull PerlValue myReturnValueFromCode;
-
-  public PerlSubDefinitionStub(StubElement parent,
-                               String packageName,
-                               String subName,
-                               @NotNull List<PerlSubArgument> arguments,
-                               PerlSubAnnotations annotations,
-                               @NotNull PerlValue returnValueFromCode,
-                               IElementType elementType) {
-    super(parent, packageName, subName, annotations, elementType);
-    myArguments = arguments;
-    myReturnValueFromCode = returnValueFromCode;
-  }
-
-  @Override
-  public @NotNull PerlValue getReturnValueFromCode() {
-    return myReturnValueFromCode;
-  }
-
-  @Override
-  public @NotNull List<PerlSubArgument> getSubArgumentsList() {
-    return myArguments;
-  }
-
-  @Override
-  public String toString() {
-    return super.toString() + "\n" +
-           "\tArguments: " + myArguments + "\n" +
-           "\tReturn value: " + myReturnValueFromCode;
-  }
+  override fun toString(): String = super.toString() + "\n" +
+    "\tArguments: " + myArguments + "\n" +
+    "\tReturn value: " + myReturnValueFromCode
 }
