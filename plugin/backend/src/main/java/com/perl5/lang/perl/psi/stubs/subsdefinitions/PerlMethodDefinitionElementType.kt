@@ -13,29 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.stubs.subsdefinitions
 
-package com.perl5.lang.perl.psi.stubs.subsdefinitions;
+import com.intellij.lang.ASTNode
+import com.intellij.lang.Language
+import com.intellij.psi.PsiElement
+import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl
+import org.jetbrains.annotations.NonNls
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.impl.PsiPerlMethodDefinitionImpl;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+open class PerlMethodDefinitionElementType : PerlSubDefinitionElementType {
+  constructor(name: String) : super(name)
 
+  constructor(debugName: @NonNls String, language: Language?) : super(debugName, language)
 
-public class PerlMethodDefinitionElementType extends PerlSubDefinitionElementType {
-  public PerlMethodDefinitionElementType(String name) {
-    super(name);
-  }
-
-  public PerlMethodDefinitionElementType(@NotNull @NonNls String debugName, @Nullable Language language) {
-    super(debugName, language);
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PsiPerlMethodDefinitionImpl(node);
-  }
+  override fun getPsiElement(node: ASTNode): PsiElement = PsiPerlMethodDefinitionImpl(node)
 }
