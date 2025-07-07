@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.mojolicious.psi.impl;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mojolicious.MojoIcons;
 import com.perl5.lang.perl.psi.PerlSubExpr;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
@@ -31,7 +31,7 @@ import javax.swing.*;
 public class MojoHelperDefinition extends PerlLightMethodDefinitionElement<PerlSubCallElement> {
   public MojoHelperDefinition(@NotNull PerlSubCallElement wrapper,
                               @NotNull String name,
-                              @NotNull IStubElementType<?, ?> elementType,
+                              @NotNull IElementType elementType,
                               @NotNull PsiElement nameIdentifier,
                               @Nullable String packageName,
                               @NotNull PerlSubExpr elementSub) {

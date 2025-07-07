@@ -23,7 +23,7 @@ import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
@@ -53,7 +53,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
                                        @NotNull String name,
-                                       @NotNull IStubElementType<?, ?> elementType,
+                                       @NotNull IElementType elementType,
                                        @Nullable PsiElement nameIdentifier,
                                        @Nullable String namespaceName,
                                        @NotNull List<PerlSubArgument> subArguments,
@@ -70,7 +70,7 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
 
   public PerlLightSubDefinitionElement(@NotNull Delegate delegate,
                                        @NotNull String name,
-                                       @NotNull IStubElementType<?, ?> elementType,
+                                       @NotNull IElementType elementType,
                                        @NotNull PsiElement nameIdentifier,
                                        @Nullable String namespaceName,
                                        @NotNull PerlSubExpr elementSub) {

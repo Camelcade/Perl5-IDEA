@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
 import com.perl5.lang.perl.parser.moose.psi.PerlMoosePsiUtil;
@@ -36,7 +36,7 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
     super(node);
   }
 
-  public PerlMooseOverrideStatement(@NotNull PerlSubDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public PerlMooseOverrideStatement(@NotNull PerlSubDefinitionStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -84,7 +84,7 @@ public class PerlMooseOverrideStatement extends PerlSubDefinitionBase implements
   }
 
   @Override
-  protected String getSubNameHeavy() {
+  protected @Nullable String getSubNameHeavy() {
     PsiElement nameContainer = getNameIdentifier();
 
     if (nameContainer != null) {

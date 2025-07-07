@@ -19,7 +19,14 @@ package com.perl5.lang.perl.psi.stubs
 import com.intellij.psi.stubs.StubRegistry
 import com.intellij.psi.stubs.StubRegistryExtension
 import com.perl5.lang.perl.lexer.PerlElementTypes
+import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes
+import com.perl5.lang.perl.parser.moose.MooseElementTypes
+import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubSerializingFactory
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlFuncDefinitionStubSerializingFactory
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionStubSerializingFactory
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlMethodDefinitionStubSerializingFactory
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubSerializingFactory
 import com.perl5.lang.pod.lexer.PodElementTypes
 import com.perl5.lang.pod.parser.psi.stubs.PodFileStubSerializer
 
@@ -30,8 +37,23 @@ class PerlStubRegistryExtension : StubRegistryExtension {
 
     listOf(
       PerlElementTypes.SUB_DECLARATION to ::PerlSubDeclarationStubSerializingFactory,
+      PerlStubElementTypes.SUB_DEFINITION to ::PerlSubDefinitionStubSerializingFactory,
+      PerlStubElementTypes.METHOD_DEFINITION to ::PerlMethodDefinitionStubSerializingFactory,
+      PerlStubElementTypes.FUNC_DEFINITION to ::PerlFuncDefinitionStubSerializingFactory,
+
+      MooseElementTypes.MOOSE_STATEMENT_OVERRIDE to ::PerlMooseOverrideStubSerializingFactory,
     ).forEach { (elementType, factory) ->
       registry.registerStubSerializingFactory(elementType, factory(elementType))
+    }
+
+    listOf(
+      ClassAccessorElementTypes.CLASS_ACCESSOR_METHOD,
+      PerlStubElementTypes.LIGHT_SUB_DEFINITION,
+      PerlStubElementTypes.LIGHT_METHOD_DEFINITION,
+      PerlStubElementTypes.LIGHT_ATTRIBUTE_DEFINITION,
+
+      ).forEach {
+      registry.registerStubSerializingFactory(it, PerlLightSubDefinitionStubSerializingFactory(it))
     }
   }
 }

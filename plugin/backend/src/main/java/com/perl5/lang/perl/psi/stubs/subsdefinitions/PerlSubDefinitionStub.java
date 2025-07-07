@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,8 @@
 
 package com.perl5.lang.perl.psi.stubs.subsdefinitions;
 
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlSubDefinition;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
@@ -38,7 +38,7 @@ public class PerlSubDefinitionStub extends PerlSubStub<PerlSubDefinitionElement>
                                @NotNull List<PerlSubArgument> arguments,
                                PerlSubAnnotations annotations,
                                @NotNull PerlValue returnValueFromCode,
-                               IStubElementType elementType) {
+                               IElementType elementType) {
     super(parent, packageName, subName, annotations, elementType);
     myArguments = arguments;
     myReturnValueFromCode = returnValueFromCode;

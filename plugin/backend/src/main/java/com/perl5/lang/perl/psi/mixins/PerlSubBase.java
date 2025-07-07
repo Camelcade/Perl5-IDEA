@@ -91,7 +91,7 @@ public abstract class PerlSubBase<Stub extends PerlSubStub<?>> extends PerlStubB
     return getSubNameHeavy();
   }
 
-  protected String getSubNameHeavy() {
+  protected @Nullable String getSubNameHeavy() {
     PsiElement subNameElement = getNameIdentifier();
     // fixme manipulator?
     return subNameElement == null ? null : subNameElement.getText();

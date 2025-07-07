@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulator;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.Function;
 import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
@@ -42,7 +42,7 @@ public class PerlAttributeDefinition extends PerlLightMethodDefinitionElement<Pe
 
   public PerlAttributeDefinition(@NotNull PerlSubCallElement wrapper,
                                  @NotNull String name,
-                                 @NotNull IStubElementType<?, ?> elementType,
+                                 @NotNull IElementType elementType,
                                  @Nullable PsiElement nameIdentifier,
                                  @Nullable String packageName,
                                  @NotNull List<PerlSubArgument> subArguments,

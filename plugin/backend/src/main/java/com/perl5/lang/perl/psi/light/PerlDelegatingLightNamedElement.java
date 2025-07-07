@@ -19,7 +19,6 @@ package com.perl5.lang.perl.psi.light;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.Function;
 import com.intellij.util.IncorrectOperationException;
@@ -65,11 +64,6 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   @Override
   public @NotNull String getName() {
     return myName;
-  }
-
-  @Override
-  public IStubElementType<?, PerlDelegatingLightNamedElement<?>> getElementType() {
-    return (IStubElementType<?, PerlDelegatingLightNamedElement<?>>)super.getElementType();
   }
 
   protected final void setNameComputation(@NotNull Function<String, String> nameComputation) {
