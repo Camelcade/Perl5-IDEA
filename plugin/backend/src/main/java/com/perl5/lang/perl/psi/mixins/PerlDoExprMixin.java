@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.mixins;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlDoExpr;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
@@ -32,7 +32,7 @@ public abstract class PerlDoExprMixin extends PerlStubBasedPsiElementBase<PerlRu
     super(node);
   }
 
-  public PerlDoExprMixin(PerlRuntimeImportStub stub, IStubElementType nodeType) {
+  public PerlDoExprMixin(PerlRuntimeImportStub stub, IElementType nodeType) {
     super(stub, nodeType);
   }
 
