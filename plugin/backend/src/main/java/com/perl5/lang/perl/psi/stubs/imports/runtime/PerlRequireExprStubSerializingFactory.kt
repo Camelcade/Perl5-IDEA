@@ -13,15 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.perl5.lang.perl.psi.stubs.imports.runtime
 
-import com.intellij.lang.ASTNode
-import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.IElementType
-import com.perl5.lang.perl.PerlLanguage
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider
-import com.perl5.lang.perl.psi.impl.PsiPerlDoExprImpl
+import com.perl5.lang.perl.psi.PerlDoExpr
+import com.perl5.lang.perl.psi.impl.PsiPerlRequireExprImpl
 
-open class PerlDoExprElementType(debugName: String) : IElementType(debugName, PerlLanguage.INSTANCE), PsiElementProvider {
-  override fun getPsiElement(node: ASTNode): PsiElement = PsiPerlDoExprImpl(node)
+
+class PerlRequireExprStubSerializingFactory(elementType: IElementType) : PerlDoExprStubSerializingFactory(elementType) {
+  override fun createPsi(stub: PerlRuntimeImportStub): PerlDoExpr = PsiPerlRequireExprImpl(stub, elementType)
 }

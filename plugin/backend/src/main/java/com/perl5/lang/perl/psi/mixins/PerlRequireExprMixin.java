@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi.mixins;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlRequireExpr;
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
@@ -30,7 +30,7 @@ public abstract class PerlRequireExprMixin extends PerlDoExprMixin implements Pe
     super(node);
   }
 
-  public PerlRequireExprMixin(PerlRuntimeImportStub stub, IStubElementType nodeType) {
+  public PerlRequireExprMixin(PerlRuntimeImportStub stub, IElementType nodeType) {
     super(stub, nodeType);
   }
 

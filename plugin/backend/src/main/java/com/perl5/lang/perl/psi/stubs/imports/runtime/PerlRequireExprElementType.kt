@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,28 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.stubs.imports.runtime
 
-package com.perl5.lang.perl.psi.stubs.imports.runtime;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.perl5.lang.perl.psi.impl.PsiPerlRequireExprImpl
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.psi.PerlDoExpr;
-import com.perl5.lang.perl.psi.impl.PsiPerlRequireExprImpl;
-import org.jetbrains.annotations.NotNull;
-
-
-public class PerlRequireExprElementType extends PerlDoExprElementType {
-  public PerlRequireExprElementType(@NotNull String debugName) {
-    super(debugName);
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PsiPerlRequireExprImpl(node);
-  }
-
-  @Override
-  public PerlDoExpr createPsi(@NotNull PerlRuntimeImportStub stub) {
-    return new PsiPerlRequireExprImpl(stub, this);
-  }
+class PerlRequireExprElementType(debugName: String) : PerlDoExprElementType(debugName) {
+  override fun getPsiElement(node: ASTNode): PsiElement = PsiPerlRequireExprImpl(node)
 }
