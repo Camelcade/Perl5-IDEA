@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,18 @@ import com.intellij.psi.stubs.StubElement;
 import com.perl5.lang.perl.psi.PerlGlobVariable;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class PerlGlobStub extends StubBase<PsiPerlGlobVariable> implements StubElement<PsiPerlGlobVariable>, PerlGlobVariable {
-  private final String myNamespaceName;
+  private final @NotNull String myNamespaceName;
   private final String myVariableName;
   private final boolean myIsLeftSideOfAssignment;
 
-  public PerlGlobStub(final StubElement<?> parent, final String namespaceName, final String variableName, boolean isLeftSideOfAssignment) {
+  public PerlGlobStub(final StubElement<?> parent,
+                      @NotNull String namespaceName,
+                      String variableName,
+                      boolean isLeftSideOfAssignment) {
     super(parent, PerlStubElementTypes.PERL_GLOB);
     myNamespaceName = namespaceName;
     myVariableName = variableName;
@@ -36,7 +40,7 @@ public class PerlGlobStub extends StubBase<PsiPerlGlobVariable> implements StubE
   }
 
   @Override
-  public String getNamespaceName() {
+  public @NotNull String getNamespaceName() {
     return myNamespaceName;
   }
 

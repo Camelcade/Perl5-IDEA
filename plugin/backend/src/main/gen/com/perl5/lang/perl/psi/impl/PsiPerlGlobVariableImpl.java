@@ -2,7 +2,7 @@
 package com.perl5.lang.perl.psi.impl;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+import com.intellij.psi.tree.IElementType;import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -19,7 +19,7 @@ public class PsiPerlGlobVariableImpl extends PerlGlobVariableMixin implements Ps
     super(node);
   }
 
-  public PsiPerlGlobVariableImpl(PerlGlobStub stub, IStubElementType stubType) {
+  public PsiPerlGlobVariableImpl(PerlGlobStub stub, IElementType stubType) {
     super(stub, stubType);
   }
 
