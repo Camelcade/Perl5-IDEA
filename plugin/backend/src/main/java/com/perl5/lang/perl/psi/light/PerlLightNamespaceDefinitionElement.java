@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi.light;
 
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
@@ -60,7 +60,7 @@ public class PerlLightNamespaceDefinitionElement extends PerlDelegatingLightName
 
   public PerlLightNamespaceDefinitionElement(@NotNull PerlPolyNamedElement<?> delegate,
                                              @NotNull String name,
-                                             @NotNull IStubElementType<?, ?> elementType,
+                                             @NotNull IElementType elementType,
                                              @NotNull PsiElement nameIdentifier,
                                              @NotNull PerlMroType mroType,
                                              @NotNull List<String> parentNamespacesNames,
