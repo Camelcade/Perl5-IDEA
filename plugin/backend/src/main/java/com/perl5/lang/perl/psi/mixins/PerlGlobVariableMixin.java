@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
@@ -45,7 +45,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
     super(node);
   }
 
-  public PerlGlobVariableMixin(@NotNull PerlGlobStub stub, @NotNull IStubElementType nodeType) {
+  public PerlGlobVariableMixin(@NotNull PerlGlobStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -71,7 +71,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
   }
 
   @Override
-  public String getGlobName() {
+  public @Nullable String getGlobName() {
     PerlGlobStub stub = getGreenStub();
     if (stub != null) {
       return stub.getGlobName();
