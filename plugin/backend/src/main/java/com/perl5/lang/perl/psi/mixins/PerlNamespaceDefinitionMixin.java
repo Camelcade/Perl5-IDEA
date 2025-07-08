@@ -22,7 +22,7 @@ import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.intellij.util.Processor;
@@ -62,7 +62,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     super(node);
   }
 
-  public PerlNamespaceDefinitionMixin(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public PerlNamespaceDefinitionMixin(@NotNull PerlNamespaceDefinitionStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 
@@ -102,12 +102,11 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
     return computeNamespaceName();
   }
 
-  protected String computeNamespaceName() {
+  protected @Nullable String computeNamespaceName() {
     PerlNamespaceElement namespaceElement = getNamespaceElement();
     if (namespaceElement != null) {
       return namespaceElement.getCanonicalName();
     }
-
     return null;
   }
 

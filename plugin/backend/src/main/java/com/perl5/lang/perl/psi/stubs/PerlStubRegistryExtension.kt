@@ -22,6 +22,8 @@ import com.perl5.lang.perl.lexer.PerlElementTypes
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes
 import com.perl5.lang.perl.parser.moose.MooseElementTypes
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideStubSerializingFactory
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceDefinitionStubSerializingFactory
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlFuncDefinitionStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionStubSerializingFactory
@@ -40,6 +42,8 @@ class PerlStubRegistryExtension : StubRegistryExtension {
       PerlStubElementTypes.SUB_DEFINITION to ::PerlSubDefinitionStubSerializingFactory,
       PerlStubElementTypes.METHOD_DEFINITION to ::PerlMethodDefinitionStubSerializingFactory,
       PerlStubElementTypes.FUNC_DEFINITION to ::PerlFuncDefinitionStubSerializingFactory,
+      PerlStubElementTypes.PERL_NAMESPACE to ::PerlNamespaceDefinitionStubSerializingFactory,
+      PerlStubElementTypes.LIGHT_NAMESPACE_DEFINITION to ::PerlLightNamespaceDefinitionStubSerializingFactory,
 
       MooseElementTypes.MOOSE_STATEMENT_OVERRIDE to ::PerlMooseOverrideStubSerializingFactory,
     ).forEach { (elementType, factory) ->

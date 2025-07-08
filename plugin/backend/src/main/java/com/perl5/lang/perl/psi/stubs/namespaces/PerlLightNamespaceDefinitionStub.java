@@ -17,9 +17,9 @@
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.PsiFileStubImpl;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.stubs.PerlLightElementStub;
 import org.jetbrains.annotations.NotNull;
@@ -31,7 +31,7 @@ public class PerlLightNamespaceDefinitionStub extends PerlNamespaceDefinitionStu
   private boolean myIsImplicit = false;
 
   public PerlLightNamespaceDefinitionStub(@Nullable StubElement<?> parent,
-                                          IStubElementType elementType,
+                                          @NotNull IElementType elementType,
                                           @NotNull PerlNamespaceDefinitionData data) {
     super(new PsiFileStubImpl<>(null), elementType, data);
     myParent = parent;
