@@ -30,6 +30,7 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlFuncDefinitionStubSeria
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlMethodDefinitionStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubSerializingFactory
+import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubSerializingFactory
 import com.perl5.lang.pod.lexer.PodElementTypes
 import com.perl5.lang.pod.parser.psi.stubs.PodFileStubSerializer
 
@@ -46,6 +47,7 @@ class PerlStubRegistryExtension : StubRegistryExtension {
       PerlStubElementTypes.PERL_NAMESPACE to ::PerlNamespaceDefinitionStubSerializingFactory,
       PerlStubElementTypes.LIGHT_NAMESPACE_DEFINITION to ::PerlLightNamespaceDefinitionStubSerializingFactory,
       PerlStubElementTypes.PERL_GLOB to ::PerlGlobStubSerializingFactory,
+      PerlStubElementTypes.PERL_VARIABLE_DECLARATION_ELEMENT to ::PerlVariableStubSerializingFactory,
 
       MooseElementTypes.MOOSE_STATEMENT_OVERRIDE to ::PerlMooseOverrideStubSerializingFactory,
     ).forEach { (elementType, factory) ->

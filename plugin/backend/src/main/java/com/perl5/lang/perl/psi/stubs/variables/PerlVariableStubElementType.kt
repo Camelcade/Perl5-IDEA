@@ -13,111 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.psi.stubs.variables
 
-package com.perl5.lang.perl.psi.stubs.variables;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.perl.PerlLanguage
+import com.perl5.lang.perl.lexer.PerlElementTypes
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider
+import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationElementImpl
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.*;
-import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationElementImpl;
-import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
-import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
-import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.util.Objects;
-
-
-public class PerlVariableStubElementType extends IStubElementType<PerlVariableDeclarationStub, PerlVariableDeclarationElement>
-  implements PerlElementTypes, PsiElementProvider {
-  public PerlVariableStubElementType(@NotNull String debugName) {
-    super(debugName, PerlLanguage.INSTANCE);
-  }
-
-  @Override
-  public @NotNull PerlVariableDeclarationStub createStub(@NotNull PerlVariableDeclarationElement psi, StubElement parentStub) {
-    return new PerlVariableDeclarationStub(
-      parentStub,
-      this,
-      Objects.requireNonNull(psi.getNamespaceName()),
-      Objects.requireNonNull(psi.getName()),
-      psi.getDeclaredValue(),
-      psi.getActualType(),
-      psi.getLocalVariableAnnotations());
-  }
-
-  @Override
-  public PerlVariableDeclarationElement createPsi(@NotNull PerlVariableDeclarationStub stub) {
-    return new PsiPerlVariableDeclarationElementImpl(stub, this);
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PsiPerlVariableDeclarationElementImpl(node);
-  }
-
-  @Override
-  public boolean shouldCreateStub(ASTNode node) {
-    PsiElement psi = node.getPsi();
-    return psi instanceof PerlVariableDeclarationElement variableDeclarationElement &&
-           psi.isValid() &&
-           variableDeclarationElement.isGlobalDeclaration() &&
-           StringUtil.isNotEmpty(variableDeclarationElement.getName()) &&
-           StringUtil.isNotEmpty(variableDeclarationElement.getNamespaceName());
-  }
-
-  @Override
-  public @NotNull String getExternalId() {
-    return "perl." + super.toString();
-  }
-
-  @Override
-  public void serialize(@NotNull PerlVariableDeclarationStub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(stub.getNamespaceName());
-    dataStream.writeName(stub.getVariableName());
-    stub.getDeclaredValue().serialize(dataStream);
-    dataStream.writeByte(stub.getActualType().ordinal());
-
-    PerlVariableAnnotations annotations = stub.getVariableAnnotations();
-    if (annotations.isEmpty()) {
-      dataStream.writeBoolean(false);
-    }
-    else {
-      dataStream.writeBoolean(true);
-      annotations.serialize(dataStream);
-    }
-  }
-
-  @Override
-  public @NotNull PerlVariableDeclarationStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    return new PerlVariableDeclarationStub(
-      parentStub,
-      this,
-      PerlStubSerializationUtil.readNotNullString(dataStream),
-      PerlStubSerializationUtil.readNotNullString(dataStream),
-      PerlValuesManager.readValue(dataStream),
-      PerlVariableType.values()[dataStream.readByte()],
-      readAnnotations(dataStream)
-    );
-  }
-
-  private @NotNull PerlVariableAnnotations readAnnotations(@NotNull StubInputStream dataStream) throws IOException {
-    return dataStream.readBoolean() ? PerlVariableAnnotations.deserialize(dataStream) : PerlVariableAnnotations.empty();
-  }
-
-  @Override
-  public void indexStub(@NotNull PerlVariableDeclarationStub stub, @NotNull IndexSink sink) {
-    String variableName = stub.getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + stub.getVariableName();
-    var indexKeys = stub.getIndexKey();
-    sink.occurrence(indexKeys.getFirst(), variableName);
-    sink.occurrence(indexKeys.getSecond(), stub.getNamespaceName());
-  }
+class PerlVariableStubElementType(debugName: String) : IElementType(debugName, PerlLanguage.INSTANCE),
+                                                       PerlElementTypes, PsiElementProvider {
+  override fun getPsiElement(node: ASTNode): PsiElement = PsiPerlVariableDeclarationElementImpl(node)
 }

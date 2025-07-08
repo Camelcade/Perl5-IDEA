@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,10 +17,10 @@
 package com.perl5.lang.perl.psi.stubs.variables;
 
 import com.intellij.openapi.util.Pair;
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
@@ -37,7 +37,7 @@ public class PerlVariableDeclarationStub extends StubBase<PerlVariableDeclaratio
 
   public PerlVariableDeclarationStub(
     StubElement parent,
-    @NotNull IStubElementType elementType,
+    @NotNull IElementType elementType,
     @NotNull String namespaceName,
     @NotNull String variableName,
     @NotNull PerlValue declaredValue,
