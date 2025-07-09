@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,34 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.pod.elementTypes
 
-package com.perl5.lang.pod.elementTypes;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.perl5.lang.pod.parser.psi.mixin.PodFormatterX
+import com.perl5.lang.pod.psi.impl.PsiPodFormatIndexImpl
+import org.jetbrains.annotations.NonNls
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.perl5.lang.pod.parser.psi.mixin.PodFormatterX;
-import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
-import com.perl5.lang.pod.psi.impl.PsiPodFormatIndexImpl;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-
-public class PodFormatterXElementType extends PodStubBasedTitledSectionElementType<PodFormatterX> {
-  public PodFormatterXElementType(@NotNull @NonNls String debugName) {
-    super(debugName);
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new PsiPodFormatIndexImpl(node);
-  }
-
-  @Override
-  public PodFormatterX createPsi(@NotNull PodSectionStub stub) {
-    return new PsiPodFormatIndexImpl(stub, this);
-  }
-
-  @Override
-  protected boolean shouldCreateStub(@NotNull PodFormatterX psi) {
-    return super.shouldCreateStub(psi) && psi.isMeaningful();
+class PodFormatterXElementType(debugName: @NonNls String) : PodStubBasedTitledSectionElementType<PodFormatterX>(debugName) {
+  override fun getPsiElement(node: ASTNode): PsiElement {
+    return PsiPodFormatIndexImpl(node)
   }
 }

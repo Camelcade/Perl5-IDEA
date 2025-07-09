@@ -18,7 +18,7 @@ package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
@@ -35,7 +35,7 @@ public class PodSectionItem extends PodTitledSectionMixin {
   }
 
   public PodSectionItem(@NotNull PodSectionStub stub,
-                        @NotNull IStubElementType nodeType) {
+                        @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

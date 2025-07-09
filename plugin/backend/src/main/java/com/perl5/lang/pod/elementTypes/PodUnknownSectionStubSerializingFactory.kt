@@ -13,13 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.perl5.lang.pod.elementTypes
 
-import com.intellij.lang.ASTNode
-import com.intellij.psi.PsiElement
-import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem
-import com.perl5.lang.pod.psi.impl.PsiItemSectionImpl
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub
+import com.perl5.lang.pod.psi.impl.PsiUnknownSectionImpl
 
-class PodSectionItemElementType(debugName: String) : PodStubBasedTitledSectionElementType<PodSectionItem>(debugName) {
-  override fun getPsiElement(node: ASTNode): PsiElement = PsiItemSectionImpl(node)
+
+class PodUnknownSectionStubSerializingFactory(elementType: IElementType) :
+  PodStubBasedTitledSectionSerializingFactory<PsiUnknownSectionImpl>(elementType) {
+  override fun createPsi(stub: PodSectionStub): PsiUnknownSectionImpl = PsiUnknownSectionImpl(stub, elementType)
 }

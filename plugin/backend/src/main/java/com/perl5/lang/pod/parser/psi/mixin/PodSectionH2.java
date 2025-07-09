@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +28,7 @@ public class PodSectionH2 extends PodTitledSectionMixin {
   }
 
   public PodSectionH2(@NotNull PodSectionStub stub,
-                      @NotNull IStubElementType nodeType) {
+                      @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

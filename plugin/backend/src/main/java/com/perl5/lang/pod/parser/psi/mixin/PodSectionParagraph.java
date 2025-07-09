@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.pod.parser.psi.mixin;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
@@ -32,7 +32,7 @@ import static com.perl5.lang.pod.parser.psi.util.PodRenderUtil.PARAGRAPH_SUFFIX;
 public class PodSectionParagraph extends PodStubBasedSection {
 
   public PodSectionParagraph(@NotNull PodSectionStub stub,
-                             @NotNull IStubElementType nodeType) {
+                             @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

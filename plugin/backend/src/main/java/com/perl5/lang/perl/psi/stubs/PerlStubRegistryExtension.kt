@@ -33,6 +33,7 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionStubS
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlMethodDefinitionStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableStubSerializingFactory
+import com.perl5.lang.pod.elementTypes.*
 import com.perl5.lang.pod.lexer.PodElementTypes
 import com.perl5.lang.pod.parser.psi.stubs.PodFileStubSerializer
 
@@ -52,6 +53,15 @@ class PerlStubRegistryExtension : StubRegistryExtension {
       PerlStubElementTypes.PERL_VARIABLE_DECLARATION_ELEMENT to ::PerlVariableStubSerializingFactory,
       PerlStubElementTypes.PERL_DO_EXPR to ::PerlDoExprStubSerializingFactory,
       PerlStubElementTypes.PERL_REQUIRE_EXPR to ::PerlRequireExprStubSerializingFactory,
+
+      PodStubElementTypes.POD_PARAGRAPH to ::PodParagraphStubSerializingFactory,
+      PodStubElementTypes.HEAD_1_SECTION to ::PodHead1StubSerializingFactory,
+      PodStubElementTypes.HEAD_2_SECTION to ::PodHead2StubSerializingFactory,
+      PodStubElementTypes.HEAD_3_SECTION to ::PodHead3StubSerializingFactory,
+      PodStubElementTypes.HEAD_4_SECTION to ::PodHead4StubSerializingFactory,
+      PodStubElementTypes.UNKNOWN_SECTION to ::PodUnknownSectionStubSerializingFactory,
+      PodStubElementTypes.POD_FORMAT_INDEX to ::PodFormatterXSerializingFactory,
+      PodStubElementTypes.ITEM_SECTION to ::PodSectionItemStubSerializingFactory,
 
       MooseElementTypes.MOOSE_STATEMENT_OVERRIDE to ::PerlMooseOverrideStubSerializingFactory,
     ).forEach { (elementType, factory) ->
