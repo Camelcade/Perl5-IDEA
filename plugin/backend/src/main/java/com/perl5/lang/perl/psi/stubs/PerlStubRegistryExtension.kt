@@ -22,7 +22,10 @@ import com.perl5.lang.perl.lexer.PerlElementTypes
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes
 import com.perl5.lang.perl.parser.moose.MooseElementTypes
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideStubSerializingFactory
+import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubSerializingFactory
+import com.perl5.lang.perl.psi.stubs.imports.PerlNoStatementStubSerializingFactory
+import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlDoExprStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRequireExprStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlLightNamespaceDefinitionStubSerializingFactory
@@ -53,6 +56,10 @@ class PerlStubRegistryExtension : StubRegistryExtension {
       PerlStubElementTypes.PERL_VARIABLE_DECLARATION_ELEMENT to ::PerlVariableStubSerializingFactory,
       PerlStubElementTypes.PERL_DO_EXPR to ::PerlDoExprStubSerializingFactory,
       PerlStubElementTypes.PERL_REQUIRE_EXPR to ::PerlRequireExprStubSerializingFactory,
+      PerlStubElementTypes.USE_STATEMENT to ::PerlUseStatementStubSerializingFactory,
+      PerlStubElementTypes.NO_STATEMENT to ::PerlNoStatementStubSerializingFactory,
+
+      PerlElementTypes.SUB_CALL to ::PerlSubCallStubSerializingFactory,
 
       PodStubElementTypes.POD_PARAGRAPH to ::PodParagraphStubSerializingFactory,
       PodStubElementTypes.HEAD_1_SECTION to ::PodHead1StubSerializingFactory,

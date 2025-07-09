@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,9 +17,9 @@
 package com.perl5.lang.perl.psi.stubs;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import org.jetbrains.annotations.NotNull;
 
@@ -30,7 +30,7 @@ public abstract class PerlPolyNamedElementStub<Psi extends PerlPolyNamedElement<
   private final @NotNull List<StubElement<?>> myLightNamedElementsStubs;
 
   public PerlPolyNamedElementStub(StubElement<?> parent,
-                                  IStubElementType<?, ?> elementType,
+                                  IElementType elementType,
                                   @NotNull List<StubElement<?>> lightNamedElementsStubs) {
     super(parent, elementType);
     myLightNamedElementsStubs = lightNamedElementsStubs;
