@@ -2,7 +2,7 @@
 package com.perl5.lang.pod.psi.impl;
 
 import java.util.List;
-import org.jetbrains.annotations.*;
+import com.intellij.psi.tree.IElementType;import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -19,7 +19,7 @@ public class PsiHead2SectionImpl extends PodSectionH2 implements PsiHead2Section
     super(node);
   }
 
-  public PsiHead2SectionImpl(PodSectionStub stub, IStubElementType stubType) {
+  public PsiHead2SectionImpl(PodSectionStub stub, IElementType stubType) {
     super(stub, stubType);
   }
 

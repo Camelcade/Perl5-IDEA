@@ -13,9 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.perl5.lang.pod.elementTypes
 
+import com.intellij.openapi.util.text.StringUtil
+import com.intellij.psi.PsiElement
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.tree.IElementType
 import com.perl5.lang.pod.parser.psi.mixin.PodStubBasedTitledSection
+import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub
 
-abstract class PodStubBasedTitledSectionElementType<Psi : PodStubBasedTitledSection>(debugName: String) :
-  PodStubBasedSectionElementType<Psi>(debugName)
+abstract class PodStubBasedTitledSectionSerializingFactory<Psi : PodStubBasedTitledSection>(elementType: IElementType) :
+  PodStubBasedSectionSerializingFactory<Psi>(elementType) {
+  override fun createStub(psi: Psi, parentStub: StubElement<out PsiElement>?): PodSectionStub =
+    PodSectionStub(parentStub, elementType, psi.getTitleText()!!)
+
+  override fun shouldCreateStub(psi: Psi): Boolean = StringUtil.isNotEmpty(psi.getTitleText())
+}

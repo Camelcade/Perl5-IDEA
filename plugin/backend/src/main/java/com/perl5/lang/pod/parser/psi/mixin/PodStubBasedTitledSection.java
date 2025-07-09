@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
@@ -31,7 +31,7 @@ import javax.swing.*;
 
 public abstract class PodStubBasedTitledSection extends PodStubBasedSection implements StubBasedPsiElement<PodSectionStub>,
                                                                                        PodTitledSection {
-  public PodStubBasedTitledSection(@NotNull PodSectionStub stub, @NotNull IStubElementType nodeType) {
+  public PodStubBasedTitledSection(@NotNull PodSectionStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 
