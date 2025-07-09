@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
 import com.perl5.lang.perl.psi.*;
@@ -38,7 +38,7 @@ public abstract class PerlSubCallElement extends PerlPolyNamedElement<PerlSubCal
   private static final Logger LOG = Logger.getInstance(PerlSubCallElement.class);
 
   public PerlSubCallElement(@NotNull PerlSubCallElementStub stub,
-                            @NotNull IStubElementType nodeType) {
+                            @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

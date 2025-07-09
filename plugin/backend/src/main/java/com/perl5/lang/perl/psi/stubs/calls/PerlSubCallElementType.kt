@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.perl5.lang.perl.psi.stubs.imports
+package com.perl5.lang.perl.psi.stubs.calls
 
 import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiElement
-import com.perl5.lang.perl.psi.impl.PerlNoStatementElement
+import com.perl5.lang.perl.psi.impl.PerlSubCallElement
+import com.perl5.lang.perl.psi.impl.PsiPerlSubCallImpl
+import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType
 
-class PerlNoStatementStubElementType(debugName: String) : PerlUseStatementStubElementType(debugName) {
-  override fun getPsiElement(node: ASTNode): PsiElement = PerlNoStatementElement(node)
+class PerlSubCallElementType(debugName: String) : PerlPolyNamedElementType<PerlSubCallElementStub, PerlSubCallElement>(debugName) {
+  override fun getPsiElement(node: ASTNode): PsiElement = PsiPerlSubCallImpl(node)
 }

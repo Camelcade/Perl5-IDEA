@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.perl5.lang.perl.psi.stubs.imports
 
 import com.intellij.lang.ASTNode
-import com.intellij.psi.PsiElement
-import com.perl5.lang.perl.psi.impl.PerlNoStatementElement
+import com.intellij.psi.tree.IElementType
 
-class PerlNoStatementStubElementType(debugName: String) : PerlUseStatementStubElementType(debugName) {
-  override fun getPsiElement(node: ASTNode): PsiElement = PerlNoStatementElement(node)
+class PerlNoStatementStubSerializingFactory(elementType: IElementType) : PerlUseStatementStubSerializingFactory(elementType) {
+  override fun shouldCreateStub(node: ASTNode): Boolean = false
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
@@ -43,7 +42,7 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub<?>> extends PerlStubBasedPsiElementBase<Stub>
   implements StubBasedPsiElement<Stub> {
-  public PerlPolyNamedElement(@NotNull Stub stub, @NotNull IStubElementType nodeType) {
+  public PerlPolyNamedElement(@NotNull Stub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

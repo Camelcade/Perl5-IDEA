@@ -17,6 +17,7 @@
       <name>net.sf.cglib.core.internal.Function</name>
       <name>org.apache.log4j.Logger</name>
       <name>org.codehaus.groovy.util.StringUtil</name>
+      <name>org.intellij.markdown.IElementType</name>
       <name>org.jsoup.helper.StringUtil</name>
       <name>org.jsoup.internal.StringUtil</name>
     </excluded-names>

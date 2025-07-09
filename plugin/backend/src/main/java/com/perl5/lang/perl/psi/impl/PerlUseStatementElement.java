@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
@@ -32,7 +32,7 @@ public class PerlUseStatementElement extends PerlUseStatementElementBase {
     super(node);
   }
 
-  public PerlUseStatementElement(PerlUseStatementStub stub, IStubElementType nodeType) {
+  public PerlUseStatementElement(PerlUseStatementStub stub, IElementType nodeType) {
     super(stub, nodeType);
   }
 
