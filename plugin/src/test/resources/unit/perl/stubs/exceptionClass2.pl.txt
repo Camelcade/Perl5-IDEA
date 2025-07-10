@@ -1,0 +1,59 @@
+Language: Perl5
+PerlFileStub
+	Name: main
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Type: Perl5
+  NAMESPACE:PerlNamespaceDefinitionStub
+	Name: MyTest::Exceptions
+	Mro: DFS
+	Parents: []
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+    USE_STATEMENT:PerlUseStatementStub
+	Light elements: 4
+	LIGHT_NAMESPACE_DEFINITION:PerlLightNamespaceDefinitionStub
+	Name: Library::Exception
+	Mro: DFS
+	Parents: [Exception::Class::Base]
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	LIGHT_NAMESPACE_DEFINITION:PerlLightNamespaceDefinitionStub
+	Name: LibraryException
+	Mro: DFS
+	Parents: [Exception::Class::Base]
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	LIGHT_NAMESPACE_DEFINITION:PerlLightNamespaceDefinitionStub
+	Name: Library::Exception2
+	Mro: DFS
+	Parents: [Exception::Class::Base]
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	LIGHT_NAMESPACE_DEFINITION:PerlLightNamespaceDefinitionStub
+	Name: LibraryException3
+	Mro: DFS
+	Parents: [Exception::Class::Base]
+	@EXPORT: []
+	@EXPORT_OK: []
+	@EXPORT_TAGS: {}
+	Annotations: null
+	Package name: Exception::Class
+	Outer package name: MyTest::Exceptions
+	Import options: [Library::Exception, LibraryException, Library::Exception2, LibraryException3]
+
+----------
+Language: Perl5 POD
+PsiFileStubImpl
