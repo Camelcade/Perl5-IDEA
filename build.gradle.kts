@@ -318,7 +318,7 @@ tasks {
     sourceDirectories.setFrom(sourcesDirs)
 
     val classDirs = allprojects.map { project ->
-      project.tasks.named<InstrumentCodeTask>(INSTRUMENT_CODE).map { it -> it.outputDirectory }
+      project.tasks.named<InstrumentCodeTask>(INSTRUMENT_CODE).map { it.outputDirectory }
     }
     project.logger.info("\tFound following class dirs:")
     classDirs.map { it.get().get().toString() }.sorted().forEach { project.logger.info("\t- $it") }
@@ -366,14 +366,14 @@ sonar {
 
 coveralls {
   jacocoReportPath = coverageReportFile
-  allprojects.map {
-    sourceDirs.addAll(it.sourceSets.main.get().allSource.sourceDirectories.map { it.absolutePath })
+  allprojects.map { project ->
+    sourceDirs.addAll(project.sourceSets.main.get().allSource.sourceDirectories.map { it.absolutePath })
   }
 }
 
 intellijPlatform {
   val pluginList = mutableListOf<String>()
-  val bundledPluginList = mutableListOf(properties("intelliLangPlugin").get(),)
+  val bundledPluginList = mutableListOf(properties("intelliLangPlugin").get())
 
   if (!isCI.get()) {
     pluginList.add("PsiViewer:${properties("psiViewerVersion").get()}")
@@ -436,15 +436,15 @@ fun normalizeSandbox(project: Project, taskName: String) {
     val pluginLibModulesPath = pluginRootPath.resolve(LIB_MODULES)
     Files.createDirectories(pluginLibModulesPath)
     Files.list(pluginLibPath).use {
-      it.filter {
-        val fileName = it.fileName.toString()
+      it.filter { path ->
+        val fileName = path.fileName.toString()
         fileName.endsWith(".jar") &&
           fileName.startsWith(archiveBasePrefix(pluginName)) &&
           fileName != mainJarName &&
           !fileName.contains("searchableOptions")
-      }.forEach {
-        project.logger.info("\t\tMoving $it to $pluginLibModulesPath")
-        it.moveTo(pluginLibModulesPath.resolve(it.fileName))
+      }.forEach { path ->
+        project.logger.info("\t\tMoving $path to $pluginLibModulesPath")
+        path.moveTo(pluginLibModulesPath.resolve(path.fileName))
       }
     }
   }

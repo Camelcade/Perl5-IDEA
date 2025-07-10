@@ -49,7 +49,7 @@ abstract class PerlSubDefinitionBase : PerlSubBase<PerlSubDefinitionStub>, PerlS
     }
 
     val arguments = getSubArgumentsList()
-    return !arguments.isEmpty() && arguments.first().isSelf(getProject()) == true
+    return !arguments.isEmpty() && arguments.first().isSelf(getProject())
   }
 
   override fun getSubArgumentsList(): List<PerlSubArgument> {

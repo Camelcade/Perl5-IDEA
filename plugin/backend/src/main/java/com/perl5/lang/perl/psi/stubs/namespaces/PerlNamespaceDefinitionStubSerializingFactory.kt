@@ -37,7 +37,7 @@ open class PerlNamespaceDefinitionStubSerializingFactory(val elementType: IEleme
 
   override fun getExternalId(): String = "perl.$elementType"
 
-  override fun serialize(stub: PerlNamespaceDefinitionStub, dataStream: StubOutputStream) = stub.data.serialize(dataStream)
+  override fun serialize(stub: PerlNamespaceDefinitionStub, dataStream: StubOutputStream): Unit = stub.data.serialize(dataStream)
 
   override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): PerlNamespaceDefinitionStub =
     createStubElement(parentStub, PerlNamespaceDefinitionData.deserialize(dataStream))
