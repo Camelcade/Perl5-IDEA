@@ -40,7 +40,7 @@ class PerlLightSubDefinitionStub(
 
   override fun getParentStub(): StubElement<*>? = myParent
 
-  override fun <E : PsiElement?> getParentStubOfType(parentClass: Class<E?>) = throw IncorrectOperationException("NYI")
+  override fun <E : PsiElement?> getParentStubOfType(parentClass: Class<E?>): Nothing = throw IncorrectOperationException("NYI")
 
   override fun toString(): String = elementType.toString() + ":" + super.toString()
 

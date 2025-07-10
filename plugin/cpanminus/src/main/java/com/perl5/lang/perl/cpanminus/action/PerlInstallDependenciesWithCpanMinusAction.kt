@@ -50,6 +50,6 @@ class PerlInstallDependenciesWithCpanMinusAction :
       return
     }
 
-    CpanminusAdapter.installModules(perlSdk, getEventProject(event), listOf<String>("--installdeps", eventFile.parent!!.path), null, true)
+    CpanminusAdapter.installModules(perlSdk, getEventProject(event), listOf("--installdeps", eventFile.parent!!.path), null, true)
   }
 }

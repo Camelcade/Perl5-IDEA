@@ -72,14 +72,10 @@ class PerlClassAccessorMethod : PerlLightMethodDefinitionElement<PerlSubCallElem
     delegate: PerlSubCallElement,
     stub: PerlSubDefinitionStub
   ) : super(delegate, stub) {
-    if (hasGetterName()) {
-      nameComputation = GETTER_COMPUTATION
-    }
-    else if (hasSetterName()) {
-      nameComputation = SETTER_COMPUTATION
-    }
-    else {
-      nameComputation = SIMPLE_COMPUTATION
+    nameComputation = when {
+      hasGetterName() -> GETTER_COMPUTATION
+      hasSetterName() -> SETTER_COMPUTATION
+      else -> SIMPLE_COMPUTATION
     }
   }
 

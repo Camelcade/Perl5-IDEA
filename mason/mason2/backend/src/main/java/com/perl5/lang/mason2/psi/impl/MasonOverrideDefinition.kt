@@ -36,7 +36,7 @@ class MasonOverrideDefinition : PerlMooseOverrideStatement, PerlImplicitVariable
 
   constructor(stub: PerlSubDefinitionStub, nodeType: IElementType) : super(stub, nodeType)
 
-  protected fun buildImplicitVariables(): MutableList<PerlVariableDeclarationElement> {
+  private fun buildImplicitVariables(): MutableList<PerlVariableDeclarationElement> {
     val newImplicitVariables: MutableList<PerlVariableDeclarationElement> = ArrayList()
     if (isValid()) {
       newImplicitVariables.add(PerlImplicitVariableDeclaration.createInvocant(this))
@@ -49,7 +49,7 @@ class MasonOverrideDefinition : PerlMooseOverrideStatement, PerlImplicitVariable
   override fun getNameIdentifier(): PsiElement? = PsiTreeUtil.getChildOfType(this, PerlSubNameElement::class.java)
 
   override val subNameHeavy: String?
-    get() = getNameIdentifier()?.getNode()?.getText()
+    get() = getNameIdentifier()?.node?.text
 
   @Throws(IncorrectOperationException::class)
   override fun setName(name: String): PsiElement {

@@ -48,14 +48,14 @@ open class PerlMooseOverrideStatement : PerlSubDefinitionBase, PerlReferencesPro
     var expr: PsiElement? = this.expr
 
     if (expr is PsiPerlParenthesisedExpr) {
-      expr = expr.getFirstChild()
+      expr = expr.firstChild
       if (expr != null) {
-        expr = expr.getNextSibling()
+        expr = expr.nextSibling
       }
     }
 
     if (expr is PsiPerlCommaSequenceExpr) {
-      val nameContainer = expr.getFirstChild()
+      val nameContainer = expr.firstChild
       if (nameContainer is PerlString) {
         return nameContainer
       }

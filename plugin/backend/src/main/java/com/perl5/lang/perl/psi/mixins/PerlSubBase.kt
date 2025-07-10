@@ -33,6 +33,7 @@ import com.perl5.lang.perl.psi.utils.PerlAnnotations
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
 import com.perl5.lang.perl.util.PerlPackageUtil
+import javax.swing.Icon
 
 abstract class PerlSubBase<Stub : PerlSubStub<*>> : PerlStubBasedPsiElementBase<Stub>, PerlSubElement, StubBasedPsiElement<Stub>,
                                                     PerlNamespaceElementContainer, PerlDeprecatable, PerlLabelScope {
@@ -86,8 +87,7 @@ abstract class PerlSubBase<Stub : PerlSubStub<*>> : PerlStubBasedPsiElementBase<
     return PerlSubAnnotations.createFromAnnotationsList(PerlAnnotations.collectAnnotations(this))
   }
 
-  override fun getIcon(flags: Int) = if (isMethod()) PerlIcons.METHOD_GUTTER_ICON else PerlIcons.SUB_GUTTER_ICON
-
+  override fun getIcon(flags: Int): Icon = if (isMethod()) PerlIcons.METHOD_GUTTER_ICON else PerlIcons.SUB_GUTTER_ICON
 
   override fun getTextOffset(): Int = this.nameIdentifier?.textOffset ?: super.getTextOffset()
 

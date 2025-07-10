@@ -29,7 +29,7 @@ abstract class PodStubBasedSectionSerializingFactory<Psi : PodStubBasedSection>(
 
   override fun getExternalId(): String = "PodSection $elementType"
 
-  override fun serialize(stub: PodSectionStub, dataStream: StubOutputStream) = dataStream.writeName(stub.content)
+  override fun serialize(stub: PodSectionStub, dataStream: StubOutputStream): Unit = dataStream.writeName(stub.content)
 
   override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): PodSectionStub =
     PodSectionStub(parentStub, elementType, PerlStubSerializationUtil.readString(dataStream)!!)
@@ -40,7 +40,7 @@ abstract class PodStubBasedSectionSerializingFactory<Psi : PodStubBasedSection>(
     return psi != null && shouldCreateStub(psi as Psi)
   }
 
-  override fun indexStub(stub: PodSectionStub, sink: IndexSink) = Unit
+  override fun indexStub(stub: PodSectionStub, sink: IndexSink): Unit = Unit
 
-  open protected fun shouldCreateStub(psi: Psi): Boolean = psi.isIndexed()
+  protected open fun shouldCreateStub(psi: Psi): Boolean = psi.isIndexed()
 }
