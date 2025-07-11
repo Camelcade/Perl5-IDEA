@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
 import com.perl5.lang.perl.psi.PerlVariable;
@@ -34,7 +34,7 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.FAT_COMMA;
 
 
 public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonArgsBlockStub> implements HTMLMasonArgsBlock {
-  public HTMLMasonArgsBlockImpl(@NotNull HTMLMasonArgsBlockStub stub, @NotNull IStubElementType nodeType) {
+  public HTMLMasonArgsBlockImpl(@NotNull HTMLMasonArgsBlockStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

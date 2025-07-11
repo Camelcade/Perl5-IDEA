@@ -18,13 +18,11 @@ package com.perl5.lang.htmlmason.parser.stubs
 
 import com.intellij.psi.stubs.StubRegistry
 import com.intellij.psi.stubs.StubRegistryExtension
-import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes
+import com.perl5.lang.htmlmason.elementType.*
+import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.HTML_MASON_ARGS_BLOCK
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.HTML_MASON_FLAGS_STATEMENT
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.HTML_MASON_METHOD_DEFINITION
 import com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.HTML_MASON_SUBCOMPONENT_DEFINITION
-import com.perl5.lang.htmlmason.elementType.HTMLMasonFlagsStatementStubSerializingFactory
-import com.perl5.lang.htmlmason.elementType.HTMLMasonMethodStubSerializingFactory
-import com.perl5.lang.htmlmason.elementType.HTMLMasonSubcomponentStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.PerlFileStubserializer
 
 class HTMLMasonStubRegistryExtension : StubRegistryExtension {
@@ -34,6 +32,7 @@ class HTMLMasonStubRegistryExtension : StubRegistryExtension {
       HTML_MASON_SUBCOMPONENT_DEFINITION to ::HTMLMasonSubcomponentStubSerializingFactory,
       HTML_MASON_METHOD_DEFINITION to ::HTMLMasonMethodStubSerializingFactory,
       HTML_MASON_FLAGS_STATEMENT to ::HTMLMasonFlagsStatementStubSerializingFactory,
+      HTML_MASON_ARGS_BLOCK to ::HTMLMasonArgsBlockStubSerializingFactory,
     ).forEach { (elementType, factory) -> registry.registerStubSerializingFactory(elementType, factory(elementType)) }
   }
 }

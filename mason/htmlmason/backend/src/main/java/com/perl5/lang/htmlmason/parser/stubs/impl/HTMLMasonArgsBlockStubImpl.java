@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package com.perl5.lang.htmlmason.parser.stubs.impl;
 
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
@@ -29,7 +29,7 @@ import java.util.List;
 public class HTMLMasonArgsBlockStubImpl extends StubBase<HTMLMasonArgsBlock> implements HTMLMasonArgsBlockStub {
   private final List<PerlSubArgument> myArguments;
 
-  public HTMLMasonArgsBlockStubImpl(StubElement parent, IStubElementType elementType, List<PerlSubArgument> arguments) {
+  public HTMLMasonArgsBlockStubImpl(StubElement parent, IElementType elementType, List<PerlSubArgument> arguments) {
     super(parent, elementType);
     myArguments = arguments;
   }
