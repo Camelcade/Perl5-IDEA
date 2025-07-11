@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,14 +16,14 @@
 
 package com.perl5.lang.htmlmason.parser.stubs.impl;
 
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonSubcomponentDefinitionStub;
 
 public class HTMLMasonSubcomponentDefinitionStubImpl extends HTMLMasonNamedElementStubBaseImpl<HTMLMasonSubcomponentDefitnition>
   implements HTMLMasonSubcomponentDefinitionStub {
-  public HTMLMasonSubcomponentDefinitionStubImpl(StubElement parent, IStubElementType elementType, String myName) {
+  public HTMLMasonSubcomponentDefinitionStubImpl(StubElement parent, IElementType elementType, String myName) {
     super(parent, elementType, myName);
   }
 }
