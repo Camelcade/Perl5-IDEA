@@ -22,6 +22,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes
 import com.perl5.lang.perl.parser.moose.MooseElementTypes
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideStubSerializingFactory
+import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementSerializingFactory
 import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.imports.PerlNoStatementStubSerializingFactory
@@ -70,6 +71,7 @@ class PerlStubRegistryExtension : StubRegistryExtension {
       PodStubElementTypes.POD_FORMAT_INDEX to ::PodFormatterXSerializingFactory,
       PodStubElementTypes.ITEM_SECTION to ::PodSectionItemStubSerializingFactory,
 
+      MooseElementTypes.MOOSE_STATEMENT_AUGMENT to ::PerlMooseAugmentStatementSerializingFactory,
       MooseElementTypes.MOOSE_STATEMENT_OVERRIDE to ::PerlMooseOverrideStubSerializingFactory,
     ).forEach { (elementType, factory) ->
       registry.registerStubSerializingFactory(elementType, factory(elementType))

@@ -13,14 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.perl5.lang.mason2.elementType
 
-import com.intellij.lang.ASTNode
-import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IElementType
 import com.perl5.lang.mason2.psi.impl.MasonAugmentMethodModifierImpl
-import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementElementType
-import org.jetbrains.annotations.NonNls
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement
+import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementSerializingFactory
+import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub
 
-class MasonAugmentMethodModifierElementType(debugName: @NonNls String) : PerlMooseAugmentStatementElementType(debugName) {
-  override fun getPsiElement(node: ASTNode): PsiElement = MasonAugmentMethodModifierImpl(node)
+
+class MasonAugmentMethodModifierStubSerializingFactory(elementType: IElementType) :
+  PerlMooseAugmentStatementSerializingFactory(elementType) {
+  override fun createPsi(stub: PerlMooseAugmentStatementStub): PerlMooseAugmentStatement = MasonAugmentMethodModifierImpl(stub, elementType)
 }

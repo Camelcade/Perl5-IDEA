@@ -19,10 +19,12 @@ package com.perl5.lang.mason2.stubs
 import com.intellij.psi.stubs.StubRegistry
 import com.intellij.psi.stubs.StubRegistryExtension
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes
+import com.perl5.lang.mason2.elementType.Mason2ElementTypes.Companion.MASON_AUGMENT_MODIFIER
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes.Companion.MASON_FILTER_DEFINITION
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes.Companion.MASON_METHOD_DEFINITION
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes.Companion.MASON_NAMESPACE_DEFINITION
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes.Companion.MASON_OVERRIDE_DEFINITION
+import com.perl5.lang.mason2.elementType.MasonAugmentMethodModifierStubSerializingFactory
 import com.perl5.lang.mason2.elementType.MasonNamespaceStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.PerlFileStubserializer
 
@@ -36,6 +38,7 @@ class Mason2StubRegistryExtension : StubRegistryExtension {
       MASON_METHOD_DEFINITION to ::MasonMethodDefinitionStubSerializingFactory,
       MASON_FILTER_DEFINITION to ::MasonFilterDefinitionStubSerializingFactory,
       MASON_NAMESPACE_DEFINITION to ::MasonNamespaceStubSerializingFactory,
+      MASON_AUGMENT_MODIFIER to ::MasonAugmentMethodModifierStubSerializingFactory,
     ).forEach { (elementType, factory) -> registry.registerStubSerializingFactory(elementType, factory(elementType)) }
   }
 }

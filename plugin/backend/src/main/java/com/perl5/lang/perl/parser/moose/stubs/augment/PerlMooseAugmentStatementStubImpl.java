@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,15 +16,15 @@
 
 package com.perl5.lang.perl.parser.moose.stubs.augment;
 
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 
 public class PerlMooseAugmentStatementStubImpl extends StubBase<PerlMooseAugmentStatement> implements PerlMooseAugmentStatementStub {
   private final String mySubName;
 
-  public PerlMooseAugmentStatementStubImpl(StubElement parent, IStubElementType elementType, String subName) {
+  public PerlMooseAugmentStatementStubImpl(StubElement parent, IElementType elementType, String subName) {
     super(parent, elementType);
     mySubName = subName;
   }

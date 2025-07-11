@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.mason2.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.MasonAugmentMethodModifier;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAugmentStatementImpl;
@@ -41,12 +41,12 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
     super(node);
   }
 
-  public MasonAugmentMethodModifierImpl(@NotNull PerlMooseAugmentStatementStub stub, @NotNull IStubElementType nodeType) {
+  public MasonAugmentMethodModifierImpl(@NotNull PerlMooseAugmentStatementStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 
   @Override
-  public @Nullable PsiReference[] getReferences(PsiElement element) {
+  public PsiReference @Nullable [] getReferences(PsiElement element) {
     return null;
   }
 
