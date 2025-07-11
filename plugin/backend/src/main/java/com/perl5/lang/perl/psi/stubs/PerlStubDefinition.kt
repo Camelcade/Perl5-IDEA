@@ -28,7 +28,7 @@ import com.perl5.lang.perl.psi.PerlFile
 import com.perl5.lang.perl.psi.PerlSubCallHandlerVersionService
 
 
-private const val baseVersion = 6
+private const val baseVersion = 7
 
 internal open class PerlStubDefinition : LanguageStubDefinition {
   override val builder: StubBuilder
