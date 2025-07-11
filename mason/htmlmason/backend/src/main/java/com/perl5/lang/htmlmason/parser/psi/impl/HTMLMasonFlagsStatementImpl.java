@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
@@ -37,7 +37,7 @@ public class HTMLMasonFlagsStatementImpl extends PerlStubBasedPsiElementBase<HTM
     super(node);
   }
 
-  public HTMLMasonFlagsStatementImpl(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull IStubElementType nodeType) {
+  public HTMLMasonFlagsStatementImpl(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

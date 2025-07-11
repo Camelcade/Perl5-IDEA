@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,9 +16,9 @@
 
 package com.perl5.lang.htmlmason.parser.stubs.impl;
 
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubBase;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +26,7 @@ import org.jetbrains.annotations.Nullable;
 public class HTMLMasonFlagsStatementStubImpl extends StubBase<HTMLMasonFlagsStatement> implements HTMLMasonFlagsStatementStub {
   final String myParentComponentPath;
 
-  public HTMLMasonFlagsStatementStubImpl(StubElement parent, IStubElementType elementType, @Nullable String parentComponentPath) {
+  public HTMLMasonFlagsStatementStubImpl(StubElement parent, IElementType elementType, @Nullable String parentComponentPath) {
     super(parent, elementType);
     myParentComponentPath = parentComponentPath;
   }
