@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseMethodModifier;
@@ -39,7 +39,7 @@ public class PerlMooseAugmentStatementImpl extends PerlStubBasedPsiElementBase<P
     super(node);
   }
 
-  public PerlMooseAugmentStatementImpl(@NotNull PerlMooseAugmentStatementStub stub, @NotNull IStubElementType nodeType) {
+  public PerlMooseAugmentStatementImpl(@NotNull PerlMooseAugmentStatementStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 
