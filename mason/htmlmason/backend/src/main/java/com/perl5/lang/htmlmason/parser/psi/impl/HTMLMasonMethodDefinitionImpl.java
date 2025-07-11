@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.HTMLMasonIcons;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonMethodDefinitionStub;
@@ -33,7 +33,7 @@ public class HTMLMasonMethodDefinitionImpl extends HTMLMasonStubBasedNamedElemen
     super(node);
   }
 
-  public HTMLMasonMethodDefinitionImpl(@NotNull HTMLMasonMethodDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public HTMLMasonMethodDefinitionImpl(@NotNull HTMLMasonMethodDefinitionStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

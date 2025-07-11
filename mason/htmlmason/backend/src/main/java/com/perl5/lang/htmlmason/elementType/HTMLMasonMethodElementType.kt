@@ -13,73 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.htmlmason.elementType
 
-package com.perl5.lang.htmlmason.elementType;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.htmlmason.HTMLMasonLanguage
+import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonMethodDefinitionImpl
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider
+import org.jetbrains.annotations.NonNls
 
-import com.intellij.lang.ASTNode;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.*;
-import com.perl5.lang.htmlmason.HTMLMasonLanguage;
-import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
-import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonMethodDefinitionImpl;
-import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonMethodDefinitionStub;
-import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonMethodDefinitionStubImpl;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-
-
-public class HTMLMasonMethodElementType extends IStubElementType<HTMLMasonMethodDefinitionStub, HTMLMasonMethodDefinition>
-  implements PsiElementProvider {
-  public HTMLMasonMethodElementType(@NotNull @NonNls String debugName) {
-    super(debugName, HTMLMasonLanguage.INSTANCE);
-  }
-
-  @Override
-  public HTMLMasonMethodDefinition createPsi(@NotNull HTMLMasonMethodDefinitionStub stub) {
-    return new HTMLMasonMethodDefinitionImpl(stub, this);
-  }
-
-  @Override
-  public @NotNull HTMLMasonMethodDefinitionStub createStub(@NotNull HTMLMasonMethodDefinition psi, StubElement parentStub) {
-    return new HTMLMasonMethodDefinitionStubImpl(parentStub, this, psi.getName());
-  }
-
-  @Override
-  public @NotNull String getExternalId() {
-    return "HTML::Mason::" + super.toString();
-  }
-
-  @Override
-  public void serialize(@NotNull HTMLMasonMethodDefinitionStub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(stub.getName());
-  }
-
-  @Override
-  public @NotNull HTMLMasonMethodDefinitionStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub)
-    throws IOException {
-    return new HTMLMasonMethodDefinitionStubImpl(parentStub, this, PerlStubSerializationUtil.readString(dataStream));
-  }
-
-  /**
-   * @implNote we don't need to index this stub, only store
-   */
-  @Override
-  public void indexStub(@NotNull HTMLMasonMethodDefinitionStub stub, @NotNull IndexSink sink) {
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new HTMLMasonMethodDefinitionImpl(node);
-  }
-
-  @Override
-  public boolean shouldCreateStub(ASTNode node) {
-    PsiElement psi = node.getPsi();
-    return psi instanceof HTMLMasonMethodDefinition methodDefinition && StringUtil.isNotEmpty(methodDefinition.getName());
-  }
+class HTMLMasonMethodElementType(debugName: @NonNls String) : IElementType(debugName, HTMLMasonLanguage.INSTANCE), PsiElementProvider {
+  override fun getPsiElement(node: ASTNode): PsiElement = HTMLMasonMethodDefinitionImpl(node)
 }
