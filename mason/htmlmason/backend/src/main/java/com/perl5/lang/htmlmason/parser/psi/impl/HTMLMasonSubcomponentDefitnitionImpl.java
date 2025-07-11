@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.htmlmason.parser.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.search.LocalSearchScope;
 import com.intellij.psi.search.SearchScope;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.HTMLMasonIcons;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonSubcomponentDefinitionStub;
@@ -31,7 +31,7 @@ import javax.swing.*;
 
 public class HTMLMasonSubcomponentDefitnitionImpl extends HTMLMasonStubBasedNamedElementImpl<HTMLMasonSubcomponentDefinitionStub>
   implements HTMLMasonSubcomponentDefitnition {
-  public HTMLMasonSubcomponentDefitnitionImpl(@NotNull HTMLMasonSubcomponentDefinitionStub stub, @NotNull IStubElementType nodeType) {
+  public HTMLMasonSubcomponentDefitnitionImpl(@NotNull HTMLMasonSubcomponentDefinitionStub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 

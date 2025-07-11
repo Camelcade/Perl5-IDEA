@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.scope.PsiScopeProcessor;
-import com.intellij.psi.stubs.IStubElementType;
 import com.intellij.psi.stubs.StubElement;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
 import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 public abstract class HTMLMasonStubBasedElement<T extends StubElement<?>> extends PerlStubBasedPsiElementBase<T>
   implements HTMLMasonCompositeElement {
-  public HTMLMasonStubBasedElement(@NotNull T stub, @NotNull IStubElementType nodeType) {
+  public HTMLMasonStubBasedElement(@NotNull T stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
 
