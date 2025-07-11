@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,82 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.htmlmason.elementType
 
-package com.perl5.lang.htmlmason.elementType;
+import com.intellij.lang.ASTNode
+import com.intellij.psi.PsiElement
+import com.intellij.psi.tree.IElementType
+import com.perl5.lang.htmlmason.HTMLMasonLanguage
+import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFlagsStatementImpl
+import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider
+import org.jetbrains.annotations.NonNls
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.*;
-import com.intellij.util.io.StringRef;
-import com.perl5.lang.htmlmason.HTMLMasonLanguage;
-import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
-import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFlagsStatementImpl;
-import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub;
-import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex;
-import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonFlagsStatementStubImpl;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
-import org.jetbrains.annotations.NonNls;
-import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-
-import static com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement.UNDEF_RESULT;
-
-
-public class HTMLMasonFlagsStatementElementType extends IStubElementType<HTMLMasonFlagsStatementStub, HTMLMasonFlagsStatement>
-  implements PsiElementProvider {
-  public HTMLMasonFlagsStatementElementType(@NotNull @NonNls String debugName) {
-    super(debugName, HTMLMasonLanguage.INSTANCE);
-  }
-
-  @Override
-  public HTMLMasonFlagsStatement createPsi(@NotNull HTMLMasonFlagsStatementStub stub) {
-    return new HTMLMasonFlagsStatementImpl(stub, this);
-  }
-
-  @Override
-  public @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return new HTMLMasonFlagsStatementImpl(node);
-  }
-
-
-  @Override
-  public @NotNull HTMLMasonFlagsStatementStub createStub(@NotNull HTMLMasonFlagsStatement psi, StubElement parentStub) {
-    return new HTMLMasonFlagsStatementStubImpl(parentStub, this, psi.getParentComponentPath());
-  }
-
-  @Override
-  public @NotNull String getExternalId() {
-    return "HTML::Mason::" + super.toString();
-  }
-
-  @Override
-  public void serialize(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull StubOutputStream dataStream) throws IOException {
-    String parentComponentPath = stub.getParentComponentPath();
-
-    if (UNDEF_RESULT.equals(parentComponentPath)) {
-      dataStream.writeBoolean(false);
-      return;
-    }
-    dataStream.writeBoolean(true);
-    dataStream.writeName(parentComponentPath);
-  }
-
-  @Override
-  public @NotNull HTMLMasonFlagsStatementStub deserialize(@NotNull StubInputStream dataStream, StubElement parentStub) throws IOException {
-    if (!dataStream.readBoolean()) {
-      return new HTMLMasonFlagsStatementStubImpl(parentStub, this, UNDEF_RESULT);
-    }
-    StringRef nameRef = dataStream.readName();
-    return new HTMLMasonFlagsStatementStubImpl(parentStub, this, nameRef == null ? null : nameRef.toString());
-  }
-
-  @Override
-  public void indexStub(@NotNull HTMLMasonFlagsStatementStub stub, @NotNull IndexSink sink) {
-    String parentComponentPath = stub.getParentComponentPath();
-
-    if (parentComponentPath != null && !UNDEF_RESULT.equals(parentComponentPath)) {
-      sink.occurrence(HTMLMasonFlagsStubIndex.KEY, parentComponentPath);
-    }
-  }
+class HTMLMasonFlagsStatementElementType(debugName: @NonNls String) : IElementType(debugName, HTMLMasonLanguage.INSTANCE),
+                                                                      PsiElementProvider {
+  override fun getPsiElement(node: ASTNode): PsiElement = HTMLMasonFlagsStatementImpl(node)
 }
