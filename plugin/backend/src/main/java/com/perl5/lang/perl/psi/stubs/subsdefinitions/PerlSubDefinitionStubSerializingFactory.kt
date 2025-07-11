@@ -25,12 +25,13 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
 import com.perl5.lang.perl.psi.utils.PerlSubArgument
 
 
-open class PerlSubDefinitionStubSerializingFactory(val elementType: IElementType) :
-  StubSerializingElementFactory<PerlSubDefinitionStub, PerlSubDefinitionElement> {
+open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
+  PerlStubSerializingFactory<PerlSubDefinitionStub, PerlSubDefinitionElement>(elementType) {
   override fun createPsi(stub: PerlSubDefinitionStub): PerlSubDefinitionElement = PsiPerlSubDefinitionImpl(stub, elementType)
 
   override fun createStub(
@@ -47,7 +48,6 @@ open class PerlSubDefinitionStubSerializingFactory(val elementType: IElementType
     )
   }
 
-  override fun getExternalId(): String = "perl.$elementType"
 
   override fun serialize(
     stub: PerlSubDefinitionStub,

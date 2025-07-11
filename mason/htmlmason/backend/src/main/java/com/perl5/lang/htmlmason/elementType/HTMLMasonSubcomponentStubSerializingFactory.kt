@@ -19,17 +19,21 @@ package com.perl5.lang.htmlmason.elementType
 import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.psi.PsiElement
-import com.intellij.psi.stubs.*
+import com.intellij.psi.stubs.IndexSink
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.stubs.StubInputStream
+import com.intellij.psi.stubs.StubOutputStream
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonSubcomponentDefitnitionImpl
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonStubsSerializingFactory
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonSubcomponentDefinitionStub
 import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonSubcomponentDefinitionStubImpl
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil
 
 
-class HTMLMasonSubcomponentStubSerializingFactory(val elementType: IElementType) :
-  StubSerializingElementFactory<HTMLMasonSubcomponentDefinitionStub, HTMLMasonSubcomponentDefitnition> {
+class HTMLMasonSubcomponentStubSerializingFactory(elementType: IElementType) :
+  HTMLMasonStubsSerializingFactory<HTMLMasonSubcomponentDefinitionStub, HTMLMasonSubcomponentDefitnition>(elementType) {
   override fun createPsi(stub: HTMLMasonSubcomponentDefinitionStub): HTMLMasonSubcomponentDefitnition =
     HTMLMasonSubcomponentDefitnitionImpl(stub, elementType)
 
@@ -37,8 +41,6 @@ class HTMLMasonSubcomponentStubSerializingFactory(val elementType: IElementType)
     psi: HTMLMasonSubcomponentDefitnition,
     parentStub: StubElement<out PsiElement>?
   ): HTMLMasonSubcomponentDefinitionStub = HTMLMasonSubcomponentDefinitionStubImpl(parentStub, elementType, psi.name)
-
-  override fun getExternalId(): String = "HTML::Mason::$elementType"
 
   override fun serialize(stub: HTMLMasonSubcomponentDefinitionStub, dataStream: StubOutputStream) = dataStream.writeName(stub.getName())
 

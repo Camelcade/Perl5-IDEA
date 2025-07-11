@@ -19,21 +19,23 @@ package com.perl5.lang.perl.parser.moose.stubs.augment
 import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.psi.PsiElement
-import com.intellij.psi.stubs.*
+import com.intellij.psi.stubs.IndexSink
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.stubs.StubInputStream
+import com.intellij.psi.stubs.StubOutputStream
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAugmentStatementImpl
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 
 
-open class PerlMooseAugmentStatementSerializingFactory(val elementType: IElementType) :
-  StubSerializingElementFactory<PerlMooseAugmentStatementStub, PerlMooseAugmentStatement> {
+open class PerlMooseAugmentStatementSerializingFactory(elementType: IElementType) :
+  PerlStubSerializingFactory<PerlMooseAugmentStatementStub, PerlMooseAugmentStatement>(elementType) {
   override fun createPsi(stub: PerlMooseAugmentStatementStub): PerlMooseAugmentStatement = PerlMooseAugmentStatementImpl(stub, elementType)
 
   override fun createStub(psi: PerlMooseAugmentStatement, parentStub: StubElement<out PsiElement>?): PerlMooseAugmentStatementStub =
     PerlMooseAugmentStatementStubImpl(parentStub, elementType, psi.getSubName())
-
-  override fun getExternalId(): String = "perl.$elementType"
 
   override fun serialize(stub: PerlMooseAugmentStatementStub, dataStream: StubOutputStream): Unit = dataStream.writeName(stub.getSubName())
 

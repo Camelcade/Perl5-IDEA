@@ -32,8 +32,8 @@ import java.io.IOException
 private val LOG = Logger.getInstance(PerlPolynamedStubSerializingFactory::class.java)
 
 @Suppress("FINITE_BOUNDS_VIOLATION_IN_JAVA")
-abstract class PerlPolynamedStubSerializingFactory<Stub : PerlPolyNamedElementStub<Psi>, Psi : PerlPolyNamedElement<Stub>>(val elementType: IElementType) :
-  StubSerializingElementFactory<Stub, Psi> {
+abstract class PerlPolynamedStubSerializingFactory<Stub : PerlPolyNamedElementStub<Psi>, Psi : PerlPolyNamedElement<Stub>>(elementType: IElementType) :
+  PerlStubSerializingFactory<Stub, Psi>(elementType) {
   private companion object {
     val DIRECT_MAP = Object2IntOpenHashMap<IElementType>()
     val REVERSE_MAP: Int2ObjectOpenHashMap<IElementType> = Int2ObjectOpenHashMap()
@@ -142,8 +142,6 @@ abstract class PerlPolynamedStubSerializingFactory<Stub : PerlPolyNamedElementSt
   // to save additional data in subclasses
   @Throws(IOException::class)
   protected open fun serializeStub(stub: Stub, dataStream: StubOutputStream): Unit = Unit
-
-  override fun getExternalId(): String = "perl.poly.$elementType"
 
   @Throws(IOException::class)
   protected abstract fun deserialize(

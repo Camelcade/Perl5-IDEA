@@ -19,17 +19,21 @@ package com.perl5.lang.perl.psi.stubs.subsdeclarations
 import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.psi.PsiElement
-import com.intellij.psi.stubs.*
+import com.intellij.psi.stubs.IndexSink
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.stubs.StubInputStream
+import com.intellij.psi.stubs.StubOutputStream
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.psi.PerlSubDeclarationElement
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDeclarationImpl
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlCallableNamesIndex
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
 
 
-class PerlSubDeclarationStubSerializingFactory(val elementType: IElementType) :
-  StubSerializingElementFactory<PerlSubDeclarationStub, PerlSubDeclarationElement> {
+class PerlSubDeclarationStubSerializingFactory(elementType: IElementType) :
+  PerlStubSerializingFactory<PerlSubDeclarationStub, PerlSubDeclarationElement>(elementType) {
   override fun createPsi(stub: PerlSubDeclarationStub): PerlSubDeclarationElement =
     PsiPerlSubDeclarationImpl(stub, elementType)
 
@@ -41,8 +45,6 @@ class PerlSubDeclarationStubSerializingFactory(val elementType: IElementType) :
       psi.getAnnotations(),
       elementType
     )
-
-  override fun getExternalId(): String = "perl.${elementType.debugName}"
 
   override fun serialize(
     stub: PerlSubDeclarationStub,

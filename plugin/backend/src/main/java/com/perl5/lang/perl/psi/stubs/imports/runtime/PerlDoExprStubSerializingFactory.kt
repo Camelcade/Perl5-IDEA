@@ -18,21 +18,23 @@ package com.perl5.lang.perl.psi.stubs.imports.runtime
 
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.psi.PsiElement
-import com.intellij.psi.stubs.*
+import com.intellij.psi.stubs.IndexSink
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.stubs.StubInputStream
+import com.intellij.psi.stubs.StubOutputStream
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.psi.PerlDoExpr
 import com.perl5.lang.perl.psi.impl.PsiPerlDoExprImpl
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 
 
-open class PerlDoExprStubSerializingFactory(val elementType: IElementType) :
-  StubSerializingElementFactory<PerlRuntimeImportStub, PerlDoExpr> {
+open class PerlDoExprStubSerializingFactory(elementType: IElementType) :
+  PerlStubSerializingFactory<PerlRuntimeImportStub, PerlDoExpr>(elementType) {
   override fun createPsi(stub: PerlRuntimeImportStub): PerlDoExpr = PsiPerlDoExprImpl(stub, elementType)
 
   override fun createStub(psi: PerlDoExpr, parentStub: StubElement<out PsiElement>?): PerlRuntimeImportStub =
     PerlRuntimeImportStubImpl(parentStub, elementType, psi.getImportPath())
-
-  override fun getExternalId(): String = "perl.$elementType"
 
   override fun serialize(stub: PerlRuntimeImportStub, dataStream: StubOutputStream): Unit = dataStream.writeName(stub.getImportPath() ?: "")
 
