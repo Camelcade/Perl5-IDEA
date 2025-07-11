@@ -17,7 +17,10 @@
 package com.perl5.lang.htmlmason.elementType
 
 import com.intellij.psi.PsiElement
-import com.intellij.psi.stubs.*
+import com.intellij.psi.stubs.IndexSink
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.stubs.StubInputStream
+import com.intellij.psi.stubs.StubOutputStream
 import com.intellij.psi.tree.IElementType
 import com.intellij.util.io.StringRef
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement
@@ -25,17 +28,16 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement.UNDEF_RESULT
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFlagsStatementImpl
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStatementStub
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonStubsSerializingFactory
 import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonFlagsStatementStubImpl
 
 
-class HTMLMasonFlagsStatementStubSerializingFactory(val elementType: IElementType) :
-  StubSerializingElementFactory<HTMLMasonFlagsStatementStub, HTMLMasonFlagsStatement> {
+class HTMLMasonFlagsStatementStubSerializingFactory(elementType: IElementType) :
+  HTMLMasonStubsSerializingFactory<HTMLMasonFlagsStatementStub, HTMLMasonFlagsStatement>(elementType) {
   override fun createPsi(stub: HTMLMasonFlagsStatementStub): HTMLMasonFlagsStatement = HTMLMasonFlagsStatementImpl(stub, elementType)
 
   override fun createStub(psi: HTMLMasonFlagsStatement, parentStub: StubElement<out PsiElement>?): HTMLMasonFlagsStatementStub =
     HTMLMasonFlagsStatementStubImpl(parentStub, elementType, psi.getParentComponentPath())
-
-  override fun getExternalId(): String = "HTML::Mason::$elementType"
 
   override fun serialize(stub: HTMLMasonFlagsStatementStub, dataStream: StubOutputStream) {
     val parentComponentPath = stub.getParentComponentPath()

@@ -23,19 +23,18 @@ import com.intellij.psi.stubs.*
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDescendantsIndex.NAMESPACE_DESCENDANTS_KEY
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex.NAMESPACE_KEY
 
 
-open class PerlNamespaceDefinitionStubSerializingFactory(val elementType: IElementType) :
-  StubSerializingElementFactory<PerlNamespaceDefinitionStub, PerlNamespaceDefinitionElement> {
+open class PerlNamespaceDefinitionStubSerializingFactory(elementType: IElementType) :
+  PerlStubSerializingFactory<PerlNamespaceDefinitionStub, PerlNamespaceDefinitionElement>(elementType) {
   override fun createPsi(stub: PerlNamespaceDefinitionStub): PerlNamespaceDefinitionElement =
     PsiPerlNamespaceDefinitionImpl(stub, elementType)
 
   override fun createStub(psi: PerlNamespaceDefinitionElement, parentStub: StubElement<out PsiElement>?): PerlNamespaceDefinitionStub =
     createStubElement(parentStub, PerlNamespaceDefinitionData(psi))
-
-  override fun getExternalId(): String = "perl.$elementType"
 
   override fun serialize(stub: PerlNamespaceDefinitionStub, dataStream: StubOutputStream): Unit = stub.data.serialize(dataStream)
 

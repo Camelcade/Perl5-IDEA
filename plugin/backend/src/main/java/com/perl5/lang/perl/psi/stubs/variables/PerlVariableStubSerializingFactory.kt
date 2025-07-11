@@ -19,20 +19,24 @@ package com.perl5.lang.perl.psi.stubs.variables
 import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.psi.PsiElement
-import com.intellij.psi.stubs.*
+import com.intellij.psi.stubs.IndexSink
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.stubs.StubInputStream
+import com.intellij.psi.stubs.StubOutputStream
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement
 import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationElementImpl
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations
 import com.perl5.lang.perl.psi.utils.PerlVariableType
 import com.perl5.lang.perl.util.PerlPackageUtil
 import java.io.IOException
 
 
-class PerlVariableStubSerializingFactory(val elementType: IElementType) :
-  StubSerializingElementFactory<PerlVariableDeclarationStub, PerlVariableDeclarationElement> {
+class PerlVariableStubSerializingFactory(elementType: IElementType) :
+  PerlStubSerializingFactory<PerlVariableDeclarationStub, PerlVariableDeclarationElement>(elementType) {
   override fun createPsi(stub: PerlVariableDeclarationStub): PerlVariableDeclarationElement =
     PsiPerlVariableDeclarationElementImpl(stub, elementType)
 
@@ -46,8 +50,6 @@ class PerlVariableStubSerializingFactory(val elementType: IElementType) :
       psi.getActualType(),
       psi.getLocalVariableAnnotations()
     )
-
-  override fun getExternalId(): String = "perl.$elementType"
 
   override fun serialize(stub: PerlVariableDeclarationStub, dataStream: StubOutputStream) {
     dataStream.writeName(stub.namespaceName)

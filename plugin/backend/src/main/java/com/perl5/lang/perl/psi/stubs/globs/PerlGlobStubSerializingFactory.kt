@@ -19,24 +19,27 @@ package com.perl5.lang.perl.psi.stubs.globs
 import com.intellij.lang.ASTNode
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.psi.PsiElement
-import com.intellij.psi.stubs.*
+import com.intellij.psi.stubs.IndexSink
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.stubs.StubInputStream
+import com.intellij.psi.stubs.StubOutputStream
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.psi.PerlGlobVariableElement
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable
 import com.perl5.lang.perl.psi.impl.PsiPerlGlobVariableImpl
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobNamespaceStubIndex.KEY_GLOB_NAMESPACE
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStubIndex.KEY_GLOB
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlCallableNamesIndex
 
 
-class PerlGlobStubSerializingFactory(val elementType: IElementType) : StubSerializingElementFactory<PerlGlobStub, PsiPerlGlobVariable> {
+class PerlGlobStubSerializingFactory(elementType: IElementType) :
+  PerlStubSerializingFactory<PerlGlobStub, PsiPerlGlobVariable>(elementType) {
   override fun createPsi(stub: PerlGlobStub): PsiPerlGlobVariable = PsiPerlGlobVariableImpl(stub, elementType)
 
   override fun createStub(psi: PsiPerlGlobVariable, parentStub: StubElement<out PsiElement>?): PerlGlobStub =
     PerlGlobStub(parentStub, psi.getNamespaceName()!!, psi.name, psi.isLeftSideOfAssignment())
-
-  override fun getExternalId(): String = "perl.$elementType"
 
   override fun serialize(stub: PerlGlobStub, dataStream: StubOutputStream) {
     dataStream.writeName(stub.namespaceName)

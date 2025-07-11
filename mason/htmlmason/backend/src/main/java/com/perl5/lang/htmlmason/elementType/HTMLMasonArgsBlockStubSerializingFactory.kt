@@ -17,23 +17,25 @@
 package com.perl5.lang.htmlmason.elementType
 
 import com.intellij.psi.PsiElement
-import com.intellij.psi.stubs.*
+import com.intellij.psi.stubs.IndexSink
+import com.intellij.psi.stubs.StubElement
+import com.intellij.psi.stubs.StubInputStream
+import com.intellij.psi.stubs.StubOutputStream
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonArgsBlockImpl
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub
+import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonStubsSerializingFactory
 import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonArgsBlockStubImpl
 import com.perl5.lang.perl.psi.utils.PerlSubArgument
 
 
-class HTMLMasonArgsBlockStubSerializingFactory(val elementType: IElementType) :
-  StubSerializingElementFactory<HTMLMasonArgsBlockStub, HTMLMasonArgsBlock> {
+class HTMLMasonArgsBlockStubSerializingFactory(elementType: IElementType) :
+  HTMLMasonStubsSerializingFactory<HTMLMasonArgsBlockStub, HTMLMasonArgsBlock>(elementType) {
   override fun createPsi(stub: HTMLMasonArgsBlockStub): HTMLMasonArgsBlock = HTMLMasonArgsBlockImpl(stub, elementType)
 
   override fun createStub(psi: HTMLMasonArgsBlock, parentStub: StubElement<out PsiElement>?): HTMLMasonArgsBlockStub =
     HTMLMasonArgsBlockStubImpl(parentStub, elementType, psi.getArgumentsList())
-
-  override fun getExternalId(): String = "HTML::Mason::$elementType"
 
   override fun serialize(stub: HTMLMasonArgsBlockStub, dataStream: StubOutputStream) =
     PerlSubArgument.serializeList(dataStream, stub.getArgumentsList())
