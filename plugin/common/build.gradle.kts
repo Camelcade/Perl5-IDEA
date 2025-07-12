@@ -14,6 +14,20 @@
  * limitations under the License.
  */
 
+val genRoot = project.file("src/main/gen").also { genRoot ->
+  sourceSets {
+    main {
+      java.srcDirs(genRoot)
+    }
+  }
+
+  idea {
+    module {
+      generatedSourceDirs.add(genRoot)
+    }
+  }
+}
+
 dependencies {
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
