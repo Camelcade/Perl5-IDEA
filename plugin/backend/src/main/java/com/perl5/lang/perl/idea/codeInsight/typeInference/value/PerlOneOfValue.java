@@ -24,7 +24,6 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.*;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
@@ -34,13 +33,8 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
 
   private final @NotNull Set<PerlValue> myVariants;
 
-  private PerlOneOfValue(@NotNull Set<? extends PerlValue> variants) {
+  public PerlOneOfValue(@NotNull Set<? extends PerlValue> variants) {
     myVariants = Collections.unmodifiableSet(variants);
-  }
-
-  PerlOneOfValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
-    myVariants = deserializer.readValuesSet();
   }
 
   @Override

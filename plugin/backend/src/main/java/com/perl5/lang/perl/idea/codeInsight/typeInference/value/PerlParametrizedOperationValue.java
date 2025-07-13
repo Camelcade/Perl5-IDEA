@@ -18,8 +18,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-
 public abstract class PerlParametrizedOperationValue extends PerlOperationValue {
   private final @NotNull PerlValue myParameter;
 
@@ -27,11 +25,6 @@ public abstract class PerlParametrizedOperationValue extends PerlOperationValue 
                                         @NotNull PerlValue parameter) {
     super(baseValue);
     myParameter = parameter;
-  }
-
-  PerlParametrizedOperationValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
-    myParameter = deserializer.readValue();
   }
 
   @Override

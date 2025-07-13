@@ -18,8 +18,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-
 /**
  * Pair of values, where second one is the fallback for the first one. If first can't be resolved to something sensible, second is used.
  */
@@ -27,10 +25,6 @@ public class PerlValueWithFallback extends PerlParametrizedOperationValue {
   private PerlValueWithFallback(@NotNull PerlValue baseValue,
                                 @NotNull PerlValue parameter) {
     super(baseValue, parameter);
-  }
-
-  PerlValueWithFallback(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override

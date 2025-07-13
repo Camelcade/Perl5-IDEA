@@ -17,8 +17,13 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNDEF_VALUE
 
 class PerlUndefValueSerializationHelper : PerlValueSerializationHelper<PerlUndefValue> {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.UNDEF_ID
+
+  override fun deserialize(deserializer: PerlValueDeserializer): PerlValue = UNDEF_VALUE
 }

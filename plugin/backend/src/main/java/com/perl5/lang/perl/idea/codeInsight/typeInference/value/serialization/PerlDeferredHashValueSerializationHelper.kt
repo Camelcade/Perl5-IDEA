@@ -17,8 +17,12 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDeferredHashValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 
 class PerlDeferredHashValueSerializationHelper : PerlListValueSerializationHelper<PerlDeferredHashValue>() {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.DEFERRED_HASH_ID
+
+  override fun deserialize(deserializer: PerlValueDeserializer, valuesList: List<PerlValue>): PerlValue = PerlDeferredHashValue(valuesList)
 }

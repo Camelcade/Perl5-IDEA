@@ -21,7 +21,6 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
@@ -36,10 +35,6 @@ public class PerlScalarContextValue extends PerlOperationValue {
     else if (baseValue.isDeterministic()) {
       LOG.error("Deterministic values should be resolved in place: " + baseValue);
     }
-  }
-
-  PerlScalarContextValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override

@@ -20,8 +20,6 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-
 /**
  * Represents non-mutation operation value on some base value. E.g. item, slice, keys, scalar
  */
@@ -30,11 +28,6 @@ public abstract class PerlOperationValue extends PerlValue {
 
   public PerlOperationValue(@NotNull PerlValue baseValue) {
     myBaseValue = baseValue;
-  }
-
-  PerlOperationValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
-    myBaseValue = deserializer.readValue();
   }
 
   @Override

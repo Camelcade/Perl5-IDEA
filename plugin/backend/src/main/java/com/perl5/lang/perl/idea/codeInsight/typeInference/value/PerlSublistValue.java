@@ -21,7 +21,6 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
@@ -34,12 +33,6 @@ public class PerlSublistValue extends PerlOperationValue {
     super(baseValue);
     myStartOffset = startOffset;
     myEndOffset = endOffset;
-  }
-
-  public PerlSublistValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
-    myStartOffset = deserializer.readVarInt();
-    myEndOffset = deserializer.readVarInt();
   }
 
   @Override

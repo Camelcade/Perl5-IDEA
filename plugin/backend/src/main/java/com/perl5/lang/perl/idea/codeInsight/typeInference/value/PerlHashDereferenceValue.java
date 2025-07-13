@@ -21,8 +21,6 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public class PerlHashDereferenceValue extends PerlOperationValue {
@@ -31,10 +29,6 @@ public class PerlHashDereferenceValue extends PerlOperationValue {
     if (referenceValue.isDeterministic()) {
       LOG.error("Deterministic values should be resolved in-place: " + referenceValue);
     }
-  }
-
-  PerlHashDereferenceValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override

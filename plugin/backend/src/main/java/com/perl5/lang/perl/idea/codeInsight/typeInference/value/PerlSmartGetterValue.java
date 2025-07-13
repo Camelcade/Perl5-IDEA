@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
@@ -30,10 +29,6 @@ public class PerlSmartGetterValue extends PerlOperationValue {
 
   private PerlSmartGetterValue(@NotNull PerlValue realValue) {
     super(realValue);
-  }
-
-  PerlSmartGetterValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override

@@ -22,17 +22,11 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public final class PerlBlessedValue extends PerlParametrizedOperationValue {
   PerlBlessedValue(@NotNull PerlValue targetValue, @NotNull PerlValue blessValue) {
     super(targetValue, blessValue);
-  }
-
-  PerlBlessedValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   public @NotNull PerlValue getBless() {

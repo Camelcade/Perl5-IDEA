@@ -21,7 +21,6 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -33,10 +32,6 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
 
   private PerlArrayValue(@NotNull List<? extends PerlValue> elements) {
     super(elements);
-  }
-
-  PerlArrayValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override
@@ -107,6 +102,13 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
       return EMPTY_ARRAY;
     }
     return PerlValuesManager.intern(new PerlArrayValue(Arrays.asList(values)));
+  }
+
+  public static PerlValue create(@NotNull List<? extends PerlValue> values) {
+    if (values.isEmpty()) {
+      return EMPTY_ARRAY;
+    }
+    return PerlValuesManager.intern(new PerlArrayValue(values));
   }
 
   public static @NotNull Builder builder() {

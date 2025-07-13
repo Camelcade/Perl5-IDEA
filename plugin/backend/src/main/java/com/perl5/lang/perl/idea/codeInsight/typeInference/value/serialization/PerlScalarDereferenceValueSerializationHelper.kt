@@ -17,8 +17,13 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarDereferenceValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 
 class PerlScalarDereferenceValueSerializationHelper : PerlOperationValueSerializationHelper<PerlScalarDereferenceValue>() {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.SCALAR_DEREFERENCE_ID
+
+  override fun deserialize(deserializer: PerlValueDeserializer, baseValue: PerlValue): PerlValue =
+    PerlScalarDereferenceValue.create(baseValue)
 }

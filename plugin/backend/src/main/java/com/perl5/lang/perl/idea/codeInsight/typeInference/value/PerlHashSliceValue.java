@@ -21,8 +21,6 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public class PerlHashSliceValue extends PerlParametrizedOperationValue {
@@ -34,10 +32,6 @@ public class PerlHashSliceValue extends PerlParametrizedOperationValue {
                 "hash=" + hashValue + "; " +
                 "keys=" + keysValue);
     }
-  }
-
-  PerlHashSliceValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override

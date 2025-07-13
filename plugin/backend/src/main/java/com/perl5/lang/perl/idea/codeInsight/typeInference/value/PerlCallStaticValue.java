@@ -29,7 +29,6 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -42,11 +41,6 @@ public final class PerlCallStaticValue extends PerlCallValue {
                              boolean hasExplicitNamespace) {
     super(namespaceNameValue, subNameValue, arguments);
     myHasExplicitNamespace = hasExplicitNamespace;
-  }
-
-  PerlCallStaticValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
-    myHasExplicitNamespace = deserializer.readBoolean();
   }
 
   public boolean hasExplicitNamespace() {

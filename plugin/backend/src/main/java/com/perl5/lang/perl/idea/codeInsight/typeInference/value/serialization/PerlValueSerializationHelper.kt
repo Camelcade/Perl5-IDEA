@@ -17,14 +17,17 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.intellij.openapi.util.ClassExtension
+import com.jetbrains.rd.util.concurrentMapOf
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
 import java.io.IOException
 
 
 private val EP = ClassExtension<PerlValueSerializationHelper<*>>("com.perl5.valueSerializationHelper")
 private var id = 0
+private val idMap = concurrentMapOf<Int, PerlValueSerializationHelper<*>>()
 
 interface PerlValueSerializationHelper<Val : PerlValue> {
 
@@ -37,11 +40,20 @@ interface PerlValueSerializationHelper<Val : PerlValue> {
   @Throws(IOException::class)
   fun serializeData(value: Val, serializer: PerlValueSerializer) = Unit
 
+  fun deserialize(deserializer: PerlValueDeserializer): PerlValue =
+    throw UnsupportedOperationException("This method is not implemented for $this")
+
   companion object {
     @Suppress("UNCHECKED_CAST")
     @JvmStatic
     operator fun <Val : PerlValue> get(value: Val): PerlValueSerializationHelper<Val> =
       EP.findSingle(value.javaClass) as? PerlValueSerializationHelper<Val> ?: throw RuntimeException("No serialization helper for $value")
+
+    @JvmStatic
+    operator fun get(id: Int): PerlValueSerializationHelper<*> = idMap.computeIfAbsent(id) {
+      EP.point!!.extensionList.map { it.instance }.find { it.serializationId == id }
+        ?: throw RuntimeException("No serialization helper for id $id")
+    }
 
     @JvmField
     val DUPLICATE_ID = id++

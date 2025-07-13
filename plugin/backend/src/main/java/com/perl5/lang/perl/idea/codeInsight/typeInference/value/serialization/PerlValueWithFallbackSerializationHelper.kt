@@ -16,9 +16,14 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueWithFallback
 
 class PerlValueWithFallbackSerializationHelper : PerlParametrizedOperationValueSerializationHelper<PerlValueWithFallback>() {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.VALUE_WITH_FALLBACK
+
+  override fun deserialize(deserializer: PerlValueDeserializer, baseValue: PerlValue, parameter: PerlValue): PerlValue =
+    PerlValueWithFallback.create(baseValue, parameter)
 }

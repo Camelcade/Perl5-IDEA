@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.List;
 
 public class PerlDefaultArgumentValue extends PerlParametrizedOperationValue {
@@ -29,11 +28,6 @@ public class PerlDefaultArgumentValue extends PerlParametrizedOperationValue {
                                    int argumentIndex) {
     super(baseValue, defaultValue);
     myArgumentIndex = argumentIndex;
-  }
-
-  PerlDefaultArgumentValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
-    myArgumentIndex = deserializer.readVarInt();
   }
 
   public final int getArgumentIndex() {

@@ -20,7 +20,6 @@ import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.Set;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNDEF_VALUE;
@@ -29,10 +28,6 @@ public final class PerlReferenceValue extends PerlParametrizedOperationValue {
   public PerlReferenceValue(@NotNull PerlValue reference,
                             @NotNull PerlValue bless) {
     super(reference, bless);
-  }
-
-  PerlReferenceValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override
