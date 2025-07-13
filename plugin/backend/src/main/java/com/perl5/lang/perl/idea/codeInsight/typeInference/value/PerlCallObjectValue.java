@@ -53,21 +53,14 @@ public final class PerlCallObjectValue extends PerlCallValue {
     mySuperContext = deserializer.readNameString();
   }
 
-  @Override
-  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
-    super.serializeData(serializer);
-    serializer.writeName(mySuperContext);
+  public @Nullable String getSuperContext() {
+    return mySuperContext;
   }
 
   @Override
   protected @NotNull List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue,
                                                               @NotNull PerlValueResolver valueResolver) {
     return ContainerUtil.prepend(super.computeResolvedArguments(resolvedNamespaceValue, valueResolver), resolvedNamespaceValue);
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.CALL_OBJECT_ID;
   }
 
   @Override
@@ -174,26 +167,10 @@ public final class PerlCallObjectValue extends PerlCallValue {
       getPresentableArguments());
   }
 
-  public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceValue, @NotNull String name) {
-    return create(namespaceValue, name, Collections.emptyList(), null);
-  }
-
-  public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceValue,
-                                                    @NotNull String name,
-                                                    @Nullable String superContext) {
-    return create(namespaceValue, name, Collections.emptyList(), superContext);
-  }
-
   public static @NotNull PerlCallObjectValue create(@NotNull String namespace,
                                                     @NotNull String name,
                                                     @NotNull List<? extends PerlValue> arguments) {
     return create(PerlScalarValue.create(namespace), name, arguments, null);
-  }
-
-  public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceNameValue,
-                                                    @NotNull String name,
-                                                    @NotNull List<? extends PerlValue> arguments) {
-    return create(namespaceNameValue, PerlScalarValue.create(name), arguments, null);
   }
 
   public static @NotNull PerlCallObjectValue create(@NotNull PerlValue namespaceNameValue,

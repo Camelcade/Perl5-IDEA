@@ -58,10 +58,6 @@ public final class PerlDeferredHashValue extends PerlMapValue {
     return UNKNOWN_VALUE;
   }
 
-  @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.DEFERRED_HASH_ID;
-  }
 
   @Override
   protected String getValuesPresentableText() {

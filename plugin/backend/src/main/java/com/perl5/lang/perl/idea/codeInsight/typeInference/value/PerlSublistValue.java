@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.SUBLIST_ID;
 
 public class PerlSublistValue extends PerlOperationValue {
   private final int myStartOffset;
@@ -44,13 +43,6 @@ public class PerlSublistValue extends PerlOperationValue {
   }
 
   @Override
-  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
-    super.serializeData(serializer);
-    serializer.writeVarInt(myStartOffset);
-    serializer.writeVarInt(myEndOffset);
-  }
-
-  @Override
   protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedListValue, @NotNull PerlValueResolver resolver) {
     return computeStrictResolve(resolvedListValue, myStartOffset, myEndOffset);
   }
@@ -58,11 +50,6 @@ public class PerlSublistValue extends PerlOperationValue {
   @Override
   protected @Nullable PerlContextType getContextType() {
     return PerlContextType.LIST;
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return SUBLIST_ID;
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 
-abstract class PerlParametrizedOperationValue extends PerlOperationValue {
+public abstract class PerlParametrizedOperationValue extends PerlOperationValue {
   private final @NotNull PerlValue myParameter;
 
   public PerlParametrizedOperationValue(@NotNull PerlValue baseValue,
@@ -35,12 +35,6 @@ abstract class PerlParametrizedOperationValue extends PerlOperationValue {
   }
 
   @Override
-  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
-    super.serializeData(serializer);
-    serializer.writeValue(myParameter);
-  }
-
-  @Override
   protected @NotNull PerlValue computeResolve(@NotNull PerlValue resolvedBaseValue, @NotNull PerlValueResolver resolver) {
     return resolver.resolve(myParameter, it -> computeResolve(resolvedBaseValue, it, resolver));
   }
@@ -49,7 +43,7 @@ abstract class PerlParametrizedOperationValue extends PerlOperationValue {
                                                        @NotNull PerlValue resolvedParameter,
                                                        @NotNull PerlValueResolver resolver);
 
-  protected final @NotNull PerlValue getParameter() {
+  public final @NotNull PerlValue getParameter() {
     return myParameter;
   }
 

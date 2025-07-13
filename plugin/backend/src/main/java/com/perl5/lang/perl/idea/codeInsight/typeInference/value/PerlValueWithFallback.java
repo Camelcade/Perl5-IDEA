@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,11 +50,6 @@ public class PerlValueWithFallback extends PerlParametrizedOperationValue {
                                               @NotNull PerlValue resolvedParameter,
                                               @NotNull PerlValueResolver resolver) {
     return resolvedParameter;
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.VALUE_WITH_FALLBACK;
   }
 
   @Override

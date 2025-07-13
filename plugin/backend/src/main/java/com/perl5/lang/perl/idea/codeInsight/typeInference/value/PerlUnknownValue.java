@@ -39,11 +39,6 @@ public final class PerlUnknownValue extends PerlSpecialValue {
   }
 
   @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.UNKNOWN_ID;
-  }
-
-  @Override
   protected boolean computeIsDeterministic() {
     return true;
   }

@@ -124,11 +124,6 @@ public class PerlDuckValue extends PerlListValue {
     return isEmpty();
   }
 
-  @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.DUCK_TYPE_ID;
-  }
-
   public static boolean isDuckTypingEnabled() {
     return Registry.is("perl5.duck.typing.support", true);
   }

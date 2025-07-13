@@ -24,6 +24,7 @@ import com.intellij.psi.stubs.StubElement
 import com.intellij.psi.stubs.StubInputStream
 import com.intellij.psi.stubs.StubOutputStream
 import com.intellij.psi.tree.IElementType
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer.serialize
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement
 import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationElementImpl
@@ -54,7 +55,7 @@ class PerlVariableStubSerializingFactory(elementType: IElementType) :
   override fun serialize(stub: PerlVariableDeclarationStub, dataStream: StubOutputStream) {
     dataStream.writeName(stub.namespaceName)
     dataStream.writeName(stub.variableName)
-    stub.declaredValue.serialize(dataStream)
+    serialize(stub.declaredValue, dataStream)
     dataStream.writeByte(stub.actualType.ordinal)
 
     val annotations = stub.variableAnnotations

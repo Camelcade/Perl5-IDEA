@@ -130,10 +130,8 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     return ContainerUtil.map(myArguments, valueResolver::resolve);
   }
 
-  @Override
-  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
-    super.serializeData(serializer);
-    serializer.writeValuesList(myArguments);
+  public final @NotNull List<PerlValue> getArguments() {
+    return myArguments;
   }
 
   @Override

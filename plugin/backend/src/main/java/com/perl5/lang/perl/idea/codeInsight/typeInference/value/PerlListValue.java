@@ -27,7 +27,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-abstract class PerlListValue extends PerlValue {
+public abstract class PerlListValue extends PerlValue {
   private final @NotNull List<PerlValue> myElements;
 
   protected PerlListValue(@NotNull List<? extends PerlValue> elements) {
@@ -37,11 +37,6 @@ abstract class PerlListValue extends PerlValue {
   protected PerlListValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
     super(deserializer);
     myElements = deserializer.readValuesList();
-  }
-
-  @Override
-  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
-    serializer.writeValuesList(myElements);
   }
 
   public final boolean isEmpty() {

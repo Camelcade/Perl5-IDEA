@@ -68,14 +68,8 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
     return myVariants.iterator();
   }
 
-  @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.ONE_OF_ID;
-  }
-
-  @Override
-  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
-    serializer.writeValuesList(myVariants);
+  public @NotNull Set<PerlValue> getVariants() {
+    return myVariants;
   }
 
   @Override

@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.stubs.*
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer.serialize
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl
@@ -67,7 +68,7 @@ open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
       dataStream.writeBoolean(true)
       subAnnotations.serialize(dataStream)
     }
-    stub.returnValueFromCode.serialize(dataStream)
+    serialize(stub.returnValueFromCode, dataStream)
   }
 
   override fun deserialize(

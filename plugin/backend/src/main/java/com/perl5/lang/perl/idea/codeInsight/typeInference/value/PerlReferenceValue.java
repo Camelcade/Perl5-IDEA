@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,11 +33,6 @@ public final class PerlReferenceValue extends PerlParametrizedOperationValue {
 
   PerlReferenceValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
     super(deserializer);
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.REFERENCE_ID;
   }
 
   @Override

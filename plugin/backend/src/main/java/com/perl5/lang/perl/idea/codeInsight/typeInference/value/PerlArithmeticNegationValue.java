@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARITHMETIC_NEGATION;
 
 public class PerlArithmeticNegationValue extends PerlOperationValue {
   PerlArithmeticNegationValue(@NotNull PerlValue baseValue) {
@@ -66,11 +65,6 @@ public class PerlArithmeticNegationValue extends PerlOperationValue {
       return PerlScalarValue.create("-" + value.substring(1));
     }
     return PerlScalarValue.create("-" + value);
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return ARITHMETIC_NEGATION;
   }
 
   @Override

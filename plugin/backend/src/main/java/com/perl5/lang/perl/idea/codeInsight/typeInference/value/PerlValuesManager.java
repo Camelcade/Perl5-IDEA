@@ -74,45 +74,6 @@ public final class PerlValuesManager {
     VARIABLE_DECLARATION_ELEMENT
   );
 
-  private static int id = 0;
-  static final int DUPLICATE_ID = id++;
-  // special values
-  static final int UNKNOWN_ID = id++;
-  static final int UNDEF_ID = id++;
-  static final int ARGUMENTS_ID = id++;
-  // primitives
-  static final int SCALAR_ID = id++;
-  static final int SCALAR_DEREFERENCE_ID = id++;
-  static final int SCALAR_CONTEXT_ID = id++;
-  static final int ARRAY_ID = id++;
-  static final int ARRAY_ELEMENT_ID = id++;
-  static final int ARRAY_SLICE_ID = id++;
-  static final int ARRAY_DEREFERENCE_ID = id++;
-  static final int UNSHIFT_ID = id++;
-  static final int PUSH_ID = id++;
-  static final int SUBLIST_ID = id++;
-
-  static final int HASH_ID = id++;
-  static final int HASH_ELEMENT_VALUE = id++;
-  static final int DEFERRED_HASH_ID = id++;
-  static final int HASH_SLICE_ID = id++;
-  static final int HASH_DEREFERENCE_ID = id++;
-  static final int ARITHMETIC_NEGATION = id++;
-  static final int REFERENCE_ID = id++;
-  static final int BLESSED_ID = id++;
-
-  // synthetic values
-  static final int CALL_STATIC_ID = id++;
-  static final int CALL_OBJECT_ID = id++;
-  static final int ONE_OF_ID = id++;
-  static final int DEFAULT_ARGUMENT_ID = id++;
-  static final int SMART_GETTER_ID = id++;
-  static final int DUCK_TYPE_ID = id++;
-  static final int VALUE_WITH_FALLBACK = id++;
-
-  public static int getVersion() {
-    return id + (PerlDuckValue.isDuckTypingEnabled() ? 100 : 0);
-  }
 
   private static final Interner<PerlValue> INTERNER = Interner.createWeakInterner();
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.NlsSafe;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -107,21 +106,6 @@ public abstract class PerlValue {
   public boolean canRepresentSubName(@Nullable String subName) {
     return false;
   }
-
-  /**
-   * @return a serialization id unique for this value.
-   * @see PerlValuesManager
-   */
-  protected abstract int getSerializationId();
-
-  /**
-   * Serializes this value data
-   */
-  public final void serialize(@NotNull StubOutputStream dataStream) throws IOException {
-    new PerlValueSerializer(dataStream).writeValue(this);
-  }
-
-  protected abstract void serializeData(@NotNull PerlValueSerializer serializer) throws IOException;
 
   /**
    * @return a context type for this value. Or null if context can't be determined (can be any)

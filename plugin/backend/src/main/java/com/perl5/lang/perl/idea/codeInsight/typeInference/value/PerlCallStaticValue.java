@@ -53,17 +53,6 @@ public final class PerlCallStaticValue extends PerlCallValue {
     return myHasExplicitNamespace;
   }
 
-  @Override
-  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
-    super.serializeData(serializer);
-    serializer.writeBoolean(myHasExplicitNamespace);
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.CALL_STATIC_ID;
-  }
-
   // fixme resolve namespace and subs first
   @Override
   public boolean processTargetNamespaceElements(@NotNull PsiElement contextElement,

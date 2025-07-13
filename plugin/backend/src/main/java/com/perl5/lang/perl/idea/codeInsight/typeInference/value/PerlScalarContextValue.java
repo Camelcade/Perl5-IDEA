@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.SCALAR_CONTEXT_ID;
 
 public class PerlScalarContextValue extends PerlOperationValue {
 
@@ -71,11 +70,6 @@ public class PerlScalarContextValue extends PerlOperationValue {
              PerlScalarValue.create(hashValue.getMap().size()) : UNKNOWN_VALUE;
     }
     return null;
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return SCALAR_CONTEXT_ID;
   }
 
   @Override
