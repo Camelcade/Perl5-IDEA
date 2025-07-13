@@ -62,11 +62,6 @@ public class PerlHashValue extends PerlMapValue {
   }
 
   @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.HASH_ID;
-  }
-
-  @Override
   protected String getValuesPresentableText() {
     List<PerlValue> elements = getElements();
     StringBuilder sb = new StringBuilder();

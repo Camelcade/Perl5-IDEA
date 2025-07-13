@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,10 +36,8 @@ public class PerlDefaultArgumentValue extends PerlParametrizedOperationValue {
     myArgumentIndex = deserializer.readVarInt();
   }
 
-  @Override
-  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
-    super.serializeData(serializer);
-    serializer.writeVarInt(myArgumentIndex);
+  public final int getArgumentIndex() {
+    return myArgumentIndex;
   }
 
   @Override
@@ -62,11 +60,6 @@ public class PerlDefaultArgumentValue extends PerlParametrizedOperationValue {
   @Override
   public String toString() {
     return getBaseValue() + "(with default " + getParameter() + ")";
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.DEFAULT_ARGUMENT_ID;
   }
 
   public static PerlValue create(@NotNull PerlValue mainValue, @NotNull PerlValue fallbackValue, int argumentIndex) {

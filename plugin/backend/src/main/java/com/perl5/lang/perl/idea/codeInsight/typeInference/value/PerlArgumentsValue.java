@@ -21,7 +21,6 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARGUMENTS_ID;
 
 /**
  * Pseudo-value representing sub input arguments
@@ -41,11 +40,6 @@ public final class PerlArgumentsValue extends PerlSpecialValue {
   @Override
   protected @NotNull PerlContextType getContextType() {
     return PerlContextType.LIST;
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return ARGUMENTS_ID;
   }
 
   @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.HASH_ELEMENT_VALUE;
 
 public final class PerlHashElementValue extends PerlParametrizedOperationValue {
   PerlHashElementValue(@NotNull PerlValue hashValue, @NotNull PerlValue keyValue) {
@@ -37,11 +36,6 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
 
   PerlHashElementValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
     super(deserializer);
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return HASH_ELEMENT_VALUE;
   }
 
   @Override

@@ -55,16 +55,6 @@ public final class PerlScalarValue extends PerlValue {
     return PerlContextType.SCALAR;
   }
 
-  @Override
-  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
-    serializer.writeName(myValue);
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.SCALAR_ID;
-  }
-
   public @NotNull String getValue() {
     return myValue;
   }

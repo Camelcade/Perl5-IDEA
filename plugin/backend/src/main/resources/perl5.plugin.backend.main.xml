@@ -21,6 +21,11 @@
     <extensionPoint qualifiedName="com.perl5.versionManagerHandler" beanClass="com.perl5.lang.perl.idea.sdk.PerlHandlerBean" dynamic="true">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerHandler"/>
     </extensionPoint>
+    <extensionPoint qualifiedName="com.perl5.valueSerializationHelper" beanClass="com.intellij.openapi.util.ClassExtensionPoint"
+                    dynamic="true">
+      <with attribute="implementationClass"
+            implements="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueSerializationHelper"/>
+    </extensionPoint>
     <extensionPoint qualifiedName="com.perl5.packageManagerAdapterFactory"
                     interface="com.perl5.lang.perl.adapters.PackageManagerAdapterFactory"
                     dynamic="true"/>
@@ -43,6 +48,62 @@
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.perl5">
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArgumentsValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlArgumentsValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArithmeticNegationValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlArithmeticNegationValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArrayDereferenceValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlArrayDereferenceValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArrayElementValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlArrayElementValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArraySliceValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlArraySliceValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArrayValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlArrayValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlBlessedValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlBlessedValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallObjectValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlCallObjectValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallStaticValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlCallStaticValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDefaultArgumentValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlDefaultArgumentValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDeferredHashValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlDeferredHashValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlDuckValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlHashDereferenceValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlHashDereferenceValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlHashElementValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlHashElementValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlHashSliceValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlHashSliceValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlHashValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlHashValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlOneOfValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlPushValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlPushValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlReferenceValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlReferenceValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarContextValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlScalarContextValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarDereferenceValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlScalarDereferenceValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlScalarValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlSmartGetterValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlSmartGetterValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlSublistValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlSublistValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlUndefValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnknownValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlUnknownValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnshiftValue"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlUnshiftValueSerializationHelper"/>
+    <valueSerializationHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueWithFallback"
+                              implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueWithFallbackSerializationHelper"/>
     <subCallHandler key="has"
                     implementationClass="com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAttributeHandler"/>
     <subCallHandler key="mk_accessors"

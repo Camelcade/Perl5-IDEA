@@ -87,11 +87,6 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
   }
 
   @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.ARRAY_ID;
-  }
-
-  @Override
   public String toString() {
     return "Array: " + getElements();
   }

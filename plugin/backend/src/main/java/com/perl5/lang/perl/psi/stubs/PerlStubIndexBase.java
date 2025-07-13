@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorService;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueSerializationHelper;
 import com.perl5.lang.perl.psi.PerlSubCallHandlerVersionService;
 import com.perl5.lang.perl.util.PerlStubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +39,7 @@ public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringSt
   public int getVersion() {
     return super.getVersion() +
            VERSION +
-           PerlValuesManager.getVersion() +
+           PerlValueSerializationHelper.getVersion() +
            PerlSubCallHandlerVersionService.getHandlersVersion() +
            PerlPackageProcessorService.getVersion();
   }

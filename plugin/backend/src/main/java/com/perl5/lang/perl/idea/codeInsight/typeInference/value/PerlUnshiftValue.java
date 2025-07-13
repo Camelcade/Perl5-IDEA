@@ -30,7 +30,6 @@ import java.util.function.BiFunction;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArrayValue.EMPTY_ARRAY;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.UNSHIFT_ID;
 
 public class PerlUnshiftValue extends PerlParametrizedOperationValue {
   private PerlUnshiftValue(@NotNull PerlValue arrayValue,
@@ -52,11 +51,6 @@ public class PerlUnshiftValue extends PerlParametrizedOperationValue {
   @Override
   protected @Nullable PerlContextType getContextType() {
     return PerlContextType.LIST;
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return UNSHIFT_ID;
   }
 
   @Override

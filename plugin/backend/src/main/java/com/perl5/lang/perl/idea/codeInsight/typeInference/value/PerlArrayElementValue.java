@@ -23,7 +23,6 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager.ARRAY_ELEMENT_ID;
 
 public final class PerlArrayElementValue extends PerlParametrizedOperationValue {
   private PerlArrayElementValue(@NotNull PerlValue arrayValue, @NotNull PerlValue indexValue) {
@@ -54,11 +53,6 @@ public final class PerlArrayElementValue extends PerlParametrizedOperationValue 
   private static @Nullable PerlValue computeResolve(@NotNull PerlValue resolvedArrayValue,
                                                     @NotNull PerlValue resolvedIndexValue) {
     return resolvedArrayValue instanceof PerlArrayValue arrayValue ? arrayValue.get(resolvedIndexValue) : null;
-  }
-
-  @Override
-  protected int getSerializationId() {
-    return ARRAY_ELEMENT_ID;
   }
 
   @Override

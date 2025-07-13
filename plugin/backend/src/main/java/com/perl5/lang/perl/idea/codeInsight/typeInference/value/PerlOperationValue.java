@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import java.io.IOException;
 /**
  * Represents non-mutation operation value on some base value. E.g. item, slice, keys, scalar
  */
-abstract class PerlOperationValue extends PerlValue {
+public abstract class PerlOperationValue extends PerlValue {
   private final @NotNull PerlValue myBaseValue;
 
   public PerlOperationValue(@NotNull PerlValue baseValue) {
@@ -42,13 +42,8 @@ abstract class PerlOperationValue extends PerlValue {
     return PerlContextType.SCALAR;
   }
 
-  protected final @NotNull PerlValue getBaseValue() {
+  public final @NotNull PerlValue getBaseValue() {
     return myBaseValue;
-  }
-
-  @Override
-  protected void serializeData(@NotNull PerlValueSerializer serializer) throws IOException {
-    serializer.writeValue(myBaseValue);
   }
 
   @Override

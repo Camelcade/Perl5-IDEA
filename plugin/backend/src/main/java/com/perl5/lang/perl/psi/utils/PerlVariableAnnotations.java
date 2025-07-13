@@ -23,6 +23,7 @@ import com.intellij.psi.util.*;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.PerlElementTypesGenerated;
@@ -68,7 +69,7 @@ public class PerlVariableAnnotations {
 
   public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
     dataStream.writeByte(myFlags);
-    myValue.serialize(dataStream);
+    PerlValueSerializer.serialize(myValue, dataStream);
   }
 
   public boolean isDeprecated() {

@@ -43,11 +43,6 @@ public final class PerlUndefValue extends PerlSpecialValue {
   }
 
   @Override
-  protected int getSerializationId() {
-    return PerlValuesManager.UNDEF_ID;
-  }
-
-  @Override
   public @NotNull String getPresentableText() {
     return PerlBaseLexer.STRING_UNDEF;
   }

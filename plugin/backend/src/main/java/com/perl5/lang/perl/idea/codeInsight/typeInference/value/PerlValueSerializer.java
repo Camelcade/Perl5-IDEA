@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueSerializationHelper;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,23 +33,24 @@ public final class PerlValueSerializer {
     myOutputStream = outputStream;
   }
 
-  void writeValue(@NotNull PerlValue value) throws IOException {
+  public void writeValue(@NotNull PerlValue value) throws IOException {
+    var serializerHelper = PerlValueSerializationHelper.get(value);
     if (value instanceof PerlSpecialValue) {
-      writeVarInt(value.getSerializationId());
+      writeVarInt(serializerHelper.getSerializationId());
       return;
     }
     int duplicateId = myDryMap.getInt(value);
     if (duplicateId > 0) {
-      writeVarInt(PerlValuesManager.DUPLICATE_ID);
+      writeVarInt(PerlValueSerializationHelper.DUPLICATE_ID);
       writeVarInt(duplicateId);
       return;
     }
-    writeVarInt(value.getSerializationId());
-    value.serializeData(this);
+    writeVarInt(serializerHelper.getSerializationId());
+    serializerHelper.serializeData(value, this);
     myDryMap.put(value, myDryMap.size() + 1);
   }
 
-  void writeValuesList(@NotNull Collection<? extends PerlValue> elements) throws IOException {
+  public void writeValuesList(@NotNull Collection<? extends PerlValue> elements) throws IOException {
     writeVarInt(elements.size());
     for (PerlValue element : elements) {
       writeValue(element);
@@ -65,5 +67,9 @@ public final class PerlValueSerializer {
 
   public void writeBoolean(boolean v) throws IOException {
     myOutputStream.writeBoolean(v);
+  }
+
+  public static void serialize(@NotNull PerlValue value, @NotNull StubOutputStream outputStream) throws IOException {
+    new PerlValueSerializer(outputStream).writeValue(value);
   }
 }
