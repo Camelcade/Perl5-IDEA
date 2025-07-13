@@ -24,7 +24,7 @@ import java.io.IOException
 
 
 private val EP = ClassExtension<PerlValueSerializationHelper<*>>("com.perl5.valueSerializationHelper")
-var id = 0
+private var id = 0
 
 interface PerlValueSerializationHelper<Val : PerlValue> {
 
@@ -41,7 +41,7 @@ interface PerlValueSerializationHelper<Val : PerlValue> {
     @Suppress("UNCHECKED_CAST")
     @JvmStatic
     operator fun <Val : PerlValue> get(value: Val): PerlValueSerializationHelper<Val> =
-      EP.findSingle(value.javaClass) as? PerlValueSerializationHelper<Val> ?: throw RuntimeException("No seraizliationhelper for $value")
+      EP.findSingle(value.javaClass) as? PerlValueSerializationHelper<Val> ?: throw RuntimeException("No serialization helper for $value")
 
     @JvmField
     val DUPLICATE_ID = id++

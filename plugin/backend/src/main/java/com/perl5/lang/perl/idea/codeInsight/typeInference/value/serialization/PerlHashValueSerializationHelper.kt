@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlHashValue
 
-class PerlHashValueSerializationHelper : PerlListValueSeriazliationHelper<PerlHashValue>() {
+class PerlHashValueSerializationHelper : PerlListValueSerializationHelper<PerlHashValue>() {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.HASH_ID
 }

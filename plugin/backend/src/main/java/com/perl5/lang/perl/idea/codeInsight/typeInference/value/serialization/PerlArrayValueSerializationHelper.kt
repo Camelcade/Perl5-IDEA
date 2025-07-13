@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArrayValue
 
-class PerlArrayValueSerializationHelper : PerlListValueSeriazliationHelper<PerlArrayValue>() {
+class PerlArrayValueSerializationHelper : PerlListValueSerializationHelper<PerlArrayValue>() {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.ARRAY_ID
 }
