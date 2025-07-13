@@ -21,9 +21,7 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.Collections;
-import java.util.Objects;
 import java.util.Set;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
@@ -37,11 +35,6 @@ public final class PerlScalarValue extends PerlValue {
 
   private PerlScalarValue(@NotNull String value) {
     myValue = value;
-  }
-
-  PerlScalarValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
-    myValue = Objects.requireNonNull(deserializer.readNameString());
   }
 
   @NotNull

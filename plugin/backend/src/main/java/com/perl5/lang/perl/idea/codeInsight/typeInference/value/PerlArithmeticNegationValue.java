@@ -21,8 +21,6 @@ import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public class PerlArithmeticNegationValue extends PerlOperationValue {
@@ -31,10 +29,6 @@ public class PerlArithmeticNegationValue extends PerlOperationValue {
     if (baseValue.isDeterministic()) {
       LOG.error("Deterministic values should be resolved in-place: " + baseValue);
     }
-  }
-
-  PerlArithmeticNegationValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override

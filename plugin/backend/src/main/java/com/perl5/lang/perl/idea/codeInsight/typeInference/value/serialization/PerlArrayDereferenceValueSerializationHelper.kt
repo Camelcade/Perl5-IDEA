@@ -17,8 +17,13 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArrayDereferenceValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 
 class PerlArrayDereferenceValueSerializationHelper : PerlOperationValueSerializationHelper<PerlArrayDereferenceValue>() {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.ARRAY_DEREFERENCE_ID
+
+  override fun deserialize(deserializer: PerlValueDeserializer, baseValue: PerlValue): PerlValue =
+    PerlArrayDereferenceValue.create(baseValue)
 }

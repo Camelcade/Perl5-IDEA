@@ -17,8 +17,13 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlBlessedValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 
 class PerlBlessedValueSerializationHelper : PerlParametrizedOperationValueSerializationHelper<PerlBlessedValue>() {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.BLESSED_ID
+
+  override fun deserialize(deserializer: PerlValueDeserializer, baseValue: PerlValue, parameter: PerlValue): PerlValue =
+    PerlBlessedValue.create(baseValue, parameter)
 }

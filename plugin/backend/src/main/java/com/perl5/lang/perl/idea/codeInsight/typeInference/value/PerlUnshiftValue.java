@@ -24,7 +24,6 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.function.BiFunction;
 
@@ -35,10 +34,6 @@ public class PerlUnshiftValue extends PerlParametrizedOperationValue {
   private PerlUnshiftValue(@NotNull PerlValue arrayValue,
                            @NotNull PerlValue prefixValue) {
     super(arrayValue, prefixValue);
-  }
-
-  public PerlUnshiftValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override

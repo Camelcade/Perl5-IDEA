@@ -25,7 +25,6 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -42,8 +41,8 @@ public class PerlDuckValue extends PerlListValue {
     super(elements);
   }
 
-  PerlDuckValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
+  public static @NotNull PerlValue create(@NotNull List<? extends PerlValue> elements) {
+    return elements.isEmpty() ? UNKNOWN_VALUE : new PerlDuckValue(elements);
   }
 
   @Override

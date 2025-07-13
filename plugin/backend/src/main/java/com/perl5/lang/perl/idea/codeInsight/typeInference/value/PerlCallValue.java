@@ -39,7 +39,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
@@ -57,11 +56,6 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
                           @NotNull List<? extends PerlValue> arguments) {
     super(namespaceNameValue, subNameValue);
     myArguments = List.copyOf(arguments);
-  }
-
-  PerlCallValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
-    myArguments = deserializer.readValuesList();
   }
 
   @Override

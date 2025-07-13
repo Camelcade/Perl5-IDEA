@@ -29,7 +29,6 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -46,11 +45,6 @@ public final class PerlCallObjectValue extends PerlCallValue {
                               @Nullable String superContext) {
     super(namespaceNameValue, subNameValue, arguments);
     mySuperContext = superContext;
-  }
-
-  PerlCallObjectValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
-    mySuperContext = deserializer.readNameString();
   }
 
   public @Nullable String getSuperContext() {

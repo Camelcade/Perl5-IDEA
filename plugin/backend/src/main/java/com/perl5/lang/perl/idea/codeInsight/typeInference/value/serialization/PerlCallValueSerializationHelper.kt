@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
 
 abstract class PerlCallValueSerializationHelper<Val : PerlCallValue> : PerlParametrizedOperationValueSerializationHelper<Val>() {
@@ -24,4 +26,14 @@ abstract class PerlCallValueSerializationHelper<Val : PerlCallValue> : PerlParam
     super.serializeData(value, serializer)
     serializer.writeValuesList(value.arguments)
   }
+
+  final override fun deserialize(deserializer: PerlValueDeserializer, baseValue: PerlValue, parameter: PerlValue): PerlValue =
+    deserialize(deserializer, baseValue, parameter, deserializer.readValuesList())
+
+  protected abstract fun deserialize(
+    deserializer: PerlValueDeserializer,
+    baseValue: PerlValue,
+    parameter: PerlValue,
+    arguments: List<PerlValue>
+  ): PerlValue
 }

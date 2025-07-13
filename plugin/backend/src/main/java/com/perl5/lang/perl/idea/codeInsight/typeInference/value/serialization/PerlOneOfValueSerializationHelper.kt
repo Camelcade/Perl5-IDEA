@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
 
 class PerlOneOfValueSerializationHelper : PerlValueSerializationHelper<PerlOneOfValue> {
@@ -24,4 +26,6 @@ class PerlOneOfValueSerializationHelper : PerlValueSerializationHelper<PerlOneOf
     get() = PerlValueSerializationHelper.ONE_OF_ID
 
   override fun serializeData(value: PerlOneOfValue, serializer: PerlValueSerializer) = serializer.writeValuesList(value.variants)
+
+  override fun deserialize(deserializer: PerlValueDeserializer): PerlValue = PerlOneOfValue(deserializer.readValuesSet())
 }

@@ -17,8 +17,13 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArithmeticNegationValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 
 class PerlArithmeticNegationValueSerializationHelper : PerlOperationValueSerializationHelper<PerlArithmeticNegationValue>() {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.ARITHMETIC_NEGATION
+
+  override fun deserialize(deserializer: PerlValueDeserializer, baseValue: PerlValue): PerlValue =
+    PerlArithmeticNegationValue.create(baseValue)
 }

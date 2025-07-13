@@ -22,18 +22,12 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public class PerlPushValue extends PerlParametrizedOperationValue {
   private PerlPushValue(@NotNull PerlValue arrayValue,
                         @NotNull PerlValue suffixValue) {
     super(arrayValue, suffixValue);
-  }
-
-  PerlPushValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override

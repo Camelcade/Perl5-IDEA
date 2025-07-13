@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDefaultArgumentValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
 
 class PerlDefaultArgumentValueSerializationHelper : PerlParametrizedOperationValueSerializationHelper<PerlDefaultArgumentValue>() {
@@ -27,4 +29,7 @@ class PerlDefaultArgumentValueSerializationHelper : PerlParametrizedOperationVal
     super.serializeData(value, serializer)
     serializer.writeVarInt(value.argumentIndex)
   }
+
+  override fun deserialize(deserializer: PerlValueDeserializer, baseValue: PerlValue, parameter: PerlValue): PerlValue =
+    PerlDefaultArgumentValue.create(baseValue, parameter, deserializer.readVarInt())
 }

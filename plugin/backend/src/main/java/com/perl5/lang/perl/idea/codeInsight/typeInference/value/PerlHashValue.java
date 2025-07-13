@@ -20,7 +20,6 @@ import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -36,10 +35,6 @@ public class PerlHashValue extends PerlMapValue {
 
   public PerlHashValue(@NotNull List<? extends PerlValue> elements) {
     super(elements);
-  }
-
-  public PerlHashValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   public @NotNull Map<PerlValue, PerlValue> getMap() {

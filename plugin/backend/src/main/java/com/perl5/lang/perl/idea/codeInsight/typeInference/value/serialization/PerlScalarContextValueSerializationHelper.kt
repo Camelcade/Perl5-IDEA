@@ -17,8 +17,12 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarContextValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 
 class PerlScalarContextValueSerializationHelper : PerlOperationValueSerializationHelper<PerlScalarContextValue>() {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.SCALAR_CONTEXT_ID
+
+  override fun deserialize(deserializer: PerlValueDeserializer, baseValue: PerlValue): PerlValue = PerlScalarContextValue.create(baseValue)
 }

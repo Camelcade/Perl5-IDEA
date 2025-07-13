@@ -21,7 +21,6 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,11 +31,6 @@ public abstract class PerlListValue extends PerlValue {
 
   protected PerlListValue(@NotNull List<? extends PerlValue> elements) {
     myElements = elements.isEmpty() ? Collections.emptyList() : Collections.unmodifiableList(elements);
-  }
-
-  protected PerlListValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
-    myElements = deserializer.readValuesList();
   }
 
   public final boolean isEmpty() {

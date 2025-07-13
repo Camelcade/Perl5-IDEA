@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlSublistValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
 
 class PerlSublistValueSerializationHelper : PerlOperationValueSerializationHelper<PerlSublistValue>() {
@@ -28,4 +30,7 @@ class PerlSublistValueSerializationHelper : PerlOperationValueSerializationHelpe
     serializer.writeVarInt(value.startOffset)
     serializer.writeVarInt(value.endOffset)
   }
+
+  override fun deserialize(deserializer: PerlValueDeserializer, baseValue: PerlValue): PerlValue =
+    PerlSublistValue.create(baseValue, deserializer.readVarInt(), deserializer.readVarInt())
 }

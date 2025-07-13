@@ -20,7 +20,6 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -31,10 +30,6 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 public abstract class PerlMapValue extends PerlListValue {
   protected PerlMapValue(@NotNull List<? extends PerlValue> elements) {
     super(elements);
-  }
-
-  PerlMapValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override

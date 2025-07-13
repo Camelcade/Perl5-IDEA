@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueSerializationHelper;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,8 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.*;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.*;
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueSerializationHelper.*;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueSerializationHelper.DUPLICATE_ID;
 
 public class PerlValueDeserializer {
 
@@ -36,8 +36,7 @@ public class PerlValueDeserializer {
     myInputStream = inputStream;
   }
 
-  @NotNull
-  PerlValue readValue() throws IOException {
+  public @NotNull PerlValue readValue() throws IOException {
     final int valueId = readVarInt();
     if (valueId == DUPLICATE_ID) {
       int duplicateId = readVarInt();
@@ -47,103 +46,16 @@ public class PerlValueDeserializer {
       }
       return duplicate;
     }
-    // Special values
-    if (valueId == UNKNOWN_ID) {
-      return UNKNOWN_VALUE;
+    PerlValueSerializationHelper<?> serializationHelper = PerlValueSerializationHelper.get(valueId);
+    PerlValue value = serializationHelper.deserialize(this);
+    if (value instanceof PerlSpecialValue) {
+      return value;
     }
-    else if (valueId == UNDEF_ID) {
-      return UNDEF_VALUE;
-    }
-    else if (valueId == ARGUMENTS_ID) {
-      return ARGUMENTS_VALUE;
-    }
-
-    PerlValue value = readValue(valueId);
     myDryMap.put(myDryMap.size() + 1, value);
     return PerlValuesManager.intern(value);
   }
 
-  private @NotNull PerlValue readValue(int valueId) throws IOException {
-    if (valueId == SCALAR_ID) {
-      return new PerlScalarValue(this);
-    }
-    else if (valueId == SCALAR_CONTEXT_ID) {
-      return new PerlScalarContextValue(this);
-    }
-    else if (valueId == ARRAY_ID) {
-      return new PerlArrayValue(this);
-    }
-    else if (valueId == HASH_ID) {
-      return new PerlHashValue(this);
-    }
-    else if (valueId == DEFERRED_HASH_ID) {
-      return new PerlDeferredHashValue(this);
-    }
-    else if (valueId == REFERENCE_ID) {
-      return new PerlReferenceValue(this);
-    }
-    else if (valueId == BLESSED_ID) {
-      return new PerlBlessedValue(this);
-    }
-    else if (valueId == ONE_OF_ID) {
-      return new PerlOneOfValue(this);
-    }
-    else if (valueId == CALL_OBJECT_ID) {
-      return new PerlCallObjectValue(this);
-    }
-    else if (valueId == CALL_STATIC_ID) {
-      return new PerlCallStaticValue(this);
-    }
-    else if (valueId == ARRAY_ELEMENT_ID) {
-      return new PerlArrayElementValue(this);
-    }
-    else if (valueId == HASH_ELEMENT_VALUE) {
-      return new PerlHashElementValue(this);
-    }
-    else if (valueId == ARITHMETIC_NEGATION) {
-      return new PerlArithmeticNegationValue(this);
-    }
-    else if (valueId == ARRAY_SLICE_ID) {
-      return new PerlArraySliceValue(this);
-    }
-    else if (valueId == HASH_SLICE_ID) {
-      return new PerlHashSliceValue(this);
-    }
-    else if (valueId == SCALAR_DEREFERENCE_ID) {
-      return new PerlScalarDereferenceValue(this);
-    }
-    else if (valueId == UNSHIFT_ID) {
-      return new PerlUnshiftValue(this);
-    }
-    else if (valueId == PUSH_ID) {
-      return new PerlPushValue(this);
-    }
-    else if (valueId == ARRAY_DEREFERENCE_ID) {
-      return new PerlArrayDereferenceValue(this);
-    }
-    else if (valueId == HASH_DEREFERENCE_ID) {
-      return new PerlHashDereferenceValue(this);
-    }
-    else if (valueId == SUBLIST_ID) {
-      return new PerlSublistValue(this);
-    }
-    else if( valueId == SMART_GETTER_ID){
-      return new PerlSmartGetterValue(this);
-    }
-    else if (valueId == DEFAULT_ARGUMENT_ID) {
-      return new PerlDefaultArgumentValue(this);
-    }
-    else if (valueId == DUCK_TYPE_ID) {
-      return new PerlDuckValue(this);
-    }
-    else if (valueId == VALUE_WITH_FALLBACK) {
-      return new PerlValueWithFallback(this);
-    }
-    throw new IOException("Don't know how to deserialize a value: " + valueId);
-  }
-
-  @NotNull
-  List<PerlValue> readValuesList() throws IOException {
+  public @NotNull List<PerlValue> readValuesList() throws IOException {
     int size = readVarInt();
     if (size == 0) {
       return Collections.emptyList();
@@ -155,8 +67,7 @@ public class PerlValueDeserializer {
     return Collections.unmodifiableList(elements);
   }
 
-  @NotNull
-  Set<PerlValue> readValuesSet() throws IOException {
+  public @NotNull Set<PerlValue> readValuesSet() throws IOException {
     int size = readVarInt();
     if (size == 0) {
       return Collections.emptySet();

@@ -17,6 +17,8 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallStaticValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
 
 class PerlCallStaticValueSerializationHelper : PerlCallValueSerializationHelper<PerlCallStaticValue>() {
@@ -27,4 +29,11 @@ class PerlCallStaticValueSerializationHelper : PerlCallValueSerializationHelper<
     super.serializeData(value, serializer)
     serializer.writeBoolean(value.hasExplicitNamespace())
   }
+
+  override fun deserialize(
+    deserializer: PerlValueDeserializer,
+    baseValue: PerlValue,
+    parameter: PerlValue,
+    arguments: List<PerlValue>
+  ): PerlValue = PerlCallStaticValue(baseValue, parameter, arguments, deserializer.readBoolean())
 }

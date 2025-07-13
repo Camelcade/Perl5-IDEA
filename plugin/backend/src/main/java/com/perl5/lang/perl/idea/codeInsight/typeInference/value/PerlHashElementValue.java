@@ -20,8 +20,6 @@ import com.intellij.util.ObjectUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
-
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public final class PerlHashElementValue extends PerlParametrizedOperationValue {
@@ -32,10 +30,6 @@ public final class PerlHashElementValue extends PerlParametrizedOperationValue {
                 "hash=" + hashValue + "; " +
                 "key=" + keyValue);
     }
-  }
-
-  PerlHashElementValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   @Override

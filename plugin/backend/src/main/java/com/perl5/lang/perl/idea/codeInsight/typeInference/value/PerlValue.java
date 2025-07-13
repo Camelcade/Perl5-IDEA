@@ -24,7 +24,6 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Set;
 
@@ -44,10 +43,6 @@ public abstract class PerlValue {
   private volatile PerlValueType myValueDeterminism = null;
 
   protected PerlValue() {
-  }
-
-  @SuppressWarnings("RedundantThrows")
-  PerlValue(@NotNull PerlValueDeserializer ignoredDeserializer) throws IOException {
   }
 
   /**

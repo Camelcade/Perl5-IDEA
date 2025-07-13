@@ -19,7 +19,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,10 +27,6 @@ import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 public final class PerlDeferredHashValue extends PerlMapValue {
   public PerlDeferredHashValue(@NotNull List<? extends PerlValue> elements) {
     super(elements);
-  }
-
-  PerlDeferredHashValue(@NotNull PerlValueDeserializer deserializer) throws IOException {
-    super(deserializer);
   }
 
   /**

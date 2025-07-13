@@ -17,8 +17,13 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUnshiftValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 
 class PerlUnshiftValueSerializationHelper : PerlParametrizedOperationValueSerializationHelper<PerlUnshiftValue>() {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.UNSHIFT_ID
+
+  override fun deserialize(deserializer: PerlValueDeserializer, baseValue: PerlValue, parameter: PerlValue): PerlValue =
+    PerlUnshiftValue.create(baseValue, parameter)
 }
