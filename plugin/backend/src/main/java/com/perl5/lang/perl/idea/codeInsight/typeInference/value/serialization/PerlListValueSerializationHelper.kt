@@ -19,6 +19,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlListValue
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
 
-abstract class PerlListValueSeriazliationHelper<Val : PerlListValue> : PerlValueSerializationHelper<Val> {
+abstract class PerlListValueSerializationHelper<Val : PerlListValue> : PerlValueSerializationHelper<Val> {
   override fun serializeData(value: Val, serializer: PerlValueSerializer) = serializer.writeValuesList(value.elements)
 }

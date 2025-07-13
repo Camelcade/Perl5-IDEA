@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue
 
-class PerlDuckValueSerializationHelper : PerlListValueSeriazliationHelper<PerlDuckValue>() {
+class PerlDuckValueSerializationHelper : PerlListValueSerializationHelper<PerlDuckValue>() {
   override val serializationId: Int
     get() = PerlValueSerializationHelper.DUCK_TYPE_ID
 }
