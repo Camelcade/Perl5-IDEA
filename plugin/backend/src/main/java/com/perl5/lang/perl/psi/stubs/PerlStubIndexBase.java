@@ -24,7 +24,7 @@ import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorService;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueSerializationHelper;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueBackendHelper;
 import com.perl5.lang.perl.psi.PerlSubCallHandlerVersionService;
 import com.perl5.lang.perl.util.PerlStubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -39,7 +39,7 @@ public abstract class PerlStubIndexBase<Psi extends PsiElement> extends StringSt
   public int getVersion() {
     return super.getVersion() +
            VERSION +
-           PerlValueSerializationHelper.getVersion() +
+           PerlValueBackendHelper.getVersion() +
            PerlSubCallHandlerVersionService.getHandlersVersion() +
            PerlPackageProcessorService.getVersion();
   }

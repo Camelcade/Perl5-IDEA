@@ -23,7 +23,7 @@ import com.intellij.psi.stubs.LanguageStubDefinition
 import com.intellij.psi.stubs.StubElement
 import com.intellij.psi.util.elementType
 import com.perl5.lang.perl.idea.EP.PerlPackageProcessorService
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueSerializationHelper
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueBackendHelper
 import com.perl5.lang.perl.psi.PerlFile
 import com.perl5.lang.perl.psi.PerlSubCallHandlerVersionService
 
@@ -38,7 +38,7 @@ internal open class PerlStubDefinition : LanguageStubDefinition {
     }
 
   override val stubVersion: Int = baseVersion +
-    PerlValueSerializationHelper.getVersion() +
+    PerlValueBackendHelper.getVersion() +
     PerlSubCallHandlerVersionService.getHandlersVersion() +
     PerlPackageProcessorService.getVersion()
 }

@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubOutputStream;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueSerializationHelper;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueBackendHelper;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,14 +34,14 @@ public final class PerlValueSerializer {
   }
 
   public void writeValue(@NotNull PerlValue value) throws IOException {
-    var serializerHelper = PerlValueSerializationHelper.get(value);
+    var serializerHelper = PerlValueBackendHelper.get(value);
     if (value instanceof PerlSpecialValue) {
       writeVarInt(serializerHelper.getSerializationId());
       return;
     }
     int duplicateId = myDryMap.getInt(value);
     if (duplicateId > 0) {
-      writeVarInt(PerlValueSerializationHelper.DUPLICATE_ID);
+      writeVarInt(PerlValueBackendHelper.DUPLICATE_ID);
       writeVarInt(duplicateId);
       return;
     }
