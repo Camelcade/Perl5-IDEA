@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.psi.stubs.StubInputStream;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueSerializationHelper;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueBackendHelper;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.*;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueSerializationHelper.DUPLICATE_ID;
+import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueBackendHelper.DUPLICATE_ID;
 
 public class PerlValueDeserializer {
 
@@ -46,7 +46,7 @@ public class PerlValueDeserializer {
       }
       return duplicate;
     }
-    PerlValueSerializationHelper<?> serializationHelper = PerlValueSerializationHelper.get(valueId);
+    PerlValueBackendHelper<?> serializationHelper = PerlValueBackendHelper.get(valueId);
     PerlValue value = serializationHelper.deserialize(this);
     if (value instanceof PerlSpecialValue) {
       return value;
