@@ -39,6 +39,7 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlMigrationUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
@@ -369,13 +370,13 @@ public final class PerlValuesManager {
       return UNKNOWN_VALUE;
     }
     List<PsiElement> elements = assignValueDescriptor.getElements();
-    PerlContextType targetContextType = PerlContextType.from(target);
+    PerlContextType targetContextType = PerlMigrationUtil.contextFrom(target);
     if (targetContextType == PerlContextType.SCALAR) {
       int startIndex = assignValueDescriptor.getStartIndex();
-      if (elements.size() == 1 && (PerlContextType.isScalar(elements.getFirst()) || startIndex == -1)) {
+      if (elements.size() == 1 && (PerlMigrationUtil.isScalar(elements.getFirst()) || startIndex == -1)) {
         return PerlScalarContextValue.create(from(elements.getFirst()));
       }
-      else if (elements.size() > 1 || PerlContextType.isList(ContainerUtil.getFirstItem(elements))) {
+      else if (elements.size() > 1 || PerlMigrationUtil.isList(ContainerUtil.getFirstItem(elements))) {
         return PerlArrayElementValue.create(
           PerlArrayValue.builder().addPsiElements(elements).build(),
           PerlScalarValue.create(startIndex)

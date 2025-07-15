@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.utils.PerlContextType;
+import com.perl5.lang.perl.util.PerlMigrationUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,7 +59,7 @@ public class PerlSubSignatureElementInstruction extends PerlMutationInstruction 
       }
     }
 
-    PerlValue mainValue = PerlContextType.isScalar(myElement) ?
+    PerlValue mainValue = PerlMigrationUtil.isScalar(myElement) ?
                           PerlArrayElementValue.create(PerlValues.ARGUMENTS_VALUE, PerlScalarValue.create(myIndex)) :
                           PerlSublistValue.create(PerlValues.ARGUMENTS_VALUE, myIndex, 0);
     PerlValue defaultValue = PerlValuesManager.from(myDefaultValue);

@@ -25,6 +25,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlMigrationUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -149,7 +150,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
         found = true;
         break;
       }
-      if (PerlContextType.isList(leftElement)) {
+      if (PerlMigrationUtil.isList(leftElement)) {
         return null;
       }
       leftElementIndex++;
@@ -163,12 +164,12 @@ public interface PerlAssignExpression extends PsiPerlExpr {
     if (rightElements.isEmpty()) {
       return null;
     }
-    if (PerlContextType.isScalar(leftAssignPart)) {
+    if (PerlMigrationUtil.isScalar(leftAssignPart)) {
       PsiElement lastItem = ContainerUtil.getLastItem(rightElements);
-      return new PerlAssignValueDescriptor(Objects.requireNonNull(lastItem), PerlContextType.isList(lastItem) ? -1 : 0);
+      return new PerlAssignValueDescriptor(Objects.requireNonNull(lastItem), PerlMigrationUtil.isList(lastItem) ? -1 : 0);
     }
 
-    PerlContextType leftContextType = PerlContextType.from(leftPartElement);
+    PerlContextType leftContextType = PerlMigrationUtil.contextFrom(leftPartElement);
     for (int i = 0; i < rightElements.size(); i++) {
       PsiElement rightElement = rightElements.get(i);
       if (leftElementIndex == 0) {
@@ -177,7 +178,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
         }
         return new PerlAssignValueDescriptor(rightElements.subList(i, rightElements.size()));
       }
-      if (PerlContextType.from(rightElement) == LIST) {
+      if (PerlMigrationUtil.contextFrom(rightElement) == LIST) {
         return new PerlAssignValueDescriptor(rightElements.subList(i, rightElements.size()), leftElementIndex);
       }
       leftElementIndex--;
