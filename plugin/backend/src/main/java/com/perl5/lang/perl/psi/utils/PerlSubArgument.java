@@ -20,8 +20,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.stubs.StubOutputStream;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -76,12 +76,12 @@ public class PerlSubArgument {
   }
 
   public String toStringShort() {
-    return StringUtil.isNotEmpty(myArgumentName) ? myArgumentType.getSigil() + myArgumentName : PerlLexer.STRING_UNDEF;
+    return StringUtil.isNotEmpty(myArgumentName) ? myArgumentType.getSigil() + myArgumentName : PerlUndefValue.STRING_UNDEF;
   }
 
   public String toStringLong() {
     if (StringUtil.isEmpty(myArgumentName)) {
-      return PerlLexer.STRING_UNDEF;
+      return PerlUndefValue.STRING_UNDEF;
     }
 
     String shortName = myArgumentType.getSigil() + myArgumentName;

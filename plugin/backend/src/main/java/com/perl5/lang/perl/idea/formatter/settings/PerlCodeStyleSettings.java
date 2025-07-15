@@ -25,7 +25,7 @@ import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.DO_NOT_WRAP;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.WHATEVER;
 import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_NAMESPACE_FULL;
-import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_SEPARATOR;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.NAMESPACE_SEPARATOR;
 
 
 public class PerlCodeStyleSettings extends CustomCodeStyleSettings {

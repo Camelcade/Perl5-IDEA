@@ -26,7 +26,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlNamespaceElementContainer;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -125,7 +125,7 @@ public abstract class PerlUseStatementElementBase extends PerlPolyNamedElement<P
       return stub.getNamespaceName();
     }
 
-    return PerlPackageUtil.getContextNamespaceName(this);
+    return PerlPackageUtilCore.getContextNamespaceName(this);
   }
 
   @Override

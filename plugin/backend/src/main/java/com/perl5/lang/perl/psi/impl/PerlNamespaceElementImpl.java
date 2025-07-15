@@ -29,6 +29,7 @@ import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.references.PerlNamespaceFileReference;
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
 
   @Override
   public @NotNull String getName() {
-    return isTag() ? PerlPackageUtil.getContextNamespaceName(this) : this.getText();
+    return isTag() ? PerlPackageUtilCore.getContextNamespaceName(this) : this.getText();
   }
 
   @Override

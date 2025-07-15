@@ -27,7 +27,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlScalarUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -50,7 +50,7 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
     String namespaceName = null;
     if (canonicalPath != null) {
       try {
-        namespaceName = MOJO_SANDBOX_NS_PREFIX + PerlPackageUtil.NAMESPACE_SEPARATOR +
+        namespaceName = MOJO_SANDBOX_NS_PREFIX + PerlPackageUtilCore.NAMESPACE_SEPARATOR +
                         new HexBinaryAdapter().marshal(MessageDigest.getInstance("MD5").digest(canonicalPath.getBytes()));
       }
       catch (NoSuchAlgorithmException ignore) {

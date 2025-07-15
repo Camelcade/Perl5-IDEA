@@ -24,7 +24,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -38,7 +38,7 @@ public class PerlRedundantNamespaceInspection extends PerlInspection {
         if (namespaceElement != null) {
           String packageName = namespaceElement.getCanonicalName();
           if (StringUtil.isNotEmpty(packageName)) {
-            String contextPackageName = PerlPackageUtil.getContextNamespaceName(o);
+            String contextPackageName = PerlPackageUtilCore.getContextNamespaceName(o);
             if (StringUtil.equals(packageName, contextPackageName)) {
               if (!namespaceElement.getTextRange().isEmpty()) {
                 holder.registerProblem(

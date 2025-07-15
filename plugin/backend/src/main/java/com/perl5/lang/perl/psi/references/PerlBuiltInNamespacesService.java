@@ -22,6 +22,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,7 +36,7 @@ public class PerlBuiltInNamespacesService {
 
   public PerlBuiltInNamespacesService(@NotNull Project project) {
     PsiManager psiManager = PsiManager.getInstance(project);
-    myNamespacesMap.put(MAIN_NAMESPACE_NAME, new PerlBuiltInNamespaceDefinition(psiManager, MAIN_NAMESPACE_NAME));
+    myNamespacesMap.put(PerlPackageUtilCore.MAIN_NAMESPACE_NAME, new PerlBuiltInNamespaceDefinition(psiManager, PerlPackageUtilCore.MAIN_NAMESPACE_NAME));
     myNamespacesMap.put(CORE_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_NAMESPACE));
     myNamespacesMap.put(CORE_GLOBAL_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_GLOBAL_NAMESPACE));
     myNamespacesMap.put(UNIVERSAL_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, UNIVERSAL_NAMESPACE));

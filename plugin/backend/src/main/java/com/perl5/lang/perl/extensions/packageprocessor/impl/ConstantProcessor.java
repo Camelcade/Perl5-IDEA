@@ -31,7 +31,7 @@ import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
 import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,7 +59,7 @@ public class ConstantProcessor extends PerlPragmaProcessorBase {
           ElementManipulators.getValueText(keyElement),
           LIGHT_SUB_DEFINITION,
           keyElement,
-          PerlPackageUtil.getContextNamespaceName(useStatementElement),
+          PerlPackageUtilCore.getContextNamespaceName(useStatementElement),
           Collections.emptyList(),
           PerlSubAnnotations.tryToFindAnnotations(keyElement, useArguments, useStatementElement),
           PerlValuesManager.lazy(valElement)

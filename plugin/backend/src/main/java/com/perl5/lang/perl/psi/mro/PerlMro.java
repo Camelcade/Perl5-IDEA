@@ -27,6 +27,7 @@ import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlGlobUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -91,7 +92,7 @@ public abstract class PerlMro {
     for (String currentNamespaceName : linearISA) {
       for (String subName : callableNames) {
         if (StringUtil.isNotEmpty(subName) && !PerlPackageUtil.processCallables(
-          project, searchScope, PerlPackageUtil.join(currentNamespaceName, subName),
+          project, searchScope, PerlPackageUtilCore.join(currentNamespaceName, subName),
           it -> {
             stopFlag.set("");
             return processor.process(it);
@@ -112,7 +113,7 @@ public abstract class PerlMro {
       if (PerlPackageUtil.isUNIVERSAL(currentNamespaceName)) {
         continue;
       }
-      if (!PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtil.join(currentNamespaceName, SUB_AUTOLOAD), it -> {
+      if (!PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtilCore.join(currentNamespaceName, SUB_AUTOLOAD), it -> {
         processor.process(it);
         return false;
       })) {

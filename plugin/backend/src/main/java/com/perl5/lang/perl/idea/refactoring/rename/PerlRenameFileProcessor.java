@@ -32,7 +32,7 @@ import com.intellij.refactoring.rename.RenamePsiFileProcessor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,9 +52,9 @@ public class PerlRenameFileProcessor extends RenamePsiFileProcessor {
       final String currentPackageName = ((PerlFileImpl)element).getFilePackageName();
 
       if (currentPackageName != null) {
-        String[] nameChunks = currentPackageName.split(PerlPackageUtil.NAMESPACE_SEPARATOR);
+        String[] nameChunks = currentPackageName.split(PerlPackageUtilCore.NAMESPACE_SEPARATOR);
         nameChunks[nameChunks.length - 1] = newName.replaceFirst("\\.pm$", "");
-        final String newPackageName = StringUtil.join(nameChunks, PerlPackageUtil.NAMESPACE_SEPARATOR);
+        final String newPackageName = StringUtil.join(nameChunks, PerlPackageUtilCore.NAMESPACE_SEPARATOR);
 
         final String newFileName = ((PerlFileImpl)element).getVirtualFile().getParent().getPath() + '/' + newName;
 

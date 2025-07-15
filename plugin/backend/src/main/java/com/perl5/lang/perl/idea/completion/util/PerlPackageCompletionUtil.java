@@ -40,6 +40,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -85,7 +86,7 @@ public class PerlPackageCompletionUtil {
       return completionProcessor.result();
     }
     if (appendNamespaceSeparator) {
-      packageName += PerlPackageUtil.NAMESPACE_SEPARATOR;
+      packageName += PerlPackageUtilCore.NAMESPACE_SEPARATOR;
     }
 
     LookupElementBuilder result = LookupElementBuilder.create(ObjectUtils.notNull(lookupObject, packageName), packageName);

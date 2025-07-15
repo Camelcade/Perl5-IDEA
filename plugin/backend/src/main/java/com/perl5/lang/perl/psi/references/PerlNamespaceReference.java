@@ -25,6 +25,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInNamespaceDefinition;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
@@ -47,7 +48,7 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
   protected @NotNull ResolveResult[] resolveInner(boolean incompleteCode) {
     String namespaceName = getNamspaceName();
     if (namespaceName.isEmpty()) {
-      namespaceName = PerlPackageUtil.MAIN_NAMESPACE_NAME;
+      namespaceName = PerlPackageUtilCore.MAIN_NAMESPACE_NAME;
     }
 
     Project project = myElement.getProject();

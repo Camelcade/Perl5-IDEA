@@ -28,6 +28,7 @@ import com.perl5.lang.perl.psi.PerlCallableElement
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService
 import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 import com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD
 
 
@@ -84,7 +85,7 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
       if (!PerlPackageUtil.processCallables(
           project,
           subsEffectiveScope,
-          PerlPackageUtil.join(namespaceName, subName),
+          PerlPackageUtilCore.join(namespaceName, subName),
           processorWrapper
         )
       ) {
@@ -112,7 +113,7 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
     // AUTOLOAD
     return !processingContext.processAutoload ||
       PerlPackageUtil.isUNIVERSAL(namespaceName) || PerlPackageUtil.isCORE(namespaceName) ||
-      PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtil.join(namespaceName, SUB_AUTOLOAD), processorWrapper)
+      PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtilCore.join(namespaceName, SUB_AUTOLOAD), processorWrapper)
   }
 
   /**
@@ -127,7 +128,7 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
     contextElement: PsiElement?
   ): GlobalSearchScope {
     val contextFile = contextElement?.containingFile?.originalFile
-    if (PerlPackageUtil.MAIN_NAMESPACE_NAME == namespaceName &&
+    if (PerlPackageUtilCore.MAIN_NAMESPACE_NAME == namespaceName &&
       PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION && contextFile != null
     ) {
       return GlobalSearchScope.fileScope(contextFile)

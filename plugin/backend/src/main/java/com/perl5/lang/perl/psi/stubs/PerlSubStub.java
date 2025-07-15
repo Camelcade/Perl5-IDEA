@@ -23,7 +23,7 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlSub;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class PerlSubStub<Psi extends PerlSubElement> extends StubBase<Psi> implements StubElement<Psi>, PerlSub {
@@ -59,7 +59,7 @@ public abstract class PerlSubStub<Psi extends PerlSubElement> extends StubBase<P
 
   @Override
   public String getCanonicalName() {
-    return getNamespaceName() + PerlPackageUtil.NAMESPACE_SEPARATOR + getSubName();
+    return getNamespaceName() + PerlPackageUtilCore.NAMESPACE_SEPARATOR + getSubName();
   }
 
   @Override

@@ -37,6 +37,7 @@ import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.util.PerlFileUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -82,7 +83,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
   @Override
   protected @Nullable String computeNamespaceName() {
     String packageName = Mason2Util.getVirtualFileClassName(getProject(), MasonCoreUtil.getContainingVirtualFile(getContainingFile()));
-    return packageName == null ? PerlPackageUtil.MAIN_NAMESPACE_NAME : packageName;
+    return packageName == null ? PerlPackageUtilCore.MAIN_NAMESPACE_NAME : packageName;
   }
 
   @Override

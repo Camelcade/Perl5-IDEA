@@ -29,6 +29,7 @@ import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamedBlockImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -71,7 +72,7 @@ class PerlBeginStackElement extends PerlCallStackElement {
 
   @Override
   protected @NotNull List<NavigatablePsiElement> computeNavigatables(@NotNull Project project, @NotNull Sdk perlSdk) {
-    if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(myNamespaceName)) {
+    if (PerlPackageUtilCore.MAIN_NAMESPACE_NAME.equals(myNamespaceName)) {
       return Collections.emptyList();
     }
     List<NavigatablePsiElement> result = new ArrayList<>();
@@ -92,12 +93,12 @@ class PerlBeginStackElement extends PerlCallStackElement {
           var endOffset = document.getLineEndOffset(myLineNumber - 1);
 
           var useStatement = PerlPsiUtil.findElementOfClassAtRange(psiFile, startOffset, endOffset, PerlUseStatementElementBase.class);
-          if (myNamespaceName.equals(PerlPackageUtil.getContextNamespaceName(useStatement))) {
+          if (myNamespaceName.equals(PerlPackageUtilCore.getContextNamespaceName(useStatement))) {
             result.add(useStatement);
           }
           else {
             var namedBlockAtOffset = PerlPsiUtil.findElementOfClassAtRange(psiFile, startOffset, endOffset, PsiPerlNamedBlockImpl.class);
-            if (myNamespaceName.equals(PerlPackageUtil.getContextNamespaceName(namedBlockAtOffset))) {
+            if (myNamespaceName.equals(PerlPackageUtilCore.getContextNamespaceName(namedBlockAtOffset))) {
               result.add(new PerlTargetElementWrapper(namedBlockAtOffset) {
                 @Override
                 public void navigate(boolean requestFocus) {

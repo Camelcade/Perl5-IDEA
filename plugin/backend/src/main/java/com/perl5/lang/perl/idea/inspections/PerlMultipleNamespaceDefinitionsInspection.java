@@ -24,6 +24,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -37,7 +38,7 @@ public class PerlMultipleNamespaceDefinitionsInspection extends PerlInspection {
         Project project = o.getProject();
         String packageName = o.getNamespaceName();
         if (packageName != null &&
-            !PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName) &&
+            !PerlPackageUtilCore.MAIN_NAMESPACE_NAME.equals(packageName) &&
             PerlPackageUtil.getNamespaceDefinitions(project, GlobalSearchScope.projectScope(project), o.getNamespaceName()).size() > 1 &&
             o.getNameIdentifier() != null
           ) {

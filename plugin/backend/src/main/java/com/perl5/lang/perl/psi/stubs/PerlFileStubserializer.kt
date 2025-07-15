@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.stubs
 import com.intellij.psi.stubs.*
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex.NAMESPACE_KEY
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 
 
 class PerlFileStubserializer(val fileType: PerlFileElementType) : StubSerializer<PerlFileStub> {
@@ -31,7 +31,7 @@ class PerlFileStubserializer(val fileType: PerlFileElementType) : StubSerializer
     PerlFileStub(PerlNamespaceDefinitionData.deserialize(dataStream), fileType)
 
   override fun indexStub(stub: PerlFileStub, sink: IndexSink) {
-    if (stub.isEmpty && stub.getNamespaceName() == PerlPackageUtil.MAIN_NAMESPACE_NAME) {
+    if (stub.isEmpty && stub.getNamespaceName() == PerlPackageUtilCore.MAIN_NAMESPACE_NAME) {
       return
     }
     sink.occurrence(NAMESPACE_KEY, stub.getNamespaceName())

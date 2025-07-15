@@ -18,7 +18,7 @@ package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.PerlLexer;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue;
 import com.perl5.lang.pod.parser.psi.PodFormatter;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import org.jetbrains.annotations.NotNull;
@@ -312,7 +312,7 @@ public class PodFormatterE extends PodSectionMixin implements PodFormatter {
       Matcher m;
 
       if (text == null) {
-        text = PerlLexer.STRING_UNDEF;
+        text = PerlUndefValue.STRING_UNDEF;
       }
       else if (text.equals("sol")) {
         text = "/";

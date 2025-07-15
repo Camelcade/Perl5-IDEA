@@ -35,7 +35,7 @@ import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -54,7 +54,7 @@ public abstract class PerlClassAccessorHandler extends PerlSubCallHandler<PerlCl
 
   @Override
   public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement psiElement) {
-    String packageName = PerlPackageUtil.getContextNamespaceName(psiElement);
+    String packageName = PerlPackageUtilCore.getContextNamespaceName(psiElement);
     if (StringUtil.isEmpty(packageName)) {
       return Collections.emptyList();
     }

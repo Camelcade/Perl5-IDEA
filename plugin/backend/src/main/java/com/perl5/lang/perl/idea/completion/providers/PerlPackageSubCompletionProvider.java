@@ -25,6 +25,7 @@ import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleComple
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
@@ -43,7 +44,7 @@ public class PerlPackageSubCompletionProvider extends PerlCompletionProvider {
     String currentPrefixMatcher = result.getPrefixMatcher().getPrefix();
     String newPrefixMathcer = explicitNamespace == null
                               ? currentPrefixMatcher
-                              : PerlPackageUtil.join(explicitNamespace, currentPrefixMatcher);
+                              : PerlPackageUtilCore.join(explicitNamespace, currentPrefixMatcher);
     result = result.withPrefixMatcher(newPrefixMathcer);
 
     PerlSimpleCompletionProcessor completionProcessor = new PerlSimpleCompletionProcessor(parameters, result, parameters.getPosition());

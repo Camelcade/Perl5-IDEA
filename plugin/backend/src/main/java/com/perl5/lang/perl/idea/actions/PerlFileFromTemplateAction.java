@@ -31,7 +31,7 @@ import com.perl5.PerlBundle;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.filetemplates.PerlCreateFileFromTemplateHandler;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -78,8 +78,8 @@ public class PerlFileFromTemplateAction extends CreateFileFromTemplateAction imp
   protected PsiFile createFileFromTemplate(String name, FileTemplate template, PsiDirectory dir) {
     final List<String> pathChunks = new ArrayList<>();
 
-    if (StringUtil.contains(name, PerlPackageUtil.NAMESPACE_SEPARATOR)) {
-      pathChunks.addAll(StringUtil.split(name, PerlPackageUtil.NAMESPACE_SEPARATOR));
+    if (StringUtil.contains(name, PerlPackageUtilCore.NAMESPACE_SEPARATOR)) {
+      pathChunks.addAll(StringUtil.split(name, PerlPackageUtilCore.NAMESPACE_SEPARATOR));
     }
     else if (StringUtil.contains(name, "/")) {
       pathChunks.addAll(StringUtil.split(name, "/"));

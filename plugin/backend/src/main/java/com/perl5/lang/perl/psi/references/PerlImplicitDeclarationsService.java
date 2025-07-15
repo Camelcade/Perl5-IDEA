@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_NAMESPACE;
-import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_SEPARATOR;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.NAMESPACE_SEPARATOR;
 
 /**
  * Service for a common tricky-defined entities:<ul>

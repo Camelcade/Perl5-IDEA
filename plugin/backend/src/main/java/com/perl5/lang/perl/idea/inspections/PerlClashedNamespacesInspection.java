@@ -23,6 +23,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -40,7 +41,7 @@ public class PerlClashedNamespacesInspection extends PerlInspection {
 
 
         String packageName = o.getNamespaceName();
-        if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
+        if (PerlPackageUtilCore.MAIN_NAMESPACE_NAME.equals(packageName)) {
           return;
         }
 

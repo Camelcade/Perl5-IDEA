@@ -31,6 +31,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -118,7 +119,7 @@ public class PerlTestRunConfiguration extends PerlAbstractTestRunConfiguration {
           String inputText = event.getText();
           Matcher matcher = MISSING_FILTER_PATTERN.matcher(inputText);
           if (matcher.find()) {
-            String libraryName = PROVE_PLUGIN_NAMESPACE + PerlPackageUtil.NAMESPACE_SEPARATOR + matcher.group(1);
+            String libraryName = PROVE_PLUGIN_NAMESPACE + PerlPackageUtilCore.NAMESPACE_SEPARATOR + matcher.group(1);
             PerlRunUtil.showMissingLibraryNotification(getProject(), effectiveSdk, Collections.singletonList(libraryName));
           }
         }

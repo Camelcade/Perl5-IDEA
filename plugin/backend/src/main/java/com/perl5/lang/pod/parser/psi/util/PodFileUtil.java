@@ -29,6 +29,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.pod.PodLanguage;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
@@ -97,13 +98,13 @@ public class PodFileUtil {
   public static @Nullable String getPackageNameFromVirtualFile(VirtualFile file, VirtualFile classRoot) {
     String relativePath = VfsUtilCore.getRelativePath(file, classRoot);
     if (relativePath != null) {
-      return StringUtil.join(relativePath.replaceAll(PM_OR_POD_EXTENSION_PATTERN, "").split("/"), PerlPackageUtil.NAMESPACE_SEPARATOR);
+      return StringUtil.join(relativePath.replaceAll(PM_OR_POD_EXTENSION_PATTERN, "").split("/"), PerlPackageUtilCore.NAMESPACE_SEPARATOR);
     }
     return null;
   }
 
   public static String getFilenameFromPackage(@NotNull String packageName) {
-    return StringUtil.join(PerlPackageUtil.getCanonicalNamespaceName(packageName).split(PerlPackageUtil.NAMESPACE_SEPARATOR), "/") +
+    return StringUtil.join(PerlPackageUtil.getCanonicalNamespaceName(packageName).split(PerlPackageUtilCore.NAMESPACE_SEPARATOR), "/") +
            "." +
            PodFileType.EXTENSION;
   }
@@ -138,7 +139,7 @@ public class PodFileUtil {
     String fileId = descriptor.getName();
 
     final PsiManager psiManager = PsiManager.getInstance(project);
-    if (fileId.contains(PerlPackageUtil.NAMESPACE_SEPARATOR) ||
+    if (fileId.contains(PerlPackageUtilCore.NAMESPACE_SEPARATOR) ||
         !StringUtil.startsWith(fileId, "perl")) { // can be Foo/Bar.pod or Foo/Bar.pm
       String podRelativePath = PodFileUtil.getFilenameFromPackage(fileId);
       String packageRelativePath = PerlPackageUtil.getPackagePathByName(fileId);

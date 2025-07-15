@@ -31,7 +31,7 @@ public final class PerlCorePackages {
    * {@code main::} and {@code CORE::} added manually
    */
   public static final Set<String> CORE_PACKAGES = Set.of(
-    PerlPackageUtil.MAIN_NAMESPACE_NAME,
+    PerlPackageUtilCore.MAIN_NAMESPACE_NAME,
     PerlPackageUtil.CORE_NAMESPACE,
     "Amiga::ARexx",
     "Amiga::Exec",

@@ -32,7 +32,7 @@ import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations
 import com.perl5.lang.perl.psi.utils.PerlVariableType
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 import java.io.IOException
 
 
@@ -84,7 +84,7 @@ class PerlVariableStubSerializingFactory(elementType: IElementType) :
     if (dataStream.readBoolean()) PerlVariableAnnotations.deserialize(dataStream) else PerlVariableAnnotations.empty()
 
   override fun indexStub(stub: PerlVariableDeclarationStub, sink: IndexSink) {
-    val variableName = PerlPackageUtil.join(stub.namespaceName, stub.variableName)
+    val variableName = PerlPackageUtilCore.join(stub.namespaceName, stub.variableName)
     val indexKeys = stub.getIndexKey()
     sink.occurrence(indexKeys.getFirst(), variableName)
     sink.occurrence(indexKeys.getSecond(), stub.namespaceName)

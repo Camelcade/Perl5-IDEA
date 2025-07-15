@@ -19,7 +19,7 @@ package com.perl5.lang.perl.psi.references;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.ResolveResult;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -38,7 +38,7 @@ public class PerlSubReferenceSuper extends PerlSubReferenceSimple {
     // fixme not dry with simple resolver, need some generics fix
     PsiElement element = getElement();
 
-    String packageName = PerlPackageUtil.getContextNamespaceName(element);
+    String packageName = PerlPackageUtilCore.getContextNamespaceName(element);
     String subName = element.getNode().getText();
     Project project = element.getProject();
 

@@ -24,7 +24,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -50,7 +50,7 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
 
         String packageName = o.getNamespaceName();
 
-        if (StringUtil.isEmpty(packageName) || PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
+        if (StringUtil.isEmpty(packageName) || PerlPackageUtilCore.MAIN_NAMESPACE_NAME.equals(packageName)) {
           return;
         }
 

@@ -178,7 +178,7 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
             aliasName,
             LIGHT_SUB_DEFINITION,
             aliasEntry.getNonNullValueElement(),
-            PerlPackageUtil.getContextNamespaceName(useStatementElement),
+            PerlPackageUtilCore.getContextNamespaceName(useStatementElement),
             new ArrayList<>(throwArguments),
             PerlSubAnnotations.tryToFindAnnotations(aliasEntry.keyElement, aliasEntry.valueElement),
             UNKNOWN_VALUE_PROVIDER,

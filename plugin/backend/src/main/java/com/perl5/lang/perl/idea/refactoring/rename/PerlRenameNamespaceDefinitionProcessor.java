@@ -28,6 +28,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -73,7 +74,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
 
           // rename file
           String newPackageName = PerlPackageUtil.getCanonicalNamespaceName(newName);
-          List<String> newPackageChunks = Arrays.asList(newPackageName.split(PerlPackageUtil.NAMESPACE_SEPARATOR));
+          List<String> newPackageChunks = Arrays.asList(newPackageName.split(PerlPackageUtilCore.NAMESPACE_SEPARATOR));
           String newFileName = newPackageChunks.getLast() + ".pm";
           file.setName(newFileName);
 

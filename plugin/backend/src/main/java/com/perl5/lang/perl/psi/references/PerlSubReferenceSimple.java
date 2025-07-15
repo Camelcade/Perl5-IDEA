@@ -29,7 +29,7 @@ import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -66,7 +66,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
     // fixme not dry with super resolver, need some generics fix
     PsiElement element = getElement();
 
-    String packageName = PerlPackageUtil.getContextNamespaceName(element);
+    String packageName = PerlPackageUtilCore.getContextNamespaceName(element);
     String subName = element.getNode().getText();
     Project project = element.getProject();
 

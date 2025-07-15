@@ -26,6 +26,7 @@ import com.perl5.lang.perl.psi.PerlRecursiveVisitor;
 import com.perl5.lang.perl.psi.PsiPerlTryExpr;
 import com.perl5.lang.perl.psi.PsiPerlTrycatchCompound;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -57,7 +58,7 @@ class PerlTryStackElement extends PerlCallStackElement {
 
   @Override
   protected @NotNull List<NavigatablePsiElement> computeNavigatables(@NotNull Project project, @NotNull Sdk perlSdk) {
-    if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(myNamespaceName)) {
+    if (PerlPackageUtilCore.MAIN_NAMESPACE_NAME.equals(myNamespaceName)) {
       return Collections.emptyList();
     }
     List<NavigatablePsiElement> result = new ArrayList<>();
