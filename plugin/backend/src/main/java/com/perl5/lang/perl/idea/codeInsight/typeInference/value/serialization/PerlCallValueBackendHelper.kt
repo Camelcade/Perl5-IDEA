@@ -16,10 +16,20 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
+import com.intellij.openapi.project.Project
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiNamedElement
+import com.intellij.psi.search.GlobalSearchScope
+import com.intellij.util.Processor
+import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*
+import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings
+import com.perl5.lang.perl.psi.PerlCallableElement
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement
+import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService
+import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD
+
 
 abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrizedOperationValueBackendHelper<Val>() {
   override fun serializeData(value: Val, serializer: PerlValueSerializer) {
@@ -36,4 +46,209 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
     parameter: PerlValue,
     arguments: List<PerlValue>
   ): PerlValue
+
+  /**
+   * Processes all possible call targets: subs declarations, definitions and typeglobs with `processor`
+   * @param contextElement invocation point. Context element, necessary to compute additional imports
+   */
+  fun processCallTargets(
+    callValue: Val,
+    contextElement: PsiElement,
+    processor: Processor<in PsiNamedElement?>
+  ): Boolean {
+    val project: Project = contextElement.project
+    val searchScope = contextElement.resolveScope
+    val subNames: MutableSet<String> = callValue.subNameValue.resolve(contextElement).subNames
+    val namespaceNames: MutableSet<String> = computeNamespaceNames(callValue.namespaceNameValue.resolve(contextElement))
+    return !subNames.isEmpty() && !namespaceNames.isEmpty() &&
+      processCallTargets(callValue, project, searchScope, contextElement, namespaceNames, subNames, processor)
+  }
+
+  protected fun processItemsInNamespace(
+    project: Project,
+    searchScope: GlobalSearchScope,
+    subNames: MutableSet<String>,
+    processor: Processor<in PsiNamedElement?>,
+    namespaceName: String,
+    processingContext: ProcessingContext,
+    contextElement: PsiElement?
+  ): Boolean {
+    val processorWrapper = Processor { it: PsiNamedElement? ->
+      processingContext.processBuiltIns = false
+      processingContext.processAutoload = false
+      processor.process(it)
+    }
+
+    val subsEffectiveScope: GlobalSearchScope = getEffectiveScope(project, searchScope, namespaceName, contextElement)
+    for (subName in subNames) {
+      if (!PerlPackageUtil.processCallables(
+          project,
+          subsEffectiveScope,
+          PerlPackageUtil.join(namespaceName, subName),
+          processorWrapper
+        )
+      ) {
+        return false
+      }
+    }
+
+    // exports
+    val exportDescriptors = PerlNamespaceDefinitionElement.getExportDescriptors(project, searchScope, namespaceName)
+    if (!processExportDescriptorsItems(project, searchScope, subNames, processorWrapper, exportDescriptors)) {
+      return false
+    }
+
+    // built-ins
+    if (processingContext.processBuiltIns) {
+      processingContext.processBuiltIns = false
+      for (subName in subNames) {
+        val coreSub = PerlImplicitDeclarationsService.getInstance(project).getCoreSub(subName)
+        if (coreSub != null && !processorWrapper.process(coreSub)) {
+          return false
+        }
+      }
+    }
+
+    // AUTOLOAD
+    return !processingContext.processAutoload ||
+      PerlPackageUtil.isUNIVERSAL(namespaceName) || PerlPackageUtil.isCORE(namespaceName) ||
+      PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtil.join(namespaceName, SUB_AUTOLOAD), processorWrapper)
+  }
+
+  /**
+   * Adjust search scope if necessary. Used to handle simple main resolution
+   *
+   * @return original or adjusted scope to search
+   */
+  private fun getEffectiveScope(
+    project: Project,
+    originalScope: GlobalSearchScope,
+    namespaceName: String,
+    contextElement: PsiElement?
+  ): GlobalSearchScope {
+    val contextFile = contextElement?.containingFile?.originalFile
+    if (PerlPackageUtil.MAIN_NAMESPACE_NAME == namespaceName &&
+      PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION && contextFile != null
+    ) {
+      return GlobalSearchScope.fileScope(contextFile)
+    }
+    return originalScope
+  }
+
+  protected fun processExportDescriptorsItems(
+    project: Project,
+    searchScope: GlobalSearchScope,
+    subNames: Set<String>,
+    processorWrapper: Processor<in PsiNamedElement?>,
+    exportDescriptors: Set<PerlExportDescriptor>
+  ): Boolean {
+    for (exportDescriptor in exportDescriptors) {
+      if (subNames.contains(exportDescriptor.importedName) &&
+        !PerlPackageUtil.processCallables(project, searchScope, exportDescriptor.targetCanonicalName, processorWrapper)
+      ) {
+        return false
+      }
+    }
+    return true
+  }
+
+
+  /**
+   * @return set of a namepsaces names that should be used for the `resolvedNamespaceValue`
+   */
+  open fun computeNamespaceNames(resolvedNamespaceValue: PerlValue): MutableSet<String> = resolvedNamespaceValue.namespaceNames
+
+  /**
+   * Processes all possible call targets: subs declarations, definitions and typeglobs with `processor` for
+   * the `namespaceName`
+   */
+  abstract fun processCallTargets(
+    callValue: Val,
+    project: Project,
+    searchScope: GlobalSearchScope,
+    contextElement: PsiElement?,
+    namespaceNames: MutableSet<String>,
+    subNames: MutableSet<String>,
+    processor: Processor<in PsiNamedElement?>
+  ): Boolean
+
+  /**
+   * Processes all elements in all namespaces targeted by current call qualifying namespace. E.g. for `Foo::Bar->foo` processes
+   * all elements from `Foo::Bar`
+   * @param contextElement origin element of a call. Used to process implicit import into the file
+   */
+  abstract fun processTargetNamespaceElements(
+    callValue: Val,
+    contextElement: PsiElement,
+    processor: PerlNamespaceItemProcessor<in PsiNamedElement>
+  ): Boolean
+
+  protected class ProcessingContext {
+    var processAutoload: Boolean = true
+    var processBuiltIns: Boolean = true
+  }
+
+  protected fun processExportDescriptors(
+    project: Project,
+    searchScope: GlobalSearchScope,
+    processor: PerlNamespaceItemProcessor<in PsiNamedElement>,
+    exportDescriptors: MutableSet<out PerlExportDescriptor>
+  ): Boolean {
+    if (exportDescriptors.isEmpty()) {
+      return true
+    }
+    val foundOne = booleanArrayOf(false)
+    for (exportDescriptor in exportDescriptors) {
+      foundOne[0] = false
+      if (!PerlPackageUtil.processCallables(
+          project,
+          searchScope,
+          exportDescriptor.targetCanonicalName,
+          Processor { it: PerlCallableElement? ->
+            foundOne[0] = true
+            processor.processImportedItem(it!!, exportDescriptor)
+          })
+      ) {
+        return false
+      }
+
+      if (!foundOne[0]) {
+        if (!processor.processOrphanDescriptor(exportDescriptor)) {
+          return false
+        }
+      }
+    }
+    return true
+  }
+
+  protected fun processTargetNamespaceElements(
+    project: Project,
+    searchScope: GlobalSearchScope,
+    processor: PerlNamespaceItemProcessor<in PsiNamedElement>,
+    currentNamespaceName: String,
+    contextElement: PsiElement
+  ): Boolean {
+    val effectiveScope = getEffectiveScope(project, searchScope, currentNamespaceName, contextElement)
+
+    if (!PerlPackageUtil.processCallablesInNamespace(
+        project,
+        effectiveScope,
+        currentNamespaceName,
+        Processor { t: PerlCallableElement? -> processor.processItem(t!!) })
+    ) {
+      return false
+    }
+
+    // exports
+    val exportDescriptors =
+      PerlNamespaceDefinitionElement.getExportDescriptors(project, effectiveScope, currentNamespaceName)
+    return processExportDescriptors(project, effectiveScope, processor, exportDescriptors)
+  }
+
+
+  companion object {
+    @JvmStatic
+    operator fun get(callValue: PerlCallValue): PerlCallValueBackendHelper<PerlCallValue> =
+      PerlValueBackendHelper[callValue] as PerlCallValueBackendHelper<PerlCallValue>
+  }
 }

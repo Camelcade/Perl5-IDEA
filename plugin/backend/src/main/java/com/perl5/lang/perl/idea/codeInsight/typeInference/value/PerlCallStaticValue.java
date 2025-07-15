@@ -16,18 +16,9 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.Processor;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.extensions.imports.PerlImportsProvider;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Set;
@@ -47,26 +38,6 @@ public final class PerlCallStaticValue extends PerlCallValue {
     return myHasExplicitNamespace;
   }
 
-  // fixme resolve namespace and subs first
-  @Override
-  public boolean processTargetNamespaceElements(@NotNull PsiElement contextElement,
-                                                @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor) {
-    Project project = contextElement.getProject();
-    GlobalSearchScope searchScope = contextElement.getResolveScope();
-    for (String currentNamespaceName : getNamespaceNameValue().resolve(contextElement).getNamespaceNames()) {
-      if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName, contextElement)) {
-        return false;
-      }
-    }
-
-    PerlNamespaceDefinitionElement containingNamespace = PerlPackageUtil.getContainingNamespace(contextElement.getOriginalElement());
-    String namespaceName = containingNamespace == null ? null : containingNamespace.getNamespaceName();
-    if (!StringUtil.isEmpty(namespaceName)) {
-      processExportDescriptors(
-        project, searchScope, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace));
-    }
-    return true;
-  }
 
   @Override
   protected void addFallbackTargets(@NotNull Set<String> namespaceNames,
@@ -82,33 +53,6 @@ public final class PerlCallStaticValue extends PerlCallValue {
         builder.addVariant(PerlScalarValue.create(possiblePackageName));
       }
     }
-  }
-
-  @Override
-  protected boolean processCallTargets(@NotNull Project project,
-                                       @NotNull GlobalSearchScope searchScope,
-                                       @Nullable PsiElement contextElement,
-                                       @NotNull Set<String> namespaceNames,
-                                       @NotNull Set<String> subNames,
-                                       @NotNull Processor<? super PsiNamedElement> processor) {
-    for (String contextNamespace : namespaceNames) {
-      ProcessingContext processingContext = new ProcessingContext();
-      processingContext.processBuiltIns = !myHasExplicitNamespace;
-      if (!processItemsInNamespace(project, searchScope, subNames, processor, contextNamespace, processingContext, contextElement)) {
-        return false;
-      }
-    }
-
-    if (!myHasExplicitNamespace && contextElement != null) {
-      PerlNamespaceDefinitionElement containingNamespace = PerlPackageUtil.getContainingNamespace(contextElement.getOriginalElement());
-      String namespaceName = containingNamespace == null ? null : containingNamespace.getNamespaceName();
-      if (!StringUtil.isEmpty(namespaceName)) {
-        processExportDescriptorsItems(
-          project, searchScope, subNames, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace));
-      }
-    }
-
-    return true;
   }
 
   @Override
