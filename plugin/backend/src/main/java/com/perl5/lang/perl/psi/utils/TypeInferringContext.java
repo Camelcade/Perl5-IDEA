@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueWithFallback;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueBackendHelper;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
@@ -32,7 +33,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue.isDuckTypingEnabled;
 import static com.perl5.lang.perl.psi.utils.PerlResolveUtil.computeStopElement;
 
 class TypeInferringContext {
@@ -134,7 +134,7 @@ class TypeInferringContext {
   }
 
   public @NotNull PerlValue buildValue() {
-    return isDuckTypingEnabled() ? PerlValueWithFallback.create(myValueBuilder.build(), myDuckValueBuilder.build())
+    return PerlValueBackendHelper.isDuckTypingEnabled() ? PerlValueWithFallback.create(myValueBuilder.build(), myDuckValueBuilder.build())
                                  : myValueBuilder.build();
   }
 

@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.util.registry.Registry;
 import com.intellij.openapi.util.text.StringUtil;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueBackendHelper;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.util.PerlPackageUtil;
@@ -47,7 +47,7 @@ public class PerlDuckValue extends PerlListValue {
 
   @Override
   protected @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver, @NotNull List<? extends PerlValue> resolvedElements) {
-    if (isEmpty() || !isDuckTypingEnabled()) {
+    if (isEmpty() || !PerlValueBackendHelper.isDuckTypingEnabled()) {
       return UNKNOWN_VALUE;
     }
     var usedCallableNames = resolvedElements.stream()
@@ -121,10 +121,6 @@ public class PerlDuckValue extends PerlListValue {
   @Override
   protected boolean computeIsDeterministic() {
     return isEmpty();
-  }
-
-  public static boolean isDuckTypingEnabled() {
-    return Registry.is("perl5.duck.typing.support", true);
   }
 
   public static final class Builder {

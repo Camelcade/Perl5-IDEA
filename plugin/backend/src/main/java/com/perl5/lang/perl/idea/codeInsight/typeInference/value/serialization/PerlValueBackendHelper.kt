@@ -17,8 +17,8 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.intellij.openapi.util.ClassExtension
+import com.intellij.openapi.util.registry.Registry
 import com.jetbrains.rd.util.concurrentMapOf
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
@@ -63,6 +63,9 @@ interface PerlValueBackendHelper<Val : PerlValue> {
       EP.point!!.extensionList.map { it.instance }.find { it.serializationId == id }
         ?: throw RuntimeException("No serialization helper for id $id")
     }
+
+    @JvmStatic
+    fun isDuckTypingEnabled(): Boolean = Registry.`is`("perl5.duck.typing.support", true)
 
     @JvmField
     val DUPLICATE_ID = id++
@@ -155,6 +158,6 @@ interface PerlValueBackendHelper<Val : PerlValue> {
     val VALUE_WITH_FALLBACK = id++
 
     @JvmStatic
-    fun getVersion(): Int = id + (if (PerlDuckValue.isDuckTypingEnabled()) 100 else 0)
+    fun getVersion(): Int = id + (if (isDuckTypingEnabled()) 100 else 0)
   }
 }
