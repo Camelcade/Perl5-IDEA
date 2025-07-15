@@ -17,14 +17,11 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.PerlAnnotation;
 import com.perl5.lang.perl.psi.PsiPerlAnnotationDeprecated;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.List;
 
 
@@ -41,10 +38,6 @@ public class PerlNamespaceAnnotations {
     myFlags = flags;
   }
 
-  public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeByte(myFlags);
-  }
-
   public boolean isDeprecated() {
     return (myFlags & IS_DEPRECATED) == IS_DEPRECATED;
   }
@@ -53,9 +46,8 @@ public class PerlNamespaceAnnotations {
     myFlags |= IS_DEPRECATED;
   }
 
-  public static PerlNamespaceAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
-    byte flags = dataStream.readByte();
-    return new PerlNamespaceAnnotations(flags);
+  public byte getFlags() {
+    return myFlags;
   }
 
   private static @Nullable PerlNamespaceAnnotations createFromAnnotationsList(List<? extends PerlAnnotation> annotations) {

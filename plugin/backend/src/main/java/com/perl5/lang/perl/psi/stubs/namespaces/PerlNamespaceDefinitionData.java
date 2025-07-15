@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -129,7 +129,7 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
     }
     else {
       dataStream.writeBoolean(true);
-      namespaceAnnotations.serialize(dataStream);
+      serializeAnnotations(namespaceAnnotations, dataStream);
     }
   }
 
@@ -148,7 +148,7 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
       Objects.requireNonNull(EXPORT),
       Objects.requireNonNull(EXPORT_OK),
       EXPORT_TAGS,
-      dataStream.readBoolean() ? PerlNamespaceAnnotations.deserialize(dataStream) : null
+      dataStream.readBoolean() ? deserializeAnnotations(dataStream) : null
     );
   }
 
@@ -162,5 +162,15 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
            "\t@EXPORT_TAGS: " + myEXPORT_TAGS + "\n" +
            "\tAnnotations: " + myPerlNamespaceAnnotations
       ;
+  }
+
+  private static void serializeAnnotations(@NotNull PerlNamespaceAnnotations annotations, @NotNull StubOutputStream dataStream)
+    throws IOException {
+    dataStream.writeByte(annotations.getFlags());
+  }
+
+  private static PerlNamespaceAnnotations deserializeAnnotations(@NotNull StubInputStream dataStream) throws IOException {
+    byte flags = dataStream.readByte();
+    return new PerlNamespaceAnnotations(flags);
   }
 }
