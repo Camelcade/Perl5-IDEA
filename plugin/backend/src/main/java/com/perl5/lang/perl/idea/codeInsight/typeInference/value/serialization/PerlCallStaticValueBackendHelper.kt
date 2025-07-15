@@ -96,4 +96,22 @@ class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStat
 
     return true
   }
+
+  override fun addFallbackTargets(
+    callValue: PerlCallStaticValue,
+    namespaceNames: MutableSet<String>,
+    subNames: MutableSet<String>,
+    resolvedArguments: MutableList<PerlValue>,
+    hasTarget: Boolean,
+    builder: PerlOneOfValue.Builder,
+    resolvedNamespaceValue: PerlValue,
+    resolver: PerlValueResolver
+  ) {
+    if (!hasTarget && callValue.hasExplicitNamespace() && subNames.size == 1 && namespaceNames.size == 1 && resolvedArguments.isEmpty()) {
+      val possiblePackageName = PerlPackageUtil.join(namespaceNames.iterator().next(), subNames.iterator().next())
+      if (!PerlPackageUtil.getNamespaceDefinitions(resolver.project, resolver.resolveScope, possiblePackageName).isEmpty()) {
+        builder.addVariant(PerlScalarValue.create(possiblePackageName))
+      }
+    }
+  }
 }

@@ -245,6 +245,23 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
     return processExportDescriptors(project, effectiveScope, processor, exportDescriptors)
   }
 
+  /**
+   * Computes a fallback value. This method should handle two cases:
+   * - invisible/complex constructor, where we can't compute a proper return value
+   * - incorrectly lexed namespace FQNs, where `Foo::Bar` was lexed and parsed as `Foo::Bar()`
+   *
+   * @param hasTarget true iff we has processed a real target of this call
+   */
+  abstract fun addFallbackTargets(
+    callValue: Val,
+    namespaceNames: MutableSet<String>,
+    subNames: MutableSet<String>,
+    resolvedArguments: MutableList<PerlValue>,
+    hasTarget: Boolean,
+    builder: PerlOneOfValue.Builder,
+    resolvedNamespaceValue: PerlValue,
+    resolver: PerlValueResolver
+  )
 
   companion object {
     @JvmStatic

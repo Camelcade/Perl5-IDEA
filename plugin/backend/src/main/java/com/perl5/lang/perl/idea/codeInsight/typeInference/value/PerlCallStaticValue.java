@@ -17,11 +17,9 @@
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Set;
 
 public final class PerlCallStaticValue extends PerlCallValue {
   private final boolean myHasExplicitNamespace;
@@ -36,23 +34,6 @@ public final class PerlCallStaticValue extends PerlCallValue {
 
   public boolean hasExplicitNamespace() {
     return myHasExplicitNamespace;
-  }
-
-
-  @Override
-  protected void addFallbackTargets(@NotNull Set<String> namespaceNames,
-                                    @NotNull Set<String> subNames,
-                                    @NotNull List<PerlValue> resolvedArguments,
-                                    boolean hasTarget,
-                                    @NotNull PerlOneOfValue.Builder builder,
-                                    @NotNull PerlValue resolvedNamespaceValue,
-                                    @NotNull PerlValueResolver resolver) {
-    if (!hasTarget && myHasExplicitNamespace && subNames.size() == 1 && namespaceNames.size() == 1 && resolvedArguments.isEmpty()) {
-      String possiblePackageName = PerlPackageUtil.join(namespaceNames.iterator().next(), subNames.iterator().next());
-      if( !PerlPackageUtil.getNamespaceDefinitions(resolver.getProject(), resolver.getResolveScope(), possiblePackageName).isEmpty()){
-        builder.addVariant(PerlScalarValue.create(possiblePackageName));
-      }
-    }
   }
 
   @Override

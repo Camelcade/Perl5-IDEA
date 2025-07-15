@@ -23,7 +23,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import static com.perl5.lang.perl.util.PerlPackageUtil.DEREFERENCE_OPERATOR;
 
@@ -51,20 +50,6 @@ public final class PerlCallObjectValue extends PerlCallValue {
   public boolean isSuper() {
     return mySuperContext != null;
   }
-
-  @Override
-  protected void addFallbackTargets(@NotNull Set<String> namespaceNames,
-                                    @NotNull Set<String> subNames,
-                                    @NotNull List<PerlValue> resolvedArguments,
-                                    boolean hasTarget,
-                                    @NotNull PerlOneOfValue.Builder builder,
-                                    @NotNull PerlValue resolvedNamespaceValue,
-                                    @NotNull PerlValueResolver resolver) {
-    if (subNames.size() == 1 && "new".equals(subNames.iterator().next())) {
-      builder.addVariant(resolvedNamespaceValue);
-    }
-  }
-
 
   @Override
   public boolean equals(Object o) {

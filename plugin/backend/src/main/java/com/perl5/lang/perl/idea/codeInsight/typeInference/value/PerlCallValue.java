@@ -80,25 +80,11 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
         return null;
       });
 
-    addFallbackTargets(namespaceNames, subNames, resolvedArguments, hasTargets[0], builder, resolvedNamespaceValue, resolver);
+    PerlCallValueBackendHelper.get(this)
+      .addFallbackTargets(this, namespaceNames, subNames, resolvedArguments, hasTargets[0], builder, resolvedNamespaceValue, resolver);
 
     return builder.build();
   }
-
-  /**
-   * Computes a fallback value. This method should handle two cases:
-   * - invisible/complex constructor, where we can't compute a proper return value
-   * - incorrectly lexed namespace FQNs, where {@code Foo::Bar} was lexed and parsed as {@code Foo::Bar()}
-   *
-   * @param hasTarget true iff we has processed a real target of this call
-   */
-  protected abstract void addFallbackTargets(@NotNull Set<String> namespaceNames,
-                                             @NotNull Set<String> subNames,
-                                             @NotNull List<PerlValue> resolvedArguments,
-                                             boolean hasTarget,
-                                             @NotNull PerlOneOfValue.Builder builder,
-                                             @NotNull PerlValue resolvedNamespaceValue,
-                                             @NotNull PerlValueResolver resolver);
 
   /**
    * @return a list of arguments that passed to the call, resolved in the context of {@code contextElement}

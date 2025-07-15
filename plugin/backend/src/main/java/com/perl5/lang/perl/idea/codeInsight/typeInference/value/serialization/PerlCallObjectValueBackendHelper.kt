@@ -94,6 +94,21 @@ class PerlCallObjectValueBackendHelper : PerlCallValueBackendHelper<PerlCallObje
     return true
   }
 
+  override fun addFallbackTargets(
+    callValue: PerlCallObjectValue,
+    namespaceNames: MutableSet<String>,
+    subNames: MutableSet<String>,
+    resolvedArguments: MutableList<PerlValue>,
+    hasTarget: Boolean,
+    builder: PerlOneOfValue.Builder,
+    resolvedNamespaceValue: PerlValue,
+    resolver: PerlValueResolver
+  ) {
+    if (subNames.size == 1 && "new" == subNames.iterator().next()) {
+      builder.addVariant(resolvedNamespaceValue)
+    }
+  }
+
   private fun getEffectiveNamespaceName(callValue: PerlCallObjectValue, contextNamespace: String): String =
     callValue.superContext ?: contextNamespace
 }
