@@ -25,6 +25,7 @@ import com.intellij.psi.PsiReference;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlCallValueBackendHelper;
 import com.perl5.lang.perl.idea.completion.inserthandlers.SubSelectionHandler;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
@@ -222,7 +223,7 @@ public class PerlSubCompletionUtil {
   public static boolean processSubsCompletionsForCallValue(@NotNull PerlSimpleCompletionProcessor completionProcessor,
                                                            @NotNull PerlCallValue perlValue,
                                                            boolean isStatic) {
-    return perlValue.processTargetNamespaceElements(
+    return PerlCallValueBackendHelper.get(perlValue).processTargetNamespaceElements(perlValue,
       completionProcessor.getLeafElement(), new PerlNamespaceItemProcessor<>() {
         @Override
         public boolean processItem(@NotNull PsiNamedElement element) {

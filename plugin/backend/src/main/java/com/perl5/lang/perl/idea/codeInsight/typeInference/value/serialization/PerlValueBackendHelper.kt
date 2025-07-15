@@ -28,6 +28,7 @@ import java.io.IOException
 private val EP = ClassExtension<PerlValueBackendHelper<*>>("com.perl5.valueBackendHelper")
 private var id = 0
 private val idMap = concurrentMapOf<Int, PerlValueBackendHelper<*>>()
+private val instanceCache = concurrentMapOf<Class<*>, PerlValueBackendHelper<*>>()
 
 interface PerlValueBackendHelper<Val : PerlValue> {
 
@@ -44,10 +45,18 @@ interface PerlValueBackendHelper<Val : PerlValue> {
     throw UnsupportedOperationException("This method is not implemented for $this")
 
   companion object {
+
     @Suppress("UNCHECKED_CAST")
     @JvmStatic
     operator fun <Val : PerlValue> get(value: Val): PerlValueBackendHelper<Val> =
       EP.findSingle(value.javaClass) as? PerlValueBackendHelper<Val> ?: throw RuntimeException("No serialization helper for $value")
+
+    fun instance(clazz: Class<*>) = instanceCache.computeIfAbsent(clazz) {
+      EP.point!!.extensionList.map { it.instance }.find { it.serializationId == id }
+        ?: throw RuntimeException("No serialization helper for id $id")
+    }
+
+    inline fun <reified T : PerlValueBackendHelper<*>> instance(): T = instance(T::class.java) as T
 
     @JvmStatic
     operator fun get(id: Int): PerlValueBackendHelper<*> = idMap.computeIfAbsent(id) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallObjectValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlCallValueBackendHelper;
 import com.perl5.lang.perl.parser.moose.MooseTokenSets;
 import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
@@ -63,7 +64,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
     }
 
     List<PsiElement> relatedItems = new ArrayList<>();
-    perlValue.processCallTargets(element, relatedItems::add);
+    PerlCallValueBackendHelper.get(perlValue).processCallTargets(perlValue, element, relatedItems::add);
     return getResolveResults(relatedItems).toArray(ResolveResult.EMPTY_ARRAY);
   }
 }

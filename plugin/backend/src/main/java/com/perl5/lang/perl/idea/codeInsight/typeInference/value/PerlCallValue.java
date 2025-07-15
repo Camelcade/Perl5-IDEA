@@ -16,25 +16,15 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.RecursionManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.ObjectUtils;
-import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlCallValueBackendHelper;
 import com.perl5.lang.perl.psi.PerlSubElement;
-import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -43,7 +33,6 @@ import java.util.List;
 import java.util.Set;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 
 /**
  * Represents a method call value
@@ -67,7 +56,7 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
       return UNKNOWN_VALUE;
     }
 
-    Set<String> namespaceNames = computeNamespaceNames(resolvedNamespaceValue);
+    Set<String> namespaceNames = PerlCallValueBackendHelper.get(this).computeNamespaceNames(resolvedNamespaceValue);
     if (namespaceNames.isEmpty()) {
       return UNKNOWN_VALUE;
     }
@@ -79,7 +68,9 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     boolean[] hasTargets = new boolean[]{false};
     RecursionManager.doPreventingRecursion(
       Pair.create(resolver.getResolveScope(), this), true, () -> {
-        processCallTargets(resolver.getProject(), resolver.getResolveScope(), resolver.getContextFile(), namespaceNames, subNames, it -> {
+        PerlCallValueBackendHelper.get(this)
+          .processCallTargets(this, resolver.getProject(), resolver.getResolveScope(), resolver.getContextFile(), namespaceNames, subNames,
+                              it -> {
           hasTargets[0] = true;
           if (it instanceof PerlSubElement subElement) {
             builder.addVariant(new PerlSubValueResolver(it, argumentsValue).resolve(subElement.getReturnValue()));
@@ -92,13 +83,6 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     addFallbackTargets(namespaceNames, subNames, resolvedArguments, hasTargets[0], builder, resolvedNamespaceValue, resolver);
 
     return builder.build();
-  }
-
-  /**
-   * @return set of a namepsaces names that should be used for the {@code resolvedNamespaceValue}
-   */
-  protected @NotNull Set<String> computeNamespaceNames(@NotNull PerlValue resolvedNamespaceValue) {
-    return resolvedNamespaceValue.getNamespaceNames();
   }
 
   /**
@@ -141,40 +125,6 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     return getParameter();
   }
 
-  /**
-   * Processes all possible call targets: subs declarations, definitions and typeglobs with {@code processor}
-   * @param contextElement invocation point. Context element, necessary to compute additional imports
-   */
-  @SuppressWarnings("UnusedReturnValue")
-  public final boolean processCallTargets(@NotNull PsiElement contextElement,
-                                          @NotNull Processor<? super PsiNamedElement> processor) {
-    Project project = contextElement.getProject();
-    GlobalSearchScope searchScope = contextElement.getResolveScope();
-    Set<String> subNames = getSubNameValue().resolve(contextElement).getSubNames();
-    Set<String> namespaceNames = computeNamespaceNames(getNamespaceNameValue().resolve(contextElement));
-    return !subNames.isEmpty() && !namespaceNames.isEmpty() &&
-           processCallTargets(project, searchScope, contextElement, namespaceNames, subNames, processor);
-  }
-
-  /**
-   * Processes all possible call targets: subs declarations, definitions and typeglobs with {@code processor} for
-   * the {@code namespaceName}
-   */
-  protected abstract boolean processCallTargets(@NotNull Project project,
-                                                @NotNull GlobalSearchScope searchScope,
-                                                @Nullable PsiElement contextElement,
-                                                @NotNull Set<String> namespaceNames,
-                                                @NotNull Set<String> subNames,
-                                                @NotNull Processor<? super PsiNamedElement> processor);
-
-  /**
-   * Processes all elements in all namespaces targeted by current call qualifying namespace. E.g. for {@code Foo::Bar->foo} processes
-   * all elements from {@code Foo::Bar}
-   * @param contextElement origin element of a call. Used to process implicit import into the file
-   */
-  public abstract boolean processTargetNamespaceElements(@NotNull PsiElement contextElement,
-                                                         @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor);
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -192,133 +142,12 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
     return myArguments.equals(value.myArguments);
   }
 
-  protected static boolean processExportDescriptors(@NotNull Project project,
-                                                    @NotNull GlobalSearchScope searchScope,
-                                                    @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor,
-                                                    @NotNull Set<? extends PerlExportDescriptor> exportDescriptors) {
-    if (exportDescriptors.isEmpty()) {
-      return true;
-    }
-    boolean[] foundOne = new boolean[]{false};
-    for (PerlExportDescriptor exportDescriptor : exportDescriptors) {
-      foundOne[0] = false;
-      if (!PerlPackageUtil.processCallables(project, searchScope, exportDescriptor.getTargetCanonicalName(), it -> {
-        foundOne[0] = true;
-        return processor.processImportedItem(it, exportDescriptor);
-      })) {
-        return false;
-      }
-
-      if (!foundOne[0]) {
-        if (!processor.processOrphanDescriptor(exportDescriptor)) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  protected static boolean processTargetNamespaceElements(@NotNull Project project,
-                                                          @NotNull GlobalSearchScope searchScope,
-                                                          @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor,
-                                                          @NotNull String currentNamespaceName,
-                                                          @Nullable PsiElement contextElement) {
-    GlobalSearchScope effectiveScope = getEffectiveScope(project, searchScope, currentNamespaceName, contextElement);
-
-    if (!PerlPackageUtil.processCallablesInNamespace(project, effectiveScope, currentNamespaceName, processor::processItem)) {
-      return false;
-    }
-
-    // exports
-    Set<PerlExportDescriptor> exportDescriptors =
-      PerlNamespaceDefinitionElement.getExportDescriptors(project, effectiveScope, currentNamespaceName);
-    return processExportDescriptors(project, effectiveScope, processor, exportDescriptors);
-  }
 
   @Override
   protected int computeHashCode() {
     int result = super.computeHashCode();
     result = 31 * result + myArguments.hashCode();
     return result;
-  }
-
-  protected static boolean processItemsInNamespace(@NotNull Project project,
-                                                   @NotNull GlobalSearchScope searchScope,
-                                                   @NotNull Set<String> subNames,
-                                                   @NotNull Processor<? super PsiNamedElement> processor,
-                                                   @NotNull String namespaceName,
-                                                   @NotNull ProcessingContext processingContext,
-                                                   @Nullable PsiElement contextElement) {
-    Processor<PsiNamedElement> processorWrapper = it -> {
-      processingContext.processBuiltIns = false;
-      processingContext.processAutoload = false;
-      return processor.process(it);
-    };
-
-    GlobalSearchScope subsEffectiveScope = getEffectiveScope(project, searchScope, namespaceName, contextElement);
-    for (String subName : subNames) {
-      if (!PerlPackageUtil.processCallables(project, subsEffectiveScope, PerlPackageUtil.join(namespaceName, subName), processorWrapper)) {
-        return false;
-      }
-    }
-
-    // exports
-    Set<PerlExportDescriptor> exportDescriptors = PerlNamespaceDefinitionElement.getExportDescriptors(project, searchScope, namespaceName);
-    if (!processExportDescriptorsItems(project, searchScope, subNames, processorWrapper, exportDescriptors)) {
-      return false;
-    }
-
-    // built-ins
-    if (processingContext.processBuiltIns) {
-      processingContext.processBuiltIns = false;
-      for (String subName : subNames) {
-        PerlSubDefinitionElement coreSub = PerlImplicitDeclarationsService.getInstance(project).getCoreSub(subName);
-        if (coreSub != null && !processorWrapper.process(coreSub)) {
-          return false;
-        }
-      }
-    }
-
-    // AUTOLOAD
-    return !processingContext.processAutoload ||
-           PerlPackageUtil.isUNIVERSAL(namespaceName) || PerlPackageUtil.isCORE(namespaceName) ||
-           PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtil.join(namespaceName, SUB_AUTOLOAD), processorWrapper);
-  }
-
-  /**
-   * Adjust search scope if necessary. Used to handle simple main resolution
-   *
-   * @return original or adjusted scope to search
-   */
-  protected static @NotNull GlobalSearchScope getEffectiveScope(@NotNull Project project,
-                                                                @NotNull GlobalSearchScope originalScope,
-                                                                @NotNull String namespaceName,
-                                                                @Nullable PsiElement contextElement) {
-    PsiFile contextFile = contextElement == null ? null : contextElement.getContainingFile().getOriginalFile();
-    if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(namespaceName) &&
-        PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION && contextFile != null) {
-      return GlobalSearchScope.fileScope(contextFile);
-    }
-    return originalScope;
-  }
-
-  protected static boolean processExportDescriptorsItems(@NotNull Project project,
-                                                         @NotNull GlobalSearchScope searchScope,
-                                                         @NotNull Set<String> subNames,
-                                                         @NotNull Processor<? super PsiNamedElement> processorWrapper,
-                                                         @NotNull Set<? extends PerlExportDescriptor> exportDescriptors) {
-    for (PerlExportDescriptor exportDescriptor : exportDescriptors) {
-      if (subNames.contains(exportDescriptor.getImportedName()) &&
-          !PerlPackageUtil.processCallables(project, searchScope, exportDescriptor.getTargetCanonicalName(), processorWrapper)) {
-        return false;
-      }
-    }
-    return true;
-  }
-
-  protected static class ProcessingContext {
-    public boolean processAutoload = true;
-    public boolean processBuiltIns = true;
   }
 
   protected final @NotNull String getPresentableArguments() {

@@ -16,20 +16,11 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiNamedElement;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.util.ObjectUtils;
-import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.psi.mro.PerlMro;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -57,33 +48,8 @@ public final class PerlCallObjectValue extends PerlCallValue {
     return ContainerUtil.prepend(super.computeResolvedArguments(resolvedNamespaceValue, valueResolver), resolvedNamespaceValue);
   }
 
-  @Override
-  public boolean processTargetNamespaceElements(@NotNull PsiElement contextElement,
-                                                @NotNull PerlNamespaceItemProcessor<? super PsiNamedElement> processor) {
-    Project project = contextElement.getProject();
-    GlobalSearchScope searchScope = contextElement.getResolveScope();
-    for (String contextNamespace : getNamespaceNameValue().resolve(contextElement).getNamespaceNames()) {
-      for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, getEffectiveNamespaceName(contextNamespace), isSuper())) {
-        if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName, contextElement)) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  private boolean isSuper() {
+  public boolean isSuper() {
     return mySuperContext != null;
-  }
-
-  private @NotNull String getEffectiveNamespaceName(String contextNamespace) {
-    return ObjectUtils.notNull(mySuperContext, contextNamespace);
-  }
-
-  @Override
-  protected @NotNull Set<String> computeNamespaceNames(@NotNull PerlValue resolvedNamespaceValue) {
-    return resolvedNamespaceValue.isUnknown() ? Collections.singleton(PerlPackageUtil.UNIVERSAL_NAMESPACE) :
-           super.computeNamespaceNames(resolvedNamespaceValue);
   }
 
   @Override
@@ -99,27 +65,6 @@ public final class PerlCallObjectValue extends PerlCallValue {
     }
   }
 
-  @Override
-  protected boolean processCallTargets(@NotNull Project project,
-                                       @NotNull GlobalSearchScope searchScope,
-                                       @Nullable PsiElement contextElement,
-                                       @NotNull Set<String> namespaceNames,
-                                       @NotNull Set<String> subNames,
-                                       @NotNull Processor<? super PsiNamedElement> processor) {
-    for (String contextNamespace : namespaceNames) {
-      for (String currentNamespaceName : PerlMro.getLinearISA(project, searchScope, getEffectiveNamespaceName(contextNamespace), isSuper())) {
-        ProcessingContext processingContext = new ProcessingContext();
-        processingContext.processBuiltIns = false;
-        if (!processItemsInNamespace(project, searchScope, subNames, processor, currentNamespaceName, processingContext, contextElement)) {
-          return false;
-        }
-        if (!processingContext.processAutoload) { // marker that we've got at least one result
-          break;
-        }
-      }
-    }
-    return true;
-  }
 
   @Override
   public boolean equals(Object o) {

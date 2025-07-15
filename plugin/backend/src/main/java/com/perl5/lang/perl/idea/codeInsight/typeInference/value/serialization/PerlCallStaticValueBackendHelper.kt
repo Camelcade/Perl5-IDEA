@@ -16,10 +16,16 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallStaticValue
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.util.text.StringUtil
+import com.intellij.psi.PsiElement
+import com.intellij.psi.PsiNamedElement
+import com.intellij.psi.search.GlobalSearchScope
+import com.intellij.util.Processor
+import com.perl5.lang.perl.extensions.imports.PerlImportsProvider
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*
+import com.perl5.lang.perl.util.PerlPackageUtil
+
 
 class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStaticValue>() {
   override val serializationId: Int
@@ -36,4 +42,58 @@ class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStat
     parameter: PerlValue,
     arguments: List<PerlValue>
   ): PerlValue = PerlCallStaticValue(baseValue, parameter, arguments, deserializer.readBoolean())
+
+  // fixme resolve namespace and subs first
+  override fun processTargetNamespaceElements(
+    callValue: PerlCallStaticValue,
+    contextElement: PsiElement,
+    processor: PerlNamespaceItemProcessor<in PsiNamedElement>
+  ): Boolean {
+    val project: Project = contextElement.project
+    val searchScope = contextElement.resolveScope
+    for (currentNamespaceName in callValue.namespaceNameValue.resolve(contextElement).namespaceNames) {
+      if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName, contextElement)) {
+        return false
+      }
+    }
+
+    val containingNamespace = PerlPackageUtil.getContainingNamespace(contextElement.originalElement)
+    val namespaceName = if (containingNamespace == null) null else containingNamespace.getNamespaceName()
+    if (!StringUtil.isEmpty(namespaceName)) {
+      processExportDescriptors(
+        project, searchScope, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace)
+      )
+    }
+    return true
+  }
+
+  override fun processCallTargets(
+    callValue: PerlCallStaticValue,
+    project: Project,
+    searchScope: GlobalSearchScope,
+    contextElement: PsiElement?,
+    namespaceNames: MutableSet<String>,
+    subNames: MutableSet<String>,
+    processor: Processor<in PsiNamedElement?>
+  ): Boolean {
+    for (contextNamespace in namespaceNames) {
+      val processingContext = ProcessingContext()
+      processingContext.processBuiltIns = !callValue.hasExplicitNamespace()
+      if (!processItemsInNamespace(project, searchScope, subNames, processor, contextNamespace, processingContext, contextElement)) {
+        return false
+      }
+    }
+
+    if (!callValue.hasExplicitNamespace() && contextElement != null) {
+      val containingNamespace = PerlPackageUtil.getContainingNamespace(contextElement.originalElement)
+      val namespaceName = if (containingNamespace == null) null else containingNamespace.getNamespaceName()
+      if (!StringUtil.isEmpty(namespaceName)) {
+        processExportDescriptorsItems(
+          project, searchScope, subNames, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace)
+        )
+      }
+    }
+
+    return true
+  }
 }
