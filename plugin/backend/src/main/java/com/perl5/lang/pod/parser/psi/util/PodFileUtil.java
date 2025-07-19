@@ -104,7 +104,7 @@ public class PodFileUtil {
   }
 
   public static String getFilenameFromPackage(@NotNull String packageName) {
-    return StringUtil.join(PerlPackageUtil.getCanonicalNamespaceName(packageName).split(PerlPackageUtilCore.NAMESPACE_SEPARATOR), "/") +
+    return StringUtil.join(PerlPackageUtilCore.getCanonicalNamespaceName(packageName).split(PerlPackageUtilCore.NAMESPACE_SEPARATOR), "/") +
            "." +
            PodFileType.EXTENSION;
   }

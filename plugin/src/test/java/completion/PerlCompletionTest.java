@@ -23,7 +23,7 @@ import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.internals.PerlVersion;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -1022,7 +1022,7 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   private void doTestWithTypeText() {
     doTestCompletion((lookup, presentation) -> {
       var typeText = presentation.getTypeText();
-      return StringUtil.isNotEmpty(typeText) && !typeText.equals(BUILT_IN) && !typeText.equals(PerlPackageUtil.CORE_NAMESPACE);
+      return StringUtil.isNotEmpty(typeText) && !typeText.equals(BUILT_IN) && !typeText.equals(PerlPackageUtilCore.CORE_NAMESPACE);
     });
   }
 

@@ -87,15 +87,4 @@ public class PerlMooseExtendsStatementImpl extends PsiPerlStatementImpl implemen
     return result;
   }
 
-  @Override
-  public @Nullable PsiReference[] getReferences(PsiElement element) {
-    PsiElement string = element.getParent();
-    if (string != null) {
-      PsiElement meOrCommaSequence = string.getParent();
-      if (meOrCommaSequence == this || meOrCommaSequence != null && meOrCommaSequence.getParent() == this) {
-        return new PsiReference[]{new PerlNamespaceReference(element)};
-      }
-    }
-    return null;
-  }
 }

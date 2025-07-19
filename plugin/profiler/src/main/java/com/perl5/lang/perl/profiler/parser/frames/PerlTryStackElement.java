@@ -25,7 +25,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.PerlRecursiveVisitor;
 import com.perl5.lang.perl.psi.PsiPerlTryExpr;
 import com.perl5.lang.perl.psi.PsiPerlTrycatchCompound;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlNamespaceUtil;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,7 +48,7 @@ class PerlTryStackElement extends PerlCallStackElement {
     if (tryTinySuffixIndex < 0) {
       LOG.error("Attempting to create try frame from non-try text: " + frameText);
     }
-    myNamespaceName = PerlPackageUtil.getCanonicalName(cleanedFrameText.substring(0, tryTinySuffixIndex));
+    myNamespaceName = PerlPackageUtilCore.getCanonicalName(cleanedFrameText.substring(0, tryTinySuffixIndex));
   }
 
   @Override
@@ -63,7 +63,7 @@ class PerlTryStackElement extends PerlCallStackElement {
     }
     List<NavigatablePsiElement> result = new ArrayList<>();
     Set<PsiFile> processedFiles = new HashSet<>();
-    PerlPackageUtil.processNamespaces(
+    PerlNamespaceUtil.processNamespaces(
       myNamespaceName, project, GlobalSearchScope.allScope(project),
       it -> {
         var psiFile = it.getContainingFile();

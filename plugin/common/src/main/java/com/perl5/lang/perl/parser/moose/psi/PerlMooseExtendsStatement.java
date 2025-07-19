@@ -16,9 +16,9 @@
 
 package com.perl5.lang.perl.parser.moose.psi;
 
-import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider;
+import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.extensions.parser.PerlRuntimeParentsProvider;
 
 
-public interface PerlMooseExtendsStatement extends PerlRuntimeParentsProvider, PerlReferencesProvider {
+public interface PerlMooseExtendsStatement extends PsiElement, PerlRuntimeParentsProvider {
 }

@@ -21,7 +21,6 @@ import com.intellij.psi.PsiManager;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInNamespaceDefinition;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,21 +28,19 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.*;
-
 public class PerlBuiltInNamespacesService {
   private final Map<String, PerlBuiltInNamespaceDefinition> myNamespacesMap = new HashMap<>();
 
   public PerlBuiltInNamespacesService(@NotNull Project project) {
     PsiManager psiManager = PsiManager.getInstance(project);
     myNamespacesMap.put(PerlPackageUtilCore.MAIN_NAMESPACE_NAME, new PerlBuiltInNamespaceDefinition(psiManager, PerlPackageUtilCore.MAIN_NAMESPACE_NAME));
-    myNamespacesMap.put(CORE_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_NAMESPACE));
-    myNamespacesMap.put(CORE_GLOBAL_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, CORE_GLOBAL_NAMESPACE));
-    myNamespacesMap.put(UNIVERSAL_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, UNIVERSAL_NAMESPACE));
+    myNamespacesMap.put(PerlPackageUtilCore.CORE_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, PerlPackageUtilCore.CORE_NAMESPACE));
+    myNamespacesMap.put(PerlPackageUtilCore.CORE_GLOBAL_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, PerlPackageUtilCore.CORE_GLOBAL_NAMESPACE));
+    myNamespacesMap.put(PerlPackageUtilCore.UNIVERSAL_NAMESPACE, new PerlBuiltInNamespaceDefinition(psiManager, PerlPackageUtilCore.UNIVERSAL_NAMESPACE));
   }
 
   public @Nullable PerlBuiltInNamespaceDefinition getNamespaceDefinition(@Nullable String name) {
-    return name == null ? null : myNamespacesMap.get(PerlPackageUtil.getCanonicalName(name));
+    return name == null ? null : myNamespacesMap.get(PerlPackageUtilCore.getCanonicalName(name));
   }
 
   @SuppressWarnings("UnusedReturnValue")

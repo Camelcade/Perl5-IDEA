@@ -25,7 +25,7 @@ import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_META
 import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_REQUIRES
 import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_WITH
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 import kotlinx.collections.immutable.toImmutableList
 
 class MooRoleProcessor : BaseStrictWarningsProvidingProcessor() {
@@ -38,7 +38,7 @@ class MooRoleProcessor : BaseStrictWarningsProvidingProcessor() {
       MOOSE_KEYWORD_META,
       MOOSE_KEYWORD_REQUIRES,
       MOOSE_KEYWORD_WITH
-    ).map { keyword -> PerlExportDescriptor.create(PerlPackageUtil.MOO_ROLE, keyword) }
+    ).map { keyword -> PerlExportDescriptor.create(PerlPackageUtilCore.MOO_ROLE, keyword) }
       .toImmutableList()
   }
 

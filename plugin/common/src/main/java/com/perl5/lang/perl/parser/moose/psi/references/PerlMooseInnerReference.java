@@ -26,6 +26,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.moose.psi.PerlMooseAugmentStatement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionHandler;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -84,7 +85,8 @@ public class PerlMooseInnerReference extends PerlCachingReference<PsiElement> {
                                                       List<? super ResolveResult> result) {
     recursionSet.add(namespaceDefinition);
 
-    for (PerlNamespaceDefinitionElement childNamespace : namespaceDefinition.getChildNamespaceDefinitions()) {
+    for (PerlNamespaceDefinitionElement childNamespace : PerlNamespaceDefinitionHandler.instance(namespaceDefinition)
+      .getChildNamespaceDefinitions(namespaceDefinition)) {
       if (!recursionSet.contains(childNamespace)) {
         boolean noSubclasses = false;
 

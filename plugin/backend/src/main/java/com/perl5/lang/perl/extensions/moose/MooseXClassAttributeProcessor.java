@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Collections;
 import java.util.List;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_MOOSE_X_CLASSATTRIBUTE;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.PACKAGE_MOOSE_X_CLASSATTRIBUTE;
 
 public class MooseXClassAttributeProcessor extends BaseStrictWarningsProvidingProcessor {
   private static final List<PerlExportDescriptor> EXPORTS =

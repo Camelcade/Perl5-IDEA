@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.__PACKAGE__;
 
 
 public class PerlReferencesSearcher extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters> {

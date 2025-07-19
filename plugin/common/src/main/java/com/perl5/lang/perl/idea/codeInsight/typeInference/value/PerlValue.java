@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.NlsSafe;
+import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.Contract;
@@ -147,6 +148,10 @@ public abstract class PerlValue {
 
   protected int computeHashCode() {
     return getClass().hashCode();
+  }
+
+  public static boolean isDuckTypingEnabled() {
+    return Registry.is("perl5.duck.typing.support", true);
   }
 
   enum PerlValueType {

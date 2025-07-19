@@ -58,7 +58,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
   protected PsiElement fileContext;
 
   private final ClearableLazyValue<List<String>> myParentNamespaces = ClearableLazyValue.create(
-    () -> PerlPackageUtil.collectParentNamespaceNamesFromPsi(this));
+    () -> PerlPackageUtilCore.collectParentNamespaceNamesFromPsi(this));
   private final ClearableLazyValue<Instruction[]> myControlFlow = PerlControlFlowBuilder.createLazy(this);
 
   public PerlFileImpl(@NotNull FileViewProvider viewProvider, Language language) {

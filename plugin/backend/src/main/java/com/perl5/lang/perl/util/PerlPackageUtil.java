@@ -19,7 +19,6 @@ package com.perl5.lang.perl.util;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.intellij.openapi.util.NlsSafe;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
@@ -70,97 +69,14 @@ import org.jetbrains.annotations.*;
 
 import java.io.File;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
-import java.util.regex.Pattern;
 
 import static com.perl5.lang.perl.util.PerlCorePackages.*;
 
 
 public final class PerlPackageUtil implements PerlElementTypes {
-  public static final String PROFILER_MODULE = "Devel::NYTProf";
-  public static final String DEBUGGER_MODULE = "Devel::Camelcadedb";
-  public static final String COVERAGE_MODULE = "Devel::Cover";
-  public static final String TEST_HARNESS_MODULE = "Test::Harness";
-  public static final String TAP_FORMATTER_MODULE = "TAP::Formatter::Camelcade";
-  public static final String JSON_MODULE = "JSON";
-  public static final String ADJUST_BLOCK = "ADJUST";
 
   private PerlPackageUtil() {
-  }
-
-  public static final String DEREFERENCE_OPERATOR = "->";
-  public static final char NAMESPACE_SEPARATOR_LEGACY = '\'';
-
-  public static final String NAMESPACE_ANY = "*";
-  public static final AtomicNotNullLazyValue<PerlValue> NAMESPACE_ANY_VALUE =
-    AtomicNotNullLazyValue.createValue(() -> PerlScalarValue.create(NAMESPACE_ANY));
-
-  public static final String __PACKAGE__ = "__PACKAGE__";
-  public static final String PACKAGE_CARP = "Carp";
-  public static final String PACKAGE_SCALAR_UTIL = "Scalar::Util";
-  public static final @NonNls String PACKAGE_MOO = "Moo";
-  public static final @NonNls String MOO_ROLE = PACKAGE_MOO + PerlPackageUtilCore.NAMESPACE_SEPARATOR + "Role";
-  public static final String PACKAGE_CLASS_MOP_MIXIN = "Class::MOP::Mixin";
-  public static final String PACKAGE_MOOSE = "Moose";
-  public static final String PACKAGE_MOOSE_BASE = "Moose" + PerlPackageUtilCore.NAMESPACE_SEPARATOR;
-  public static final String PACKAGE_MOOSE_X = PACKAGE_MOOSE + "X";
-  public static final String PACKAGE_MOOSE_X_BASE = PACKAGE_MOOSE_X + PerlPackageUtilCore.NAMESPACE_SEPARATOR;
-  public static final String PACKAGE_MOOSE_OBJECT = PACKAGE_MOOSE_BASE + "Object";
-  public static final String PACKAGE_MOOSE_ROLE = PACKAGE_MOOSE_BASE + "Role";
-  public static final String PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS = PACKAGE_MOOSE_BASE + "Util::TypeConstraints";
-  public static final String PACKAGE_MOOSE_X_TYPES_CHECKEDUTILEXPORTS = PACKAGE_MOOSE_X_BASE + "Types::CheckedUtilExports";
-  public static final String PACKAGE_MOOSE_X_CLASSATTRIBUTE = PACKAGE_MOOSE_X_BASE + "ClassAttribute";
-  public static final String PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED = PACKAGE_MOOSE_X_BASE + "Role::Parameterized";
-  public static final String PACKAGE_VARS = "vars";
-
-  public static final Pattern PACKAGE_SEPARATOR_RE = Pattern.compile(
-    PerlPackageUtilCore.NAMESPACE_SEPARATOR + "|" + NAMESPACE_SEPARATOR_LEGACY);
-  public static final Pattern PACKAGE_SEPARATOR_TAIL_RE = Pattern.compile("(" + PerlPackageUtilCore.NAMESPACE_SEPARATOR + "|" +
-                                                                          NAMESPACE_SEPARATOR_LEGACY + ")$");
-
-  public static final Set<String> CORE_PACKAGES_ALL = new HashSet<>();
-
-  public static final String SUPER_NAMESPACE = "SUPER";
-  public static final String SUPER_NAMESPACE_FULL = SUPER_NAMESPACE + PerlPackageUtilCore.NAMESPACE_SEPARATOR;
-
-  public static final String MAIN_NAMESPACE_FULL = PerlPackageUtilCore.MAIN_NAMESPACE_NAME + PerlPackageUtilCore.NAMESPACE_SEPARATOR;
-  public static final String MAIN_NAMESPACE_SHORT = PerlPackageUtilCore.NAMESPACE_SEPARATOR;
-
-  public static final String UNIVERSAL_NAMESPACE = "UNIVERSAL";
-
-  public static final String CORE_NAMESPACE = "CORE";
-  public static final String CORE_NAMESPACE_FULL = CORE_NAMESPACE + PerlPackageUtilCore.NAMESPACE_SEPARATOR;
-  public static final String CORE_GLOBAL_NAMESPACE = CORE_NAMESPACE_FULL + "GLOBAL";
-  public static final String DEFAULT_LIB_DIR = "lib";
-  public static final String DEFAULT_TEST_DIR = "t";
-
-  private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
-  private static final Map<String, String> PATH_TO_PACKAGE_NAME_MAP = new ConcurrentHashMap<>();
-  public static final String FUNCTION_PARAMETERS = "Function::Parameters";
-
-  static {
-    CORE_PACKAGES_ALL.addAll(CORE_PACKAGES);
-    CORE_PACKAGES_ALL.addAll(CORE_PACKAGES_PRAGMAS);
-    CORE_PACKAGES_ALL.addAll(CORE_PACKAGES_DEPRECATED);
-  }
-
-  /**
-   * @return true if package name is in CoreList
-   */
-  @Contract("null -> false")
-  public static boolean isBuiltIn(@Nullable String packageName) {
-    return packageName != null && CORE_PACKAGES_ALL.contains(getCanonicalNamespaceName(packageName));
-  }
-
-  /**
-   * Checks if package is pragma
-   *
-   * @param pacakgeName package name
-   * @return result
-   */
-  public static boolean isPragma(String pacakgeName) {
-    return CORE_PACKAGES_PRAGMAS.contains(getCanonicalNamespaceName(pacakgeName));
   }
 
   /**
@@ -170,12 +86,12 @@ public final class PerlPackageUtil implements PerlElementTypes {
                                      @NotNull GlobalSearchScope searchScope,
                                      @NotNull String packageCanonicalName) {
     return CORE_PACKAGES_DEPRECATED.contains(packageCanonicalName) ||
-           !processNamespaces(packageCanonicalName, project, searchScope, it -> !it.isDeprecated());
+           !PerlNamespaceUtil.processNamespaces(packageCanonicalName, project, searchScope, it -> !it.isDeprecated());
   }
 
   @Contract("null->false")
   public static boolean isSUPER(@Nullable String packageName) {
-    return SUPER_NAMESPACE.equals(packageName);
+    return PerlPackageUtilCore.SUPER_NAMESPACE.equals(packageName);
   }
 
   public static boolean isMain(String packageName) {
@@ -183,48 +99,11 @@ public final class PerlPackageUtil implements PerlElementTypes {
   }
 
   public static boolean isCORE(String packageName) {
-    return CORE_NAMESPACE.equals(packageName);
+    return PerlPackageUtilCore.CORE_NAMESPACE.equals(packageName);
   }
 
   public static boolean isUNIVERSAL(String packageName) {
-    return UNIVERSAL_NAMESPACE.equals(packageName);
-  }
-
-  /**
-   * Make canonical package name.
-   *
-   * @param name package name
-   * @return canonical package name
-   */
-  public static String getCanonicalNamespaceName(@NotNull String name) {
-    String canonicalName = getCanonicalName(name);
-    return StringUtil.startsWith(canonicalName, MAIN_NAMESPACE_FULL) ?
-           canonicalName.substring(MAIN_NAMESPACE_FULL.length()) : canonicalName;
-  }
-
-  public static @NotNull String getCanonicalName(@NotNull String name) {
-    String newName;
-
-    if ((newName = CANONICAL_NAMES_CACHE.get(name)) != null) {
-      return newName;
-    }
-
-    String originalName = name;
-
-    name = PACKAGE_SEPARATOR_TAIL_RE.matcher(name).replaceFirst("");
-
-    String[] chunks = PACKAGE_SEPARATOR_RE.split(name, -1);
-
-    if (chunks.length > 0 && chunks[0].isEmpty())    // implicit main
-    {
-      chunks[0] = PerlPackageUtilCore.MAIN_NAMESPACE_NAME;
-    }
-
-    newName = StringUtil.join(chunks, PerlPackageUtilCore.NAMESPACE_SEPARATOR);
-
-    CANONICAL_NAMES_CACHE.put(originalName, newName);
-
-    return newName;
+    return PerlPackageUtilCore.UNIVERSAL_NAMESPACE.equals(packageName);
   }
 
   public static @NotNull PerlValue getContextType(@Nullable PsiElement element) {
@@ -232,7 +111,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
   }
 
   public static @NotNull List<String> split(@Nullable String packageName) {
-    return packageName == null ? Collections.emptyList() : StringUtil.split(getCanonicalNamespaceName(packageName), PerlPackageUtilCore.NAMESPACE_SEPARATOR);
+    return packageName == null ? Collections.emptyList() : StringUtil.split(PerlPackageUtilCore.getCanonicalNamespaceName(packageName), PerlPackageUtilCore.NAMESPACE_SEPARATOR);
   }
 
   @Contract("null -> null")
@@ -241,7 +120,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
       return null;
     }
     if (fqn.endsWith(PerlPackageUtilCore.NAMESPACE_SEPARATOR)) {
-      return Pair.create(getCanonicalName(fqn), null);
+      return Pair.create(PerlPackageUtilCore.getCanonicalName(fqn), null);
     }
     var sepIndex = fqn.lastIndexOf(PerlPackageUtilCore.NAMESPACE_SEPARATOR);
     if (sepIndex < 0) {
@@ -269,35 +148,6 @@ public final class PerlPackageUtil implements PerlElementTypes {
     return namespaceContainer;
   }
 
-  public static @NotNull List<PerlNamespaceDefinitionElement> collectNamespaceDefinitions(@NotNull Project project,
-                                                                                          @NotNull List<String> packageNames) {
-    ArrayList<PerlNamespaceDefinitionElement> namespaceDefinitions = new ArrayList<>();
-    for (String packageName : packageNames) {
-      Collection<PerlNamespaceDefinitionElement> list =
-        getNamespaceDefinitions(project, GlobalSearchScope.projectScope(project), packageName);
-
-      if (list.isEmpty()) {
-        list = getNamespaceDefinitions(project, GlobalSearchScope.allScope(project), packageName);
-      }
-
-      namespaceDefinitions.addAll(list);
-    }
-    return namespaceDefinitions;
-  }
-
-  /**
-   * Searching project files for namespace definitions by specific package name
-   *
-   * @see #processNamespaces(String, Project, GlobalSearchScope, Processor)
-   */
-  public static Collection<PerlNamespaceDefinitionElement> getNamespaceDefinitions(@NotNull Project project,
-                                                                                   @NotNull GlobalSearchScope scope,
-                                                                                   @NotNull String canonicalPackageName) {
-    List<PerlNamespaceDefinitionElement> result = new ArrayList<>();
-    processNamespaces(canonicalPackageName, project, scope, result::add);
-    return result;
-  }
-
   /**
    * Returns list of defined package names
    *
@@ -314,22 +164,6 @@ public final class PerlPackageUtil implements PerlElementTypes {
     Collection<String> keys = PerlNamespaceIndex.getInstance().getAllNames(scope);
     keys.addAll(PerlLightNamespaceIndex.getInstance().getAllNames(scope));
     return keys;
-  }
-
-  /**
-   * Processes all global packages names with specific processor
-   *
-   * @param scope     search scope
-   * @param processor string processor for suitable strings
-   * @return collection of constants names
-   */
-  @SuppressWarnings("UnusedReturnValue")
-  public static boolean processNamespaces(@NotNull String packageName,
-                                          @NotNull Project project,
-                                          @NotNull GlobalSearchScope scope,
-                                          @NotNull Processor<? super PerlNamespaceDefinitionElement> processor) {
-    return PerlNamespaceIndex.getInstance().processElements(project, packageName, scope, processor) &&
-           PerlLightNamespaceIndex.getInstance().processLightElements(project, packageName, scope, processor);
   }
 
   @SuppressWarnings("UnusedReturnValue")
@@ -385,12 +219,12 @@ public final class PerlPackageUtil implements PerlElementTypes {
    * @return canonical package name
    */
   public static String getPackageNameByPath(final String packagePath) {
-    String result = PATH_TO_PACKAGE_NAME_MAP.get(packagePath);
+    String result = PerlPackageUtilCore.PATH_TO_PACKAGE_NAME_MAP.get(packagePath);
 
     if (result == null) {
       String path = packagePath.replace("\\", "/");
-      result = getCanonicalNamespaceName(StringUtil.join(path.replaceFirst("\\.pm$", "").split("/"), PerlPackageUtilCore.NAMESPACE_SEPARATOR));
-      PATH_TO_PACKAGE_NAME_MAP.put(packagePath, result);
+      result = PerlPackageUtilCore.getCanonicalNamespaceName(StringUtil.join(path.replaceFirst("\\.pm$", "").split("/"), PerlPackageUtilCore.NAMESPACE_SEPARATOR));
+      PerlPackageUtilCore.PATH_TO_PACKAGE_NAME_MAP.put(packagePath, result);
     }
     return result;
   }
@@ -461,7 +295,8 @@ public final class PerlPackageUtil implements PerlElementTypes {
     }
     recursionMap.add(childClass);
 
-    for (PerlNamespaceDefinitionElement parentNamespace : childClass.getParentNamespaceDefinitions()) {
+    for (PerlNamespaceDefinitionElement parentNamespace : PerlNamespaceDefinitionHandler.instance(childClass)
+      .getParentNamespaceDefinitions(childClass)) {
       for (PsiElement subDefinitionBase : collectNamespaceSubs(parentNamespace)) {
         ProgressManager.checkCanceled();
         String subName = ((PerlSubElement)subDefinitionBase).getSubName();
@@ -642,20 +477,6 @@ public final class PerlPackageUtil implements PerlElementTypes {
       nameRange = TextRange.EMPTY_RANGE;
     }
     return Pair.create(packageRange, nameRange);
-  }
-
-  /**
-   * @return list of parent namespaces defined by different syntax constructions in the sub-tree of the {@code namespaceDefinition}
-   */
-  public static @NotNull List<String> collectParentNamespaceNamesFromPsi(@NotNull PerlNamespaceDefinitionElement namespaceDefinition) {
-    String namespaceName = namespaceDefinition.getNamespaceName();
-    if (StringUtil.isEmpty(namespaceName)) {
-      return Collections.emptyList();
-    }
-    ParentNamespacesNamesCollector collector = new ParentNamespacesNamesCollector(namespaceName);
-    PerlPsiUtil.processNamespaceStatements(namespaceDefinition, collector);
-    collector.applyRunTimeModifiers();
-    return collector.getParentNamespaces();
   }
 
   @Contract("null->null")

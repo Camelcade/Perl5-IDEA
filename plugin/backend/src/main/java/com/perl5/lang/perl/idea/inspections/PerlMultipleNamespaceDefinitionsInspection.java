@@ -23,7 +23,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlNamespaceUtil;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
@@ -39,7 +39,7 @@ public class PerlMultipleNamespaceDefinitionsInspection extends PerlInspection {
         String packageName = o.getNamespaceName();
         if (packageName != null &&
             !PerlPackageUtilCore.MAIN_NAMESPACE_NAME.equals(packageName) &&
-            PerlPackageUtil.getNamespaceDefinitions(project, GlobalSearchScope.projectScope(project), o.getNamespaceName()).size() > 1 &&
+            PerlNamespaceUtil.getNamespaceDefinitions(project, GlobalSearchScope.projectScope(project), o.getNamespaceName()).size() > 1 &&
             o.getNameIdentifier() != null
           ) {
           registerProblem(holder, o.getNameIdentifier(), PerlBundle.message("inspection.message.multiple.namespace.definitions.found"));

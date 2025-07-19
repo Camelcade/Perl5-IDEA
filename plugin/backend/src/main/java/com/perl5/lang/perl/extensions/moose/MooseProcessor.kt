@@ -31,21 +31,21 @@ import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_OVERRIDE
 import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_SUPER
 import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_WITH
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 import kotlinx.collections.immutable.toImmutableList
 
 open class MooseProcessor : BaseStrictWarningsProvidingProcessor(), PerlPackageParentsProvider, PerlPackageLoader {
   private val myLoadedClasses: List<String> by lazy {
-    listOf(PerlPackageUtil.PACKAGE_MOOSE_OBJECT, PerlPackageUtil.PACKAGE_CARP, PerlPackageUtil.PACKAGE_SCALAR_UTIL)
+    listOf(PerlPackageUtilCore.PACKAGE_MOOSE_OBJECT, PerlPackageUtilCore.PACKAGE_CARP, PerlPackageUtilCore.PACKAGE_SCALAR_UTIL)
   }
 
-  private val myParentClasses: List<String> = listOf(PerlPackageUtil.PACKAGE_MOOSE_OBJECT)
+  private val myParentClasses: List<String> = listOf(PerlPackageUtilCore.PACKAGE_MOOSE_OBJECT)
 
   private val myExports: List<PerlExportDescriptor> by lazy {
     (listOf(
-      PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_CARP, "confess"),
-      PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_SCALAR_UTIL, "blessed"),
-      PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_CLASS_MOP_MIXIN, MOOSE_KEYWORD_META)
+      PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_CARP, "confess"),
+      PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_SCALAR_UTIL, "blessed"),
+      PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_CLASS_MOP_MIXIN, MOOSE_KEYWORD_META)
     ) +
       listOf(
         MOOSE_KEYWORD_AFTER,
@@ -58,7 +58,7 @@ open class MooseProcessor : BaseStrictWarningsProvidingProcessor(), PerlPackageP
         MOOSE_KEYWORD_WITH,
         MOOSE_KEYWORD_INNER,
         MOOSE_KEYWORD_SUPER
-      ).map { keyword -> PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOOSE, keyword) })
+      ).map { keyword -> PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_MOOSE, keyword) })
       .toImmutableList()
   }
 

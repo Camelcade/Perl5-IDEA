@@ -31,14 +31,14 @@ import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_REQUIRES
 import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_SUPER
 import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_WITH
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 import kotlinx.collections.immutable.toImmutableList
 
 internal val MOOSE_ROLE_EXPORTS: List<PerlExportDescriptor> by lazy {
   (listOf(
-    PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_CARP, "confess"),
-    PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_SCALAR_UTIL, "blessed"),
-    PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_CLASS_MOP_MIXIN, MOOSE_KEYWORD_META)
+    PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_CARP, "confess"),
+    PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_SCALAR_UTIL, "blessed"),
+    PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_CLASS_MOP_MIXIN, MOOSE_KEYWORD_META)
   ) + listOf(
     MOOSE_KEYWORD_AFTER,
     MOOSE_KEYWORD_AROUND,
@@ -52,7 +52,7 @@ internal val MOOSE_ROLE_EXPORTS: List<PerlExportDescriptor> by lazy {
     MOOSE_KEYWORD_REQUIRES,
     MOOSE_KEYWORD_SUPER,
     MOOSE_KEYWORD_WITH
-  ).map { keyword -> PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOOSE_ROLE, keyword) })
+  ).map { keyword -> PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_MOOSE_ROLE, keyword) })
     .toImmutableList()
 }
 

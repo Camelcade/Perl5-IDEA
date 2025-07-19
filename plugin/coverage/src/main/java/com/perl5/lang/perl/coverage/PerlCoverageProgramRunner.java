@@ -30,7 +30,7 @@ import com.intellij.execution.ui.RunContentDescriptor;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.concurrency.AsyncPromise;
@@ -61,8 +61,8 @@ public class PerlCoverageProgramRunner extends GenericPerlProgramRunner {
   @Override
   protected Set<String> getRequiredModules(@NotNull ExecutionEnvironment environment) {
     var modules = super.getRequiredModules(environment);
-    modules.add(PerlPackageUtil.COVERAGE_MODULE);
-    modules.add(PerlPackageUtil.JSON_MODULE);
+    modules.add(PerlPackageUtilCore.COVERAGE_MODULE);
+    modules.add(PerlPackageUtilCore.JSON_MODULE);
     return modules;
   }
 

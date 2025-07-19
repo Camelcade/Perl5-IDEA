@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_VARS;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.PACKAGE_VARS;
 
 public class PerlUseVarsInspection extends PerlInspection {
   @Override

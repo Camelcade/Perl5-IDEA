@@ -37,7 +37,7 @@ import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.TestOnly;
@@ -155,7 +155,7 @@ public class PerlNamesCache implements Disposable {
       ProgressManager.checkCanceled();
       myKnownSubs = Collections.unmodifiableSet(subsSet);
 
-      Set<String> namespacesSet = new HashSet<>(PerlPackageUtil.CORE_PACKAGES_ALL);
+      Set<String> namespacesSet = new HashSet<>(PerlPackageUtilCore.CORE_PACKAGES_ALL);
 
       PerlNamespaceIndex namespaceIndex = PerlNamespaceIndex.getInstance();
       Collection<String> namespacesNames = namespaceIndex.getAllNames(myProject);

@@ -30,7 +30,7 @@ import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.psi.utils.PerlAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jdom.Element;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -41,7 +41,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY_VALUE;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.NAMESPACE_ANY_VALUE;
 
 
 /**
@@ -126,11 +126,11 @@ public abstract class PerlImplicitDeclarationsProvider {
       return;
     }
     PerlImplicitSubDefinition subDefinition;
-    if (PerlPackageUtil.CORE_NAMESPACE.equals(namespaceName)) {
+    if (PerlPackageUtilCore.CORE_NAMESPACE.equals(namespaceName)) {
       subDefinition = new PerlBuiltInSubDefinition(
         declarationsService.getPsiManager(),
         subName,
-        PerlPackageUtil.CORE_NAMESPACE,
+        PerlPackageUtilCore.CORE_NAMESPACE,
         readArguments(element.getChild(ARGUMENTS_ELEMENT), subName),
         readReturnValue(element)
       );
@@ -161,7 +161,7 @@ public abstract class PerlImplicitDeclarationsProvider {
     if (returnsAttribute.equals("*")) {
       return NAMESPACE_ANY_VALUE.get();
     }
-    return PerlScalarValue.create(PerlPackageUtil.getCanonicalName(returnsAttribute));
+    return PerlScalarValue.create(PerlPackageUtilCore.getCanonicalName(returnsAttribute));
   }
 
   private @NotNull List<PerlSubArgument> readArguments(@Nullable Element argumentsElement, @NotNull String subName) {

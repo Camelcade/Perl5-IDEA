@@ -23,7 +23,6 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
-import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
@@ -50,7 +49,7 @@ public class PerlMooseSuperReference extends PerlCachingReference<PsiElement> {
     Project project = element.getProject();
 
 
-    var targetSubs = PerlMro.collectCallables(
+    var targetSubs = PerlMroUtil.collectCallables(
       project, element.getResolveScope(),
       packageName,
       subName,

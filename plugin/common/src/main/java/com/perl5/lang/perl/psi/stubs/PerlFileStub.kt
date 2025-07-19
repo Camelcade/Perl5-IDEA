@@ -21,6 +21,7 @@ import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.psi.PerlFile
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition
 import com.perl5.lang.perl.psi.mro.PerlMroType
+import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations
 
 class PerlFileStub : PsiFileStubImpl<PerlFile>, PerlNamespaceDefinition {

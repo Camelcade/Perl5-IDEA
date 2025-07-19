@@ -33,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.CORE_NAMESPACE;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.CORE_NAMESPACE;
 import static com.perl5.lang.perl.util.PerlPackageUtilCore.NAMESPACE_SEPARATOR;
 
 /**

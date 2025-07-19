@@ -29,6 +29,8 @@ import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
 import com.perl5.lang.perl.psi.utils.PerlSubArgument
+import com.perl5.lang.perl.psi.utils.PerlVariableType
+import java.io.IOException
 
 
 open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
@@ -57,8 +59,7 @@ open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
     dataStream.writeName(stub.namespaceName)
     dataStream.writeName(stub.subName)
 
-    PerlSubArgument.serializeList(dataStream, stub.subArgumentsList)
-
+    dataStream.serializeArguments(stub.subArgumentsList)
 
     val subAnnotations = stub.annotations
     if (subAnnotations == null) {
@@ -77,7 +78,7 @@ open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
   ): PerlSubDefinitionStub {
     val packageName = dataStream.readName()!!.getString()
     val functionName = dataStream.readName()!!.getString()
-    val arguments = PerlSubArgument.deserializeList(dataStream)
+    val arguments = dataStream.deserializeArguments()
     val annotations: PerlSubAnnotations? = if (dataStream.readBoolean()) PerlSubAnnotations.deserialize(dataStream) else null
     return createStubElement(parentStub, packageName, functionName!!, arguments, PerlValuesManager.readValue(dataStream), annotations)
   }
@@ -122,4 +123,41 @@ open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
   protected open fun getReverseKey(): StubIndexKey<String, out PsiElement> = PerlSubDefinitionReverseIndex.KEY
 
   protected open fun getCallableNameKey(): StubIndexKey<String, out PsiElement> = PerlCallableNamesIndex.KEY
+}
+
+@Throws(IOException::class)
+fun StubOutputStream.serializeArguments(arguments: List<PerlSubArgument>) {
+  writeVarInt(arguments.size)
+  arguments.forEach { serializeArgument(it) }
+}
+
+@Throws(IOException::class)
+private fun StubOutputStream.serializeArgument(argument: PerlSubArgument) {
+  writeName(argument.argumentType.toString())
+  writeName(argument.argumentName)
+  writeName(argument.variableClass)
+  writeBoolean(argument.isOptional)
+}
+
+@Throws(IOException::class)
+private fun StubInputStream.deserializeArgument(): PerlSubArgument {
+  val argumentType = PerlVariableType.valueOf(readName().toString())
+  val argumentName = readName().toString()
+  val variableClass = readName().toString()
+  val isOptional = readBoolean()
+  return PerlSubArgument.create(argumentType, argumentName, variableClass, isOptional)
+}
+
+@Throws(IOException::class)
+fun StubInputStream.deserializeArguments(): List<PerlSubArgument> {
+  val argumentsNumber = readVarInt()
+
+  if (argumentsNumber <= 0) {
+    return emptyList()
+  }
+  val arguments: MutableList<PerlSubArgument> = ArrayList(argumentsNumber)
+  for (i in 0..<argumentsNumber) {
+    arguments.add(deserializeArgument())
+  }
+  return arguments
 }

@@ -21,7 +21,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 
 /**
  * Converting $$var{key} to $var->{key}
@@ -46,7 +46,7 @@ public class PerlFormattingScalarDerefExpand implements PerlFormattingOperation 
           scalarVariable.isValid()) {
         PsiElement indexElement = parent.getLastChild();
         if (indexElement.isValid() && (indexElement instanceof PsiPerlHashIndex || indexElement instanceof PsiPerlArrayIndex)) {
-          String newCode = scalarVariable.getNode().getText() + PerlPackageUtil.DEREFERENCE_OPERATOR + indexElement.getText();
+          String newCode = scalarVariable.getNode().getText() + PerlPackageUtilCore.DEREFERENCE_OPERATOR + indexElement.getText();
           PerlFileImpl newFile = PerlElementFactory.createFile(myScalarDereference.getProject(), newCode);
           PsiPerlDerefExpr derefExpr = PsiTreeUtil.findChildOfType(newFile, PsiPerlDerefExpr.class);
           if (derefExpr != null) {

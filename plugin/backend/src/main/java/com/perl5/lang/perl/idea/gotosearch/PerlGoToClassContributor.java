@@ -21,6 +21,7 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
+import com.perl5.lang.perl.util.PerlNamespaceUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
@@ -57,6 +58,6 @@ public class PerlGoToClassContributor extends PerlChooseByNameContributor implem
       return Collections.emptyList();
     }
     var searchScope = includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);
-    return PerlPackageUtil.getNamespaceDefinitions(project, searchScope, packageName);
+    return PerlNamespaceUtil.getNamespaceDefinitions(project, searchScope, packageName);
   }
 }

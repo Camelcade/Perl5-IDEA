@@ -159,9 +159,9 @@ public final class PerlValuesManager {
     }
     else if (elementType == PACKAGE_EXPR) {
       String elementText = element.getText();
-      return PerlPackageUtil.__PACKAGE__.equals(elementText)
+      return PerlPackageUtilCore.__PACKAGE__.equals(elementText)
              ? PerlPackageUtil.getContextType(element)
-             : PerlScalarValue.create(PerlPackageUtil.getCanonicalName(elementText));
+             : PerlScalarValue.create(PerlPackageUtilCore.getCanonicalName(elementText));
     }
     else if (elementType == SUB_CALL) {
       return PerlValuesManager.from(((PerlSubCallElement)element).getMethod());

@@ -37,7 +37,7 @@ import com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -128,7 +128,7 @@ public abstract class PerlIntroduceTargetsHandler {
         return reportEmptyPlace();
       }
       case PsiPerlPackageExpr packageExpr -> {
-        return "'" + PerlPackageUtil.getCanonicalNamespaceName(StringUtil.notNullize(packageExpr.getText())) + "'";
+        return "'" + PerlPackageUtilCore.getCanonicalNamespaceName(StringUtil.notNullize(packageExpr.getText())) + "'";
       }
       case PsiPerlMatchRegex matchRegex -> {
         char openQuote = matchRegex.getOpenQuote();

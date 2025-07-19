@@ -24,7 +24,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static com.perl5.lang.perl.psi.mro.PerlMro.collectCallables;
+import static com.perl5.lang.perl.util.PerlMroUtil.collectCallables;
 
 
 public class PerlSubReferenceSuper extends PerlSubReferenceSimple {

@@ -42,9 +42,6 @@ public final class PerlScalarUtil implements PerlElementTypes {
   private PerlScalarUtil() {
   }
 
-  public static final String DEFAULT_SELF_NAME = "self";
-  public static final String DEFAULT_SELF_SCALAR_NAME = "$" + DEFAULT_SELF_NAME;
-
   /**
    * Searching project files for global scalar definitions by specific package and variable name
    *

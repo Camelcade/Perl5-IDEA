@@ -48,6 +48,8 @@
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.perl5">
+    <namespaceDefinitionHalder forClass="com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement"
+                               implementationClass="com.perl5.lang.perl.psi.PerlDefaultBackendNamespaceDefinitionHandler"/>
     <valueBackendHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArgumentsValue"
                         implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlArgumentsValueBackendHelper"/>
     <valueBackendHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArithmeticNegationValue"
@@ -289,6 +291,8 @@
     <treeStructureProvider implementation="com.perl5.lang.perl.idea.project.PerlTreeStructureProvider"/>
     <moduleExtension implementation="com.intellij.openapi.projectRoots.impl.PerlModuleExtension"/>
 
+    <applicationService serviceImplementation="com.perl5.lang.perl.idea.presentations.PerlBackendItemPresentationService"
+                        serviceInterface="com.perl5.lang.perl.idea.presentations.PerlItemPresentationService"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
     <postStartupActivity implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeServiceWatcher"/>
     <postStartupActivity implementation="com.perl5.lang.perl.idea.sdk.host.PerlHostCacheCleaner"/>

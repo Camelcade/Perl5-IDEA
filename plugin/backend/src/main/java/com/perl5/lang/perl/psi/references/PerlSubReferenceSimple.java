@@ -37,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import static com.perl5.lang.perl.psi.mro.PerlMro.collectCallables;
+import static com.perl5.lang.perl.util.PerlMroUtil.collectCallables;
 
 /**
  * Basic class for sub reference. Uses context package to resolve. Used in string contents, moose, etc.

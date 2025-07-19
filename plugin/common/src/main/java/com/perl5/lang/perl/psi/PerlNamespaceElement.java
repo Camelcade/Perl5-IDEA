@@ -18,7 +18,7 @@ package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public interface PerlNamespaceElement extends PsiElement, PerlDeprecatable {
    * @return result
    */
   default boolean isBuiltin() {
-    return PerlPackageUtil.isBuiltIn(getCanonicalName());
+    return PerlPackageUtilCore.isBuiltIn(getCanonicalName());
   }
 
   /**

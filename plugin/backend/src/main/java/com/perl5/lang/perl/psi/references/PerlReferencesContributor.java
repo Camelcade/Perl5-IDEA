@@ -18,6 +18,10 @@ package com.perl5.lang.perl.psi.references;
 
 import com.intellij.psi.*;
 import com.intellij.util.ProcessingContext;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseExtendsStatement;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseExtendsStatementReferenceProvider;
+import com.perl5.lang.perl.parser.moose.psi.PerlMooseOverrideReferenceProvider;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
 import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PsiPerlLabelExpr;
 import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
@@ -35,6 +39,12 @@ public class PerlReferencesContributor extends PsiReferenceContributor {
     registrar.registerReferenceProvider(psiElement(PerlHeredocTerminatorElement.class), new PerlHeredocReferenceProvider());
     registrar.registerReferenceProvider(psiElement(PerlNamespaceElementImpl.class), new PerlNamespaceElementReferenceProvider());
     registrar.registerReferenceProvider(psiElement(PerlStringContentElementImpl.class), new PerlStringContentElementReferenceProvider());
+    registrar.registerReferenceProvider(psiElement(PerlStringContentElementImpl.class)
+                                          .withTreeParent(psiElement(PerlMooseOverrideStatement.class)),
+                                        new PerlMooseOverrideReferenceProvider());
+    registrar.registerReferenceProvider(psiElement(PerlStringContentElementImpl.class)
+                                          .withTreeParent(psiElement(PerlMooseExtendsStatement.class)),
+                                        new PerlMooseExtendsStatementReferenceProvider());
 
     registrar.registerReferenceProvider(
       EXPORT_ASSIGNED_STRING_CONTENT,

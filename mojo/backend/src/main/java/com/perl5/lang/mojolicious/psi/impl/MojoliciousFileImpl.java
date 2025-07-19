@@ -28,7 +28,7 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
-import com.perl5.lang.perl.util.PerlScalarUtil;
+import com.perl5.lang.perl.util.PerlScalarUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -84,7 +84,7 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
     if (myImplicitVariables == null) {
       List<PerlVariableDeclarationElement> implicitVariables = new ArrayList<>();
       implicitVariables
-        .add(PerlImplicitVariableDeclaration.createLexical(this, PerlScalarUtil.DEFAULT_SELF_SCALAR_NAME, MOJO_CONTROLLER_NS));
+        .add(PerlImplicitVariableDeclaration.createLexical(this, PerlScalarUtilCore.DEFAULT_SELF_SCALAR_NAME, MOJO_CONTROLLER_NS));
       implicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, "$c", MOJO_CONTROLLER_NS));
       implicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, "$cb"));
       implicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, "$_O"));

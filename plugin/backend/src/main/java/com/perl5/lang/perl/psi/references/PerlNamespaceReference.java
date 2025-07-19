@@ -24,7 +24,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInNamespaceDefinition;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlNamespaceUtil;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
@@ -59,8 +59,8 @@ public class PerlNamespaceReference extends PerlCachingReference<PsiElement> {
     }
 
     return PsiElementResolveResult.createResults(
-      PerlPackageUtil.getNamespaceDefinitions(project, myElement.getResolveScope(),
-                                              PerlPackageUtil.getCanonicalNamespaceName(namespaceName)));
+      PerlNamespaceUtil.getNamespaceDefinitions(project, myElement.getResolveScope(),
+                                                PerlPackageUtilCore.getCanonicalNamespaceName(namespaceName)));
   }
 
   @Override

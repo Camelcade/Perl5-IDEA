@@ -38,7 +38,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
+import static com.perl5.lang.perl.util.PerlScalarUtilCore.DEFAULT_SELF_NAME;
 
 public class PerlSettingsPersistenceTest extends PerlLightTestCase {
   @Override

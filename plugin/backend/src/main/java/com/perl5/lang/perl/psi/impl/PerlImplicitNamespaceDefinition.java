@@ -24,7 +24,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,7 +40,7 @@ public class PerlImplicitNamespaceDefinition extends PerlImplicitElement impleme
                                          @NotNull String namespaceName,
                                          @Nullable PsiElement parent) {
     super(manager, parent);
-    myNamespaceName = PerlPackageUtil.getCanonicalNamespaceName(namespaceName);
+    myNamespaceName = PerlPackageUtilCore.getCanonicalNamespaceName(namespaceName);
   }
 
   @Override

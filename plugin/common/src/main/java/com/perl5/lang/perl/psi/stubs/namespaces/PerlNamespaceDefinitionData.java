@@ -64,7 +64,7 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
     );
   }
 
-  private PerlNamespaceDefinitionData(@NotNull String namespaceName,
+  public PerlNamespaceDefinitionData(@NotNull String namespaceName,
                                       @NotNull PerlMroType mroType,
                                       @NotNull List<String> parentNamespaces,
                                       @NotNull List<String> EXPORT,
@@ -115,41 +115,7 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
     return myEXPORT_TAGS;
   }
 
-  public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeName(getNamespaceName());
-    dataStream.writeName(getMroType().toString());
-    PerlStubSerializationUtil.writeStringsList(dataStream, getParentNamespacesNames());
-    PerlStubSerializationUtil.writeStringsList(dataStream, getEXPORT());
-    PerlStubSerializationUtil.writeStringsList(dataStream, getEXPORT_OK());
-    PerlStubSerializationUtil.writeStringListMap(dataStream, getEXPORT_TAGS());
-
-    PerlNamespaceAnnotations namespaceAnnotations = getAnnotations();
-    if (namespaceAnnotations == null) {
-      dataStream.writeBoolean(false);
-    }
-    else {
-      dataStream.writeBoolean(true);
-      serializeAnnotations(namespaceAnnotations, dataStream);
-    }
-  }
-
   public static @NotNull PerlNamespaceDefinitionData deserialize(@NotNull StubInputStream dataStream) throws IOException {
-    String packageName = PerlStubSerializationUtil.readString(dataStream);
-    PerlMroType mroType = PerlMroType.valueOf(PerlStubSerializationUtil.readString(dataStream));
-    List<String> parentNamespaces = PerlStubSerializationUtil.readStringsList(dataStream);
-    List<String> EXPORT = PerlStubSerializationUtil.readStringsList(dataStream);
-    List<String> EXPORT_OK = PerlStubSerializationUtil.readStringsList(dataStream);
-    Map<String, List<String>> EXPORT_TAGS = PerlStubSerializationUtil.readStringListMap(dataStream);
-
-    return new PerlNamespaceDefinitionData(
-      Objects.requireNonNull(packageName),
-      mroType,
-      Objects.requireNonNull(parentNamespaces),
-      Objects.requireNonNull(EXPORT),
-      Objects.requireNonNull(EXPORT_OK),
-      EXPORT_TAGS,
-      dataStream.readBoolean() ? deserializeAnnotations(dataStream) : null
-    );
   }
 
   @Override
@@ -162,15 +128,5 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
            "\t@EXPORT_TAGS: " + myEXPORT_TAGS + "\n" +
            "\tAnnotations: " + myPerlNamespaceAnnotations
       ;
-  }
-
-  private static void serializeAnnotations(@NotNull PerlNamespaceAnnotations annotations, @NotNull StubOutputStream dataStream)
-    throws IOException {
-    dataStream.writeByte(annotations.getFlags());
-  }
-
-  private static PerlNamespaceAnnotations deserializeAnnotations(@NotNull StubInputStream dataStream) throws IOException {
-    byte flags = dataStream.readByte();
-    return new PerlNamespaceAnnotations(flags);
   }
 }

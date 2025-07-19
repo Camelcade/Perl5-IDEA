@@ -20,7 +20,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
@@ -35,7 +34,7 @@ public interface PerlSubElement extends PerlSub, PerlCallableElement {
     }
 
     Ref<PerlSubElement> resultRef = Ref.create();
-    PerlMro.processCallables(
+    PerlMroUtil.processCallables(
       getProject(), getResolveScope(), getNamespaceName(), Collections.singleton(getSubName()), true,
       it -> {
         if (it instanceof PerlSubElement subElement) {

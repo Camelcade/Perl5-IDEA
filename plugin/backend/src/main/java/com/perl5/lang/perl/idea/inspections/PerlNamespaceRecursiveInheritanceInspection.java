@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionHandler;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
@@ -66,7 +67,8 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
   private static boolean hasRecursiveInheritance(@NotNull PerlNamespaceDefinitionElement definition,
                                                  @NotNull Set<? super String> passedWay) {
     passedWay.add(definition.getNamespaceName());
-    for (PerlNamespaceDefinitionElement element : definition.getParentNamespaceDefinitions()) {
+    for (PerlNamespaceDefinitionElement element : PerlNamespaceDefinitionHandler.instance(definition)
+      .getParentNamespaceDefinitions(definition)) {
       if (passedWay.contains(element.getNamespaceName())) {
         return true;
       }

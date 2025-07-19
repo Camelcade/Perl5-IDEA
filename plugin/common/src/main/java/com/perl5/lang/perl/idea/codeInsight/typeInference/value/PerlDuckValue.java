@@ -20,7 +20,6 @@ import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueBackendHelper;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -96,7 +95,7 @@ public class PerlDuckValue extends PerlListValue {
     var callablesLeft = new HashSet<>(callableNames);
     var project = resolver.getProject();
     var resolveScope = resolver.getResolveScope();
-    boolean notFinished = PerlMro.processCallables(project, resolveScope, namespaceName, callableNames, false, it -> {
+    boolean notFinished = PerlMroUtil.processCallables(project, resolveScope, namespaceName, callableNames, false, it -> {
       callablesLeft.remove(it.getCallableName());
       return !callablesLeft.isEmpty();
     }, false);

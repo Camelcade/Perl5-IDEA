@@ -52,7 +52,7 @@ import java.util.Map;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.util.PerlCorePackages.PACKAGE_EXPORTER;
-import static com.perl5.lang.perl.util.PerlPackageUtil.ADJUST_BLOCK;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.ADJUST_BLOCK;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
 import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
 

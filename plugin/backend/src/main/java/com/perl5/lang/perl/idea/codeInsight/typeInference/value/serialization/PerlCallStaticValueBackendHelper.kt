@@ -24,7 +24,7 @@ import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.util.Processor
 import com.perl5.lang.perl.extensions.imports.PerlImportsProvider
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlNamespaceUtil
 import com.perl5.lang.perl.util.PerlPackageUtilCore
 
 
@@ -110,7 +110,7 @@ class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStat
   ) {
     if (!hasTarget && callValue.hasExplicitNamespace() && subNames.size == 1 && namespaceNames.size == 1 && resolvedArguments.isEmpty()) {
       val possiblePackageName = PerlPackageUtilCore.join(namespaceNames.iterator().next(), subNames.iterator().next())
-      if (!PerlPackageUtil.getNamespaceDefinitions(resolver.project, resolver.resolveScope, possiblePackageName).isEmpty()) {
+      if (!PerlNamespaceUtil.getNamespaceDefinitions(resolver.project, resolver.resolveScope, possiblePackageName).isEmpty()) {
         builder.addVariant(PerlScalarValue.create(possiblePackageName))
       }
     }

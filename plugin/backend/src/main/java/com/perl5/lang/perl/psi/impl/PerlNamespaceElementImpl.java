@@ -61,7 +61,7 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
 
   @Override
   public String getCanonicalName() {
-    return PerlPackageUtil.getCanonicalNamespaceName(getName());
+    return PerlPackageUtilCore.getCanonicalNamespaceName(getName());
   }
 
   @Override

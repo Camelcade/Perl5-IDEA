@@ -28,8 +28,8 @@ import org.jetbrains.annotations.Nullable;
 import javax.swing.*;
 import java.io.IOException;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.DEFAULT_LIB_DIR;
-import static com.perl5.lang.perl.util.PerlPackageUtil.DEFAULT_TEST_DIR;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.DEFAULT_LIB_DIR;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.DEFAULT_TEST_DIR;
 
 public class PerlProjectGenerator extends PerlProjectGeneratorBase<PerlProjectGenerationSettings> {
   private static final Logger LOG = Logger.getInstance(PerlProjectGenerator.class);

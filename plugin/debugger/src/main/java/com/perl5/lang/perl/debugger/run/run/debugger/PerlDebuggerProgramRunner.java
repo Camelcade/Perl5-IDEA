@@ -33,7 +33,7 @@ import com.perl5.lang.perl.debugger.PerlDebuggerBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.run.debugger.PerlDebugOptions;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.concurrency.AsyncPromise;
@@ -61,7 +61,7 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
   @Override
   protected Set<String> getRequiredModules(@NotNull ExecutionEnvironment environment) {
     var modules = super.getRequiredModules(environment);
-    modules.add(PerlPackageUtil.DEBUGGER_MODULE);
+    modules.add(PerlPackageUtilCore.DEBUGGER_MODULE);
     return modules;
   }
 

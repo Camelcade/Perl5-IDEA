@@ -25,8 +25,8 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings
 import com.perl5.lang.perl.psi.PerlCallableElement
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService
+import com.perl5.lang.perl.util.PerlNamespaceUtil
 import com.perl5.lang.perl.util.PerlPackageUtil
 import com.perl5.lang.perl.util.PerlPackageUtilCore
 import com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD
@@ -94,7 +94,7 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
     }
 
     // exports
-    val exportDescriptors = PerlNamespaceDefinitionElement.getExportDescriptors(project, searchScope, namespaceName)
+    val exportDescriptors = PerlNamespaceUtil.getExportDescriptors(project, searchScope, namespaceName)
     if (!processExportDescriptorsItems(project, searchScope, subNames, processorWrapper, exportDescriptors)) {
       return false
     }
@@ -242,7 +242,7 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
 
     // exports
     val exportDescriptors =
-      PerlNamespaceDefinitionElement.getExportDescriptors(project, effectiveScope, currentNamespaceName)
+      PerlNamespaceUtil.getExportDescriptors(project, effectiveScope, currentNamespaceName)
     return processExportDescriptors(project, effectiveScope, processor, exportDescriptors)
   }
 

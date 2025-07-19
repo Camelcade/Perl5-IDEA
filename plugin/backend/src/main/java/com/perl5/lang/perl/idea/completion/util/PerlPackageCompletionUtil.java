@@ -39,6 +39,7 @@ import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService;
+import com.perl5.lang.perl.util.PerlNamespaceUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlTimeLogger;
@@ -51,7 +52,7 @@ import java.util.List;
 import java.util.Map;
 
 import static com.perl5.PerlIcons.PACKAGE_GUTTER_ICON;
-import static com.perl5.lang.perl.util.PerlPackageUtil.__PACKAGE__;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.__PACKAGE__;
 
 
 public class PerlPackageCompletionUtil {
@@ -91,11 +92,11 @@ public class PerlPackageCompletionUtil {
 
     LookupElementBuilder result = LookupElementBuilder.create(ObjectUtils.notNull(lookupObject, packageName), packageName);
 
-    if (PerlPackageUtil.isBuiltIn(packageName)) {
+    if (PerlPackageUtilCore.isBuiltIn(packageName)) {
       result = result.withBoldness(true);
     }
 
-    if (PerlPackageUtil.isPragma(packageName)) {
+    if (PerlPackageUtilCore.isPragma(packageName)) {
       result = result.withIcon(PerlIcons.PRAGMA_GUTTER_ICON);
     }
     else {
@@ -163,7 +164,7 @@ public class PerlPackageCompletionUtil {
       if (!completionProcessor.matches(packageName)) {
         continue;
       }
-      PerlPackageUtil.processNamespaces(packageName, project, searchScope, namespace -> {
+      PerlNamespaceUtil.processNamespaces(packageName, project, searchScope, namespace -> {
         String name = namespace.getNamespaceName();
         if (StringUtil.isNotEmpty(name)) {
           char firstChar = name.charAt(0);

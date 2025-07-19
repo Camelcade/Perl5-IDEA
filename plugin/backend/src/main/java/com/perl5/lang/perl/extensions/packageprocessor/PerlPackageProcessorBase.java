@@ -21,7 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlNamespaceUtil;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -48,7 +48,7 @@ public abstract class PerlPackageProcessorBase implements PerlPackageProcessor {
 
     // fixme handle tags
     GlobalSearchScope scope = GlobalSearchScope.allScope(useStatement.getProject());
-    for (PerlNamespaceDefinitionElement namespaceDefinition : PerlPackageUtil
+    for (PerlNamespaceDefinitionElement namespaceDefinition : PerlNamespaceUtil
       .getNamespaceDefinitions(useStatement.getProject(), scope, packageName)) {
       var defaultExports = namespaceDefinition.getEXPORT();
       export.addAll(defaultExports);

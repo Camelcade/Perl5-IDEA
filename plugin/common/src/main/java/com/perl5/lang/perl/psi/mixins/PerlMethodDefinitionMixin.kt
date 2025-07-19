@@ -26,7 +26,7 @@ import com.perl5.lang.perl.psi.PsiPerlMethodSignatureInvocant
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
 import com.perl5.lang.perl.psi.utils.PerlSubArgument
-import com.perl5.lang.perl.util.PerlScalarUtil
+import com.perl5.lang.perl.util.PerlScalarUtilCore
 
 abstract class PerlMethodDefinitionMixin : PerlSubDefinitionBase, PerlMethodDefinition {
   protected val myImplicitVariables: List<PerlVariableDeclarationElement> by lazy { buildImplicitVariables() }
@@ -79,6 +79,6 @@ abstract class PerlMethodDefinitionMixin : PerlSubDefinitionBase, PerlMethodDefi
     @JvmStatic
     val defaultInvocantName: String
       get() =
-        PerlScalarUtil.DEFAULT_SELF_SCALAR_NAME
+        PerlScalarUtilCore.DEFAULT_SELF_SCALAR_NAME
   }
 }

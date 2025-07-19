@@ -37,13 +37,6 @@ class PerlStringContentElementReferenceProvider : PsiReferenceProvider() {
       if (PerlString.looksLikePackage(valueText)) {
         result.add(PerlNamespaceReference(element))
       }
-      else {
-        PsiTreeUtil.getParentOfType(
-          element, PerlReferencesProvider::class.java, true, PsiPerlStatement::class.java
-        )?.let {
-          result.addAll(it.getReferences(element).filterNotNull())
-        }
-      }
       return result.toTypedArray()
     } ?: PsiReference.EMPTY_ARRAY
 }

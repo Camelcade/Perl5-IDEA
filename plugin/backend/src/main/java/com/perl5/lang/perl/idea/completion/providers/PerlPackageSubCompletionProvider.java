@@ -24,7 +24,6 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
@@ -54,9 +53,9 @@ public class PerlPackageSubCompletionProvider extends PerlCompletionProvider {
       logger.debug("Processed all namespace names");
     }
     else {
-      if (!StringUtil.equals(PerlPackageUtil.SUPER_NAMESPACE_FULL, newPrefixMathcer)) {
+      if (!StringUtil.equals(PerlPackageUtilCore.SUPER_NAMESPACE_FULL, newPrefixMathcer)) {
         PerlPackageCompletionUtil.processPackageLookupElementWithAutocomplete(
-          null, PerlPackageUtil.SUPER_NAMESPACE_FULL, null, completionProcessor);
+          null, PerlPackageUtilCore.SUPER_NAMESPACE_FULL, null, completionProcessor);
         logger.debug("Processed all package lookups with autocomplete");
       }
     }

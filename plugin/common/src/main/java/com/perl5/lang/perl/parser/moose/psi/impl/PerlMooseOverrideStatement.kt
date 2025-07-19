@@ -18,21 +18,16 @@ package com.perl5.lang.perl.parser.moose.psi.impl
 import com.intellij.lang.ASTNode
 import com.intellij.psi.ElementManipulators
 import com.intellij.psi.PsiElement
-import com.intellij.psi.PsiReference
 import com.intellij.psi.tree.IElementType
 import com.intellij.util.IncorrectOperationException
-import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider
-import com.perl5.lang.perl.parser.moose.psi.PerlMoosePsiUtil
 import com.perl5.lang.perl.psi.*
 import com.perl5.lang.perl.psi.mixins.PerlSubDefinitionBase
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
 
-open class PerlMooseOverrideStatement : PerlSubDefinitionBase, PerlReferencesProvider {
+open class PerlMooseOverrideStatement : PerlSubDefinitionBase {
   constructor(node: ASTNode) : super(node)
 
   constructor(stub: PerlSubDefinitionStub, nodeType: IElementType) : super(stub, nodeType)
-
-  override fun getReferences(element: PsiElement?): Array<PsiReference?> = PerlMoosePsiUtil.getModifiersNameReference(this.expr, element)
 
   /**
    * fixme probably a bug. This need to be refactored anyway
