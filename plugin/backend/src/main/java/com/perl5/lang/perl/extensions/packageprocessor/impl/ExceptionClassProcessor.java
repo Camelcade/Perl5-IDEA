@@ -53,7 +53,7 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
       return Collections.emptyList();
     }
     List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
-    List<PsiElement> listElements = PerlArrayUtil.collectListElements(expr);
+    List<PsiElement> listElements = PerlArrayUtilCore.collectListElements(expr);
 
     for (int i = 0; i < listElements.size(); i++) {
       processExceptionElement(listElements, i, result, useStatementElement);
@@ -108,7 +108,7 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
       if (fieldsContainer instanceof PsiPerlAnonArray anonArray) {
         fieldsContainer = anonArray.getExpr();
       }
-      List<PsiElement> elements = PerlArrayUtil.collectListElements(fieldsContainer);
+      List<PsiElement> elements = PerlArrayUtilCore.collectListElements(fieldsContainer);
       if (!elements.isEmpty()) {
 
         // Fields method

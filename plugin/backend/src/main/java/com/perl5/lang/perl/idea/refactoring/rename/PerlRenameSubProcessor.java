@@ -70,7 +70,7 @@ public class PerlRenameSubProcessor extends RenamePsiElementProcessor {
   }
 
   private @NotNull PsiElement suggestSuperMethod(@NotNull PerlSubElement subBase) {
-    PerlSubElement topLevelSuperMethod = subBase.getTopmostSuperMethod();
+    PerlSubElement topLevelSuperMethod = PerlSubUtil.getTopmostSuperMethod(subBase);
     String canonicalName = topLevelSuperMethod.getCanonicalName();
 
     if (topLevelSuperMethod == subBase || canonicalName == null) {

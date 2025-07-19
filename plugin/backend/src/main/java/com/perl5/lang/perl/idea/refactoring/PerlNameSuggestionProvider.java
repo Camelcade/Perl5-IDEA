@@ -47,7 +47,7 @@ import com.perl5.lang.perl.psi.mixins.PerlStatementMixin;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -526,7 +526,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     if (StringUtil.isEmptyOrSpaces(packageName)) {
       return Collections.emptyList();
     }
-    List<String> packageChunks = PerlPackageUtil.split(packageName);
+    List<String> packageChunks = PerlPackageUtilCore.split(packageName);
     if (packageChunks.isEmpty()) {
       return Collections.emptyList();
     }

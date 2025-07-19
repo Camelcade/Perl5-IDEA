@@ -23,7 +23,7 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonParametrizedEntity;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
-import com.perl5.lang.perl.util.PerlSubUtil;
+import com.perl5.lang.perl.util.PerlSubUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -47,6 +47,6 @@ public class HTMLMasonUtil {
   }
 
   public static String getArgumentsListAsString(HTMLMasonParametrizedEntity entity) {
-    return PerlSubUtil.getArgumentsListAsString(getArgumentsList(entity));
+    return PerlSubUtilCore.getArgumentsListAsString(getArgumentsList(entity));
   }
 }

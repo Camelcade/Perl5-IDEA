@@ -20,7 +20,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlOneOfValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -114,7 +114,7 @@ public interface PerlSub extends PerlCallable {
     }
 
     PerlValue returnValue = subAnnotations.getReturnValue();
-    if (PerlPackageUtil.NAMESPACE_ANY_VALUE.getValue().equals(returnValue)) {
+    if (PerlPackageUtilCore.NAMESPACE_ANY_VALUE.getValue().equals(returnValue)) {
       return PerlValues.FIRST_ARGUMENT_VALUE;
     }
     else {

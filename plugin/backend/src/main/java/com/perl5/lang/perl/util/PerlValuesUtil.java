@@ -14,16 +14,20 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.util;
 
-import org.jetbrains.annotations.Nullable;
+import com.intellij.psi.stubs.StubInputStream;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
+import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer;
+import org.jetbrains.annotations.NotNull;
 
-public interface PerlSubElement extends PerlSub, PerlCallableElement {
+import java.io.IOException;
 
-  default boolean isBuiltIn() {
-    return false;
+public final class PerlValuesUtil {
+  private PerlValuesUtil() {
   }
 
-  @SuppressWarnings("override")
-  @Nullable PsiPerlSignatureContent getSignatureContent();
+  public static PerlValue readValue(@NotNull StubInputStream dataStream) throws IOException {
+    return new PerlValueDeserializer(dataStream).readValue();
+  }
 }

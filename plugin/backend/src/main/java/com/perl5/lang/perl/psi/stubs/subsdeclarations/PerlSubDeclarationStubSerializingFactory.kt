@@ -29,6 +29,9 @@ import com.perl5.lang.perl.psi.impl.PsiPerlSubDeclarationImpl
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlCallableNamesIndex
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.readSubAnnotations
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.writeSubAnnotations
+import com.perl5.lang.perl.psi.stubs.variables.writeAnnotations
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
 
 
@@ -58,7 +61,7 @@ class PerlSubDeclarationStubSerializingFactory(elementType: IElementType) :
     }
     else {
       dataStream.writeBoolean(true)
-      subAnnotations.serialize(dataStream)
+      dataStream.writeSubAnnotations(subAnnotations)
     }
   }
 
@@ -69,7 +72,7 @@ class PerlSubDeclarationStubSerializingFactory(elementType: IElementType) :
     val packageName = PerlStubSerializationUtil.readString(dataStream)
     val subName = PerlStubSerializationUtil.readString(dataStream)
     val annotations: PerlSubAnnotations? =
-      if (dataStream.readBoolean()) PerlSubAnnotations.deserialize(dataStream) else null
+      if (dataStream.readBoolean()) dataStream.readSubAnnotations() else null
     return PerlSubDeclarationStub(parentStub, packageName, subName, annotations, elementType)
   }
 

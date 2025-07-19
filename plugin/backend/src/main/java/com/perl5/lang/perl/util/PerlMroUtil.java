@@ -90,10 +90,10 @@ public final class PerlMroUtil {
     }
 
     for (String currentNamespaceName : linearISA) {
-      if (PerlPackageUtil.isUNIVERSAL(currentNamespaceName)) {
+      if (PerlPackageUtilCore.isUNIVERSAL(currentNamespaceName)) {
         continue;
       }
-      if (!PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtilCore.join(currentNamespaceName, PerlSubUtil.SUB_AUTOLOAD), it -> {
+      if (!PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtilCore.join(currentNamespaceName, PerlSubUtilCore.SUB_AUTOLOAD), it -> {
         processor.process(it);
         return false;
       })) {

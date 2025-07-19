@@ -14,16 +14,10 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.util
 
-import org.jetbrains.annotations.Nullable;
+import com.perl5.lang.perl.psi.PerlFile
 
-public interface PerlSubElement extends PerlSub, PerlCallableElement {
-
-  default boolean isBuiltIn() {
-    return false;
-  }
-
-  @SuppressWarnings("override")
-  @Nullable PsiPerlSignatureContent getSignatureContent();
+class PerlFrontendPackageService : PerlPackageService {
+  override fun getFilePackageName(perlFile: PerlFile): String? = null
 }

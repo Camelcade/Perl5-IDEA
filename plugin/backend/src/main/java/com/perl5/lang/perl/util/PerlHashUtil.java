@@ -182,7 +182,7 @@ public final class PerlHashUtil implements PerlElementTypes {
       return Collections.emptyList();
     }
 
-    return PerlArrayUtil.collectListElements(rootElement);
+    return PerlArrayUtilCore.collectListElements(rootElement);
   }
 
   public static boolean processAsHash(@NotNull List<? extends PsiElement> elements,

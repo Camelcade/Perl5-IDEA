@@ -33,7 +33,7 @@ import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
-import com.perl5.lang.perl.util.PerlMigrationUtil;
+import com.perl5.lang.perl.util.PerlContextUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -109,7 +109,7 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
 
       if (element.getTextRange().getEndOffset() >= offset) {
         if (element instanceof PerlCompositeElementImpl) {
-          PerlContextType valueContextType = PerlMigrationUtil.contextFrom(element);
+          PerlContextType valueContextType = PerlContextUtil.contextFrom(element);
 
           if (valueContextType == PerlContextType.SCALAR) {
             if (currentIndex < parameterInfos.length) {

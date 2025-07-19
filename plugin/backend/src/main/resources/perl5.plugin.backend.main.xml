@@ -291,6 +291,8 @@
     <treeStructureProvider implementation="com.perl5.lang.perl.idea.project.PerlTreeStructureProvider"/>
     <moduleExtension implementation="com.intellij.openapi.projectRoots.impl.PerlModuleExtension"/>
 
+    <applicationService serviceImplementation="com.perl5.lang.perl.util.PerlBackendPackageService"
+                        serviceInterface="com.perl5.lang.perl.util.PerlPackageService"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.presentations.PerlBackendItemPresentationService"
                         serviceInterface="com.perl5.lang.perl.idea.presentations.PerlItemPresentationService"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>

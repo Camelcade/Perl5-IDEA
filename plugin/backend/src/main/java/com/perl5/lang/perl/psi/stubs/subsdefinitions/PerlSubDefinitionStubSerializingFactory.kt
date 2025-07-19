@@ -30,6 +30,7 @@ import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
 import com.perl5.lang.perl.psi.utils.PerlSubArgument
 import com.perl5.lang.perl.psi.utils.PerlVariableType
+import com.perl5.lang.perl.util.PerlValuesUtil
 import java.io.IOException
 
 
@@ -67,7 +68,7 @@ open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
     }
     else {
       dataStream.writeBoolean(true)
-      subAnnotations.serialize(dataStream)
+      dataStream.writeSubAnnotations(subAnnotations)
     }
     serialize(stub.returnValueFromCode, dataStream)
   }
@@ -79,8 +80,8 @@ open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
     val packageName = dataStream.readName()!!.getString()
     val functionName = dataStream.readName()!!.getString()
     val arguments = dataStream.deserializeArguments()
-    val annotations: PerlSubAnnotations? = if (dataStream.readBoolean()) PerlSubAnnotations.deserialize(dataStream) else null
-    return createStubElement(parentStub, packageName, functionName!!, arguments, PerlValuesManager.readValue(dataStream), annotations)
+    val annotations: PerlSubAnnotations? = if (dataStream.readBoolean()) dataStream.readSubAnnotations() else null
+    return createStubElement(parentStub, packageName, functionName!!, arguments, PerlValuesUtil.readValue(dataStream), annotations)
   }
 
   override fun indexStub(
@@ -161,3 +162,10 @@ fun StubInputStream.deserializeArguments(): List<PerlSubArgument> {
   }
   return arguments
 }
+
+fun StubOutputStream.writeSubAnnotations(annotations: PerlSubAnnotations): Unit {
+  writeByte(annotations.flags.toInt());
+  serialize(annotations.returnValue, this);
+}
+
+fun StubInputStream.readSubAnnotations(): PerlSubAnnotations = PerlSubAnnotations(readByte(), PerlValuesUtil.readValue(this)  )

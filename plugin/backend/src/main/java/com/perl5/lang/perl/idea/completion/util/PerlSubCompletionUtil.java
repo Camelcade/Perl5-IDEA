@@ -35,6 +35,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlImplicitSubDefinition;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -283,7 +284,7 @@ public class PerlSubCompletionUtil {
       return false;
     }
     PerlCallStaticValue callValue = new PerlCallStaticValue(
-      PerlPackageUtil.getContextType(completionProcessor.getLeafElement()), PerlScalarValue.create("dummy"), Collections.emptyList(),
+      PerlPackageUtilCore.getContextType(completionProcessor.getLeafElement()), PerlScalarValue.create("dummy"), Collections.emptyList(),
       false);
     return processSubsCompletionsForCallValue(completionProcessor, callValue, true);
   }

@@ -29,18 +29,15 @@ import org.jetbrains.annotations.Nullable;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.VARIABLE_DECLARATIONS;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
-/**
- * Temporary migration util for static methods we can't yet move to the common part
- */
-public final class PerlMigrationUtil {
-  private static final Logger LOG = Logger.getInstance(PerlMigrationUtil.class);
+public final class PerlContextUtil {
+  private static final Logger LOG = Logger.getInstance(PerlContextUtil.class);
 
   private static final TokenSet LIST_CONTEXT_ELEMENTS = TokenSet.create(
     ARRAY_VARIABLE, HASH_VARIABLE, ARRAY_CAST_EXPR, HASH_CAST_EXPR, COMMA_SEQUENCE_EXPR, STRING_LIST, PARENTHESISED_EXPR, ARRAY_SLICE,
     HASH_SLICE
   );
 
-  private PerlMigrationUtil() {
+  private PerlContextUtil() {
   }
 
   /**

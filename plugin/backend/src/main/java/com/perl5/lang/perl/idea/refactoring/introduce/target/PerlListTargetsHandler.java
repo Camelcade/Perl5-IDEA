@@ -21,7 +21,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
-import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlArrayUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -47,7 +47,7 @@ class PerlListTargetsHandler extends PerlSequentialElementTargetHandler {
                                                               @NotNull PsiElement replacement) {
     PerlIntroduceTarget baseTarget = Objects.requireNonNull(occurrences.getFirst());
     PsiElement baseElement = Objects.requireNonNull(baseTarget.getPlace());
-    List<PsiElement> sourceElements = PerlArrayUtil.collectListElements(baseElement);
+    List<PsiElement> sourceElements = PerlArrayUtilCore.collectListElements(baseElement);
 
     PsiElement occurrencePlace = occurrences.getFirst().getPlace();
     if (occurrencePlace == null) {

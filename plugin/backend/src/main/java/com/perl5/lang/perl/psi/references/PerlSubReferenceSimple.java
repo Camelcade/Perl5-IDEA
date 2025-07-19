@@ -30,7 +30,7 @@ import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlSubElement;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
-import com.perl5.lang.perl.util.PerlSubUtil;
+import com.perl5.lang.perl.util.PerlSubUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -148,7 +148,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
     for (PsiElement element : relatedItems) {
       if (!isAutoloaded() &&
           element instanceof PerlIdentifierOwner identifierOwner &&
-          PerlSubUtil.SUB_AUTOLOAD.equals(identifierOwner.getName())) {
+          PerlSubUtilCore.SUB_AUTOLOAD.equals(identifierOwner.getName())) {
         setAutoloaded();
       }
 

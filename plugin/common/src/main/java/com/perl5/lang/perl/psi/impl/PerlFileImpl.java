@@ -34,7 +34,6 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl;
-import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder;
 import com.perl5.lang.perl.psi.PerlFile;
@@ -43,7 +42,7 @@ import com.perl5.lang.perl.psi.references.PerlFileContextSubstitutor;
 import com.perl5.lang.perl.psi.stubs.PerlFileStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageService;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -90,16 +89,7 @@ public class PerlFileImpl extends PsiFileBase implements PerlFile {
    * @return canonical package name or null if it's not pm file or it's not in source root
    */
   public @Nullable String getFilePackageName() {
-    VirtualFile containingFile = getVirtualFile();
-
-    if (containingFile != null && containingFile.getFileType() == PerlFileTypePackage.INSTANCE) {
-      VirtualFile innermostSourceRoot = PerlPackageUtil.getClosestIncRoot(getProject(), containingFile);
-      if (innermostSourceRoot != null) {
-        String relativePath = VfsUtilCore.getRelativePath(containingFile, innermostSourceRoot);
-        return PerlPackageUtil.getPackageNameByPath(relativePath);
-      }
-    }
-    return null;
+    return PerlPackageService.getInstance().getFilePackageName(this);
   }
 
   @Override

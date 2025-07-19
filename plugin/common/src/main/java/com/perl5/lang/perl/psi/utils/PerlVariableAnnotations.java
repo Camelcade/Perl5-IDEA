@@ -17,20 +17,15 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.psi.util.*;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.PerlElementTypesGenerated;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
 import java.util.List;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
@@ -59,17 +54,16 @@ public class PerlVariableAnnotations {
 
   private @NotNull PerlValue myValue = UNKNOWN_VALUE;
 
+  public byte getFlags() {
+    return myFlags;
+  }
+
   private PerlVariableAnnotations() {
   }
 
-  private PerlVariableAnnotations(byte flags, @NotNull PerlValue value) {
+  public PerlVariableAnnotations(byte flags, @NotNull PerlValue value) {
     myFlags = flags;
     myValue = value;
-  }
-
-  public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeByte(myFlags);
-    PerlValueSerializer.serialize(myValue, dataStream);
   }
 
   public boolean isDeprecated() {
@@ -94,13 +88,6 @@ public class PerlVariableAnnotations {
 
   public static PerlVariableAnnotations empty() {
     return EMPTY;
-  }
-
-  public static PerlVariableAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
-    return new PerlVariableAnnotations(
-      dataStream.readByte(),
-      PerlValuesManager.readValue(dataStream)
-    );
   }
 
   public static @NotNull PerlVariableAnnotations from(@NotNull PerlVariableDeclarationElement variableDeclarationElement) {

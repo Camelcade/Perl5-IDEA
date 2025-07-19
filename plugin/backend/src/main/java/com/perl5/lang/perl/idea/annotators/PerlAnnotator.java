@@ -37,7 +37,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.*;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.references.PerlSubReference;
-import com.perl5.lang.perl.util.PerlSubUtil;
+import com.perl5.lang.perl.util.PerlSubUtilCore;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
@@ -138,7 +138,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
         defaultSilentProducer.accept(PerlSyntaxHighlighter.PERL_SUB_DECLARATION);
       }
       else if (parent instanceof PerlSubDefinitionElement) {
-        if (PerlSubUtil.SUB_AUTOLOAD.equals(((PerlSubNameElement)element).getName())) {
+        if (PerlSubUtilCore.SUB_AUTOLOAD.equals(((PerlSubNameElement)element).getName())) {
           defaultSilentProducer.accept(PerlSyntaxHighlighter.PERL_AUTOLOAD);
         }
         else {

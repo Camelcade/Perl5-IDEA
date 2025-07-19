@@ -20,13 +20,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlUndefValue;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
+import com.perl5.lang.perl.util.PerlScalarUtilCore;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
+import static com.perl5.lang.perl.util.PerlScalarUtilCore.DEFAULT_SELF_NAME;
 
 
 public class PerlSubArgument {
@@ -171,6 +172,6 @@ public class PerlSubArgument {
   }
 
   public static PerlSubArgument self() {
-    return mandatoryScalar(PerlScalarUtil.DEFAULT_SELF_NAME);
+    return mandatoryScalar(PerlScalarUtilCore.DEFAULT_SELF_NAME);
   }
 }

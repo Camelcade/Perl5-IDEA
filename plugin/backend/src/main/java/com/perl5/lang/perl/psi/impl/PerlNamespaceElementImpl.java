@@ -74,22 +74,22 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
 
   @Override
   public boolean isSUPER() {
-    return PerlPackageUtil.isSUPER(getCanonicalName());
+    return PerlPackageUtilCore.isSUPER(getCanonicalName());
   }
 
   @Override
   public boolean isMain() {
-    return PerlPackageUtil.isMain(getCanonicalName());
+    return PerlPackageUtilCore.isMain(getCanonicalName());
   }
 
   @Override
   public boolean isCORE() {
-    return PerlPackageUtil.isCORE(getCanonicalName());
+    return PerlPackageUtilCore.isCORE(getCanonicalName());
   }
 
   @Override
   public boolean isUNIVERSAL() {
-    return PerlPackageUtil.isUNIVERSAL(getCanonicalName());
+    return PerlPackageUtilCore.isUNIVERSAL(getCanonicalName());
   }
 
   @Override

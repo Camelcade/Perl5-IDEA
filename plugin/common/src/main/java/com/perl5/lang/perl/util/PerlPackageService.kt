@@ -14,16 +14,23 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.psi;
+package com.perl5.lang.perl.util
 
-import org.jetbrains.annotations.Nullable;
+import com.intellij.openapi.components.service
+import com.perl5.lang.perl.psi.PerlFile
 
-public interface PerlSubElement extends PerlSub, PerlCallableElement {
+/**
+ * Decouples be/fe package-related functionality.
+ */
+interface PerlPackageService {
+  /**
+   * @return package name for a file if applicable. E.g. lib/Foo/Bar.pm produces Foo::Bar if lib is marked as a library root.
+   * Or null if not applicable
+   */
+  fun getFilePackageName(perlFile: PerlFile): String?
 
-  default boolean isBuiltIn() {
-    return false;
+  companion object{
+    @JvmStatic
+    fun getInstance(): PerlPackageService = service()
   }
-
-  @SuppressWarnings("override")
-  @Nullable PsiPerlSignatureContent getSignatureContent();
 }

@@ -18,17 +18,11 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
-import com.perl5.lang.perl.psi.PerlStringList;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.PsiPerlCommaSequenceExpr;
-import com.perl5.lang.perl.psi.PsiPerlParenthesisedExpr;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -122,17 +116,6 @@ public final class PerlArrayUtil implements PerlElementTypes {
   }
 
   /**
-   * Traversing root element, expanding lists and collecting all elements to the plain one:
-   * ($a, $b, ($c, $d)), qw/bla bla/ -> $a, $b, $c, $d, bla, bla;
-   *
-   * @param rootElement top-level container or a single element
-   * @return passed or new List of found PsiElements
-   */
-  public static @NotNull List<PsiElement> collectListElements(@Nullable PsiElement rootElement) {
-    return collectListElements(rootElement, new ArrayList<>());
-  }
-
-  /**
    * @return list of all children of {@code parentElement} with flattened sequence expressions
    */
   @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
@@ -146,25 +129,7 @@ public final class PerlArrayUtil implements PerlElementTypes {
     }
     List<PsiElement> result = new ArrayList<>();
     for (PsiElement child : children) {
-      PerlArrayUtil.collectListElements(child, result);
-    }
-    return result;
-  }
-
-  public static @NotNull List<PsiElement> collectListElements(@Nullable PsiElement rootElement, @NotNull List<PsiElement> result) {
-    if (rootElement == null || PerlTokenSetsEx.getCOMMENTS().contains(PsiUtilCore.getElementType(rootElement))) {
-      return result;
-    }
-
-    if (rootElement instanceof PsiPerlParenthesisedExpr ||
-        rootElement instanceof PsiPerlCommaSequenceExpr ||
-        rootElement instanceof PerlStringList) {
-      for (PsiElement childElement : rootElement.getChildren()) {
-        collectListElements(childElement, result);
-      }
-    }
-    else if (rootElement.getNode() instanceof CompositeElement) {
-      result.add(rootElement);
+      PerlArrayUtilCore.collectListElements(child, result);
     }
     return result;
   }

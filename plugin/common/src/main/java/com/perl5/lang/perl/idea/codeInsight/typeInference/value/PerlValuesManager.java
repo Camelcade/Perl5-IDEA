@@ -23,7 +23,6 @@ import com.intellij.openapi.util.RecursionManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.ElementManipulators;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubInputStream;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiCacheKey;
@@ -38,15 +37,13 @@ import com.perl5.lang.perl.psi.mixins.PerlVariableMixin;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlMigrationUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlArrayUtilCore;
+import com.perl5.lang.perl.util.PerlContextUtil;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -78,10 +75,6 @@ public final class PerlValuesManager {
 
 
   private static final Interner<PerlValue> INTERNER = Interner.createWeakInterner();
-
-  public static PerlValue readValue(@NotNull StubInputStream dataStream) throws IOException {
-    return new PerlValueDeserializer(dataStream).readValue();
-  }
 
   static <T extends PerlValue> T intern(T value) {
     //noinspection unchecked
@@ -160,7 +153,7 @@ public final class PerlValuesManager {
     else if (elementType == PACKAGE_EXPR) {
       String elementText = element.getText();
       return PerlPackageUtilCore.__PACKAGE__.equals(elementText)
-             ? PerlPackageUtil.getContextType(element)
+             ? PerlPackageUtilCore.getContextType(element)
              : PerlScalarValue.create(PerlPackageUtilCore.getCanonicalName(elementText));
     }
     else if (elementType == SUB_CALL) {
@@ -182,7 +175,7 @@ public final class PerlValuesManager {
       return PerlOneOfValue.builder().addVariants(element.getChildren()).build();
     }
     else if (LIST_VALUES.get().contains(elementType)) {
-      return PerlArrayValue.builder().addPsiElements(PerlArrayUtil.collectListElements(element)).build();
+      return PerlArrayValue.builder().addPsiElements(PerlArrayUtilCore.collectListElements(element)).build();
     }
     else if (elementType == ANON_ARRAY) {
       return PerlReferenceValue.create(PerlArrayValue.builder().addPsiElements(Arrays.asList(element.getChildren())).build());
@@ -263,7 +256,7 @@ public final class PerlValuesManager {
     else if (element instanceof PsiPerlBlessExpr perlBlessExpr) {
       PerlValue targetValue = from(perlBlessExpr.getReferenceExpression());
       PsiElement blessExpression = perlBlessExpr.getBlessExpression();
-      PerlValue blessValue = blessExpression != null ? from(blessExpression) : PerlPackageUtil.getContextType(element);
+      PerlValue blessValue = blessExpression != null ? from(blessExpression) : PerlPackageUtilCore.getContextType(element);
       return PerlBlessedValue.create(targetValue, blessValue);
     }
     else if (element instanceof PsiPerlArrayUnshiftExpr unshiftExpr) {
@@ -304,7 +297,7 @@ public final class PerlValuesManager {
 
     PsiElement derefExpression = parentElement.getParent();
     if (isNestedCall && parentElement.getPrevSibling() != null) {
-      boolean isSuper = PerlPackageUtil.isSUPER(explicitNamespaceName);
+      boolean isSuper = PerlPackageUtilCore.isSUPER(explicitNamespaceName);
       if (hasExplicitNamespace && !isSuper) { // awkward $var->Foo::Bar::method->
         return new PerlCallStaticValue(PerlScalarValue.create(explicitNamespaceName), subNameValue, callArguments, true);
       }
@@ -371,13 +364,13 @@ public final class PerlValuesManager {
       return UNKNOWN_VALUE;
     }
     List<PsiElement> elements = assignValueDescriptor.getElements();
-    PerlContextType targetContextType = PerlMigrationUtil.contextFrom(target);
+    PerlContextType targetContextType = PerlContextUtil.contextFrom(target);
     if (targetContextType == PerlContextType.SCALAR) {
       int startIndex = assignValueDescriptor.getStartIndex();
-      if (elements.size() == 1 && (PerlMigrationUtil.isScalar(elements.getFirst()) || startIndex == -1)) {
+      if (elements.size() == 1 && (PerlContextUtil.isScalar(elements.getFirst()) || startIndex == -1)) {
         return PerlScalarContextValue.create(from(elements.getFirst()));
       }
-      else if (elements.size() > 1 || PerlMigrationUtil.isList(ContainerUtil.getFirstItem(elements))) {
+      else if (elements.size() > 1 || PerlContextUtil.isList(ContainerUtil.getFirstItem(elements))) {
         return PerlArrayElementValue.create(
           PerlArrayValue.builder().addPsiElements(elements).build(),
           PerlScalarValue.create(startIndex)

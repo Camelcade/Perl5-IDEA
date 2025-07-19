@@ -29,7 +29,7 @@ import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService
 import com.perl5.lang.perl.util.PerlNamespaceUtil
 import com.perl5.lang.perl.util.PerlPackageUtil
 import com.perl5.lang.perl.util.PerlPackageUtilCore
-import com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD
+import com.perl5.lang.perl.util.PerlSubUtilCore.SUB_AUTOLOAD
 
 
 abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrizedOperationValueBackendHelper<Val>() {
@@ -112,7 +112,7 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
 
     // AUTOLOAD
     return !processingContext.processAutoload ||
-      PerlPackageUtil.isUNIVERSAL(namespaceName) || PerlPackageUtil.isCORE(namespaceName) ||
+      PerlPackageUtilCore.isUNIVERSAL(namespaceName) || PerlPackageUtilCore.isCORE(namespaceName) ||
       PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtilCore.join(namespaceName, SUB_AUTOLOAD), processorWrapper)
   }
 

@@ -37,7 +37,7 @@ import com.perl5.lang.perl.debugger.protocol.*;
 import com.perl5.lang.perl.debugger.values.PerlXMainGroup;
 import com.perl5.lang.perl.debugger.values.PerlXNamedValue;
 import com.perl5.lang.perl.debugger.values.PerlXValueGroup;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
@@ -93,7 +93,7 @@ public class PerlStackFrame extends XStackFrame {
   public static void doCustomizePresentation(@NotNull PerlStackFrameDescriptor frameDescriptor, @NotNull ColoredTextContainer component) {
     var fileDescriptor = frameDescriptor.getFileDescriptor();
     var fqn = fileDescriptor.getName();
-    var nameChunks = PerlPackageUtil.splitNames(fqn);
+    var nameChunks = PerlPackageUtilCore.splitNames(fqn);
     var filePath = fileDescriptor.getPath();
     @NlsSafe var namespaceName = nameChunks == null ? null : nameChunks.getFirst();
     var subName = nameChunks == null ? null : nameChunks.getSecond();

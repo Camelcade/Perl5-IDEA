@@ -12,5 +12,7 @@
   <extensions defaultExtensionNs="com.intellij">
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.presentations.PerlFrontendItemPresentationService"
                         serviceInterface="com.perl5.lang.perl.idea.presentations.PerlItemPresentationService"/>
+    <applicationService serviceImplementation="com.perl5.lang.perl.util.PerlFrontendPackageService"
+                        serviceInterface="com.perl5.lang.perl.util.PerlPackageService"/>
   </extensions>
 </idea-plugin>

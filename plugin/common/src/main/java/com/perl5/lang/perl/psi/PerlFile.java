@@ -29,7 +29,7 @@ import com.perl5.lang.perl.psi.properties.PerlDieScope;
 import com.perl5.lang.perl.psi.properties.PerlLabelScope;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.pod.parser.psi.PodLinkTarget;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,7 +51,7 @@ public interface PerlFile
       return namespaceDefinition;
     }
     return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(
-      new PerlImplicitNamespaceDefinition(getManager(), PerlPackageUtil.getCanonicalNamespaceName(packageName), this),
+      new PerlImplicitNamespaceDefinition(getManager(), PerlPackageUtilCore.getCanonicalNamespaceName(packageName), this),
       this));
   }
 

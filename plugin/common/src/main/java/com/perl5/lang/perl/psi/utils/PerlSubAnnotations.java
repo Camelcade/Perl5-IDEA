@@ -18,17 +18,12 @@ package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer;
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,14 +43,13 @@ public class PerlSubAnnotations {
   public PerlSubAnnotations() {
   }
 
-  private PerlSubAnnotations(byte flags, @NotNull PerlValue returnValue) {
-    myFlags = flags;
-    myReturnValue = returnValue;
+  public byte getFlags() {
+    return myFlags;
   }
 
-  public void serialize(@NotNull StubOutputStream dataStream) throws IOException {
-    dataStream.writeByte(myFlags);
-    PerlValueSerializer.serialize(myReturnValue, dataStream);
+  public PerlSubAnnotations(byte flags, @NotNull PerlValue returnValue) {
+    myFlags = flags;
+    myReturnValue = returnValue;
   }
 
   public boolean isMethod() {
@@ -120,13 +114,6 @@ public class PerlSubAnnotations {
     int result = myFlags;
     result = 31 * result + myReturnValue.hashCode();
     return result;
-  }
-
-  public static PerlSubAnnotations deserialize(@NotNull StubInputStream dataStream) throws IOException {
-    return new PerlSubAnnotations(
-      dataStream.readByte(),
-      PerlValuesManager.readValue(dataStream)
-    );
   }
 
   /**
