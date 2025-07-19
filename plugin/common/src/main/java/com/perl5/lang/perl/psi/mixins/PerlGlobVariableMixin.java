@@ -31,8 +31,6 @@ import com.perl5.lang.perl.psi.PsiPerlAssignExpr;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
 import com.perl5.lang.perl.psi.stubs.globs.PerlGlobStub;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -100,7 +98,7 @@ public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<
 
     String variableNameText = variableNameElement.getText();
     int delimiterIndex = variableNameText.lastIndexOf(':');
-    return delimiterIndex == -1 ? null : PerlPackageUtil.getCanonicalNamespaceName(variableNameText.substring(0, delimiterIndex + 1));
+    return delimiterIndex == -1 ? null : PerlPackageUtilCore.getCanonicalNamespaceName(variableNameText.substring(0, delimiterIndex + 1));
   }
 
   @Override

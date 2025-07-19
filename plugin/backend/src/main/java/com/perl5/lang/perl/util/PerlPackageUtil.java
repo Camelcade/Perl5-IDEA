@@ -152,16 +152,6 @@ public final class PerlPackageUtil implements PerlElementTypes {
   }
 
   /**
-   * Builds package path from packageName Foo::Bar => Foo/Bar.pm
-   *
-   * @param packageName canonical package name
-   * @return package path
-   */
-  public static String getPackagePathByName(String packageName) {
-    return StringUtil.join(packageName.split(":+"), "/") + "." + PerlFileTypePackage.EXTENSION;
-  }
-
-  /**
    * Translates package relative name to the package name Foo/Bar.pm => Foo::Bar
    *
    * @param packagePath package relative path
@@ -288,7 +278,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
       return null;
     }
 
-    String packagePath = getPackagePathByName(packageName);
+    String packagePath = PerlPackageUtilCore.getPackagePathByName(packageName);
     for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
       VirtualFile targetFile = classRoot.findFileByRelativePath(packagePath);
       if (targetFile != null) {
@@ -307,7 +297,7 @@ public final class PerlPackageUtil implements PerlElementTypes {
    */
   public static @Nullable PsiFile resolvePackageNameToPsi(@NotNull PsiFile psiFile, String canonicalPackageName) {
     // resolves to a psi file
-    return resolveRelativePathToPsi(psiFile, getPackagePathByName(canonicalPackageName));
+    return resolveRelativePathToPsi(psiFile, PerlPackageUtilCore.getPackagePathByName(canonicalPackageName));
   }
 
   /**

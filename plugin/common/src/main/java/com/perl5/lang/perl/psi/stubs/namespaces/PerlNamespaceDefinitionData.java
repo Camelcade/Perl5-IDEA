@@ -17,10 +17,8 @@
 package com.perl5.lang.perl.psi.stubs.namespaces;
 
 import com.intellij.psi.stubs.StubInputStream;
-import com.intellij.psi.stubs.StubOutputStream;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinition;
 import com.perl5.lang.perl.psi.mro.PerlMroType;
-import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -113,9 +111,6 @@ public class PerlNamespaceDefinitionData implements PerlNamespaceDefinition {
   @Override
   public @NotNull Map<String, List<String>> getEXPORT_TAGS() {
     return myEXPORT_TAGS;
-  }
-
-  public static @NotNull PerlNamespaceDefinitionData deserialize(@NotNull StubInputStream dataStream) throws IOException {
   }
 
   @Override

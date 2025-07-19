@@ -70,7 +70,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
     else if (qualifiedRanges.first == TextRange.EMPTY_RANGE) {
       return MAIN_NAMESPACE_NAME;
     }
-    return PerlPackageUtil.getCanonicalNamespaceName(qualifiedRanges.first.subSequence(variableName).toString());
+    return PerlPackageUtilCore.getCanonicalNamespaceName(qualifiedRanges.first.subSequence(variableName).toString());
   }
 
   @Override

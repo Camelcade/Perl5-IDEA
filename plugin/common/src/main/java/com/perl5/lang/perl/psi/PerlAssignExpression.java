@@ -24,8 +24,8 @@ import com.intellij.util.SmartList;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlMigrationUtil;
+import com.perl5.lang.perl.util.PerlArrayUtilCore;
+import com.perl5.lang.perl.util.PerlContextUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -150,7 +150,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
         found = true;
         break;
       }
-      if (PerlMigrationUtil.isList(leftElement)) {
+      if (PerlContextUtil.isList(leftElement)) {
         return null;
       }
       leftElementIndex++;
@@ -164,12 +164,12 @@ public interface PerlAssignExpression extends PsiPerlExpr {
     if (rightElements.isEmpty()) {
       return null;
     }
-    if (PerlMigrationUtil.isScalar(leftAssignPart)) {
+    if (PerlContextUtil.isScalar(leftAssignPart)) {
       PsiElement lastItem = ContainerUtil.getLastItem(rightElements);
-      return new PerlAssignValueDescriptor(Objects.requireNonNull(lastItem), PerlMigrationUtil.isList(lastItem) ? -1 : 0);
+      return new PerlAssignValueDescriptor(Objects.requireNonNull(lastItem), PerlContextUtil.isList(lastItem) ? -1 : 0);
     }
 
-    PerlContextType leftContextType = PerlMigrationUtil.contextFrom(leftPartElement);
+    PerlContextType leftContextType = PerlContextUtil.contextFrom(leftPartElement);
     for (int i = 0; i < rightElements.size(); i++) {
       PsiElement rightElement = rightElements.get(i);
       if (leftElementIndex == 0) {
@@ -178,7 +178,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
         }
         return new PerlAssignValueDescriptor(rightElements.subList(i, rightElements.size()));
       }
-      if (PerlMigrationUtil.contextFrom(rightElement) == LIST) {
+      if (PerlContextUtil.contextFrom(rightElement) == LIST) {
         return new PerlAssignValueDescriptor(rightElements.subList(i, rightElements.size()), leftElementIndex);
       }
       leftElementIndex--;
@@ -218,7 +218,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
    */
   static @NotNull List<PsiElement> flattenAssignmentPart(@NotNull PsiElement element) {
     List<PsiElement> result = new SmartList<>();
-    for (PsiElement listElement : PerlArrayUtil.collectListElements(element)) {
+    for (PsiElement listElement : PerlArrayUtilCore.collectListElements(element)) {
       if (listElement instanceof PerlVariableDeclarationExpr) {
         ContainerUtil.addAll(result, listElement.getChildren());
       }

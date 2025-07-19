@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.references;
 
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -24,10 +25,10 @@ import com.intellij.util.Processor;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlArrayUtilCore;
 import com.perl5.lang.perl.util.PerlBuiltInScalars;
-import com.perl5.lang.perl.util.PerlGlobUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
+import com.perl5.lang.perl.util.PerlGlobUtilCore;
+import com.perl5.lang.perl.util.PerlHashUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -35,9 +36,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.psi.utils.PerlVariableType.*;
-
-public class PerlBuiltInVariablesService {
+public class PerlBuiltInVariablesService implements Disposable {
   private final PsiManager myPsiManager;
   private final Map<String, PerlBuiltInVariable> myScalars = new HashMap<>();
   private final Map<String, PerlBuiltInVariable> myArrays = new HashMap<>();
@@ -52,9 +51,12 @@ public class PerlBuiltInVariablesService {
       myScalars.put(variableName, new PerlBuiltInVariable(myPsiManager, "$" + variableName));
     }
     PerlBuiltInScalars.BUILT_IN.forEach(name -> myScalars.put(name, new PerlBuiltInVariable(myPsiManager, PerlVariableType.SCALAR.withSigil(name))));
-    PerlArrayUtil.BUILT_IN.forEach(name -> myArrays.put(name, new PerlBuiltInVariable(myPsiManager, PerlVariableType.ARRAY.withSigil(name))));
-    PerlHashUtil.BUILT_IN.forEach(name -> myHashes.put(name, new PerlBuiltInVariable(myPsiManager, PerlVariableType.HASH.withSigil(name))));
-    PerlGlobUtil.BUILT_IN.forEach(name -> myGlobs.put(name, new PerlBuiltInVariable(myPsiManager, PerlVariableType.GLOB.withSigil(name))));
+    PerlArrayUtilCore.BUILT_IN.forEach(
+      name -> myArrays.put(name, new PerlBuiltInVariable(myPsiManager, PerlVariableType.ARRAY.withSigil(name))));
+    PerlHashUtilCore.BUILT_IN.forEach(
+      name -> myHashes.put(name, new PerlBuiltInVariable(myPsiManager, PerlVariableType.HASH.withSigil(name))));
+    PerlGlobUtilCore.BUILT_IN.forEach(
+      name -> myGlobs.put(name, new PerlBuiltInVariable(myPsiManager, PerlVariableType.GLOB.withSigil(name))));
   }
 
   public @Nullable PerlBuiltInVariable getScalar(@Nullable String name) {
@@ -132,5 +134,9 @@ public class PerlBuiltInVariablesService {
    */
   public static @NotNull PerlBuiltInVariable getImplicitArray(@NotNull Project project) {
     return Objects.requireNonNull(getInstance(project).getArray("_"));
+  }
+
+  @Override
+  public void dispose() {
   }
 }

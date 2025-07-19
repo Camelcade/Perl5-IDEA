@@ -104,7 +104,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
     if (arguments == null) {
       return null;
     }
-    List<PsiElement> listElements = PerlArrayUtil.collectListElements(arguments.getFirstChild());
+    List<PsiElement> listElements = PerlArrayUtilCore.collectListElements(arguments.getFirstChild());
     if (listElements.isEmpty()) {
       return null;
     }
@@ -112,7 +112,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
     if (namesContainer instanceof PsiPerlAnonArray anonArray) {
       namesContainer = anonArray.getExpr();
     }
-    List<PsiElement> identifiers = ContainerUtil.filter(PerlArrayUtil.collectListElements(namesContainer),
+    List<PsiElement> identifiers = ContainerUtil.filter(PerlArrayUtilCore.collectListElements(namesContainer),
                                                         subCallElement::isAcceptableIdentifierElement);
     if (identifiers.isEmpty()) {
       return null;
@@ -271,7 +271,7 @@ public class PerlMooseAttributeHandler extends PerlSubCallHandlerWithEmptyData {
       }
       else if (handlesEntry.valueElement instanceof PsiPerlAnonArray anonArray) {
         // handle handles ARRAY
-        List<PsiElement> delegatesIdentifiers = PerlArrayUtil.collectListElements(anonArray.getExpr());
+        List<PsiElement> delegatesIdentifiers = PerlArrayUtilCore.collectListElements(anonArray.getExpr());
         for (PsiElement identifier : delegatesIdentifiers) {
           if (!subCallElement.isAcceptableIdentifierElement(identifier)) {
             continue;

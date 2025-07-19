@@ -97,7 +97,7 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
 
     Map<String, PerlHashEntry> exceptionSettings =
       listElements.size() > currentIndex + 1
-      ? PerlHashUtil.collectHashMap(listElements.get(currentIndex + 1))
+      ? PerlHashUtilCore.collectHashMap(listElements.get(currentIndex + 1))
       : Collections.emptyMap();
 
     // Building fields
@@ -126,7 +126,7 @@ public class ExceptionClassProcessor extends PerlPackageProcessorBase {
         throwArguments = new LinkedHashSet<>();
         for (PsiElement fieldElement : elements) {
           if (useStatementElement.isAcceptableIdentifierElement(fieldElement)) {
-            String fieldName = PerlScalarUtil.getStringContent(fieldElement);
+            String fieldName = PerlScalarUtilCore.getStringContent(fieldElement);
             if (StringUtil.isNotEmpty(fieldName)) {
               throwArguments.add(PerlSubArgument.mandatoryScalar(fieldName));
               result.add(new PerlLightMethodDefinitionElement<>(

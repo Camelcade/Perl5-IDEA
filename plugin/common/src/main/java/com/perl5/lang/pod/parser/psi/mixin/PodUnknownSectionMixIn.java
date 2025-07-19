@@ -37,8 +37,8 @@ public abstract class PodUnknownSectionMixIn extends PodTitledSectionMixin {
 
   @Override
   public void renderElementTitleAsHTML(StringBuilder builder, PodRenderingContext context) {
-    builder.append(PARAGRAPH_PREFIX);
+    builder.append(PodRenderUtil.PARAGRAPH_PREFIX);
     super.renderElementTitleAsHTML(builder, context);
-    builder.append(PARAGRAPH_SUFFIX);
+    builder.append(PodRenderUtil.PARAGRAPH_SUFFIX);
   }
 }

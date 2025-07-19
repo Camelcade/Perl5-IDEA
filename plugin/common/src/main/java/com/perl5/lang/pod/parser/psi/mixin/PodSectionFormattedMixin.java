@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package com.perl5.lang.pod.parser.psi.mixin;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.pod.parser.PodElementTypesGenerated;
 import com.perl5.lang.pod.parser.psi.PodRenderingContext;
 import com.perl5.lang.pod.parser.psi.PodSectionFormatted;
 import com.perl5.lang.pod.psi.PsiPodSectionFormat;
@@ -41,7 +42,7 @@ public class PodSectionFormattedMixin extends PodSectionMixin implements PodSect
 
     if (formatterElement != null) {
       ASTNode formatterNode = formatterElement.getNode();
-      ASTNode formatterNameNode = formatterNode.findChildByType(POD_FORMAT_NAME);
+      ASTNode formatterNameNode = formatterNode.findChildByType(PodElementTypesGenerated.POD_FORMAT_NAME);
       return formatterNameNode == null ? null : formatterNameNode.getPsi();
     }
     return null;

@@ -36,7 +36,7 @@ import com.perl5.lang.perl.psi.mro.PerlMroType;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -56,7 +56,7 @@ public abstract class PerlNamespaceDefinitionMixin extends PerlStubBasedPsiEleme
   private final ClearableLazyValue<ExporterInfo> myExporterInfo = ClearableLazyValue.create(this::computeExporterInfo);
   private final ClearableLazyValue<PerlMroType> myMroType = ClearableLazyValue.create(this::computeMroType);
   private final ClearableLazyValue<List<String>> myParentNamespaces = ClearableLazyValue.create(
-    () -> PerlPackageUtil.collectParentNamespaceNamesFromPsi(this));
+    () -> PerlPackageUtilCore.collectParentNamespaceNamesFromPsi(this));
 
   public PerlNamespaceDefinitionMixin(@NotNull ASTNode node) {
     super(node);

@@ -30,7 +30,7 @@ import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.imports.PerlUseStatementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.util.PerlHashUtil;
+import com.perl5.lang.perl.util.PerlHashUtilCore;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -52,7 +52,7 @@ public class ConstantProcessor extends PerlPragmaProcessorBase {
     boolean multipleDefinition = useArguments instanceof PsiPerlAnonHash;
 
     List<PerlDelegatingLightNamedElement<?>> result = new ArrayList<>();
-    PerlHashUtil.processHashElements(useArguments, (keyElement, valElement) -> {
+    PerlHashUtilCore.processHashElements(useArguments, (keyElement, valElement) -> {
       if (useStatementElement.isAcceptableIdentifierElement(keyElement)) {
         result.add(new PerlLightConstantDefinitionElement(
           useStatementElement,

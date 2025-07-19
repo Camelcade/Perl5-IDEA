@@ -33,6 +33,7 @@ import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -577,7 +578,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
       tokenType = PACKAGE;
     }
     else if (myProject != null) {
-      String canonicalName = PerlPackageUtil.getCanonicalName(tokenText);
+      String canonicalName = PerlPackageUtilCore.getCanonicalName(tokenText);
       if (!StringUtil.containsChar(canonicalName, ':')) {
         if (StringUtil.isCapitalized(canonicalName) &&
             (myNamespaceNamesProvider.getValue().contains(canonicalName) || myLocalPackages.contains(canonicalName))) {
@@ -1134,7 +1135,7 @@ public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElemen
 
 
   protected IElementType registerPackage(IElementType tokenType) {
-    myLocalPackages.add(PerlPackageUtil.getCanonicalNamespaceName(yytext().toString()));
+    myLocalPackages.add(PerlPackageUtilCore.getCanonicalNamespaceName(yytext().toString()));
     return tokenType;
   }
 

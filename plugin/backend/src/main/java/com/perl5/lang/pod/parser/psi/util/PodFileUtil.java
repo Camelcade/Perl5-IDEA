@@ -142,7 +142,7 @@ public class PodFileUtil {
     if (fileId.contains(PerlPackageUtilCore.NAMESPACE_SEPARATOR) ||
         !StringUtil.startsWith(fileId, "perl")) { // can be Foo/Bar.pod or Foo/Bar.pm
       String podRelativePath = PodFileUtil.getFilenameFromPackage(fileId);
-      String packageRelativePath = PerlPackageUtil.getPackagePathByName(fileId);
+      String packageRelativePath = PerlPackageUtilCore.getPackagePathByName(fileId);
 
       for (VirtualFile classRoot : PerlProjectManager.getInstance(project).getAllLibraryRoots()) {
         VirtualFile targetVirtualFile = classRoot.findFileByRelativePath(podRelativePath);

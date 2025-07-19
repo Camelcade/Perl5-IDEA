@@ -21,7 +21,7 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlRequireExpr;
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.Nullable;
 
 
@@ -42,7 +42,7 @@ public abstract class PerlRequireExprMixin extends PerlDoExprMixin implements Pe
   @Override
   protected @Nullable String findImportPath() {
     if (getNamespaceElement() != null) {
-      return PerlPackageUtil.getPackagePathByName(getNamespaceElement().getCanonicalName());
+      return PerlPackageUtilCore.getPackagePathByName(getNamespaceElement().getCanonicalName());
     }
 
     return super.findImportPath();

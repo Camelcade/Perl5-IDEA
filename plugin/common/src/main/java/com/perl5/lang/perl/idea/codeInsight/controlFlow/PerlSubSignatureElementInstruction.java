@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.util.PerlMigrationUtil;
+import com.perl5.lang.perl.util.PerlContextUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,7 +59,7 @@ public class PerlSubSignatureElementInstruction extends PerlMutationInstruction 
       }
     }
 
-    PerlValue mainValue = PerlMigrationUtil.isScalar(myElement) ?
+    PerlValue mainValue = PerlContextUtil.isScalar(myElement) ?
                           PerlArrayElementValue.create(PerlValues.ARGUMENTS_VALUE, PerlScalarValue.create(myIndex)) :
                           PerlSublistValue.create(PerlValues.ARGUMENTS_VALUE, myIndex, 0);
     PerlValue defaultValue = PerlValuesManager.from(myDefaultValue);

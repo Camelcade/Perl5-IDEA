@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
@@ -36,20 +35,6 @@ import static com.perl5.lang.perl.psi.stubs.variables.PerlArrayStubIndex.KEY_ARR
 public final class PerlArrayUtil implements PerlElementTypes {
   private PerlArrayUtil() {
   }
-
-  public static final Set<String> BUILT_IN = Set.of(
-    "+",
-    "-",
-    "_",
-    "F",
-    "ARG",
-    "LAST_MATCH_END",
-    "ARGV",
-    "INC",
-    "^CAPTURE",
-    "LAST_MATCH_START",
-    "ISA"
-  );
 
 
   /**
@@ -113,24 +98,5 @@ public final class PerlArrayUtil implements PerlElementTypes {
     }
     return PerlImplicitDeclarationsService.getInstance(project).processArraysInNamespace(namespaceName, processor) &&
            PerlVariableUtil.processGlobalVariables(KEY_ARRAY_IN_NAMESPACE, project, scope, processor, namespaceName, !processAll);
-  }
-
-  /**
-   * @return list of all children of {@code parentElement} with flattened sequence expressions
-   */
-  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
-  public static @NotNull List<PsiElement> collectChildrenList(@Nullable PsiElement parentElement) {
-    if (parentElement == null) {
-      return Collections.emptyList();
-    }
-    PsiElement[] children = parentElement.getChildren();
-    if (children.length == 0) {
-      return Collections.emptyList();
-    }
-    List<PsiElement> result = new ArrayList<>();
-    for (PsiElement child : children) {
-      PerlArrayUtilCore.collectListElements(child, result);
-    }
-    return result;
   }
 }

@@ -17,7 +17,7 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlArrayUtilCore;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
@@ -30,7 +30,7 @@ public interface PerlBlessExpr extends PsiPerlExpr {
    * @return first argument of bless expression if any
    */
   default @Nullable PsiElement getReferenceExpression() {
-    List<PsiElement> unpackedChildren = PerlArrayUtil.collectChildrenList(this);
+    List<PsiElement> unpackedChildren = PerlArrayUtilCore.collectChildrenList(this);
     return !unpackedChildren.isEmpty() ? unpackedChildren.getFirst() : null;
   }
 
@@ -38,7 +38,7 @@ public interface PerlBlessExpr extends PsiPerlExpr {
    * @return second argument of bless expression if any
    */
   default @Nullable PsiElement getBlessExpression() {
-    List<PsiElement> unpackedChildren = PerlArrayUtil.collectChildrenList(this);
+    List<PsiElement> unpackedChildren = PerlArrayUtilCore.collectChildrenList(this);
     return unpackedChildren.size() > 1 ? unpackedChildren.get(1) : null;
   }
 }

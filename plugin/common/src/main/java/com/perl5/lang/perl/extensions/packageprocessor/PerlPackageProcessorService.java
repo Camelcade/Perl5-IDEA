@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.EP;
+package com.perl5.lang.perl.extensions.packageprocessor;
 
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
@@ -22,7 +22,6 @@ import com.intellij.openapi.components.Service;
 import com.intellij.openapi.util.ClearableLazyValue;
 import com.intellij.openapi.util.KeyedExtensionCollector;
 import com.intellij.util.KeyedLazyInstance;
-import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor;
 
 import java.util.Objects;
 

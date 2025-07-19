@@ -46,7 +46,7 @@ public class PerlDuckValue extends PerlListValue {
 
   @Override
   protected @NotNull PerlValue computeResolve(@NotNull PerlValueResolver resolver, @NotNull List<? extends PerlValue> resolvedElements) {
-    if (isEmpty() || !PerlValueBackendHelper.isDuckTypingEnabled()) {
+    if (isEmpty() || !PerlValue.isDuckTypingEnabled()) {
       return UNKNOWN_VALUE;
     }
     var usedCallableNames = resolvedElements.stream()

@@ -31,6 +31,7 @@ import com.intellij.util.xmlb.annotations.Tag;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.idea.PerlPathMacros;
 import com.perl5.lang.perl.internals.PerlVersion;
+import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;

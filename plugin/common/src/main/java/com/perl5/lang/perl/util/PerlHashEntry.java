@@ -35,7 +35,7 @@ public class PerlHashEntry {
   }
 
   public @Nullable String getValueString() {
-    return PerlScalarUtil.getStringContent(valueElement);
+    return PerlScalarUtilCore.getStringContent(valueElement);
   }
 
   public boolean isComplete() {

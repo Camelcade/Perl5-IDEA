@@ -26,7 +26,7 @@ import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.PsiPerlStatementModifier;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationStub;
-import com.perl5.lang.perl.xsubs.PerlXSubsState;
+import com.perl5.lang.perl.util.PerlSubUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,7 +66,7 @@ public abstract class PerlSubDeclarationBase extends PerlSubBase<PerlSubDeclarat
 
   @Override
   public boolean isXSub() {
-    return StringUtil.equals(getContainingFile().getName(), PerlXSubsState.DEPARSED_FILE_NAME);
+    return StringUtil.equals(getContainingFile().getName(), PerlSubUtilCore.DEPARSED_FILE_NAME);
   }
 
   @SuppressWarnings("SameReturnValue")

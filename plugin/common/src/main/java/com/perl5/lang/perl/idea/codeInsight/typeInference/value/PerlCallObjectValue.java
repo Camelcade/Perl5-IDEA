@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 import java.util.Objects;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.DEREFERENCE_OPERATOR;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.DEREFERENCE_OPERATOR;
 
 public final class PerlCallObjectValue extends PerlCallValue {
   private final @Nullable String mySuperContext;

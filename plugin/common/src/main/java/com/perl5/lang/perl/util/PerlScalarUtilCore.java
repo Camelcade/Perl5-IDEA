@@ -16,10 +16,26 @@
 
 package com.perl5.lang.perl.util;
 
+import com.intellij.psi.ElementManipulators;
+import com.intellij.psi.PsiElement;
+import com.perl5.lang.perl.psi.PerlString;
+import com.perl5.lang.perl.psi.PerlStringContentElement;
+import org.jetbrains.annotations.Nullable;
+
 public final class PerlScalarUtilCore {
   public static final String DEFAULT_SELF_NAME = "self";
   public static final String DEFAULT_SELF_SCALAR_NAME = "$" + DEFAULT_SELF_NAME;
 
   private PerlScalarUtilCore() {
+  }
+
+  /**
+   * Extracts value from the string element
+   *
+   * @param string psi element that may be StringElement or stringcontentElement
+   * @return string content or null
+   */
+  public static @Nullable String getStringContent(@Nullable PsiElement string) {
+    return string instanceof PerlString || string instanceof PerlStringContentElement ? ElementManipulators.getValueText(string) : null;
   }
 }

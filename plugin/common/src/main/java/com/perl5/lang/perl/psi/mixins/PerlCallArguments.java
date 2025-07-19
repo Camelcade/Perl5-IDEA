@@ -20,7 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.PsiPerlExpr;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
-import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlArrayUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -34,6 +34,6 @@ public class PerlCallArguments extends PerlCompositeElementImpl {
 
   public @NotNull List<PsiElement> getArgumentsList() {
     PsiPerlExpr argumentExpression = findChildByClass(PsiPerlExpr.class);
-    return argumentExpression == null ? Collections.emptyList() : PerlArrayUtil.collectListElements(argumentExpression);
+    return argumentExpression == null ? Collections.emptyList() : PerlArrayUtilCore.collectListElements(argumentExpression);
   }
 }

@@ -25,6 +25,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -53,7 +54,7 @@ public class PerlPluginUtil {
    * happen when project is closed or plugin unloaded.
    */
   public static @NotNull Disposable getUnloadAwareDisposable(@NotNull Project project) {
-    return PerlBuiltInVa.getInstance(project);
+    return PerlBuiltInVariablesService.getInstance(project);
   }
 
   public static @NotNull String getPluginVersion() {

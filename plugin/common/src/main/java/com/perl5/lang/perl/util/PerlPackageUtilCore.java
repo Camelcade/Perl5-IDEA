@@ -23,6 +23,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
@@ -275,5 +276,15 @@ public final class PerlPackageUtilCore {
       return Pair.create(MAIN_NAMESPACE_NAME, fqn.substring(NAMESPACE_SEPARATOR.length()));
     }
     return Pair.create(fqn.substring(0, sepIndex), fqn.substring(sepIndex + NAMESPACE_SEPARATOR.length()));
+  }
+
+  /**
+   * Builds package path from packageName Foo::Bar => Foo/Bar.pm
+   *
+   * @param packageName canonical package name
+   * @return package path
+   */
+  public static String getPackagePathByName(String packageName) {
+    return StringUtil.join(packageName.split(":+"), "/") + "." + PerlFileTypePackage.EXTENSION;
   }
 }

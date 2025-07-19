@@ -54,9 +54,9 @@ public class PodSectionParagraph extends PodStubBasedSection {
     PsiElement firstChild = getFirstChild();
 
     if (firstChild != null) {
-      builder.append(PARAGRAPH_PREFIX);
+      builder.append(PodRenderUtil.PARAGRAPH_PREFIX);
       PodRenderUtil.renderPsiRangeAsHTML(firstChild, null, builder, context);
-      builder.append(PARAGRAPH_SUFFIX);
+      builder.append(PodRenderUtil.PARAGRAPH_SUFFIX);
     }
   }
 

@@ -19,7 +19,6 @@ package intellilang;
 
 import base.PerlLightTestCase;
 import com.intellij.lang.html.HTMLLanguage;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.util.FileContentUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;

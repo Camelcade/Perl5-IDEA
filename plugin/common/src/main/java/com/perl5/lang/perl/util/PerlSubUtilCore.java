@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.util.text.StringUtil;
+import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ import java.util.List;
 public final class PerlSubUtilCore {
   public static final String SUB_AUTOLOAD = "AUTOLOAD";
   public static final String SUB_DESTROY = "DESTROY";
+  @Transient
+  public static final String DEPARSED_FILE_NAME = "_Deparsed_XSubs.pm";
 
   private PerlSubUtilCore() {
   }

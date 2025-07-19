@@ -27,9 +27,25 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 public final class PerlArrayUtilCore {
+  public static final Set<String> BUILT_IN = Set.of(
+    "+",
+    "-",
+    "_",
+    "F",
+    "ARG",
+    "LAST_MATCH_END",
+    "ARGV",
+    "INC",
+    "^CAPTURE",
+    "LAST_MATCH_START",
+    "ISA"
+  );
+
   private PerlArrayUtilCore() {
   }
 
@@ -58,6 +74,25 @@ public final class PerlArrayUtilCore {
     }
     else if (rootElement.getNode() instanceof CompositeElement) {
       result.add(rootElement);
+    }
+    return result;
+  }
+
+  /**
+   * @return list of all children of {@code parentElement} with flattened sequence expressions
+   */
+  @SuppressWarnings("StaticMethodOnlyUsedInOneClass")
+  public static @NotNull List<PsiElement> collectChildrenList(@Nullable PsiElement parentElement) {
+    if (parentElement == null) {
+      return Collections.emptyList();
+    }
+    PsiElement[] children = parentElement.getChildren();
+    if (children.length == 0) {
+      return Collections.emptyList();
+    }
+    List<PsiElement> result = new ArrayList<>();
+    for (PsiElement child : children) {
+      collectListElements(child, result);
     }
     return result;
   }

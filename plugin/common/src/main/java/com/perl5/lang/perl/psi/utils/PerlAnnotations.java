@@ -30,6 +30,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jdom.Element;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,8 +38,6 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
-import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY;
-import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_ANY_VALUE;
 
 
 public final class PerlAnnotations implements PerlElementTypes {
@@ -80,7 +79,7 @@ public final class PerlAnnotations implements PerlElementTypes {
     PsiElement run = annotation.getFirstChild();
     while (run != null) {
       if (PsiUtilCore.getElementType(run) == OPERATOR_MUL) {
-        return PerlPackageUtil.NAMESPACE_ANY;
+        return PerlPackageUtilCore.NAMESPACE_ANY;
       }
       run = run.getNextSibling();
     }
@@ -94,7 +93,7 @@ public final class PerlAnnotations implements PerlElementTypes {
   public static PerlValue getParameterValue(@NotNull PerlAnnotationWithValue annotation) {
     String returnClass = getReturnClass(annotation);
     return returnClass == null ? UNKNOWN_VALUE :
-      returnClass.equals(PerlPackageUtil.NAMESPACE_ANY) ? PerlPackageUtil.NAMESPACE_ANY_VALUE.get() : PerlScalarValue.create(returnClass);
+      returnClass.equals(PerlPackageUtilCore.NAMESPACE_ANY) ? PerlPackageUtilCore.NAMESPACE_ANY_VALUE.get() : PerlScalarValue.create(returnClass);
   }
 
   /**
