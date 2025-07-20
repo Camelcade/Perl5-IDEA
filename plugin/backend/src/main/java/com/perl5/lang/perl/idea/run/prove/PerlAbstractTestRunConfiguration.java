@@ -37,7 +37,7 @@ import com.perl5.lang.perl.idea.execution.PerlTerminalExecutionConsole;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.PerlRunProfileState;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -221,7 +221,8 @@ public abstract class PerlAbstractTestRunConfiguration extends GenericPerlRunCon
 
   @Override
   public @NotNull List<String> getRequiredModulesList() {
-    return ContainerUtil.append(super.getRequiredModulesList(), PerlPackageUtil.TEST_HARNESS_MODULE, PerlPackageUtil.TAP_FORMATTER_MODULE);
+    return ContainerUtil.append(super.getRequiredModulesList(), PerlPackageUtilCore.TEST_HARNESS_MODULE,
+                                PerlPackageUtilCore.TAP_FORMATTER_MODULE);
   }
 
   protected void addTestPathArguments(@NotNull List<? super String> arguments, @NotNull String testFilePath, @NotNull VirtualFile testVirtualFile) {

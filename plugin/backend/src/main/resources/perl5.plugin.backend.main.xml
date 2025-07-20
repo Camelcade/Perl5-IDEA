@@ -48,6 +48,10 @@
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.perl5">
+    <codeGenerator forClass="com.perl5.lang.perl.psi.impl.PerlFileImpl"
+                   implementationClass="com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl"/>
+    <namespaceDefinitionHalder forClass="com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement"
+                               implementationClass="com.perl5.lang.perl.psi.PerlDefaultBackendNamespaceDefinitionHandler"/>
     <valueBackendHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArgumentsValue"
                         implementationClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlArgumentsValueBackendHelper"/>
     <valueBackendHelper forClass="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlArithmeticNegationValue"
@@ -280,7 +284,10 @@
     <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlProjectManager"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlDirectoryIndex"/>
-    <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlNamesCache"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlNamesBackendCache"
+                    serviceInterface="com.perl5.lang.perl.idea.project.PerlNamesCache"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueBackendResolveService"
+                    serviceInterface="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueResolveService"/>
 
     <sdkType implementation="com.perl5.lang.perl.idea.sdk.PerlSdkType"/>
 
@@ -289,6 +296,10 @@
     <treeStructureProvider implementation="com.perl5.lang.perl.idea.project.PerlTreeStructureProvider"/>
     <moduleExtension implementation="com.intellij.openapi.projectRoots.impl.PerlModuleExtension"/>
 
+    <applicationService serviceImplementation="com.perl5.lang.perl.util.PerlBackendPackageService"
+                        serviceInterface="com.perl5.lang.perl.util.PerlPackageService"/>
+    <applicationService serviceImplementation="com.perl5.lang.perl.idea.presentations.PerlBackendItemPresentationService"
+                        serviceInterface="com.perl5.lang.perl.idea.presentations.PerlItemPresentationService"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
     <postStartupActivity implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeServiceWatcher"/>
     <postStartupActivity implementation="com.perl5.lang.perl.idea.sdk.host.PerlHostCacheCleaner"/>
@@ -562,10 +573,6 @@
 
     <fileType implementationClass="com.perl5.lang.xs.filetypes.XSFileType" fieldName="INSTANCE"
               name="Perl5 Extension" extensions="xs" language="Perl5 XS"/>
-
-
-    <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
-    <additionalTextAttributes scheme="Darcula" file="colorSchemes/perl_darcula.xml"/>
 
     <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
 

@@ -23,12 +23,14 @@ import com.intellij.psi.stubs.*
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer.serialize
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement
 import com.perl5.lang.perl.psi.impl.PsiPerlSubDefinitionImpl
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
 import com.perl5.lang.perl.psi.utils.PerlSubArgument
+import com.perl5.lang.perl.psi.utils.PerlVariableType
+import com.perl5.lang.perl.util.PerlValuesUtil
+import java.io.IOException
 
 
 open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
@@ -57,8 +59,7 @@ open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
     dataStream.writeName(stub.namespaceName)
     dataStream.writeName(stub.subName)
 
-    PerlSubArgument.serializeList(dataStream, stub.subArgumentsList)
-
+    dataStream.serializeArguments(stub.subArgumentsList)
 
     val subAnnotations = stub.annotations
     if (subAnnotations == null) {
@@ -66,7 +67,7 @@ open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
     }
     else {
       dataStream.writeBoolean(true)
-      subAnnotations.serialize(dataStream)
+      dataStream.writeSubAnnotations(subAnnotations)
     }
     serialize(stub.returnValueFromCode, dataStream)
   }
@@ -77,9 +78,9 @@ open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
   ): PerlSubDefinitionStub {
     val packageName = dataStream.readName()!!.getString()
     val functionName = dataStream.readName()!!.getString()
-    val arguments = PerlSubArgument.deserializeList(dataStream)
-    val annotations: PerlSubAnnotations? = if (dataStream.readBoolean()) PerlSubAnnotations.deserialize(dataStream) else null
-    return createStubElement(parentStub, packageName, functionName!!, arguments, PerlValuesManager.readValue(dataStream), annotations)
+    val arguments = dataStream.deserializeArguments()
+    val annotations: PerlSubAnnotations? = if (dataStream.readBoolean()) dataStream.readSubAnnotations() else null
+    return createStubElement(parentStub, packageName, functionName!!, arguments, PerlValuesUtil.readValue(dataStream), annotations)
   }
 
   override fun indexStub(
@@ -123,3 +124,45 @@ open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
 
   protected open fun getCallableNameKey(): StubIndexKey<String, out PsiElement> = PerlCallableNamesIndex.KEY
 }
+
+@Throws(IOException::class)
+fun StubOutputStream.serializeArguments(arguments: List<PerlSubArgument>) {
+  writeVarInt(arguments.size)
+  arguments.forEach { serializeArgument(it) }
+}
+
+@Throws(IOException::class)
+private fun StubOutputStream.serializeArgument(argument: PerlSubArgument) {
+  writeName(argument.argumentType.toString())
+  writeName(argument.argumentName)
+  writeName(argument.variableClass)
+  writeBoolean(argument.isOptional)
+}
+
+@Throws(IOException::class)
+private fun StubInputStream.deserializeArgument(): PerlSubArgument {
+  val argumentType = PerlVariableType.valueOf(readName().toString())
+  val argumentName = readName().toString()
+  val variableClass = readName().toString()
+  val isOptional = readBoolean()
+  return PerlSubArgument.create(argumentType, argumentName, variableClass, isOptional)
+}
+
+@Throws(IOException::class)
+fun StubInputStream.deserializeArguments(): List<PerlSubArgument> {
+  val argumentsNumber = readVarInt()
+
+  if (argumentsNumber <= 0) {
+    return emptyList()
+  }
+  val arguments: MutableList<PerlSubArgument> = ArrayList(argumentsNumber)
+  repeat((0..<argumentsNumber).count()) { arguments.add(deserializeArgument()) }
+  return arguments
+}
+
+fun StubOutputStream.writeSubAnnotations(annotations: PerlSubAnnotations) {
+  writeByte(annotations.flags.toInt())
+  serialize(annotations.returnValue, this)
+}
+
+fun StubInputStream.readSubAnnotations(): PerlSubAnnotations = PerlSubAnnotations(readByte(), PerlValuesUtil.readValue(this))

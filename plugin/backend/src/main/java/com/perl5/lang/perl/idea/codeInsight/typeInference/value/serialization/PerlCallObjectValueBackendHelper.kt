@@ -22,8 +22,8 @@ import com.intellij.psi.PsiNamedElement
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.util.Processor
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*
-import com.perl5.lang.perl.psi.mro.PerlMro
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlMroUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 
 
 class PerlCallObjectValueBackendHelper : PerlCallValueBackendHelper<PerlCallObjectValue>() {
@@ -43,7 +43,7 @@ class PerlCallObjectValueBackendHelper : PerlCallValueBackendHelper<PerlCallObje
   ): PerlValue = PerlCallObjectValue.create(baseValue, parameter, arguments, deserializer.readNameString())
 
   override fun computeNamespaceNames(resolvedNamespaceValue: PerlValue): MutableSet<String> =
-    if (resolvedNamespaceValue.isUnknown) mutableSetOf(PerlPackageUtil.UNIVERSAL_NAMESPACE)
+    if (resolvedNamespaceValue.isUnknown) mutableSetOf(PerlPackageUtilCore.UNIVERSAL_NAMESPACE)
     else super.computeNamespaceNames(resolvedNamespaceValue)
 
   override fun processCallTargets(
@@ -56,7 +56,7 @@ class PerlCallObjectValueBackendHelper : PerlCallValueBackendHelper<PerlCallObje
     processor: Processor<in PsiNamedElement?>
   ): Boolean {
     for (contextNamespace in namespaceNames) {
-      for (currentNamespaceName in PerlMro.getLinearISA(
+      for (currentNamespaceName in PerlMroUtil.getLinearISA(
         project,
         searchScope,
         getEffectiveNamespaceName(callValue, contextNamespace),
@@ -83,7 +83,7 @@ class PerlCallObjectValueBackendHelper : PerlCallValueBackendHelper<PerlCallObje
     val project: Project = contextElement.project
     val searchScope: GlobalSearchScope = contextElement.resolveScope
     for (contextNamespace in callValue.namespaceNameValue.resolve(contextElement).namespaceNames) {
-      for (currentNamespaceName in PerlMro.getLinearISA(
+      for (currentNamespaceName in PerlMroUtil.getLinearISA(
         project, searchScope, getEffectiveNamespaceName(callValue, contextNamespace), callValue.isSuper
       )) {
         if (!processTargetNamespaceElements(project, searchScope, processor, currentNamespaceName, contextElement)) {
@@ -92,6 +92,21 @@ class PerlCallObjectValueBackendHelper : PerlCallValueBackendHelper<PerlCallObje
       }
     }
     return true
+  }
+
+  override fun addFallbackTargets(
+    callValue: PerlCallObjectValue,
+    namespaceNames: MutableSet<String>,
+    subNames: MutableSet<String>,
+    resolvedArguments: MutableList<PerlValue>,
+    hasTarget: Boolean,
+    builder: PerlOneOfValue.Builder,
+    resolvedNamespaceValue: PerlValue,
+    resolver: PerlValueResolver
+  ) {
+    if (subNames.size == 1 && "new" == subNames.iterator().next()) {
+      builder.addVariant(resolvedNamespaceValue)
+    }
   }
 
   private fun getEffectiveNamespaceName(callValue: PerlCallObjectValue, contextNamespace: String): String =

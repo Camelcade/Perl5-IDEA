@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.moose
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
 import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 import kotlinx.collections.immutable.toImmutableList
 
 class MooseXTypesCheckedUtilExportsProcessor : BaseStrictWarningsProvidingProcessor() {
@@ -34,7 +34,7 @@ class MooseXTypesCheckedUtilExportsProcessor : BaseStrictWarningsProvidingProces
       "role_type",
       "subtype",
       "type"
-    ).map { name -> PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOOSE_X_TYPES_CHECKEDUTILEXPORTS, name) }
+    ).map { name -> PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_MOOSE_X_TYPES_CHECKEDUTILEXPORTS, name) }
       .toImmutableList()
   }
 

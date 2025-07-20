@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.perl5.lang.perl.util.PerlScalarUtil.DEFAULT_SELF_NAME;
+import static com.perl5.lang.perl.util.PerlScalarUtilCore.DEFAULT_SELF_NAME;
 
 public class PerlSettingsPersistenceTest extends PerlLightTestCase {
   @Override

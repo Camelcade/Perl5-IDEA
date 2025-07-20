@@ -22,15 +22,15 @@ import com.intellij.codeInsight.navigation.NavigationGutterIconBuilder;
 import com.intellij.icons.AllIcons;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.util.Processor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
 import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -65,7 +65,8 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
       nameIdentifier = element;
     }
 
-    List<PerlNamespaceDefinitionElement> parentNamespaces = element.getParentNamespaceDefinitions();
+    List<PerlNamespaceDefinitionElement> parentNamespaces =
+      PerlNamespaceDefinitionHandler.instance(element).getParentNamespaceDefinitions(element);
     if (!parentNamespaces.isEmpty()) {
       NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
         .create(AllIcons.Gutter.ImplementingMethod)
@@ -75,7 +76,8 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
       result.add(getMarkerInfo(builder, nameIdentifier));
     }
 
-    Collection<PerlNamespaceDefinitionElement> childNamespaces = element.getChildNamespaceDefinitions();
+    Collection<PerlNamespaceDefinitionElement> childNamespaces =
+      PerlNamespaceDefinitionHandler.instance(element).getChildNamespaceDefinitions(element);
     if (!childNamespaces.isEmpty()) {
       NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
         .create(AllIcons.Gutter.ImplementedMethod)
@@ -103,7 +105,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
         nameIdentifier = subElement;
       }
 
-      PerlSubElement parentSub = subElement.getDirectSuperMethod();
+      @Nullable PerlSubElement parentSub = PerlSubUtil.getDirectSuperMethod(subElement);
 
       if (parentSub != null) {
         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
@@ -115,7 +117,7 @@ public class PerlLineMarkerProvider extends RelatedItemLineMarkerProvider implem
       }
 
       List<PerlSubElement> overridingSubs = new ArrayList<>();
-      subElement.processDirectOverridingSubs(overridingSubs::add);
+      PerlSubUtil.processDirectOverridingSubs(subElement, (Processor<? super PerlSubDefinitionElement>)overridingSubs::add);
       if (!overridingSubs.isEmpty()) {
         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
           .create(AllIcons.Gutter.OverridenMethod)

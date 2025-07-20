@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,14 @@ package com.perl5.lang.perl.extensions.moose
 
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 import kotlinx.collections.immutable.toImmutableList
 
 class MooseXRoleParametrized : MooseRoleProcessor() {
   private val myExports: List<PerlExportDescriptor> by lazy {
     (MOOSE_ROLE_EXPORTS + listOf(
-      PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "parameter"),
-      PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "role")
+      PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "parameter"),
+      PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_MOOSE_X_ROLE_PARAMETRIZIED, "role")
     )).toImmutableList()
   }
 

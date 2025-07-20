@@ -18,7 +18,7 @@ package unit.perl;
 
 import base.PerlLightTestCase;
 import com.intellij.testFramework.Parameterized;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +36,7 @@ public class PerlPackageUtilTest extends PerlLightTestCase {
 
   @Test
   public void test() {
-    var result = PerlPackageUtil.splitNames(myFqn);
+    var result = PerlPackageUtilCore.splitNames(myFqn);
     if (myFqn == null || myFqn.isEmpty()) {
       assertNull(result);
     }

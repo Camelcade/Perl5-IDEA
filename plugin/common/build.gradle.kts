@@ -13,10 +13,84 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+import org.jetbrains.grammarkit.tasks.GenerateParserTask
+
+fun properties(key: String) = providers.gradleProperty(key)
+
+val genRoot = project.file("src/main/gen").also { genRoot ->
+  sourceSets {
+    main {
+      java.srcDirs(genRoot)
+    }
+  }
+
+  idea {
+    module {
+      generatedSourceDirs.add(genRoot)
+    }
+  }
+}
 
 dependencies {
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
   }
+}
+
+tasks {
+  val generatePerlParserTask = register<GenerateParserTask>("generatePerl5Parser") {
+    sourceFile.set(file("grammar/Perl5.bnf"))
+    pathToParser.set("/com/perl5/lang/perl/parser/PerlParserGenerated.java")
+    pathToPsiRoot.set("/com/perl5/lang/perl/psi")
+  }
+
+  val generatePodParserTask = register<GenerateParserTask>("generatePodParser") {
+    sourceFile.set(file("grammar/Pod.bnf"))
+    pathToParser.set("/com/perl5/lang/pod/parser/PodParserGenerated.java")
+    pathToPsiRoot.set("/com/perl5/lang/pod/psi")
+  }
+
+  val generatePerlLexerTask = register<GenerateLexerTask>("generatePerlLexer") {
+    sourceFile.set(file("grammar/Perl.flex"))
+    targetOutputDir.set(file("src/main/gen/com/perl5/lang/perl/lexer/"))
+
+    dependsOn(generatePerlParserTask)
+  }
+  val generatePodLexerTask = register<GenerateLexerTask>("generatePodLexer") {
+    sourceFile.set(file("grammar/Pod.flex"))
+    targetOutputDir.set(file("src/main/gen/com/perl5/lang/pod/lexer/"))
+
+    dependsOn(generatePodParserTask)
+  }
+  rootProject.tasks.findByName("generateLexers")?.dependsOn(
+    generatePerlLexerTask,
+    generatePodLexerTask
+  )
+
+  withType<GenerateLexerTask> {
+    skeleton.set(rootProject.file(properties("lexer_skeleton").get()))
+    purgeOldFiles.set(true)
+  }
+
+  withType<GenerateParserTask> {
+    targetRootOutputDir.set(genRoot)
+    purgeOldFiles.set(true)
+  }
+
+  /*
+    withType<JavaCompile> {
+      dependsOn(
+        generatePerlLexerTask,
+        generatePodLexerTask
+      )
+    }
+    withType<KotlinCompile> {
+      dependsOn(
+        generatePerlLexerTask,
+        generatePodLexerTask
+      )
+    }
+  */
 }

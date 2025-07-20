@@ -39,6 +39,7 @@ import com.perl5.lang.mojolicious.idea.modules.MojoTemplateMarkSourceRootAction;
 import com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -78,7 +79,7 @@ public class MojoProjectManager implements Disposable {
             return;
           }
           VirtualFile appRoot = mojoApp.getRoot();
-          new PerlMarkLibrarySourceRootAction().markRoot(myProject, appRoot.findChild(PerlPackageUtil.DEFAULT_LIB_DIR));
+          new PerlMarkLibrarySourceRootAction().markRoot(myProject, appRoot.findChild(PerlPackageUtilCore.DEFAULT_LIB_DIR));
           new MojoTemplateMarkSourceRootAction().markRoot(myProject, appRoot.findChild(MojoUtil.DEFAULT_TEMPLATES_DIR_NAME));
         });
       }
@@ -89,7 +90,7 @@ public class MojoProjectManager implements Disposable {
           if (myProject.isDisposed() || !mojoPlugin.isValid()) {
             return;
           }
-          new PerlMarkLibrarySourceRootAction().markRoot(myProject, mojoPlugin.getRoot().findChild(PerlPackageUtil.DEFAULT_LIB_DIR));
+          new PerlMarkLibrarySourceRootAction().markRoot(myProject, mojoPlugin.getRoot().findChild(PerlPackageUtilCore.DEFAULT_LIB_DIR));
         });
       }
     });
@@ -247,7 +248,7 @@ public class MojoProjectManager implements Disposable {
       LOG.debug("Namespace without a virtual file");
       return null;
     }
-    VirtualFile libDirectory = VfsUtilCore.findContainingDirectory(namespaceFile, PerlPackageUtil.DEFAULT_LIB_DIR);
+    VirtualFile libDirectory = VfsUtilCore.findContainingDirectory(namespaceFile, PerlPackageUtilCore.DEFAULT_LIB_DIR);
     if (libDirectory == null) {
       LOG.debug("No containing lib dir found");
       return null;

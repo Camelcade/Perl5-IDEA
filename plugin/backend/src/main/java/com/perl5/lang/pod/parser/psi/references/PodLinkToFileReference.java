@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.pod.filetypes.PodFileType;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
@@ -60,9 +60,9 @@ public class PodLinkToFileReference extends PerlCachingReference<PodFormatterL> 
 
       if (StringUtil.isNotEmpty(currentName) &&
           (newElementName.endsWith("." + PerlFileTypePackage.EXTENSION) || newElementName.endsWith("." + PodFileType.EXTENSION))) {
-        String[] nameChunks = currentName.split(PerlPackageUtil.NAMESPACE_SEPARATOR);
+        String[] nameChunks = currentName.split(PerlPackageUtilCore.NAMESPACE_SEPARATOR);
         nameChunks[nameChunks.length - 1] = newElementName.replaceFirst(PodFileUtil.PM_OR_POD_EXTENSION_PATTERN, "");
-        newElementName = StringUtil.join(nameChunks, PerlPackageUtil.NAMESPACE_SEPARATOR);
+        newElementName = StringUtil.join(nameChunks, PerlPackageUtilCore.NAMESPACE_SEPARATOR);
 
         return super.handleElementRename(newElementName);
       }

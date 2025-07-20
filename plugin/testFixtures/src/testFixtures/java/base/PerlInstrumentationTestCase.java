@@ -19,6 +19,7 @@ package base;
 import categories.Light;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.util.lang.PathClassLoader;
+import com.perl5.lang.perl.PerlParserDefinition;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -33,7 +34,9 @@ import java.util.stream.Stream;
 @RunWith(Parameterized.class)
 public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
 
-  protected static final Pattern PLUGIN_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.plugin\\.backend\\.main\\.jar!");
+  protected static final Pattern PLUGIN_COMMON_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.plugin\\.common\\.main\\.jar!");
+  protected static final Object[] PARSER_DEFINITION_CLASS_DATA =
+    {"plugin.common", PerlParserDefinition.class, PLUGIN_COMMON_PATTERN_STRING};
   protected static final Pattern EMBEDDED_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.embedded\\.backend\\.main\\.jar");
   protected static final Pattern MOJO_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.mojo\\.backend\\.main\\.jar!");
   protected static final Pattern TT2_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.tt2\\.backend\\.main\\.jar!");

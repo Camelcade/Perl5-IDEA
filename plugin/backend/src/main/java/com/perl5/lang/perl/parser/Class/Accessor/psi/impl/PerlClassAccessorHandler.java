@@ -33,9 +33,9 @@ import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
 import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementData;
 import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementStub;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore;
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -54,7 +54,7 @@ public abstract class PerlClassAccessorHandler extends PerlSubCallHandler<PerlCl
 
   @Override
   public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromPsi(@NotNull PerlSubCallElement psiElement) {
-    String packageName = PerlPackageUtil.getContextNamespaceName(psiElement);
+    String packageName = PerlPackageUtilCore.getContextNamespaceName(psiElement);
     if (StringUtil.isEmpty(packageName)) {
       return Collections.emptyList();
     }
@@ -131,7 +131,7 @@ public abstract class PerlClassAccessorHandler extends PerlSubCallHandler<PerlCl
       Ref<Boolean> result = Ref.create(Boolean.FALSE);
 
       // fixme we need a smarter treewalkup here, scopes are not necessary here
-      PerlResolveUtil.treeWalkUp(psiElement, (element, state) -> {
+      PerlResolveUtilCore.treeWalkUp(psiElement, (element, state) -> {
         if (element instanceof PsiPerlNamespaceContent) {
           return false;
         }

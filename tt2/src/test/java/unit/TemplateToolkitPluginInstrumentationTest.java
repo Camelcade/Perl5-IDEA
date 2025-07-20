@@ -18,7 +18,6 @@ package unit;
 
 import base.PerlInstrumentationTestCase;
 import categories.CategoriesFilter;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.tt2.TemplateToolkitParserDefinition;
 import org.junit.runners.Parameterized;
 
@@ -32,8 +31,8 @@ public class TemplateToolkitPluginInstrumentationTest extends PerlInstrumentatio
     return !CategoriesFilter.shouldRun(TemplateToolkitPluginInstrumentationTest.class) ?
       Collections.emptyList() :
       Arrays.asList(new Object[][]{
-        {"plugin.backend", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
-      {"tt2", TemplateToolkitParserDefinition.class, TT2_PATTERN_STRING}
+        PARSER_DEFINITION_CLASS_DATA,
+        {"tt2", TemplateToolkitParserDefinition.class, TT2_PATTERN_STRING}
     });
   }
 }

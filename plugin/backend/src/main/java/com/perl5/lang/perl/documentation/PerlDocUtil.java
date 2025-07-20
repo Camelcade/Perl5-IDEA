@@ -52,9 +52,9 @@ import java.util.Map;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.util.PerlCorePackages.PACKAGE_EXPORTER;
-import static com.perl5.lang.perl.util.PerlPackageUtil.ADJUST_BLOCK;
-import static com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD;
-import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.ADJUST_BLOCK;
+import static com.perl5.lang.perl.util.PerlSubUtilCore.SUB_AUTOLOAD;
+import static com.perl5.lang.perl.util.PerlSubUtilCore.SUB_DESTROY;
 
 
 public final class PerlDocUtil implements PerlElementTypes {

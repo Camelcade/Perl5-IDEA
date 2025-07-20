@@ -18,7 +18,6 @@ package com.perl5.lang.mason2.psi.impl;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.MasonAugmentMethodModifier;
@@ -46,8 +45,8 @@ public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImp
   }
 
   @Override
-  public PsiReference @Nullable [] getReferences(PsiElement element) {
-    return null;
+  public boolean hasStringSubReference() {
+    return false;
   }
 
   protected List<PerlVariableDeclarationElement> buildImplicitVariables() {

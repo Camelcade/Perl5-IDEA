@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,8 +22,8 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiReference;
 import com.intellij.psi.search.searches.ReferencesSearch;
 import com.intellij.util.Processor;
-import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 
 public class PodReferencesSearch extends QueryExecutorBase<PsiReference, ReferencesSearch.SearchParameters> {
@@ -48,7 +48,7 @@ public class PodReferencesSearch extends QueryExecutorBase<PsiReference, Referen
       }
     }
     queryParameters.getOptimizer().searchWord(longestWord, queryParameters.getEffectiveSearchScope(), true, element);
-    String escapedTitle = PodLinkCompletionProvider.escapeTitle(textTitle);
+    String escapedTitle = PodRenderUtil.escapeTitle(textTitle);
     if (!StringUtil.equals(escapedTitle, textTitle)) {
       queryParameters.getOptimizer().searchWord(escapedTitle, queryParameters.getEffectiveSearchScope(), true, element);
     }

@@ -25,4 +25,6 @@ class PerlDuckValueBackendHelper : PerlListValueBackendHelper<PerlDuckValue>() {
     get() = PerlValueBackendHelper.DUCK_TYPE_ID
 
   override fun deserialize(deserializer: PerlValueDeserializer, valuesList: List<PerlValue>): PerlValue = PerlDuckValue.create(valuesList)
+
+
 }

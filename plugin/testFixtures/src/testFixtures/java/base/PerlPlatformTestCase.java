@@ -65,6 +65,7 @@ import com.intellij.util.ui.tree.TreeUtil;
 import com.perl5.lang.perl.adapters.PackageManagerAdapter;
 import com.perl5.lang.perl.cpan.adapter.CpanAdapter;
 import com.perl5.lang.perl.cpanminus.adapter.CpanminusAdapter;
+import com.perl5.lang.perl.idea.project.PerlNamesBackendCache;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.idea.project.PerlProjectDirectoriesConfigurator;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
@@ -169,7 +170,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       });
 
       Disposer.dispose(myPerlTestCaseDisposable);
-      var namesCache = PerlNamesCache.getInstance(getProject());
+      var namesCache = (PerlNamesBackendCache)PerlNamesCache.getInstance(getProject());
       namesCache.stopQueue();
       PlatformTestUtil.waitWithEventsDispatching("Unable to finish names update in 10 secs", () -> !namesCache.isUpdating(), 10);
     }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
+import com.perl5.lang.perl.util.PerlNamespaceUtil;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -53,7 +54,7 @@ public class PerlUnresolvedNamespaceInspection extends PerlInspection {
           return;
         }
 
-        if (o.getNamespaceDefinitions().isEmpty()) {
+        if (PerlNamespaceUtil.getNamespaceDefinitions(o).isEmpty()) {
           registerProblem(holder, o, PerlBundle.message("inspection.message.unable.to.find.namespace.definition"));
         }
       }

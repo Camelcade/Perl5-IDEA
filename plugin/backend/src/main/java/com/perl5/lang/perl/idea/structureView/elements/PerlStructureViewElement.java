@@ -38,7 +38,6 @@ import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
 import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.*;
 import com.perl5.lang.pod.PodLanguage;
@@ -236,7 +235,7 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
       String packageName = namespaceDefinitionWithIdentifier.getNamespaceName();
 
       if (packageName != null) {
-        for (PsiElement element : PerlMro.getVariants(psiElement, packageName, true)) {
+        for (PsiElement element : PerlMroUtil.getVariants(psiElement, packageName, true)) {
           if (element instanceof PerlIdentifierOwner identifierOwner && !implementedMethods.contains((identifierOwner).getName())) {
             switch (element) {
               case PerlLightConstantDefinitionElement perlLightConstantDefinitionElement ->

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlHierarchyNodeDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionHandler;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -55,7 +56,8 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure {
 
   protected Collection<PsiElement> getSubElements(PsiElement element) {
     assert element instanceof PerlNamespaceDefinitionElement;
-    return new ArrayList<>(((PerlNamespaceDefinitionElement)element).getChildNamespaceDefinitions());
+    return new ArrayList<>(PerlNamespaceDefinitionHandler.instance(((PerlNamespaceDefinitionElement)element))
+                             .getChildNamespaceDefinitions(((PerlNamespaceDefinitionElement)element)));
   }
 
   protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor<?> parentDescriptor, PsiElement element, boolean isBase) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,8 +32,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static com.perl5.lang.perl.psi.stubs.globs.PerlGlobNamespaceStubIndex.KEY_GLOB_NAMESPACE;
 
@@ -41,15 +39,6 @@ import static com.perl5.lang.perl.psi.stubs.globs.PerlGlobNamespaceStubIndex.KEY
 public final class PerlGlobUtil implements PerlElementTypes {
   private PerlGlobUtil() {
   }
-
-  public static final Set<String> BUILT_IN = Stream.of(
-      Set.of("ARGV", "STDERR", "STDOUT", "ARGVOUT", "STDIN"),
-      PerlBuiltInScalars.BUILT_IN,
-      //PerlBuiltInSubs.BUILT_IN,
-      PerlArrayUtil.BUILT_IN,
-      PerlHashUtil.BUILT_IN)
-    .flatMap(Set::stream)
-    .collect(Collectors.toUnmodifiableSet());
 
   /**
    * Searching project files for sub definitions by specific package and function name

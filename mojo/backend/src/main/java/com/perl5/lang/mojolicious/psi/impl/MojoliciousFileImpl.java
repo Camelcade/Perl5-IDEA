@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,8 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
+import com.perl5.lang.perl.util.PerlScalarUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -50,7 +50,7 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
     String namespaceName = null;
     if (canonicalPath != null) {
       try {
-        namespaceName = MOJO_SANDBOX_NS_PREFIX + PerlPackageUtil.NAMESPACE_SEPARATOR +
+        namespaceName = MOJO_SANDBOX_NS_PREFIX + PerlPackageUtilCore.NAMESPACE_SEPARATOR +
                         new HexBinaryAdapter().marshal(MessageDigest.getInstance("MD5").digest(canonicalPath.getBytes()));
       }
       catch (NoSuchAlgorithmException ignore) {
@@ -84,7 +84,7 @@ public class MojoliciousFileImpl extends PerlFileImpl implements MojoliciousFile
     if (myImplicitVariables == null) {
       List<PerlVariableDeclarationElement> implicitVariables = new ArrayList<>();
       implicitVariables
-        .add(PerlImplicitVariableDeclaration.createLexical(this, PerlScalarUtil.DEFAULT_SELF_SCALAR_NAME, MOJO_CONTROLLER_NS));
+        .add(PerlImplicitVariableDeclaration.createLexical(this, PerlScalarUtilCore.DEFAULT_SELF_SCALAR_NAME, MOJO_CONTROLLER_NS));
       implicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, "$c", MOJO_CONTROLLER_NS));
       implicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, "$cb"));
       implicitVariables.add(PerlImplicitVariableDeclaration.createLexical(this, "$_O"));

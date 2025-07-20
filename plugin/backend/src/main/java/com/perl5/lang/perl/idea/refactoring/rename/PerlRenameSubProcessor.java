@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -70,7 +70,7 @@ public class PerlRenameSubProcessor extends RenamePsiElementProcessor {
   }
 
   private @NotNull PsiElement suggestSuperMethod(@NotNull PerlSubElement subBase) {
-    PerlSubElement topLevelSuperMethod = subBase.getTopmostSuperMethod();
+    PerlSubElement topLevelSuperMethod = PerlSubUtil.getTopmostSuperMethod(subBase);
     String canonicalName = topLevelSuperMethod.getCanonicalName();
 
     if (topLevelSuperMethod == subBase || canonicalName == null) {

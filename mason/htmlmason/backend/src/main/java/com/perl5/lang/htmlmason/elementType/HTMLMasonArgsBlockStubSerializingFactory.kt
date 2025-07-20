@@ -27,7 +27,8 @@ import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonArgsBlockImpl
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonArgsBlockStub
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonStubsSerializingFactory
 import com.perl5.lang.htmlmason.parser.stubs.impl.HTMLMasonArgsBlockStubImpl
-import com.perl5.lang.perl.psi.utils.PerlSubArgument
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.deserializeArguments
+import com.perl5.lang.perl.psi.stubs.subsdefinitions.serializeArguments
 
 
 class HTMLMasonArgsBlockStubSerializingFactory(elementType: IElementType) :
@@ -38,10 +39,10 @@ class HTMLMasonArgsBlockStubSerializingFactory(elementType: IElementType) :
     HTMLMasonArgsBlockStubImpl(parentStub, elementType, psi.getArgumentsList())
 
   override fun serialize(stub: HTMLMasonArgsBlockStub, dataStream: StubOutputStream) =
-    PerlSubArgument.serializeList(dataStream, stub.getArgumentsList())
+    dataStream.serializeArguments(stub.getArgumentsList())
 
   override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): HTMLMasonArgsBlockStub =
-    HTMLMasonArgsBlockStubImpl(parentStub, elementType, PerlSubArgument.deserializeList(dataStream))
+    HTMLMasonArgsBlockStubImpl(parentStub, elementType, dataStream.deserializeArguments())
 
   override fun indexStub(stub: HTMLMasonArgsBlockStub, sink: IndexSink): Unit = Unit
 }

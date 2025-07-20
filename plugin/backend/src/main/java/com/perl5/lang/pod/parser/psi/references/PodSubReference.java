@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@ import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.impl.PodIdentifierImpl;
@@ -74,7 +74,7 @@ public class PodSubReference extends PerlCachingReference<PodIdentifierImpl> {
     List<ResolveResult> results = new ArrayList<>();
 
     if (StringUtil.isNotEmpty(packageName)) {
-      String canonicalName = packageName + PerlPackageUtil.NAMESPACE_SEPARATOR + subName;
+      String canonicalName = packageName + PerlPackageUtilCore.NAMESPACE_SEPARATOR + subName;
       for (PerlSubDefinitionElement target : PerlSubUtil.getSubDefinitions(project, canonicalName)) {
         results.add(new PsiElementResolveResult(target));
       }

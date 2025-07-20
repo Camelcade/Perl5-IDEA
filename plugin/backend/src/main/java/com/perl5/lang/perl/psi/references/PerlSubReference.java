@@ -25,7 +25,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.Pe
 import com.perl5.lang.perl.parser.moose.MooseTokenSets;
 import com.perl5.lang.perl.psi.PerlMethod;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -53,7 +53,7 @@ public class PerlSubReference extends PerlSubReferenceSimple {
     else {
       var parentElementType = PsiUtilCore.getElementType(parent);
       if (MODIFIER_DECLARATIONS_TOKENSET.contains(parentElementType) || MooseTokenSets.MOOSE_STATEMENTS.contains(parentElementType)) {
-        perlValue = PerlCallObjectValue.create(PerlPackageUtil.getContextNamespaceName(myElement),
+        perlValue = PerlCallObjectValue.create(PerlPackageUtilCore.getContextNamespaceName(myElement),
                                                myElement.getText(),
                                                Collections.emptyList());
       }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,6 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType;
-import com.perl5.lang.mason2.idea.generation.Mason2TemplatingCodeGeneratorImpl;
-import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,11 +37,6 @@ public class MasonTemplatingFileImpl extends MasonFileImpl {
   @Override
   protected FileType getDefaultFileType() {
     return MasonTopLevelComponentFileType.INSTANCE;
-  }
-
-  @Override
-  public PerlCodeGenerator getCodeGenerator() {
-    return Mason2TemplatingCodeGeneratorImpl.INSTANCE;
   }
 
   @Override

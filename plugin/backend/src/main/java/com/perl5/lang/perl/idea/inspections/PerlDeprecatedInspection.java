@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -42,7 +42,7 @@ public class PerlDeprecatedInspection extends PerlInspection {
         PsiElement container = o.getParent();
 
         if (!(container instanceof PerlSubElement)) {
-          PerlResolveUtil.processResolveTargets((psiElement, reference) -> {
+          PerlResolveUtilCore.processResolveTargets((psiElement, reference) -> {
             if (psiElement instanceof PerlDeprecatable perlDeprecatable && perlDeprecatable.isDeprecated()) {
               markDeprecated(holder, o, PerlBundle.message("perl.deprecated.sub"));
               return false;
@@ -65,7 +65,7 @@ public class PerlDeprecatedInspection extends PerlInspection {
             markDeprecated(holder, o, PerlBundle.message("perl.deprecated.variable"));
           }
 
-          PerlResolveUtil.processResolveTargets((psiElement, reference) -> {
+          PerlResolveUtilCore.processResolveTargets((psiElement, reference) -> {
             String message = null;
             if (psiElement instanceof PerlNamespaceDefinitionElement namespaceDefinitionElement &&
                 namespaceDefinitionElement.isDeprecated()) {

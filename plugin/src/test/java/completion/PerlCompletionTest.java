@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.internals.PerlVersion;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -1022,7 +1022,7 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   private void doTestWithTypeText() {
     doTestCompletion((lookup, presentation) -> {
       var typeText = presentation.getTypeText();
-      return StringUtil.isNotEmpty(typeText) && !typeText.equals(BUILT_IN) && !typeText.equals(PerlPackageUtil.CORE_NAMESPACE);
+      return StringUtil.isNotEmpty(typeText) && !typeText.equals(BUILT_IN) && !typeText.equals(PerlPackageUtilCore.CORE_NAMESPACE);
     });
   }
 

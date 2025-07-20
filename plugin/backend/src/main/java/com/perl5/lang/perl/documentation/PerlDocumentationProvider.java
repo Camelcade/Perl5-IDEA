@@ -42,7 +42,7 @@ import org.jetbrains.annotations.Nullable;
 import static com.perl5.lang.perl.documentation.PerlDocUtil.SWITCH_DOC_LINK;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.parser.MooseParserExtension.*;
-import static com.perl5.lang.perl.util.PerlPackageUtil.FUNCTION_PARAMETERS;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.FUNCTION_PARAMETERS;
 import static com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER;
 
 public class PerlDocumentationProvider extends PerlDocumentationProviderBase implements PerlElementTypes {

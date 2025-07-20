@@ -23,9 +23,13 @@ import com.intellij.psi.stubs.*
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl
+import com.perl5.lang.perl.psi.mro.PerlMroType
+import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDescendantsIndex.NAMESPACE_DESCENDANTS_KEY
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex.NAMESPACE_KEY
+import com.perl5.lang.perl.psi.utils.PerlNamespaceAnnotations
+import java.io.IOException
 
 
 open class PerlNamespaceDefinitionStubSerializingFactory(elementType: IElementType) :
@@ -36,10 +40,11 @@ open class PerlNamespaceDefinitionStubSerializingFactory(elementType: IElementTy
   override fun createStub(psi: PerlNamespaceDefinitionElement, parentStub: StubElement<out PsiElement>?): PerlNamespaceDefinitionStub =
     createStubElement(parentStub, PerlNamespaceDefinitionData(psi))
 
-  override fun serialize(stub: PerlNamespaceDefinitionStub, dataStream: StubOutputStream): Unit = stub.data.serialize(dataStream)
+  override fun serialize(stub: PerlNamespaceDefinitionStub, dataStream: StubOutputStream): Unit =
+    dataStream.serializeNamespaceData(stub.data)
 
   override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): PerlNamespaceDefinitionStub =
-    createStubElement(parentStub, PerlNamespaceDefinitionData.deserialize(dataStream))
+    createStubElement(parentStub, dataStream.deserializeNamespaceData())
 
   override fun indexStub(stub: PerlNamespaceDefinitionStub, sink: IndexSink) {
     val name: String = stub.namespaceName
@@ -68,3 +73,48 @@ open class PerlNamespaceDefinitionStubSerializingFactory(elementType: IElementTy
     data: PerlNamespaceDefinitionData
   ): PerlNamespaceDefinitionStub = PerlNamespaceDefinitionStub(parentStub, elementType, data)
 }
+
+fun StubOutputStream.serializeNamespaceData(namespaceData: PerlNamespaceDefinitionData) {
+  writeName(namespaceData.namespaceName)
+  writeName(namespaceData.mroType.toString())
+  PerlStubSerializationUtil.writeStringsList(this, namespaceData.parentNamespacesNames)
+  PerlStubSerializationUtil.writeStringsList(this, namespaceData.export)
+  PerlStubSerializationUtil.writeStringsList(this, namespaceData.exporT_OK)
+  PerlStubSerializationUtil.writeStringListMap(this, namespaceData.exporT_TAGS)
+
+  val namespaceAnnotations: PerlNamespaceAnnotations? = namespaceData.annotations
+  if (namespaceAnnotations == null) {
+    writeBoolean(false)
+  }
+  else {
+    writeBoolean(true)
+    serializeAnnotations(namespaceAnnotations)
+  }
+}
+
+@Throws(IOException::class)
+private fun StubOutputStream.serializeAnnotations(annotations: PerlNamespaceAnnotations) = writeByte(annotations.flags.toInt())
+
+
+@Throws(IOException::class)
+fun StubInputStream.deserializeNamespaceData(): PerlNamespaceDefinitionData {
+  val packageName = PerlStubSerializationUtil.readString(this)!!
+  val mroType = PerlMroType.valueOf(PerlStubSerializationUtil.readString(this)!!)
+  val parentNamespaces = PerlStubSerializationUtil.readStringsList(this)!!
+  val EXPORT = PerlStubSerializationUtil.readStringsList(this)!!
+  val EXPORT_OK = PerlStubSerializationUtil.readStringsList(this)!!
+  val EXPORT_TAGS = PerlStubSerializationUtil.readStringListMap(this)!!
+
+  return PerlNamespaceDefinitionData(
+    packageName,
+    mroType,
+    parentNamespaces,
+    EXPORT,
+    EXPORT_OK,
+    EXPORT_TAGS,
+    if (readBoolean()) deserializeAnnotations() else null
+  )
+}
+
+@Throws(IOException::class)
+private fun StubInputStream.deserializeAnnotations(): PerlNamespaceAnnotations = PerlNamespaceAnnotations(readByte())

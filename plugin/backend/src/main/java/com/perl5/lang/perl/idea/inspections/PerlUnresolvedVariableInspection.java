@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -43,7 +43,7 @@ public class PerlUnresolvedVariableInspection extends PerlInspection {
 
         PerlVariableNameElement variableNameElement = variable.getVariableNameElement();
 
-        if (!PerlResolveUtil.isResolvable(variableNameElement)) {
+        if (!PerlResolveUtilCore.isResolvable(variableNameElement)) {
           registerProblem(holder, variableNameElement, PerlBundle.message("inspection.message.unable.to.find.variable.declaration"));
         }
       }

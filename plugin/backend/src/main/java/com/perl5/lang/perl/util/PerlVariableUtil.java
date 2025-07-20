@@ -18,18 +18,26 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Pair;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.stubs.StubIndexKey;
+import com.intellij.util.ObjectUtils;
 import com.intellij.util.Processor;
+import com.perl5.lang.perl.psi.PerlGlobVariableElement;
 import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclaration;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
+import com.perl5.lang.perl.psi.stubs.variables.PerlArrayStubIndex;
+import com.perl5.lang.perl.psi.stubs.variables.PerlHashStubIndex;
+import com.perl5.lang.perl.psi.stubs.variables.PerlScalarStubIndex;
+import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 
 public final class PerlVariableUtil {
@@ -87,5 +95,81 @@ public final class PerlVariableUtil {
       }
     }
     return true;
+  }
+
+  /**
+   * Looking for global variable declarations sutable for current variable
+   *
+   * @return list of global declarations
+   */
+  public static @NotNull List<PerlVariableDeclarationElement> getGlobalDeclarations(@NotNull PerlVariable perlVariable) {
+    if (perlVariable instanceof PerlImplicitVariableDeclaration) {
+      return Collections.emptyList();
+    }
+    String variableName = perlVariable.getName();
+    if (variableName == null) {
+      return Collections.emptyList();
+    }
+
+    List<PerlVariableDeclarationElement> result = new ArrayList<>();
+    PerlVariableType myType = perlVariable.getActualType();
+
+    PsiElement parent = perlVariable.getParent(); // wrapper if any
+    String namespaceName =
+      ObjectUtils.notNull(perlVariable.getExplicitNamespaceName(), PerlPackageUtilCore.getContextNamespaceName(perlVariable));
+    String fullQualifiedName = PerlPackageUtilCore.join(namespaceName, variableName);
+
+    Processor<PerlVariableDeclarationElement> variableProcessor = it -> {
+      if (!it.equals(parent)) {
+        result.add(it);
+      }
+      return true;
+    };
+    if (myType == PerlVariableType.SCALAR) {
+      PerlScalarUtil.processGlobalScalarsByName(perlVariable.getProject(), perlVariable.getResolveScope(), fullQualifiedName, true,
+                                                variableProcessor);
+    }
+    else if (myType == PerlVariableType.ARRAY) {
+      PerlArrayUtil.processGlobalArraysByName(perlVariable.getProject(), perlVariable.getResolveScope(), fullQualifiedName, true,
+                                              variableProcessor);
+    }
+    else if (myType == PerlVariableType.HASH) {
+      PerlHashUtil.processGlobalHashesByName(perlVariable.getProject(), perlVariable.getResolveScope(), fullQualifiedName, true,
+                                             variableProcessor);
+    }
+
+    return result;
+  }
+
+  public static Pair<StubIndexKey<String, PerlVariableDeclarationElement>, StubIndexKey<String, PerlVariableDeclarationElement>> getIndexKey(
+    @NotNull PerlVariableDeclaration perlVariableDeclaration) {
+    var myVariableType = perlVariableDeclaration.getActualType();
+    if (myVariableType == PerlVariableType.ARRAY) {
+      return PerlArrayStubIndex.ARRAY_KEYS;
+    }
+    else if (myVariableType == PerlVariableType.SCALAR) {
+      return PerlScalarStubIndex.SCALAR_KEYS;
+    }
+    else if (myVariableType == PerlVariableType.HASH) {
+      return PerlHashStubIndex.HASH_KEYS;
+    }
+    throw new RuntimeException("Don't have key for " + myVariableType);
+  }
+
+  public static @NotNull List<PerlGlobVariableElement> getRelatedGlobs(PerlVariable perlVariable) {
+    if (perlVariable instanceof PerlImplicitVariableDeclaration) {
+      return Collections.emptyList();
+    }
+    String variableName = perlVariable.getName();
+    if (variableName == null) {
+      return Collections.emptyList();
+    }
+    String namespaceName =
+      ObjectUtils.notNull(perlVariable.getExplicitNamespaceName(), PerlPackageUtilCore.getContextNamespaceName(perlVariable));
+    String fullQualifiedName = PerlPackageUtilCore.join(namespaceName, variableName);
+
+    List<PerlGlobVariableElement> result = new ArrayList<>();
+    PerlGlobUtil.processGlobsByName(perlVariable.getProject(), perlVariable.getResolveScope(), fullQualifiedName, result::add, true);
+    return result;
   }
 }

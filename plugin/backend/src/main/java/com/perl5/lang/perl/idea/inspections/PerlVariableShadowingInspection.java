@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.PsiPerlVariableDeclarationLocal;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore;
 
 
 public class PerlVariableShadowingInspection extends PerlVariableInspectionBase {
@@ -34,7 +34,7 @@ public class PerlVariableShadowingInspection extends PerlVariableInspectionBase 
     PsiElement declarationContainer = variableDeclarationWrapper.getParent();
 
     if (!(declarationContainer instanceof PsiPerlVariableDeclarationLocal)) {
-      PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(variable);
+      PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtilCore.getLexicalDeclaration(variable);
       if (lexicalDeclaration instanceof PerlBuiltInVariable) {
         registerProblem(holder, variable,
                         PerlBundle.message("perl.inspection.shadows.builtin", lexicalDeclaration.getVariable().getLineNumber()));

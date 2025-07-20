@@ -22,7 +22,7 @@ import com.intellij.psi.PsiElementVisitor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -40,12 +40,12 @@ public class PerlClashedNamespacesInspection extends PerlInspection {
 
 
         String packageName = o.getNamespaceName();
-        if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
+        if (PerlPackageUtilCore.MAIN_NAMESPACE_NAME.equals(packageName)) {
           return;
         }
 
         // fixme we should check that this is not in SDK
-        if (PerlPackageUtil.isBuiltIn(packageName)) {
+        if (PerlPackageUtilCore.isBuiltIn(packageName)) {
           registerProblem(holder, nameIdentifier,
                           PerlBundle.message("inspection.message.namespace.definition.clashes.with.built.in.namespace"));
         }

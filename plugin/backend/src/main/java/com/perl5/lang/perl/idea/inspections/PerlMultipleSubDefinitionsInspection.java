@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlSubUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -40,7 +40,7 @@ public class PerlMultipleSubDefinitionsInspection extends PerlInspection {
 
         String canonicalName = o.getCanonicalName();
         GlobalSearchScope searchScope;
-        if (PerlPackageUtil.isMain(o.getNamespaceName()) && PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION) {
+        if (PerlPackageUtilCore.isMain(o.getNamespaceName()) && PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION) {
           searchScope = GlobalSearchScope.fileScope(o.getContainingFile());
         }
         else {
