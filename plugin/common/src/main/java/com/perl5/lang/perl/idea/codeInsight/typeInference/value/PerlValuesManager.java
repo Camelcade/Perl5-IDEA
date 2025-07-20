@@ -76,7 +76,7 @@ public final class PerlValuesManager {
 
   private static final Interner<PerlValue> INTERNER = Interner.createWeakInterner();
 
-  static <T extends PerlValue> T intern(T value) {
+  public static <T extends PerlValue> T intern(T value) {
     //noinspection unchecked
     return (T)INTERNER.intern(value);
   }

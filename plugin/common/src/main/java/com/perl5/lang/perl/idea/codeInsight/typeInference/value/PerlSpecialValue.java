@@ -16,18 +16,7 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.psi.stubs.StubInputStream;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
-abstract class PerlSpecialValue extends PerlValue {
-
+public abstract class PerlSpecialValue extends PerlValue {
   protected PerlSpecialValue() {
-  }
-
-  private PerlSpecialValue(@Nullable PerlValue bless) {
-  }
-
-  private PerlSpecialValue(@NotNull StubInputStream dataStream) {
   }
 }
