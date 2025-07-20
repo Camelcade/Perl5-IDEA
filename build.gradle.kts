@@ -7,6 +7,7 @@ import org.jetbrains.intellij.platform.gradle.Constants.Tasks.INSTRUMENT_CODE
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.intellij.platform.gradle.tasks.InstrumentCodeTask
 import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
+import org.jetbrains.intellij.platform.gradle.tasks.aware.SplitModeAware.SplitModeTarget
 import org.kt3k.gradle.plugin.coveralls.CoverallsTask
 import java.nio.file.Files
 import kotlin.io.path.moveTo
@@ -348,11 +349,14 @@ tasks {
         systemProperty(passedKey, value.toString())
       }
     }
-
     jvmArgs("-Xmx2048m")
   }
 }
 
+val runInSplitMode by intellijPlatformTesting.runIde.registering {
+  splitMode = true
+  splitModeTarget = SplitModeTarget.BOTH
+}
 
 val coverageReportFile = project.buildDir.resolve("reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
 sonar {
