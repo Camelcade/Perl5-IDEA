@@ -17,15 +17,13 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlCallableElement;
-import com.perl5.lang.perl.psi.PerlSubDeclarationElement;
-import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
-import com.perl5.lang.perl.psi.PerlSubElement;
+import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationReverseIndex;
@@ -33,7 +31,6 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsInde
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionReverseIndex;
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex;
-import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,9 +40,6 @@ import java.util.*;
 public final class PerlSubUtil implements PerlElementTypes {
   private PerlSubUtil() {
   }
-
-  public static final String SUB_AUTOLOAD = "AUTOLOAD";
-  public static final String SUB_DESTROY = "DESTROY";
 
   /**
    * Searching project files for sub definitions by specific package and function name
@@ -147,66 +141,16 @@ public final class PerlSubUtil implements PerlElementTypes {
     return StubIndex.getElements(PerlSubDeclarationIndex.KEY, canonicalName, project, scope, PerlSubDeclarationElement.class);
   }
 
-  /**
-   * Builds arguments string for presentation
-   *
-   * @param subArguments list of arguments
-   * @return stringified prototype
-   */
-  public static String getArgumentsListAsString(List<? extends PerlSubArgument> subArguments) {
-    int argumentsNumber = subArguments.size();
-
-    List<String> argumentsList = new ArrayList<>();
-    List<String> optionalAargumentsList = new ArrayList<>();
-
-    for (PerlSubArgument argument : subArguments) {
-      if (!optionalAargumentsList.isEmpty() || argument.isOptional()) {
-        optionalAargumentsList.add(argument.toStringShort());
-      }
-      else {
-        argumentsList.add(argument.toStringShort());
-      }
-
-      int compiledListSize = argumentsList.size() + optionalAargumentsList.size();
-      if (compiledListSize > 5 && argumentsNumber > compiledListSize) {
-        if (!optionalAargumentsList.isEmpty()) {
-          optionalAargumentsList.add("...");
-        }
-        else {
-          argumentsList.add("...");
-        }
-        break;
-      }
-    }
-
-    if (argumentsList.isEmpty() && optionalAargumentsList.isEmpty()) {
-      return "";
-    }
-
-    String argumentListString = StringUtil.join(argumentsList, ", ");
-    String optionalArgumentsString = StringUtil.join(optionalAargumentsList, ", ");
-
-    if (argumentListString.isEmpty()) {
-      return "([" + optionalArgumentsString + "])";
-    }
-    if (optionalAargumentsList.isEmpty()) {
-      return "(" + argumentListString + ")";
-    }
-    else {
-      return "(" + argumentListString + " [, " + optionalArgumentsString + "])";
-    }
-  }
-
 
   public static @NotNull List<PerlSubElement> collectOverridingSubs(PerlSubElement subBase) {
     return collectOverridingSubs(subBase, new HashSet<>());
   }
 
-  public static @NotNull List<PerlSubElement> collectOverridingSubs(@NotNull PerlSubElement subBase,
+  public static @NotNull List<PerlSubElement> collectOverridingSubs(@NotNull PerlSubElement subElement,
                                                                     @NotNull Set<? super String> recursionSet) {
     List<PerlSubElement> result;
     result = new ArrayList<>();
-    for (PerlSubElement directDescendant : subBase.getDirectOverridingSubs()) {
+    for (PerlSubElement directDescendant : getDirectOverridingSubs(subElement)) {
       String packageName = directDescendant.getNamespaceName();
       if (StringUtil.isNotEmpty(packageName) && !recursionSet.contains(packageName)) {
         recursionSet.add(packageName);
@@ -224,5 +168,83 @@ public final class PerlSubUtil implements PerlElementTypes {
                                                     @NotNull Processor<? super PerlCallableElement> processor) {
     return processSubDefinitionsInPackage(project, packageName, searchScope, processor) &&
            processSubDeclarationsInPackage(project, packageName, searchScope, processor);
+  }
+
+  public static @Nullable PerlSubElement getDirectSuperMethod(@NotNull PerlSubElement subElement) {
+
+    if (!subElement.isMethod()) {
+      return null;
+    }
+
+    Ref<PerlSubElement> resultRef = Ref.create();
+    PerlMroUtil.processCallables(
+      subElement.getProject(), subElement.getResolveScope(), subElement.getNamespaceName(), Collections.singleton(subElement.getSubName()),
+      true,
+      it -> {
+        if (it instanceof PerlSubElement subElement1) {
+          resultRef.set(subElement1);
+          return false;
+        }
+        return true;
+      },
+      true);
+
+    return resultRef.get();
+  }
+
+  public static @NotNull PerlSubElement getTopmostSuperMethod(PerlSubElement subElement) {
+    Set<String> classRecursion = new HashSet<>();
+
+    PerlSubElement run = subElement;
+    while (true) {
+      String packageName = run.getNamespaceName();
+      if (StringUtil.isEmpty(packageName) || classRecursion.contains(packageName)) {
+        return run;
+      }
+      classRecursion.add(packageName);
+      PerlSubElement newRun = getDirectSuperMethod(run);
+      if (newRun == null) {
+        return run;
+      }
+      run = newRun;
+    }
+  }
+
+  public static List<PerlSubDefinitionElement> getDirectOverridingSubs(@NotNull PerlSubElement subElement) {
+    List<PerlSubDefinitionElement> result = new ArrayList<>();
+    processDirectOverridingSubs(subElement, (Processor<? super PerlSubDefinitionElement>)result::add);
+    return result;
+  }
+
+  @SuppressWarnings({"UnusedReturnValue", "SameReturnValue"})
+  public static boolean processDirectOverridingSubs(@NotNull PerlSubElement subElement,
+                                                    @NotNull Processor<? super PerlSubDefinitionElement> processor) {
+    String packageName = subElement.getNamespaceName();
+    String subName = subElement.getSubName();
+    if (packageName == null || subName == null) {
+      return true;
+    }
+    Set<String> recursionSet = new HashSet<>();
+    Project project = subElement.getProject();
+    Queue<String> packagesToProcess = new ArrayDeque<>(5);
+    packagesToProcess.add(packageName);
+
+    while (!packagesToProcess.isEmpty()) {
+      packageName = packagesToProcess.poll();
+      NAMESPACE:
+      for (PerlNamespaceDefinitionElement childNamespace : PerlPackageUtil.getChildNamespaces(project, packageName)) {
+        String childNamespaceName = childNamespace.getNamespaceName();
+        if (StringUtil.isNotEmpty(childNamespaceName) && recursionSet.add(childNamespaceName)) {
+          for (PerlSubDefinitionElement subDefinition : PerlSubUtil.getSubDefinitionsInPackage(project, childNamespaceName)) {
+            if (subName.equals(subDefinition.getSubName()) && getDirectSuperMethod(subDefinition) == subElement) {
+              processor.process(subDefinition);
+              continue NAMESPACE;
+            }
+          }
+          packagesToProcess.add(childNamespaceName);
+        }
+      }
+    }
+    return true;
   }
 }

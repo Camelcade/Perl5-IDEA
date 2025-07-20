@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +19,13 @@ package com.perl5.lang.perl.idea.generation.handlers;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.psi.PerlFile;
 
 
 public class GeneratePerlSetterActionHandler extends GeneratePerlClassMemberHandlerBase {
   @Override
   protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file) {
-    ((PerlFile)file).getCodeGenerator().generateSetters(anchor, editor);
+    PerlCodeGenerator.getInstance(((PerlFile)file)).generateSetters(anchor, editor);
   }
 }

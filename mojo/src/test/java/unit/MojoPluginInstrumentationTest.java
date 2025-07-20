@@ -19,7 +19,6 @@ package unit;
 import base.PerlInstrumentationTestCase;
 import categories.CategoriesFilter;
 import com.perl5.lang.mojolicious.MojoliciousParserDefinition;
-import com.perl5.lang.perl.PerlParserDefinition;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
@@ -30,7 +29,7 @@ public class MojoPluginInstrumentationTest extends PerlInstrumentationTestCase {
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
     return !CategoriesFilter.shouldRun(MojoPluginInstrumentationTest.class) ? Collections.emptyList() : Arrays.asList(new Object[][]{
-      {"plugin.backend", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
+      PARSER_DEFINITION_CLASS_DATA,
       {"mojo.backend", MojoliciousParserDefinition.class, MOJO_PATTERN_STRING},
     });
   }

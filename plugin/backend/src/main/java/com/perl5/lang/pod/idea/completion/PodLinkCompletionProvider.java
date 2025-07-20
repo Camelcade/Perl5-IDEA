@@ -44,6 +44,7 @@ import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterX;
 import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
 import com.perl5.lang.pod.parser.psi.util.PodFileUtil;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import com.perl5.lang.pod.psi.PsiItemSection;
 import com.perl5.lang.pod.psi.PsiPodFormatIndex;
 import org.jetbrains.annotations.Contract;
@@ -51,13 +52,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 public class PodLinkCompletionProvider extends CompletionProvider<CompletionParameters> implements PodElementTypes {
   private static final Logger LOG = Logger.getInstance(PodLinkCompletionProvider.class);
-  private static final List<String> TO_ESCAPE = List.of("<", ">", "/", "|");
-  private static final List<String> ESCAPE_TO = List.of("E<lt>", "E<gt>", "E<sol>", "E<verbar>");
 
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
@@ -79,7 +77,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
       processFilesCompletions(completionProcessor);
     }
     if (parentType == LINK_SECTION) {
-      addSectionsCompletions(linkElement.getTargetFile(), completionProcessor);
+      addSectionsCompletions(PodFileUtil.getTargetFile(linkElement), completionProcessor);
     }
     completionProcessor.logStatus(getClass());
   }
@@ -114,13 +112,6 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
     });
   }
 
-  /**
-   * @return section title with escaped {@code < > | /} chars
-   */
-  public static @NotNull String escapeTitle(@NotNull String title) {
-    return StringUtil.replace(title, TO_ESCAPE, ESCAPE_TO);
-  }
-
   protected static void addSectionsCompletions(@Nullable PsiFile targetFile,
                                                @NotNull PerlCompletionProcessor completionProcessor) {
     if (targetFile == null) {
@@ -140,7 +131,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
       public void visitTargetableSection(PodTitledSection o) {
         String title = cleanItemText(o.getTitleText());
         if (completionProcessor.matches(title) && distinctString.add(title)) {
-          completionProcessor.process(LookupElementBuilder.create(o, escapeTitle(title))
+          completionProcessor.process(LookupElementBuilder.create(o, PodRenderUtil.escapeTitle(title))
                                         .withLookupString(title)
                                         .withPresentableText(title)
                                         .withIcon(PerlIcons.POD_FILE)
@@ -168,7 +159,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
         if (isNumber(trimmed)) {
           return null;
         }
-        return trimItemText(trimmed);
+        return PodRenderUtil.trimItemText(trimmed);
       }
 
       private static boolean isNumber(@NotNull String text){
@@ -196,7 +187,7 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
           return;
         }
 
-        String escapedIndexTitle = escapeTitle(indexTitle);
+        String escapedIndexTitle = PodRenderUtil.escapeTitle(indexTitle);
         if (!completionProcessor.matches(indexTitle) && !completionProcessor.matches(escapedIndexTitle)) {
           return;
         }
@@ -227,9 +218,5 @@ public class PodLinkCompletionProvider extends CompletionProvider<CompletionPara
         );
       }
     });
-  }
-
-  public static String trimItemText(String trimmed) {
-    return StringUtil.nullize(StringUtil.shortenTextWithEllipsis(trimmed, 140, 0));
   }
 }

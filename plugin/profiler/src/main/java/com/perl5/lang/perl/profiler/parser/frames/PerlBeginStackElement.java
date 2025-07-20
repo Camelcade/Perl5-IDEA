@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,8 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElementBase;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamedBlockImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlNamespaceUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
@@ -51,7 +52,7 @@ class PerlBeginStackElement extends PerlCallStackElement {
     if (beginStartSuffix < 0) {
       LOG.error("Attempting to create try frame from non-try text: " + frameText);
     }
-    myNamespaceName = PerlPackageUtil.getCanonicalName(cleanedFrameText.substring(0, beginStartSuffix));
+    myNamespaceName = PerlPackageUtilCore.getCanonicalName(cleanedFrameText.substring(0, beginStartSuffix));
     int lineNumber = 1;
     try {
       var lineNumberInfo = cleanedFrameText.substring(beginStartSuffix + BEGIN_BLOCK_SUFFIX.length());
@@ -71,12 +72,12 @@ class PerlBeginStackElement extends PerlCallStackElement {
 
   @Override
   protected @NotNull List<NavigatablePsiElement> computeNavigatables(@NotNull Project project, @NotNull Sdk perlSdk) {
-    if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(myNamespaceName)) {
+    if (PerlPackageUtilCore.MAIN_NAMESPACE_NAME.equals(myNamespaceName)) {
       return Collections.emptyList();
     }
     List<NavigatablePsiElement> result = new ArrayList<>();
     Set<PsiFile> processedFiles = new HashSet<>();
-    PerlPackageUtil.processNamespaces(
+    PerlNamespaceUtil.processNamespaces(
       myNamespaceName, project, GlobalSearchScope.allScope(project),
       it -> {
         var psiFile = it.getContainingFile();
@@ -92,12 +93,12 @@ class PerlBeginStackElement extends PerlCallStackElement {
           var endOffset = document.getLineEndOffset(myLineNumber - 1);
 
           var useStatement = PerlPsiUtil.findElementOfClassAtRange(psiFile, startOffset, endOffset, PerlUseStatementElementBase.class);
-          if (myNamespaceName.equals(PerlPackageUtil.getContextNamespaceName(useStatement))) {
+          if (myNamespaceName.equals(PerlPackageUtilCore.getContextNamespaceName(useStatement))) {
             result.add(useStatement);
           }
           else {
             var namedBlockAtOffset = PerlPsiUtil.findElementOfClassAtRange(psiFile, startOffset, endOffset, PsiPerlNamedBlockImpl.class);
-            if (myNamespaceName.equals(PerlPackageUtil.getContextNamespaceName(namedBlockAtOffset))) {
+            if (myNamespaceName.equals(PerlPackageUtilCore.getContextNamespaceName(namedBlockAtOffset))) {
               result.add(new PerlTargetElementWrapper(namedBlockAtOffset) {
                 @Override
                 public void navigate(boolean requestFocus) {

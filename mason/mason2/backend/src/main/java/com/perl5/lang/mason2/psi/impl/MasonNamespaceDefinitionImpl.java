@@ -17,26 +17,20 @@
 package com.perl5.lang.mason2.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.search.GlobalSearchScope;
-import com.intellij.psi.stubs.StubIndex;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.mason2.Mason2Util;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
-import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
-import com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex;
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PsiPerlNamespaceDefinitionImpl;
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub;
 import com.perl5.lang.perl.util.PerlFileUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -82,34 +76,7 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
   @Override
   protected @Nullable String computeNamespaceName() {
     String packageName = Mason2Util.getVirtualFileClassName(getProject(), MasonCoreUtil.getContainingVirtualFile(getContainingFile()));
-    return packageName == null ? PerlPackageUtil.MAIN_NAMESPACE_NAME : packageName;
-  }
-
-  @Override
-  public List<PerlNamespaceDefinitionElement> getParentNamespaceDefinitions() {
-    List<String> parentsPaths = getParentNamespacesNames();
-
-    VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(getContainingFile());
-    List<PerlNamespaceDefinitionElement> parentsNamespaces;
-
-    if (!parentsPaths.isEmpty() && containingFile != null) {
-      parentsNamespaces = Mason2Util.collectComponentNamespacesByPaths(getProject(), parentsPaths, containingFile.getParent());
-    }
-    else {
-      String autobaseParent = getParentNamespaceFromAutobase();
-      if (autobaseParent != null) {
-        parentsNamespaces = Mason2Util.getMasonNamespacesByAbsolutePath(getProject(), autobaseParent);
-      }
-      else {
-        parentsNamespaces = new ArrayList<>();
-      }
-    }
-
-    if (parentsNamespaces.isEmpty()) {
-      parentsNamespaces.addAll(PerlPackageUtil.getNamespaceDefinitions(getProject(), getResolveScope(), MASON_DEFAULT_COMPONENT_PARENT));
-    }
-
-    return parentsNamespaces;
+    return packageName == null ? PerlPackageUtilCore.MAIN_NAMESPACE_NAME : packageName;
   }
 
   @Override
@@ -180,97 +147,6 @@ public class MasonNamespaceDefinitionImpl extends PsiPerlNamespaceDefinitionImpl
       return getParentComponentFile(componentRoot, currentDirectory.getParent(), childFile);
     }
     return null;
-  }
-
-  @Override
-  public @NotNull List<PerlNamespaceDefinitionElement> getChildNamespaceDefinitions() {
-    MasonSettings masonSettings = MasonSettings.getInstance(getProject());
-    final List<PerlNamespaceDefinitionElement> childNamespaces = new ArrayList<>();
-
-    // collect psi children
-    final Project project = getProject();
-    final GlobalSearchScope projectScope = GlobalSearchScope.projectScope(project);
-    final String componentPath = getComponentPath();
-    if (componentPath != null) {
-      final List<String> relativePaths = new ArrayList<>();
-      final List<String> exactPaths = new ArrayList<>();
-
-      StubIndex.getInstance().processAllKeys(MasonParentNamespacesStubIndex.KEY, project, parentPath -> {
-        if (parentPath.charAt(0) == VfsUtil.VFS_SEPARATOR_CHAR) // absolute path, should be equal
-        {
-          if (componentPath.equals(parentPath.substring(1))) {
-            exactPaths.add(parentPath);
-          }
-        }
-        else if (componentPath.endsWith(parentPath))    // relative path
-        {
-          relativePaths.add(parentPath);
-        }
-
-        return true;
-      });
-
-      for (String parentPath : exactPaths) {
-        childNamespaces.addAll(StubIndex.getElements(
-          MasonParentNamespacesStubIndex.KEY,
-          parentPath,
-          project,
-          projectScope,
-          MasonNamespaceDefinition.class
-        ));
-      }
-
-      for (String parentPath : relativePaths) {
-        for (MasonNamespaceDefinition masonNamespaceDefinition : StubIndex.getElements(
-          MasonParentNamespacesStubIndex.KEY,
-          parentPath,
-          project,
-          projectScope,
-          MasonNamespaceDefinition.class
-        )) {
-          if (masonNamespaceDefinition.getParentNamespaceDefinitions().contains(MasonNamespaceDefinitionImpl.this)) {
-            childNamespaces.add(masonNamespaceDefinition);
-          }
-        }
-      }
-    }
-
-    // collect autobased children
-    if (masonSettings.autobaseNames.contains(getContainingFile().getName())) {
-      VirtualFile containingFile = MasonCoreUtil.getContainingVirtualFile(getContainingFile());
-      if (containingFile != null) {
-        final String basePath = PerlFileUtil.getPathRelativeToContentRoot(containingFile.getParent(), getProject());
-
-        if (basePath != null) {
-          final List<String> componentPaths = new ArrayList<>();
-          StubIndex.getInstance().processAllKeys(
-            MasonNamespaceDefitnitionsStubIndex.KEY, getProject(), componentPath1 -> {
-              if (componentPath1.startsWith(basePath)) {
-                componentPaths.add(componentPath1);
-              }
-              return true;
-            }
-          );
-
-          for (String compoPath : componentPaths) {
-            for (MasonNamespaceDefinition namespaceDefinition : StubIndex.getElements(
-              MasonNamespaceDefitnitionsStubIndex.KEY,
-              compoPath,
-              project,
-              projectScope,
-              MasonNamespaceDefinition.class
-            )) {
-              if (namespaceDefinition.getParentNamespaceDefinitions().contains(MasonNamespaceDefinitionImpl.this)
-                  && !childNamespaces.contains(namespaceDefinition)
-              ) {
-                childNamespaces.add(namespaceDefinition);
-              }
-            }
-          }
-        }
-      }
-    }
-    return childNamespaces;
   }
 
   @Override

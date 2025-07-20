@@ -25,10 +25,11 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings
 import com.perl5.lang.perl.psi.PerlCallableElement
-import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService
+import com.perl5.lang.perl.util.PerlNamespaceUtil
 import com.perl5.lang.perl.util.PerlPackageUtil
-import com.perl5.lang.perl.util.PerlSubUtil.SUB_AUTOLOAD
+import com.perl5.lang.perl.util.PerlPackageUtilCore
+import com.perl5.lang.perl.util.PerlSubUtilCore.SUB_AUTOLOAD
 
 
 abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrizedOperationValueBackendHelper<Val>() {
@@ -84,7 +85,7 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
       if (!PerlPackageUtil.processCallables(
           project,
           subsEffectiveScope,
-          PerlPackageUtil.join(namespaceName, subName),
+          PerlPackageUtilCore.join(namespaceName, subName),
           processorWrapper
         )
       ) {
@@ -93,7 +94,7 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
     }
 
     // exports
-    val exportDescriptors = PerlNamespaceDefinitionElement.getExportDescriptors(project, searchScope, namespaceName)
+    val exportDescriptors = PerlNamespaceUtil.getExportDescriptors(project, searchScope, namespaceName)
     if (!processExportDescriptorsItems(project, searchScope, subNames, processorWrapper, exportDescriptors)) {
       return false
     }
@@ -111,8 +112,8 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
 
     // AUTOLOAD
     return !processingContext.processAutoload ||
-      PerlPackageUtil.isUNIVERSAL(namespaceName) || PerlPackageUtil.isCORE(namespaceName) ||
-      PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtil.join(namespaceName, SUB_AUTOLOAD), processorWrapper)
+      PerlPackageUtilCore.isUNIVERSAL(namespaceName) || PerlPackageUtilCore.isCORE(namespaceName) ||
+      PerlPackageUtil.processCallables(project, searchScope, PerlPackageUtilCore.join(namespaceName, SUB_AUTOLOAD), processorWrapper)
   }
 
   /**
@@ -127,7 +128,7 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
     contextElement: PsiElement?
   ): GlobalSearchScope {
     val contextFile = contextElement?.containingFile?.originalFile
-    if (PerlPackageUtil.MAIN_NAMESPACE_NAME == namespaceName &&
+    if (PerlPackageUtilCore.MAIN_NAMESPACE_NAME == namespaceName &&
       PerlSharedSettings.getInstance(project).SIMPLE_MAIN_RESOLUTION && contextFile != null
     ) {
       return GlobalSearchScope.fileScope(contextFile)
@@ -241,10 +242,27 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
 
     // exports
     val exportDescriptors =
-      PerlNamespaceDefinitionElement.getExportDescriptors(project, effectiveScope, currentNamespaceName)
+      PerlNamespaceUtil.getExportDescriptors(project, effectiveScope, currentNamespaceName)
     return processExportDescriptors(project, effectiveScope, processor, exportDescriptors)
   }
 
+  /**
+   * Computes a fallback value. This method should handle two cases:
+   * - invisible/complex constructor, where we can't compute a proper return value
+   * - incorrectly lexed namespace FQNs, where `Foo::Bar` was lexed and parsed as `Foo::Bar()`
+   *
+   * @param hasTarget true iff we has processed a real target of this call
+   */
+  abstract fun addFallbackTargets(
+    callValue: Val,
+    namespaceNames: MutableSet<String>,
+    subNames: MutableSet<String>,
+    resolvedArguments: MutableList<PerlValue>,
+    hasTarget: Boolean,
+    builder: PerlOneOfValue.Builder,
+    resolvedNamespaceValue: PerlValue,
+    resolver: PerlValueResolver
+  )
 
   companion object {
     @JvmStatic

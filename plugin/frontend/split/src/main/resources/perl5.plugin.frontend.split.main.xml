@@ -4,4 +4,19 @@
     <module name="perl5.plugin.frontend.main"/>
   </dependencies>
 
+  <extensions defaultExtensionNs="com.perl5">
+    <namespaceDefinitionHalder forClass="com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement"
+                               implementationClass="com.perl5.lang.perl.psi.PerlDefaultFrontendNamespaceDefinitionHandler"/>
+  </extensions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="com.perl5.lang.perl.idea.presentations.PerlFrontendItemPresentationService"
+                        serviceInterface="com.perl5.lang.perl.idea.presentations.PerlItemPresentationService"/>
+    <applicationService serviceImplementation="com.perl5.lang.perl.util.PerlFrontendPackageService"
+                        serviceInterface="com.perl5.lang.perl.util.PerlPackageService"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlNamesFrontendCache"
+                    serviceInterface="com.perl5.lang.perl.idea.project.PerlNamesCache"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueFrontendResolveService"
+                    serviceInterface="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueResolveService"/>
+  </extensions>
 </idea-plugin>

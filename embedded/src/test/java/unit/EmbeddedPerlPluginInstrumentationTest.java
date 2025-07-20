@@ -19,7 +19,6 @@ package unit;
 import base.PerlInstrumentationTestCase;
 import categories.CategoriesFilter;
 import com.perl5.lang.embedded.EmbeddedPerlAstFactory;
-import com.perl5.lang.perl.PerlParserDefinition;
 import org.junit.runners.Parameterized;
 
 import java.util.Arrays;
@@ -33,7 +32,7 @@ public class EmbeddedPerlPluginInstrumentationTest extends PerlInstrumentationTe
     return !CategoriesFilter.shouldRun(EmbeddedPerlPluginInstrumentationTest.class) ?
       Collections.emptyList() :
       Arrays.asList(new Object[][]{
-        {"plugin.backend", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
+        PARSER_DEFINITION_CLASS_DATA,
         {"embedded", EmbeddedPerlAstFactory.class, EMBEDDED_PATTERN_STRING}
     });
   }

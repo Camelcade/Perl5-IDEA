@@ -23,7 +23,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StringStubIndexExtension;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.idea.EP.PerlPackageProcessorService;
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorService;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueBackendHelper;
 import com.perl5.lang.perl.psi.PerlSubCallHandlerVersionService;
 import com.perl5.lang.perl.util.PerlStubUtil;

@@ -63,6 +63,7 @@ import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.host.os.PerlOsHandler;
 import com.perl5.lang.perl.util.PerlPluginUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
+import com.perl5.lang.perl.util.PerlSubUtilCore;
 import com.perl5.lang.perl.util.PerlUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -79,8 +80,6 @@ import java.util.*;
 )
 public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> {
   private static final Logger LOG = Logger.getInstance(PerlXSubsState.class);
-  @Transient
-  public static final String DEPARSED_FILE_NAME = "_Deparsed_XSubs.pm";
   public boolean isActual = true;
   public Map<String, Long> myFilesMap = Collections.emptyMap();
   @Transient
@@ -204,7 +203,7 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
   @VisibleForTesting
   public @Nullable VirtualFile getDeparsedSubsFile() {
     for (VirtualFile possibleLocation : getPossibleFileLocations()) {
-      var deparsedFile = possibleLocation.findFileByRelativePath(DEPARSED_FILE_NAME);
+      var deparsedFile = possibleLocation.findFileByRelativePath(PerlSubUtilCore.DEPARSED_FILE_NAME);
       if (deparsedFile != null && deparsedFile.isValid()) {
         return deparsedFile;
       }
@@ -227,15 +226,15 @@ public class PerlXSubsState implements PersistentStateComponent<PerlXSubsState> 
 
     for (VirtualFile possibleLocation : getPossibleFileLocations()) {
       try {
-        return possibleLocation.findOrCreateChildData(this, DEPARSED_FILE_NAME);
+        return possibleLocation.findOrCreateChildData(this, PerlSubUtilCore.DEPARSED_FILE_NAME);
       }
       catch (IOException e) {
-        LOG.warn("Unable to create " + DEPARSED_FILE_NAME + " in the content root " + possibleLocation +
+        LOG.warn("Unable to create " + PerlSubUtilCore.DEPARSED_FILE_NAME + " in the content root " + possibleLocation +
                  "cause: " + e.getMessage());
       }
     }
 
-    throw new IOException("Could not find suitable location for creating a file: " + DEPARSED_FILE_NAME);
+    throw new IOException("Could not find suitable location for creating a file: " + PerlSubUtilCore.DEPARSED_FILE_NAME);
   }
 
   private boolean isFileUpToDate(@NotNull VirtualFile virtualFile) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.psi.PerlSubNameElement;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.EXPORT_ASSIGNED_STRING_CONTENT;
@@ -38,7 +38,7 @@ public class PerlUnresolvedSubInspection extends PerlInspection {
       @Override
       public void visitStringContentElement(@NotNull PerlStringContentElementImpl o) {
         if (EXPORT_ASSIGNED_STRING_CONTENT.accepts(o)) {
-          if (!PerlResolveUtil.isResolvable(o.getReference())) {
+          if (!PerlResolveUtilCore.isResolvable(o.getReference())) {
             registerProblem(holder, o, PerlBundle.message("perl.inspection.no.exported.entity"));
           }
         }
@@ -57,7 +57,7 @@ public class PerlUnresolvedSubInspection extends PerlInspection {
         }
 
         for (PsiReference reference : subNameElement.getReferences()) {
-          if (PerlResolveUtil.isResolvable(reference)) {
+          if (PerlResolveUtilCore.isResolvable(reference)) {
             return;
           }
         }

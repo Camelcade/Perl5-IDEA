@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,12 +21,12 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
-import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
 import com.perl5.lang.pod.parser.psi.PodElementFactory;
 import com.perl5.lang.pod.parser.psi.PodLinkDescriptor;
 import com.perl5.lang.pod.parser.psi.PodStubsAwareRecursiveVisitor;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.parser.psi.mixin.PodFormatterL;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -43,7 +43,7 @@ public class PodLinkToSectionReference extends PerlCachingReference<PodFormatter
   @Override
   public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     return super.handleElementRename(
-      PodLinkCompletionProvider.escapeTitle(PodElementFactory.getHeaderText(myElement.getProject(), newElementName)));
+      PodRenderUtil.escapeTitle(PodElementFactory.getHeaderText(myElement.getProject(), newElementName)));
   }
 
   @Override

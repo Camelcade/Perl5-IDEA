@@ -8,6 +8,10 @@
 
   <extensions defaultExtensionNs="com.perl5">
     <settings.configurable.extension implementation="com.perl5.lang.mason2.idea.configuration.Mason2SettingsConfigurableExtension"/>
+    <namespaceDefinitionHalder forClass="com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionImpl"
+                               implementationClass="com.perl5.lang.mason2.psi.impl.MasonBackendNamespaceDefinitionHandler"/>
+    <codeGenerator forClass="com.perl5.lang.mason2.psi.impl.MasonTemplatingFileImpl"
+                   implementationClass="com.perl5.lang.mason2.idea.generation.Mason2TemplatingCodeGeneratorImpl"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

@@ -1,3 +1,17 @@
 <idea-plugin>
+  <extensionPoints>
+    <extensionPoint qualifiedName="com.perl5.namespaceDefinitionHalder" beanClass="com.intellij.openapi.util.ClassExtensionPoint"
+                    dynamic="true">
+      <with attribute="implementationClass" implements="com.perl5.lang.perl.psi.PerlNamespaceDefinitionHandler"/>
+    </extensionPoint>
+    <extensionPoint qualifiedName="com.perl5.codeGenerator" beanClass="com.intellij.openapi.util.ClassExtensionPoint"
+                    dynamic="true">
+      <with attribute="implementationClass" implements="com.perl5.lang.perl.extensions.PerlCodeGenerator"/>
+    </extensionPoint>
+  </extensionPoints>
 
+  <extensions defaultExtensionNs="com.intellij">
+    <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
+    <additionalTextAttributes scheme="Darcula" file="colorSchemes/perl_darcula.xml"/>
+  </extensions>
 </idea-plugin>

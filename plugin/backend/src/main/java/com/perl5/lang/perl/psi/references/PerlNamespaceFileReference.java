@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.psi.PerlNamespaceElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespaceElement> {
@@ -52,9 +53,9 @@ public class PerlNamespaceFileReference extends PerlCachingReference<PerlNamespa
   public PsiElement handleElementRename(@NotNull String newElementName) throws IncorrectOperationException {
     String currentName = myElement.getCanonicalName();
     if (currentName != null && newElementName.endsWith(".pm")) {
-      String[] nameChunks = currentName.split(PerlPackageUtil.NAMESPACE_SEPARATOR);
+      String[] nameChunks = currentName.split(PerlPackageUtilCore.NAMESPACE_SEPARATOR);
       nameChunks[nameChunks.length - 1] = newElementName.replaceFirst("\\.pm$", "");
-      newElementName = StringUtil.join(nameChunks, PerlPackageUtil.NAMESPACE_SEPARATOR);
+      newElementName = StringUtil.join(nameChunks, PerlPackageUtilCore.NAMESPACE_SEPARATOR);
 
       return super.handleElementRename(newElementName);
     }

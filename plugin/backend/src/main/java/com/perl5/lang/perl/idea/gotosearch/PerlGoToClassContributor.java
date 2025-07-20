@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,9 @@ import com.intellij.navigation.NavigationItem;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
+import com.perl5.lang.perl.util.PerlNamespaceUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -39,7 +41,7 @@ public class PerlGoToClassContributor extends PerlChooseByNameContributor implem
 
   @Override
   public @Nullable String getQualifiedNameSeparator() {
-    return PerlPackageUtil.NAMESPACE_SEPARATOR;
+    return PerlPackageUtilCore.NAMESPACE_SEPARATOR;
   }
 
   @Override
@@ -52,10 +54,10 @@ public class PerlGoToClassContributor extends PerlChooseByNameContributor implem
                                                                                    String pattern,
                                                                                    Project project,
                                                                                    boolean includeNonProjectItems) {
-    if (PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
+    if (PerlPackageUtilCore.MAIN_NAMESPACE_NAME.equals(packageName)) {
       return Collections.emptyList();
     }
     var searchScope = includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);
-    return PerlPackageUtil.getNamespaceDefinitions(project, searchScope, packageName);
+    return PerlNamespaceUtil.getNamespaceDefinitions(project, searchScope, packageName);
   }
 }

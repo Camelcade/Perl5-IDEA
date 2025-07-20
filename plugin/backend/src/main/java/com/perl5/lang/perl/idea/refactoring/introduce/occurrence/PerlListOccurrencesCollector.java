@@ -21,7 +21,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.refactoring.introduce.PerlIntroduceTarget;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlArrayUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -31,14 +31,14 @@ class PerlListOccurrencesCollector extends PerlIntroduceTargetOccurrencesCollect
 
   PerlListOccurrencesCollector(@NotNull PerlIntroduceTarget target) {
     super(target);
-    List<PsiElement> targetChildren = PerlArrayUtil.collectListElements(getTargetElement());
+    List<PsiElement> targetChildren = PerlArrayUtilCore.collectListElements(getTargetElement());
     myElementsToSearch = ContainerUtil.filter(targetChildren, it -> getTarget().getTextRange().contains(it.getTextRange()));
     assert !myElementsToSearch.isEmpty() : "Empty elements for " + target;
   }
 
   @Override
   protected boolean collectOccurrences(@NotNull PsiElement element) {
-    List<PsiElement> elementChildren = PerlArrayUtil.collectListElements(element);
+    List<PsiElement> elementChildren = PerlArrayUtilCore.collectListElements(element);
     if (elementChildren.isEmpty()) {
       return false;
     }

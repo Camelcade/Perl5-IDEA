@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,6 +33,7 @@ import com.perl5.lang.perl.psi.PsiPerlRequireExpr;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
+import com.perl5.lang.perl.util.PerlNamespaceUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
@@ -67,7 +68,7 @@ public class PerlUnresolvedPackageFileInspection extends PerlInspection {
       }
 
       public void checkPackageFile(PerlNamespaceElement o) {
-        List<PerlFileImpl> namespaceFiles = o.getNamespaceFiles();
+        List<PerlFileImpl> namespaceFiles = PerlNamespaceUtil.getNamespaceFiles(o);
         String packageName = o.getCanonicalName();
 
         if (namespaceFiles.isEmpty() && StringUtil.isNotEmpty(packageName)) {
@@ -86,15 +87,8 @@ public class PerlUnresolvedPackageFileInspection extends PerlInspection {
     };
   }
 
-  private static class InstallPackageQuickfix implements LocalQuickFix {
-    @SafeFieldForPreview private final @NotNull PackageManagerAdapter myAdapter;
-
-    private final @NotNull String myPackageName;
-
-    public InstallPackageQuickfix(@NotNull PackageManagerAdapter adapter, @NotNull String packageName) {
-      myAdapter = adapter;
-      myPackageName = packageName;
-    }
+  private record InstallPackageQuickfix(@SafeFieldForPreview @NotNull PackageManagerAdapter myAdapter, @NotNull String myPackageName)
+    implements LocalQuickFix {
 
     @Override
     public @Nls(capitalization = Nls.Capitalization.Sentence) @NotNull String getFamilyName() {

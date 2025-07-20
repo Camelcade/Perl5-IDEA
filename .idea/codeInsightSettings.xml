@@ -13,9 +13,12 @@
       <name>com.twelvemonkeys.lang.StringUtil</name>
       <name>groovy.transform.Immutable</name>
       <name>io.netty.util.internal.StringUtil</name>
+      <name>java.rmi.registry.Registry</name>
       <name>net.jcip.annotations.Immutable</name>
       <name>net.sf.cglib.core.internal.Function</name>
+      <name>org.apache.http.config.Registry</name>
       <name>org.apache.log4j.Logger</name>
+      <name>org.apache.tools.ant.Project</name>
       <name>org.codehaus.groovy.util.StringUtil</name>
       <name>org.intellij.markdown.IElementType</name>
       <name>org.jsoup.helper.StringUtil</name>

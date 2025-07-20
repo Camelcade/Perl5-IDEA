@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference;
 import com.perl5.lang.perl.psi.references.PerlVariableReference;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -38,7 +39,7 @@ public class PerlVariableReferencesProvider extends PsiReferenceProvider {
     if (parent instanceof PerlVariable perlVariable && !perlVariable.isDeclaration()) {
       String elementText = element.getText();
       if (PerlPackageUtil.isFullQualifiedName(elementText)) {
-        Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(elementText);
+        Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtilCore.getQualifiedRanges(elementText);
         // two refs
         return new PsiReference[]{
           new PerlNamespaceReference(element, qualifiedRanges.first),
@@ -52,7 +53,7 @@ public class PerlVariableReferencesProvider extends PsiReferenceProvider {
     else if (parent instanceof PerlGlobVariableElement) {
       String elementText = element.getText();
       if (PerlPackageUtil.isFullQualifiedName(elementText)) {
-        Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtil.getQualifiedRanges(elementText);
+        Pair<TextRange, TextRange> qualifiedRanges = PerlPackageUtilCore.getQualifiedRanges(elementText);
         // two refs
         return new PsiReference[]{new PerlNamespaceReference(element, qualifiedRanges.first)};
       }

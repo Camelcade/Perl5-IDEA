@@ -25,14 +25,15 @@ import com.intellij.psi.stubs.StubInputStream
 import com.intellij.psi.stubs.StubOutputStream
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer.serialize
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement
 import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationElementImpl
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializationUtil
 import com.perl5.lang.perl.psi.stubs.PerlStubSerializingFactory
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations
 import com.perl5.lang.perl.psi.utils.PerlVariableType
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
+import com.perl5.lang.perl.util.PerlValuesUtil
+import com.perl5.lang.perl.util.PerlVariableUtil
 import java.io.IOException
 
 
@@ -64,7 +65,7 @@ class PerlVariableStubSerializingFactory(elementType: IElementType) :
     }
     else {
       dataStream.writeBoolean(true)
-      annotations.serialize(dataStream)
+      dataStream.writeAnnotations(annotations)
     }
   }
 
@@ -74,18 +75,18 @@ class PerlVariableStubSerializingFactory(elementType: IElementType) :
       elementType,
       PerlStubSerializationUtil.readNotNullString(dataStream),
       PerlStubSerializationUtil.readNotNullString(dataStream),
-      PerlValuesManager.readValue(dataStream),
+      PerlValuesUtil.readValue(dataStream),
       PerlVariableType.entries[dataStream.readByte().toInt()],
       readAnnotations(dataStream)
     )
 
   @Throws(IOException::class)
   private fun readAnnotations(dataStream: StubInputStream): PerlVariableAnnotations =
-    if (dataStream.readBoolean()) PerlVariableAnnotations.deserialize(dataStream) else PerlVariableAnnotations.empty()
+    if (dataStream.readBoolean()) dataStream.readVariableAnnotations() else PerlVariableAnnotations.empty()
 
   override fun indexStub(stub: PerlVariableDeclarationStub, sink: IndexSink) {
-    val variableName = PerlPackageUtil.join(stub.namespaceName, stub.variableName)
-    val indexKeys = stub.getIndexKey()
+    val variableName = PerlPackageUtilCore.join(stub.namespaceName, stub.variableName)
+    val indexKeys = PerlVariableUtil.getIndexKey(stub)
     sink.occurrence(indexKeys.getFirst(), variableName)
     sink.occurrence(indexKeys.getSecond(), stub.namespaceName)
   }
@@ -99,3 +100,11 @@ class PerlVariableStubSerializingFactory(elementType: IElementType) :
       StringUtil.isNotEmpty(psi.getNamespaceName())
   }
 }
+
+fun StubOutputStream.writeAnnotations(annotations: PerlVariableAnnotations) {
+  writeByte(annotations.flags.toInt())
+  serialize(annotations.annotatedValue, this)
+}
+
+fun StubInputStream.readVariableAnnotations(): PerlVariableAnnotations =
+  PerlVariableAnnotations(readByte(), PerlValuesUtil.readValue(this))

@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization
 
 import com.intellij.openapi.util.ClassExtension
 import com.jetbrains.rd.util.concurrentMapOf
-import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlDuckValue
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeserializer
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
@@ -155,6 +154,6 @@ interface PerlValueBackendHelper<Val : PerlValue> {
     val VALUE_WITH_FALLBACK = id++
 
     @JvmStatic
-    fun getVersion(): Int = id + (if (PerlDuckValue.isDuckTypingEnabled()) 100 else 0)
+    fun getVersion(): Int = id + (if (PerlValue.isDuckTypingEnabled()) 100 else 0)
   }
 }

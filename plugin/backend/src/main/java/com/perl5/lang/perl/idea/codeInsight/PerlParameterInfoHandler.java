@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,8 @@ import com.perl5.lang.perl.psi.mixins.PerlMethodMixin;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore;
+import com.perl5.lang.perl.util.PerlContextUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -108,7 +109,7 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
 
       if (element.getTextRange().getEndOffset() >= offset) {
         if (element instanceof PerlCompositeElementImpl) {
-          PerlContextType valueContextType = PerlContextType.from(element);
+          PerlContextType valueContextType = PerlContextUtil.contextFrom(element);
 
           if (valueContextType == PerlContextType.SCALAR) {
             if (currentIndex < parameterInfos.length) {
@@ -206,7 +207,7 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
 
         Ref<PerlParameterInfo[]> parameterInfoRef = Ref.create();
 
-        PerlResolveUtil.processResolveTargets((target, reference) -> {
+        PerlResolveUtilCore.processResolveTargets((target, reference) -> {
           PerlParameterInfo[] parameterInfos = getTargetParameterInfo(target);
           if (parameterInfos != null) {
             parameterInfoRef.set(parameterInfos);

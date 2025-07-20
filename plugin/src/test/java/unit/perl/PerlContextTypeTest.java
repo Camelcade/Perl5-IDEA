@@ -21,6 +21,7 @@ import base.PerlLightTestCase;
 import com.intellij.psi.PsiElement;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
+import com.perl5.lang.perl.util.PerlContextUtil;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 public class PerlContextTypeTest extends PerlLightTestCase {
@@ -205,6 +206,6 @@ public class PerlContextTypeTest extends PerlLightTestCase {
     initWithTextSmartWithoutErrors(text);
     PsiElement elementAtCaret = getElementAtCaret(clazz);
     assertNotNull(elementAtCaret);
-    assertEquals(expectedType + "\n" + text, PerlContextType.from(elementAtCaret) + "\n" + text);
+    assertEquals(expectedType + "\n" + text, PerlContextUtil.contextFrom(elementAtCaret) + "\n" + text);
   }
 }

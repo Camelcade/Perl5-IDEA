@@ -30,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
-import static com.perl5.lang.perl.util.PerlSubUtil.SUB_DESTROY;
+import static com.perl5.lang.perl.util.PerlSubUtilCore.SUB_DESTROY;
 
 
 public class PerlUnusedSubInspection extends PerlInspection {

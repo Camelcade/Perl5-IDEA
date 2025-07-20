@@ -26,14 +26,14 @@ import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_EXTENDS
 import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_HAS
 import com.perl5.lang.perl.parser.moose.MooseSyntax.MOOSE_KEYWORD_WITH
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 import kotlinx.collections.immutable.PersistentList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.annotations.NonNls
 
 class MooProcessor : BaseStrictWarningsProvidingProcessor(), PerlPackageParentsProvider, PerlPackageLoader {
-  private val mooObject: @NonNls String = PerlPackageUtil.join(PerlPackageUtil.PACKAGE_MOO, "Object")
+  private val mooObject: @NonNls String = PerlPackageUtilCore.join(PerlPackageUtilCore.PACKAGE_MOO, "Object")
   private val loadedClasses: PersistentList<String> = persistentListOf(mooObject)
   private val parentClasses: PersistentList<String> = loadedClasses
 
@@ -45,7 +45,7 @@ class MooProcessor : BaseStrictWarningsProvidingProcessor(), PerlPackageParentsP
       MOOSE_KEYWORD_EXTENDS,
       MOOSE_KEYWORD_HAS,
       MOOSE_KEYWORD_WITH
-    ).map { keyword -> PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOO, keyword) }
+    ).map { keyword -> PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_MOO, keyword) }
       .toImmutableList()
   }
 

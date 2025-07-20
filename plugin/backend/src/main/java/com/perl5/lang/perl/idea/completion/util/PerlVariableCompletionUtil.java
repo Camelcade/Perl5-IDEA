@@ -41,7 +41,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInVariable;
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope;
 import com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import com.perl5.lang.perl.util.*;
 import com.perl5.lang.perl.util.processors.PerlNamespaceEntityProcessor;
@@ -227,7 +227,7 @@ public class PerlVariableCompletionUtil {
 
       return true;
     };
-    PerlResolveUtil.treeWalkUp(variableCompletionProcessor.getLeafElement(), processor);
+    PerlResolveUtilCore.treeWalkUp(variableCompletionProcessor.getLeafElement(), processor);
   }
 
 
@@ -506,7 +506,7 @@ public class PerlVariableCompletionUtil {
     }
 
     if (processor != null) {
-      namespaceContainer.processExportDescriptors(processor);
+      PerlNamespaceDefinitionHandler.instance(namespaceContainer).processExportDescriptors(namespaceContainer, processor);
     }
   }
 }

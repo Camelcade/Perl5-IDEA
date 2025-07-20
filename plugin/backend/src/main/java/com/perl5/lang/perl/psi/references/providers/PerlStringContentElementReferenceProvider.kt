@@ -20,11 +20,8 @@ import com.intellij.psi.ElementManipulators
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiReference
 import com.intellij.psi.PsiReferenceProvider
-import com.intellij.psi.util.PsiTreeUtil
 import com.intellij.util.ProcessingContext
-import com.perl5.lang.perl.extensions.parser.PerlReferencesProvider
 import com.perl5.lang.perl.psi.PerlString
-import com.perl5.lang.perl.psi.PsiPerlStatement
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl
 import com.perl5.lang.perl.psi.references.PerlNamespaceReference
 
@@ -36,13 +33,6 @@ class PerlStringContentElementReferenceProvider : PsiReferenceProvider() {
       val valueText = ElementManipulators.getValueText(element)
       if (PerlString.looksLikePackage(valueText)) {
         result.add(PerlNamespaceReference(element))
-      }
-      else {
-        PsiTreeUtil.getParentOfType(
-          element, PerlReferencesProvider::class.java, true, PsiPerlStatement::class.java
-        )?.let {
-          result.addAll(it.getReferences(element).filterNotNull())
-        }
       }
       return result.toTypedArray()
     } ?: PsiReference.EMPTY_ARRAY

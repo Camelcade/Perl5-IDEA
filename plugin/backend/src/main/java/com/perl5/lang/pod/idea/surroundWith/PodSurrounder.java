@@ -29,7 +29,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlBundle;
-import com.perl5.lang.pod.idea.completion.PodLinkCompletionProvider;
+import com.perl5.lang.pod.parser.psi.util.PodRenderUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -94,7 +94,7 @@ public abstract class PodSurrounder implements Surrounder {
           sequentialOpenAngles = 0;
           sequentialCloseAngles = 0;
           if (StringUtil.equals(text, "|") || (StringUtil.equals(text, "/"))) {
-            sb.append(PodLinkCompletionProvider.escapeTitle(text.toString()));
+            sb.append(PodRenderUtil.escapeTitle(text.toString()));
           }
           else {
             sb.append(text);

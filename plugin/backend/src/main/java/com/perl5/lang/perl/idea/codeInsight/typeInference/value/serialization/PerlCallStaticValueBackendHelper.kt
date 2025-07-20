@@ -24,7 +24,8 @@ import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.util.Processor
 import com.perl5.lang.perl.extensions.imports.PerlImportsProvider
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.*
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlNamespaceUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 
 
 class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStaticValue>() {
@@ -57,7 +58,7 @@ class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStat
       }
     }
 
-    val containingNamespace = PerlPackageUtil.getContainingNamespace(contextElement.originalElement)
+    val containingNamespace = PerlPackageUtilCore.getContainingNamespace(contextElement.originalElement)
     val namespaceName = if (containingNamespace == null) null else containingNamespace.getNamespaceName()
     if (!StringUtil.isEmpty(namespaceName)) {
       processExportDescriptors(
@@ -85,7 +86,7 @@ class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStat
     }
 
     if (!callValue.hasExplicitNamespace() && contextElement != null) {
-      val containingNamespace = PerlPackageUtil.getContainingNamespace(contextElement.originalElement)
+      val containingNamespace = PerlPackageUtilCore.getContainingNamespace(contextElement.originalElement)
       val namespaceName = if (containingNamespace == null) null else containingNamespace.getNamespaceName()
       if (!StringUtil.isEmpty(namespaceName)) {
         processExportDescriptorsItems(
@@ -95,5 +96,23 @@ class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStat
     }
 
     return true
+  }
+
+  override fun addFallbackTargets(
+    callValue: PerlCallStaticValue,
+    namespaceNames: MutableSet<String>,
+    subNames: MutableSet<String>,
+    resolvedArguments: MutableList<PerlValue>,
+    hasTarget: Boolean,
+    builder: PerlOneOfValue.Builder,
+    resolvedNamespaceValue: PerlValue,
+    resolver: PerlValueResolver
+  ) {
+    if (!hasTarget && callValue.hasExplicitNamespace() && subNames.size == 1 && namespaceNames.size == 1 && resolvedArguments.isEmpty()) {
+      val possiblePackageName = PerlPackageUtilCore.join(namespaceNames.iterator().next(), subNames.iterator().next())
+      if (!PerlNamespaceUtil.getNamespaceDefinitions(resolver.project, resolver.resolveScope, possiblePackageName).isEmpty()) {
+        builder.addVariant(PerlScalarValue.create(possiblePackageName))
+      }
+    }
   }
 }

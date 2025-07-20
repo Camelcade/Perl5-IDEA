@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package intellilang;
 
 import base.PerlLightTestCase;
 import com.intellij.lang.html.HTMLLanguage;
-import com.intellij.openapi.util.SystemInfo;
 import com.intellij.util.FileContentUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;

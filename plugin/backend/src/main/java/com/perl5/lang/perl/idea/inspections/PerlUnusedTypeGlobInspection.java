@@ -24,7 +24,7 @@ import com.intellij.psi.search.searches.ReferencesSearch;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.PsiPerlGlobVariable;
-import com.perl5.lang.perl.util.PerlGlobUtil;
+import com.perl5.lang.perl.util.PerlGlobUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -34,7 +34,7 @@ public class PerlUnusedTypeGlobInspection extends PerlInspection {
     return new PerlVisitor() {
       @Override
       public void visitGlobVariable(@NotNull PsiPerlGlobVariable o) {
-        if ((o.getExplicitNamespaceName() != null || !PerlGlobUtil.BUILT_IN.contains(o.getName())) &&
+        if ((o.getExplicitNamespaceName() != null || !PerlGlobUtilCore.BUILT_IN.contains(o.getName())) &&
             ReferencesSearch.search(o, GlobalSearchScope.projectScope(o.getProject())).findFirst() == null) {
           holder.registerProblem(o, PerlBundle.message("inspection.message.unused.typeglob.alias"),
                                  ProblemHighlightType.LIKE_UNUSED_SYMBOL);

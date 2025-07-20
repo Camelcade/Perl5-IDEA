@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,9 +22,10 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
+import com.perl5.lang.perl.psi.PerlNamespaceDefinitionHandler;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.PerlVisitor;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -50,7 +51,7 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
 
         String packageName = o.getNamespaceName();
 
-        if (StringUtil.isEmpty(packageName) || PerlPackageUtil.MAIN_NAMESPACE_NAME.equals(packageName)) {
+        if (StringUtil.isEmpty(packageName) || PerlPackageUtilCore.MAIN_NAMESPACE_NAME.equals(packageName)) {
           return;
         }
 
@@ -66,7 +67,8 @@ public class PerlNamespaceRecursiveInheritanceInspection extends PerlInspection 
   private static boolean hasRecursiveInheritance(@NotNull PerlNamespaceDefinitionElement definition,
                                                  @NotNull Set<? super String> passedWay) {
     passedWay.add(definition.getNamespaceName());
-    for (PerlNamespaceDefinitionElement element : definition.getParentNamespaceDefinitions()) {
+    for (PerlNamespaceDefinitionElement element : PerlNamespaceDefinitionHandler.instance(definition)
+      .getParentNamespaceDefinitions(definition)) {
       if (passedWay.contains(element.getNamespaceName())) {
         return true;
       }

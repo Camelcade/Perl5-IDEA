@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.perl.idea.filetemplates;
 
 import com.intellij.ide.fileTemplates.FileTemplate;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -45,7 +45,7 @@ public class PerlCreatePackageFileFromTemplateHandler extends PerlCreateFileFrom
       props.put("PERL_PACKAGE_NAME", fileName);
     }
     else {
-      props.put("PERL_PACKAGE_NAME", packagePrefix + PerlPackageUtil.NAMESPACE_SEPARATOR + fileName);
+      props.put("PERL_PACKAGE_NAME", packagePrefix + PerlPackageUtilCore.NAMESPACE_SEPARATOR + fileName);
     }
 
     super.prepareProperties(props);

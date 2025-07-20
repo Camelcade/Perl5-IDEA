@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.PerlStringList;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlArrayUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -74,7 +74,7 @@ class PerlStringListTargetsHandler extends PerlSequentialElementTargetHandler {
                                                               @NotNull PsiElement replacement) {
     PerlIntroduceTarget baseTarget = Objects.requireNonNull(occurrences.getFirst());
     PsiElement baseElement = Objects.requireNonNull(baseTarget.getPlace());
-    List<PsiElement> sourceElements = PerlArrayUtil.collectListElements(baseElement);
+    List<PsiElement> sourceElements = PerlArrayUtilCore.collectListElements(baseElement);
 
     List<PsiElement> resultElements = new ArrayList<>();
 

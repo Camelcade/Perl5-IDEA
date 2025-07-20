@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableComp
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlVariableCompletionProcessorImpl;
 import com.perl5.lang.perl.idea.completion.util.PerlVariableCompletionUtil;
 import com.perl5.lang.perl.psi.PsiPerlMethod;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
 
@@ -48,7 +48,7 @@ public class PerlVariableCompletionProvider extends PerlCompletionProvider {
     }
     namespaceName = psiPerlMethod.getExplicitNamespaceName();
     if (StringUtil.isNotEmpty(namespaceName)) {
-      resultSet = resultSet.withPrefixMatcher(PerlPackageUtil.join(namespaceName, resultSet.getPrefixMatcher().getPrefix()));
+      resultSet = resultSet.withPrefixMatcher(PerlPackageUtilCore.join(namespaceName, resultSet.getPrefixMatcher().getPrefix()));
     }
 
     PerlVariableCompletionProcessor variableCompletionProcessor = new PerlVariableCompletionProcessorImpl(

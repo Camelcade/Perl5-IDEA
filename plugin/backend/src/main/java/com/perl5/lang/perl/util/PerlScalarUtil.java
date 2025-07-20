@@ -17,14 +17,10 @@
 package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.ElementManipulators;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
-import com.perl5.lang.perl.psi.PerlString;
-import com.perl5.lang.perl.psi.PerlStringContentElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import org.jetbrains.annotations.NotNull;
@@ -41,9 +37,6 @@ import static com.perl5.lang.perl.psi.stubs.variables.PerlScalarStubIndex.KEY_SC
 public final class PerlScalarUtil implements PerlElementTypes {
   private PerlScalarUtil() {
   }
-
-  public static final String DEFAULT_SELF_NAME = "self";
-  public static final String DEFAULT_SELF_SCALAR_NAME = "$" + DEFAULT_SELF_NAME;
 
   /**
    * Searching project files for global scalar definitions by specific package and variable name
@@ -105,15 +98,5 @@ public final class PerlScalarUtil implements PerlElementTypes {
     return PerlImplicitDeclarationsService.getInstance(project).processScalarsInNamespace(namespaceName, processor) &&
            PerlVariableUtil.processGlobalVariables(
              KEY_SCALAR_IN_NAMESPACE, project, scope, processor, namespaceName, !processAll);
-  }
-
-  /**
-   * Extracts value from the string element
-   *
-   * @param string psi element that may be StringElement or stringcontentElement
-   * @return string content or null
-   */
-  public static @Nullable String getStringContent(@Nullable PsiElement string) {
-    return string instanceof PerlString || string instanceof PerlStringContentElement ? ElementManipulators.getValueText(string) : null;
   }
 }

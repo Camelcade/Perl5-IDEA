@@ -28,7 +28,7 @@ import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -108,7 +108,7 @@ public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
     if (!(variableContainer instanceof PerlVariableDeclarationElement)) {
       return;
     }
-    PerlVariableDeclarationElement shadowedVariable = PerlResolveUtil.getLexicalDeclaration(perlVariable);
+    PerlVariableDeclarationElement shadowedVariable = PerlResolveUtilCore.getLexicalDeclaration(perlVariable);
     if (shadowedVariable != null) {
       result.add(shadowedVariable);
     }

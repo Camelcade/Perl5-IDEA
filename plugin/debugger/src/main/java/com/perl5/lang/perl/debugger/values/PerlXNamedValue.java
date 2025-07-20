@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.references.scopes.PerlVariableDeclarationSearcher;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -225,7 +225,7 @@ public class PerlXNamedValue extends XNamedValue implements PerlLoadableXValueCo
 
     if (navigatable != null) {
       PerlVariableDeclarationSearcher variableProcessor = new PerlVariableDeclarationSearcher(variableName, variableType, element);
-      PerlResolveUtil.treeWalkUp(element, variableProcessor);
+      PerlResolveUtilCore.treeWalkUp(element, variableProcessor);
 
       PerlVariableDeclarationElement result = variableProcessor.getResult();
       if (result == null) {
@@ -269,7 +269,7 @@ public class PerlXNamedValue extends XNamedValue implements PerlLoadableXValueCo
         }
       };
 
-      PerlResolveUtil.treeWalkUp(element, variableProcessor);
+      PerlResolveUtilCore.treeWalkUp(element, variableProcessor);
       return found[0];
     }
     return true;

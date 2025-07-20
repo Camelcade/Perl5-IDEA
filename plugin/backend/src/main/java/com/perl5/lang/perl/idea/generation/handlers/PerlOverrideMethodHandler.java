@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.perl.extensions.PerlCodeGenerator;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import org.jetbrains.annotations.NotNull;
@@ -29,7 +30,7 @@ import org.jetbrains.annotations.NotNull;
 public class PerlOverrideMethodHandler extends GeneratePerlClassMemberHandlerBase implements LanguageCodeInsightActionHandler {
   @Override
   protected void generateAfterElement(PsiElement anchor, Editor editor, PsiFile file) {
-    ((PerlFile)file).getCodeGenerator().generateOverrideMethod(anchor, editor);
+    PerlCodeGenerator.getInstance(((PerlFile)file)).generateOverrideMethod(anchor, editor);
   }
 
   @Override

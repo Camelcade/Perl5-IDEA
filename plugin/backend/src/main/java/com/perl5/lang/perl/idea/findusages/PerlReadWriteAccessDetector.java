@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.mixins.PerlCallArguments;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlArrayUtil;
+import com.perl5.lang.perl.util.PerlArrayUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -143,7 +143,7 @@ public class PerlReadWriteAccessDetector extends ReadWriteAccessDetector {
       return Access.ReadWrite;
     }
     else if (LIST_MODIFYING_EXPR.contains(parentExpressionType)) {
-      List<PsiElement> children = PerlArrayUtil.collectListElements(expression);
+      List<PsiElement> children = PerlArrayUtilCore.collectListElements(expression);
       if (!children.isEmpty() && PsiTreeUtil.isAncestor(children.getFirst(), originalElement, false)) {
         return Access.ReadWrite;
       }

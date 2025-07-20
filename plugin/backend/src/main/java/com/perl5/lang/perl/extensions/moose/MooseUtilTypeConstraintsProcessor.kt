@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package com.perl5.lang.perl.extensions.moose
 import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor
 import com.perl5.lang.perl.extensions.packageprocessor.impl.BaseStrictWarningsProvidingProcessor
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
-import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 import kotlinx.collections.immutable.toImmutableList
 
 class MooseUtilTypeConstraintsProcessor : BaseStrictWarningsProvidingProcessor() {
@@ -26,7 +26,7 @@ class MooseUtilTypeConstraintsProcessor : BaseStrictWarningsProvidingProcessor()
     listOf(
       "as", "class_type", "coerce", "duck_type", "enum", "find_type_constraint", "from", "inline_as", "match_on_type", "maybe_type",
       "message", "register_type_constraint", "role_type", "subtype", "type", "union", "via", "where"
-    ).map { name -> PerlExportDescriptor.create(PerlPackageUtil.PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS, name) }
+    ).map { name -> PerlExportDescriptor.create(PerlPackageUtilCore.PACKAGE_MOOSE_UTIL_TYPE_CONSTRAINTS, name) }
       .toImmutableList()
   }
 

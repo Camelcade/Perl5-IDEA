@@ -22,7 +22,7 @@ import com.intellij.psi.stubs.DefaultStubBuilder
 import com.intellij.psi.stubs.LanguageStubDefinition
 import com.intellij.psi.stubs.StubElement
 import com.intellij.psi.util.elementType
-import com.perl5.lang.perl.idea.EP.PerlPackageProcessorService
+import com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessorService
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.serialization.PerlValueBackendHelper
 import com.perl5.lang.perl.psi.PerlFile
 import com.perl5.lang.perl.psi.PerlSubCallHandlerVersionService

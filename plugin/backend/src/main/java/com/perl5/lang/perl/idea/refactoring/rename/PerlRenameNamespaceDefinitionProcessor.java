@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -72,8 +73,8 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
           }
 
           // rename file
-          String newPackageName = PerlPackageUtil.getCanonicalNamespaceName(newName);
-          List<String> newPackageChunks = Arrays.asList(newPackageName.split(PerlPackageUtil.NAMESPACE_SEPARATOR));
+          String newPackageName = PerlPackageUtilCore.getCanonicalNamespaceName(newName);
+          List<String> newPackageChunks = Arrays.asList(newPackageName.split(PerlPackageUtilCore.NAMESPACE_SEPARATOR));
           String newFileName = newPackageChunks.getLast() + ".pm";
           file.setName(newFileName);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,7 +20,6 @@ package completion;
 import base.MojoLightTestCase;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
-import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import org.junit.Test;
 
 import static com.perl5.lang.perl.extensions.mojo.MojoliciousLitePackageProcessor.MOJOLICIOUS_LITE;

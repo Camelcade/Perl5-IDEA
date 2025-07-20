@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.util.PerlPackageUtil.PACKAGE_VARS;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.PACKAGE_VARS;
 
 public class PerlUseVarsInspection extends PerlInspection {
   @Override

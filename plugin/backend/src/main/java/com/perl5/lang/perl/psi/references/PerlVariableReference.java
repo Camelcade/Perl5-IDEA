@@ -25,12 +25,9 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlVariable;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.utils.PerlResolveUtil;
+import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import com.perl5.lang.perl.util.PerlArrayUtil;
-import com.perl5.lang.perl.util.PerlHashUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
-import com.perl5.lang.perl.util.PerlScalarUtil;
+import com.perl5.lang.perl.util.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -51,7 +48,7 @@ public class PerlVariableReference extends PerlCachingReference<PsiElement> {
 
     List<PsiElement> result = new ArrayList<>();
 
-    PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtil.getLexicalDeclaration(perlVariable);
+    PerlVariableDeclarationElement lexicalDeclaration = PerlResolveUtilCore.getLexicalDeclaration(perlVariable);
 
     if (lexicalDeclaration != null) {
       result.add(lexicalDeclaration);
@@ -73,11 +70,11 @@ public class PerlVariableReference extends PerlCachingReference<PsiElement> {
   }
 
   private void addGlobalVariables(@NotNull PerlVariable variable, @NotNull List<? super PsiElement> result) {
-    result.addAll(variable.getGlobalDeclarations());
+    result.addAll(PerlVariableUtil.getGlobalDeclarations(variable));
   }
 
   private void addRelatedGlobs(@NotNull PerlVariable variable, @NotNull List<? super PsiElement> result) {
-    result.addAll(variable.getRelatedGlobs());
+    result.addAll(PerlVariableUtil.getRelatedGlobs(variable));
   }
 
   private void addImportedVariables(@NotNull PerlVariable perlVariable, @NotNull List<? super PsiElement> result) {

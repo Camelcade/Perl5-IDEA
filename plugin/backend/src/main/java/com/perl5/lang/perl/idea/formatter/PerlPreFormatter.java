@@ -33,7 +33,7 @@ import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -342,11 +342,11 @@ public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeSt
 
     String elementContent = o.getNode().getText();
 
-    if (myPerlSettings.MAIN_FORMAT == SUPPRESS && PerlPackageUtil.MAIN_NAMESPACE_FULL.equals(elementContent)) {
-      myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtil.NAMESPACE_SEPARATOR));
+    if (myPerlSettings.MAIN_FORMAT == SUPPRESS && PerlPackageUtilCore.MAIN_NAMESPACE_FULL.equals(elementContent)) {
+      myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtilCore.NAMESPACE_SEPARATOR));
     }
-    else if (myPerlSettings.MAIN_FORMAT == FORCE && PerlPackageUtil.MAIN_NAMESPACE_SHORT.equals(elementContent)) {
-      myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtil.MAIN_NAMESPACE_FULL));
+    else if (myPerlSettings.MAIN_FORMAT == FORCE && PerlPackageUtilCore.MAIN_NAMESPACE_SHORT.equals(elementContent)) {
+      myFormattingOperations.add(new PerlFormattingReplaceWithText(o, PerlPackageUtilCore.MAIN_NAMESPACE_FULL));
     }
     else {
       super.visitNamespaceElement(o);

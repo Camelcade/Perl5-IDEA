@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,8 +24,8 @@ import com.perl5.PerlBundle;
 import static com.intellij.psi.codeStyle.CommonCodeStyleSettings.DO_NOT_WRAP;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.SAME_LINE;
 import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.WHATEVER;
-import static com.perl5.lang.perl.util.PerlPackageUtil.MAIN_NAMESPACE_FULL;
-import static com.perl5.lang.perl.util.PerlPackageUtil.NAMESPACE_SEPARATOR;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.MAIN_NAMESPACE_FULL;
+import static com.perl5.lang.perl.util.PerlPackageUtilCore.NAMESPACE_SEPARATOR;
 
 
 public class PerlCodeStyleSettings extends CustomCodeStyleSettings {

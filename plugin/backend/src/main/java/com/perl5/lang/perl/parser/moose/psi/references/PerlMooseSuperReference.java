@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ import com.intellij.psi.ResolveResult;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement;
-import com.perl5.lang.perl.psi.mro.PerlMro;
 import com.perl5.lang.perl.psi.references.PerlCachingReference;
-import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlMroUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -45,12 +45,12 @@ public class PerlMooseSuperReference extends PerlCachingReference<PsiElement> {
     if (overrideStatement == null) {
       return ResolveResult.EMPTY_ARRAY;
     }
-    String packageName = PerlPackageUtil.getContextNamespaceName(element);
+    String packageName = PerlPackageUtilCore.getContextNamespaceName(element);
     String subName = overrideStatement.getSubName();
     Project project = element.getProject();
 
 
-    var targetSubs = PerlMro.collectCallables(
+    var targetSubs = PerlMroUtil.collectCallables(
       project, element.getResolveScope(),
       packageName,
       subName,

@@ -58,7 +58,6 @@ import java.util.function.UnaryOperator;
 
 public class PerlCodeGeneratorImpl implements PerlCodeGenerator {
   private static UnaryOperator<List<PerlMethodMember>> ourTestChooser = null;
-  public static final PerlCodeGenerator INSTANCE = new PerlCodeGeneratorImpl();
 
   @Override
   public @Nullable String getOverrideCodeText(PsiElement subBase) {

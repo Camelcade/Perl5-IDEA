@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,14 +17,11 @@
 package com.perl5.lang.mason2.psi.impl;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiReference;
 import com.perl5.lang.mason2.psi.MasonMethodModifier;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseMethodModifierImpl;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +34,9 @@ public class MasonMethodModifierImpl extends PerlMooseMethodModifierImpl impleme
     super(node);
   }
 
-
   @Override
-  public @Nullable PsiReference[] getReferences(PsiElement element) {
-    return null;
+  public boolean hasStringSubReference() {
+    return false;
   }
 
   protected @NotNull List<PerlVariableDeclarationElement> buildImplicitVariables() {

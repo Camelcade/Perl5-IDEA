@@ -19,7 +19,6 @@ package unit;
 import base.PerlInstrumentationTestCase;
 import categories.CategoriesFilter;
 import com.perl5.lang.mason2.Mason2ParserDefinition;
-import com.perl5.lang.perl.PerlParserDefinition;
 import com.perl5.lang.perl.parser.MasonParserUtil;
 import org.junit.runners.Parameterized;
 
@@ -31,7 +30,7 @@ public class Mason2PluginInstrumentationTest extends PerlInstrumentationTestCase
   @Parameterized.Parameters(name = "{0}")
   public static Collection<Object[]> data() {
     return !CategoriesFilter.shouldRun(Mason2PluginInstrumentationTest.class) ? Collections.emptyList() : Arrays.asList(new Object[][]{
-      {"plugin.backend", PerlParserDefinition.class, PLUGIN_PATTERN_STRING},
+      PARSER_DEFINITION_CLASS_DATA,
       {"mason.framework", MasonParserUtil.class, MASON_FRAMEWORK_PATTERN_STRING},
       {"mason2", Mason2ParserDefinition.class, MASON2_PATTERN_STRING},
     });
