@@ -27,7 +27,7 @@
   <dependencies>
     <plugin id="com.perl5"/>
     <plugin id="com.intellij.modules.lang"/>
-    <module name="perl5.plugin.backend.main"/>
+    <module name="perl5.plugin.common.main"/>
   </dependencies>
 
   <extensions defaultExtensionNs="com.perl5">
