@@ -5,5 +5,9 @@
   </dependencies>
   <extensions defaultExtensionNs="com.intellij">
     <errorHandler implementation="com.perl5.lang.mason2.MasonYoutrackErrorHandler"/>
+    <editorHighlighterProvider filetype="Mason2 Pure Perl5 Component"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+    <editorHighlighterProvider filetype="Mason2 top-level component"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
   </extensions>
 </idea-plugin>

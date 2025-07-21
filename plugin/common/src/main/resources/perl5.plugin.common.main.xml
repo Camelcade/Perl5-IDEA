@@ -64,6 +64,12 @@
                           id="PerlEnterHandler" order="first"/>
     <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterInBracketsHandler"/>
     <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterInCommentHandler"/>
+    <editorHighlighterProvider filetype="Perl5 Script"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+    <editorHighlighterProvider filetype="Perl5 Package"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+    <editorHighlighterProvider filetype="Perl5 Test"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->

@@ -353,15 +353,6 @@
     <configurationType implementation="com.perl5.lang.perl.idea.run.prove.PerlTestRunConfigurationType"/>
     <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.prove.PerlTestRunConfigurationProducer"/>
 
-    <editorHighlighterProvider filetype="Perl5 Script"
-                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
-    <editorHighlighterProvider filetype="Cpanfile"
-                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
-    <editorHighlighterProvider filetype="Perl5 Package"
-                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
-    <editorHighlighterProvider filetype="Perl5 Test"
-                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
-
     <lang.psiStructureViewFactory language="Perl5"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
     <declarationRangeHandler key="com.perl5.lang.perl.psi.PerlSubDefinitionElement"
