@@ -17,6 +17,12 @@
 
     <!-- Perl  -->
     <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
+    <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypeScript" fieldName="INSTANCE"
+              name="Perl5 Script" language="Perl5" extensions="pl;ph;al;cgi"/>
+    <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypePackage" fieldName="INSTANCE"
+              name="Perl5 Package" extensions="pm" language="Perl5"/>
+    <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypeTest" fieldName="INSTANCE"
+              name="Perl5 Test" language="Perl5" extensions="t"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
     <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
                   id="PerlTypedHandler" order="first"/>
@@ -55,6 +61,11 @@
     <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlBraceMatcher"/>
     <!-- EOF Perl  -->
 
+    <!-- Perl XS  -->
+    <fileType implementationClass="com.perl5.lang.xs.filetypes.XSFileType" fieldName="INSTANCE"
+              name="Perl5 Extension" extensions="xs" language="Perl5 XS"/>
+    <!-- EOF Perl XS  -->
+
     <!-- Regexp  -->
     <lang.parserDefinition language="Perl5Regexp"
                            implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpParserDefinition"/>
@@ -62,6 +73,8 @@
 
     <!--  POD -->
     <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
+    <fileType implementationClass="com.perl5.lang.pod.filetypes.PodFileType" fieldName="INSTANCE"
+              name="POD File" language="Perl5 POD" extensions="pod"/>
     <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
     <lang.syntaxHighlighterFactory language="Perl5 POD"
                                    implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
