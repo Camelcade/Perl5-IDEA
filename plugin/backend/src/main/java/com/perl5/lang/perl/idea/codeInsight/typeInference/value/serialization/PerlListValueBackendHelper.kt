@@ -22,7 +22,7 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueDeseria
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValueSerializer
 
 abstract class PerlListValueBackendHelper<Val : PerlListValue> : PerlValueBackendHelper<Val> {
-  override fun serializeData(value: Val, serializer: PerlValueSerializer) = serializer.writeValuesList(value.elements)
+  override fun serializeData(value: Val, serializer: PerlValueSerializer): Unit = serializer.writeValuesList(value.elements)
 
   final override fun deserialize(deserializer: PerlValueDeserializer): PerlValue = deserialize(deserializer, deserializer.readValuesList())
 

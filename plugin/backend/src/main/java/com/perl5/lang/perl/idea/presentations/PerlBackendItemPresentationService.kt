@@ -43,11 +43,11 @@ class PerlBackendItemPresentationService : PerlItemPresentationService {
     // trying to get project's root directory
     val innerMostSourceRoot =
       ProjectRootManagerEx.getInstanceEx(containingFile.project).fileIndex.getContentRootForFile(virtualFile)
-    if (innerMostSourceRoot != null) {
-      return VfsUtilCore.getRelativePath(virtualFile, innerMostSourceRoot)!!
+    return if (innerMostSourceRoot != null) {
+      VfsUtilCore.getRelativePath(virtualFile, innerMostSourceRoot)!!
     }
     else {
-      return virtualFile.path
+      virtualFile.path
     }
   }
 }

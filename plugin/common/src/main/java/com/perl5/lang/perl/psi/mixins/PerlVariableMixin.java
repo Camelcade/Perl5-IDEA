@@ -154,7 +154,7 @@ public abstract class PerlVariableMixin extends PerlCompositeElementImpl impleme
    */
   @Deprecated
   @Override
-  public PerlVariableDeclarationElement getLexicalDeclaration() {
+  public @Nullable PerlVariableDeclarationElement getLexicalDeclaration() {
     if (getExplicitNamespaceName() != null) {
       return null;
     }

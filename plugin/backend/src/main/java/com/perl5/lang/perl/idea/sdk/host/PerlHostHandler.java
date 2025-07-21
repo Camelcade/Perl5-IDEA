@@ -79,7 +79,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
                                       @Nullable Function<? super PerlHostData<?, ?>, ? extends File> defaultPathFunction,
                                       boolean useDefaultIfExists,
                                       @NotNull Predicate<? super String> nameValidator,
-                                      @NotNull Function<? super String, String> pathValidator,
+                                      @NotNull Function<? super String, @Nullable String> pathValidator,
                                       @NotNull BiConsumer<? super String, ? super PerlHostData<?, ?>> selectionConsumer,
                                       @NotNull Disposable disposable) {
     Data hostData = createDataInteractively();
@@ -91,11 +91,11 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
     Consumer<String> resultConsumer = it -> selectionConsumer.accept(it, hostData);
     if (fileSystem != null) {
       chooseFileInteractively(
-        dialogTitle, defaultPath, useDefaultIfExists, nameValidator, pathValidator, resultConsumer, hostData, fileSystem);
+        dialogTitle, defaultPath, useDefaultIfExists, nameValidator, pathValidator, resultConsumer, fileSystem);
     }
     else {
       chooseFileInteractively(
-        dialogTitle, defaultPath, useDefaultIfExists, nameValidator, pathValidator, resultConsumer, hostData);
+        dialogTitle, defaultPath, nameValidator, pathValidator, resultConsumer);
     }
   }
 
@@ -104,11 +104,9 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
    */
   protected void chooseFileInteractively(@NlsContexts.DialogTitle @NotNull String dialogTitle,
                                          @Nullable File defaultPath,
-                                         boolean useDefaultIfExists,
                                          @NotNull Predicate<? super String> nameValidator,
                                          @NotNull Function<? super String, String> pathValidator,
-                                         @NotNull Consumer<? super String> selectionConsumer,
-                                         @NotNull Data hostData) {
+                                         @NotNull Consumer<? super String> selectionConsumer) {
     Ref<String> pathRef = Ref.create();
     ApplicationManager.getApplication().invokeAndWait(
       () -> pathRef.set(Messages.showInputDialog(
@@ -143,7 +141,6 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
                                          @NotNull Predicate<? super String> nameValidator,
                                          @NotNull Function<? super String, String> pathValidator,
                                          @NotNull Consumer<? super String> selectionConsumer,
-                                         @NotNull Data hostData,
                                          @NotNull VirtualFileSystem fileSystem) {
     VirtualFile defaultFile = defaultPath == null ? null : fileSystem.findFileByPath(defaultPath.getPath());
 

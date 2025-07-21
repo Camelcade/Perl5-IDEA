@@ -38,7 +38,7 @@ class MasonOverrideDefinition : PerlMooseOverrideStatement, PerlImplicitVariable
 
   private fun buildImplicitVariables(): MutableList<PerlVariableDeclarationElement> {
     val newImplicitVariables: MutableList<PerlVariableDeclarationElement> = ArrayList()
-    if (isValid()) {
+    if (isValid) {
       newImplicitVariables.add(PerlImplicitVariableDeclaration.createInvocant(this))
     }
     return newImplicitVariables

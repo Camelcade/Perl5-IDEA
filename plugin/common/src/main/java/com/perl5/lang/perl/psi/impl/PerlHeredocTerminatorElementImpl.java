@@ -24,6 +24,7 @@ import com.perl5.lang.perl.psi.PerlHeredocTerminatorElement;
 import com.perl5.lang.perl.psi.PerlReferenceOwner;
 import com.perl5.lang.perl.psi.PerlVisitor;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements PerlHeredocTerminatorElement {
   public PerlHeredocTerminatorElementImpl(IElementType type, CharSequence text) {
@@ -46,7 +47,7 @@ public class PerlHeredocTerminatorElementImpl extends PsiCommentImpl implements 
   }
 
   @Override
-  public final PsiReference getReference() {
+  public final @Nullable PsiReference getReference() {
     PsiReference[] references = getReferences();
     return references.length == 0 ? null : references[0];
   }

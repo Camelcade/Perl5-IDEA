@@ -38,7 +38,7 @@ class HTMLMasonArgsBlockStubSerializingFactory(elementType: IElementType) :
   override fun createStub(psi: HTMLMasonArgsBlock, parentStub: StubElement<out PsiElement>?): HTMLMasonArgsBlockStub =
     HTMLMasonArgsBlockStubImpl(parentStub, elementType, psi.getArgumentsList())
 
-  override fun serialize(stub: HTMLMasonArgsBlockStub, dataStream: StubOutputStream) =
+  override fun serialize(stub: HTMLMasonArgsBlockStub, dataStream: StubOutputStream): Unit =
     dataStream.serializeArguments(stub.getArgumentsList())
 
   override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): HTMLMasonArgsBlockStub =

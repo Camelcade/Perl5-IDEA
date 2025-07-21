@@ -23,6 +23,7 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.PerlParserImpl;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * This wrapper created to be able to store per-parsing data like pragmas, warnings and variables ?
@@ -46,7 +47,7 @@ public class PerlBuilder extends GeneratedParserUtilBase.Builder implements Perl
    * @param steps positive or negative steps number to get token
    * @return token data: type and text
    */
-  public IElementType lookupToken(int steps) {
+  public @Nullable IElementType lookupToken(int steps) {
     assert steps != 0;
     int rawStep = 0;
     int step = steps / Math.abs(steps);

@@ -22,13 +22,14 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeProvider;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public class TemplateToolkitFileTypeProvider implements PerlFileTypeProvider {
   @Override
-  public void addRoots(@NotNull Project project, BiConsumer<? super VirtualFile, Function<VirtualFile, FileType>> rootConsumer) {
+  public void addRoots(@NotNull Project project, BiConsumer<? super VirtualFile, Function<VirtualFile, @Nullable FileType>> rootConsumer) {
     TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(project);
     for (VirtualFile root : settings.getTemplateRoots()) {
       rootConsumer.accept(

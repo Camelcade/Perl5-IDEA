@@ -104,7 +104,7 @@ class PerlValueBackendResolveService : PerlValueResolveService {
     }
 
     val valueBuilder = PerlOneOfValue.builder()
-    val namespaceNameProcessor: Consumer<String?> = Consumer { it -> valueBuilder.addVariant(PerlScalarValue.create(it)) }
+    val namespaceNameProcessor: Consumer<String?> = Consumer { valueBuilder.addVariant(PerlScalarValue.create(it)) }
     if (usedCallableNames.isEmpty()) {
       baseNamespaces.forEach(namespaceNameProcessor)
     }

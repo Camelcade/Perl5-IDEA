@@ -19,7 +19,6 @@ package formatter;
 
 import categories.Heavy;
 import com.intellij.openapi.util.registry.Registry;
-import com.perl5.lang.perl.idea.project.PerlNamesBackendCache;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -342,7 +341,7 @@ public class PerlFormatterSpacingTest extends PerlFormatterTestCase {
     var value = Registry.get("perl5.eval.auto.injection");
     try {
       value.setValue(false);
-      ((PerlNamesBackendCache)PerlNamesCache.getInstance(getProject())).cleanCache();
+      PerlNamesCache.getInstance(getProject()).cleanCache();
       initWithLarge(getTestName(true));
       doFormatTestWithoutInitialization(getTestName(true), "");
     }

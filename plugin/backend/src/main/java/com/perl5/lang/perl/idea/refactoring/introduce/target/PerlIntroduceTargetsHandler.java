@@ -300,7 +300,7 @@ public abstract class PerlIntroduceTargetsHandler {
    * Could be an extension point
    */
   @Contract("null->null;!null->!null")
-  private static PerlIntroduceTargetsHandler getHandler(@Nullable PsiElement run) {
+  private static @Nullable PerlIntroduceTargetsHandler getHandler(@Nullable PsiElement run) {
     if (run == null) {
       return null;
     }

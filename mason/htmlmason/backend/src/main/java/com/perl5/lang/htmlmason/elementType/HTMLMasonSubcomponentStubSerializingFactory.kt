@@ -42,7 +42,8 @@ class HTMLMasonSubcomponentStubSerializingFactory(elementType: IElementType) :
     parentStub: StubElement<out PsiElement>?
   ): HTMLMasonSubcomponentDefinitionStub = HTMLMasonSubcomponentDefinitionStubImpl(parentStub, elementType, psi.name)
 
-  override fun serialize(stub: HTMLMasonSubcomponentDefinitionStub, dataStream: StubOutputStream) = dataStream.writeName(stub.getName())
+  override fun serialize(stub: HTMLMasonSubcomponentDefinitionStub, dataStream: StubOutputStream): Unit =
+    dataStream.writeName(stub.getName())
 
   override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): HTMLMasonSubcomponentDefinitionStub =
     HTMLMasonSubcomponentDefinitionStubImpl(parentStub, elementType, PerlStubSerializationUtil.readString(dataStream))

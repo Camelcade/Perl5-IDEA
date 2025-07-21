@@ -52,7 +52,7 @@ public class PerlArraySliceValue extends PerlParametrizedOperationValue {
     return ObjectUtils.notNull(computeResolve(resolvedArrayValue, resolvedIndexesValue), UNKNOWN_VALUE);
   }
 
-  private static PerlValue computeResolve(@NotNull PerlValue arrayValue,
+  private static @Nullable PerlValue computeResolve(@NotNull PerlValue arrayValue,
                                           @NotNull PerlValue indexValue) {
     if (!(arrayValue instanceof PerlArrayValue)) {
       return null;

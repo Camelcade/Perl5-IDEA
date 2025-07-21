@@ -23,6 +23,7 @@ import com.intellij.psi.PsiReference;
 import com.perl5.lang.perl.psi.PerlReferenceOwner;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class PodCompositeElementMixin extends ASTWrapperPsiElement implements PodCompositeElement {
   public PodCompositeElementMixin(@NotNull ASTNode node) {
@@ -35,7 +36,7 @@ public class PodCompositeElementMixin extends ASTWrapperPsiElement implements Po
   }
 
   @Override
-  public final PsiReference getReference() {
+  public final @Nullable PsiReference getReference() {
     PsiReference[] references = getReferences();
     return references.length == 0 ? null : references[0];
   }

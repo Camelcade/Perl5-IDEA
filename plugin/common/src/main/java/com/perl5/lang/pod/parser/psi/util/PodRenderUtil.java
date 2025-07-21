@@ -199,7 +199,7 @@ public class PodRenderUtil implements PodElementTypes {
     }
   }
 
-  public static String getPodLinkForElement(PodTitledSection element) {
+  public static @Nullable String getPodLinkForElement(PodTitledSection element) {
     String elementLink = element.getTitleText();
     if (StringUtil.isEmpty(elementLink)) {
       return null;

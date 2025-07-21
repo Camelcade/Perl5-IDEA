@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,6 +31,7 @@ import com.perl5.lang.tt2.TemplateToolkitLanguage;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public class TemplateToolkitTypedHandler extends TypedHandlerDelegate implements TemplateToolkitElementTypes {
@@ -44,7 +45,7 @@ public class TemplateToolkitTypedHandler extends TypedHandlerDelegate implements
     return result == null ? super.beforeCharTyped(c, project, editor, file, fileType) : result;
   }
 
-  protected Result processChar(char c, Project project, Editor editor, PsiFile file) {
+  protected @Nullable Result processChar(char c, Project project, Editor editor, PsiFile file) {
     FileViewProvider viewProvider = file.getViewProvider();
     if (!(viewProvider instanceof TemplateToolkitFileViewProvider)) {
       return null;

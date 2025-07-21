@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.openapi.util.NullableLazyValue;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostFileTransfer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -36,7 +37,7 @@ class PerlDockerFileTransfer extends PerlHostFileTransfer<PerlDockerData> {
   private volatile Throwable closedThrowable;
   private volatile ExecutionException myCreationError;
 
-  private final NullableLazyValue<String> myContainerNameProvider = atomicLazyNullable(() -> {
+  private final NullableLazyValue<@Nullable String> myContainerNameProvider = atomicLazyNullable(() -> {
     try {
       String containerName = getAdapter().createRunningContainer("copying_" + myHostData.getSafeImageName());
       isOpened = true;

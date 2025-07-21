@@ -30,6 +30,7 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 
@@ -52,7 +53,7 @@ public class PerlDocumentBasedFormattingModel extends DocumentBasedFormattingMod
   }
 
   @Override
-  public TextRange shiftIndentInsideDocumentRange(Document document, ASTNode node, TextRange range, int indent) {
+  public @Nullable TextRange shiftIndentInsideDocumentRange(Document document, ASTNode node, TextRange range, int indent) {
     if (!HEREDOC_BODIES_TOKENSET.contains(PsiUtilCore.getElementType(node))) {
       return null;
     }

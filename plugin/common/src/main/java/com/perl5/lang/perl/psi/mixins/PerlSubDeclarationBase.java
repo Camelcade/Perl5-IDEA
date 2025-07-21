@@ -43,7 +43,7 @@ public abstract class PerlSubDeclarationBase extends PerlSubBase<PerlSubDeclarat
   }
 
   @Override
-  public @Nullable Icon getIcon(int flags) {
+  public @NotNull Icon getIcon(int flags) {
     return isXSub()
            ? PerlIcons.XSUB_GUTTER_ICON
            : PerlIcons.SUB_DECLARATION_GUTTER_ICON;

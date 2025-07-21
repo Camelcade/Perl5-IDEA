@@ -33,12 +33,11 @@ interface PerlValueBackendHelper<Val : PerlValue> {
 
   /**
    * @return a serialization id unique for this value.
-   * @see PerlValuesManager
    */
   val serializationId: Int
 
   @Throws(IOException::class)
-  fun serializeData(value: Val, serializer: PerlValueSerializer) = Unit
+  fun serializeData(value: Val, serializer: PerlValueSerializer): Unit = Unit
 
   fun deserialize(deserializer: PerlValueDeserializer): PerlValue =
     throw UnsupportedOperationException("This method is not implemented for $this")
@@ -50,7 +49,7 @@ interface PerlValueBackendHelper<Val : PerlValue> {
     operator fun <Val : PerlValue> get(value: Val): PerlValueBackendHelper<Val> =
       EP.findSingle(value.javaClass) as? PerlValueBackendHelper<Val> ?: throw RuntimeException("No serialization helper for $value")
 
-    fun instance(clazz: Class<*>) = instanceCache.computeIfAbsent(clazz) {
+    fun instance(clazz: Class<*>): PerlValueBackendHelper<*> = instanceCache.computeIfAbsent(clazz) {
       EP.point!!.extensionList.map { it.instance }.find { it.serializationId == id }
         ?: throw RuntimeException("No serialization helper for id $id")
     }
@@ -64,94 +63,94 @@ interface PerlValueBackendHelper<Val : PerlValue> {
     }
 
     @JvmField
-    val DUPLICATE_ID = id++
+    val DUPLICATE_ID: Int = id++
 
     // special values
     @JvmField
-    val UNKNOWN_ID = id++
+    val UNKNOWN_ID: Int = id++
 
     @JvmField
-    val UNDEF_ID = id++
+    val UNDEF_ID: Int = id++
 
     @JvmField
-    val ARGUMENTS_ID = id++
+    val ARGUMENTS_ID: Int = id++
 
     // primitives
     @JvmField
-    val SCALAR_ID = id++
+    val SCALAR_ID: Int = id++
 
     @JvmField
-    val SCALAR_DEREFERENCE_ID = id++
+    val SCALAR_DEREFERENCE_ID: Int = id++
 
     @JvmField
-    val SCALAR_CONTEXT_ID = id++
+    val SCALAR_CONTEXT_ID: Int = id++
 
     @JvmField
-    val ARRAY_ID = id++
+    val ARRAY_ID: Int = id++
 
     @JvmField
-    val ARRAY_ELEMENT_ID = id++
+    val ARRAY_ELEMENT_ID: Int = id++
 
     @JvmField
-    val ARRAY_SLICE_ID = id++
+    val ARRAY_SLICE_ID: Int = id++
 
     @JvmField
-    val ARRAY_DEREFERENCE_ID = id++
+    val ARRAY_DEREFERENCE_ID: Int = id++
 
     @JvmField
-    val UNSHIFT_ID = id++
+    val UNSHIFT_ID: Int = id++
 
     @JvmField
-    val PUSH_ID = id++
+    val PUSH_ID: Int = id++
 
     @JvmField
-    val SUBLIST_ID = id++
+    val SUBLIST_ID: Int = id++
 
     @JvmField
-    val HASH_ID = id++
+    val HASH_ID: Int = id++
 
     @JvmField
-    val HASH_ELEMENT_VALUE = id++
+    val HASH_ELEMENT_VALUE: Int = id++
 
     @JvmField
-    val DEFERRED_HASH_ID = id++
+    val DEFERRED_HASH_ID: Int = id++
 
     @JvmField
-    val HASH_SLICE_ID = id++
+    val HASH_SLICE_ID: Int = id++
 
     @JvmField
-    val HASH_DEREFERENCE_ID = id++
+    val HASH_DEREFERENCE_ID: Int = id++
 
     @JvmField
-    val ARITHMETIC_NEGATION = id++
+    val ARITHMETIC_NEGATION: Int = id++
 
     @JvmField
-    val REFERENCE_ID = id++
+    val REFERENCE_ID: Int = id++
 
     @JvmField
-    val BLESSED_ID = id++
+    val BLESSED_ID: Int = id++
 
     // synthetic values
     @JvmField
-    val CALL_STATIC_ID = id++
+    val CALL_STATIC_ID: Int = id++
 
     @JvmField
-    val CALL_OBJECT_ID = id++
+    val CALL_OBJECT_ID: Int = id++
 
     @JvmField
-    val ONE_OF_ID = id++
+    val ONE_OF_ID: Int = id++
 
     @JvmField
-    val DEFAULT_ARGUMENT_ID = id++
+    val DEFAULT_ARGUMENT_ID: Int = id++
 
     @JvmField
-    val SMART_GETTER_ID = id++
+    val SMART_GETTER_ID: Int = id++
 
     @JvmField
-    val DUCK_TYPE_ID = id++
+    val DUCK_TYPE_ID: Int = id++
 
     @JvmField
-    val VALUE_WITH_FALLBACK = id++
+    val VALUE_WITH_FALLBACK: Int = id++
 
     @JvmStatic
     fun getVersion(): Int = id + (if (PerlValue.isDuckTypingEnabled()) 100 else 0)
