@@ -388,8 +388,6 @@
     <gotoDeclarationHandler implementation="com.perl5.lang.perl.idea.navigation.PerlGotoDeclarationHandler"/>
     <weigher key="completion" implementationClass="com.perl5.lang.perl.idea.PerlCompletionWeighter" order="first"/>
 
-    <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-
     <renameHandler
         implementation="com.perl5.lang.perl.idea.refactoring.rename.PerlStringNameIdentifierInplaceRenameHandler"
         order="first"/>

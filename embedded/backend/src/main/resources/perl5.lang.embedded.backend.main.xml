@@ -20,10 +20,6 @@
     <lang.findUsagesProvider language="Embedded Perl"
                              implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
 
-
-    <lang.namesValidator language="Embedded Perl"
-                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-
     <lang.foldingBuilder language="Embedded Perl"
                          implementationClass="com.perl5.lang.embedded.idea.folding.EmbeddedPerlFoldingBuilder"/>
 

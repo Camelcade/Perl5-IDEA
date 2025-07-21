@@ -41,9 +41,6 @@
     <lang.formatter language="Mojolicious Perl"
                     implementationClass="com.perl5.lang.mojolicious.idea.formatter.MojoliciousFormattingModelBuilder"/>
 
-    <lang.namesValidator language="Mojolicious Perl"
-                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-
     <typedHandler implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousTypedHandler"
                   order="first"/>
     <enterHandlerDelegate

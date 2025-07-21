@@ -78,8 +78,6 @@
     <lang.indentStrategy language="Mason2"
                          implementationClass="com.perl5.lang.mason2.idea.editor.MasonIndentStrategy"/>
 
-    <lang.namesValidator language="Mason2"
-                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
     <psi.referenceContributor language="Mason2"
                               implementation="com.perl5.lang.mason2.psi.references.MasonReferenceContributor"/>
     <lang.refactoringSupport language="Mason2"
