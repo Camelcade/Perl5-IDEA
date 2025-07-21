@@ -52,6 +52,7 @@
     <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlHeredocTerminatorElement" order="first"
                              implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocTerminatorManipulator"/>
     <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
+    <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlBraceMatcher"/>
     <!-- EOF Perl  -->
 
     <!-- Regexp  -->
