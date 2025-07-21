@@ -371,8 +371,6 @@
 
     <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
 
-    <lang.syntaxHighlighterFactory language="Perl5"
-                                   implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
     <editorHighlighterProvider filetype="Perl5 Script"
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
     <editorHighlighterProvider filetype="Cpanfile"
