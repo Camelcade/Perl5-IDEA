@@ -9,5 +9,7 @@
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
     <editorHighlighterProvider filetype="Mason2 top-level component"
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+    <lang.namesValidator language="Mason2"
+                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
   </extensions>
 </idea-plugin>

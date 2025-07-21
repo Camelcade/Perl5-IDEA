@@ -23,6 +23,8 @@
                                    implementationClass="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlSyntaxHighlighterFactory"/>
     <typedHandler implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlTypedHandler"
                   order="first"/>
+    <lang.namesValidator language="Embedded Perl"
+                         implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
 
     <!--Temporary solution, better than nothing-->
     <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
