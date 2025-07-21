@@ -32,6 +32,7 @@
     <!-- EOF Perl  -->
 
     <!--  POD -->
+    <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
     <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
     <lang.syntaxHighlighterFactory language="Perl5 POD"
                                    implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
