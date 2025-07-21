@@ -337,7 +337,6 @@
         implementation="com.perl5.lang.perl.idea.filetemplates.PerlFilePropertiesProvider" order="last"/>
 
     <lang.smartEnterProcessor language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.smartkeys.PerlSmartEnterProcessor"/>
-    <backspaceHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlBackspaceHandler" order="first"/>
 
     <documentationProvider implementation="com.perl5.lang.perl.documentation.PerlDocumentationProvider"
                            order="first"/>
@@ -700,7 +699,6 @@
 
     <!-- POD  language-->
     <!-- tested/untestable -->
-    <backspaceHandlerDelegate implementation="com.perl5.lang.pod.idea.editor.PodBackspaceHandler"/>
     <documentationProvider implementation="com.perl5.lang.pod.idea.documentation.PodDocumentationProvider" order="first"/>
     <lang.psiStructureViewFactory language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
     <iconProvider implementation="com.perl5.lang.pod.idea.ui.PodIconProvider"/>
