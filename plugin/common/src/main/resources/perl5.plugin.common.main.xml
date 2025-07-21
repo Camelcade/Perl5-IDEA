@@ -15,6 +15,8 @@
     <additionalTextAttributes scheme="Darcula" file="colorSchemes/perl_darcula.xml"/>
     <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
 
+    <!-- Perl  -->
+    <lang.parserDefinition language="Perl5" implementationClass="com.perl5.lang.perl.PerlParserDefinition"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
     <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
                   id="PerlTypedHandler" order="first"/>
@@ -27,6 +29,7 @@
 
     <lang.syntaxHighlighterFactory language="Perl5"
                                    implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
+    <!-- EOF Perl  -->
 
     <!--  POD -->
     <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
