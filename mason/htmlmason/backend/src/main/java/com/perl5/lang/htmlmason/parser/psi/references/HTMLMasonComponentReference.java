@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonNamedElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 
@@ -139,7 +140,8 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
 
       if (StringUtil.startsWith(nameOrPath, "/")) {
         HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
-        for (VirtualFile componentRoot : settings.getComponentsRoots()) {
+        for (VirtualFile componentRoot : PerlProjectManager.getInstance(settings.getProject())
+          .getModulesRootsOfType(settings.getSourceRootType())) {
           componentVirtualFile = componentRoot.findFileByRelativePath(nameOrPath);
 
           if (componentVirtualFile != null) {

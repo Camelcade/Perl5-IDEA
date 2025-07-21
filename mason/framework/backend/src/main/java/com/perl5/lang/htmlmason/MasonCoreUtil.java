@@ -26,6 +26,7 @@ import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import org.jetbrains.annotations.NotNull;
@@ -41,7 +42,8 @@ public class MasonCoreUtil {
         file = file.getParent();
       }
 
-      for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
+      for (VirtualFile componentRoot : PerlProjectManager.getInstance(masonSettings.getProject())
+        .getModulesRootsOfType(masonSettings.getSourceRootType())) {
         if (VfsUtilCore.isAncestor(componentRoot, file, false)) {
           return componentRoot;
         }

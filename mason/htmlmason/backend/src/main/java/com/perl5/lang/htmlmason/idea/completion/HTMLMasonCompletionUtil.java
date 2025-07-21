@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonParametrizedEntity;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonSubcomponentDefitnition;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.*;
@@ -89,7 +90,8 @@ public final class HTMLMasonCompletionUtil {
   public static void fillWithAbsoluteSubcomponents(final @NotNull CompletionResultSet resultSet, @NotNull Project project) {
     HTMLMasonSettings masonSettings = HTMLMasonSettings.getInstance(project);
 
-    for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
+    for (VirtualFile componentRoot : PerlProjectManager.getInstance(masonSettings.getProject())
+      .getModulesRootsOfType(masonSettings.getSourceRootType())) {
       VfsUtilCore.processFilesRecursively(componentRoot, new ComponentsFilesCollector("/", componentRoot, resultSet, project));
     }
   }

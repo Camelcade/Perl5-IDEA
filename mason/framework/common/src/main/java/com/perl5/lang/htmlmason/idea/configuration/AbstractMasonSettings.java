@@ -18,12 +18,10 @@ package com.perl5.lang.htmlmason.idea.configuration;
 
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.EditorNotifications;
 import com.intellij.util.xmlb.annotations.Transient;
 import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -59,11 +57,7 @@ public abstract class AbstractMasonSettings {
     }
   }
 
-  protected abstract PerlSourceRootType getSourceRootType();
-
-  public @NotNull List<VirtualFile> getComponentsRoots() {
-    return PerlProjectManager.getInstance(getProject()).getModulesRootsOfType(getSourceRootType());
-  }
+  public abstract PerlSourceRootType getSourceRootType();
 
   public int getChangeCounter() {
     return changeCounter;

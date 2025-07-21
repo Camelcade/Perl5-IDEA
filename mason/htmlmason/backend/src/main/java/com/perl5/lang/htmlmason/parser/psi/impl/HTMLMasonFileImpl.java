@@ -36,6 +36,7 @@ import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.*;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.psi.PerlCompositeElement;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
@@ -137,7 +138,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     else if (!StringUtil.equals(parentComponentPath, HTMLMasonFlagsStatement.UNDEF_RESULT)) {
       if (StringUtil.startsWith(parentComponentPath, "/")) {
         parentComponentPath = parentComponentPath.substring(1);
-        for (VirtualFile root : settings.getComponentsRoots()) {
+        for (VirtualFile root : PerlProjectManager.getInstance(settings.getProject()).getModulesRootsOfType(settings.getSourceRootType())) {
           if ((parentFile = root.findFileByRelativePath(parentComponentPath)) != null) {
             break;
           }
