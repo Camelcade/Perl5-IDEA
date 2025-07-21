@@ -37,6 +37,7 @@
                                    implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
     <lang.formatter language="Perl5"
                     implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
+    <preFormatProcessor implementation="com.perl5.lang.perl.idea.formatter.PerlPreFormatProcessor"/>
     <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PsiPerlLabelExpr"
                              implementationClass="com.perl5.lang.perl.idea.manipulators.PerlLeafOrLeafOwnerManipulator"/>
     <lang.elementManipulator forClass="com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl" order="first"
