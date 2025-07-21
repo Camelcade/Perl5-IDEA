@@ -63,8 +63,6 @@
     <multiLangCommenter
         implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
 
-    <lang.commenter language="Mojolicious Perl"
-                    implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
     <highlightErrorFilter
         implementation="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousTemplateLanguageErrorFilter"/>
     <liveTemplateOptionalProcessor

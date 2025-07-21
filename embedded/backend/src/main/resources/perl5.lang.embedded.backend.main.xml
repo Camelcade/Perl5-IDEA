@@ -58,8 +58,6 @@
     <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
 
     <!-- Here should be an EmbeddedPerlCommenter -->
-    <lang.commenter language="Embedded Perl"
-                    implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
     <highlightErrorFilter
         implementation="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlTemplateLanguageErrorFilter"/>
   </extensions>
