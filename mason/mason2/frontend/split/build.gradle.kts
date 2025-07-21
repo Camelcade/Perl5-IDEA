@@ -20,6 +20,9 @@ dependencies {
     ":plugin.frontend",
     ":lang.mason.mason2.common",
     ":lang.mason.mason2.frontend",
+    ":lang.mason.framework.common",
+    ":lang.mason.framework.frontend",
+    ":lang.mason.framework.frontend.split",
   ).forEach {
     compileOnly(project(it))
   }

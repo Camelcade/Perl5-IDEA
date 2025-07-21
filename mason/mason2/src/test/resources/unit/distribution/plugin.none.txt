@@ -8,17 +8,19 @@ Jar files:
 Content modules:
  - perl5.lang.mason.mason2.common.main (REQUIRED); lib/modules/perl5.lang.mason.mason2.common.main.jar
   - Dependencies:
-    - Plugin(id=com.perl5.lang.mason.framework)
+    - Module(name=perl5.lang.mason.framework.common.main)
     - Module(name=perl5.plugin.common.main)
  - perl5.lang.mason.mason2.backend.main (OPTIONAL); lib/modules/perl5.lang.mason.mason2.backend.main.jar
   - Dependencies:
     - Module(name=perl5.plugin.backend.main)
     - Module(name=perl5.lang.mason.mason2.common.main)
+    - Module(name=perl5.lang.mason.framework.backend.main)
  - perl5.lang.mason.mason2.frontend.main (OPTIONAL); lib/modules/perl5.lang.mason.mason2.frontend.main.jar
   - Dependencies:
-    - Module(name=intellij.platform.frontend)
+    - Module(name=perl5.lang.mason.framework.frontend.main)
     - Module(name=perl5.lang.mason.mason2.common.main)
  - perl5.lang.mason.mason2.frontend.split.main (OPTIONAL); lib/modules/perl5.lang.mason.mason2.frontend.split.main.jar
   - Dependencies:
     - Module(name=intellij.platform.frontend.split)
     - Module(name=perl5.lang.mason.mason2.frontend.main)
+    - Module(name=perl5.lang.mason.framework.frontend.split.main)

@@ -1,0 +1,25 @@
+Plugin: com.perl5.lang.mason.framework
+Jar files:
+- lib/perl5.lang.mason.framework.main.jar
+- lib/plugin.testFixtures-test-fixtures.jar
+- lib/junit-4.13.2.jar
+- lib/opentest4j-1.3.0.jar
+- lib/hamcrest-core-1.3.jar
+Content modules:
+ - perl5.lang.mason.framework.backend.main (OPTIONAL); lib/modules/perl5.lang.mason.framework.backend.main.jar
+  - Dependencies:
+    - Module(name=perl5.plugin.backend.main)
+    - Module(name=perl5.lang.mason.framework.common.main)
+ - perl5.lang.mason.framework.common.main (REQUIRED); lib/modules/perl5.lang.mason.framework.common.main.jar
+  - Dependencies:
+    - Module(name=perl5.plugin.common.main)
+ - perl5.lang.mason.framework.frontend.main (OPTIONAL); lib/modules/perl5.lang.mason.framework.frontend.main.jar
+  - Dependencies:
+    - Module(name=intellij.platform.frontend.main)
+    - Module(name=perl5.plugin.frontend.main)
+    - Module(name=perl5.lang.mason.framework.common.main)
+ - perl5.lang.mason.framework.frontend.split.main (OPTIONAL); lib/modules/perl5.lang.mason.framework.frontend.split.main.jar
+  - Dependencies:
+    - Module(name=intellij.platform.frontend.split.main)
+    - Module(name=perl5.plugin.frontend.split.main)
+    - Module(name=perl5.lang.mason.framework.frontend.main)

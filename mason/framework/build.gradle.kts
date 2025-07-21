@@ -16,15 +16,29 @@
 fun properties(key: String) = providers.gradleProperty(key)
 
 dependencies {
+  // packaging, which modules to include into this one
+  listOf(
+    ":lang.mason.framework.common",
+    ":lang.mason.framework.backend",
+    ":lang.mason.framework.frontend",
+    ":lang.mason.framework.frontend.split",
+  ).forEach {
+    runtimeOnly(project(it))
+  }
+
+  // compilation dependencies
   listOf(
     ":plugin.common",
-    ":plugin.backend"
+    ":plugin.backend",
+    ":plugin.frontend",
+    ":lang.mason.framework.backend",
+    ":lang.mason.framework.common",
+    ":lang.mason.framework.frontend",
   ).forEach {
-    compileOnly(project(it))
     testCompileOnly(project(it))
-    testRuntimeOnly(project(it))
   }
   testImplementation(testFixtures(project(":plugin.testFixtures")))
+
   intellijPlatform {
     intellijPlatform{
       val platformVersionProvider: Provider<String> by rootProject.extra

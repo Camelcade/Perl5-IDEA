@@ -1,0 +1,9 @@
+<idea-plugin>
+  <dependencies>
+    <module name="perl5.plugin.common.main"/>
+  </dependencies>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <errorHandler implementation="com.perl5.lang.MasonFrameworkYoutrackErrorHandler"/>
+  </extensions>
+</idea-plugin>
