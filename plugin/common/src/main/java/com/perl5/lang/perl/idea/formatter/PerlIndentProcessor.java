@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,6 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
@@ -86,8 +85,8 @@ public class PerlIndentProcessor implements PerlElementTypes {
       return Indent.getContinuationIndent();
     }
 
-    if (isFirst && BLOCK_OPENERS.contains(nodeType)
-        || isLast && BLOCK_CLOSERS.contains(nodeType)
+    if (isFirst && PerlFormattingTokenSets.BLOCK_OPENERS.contains(nodeType)
+        || isLast && PerlFormattingTokenSets.BLOCK_CLOSERS.contains(nodeType)
       ) {
       return Indent.getNoneIndent();
     }
@@ -181,7 +180,8 @@ public class PerlIndentProcessor implements PerlElementTypes {
     if (elementType == SIGNATURE_ELEMENT) {
       return Indent.getContinuationWithoutFirstIndent();
     }
-    if (SUB_OR_MODIFIER_DEFINITIONS_TOKENSET.contains(elementType) && block.getChildElementType(newChildIndex - 1) == LEFT_PAREN) {
+    if (PerlFormattingTokenSets.SUB_OR_MODIFIER_DEFINITIONS_TOKENSET.contains(elementType) &&
+        block.getChildElementType(newChildIndex - 1) == LEFT_PAREN) {
       return Indent.getNormalIndent();
     }
 

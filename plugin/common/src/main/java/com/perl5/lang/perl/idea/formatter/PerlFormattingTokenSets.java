@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,8 +20,8 @@ import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
 public final class PerlFormattingTokenSets {

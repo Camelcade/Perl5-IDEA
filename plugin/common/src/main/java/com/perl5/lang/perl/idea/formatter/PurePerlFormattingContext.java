@@ -404,7 +404,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
    *
    * @return check result
    */
-  private static boolean blockHasLessChildrenThan(@NotNull ASTNode node, int maxChildren) {
+  private static boolean blockHasLessChildrenThan(@NotNull ASTNode node, @SuppressWarnings("SameParameterValue") int maxChildren) {
     int counter = -2; // for braces
     ASTNode childNode = node.getFirstChildNode();
     while (childNode != null) {
