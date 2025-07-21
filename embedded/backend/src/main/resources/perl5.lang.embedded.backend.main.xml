@@ -10,8 +10,6 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <errorHandler implementation="com.perl5.lang.embedded.EmbeddedPerlYoutrackErrorHandler"/>
-
     <stubElementTypeHolder class="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
     <stubElementRegistryExtension implementation="com.perl5.lang.embedded.stubs.EmbeddedPerlStubRegistryExtension"/>
     <languageStubDefinition language="Embedded Perl" implementationClass="com.perl5.lang.perl.psi.stubs.PerlTemplatingStubDefinition"/>

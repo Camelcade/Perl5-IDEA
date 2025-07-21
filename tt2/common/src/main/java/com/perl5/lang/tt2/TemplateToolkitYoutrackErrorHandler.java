@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.mojolicious;
+package com.perl5.lang.tt2;
 
 import com.perl5.errorHandler.YoutrackErrorHandler;
 
-public class MojoYoutrackErrorHandler extends YoutrackErrorHandler {
+public class TemplateToolkitYoutrackErrorHandler extends YoutrackErrorHandler {
 }

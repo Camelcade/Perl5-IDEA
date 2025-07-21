@@ -364,8 +364,6 @@
                            order="first"/>
     <fileTypeDetector implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeDetector"/>
 
-    <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
-
     <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypeScript" fieldName="INSTANCE"
               name="Perl5 Script" language="Perl5" extensions="pl;ph;al;cgi"/>
     <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypePackage" fieldName="INSTANCE"
