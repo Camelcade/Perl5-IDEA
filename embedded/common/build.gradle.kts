@@ -14,6 +14,21 @@
  * limitations under the License.
  */
 
+
+project.file("src/main/gen").let { genRoot ->
+  sourceSets {
+    main {
+      java.srcDirs(genRoot)
+    }
+  }
+
+  idea {
+    module {
+      generatedSourceDirs.add(genRoot)
+    }
+  }
+}
+
 dependencies {
   listOf(
     ":plugin.common",
@@ -25,3 +40,12 @@ dependencies {
     create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
   }
 }
+
+/*
+  withType<JavaCompile> {
+    dependsOn(generateLexerTask)
+  }
+  withType<KotlinCompile>{
+    dependsOn(generateLexerTask)
+  }
+*/

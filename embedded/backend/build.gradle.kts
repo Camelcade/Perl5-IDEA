@@ -18,23 +18,11 @@ import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 fun properties(key: String) = providers.gradleProperty(key)
 
 
-project.file("src/main/gen").let { genRoot ->
-  sourceSets {
-    main {
-      java.srcDirs(genRoot)
-    }
-  }
-
-  idea {
-    module {
-      generatedSourceDirs.add(genRoot)
-    }
-  }
-}
-
 dependencies {
   listOf(
-    ":plugin.common", ":plugin.backend",
+    ":plugin.common",
+    ":plugin.backend",
+    ":lang.embedded.common",
   ).forEach {
     compileOnly(project(it))
   }
@@ -55,13 +43,4 @@ tasks {
   rootProject.tasks.findByName("generateLexers")?.dependsOn(
     generateLexerTask
   )
-
-  /*
-    withType<JavaCompile> {
-      dependsOn(generateLexerTask)
-    }
-    withType<KotlinCompile>{
-      dependsOn(generateLexerTask)
-    }
-  */
 }
