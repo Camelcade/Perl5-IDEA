@@ -4,7 +4,29 @@
   </dependencies>
   <extensions defaultExtensionNs="com.intellij">
     <errorHandler implementation="com.perl5.lang.embedded.EmbeddedPerlYoutrackErrorHandler"/>
+
+    <lang.parserDefinition language="Embedded Perl"
+                           implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
+    <fileType implementationClass="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType" fieldName="INSTANCE"
+              name="Embedded Perl" language="Embedded Perl" extensions="thtml;phtml"/>
     <lang.commenter language="Embedded Perl"
                     implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
+    <lang.ast.factory language="Embedded Perl" implementationClass="com.perl5.lang.embedded.EmbeddedPerlAstFactory"/>
+    <lang.braceMatcher language="Embedded Perl"
+                       implementationClass="com.perl5.lang.embedded.idea.editor.EmbeddedPerlBraceMatcher"/>
+    <editorHighlighterProvider filetype="Embedded Perl"
+                               implementationClass="com.perl5.lang.embedded.filetypes.EmbeddedPerlEditorHighlighterProvider"/>
+    <lang.formatter language="Embedded Perl"
+                    implementationClass="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlFormattingModelBuilder"/>
+    <preFormatProcessor implementation="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlPreFormatProcessor"/>
+    <lang.syntaxHighlighterFactory language="Embedded Perl"
+                                   implementationClass="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlSyntaxHighlighterFactory"/>
+    <typedHandler implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlTypedHandler"
+                  order="first"/>
+
+    <!--Temporary solution, better than nothing-->
+    <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
+    <enterHandlerDelegate implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlEnterDelegate"
+                          id="EmbeddedPerlEnterHandler" order="after PerlEnterHandler"/>
   </extensions>
 </idea-plugin>

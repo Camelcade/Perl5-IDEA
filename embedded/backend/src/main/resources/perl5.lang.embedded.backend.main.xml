@@ -15,32 +15,14 @@
     <languageStubDefinition language="Embedded Perl" implementationClass="com.perl5.lang.perl.psi.stubs.PerlTemplatingStubDefinition"/>
 
     <internalFileTemplate name="Perl5 embedded"/>
-    <fileType implementationClass="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType" fieldName="INSTANCE"
-              name="Embedded Perl" language="Embedded Perl" extensions="thtml;phtml"/>
-    <editorHighlighterProvider filetype="Embedded Perl"
-                               implementationClass="com.perl5.lang.embedded.filetypes.EmbeddedPerlEditorHighlighterProvider"/>
-    <lang.parserDefinition language="Embedded Perl"
-                           implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
-    <lang.ast.factory language="Embedded Perl" implementationClass="com.perl5.lang.embedded.EmbeddedPerlAstFactory"/>
     <lang.fileViewProviderFactory language="Embedded Perl"
                                   implementationClass="com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory"/>
-    <lang.syntaxHighlighterFactory language="Embedded Perl"
-                                   implementationClass="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlSyntaxHighlighterFactory"/>
     <lang.findUsagesProvider language="Embedded Perl"
                              implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
-    <lang.braceMatcher language="Embedded Perl"
-                       implementationClass="com.perl5.lang.embedded.idea.editor.EmbeddedPerlBraceMatcher"/>
 
-    <typedHandler implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlTypedHandler"
-                  order="first"/>
-    <enterHandlerDelegate implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlEnterDelegate"
-                          id="EmbeddedPerlEnterHandler" order="after PerlEnterHandler"/>
-    <lang.formatter language="Embedded Perl"
-                    implementationClass="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlFormattingModelBuilder"/>
 
     <lang.namesValidator language="Embedded Perl"
                          implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
-    <preFormatProcessor implementation="com.perl5.lang.embedded.idea.formatter.EmbeddedPerlPreFormatProcessor"/>
 
     <lang.foldingBuilder language="Embedded Perl"
                          implementationClass="com.perl5.lang.embedded.idea.folding.EmbeddedPerlFoldingBuilder"/>
@@ -54,8 +36,6 @@
     <lang.refactoringSupport language="Embedded Perl"
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
-    <!--Temporary solution, better than nothing-->
-    <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
 
     <!-- Here should be an EmbeddedPerlCommenter -->
     <highlightErrorFilter
