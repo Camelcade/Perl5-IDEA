@@ -36,7 +36,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Mason2Util {
+public final class Mason2Util {
+  private Mason2Util() {
+  }
+
   public static @NotNull String getClassnameFromPath(@NotNull String path) {
     return "/MC0::" +
            path.replaceAll("[^\\p{L}\\d_\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtilCore.NAMESPACE_SEPARATOR);
