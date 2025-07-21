@@ -34,7 +34,8 @@ project.file("src/main/gen").let { genRoot ->
 dependencies {
   listOf(
     ":plugin.common", ":plugin.backend",
-    ":lang.mason.framework",
+    ":lang.mason.framework.common",
+    ":lang.mason.framework.backend",
   ).forEach {
     compileOnly(project(it))
   }

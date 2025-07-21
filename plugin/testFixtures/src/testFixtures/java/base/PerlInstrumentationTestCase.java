@@ -40,7 +40,8 @@ public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
   protected static final Pattern EMBEDDED_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.embedded\\.backend\\.main\\.jar");
   protected static final Pattern MOJO_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.mojo\\.backend\\.main\\.jar!");
   protected static final Pattern TT2_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.tt2\\.backend\\.main\\.jar!");
-  protected static final Pattern MASON_FRAMEWORK_PATTERN_STRING = Pattern.compile("lib/perl5\\.lang\\.mason\\.framework\\.main\\.jar!");
+  protected static final Pattern MASON_FRAMEWORK_PATTERN_STRING =
+    Pattern.compile("lib/modules/perl5\\.lang\\.mason\\.framework\\.backend\\.main\\.jar!");
   protected static final Pattern MASON_PATTERN_STRING =
     Pattern.compile("lib/modules/perl5\\.lang\\.mason\\.htmlmason\\.backend\\.main\\.jar!");
   protected static final Pattern MASON2_PATTERN_STRING =

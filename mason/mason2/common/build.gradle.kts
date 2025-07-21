@@ -17,6 +17,7 @@
 dependencies {
   listOf(
     ":plugin.common",
+    ":lang.mason.framework.common",
   ).forEach {
     compileOnly(project(it))
   }

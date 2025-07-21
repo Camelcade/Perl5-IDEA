@@ -2,6 +2,7 @@
   <dependencies>
     <module name="perl5.plugin.backend.main"/>
     <module name="perl5.lang.mason.mason2.common.main"/>
+    <module name="perl5.lang.mason.framework.backend.main"/>
   </dependencies>
 
   <resource-bundle>messages.MasonBundle</resource-bundle>

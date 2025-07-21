@@ -2,6 +2,7 @@
   <dependencies>
     <module name="intellij.platform.frontend.split"/>
     <module name="perl5.lang.mason.htmlmason.frontend.main"/>
+    <module name="perl5.lang.mason.framework.frontend.split.main"/>
   </dependencies>
 
 </idea-plugin>

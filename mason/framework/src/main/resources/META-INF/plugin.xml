@@ -26,18 +26,13 @@
 
   <dependencies>
     <plugin id="com.perl5"/>
-    <plugin id="com.intellij.modules.lang"/>
-    <module name="perl5.plugin.common.main"/>
   </dependencies>
 
-  <extensions defaultExtensionNs="com.perl5">
-  </extensions>
-
-  <extensions defaultExtensionNs="com.intellij">
-    <errorHandler implementation="com.perl5.lang.MasonFrameworkYoutrackErrorHandler"/>
-  </extensions>
-
-  <actions>
-  </actions>
+  <content>
+    <module name="perl5.lang.mason.framework.backend.main"/>
+    <module name="perl5.lang.mason.framework.common.main" loading="required"/>
+    <module name="perl5.lang.mason.framework.frontend.main"/>
+    <module name="perl5.lang.mason.framework.frontend.split.main"/>
+  </content>
 
 </idea-plugin>

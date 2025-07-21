@@ -18,6 +18,8 @@ dependencies {
   listOf(
     ":plugin.common",
     ":lang.mason.mason2.common",
+    ":lang.mason.framework.common",
+    ":lang.mason.framework.frontend",
   ).forEach {
     compileOnly(project(it))
   }

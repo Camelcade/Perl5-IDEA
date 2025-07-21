@@ -30,7 +30,11 @@ dependencies {
   listOf(
     ":plugin.common", ":plugin.backend",
     ":lang.mason.mason2.backend",
-    ":lang.mason.framework",
+    ":lang.mason.mason2.common",
+    ":lang.mason.mason2.frontend",
+    ":lang.mason.framework.backend",
+    ":lang.mason.framework.common",
+    ":lang.mason.framework.frontend",
   ).forEach {
     testCompileOnly(project(it))
   }

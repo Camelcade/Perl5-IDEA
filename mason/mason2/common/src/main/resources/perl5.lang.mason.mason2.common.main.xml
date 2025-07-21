@@ -1,6 +1,6 @@
 <idea-plugin>
   <dependencies>
-    <plugin id="com.perl5.lang.mason.framework"/>
+    <module name="perl5.lang.mason.framework.common.main"/>
     <module name="perl5.plugin.common.main"/>
   </dependencies>
   <extensions defaultExtensionNs="com.intellij">

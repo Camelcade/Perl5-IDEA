@@ -1,0 +1,7 @@
+<idea-plugin>
+  <dependencies>
+    <module name="intellij.platform.frontend.split.main"/>
+    <module name="perl5.plugin.frontend.split.main"/>
+    <module name="perl5.lang.mason.framework.frontend.main"/>
+  </dependencies>
+</idea-plugin>
