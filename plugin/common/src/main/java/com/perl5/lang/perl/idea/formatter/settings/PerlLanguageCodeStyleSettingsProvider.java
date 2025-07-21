@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,12 +28,12 @@ import com.intellij.psi.codeStyle.CommonCodeStyleSettings;
 import com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlLanguage;
+import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions;
 import org.jetbrains.annotations.NotNull;
 
 import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.OptionAnchor.AFTER;
 import static com.intellij.psi.codeStyle.CodeStyleSettingsCustomizable.WRAP_VALUES;
 import static com.intellij.psi.codeStyle.LanguageCodeStyleSettingsProvider.SettingsType.*;
-import static com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings.OptionalConstructions.*;
 
 
 public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSettingsProvider {
@@ -207,7 +207,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 "ALIGN_CONSECUTIVE_ASSIGNMENTS",
                                 PerlBundle.message("perl.formatting.align.consecutive.assignments"),
                                 customizableOptions.WRAPPING_ASSIGNMENT,
-                                ALIGN_ASSIGNMENTS_OPTIONS
+                                OptionalConstructions.ALIGN_ASSIGNMENTS_OPTIONS
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
@@ -238,14 +238,14 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 "BRACE_STYLE_NAMESPACE",
                                 customizableOptions.WRAPPING_BRACES,
                                 localization.GROUP_NAMESPACE,
-                                BRACE_PLACEMENT_OPTIONS
+                                OptionalConstructions.BRACE_PLACEMENT_OPTIONS
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "BRACE_STYLE_SUB",
                                 customizableOptions.WRAPPING_BRACES,
                                 localization.GROUP_SUB,
-                                BRACE_PLACEMENT_OPTIONS
+                                OptionalConstructions.BRACE_PLACEMENT_OPTIONS
       );
 
       @SuppressWarnings("DialogTitleCapitalization") var ifElseTitle = PerlBundle.message("perl.formatting.compound.secondary");
@@ -259,7 +259,7 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 "BRACE_STYLE_COMPOUND",
                                 customizableOptions.WRAPPING_BRACES,
                                 localization.GROUP_COMPOUND,
-                                BRACE_PLACEMENT_OPTIONS
+                                OptionalConstructions.BRACE_PLACEMENT_OPTIONS
       );
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
@@ -303,56 +303,56 @@ public class PerlLanguageCodeStyleSettingsProvider extends LanguageCodeStyleSett
                                 "OPTIONAL_QUOTES",
                                 PerlBundle.message("perl.formatting.quotation.before.fatcomma"),
                                 localization.GROUP_QUOTATION,
-                                OPTIONS_DEFAULT);
+                                OptionalConstructions.OPTIONS_DEFAULT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_QUOTES_HASH_INDEX",
                                 PerlBundle.message("perl.formatting.quotation.hash.index"),
                                 localization.GROUP_QUOTATION,
-                                OPTIONS_DEFAULT);
+                                OptionalConstructions.OPTIONS_DEFAULT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_QUOTES_HEREDOC_OPENER",
                                 PerlBundle.message("perl.formatting.quotation.heredoc.opener"),
                                 localization.GROUP_QUOTATION,
-                                OPTIONS_DEFAULT);
+                                OptionalConstructions.OPTIONS_DEFAULT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_DEREFERENCE",
                                 PerlBundle.message("perl.formatting.deref.indexes"),
                                 localization.GROUP_DEREFERENCE,
-                                OPTIONS_DEFAULT);
+                                OptionalConstructions.OPTIONS_DEFAULT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_DEREFERENCE_HASHREF_ELEMENT",
                                 PerlBundle.message("perl.formatting.hashref.element"),
                                 localization.GROUP_DEREFERENCE,
-                                OPTIONS_HASHREF_ELEMENT);
+                                OptionalConstructions.OPTIONS_HASHREF_ELEMENT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_DEREFERENCE_SIMPLE",
                                 PerlBundle.message("perl.formatting.simple.dereference"),
                                 localization.GROUP_DEREFERENCE,
-                                OPTIONS_SIMPLE_DEREF_STYLE);
+                                OptionalConstructions.OPTIONS_SIMPLE_DEREF_STYLE);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_PARENTHESES",
                                 PerlBundle.message("perl.formatting.statement.modifiers"),
                                 localization.GROUP_PARENTHESES,
-                                OPTIONS_DEFAULT);
+                                OptionalConstructions.OPTIONS_DEFAULT);
 
       //noinspection DialogTitleCapitalization
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "MAIN_FORMAT",
                                 PerlBundle.message("perl.formatting.main.format"),
                                 customizableOptions.SPACES_OTHER,
-                                OPTIONS_MAIN_FORMAT);
+                                OptionalConstructions.OPTIONS_MAIN_FORMAT);
 
       consumer.showCustomOption(PerlCodeStyleSettings.class,
                                 "OPTIONAL_TRAILING_COMMA",
                                 PerlBundle.message("label.before.newline.hash.array"),
                                 localization.GROUP_COMMA,
-                                OPTIONS_DEFAULT);
+                                OptionalConstructions.OPTIONS_DEFAULT);
     }
   }
 
