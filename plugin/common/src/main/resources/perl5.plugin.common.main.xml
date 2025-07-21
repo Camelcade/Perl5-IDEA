@@ -67,6 +67,7 @@
                                    implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
     <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
                              implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodElementManipulator"/>
+    <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
 
     <!--  END OF POD -->
   </extensions>
