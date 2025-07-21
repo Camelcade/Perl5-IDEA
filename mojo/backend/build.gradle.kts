@@ -37,6 +37,7 @@ dependencies {
   listOf(
     ":plugin.common",
     ":plugin.backend",
+    ":lang.mojo.common",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
