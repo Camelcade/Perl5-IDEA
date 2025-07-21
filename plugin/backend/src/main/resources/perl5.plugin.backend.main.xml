@@ -312,7 +312,6 @@
     <resolveScopeProvider implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlResolveScopeProvider"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
 
-    <extendWordSelectionHandler implementation="com.perl5.lang.perl.idea.editor.PerlVariableSelectionHandler"/>
     <basicWordSelectionFilter implementation="com.perl5.lang.perl.idea.editor.PerlVariableSelectionHandler$OuterElementsSuppressor"/>
 
     <preFormatProcessor implementation="com.perl5.lang.perl.idea.formatter.PerlPreFormatProcessor"/>
