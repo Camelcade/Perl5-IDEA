@@ -708,7 +708,6 @@
     <lang.psiStructureViewFactory language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
     <iconProvider implementation="com.perl5.lang.pod.idea.ui.PodIconProvider"/>
     <internalFileTemplate name="Perl5 pod"/>
-    <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
     <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
     <lang.ast.factory language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodAstFactory"/>
     <breadcrumbsInfoProvider implementation="com.perl5.lang.pod.idea.ui.breadcrumbs.PodBreadCrumbsProvider"/>

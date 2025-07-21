@@ -93,7 +93,7 @@
     <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
                              implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodElementManipulator"/>
     <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
-
+    <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
     <!--  END OF POD -->
   </extensions>
 </idea-plugin>
