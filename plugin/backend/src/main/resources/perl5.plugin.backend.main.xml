@@ -822,8 +822,6 @@
 
     <lang.namesValidator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
     <referencesSearch implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
-    <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
-                             implementationClass="com.perl5.lang.pod.parser.psi.manipulators.PodElementManipulator"/>
 
     <lang.surroundDescriptor language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.surroundWith.PodSurroundDescriptor"/>
   </extensions>
