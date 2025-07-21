@@ -16,7 +16,7 @@
 
 dependencies {
   listOf(
-    ":plugin.common", ":plugin.backend",
+    ":plugin.common",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
