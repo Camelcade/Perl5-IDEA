@@ -31,6 +31,26 @@
                                    implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
     <lang.formatter language="Perl5"
                     implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PsiPerlLabelExpr"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlLeafOrLeafOwnerManipulator"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocElementManipulator"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.mixins.PerlStringMixin" order="first" id="QuotedString"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringManipulator"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.mixins.PerlStringBareMixin" order="after QuotedString"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlBareStringManipulator"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlAnnotationVariableElement"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlAnnotationVariableElementManipulator"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlStringContentElement" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlStringContentManipulator"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlNamespaceElement" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlNamespaceElementManipulator"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlVariableNameElement" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlVariableNameManipulator"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlSubNameElement" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlSubNameManipulator"/>
+    <lang.elementManipulator forClass="com.perl5.lang.perl.psi.PerlHeredocTerminatorElement" order="first"
+                             implementationClass="com.perl5.lang.perl.idea.manipulators.PerlHeredocTerminatorManipulator"/>
     <!-- EOF Perl  -->
 
     <!-- Regexp  -->
