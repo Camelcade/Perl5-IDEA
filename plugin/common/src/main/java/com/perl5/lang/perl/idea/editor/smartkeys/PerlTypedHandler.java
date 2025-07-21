@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.editor.smartkeys;
 import com.intellij.codeInsight.AutoPopupController;
 import com.intellij.codeInsight.CodeInsightSettings;
 import com.intellij.codeInsight.completion.CompletionType;
+import com.intellij.codeInsight.editorActions.TypedHandlerDelegate;
 import com.intellij.openapi.editor.CaretModel;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
@@ -71,20 +72,20 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
 
 
   @Override
-  public @NotNull Result beforeCharTyped(char c,
-                                         @NotNull Project project,
-                                         @NotNull Editor editor,
-                                         @NotNull PsiFile file,
-                                         @NotNull FileType fileType) {
+  public @NotNull TypedHandlerDelegate.Result beforeCharTyped(char c,
+                                                              @NotNull Project project,
+                                                              @NotNull Editor editor,
+                                                              @NotNull PsiFile file,
+                                                              @NotNull FileType fileType) {
     if (!isMyFile(file)) {
-      return Result.CONTINUE;
+      return TypedHandlerDelegate.Result.CONTINUE;
     }
     CaretModel caretModel = editor.getCaretModel();
     int currentOffset = caretModel.getOffset();
     Document document = editor.getDocument();
     CharSequence documentSequence = document.getCharsSequence();
     if (currentOffset > documentSequence.length()) {
-      return Result.CONTINUE;
+      return TypedHandlerDelegate.Result.CONTINUE;
     }
 
     EditorHighlighter highlighter = editor.getHighlighter();
@@ -99,13 +100,13 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     if (c == '<' && prevTokenType == LEFT_ANGLE && prevTokenLength == 1 && nextTokenType == RIGHT_ANGLE && nextTokenLength == 1) {
       document.replaceString(currentOffset, currentOffset + 1, "<");
       caretModel.moveToOffset(currentOffset + 1);
-      return Result.STOP;
+      return TypedHandlerDelegate.Result.STOP;
     }
 
     char nextChar = currentOffset == documentSequence.length() ? 0 : documentSequence.charAt(currentOffset);
     if (QUOTE_CLOSE_FIRST_ANY.contains(nextTokenType) && c == nextChar) {
       caretModel.moveToOffset(currentOffset + 1);
-      return Result.STOP;
+      return TypedHandlerDelegate.Result.STOP;
     }
 
     if (c == ':') {
@@ -115,7 +116,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
           caretModel.moveToOffset(currentOffset + 2);
         }
         AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
-        return Result.STOP;
+        return TypedHandlerDelegate.Result.STOP;
       }
       else if (currentOffset > 1 && documentSequence.charAt(currentOffset - 1) == ':') {
         AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
@@ -123,7 +124,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     }
 
     if (c == ' ') {
-      Result result = tryToAddFatComma(editor, file, currentOffset);
+      TypedHandlerDelegate.Result result = tryToAddFatComma(editor, file, currentOffset);
       if (result != null) {
         return result;
       }
@@ -131,10 +132,10 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
 
     if (c == '>' && PerlEditorUtil.getPreviousTokenType(prevPositionIterator, true) == OPERATOR_DEREFERENCE) {
       AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
-      return Result.STOP;
+      return TypedHandlerDelegate.Result.STOP;
     }
 
-    return Result.CONTINUE;
+    return TypedHandlerDelegate.Result.CONTINUE;
   }
 
   static final TokenSet COLON_HANDLING_VARIABLE_TOKENS = TokenSet.orSet(SIGILS, VARIABLE_NAMES);
@@ -181,14 +182,17 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
   }
 
   @Override
-  public @NotNull Result charTyped(char typedChar, @NotNull Project project, @NotNull Editor editor, @NotNull PsiFile file) {
+  public @NotNull TypedHandlerDelegate.Result charTyped(char typedChar,
+                                                        @NotNull Project project,
+                                                        @NotNull Editor editor,
+                                                        @NotNull PsiFile file) {
     if (!isMyFile(file)) {
-      return Result.CONTINUE;
+      return TypedHandlerDelegate.Result.CONTINUE;
     }
     final int currentOffset = editor.getCaretModel().getOffset();
     final int offset = currentOffset - 1;
     if (offset < 0) {
-      return Result.CONTINUE;
+      return TypedHandlerDelegate.Result.CONTINUE;
     }
 
     Perl5CodeInsightSettings perlCodeInsightSettings = Perl5CodeInsightSettings.getInstance();
@@ -200,7 +204,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     if (QUOTE_OPEN_ANY.contains(elementTokenType) && CodeInsightSettings.getInstance().AUTOINSERT_PAIR_QUOTE) {
       IElementType quotePrefixType = offset > 0 ? PerlEditorUtil.getPreviousTokenType(highlighter.createIterator(offset - 1), false) : null;
       if (offset > text.length() - 1 || text.charAt(offset) != typedChar) {
-        return Result.CONTINUE;
+        return TypedHandlerDelegate.Result.CONTINUE;
       }
       if (elementTokenType == QUOTE_DOUBLE_OPEN || elementTokenType == QUOTE_SINGLE_OPEN) {
         AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
@@ -220,9 +224,9 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
                  StringUtil.containsChar(HANDLED_BY_BRACE_MATCHER, openChar) &&
                  !PerlEditorUtil.areMarkersBalanced((EditorEx)editor, offset, openChar)) {
           EditorModificationUtilEx.insertStringAtCaret(editor, Character.toString(closeChar), false, false);
-          return Result.STOP;
+          return TypedHandlerDelegate.Result.STOP;
         }
-        return Result.CONTINUE;
+        return TypedHandlerDelegate.Result.CONTINUE;
       }
 
       StringBuilder textToAppend = new StringBuilder();
@@ -264,7 +268,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
       }
     }
 
-    return Result.CONTINUE;
+    return TypedHandlerDelegate.Result.CONTINUE;
   }
 
   private void handleEqualSign(@NotNull Editor editor,
@@ -296,7 +300,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     }
   }
 
-  private @Nullable Result tryToAddFatComma(@NotNull Editor editor, @NotNull PsiFile file, int offset) {
+  private @Nullable TypedHandlerDelegate.Result tryToAddFatComma(@NotNull Editor editor, @NotNull PsiFile file, int offset) {
     if (!Perl5CodeInsightSettings.getInstance().SMART_COMMA_SEQUENCE_TYPING) {
       return null;
     }
@@ -337,7 +341,7 @@ public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlEl
     CodeStyleManager.getInstance(project).reformatText(file, reformatFrom, offset + 2);
     AutoPopupController.getInstance(project).scheduleAutoPopup(editor);
 
-    return Result.CONTINUE;
+    return TypedHandlerDelegate.Result.CONTINUE;
   }
 
   @Override
