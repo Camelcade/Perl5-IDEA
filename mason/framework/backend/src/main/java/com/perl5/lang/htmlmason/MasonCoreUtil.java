@@ -16,26 +16,22 @@
 
 package com.perl5.lang.htmlmason;
 
-import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.newvfs.impl.FakeVirtualFile;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.LightVirtualFile;
 import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
-import com.perl5.lang.mason2.idea.configuration.VariableDescription;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
-import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 
+public final class MasonCoreUtil {
+  private MasonCoreUtil() {
+  }
 
-public class MasonCoreUtil {
   public static @Nullable VirtualFile getComponentRoot(@NotNull AbstractMasonSettings masonSettings, @Nullable VirtualFile file) {
     if (file != null) {
       if (file instanceof FakeVirtualFile) {
@@ -69,22 +65,5 @@ public class MasonCoreUtil {
       }
     }
     return originalFile instanceof LightVirtualFile || originalFile == null || !originalFile.exists() ? null : originalFile;
-  }
-
-  public static void fillVariablesList(PsiElement parent,
-                                       List<? super PerlVariableDeclarationElement> targetList,
-                                       List<? extends VariableDescription> sourceList) {
-    for (VariableDescription variableDescription : sourceList) {
-      String variableType = variableDescription.variableType;
-      if (StringUtil.isEmpty(variableType)) {
-        variableType = null;
-      }
-      targetList.add(
-        PerlImplicitVariableDeclaration.createGlobal(
-          parent,
-          variableDescription.variableName,
-          variableType
-        ));
-    }
   }
 }
