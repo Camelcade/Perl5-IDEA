@@ -819,8 +819,6 @@
                      implementationClass="com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection"
                      key="inspection.pod.legacy.section.link.display.name"
                      bundle="messages.PerlBundle"/>
-    <lang.syntaxHighlighterFactory language="Perl5 POD"
-                                   implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
     <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
     <lang.findUsagesProvider language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.findusages.PodFindUsagesProvider"/>
     <fileStructureGroupRuleProvider implementation="com.perl5.lang.pod.idea.findusages.PodFileStructureGroupRuleProvider"/>
