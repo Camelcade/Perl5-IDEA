@@ -71,6 +71,7 @@
     <editorHighlighterProvider filetype="Perl5 Test"
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
     <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
+    <basicWordSelectionFilter implementation="com.perl5.lang.perl.idea.editor.PerlVariableSelectionHandler$OuterElementsSuppressor"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->
