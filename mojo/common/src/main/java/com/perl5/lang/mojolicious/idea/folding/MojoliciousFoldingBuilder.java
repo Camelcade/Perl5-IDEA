@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,37 +26,28 @@ public class MojoliciousFoldingBuilder extends PerlFoldingBuilder implements Moj
   protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
     PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
     TokenSet.create(
-      MOJO_BLOCK_OPENER,
-      MOJO_BLOCK_CLOSER,
-      MOJO_BLOCK_NOSPACE_CLOSER,
+      MojoliciousElementTypes.MOJO_BLOCK_OPENER,
+      MojoliciousElementTypes.MOJO_BLOCK_CLOSER,
+      MojoliciousElementTypes.MOJO_BLOCK_NOSPACE_CLOSER,
 
-      MOJO_BLOCK_EXPR_OPENER,
-      MOJO_BLOCK_EXPR_CLOSER,
+      MojoliciousElementTypes.MOJO_BLOCK_EXPR_OPENER,
+      MojoliciousElementTypes.MOJO_BLOCK_EXPR_CLOSER,
 
-      MOJO_BLOCK_EXPR_ESCAPED_OPENER,
-      MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
+      MojoliciousElementTypes.MOJO_BLOCK_EXPR_ESCAPED_OPENER,
+      MojoliciousElementTypes.MOJO_BLOCK_EXPR_NOSPACE_CLOSER,
 
-      MOJO_LINE_EXPR_ESCAPED_OPENER,
-      MOJO_LINE_EXPR_OPENER,
-      MOJO_LINE_OPENER,
+      MojoliciousElementTypes.MOJO_LINE_EXPR_ESCAPED_OPENER,
+      MojoliciousElementTypes.MOJO_LINE_EXPR_OPENER,
+      MojoliciousElementTypes.MOJO_LINE_OPENER,
 
-      MOJO_BLOCK_OPENER_TAG,
-      MOJO_LINE_OPENER_TAG,
+      MojoliciousElementTypes.MOJO_BLOCK_OPENER_TAG,
+      MojoliciousElementTypes.MOJO_LINE_OPENER_TAG,
 
-      MOJO_TEMPLATE_BLOCK_HTML
+      MojoliciousElementTypes.MOJO_TEMPLATE_BLOCK_HTML
     ));
 
   @Override
   protected @NotNull TokenSet getCommentExcludedTokens() {
     return COMMENT_EXCLUDED_TOKENS;
   }
-
-/*
-        @Nullable
-	@Override
-	protected IElementType getTemplateBlockElementType()
-	{
-		return MOJO_TEMPLATE_BLOCK_HTML;
-	}
-*/
 }
