@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.perl.idea.actions;
+package com.perl5.lang.mojolicious;
 
-/**
- * Marker interface and common API for perl plugin actions
- */
-public interface PerlAction {
+import com.perl5.errorHandler.YoutrackErrorHandler;
+
+public class MojoYoutrackErrorHandler extends YoutrackErrorHandler {
 }

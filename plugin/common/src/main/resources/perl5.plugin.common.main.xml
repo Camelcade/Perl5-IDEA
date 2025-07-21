@@ -13,5 +13,6 @@
   <extensions defaultExtensionNs="com.intellij">
     <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
     <additionalTextAttributes scheme="Darcula" file="colorSchemes/perl_darcula.xml"/>
+    <errorHandler implementation="com.perl5.errorHandler.YoutrackErrorHandler"/>
   </extensions>
 </idea-plugin>

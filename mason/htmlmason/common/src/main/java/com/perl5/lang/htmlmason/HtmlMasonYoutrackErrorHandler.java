@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.perl5.lang.tt2;
+package com.perl5.lang.htmlmason;
 
 import com.perl5.errorHandler.YoutrackErrorHandler;
 
-public class TemplateToolkitYoutrackErrorHandler extends YoutrackErrorHandler {
+public class HtmlMasonYoutrackErrorHandler extends YoutrackErrorHandler {
 }
