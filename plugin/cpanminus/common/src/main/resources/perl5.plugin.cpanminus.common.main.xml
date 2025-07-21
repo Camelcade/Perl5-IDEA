@@ -23,5 +23,7 @@
   <extensions defaultExtensionNs="com.intellij">
     <fileType implementationClass="com.perl5.lang.perl.cpanminus.cpanfile.PerlFileTypeCpanfile" fieldName="INSTANCE"
               name="Cpanfile" language="Perl5" fileNames="cpanfile"/>
+    <editorHighlighterProvider filetype="Cpanfile"
+                               implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
   </extensions>
 </idea-plugin>
