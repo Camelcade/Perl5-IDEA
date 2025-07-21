@@ -32,9 +32,13 @@ Content modules:
  - perl5.plugin.cpan.main (OPTIONAL); lib/modules/perl5.plugin.cpan.main.jar
   - Dependencies:
     - Module(name=perl5.plugin.backend.main)
- - perl5.plugin.cpanminus.main (OPTIONAL); lib/modules/perl5.plugin.cpanminus.main.jar
+ - perl5.plugin.cpanminus.backend.main (OPTIONAL); lib/modules/perl5.plugin.cpanminus.backend.main.jar
   - Dependencies:
     - Module(name=perl5.plugin.backend.main)
+    - Module(name=perl5.plugin.cpanminus.common.main)
+ - perl5.plugin.cpanminus.common.main (OPTIONAL); lib/modules/perl5.plugin.cpanminus.common.main.jar
+  - Dependencies:
+    - Module(name=perl5.plugin.common.main)
  - perl5.plugin.debugger.main (OPTIONAL); lib/modules/perl5.plugin.debugger.main.jar
   - Dependencies:
     - Module(name=perl5.plugin.backend.main)

@@ -35,7 +35,8 @@
     <module name="perl5.plugin.backend.main"/>
     <module name="perl5.plugin.coverage.main"/>
     <module name="perl5.plugin.cpan.main"/>
-    <module name="perl5.plugin.cpanminus.main"/>
+    <module name="perl5.plugin.cpanminus.backend.main"/>
+    <module name="perl5.plugin.cpanminus.common.main"/>
     <module name="perl5.plugin.debugger.main"/>
     <module name="perl5.plugin.docker.main"/>
     <module name="perl5.plugin.frontend.main"/>

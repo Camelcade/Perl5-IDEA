@@ -62,7 +62,7 @@ public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
       buildData("common", PerlParserDefinition.class),
       buildData("coverage", PerlCoverageEnabledConfiguration.class),
       buildData("cpan", PerlInstallPackagesWithCpanAction.class),
-      buildData("cpanminus", PerlInstallCpanmAction.class),
+      buildData("cpanminus.backend", PerlInstallCpanmAction.class),
       buildData("debugger", PerlDebuggerProgramRunner.class),
       buildData("docker", PerlDockerTestUtil.getInstrumentationTestClass()),
       buildData("idea", PerlIdeaTestUtil.getInstrumentationTestClass()),

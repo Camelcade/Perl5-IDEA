@@ -17,6 +17,7 @@
 <idea-plugin>
   <dependencies>
     <module name="perl5.plugin.backend.main"/>
+    <module name="perl5.plugin.cpanminus.common.main"/>
   </dependencies>
   <resource-bundle>messages.PerlCpanminusBundle</resource-bundle>
 
@@ -27,9 +28,6 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <fileType implementationClass="com.perl5.lang.perl.cpanminus.cpanfile.PerlFileTypeCpanfile" fieldName="INSTANCE"
-              name="Cpanfile" language="Perl5" fileNames="cpanfile"/>
-
     <runAnything.helpGroup implementation="com.perl5.lang.perl.cpanminus.runAnything.PerlCpanminusRunAnythingHelpGroup"/>
     <runAnything.executionProvider implementation="com.perl5.lang.perl.cpanminus.runAnything.PerlCpanminusRunAnythingProvider"/>
   </extensions>
