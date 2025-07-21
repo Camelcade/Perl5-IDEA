@@ -20,9 +20,6 @@
     <lang.findUsagesProvider language="Embedded Perl"
                              implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
 
-    <lang.foldingBuilder language="Embedded Perl"
-                         implementationClass="com.perl5.lang.embedded.idea.folding.EmbeddedPerlFoldingBuilder"/>
-
     <!--<lang.formatter language="Embedded Perl"-->
     <!--implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>-->
 
