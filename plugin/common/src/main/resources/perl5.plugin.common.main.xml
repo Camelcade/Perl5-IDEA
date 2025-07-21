@@ -26,6 +26,7 @@
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
     <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
                   id="PerlTypedHandler" order="first"/>
+    <backspaceHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlBackspaceHandler" order="first"/>
     <codeStyleSettingsProvider
         implementation="com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettingsProvider"/>
     <langCodeStyleSettingsProvider
@@ -90,6 +91,7 @@
     <fileType implementationClass="com.perl5.lang.pod.filetypes.PodFileType" fieldName="INSTANCE"
               name="POD File" language="Perl5 POD" extensions="pod"/>
     <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
+    <backspaceHandlerDelegate implementation="com.perl5.lang.pod.idea.editor.PodBackspaceHandler"/>
     <lang.syntaxHighlighterFactory language="Perl5 POD"
                                    implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
     <lang.elementManipulator forClass="com.perl5.lang.pod.parser.psi.PodCompositeElement" order="first"
