@@ -499,8 +499,6 @@
     <!-- Switch settings end -->
 
 
-    <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
-
     <localInspection language="Perl5"
                      shortName="MooseAttributeAccessors" groupKey="inspection.group.perl" enabledByDefault="true" level="ERROR"
                      implementationClass="com.perl5.lang.perl.parser.moose.idea.inspections.MooseMultiAttributeAccessorInspection"
