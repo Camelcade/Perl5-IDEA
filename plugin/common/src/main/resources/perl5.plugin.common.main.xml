@@ -30,6 +30,8 @@
 
     <!--  POD -->
     <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
+    <lang.syntaxHighlighterFactory language="Perl5 POD"
+                                   implementationClass="com.perl5.lang.pod.idea.highlighter.PodSyntaxHighlighterFactory"/>
 
     <!--  END OF POD -->
   </extensions>
