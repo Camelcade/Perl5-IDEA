@@ -22,7 +22,8 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.stubs.IndexSink
 import com.intellij.psi.stubs.StubElement
 import com.intellij.psi.tree.IElementType
-import com.perl5.lang.mason2.Mason2Util
+import com.perl5.lang.htmlmason.MasonCoreUtil
+import com.perl5.lang.mason2.Mason2UtilCore
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition
 import com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionImpl
 import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex
@@ -32,6 +33,7 @@ import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionData
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStub
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceDefinitionStubSerializingFactory
 import com.perl5.lang.perl.psi.stubs.namespaces.PerlNamespaceIndex.NAMESPACE_KEY
+import com.perl5.lang.perl.util.PerlFileUtil
 
 
 class MasonNamespaceStubSerializingFactory(elementType: IElementType) : PerlNamespaceDefinitionStubSerializingFactory(elementType) {
@@ -41,7 +43,7 @@ class MasonNamespaceStubSerializingFactory(elementType: IElementType) : PerlName
   override fun createStub(psi: PerlNamespaceDefinitionElement, parentStub: StubElement<out PsiElement>?): PerlNamespaceDefinitionStub =
     PerlNamespaceDefinitionStub(
       parentStub, elementType, PerlNamespaceDefinitionData(
-        StringUtil.notNullize((psi as MasonNamespaceDefinitionImpl).getAbsoluteComponentPath()), psi
+        StringUtil.notNullize((psi as MasonNamespaceDefinition).getAbsoluteComponentPath()), psi
       )
     )
 
@@ -50,7 +52,7 @@ class MasonNamespaceStubSerializingFactory(elementType: IElementType) : PerlName
     sink.occurrence(MasonNamespaceDefitnitionsStubIndex.KEY, name)
 
     // fixme this is kinda hack to make MRO work. But, it should be smarter
-    sink.occurrence(NAMESPACE_KEY, Mason2Util.getClassnameFromPath(name))
+    sink.occurrence(NAMESPACE_KEY, Mason2UtilCore.getClassnameFromPath(name))
 
     for (parent in stub.parentNamespacesNames) {
       if (parent != null && !parent.isEmpty()) {
@@ -65,4 +67,18 @@ class MasonNamespaceStubSerializingFactory(elementType: IElementType) : PerlName
       psi.isValid &&
       StringUtil.isNotEmpty(psi.getAbsoluteComponentPath())
   }
+}
+
+/**
+ * Returns file path relative to project root
+ *
+ * @return path, relative to root, null if it's LightVirtualFile without original
+ */
+fun MasonNamespaceDefinition.getAbsoluteComponentPath(): String? {
+  val containingFile = MasonCoreUtil.getContainingVirtualFile(containingFile)
+  if (containingFile != null) {
+    return PerlFileUtil.getPathRelativeToContentRoot(containingFile, project)
+  }
+
+  return null
 }

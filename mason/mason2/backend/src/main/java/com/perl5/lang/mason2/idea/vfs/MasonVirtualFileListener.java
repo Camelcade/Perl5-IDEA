@@ -20,8 +20,10 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.vfs.*;
 import com.intellij.util.indexing.FileBasedIndex;
+import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashSet;
@@ -120,7 +122,8 @@ public final class MasonVirtualFileListener implements VirtualFileListener {
   }
 
   private @NotNull List<VirtualFile> getComponentsRoots() {
-    return getSettings().getComponentsRoots();
+    AbstractMasonSettings settings = getSettings();
+    return PerlProjectManager.getInstance(settings.getProject()).getModulesRootsOfType(settings.getSourceRootType());
   }
 
   /**

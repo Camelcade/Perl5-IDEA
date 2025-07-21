@@ -33,6 +33,7 @@ import com.intellij.util.Processor;
 import com.perl5.lang.htmlmason.HTMLMasonLanguage;
 import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.MasonCoreUtil;
+import com.perl5.lang.htmlmason.MasonCoreUtilCore;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.*;
 import com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex;
@@ -106,7 +107,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
     List<PerlVariableDeclarationElement> newImplicitVariables = new ArrayList<>();
 
     if (isValid()) {
-      MasonCoreUtil.fillVariablesList(this, newImplicitVariables, settings.globalVariables);
+      MasonCoreUtilCore.fillVariablesList(this, newImplicitVariables, settings.globalVariables);
     }
     return newImplicitVariables;
   }

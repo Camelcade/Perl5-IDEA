@@ -17,11 +17,13 @@
 package com.perl5.lang.mason2.psi.impl
 
 import com.intellij.openapi.vfs.VfsUtil
+import com.intellij.openapi.vfs.VfsUtilCore
+import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.psi.search.GlobalSearchScope
 import com.intellij.psi.stubs.StubIndex
 import com.intellij.util.Processor
 import com.perl5.lang.htmlmason.MasonCoreUtil
-import com.perl5.lang.mason2.Mason2Constants.MASON_DEFAULT_COMPONENT_PARENT
+import com.perl5.lang.mason2.Mason2Constants
 import com.perl5.lang.mason2.Mason2Util
 import com.perl5.lang.mason2.idea.configuration.MasonSettings
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition
@@ -32,7 +34,6 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionHandler
 import com.perl5.lang.perl.util.PerlFileUtil
 import com.perl5.lang.perl.util.PerlNamespaceUtil
-
 
 class MasonBackendNamespaceDefinitionHandler : PerlDefaultBackendNamespaceDefinitionHandler<MasonNamespaceDefinitionImpl>() {
   override fun getParentNamespaceDefinitions(namespace: MasonNamespaceDefinitionImpl): List<PerlNamespaceDefinitionElement> {
@@ -59,7 +60,7 @@ class MasonBackendNamespaceDefinitionHandler : PerlDefaultBackendNamespaceDefini
         PerlNamespaceUtil.getNamespaceDefinitions(
           namespace.getProject(),
           namespace.resolveScope,
-          MASON_DEFAULT_COMPONENT_PARENT
+          Mason2Constants.MASON_DEFAULT_COMPONENT_PARENT
         )
       )
     }
@@ -161,3 +162,76 @@ class MasonBackendNamespaceDefinitionHandler : PerlDefaultBackendNamespaceDefini
     return childNamespaces
   }
 }
+
+private fun MasonNamespaceDefinitionImpl.getParentNamespaceFromAutobase(): String? {
+  // autobase
+  val componentRoot: VirtualFile? = containingFile.getComponentRoot()
+  val containingFile = MasonCoreUtil.getContainingVirtualFile(containingFile)
+
+  if (componentRoot != null && containingFile != null) {
+    val parentComponentFile: VirtualFile? =
+      getParentComponentFile(componentRoot, containingFile.parent, containingFile)
+    if (parentComponentFile != null) { // found autobase class
+      return PerlFileUtil.getPathRelativeToContentRoot(parentComponentFile, this.project)
+    }
+  }
+  return null
+}
+
+/**
+ * Recursively traversing paths and looking for autobase
+ *
+ * @param componentRoot    component root we are search in
+ * @param currentDirectory directory we are currently in	 *
+ * @param childFile        current file (just to speed things up)
+ * @return parent component virtual file or null if not found
+ */
+private fun MasonNamespaceDefinition.getParentComponentFile(
+  componentRoot: VirtualFile,
+  currentDirectory: VirtualFile,
+  childFile: VirtualFile
+): VirtualFile? {
+  // check in current dir
+  var autobaseNames: MutableList<String?> =
+    java.util.ArrayList<String?>(MasonSettings.getInstance(project).autobaseNames)
+
+  if (childFile.parent == currentDirectory && autobaseNames.contains(childFile.name)) {// avoid cyclic inheritance
+    autobaseNames = autobaseNames.subList(0, autobaseNames.lastIndexOf(childFile.name))
+  }
+
+  for (i in autobaseNames.indices.reversed()) {
+    val potentialParent = VfsUtil.findRelativeFile(currentDirectory, autobaseNames[i])
+    if (potentialParent != null && potentialParent.exists() && (potentialParent != childFile)) {
+      return potentialParent
+    }
+  }
+
+  // move up or exit
+  if (componentRoot != currentDirectory) {
+    return getParentComponentFile(componentRoot, currentDirectory.parent, childFile)
+  }
+  return null
+}
+
+/**
+ * Returns file path relative to one of the component roots or project root if not under component root
+ *
+ * @return path, relative to root, null if it's LightVirtualFile without original
+ */
+private fun MasonNamespaceDefinition.getComponentPath(): String? {
+  val containingFile = MasonCoreUtil.getContainingVirtualFile(containingFile)
+  if (containingFile != null) {
+    val containingRoot = Mason2Util.getComponentRoot(project, containingFile)
+    if (containingRoot != null) {
+      return VfsUtilCore.getRelativePath(containingFile, containingRoot)
+    }
+  }
+  return null
+}
+
+/**
+ * Returns VFS object representing component root
+ *
+ * @return component root
+ */
+fun MasonFileImpl.getComponentRoot(): VirtualFile? = Mason2Util.getComponentRoot(project, MasonCoreUtil.getContainingVirtualFile(this))

@@ -13,27 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 
 fun properties(key: String) = providers.gradleProperty(key)
 
-project.file("src/main/gen").let { genRoot ->
-  sourceSets {
-    main {
-      java.srcDirs(genRoot)
-    }
-  }
-
-  idea {
-    module {
-      generatedSourceDirs.add(genRoot)
-    }
-  }
-}
-
 dependencies {
   listOf(
-    ":plugin.common", ":plugin.backend",
+    ":plugin.common",
+    ":plugin.backend",
+    ":lang.mason.mason2.common",
     ":lang.mason.framework.common",
     ":lang.mason.framework.backend",
   ).forEach {
@@ -46,24 +33,3 @@ dependencies {
 
 }
 
-tasks {
-  val generateLexerTask = register<GenerateLexerTask>("generateMason2Lexer") {
-    sourceFile.set(file("grammar/Mason2.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/mason2/lexer/"))
-    skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
-    purgeOldFiles.set(true)
-  }
-
-  rootProject.tasks.findByName("generateLexers")?.dependsOn(
-    generateLexerTask
-  )
-
-  /*
-    withType<JavaCompile> {
-      dependsOn(generateLexerTask)
-    }
-    withType<KotlinCompile>{
-      dependsOn(generateLexerTask)
-    }
-  */
-}

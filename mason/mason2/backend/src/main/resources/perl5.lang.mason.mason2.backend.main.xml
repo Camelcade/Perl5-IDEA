@@ -18,6 +18,8 @@
   <extensions defaultExtensionNs="com.intellij">
     <!--Mason2 settings -->
     <projectService serviceImplementation="com.perl5.lang.mason2.idea.configuration.MasonSettings"/>
+    <applicationService serviceImplementation="com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionBackendService"
+                        serviceInterface="com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionService"/>
 
     <annotator language="Perl5" implementationClass="com.perl5.lang.mason2.idea.annotator.MasonAnnotator"
                order="after PERL_SUBS_ANNOTATOR"/>
@@ -71,8 +73,6 @@
     <typedHandler implementation="com.perl5.lang.mason2.idea.editor.MasonTypedHandler" order="first"/>
     <lang.findUsagesProvider language="Mason2"
                              implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
-    <lang.foldingBuilder language="Mason2"
-                         implementationClass="com.perl5.lang.mason2.idea.folding.MasonFoldingBuilder"/>
     <lang.formatter language="Mason2"
                     implementationClass="com.perl5.lang.mason2.idea.formatter.MasonFormattingModelBuilder"/>
     <lang.indentStrategy language="Mason2"

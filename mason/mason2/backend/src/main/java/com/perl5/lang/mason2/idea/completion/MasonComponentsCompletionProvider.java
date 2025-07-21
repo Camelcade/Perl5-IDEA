@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,6 +35,7 @@ import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.idea.completion.providers.PerlCompletionProvider;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
 
@@ -83,7 +84,8 @@ public class MasonComponentsCompletionProvider extends PerlCompletionProvider {
       }
 
 
-      for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
+      for (VirtualFile componentRoot : PerlProjectManager.getInstance(masonSettings.getProject())
+        .getModulesRootsOfType(masonSettings.getSourceRootType())) {
         VfsUtilCore.processFilesRecursively(componentRoot, new MasonRootsProcessor(componentRoot) {
           @Override
           public boolean process(VirtualFile virtualFile) {
