@@ -528,8 +528,6 @@
     <lang.findUsagesProvider language="Perl5"
                              implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
 
-    <lang.parserDefinition language="Perl5Regexp"
-                           implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpParserDefinition"/>
     <regExpLanguageHost forClass="com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl"
                         implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpHost"/>
     <multiHostInjector implementation="com.perl5.lang.perl.idea.regexp.Perl5RegexpInjector"/>
