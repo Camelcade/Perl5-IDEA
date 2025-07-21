@@ -31,6 +31,11 @@
                                    implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
     <!-- EOF Perl  -->
 
+    <!-- Regexp  -->
+    <lang.parserDefinition language="Perl5Regexp"
+                           implementationClass="com.perl5.lang.perl.idea.regexp.Perl5RegexpParserDefinition"/>
+    <!-- EOF Regexp  -->
+
     <!--  POD -->
     <lang.parserDefinition language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodParserDefinition"/>
     <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
