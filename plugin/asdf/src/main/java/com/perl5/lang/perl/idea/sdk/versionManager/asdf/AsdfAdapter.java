@@ -96,7 +96,7 @@ public class AsdfAdapter extends PerlVersionManagerAdapter {
    */
   @VisibleForTesting
   @Contract("null->null; !null->!null")
-  public static List<String> parseInstallableDistributionsList(@Nullable List<String> output) {
+  public static @Nullable List<String> parseInstallableDistributionsList(@Nullable List<String> output) {
     return output == null ? null : output.stream()
       .map(String::trim)
       .filter(StringUtil::isNotEmpty)
@@ -109,7 +109,7 @@ public class AsdfAdapter extends PerlVersionManagerAdapter {
    */
   @VisibleForTesting
   @Contract("null->null; !null->!null")
-  public static List<String> parseInstalledDistributionsList(@Nullable List<String> output) {
+  public static @Nullable List<String> parseInstalledDistributionsList(@Nullable List<String> output) {
     return output == null ? null : output.stream()
       .filter(it -> !StringUtil.contains(it, "system"))
       .map(it -> it.replaceAll("\\(.+?\\)", "").replaceAll("^\\s*\\**\\s*", "").trim())

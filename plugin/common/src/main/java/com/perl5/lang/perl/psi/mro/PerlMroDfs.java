@@ -51,7 +51,7 @@ public class PerlMroDfs extends PerlMro {
       if (!recursionMap.contains(packageName)) {
         recursionMap.add(packageName);
         result.add(packageName);
-        PerlNamespaceDefinitionHandler.instance(namespaceDefinition).getLinearISA(namespaceDefinition, recursionMap, result);
+        PerlNamespaceDefinitionHandler.instance(namespaceDefinition).collectLinearISA(namespaceDefinition, recursionMap, result);
       }
     }
   }

@@ -179,7 +179,7 @@ public final class PerlMroUtil {
     // fixme we should check only those, which are used in current file
     for (PerlNamespaceDefinitionElement namespaceDefinition : PerlNamespaceUtil.getNamespaceDefinitions(project, searchScope,
                                                                                                         packageName)) {
-      PerlNamespaceDefinitionHandler.instance(namespaceDefinition).getLinearISA(namespaceDefinition, recursionMap, result);
+      PerlNamespaceDefinitionHandler.instance(namespaceDefinition).collectLinearISA(namespaceDefinition, recursionMap, result);
     }
   }
 }

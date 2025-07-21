@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -43,7 +44,7 @@ public class ForeachToForIntention extends PsiElementBaseIntentionAction {
     return getText();
   }
 
-  private PerlForeachCompound getForeachStatement(@NotNull PsiElement element) {
+  private @Nullable PerlForeachCompound getForeachStatement(@NotNull PsiElement element) {
     PerlForeachCompound forCompound = PsiTreeUtil.getParentOfType(element, PerlForeachCompound.class);
     if (forCompound == null) {
       return null;

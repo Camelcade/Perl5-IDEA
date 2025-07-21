@@ -160,7 +160,7 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
    */
   protected abstract @NotNull String getGenerateCommand();
 
-  protected VirtualFile getTargetDirectory(@NotNull AnActionEvent event) {
+  protected @Nullable VirtualFile getTargetDirectory(@NotNull AnActionEvent event) {
     Project project = event.getProject();
     VirtualFile virtualFile = event.getData(CommonDataKeys.VIRTUAL_FILE);
     return virtualFile != null && project != null &&

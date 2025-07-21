@@ -21,6 +21,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -33,5 +34,5 @@ public interface PerlFileTypeProvider {
    * @param project project for settings
    * @param rootConsumer function should return a custom fileType or null
    */
-  void addRoots(@NotNull Project project, BiConsumer<? super VirtualFile, Function<VirtualFile, FileType>> rootConsumer);
+  void addRoots(@NotNull Project project, BiConsumer<? super VirtualFile, Function<VirtualFile, @Nullable FileType>> rootConsumer);
 }

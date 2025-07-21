@@ -651,7 +651,7 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
       return null;
     }
     Set<String> existingNames = collectExistingNames(contextElement, variableType);
-    Function<String, String> fun = originalName -> {
+    Function<@Nullable String, @Nullable String> fun = originalName -> {
       if (originalName == null) {
         return null;
       }

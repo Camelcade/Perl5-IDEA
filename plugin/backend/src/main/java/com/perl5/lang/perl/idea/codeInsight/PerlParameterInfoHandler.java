@@ -189,14 +189,14 @@ public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCal
     return ParameterInfoUtils.findParentOfType(context.getFile(), context.getOffset() + 1, PsiPerlCallArgumentsImpl.class);
   }
 
-  private static @Nullable PerlParameterInfo[] getTargetParameterInfo(@Nullable PsiElement target) {
+  private static PerlParameterInfo @Nullable [] getTargetParameterInfo(@Nullable PsiElement target) {
     if (!(target instanceof PerlSubDefinitionElement subDefinitionElement)) {
       return null;
     }
     return PerlParameterInfo.wrapArguments(subDefinitionElement.getSubArgumentsListWithoutSelf());
   }
 
-  private static @Nullable PerlParameterInfo[] getMethodCallArguments(@NotNull PsiPerlCallArgumentsImpl arguments) {
+  private static PerlParameterInfo @Nullable [] getMethodCallArguments(@NotNull PsiPerlCallArgumentsImpl arguments) {
     PsiElement run = arguments.getPrevSibling();
     while (run != null) {
       if (run instanceof PerlMethodMixin methodMixin) {

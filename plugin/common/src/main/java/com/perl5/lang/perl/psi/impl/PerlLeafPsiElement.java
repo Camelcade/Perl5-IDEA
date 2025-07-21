@@ -21,6 +21,7 @@ import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.PerlReferenceOwner;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 
 public class PerlLeafPsiElement extends LeafPsiElement implements PerlReferenceOwner {
@@ -34,7 +35,7 @@ public class PerlLeafPsiElement extends LeafPsiElement implements PerlReferenceO
   }
 
   @Override
-  public final PsiReference getReference() {
+  public final @Nullable PsiReference getReference() {
     PsiReference[] references = getReferences();
     return references.length == 0 ? null : references[0];
   }

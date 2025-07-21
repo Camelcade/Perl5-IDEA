@@ -71,7 +71,7 @@ public class PerlDirectoryIndex implements Disposable {
     myIndex.resetIndex();
   }
 
-  private static Function<VirtualFile, VirtualFile> createRootComputator(@NotNull LightDirectoryIndex<? extends PerlDirectoryIndexEntry> index) {
+  private static Function<@Nullable VirtualFile, @Nullable VirtualFile> createRootComputator(@NotNull LightDirectoryIndex<? extends PerlDirectoryIndexEntry> index) {
     return virtualFile -> {
       if (virtualFile == null) {
         return null;

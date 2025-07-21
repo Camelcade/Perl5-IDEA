@@ -57,7 +57,7 @@ open class PerlUseStatementStubSerializingFactory(elementType: IElementType) :
     PerlStubSerializationUtil.writeStringsList(dataStream, stub.importParameters)
   }
 
-  override fun doIndexStub(stub: PerlUseStatementStub, sink: IndexSink) =
+  override fun doIndexStub(stub: PerlUseStatementStub, sink: IndexSink): Unit =
     sink.occurrence(PerlUseStatementsIndex.KEY, stub.namespaceName)
 
   override fun shouldCreateStub(node: ASTNode): Boolean {

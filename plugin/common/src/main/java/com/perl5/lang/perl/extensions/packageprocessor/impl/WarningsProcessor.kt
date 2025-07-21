@@ -33,7 +33,7 @@ class WarningsProcessor : PerlPragmaProcessorBase(), PerlPackageOptionsProvider 
   private val OPTIONS_BUNDLES: Map<String, String> by lazy {
     PerlWarningTree.NODE_OPTIONS.entries.associate { entry ->
       val joinedOptions = entry.value.collectChildLeafs()
-        .joinToString(" ") { leaf -> leaf.getStringIdentifier() + "(" + leaf.minVersion.strictDottedVersion + ")" }
+        .joinToString(" ") { leaf -> leaf.stringIdentifier + "(" + leaf.minVersion.strictDottedVersion + ")" }
 
       entry.key to "${entry.value.minVersion.strictDottedVersion}, $joinedOptions"
     }.toImmutableMap()

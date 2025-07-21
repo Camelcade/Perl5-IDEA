@@ -141,7 +141,7 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   }
 
   @Override
-  public PerlVariableDeclarationElement getLexicalDeclaration() {
+  public @Nullable PerlVariableDeclarationElement getLexicalDeclaration() {
     return null;
   }
 
@@ -227,12 +227,12 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
 
   @SuppressWarnings("deprecation")
   @Override
-  public IStubElementType<?, ?> getElementType() {
+  public @Nullable IStubElementType<?, ?> getElementType() {
     return null;
   }
 
   @Override
-  public PerlVariableDeclarationStub getStub() {
+  public @Nullable PerlVariableDeclarationStub getStub() {
     return null;
   }
 
@@ -348,8 +348,8 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
                                                                  @NotNull String variableName,
                                                                  @Nullable String variableClass,
                                                                  boolean isLexical,
-                                                                 boolean isLocal,
-                                                                 boolean isInvocant
+                                                                 @SuppressWarnings("SameParameterValue") boolean isLocal,
+                                                                 @SuppressWarnings("SameParameterValue") boolean isInvocant
   ) {
     return create(parent.getManager(), variableName, null, variableClass, isLexical, isLocal, isInvocant, parent);
   }

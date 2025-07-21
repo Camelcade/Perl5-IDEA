@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -98,7 +98,7 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
     }
 
     @Override
-    public VirtualFile getParent() {
+    public @Nullable VirtualFile getParent() {
       File currentFilePath = new File(myPath);
       File parentPath = currentFilePath.getParentFile();
       return parentPath == null ? null : new WslVirtualFile(getOriginalFile().getParent(), parentPath.getPath());

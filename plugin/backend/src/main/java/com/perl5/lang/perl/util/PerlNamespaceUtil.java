@@ -44,11 +44,6 @@ public final class PerlNamespaceUtil {
   private PerlNamespaceUtil() {
   }
 
-  public static void getLinearISA(@NotNull PerlNamespaceDefinitionElement namespaceDefinitionElement,
-                                  @NotNull Set<String> recursionMap,
-                                  @NotNull List<String> result) {
-  }
-
   public static @NotNull Set<PerlExportDescriptor> getExportDescriptors(@NotNull Project project,
                                                                         @NotNull GlobalSearchScope searchScope,
                                                                         @NotNull String namespaceName) {

@@ -320,7 +320,7 @@ public class PerlProjectManager implements Disposable {
   /**
    * @return sdk for project. If not configured - suggests to configure
    */
-  public static Sdk getSdkWithNotification(@NotNull Project project) {
+  public static @Nullable Sdk getSdkWithNotification(@NotNull Project project) {
     Sdk sdk = getSdk(project);
     if (sdk != null) {
       return sdk;

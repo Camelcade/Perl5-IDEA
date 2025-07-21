@@ -38,7 +38,7 @@ public interface PerlVariable extends PsiPerlExpr, PerlLexicalScopeMember, PerlV
    */
   @NotNull PerlVariableType getActualType();
 
-  PerlVariableDeclarationElement getLexicalDeclaration();
+  @Nullable PerlVariableDeclarationElement getLexicalDeclaration();
 
   int getLineNumber();
 

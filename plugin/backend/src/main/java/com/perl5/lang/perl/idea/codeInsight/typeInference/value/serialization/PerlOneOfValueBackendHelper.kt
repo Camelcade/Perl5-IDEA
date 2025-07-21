@@ -25,7 +25,7 @@ class PerlOneOfValueBackendHelper : PerlValueBackendHelper<PerlOneOfValue> {
   override val serializationId: Int
     get() = PerlValueBackendHelper.ONE_OF_ID
 
-  override fun serializeData(value: PerlOneOfValue, serializer: PerlValueSerializer) = serializer.writeValuesList(value.variants)
+  override fun serializeData(value: PerlOneOfValue, serializer: PerlValueSerializer): Unit = serializer.writeValuesList(value.variants)
 
   override fun deserialize(deserializer: PerlValueDeserializer): PerlValue = PerlOneOfValue(deserializer.readValuesSet())
 }

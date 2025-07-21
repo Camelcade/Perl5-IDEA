@@ -49,7 +49,7 @@ public abstract class PerlImplicitElement extends LightElement {
   }
 
   @Override
-  public PsiFile getContainingFile() {
+  public @Nullable PsiFile getContainingFile() {
     PsiElement parent = getParent();
     return parent == null ? null : parent.getContainingFile();
   }

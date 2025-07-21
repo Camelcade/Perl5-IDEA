@@ -76,8 +76,8 @@ open class PerlSubDefinitionStubSerializingFactory(elementType: IElementType) :
     dataStream: StubInputStream,
     parentStub: StubElement<*>?
   ): PerlSubDefinitionStub {
-    val packageName = dataStream.readName()!!.getString()
-    val functionName = dataStream.readName()!!.getString()
+    val packageName = dataStream.readName()!!.string
+    val functionName = dataStream.readName()!!.string
     val arguments = dataStream.deserializeArguments()
     val annotations: PerlSubAnnotations? = if (dataStream.readBoolean()) dataStream.readSubAnnotations() else null
     return createStubElement(parentStub, packageName, functionName!!, arguments, PerlValuesUtil.readValue(dataStream), annotations)

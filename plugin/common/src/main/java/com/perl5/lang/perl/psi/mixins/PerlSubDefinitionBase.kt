@@ -48,14 +48,14 @@ abstract class PerlSubDefinitionBase : PerlSubBase<PerlSubDefinitionStub>, PerlS
       return true
     }
 
-    val arguments = getSubArgumentsList()
-    return !arguments.isEmpty() && arguments.first().isSelf(getProject())
+    val arguments = subArgumentsList
+    return !arguments.isEmpty() && arguments.first().isSelf(project)
   }
 
   override fun getSubArgumentsList(): List<PerlSubArgument> {
-    val stub = getGreenStub()
+    val stub = greenStub
     if (stub != null) {
-      return ArrayList<PerlSubArgument>(stub.getSubArgumentsList())
+      return ArrayList<PerlSubArgument>(stub.subArgumentsList)
     }
 
     return perlSubArgumentsFromSignature ?: this.perlSubArgumentsFromBody
@@ -66,8 +66,8 @@ abstract class PerlSubDefinitionBase : PerlSubBase<PerlSubDefinitionStub>, PerlS
     if (!returnValue.isUnknown) {
       return returnValue
     }
-    val greenStub = getGreenStub()
-    return greenStub?.getReturnValueFromCode() ?: myReturnValueFromCode.getValue()
+    val greenStub = greenStub
+    return greenStub?.getReturnValueFromCode() ?: myReturnValueFromCode.value
   }
 
   override fun getPresentation(): ItemPresentation = PerlItemPresentationSimpleDynamicLocation(this, presentableName)
@@ -122,7 +122,7 @@ abstract class PerlSubDefinitionBase : PerlSubBase<PerlSubDefinitionStub>, PerlS
 
   override fun getSubDefinitionBody(): PsiPerlBlock? = block
 
-  override fun getControlFlow(): Array<Instruction> = myControlFlow.getValue()
+  override fun getControlFlow(): Array<Instruction> = myControlFlow.value
 
   override fun subtreeChanged() {
     myControlFlow.drop()

@@ -56,7 +56,7 @@ public class PerlMroC3 extends PerlMro {
     }
 
     for (PerlNamespaceDefinitionElement namespaceDefinition : nextIterationDefinitions) {
-      PerlNamespaceDefinitionHandler.instance(namespaceDefinition).getLinearISA(namespaceDefinition, recursionMap, result);
+      PerlNamespaceDefinitionHandler.instance(namespaceDefinition).collectLinearISA(namespaceDefinition, recursionMap, result);
     }
   }
 }

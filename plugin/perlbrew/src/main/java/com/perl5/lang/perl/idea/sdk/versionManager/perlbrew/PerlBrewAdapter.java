@@ -142,7 +142,7 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
    */
   @VisibleForTesting
   @Contract("null->null; !null->!null")
-  public static List<String> parseInstalledDistributionsList(@Nullable List<String> output) {
+  public static @Nullable List<String> parseInstalledDistributionsList(@Nullable List<String> output) {
     return output == null ? null : ContainerUtil.map(output, it -> it.replaceAll("\\(.+?\\)", "").replaceAll("^\\s*\\**\\s*", "").trim());
   }
 
@@ -151,7 +151,7 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
    */
   @VisibleForTesting
   @Contract("null->null;!null->!null")
-  public static List<String> parseInstallableDistributionsList(@Nullable List<String> output) {
+  public static @Nullable List<String> parseInstallableDistributionsList(@Nullable List<String> output) {
     if (output == null) {
       return null;
     }

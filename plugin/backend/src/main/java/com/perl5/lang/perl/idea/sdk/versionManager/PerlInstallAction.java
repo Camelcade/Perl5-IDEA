@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.perl5.lang.perl.idea.actions.PerlActionBase;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
@@ -49,7 +50,7 @@ public class PerlInstallAction extends PerlActionBase implements DumbAware {
     return getHandler(event) != null;
   }
 
-  private InstallPerlHandler getHandler(AnActionEvent event) {
+  private @Nullable InstallPerlHandler getHandler(AnActionEvent event) {
     Sdk perlSdk = PerlProjectManager.getSdk(event);
     return perlSdk == null ? null : PerlVersionManagerData.notNullFrom(perlSdk).getInstallPerlHandler();
   }

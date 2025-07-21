@@ -46,7 +46,7 @@ class HTMLMasonMethodStubSerializingFactory(elementType: IElementType) :
   override fun serialize(
     stub: HTMLMasonMethodDefinitionStub,
     dataStream: StubOutputStream
-  ) = dataStream.writeName(stub.getName())
+  ): Unit = dataStream.writeName(stub.getName())
 
   override fun deserialize(
     dataStream: StubInputStream,

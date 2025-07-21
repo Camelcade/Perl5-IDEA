@@ -34,7 +34,7 @@ interface PerlNamespaceDefinitionHandler<Ns : PerlNamespaceDefinitionElement> {
 
   fun getChildNamespaceDefinitions(namespace: Ns): List<PerlNamespaceDefinitionElement>
 
-  fun getLinearISA(namespace: Ns, recursionMap: MutableSet<String>, result: MutableList<String>) = namespace.mro.getLinearISA(
+  fun collectLinearISA(namespace: Ns, recursionMap: MutableSet<String>, result: MutableList<String>): Unit = namespace.mro.getLinearISA(
     namespace.getProject(), getParentNamespaceDefinitions(namespace), recursionMap, result
   )
 

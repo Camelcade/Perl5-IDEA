@@ -42,7 +42,7 @@ abstract class PerlSubBase<Stub : PerlSubStub<*>> : PerlStubBasedPsiElementBase<
   constructor(stub: Stub, nodeType: IElementType) : super(stub, nodeType)
 
   override fun getNamespaceName(): String? {
-    val stub = getGreenStub()
+    val stub = greenStub
     if (stub != null) {
       return stub.namespaceName
     }
@@ -62,7 +62,7 @@ abstract class PerlSubBase<Stub : PerlSubStub<*>> : PerlStubBasedPsiElementBase<
   override fun getName(): String? = getSubName()
 
   override fun getSubName(): String? {
-    val stub = getGreenStub()
+    val stub = greenStub
     if (stub != null) {
       return stub.subName
     }
@@ -80,7 +80,7 @@ abstract class PerlSubBase<Stub : PerlSubStub<*>> : PerlStubBasedPsiElementBase<
   override fun getNamespaceElement(): PerlNamespaceElement? = findChildByClass(PerlNamespaceElement::class.java)
 
   override fun getAnnotations(): PerlSubAnnotations? {
-    val stub = getGreenStub()
+    val stub = greenStub
     if (stub != null) {
       return stub.annotations
     }
@@ -91,5 +91,5 @@ abstract class PerlSubBase<Stub : PerlSubStub<*>> : PerlStubBasedPsiElementBase<
 
   override fun getTextOffset(): Int = this.nameIdentifier?.textOffset ?: super.getTextOffset()
 
-  override fun toString(): String = super.toString() + "@" + (if (isValid()) getCanonicalName() else "!INVALID!")
+  override fun toString(): String = super.toString() + "@" + (if (isValid) getCanonicalName() else "!INVALID!")
 }

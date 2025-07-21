@@ -51,9 +51,9 @@ class PerlBackendPackageService : PerlPackageService {
     }
 
     // fixme handle tags
-    val scope = GlobalSearchScope.allScope(useStatement.getProject())
+    val scope = GlobalSearchScope.allScope(useStatement.project)
     for (namespaceDefinition in PerlNamespaceUtil
-      .getNamespaceDefinitions(useStatement.getProject(), scope, packageName)) {
+      .getNamespaceDefinitions(useStatement.project, scope, packageName)) {
       val defaultExports = namespaceDefinition.getEXPORT()
       export.addAll(defaultExports)
       exportOk.addAll(defaultExports)
