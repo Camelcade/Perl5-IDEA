@@ -21,7 +21,7 @@ import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementData;
 public class PerlClassAccessorCallData implements PerlSubCallElementData {
   private final boolean myFBP;
 
-  PerlClassAccessorCallData(boolean FBP) {
+  public PerlClassAccessorCallData(boolean FBP) {
     myFBP = FBP;
   }
 
