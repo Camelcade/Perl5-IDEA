@@ -123,7 +123,7 @@ public class HTMLMasonSettings extends AbstractMasonSettings implements Persiste
   }
 
   @Override
-  protected PerlSourceRootType getSourceRootType() {
+  public PerlSourceRootType getSourceRootType() {
     return HTMLMasonSourceRootType.INSTANCE;
   }
 

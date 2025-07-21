@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,11 @@ import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotificationProvider;
 import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
+import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,7 +53,8 @@ public class HTMLMasonPathsNotification implements EditorNotificationProvider, D
       return null;
     }
 
-    if (HTMLMasonSettings.getInstance(myProject).getComponentsRoots().isEmpty()) {
+    AbstractMasonSettings settings = HTMLMasonSettings.getInstance(myProject);
+    if (PerlProjectManager.getInstance(settings.getProject()).getModulesRootsOfType(settings.getSourceRootType()).isEmpty()) {
       return fileEditor -> createNotificationPanel(HtmlMasonBundle.message("link.label.html.mason.components.roots.are.not.configured"));
     }
     else {

@@ -22,6 +22,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeProvider;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +34,7 @@ public class HTMLMasonFileTypeProvider implements PerlFileTypeProvider {
   @Override
   public void addRoots(@NotNull Project project, BiConsumer<? super VirtualFile, Function<VirtualFile, @Nullable FileType>> rootConsumer) {
     HTMLMasonSettings settings = HTMLMasonSettings.getInstance(project);
-    for (VirtualFile root : settings.getComponentsRoots()) {
+    for (VirtualFile root : PerlProjectManager.getInstance(settings.getProject()).getModulesRootsOfType(settings.getSourceRootType())) {
       rootConsumer.accept(root, virtualFile -> {
         String virtualFileName = virtualFile.getName();
         if (StringUtil.equals(settings.autoHandlerName, virtualFileName) ||

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,19 +16,27 @@
 
 package com.perl5.lang.htmlmason.idea.configuration;
 
-import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
-import org.jetbrains.annotations.NotNull;
 
-public class HTMLMasonSourceRootType extends PerlSourceRootType {
-  public static final HTMLMasonSourceRootType INSTANCE = new HTMLMasonSourceRootType();
+public enum HTMLMasonCustomTagRole {
+  PERL("as <%perl>", true),
+  METHOD("as <%method>", false),
+  DEF("as <%def>", false),
+  ARGS("as <%args>", true);
 
-  @Override
-  protected PerlSourceRootType getRootType() {
-    return INSTANCE;
+  private final String myTitle;
+  private final boolean myIsSimple;
+
+  HTMLMasonCustomTagRole(String title, boolean isSimple) {
+    myTitle = title;
+    myIsSimple = isSimple;
   }
 
-  @Override
-  public @NotNull String getSerializationKey() {
-    return "html-mason";
+  public String getTitle() {
+    return myTitle;
+  }
+
+
+  public boolean isSimple() {
+    return myIsSimple;
   }
 }

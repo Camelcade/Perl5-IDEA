@@ -13,23 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import org.jetbrains.grammarkit.tasks.GenerateLexerTask
-
 fun properties(key: String) = providers.gradleProperty(key)
-
-project.file("src/main/gen").let { genRoot ->
-  sourceSets {
-    main {
-      java.srcDirs(genRoot)
-    }
-  }
-
-  idea {
-    module {
-      generatedSourceDirs.add(genRoot)
-    }
-  }
-}
 
 dependencies {
   listOf(
@@ -47,23 +31,3 @@ dependencies {
   }
 }
 
-tasks {
-  val generateLexerTask = register<GenerateLexerTask>("generateHTMLMasonLexer") {
-    sourceFile.set(file("grammar/HTMLMason.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/htmlmason/lexer/"))
-    skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
-    purgeOldFiles.set(true)
-  }
-  rootProject.tasks.findByName("generateLexers")?.dependsOn(
-    generateLexerTask
-  )
-
-  /*
-    withType<JavaCompile> {
-      dependsOn(generateLexerTask)
-    }
-    withType<KotlinCompile>{
-      dependsOn(generateLexerTask)
-    }
-  */
-}
