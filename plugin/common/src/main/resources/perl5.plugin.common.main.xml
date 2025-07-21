@@ -29,6 +29,8 @@
     <lang.indentStrategy language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlIndentStrategy"/>
     <lang.syntaxHighlighterFactory language="Perl5"
                                    implementationClass="com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterFactory"/>
+    <lang.formatter language="Perl5"
+                    implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>
     <!-- EOF Perl  -->
 
     <!-- Regexp  -->

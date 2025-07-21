@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -173,13 +173,10 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     return new PerlInjectedLanguageBlocksBuilder(context, hostNode, rangeInHost).calcInjectedBlocks();
   }
 
-  private static class Entry {
-    private final TextRange myHostRange;
-    private final TextRange myInjectedRange;
-
-    public Entry(@NotNull TextRange hostRange, @NotNull TextRange injectedRange) {
-      myHostRange = hostRange;
-      myInjectedRange = injectedRange;
+  private record Entry(TextRange myHostRange, TextRange myInjectedRange) {
+    private Entry(@NotNull TextRange myHostRange, @NotNull TextRange myInjectedRange) {
+      this.myHostRange = myHostRange;
+      this.myInjectedRange = myInjectedRange;
     }
 
     @Override
