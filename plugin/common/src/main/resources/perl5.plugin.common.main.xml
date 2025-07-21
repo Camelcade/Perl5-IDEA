@@ -60,6 +60,10 @@
     <lang.commenter language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
     <lang.braceMatcher language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlBraceMatcher"/>
     <extendWordSelectionHandler implementation="com.perl5.lang.perl.idea.editor.PerlVariableSelectionHandler"/>
+    <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterHeredocClosingHandler"
+                          id="PerlEnterHandler" order="first"/>
+    <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterInBracketsHandler"/>
+    <enterHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlEnterInCommentHandler"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->
