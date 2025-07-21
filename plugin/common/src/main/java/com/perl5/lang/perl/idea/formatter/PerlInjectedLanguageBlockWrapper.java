@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,16 +103,5 @@ public class PerlInjectedLanguageBlockWrapper implements Block {
   @Override
   public boolean isLeaf() {
     return myOriginal.isLeaf();
-  }
-
-  public static class RootBlockWrapper extends PerlInjectedLanguageBlockWrapper {
-    public RootBlockWrapper(@NotNull Block original, @NotNull PerlInjectedLanguageBlocksBuilder builder) {
-      super(original, builder);
-    }
-
-    @Override
-    public @Nullable Alignment getAlignment() {
-      return myBuilder.getAbsoluteIndentAlignment();
-    }
   }
 }
