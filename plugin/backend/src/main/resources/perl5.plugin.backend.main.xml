@@ -321,7 +321,6 @@
     <editorSmartKeysConfigurable instance="com.perl5.lang.perl.idea.editor.smartkeys.options.PerlSmartKeyOptions"/>
 
     <spellchecker.support implementationClass="com.perl5.lang.perl.idea.editor.PerlSpellCheckingStrategy" language="Perl5"/>
-    <lang.indentStrategy language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.PerlIndentStrategy"/>
 
     <projectConfigurable groupId="language" bundle="messages.PerlBundle" key="perl.perl5"
                          provider="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableProvider"
