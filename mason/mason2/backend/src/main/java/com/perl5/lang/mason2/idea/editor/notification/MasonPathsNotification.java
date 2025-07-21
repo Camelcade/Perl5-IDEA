@@ -25,17 +25,20 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotificationProvider;
+import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
 import com.perl5.lang.mason2.Mason2Bundle;
 import com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.impl.MasonFileImpl;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 import java.util.function.Function;
 
+import static com.perl5.lang.mason2.psi.impl.MasonBackendNamespaceDefinitionHandlerKt.getComponentRoot;
 
 public class MasonPathsNotification implements EditorNotificationProvider, DumbAware {
   private final Project myProject;
@@ -50,12 +53,13 @@ public class MasonPathsNotification implements EditorNotificationProvider, DumbA
     if (!(file.getFileType() instanceof MasonPurePerlComponentFileType)) {
       return null;
     }
-    if (MasonSettings.getInstance(myProject).getComponentsRoots().isEmpty()) {
+    AbstractMasonSettings settings = MasonSettings.getInstance(myProject);
+    if (PerlProjectManager.getInstance(settings.getProject()).getModulesRootsOfType(settings.getSourceRootType()).isEmpty()) {
       return fileEditor -> createNotificationPanel(Mason2Bundle.message("label.mason2.components.roots.are.not.configured"));
     }
     else {
       PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
-      if (psiFile instanceof MasonFileImpl masonFile && masonFile.getComponentRoot() == null) {
+      if (psiFile instanceof MasonFileImpl masonFile && getComponentRoot(masonFile) == null) {
         return fileEditor -> createNotificationPanel(Mason2Bundle.message("label.component.not.under.one.configured.roots"));
       }
     }

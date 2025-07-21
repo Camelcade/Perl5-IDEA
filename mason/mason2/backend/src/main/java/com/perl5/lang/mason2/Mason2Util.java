@@ -26,9 +26,9 @@ import com.perl5.lang.htmlmason.MasonCoreUtil;
 import com.perl5.lang.mason2.idea.configuration.MasonSettings;
 import com.perl5.lang.mason2.psi.MasonNamespaceDefinition;
 import com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex;
+import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlFileUtil;
-import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -40,17 +40,12 @@ public final class Mason2Util {
   private Mason2Util() {
   }
 
-  public static @NotNull String getClassnameFromPath(@NotNull String path) {
-    return "/MC0::" +
-           path.replaceAll("[^\\p{L}\\d_\\/]", "_").replaceAll("" + VfsUtil.VFS_SEPARATOR_CHAR, PerlPackageUtilCore.NAMESPACE_SEPARATOR);
-  }
-
   public static @Nullable String getVirtualFileClassName(@NotNull Project project, @Nullable VirtualFile componentFile) {
     if (componentFile != null && componentFile.isValid()) {
       VirtualFile componentRoot = getComponentRoot(project, componentFile);
       if (componentRoot != null) {
         //noinspection ConstantConditions
-        return getClassnameFromPath(VfsUtilCore.getRelativePath(componentFile, componentRoot));
+        return Mason2UtilCore.getClassnameFromPath(VfsUtilCore.getRelativePath(componentFile, componentRoot));
       }
     }
 
@@ -85,7 +80,8 @@ public final class Mason2Util {
       if (componentPath
         .startsWith("" + VfsUtil.VFS_SEPARATOR_CHAR)) // abs path relative to mason roots, see the Mason::Interp::_determine_parent_compc
       {
-        for (VirtualFile componentRoot : masonSettings.getComponentsRoots()) {
+        for (VirtualFile componentRoot : PerlProjectManager.getInstance(masonSettings.getProject())
+          .getModulesRootsOfType(masonSettings.getSourceRootType())) {
           componentFile = componentRoot.findFileByRelativePath(componentPath.substring(1));
           if (componentFile != null) {
             break;

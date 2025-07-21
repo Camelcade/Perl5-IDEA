@@ -41,11 +41,11 @@ public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
   protected static final Pattern MOJO_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.mojo\\.backend\\.main\\.jar!");
   protected static final Pattern TT2_PATTERN_STRING = Pattern.compile("lib/modules/perl5\\.lang\\.tt2\\.backend\\.main\\.jar!");
   protected static final Pattern MASON_FRAMEWORK_PATTERN_STRING =
-    Pattern.compile("lib/modules/perl5\\.lang\\.mason\\.framework\\.backend\\.main\\.jar!");
+    Pattern.compile("lib/modules/perl5\\.lang\\.mason\\.framework\\.common\\.main\\.jar!");
   protected static final Pattern MASON_PATTERN_STRING =
     Pattern.compile("lib/modules/perl5\\.lang\\.mason\\.htmlmason\\.backend\\.main\\.jar!");
   protected static final Pattern MASON2_PATTERN_STRING =
-    Pattern.compile("lib/modules/perl5\\.lang\\.mason\\.mason2\\.backend\\.main\\.jar!");
+    Pattern.compile("lib/modules/perl5\\.lang\\.mason\\.mason2\\.common\\.main\\.jar!");
 
   @Parameterized.Parameter() public @NotNull String myName;
 

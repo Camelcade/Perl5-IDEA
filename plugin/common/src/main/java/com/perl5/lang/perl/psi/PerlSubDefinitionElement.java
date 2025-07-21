@@ -30,7 +30,7 @@ import java.util.List;
 
 public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElement, PerlDieScope, PerlBlockOwner, NavigationItem {
   @Override
-  default String getPresentableName() {
+  default @Nullable String getPresentableName() {
     String args = getSubArgumentsListAsString();
     return this.getName() + (args.isEmpty() ? "()" : args);
   }

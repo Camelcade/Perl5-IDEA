@@ -4,5 +4,8 @@
     <module name="perl5.lang.mason.mason2.frontend.main"/>
     <module name="perl5.lang.mason.framework.frontend.split.main"/>
   </dependencies>
-
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationService serviceImplementation="com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionFrontendService"
+                        serviceInterface="com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionService"/>
+  </extensions>
 </idea-plugin>
