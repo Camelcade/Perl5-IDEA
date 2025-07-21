@@ -19,5 +19,10 @@
     <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
                   id="PerlTypedHandler" order="first"/>
 
+
+    <!--  POD -->
+    <typedHandler implementation="com.perl5.lang.pod.idea.editor.PodTypedHandler"/>
+
+    <!--  END OF POD -->
   </extensions>
 </idea-plugin>
