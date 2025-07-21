@@ -352,13 +352,6 @@
                            order="first"/>
     <fileTypeDetector implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeDetector"/>
 
-    <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypeScript" fieldName="INSTANCE"
-              name="Perl5 Script" language="Perl5" extensions="pl;ph;al;cgi"/>
-    <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypePackage" fieldName="INSTANCE"
-              name="Perl5 Package" extensions="pm" language="Perl5"/>
-    <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypeTest" fieldName="INSTANCE"
-              name="Perl5 Test" language="Perl5" extensions="t"/>
-
     <configurationType implementation="com.perl5.lang.perl.idea.run.run.PerlRunConfigurationType"/>
     <runConfigurationProducer implementation="com.perl5.lang.perl.idea.run.run.PerlRunConfigurationProducer"/>
     <programRunner implementation="com.perl5.lang.perl.idea.run.run.PerlRunProgramRunner"/>
@@ -520,9 +513,6 @@
                order="after PERL_SUBS_ANNOTATOR"/>
     <!-- Switch settings end -->
 
-
-    <fileType implementationClass="com.perl5.lang.xs.filetypes.XSFileType" fieldName="INSTANCE"
-              name="Perl5 Extension" extensions="xs" language="Perl5 XS"/>
 
     <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
 
@@ -734,8 +724,6 @@
     <documentationProvider implementation="com.perl5.lang.pod.idea.documentation.PodDocumentationProvider" order="first"/>
     <lang.psiStructureViewFactory language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
     <iconProvider implementation="com.perl5.lang.pod.idea.ui.PodIconProvider"/>
-    <fileType implementationClass="com.perl5.lang.pod.filetypes.PodFileType" fieldName="INSTANCE"
-              name="POD File" language="Perl5 POD" extensions="pod"/>
     <internalFileTemplate name="Perl5 pod"/>
     <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
     <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
