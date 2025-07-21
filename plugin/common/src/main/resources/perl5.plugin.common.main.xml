@@ -70,6 +70,7 @@
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
     <editorHighlighterProvider filetype="Perl5 Test"
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+    <colorSettingsPage implementation="com.perl5.lang.perl.idea.highlighter.PerlColorSettingsPage"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->
