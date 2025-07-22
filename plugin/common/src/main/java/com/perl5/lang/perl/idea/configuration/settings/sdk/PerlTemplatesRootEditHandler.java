@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,36 +16,18 @@
 
 package com.perl5.lang.perl.idea.configuration.settings.sdk;
 
-import com.intellij.openapi.actionSystem.CustomShortcutSet;
-import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
-import com.intellij.ui.JBColor;
+import com.perl5.PerlBundle;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jetbrains.jps.model.JpsDummyElement;
 import org.jetbrains.jps.model.module.JpsModuleSourceRootType;
 
-import javax.swing.*;
-import java.awt.*;
-
-public abstract class PerlSourceRootEditHandler extends ModuleSourceRootEditHandler<JpsDummyElement> {
-  public PerlSourceRootEditHandler(JpsModuleSourceRootType<JpsDummyElement> rootType) {
+public abstract class PerlTemplatesRootEditHandler extends PerlSourceRootEditHandler {
+  public PerlTemplatesRootEditHandler(JpsModuleSourceRootType<JpsDummyElement> rootType) {
     super(rootType);
   }
 
   @Override
-  public @Nullable Icon getFolderUnderRootIcon() {
-    return null;
+  public @NotNull String getRootsGroupTitle() {
+    return PerlBundle.message("perl.root.group.template");
   }
-
-  @Override
-  public @Nullable CustomShortcutSet getMarkRootShortcutSet() {
-    return null;
-  }
-
-
-  @Override
-  public @NotNull Color getRootsGroupColor() {
-    return new JBColor(new Color(76, 94, 133), new Color(76, 94, 133));
-  }
-
 }
