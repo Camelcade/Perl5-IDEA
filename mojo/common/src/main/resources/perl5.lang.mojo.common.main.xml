@@ -24,5 +24,7 @@
     <enterHandlerDelegate
         implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousEnterHandlerDelegate"
         id="MojoliciousPerlEnterHandler" order="after PerlEnterHandler"/>
+    <lang.braceMatcher language="Mojolicious Perl"
+                       implementationClass="com.perl5.lang.mojolicious.idea.editor.MojoBraceMatcher"/>
   </extensions>
 </idea-plugin>
