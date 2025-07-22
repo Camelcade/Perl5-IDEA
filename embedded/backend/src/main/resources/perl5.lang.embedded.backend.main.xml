@@ -28,11 +28,6 @@
 
     <lang.refactoringSupport language="Embedded Perl"
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
-
-
-    <!-- Here should be an EmbeddedPerlCommenter -->
-    <highlightErrorFilter
-        implementation="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlTemplateLanguageErrorFilter"/>
   </extensions>
 
   <actions>

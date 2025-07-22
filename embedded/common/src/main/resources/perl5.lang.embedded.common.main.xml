@@ -32,5 +32,7 @@
     <multiLangCommenter implementation="com.perl5.lang.embedded.idea.commenter.EmbeddedPerlCommenterProvider"/>
     <enterHandlerDelegate implementation="com.perl5.lang.embedded.idea.editor.smartkeys.EmbeddedPerlEnterDelegate"
                           id="EmbeddedPerlEnterHandler" order="after PerlEnterHandler"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.embedded.idea.highlighting.EmbeddedPerlTemplateLanguageErrorFilter"/>
   </extensions>
 </idea-plugin>
