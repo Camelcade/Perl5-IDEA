@@ -24,10 +24,6 @@
     <stubElementRegistryExtension implementation="com.perl5.lang.mojolicious.stubs.MojoStubRegistryExtension"/>
     <languageStubDefinition language="Mojolicious Perl" implementationClass="com.perl5.lang.perl.psi.stubs.PerlTemplatingStubDefinition"/>
 
-    <fileType implementationClass="com.perl5.lang.mojolicious.filetypes.MojoliciousFileType" fieldName="INSTANCE"
-              name="Mojolicious Perl5 Template"
-              language="Mojolicious Perl"
-              extensions="ep"/>
     <editorHighlighterProvider filetype="Mojolicious Perl5 Template"
                                implementationClass="com.perl5.lang.mojolicious.filetypes.MojoliciousEditorHighlighterProvider"/>
     <lang.parserDefinition language="Mojolicious Perl"
