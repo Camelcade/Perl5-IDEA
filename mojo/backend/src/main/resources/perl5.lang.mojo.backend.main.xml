@@ -26,16 +26,12 @@
 
     <lang.findUsagesProvider language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.mojolicious.idea.findusages.MojoliciousFindUsagesProvider"/>
-    <lang.formatter language="Mojolicious Perl"
-                    implementationClass="com.perl5.lang.mojolicious.idea.formatter.MojoliciousFormattingModelBuilder"/>
-
 
     <lang.refactoringSupport language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
     <lang.psiStructureViewFactory language="Mojolicious Perl"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-    <preFormatProcessor implementation="com.perl5.lang.mojolicious.idea.formatter.MojoliciousPreFormatProcessor"/>
     <multiLangCommenter
         implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
 
