@@ -21,6 +21,8 @@
                                implementationClass="com.perl5.lang.htmlmason.filetypes.HTMLMasonEditorHighlighterProvider"/>
     <lang.braceMatcher language="HTML::Mason Templating Language"
                        implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonBraceMatcher"/>
+    <lang.formatter language="HTML::Mason Templating Language"
+                    implementationClass="com.perl5.lang.htmlmason.idea.formatter.HTMLMasonFormattingModelBuilder"/>
     <lang.indentStrategy language="HTML::Mason Templating Language"
                          implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonIndentStrategy"/>
     <typedHandler implementation="com.perl5.lang.htmlmason.idea.editor.HTMLMasonTypedHandler" order="first"/>
