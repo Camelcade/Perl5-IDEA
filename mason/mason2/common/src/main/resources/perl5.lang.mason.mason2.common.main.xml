@@ -7,6 +7,12 @@
   <resource-bundle>messages.MasonBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
+    <fileType implementationClass="com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType" fieldName="INSTANCE"
+              name="Mason2 Pure Perl5 Component" language="Mason2" extensions="mp"/>
+    <fileType implementationClass="com.perl5.lang.mason2.filetypes.MasonInternalComponentFileType" fieldName="INSTANCE"
+              name="Mason2 Internal Component" language="Mason2 Templating Language" extensions="mi"/>
+    <fileType implementationClass="com.perl5.lang.mason2.filetypes.MasonTopLevelComponentFileType" fieldName="INSTANCE"
+              name="Mason2 Top-Level Component" language="Mason2 Templating Language" extensions="mc"/>
     <errorHandler implementation="com.perl5.lang.mason2.MasonYoutrackErrorHandler"/>
     <editorHighlighterProvider filetype="Mason2 Pure Perl5 Component"
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
