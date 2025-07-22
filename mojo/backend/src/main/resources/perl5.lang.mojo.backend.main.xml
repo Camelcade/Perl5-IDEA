@@ -41,9 +41,6 @@
 
     <typedHandler implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousTypedHandler"
                   order="first"/>
-    <enterHandlerDelegate
-        implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousEnterHandlerDelegate"
-        id="MojoliciousPerlEnterHandler" order="after PerlEnterHandler"/>
 
     <lang.refactoringSupport language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>

@@ -12,5 +12,8 @@
                          implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
     <lang.foldingBuilder language="Mojolicious Perl"
                          implementationClass="com.perl5.lang.mojolicious.idea.folding.MojoliciousFoldingBuilder"/>
+    <enterHandlerDelegate
+        implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousEnterHandlerDelegate"
+        id="MojoliciousPerlEnterHandler" order="after PerlEnterHandler"/>
   </extensions>
 </idea-plugin>
