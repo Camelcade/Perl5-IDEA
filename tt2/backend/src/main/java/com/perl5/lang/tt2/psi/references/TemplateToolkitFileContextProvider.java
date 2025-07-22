@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.perl5.lang.tt2.psi.references;
 import com.intellij.psi.FileContextProvider;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiFileSystemItem;
-import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
+import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsBackendHelper;
 import com.perl5.lang.tt2.psi.TemplateToolkitFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -35,7 +35,7 @@ public class TemplateToolkitFileContextProvider extends FileContextProvider {
 
   @Override
   public @NotNull Collection<PsiFileSystemItem> getContextFolders(PsiFile file) {
-    return TemplateToolkitSettings.getInstance(file.getProject()).getTemplatePsiRoots();
+    return TemplateToolkitSettingsBackendHelper.getInstance(file.getProject()).getTemplatePsiRoots();
   }
 
   @Override

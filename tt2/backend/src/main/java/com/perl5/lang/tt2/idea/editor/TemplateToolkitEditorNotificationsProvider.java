@@ -25,7 +25,7 @@ import com.intellij.ui.EditorNotificationProvider;
 import com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurable;
 import com.perl5.lang.tt2.TemplateToolkitBundle;
 import com.perl5.lang.tt2.filetypes.TemplateToolkitFileType;
-import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
+import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsBackendHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,7 +46,7 @@ public class TemplateToolkitEditorNotificationsProvider implements EditorNotific
     if (file.getFileType() != TemplateToolkitFileType.INSTANCE) {
       return null;
     }
-    TemplateToolkitSettings settings = TemplateToolkitSettings.getInstance(myProject);
+    var settings = TemplateToolkitSettingsBackendHelper.getInstance(myProject);
     if (settings.isVirtualFileUnderRoot(file)) {
       return null;
     }

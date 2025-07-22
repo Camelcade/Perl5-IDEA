@@ -7,32 +7,12 @@
   <resource-bundle>messages.TemplateToolkitBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.perl5">
-    <settings.configurable.extension implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurableExtension"/>
     <fileTypeProvider implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <fileType implementationClass="com.perl5.lang.tt2.filetypes.TemplateToolkitFileType" fieldName="INSTANCE"
-              name="Template Toolkit" extensions="tt;tt2" language="Template Toolkit 2"/>
-    <editorHighlighterProvider filetype="Template Toolkit"
-                               implementationClass="com.perl5.lang.tt2.filetypes.TemplateToolkitEditorHighlighterProvider"/>
-    <lang.fileViewProviderFactory language="Template Toolkit 2"
-                                  implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
-    <lang.parserDefinition language="Template Toolkit 2"
-                           implementationClass="com.perl5.lang.tt2.TemplateToolkitParserDefinition"/>
-    <lang.ast.factory language="Template Toolkit 2" implementationClass="com.perl5.lang.tt2.TemplateToolkitAstFactory"/>
-    <projectService serviceImplementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
-    <lang.syntaxHighlighterFactory language="Template Toolkit 2"
-                                   implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighterFactory"/>
-    <colorSettingsPage implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitColorSettingsPage"/>
-    <lang.braceMatcher language="Template Toolkit 2"
-                       implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitBraceMatcher"/>
     <annotator language="Template Toolkit 2"
                implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxAnnotator"/>
-    <quoteHandler fileType="Template Toolkit"
-                  className="com.perl5.lang.tt2.idea.editor.TemplateToolkitQuoteHandler"/>
-    <typedHandler implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitTypedHandler"
-                  order="first"/>
 
     <defaultLiveTemplates file="liveTemplates/TemplateToolkit2.xml"/>
     <defaultLiveTemplates file="liveTemplates/TemplateToolkit2Postfix.xml"/>
@@ -52,24 +32,16 @@
     <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitOpenTagMacro"/>
     <liveTemplateMacro implementation="com.perl5.lang.tt2.idea.liveTemplates.TemplateToolkitCloseTagMacro"/>
 
-    <lang.indentStrategy language="Template Toolkit 2"
-                         implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitIndentStrategy"/>
-
     <completion.contributor language="Template Toolkit 2"
                             implementationClass="com.perl5.lang.tt2.idea.completion.TemplateToolkitCompletionContributor"/>
     <editorNotificationProvider
         implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitEditorNotificationsProvider"/>
 
-    <lang.elementManipulator forClass="com.perl5.lang.tt2.psi.TemplateToolkitString" order="first"
-                             implementationClass="com.perl5.lang.tt2.psi.manipulators.TemplateToolkitStringManipulator"/>
 
     <fileContextProvider implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileContextProvider"/>
     <psi.fileReferenceHelper implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitFileReferenceHelper"/>
     <psi.referenceContributor language="Template Toolkit 2"
                               implementation="com.perl5.lang.tt2.psi.references.TemplateToolkitReferenceContributor"/>
-
-    <projectStructure.sourceRootEditHandler
-        implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSourceRootEditHandler"/>
 
     <localInspection language="Template Toolkit 2"
                      shortName="TT2OrphanReply"
@@ -82,8 +54,6 @@
 
     <lang.refactoringSupport language="Template Toolkit 2"
                              implementationClass="com.perl5.lang.tt2.idea.refactoring.TemplateToolkitRefactoringSupportProvider"/>
-    <lang.formatter language="Template Toolkit 2"
-                    implementationClass="com.perl5.lang.tt2.formatter.TemplateToolkitFormattingModelBuilder"/>
 
   </extensions>
 

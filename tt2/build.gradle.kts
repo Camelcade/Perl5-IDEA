@@ -28,8 +28,8 @@ dependencies {
 
   // dependencies
   listOf(
-    ":plugin.common", ":plugin.backend",
-    ":lang.tt2.backend",
+    ":plugin.common", ":plugin.backend", ":plugin.frontend",
+    ":lang.tt2.backend", ":lang.tt2.common", ":lang.tt2.frontend",
   ).forEach {
     testCompileOnly(project(it))
   }

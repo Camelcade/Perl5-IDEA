@@ -13,6 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+import org.jetbrains.grammarkit.tasks.GenerateParserTask
+
+fun properties(key: String) = providers.gradleProperty(key)
+
+val genRoot = project.file("src/main/gen").also { genRoot ->
+  sourceSets {
+    main {
+      java.srcDirs(genRoot)
+    }
+  }
+
+  idea {
+    module {
+      generatedSourceDirs.add(genRoot)
+    }
+  }
+}
 
 dependencies {
   listOf(
@@ -24,4 +42,36 @@ dependencies {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
   }
+}
+
+tasks {
+  val generateParserTask = register<GenerateParserTask>("generateTT2Parser") {
+    sourceFile.set(file("grammar/TemplateToolkit.bnf"))
+    pathToParser.set("/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java")
+    pathToPsiRoot.set("/com/perl5/lang/tt2/psi")
+    targetRootOutputDir.set(genRoot)
+    purgeOldFiles.set(true)
+  }
+
+  val generateLexerTask = register<GenerateLexerTask>("generateTT2Lexer") {
+    sourceFile.set(file("grammar/TemplateToolkit.flex"))
+    targetOutputDir.set(file("src/main/gen/com/perl5/lang/tt2/lexer/"))
+    skeleton.set(rootProject.file(properties("lexer_skeleton").get()))
+    purgeOldFiles.set(true)
+
+    dependsOn(generateParserTask)
+  }
+
+  rootProject.tasks.findByName("generateLexers")?.dependsOn(
+    generateLexerTask
+  )
+
+  /*
+    withType<JavaCompile> {
+      dependsOn(generateLexerTask)
+    }
+    withType<KotlinCompile>{
+      dependsOn(generateLexerTask)
+    }
+  */
 }
