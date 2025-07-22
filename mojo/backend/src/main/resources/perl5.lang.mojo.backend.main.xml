@@ -32,8 +32,6 @@
 
     <lang.psiStructureViewFactory language="Mojolicious Perl"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-    <multiLangCommenter
-        implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
 
     <highlightErrorFilter
         implementation="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousTemplateLanguageErrorFilter"/>
