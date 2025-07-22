@@ -30,5 +30,7 @@
                                    implementationClass="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonSyntaxHighlighterFactory"/>
     <lang.namesValidator language="HTML::Mason Templating Language"
                          implementationClass="com.perl5.lang.htmlmason.idea.refactoring.HTMLMasonNamesValidator"/>
+    <projectStructure.sourceRootEditHandler
+        implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSourceRootEditHandler"/>
   </extensions>
 </idea-plugin>

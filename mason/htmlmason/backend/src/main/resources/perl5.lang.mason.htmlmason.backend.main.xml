@@ -19,8 +19,6 @@
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
     <lang.psiStructureViewFactory language="HTML::Mason Templating Language"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-    <projectStructure.sourceRootEditHandler
-        implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSourceRootEditHandler"/>
 
     <projectService serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
 
