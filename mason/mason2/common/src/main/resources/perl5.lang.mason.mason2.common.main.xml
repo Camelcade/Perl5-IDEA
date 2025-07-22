@@ -36,5 +36,7 @@
     <lang.indentStrategy language="Mason2"
                          implementationClass="com.perl5.lang.mason2.idea.editor.MasonIndentStrategy"/>
     <typedHandler implementation="com.perl5.lang.mason2.idea.editor.MasonTypedHandler" order="first"/>
+    <lang.syntaxHighlighterFactory language="Mason2"
+                                   implementationClass="com.perl5.lang.mason2.idea.highlighter.MasonSyntaxHighlighterFactory"/>
   </extensions>
 </idea-plugin>

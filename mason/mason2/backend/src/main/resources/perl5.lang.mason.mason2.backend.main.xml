@@ -57,8 +57,6 @@
     <editorHighlighterProvider filetype="Mason2 Top-Level Component"
                                implementationClass="com.perl5.lang.mason2.filetypes.MasonEditorHighlighterProvider"/>
 
-    <lang.syntaxHighlighterFactory language="Mason2"
-                                   implementationClass="com.perl5.lang.mason2.idea.highlighter.MasonSyntaxHighlighterFactory"/>
     <lang.findUsagesProvider language="Mason2"
                              implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
     <lang.formatter language="Mason2"
