@@ -2,6 +2,9 @@
   <dependencies>
     <module name="perl5.plugin.common.main"/>
   </dependencies>
+
+  <resource-bundle>messages.MojoBundle</resource-bundle>
+
   <extensions defaultExtensionNs="com.intellij">
     <lang.fileViewProviderFactory language="Mojolicious Perl"
                                   implementationClass="com.perl5.lang.mojolicious.psi.MojoliciousFileViewProviderFactory"/>
