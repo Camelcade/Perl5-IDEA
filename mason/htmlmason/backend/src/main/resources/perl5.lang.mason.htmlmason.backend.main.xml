@@ -32,8 +32,6 @@
                                    implementationClass="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonSyntaxHighlighterFactory"/>
     <lang.formatter language="HTML::Mason Templating Language"
                     implementationClass="com.perl5.lang.htmlmason.idea.formatter.HTMLMasonFormattingModelBuilder"/>
-    <lang.indentStrategy language="HTML::Mason Templating Language"
-                         implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonIndentStrategy"/>
     <lang.findUsagesProvider language="HTML::Mason Templating Language"
                              implementationClass="com.perl5.lang.htmlmason.idea.findusages.HTMLMasonFindUsagesProvider"/>
 

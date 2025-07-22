@@ -21,5 +21,7 @@
                                implementationClass="com.perl5.lang.htmlmason.filetypes.HTMLMasonEditorHighlighterProvider"/>
     <lang.braceMatcher language="HTML::Mason Templating Language"
                        implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonBraceMatcher"/>
+    <lang.indentStrategy language="HTML::Mason Templating Language"
+                         implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonIndentStrategy"/>
   </extensions>
 </idea-plugin>
