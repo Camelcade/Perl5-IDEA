@@ -2,7 +2,42 @@
   <dependencies>
     <module name="perl5.plugin.common.main"/>
   </dependencies>
+
+  <resource-bundle>messages.TemplateToolkitBundle</resource-bundle>
+
+  <extensions defaultExtensionNs="com.perl5">
+    <settings.configurable.extension implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurableExtension"/>
+  </extensions>
+
   <extensions defaultExtensionNs="com.intellij">
+    <fileType implementationClass="com.perl5.lang.tt2.filetypes.TemplateToolkitFileType" fieldName="INSTANCE"
+              name="Template Toolkit" extensions="tt;tt2" language="Template Toolkit 2"/>
+    <lang.parserDefinition language="Template Toolkit 2"
+                           implementationClass="com.perl5.lang.tt2.TemplateToolkitParserDefinition"/>
+    <editorHighlighterProvider filetype="Template Toolkit"
+                               implementationClass="com.perl5.lang.tt2.filetypes.TemplateToolkitEditorHighlighterProvider"/>
+    <lang.fileViewProviderFactory language="Template Toolkit 2"
+                                  implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
+    <lang.ast.factory language="Template Toolkit 2" implementationClass="com.perl5.lang.tt2.TemplateToolkitAstFactory"/>
+    <projectService serviceImplementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
+    <lang.syntaxHighlighterFactory language="Template Toolkit 2"
+                                   implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighterFactory"/>
+    <colorSettingsPage implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitColorSettingsPage"/>
+    <lang.braceMatcher language="Template Toolkit 2"
+                       implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitBraceMatcher"/>
+    <quoteHandler fileType="Template Toolkit"
+                  className="com.perl5.lang.tt2.idea.editor.TemplateToolkitQuoteHandler"/>
+    <typedHandler implementation="com.perl5.lang.tt2.idea.editor.TemplateToolkitTypedHandler"
+                  order="first"/>
+    <lang.indentStrategy language="Template Toolkit 2"
+                         implementationClass="com.perl5.lang.tt2.idea.editor.TemplateToolkitIndentStrategy"/>
+
+    <lang.elementManipulator forClass="com.perl5.lang.tt2.psi.TemplateToolkitString" order="first"
+                             implementationClass="com.perl5.lang.tt2.psi.manipulators.TemplateToolkitStringManipulator"/>
+    <projectStructure.sourceRootEditHandler
+        implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSourceRootEditHandler"/>
+    <lang.formatter language="Template Toolkit 2"
+                    implementationClass="com.perl5.lang.tt2.formatter.TemplateToolkitFormattingModelBuilder"/>
     <errorHandler implementation="com.perl5.lang.tt2.TemplateToolkitYoutrackErrorHandler"/>
   </extensions>
 </idea-plugin>
