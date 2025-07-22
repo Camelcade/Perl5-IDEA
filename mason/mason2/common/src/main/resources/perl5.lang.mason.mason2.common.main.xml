@@ -27,5 +27,7 @@
                          implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
     <lang.foldingBuilder language="Mason2"
                          implementationClass="com.perl5.lang.mason2.idea.folding.MasonFoldingBuilder"/>
+    <lang.braceMatcher language="Mason2"
+                       implementationClass="com.perl5.lang.mason2.idea.editor.MasonBraceMatcher"/>
   </extensions>
 </idea-plugin>
