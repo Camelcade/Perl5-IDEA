@@ -28,8 +28,8 @@ dependencies {
 
   // dependencies
   listOf(
-    ":plugin.common", ":plugin.backend",
-    ":lang.mojo.backend",
+    ":plugin.common", ":plugin.backend", ":plugin.frontend", ":plugin.frontend.split",
+    ":lang.mojo.backend", ":lang.mojo.common", ":lang.mojo.frontend", ":lang.mojo.frontend.split",
   ).forEach {
     testCompileOnly(project(it))
   }
