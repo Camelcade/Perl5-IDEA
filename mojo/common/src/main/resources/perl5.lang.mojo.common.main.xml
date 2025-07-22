@@ -28,5 +28,7 @@
                        implementationClass="com.perl5.lang.mojolicious.idea.editor.MojoBraceMatcher"/>
     <typedHandler implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousTypedHandler"
                   order="first"/>
+    <lang.syntaxHighlighterFactory language="Mojolicious Perl"
+                                   implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousSyntaxHighlighterFactory"/>
   </extensions>
 </idea-plugin>
