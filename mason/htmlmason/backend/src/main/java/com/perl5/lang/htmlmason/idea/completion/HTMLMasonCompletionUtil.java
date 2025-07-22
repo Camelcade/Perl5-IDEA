@@ -64,7 +64,7 @@ public final class HTMLMasonCompletionUtil {
   }
 
   public static void fillWithMethods(final @NotNull CompletionResultSet resultSet, @NotNull HTMLMasonFileImpl component) {
-    component.processMethodDefinitionsInThisOrParents(element -> {
+    HTMLMasonUtil.processMethodDefinitionsInThisOrParents(component, element -> {
       String name = element.getName();
       if (name != null) {
         resultSet.addElement(LookupElementBuilder
@@ -80,7 +80,7 @@ public final class HTMLMasonCompletionUtil {
   public static void fillWithRelativeSubcomponents(@NotNull CompletionResultSet resultSet,
                                                    @NotNull Project project,
                                                    @NotNull HTMLMasonFileImpl component) {
-    VirtualFile containingFile = component.getComponentVirtualFile();
+    VirtualFile containingFile = HTMLMasonUtil.getComponentVirtualFile(component);
     VirtualFile root;
     if (containingFile != null && (root = containingFile.getParent()) != null) {
       VfsUtilCore.processFilesRecursively(root, new ComponentsFilesCollector("", root, resultSet, project));

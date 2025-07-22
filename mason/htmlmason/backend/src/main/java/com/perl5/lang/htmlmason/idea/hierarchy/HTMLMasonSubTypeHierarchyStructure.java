@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.ide.hierarchy.HierarchyNodeDescriptor;
 import com.intellij.ide.util.treeView.NodeDescriptor;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlHierarchyNodeDescriptor;
 import com.perl5.lang.perl.idea.hierarchy.namespace.treestructures.PerlSubTypesHierarchyTreeStructure;
@@ -46,6 +47,6 @@ public class HTMLMasonSubTypeHierarchyStructure extends PerlSubTypesHierarchyTre
   @Override
   protected Collection<PsiElement> getSubElements(PsiElement element) {
     assert element instanceof HTMLMasonFileImpl;
-    return new ArrayList<>(((HTMLMasonFileImpl)element).getChildComponents());
+    return new ArrayList<>(HTMLMasonUtil.getChildComponents(((HTMLMasonFileImpl)element)));
   }
 }

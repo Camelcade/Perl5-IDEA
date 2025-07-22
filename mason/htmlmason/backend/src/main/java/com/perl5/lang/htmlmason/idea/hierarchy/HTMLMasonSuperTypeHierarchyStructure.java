@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.perl5.lang.htmlmason.idea.hierarchy;
 
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import org.jetbrains.annotations.NotNull;
 
@@ -34,7 +35,7 @@ public class HTMLMasonSuperTypeHierarchyStructure extends HTMLMasonSubTypeHierar
   @Override
   protected Collection<PsiElement> getSubElements(PsiElement element) {
     assert element instanceof HTMLMasonFileImpl;
-    PsiElement parent = ((HTMLMasonFileImpl)element).getParentComponent();
+    PsiElement parent = HTMLMasonUtil.getParentComponent(((HTMLMasonFileImpl)element));
     if (parent != null) {
       List<PsiElement> result = new ArrayList<>();
       result.add(parent);

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ public class HTMLMasonDocumentationProvider extends AbstractDocumentationProvide
   public @Nullable String getQuickNavigateInfo(PsiElement element, PsiElement originalElement) {
     if (element instanceof HTMLMasonFileImpl masonFile) {
       return HtmlMasonBundle.message("file.quick.navigation.info",
-                                     StringUtil.notNullize(masonFile.getAbsoluteComponentPath()),
+                                     StringUtil.notNullize(HTMLMasonUtil.getAbsoluteComponentPath(masonFile)),
                                      HTMLMasonUtil.getArgumentsListAsString(masonFile));
     }
     return null;
