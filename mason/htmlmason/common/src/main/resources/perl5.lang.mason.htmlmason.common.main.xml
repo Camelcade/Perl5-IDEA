@@ -3,6 +3,9 @@
     <module name="perl5.lang.mason.framework.common.main"/>
     <module name="perl5.plugin.common.main"/>
   </dependencies>
+
+  <resource-bundle>messages.HtmlMasonBundle</resource-bundle>
+
   <extensions defaultExtensionNs="com.intellij">
     <errorHandler implementation="com.perl5.lang.htmlmason.HtmlMasonYoutrackErrorHandler"/>
     <lang.foldingBuilder language="HTML::Mason Templating Language"
