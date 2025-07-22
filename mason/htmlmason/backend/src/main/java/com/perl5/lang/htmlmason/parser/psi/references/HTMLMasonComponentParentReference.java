@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.ResolveResult;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.psi.PerlString;
 import org.jetbrains.annotations.NotNull;
@@ -51,7 +52,7 @@ public class HTMLMasonComponentParentReference extends HTMLMasonStringReference 
     PsiFile psiFile = getElement().getContainingFile();
 
     if (psiFile instanceof HTMLMasonFileImpl htmlMasonFile) {
-      PsiFile parentComponent = htmlMasonFile.getParentComponent();
+      PsiFile parentComponent = HTMLMasonUtil.getParentComponent(htmlMasonFile);
       if (parentComponent != null) {
         return new ResolveResult[]{new PsiElementResolveResult(parentComponent)};
       }

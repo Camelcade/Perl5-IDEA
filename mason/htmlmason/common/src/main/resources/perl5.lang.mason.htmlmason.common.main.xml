@@ -7,6 +7,8 @@
   <resource-bundle>messages.HtmlMasonBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
+    <lang.parserDefinition language="HTML::Mason Templating Language"
+                           implementationClass="com.perl5.lang.htmlmason.HTMLMasonParserDefinition"/>
     <fileType implementationClass="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType" fieldName="INSTANCE"
               name="HTML::Mason Component" extensions="mas" language="HTML::Mason Templating Language"/>
     <lang.fileViewProviderFactory language="HTML::Mason Templating Language"

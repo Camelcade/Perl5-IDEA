@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonNamedElement;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
@@ -53,7 +54,7 @@ public class HTMLMasonMethodReference extends HTMLMasonStringReference {
         PsiElement startComponent = componentReference.resolve();
         if (startComponent instanceof HTMLMasonFileImpl htmlMasonFile) {
           HTMLMasonMethodDefinition methodDefinition =
-            htmlMasonFile.findMethodDefinitionByNameInThisOrParents(methodName);
+            HTMLMasonUtil.findMethodDefinitionByNameInThisOrParents(htmlMasonFile, methodName);
           if (methodDefinition != null) {
             return new ResolveResult[]{new PsiElementResolveResult(methodDefinition)};
           }

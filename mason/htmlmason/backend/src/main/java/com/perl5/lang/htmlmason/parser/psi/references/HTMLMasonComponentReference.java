@@ -23,6 +23,7 @@ import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.*;
 import com.intellij.util.IncorrectOperationException;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonCompositeElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonNamedElement;
@@ -57,21 +58,21 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
   }
 
   private PsiElement handleFilePathChange(HTMLMasonFileImpl target, String currentContent, String newFileName) {
-    VirtualFile componentFileDir = target.getComponentVirtualFile().getParent();
+    VirtualFile componentFileDir = HTMLMasonUtil.getComponentVirtualFile(target).getParent();
     VirtualFile componentRoot = null;
     String absPrefix = "";
 
     if (StringUtil.startsWith(currentContent, "/")) // abs path
     {
       absPrefix = "/";
-      componentRoot = target.getComponentRoot();
+      componentRoot = HTMLMasonUtil.getComponentRoot(target);
     }
     else // relative path
     {
       PsiFile psiFile = myElement.getContainingFile();
 
       if (psiFile instanceof HTMLMasonFileImpl htmlMasonFile) {
-        VirtualFile virtualFile = htmlMasonFile.getComponentVirtualFile();
+        VirtualFile virtualFile = HTMLMasonUtil.getComponentVirtualFile(htmlMasonFile);
 
         if (virtualFile != null) {
           componentRoot = virtualFile.getParent();

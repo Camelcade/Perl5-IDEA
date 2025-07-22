@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,7 @@ import com.intellij.icons.AllIcons;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonMethodDefinition;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
@@ -36,7 +37,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider {
   @Override
   protected void collectNavigationMarkers(@NotNull PsiElement element, @NotNull Collection<? super RelatedItemLineMarkerInfo<?>> result) {
     if (element instanceof HTMLMasonFileImpl htmlMasonFile) {
-      HTMLMasonFileImpl parentComponent = htmlMasonFile.getParentComponent();
+      HTMLMasonFileImpl parentComponent = HTMLMasonUtil.getParentComponent(htmlMasonFile);
       if (parentComponent != null) {
         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
           .create(AllIcons.Gutter.ImplementingMethod)
@@ -46,7 +47,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider {
         result.add(builder.createLineMarkerInfo(element));
       }
 
-      List<HTMLMasonFileImpl> childComponents = htmlMasonFile.getChildComponents();
+      List<HTMLMasonFileImpl> childComponents = HTMLMasonUtil.getChildComponents(htmlMasonFile);
       if (!childComponents.isEmpty()) {
         NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
           .create(AllIcons.Gutter.ImplementedMethod)
@@ -64,7 +65,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider {
 
       if (StringUtil.isNotEmpty(methodName) && component instanceof HTMLMasonFileImpl htmlMasonFile) {
         // method in parent components
-        HTMLMasonMethodDefinition methodDefinition = htmlMasonFile.findMethodDefinitionByNameInParents(methodName);
+        HTMLMasonMethodDefinition methodDefinition = HTMLMasonUtil.findMethodDefinitionByNameInParents(htmlMasonFile, methodName);
         if (methodDefinition != null) {
           NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
             .create(AllIcons.Gutter.OverridingMethod)
@@ -76,7 +77,7 @@ public class HTMLMasonLineMarkerProvider extends RelatedItemLineMarkerProvider {
 
         // method in subcomponents
         List<HTMLMasonMethodDefinition> methodDefinitions =
-          htmlMasonFile.findMethodDefinitionByNameInChildComponents(methodName);
+          HTMLMasonUtil.findMethodDefinitionByNameInChildComponents(htmlMasonFile, methodName);
         if (!methodDefinitions.isEmpty()) {
           NavigationGutterIconBuilder<PsiElement> builder = NavigationGutterIconBuilder
             .create(AllIcons.Gutter.OverridenMethod)

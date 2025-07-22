@@ -37,7 +37,7 @@ public class HTMLMasonElementDescriptionProvider implements ElementDescriptionPr
       return null;
     }
     if (location == UsageViewLongNameLocation.INSTANCE) {
-      return ((HTMLMasonFileImpl)element.getContainingFile()).getAbsoluteComponentPath() +
+      return HTMLMasonUtil.getAbsoluteComponentPath(((HTMLMasonFileImpl)element.getContainingFile())) +
              ":" +
              ((PsiNamedElement)element).getName();
     }

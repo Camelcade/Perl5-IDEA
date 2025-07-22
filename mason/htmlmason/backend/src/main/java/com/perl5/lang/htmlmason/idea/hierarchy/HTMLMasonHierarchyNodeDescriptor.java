@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.ide.util.treeView.NodeDescriptor;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.openapi.roots.ui.util.CompositeAppearance;
 import com.intellij.psi.PsiElement;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.hierarchy.namespace.PerlHierarchyNodeDescriptor;
@@ -33,7 +34,7 @@ public class HTMLMasonHierarchyNodeDescriptor extends PerlHierarchyNodeDescripto
 
   @Override
   protected void adjustAppearance(CompositeAppearance appearance, ItemPresentation presentation) {
-    String absoluteComponentPath = ((HTMLMasonFileImpl)getPerlElement()).getAbsoluteComponentContainerPath();
+    String absoluteComponentPath = HTMLMasonUtil.getAbsoluteComponentContainerPath(((HTMLMasonFileImpl)getPerlElement()));
 
     if (absoluteComponentPath != null) {
       appearance.getEnding().addText(

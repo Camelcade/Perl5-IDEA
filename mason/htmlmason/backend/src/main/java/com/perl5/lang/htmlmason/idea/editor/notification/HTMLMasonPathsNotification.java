@@ -25,6 +25,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.ui.EditorNotificationPanel;
 import com.intellij.ui.EditorNotificationProvider;
+import com.perl5.lang.htmlmason.HTMLMasonUtil;
 import com.perl5.lang.htmlmason.HtmlMasonBundle;
 import com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType;
 import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
@@ -59,7 +60,7 @@ public class HTMLMasonPathsNotification implements EditorNotificationProvider, D
     }
     else {
       PsiFile psiFile = PsiManager.getInstance(myProject).findFile(file);
-      if (psiFile instanceof HTMLMasonFileImpl htmlMasonFile && htmlMasonFile.getComponentRoot() == null) {
+      if (psiFile instanceof HTMLMasonFileImpl htmlMasonFile && HTMLMasonUtil.getComponentRoot(htmlMasonFile) == null) {
         return fileEditor -> createNotificationPanel(HtmlMasonBundle.message("link.label.component.not.under.one.configured.roots"));
       }
     }
