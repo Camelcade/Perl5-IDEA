@@ -62,8 +62,6 @@
                              implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
     <lang.findUsagesProvider language="Mason2 Templating Language"
                              implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
-    <highlightErrorFilter
-        implementation="com.perl5.lang.mason2.idea.highlighter.Mason2TemplateLanguageErrorFilter"/>
     <liveTemplateOptionalProcessor
         implementation="com.perl5.lang.mason2.idea.livetemplates.MasonLiveTemplatesProcessor"/>
     <backgroundPostStartupActivity implementation="com.perl5.lang.mason2.idea.components.MasonPostStartupActivity"/>
