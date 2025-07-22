@@ -7,6 +7,11 @@
   <resource-bundle>messages.MasonBundle</resource-bundle>
 
   <extensions defaultExtensionNs="com.intellij">
+    <lang.parserDefinition language="Mason2"
+                           implementationClass="com.perl5.lang.mason2.Mason2ParserDefinition"/>
+    <lang.parserDefinition language="Mason2 Templating Language"
+                           implementationClass="com.perl5.lang.mason2.Mason2TemplatingParserDefinition"/>
+
     <fileType implementationClass="com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType" fieldName="INSTANCE"
               name="Mason2 Pure Perl5 Component" language="Mason2" extensions="mp"/>
     <fileType implementationClass="com.perl5.lang.mason2.filetypes.MasonInternalComponentFileType" fieldName="INSTANCE"

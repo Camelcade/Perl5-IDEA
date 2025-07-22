@@ -51,8 +51,6 @@
         implementation="com.perl5.lang.mason2.idea.editor.notification.MasonPathsNotification"/>
 
 
-    <lang.parserDefinition language="Mason2"
-                           implementationClass="com.perl5.lang.mason2.Mason2ParserDefinition"/>
     <typeHierarchyProvider language="Mason2 Templating Language"
                            implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTemplatingTypeHierarchyProvider"/>
     <typeHierarchyProvider language="Mason2"
@@ -85,8 +83,6 @@
 
     <lang.findUsagesProvider language="Mason2 Templating Language"
                              implementationClass="com.perl5.lang.mason2.idea.findusages.MasonTemplatingFindUsagesProvider"/>
-    <lang.parserDefinition language="Mason2 Templating Language"
-                           implementationClass="com.perl5.lang.mason2.Mason2TemplatingParserDefinition"/>
     <lang.ast.factory language="Mason2 Templating Language" implementationClass="com.perl5.lang.mason2.Mason2TemplatingAstFactory"/>
     <lang.fileViewProviderFactory language="Mason2 Templating Language"
                                   implementationClass="com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProviderFactory"/>
