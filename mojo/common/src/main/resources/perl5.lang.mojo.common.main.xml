@@ -3,6 +3,8 @@
     <module name="perl5.plugin.common.main"/>
   </dependencies>
   <extensions defaultExtensionNs="com.intellij">
+    <lang.fileViewProviderFactory language="Mojolicious Perl"
+                                  implementationClass="com.perl5.lang.mojolicious.psi.MojoliciousFileViewProviderFactory"/>
     <errorHandler implementation="com.perl5.lang.mojolicious.MojoYoutrackErrorHandler"/>
     <lang.commenter language="Mojolicious Perl"
                     implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
