@@ -32,5 +32,9 @@
                                    implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousSyntaxHighlighterFactory"/>
     <editorHighlighterProvider filetype="Mojolicious Perl5 Template"
                                implementationClass="com.perl5.lang.mojolicious.filetypes.MojoliciousEditorHighlighterProvider"/>
+    <lang.formatter language="Mojolicious Perl"
+                    implementationClass="com.perl5.lang.mojolicious.idea.formatter.MojoliciousFormattingModelBuilder"/>
+
+    <preFormatProcessor implementation="com.perl5.lang.mojolicious.idea.formatter.MojoliciousPreFormatProcessor"/>
   </extensions>
 </idea-plugin>
