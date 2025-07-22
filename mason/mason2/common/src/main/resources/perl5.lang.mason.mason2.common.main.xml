@@ -11,6 +11,10 @@
                            implementationClass="com.perl5.lang.mason2.Mason2ParserDefinition"/>
     <lang.parserDefinition language="Mason2 Templating Language"
                            implementationClass="com.perl5.lang.mason2.Mason2TemplatingParserDefinition"/>
+    <lang.fileViewProviderFactory language="Mason2"
+                                  implementationClass="com.perl5.lang.mason2.psi.Mason2FileViewProviderFactory"/>
+    <lang.fileViewProviderFactory language="Mason2 Templating Language"
+                                  implementationClass="com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProviderFactory"/>
 
     <fileType implementationClass="com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType" fieldName="INSTANCE"
               name="Mason2 Pure Perl5 Component" language="Mason2" extensions="mp"/>
