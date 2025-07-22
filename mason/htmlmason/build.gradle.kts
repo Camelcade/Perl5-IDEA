@@ -29,14 +29,9 @@ dependencies {
 
   // compilation dependencies
   listOf(
-    ":plugin.common",
-    ":plugin.backend",
-    ":lang.mason.htmlmason.backend",
-    ":lang.mason.htmlmason.common",
-    ":lang.mason.htmlmason.frontend",
-    ":lang.mason.framework.backend",
-    ":lang.mason.framework.common",
-    ":lang.mason.framework.frontend",
+    ":plugin.common", ":plugin.backend", ":plugin.frontend",
+    ":lang.mason.htmlmason.backend", ":lang.mason.htmlmason.common", ":lang.mason.htmlmason.frontend",
+    ":lang.mason.framework.backend", ":lang.mason.framework.common", ":lang.mason.framework.frontend",
   ).forEach {
     testCompileOnly(project(it))
   }
