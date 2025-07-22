@@ -9,6 +9,8 @@
   <extensions defaultExtensionNs="com.intellij">
     <fileType implementationClass="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileType" fieldName="INSTANCE"
               name="HTML::Mason Component" extensions="mas" language="HTML::Mason Templating Language"/>
+    <lang.fileViewProviderFactory language="HTML::Mason Templating Language"
+                                  implementationClass="com.perl5.lang.htmlmason.HTMLMasonFileViewProviderFactory"/>
     <errorHandler implementation="com.perl5.lang.htmlmason.HtmlMasonYoutrackErrorHandler"/>
     <lang.foldingBuilder language="HTML::Mason Templating Language"
                          implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonFoldingBuilder"/>
