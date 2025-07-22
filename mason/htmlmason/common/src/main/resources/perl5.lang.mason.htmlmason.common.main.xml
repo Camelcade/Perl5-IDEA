@@ -32,5 +32,6 @@
                          implementationClass="com.perl5.lang.htmlmason.idea.refactoring.HTMLMasonNamesValidator"/>
     <projectStructure.sourceRootEditHandler
         implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSourceRootEditHandler"/>
+    <projectService serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
   </extensions>
 </idea-plugin>
