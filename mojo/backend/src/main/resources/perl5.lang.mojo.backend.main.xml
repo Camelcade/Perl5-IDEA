@@ -41,8 +41,6 @@
 
     <lang.psiStructureViewFactory language="Mojolicious Perl"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-    <lang.braceMatcher language="Mojolicious Perl"
-                       implementationClass="com.perl5.lang.mojolicious.idea.editor.MojoBraceMatcher"/>
     <preFormatProcessor implementation="com.perl5.lang.mojolicious.idea.formatter.MojoliciousPreFormatProcessor"/>
     <multiLangCommenter
         implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
