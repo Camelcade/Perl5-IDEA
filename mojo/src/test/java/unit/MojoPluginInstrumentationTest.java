@@ -30,7 +30,7 @@ public class MojoPluginInstrumentationTest extends PerlInstrumentationTestCase {
   public static Collection<Object[]> data() {
     return !CategoriesFilter.shouldRun(MojoPluginInstrumentationTest.class) ? Collections.emptyList() : Arrays.asList(new Object[][]{
       PARSER_DEFINITION_CLASS_DATA,
-      {"mojo.backend", MojoliciousParserDefinition.class, MOJO_PATTERN_STRING},
+      {"mojo.common", MojoliciousParserDefinition.class, MOJO_PATTERN_STRING},
     });
   }
 }
