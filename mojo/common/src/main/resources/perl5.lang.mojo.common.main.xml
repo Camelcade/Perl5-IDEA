@@ -17,6 +17,8 @@
     <errorHandler implementation="com.perl5.lang.mojolicious.MojoYoutrackErrorHandler"/>
     <lang.commenter language="Mojolicious Perl"
                     implementationClass="com.perl5.lang.perl.idea.editor.PerlCommenter"/>
+    <multiLangCommenter
+        implementation="com.perl5.lang.mojolicious.idea.commenter.MojoliciousCommenterProvider"/>
     <lang.namesValidator language="Mojolicious Perl"
                          implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
     <lang.foldingBuilder language="Mojolicious Perl"
