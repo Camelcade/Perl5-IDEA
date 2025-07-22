@@ -33,8 +33,6 @@
     <lang.formatter language="Mojolicious Perl"
                     implementationClass="com.perl5.lang.mojolicious.idea.formatter.MojoliciousFormattingModelBuilder"/>
 
-    <typedHandler implementation="com.perl5.lang.mojolicious.idea.editor.smartkeys.MojoliciousTypedHandler"
-                  order="first"/>
 
     <lang.refactoringSupport language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
