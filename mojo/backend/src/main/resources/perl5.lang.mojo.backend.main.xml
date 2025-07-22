@@ -35,8 +35,6 @@
 
     <liveTemplateOptionalProcessor
         implementation="com.perl5.lang.mojolicious.idea.liveTemplates.MojoliciousLiveTemplateProcessor"/>
-    <elementDescriptionProvider implementation="com.perl5.lang.mojolicious.psi.MojoElementDescriptionProvider" id="perl5.mojo"
-                                order="before perl5"/>
     <projectStructure.sourceRootEditHandler
         implementation="com.perl5.lang.mojolicious.idea.modules.MojoTemplateSourceRootEditHandler"/>
 

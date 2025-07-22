@@ -40,5 +40,7 @@
     <preFormatProcessor implementation="com.perl5.lang.mojolicious.idea.formatter.MojoliciousPreFormatProcessor"/>
     <highlightErrorFilter
         implementation="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousTemplateLanguageErrorFilter"/>
+    <elementDescriptionProvider implementation="com.perl5.lang.mojolicious.psi.MojoElementDescriptionProvider" id="perl5.mojo"
+                                order="before perl5"/>
   </extensions>
 </idea-plugin>
