@@ -42,5 +42,8 @@
     <typedHandler implementation="com.perl5.lang.mason2.idea.editor.MasonTypedHandler" order="first"/>
     <lang.syntaxHighlighterFactory language="Mason2"
                                    implementationClass="com.perl5.lang.mason2.idea.highlighter.MasonSyntaxHighlighterFactory"/>
+    <lang.formatter language="Mason2"
+                    implementationClass="com.perl5.lang.mason2.idea.formatter.MasonFormattingModelBuilder"/>
+    <preFormatProcessor implementation="com.perl5.lang.mason2.idea.formatter.MasonPreFormatProcessor"/>
   </extensions>
 </idea-plugin>
