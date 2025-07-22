@@ -6,6 +6,10 @@
 
   <resource-bundle>messages.MasonBundle</resource-bundle>
 
+  <extensions defaultExtensionNs="com.perl5">
+    <settings.configurable.extension implementation="com.perl5.lang.mason2.idea.configuration.Mason2SettingsConfigurableExtension"/>
+  </extensions>
+
   <extensions defaultExtensionNs="com.intellij">
     <lang.parserDefinition language="Mason2"
                            implementationClass="com.perl5.lang.mason2.Mason2ParserDefinition"/>
