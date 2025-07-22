@@ -20,8 +20,6 @@
     <lang.psiStructureViewFactory language="HTML::Mason Templating Language"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
 
-    <projectService serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
-
     <editorNotificationProvider
         implementation="com.perl5.lang.htmlmason.idea.editor.notification.HTMLMasonPathsNotification"/>
     <lang.findUsagesProvider language="HTML::Mason Templating Language"
