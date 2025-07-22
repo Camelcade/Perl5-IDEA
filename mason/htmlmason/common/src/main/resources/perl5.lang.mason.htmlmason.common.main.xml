@@ -24,5 +24,7 @@
     <lang.indentStrategy language="HTML::Mason Templating Language"
                          implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonIndentStrategy"/>
     <typedHandler implementation="com.perl5.lang.htmlmason.idea.editor.HTMLMasonTypedHandler" order="first"/>
+    <lang.syntaxHighlighterFactory language="HTML::Mason Templating Language"
+                                   implementationClass="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonSyntaxHighlighterFactory"/>
   </extensions>
 </idea-plugin>
