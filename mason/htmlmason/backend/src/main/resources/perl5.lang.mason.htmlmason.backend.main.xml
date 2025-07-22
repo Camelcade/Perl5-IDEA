@@ -13,8 +13,6 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <lang.namesValidator language="HTML::Mason Templating Language"
-                         implementationClass="com.perl5.lang.htmlmason.idea.refactoring.HTMLMasonNamesValidator"/>
     <lang.findUsagesProvider language="HTML::Mason Templating Language"
                              implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
     <lang.refactoringSupport language="HTML::Mason Templating Language"
