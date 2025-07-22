@@ -15,6 +15,7 @@
                            implementationClass="com.perl5.lang.mason2.Mason2ParserDefinition"/>
     <lang.parserDefinition language="Mason2 Templating Language"
                            implementationClass="com.perl5.lang.mason2.Mason2TemplatingParserDefinition"/>
+    <lang.ast.factory language="Mason2 Templating Language" implementationClass="com.perl5.lang.mason2.Mason2TemplatingAstFactory"/>
     <lang.fileViewProviderFactory language="Mason2"
                                   implementationClass="com.perl5.lang.mason2.psi.Mason2FileViewProviderFactory"/>
     <lang.fileViewProviderFactory language="Mason2 Templating Language"
