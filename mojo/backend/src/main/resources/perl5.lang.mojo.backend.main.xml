@@ -33,8 +33,6 @@
     <lang.psiStructureViewFactory language="Mojolicious Perl"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
 
-    <highlightErrorFilter
-        implementation="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousTemplateLanguageErrorFilter"/>
     <liveTemplateOptionalProcessor
         implementation="com.perl5.lang.mojolicious.idea.liveTemplates.MojoliciousLiveTemplateProcessor"/>
     <elementDescriptionProvider implementation="com.perl5.lang.mojolicious.psi.MojoElementDescriptionProvider" id="perl5.mojo"
