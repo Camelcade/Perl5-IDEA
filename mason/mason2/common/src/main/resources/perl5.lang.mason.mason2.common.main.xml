@@ -53,5 +53,7 @@
     <preFormatProcessor implementation="com.perl5.lang.mason2.idea.formatter.MasonPreFormatProcessor"/>
     <projectStructure.sourceRootEditHandler
         implementation="com.perl5.lang.mason2.idea.configuration.Mason2SourceRootTypeEditHandler"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.mason2.idea.highlighter.Mason2TemplateLanguageErrorFilter"/>
   </extensions>
 </idea-plugin>
