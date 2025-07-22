@@ -30,5 +30,7 @@
                   order="first"/>
     <lang.syntaxHighlighterFactory language="Mojolicious Perl"
                                    implementationClass="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousSyntaxHighlighterFactory"/>
+    <editorHighlighterProvider filetype="Mojolicious Perl5 Template"
+                               implementationClass="com.perl5.lang.mojolicious.filetypes.MojoliciousEditorHighlighterProvider"/>
   </extensions>
 </idea-plugin>
