@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.perl5.lang.mojolicious.psi.impl
 
 import com.intellij.psi.PsiElement
