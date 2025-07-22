@@ -27,6 +27,10 @@
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
     <editorHighlighterProvider filetype="Mason2 top-level component"
                                implementationClass="com.perl5.lang.perl.idea.highlighter.PerlEditorHighlighterProvider"/>
+    <editorHighlighterProvider filetype="Mason2 Internal Component"
+                               implementationClass="com.perl5.lang.mason2.filetypes.MasonEditorHighlighterProvider"/>
+    <editorHighlighterProvider filetype="Mason2 Top-Level Component"
+                               implementationClass="com.perl5.lang.mason2.filetypes.MasonEditorHighlighterProvider"/>
     <lang.namesValidator language="Mason2"
                          implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
     <lang.foldingBuilder language="Mason2"

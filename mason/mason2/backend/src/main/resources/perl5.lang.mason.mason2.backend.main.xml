@@ -52,10 +52,6 @@
                            implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTemplatingTypeHierarchyProvider"/>
     <typeHierarchyProvider language="Mason2"
                            implementationClass="com.perl5.lang.mason2.idea.hierarchy.MasonTypeHierarchyProvider"/>
-    <editorHighlighterProvider filetype="Mason2 Internal Component"
-                               implementationClass="com.perl5.lang.mason2.filetypes.MasonEditorHighlighterProvider"/>
-    <editorHighlighterProvider filetype="Mason2 Top-Level Component"
-                               implementationClass="com.perl5.lang.mason2.filetypes.MasonEditorHighlighterProvider"/>
 
     <lang.findUsagesProvider language="Mason2"
                              implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
