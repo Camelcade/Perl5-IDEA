@@ -26,8 +26,6 @@
 
     <projectService serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
 
-    <editorHighlighterProvider filetype="HTML::Mason Component"
-                               implementationClass="com.perl5.lang.htmlmason.filetypes.HTMLMasonEditorHighlighterProvider"/>
     <editorNotificationProvider
         implementation="com.perl5.lang.htmlmason.idea.editor.notification.HTMLMasonPathsNotification"/>
     <lang.braceMatcher language="HTML::Mason Templating Language"

@@ -17,5 +17,7 @@
     <lang.foldingBuilder language="HTML::Mason Templating Language"
                          implementationClass="com.perl5.lang.htmlmason.idea.editor.HTMLMasonFoldingBuilder"/>
     <lang.ast.factory language="HTML::Mason Templating Language" implementationClass="com.perl5.lang.htmlmason.HtmlMasonAstFactory"/>
+    <editorHighlighterProvider filetype="HTML::Mason Component"
+                               implementationClass="com.perl5.lang.htmlmason.filetypes.HTMLMasonEditorHighlighterProvider"/>
   </extensions>
 </idea-plugin>
