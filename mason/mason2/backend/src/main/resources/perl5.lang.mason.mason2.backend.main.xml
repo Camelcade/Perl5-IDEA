@@ -31,9 +31,6 @@
     <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonNamespaceDefitnitionsStubIndex"/>
     <stubIndex implementation="com.perl5.lang.mason2.psi.stubs.MasonParentNamespacesStubIndex"/>
 
-    <projectStructure.sourceRootEditHandler
-        implementation="com.perl5.lang.mason2.idea.configuration.Mason2SourceRootTypeEditHandler"/>
-
     <completion.contributor language="Perl5"
                             implementationClass="com.perl5.lang.mason2.idea.completion.MasonCompletionContributor"/>
 
