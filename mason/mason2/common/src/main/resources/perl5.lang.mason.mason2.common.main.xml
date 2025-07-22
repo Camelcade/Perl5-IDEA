@@ -20,6 +20,7 @@
     <lang.fileViewProviderFactory language="Mason2 Templating Language"
                                   implementationClass="com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProviderFactory"/>
 
+    <projectService serviceImplementation="com.perl5.lang.mason2.idea.configuration.MasonSettings"/>
     <fileType implementationClass="com.perl5.lang.mason2.filetypes.MasonPurePerlComponentFileType" fieldName="INSTANCE"
               name="Mason2 Pure Perl5 Component" language="Mason2" extensions="mp"/>
     <fileType implementationClass="com.perl5.lang.mason2.filetypes.MasonInternalComponentFileType" fieldName="INSTANCE"

@@ -16,7 +16,6 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!--Mason2 settings -->
-    <projectService serviceImplementation="com.perl5.lang.mason2.idea.configuration.MasonSettings"/>
     <applicationService serviceImplementation="com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionBackendService"
                         serviceInterface="com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionService"/>
 
