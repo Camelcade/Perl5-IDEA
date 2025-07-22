@@ -14,23 +14,7 @@
  * limitations under the License.
  */
 
-import org.jetbrains.grammarkit.tasks.GenerateLexerTask
-
 fun properties(key: String) = providers.gradleProperty(key)
-
-project.file("src/main/gen").let { genRoot ->
-  sourceSets {
-    main {
-      java.srcDirs(genRoot)
-    }
-  }
-
-  idea {
-    module {
-      generatedSourceDirs.add(genRoot)
-    }
-  }
-}
 
 
 dependencies {
@@ -48,23 +32,3 @@ dependencies {
   }
 }
 
-tasks {
-  val generateLexerTask = register<GenerateLexerTask>("generateMojoliciousLexer") {
-    sourceFile.set(file("grammar/Mojolicious.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/mojolicious/lexer/"))
-    skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
-    purgeOldFiles.set(true)
-  }
-  rootProject.tasks.findByName("generateLexers")?.dependsOn(
-    generateLexerTask
-  )
-
-  /*
-    withType<JavaCompile> {
-      dependsOn(generateLexerTask)
-    }
-    withType<KotlinCompile> {
-      dependsOn(generateLexerTask)
-    }
-  */
-}
