@@ -38,5 +38,7 @@
                     implementationClass="com.perl5.lang.mojolicious.idea.formatter.MojoliciousFormattingModelBuilder"/>
 
     <preFormatProcessor implementation="com.perl5.lang.mojolicious.idea.formatter.MojoliciousPreFormatProcessor"/>
+    <highlightErrorFilter
+        implementation="com.perl5.lang.mojolicious.idea.highlighter.MojoliciousTemplateLanguageErrorFilter"/>
   </extensions>
 </idea-plugin>
