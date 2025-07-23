@@ -151,6 +151,7 @@
                              implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlDeclarationRangeHandler"/>
     <codeFoldingOptionsProvider instance="com.perl5.lang.perl.idea.folding.PerlFoldingOptionsProvider"/>
     <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider" id="perl5"/>
+    <iconProvider implementation="com.perl5.lang.perl.idea.ui.PerlIconProvider"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->
