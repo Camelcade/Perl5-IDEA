@@ -219,7 +219,6 @@
     <idIndexer filetype="Cpanfile" implementationClass="com.perl5.lang.perl.idea.findusages.PerlIdIndexer"/>
     <idIndexer filetype="Perl5 Test" implementationClass="com.perl5.lang.perl.idea.findusages.PerlIdIndexer"/>
     <fileStructureGroupRuleProvider implementation="com.perl5.lang.perl.idea.findusages.PerlFileStructureGroupRuleProvider"/>
-    <readWriteAccessDetector implementation="com.perl5.lang.perl.idea.findusages.PerlReadWriteAccessDetector"/>
     <referencesSearch implementation="com.perl5.lang.perl.psi.references.PerlReferencesSearcher"/>
 
     <codeInsight.parameterInfo language="Perl5"
