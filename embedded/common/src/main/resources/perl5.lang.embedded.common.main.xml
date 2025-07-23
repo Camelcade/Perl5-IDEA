@@ -5,6 +5,8 @@
   <extensions defaultExtensionNs="com.intellij">
     <errorHandler implementation="com.perl5.lang.embedded.EmbeddedPerlYoutrackErrorHandler"/>
 
+    <lang.fileViewProviderFactory language="Embedded Perl"
+                                  implementationClass="com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory"/>
     <lang.parserDefinition language="Embedded Perl"
                            implementationClass="com.perl5.lang.embedded.EmbeddedPerlParserDefinition"/>
     <fileType implementationClass="com.perl5.lang.embedded.filetypes.EmbeddedPerlFileType" fieldName="INSTANCE"

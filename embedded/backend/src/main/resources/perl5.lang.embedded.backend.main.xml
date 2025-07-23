@@ -15,8 +15,6 @@
     <languageStubDefinition language="Embedded Perl" implementationClass="com.perl5.lang.perl.psi.stubs.PerlTemplatingStubDefinition"/>
 
     <internalFileTemplate name="Perl5 embedded"/>
-    <lang.fileViewProviderFactory language="Embedded Perl"
-                                  implementationClass="com.perl5.lang.embedded.psi.EmbeddedPerlFileViewProviderFactory"/>
     <lang.findUsagesProvider language="Embedded Perl"
                              implementationClass="com.perl5.lang.embedded.idea.findusages.EmbeddedPerlFindUsagesProvider"/>
 
