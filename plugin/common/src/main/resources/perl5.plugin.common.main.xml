@@ -48,6 +48,9 @@
                     implementationClass="com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorHandler$PerlClassAccessorRoHandler"/>
     <subCallHandler key="mk_wo_accessors"
                     implementationClass="com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorHandler$PerlClassAccessorWoHandler"/>
+
+    <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
+    <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtension"/>
   </extensions>
 
 
