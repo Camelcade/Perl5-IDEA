@@ -666,7 +666,6 @@
     <highlightUsagesHandlerFactory order="before mainone"
                                    implementation="com.perl5.lang.pod.idea.codeInsight.highlighting.PodUsagesHighlightingFactory"/>
 
-    <lang.namesValidator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
     <referencesSearch implementation="com.perl5.lang.pod.parser.psi.references.PodReferencesSearch"/>
 
     <lang.surroundDescriptor language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.surroundWith.PodSurroundDescriptor"/>

@@ -187,6 +187,7 @@
     <iconProvider implementation="com.perl5.lang.pod.idea.ui.PodIconProvider"/>
     <spellchecker.support implementationClass="com.perl5.lang.pod.idea.editor.PodSpellCheckingStrategy" language="Perl5 POD"/>
     <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
+    <lang.namesValidator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
     <!--  END OF POD -->
   </extensions>
 </idea-plugin>
