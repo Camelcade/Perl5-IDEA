@@ -27,8 +27,6 @@
                     dynamic="true"/>
     <extensionPoint qualifiedName="com.perl5.fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider"
                     dynamic="true"/>
-    <extensionPoint qualifiedName="com.perl5.parserExtension" interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"
-                    dynamic="true"/>
     <extensionPoint qualifiedName="com.perl5.importsProvider" interface="com.perl5.lang.perl.extensions.imports.PerlImportsProvider"
                     dynamic="true"/>
     <extensionPoint qualifiedName="com.perl5.implicitSubsProvider"
