@@ -4,13 +4,18 @@ import org.gradle.jvm.tasks.Jar
 import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB
 import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB_MODULES
 import org.jetbrains.intellij.platform.gradle.Constants.Tasks.INSTRUMENT_CODE
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.intellij.platform.gradle.tasks.InstrumentCodeTask
 import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
+import org.jetbrains.intellij.platform.gradle.tasks.aware.IntelliJPlatformVersionAware
 import org.jetbrains.intellij.platform.gradle.tasks.aware.SplitModeAware.SplitModeTarget
 import org.kt3k.gradle.plugin.coveralls.CoverallsTask
 import java.nio.file.Files
+import kotlin.io.path.exists
 import kotlin.io.path.moveTo
+import kotlin.io.path.readText
+import kotlin.io.path.writeText
 
 /*
  * Copyright 2015-2021 Alexandr Evstigneev
@@ -353,9 +358,26 @@ tasks {
   }
 }
 
+// hack for IJPL-198341
+abstract class FixClientExecutable : DefaultTask(), IntelliJPlatformVersionAware {
+  @TaskAction
+  fun fix() {
+    val client = platformPath.resolve("bin/linux/amd64/jetbrains_client.sh").takeIf { it.exists() } ?: return
+    val content = client.readText()
+
+    client.writeText(content.replace("IDE_HOME=\$(dirname \"\${IDE_BIN_HOME}\")",
+                                     "IDE_HOME=\$(dirname \$(dirname \$(dirname \"\${IDE_BIN_HOME}\")))"))
+  }
+}
+
+val fixClientExecutable by tasks.registering(FixClientExecutable::class)
+
 val runInSplitMode by intellijPlatformTesting.runIde.registering {
   splitMode = true
   splitModeTarget = SplitModeTarget.BOTH
+  task {
+    dependsOn(fixClientExecutable)
+  }
 }
 
 val coverageReportFile = project.buildDir.resolve("reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
