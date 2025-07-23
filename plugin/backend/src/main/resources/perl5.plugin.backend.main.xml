@@ -269,13 +269,6 @@
     <additionalLibraryRootsProvider implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlLibraryProvider"/>
     <resolveScopeProvider implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlResolveScopeProvider"/>
 
-    <projectConfigurable groupId="language" bundle="messages.PerlBundle" key="perl.perl5"
-                         provider="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableProvider"
-                         id="PERL5_MAIN_SETTINGS"/>
-
-    <projectStructure.sourceRootEditHandler
-        implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlLibrarySourceRootEditHandler"/>
-
     <codeInsight.lineMarkerProvider language="Perl5"
                                     implementationClass="com.perl5.lang.perl.idea.navigation.PerlLineMarkerProvider"/>
 
