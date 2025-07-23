@@ -117,6 +117,11 @@
     <readWriteAccessDetector implementation="com.perl5.lang.perl.idea.findusages.PerlReadWriteAccessDetector"/>
 
     <projectService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesCacheService"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->
