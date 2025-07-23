@@ -113,6 +113,7 @@
                          implementationClass="com.perl5.lang.perl.idea.folding.PerlFoldingBuilder"/>
     <highlightUsagesHandlerFactory order="before mainone"
                                    implementation="com.perl5.lang.perl.idea.codeInsight.highlighting.PerlHighlightExitPointsHandlerFactory"/>
+    <usageTypeProvider implementation="com.perl5.lang.perl.idea.findusages.PerlUsageTypeProvider"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->
