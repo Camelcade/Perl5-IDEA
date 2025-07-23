@@ -36,6 +36,9 @@ dependencies {
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
+    bundledModules(
+      "intellij.spellchecker"
+    )
   }
 }
 

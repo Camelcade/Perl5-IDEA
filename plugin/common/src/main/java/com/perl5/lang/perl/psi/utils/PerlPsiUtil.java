@@ -871,6 +871,21 @@ public final class PerlPsiUtil implements PerlElementTypes {
     return sb.toString();
   }
 
+  public static @Nullable PsiElement getLightNameIdentifierOwner(@NotNull PsiElement element) {
+    PerlPolyNamedElement<?> polyNamedElement = PsiTreeUtil.getParentOfType(element, PerlPolyNamedElement.class);
+    if (polyNamedElement == null) {
+      return null;
+    }
+
+    for (PerlDelegatingLightNamedElement<?> lightNamedElement : polyNamedElement.getLightElements()) {
+      PsiElement identifier = lightNamedElement.getNameIdentifier();
+      if (identifier != null && identifier.getTextRange().contains(element.getTextRange())) {
+        return lightNamedElement;
+      }
+    }
+    return null;
+  }
+
   public abstract static class HeredocProcessor implements Processor<PsiElement> {
     protected final int lineEndOffset;
 
