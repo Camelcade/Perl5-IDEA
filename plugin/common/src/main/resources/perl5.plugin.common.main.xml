@@ -42,6 +42,12 @@
         implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtensionImpl"/>
     <settings.configurable.extension implementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersConfigurableExtension"/>
 
+    <subCallHandler key="mk_accessors"
+                    implementationClass="com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorHandler$PerlClassAccessorRWHandler"/>
+    <subCallHandler key="mk_ro_accessors"
+                    implementationClass="com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorHandler$PerlClassAccessorRoHandler"/>
+    <subCallHandler key="mk_wo_accessors"
+                    implementationClass="com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorHandler$PerlClassAccessorWoHandler"/>
   </extensions>
 
 
