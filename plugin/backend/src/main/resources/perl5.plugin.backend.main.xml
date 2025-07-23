@@ -636,7 +636,6 @@
     <liveTemplateSubstitutor implementation="com.perl5.lang.pod.idea.livetemplates.PodSmartEndLiveTemplateSubstitutor"/>
 
     <completion.contributor language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.completion.PodCompletionContributor"/>
-    <spellchecker.support implementationClass="com.perl5.lang.pod.idea.editor.PodSpellCheckingStrategy" language="Perl5 POD"/>
 
     <localInspection language="Perl5 POD"
                      shortName="PodUnresolvableLink"
