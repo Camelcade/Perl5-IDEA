@@ -202,8 +202,6 @@
 
     <jps.plugin/>
 
-    <lang.fileViewProviderFactory language="Perl5"
-                                  implementationClass="com.perl5.lang.perl.psi.PerlFileViewProviderFactory"/>
     <externalAnnotator language="Perl5"
                        implementationClass="com.perl5.lang.perl.idea.annotators.PerlCriticAnnotator"/>
 
