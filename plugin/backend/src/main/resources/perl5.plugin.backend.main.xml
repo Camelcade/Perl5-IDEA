@@ -620,7 +620,6 @@
     <!-- tested/untestable -->
     <documentationProvider implementation="com.perl5.lang.pod.idea.documentation.PodDocumentationProvider" order="first"/>
     <lang.psiStructureViewFactory language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.structureView.PodStructureViewFactory"/>
-    <iconProvider implementation="com.perl5.lang.pod.idea.ui.PodIconProvider"/>
     <internalFileTemplate name="Perl5 pod"/>
     <lang.treePatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.parser.PodTreePatcher"/>
     <lang.ast.factory language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodAstFactory"/>

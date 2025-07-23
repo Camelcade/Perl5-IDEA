@@ -181,6 +181,7 @@
     <lang.braceMatcher language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodBraceMathcer"/>
     <colorSettingsPage implementation="com.perl5.lang.pod.idea.highlighter.PodColorSettingsPage"/>
     <lang.foldingBuilder language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.editor.PodFoldingBuilder"/>
+    <iconProvider implementation="com.perl5.lang.pod.idea.ui.PodIconProvider"/>
     <!--  END OF POD -->
   </extensions>
 </idea-plugin>
