@@ -35,14 +35,15 @@ import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
 
 
 public class PodSyntaxHighlighter extends SyntaxHighlighterBase {
-  public static final TextAttributesKey POD_TAG_KEY = createTextAttributesKey("POD_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG);
+  public static final TextAttributesKey POD_TAG_KEY =
+    createTextAttributesKey("PERL_POD_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG);
   public static final TextAttributesKey POD_FORMATTER_TAG_KEY =
-    createTextAttributesKey("POD_FORMATTER_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG_VALUE);
+    createTextAttributesKey("PERL_POD_FORMATTER_TAG", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG_VALUE);
   public static final TextAttributesKey
-    POD_FORMATTER_MARKUP_KEY = createTextAttributesKey("POD_FORMATTER_ANGLE", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG_VALUE);
-  public static final TextAttributesKey POD_VERBATIM_KEY = createTextAttributesKey("POD_CODE", HighlighterColors.TEXT);
+    POD_FORMATTER_MARKUP_KEY = createTextAttributesKey("PERL_POD_FORMATTER_ANGLE", DefaultLanguageHighlighterColors.DOC_COMMENT_TAG_VALUE);
+  public static final TextAttributesKey POD_VERBATIM_KEY = createTextAttributesKey("PERL_POD_CODE", HighlighterColors.TEXT);
   public static final TextAttributesKey POD_TEXT_KEY =
-    createTextAttributesKey("POD_TEXT_KEY", DefaultLanguageHighlighterColors.DOC_COMMENT);
+    createTextAttributesKey("PERL_POD_TEXT_KEY", DefaultLanguageHighlighterColors.DOC_COMMENT);
 
   private static final Map<IElementType, TextAttributesKey> ATTRIBUTES_MAP = new HashMap<>();
 

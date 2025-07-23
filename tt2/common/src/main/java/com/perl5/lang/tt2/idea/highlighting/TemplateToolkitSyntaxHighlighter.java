@@ -31,14 +31,17 @@ import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAtt
 
 
 public class TemplateToolkitSyntaxHighlighter extends SyntaxHighlighterBase implements TemplateToolkitElementTypes {
-  public static final TextAttributesKey TT2_NUMBER_KEY = createTextAttributesKey("TT2_NUMBER", PerlSyntaxHighlighter.PERL_NUMBER);
-  public static final TextAttributesKey TT2_MARKER_KEY = createTextAttributesKey("TT2_MARKER", PerlSyntaxHighlighter.EMBED_MARKER_KEY);
-  public static final TextAttributesKey TT2_COMMENT_KEY = createTextAttributesKey("TT2_COMMENT", PerlSyntaxHighlighter.PERL_COMMENT);
-  public static final TextAttributesKey TT2_IDENTIFIER_KEY = createTextAttributesKey("TT2_IDENTIFIER", PerlSyntaxHighlighter.PERL_SUB);
-  public static final TextAttributesKey TT2_KEYWORD_KEY = createTextAttributesKey("TT2_KEYWORD", PerlSyntaxHighlighter.PERL_KEYWORD);
-  public static final TextAttributesKey TT2_OPERATOR_KEY = createTextAttributesKey("TT2_OPERATOR", PerlSyntaxHighlighter.PERL_OPERATOR);
-  public static final TextAttributesKey TT2_SQ_STRING_KEY = createTextAttributesKey("TT2_SQ_STRING", PerlSyntaxHighlighter.PERL_SQ_STRING);
-  public static final TextAttributesKey TT2_DQ_STRING_KEY = createTextAttributesKey("TT2_DQ_STRING", PerlSyntaxHighlighter.PERL_DQ_STRING);
+  public static final TextAttributesKey TT2_NUMBER_KEY = createTextAttributesKey("PERL_TT2_NUMBER", PerlSyntaxHighlighter.PERL_NUMBER);
+  public static final TextAttributesKey TT2_MARKER_KEY = createTextAttributesKey("PERL_TT2_MARKER", PerlSyntaxHighlighter.EMBED_MARKER_KEY);
+  public static final TextAttributesKey TT2_COMMENT_KEY = createTextAttributesKey("PERL_TT2_COMMENT", PerlSyntaxHighlighter.PERL_COMMENT);
+  public static final TextAttributesKey TT2_IDENTIFIER_KEY = createTextAttributesKey("PERL_TT2_IDENTIFIER", PerlSyntaxHighlighter.PERL_SUB);
+  public static final TextAttributesKey TT2_KEYWORD_KEY = createTextAttributesKey("PERL_TT2_KEYWORD", PerlSyntaxHighlighter.PERL_KEYWORD);
+  public static final TextAttributesKey TT2_OPERATOR_KEY =
+    createTextAttributesKey("PERL_TT2_OPERATOR", PerlSyntaxHighlighter.PERL_OPERATOR);
+  public static final TextAttributesKey TT2_SQ_STRING_KEY =
+    createTextAttributesKey("PERL_TT2_SQ_STRING", PerlSyntaxHighlighter.PERL_SQ_STRING);
+  public static final TextAttributesKey TT2_DQ_STRING_KEY =
+    createTextAttributesKey("PERL_TT2_DQ_STRING", PerlSyntaxHighlighter.PERL_DQ_STRING);
   private static final TextAttributesKey[] TT2_NUMBER_KEYS = new TextAttributesKey[]{TT2_NUMBER_KEY};
   private static final TextAttributesKey[] TT2_MARKER_KEYS = new TextAttributesKey[]{TT2_MARKER_KEY};
   private static final TextAttributesKey[] TT2_COMMENT_KEYS = new TextAttributesKey[]{TT2_COMMENT_KEY};

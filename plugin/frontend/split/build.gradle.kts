@@ -24,5 +24,7 @@ dependencies {
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
     create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
+    bundledLibrary("plugins/cwm-plugin/lib/frontend-split/rd-client.jar")
+    bundledModule("intellij.rd.ide.model.generated")
   }
 }

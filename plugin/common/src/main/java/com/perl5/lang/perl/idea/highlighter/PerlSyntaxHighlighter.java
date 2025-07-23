@@ -91,7 +91,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
   public static final TextAttributesKey
     PERL_STRING_SPECIAL = createTextAttributesKey("PERL_STRING_SPECIAL", DefaultLanguageHighlighterColors.VALID_STRING_ESCAPE);
   public static final TextAttributesKey
-    PERL_STRING_CHAR_NAME = createTextAttributesKey("STRING_CHAR_NAME", DefaultLanguageHighlighterColors.CONSTANT);
+    PERL_STRING_CHAR_NAME = createTextAttributesKey("PERL_STRING_CHAR_NAME", DefaultLanguageHighlighterColors.CONSTANT);
   public static final TextAttributesKey PERL_SQ_STRING = createTextAttributesKey("PERL_SQ_STRING", DefaultLanguageHighlighterColors.STRING);
   public static final TextAttributesKey PERL_DQ_STRING = createTextAttributesKey("PERL_DQ_STRING", DefaultLanguageHighlighterColors.STRING);
   public static final TextAttributesKey PERL_DX_STRING = createTextAttributesKey("PERL_DX_STRING", DefaultLanguageHighlighterColors.STRING);
@@ -118,7 +118,7 @@ public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements Perl
   static {
     EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
     //noinspection deprecation
-    UNUSED_DEPRECATED = TextAttributesKey.createTextAttributesKey("UNUSED_DEPRECATED",
+    UNUSED_DEPRECATED = TextAttributesKey.createTextAttributesKey("PERL_UNUSED_DEPRECATED",
                                                                   TextAttributes.merge(
                                                                     currentScheme
                                                                       .getAttributes(CodeInsightColors.NOT_USED_ELEMENT_ATTRIBUTES),
