@@ -27,8 +27,6 @@
                     dynamic="true"/>
     <extensionPoint qualifiedName="com.perl5.fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider"
                     dynamic="true"/>
-    <extensionPoint qualifiedName="com.perl5.settings.configurable.extension"
-                    interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension" dynamic="true"/>
     <extensionPoint qualifiedName="com.perl5.directoryConfigurationProvider"
                     interface="com.perl5.lang.perl.idea.project.PerlDirectoryConfigurationProvider"
                     dynamic="true"/>
