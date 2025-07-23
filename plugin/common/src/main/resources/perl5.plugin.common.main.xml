@@ -12,6 +12,8 @@
                     dynamic="true">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.extensions.PerlCodeGenerator"/>
     </extensionPoint>
+    <extensionPoint qualifiedName="com.perl5.parserExtension" interface="com.perl5.lang.perl.extensions.parser.PerlParserExtension"
+                    dynamic="true"/>
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.intellij">
