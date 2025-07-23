@@ -282,8 +282,6 @@
     <defaultTemplatePropertiesProvider
         implementation="com.perl5.lang.perl.idea.filetemplates.PerlFilePropertiesProvider" order="last"/>
 
-    <lang.smartEnterProcessor language="Perl5" implementationClass="com.perl5.lang.perl.idea.editor.smartkeys.PerlSmartEnterProcessor"/>
-
     <documentationProvider implementation="com.perl5.lang.perl.documentation.PerlDocumentationProvider"
                            order="first"/>
     <fileTypeDetector implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeDetector"/>
