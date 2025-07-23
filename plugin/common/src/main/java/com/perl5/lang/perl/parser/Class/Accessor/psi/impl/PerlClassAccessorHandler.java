@@ -26,6 +26,7 @@ import com.intellij.psi.stubs.StubOutputStream;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.util.Function;
+import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes;
 import com.perl5.lang.perl.psi.PerlSubCallHandler;
 import com.perl5.lang.perl.psi.PsiPerlNamespaceContent;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
@@ -45,7 +46,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes.CLASS_ACCESSOR_METHOD;
 import static com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod.GETTER_COMPUTATION;
 import static com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorMethod.SETTER_COMPUTATION;
 
@@ -76,7 +76,7 @@ public abstract class PerlClassAccessorHandler extends PerlSubCallHandler<PerlCl
           psiElement,
           baseName,
           computation,
-          CLASS_ACCESSOR_METHOD,
+          ClassAccessorElementTypes.CLASS_ACCESSOR_METHOD,
           listElement,
           packageName,
           subAnnotations
@@ -90,7 +90,7 @@ public abstract class PerlClassAccessorHandler extends PerlSubCallHandler<PerlCl
   public @NotNull List<? extends PerlDelegatingLightNamedElement<?>> computeLightElementsFromStubs(@NotNull PerlSubCallElement psiElement,
                                                                                                    @NotNull PerlSubCallElementStub stubElement) {
     return stubElement.getLightNamedElementsStubs().stream()
-      .filter(childStub -> childStub.getElementType() == CLASS_ACCESSOR_METHOD)
+      .filter(childStub -> childStub.getElementType() == ClassAccessorElementTypes.CLASS_ACCESSOR_METHOD)
       .map(childStub -> new PerlClassAccessorMethod(psiElement, (PerlSubDefinitionStub)childStub))
       .collect(Collectors.toList());
   }
