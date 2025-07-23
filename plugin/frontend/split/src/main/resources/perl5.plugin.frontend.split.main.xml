@@ -10,6 +10,17 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
+    <rdclient.editorActionHandlerStrategyCustomizer
+        implementation="com.jetbrains.rdclient.editorActions.cwm.PerlFrontendEditorActionHandlerStrategyCustomizer"/>
+    <registryKey key="perl5.frontend.speculative.actions.enabled" defaultValue="true"
+                 description="Enable speculative actions on the client side; otherwise, they will be performed on the server side"/>
+    <rdclient.actionCustomization backend="remote" actionId="CommentByBlockComment"
+                                  implementationClass="com.jetbrains.rdclient.actions.base.PerlBackendDelegatingActionCustomization"/>
+    <rdclient.actionCustomization backend="remote" actionId="CommentByLineComment"
+                                  implementationClass="com.jetbrains.rdclient.actions.base.PerlBackendDelegatingActionCustomization"/>
+    <rdclient.highlighterSuppressionHandler
+        implementation="com.jetbrains.rdclient.daemon.com.jetbrains.rdclient.daemon.FrontendHighlighterSuppressionHandler"/>
+
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.presentations.PerlFrontendItemPresentationService"
                         serviceInterface="com.perl5.lang.perl.idea.presentations.PerlItemPresentationService"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.util.PerlFrontendPackageService"
