@@ -8,6 +8,7 @@
   <extensions defaultExtensionNs="com.perl5">
     <packageProcessor key="Mojo::Base" implementationClass="com.perl5.lang.perl.extensions.mojo.MojoBaseProcessor"/>
     <packageProcessor key="Mojolicious::Lite" implementationClass="com.perl5.lang.perl.extensions.mojo.MojoliciousLitePackageProcessor"/>
+    <settings.configurable.extension implementation="com.perl5.lang.mojolicious.idea.modules.MojoSettingsConfigurableExtension"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">

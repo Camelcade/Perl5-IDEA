@@ -182,10 +182,6 @@
     <parserExtension implementation="com.perl5.lang.perl.parser.PerlSwitchParserExtensionImpl"/>
     <parserExtension implementation="com.perl5.lang.perl.parser.MooseParserExtension"/>
 
-    <settings.configurable.extension
-        implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtensionImpl"/>
-    <settings.configurable.extension implementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersConfigurableExtension"/>
-
     <hostHandler key="localhost"
                  implementationClass="com.perl5.lang.perl.idea.sdk.host.local.PerlLocalHostHandler"/>
     <implementationHandler key="porters"
