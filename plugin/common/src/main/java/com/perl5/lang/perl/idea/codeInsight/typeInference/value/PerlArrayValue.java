@@ -119,7 +119,7 @@ public final class PerlArrayValue extends PerlListValue implements Iterable<Perl
     private Builder() {
     }
 
-    PerlValue build() {
+    public PerlValue build() {
       if (myElements.isEmpty()) {
         return EMPTY_ARRAY;
       }
