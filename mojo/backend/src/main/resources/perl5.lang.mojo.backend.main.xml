@@ -10,8 +10,6 @@
     <subCallHandler key="helper" implementationClass="com.perl5.lang.mojolicious.psi.impl.MojoHelperHandler"/>
 
     <importsProvider implementation="com.perl5.lang.mojolicious.extensions.MojoImplicitImportsProvider"/>
-
-    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.mojo.MojoLiteImplicitSubsProvider"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
