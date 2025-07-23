@@ -295,10 +295,6 @@
 
     <lang.psiStructureViewFactory language="Perl5"
                                   implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-    <declarationRangeHandler key="com.perl5.lang.perl.psi.PerlSubDefinitionElement"
-                             implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlDeclarationRangeHandler"/>
-    <declarationRangeHandler key="com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier"
-                             implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlDeclarationRangeHandler"/>
 
     <typeHierarchyProvider language="Perl5"
                            implementationClass="com.perl5.lang.perl.idea.hierarchy.namespace.PerlTypeHierarchyProvider"/>
