@@ -141,10 +141,6 @@
     <editorSmartKeysConfigurable instance="com.perl5.lang.perl.idea.editor.smartkeys.options.PerlSmartKeyOptions"/>
     <spellchecker.support implementationClass="com.perl5.lang.perl.idea.editor.PerlSpellCheckingStrategy" language="Perl5"/>
 
-    <projectConfigurable groupId="language" bundle="messages.PerlBundle" key="perl.perl5"
-                         provider="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableProvider"
-                         id="PERL5_MAIN_SETTINGS"/>
-
     <projectStructure.sourceRootEditHandler
         implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlLibrarySourceRootEditHandler"/>
 
