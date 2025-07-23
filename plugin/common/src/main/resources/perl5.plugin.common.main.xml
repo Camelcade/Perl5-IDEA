@@ -23,6 +23,22 @@
                     interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension" dynamic="true"/>
   </extensionPoints>
 
+  <extensions defaultExtensionNs="com.perl5">
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.role.tiny.RoleTinyImplicitSubsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.scalar.util.ScalarUtilImplicitSubsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.cgi.PerlCgiDeclarationsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlCoreDeclarationsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.psi.references.PerlBuiltinDeclarationsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.typesStandard.TypesStandardImplicitDeclarationsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.readonly.ReadonlyImplicitDeclarationsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.log4perl.Log4PerlImplicitDeclarationsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.moo.MooImplicitSubsProvider"/>
+    <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.futureAsyncAwait.FutureAsyncAwaitImplicitDeclarationsProvider"/>
+
+
+  </extensions>
+
+
   <extensions defaultExtensionNs="com.intellij">
     <additionalTextAttributes scheme="Default" file="colorSchemes/npp_default.xml"/>
     <additionalTextAttributes scheme="Darcula" file="colorSchemes/perl_darcula.xml"/>
