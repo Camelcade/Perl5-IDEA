@@ -265,13 +265,9 @@
     <postStartupActivity implementation="com.perl5.lang.perl.idea.project.Perl5ProjectStartupActivity"/>
     <postStartupActivity implementation="com.perl5.lang.perl.idea.project.PerlProjectDirectoriesConfiguratorStarter"/>
 
-    <applicationService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
     <applicationService serviceImplementation="com.intellij.openapi.projectRoots.impl.PerlSdkTable"/>
     <additionalLibraryRootsProvider implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlLibraryProvider"/>
     <resolveScopeProvider implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.PerlResolveScopeProvider"/>
-    <applicationService serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
-
-    <editorSmartKeysConfigurable instance="com.perl5.lang.perl.idea.editor.smartkeys.options.PerlSmartKeyOptions"/>
 
     <spellchecker.support implementationClass="com.perl5.lang.perl.idea.editor.PerlSpellCheckingStrategy" language="Perl5"/>
 

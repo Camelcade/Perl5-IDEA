@@ -122,6 +122,10 @@
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
+
+    <applicationService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
+    <applicationService serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
+    <editorSmartKeysConfigurable instance="com.perl5.lang.perl.idea.editor.smartkeys.options.PerlSmartKeyOptions"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->
