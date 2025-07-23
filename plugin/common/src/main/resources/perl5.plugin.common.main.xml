@@ -115,6 +115,8 @@
                                    implementation="com.perl5.lang.perl.idea.codeInsight.highlighting.PerlHighlightExitPointsHandlerFactory"/>
     <usageTypeProvider implementation="com.perl5.lang.perl.idea.findusages.PerlUsageTypeProvider"/>
     <readWriteAccessDetector implementation="com.perl5.lang.perl.idea.findusages.PerlReadWriteAccessDetector"/>
+
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesCacheService"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->
