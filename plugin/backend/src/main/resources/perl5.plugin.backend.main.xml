@@ -240,12 +240,6 @@
     <editorFactoryListener implementation="com.perl5.lang.perl.idea.configuration.settings.PerlEditorFactoryListener"/>
 
     <projectService serviceImplementation="com.perl5.lang.perl.idea.completion.PerlStringCompletionCache"/>
-    <projectService serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService"/>
-    <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService"/>
-    <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService"/>
-    <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService"/>
-
-    <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlProjectManager"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlDirectoryIndex"/>
