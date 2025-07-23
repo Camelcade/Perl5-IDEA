@@ -111,6 +111,8 @@
     <lang.namesValidator language="Perl5" implementationClass="com.perl5.lang.perl.idea.PerlNamesValidator"/>
     <lang.foldingBuilder language="Perl5"
                          implementationClass="com.perl5.lang.perl.idea.folding.PerlFoldingBuilder"/>
+    <highlightUsagesHandlerFactory order="before mainone"
+                                   implementation="com.perl5.lang.perl.idea.codeInsight.highlighting.PerlHighlightExitPointsHandlerFactory"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->
