@@ -114,6 +114,7 @@
     <highlightUsagesHandlerFactory order="before mainone"
                                    implementation="com.perl5.lang.perl.idea.codeInsight.highlighting.PerlHighlightExitPointsHandlerFactory"/>
     <usageTypeProvider implementation="com.perl5.lang.perl.idea.findusages.PerlUsageTypeProvider"/>
+    <readWriteAccessDetector implementation="com.perl5.lang.perl.idea.findusages.PerlReadWriteAccessDetector"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->
