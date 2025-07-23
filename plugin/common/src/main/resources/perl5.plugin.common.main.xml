@@ -24,6 +24,8 @@
                     dynamic="true"/>
     <extensionPoint qualifiedName="com.perl5.settings.configurable.extension"
                     interface="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtension" dynamic="true"/>
+    <extensionPoint qualifiedName="com.perl5.fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider"
+                    dynamic="true"/>
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.perl5">
@@ -132,6 +134,7 @@
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
+    <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
 
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
