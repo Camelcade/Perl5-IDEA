@@ -305,8 +305,6 @@
     <annotator language="Perl5" implementationClass="com.perl5.lang.perl.idea.annotators.PerlAnnotator"
                id="PERL_SUBS_ANNOTATOR" order="first"/>
 
-    <codeFoldingOptionsProvider instance="com.perl5.lang.perl.idea.folding.PerlFoldingOptionsProvider"/>
-
     <completion.contributor language="Perl5"
                             implementationClass="com.perl5.lang.perl.idea.completion.PerlCompletionContributor"/>
 

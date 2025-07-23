@@ -140,6 +140,7 @@
                              implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlDeclarationRangeHandler"/>
     <declarationRangeHandler key="com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier"
                              implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlDeclarationRangeHandler"/>
+    <codeFoldingOptionsProvider instance="com.perl5.lang.perl.idea.folding.PerlFoldingOptionsProvider"/>
     <!-- EOF Perl  -->
 
     <!-- Perl XS  -->
