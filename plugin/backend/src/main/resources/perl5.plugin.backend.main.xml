@@ -5,10 +5,6 @@
     <module name="intellij.platform.backend"/>
   </dependencies>
   <extensionPoints>
-    <extensionPoint qualifiedName="com.perl5.packageProcessor" beanClass="com.intellij.util.KeyedLazyInstanceEP" dynamic="true">
-      <with attribute="implementationClass"
-            implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
-    </extensionPoint>
     <extensionPoint qualifiedName="com.perl5.subCallHandler" beanClass="com.intellij.util.KeyedLazyInstanceEP" dynamic="true">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.psi.PerlSubCallHandler"/>
     </extensionPoint>

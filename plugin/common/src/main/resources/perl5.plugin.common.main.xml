@@ -1,5 +1,9 @@
 <idea-plugin>
   <extensionPoints>
+    <extensionPoint qualifiedName="com.perl5.packageProcessor" beanClass="com.intellij.util.KeyedLazyInstanceEP" dynamic="true">
+      <with attribute="implementationClass"
+            implements="com.perl5.lang.perl.extensions.packageprocessor.PerlPackageProcessor"/>
+    </extensionPoint>
     <extensionPoint qualifiedName="com.perl5.namespaceDefinitionHalder" beanClass="com.intellij.openapi.util.ClassExtensionPoint"
                     dynamic="true">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.psi.PerlNamespaceDefinitionHandler"/>
