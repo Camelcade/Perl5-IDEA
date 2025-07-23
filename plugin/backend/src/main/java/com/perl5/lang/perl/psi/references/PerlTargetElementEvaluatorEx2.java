@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,10 +21,8 @@ import com.intellij.codeInsight.TargetElementEvaluatorEx2;
 import com.intellij.codeInsight.TargetElementUtil;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.*;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
-import com.perl5.lang.perl.psi.impl.PerlPolyNamedElement;
-import com.perl5.lang.perl.psi.light.PerlDelegatingLightNamedElement;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -51,22 +49,7 @@ public class PerlTargetElementEvaluatorEx2 extends TargetElementEvaluatorEx2 imp
 
   @Override
   public @Nullable PsiElement getNamedElement(@NotNull PsiElement element) {
-    return getLightNameIdentifierOwner(element);
-  }
-
-  public static @Nullable PsiElement getLightNameIdentifierOwner(@NotNull PsiElement element) {
-    PerlPolyNamedElement<?> polyNamedElement = PsiTreeUtil.getParentOfType(element, PerlPolyNamedElement.class);
-    if (polyNamedElement == null) {
-      return null;
-    }
-
-    for (PerlDelegatingLightNamedElement<?> lightNamedElement : polyNamedElement.getLightElements()) {
-      PsiElement identifier = lightNamedElement.getNameIdentifier();
-      if (identifier != null && identifier.getTextRange().contains(element.getTextRange())) {
-        return lightNamedElement;
-      }
-    }
-    return null;
+    return PerlPsiUtil.getLightNameIdentifierOwner(element);
   }
 
 

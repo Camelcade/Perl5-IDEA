@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.intellij.spellchecker.tokenizer.SpellcheckingStrategy;
 import com.intellij.spellchecker.tokenizer.TokenConsumer;
 import com.intellij.spellchecker.tokenizer.Tokenizer;
 import com.perl5.lang.perl.psi.mixins.PerlStringBareMixin;
-import com.perl5.lang.perl.psi.references.PerlTargetElementEvaluatorEx2;
+import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlInjectionUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -49,20 +49,20 @@ public class PerlSpellCheckingStrategy extends SpellcheckingStrategy {
   @Override
   public @NotNull Tokenizer<?> getTokenizer(PsiElement element) {
     if (STRING_CONTENT_TOKENSET.contains(PsiUtilCore.getElementType(element))) {
-      PsiElement lightNameIdentifierOwner = PerlTargetElementEvaluatorEx2.getLightNameIdentifierOwner(element);
+      PsiElement lightNameIdentifierOwner = PerlPsiUtil.getLightNameIdentifierOwner(element);
       if (lightNameIdentifierOwner != null) {
         return IDENTIFIER_TOKENIZER;
       }
 
       if (element.getParent() instanceof PerlStringBareMixin) {
-        return TEXT_TOKENIZER;
+        return SpellcheckingStrategy.TEXT_TOKENIZER;
       }
 
       PsiLanguageInjectionHost injectionHost = PsiTreeUtil.getParentOfType(element, PsiLanguageInjectionHost.class);
       if (PerlInjectionUtil.hasInjections(injectionHost)) {
-        return EMPTY_TOKENIZER;
+        return SpellcheckingStrategy.EMPTY_TOKENIZER;
       }
-      return TEXT_TOKENIZER;
+      return SpellcheckingStrategy.TEXT_TOKENIZER;
     }
 
     return super.getTokenizer(element);
