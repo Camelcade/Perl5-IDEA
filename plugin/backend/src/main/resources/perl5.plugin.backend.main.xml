@@ -22,8 +22,6 @@
     <extensionPoint qualifiedName="com.perl5.packageManagerAdapterFactory"
                     interface="com.perl5.lang.perl.adapters.PackageManagerAdapterFactory"
                     dynamic="true"/>
-    <extensionPoint qualifiedName="com.perl5.fileTypeProvider" interface="com.perl5.lang.perl.fileTypes.PerlFileTypeProvider"
-                    dynamic="true"/>
     <extensionPoint qualifiedName="com.perl5.directoryConfigurationProvider"
                     interface="com.perl5.lang.perl.idea.project.PerlDirectoryConfigurationProvider"
                     dynamic="true"/>
@@ -249,7 +247,6 @@
                         serviceInterface="com.perl5.lang.perl.util.PerlPackageService"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.presentations.PerlBackendItemPresentationService"
                         serviceInterface="com.perl5.lang.perl.idea.presentations.PerlItemPresentationService"/>
-    <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
     <postStartupActivity implementation="com.perl5.lang.perl.fileTypes.PerlFileTypeServiceWatcher"/>
     <postStartupActivity implementation="com.perl5.lang.perl.idea.sdk.host.PerlHostCacheCleaner"/>
     <postStartupActivity implementation="com.perl5.lang.perl.idea.project.Perl5ProjectStartupActivity"/>
