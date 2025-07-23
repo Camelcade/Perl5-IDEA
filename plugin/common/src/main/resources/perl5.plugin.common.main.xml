@@ -16,6 +16,9 @@
                     dynamic="true"/>
     <extensionPoint qualifiedName="com.perl5.importsProvider" interface="com.perl5.lang.perl.extensions.imports.PerlImportsProvider"
                     dynamic="true"/>
+    <extensionPoint qualifiedName="com.perl5.implicitSubsProvider"
+                    interface="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider"
+                    dynamic="true"/>
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.intellij">
