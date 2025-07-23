@@ -32,6 +32,8 @@
   </extensionPoints>
 
   <extensions defaultExtensionNs="com.perl5">
+    <settings.configurable.extension order="first"
+        implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtensionImpl"/>
     <codeGenerator forClass="com.perl5.lang.perl.psi.impl.PerlFileImpl"
                    implementationClass="com.perl5.lang.perl.extensions.generation.PerlCodeGeneratorImpl"/>
     <namespaceDefinitionHalder forClass="com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement"

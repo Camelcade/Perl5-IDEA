@@ -38,8 +38,6 @@
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.moo.MooImplicitSubsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.futureAsyncAwait.FutureAsyncAwaitImplicitDeclarationsProvider"/>
 
-    <settings.configurable.extension
-        implementation="com.perl5.lang.perl.idea.configuration.settings.sdk.Perl5SettingsConfigurableExtensionImpl"/>
     <settings.configurable.extension implementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersConfigurableExtension"/>
 
     <subCallHandler key="mk_accessors"
