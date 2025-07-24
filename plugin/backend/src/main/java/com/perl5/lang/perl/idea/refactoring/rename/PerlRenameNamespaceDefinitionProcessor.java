@@ -53,7 +53,7 @@ public class PerlRenameNamespaceDefinitionProcessor extends PerlRenamePolyRefere
       VirtualFile classRoot = PerlPackageUtil.getClosestIncRoot(namespaceDefinition.getProject(), virtualFile);
 
       return classRoot != null &&
-             currentPackageName.equals(PerlPackageUtil.getPackageNameByPath(VfsUtilCore.getRelativePath(virtualFile, classRoot)));
+             currentPackageName.equals(PerlPackageUtilCore.getPackageNameByPath(VfsUtilCore.getRelativePath(virtualFile, classRoot)));
     }
     return false;
   }

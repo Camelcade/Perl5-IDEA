@@ -36,7 +36,7 @@ class PerlBackendPackageService : PerlPackageService {
     val containingFile: VirtualFile = perlFile.virtualFile ?: return null
     if (containingFile.fileType !== PerlFileTypePackage.INSTANCE) return null
     val innermostSourceRoot = PerlPackageUtil.getClosestIncRoot(perlFile.project, containingFile) ?: return null
-    return PerlPackageUtil.getPackageNameByPath(VfsUtilCore.getRelativePath(containingFile, innermostSourceRoot))
+    return PerlPackageUtilCore.getPackageNameByPath(VfsUtilCore.getRelativePath(containingFile, innermostSourceRoot))
   }
 
   override fun addExports(

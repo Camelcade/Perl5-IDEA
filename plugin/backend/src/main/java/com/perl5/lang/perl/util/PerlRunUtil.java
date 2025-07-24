@@ -521,7 +521,7 @@ public final class PerlRunUtil {
         if (endOffset == -1) {
           return;
         }
-        processPackage(PerlPackageUtil.getPackageNameByPath(text.substring(startOffset, endOffset)));
+        processPackage(PerlPackageUtilCore.getPackageNameByPath(text.substring(startOffset, endOffset)));
       }
 
       private void processPackage(@Nullable String packageName) {

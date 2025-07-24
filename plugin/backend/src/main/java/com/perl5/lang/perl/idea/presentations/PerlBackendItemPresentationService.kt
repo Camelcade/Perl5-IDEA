@@ -22,6 +22,7 @@ import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage
 import com.perl5.lang.perl.util.PerlPackageUtil
+import com.perl5.lang.perl.util.PerlPackageUtilCore
 
 
 class PerlBackendItemPresentationService : PerlItemPresentationService {
@@ -36,7 +37,7 @@ class PerlBackendItemPresentationService : PerlItemPresentationService {
 
       if (innerMostClassRoot != null) {
         val relativePath = VfsUtilCore.getRelativePath(virtualFile, innerMostClassRoot)
-        return PerlPackageUtil.getPackageNameByPath(relativePath)
+        return PerlPackageUtilCore.getPackageNameByPath(relativePath)
       }
     }
 
