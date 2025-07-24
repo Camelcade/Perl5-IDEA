@@ -99,7 +99,7 @@ public final class PerlPackageUtilCore {
   }
 
   private static final Map<String, String> CANONICAL_NAMES_CACHE = new ConcurrentHashMap<>();
-  static final Map<String, String> PATH_TO_PACKAGE_NAME_MAP = new ConcurrentHashMap<>();
+  private static final Map<String, String> PATH_TO_PACKAGE_NAME_MAP = new ConcurrentHashMap<>();
 
   private PerlPackageUtilCore() {
   }
@@ -319,5 +319,23 @@ public final class PerlPackageUtilCore {
       nameRange = TextRange.EMPTY_RANGE;
     }
     return Pair.create(packageRange, nameRange);
+  }
+
+  /**
+   * Translates package relative name to the package name Foo/Bar.pm => Foo::Bar
+   *
+   * @param packagePath package relative path
+   * @return canonical package name
+   */
+  public static String getPackageNameByPath(final String packagePath) {
+    String result = PATH_TO_PACKAGE_NAME_MAP.get(packagePath);
+
+    if (result == null) {
+      String path = packagePath.replace("\\", "/");
+      result = getCanonicalNamespaceName(
+        StringUtil.join(path.replaceFirst("\\.pm$", "").split("/"), NAMESPACE_SEPARATOR));
+      PATH_TO_PACKAGE_NAME_MAP.put(packagePath, result);
+    }
+    return result;
   }
 }

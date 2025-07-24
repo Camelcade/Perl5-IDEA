@@ -37,6 +37,7 @@ import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.Unmodifiable;
@@ -61,7 +62,7 @@ public class PerlMoveFileHandler extends MoveFileHandler {
 
     if (newClassRoot != null) {
       String newRelativePath = newFilePath.substring(newClassRoot.getPath().length());
-      String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
+      String newPackageName = PerlPackageUtilCore.getPackageNameByPath(newRelativePath);
 
       if (newPackageName != null) {
         for (PsiReference reference : ReferencesSearch.search(file, file.getUseScope()).findAll()) {
@@ -80,7 +81,7 @@ public class PerlMoveFileHandler extends MoveFileHandler {
 
     if (newInnermostRoot != null && originalPackageName != null) {
       String newRelativePath = VfsUtilCore.getRelativePath(virtualFile, newInnermostRoot);
-      String newPackageName = PerlPackageUtil.getPackageNameByPath(newRelativePath);
+      String newPackageName = PerlPackageUtilCore.getPackageNameByPath(newRelativePath);
 
       final RenameRefactoring[] refactoring = {null};
 

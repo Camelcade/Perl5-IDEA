@@ -21,6 +21,7 @@ import com.intellij.openapi.vfs.VfsUtilCore;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiDirectory;
 import com.perl5.lang.perl.util.PerlPackageUtil;
+import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Properties;
@@ -35,7 +36,7 @@ public class PerlFilePropertiesProvider implements DefaultTemplatePropertiesProv
     if (newInnermostRoot != null) {
       String newRelativePath = VfsUtilCore.getRelativePath(directoryFile, newInnermostRoot);
       props.put("PERL_PACKAGE_PREFIX",
-                newRelativePath == null || newRelativePath.isEmpty() ? "" : PerlPackageUtil.getPackageNameByPath(newRelativePath));
+                newRelativePath == null || newRelativePath.isEmpty() ? "" : PerlPackageUtilCore.getPackageNameByPath(newRelativePath));
     }
     else {
       props.put("PERL_PACKAGE_PREFIX", "");

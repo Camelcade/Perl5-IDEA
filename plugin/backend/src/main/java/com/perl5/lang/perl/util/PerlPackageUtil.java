@@ -139,31 +139,13 @@ public final class PerlPackageUtil implements PerlElementTypes {
     return elements;
   }
 
-  /**
-   * Translates package relative name to the package name Foo/Bar.pm => Foo::Bar
-   *
-   * @param packagePath package relative path
-   * @return canonical package name
-   */
-  public static String getPackageNameByPath(final String packagePath) {
-    String result = PerlPackageUtilCore.PATH_TO_PACKAGE_NAME_MAP.get(packagePath);
-
-    if (result == null) {
-      String path = packagePath.replace("\\", "/");
-      result = PerlPackageUtilCore.getCanonicalNamespaceName(
-        StringUtil.join(path.replaceFirst("\\.pm$", "").split("/"), PerlPackageUtilCore.NAMESPACE_SEPARATOR));
-      PerlPackageUtilCore.PATH_TO_PACKAGE_NAME_MAP.put(packagePath, result);
-    }
-    return result;
-  }
-
   public static boolean processPackageFilesForPsiElement(@NotNull PsiElement element,
                                                          @NotNull PairProcessor<? super String, ? super VirtualFile> processor) {
     return processIncFilesForPsiElement(
       element,
       (file, classRoot) -> {
         String relativePath = VfsUtilCore.getRelativePath(file, classRoot);
-        String packageName = getPackageNameByPath(relativePath);
+        String packageName = PerlPackageUtilCore.getPackageNameByPath(relativePath);
         return processor.process(packageName, file);
       },
       PerlFileTypePackage.INSTANCE)
