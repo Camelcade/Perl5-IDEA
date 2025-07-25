@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
-fun properties(key: String) = providers.gradleProperty(key)
+
 
 
 dependencies {
@@ -28,7 +29,9 @@ dependencies {
   }
   intellijPlatform{
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+    create(IntelliJPlatformType.IntellijIdeaCommunity, platformVersionProvider.get()){
+      useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
+    }
   }
 }
 
@@ -36,7 +39,7 @@ tasks {
   val generateLexerTask = register<GenerateLexerTask>("generateEmbeddedPerlLexer") {
     sourceFile.set(file("grammar/EmbeddedPerl.flex"))
     targetOutputDir.set(file("src/main/gen/com/perl5/lang/embedded/lexer/"))
-    skeleton.set(rootProject.file(properties("templating_lexer_skeleton").get()))
+    skeleton.set(rootProject.file(providers.gradleProperty("templating_lexer_skeleton").get()))
     purgeOldFiles.set(true)
   }
 

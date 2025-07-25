@@ -1,4 +1,6 @@
-fun properties(key: String) = providers.gradleProperty(key)
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+
+
 
 plugins {
   id("java-test-fixtures")
@@ -26,9 +28,12 @@ dependencies {
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
+        create(IntelliJPlatformType.IntellijIdeaCommunity, platformVersionProvider.get()){
+      useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
+    }
+
     bundledPlugins(
-      properties("intelliLangPlugin").get(),
+      providers.gradleProperty("intelliLangPlugin").get(),
       "org.jetbrains.plugins.terminal",
     )
   }
