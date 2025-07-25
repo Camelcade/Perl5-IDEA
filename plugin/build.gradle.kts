@@ -20,35 +20,6 @@ import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
 
 
 dependencies {
-  listOf(
-    ":plugin.asdf",
-    ":plugin.berrybrew",
-    ":plugin.carton",
-    ":plugin.common",
-    ":plugin.copyright",
-    ":plugin.backend",
-    ":plugin.coverage",
-    ":plugin.cpan",
-    ":plugin.cpanminus.backend",
-    ":plugin.cpanminus.common",
-    ":plugin.debugger",
-    ":plugin.docker",
-    ":plugin.frontend",
-    ":plugin.frontend.split",
-    ":plugin.idea",
-    ":plugin.intelliLang",
-    ":plugin.makeMaker",
-    ":plugin.moduleBuild",
-    ":plugin.perlInstall",
-    ":plugin.perlbrew",
-    ":plugin.plenv",
-    ":plugin.profiler",
-    ":plugin.terminal",
-    ":plugin.wsl",
-  ).forEach {
-    runtimeOnly(project(it))
-    testCompileOnly(project(it))
-  }
   testImplementation(testFixtures(project(":plugin.testFixtures")))
 
   intellijPlatform {
@@ -64,6 +35,36 @@ dependencies {
       "XPathView",
       "org.jetbrains.plugins.terminal",
     )
+
+    listOf(
+      ":plugin.asdf",
+      ":plugin.berrybrew",
+      ":plugin.carton",
+      ":plugin.common",
+      ":plugin.copyright",
+      ":plugin.backend",
+      ":plugin.coverage",
+      ":plugin.cpan",
+      ":plugin.cpanminus.backend",
+      ":plugin.cpanminus.common",
+      ":plugin.debugger",
+      ":plugin.docker",
+      ":plugin.frontend",
+      ":plugin.frontend.split",
+      ":plugin.idea",
+      ":plugin.intelliLang",
+      ":plugin.makeMaker",
+      ":plugin.moduleBuild",
+      ":plugin.perlInstall",
+      ":plugin.perlbrew",
+      ":plugin.plenv",
+      ":plugin.profiler",
+      ":plugin.terminal",
+      ":plugin.wsl",
+    ).forEach {
+      pluginModule(project(it))
+      testCompileOnly(project(it))
+    }
   }
 }
 

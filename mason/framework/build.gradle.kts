@@ -18,16 +18,6 @@ import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 
 dependencies {
-  // packaging, which modules to include into this one
-  listOf(
-    ":lang.mason.framework.common",
-    ":lang.mason.framework.backend",
-    ":lang.mason.framework.frontend",
-    ":lang.mason.framework.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-  }
-
   // compilation dependencies
   listOf(
     ":plugin.common",
@@ -42,13 +32,20 @@ dependencies {
   testImplementation(testFixtures(project(":plugin.testFixtures")))
 
   intellijPlatform {
-    intellijPlatform{
-      val platformVersionProvider: Provider<String> by rootProject.extra
-          create(IntelliJPlatformType.IntellijIdeaUltimate, platformVersionProvider.get()){
+    val platformVersionProvider: Provider<String> by rootProject.extra
+    create(IntelliJPlatformType.IntellijIdeaUltimate, platformVersionProvider.get()) {
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
-
+    // packaging, which modules to include into this one
+    listOf(
+      ":lang.mason.framework.common",
+      ":lang.mason.framework.backend",
+      ":lang.mason.framework.frontend",
+      ":lang.mason.framework.frontend.split",
+    ).forEach {
+      pluginModule(project(it))
     }
+
     localPlugin(project(":plugin"))
   }
 }

@@ -18,21 +18,14 @@ import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 
 dependencies {
-  // packaging, which modules to include into this one
-  listOf(
-    ":lang.embedded.common",
-    ":lang.embedded.backend",
-    ":lang.embedded.frontend",
-    ":lang.embedded.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-    testCompileOnly(project(it))
-  }
-
   // additional compilation dependencies
   listOf(
     ":plugin.common",
     ":plugin.backend",
+    ":lang.embedded.common",
+    ":lang.embedded.backend",
+    ":lang.embedded.frontend",
+    ":lang.embedded.frontend.split",
   ).forEach {
     testCompileOnly(project(it))
   }
@@ -42,14 +35,21 @@ dependencies {
 
   // Plugin dependencies
   intellijPlatform {
-    localPlugin(project(":plugin"))
-  }
-
-  // Useinstaller handling
-  intellijPlatform{
     val platformVersionProvider: Provider<String> by rootProject.extra
     create(IntelliJPlatformType.IntellijIdeaCommunity, platformVersionProvider.get()){
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
+
+    // packaging, which modules to include into this one
+    listOf(
+      ":lang.embedded.common",
+      ":lang.embedded.backend",
+      ":lang.embedded.frontend",
+      ":lang.embedded.frontend.split",
+    ).forEach {
+      pluginModule(project(it))
+    }
+
+    localPlugin(project(":plugin"))
   }
 }

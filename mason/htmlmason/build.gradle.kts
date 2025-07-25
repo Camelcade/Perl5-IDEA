@@ -18,16 +18,6 @@ import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 
 dependencies {
-  // packaging, which modules to include into this one
-  listOf(
-    ":lang.mason.htmlmason.common",
-    ":lang.mason.htmlmason.backend",
-    ":lang.mason.htmlmason.frontend",
-    ":lang.mason.htmlmason.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-  }
-
   // compilation dependencies
   listOf(
     ":plugin.common", ":plugin.backend", ":plugin.frontend",
@@ -42,6 +32,16 @@ dependencies {
     val platformVersionProvider: Provider<String> by rootProject.extra
         create(IntelliJPlatformType.IntellijIdeaUltimate, platformVersionProvider.get()){
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
+    }
+
+    // packaging, which modules to include into this one
+    listOf(
+      ":lang.mason.htmlmason.common",
+      ":lang.mason.htmlmason.backend",
+      ":lang.mason.htmlmason.frontend",
+      ":lang.mason.htmlmason.frontend.split",
+    ).forEach {
+      pluginModule(project(it))
     }
 
     listOf(
