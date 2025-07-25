@@ -8,6 +8,6 @@
     <editorSmartKeysConfigurable
         key="perl"
         implementation="com.perl5.lang.perl.idea.editor.smartkeys.options.PerlSmartKeyOptions"/>
+    <codeFoldingOptionsProvider instance="com.perl5.lang.perl.idea.folding.PerlFoldingOptionsProvider"/>
   </extensions>
-
 </idea-plugin>

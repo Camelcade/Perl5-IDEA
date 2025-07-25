@@ -28,7 +28,8 @@ import org.jetbrains.annotations.Nullable;
 
 @State(
   name = "PerlCodeFoldingSettings",
-  storages = @Storage(PerlPathMacros.APP_CODEINSIGHT_SETTINGS_FILE)
+  storages = @Storage(PerlPathMacros.APP_CODEINSIGHT_SETTINGS_FILE),
+  perClient = true
 )
 public class PerlFoldingSettingsImpl implements PersistentStateComponent<PerlFoldingSettingsImpl> {
   public boolean COLLAPSE_COMMENTS = true;
@@ -53,5 +54,10 @@ public class PerlFoldingSettingsImpl implements PersistentStateComponent<PerlFol
 
   public static PerlFoldingSettingsImpl getInstance() {
     return ApplicationManager.getApplication().getService(PerlFoldingSettingsImpl.class);
+  }
+
+  @Override
+  public void noStateLoaded() {
+    loadState(new PerlFoldingSettingsImpl());
   }
 }
