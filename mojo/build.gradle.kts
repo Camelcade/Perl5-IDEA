@@ -18,16 +18,6 @@ import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 
 dependencies {
-  // packaging, which modules to include into this one
-  listOf(
-    ":lang.mojo.common",
-    ":lang.mojo.backend",
-    ":lang.mojo.frontend",
-    ":lang.mojo.frontend.split",
-  ).forEach {
-    runtimeOnly(project(it))
-  }
-
   // dependencies
   listOf(
     ":plugin.common", ":plugin.backend", ":plugin.frontend", ":plugin.frontend.split",
@@ -41,6 +31,16 @@ dependencies {
     create(IntelliJPlatformType.IntellijIdeaUltimate, platformVersionProvider.get()){
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
+    // packaging, which modules to include into this one
+    listOf(
+      ":lang.mojo.common",
+      ":lang.mojo.backend",
+      ":lang.mojo.frontend",
+      ":lang.mojo.frontend.split",
+    ).forEach {
+      pluginModule(project(it))
+    }
+
     localPlugin(project(":plugin"))
     bundledPlugins(providers.gradleProperty("remoteRunPlugin").get())
   }

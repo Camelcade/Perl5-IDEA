@@ -217,22 +217,6 @@ allprojects {
       }
     }
 
-    if (isRoot || isPlugin) {
-      project.tasks.register<Task>("normalizeSandbox") {
-        dependsOn(project.tasks.named("prepareSandbox"))
-        doLast {
-          normalizeSandbox(project, "prepareSandbox")
-        }
-      }
-      listOf(
-        "buildSearchableOptions",
-        "runIde",
-        "buildPlugin",
-      ).forEach {
-        project.tasks.named(it).configure { dependsOn(project.tasks.named("normalizeSandbox")) }
-      }
-    }
-
     if (isRoot) {
       listOf(
         "buildPlugin",
@@ -261,18 +245,6 @@ allprojects {
         archiveVersion = ""
       }
 
-      project.tasks.register<Task>("normalizeTestSandbox") {
-        dependsOn(project.tasks.named("prepareTestSandbox"))
-        doLast {
-          normalizeSandbox(project, "prepareTestSandbox")
-        }
-      }
-
-      listOf(
-        "test",
-      ).forEach {
-        project.tasks.named(it).configure { dependsOn(project.tasks.named("normalizeTestSandbox")) }
-      }
       publishPlugin {
         if (project.hasProperty("eap")) {
           channels.set(listOf("EAP"))
@@ -449,35 +421,6 @@ intellijPlatform {
 
 configurations.all {
   resolutionStrategy.cacheDynamicVersionsFor(7, "days")
-}
-
-fun normalizeSandbox(project: Project, taskName: String) {
-  project.logger.info("Normalizing $taskName results for ${project.name}")
-  val pluginsRootPath = project.tasks.named<PrepareSandboxTask>(taskName).get().defaultDestinationDirectory.get().asFile.toPath()
-  project.logger.info("\tPlugins root $pluginsRootPath")
-  for (pluginName in pluginProjectsNames) {
-    val pluginRootPath = pluginsRootPath.resolve(pluginName)
-    if (!Files.exists(pluginRootPath)) {
-      continue
-    }
-    project.logger.info("\tProcessing $pluginRootPath")
-    val mainJarName = "${archiveBaseName(pluginName)}.jar"
-    val pluginLibPath = pluginRootPath.resolve(LIB)
-    val pluginLibModulesPath = pluginRootPath.resolve(LIB_MODULES)
-    Files.createDirectories(pluginLibModulesPath)
-    Files.list(pluginLibPath).use {
-      it.filter { path ->
-        val fileName = path.fileName.toString()
-        fileName.endsWith(".jar") &&
-          fileName.startsWith(archiveBasePrefix(pluginName)) &&
-          fileName != mainJarName &&
-          !fileName.contains("searchableOptions")
-      }.forEach { path ->
-        project.logger.info("\t\tMoving $path to $pluginLibModulesPath")
-        path.moveTo(pluginLibModulesPath.resolve(path.fileName))
-      }
-    }
-  }
 }
 
 fun archiveBasePrefix(projectName: String) = "${rootProject.name}.${projectName}"
