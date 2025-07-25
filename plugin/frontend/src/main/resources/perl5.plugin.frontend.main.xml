@@ -1,7 +1,13 @@
 <idea-plugin>
+  <resource-bundle>messages.PerlBundle</resource-bundle>
   <dependencies>
     <module name="intellij.platform.frontend"/>
     <module name="perl5.plugin.common.main"/>
   </dependencies>
+  <extensions defaultExtensionNs="com.intellij">
+    <editorSmartKeysConfigurable
+        key="perl"
+        implementation="com.perl5.lang.perl.idea.editor.smartkeys.options.PerlSmartKeyOptions"/>
+  </extensions>
 
 </idea-plugin>
