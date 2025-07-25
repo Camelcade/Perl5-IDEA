@@ -1,3 +1,5 @@
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+
 /*
  * Copyright 2015-2021 Alexandr Evstigneev
  *
@@ -14,7 +16,7 @@
  * limitations under the License.
  */
 
-fun properties(key: String) = providers.gradleProperty(key)
+
 
 dependencies {
   listOf(
@@ -26,8 +28,11 @@ dependencies {
   }
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
-    bundledPlugins(properties("intelliLangPlugin").get())
+        create(IntelliJPlatformType.IntellijIdeaCommunity, platformVersionProvider.get()){
+      useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
+    }
+
+    bundledPlugins(providers.gradleProperty("intelliLangPlugin").get())
   }
 }
 

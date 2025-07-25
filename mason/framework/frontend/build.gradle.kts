@@ -1,3 +1,5 @@
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+
 /*
  * Copyright 2015-2021 Alexandr Evstigneev
  *
@@ -23,6 +25,9 @@ dependencies {
   }
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
+        create(IntelliJPlatformType.IntellijIdeaCommunity, platformVersionProvider.get()){
+      useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
+    }
+
   }
 }

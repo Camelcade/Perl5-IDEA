@@ -5,6 +5,7 @@ import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB
 import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB_MODULES
 import org.jetbrains.intellij.platform.gradle.Constants.Tasks.INSTRUMENT_CODE
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+import org.jetbrains.intellij.platform.gradle.ProductMode
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.intellij.platform.gradle.tasks.InstrumentCodeTask
 import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
@@ -33,7 +34,7 @@ import kotlin.io.path.writeText
  * limitations under the License.
  */
 
-fun properties(key: String) = providers.gradleProperty(key)
+
 fun environment(key: String) = providers.environmentVariable(key)
 
 buildscript {
@@ -48,7 +49,7 @@ plugins {
   id("com.hurricup.gradle.fixcompress")
   id("idea")
   id("jacoco")
-  id("org.jetbrains.intellij.platform") version "2.6.0"
+  id("org.jetbrains.intellij.platform") version "2.6.1-SNAPSHOT"
   id("org.jetbrains.grammarkit") version "2022.3.2.2"
   id("com.github.kt3k.coveralls") version "2.12.2"
   id("org.sonarqube") version "6.2.0.5505"
@@ -61,9 +62,9 @@ repositories {
 }
 
 val isCI = environment("CI").map { it.toBoolean() }.orElse(false)
-val withCoverage = environment("COVERALLS_REPO_TOKEN").orElse(properties("with_coverage")).map { !it.isEmpty() }.orElse(false)
+val withCoverage = environment("COVERALLS_REPO_TOKEN").orElse(providers.gradleProperty("with_coverage")).map { !it.isEmpty() }.orElse(false)
 val platformVersionProvider by extra(project.provider {
-  properties("platformVersion").get() + properties("platformBranch").get() + properties("platformBuild").get()
+  providers.gradleProperty("platformVersion").get() + providers.gradleProperty("platformBranch").get() + providers.gradleProperty("platformBuild").get()
 })
 
 val pluginProjectsNames = setOf(
@@ -96,16 +97,16 @@ allprojects {
   }
 
   grammarKit {
-    jflexRelease.set(properties("jflexVersion"))
+    jflexRelease.set(providers.gradleProperty("jflexVersion"))
   }
 
-  version = properties("pluginVersion").get().ifEmpty { properties("platformVersion").get() } +
-    properties("pluginBranch").get().ifEmpty { properties("platformBranch").get() } +
-    properties("pluginBuild").get().ifEmpty { properties("platformBuild").get() }
+  version = providers.gradleProperty("pluginVersion").get().ifEmpty { providers.gradleProperty("platformVersion").get() } +
+    providers.gradleProperty("pluginBranch").get().ifEmpty { providers.gradleProperty("platformBranch").get() } +
+    providers.gradleProperty("pluginBuild").get().ifEmpty { providers.gradleProperty("platformBuild").get() }
 
   dependencies {
     intellijPlatform {
-      val platformToolsVersion = properties("platformToolsVersion")
+      val platformToolsVersion = providers.gradleProperty("platformToolsVersion")
       if (platformToolsVersion.get().isEmpty()) {
         testFramework(TestFrameworkType.Platform)
       }
@@ -122,15 +123,15 @@ allprojects {
 
   kotlin {
     compilerOptions {
-      jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(properties("javaTargetVersion").get()))
+      jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.fromTarget(providers.gradleProperty("javaTargetVersion").get()))
     }
   }
 
   tasks {
     withType<JavaCompile> {
       options.encoding = "UTF-8"
-      sourceCompatibility = properties("javaVersion").get()
-      targetCompatibility = properties("javaTargetVersion").get()
+      sourceCompatibility = providers.gradleProperty("javaVersion").get()
+      targetCompatibility = providers.gradleProperty("javaTargetVersion").get()
     }
 
     test {
@@ -144,10 +145,10 @@ allprojects {
       }
 
       if (project.hasProperty("youtrack.token")) {
-        systemProperty("youtrack.token", properties("youtrack.token").get())
+        systemProperty("youtrack.token", providers.gradleProperty("youtrack.token").get())
       }
 
-      val envPerlVersion = environment("PERL_TEST_VERSION").orElse(properties("perl.test.version"))
+      val envPerlVersion = environment("PERL_TEST_VERSION").orElse(providers.gradleProperty("perl.test.version"))
       systemProperty("perl.test.version", envPerlVersion.get())
 
       if (project.hasProperty("idea.split.test.logs")) {
@@ -157,7 +158,7 @@ allprojects {
 
       useJUnit {
         if (project.hasProperty("runtest")) {
-          include("**/" + properties("runtest").get() + ".class")
+          include("**/" + providers.gradleProperty("runtest").get() + ".class")
         }
 
         val excludeCategories = mutableListOf<String>()
@@ -276,15 +277,15 @@ allprojects {
         if (project.hasProperty("eap")) {
           channels.set(listOf("EAP"))
         }
-        token.set(properties("jbToken").orElse(""))
+        token.set(providers.gradleProperty("jbToken").orElse(""))
       }
 
       patchPluginXml {
-        pluginDescription.set(properties("descriptionFile").flatMap {
+        pluginDescription.set(providers.gradleProperty("descriptionFile").flatMap {
           providers.fileContents(layout.projectDirectory.file(it)).asText
         })
 
-        changeNotes.set(properties("changesFile").flatMap {
+        changeNotes.set(providers.gradleProperty("changesFile").flatMap {
           providers.fileContents(layout.projectDirectory.file(it)).asText
         })
       }
@@ -380,7 +381,7 @@ val runInSplitMode by intellijPlatformTesting.runIde.registering {
   }
 }
 
-val coverageReportFile = project.buildDir.resolve("reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
+val coverageReportFile = project.layout.buildDirectory.file("reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
 sonar {
   properties {
     property("sonar.projectKey", "Camelcade_Perl5-IDEA")
@@ -399,35 +400,38 @@ coveralls {
 
 intellijPlatform {
   val pluginList = mutableListOf<String>()
-  val bundledPluginList = mutableListOf(properties("intelliLangPlugin").get())
+  val bundledPluginList = mutableListOf(providers.gradleProperty("intelliLangPlugin").get())
 
   if (!isCI.get()) {
-    pluginList.add("PsiViewer:${properties("psiViewerVersion").get()}")
+    pluginList.add("PsiViewer:${providers.gradleProperty("psiViewerVersion").get()}")
   }
 
-  val runWith = properties("runWith").orElse("")
+  val runWith = providers.gradleProperty("runWith").orElse("")
   val (ideType, ideVersion) = when (runWith.get()) {
     "CL" -> {
-      "CL" to properties("clionVersion").get()
+      IntelliJPlatformType.CLion to providers.gradleProperty("clionVersion").get()
     }
     "PC" -> {
-      "PC" to properties("pycharmVersion").get()
+      IntelliJPlatformType.PyCharmCommunity to providers.gradleProperty("pycharmVersion").get()
     }
     "PY" -> {
       bundledPluginList.add("Docker")
-      bundledPluginList.add(properties("remoteRunPlugin").get())
-      "PY" to properties("pycharmVersion").get()
+      bundledPluginList.add(providers.gradleProperty("remoteRunPlugin").get())
+      IntelliJPlatformType.PyCharmProfessional to providers.gradleProperty("pycharmVersion").get()
     }
     else -> {
       bundledPluginList.add("Docker")
-      bundledPluginList.add(properties("coveragePlugin").get())
-      bundledPluginList.add(properties("remoteRunPlugin").get())
-      "IU" to platformVersionProvider.get()
+      bundledPluginList.add(providers.gradleProperty("coveragePlugin").get())
+      bundledPluginList.add(providers.gradleProperty("remoteRunPlugin").get())
+      IntelliJPlatformType.IntellijIdeaUltimate to platformVersionProvider.get()
     }
   }
   dependencies {
     intellijPlatform {
-      create(ideType, ideVersion, useInstaller = properties("useInstaller").get().toBoolean())
+      create(ideType, ideVersion){
+        useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
+        productMode = ProductMode.MONOLITH
+      }
       listOf(
         project(":plugin"),
         project(":lang.tt2"),

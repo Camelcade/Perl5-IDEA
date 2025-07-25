@@ -15,8 +15,9 @@
  */
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.grammarkit.tasks.GenerateParserTask
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
-fun properties(key: String) = providers.gradleProperty(key)
+
 
 val genRoot = project.file("src/main/gen").also { genRoot ->
   sourceSets {
@@ -40,7 +41,10 @@ dependencies {
   }
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IC", platformVersionProvider.get(), useInstaller = providers.gradleProperty("useInstaller").get().toBoolean())
+        create(IntelliJPlatformType.IntellijIdeaCommunity, platformVersionProvider.get()){
+      useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
+    }
+
   }
 }
 
@@ -56,7 +60,7 @@ tasks {
   val generateLexerTask = register<GenerateLexerTask>("generateTT2Lexer") {
     sourceFile.set(file("grammar/TemplateToolkit.flex"))
     targetOutputDir.set(file("src/main/gen/com/perl5/lang/tt2/lexer/"))
-    skeleton.set(rootProject.file(properties("lexer_skeleton").get()))
+    skeleton.set(rootProject.file(providers.gradleProperty("lexer_skeleton").get()))
     purgeOldFiles.set(true)
 
     dependsOn(generateParserTask)

@@ -1,3 +1,4 @@
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
 
 /*
@@ -16,7 +17,7 @@ import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
  * limitations under the License.
  */
 
-fun properties(key: String) = providers.gradleProperty(key)
+
 
 dependencies {
   listOf(
@@ -52,12 +53,14 @@ dependencies {
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-    create("IU", platformVersionProvider.get(), useInstaller = properties("useInstaller").get().toBoolean())
+    create(IntelliJPlatformType.IntellijIdeaUltimate, platformVersionProvider.get()){
+      useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
+    }
     bundledPlugins(
       "com.intellij.copyright",
-      properties("intelliLangPlugin").get(),
-      properties("remoteRunPlugin").get(),
-      properties("coveragePlugin").get(),
+      providers.gradleProperty("intelliLangPlugin").get(),
+      providers.gradleProperty("remoteRunPlugin").get(),
+      providers.gradleProperty("coveragePlugin").get(),
       "XPathView",
       "org.jetbrains.plugins.terminal",
     )
