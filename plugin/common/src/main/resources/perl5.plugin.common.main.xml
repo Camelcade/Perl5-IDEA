@@ -1,4 +1,5 @@
 <idea-plugin>
+  <resource-bundle>messages.PerlBundle</resource-bundle>
   <extensionPoints>
     <extensionPoint qualifiedName="com.perl5.subCallHandler" beanClass="com.intellij.util.KeyedLazyInstanceEP" dynamic="true">
       <with attribute="implementationClass" implements="com.perl5.lang.perl.psi.PerlSubCallHandler"/>
@@ -69,7 +70,9 @@
               name="Perl5 Package" extensions="pm" language="Perl5"/>
     <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypeTest" fieldName="INSTANCE"
               name="Perl5 Test" language="Perl5" extensions="t"/>
-    <applicationService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
+    <applicationService client="all" serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
+    <applicationSettings service="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
+    <rdct.remoteSettingProvider implementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettingsRemoteInfoProvider"/>
     <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
                   id="PerlTypedHandler" order="first"/>
     <backspaceHandlerDelegate implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlBackspaceHandler" order="first"/>
@@ -137,7 +140,6 @@
     <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
 
     <applicationService serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
-    <editorSmartKeysConfigurable instance="com.perl5.lang.perl.idea.editor.smartkeys.options.PerlSmartKeyOptions"/>
     <spellchecker.support implementationClass="com.perl5.lang.perl.idea.editor.PerlSpellCheckingStrategy" language="Perl5"/>
 
     <projectStructure.sourceRootEditHandler

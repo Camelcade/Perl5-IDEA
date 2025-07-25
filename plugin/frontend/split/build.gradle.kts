@@ -30,6 +30,6 @@ dependencies {
     }
 
     bundledLibrary("plugins/cwm-plugin/lib/frontend-split/rd-client.jar")
-    bundledModule("intellij.rd.ide.model.generated")
+    bundledModules("intellij.rd.ide.model.generated")
   }
 }

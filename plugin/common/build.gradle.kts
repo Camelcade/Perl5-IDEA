@@ -43,6 +43,7 @@ dependencies {
     bundledModules(
       "intellij.spellchecker"
     )
+    bundledLibrary("plugins/cwm-plugin/lib/split.jar")
   }
 }
 
