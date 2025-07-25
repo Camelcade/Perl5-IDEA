@@ -139,7 +139,9 @@
     <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
 
-    <applicationService serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
+    <applicationService client="all" serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
+    <applicationSettings service="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
+    <rdct.remoteSettingProvider implementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsRemoteInfoProvider"/>
     <spellchecker.support implementationClass="com.perl5.lang.perl.idea.editor.PerlSpellCheckingStrategy" language="Perl5"/>
 
     <projectStructure.sourceRootEditHandler
@@ -150,7 +152,6 @@
                              implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlDeclarationRangeHandler"/>
     <declarationRangeHandler key="com.perl5.lang.perl.psi.PerlNamespaceDefinitionWithIdentifier"
                              implementationClass="com.perl5.lang.perl.idea.codeInsight.PerlDeclarationRangeHandler"/>
-    <codeFoldingOptionsProvider instance="com.perl5.lang.perl.idea.folding.PerlFoldingOptionsProvider"/>
     <elementDescriptionProvider implementation="com.perl5.lang.perl.idea.PerlElementDescriptionProvider" id="perl5"/>
     <iconProvider implementation="com.perl5.lang.perl.idea.ui.PerlIconProvider"/>
 
