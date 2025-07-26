@@ -9,6 +9,7 @@
 
   <extensions defaultExtensionNs="com.perl5">
     <fileTypeProvider implementation="com.perl5.lang.htmlmason.filetypes.HTMLMasonFileTypeProvider"/>
+    <settings.configurable.extension implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettingsConfigurableExtension"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
