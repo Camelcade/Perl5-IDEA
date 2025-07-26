@@ -18,7 +18,6 @@ package com.perl5.lang.perl.idea.configuration.settings;
 
 import com.intellij.codeInsight.daemon.DaemonCodeAnalyzer;
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.Service;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
@@ -44,10 +43,10 @@ import java.util.Set;
 import static com.perl5.lang.perl.util.PerlScalarUtilCore.DEFAULT_SELF_NAME;
 
 
-@Service(Service.Level.PROJECT)
 @State(
   name = "Perl5Settings",
-  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE)
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE),
+  perClient = true
 )
 public final class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings> {
   public List<String> selfNames = PerlUtil.mutableList(DEFAULT_SELF_NAME, "this", "class", "proto");
@@ -148,6 +147,11 @@ public final class PerlSharedSettings implements PersistentStateComponent<PerlSh
       optionsString = optionsString.substring(1);
     }
     PERL_DEPARSE_ARGUMENTS = optionsString;
+  }
+
+  @Override
+  public void noStateLoaded() {
+    loadState(new PerlSharedSettings());
   }
 
   public static @NotNull PerlSharedSettings getInstance(@NotNull Project project) {

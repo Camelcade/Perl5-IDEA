@@ -139,6 +139,9 @@
     <projectService client="all" serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <projectSettings service="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <rdct.remoteSettingProvider implementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettingsRemoteInfoProvider"/>
+    <projectService client="all" serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings"/>
+    <projectSettings service="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings"/>
+    <rdct.remoteSettingProvider implementation="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettingsRemoteInfoProvider"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
 
     <applicationService client="all" serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
