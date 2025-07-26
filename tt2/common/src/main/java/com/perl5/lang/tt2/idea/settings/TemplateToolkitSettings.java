@@ -39,7 +39,8 @@ import java.util.Objects;
 
 @State(
   name = "TemplateToolkitSettings",
-  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE)
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE),
+  perClient = true
 )
 public class TemplateToolkitSettings implements PersistentStateComponent<TemplateToolkitSettings> {
   public static final Topic<SettingsListener> TT2_SETTINGS_TOPIC =
@@ -88,6 +89,11 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   @Override
   public void loadState(@NotNull TemplateToolkitSettings state) {
     XmlSerializerUtil.copyBean(state, this);
+  }
+
+  @Override
+  public void noStateLoaded() {
+    loadState(new TemplateToolkitSettings());
   }
 
   public static @NotNull TemplateToolkitSettings getInstance(@NotNull Project project) {

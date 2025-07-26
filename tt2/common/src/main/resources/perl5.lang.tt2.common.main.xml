@@ -5,10 +5,6 @@
 
   <resource-bundle>messages.TemplateToolkitBundle</resource-bundle>
 
-  <extensions defaultExtensionNs="com.perl5">
-    <settings.configurable.extension implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurableExtension"/>
-  </extensions>
-
   <extensions defaultExtensionNs="com.intellij">
     <fileType implementationClass="com.perl5.lang.tt2.filetypes.TemplateToolkitFileType" fieldName="INSTANCE"
               name="Template Toolkit" extensions="tt;tt2" language="Template Toolkit 2"/>
@@ -19,7 +15,9 @@
     <lang.fileViewProviderFactory language="Template Toolkit 2"
                                   implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
     <lang.ast.factory language="Template Toolkit 2" implementationClass="com.perl5.lang.tt2.TemplateToolkitAstFactory"/>
-    <projectService serviceImplementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
+    <projectService client="all" serviceImplementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
+    <projectSettings service="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
+    <rdct.remoteSettingProvider implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsRemoteInfoProvider"/>
     <lang.syntaxHighlighterFactory language="Template Toolkit 2"
                                    implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxHighlighterFactory"/>
     <colorSettingsPage implementation="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitColorSettingsPage"/>
