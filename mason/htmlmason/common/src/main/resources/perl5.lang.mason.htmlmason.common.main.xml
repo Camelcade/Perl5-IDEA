@@ -6,10 +6,6 @@
 
   <resource-bundle>messages.HtmlMasonBundle</resource-bundle>
 
-  <extensions defaultExtensionNs="com.perl5">
-    <settings.configurable.extension implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettingsConfigurableExtension"/>
-  </extensions>
-
   <extensions defaultExtensionNs="com.intellij">
     <lang.parserDefinition language="HTML::Mason Templating Language"
                            implementationClass="com.perl5.lang.htmlmason.HTMLMasonParserDefinition"/>
@@ -36,7 +32,9 @@
                          implementationClass="com.perl5.lang.htmlmason.idea.refactoring.HTMLMasonNamesValidator"/>
     <projectStructure.sourceRootEditHandler
         implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSourceRootEditHandler"/>
-    <projectService serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
+    <projectService client="all" serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
+    <projectSettings service="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
+    <rdct.remoteSettingProvider implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettingsRemoteInfoProvider"/>
     <highlightErrorFilter
         implementation="com.perl5.lang.htmlmason.idea.highlighter.HTMLMasonTemplateLanguageErrorFilter"/>
   </extensions>
