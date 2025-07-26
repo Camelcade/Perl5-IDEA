@@ -41,8 +41,6 @@
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.moo.MooImplicitSubsProvider"/>
     <implicitSubsProvider implementation="com.perl5.lang.perl.extensions.futureAsyncAwait.FutureAsyncAwaitImplicitDeclarationsProvider"/>
 
-    <settings.configurable.extension implementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersConfigurableExtension"/>
-
     <subCallHandler key="mk_accessors"
                     implementationClass="com.perl5.lang.perl.parser.Class.Accessor.psi.impl.PerlClassAccessorHandler$PerlClassAccessorRWHandler"/>
     <subCallHandler key="mk_ro_accessors"
@@ -132,7 +130,9 @@
     <readWriteAccessDetector implementation="com.perl5.lang.perl.idea.findusages.PerlReadWriteAccessDetector"/>
 
     <projectService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesCacheService"/>
-    <projectService serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService"/>
+    <projectService client="all" serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService"/>
+    <projectSettings service="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService"/>
+    <rdct.remoteSettingProvider implementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersRemoteInfoProvider"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService"/>

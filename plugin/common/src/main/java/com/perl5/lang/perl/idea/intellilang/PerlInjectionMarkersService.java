@@ -36,8 +36,8 @@ import static com.perl5.lang.perl.idea.intellilang.PerlDefaultInjectionMarkers.D
 
 @State(
   name = "InjectionMarkers",
-  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE)
-
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE),
+  perClient = true
 )
 public class PerlInjectionMarkersService implements PersistentStateComponent<PerlInjectionMarkersService> {
   @Tag("MARKERS_MAP")
@@ -95,6 +95,11 @@ public class PerlInjectionMarkersService implements PersistentStateComponent<Per
     HashMap<String, Language> result = new HashMap<>();
     computeMergedMarkersMap().forEach((marker, languageid) -> result.put(marker, Language.findLanguageByID(languageid)));
     return result;
+  }
+
+  @Override
+  public void noStateLoaded() {
+    loadState(new PerlInjectionMarkersService());
   }
 
   public static @NotNull PerlInjectionMarkersService getInstance(@NotNull Project project) {
