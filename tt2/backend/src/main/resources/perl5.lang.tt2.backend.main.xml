@@ -8,6 +8,7 @@
 
   <extensions defaultExtensionNs="com.perl5">
     <fileTypeProvider implementation="com.perl5.lang.tt2.filetypes.TemplateToolkitFileTypeProvider"/>
+    <settings.configurable.extension implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsConfigurableExtension"/>
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
