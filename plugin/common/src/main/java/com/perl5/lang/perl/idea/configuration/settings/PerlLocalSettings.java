@@ -31,7 +31,8 @@ import java.util.List;
 
 @State(
   name = "Perl5LocalSettings",
-  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE)
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE),
+  perClient = true
 )
 public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSettings> {
   public boolean DISABLE_NO_INTERPRETER_WARNING = false;
@@ -63,6 +64,11 @@ public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSett
   @Override
   public void loadState(@NotNull PerlLocalSettings state) {
     XmlSerializerUtil.copyBean(state, this);
+  }
+
+  @Override
+  public void noStateLoaded() {
+    loadState(new PerlLocalSettings());
   }
 
   public static @NotNull PerlLocalSettings getInstance(@NotNull Project project) {
