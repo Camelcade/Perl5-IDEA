@@ -1,20 +1,15 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.jvm.tasks.Jar
-import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB
-import org.jetbrains.intellij.platform.gradle.Constants.Sandbox.Plugin.LIB_MODULES
 import org.jetbrains.intellij.platform.gradle.Constants.Tasks.INSTRUMENT_CODE
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.ProductMode
 import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.intellij.platform.gradle.tasks.InstrumentCodeTask
-import org.jetbrains.intellij.platform.gradle.tasks.PrepareSandboxTask
 import org.jetbrains.intellij.platform.gradle.tasks.aware.IntelliJPlatformVersionAware
 import org.jetbrains.intellij.platform.gradle.tasks.aware.SplitModeAware.SplitModeTarget
 import org.kt3k.gradle.plugin.coveralls.CoverallsTask
-import java.nio.file.Files
 import kotlin.io.path.exists
-import kotlin.io.path.moveTo
 import kotlin.io.path.readText
 import kotlin.io.path.writeText
 
@@ -49,7 +44,7 @@ plugins {
   id("com.hurricup.gradle.fixcompress")
   id("idea")
   id("jacoco")
-  id("org.jetbrains.intellij.platform") version "2.6.1-SNAPSHOT"
+  id("org.jetbrains.intellij.platform") version "2.7.0"
   id("org.jetbrains.grammarkit") version "2022.3.2.2"
   id("com.github.kt3k.coveralls") version "2.12.2"
   id("org.sonarqube") version "6.2.0.5505"
