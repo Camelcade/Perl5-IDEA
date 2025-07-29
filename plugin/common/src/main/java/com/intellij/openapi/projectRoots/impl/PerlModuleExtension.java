@@ -88,7 +88,7 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
           () -> ProjectRootManagerEx.getInstanceEx(myModule.getProject()).makeRootsChange(() -> {
             myOriginal.myRoots = new LinkedHashMap<>(myRoots);
             myOriginal.myModificationTracker++;
-          }, BuildableRootsChangeRescanningInfo.newInstance().addModule(myModule).buildInfo())
+          }, false, true)
         );
       }
     }
