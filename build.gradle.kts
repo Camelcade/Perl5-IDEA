@@ -342,6 +342,7 @@ val fixClientExecutable by tasks.registering(FixClientExecutable::class)
 
 val runInSplitMode by intellijPlatformTesting.runIde.registering {
   splitMode = true
+  useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
   splitModeTarget = SplitModeTarget.BOTH
   task {
     dependsOn(fixClientExecutable)
