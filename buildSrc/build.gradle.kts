@@ -12,7 +12,7 @@ repositories {
 }
 
 dependencies {
-  implementation("org.apache.commons:commons-compress:1.27.1")
+  implementation("org.apache.commons:commons-compress:1.28.0")
 }
 
 gradlePlugin {
