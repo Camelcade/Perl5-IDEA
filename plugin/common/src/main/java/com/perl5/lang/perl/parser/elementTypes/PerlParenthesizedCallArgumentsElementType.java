@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
@@ -28,9 +27,8 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.LEFT_PAREN;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.PRINT_EXPR;
 
 public class PerlParenthesizedCallArgumentsElementType extends PerlBracedBlockElementType {
-  public PerlParenthesizedCallArgumentsElementType(@NotNull String debugName,
-                                                   @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlParenthesizedCallArgumentsElementType(@NotNull String debugName) {
+    super(debugName);
   }
 
   @Override

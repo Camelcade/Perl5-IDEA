@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
@@ -37,9 +36,8 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.HEREDOC_END_I
 
 
 public class PerlHeredocElementType extends PerlReparseableElementType {
-  public PerlHeredocElementType(@NotNull String debugName,
-                                @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlHeredocElementType(@NotNull String debugName) {
+    super(debugName);
   }
 
   /**

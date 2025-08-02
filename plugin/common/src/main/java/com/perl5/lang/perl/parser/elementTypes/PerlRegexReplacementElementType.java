@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,9 +27,8 @@ import static com.perl5.lang.perl.lexer.PerlLexer.AFTER_VALUE;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlRegexReplacementElementType extends PerlReparseableElementType {
-  public PerlRegexReplacementElementType(@NotNull String debugName,
-                                         @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlRegexReplacementElementType(@NotNull String debugName) {
+    super(debugName);
   }
 
   @Override

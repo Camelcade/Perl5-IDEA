@@ -26,7 +26,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.perl.parser.elementTypes.PerlPsiElementFactory;
 import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodLexerAdapter;
 import com.perl5.lang.pod.lexer.PodTokenSetsEx;
@@ -77,6 +77,6 @@ public class PodParserDefinition implements ParserDefinition, PodElementTypes {
 
   @Override
   public @NotNull PsiElement createElement(ASTNode node) {
-    return ((PsiElementProvider)node.getElementType()).getPsiElement(node);
+    return PerlPsiElementFactory.create(node.getElementType(), node);
   }
 }

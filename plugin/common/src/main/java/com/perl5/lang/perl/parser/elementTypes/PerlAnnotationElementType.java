@@ -20,14 +20,13 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.perl5.lang.perl.psi.impl.PerlAnnotationContainerImpl;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
 
 public class PerlAnnotationElementType extends PerlReparseableElementType {
   public PerlAnnotationElementType(@NotNull @NonNls String debugName) {
-    super(debugName, PerlAnnotationContainerImpl.class);
+    super(debugName);
   }
 
   @Override

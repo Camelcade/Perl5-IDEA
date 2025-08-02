@@ -26,7 +26,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.perl.parser.elementTypes.PerlPsiElementFactory;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitTokenSets;
 import com.perl5.lang.tt2.lexer.TemplateToolkitLexerAdapter;
@@ -69,7 +69,7 @@ public class TemplateToolkitParserDefinition implements ParserDefinition, Templa
 
   @Override
   public @NotNull PsiElement createElement(ASTNode node) {
-    return ((PsiElementProvider)node.getElementType()).getPsiElement(node);
+    return PerlPsiElementFactory.create(node.getElementType(), node);
   }
 
   @Override

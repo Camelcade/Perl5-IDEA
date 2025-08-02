@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
@@ -31,9 +30,8 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
 public class PerlStringListElementType extends PerlTwoQuotesQuoteLikeElementType {
-  public PerlStringListElementType(@NotNull String debugName,
-                                   @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlStringListElementType(@NotNull String debugName) {
+    super(debugName);
   }
 
   @Override

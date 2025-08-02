@@ -17,9 +17,10 @@
 package com.perl5.lang.perl.parser.moose;
 
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.parser.elementTypes.PerlElementTypeEx;
+import com.perl5.lang.perl.parser.elementTypes.PerlElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlTokenTypeEx;
-import com.perl5.lang.perl.parser.moose.psi.impl.*;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseKeywordElementImpl;
+import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseKeywordSubNameElementImpl;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideElementType;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementElementType;
 import org.jetbrains.annotations.NonNls;
@@ -40,12 +41,12 @@ public interface MooseElementTypes {
   IElementType RESERVED_BEFORE = new PerlMooseTokenType("MOOSE_BEFORE");
   IElementType RESERVED_HAS = new PerlMooseTokenType("MOOSE_HAS");
 
-  IElementType MOOSE_STATEMENT_WITH = new PerlElementTypeEx("MOOSE_STATEMENT_WITH", PerlMooseWithStatementImpl.class);
-  IElementType MOOSE_STATEMENT_EXTENDS = new PerlElementTypeEx("MOOSE_STATEMENT_EXTENDS", PerlMooseExtendsStatementImpl.class);
-  IElementType MOOSE_STATEMENT_META = new PerlElementTypeEx("MOOSE_STATEMENT_META", PerlMooseMetaStatementImpl.class);
-  IElementType MOOSE_STATEMENT_AROUND = new PerlElementTypeEx("MOOSE_STATEMENT_AROUND", PerlMooseAroundStatementImpl.class);
-  IElementType MOOSE_STATEMENT_AFTER = new PerlElementTypeEx("MOOSE_STATEMENT_AFTER", PerlMooseAfterStatementImpl.class);
-  IElementType MOOSE_STATEMENT_BEFORE = new PerlElementTypeEx("MOOSE_STATEMENT_BEFORE", PerlMooseBeforeStatementImpl.class);
+  IElementType MOOSE_STATEMENT_WITH = new PerlElementType("MOOSE_STATEMENT_WITH");
+  IElementType MOOSE_STATEMENT_EXTENDS = new PerlElementType("MOOSE_STATEMENT_EXTENDS");
+  IElementType MOOSE_STATEMENT_META = new PerlElementType("MOOSE_STATEMENT_META");
+  IElementType MOOSE_STATEMENT_AROUND = new PerlElementType("MOOSE_STATEMENT_AROUND");
+  IElementType MOOSE_STATEMENT_AFTER = new PerlElementType("MOOSE_STATEMENT_AFTER");
+  IElementType MOOSE_STATEMENT_BEFORE = new PerlElementType("MOOSE_STATEMENT_BEFORE");
 
   IElementType MOOSE_STATEMENT_AUGMENT = new PerlMooseAugmentStatementElementType("MOOSE_STATEMENT_AUGMENT");
   IElementType MOOSE_STATEMENT_OVERRIDE = new PerlMooseOverrideElementType("MOOSE_STATEMENT_OVERRIDE");

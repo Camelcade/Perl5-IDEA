@@ -21,14 +21,13 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
-import com.perl5.lang.perl.psi.impl.PsiPerlAnonHashImpl;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlAnonHashElementType extends PerlBracedBlockElementType {
   public PerlAnonHashElementType() {
-    super("ANON_HASH", PsiPerlAnonHashImpl.class);
+    super("ANON_HASH");
   }
 
   @Override

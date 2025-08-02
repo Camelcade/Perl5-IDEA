@@ -21,7 +21,6 @@ import com.intellij.lang.Language;
 import com.intellij.lang.PsiBuilderUtil;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.editor.PerlBraceMatcher;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
@@ -33,9 +32,8 @@ import static com.perl5.lang.perl.lexer.PerlLexer.AFTER_VARIABLE;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public abstract class PerlDereferenceElementType extends PerlReparseableElementType {
-  public PerlDereferenceElementType(@NotNull String debugName,
-                                    @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlDereferenceElementType(@NotNull String debugName) {
+    super(debugName);
   }
 
   @Override
@@ -100,8 +98,8 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
   protected abstract @NotNull IElementType getVariableNameTokenType();
 
   public static class Scalar extends PerlDereferenceElementType {
-    public Scalar(@NotNull String debugName, @NotNull Class<? extends PsiElement> clazz) {
-      super(debugName, clazz);
+    public Scalar(@NotNull String debugName) {
+      super(debugName);
     }
 
     @Override
@@ -121,8 +119,8 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
   }
 
   public static class ScalarIndex extends Scalar {
-    public ScalarIndex(@NotNull String debugName, @NotNull Class<? extends PsiElement> clazz) {
-      super(debugName, clazz);
+    public ScalarIndex(@NotNull String debugName) {
+      super(debugName);
     }
 
     @Override
@@ -133,8 +131,8 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
 
 
   public static class Array extends PerlDereferenceElementType {
-    public Array(@NotNull String debugName, @NotNull Class<? extends PsiElement> clazz) {
-      super(debugName, clazz);
+    public Array(@NotNull String debugName) {
+      super(debugName);
     }
 
     @Override
@@ -154,8 +152,8 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
   }
 
   public static class Hash extends PerlDereferenceElementType {
-    public Hash(@NotNull String debugName, @NotNull Class<? extends PsiElement> clazz) {
-      super(debugName, clazz);
+    public Hash(@NotNull String debugName) {
+      super(debugName);
     }
 
     @Override
@@ -175,8 +173,8 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
   }
 
   public static class Code extends PerlDereferenceElementType {
-    public Code(@NotNull String debugName, @NotNull Class<? extends PsiElement> clazz) {
-      super(debugName, clazz);
+    public Code(@NotNull String debugName) {
+      super(debugName);
     }
 
     @Override
@@ -196,8 +194,8 @@ public abstract class PerlDereferenceElementType extends PerlReparseableElementT
   }
 
   public static class Glob extends PerlDereferenceElementType {
-    public Glob(@NotNull String debugName, @NotNull Class<? extends PsiElement> clazz) {
-      super(debugName, clazz);
+    public Glob(@NotNull String debugName) {
+      super(debugName);
     }
 
     @Override

@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import org.jetbrains.annotations.NotNull;
@@ -30,9 +29,8 @@ import org.jetbrains.annotations.Nullable;
  * Two quoted quote-like operators element type: strings, matching regexp, string list, regex compile
  */
 public abstract class PerlTwoQuotesQuoteLikeElementType extends PerlQuoteLikeElementType {
-  public PerlTwoQuotesQuoteLikeElementType(@NotNull String debugName,
-                                           @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlTwoQuotesQuoteLikeElementType(@NotNull String debugName) {
+    super(debugName);
   }
 
   protected abstract boolean isOperatorToken(@Nullable IElementType tokenType);

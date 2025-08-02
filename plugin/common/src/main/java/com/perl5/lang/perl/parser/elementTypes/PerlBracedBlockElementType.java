@@ -21,7 +21,6 @@ import com.intellij.lang.Language;
 import com.intellij.lang.PsiBuilderUtil;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
@@ -29,9 +28,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Stack;
 
 public abstract class PerlBracedBlockElementType extends PerlReparseableElementType {
-  public PerlBracedBlockElementType(@NotNull String debugName,
-                                    @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlBracedBlockElementType(@NotNull String debugName) {
+    super(debugName);
   }
 
   @Override

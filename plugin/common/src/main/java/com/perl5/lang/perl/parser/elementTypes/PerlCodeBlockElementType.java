@@ -21,7 +21,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
-import com.perl5.lang.perl.psi.impl.PsiPerlBlockImpl;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
@@ -30,7 +29,7 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 public class PerlCodeBlockElementType extends PerlBracedBlockElementType {
 
   public PerlCodeBlockElementType() {
-    super("BLOCK", PsiPerlBlockImpl.class);
+    super("BLOCK");
   }
 
   @Override
