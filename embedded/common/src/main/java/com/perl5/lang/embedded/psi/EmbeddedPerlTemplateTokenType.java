@@ -16,13 +16,12 @@
 
 package com.perl5.lang.embedded.psi;
 
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.perl5.lang.embedded.EmbeddedPerlLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PerlReparseableTemplateTokenTypeBase;
 
 public class EmbeddedPerlTemplateTokenType extends PerlReparseableTemplateTokenTypeBase {
   public EmbeddedPerlTemplateTokenType() {
-    super("EMBED_TEMPLATE_BLOCK_HTML", PsiCommentImpl.class, EmbeddedPerlLanguage.INSTANCE);
+    super("EMBED_TEMPLATE_BLOCK_HTML", EmbeddedPerlLanguage.INSTANCE);
   }
 
   @Override

@@ -21,8 +21,8 @@ import com.intellij.openapi.util.TextRange;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlReparseableCommentTokenType extends PerlReparseableTokenType {
-  public PerlReparseableCommentTokenType(@NotNull String debugName, Class<? extends ASTNode> clazz) {
-    super(debugName, clazz);
+  public PerlReparseableCommentTokenType(@NotNull String debugName) {
+    super(debugName);
   }
 
   @Override

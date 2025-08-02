@@ -22,7 +22,6 @@ import com.intellij.psi.impl.source.tree.TreeUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.psi.impl.PerlNamespaceElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
@@ -43,7 +42,7 @@ public class PerlNamespaceNameTokenType extends PerlReparseableTokenType {
   );
 
   public PerlNamespaceNameTokenType(@NotNull String debugName) {
-    super(debugName, PerlNamespaceElementImpl.class);
+    super(debugName);
   }
 
   @Override

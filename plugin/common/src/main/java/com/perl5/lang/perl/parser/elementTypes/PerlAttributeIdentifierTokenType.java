@@ -18,7 +18,6 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
 
@@ -27,7 +26,7 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.ATTRIBUTES;
 
 public class PerlAttributeIdentifierTokenType extends PerlReparseableTokenType {
   public PerlAttributeIdentifierTokenType(@NotNull String debugName) {
-    super(debugName, LeafPsiElement.class);
+    super(debugName);
   }
 
   @Override

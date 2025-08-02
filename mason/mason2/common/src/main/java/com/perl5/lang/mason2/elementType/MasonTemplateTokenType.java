@@ -16,7 +16,6 @@
 
 package com.perl5.lang.mason2.elementType;
 
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
 import com.perl5.lang.perl.parser.elementTypes.PerlReparseableTemplateTokenTypeBase;
 
@@ -24,7 +23,7 @@ public class MasonTemplateTokenType extends PerlReparseableTemplateTokenTypeBase
   private static final String TOKEN_NAME = "MASON_TEMPLATE_BLOCK_HTML";
 
   public MasonTemplateTokenType() {
-    super(TOKEN_NAME, PsiCommentImpl.class, Mason2TemplatingLanguage.INSTANCE);
+    super(TOKEN_NAME, Mason2TemplatingLanguage.INSTANCE);
   }
 
   @Override

@@ -20,12 +20,11 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
-import com.perl5.lang.perl.psi.impl.PerlVariableNameElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 public class PerlVariableNameTokenType extends PerlReparseableTokenType {
   public PerlVariableNameTokenType(@NotNull String debugName) {
-    super(debugName, PerlVariableNameElementImpl.class);
+    super(debugName);
   }
 
   @Override

@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
+import com.intellij.lang.ASTFactory;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.lexer.Lexer;
@@ -33,18 +34,15 @@ import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PerlReparseableTokenType extends PerlTokenTypeEx implements IReparseableLeafElementType<ASTNode> {
+public abstract class PerlReparseableTokenType extends PerlTokenType implements IReparseableLeafElementType<ASTNode> {
   private static final Logger LOG = Logger.getInstance(PerlReparseableTokenType.class);
 
-  public PerlReparseableTokenType(@NotNull String debugName,
-                                  Class<? extends ASTNode> clazz) {
-    super(debugName, clazz);
+  public PerlReparseableTokenType(@NotNull String debugName) {
+    super(debugName);
   }
 
-  public PerlReparseableTokenType(@NotNull String debugName,
-                                  @Nullable Language language,
-                                  @NotNull Class<? extends ASTNode> clazz) {
-    super(debugName, language, clazz);
+  public PerlReparseableTokenType(@NotNull String debugName, @Nullable Language language) {
+    super(debugName, language);
   }
 
   /**
@@ -171,6 +169,6 @@ public abstract class PerlReparseableTokenType extends PerlTokenTypeEx implement
 
   @Override
   public final @Nullable ASTNode reparseLeaf(@NotNull ASTNode leaf, @NotNull CharSequence newText) {
-    return isReparseable(leaf, newText) ? createLeafNode(newText) : null;
+    return isReparseable(leaf, newText) ? ASTFactory.leaf(this, newText) : null;
   }
 }

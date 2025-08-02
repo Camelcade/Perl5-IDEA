@@ -18,9 +18,7 @@ package com.perl5.lang.perl.parser.moose;
 
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.parser.elementTypes.PerlElementType;
-import com.perl5.lang.perl.parser.elementTypes.PerlTokenTypeEx;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseKeywordElementImpl;
-import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseKeywordSubNameElementImpl;
+import com.perl5.lang.perl.parser.elementTypes.PerlTokenType;
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideElementType;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementElementType;
 import org.jetbrains.annotations.NonNls;
@@ -28,8 +26,8 @@ import org.jetbrains.annotations.NotNull;
 
 
 public interface MooseElementTypes {
-  IElementType RESERVED_INNER = new PerlTokenTypeEx("inner", PerlMooseKeywordSubNameElementImpl.class);
-  IElementType RESERVED_SUPER = new PerlTokenTypeEx("super", PerlMooseKeywordSubNameElementImpl.class);
+  IElementType RESERVED_INNER = new PerlTokenType("inner");
+  IElementType RESERVED_SUPER = new PerlTokenType("super");
 
   IElementType RESERVED_WITH = new PerlMooseTokenType("MOOSE_WITH");
   IElementType RESERVED_EXTENDS = new PerlMooseTokenType("MOOSE_EXTENDS");
@@ -51,9 +49,12 @@ public interface MooseElementTypes {
   IElementType MOOSE_STATEMENT_AUGMENT = new PerlMooseAugmentStatementElementType("MOOSE_STATEMENT_AUGMENT");
   IElementType MOOSE_STATEMENT_OVERRIDE = new PerlMooseOverrideElementType("MOOSE_STATEMENT_OVERRIDE");
 
-  class PerlMooseTokenType extends PerlTokenTypeEx {
+  /**
+   * Leftover, to avoid test data update. Need to migrate to a simple PerlTokenType
+   */
+  class PerlMooseTokenType extends PerlTokenType {
     public PerlMooseTokenType(@NotNull @NonNls String debugName) {
-      super(debugName, PerlMooseKeywordElementImpl.class);
+      super(debugName);
     }
   }
 }

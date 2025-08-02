@@ -20,16 +20,16 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.TokenType;
+import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.impl.source.tree.TreeUtil;
+import com.intellij.psi.tree.ILeafElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PerlReparseableTemplateTokenTypeBase extends PerlReparseableTemplateTokenType {
-  public PerlReparseableTemplateTokenTypeBase(@NotNull String debugName,
-                                              @NotNull Class<? extends ASTNode> clazz,
-                                              @Nullable Language language) {
-    super(debugName, clazz, language);
+public abstract class PerlReparseableTemplateTokenTypeBase extends PerlReparseableTemplateTokenType implements ILeafElementType {
+  public PerlReparseableTemplateTokenTypeBase(@NotNull String debugName, @Nullable Language language) {
+    super(debugName, language);
   }
 
   @Override
@@ -44,5 +44,10 @@ public abstract class PerlReparseableTemplateTokenTypeBase extends PerlReparseab
     }
     int endOffset = nextLeaf == null ? leaf.getTextRange().getEndOffset() : nextLeaf.getTextRange().getEndOffset();
     return TextRange.create(leaf.getStartOffset(), endOffset);
+  }
+
+  @Override
+  public final @NotNull ASTNode createLeafNode(@NotNull CharSequence leafText) {
+    return new PsiCommentImpl(this, leafText);
   }
 }

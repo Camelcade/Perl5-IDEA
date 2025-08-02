@@ -20,14 +20,13 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.impl.source.tree.TreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.psi.impl.PerlPodElement;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.COMMENT_BLOCK;
 
 public class PerlPodReparseableTokenType extends PerlReparseableTemplateTokenType {
   public PerlPodReparseableTokenType(@NotNull String debugName) {
-    super(debugName, PerlPodElement.class);
+    super(debugName);
   }
 
   @Override

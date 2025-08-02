@@ -16,7 +16,6 @@
 
 package com.perl5.lang.mojolicious;
 
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.perl5.lang.perl.parser.elementTypes.PerlReparseableTemplateTokenTypeBase;
 
 public class MojoTemplateTokenType extends PerlReparseableTemplateTokenTypeBase {
@@ -24,7 +23,7 @@ public class MojoTemplateTokenType extends PerlReparseableTemplateTokenTypeBase 
   private static final String TOKEN_NAME = "MOJO_TEMPLATE_BLOCK_HTML";
 
   public MojoTemplateTokenType() {
-    super(TOKEN_NAME, PsiCommentImpl.class, MojoliciousLanguage.INSTANCE);
+    super(TOKEN_NAME, MojoliciousLanguage.INSTANCE);
   }
 
   @Override

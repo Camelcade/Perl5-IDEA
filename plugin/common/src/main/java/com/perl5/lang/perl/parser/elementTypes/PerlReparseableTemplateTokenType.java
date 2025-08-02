@@ -30,14 +30,12 @@ import org.jetbrains.annotations.Nullable;
  */
 public abstract class PerlReparseableTemplateTokenType extends PerlReparseableTokenType {
 
-  public PerlReparseableTemplateTokenType(@NotNull String debugName,
-                                          Class<? extends ASTNode> clazz) {
-    super(debugName, clazz);
+  public PerlReparseableTemplateTokenType(@NotNull String debugName) {
+    super(debugName);
   }
 
-  public PerlReparseableTemplateTokenType(@NotNull String debugName,
-                                          @NotNull Class<? extends ASTNode> clazz, @Nullable Language language) {
-    super(debugName, language, clazz);
+  public PerlReparseableTemplateTokenType(@NotNull String debugName, @Nullable Language language) {
+    super(debugName, language);
   }
 
   @Override
