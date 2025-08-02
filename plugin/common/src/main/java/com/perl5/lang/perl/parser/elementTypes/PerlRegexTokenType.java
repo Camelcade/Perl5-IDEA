@@ -24,8 +24,8 @@ import org.jetbrains.annotations.NotNull;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.PERL_REGEX;
 
 public class PerlRegexTokenType extends PerlReparseableTokenType {
-  public PerlRegexTokenType(@NotNull String debugName, Class<? extends ASTNode> clazz) {
-    super(debugName, clazz);
+  public PerlRegexTokenType(@NotNull String debugName) {
+    super(debugName);
   }
 
   @Override

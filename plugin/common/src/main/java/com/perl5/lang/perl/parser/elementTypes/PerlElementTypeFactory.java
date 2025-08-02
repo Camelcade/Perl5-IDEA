@@ -17,11 +17,7 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.psi.impl.PerlHeredocTerminatorElementImpl;
-import com.perl5.lang.perl.psi.impl.PerlVersionElementImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import com.perl5.lang.perl.psi.stubs.calls.PerlSubCallElementType;
 import org.jetbrains.annotations.NotNull;
@@ -36,15 +32,15 @@ public class PerlElementTypeFactory {
     return switch (name) {
       case "COMMENT_BLOCK" -> new PerlBlockCommentTokenType(name);
       case "ATTRIBUTE_IDENTIFIER" -> new PerlAttributeIdentifierTokenType(name);
-      case "regex" -> new PerlRegexTokenType(name, LeafPsiElement.class);
+      case "regex" -> new PerlRegexTokenType(name);
       case "STRING_CONTENT", "STRING_CONTENT_QQ", "STRING_CONTENT_XQ" -> new PerlStringContentTokenType(name);
-      case "SCALAR_NAME", "ARRAY_NAME", "HASH_NAME", "GLOB_NAME", "CODE_NAME" -> new PerlVariableNameTokenType(name);
+      case "SCALAR_NAME", "ARRAY_NAME", "HASH_NAME", "GLOB_NAME" -> new PerlVariableNameTokenType(name);
       case "POD" -> new PerlPodReparseableTokenType(name);
       case "subname", "list", "unary", "unary_custom", "argumentless" -> new PerlSubNameTokenType(name);
-      case "package::name", "package::name::", "constant", "vars", __PACKAGE__ -> new PerlNamespaceNameTokenType(name);
-      case "HEREDOC_END", "HEREDOC_END_INDENTABLE" -> new PerlTokenTypeEx(name, PerlHeredocTerminatorElementImpl.class);
-      case "VERSION_ELEMENT" -> new PerlTokenTypeEx(name, PerlVersionElementImpl.class);
-      case "COMMENT_LINE" -> new PerlReparseableCommentTokenType(name, PsiCommentImpl.class);
+      case "package::name", "package::name::", __PACKAGE__ -> new PerlNamespaceNameTokenType(name);
+      case "HEREDOC_END", "HEREDOC_END_INDENTABLE" -> new PerlTokenType(name);
+      case "VERSION_ELEMENT" -> new PerlTokenType(name);
+      case "COMMENT_LINE" -> new PerlReparseableCommentTokenType(name);
       default -> new PerlTokenType(name);
     };
   }

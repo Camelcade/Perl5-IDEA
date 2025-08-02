@@ -16,7 +16,6 @@
 
 package com.perl5.lang.tt2.elementTypes;
 
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.perl5.lang.perl.parser.elementTypes.PerlReparseableTemplateTokenTypeBase;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
 
@@ -24,7 +23,7 @@ public class TemplateToolkitTemplateTokenType extends PerlReparseableTemplateTok
   private static final String TOKEN_NAME = "TT2_HTML";
 
   public TemplateToolkitTemplateTokenType() {
-    super(TOKEN_NAME, PsiCommentImpl.class, TemplateToolkitLanguage.INSTANCE);
+    super(TOKEN_NAME, TemplateToolkitLanguage.INSTANCE);
   }
 
   @Override

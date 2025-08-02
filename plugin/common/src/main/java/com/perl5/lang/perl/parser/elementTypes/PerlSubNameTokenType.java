@@ -21,7 +21,6 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
-import com.perl5.lang.perl.psi.impl.PerlSubNameElementImpl;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypes.SUB_DECLARATION;
@@ -29,7 +28,7 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlSubNameTokenType extends PerlReparseableTokenType {
   public PerlSubNameTokenType(@NotNull String debugName) {
-    super(debugName, PerlSubNameElementImpl.class);
+    super(debugName);
   }
 
   @Override

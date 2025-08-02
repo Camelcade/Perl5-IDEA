@@ -26,7 +26,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
-import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -39,7 +38,7 @@ public class PerlStringContentTokenType extends PerlReparseableTokenType {
   );
 
   public PerlStringContentTokenType(@NotNull String debugName) {
-    super(debugName, PerlStringContentElementImpl.class);
+    super(debugName);
   }
 
   @Override

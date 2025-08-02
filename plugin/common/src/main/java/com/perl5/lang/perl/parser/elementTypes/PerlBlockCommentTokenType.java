@@ -18,7 +18,6 @@ package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.impl.source.tree.PsiCommentImpl;
 import com.intellij.psi.impl.source.tree.TreeUtil;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
@@ -29,7 +28,7 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.TAG_END;
 
 public class PerlBlockCommentTokenType extends PerlReparseableTokenType {
   public PerlBlockCommentTokenType(@NotNull String debugName) {
-    super(debugName, PsiCommentImpl.class);
+    super(debugName);
   }
 
   @Override
