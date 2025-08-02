@@ -16,6 +16,8 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
+    <jps.plugin/>
+
     <!--Mason2 settings -->
     <applicationService serviceImplementation="com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionBackendService"
                         serviceInterface="com.perl5.lang.mason2.psi.impl.MasonNamespaceDefinitionService"/>

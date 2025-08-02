@@ -4,7 +4,6 @@
   </dependencies>
 
   <resource-bundle>messages.TemplateToolkitBundle</resource-bundle>
-
   <extensions defaultExtensionNs="com.intellij">
     <fileType implementationClass="com.perl5.lang.tt2.filetypes.TemplateToolkitFileType" fieldName="INSTANCE"
               name="Template Toolkit" extensions="tt;tt2" language="Template Toolkit 2"/>

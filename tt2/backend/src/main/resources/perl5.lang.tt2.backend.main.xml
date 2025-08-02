@@ -12,6 +12,8 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
+    <jps.plugin/>
+
     <annotator language="Template Toolkit 2"
                implementationClass="com.perl5.lang.tt2.idea.highlighting.TemplateToolkitSyntaxAnnotator"/>
 

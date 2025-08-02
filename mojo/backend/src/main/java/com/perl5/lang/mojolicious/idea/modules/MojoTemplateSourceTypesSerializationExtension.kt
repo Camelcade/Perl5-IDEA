@@ -13,15 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.perl5.lang.perl.idea.modules
+
+package com.perl5.lang.mojolicious.idea.modules
 
 import org.jetbrains.jps.model.serialization.JpsModelSerializerExtension
 import org.jetbrains.jps.model.serialization.module.JpsModuleSourceRootDummyPropertiesSerializer
 import org.jetbrains.jps.model.serialization.module.JpsModuleSourceRootPropertiesSerializer
 
-class PerlSourceTypesSerializationExtension : JpsModelSerializerExtension() {
+class MojoTemplateSourceTypesSerializationExtension : JpsModelSerializerExtension() {
   private val serializers: List<JpsModuleSourceRootPropertiesSerializer<*>> by lazy {
-    listOf(PerlLibrarySourceRootType.INSTANCE.let {
+    listOf(MojoTemplateSourceRootType.INSTANCE.let {
       JpsModuleSourceRootDummyPropertiesSerializer(it, it.serializationKey)
     })
   }
