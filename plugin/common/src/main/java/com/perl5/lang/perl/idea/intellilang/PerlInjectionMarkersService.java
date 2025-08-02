@@ -57,8 +57,7 @@ public class PerlInjectionMarkersService implements PersistentStateComponent<Per
   }
 
   @Transient
-  @NotNull
-  Map<String, String> computeMergedMarkersMap() {
+  public @NotNull Map<String, String> computeMergedMarkersMap() {
     HashMap<String, String> mergedMap = new HashMap<>(myCustomMarkersMap);
     DEFAULT_MARKERS.forEach(mergedMap::putIfAbsent);
     return mergedMap;
