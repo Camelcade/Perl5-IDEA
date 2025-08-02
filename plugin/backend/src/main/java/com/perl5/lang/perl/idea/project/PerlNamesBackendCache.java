@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.project;
 import com.intellij.ide.lightEdit.LightEdit;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
+import com.intellij.openapi.application.WriteAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.project.DumbService;
@@ -55,6 +56,7 @@ public class PerlNamesBackendCache implements PerlNamesCache {
   private final AtomicBoolean myIsUpdating = new AtomicBoolean(false);
   private volatile Set<String> myKnownSubs = Collections.emptySet();
   private volatile Set<String> myKnownNamespaces = Collections.emptySet();
+  private final AtomicBoolean myIsDisposed = new AtomicBoolean(false);
 
   public PerlNamesBackendCache(Project project) {
     myProject = project;
@@ -170,7 +172,7 @@ public class PerlNamesBackendCache implements PerlNamesCache {
 
       logger.debug("Names cache updated");
       return null;
-    }).inSmartMode(myProject).expireWhen(myProject::isDisposed).executeSynchronously();
+    }).inSmartMode(myProject).expireWhen(myIsDisposed::get).executeSynchronously();
   }
 
   @Override
@@ -189,6 +191,7 @@ public class PerlNamesBackendCache implements PerlNamesCache {
 
   @Override
   public void dispose() {
+    WriteAction.run(() -> myIsDisposed.set(true));
   }
 
   @Override
