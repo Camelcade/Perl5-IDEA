@@ -13,6 +13,8 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
+    <jps.plugin/>
+
     <internalFileTemplate name="Perl5 mojolicious"/>
 
     <stubElementTypeHolder class="com.perl5.lang.mojolicious.MojoliciousElementTypes"/>

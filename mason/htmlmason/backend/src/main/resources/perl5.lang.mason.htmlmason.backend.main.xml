@@ -13,6 +13,7 @@
   </extensions>
 
   <extensions defaultExtensionNs="com.intellij">
+    <jps.plugin/>
     <lang.findUsagesProvider language="HTML::Mason Templating Language"
                              implementationClass="com.perl5.lang.perl.idea.findusages.PerlFindUsagesProvider"/>
     <lang.refactoringSupport language="HTML::Mason Templating Language"
