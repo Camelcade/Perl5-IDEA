@@ -20,9 +20,8 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.pod.elementTypes.PodFileElementType;
 import com.perl5.lang.pod.elementTypes.PodOuterTokenType;
-import com.perl5.lang.pod.parser.PodElementTypesGenerated;
 
-public interface PodElementTypes extends PodElementTypesGenerated {
+public interface PodElementTypes {
   IElementType POD_OUTER = new PodOuterTokenType();
   IFileElementType FILE = new PodFileElementType("Plain old document");
 }

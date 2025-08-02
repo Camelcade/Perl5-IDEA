@@ -28,15 +28,17 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.tt2.TemplateToolkitBundle;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 import com.perl5.lang.tt2.psi.PsiElsifBranch;
 import com.perl5.lang.tt2.psi.impl.*;
 import com.perl5.lang.tt2.utils.TemplateToolkitPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.TT2_HTML;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.TT2_IDENTIFIER;
 
-public abstract class TemplateToolkitTemplateContextType extends TemplateContextType implements TemplateToolkitElementTypes {
+
+public abstract class TemplateToolkitTemplateContextType extends TemplateContextType {
   public TemplateToolkitTemplateContextType(@NlsContexts.Label @NotNull String presentableName) {
     super(presentableName);
   }

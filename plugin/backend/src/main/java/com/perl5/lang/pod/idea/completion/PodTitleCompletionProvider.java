@@ -43,6 +43,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static com.perl5.lang.pod.elementTypes.PodStubElementTypes.HEAD_1_SECTION;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_IDENTIFIER;
+
 public class PodTitleCompletionProvider extends CompletionProvider<CompletionParameters> implements PodElementPatterns {
   public static final String COPYRIGHT_AND_LICENSE = "COPYRIGHT AND LICENSE";
   public static final List<String> DEFAULT_POD_SECTIONS =

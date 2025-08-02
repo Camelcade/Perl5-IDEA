@@ -21,13 +21,15 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.lexer.MojoliciousLexerAdapter;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighterEmbedded;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.RESERVED_IF;
 
-public class MojoliciousSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded implements MojoliciousElementTypes {
+
+public class MojoliciousSyntaxHighlighter extends PerlSyntaxHighlighterEmbedded {
   public static final TokenSet MARKER_TOKENS = TokenSet.create(
     MOJO_BLOCK_OPENER,
     MOJO_BLOCK_EXPR_OPENER,

@@ -20,14 +20,15 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesBinders;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mojolicious.MojoliciousElementTypes;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.BLOCK_BRACELESS;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.SUB_EXPR;
 import static com.perl5.lang.perl.parser.PerlParserTokenSets.BAD_CHARACTER_FORBIDDEN_TOKENS;
 
 
-public class MojoliciousParser extends PerlParserImpl implements MojoliciousElementTypes, PerlElementTypes {
+public class MojoliciousParser extends PerlParserImpl {
   public static final TokenSet BAD_CAHARACTER_FORBIDDEN_TOKENS = TokenSet.orSet(
     BAD_CHARACTER_FORBIDDEN_TOKENS,
     TokenSet.create(

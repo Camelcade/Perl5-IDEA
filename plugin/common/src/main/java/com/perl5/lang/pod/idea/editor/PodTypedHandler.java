@@ -36,7 +36,6 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.editor.smartkeys.PerlEditorUtil;
 import com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandlerDelegate;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodTokenSets;
 import com.perl5.lang.pod.parser.psi.PodElementFactory;
 import com.perl5.lang.pod.psi.PsiLinkSection;
@@ -46,9 +45,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.pod.lexer.PodTokenSets.FORMAT_ACCEPTING_COMMANDS;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
 
 
-public class PodTypedHandler extends PerlTypedHandlerDelegate implements PodElementTypes {
+public class PodTypedHandler extends PerlTypedHandlerDelegate {
   private static final String POD_COMMANDS = "IBCLEFSXZ";
   private static final TokenSet POD_COMMANDS_TOKENSET = TokenSet.create(
     POD_I,

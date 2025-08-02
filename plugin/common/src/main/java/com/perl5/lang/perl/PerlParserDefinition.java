@@ -27,7 +27,6 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
@@ -40,8 +39,9 @@ import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.lexer.PerlLexer.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
-public class PerlParserDefinition implements ParserDefinition, PerlElementTypes, PerlLexerAwareParserDefinition {
+public class PerlParserDefinition implements ParserDefinition, PerlLexerAwareParserDefinition {
 
   @Override
   public @NotNull Lexer createLexer(Project project) {

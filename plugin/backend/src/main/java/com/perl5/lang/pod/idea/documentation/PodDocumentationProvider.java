@@ -32,7 +32,6 @@ import com.perl5.lang.perl.documentation.PerlDocUtil;
 import com.perl5.lang.perl.documentation.PerlDocumentationProviderBase;
 import com.perl5.lang.perl.psi.PerlFile;
 import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodTokenSets;
 import com.perl5.lang.pod.parser.psi.*;
 import com.perl5.lang.pod.parser.psi.impl.PodFileImpl;
@@ -48,8 +47,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.documentation.PerlDocumentationProvider.findPodElement;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_ANGLE_LEFT;
 
-public class PodDocumentationProvider extends PerlDocumentationProviderBase implements PodElementTypes {
+public class PodDocumentationProvider extends PerlDocumentationProviderBase {
   private static final Logger LOG = Logger.getInstance(PodDocumentationProvider.class);
 
   @Override

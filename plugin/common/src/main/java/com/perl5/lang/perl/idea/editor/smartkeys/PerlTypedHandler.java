@@ -42,7 +42,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PsiPerlPerlRegexImpl;
@@ -52,9 +51,10 @@ import org.jetbrains.annotations.Nullable;
 
 import static com.intellij.psi.TokenType.WHITE_SPACE;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
-public class PerlTypedHandler extends PerlTypedHandlerDelegate implements PerlElementTypes {
+public class PerlTypedHandler extends PerlTypedHandlerDelegate {
   // these chars are automatically closed by IDEA and we can't control this
   private static final String HANDLED_BY_BRACE_MATCHER = "{([";
 

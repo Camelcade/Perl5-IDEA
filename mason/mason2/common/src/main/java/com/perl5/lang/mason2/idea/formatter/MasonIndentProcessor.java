@@ -21,8 +21,10 @@ import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 
+import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.*;
 
-public class MasonIndentProcessor extends PerlIndentProcessor implements Mason2ElementTypes {
+
+public class MasonIndentProcessor extends PerlIndentProcessor {
   public static final MasonIndentProcessor INSTANCE = new MasonIndentProcessor();
 
   public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(

@@ -19,7 +19,6 @@ package com.perl5.lang.mason2.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.MasonAugmentMethodModifier;
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseAugmentStatementImpl;
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementStub;
@@ -31,9 +30,11 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.MASON_METHOD_MODIFIER_NAME;
+
 
 public class MasonAugmentMethodModifierImpl extends PerlMooseAugmentStatementImpl
-  implements MasonAugmentMethodModifier, Mason2ElementTypes {
+  implements MasonAugmentMethodModifier {
   protected List<PerlVariableDeclarationElement> myImplicitVariables = null;
 
   public MasonAugmentMethodModifierImpl(ASTNode node) {

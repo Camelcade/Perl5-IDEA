@@ -37,8 +37,8 @@ import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlCallValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
+import com.perl5.lang.perl.parser.PerlElementTypesGenerated;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.PerlAssignExpression.PerlAssignValueDescriptor;
@@ -126,8 +126,8 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     namesMap.put(SUB_EXPR, CODE_REF);
     namesMap.put(DO_BLOCK_EXPR, DO_RESULT);
     namesMap.put(EVAL_EXPR, EVAL_RESULT);
-    namesMap.put(PerlElementTypes.ANON_ARRAY, ANON_ARRAY);
-    namesMap.put(PerlElementTypes.ANON_HASH, ANON_HASH);
+    namesMap.put(PerlElementTypesGenerated.ANON_ARRAY, ANON_ARRAY);
+    namesMap.put(PerlElementTypesGenerated.ANON_HASH, ANON_HASH);
     namesMap.put(NUMBER_CONSTANT, NUMBER);
     return Collections.unmodifiableMap(namesMap);
   });
@@ -258,10 +258,10 @@ public class PerlNameSuggestionProvider implements NameSuggestionProvider {
     else if (REGEX_OPERATIONS.contains(expressionType)) {
       result.addAll(REGEX_BASE_NAMES);
     }
-    else if (expressionType == PerlElementTypes.ANON_HASH) {
+    else if (expressionType == PerlElementTypesGenerated.ANON_HASH) {
       result.addAll(ANON_HASH_BASE_NAMES);
     }
-    else if (expressionType == PerlElementTypes.ANON_ARRAY) {
+    else if (expressionType == PerlElementTypesGenerated.ANON_ARRAY) {
       result.addAll(ANON_ARRAY_BASE_NAMES);
     }
 

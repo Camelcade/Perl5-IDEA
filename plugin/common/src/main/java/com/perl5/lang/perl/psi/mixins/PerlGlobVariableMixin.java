@@ -24,7 +24,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.util.IncorrectOperationException;
 import com.perl5.PerlIcons;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
 import com.perl5.lang.perl.psi.PerlVariableNameElement;
 import com.perl5.lang.perl.psi.PsiPerlAssignExpr;
@@ -40,7 +39,7 @@ import javax.swing.*;
 
 
 public abstract class PerlGlobVariableMixin extends PerlStubBasedPsiElementBase<PerlGlobStub>
-  implements PsiPerlGlobVariable, PerlElementTypes {
+  implements PsiPerlGlobVariable {
   public PerlGlobVariableMixin(@NotNull ASTNode node) {
     super(node);
   }

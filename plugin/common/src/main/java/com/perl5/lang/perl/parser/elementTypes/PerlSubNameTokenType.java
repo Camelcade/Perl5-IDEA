@@ -23,7 +23,6 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import org.jetbrains.annotations.NotNull;
 
-import static com.perl5.lang.perl.lexer.PerlElementTypes.SUB_DECLARATION;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlSubNameTokenType extends PerlReparseableTokenType {

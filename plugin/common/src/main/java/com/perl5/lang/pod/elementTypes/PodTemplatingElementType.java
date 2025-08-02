@@ -23,16 +23,17 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.adapters.PerlProgressAwareAdapter;
 import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.POD;
+import static com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER;
 
-public class PodTemplatingElementType extends TemplateDataElementType implements PerlElementTypes, PodElementTypes {
+
+public class PodTemplatingElementType extends TemplateDataElementType {
   public PodTemplatingElementType(@NonNls String debugName, Language language) {
     super(debugName, language, POD, POD_OUTER);
   }

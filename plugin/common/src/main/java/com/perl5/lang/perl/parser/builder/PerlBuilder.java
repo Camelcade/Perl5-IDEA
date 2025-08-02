@@ -20,7 +20,6 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import org.jetbrains.annotations.Nullable;
@@ -28,7 +27,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * This wrapper created to be able to store per-parsing data like pragmas, warnings and variables ?
  */
-public class PerlBuilder extends GeneratedParserUtilBase.Builder implements PerlElementTypes {
+public class PerlBuilder extends GeneratedParserUtilBase.Builder {
   private final PerlParserImpl perlParser;
 
   // flags that sq strings should be converted to the use_vars_lazy_parsable_strings

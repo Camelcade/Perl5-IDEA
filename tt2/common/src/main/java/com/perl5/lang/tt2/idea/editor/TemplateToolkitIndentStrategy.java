@@ -18,11 +18,12 @@ package com.perl5.lang.tt2.idea.editor;
 
 import com.intellij.openapi.editor.IndentStrategy;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.TT2_OUTLINE_TAG;
 
-public class TemplateToolkitIndentStrategy implements IndentStrategy, TemplateToolkitElementTypes {
+
+public class TemplateToolkitIndentStrategy implements IndentStrategy {
   @Override
   public boolean canIndent(int indentationStartOffset, int indentationEndOffset, @NotNull PsiElement element) {
     return element.getNode().getElementType() != TT2_OUTLINE_TAG;

@@ -22,7 +22,7 @@ import com.perl5.lang.perl.idea.folding.PerlFoldingBuilder;
 import org.jetbrains.annotations.NotNull;
 
 
-public class MojoliciousFoldingBuilder extends PerlFoldingBuilder implements MojoliciousElementTypes {
+public class MojoliciousFoldingBuilder extends PerlFoldingBuilder {
   protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
     PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
     TokenSet.create(

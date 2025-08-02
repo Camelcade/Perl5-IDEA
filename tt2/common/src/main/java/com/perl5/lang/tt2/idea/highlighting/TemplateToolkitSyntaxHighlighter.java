@@ -23,14 +23,14 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitLexerAdapter;
 import org.jetbrains.annotations.NotNull;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 
 
-public class TemplateToolkitSyntaxHighlighter extends SyntaxHighlighterBase implements TemplateToolkitElementTypes {
+public class TemplateToolkitSyntaxHighlighter extends SyntaxHighlighterBase {
   public static final TextAttributesKey TT2_NUMBER_KEY = createTextAttributesKey("PERL_TT2_NUMBER", PerlSyntaxHighlighter.PERL_NUMBER);
   public static final TextAttributesKey TT2_MARKER_KEY = createTextAttributesKey("PERL_TT2_MARKER", PerlSyntaxHighlighter.EMBED_MARKER_KEY);
   public static final TextAttributesKey TT2_COMMENT_KEY = createTextAttributesKey("PERL_TT2_COMMENT", PerlSyntaxHighlighter.PERL_COMMENT);

@@ -35,7 +35,6 @@ import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleComple
 import com.perl5.lang.perl.idea.completion.util.PerlPackageCompletionUtil;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.filetypes.PodFileType;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.PodCompositeElement;
 import com.perl5.lang.pod.parser.psi.PodFile;
 import com.perl5.lang.pod.parser.psi.PodStubsAwareRecursiveVisitor;
@@ -54,7 +53,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashSet;
 import java.util.Set;
 
-public class PodLinkCompletionProvider extends CompletionProvider<CompletionParameters> implements PodElementTypes {
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
+
+public class PodLinkCompletionProvider extends CompletionProvider<CompletionParameters> {
   private static final Logger LOG = Logger.getInstance(PodLinkCompletionProvider.class);
 
   @Override

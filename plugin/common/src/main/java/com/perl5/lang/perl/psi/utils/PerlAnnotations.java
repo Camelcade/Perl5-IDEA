@@ -27,7 +27,6 @@ import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsProvider;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
@@ -38,9 +37,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
-public final class PerlAnnotations implements PerlElementTypes {
+public final class PerlAnnotations {
   private PerlAnnotations() {
   }
 

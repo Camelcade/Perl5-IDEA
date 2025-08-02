@@ -18,13 +18,14 @@ package com.perl5.lang.pod.parser;
 
 import com.intellij.patterns.PsiElementPattern;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.PodSectionTitle;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.FORMATTING_SECTION_CONTENT;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_FORMAT_LINK;
 
 
-public interface PodElementPatterns extends PodElementTypes {
+public interface PodElementPatterns {
   PsiElementPattern.Capture<PsiElement> LINK_IDENTIFIER =
     psiElement().withSuperParent(2, psiElement(FORMATTING_SECTION_CONTENT).withParent(psiElement(POD_FORMAT_LINK)));
 

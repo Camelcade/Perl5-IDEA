@@ -25,7 +25,6 @@ import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.idea.codeInsight.controlFlow.PerlControlFlowBuilder
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimpleDynamicLocation
-import com.perl5.lang.perl.lexer.PerlElementTypes
 import com.perl5.lang.perl.psi.*
 import com.perl5.lang.perl.psi.properties.PerlLexicalScope
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
@@ -33,7 +32,7 @@ import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore
 import com.perl5.lang.perl.psi.utils.PerlSubArgument
 import java.util.function.Supplier
 
-abstract class PerlSubDefinitionBase : PerlSubBase<PerlSubDefinitionStub>, PerlSubDefinitionElement, PerlLexicalScope, PerlElementTypes,
+abstract class PerlSubDefinitionBase : PerlSubBase<PerlSubDefinitionStub>, PerlSubDefinitionElement, PerlLexicalScope,
                                        PerlControlFlowOwner {
   private val myControlFlow = PerlControlFlowBuilder.createLazy(this)
   private val myReturnValueFromCode = ClearableLazyValue.create<PerlValue?>(

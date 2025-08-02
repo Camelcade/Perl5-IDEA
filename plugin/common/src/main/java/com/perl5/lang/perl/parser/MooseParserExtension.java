@@ -24,9 +24,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -35,9 +33,11 @@ import java.util.List;
 import java.util.Map;
 
 import static com.intellij.lang.parser.GeneratedParserUtilBase.consumeToken;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.moose.MooseElementTypes.*;
 
 
-public class MooseParserExtension extends PerlParserExtension implements MooseElementTypes, PerlElementTypes {
+public class MooseParserExtension extends PerlParserExtension {
   public static final String KEYWORD_AFTER = "after";
   public static final String KEYWORD_BEFORE = "before";
   public static final String KEYWORD_HAS = "has";

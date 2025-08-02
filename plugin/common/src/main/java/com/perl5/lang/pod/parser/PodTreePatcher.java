@@ -21,11 +21,10 @@ import com.intellij.psi.impl.source.tree.FileElement;
 import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.templateLanguages.OuterLanguageElement;
 import com.intellij.psi.templateLanguages.SimpleTreePatcher;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 
-public class PodTreePatcher extends SimpleTreePatcher implements PodElementTypes {
+public class PodTreePatcher extends SimpleTreePatcher {
   @Override
   public void insert(@NotNull CompositeElement parent, TreeElement anchorBefore, @NotNull OuterLanguageElement toInsert) {
     while (anchorBefore != null && anchorBefore.getTreePrev() == null && !(parent instanceof FileElement)) {

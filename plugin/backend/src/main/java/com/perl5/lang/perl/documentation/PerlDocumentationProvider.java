@@ -26,7 +26,6 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesManager;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlBuiltInSubDefinition;
@@ -42,10 +41,11 @@ import org.jetbrains.annotations.Nullable;
 import static com.perl5.lang.perl.documentation.PerlDocUtil.SWITCH_DOC_LINK;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.parser.MooseParserExtension.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.util.PerlPackageUtilCore.FUNCTION_PARAMETERS;
 import static com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER;
 
-public class PerlDocumentationProvider extends PerlDocumentationProviderBase implements PerlElementTypes {
+public class PerlDocumentationProvider extends PerlDocumentationProviderBase {
   private static final TokenSet FORCE_AS_OPERATORS_TOKENSET = TokenSet.orSet(
     HEREDOC_BODIES_TOKENSET,
     SPECIAL_STRING_TOKENS,

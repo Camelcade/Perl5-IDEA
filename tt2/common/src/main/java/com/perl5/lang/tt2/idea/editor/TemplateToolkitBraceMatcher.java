@@ -20,12 +20,13 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 
-public class TemplateToolkitBraceMatcher implements PairedBraceMatcher, TemplateToolkitElementTypes {
+
+public class TemplateToolkitBraceMatcher implements PairedBraceMatcher {
   private static final BracePair[] PAIRS = new BracePair[]{
     new BracePair(TT2_OPEN_TAG, TT2_CLOSE_TAG, true),
     new BracePair(TT2_LEFT_BRACE, TT2_RIGHT_BRACE, true),

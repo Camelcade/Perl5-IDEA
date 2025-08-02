@@ -23,7 +23,7 @@ import com.intellij.psi.tree.IElementType;
 
 
 
-import java.util.BitSet;
+import java.util.BitSet;import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;import static com.perl5.lang.perl.parser.moose.MooseElementTypes.*;
 
 public class PerlLexer extends PerlBaseLexer {
 

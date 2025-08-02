@@ -20,12 +20,13 @@ import com.intellij.psi.templateLanguages.TemplateDataElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.IFileElementType;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
-import com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 
-public interface TemplateToolkitElementTypes extends TemplateToolkitElementTypesGenerated {
+
+public interface TemplateToolkitElementTypes {
   IFileElementType TT2_FILE = new TemplateToolkitFileElementType();
 
   IElementType TT2_TEMPLATE_DATA = new TemplateDataElementType(

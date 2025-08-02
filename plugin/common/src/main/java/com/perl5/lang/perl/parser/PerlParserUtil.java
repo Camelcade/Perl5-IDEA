@@ -25,7 +25,6 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.PerlBundle;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.parser.builder.PerlBuilder;
@@ -37,9 +36,10 @@ import org.jetbrains.annotations.Nullable;
 import java.util.regex.Pattern;
 
 import static com.intellij.lang.WhitespacesBinders.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
-public final class PerlParserUtil extends GeneratedParserUtilBase implements PerlElementTypes {
+public final class PerlParserUtil extends GeneratedParserUtilBase {
   private PerlParserUtil() {
   }
   public static final TokenSet VERSION_TOKENS = TokenSet.create(

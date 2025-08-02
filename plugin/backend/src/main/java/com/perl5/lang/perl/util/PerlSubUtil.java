@@ -22,7 +22,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.psi.stubs.StubIndex;
 import com.intellij.util.Processor;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.psi.stubs.subsdeclarations.PerlSubDeclarationIndex;
@@ -37,7 +36,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.*;
 
 
-public final class PerlSubUtil implements PerlElementTypes {
+public final class PerlSubUtil {
   private PerlSubUtil() {
   }
 

@@ -21,13 +21,14 @@ import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.idea.editor.smartkeys.PerlEditorUtil;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
-public class MojoliciousSmartKeysUtil implements MojoliciousElementTypes, PerlElementTypes {
+
+public class MojoliciousSmartKeysUtil {
   private static final TokenSet CLOSE_TOKENS = TokenSet.create(
     MOJO_BLOCK_CLOSER,
     MOJO_BLOCK_NOSPACE_CLOSER,

@@ -25,6 +25,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.io.Reader;
 
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
+
 
 @SuppressWarnings("ALL")
 public class PodLexer extends PodLexerGenerated {

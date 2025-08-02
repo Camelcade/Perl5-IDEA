@@ -20,12 +20,13 @@ import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
 
-public class PodBraceMathcer implements PairedBraceMatcher, PodElementTypes {
+
+public class PodBraceMathcer implements PairedBraceMatcher {
   private static final BracePair[] PAIRS = new BracePair[]{
     new BracePair(POD_BEGIN, POD_END, true),
     new BracePair(POD_OVER, POD_BACK, true),

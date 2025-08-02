@@ -28,13 +28,14 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.tt2.TemplateToolkitFileViewProvider;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.TT2_HTML;
 
-public class TemplateToolkitTypedHandler extends TypedHandlerDelegate implements TemplateToolkitElementTypes {
+
+public class TemplateToolkitTypedHandler extends TypedHandlerDelegate {
   @Override
   public @NotNull Result beforeCharTyped(char c,
                                          @NotNull Project project,

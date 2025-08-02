@@ -27,15 +27,16 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.parser.elementTypes.PerlPsiElementFactory;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitTokenSets;
 import com.perl5.lang.tt2.lexer.TemplateToolkitLexerAdapter;
 import com.perl5.lang.tt2.parser.TemplateToolkitParser;
 import com.perl5.lang.tt2.psi.impl.TemplateToolkitFileImpl;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes.TT2_FILE;
 
-public class TemplateToolkitParserDefinition implements ParserDefinition, TemplateToolkitElementTypes {
+
+public class TemplateToolkitParserDefinition implements ParserDefinition {
 
   @Override
   public @NotNull Lexer createLexer(Project project) {

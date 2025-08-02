@@ -42,7 +42,6 @@ import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlDirectoryIndex;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.internals.PerlVersion;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
@@ -64,7 +63,7 @@ import java.util.*;
 import java.util.function.Function;
 
 
-public final class PerlPackageUtil implements PerlElementTypes {
+public final class PerlPackageUtil {
 
   private PerlPackageUtil() {
   }

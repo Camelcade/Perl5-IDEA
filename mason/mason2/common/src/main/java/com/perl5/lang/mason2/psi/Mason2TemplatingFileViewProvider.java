@@ -21,12 +21,14 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason2.Mason2TemplatingLanguage;
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.perl.psi.PerlMultiplePsiFilesPerDocumentFileViewProvider;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.MASON_HTML_TEMPLATE_DATA;
+import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.MASON_POD_TEMPLATE_DATA;
 
-public class Mason2TemplatingFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider implements Mason2ElementTypes {
+
+public class Mason2TemplatingFileViewProvider extends PerlMultiplePsiFilesPerDocumentFileViewProvider {
   public Mason2TemplatingFileViewProvider(final PsiManager manager, final VirtualFile virtualFile, final boolean physical) {
     super(manager, virtualFile, physical);
   }

@@ -22,6 +22,7 @@ import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.mason2.Mason2Bundle;
 
+import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.*;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 

@@ -37,7 +37,7 @@ import java.util.List;
 import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 
-public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder implements Mason2ElementTypes {
+public class MasonFoldingBuilder extends AbstractMasonFoldingBuilder {
   protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.orSet(
     PerlFoldingBuilder.COMMENT_EXCLUDED_TOKENS,
     TokenSet.create(

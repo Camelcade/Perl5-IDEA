@@ -22,6 +22,8 @@ import com.perl5.lang.tt2.psi.TemplateToolkitString;
 import com.perl5.lang.tt2.psi.impl.TemplateToolkitCompositeElementImpl;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
+
 
 public class TemplateToolkitStringMixin extends TemplateToolkitCompositeElementImpl implements TemplateToolkitString {
   public static final TokenSet BLOCK_NAME_TARGETED_CONTAINERS = TokenSet.create(

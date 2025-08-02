@@ -19,10 +19,11 @@ package com.perl5.lang.tt2.idea.editor;
 import com.intellij.codeInsight.editorActions.SimpleTokenSetQuoteHandler;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
+
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 
 
-public class TemplateToolkitQuoteHandler extends SimpleTokenSetQuoteHandler implements TemplateToolkitElementTypes {
+public class TemplateToolkitQuoteHandler extends SimpleTokenSetQuoteHandler {
   private static final TokenSet OPEN_QUOTES = TokenSet.create(
     TT2_DQ_OPEN,
     TT2_SQ_OPEN

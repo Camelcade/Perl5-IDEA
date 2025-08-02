@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,14 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.completion.providers.*;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.idea.PerlElementPatterns.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
-public class PerlCompletionContributor extends CompletionContributor implements PerlElementTypes {
+public class PerlCompletionContributor extends CompletionContributor {
   private static final Logger LOG = Logger.getInstance(PerlCompletionContributor.class);
 
   public PerlCompletionContributor() {

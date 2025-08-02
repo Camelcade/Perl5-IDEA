@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,13 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.LEFT_PAREN;
 
-public class SubSelectionHandler implements InsertHandler<LookupElement>, PerlElementTypes {
+
+public class SubSelectionHandler implements InsertHandler<LookupElement> {
   @Override
   public void handleInsert(final @NotNull InsertionContext context, @NotNull LookupElement item) {
     final Editor editor = context.getEditor();

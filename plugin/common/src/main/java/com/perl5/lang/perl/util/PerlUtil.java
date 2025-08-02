@@ -18,7 +18,6 @@ package com.perl5.lang.perl.util;
 
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -31,7 +30,7 @@ import java.util.List;
 /**
  * Misc helper methods
  */
-public final class PerlUtil implements PerlElementTypes {
+public final class PerlUtil {
   private static final Logger LOG = Logger.getInstance(PerlUtil.class);
   private PerlUtil() {
   }

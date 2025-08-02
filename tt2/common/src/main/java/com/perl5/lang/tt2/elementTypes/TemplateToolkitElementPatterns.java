@@ -21,9 +21,10 @@ import com.intellij.psi.PsiComment;
 import com.intellij.psi.PsiElement;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 
 
-public interface TemplateToolkitElementPatterns extends TemplateToolkitElementTypes {
+public interface TemplateToolkitElementPatterns {
   PsiElementPattern.Capture<PsiElement> FILTER_NAME_PATTERN =
     psiElement(TT2_IDENTIFIER).withParent(
       psiElement(IDENTIFIER_EXPR).afterLeafSkipping(
