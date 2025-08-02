@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -24,9 +23,8 @@ import org.jetbrains.annotations.Nullable;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.RESERVED_QR;
 
 public class PerlCompileRegexpElementType extends PerlMatchRegexpElementType {
-  public PerlCompileRegexpElementType(@NotNull String debugName,
-                                      @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlCompileRegexpElementType(@NotNull String debugName) {
+    super(debugName);
   }
 
   @Override

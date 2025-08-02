@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.NotNull;
@@ -25,9 +24,8 @@ import static com.perl5.lang.perl.lexer.PerlLexer.AFTER_VARIABLE;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.LEFT_BRACE;
 
 public class PerlHashIndexElementType extends PerlBracedBlockElementType {
-  public PerlHashIndexElementType(@NotNull String debugName,
-                                  @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlHashIndexElementType(@NotNull String debugName) {
+    super(debugName);
   }
 
   @Override

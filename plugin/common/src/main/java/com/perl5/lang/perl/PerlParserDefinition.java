@@ -33,7 +33,7 @@ import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.PerlTokenSetsEx;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
 import com.perl5.lang.perl.parser.PerlParserImpl;
-import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider;
+import com.perl5.lang.perl.parser.elementTypes.PerlPsiElementFactory;
 import com.perl5.lang.perl.psi.PerlLexerAwareParserDefinition;
 import com.perl5.lang.perl.psi.impl.PerlFileImpl;
 import com.perl5.lang.perl.psi.stubs.PerlStubElementTypes;
@@ -85,12 +85,7 @@ public class PerlParserDefinition implements ParserDefinition, PerlElementTypes,
 
   @Override
   public @NotNull PsiElement createElement(ASTNode node) {
-    try {
-      return ((PsiElementProvider)node.getElementType()).getPsiElement(node);
-    }
-    catch (Exception e) {
-      throw new RuntimeException("Problem with node " + node, e);
-    }
+    return PerlPsiElementFactory.create(node.getElementType(), node);
   }
 
   @Override

@@ -35,35 +35,27 @@ import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.parser.PerlParserImpl;
 import com.perl5.lang.perl.parser.builder.PerlPsiBuilderFactory;
 import com.perl5.lang.perl.psi.PerlLexerAwareParserDefinition;
-import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Stack;
-import java.util.function.Function;
 
 import static com.perl5.lang.perl.idea.editor.PerlBraceMatcher.PERL_BRACES_MAP;
 import static com.perl5.lang.perl.idea.editor.PerlBraceMatcher.PERL_BRACES_MAP_REVERSED;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
-public abstract class PerlReparseableElementType extends IReparseableElementType implements PsiElementProvider {
+public abstract class PerlReparseableElementType extends IReparseableElementType {
   private static final ClearableLazyValue<TokenSet> REPARSING_PREVENTING_CONTAINERS = ClearableLazyValue.create(
     () -> TokenSet.create(
       HEREDOC_QQ, HEREDOC_QX, STRING_DQ, STRING_XQ, MATCH_REGEX, COMPILE_REGEX, REPLACEMENT_REGEX
     ));
   protected static final Logger LOG = Logger.getInstance(PerlReparseableElementType.class);
-  private final Function<ASTNode, PsiElement> myInstanceFactory;
 
   public PerlReparseableElementType(@NotNull @NonNls String debugName) {
-    this(debugName, PerlCompositeElementImpl.class);
-  }
-
-  public PerlReparseableElementType(@NotNull @NonNls String debugName, @NotNull Class<? extends PsiElement> clazz) {
     super(debugName, PerlLanguage.INSTANCE);
-    myInstanceFactory = PerlElementTypeEx.createInstanceFactory(clazz);
   }
 
   @Override
@@ -87,11 +79,6 @@ public abstract class PerlReparseableElementType extends IReparseableElementType
     ASTNode result = PerlParserImpl.INSTANCE.parse(this, builder).getFirstChildNode();
     logger.trace("Parsed: ", PerlTimeLogger.kb(newChars.length()), " kb of ", this);
     return result;
-  }
-
-  @Override
-  public final @NotNull PsiElement getPsiElement(@NotNull ASTNode node) {
-    return myInstanceFactory.apply(node);
   }
 
   @Override

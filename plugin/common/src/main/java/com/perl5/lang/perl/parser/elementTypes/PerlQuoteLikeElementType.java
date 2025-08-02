@@ -16,15 +16,13 @@
 
 package com.perl5.lang.perl.parser.elementTypes;
 
-import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Common parent for all quote-like operators available: strings, regexps, replacements, transliterations
  */
 public abstract class PerlQuoteLikeElementType extends PerlReparseableElementType {
-  public PerlQuoteLikeElementType(@NotNull String debugName,
-                                  @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlQuoteLikeElementType(@NotNull String debugName) {
+    super(debugName);
   }
 }

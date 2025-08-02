@@ -17,17 +17,14 @@
 package com.perl5.lang.perl.parser.elementTypes;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiUtilCore;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.HEREDOC_OPENER;
 
 public abstract class PerlStringElementType extends PerlTwoQuotesQuoteLikeElementType {
-
-  public PerlStringElementType(@NotNull String debugName,
-                               @NotNull Class<? extends PsiElement> clazz) {
-    super(debugName, clazz);
+  public PerlStringElementType(@NotNull String debugName) {
+    super(debugName);
   }
 
   @Override
