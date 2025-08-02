@@ -19,16 +19,17 @@ package com.perl5.lang.perl.lexer.adapters;
 import com.intellij.lexer.MergingLexerAdapter;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import org.jetbrains.annotations.NotNull;
+
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 /**
  * Second level of lexer adapter merges necessary tokens
  *
  * @see PerlSublexingLexerAdapter
  */
-public class PerlMergingLexerAdapter extends MergingLexerAdapter implements PerlElementTypes {
+public class PerlMergingLexerAdapter extends MergingLexerAdapter {
   public static final TokenSet TOKENS_TO_MERGE = TokenSet.create(
     STRING_CONTENT, REGEX_TOKEN, STRING_CONTENT_QQ, STRING_CONTENT_XQ, TokenType.WHITE_SPACE, COMMENT_BLOCK
   );

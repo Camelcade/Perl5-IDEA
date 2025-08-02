@@ -28,13 +28,14 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlIfUnlessCompound;
 import com.perl5.lang.perl.psi.PsiPerlStatement;
 import com.perl5.lang.perl.psi.impl.PerlStringContentElementImpl;
 import com.perl5.lang.perl.psi.properties.PerlLoop;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
+
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.REGEX_TOKEN;
 
 
 public abstract class PerlTemplateContextType extends TemplateContextType {
@@ -64,7 +65,7 @@ public abstract class PerlTemplateContextType extends TemplateContextType {
     return !(element instanceof PsiWhiteSpace ||
              element instanceof PerlStringContentElementImpl ||
              element instanceof PsiComment ||
-             tokenType == PerlElementTypes.REGEX_TOKEN) &&
+             tokenType == REGEX_TOKEN) &&
            isInContext(element);
   }
 

@@ -21,7 +21,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.xml.util.XmlStringUtil;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -31,9 +30,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static com.perl5.lang.perl.psi.utils.PerlPsiUtil.DOUBLE_QUOTE;
+import static com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER;
 
 
-public class PodRenderUtil implements PodElementTypes {
+public class PodRenderUtil {
   public static final String PARAGRAPH_PREFIX = "<p style=\"padding-bottom: 10px;\">";
   public static final String PARAGRAPH_SUFFIX = "</p>";
   private static final List<String> TO_ESCAPE = List.of("<", ">", "/", "|");

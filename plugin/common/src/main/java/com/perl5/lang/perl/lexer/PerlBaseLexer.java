@@ -29,7 +29,6 @@ import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import com.perl5.lang.perl.parser.PerlParserImpl;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import com.perl5.lang.perl.psi.PerlString;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
@@ -41,11 +40,11 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 import static com.perl5.lang.perl.lexer.PerlLexer.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.pod.parser.psi.PodSyntaxElements.CUT_COMMAND_WITH_LEADING_NEWLINE;
 
 
-public abstract class PerlBaseLexer extends PerlProtoLexer implements PerlElementTypes,
-                                                                      MooseElementTypes {
+public abstract class PerlBaseLexer extends PerlProtoLexer {
   private static final Logger LOG = Logger.getInstance(PerlBaseLexer.class);
 
   private static final Pattern USE_TRYCATCH_PATTERN = Pattern.compile("use\\s+TryCatch");

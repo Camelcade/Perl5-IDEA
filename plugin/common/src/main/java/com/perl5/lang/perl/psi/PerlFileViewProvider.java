@@ -28,7 +28,6 @@ import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,9 +36,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypes.POD_BLOCK;
+
 
 public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
-  implements TemplateLanguageFileViewProvider, PerlElementTypes {
+  implements TemplateLanguageFileViewProvider {
   private static final Set<Language> myLanguages = Set.of(
     PerlLanguage.INSTANCE,
     PodLanguage.INSTANCE

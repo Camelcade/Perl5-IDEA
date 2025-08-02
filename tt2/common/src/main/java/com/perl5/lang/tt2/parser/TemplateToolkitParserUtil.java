@@ -24,14 +24,16 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.tt2.TemplateToolkitBundle;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.elementTypes.TemplateToolkitTokenSets;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes.*;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
+
 
 @SuppressWarnings("Duplicates")
-public class TemplateToolkitParserUtil extends GeneratedParserUtilBase implements TemplateToolkitElementTypes {
+public class TemplateToolkitParserUtil extends GeneratedParserUtilBase {
 
   public static final TokenSet BLOCK_CONTAINERS = TokenSet.create(
     IF_BLOCK,

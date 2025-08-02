@@ -27,7 +27,6 @@ import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlAstBlock;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlSyntheticBlock;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement;
 import com.perl5.lang.perl.psi.stubs.PerlPolyNamedElementType;
@@ -37,11 +36,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.NO_STATEMENT;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
 
-public class PerlIndentProcessor implements PerlElementTypes {
+public class PerlIndentProcessor {
   public static final PerlIndentProcessor INSTANCE = new PerlIndentProcessor();
 
   public TokenSet getAbsoluteUnindentableTokens() {

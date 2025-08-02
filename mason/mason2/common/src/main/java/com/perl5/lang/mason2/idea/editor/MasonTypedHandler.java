@@ -24,18 +24,20 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProvider;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 
 import static com.intellij.psi.xml.XmlTokenType.XML_DATA_CHARACTERS;
+import static com.perl5.lang.mason2.Mason2SyntaxElements.*;
+import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.LEFT_BRACE;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.RIGHT_BRACE;
 
 
-public class MasonTypedHandler extends TypedHandlerDelegate implements Mason2ElementTypes, PerlElementTypes {
+public class MasonTypedHandler extends TypedHandlerDelegate {
   private static final Map<String, String> SIMPLE_COMPLETION_MAP = Map.of(
     KEYWORD_DOC_OPENER_UNCLOSED, KEYWORD_DOC_CLOSER,
     KEYWORD_CLASS_OPENER_UNCLOSED, KEYWORD_CLASS_CLOSER,

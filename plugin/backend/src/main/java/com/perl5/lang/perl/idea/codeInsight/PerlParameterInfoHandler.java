@@ -21,7 +21,6 @@ import com.intellij.openapi.util.Ref;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlCompositeElementImpl;
@@ -37,8 +36,10 @@ import com.perl5.lang.perl.util.PerlContextUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
-public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCallArgumentsImpl, PerlParameterInfo>, PerlElementTypes {
+
+public class PerlParameterInfoHandler implements ParameterInfoHandler<PsiPerlCallArgumentsImpl, PerlParameterInfo> {
   @Override
   public @Nullable PsiPerlCallArgumentsImpl findElementForParameterInfo(@NotNull CreateParameterInfoContext context) {
     PsiPerlCallArgumentsImpl callArguments = findCallArguments(context);

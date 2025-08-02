@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,14 @@ import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.idea.annotators.PerlBaseAnnotator;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.lexer.TemplateToolkitSyntaxElements;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes.BLOCK_COMMENT;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 
-public class TemplateToolkitSyntaxAnnotator implements Annotator, TemplateToolkitElementTypes {
+
+public class TemplateToolkitSyntaxAnnotator implements Annotator {
   @Override
   public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
     IElementType tokenType = element.getNode().getElementType();

@@ -17,13 +17,13 @@
 package com.perl5.lang.mason2.lexer;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.mason2.Mason2SyntaxElements.KEYWORD_BLOCK_CLOSER;
 
-public abstract class Mason2TemplatingLexerBase extends PerlTemplatingLexer implements Mason2ElementTypes, PerlElementTypes {
+
+public abstract class Mason2TemplatingLexerBase extends PerlTemplatingLexer {
   private final CommentEndCalculator COMMENT_END_CALCULATOR = commentText ->
   {
     int realLexicalState = getRealLexicalState();

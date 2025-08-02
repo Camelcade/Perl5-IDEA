@@ -19,6 +19,7 @@ package com.perl5.lang.tt2.formatter;
 import com.intellij.psi.tree.TokenSet;
 
 import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes.*;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 
 final class TemplateToolkitFormattingTokenSets {
   static final TokenSet ALIGNABLE_ASSIGN_EXPRESSIONS_CONTAINERS = TokenSet.create(

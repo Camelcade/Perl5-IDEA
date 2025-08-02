@@ -17,12 +17,10 @@
 package com.perl5.lang.mojolicious.lexer;
 
 import com.intellij.openapi.util.text.StringUtil;
-import com.perl5.lang.mojolicious.MojoliciousElementTypes;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class MojoliciousBaseLexer extends PerlTemplatingLexer implements MojoliciousElementTypes, PerlElementTypes {
+public abstract class MojoliciousBaseLexer extends PerlTemplatingLexer {
   private static final CommentEndCalculator COMMENT_END_CALCULATOR = commentText -> StringUtil.indexOf(commentText, "%>");
 
   @Override

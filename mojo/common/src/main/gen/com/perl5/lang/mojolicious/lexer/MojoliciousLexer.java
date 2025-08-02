@@ -4,7 +4,7 @@
 package com.perl5.lang.mojolicious.lexer;
 
 import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.IElementType;import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
 public class MojoliciousLexer extends MojoliciousBaseLexer {

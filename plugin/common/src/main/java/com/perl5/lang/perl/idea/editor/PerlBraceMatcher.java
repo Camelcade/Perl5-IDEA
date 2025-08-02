@@ -23,7 +23,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiWhiteSpace;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlSubDefinitionElement;
 import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.PsiPerlConditionalBlock;
@@ -35,8 +34,10 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
 
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
-public class PerlBraceMatcher implements PairedBraceMatcher, PerlElementTypes {
+
+public class PerlBraceMatcher implements PairedBraceMatcher {
   public static final Map<IElementType, IElementType> PERL_BRACES_MAP = Map.of(
     LEFT_BRACE, RIGHT_BRACE,
     LEFT_BRACKET, RIGHT_BRACKET,

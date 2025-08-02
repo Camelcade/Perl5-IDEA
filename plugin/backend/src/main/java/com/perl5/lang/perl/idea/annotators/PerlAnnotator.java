@@ -46,6 +46,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import static com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlAnnotator extends PerlBaseAnnotator {
   private static final NotNullLazyValue<Map<Class<? extends PerlVariable>, TextAttributesKey>> VARIABLE_KEYS_MAP =

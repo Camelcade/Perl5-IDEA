@@ -22,12 +22,14 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.PodFile;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_ANGLE_LEFT;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_ANGLE_RIGHT;
 
-public class PodBackspaceHandler extends BackspaceHandlerDelegate implements PodElementTypes {
+
+public class PodBackspaceHandler extends BackspaceHandlerDelegate {
   @Override
   public void beforeCharDeleted(char c, @NotNull PsiFile file, @NotNull Editor editor) {
 

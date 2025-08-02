@@ -19,14 +19,15 @@ package com.perl5.lang.embedded.idea.editor.smartkeys;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorModificationUtilEx;
 import com.intellij.openapi.editor.highlighter.HighlighterIterator;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_CLOSE;
 import static com.perl5.lang.embedded.psi.EmbeddedPerlElementTypes.EMBED_MARKER_OPEN;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.OPERATOR_LT_NUMERIC;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.QUESTION;
 
 
-public final class EmbeddedPerlSmartKeysUtil implements PerlElementTypes {
+public final class EmbeddedPerlSmartKeysUtil {
 
   private EmbeddedPerlSmartKeysUtil() {
   }

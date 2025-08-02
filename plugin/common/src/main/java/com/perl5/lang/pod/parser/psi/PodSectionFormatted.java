@@ -16,8 +16,5 @@
 
 package com.perl5.lang.pod.parser.psi;
 
-import com.perl5.lang.pod.lexer.PodElementTypes;
-
-
-public interface PodSectionFormatted extends PodElementTypes, PodSectionContent {
+public interface PodSectionFormatted extends PodSectionContent {
 }

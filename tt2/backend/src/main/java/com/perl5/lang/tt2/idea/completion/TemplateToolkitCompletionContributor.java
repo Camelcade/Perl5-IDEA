@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,10 +18,12 @@ package com.perl5.lang.tt2.idea.completion;
 
 import com.intellij.codeInsight.completion.CompletionContributor;
 import com.intellij.codeInsight.completion.CompletionType;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementPatterns;
+
+import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementPatterns.BLOCK_NAME_USAGE_PATTERN;
+import static com.perl5.lang.tt2.elementTypes.TemplateToolkitElementPatterns.FILTER_NAME_PATTERN;
 
 
-public class TemplateToolkitCompletionContributor extends CompletionContributor implements TemplateToolkitElementPatterns {
+public class TemplateToolkitCompletionContributor extends CompletionContributor {
   public TemplateToolkitCompletionContributor() {
     extend(
       CompletionType.BASIC,

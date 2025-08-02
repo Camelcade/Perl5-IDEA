@@ -19,11 +19,12 @@ package com.perl5.lang.mason2.idea.highlighter;
 import com.intellij.codeInsight.highlighting.TemplateLanguageErrorFilter;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
 import com.perl5.lang.mason2.psi.Mason2TemplatingFileViewProvider;
 
+import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.*;
 
-public class Mason2TemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements Mason2ElementTypes {
+
+public class Mason2TemplateLanguageErrorFilter extends TemplateLanguageErrorFilter {
   private static final TokenSet START_TOKENS = TokenSet.create(
     MASON_BLOCK_OPENER,
     MASON_PERL_OPENER,

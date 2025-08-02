@@ -31,7 +31,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
@@ -51,13 +50,14 @@ import java.util.List;
 import java.util.Map;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.util.PerlCorePackages.PACKAGE_EXPORTER;
 import static com.perl5.lang.perl.util.PerlPackageUtilCore.ADJUST_BLOCK;
 import static com.perl5.lang.perl.util.PerlSubUtilCore.SUB_AUTOLOAD;
 import static com.perl5.lang.perl.util.PerlSubUtilCore.SUB_DESTROY;
 
 
-public final class PerlDocUtil implements PerlElementTypes {
+public final class PerlDocUtil {
   public static final String PERL_VAR_FILE_NAME = "perlvar.pod";
   public static final String PERL_FUNC_FILE_NAME = "perlfunc.pod";
   static final String PERL_OP = "perlop";

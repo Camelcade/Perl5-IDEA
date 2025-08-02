@@ -29,13 +29,16 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlBundle;
 import com.perl5.lang.pod.PodLanguage;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.mixin.PodOverSectionContent;
 import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class PodTemplateContextType extends TemplateContextType implements PodElementTypes {
+import static com.perl5.lang.pod.lexer.PodElementTypes.POD_OUTER;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_CODE;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.POD_NEWLINE;
+
+public abstract class PodTemplateContextType extends TemplateContextType {
 
   public PodTemplateContextType(@NlsContexts.Label @NotNull String presentableName) {
     super(presentableName);
@@ -108,7 +111,7 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
         PsiElement prevElement = viewProvider.findElementAt(startOffset - 1, PodLanguage.INSTANCE);
         IElementType prevElementType = PsiUtilCore.getElementType(prevElement);
 
-        if (prevElementType == PodElementTypes.POD_NEWLINE || prevElementType == POD_OUTER) {
+        if (prevElementType == POD_NEWLINE || prevElementType == POD_OUTER) {
           return true;
         }
 
@@ -117,7 +120,7 @@ public abstract class PodTemplateContextType extends TemplateContextType impleme
             if (prevElement == null || prevElement.getTextOffset() == 0) {
               return true;
             }
-            else if (prevElement.getNode().getElementType() == PodElementTypes.POD_NEWLINE) {
+            else if (prevElement.getNode().getElementType() == POD_NEWLINE) {
               return true;
             }
             else if (!(prevElement instanceof PsiWhiteSpace)) {

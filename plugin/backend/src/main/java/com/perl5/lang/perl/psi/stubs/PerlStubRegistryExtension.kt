@@ -18,8 +18,9 @@ package com.perl5.lang.perl.psi.stubs
 
 import com.intellij.psi.stubs.StubRegistry
 import com.intellij.psi.stubs.StubRegistryExtension
-import com.perl5.lang.perl.lexer.PerlElementTypes
 import com.perl5.lang.perl.parser.Class.Accessor.ClassAccessorElementTypes
+import com.perl5.lang.perl.parser.PerlElementTypesGenerated.SUB_CALL
+import com.perl5.lang.perl.parser.PerlElementTypesGenerated.SUB_DECLARATION
 import com.perl5.lang.perl.parser.moose.MooseElementTypes
 import com.perl5.lang.perl.parser.moose.stubs.PerlMooseOverrideStubSerializingFactory
 import com.perl5.lang.perl.parser.moose.stubs.augment.PerlMooseAugmentStatementSerializingFactory
@@ -47,7 +48,7 @@ class PerlStubRegistryExtension : StubRegistryExtension {
     PodElementTypes.FILE.let { registry.registerStubSerializer(it, PodFileStubSerializer()) }
 
     listOf(
-      PerlElementTypes.SUB_DECLARATION to ::PerlSubDeclarationStubSerializingFactory,
+      SUB_DECLARATION to ::PerlSubDeclarationStubSerializingFactory,
       PerlStubElementTypes.SUB_DEFINITION to ::PerlSubDefinitionStubSerializingFactory,
       PerlStubElementTypes.METHOD_DEFINITION to ::PerlMethodDefinitionStubSerializingFactory,
       PerlStubElementTypes.FUNC_DEFINITION to ::PerlFuncDefinitionStubSerializingFactory,
@@ -60,7 +61,7 @@ class PerlStubRegistryExtension : StubRegistryExtension {
       PerlStubElementTypes.USE_STATEMENT to ::PerlUseStatementStubSerializingFactory,
       PerlStubElementTypes.NO_STATEMENT to ::PerlNoStatementStubSerializingFactory,
 
-      PerlElementTypes.SUB_CALL to ::PerlSubCallStubSerializingFactory,
+      SUB_CALL to ::PerlSubCallStubSerializingFactory,
 
       PodStubElementTypes.POD_PARAGRAPH to ::PodParagraphStubSerializingFactory,
       PodStubElementTypes.HEAD_1_SECTION to ::PodHead1StubSerializingFactory,

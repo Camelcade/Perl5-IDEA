@@ -18,9 +18,8 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.PerlLanguage;
-import com.perl5.lang.perl.parser.PerlElementTypesGenerated;
 import com.perl5.lang.pod.elementTypes.PodTemplatingElementType;
 
-public interface PerlElementTypes extends PerlElementTypesGenerated {
+public interface PerlElementTypes {
   IElementType POD_BLOCK = new PodTemplatingElementType("POD_BLOCK", PerlLanguage.INSTANCE);
 }

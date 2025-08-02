@@ -26,7 +26,6 @@ import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.formatter.PurePerlFormattingContext;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.parser.PerlParserUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -37,9 +36,10 @@ import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.TRANSPARENT_ELEMENT_TYPES;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
-public class PerlFormattingBlock extends AbstractBlock implements PerlElementTypes, PerlAstBlock {
+public class PerlFormattingBlock extends AbstractBlock implements PerlAstBlock {
   /**
    * Composite elements that should be treated as leaf elements, no children
    */

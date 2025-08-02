@@ -22,7 +22,6 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTag;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTagRole;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTemplatingLexer;
 import org.jetbrains.annotations.Nullable;
 
@@ -33,7 +32,7 @@ import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 import static com.perl5.lang.htmlmason.lexer.HTMLMasonLexer.*;
 
 
-public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer implements PerlElementTypes {
+public abstract class HTMLMasonBaseLexer extends PerlTemplatingLexer {
   private final CommentEndCalculator COMMENT_END_CALCULATOR = commentText ->
   {
     int realLexicalState = getRealLexicalState();

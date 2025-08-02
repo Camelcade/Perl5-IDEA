@@ -26,11 +26,12 @@ import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.formatter.PerlXmlTemplateFormattingModelBuilder;
 import com.perl5.lang.perl.idea.formatter.blocks.PerlFormattingBlock;
 import com.perl5.lang.tt2.TemplateToolkitLanguage;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import static com.perl5.lang.tt2.formatter.TemplateToolkitFormattingTokenSets.PERL_BLOCKS;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.TT2_HTML;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.TT2_OUTER;
 
 public class TemplateToolkitFormattingModelBuilder
   extends PerlXmlTemplateFormattingModelBuilder<TemplateToolkitFormattingContext, TemplateToolkitFormattingBlock> {
@@ -41,12 +42,12 @@ public class TemplateToolkitFormattingModelBuilder
 
   @Override
   public boolean isOuterLanguageElement(PsiElement element) {
-    return PsiUtilCore.getElementType(element) == TemplateToolkitElementTypes.TT2_OUTER;
+    return PsiUtilCore.getElementType(element) == TT2_OUTER;
   }
 
   @Override
   public boolean isMarkupLanguageElement(PsiElement element) {
-    return PsiUtilCore.getElementType(element) == TemplateToolkitElementTypes.TT2_HTML;
+    return PsiUtilCore.getElementType(element) == TT2_HTML;
   }
 
   @Override

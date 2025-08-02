@@ -19,13 +19,12 @@ package com.perl5.lang.perl.parser.moose.stubs
 import com.intellij.lang.ASTNode
 import com.intellij.lang.Language
 import com.intellij.psi.PsiElement
-import com.perl5.lang.perl.lexer.PerlElementTypes
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider
 import com.perl5.lang.perl.parser.moose.psi.impl.PerlMooseOverrideStatement
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionElementType
 import org.jetbrains.annotations.NonNls
 
-open class PerlMooseOverrideElementType : PerlSubDefinitionElementType, PerlElementTypes, PsiElementProvider {
+open class PerlMooseOverrideElementType : PerlSubDefinitionElementType, PsiElementProvider {
   constructor(name: String) : super(name)
 
   constructor(debugName: @NonNls String, language: Language?) : super(debugName, language)

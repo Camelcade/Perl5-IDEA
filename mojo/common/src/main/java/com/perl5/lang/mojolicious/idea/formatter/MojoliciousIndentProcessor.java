@@ -21,8 +21,10 @@ import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets;
 import com.perl5.lang.perl.idea.formatter.PerlIndentProcessor;
 
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;
 
-public class MojoliciousIndentProcessor extends PerlIndentProcessor implements MojoliciousElementTypes {
+
+public class MojoliciousIndentProcessor extends PerlIndentProcessor {
   public static final MojoliciousIndentProcessor INSTANCE = new MojoliciousIndentProcessor();
 
   public static final TokenSet ABSOLUTE_UNINDENTABLE_TOKENS = TokenSet.orSet(

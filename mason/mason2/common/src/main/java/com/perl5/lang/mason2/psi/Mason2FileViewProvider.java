@@ -26,17 +26,17 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.perl5.lang.mason2.Mason2Language;
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
+import static com.perl5.lang.perl.lexer.PerlElementTypes.POD_BLOCK;
+
 
 public class Mason2FileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvider
-  implements TemplateLanguageFileViewProvider, Mason2ElementTypes, PerlElementTypes {
+  implements TemplateLanguageFileViewProvider {
   private static final Set<Language> myLanguages = Set.of(
     Mason2Language.INSTANCE,
     PodLanguage.INSTANCE

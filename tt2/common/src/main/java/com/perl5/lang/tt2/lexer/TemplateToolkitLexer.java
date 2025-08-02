@@ -24,6 +24,8 @@ import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 
 import java.io.IOException;
 
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
+
 
 public class TemplateToolkitLexer extends TemplateToolkitLexerGenerated implements PerlLexerWithCustomStates {
   private static final String CHOMP_MODIFIERS = "-+=~";

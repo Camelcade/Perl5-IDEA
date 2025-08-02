@@ -20,7 +20,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.search.GlobalSearchScope;
 import com.intellij.util.Processor;
 import com.intellij.util.SmartList;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +32,7 @@ import static com.perl5.lang.perl.psi.stubs.variables.PerlHashNamespaceStubIndex
 import static com.perl5.lang.perl.psi.stubs.variables.PerlHashStubIndex.KEY_HASH;
 
 
-public final class PerlHashUtil implements PerlElementTypes {
+public final class PerlHashUtil {
 
   private PerlHashUtil() {
   }

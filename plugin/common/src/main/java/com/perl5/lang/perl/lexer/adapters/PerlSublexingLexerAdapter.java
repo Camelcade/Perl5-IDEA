@@ -28,7 +28,6 @@ import com.intellij.lexer.LexerBase;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexer;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.PerlProtoLexer;
@@ -38,7 +37,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PerlSublexingLexerAdapter extends LexerBase implements PerlElementTypes {
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
+
+public class PerlSublexingLexerAdapter extends LexerBase {
   private static final Logger LOG = Logger.getInstance(FlexAdapter.class);
   private static final Map<IElementType, Integer> SUBLEXINGS_MAP = new HashMap<>();
   private static final Map<IElementType, Integer> ENFORCED_SUBLEXINGS_MAP = new HashMap<>();

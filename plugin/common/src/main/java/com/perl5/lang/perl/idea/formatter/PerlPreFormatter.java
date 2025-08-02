@@ -29,7 +29,6 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.formatter.operations.*;
 import com.perl5.lang.perl.idea.formatter.settings.PerlCodeStyleSettings;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.utils.PerlElementFactory;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
@@ -41,9 +40,10 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import static com.perl5.lang.perl.idea.formatter.PerlFormattingTokenSets.COMMA_SEQUENCE_CONTAINERS_WITH_POSSIBLE_TRAILING_COMMA;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
-public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeStyleSettings.OptionalConstructions, PerlElementTypes {
+public class PerlPreFormatter extends PerlRecursiveVisitor implements PerlCodeStyleSettings.OptionalConstructions {
   private static final Pattern ASCII_IDENTIFIER_PATTERN = Pattern.compile("[_a-zA-Z][_\\w]*");
   private static final Pattern ASCII_BARE_STRING_PATTERN = Pattern.compile("-?[_a-zA-Z][_\\w]*");
 

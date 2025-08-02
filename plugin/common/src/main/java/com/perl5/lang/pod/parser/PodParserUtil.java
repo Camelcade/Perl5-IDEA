@@ -20,12 +20,13 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.parser.GeneratedParserUtilBase;
 import com.intellij.openapi.util.NlsContexts.ParsingError;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.lexer.PodTokenSetsEx;
 import org.jetbrains.annotations.NotNull;
 
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
 
-public class PodParserUtil extends GeneratedParserUtilBase implements PodElementTypes {
+
+public class PodParserUtil extends GeneratedParserUtilBase {
   @SuppressWarnings({"StaticMethodOnlyUsedInOneClass", "SameReturnValue"})
   public static boolean completeOrReport(@NotNull PsiBuilder b,
                                          int ignoredL,

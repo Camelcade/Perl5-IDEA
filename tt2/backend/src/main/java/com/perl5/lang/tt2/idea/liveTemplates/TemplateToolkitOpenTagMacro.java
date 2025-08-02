@@ -19,14 +19,15 @@ package com.perl5.lang.tt2.idea.liveTemplates;
 import com.intellij.codeInsight.template.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 import com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings;
 import com.perl5.lang.tt2.utils.TemplateToolkitPsiUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.TT2_OUTLINE_TAG;
 
-public class TemplateToolkitOpenTagMacro extends Macro implements TemplateToolkitElementTypes {
+
+public class TemplateToolkitOpenTagMacro extends Macro {
   @Override
   public String getName() {
     return "tt2OpenMarker";

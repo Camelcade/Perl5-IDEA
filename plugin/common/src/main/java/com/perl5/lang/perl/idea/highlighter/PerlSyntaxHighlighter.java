@@ -29,10 +29,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.perl5.lang.perl.extensions.parser.PerlParserExtension;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlLexingContext;
 import com.perl5.lang.perl.lexer.adapters.PerlMergingLexerAdapter;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -40,8 +38,10 @@ import java.util.Map;
 
 import static com.intellij.openapi.editor.colors.TextAttributesKey.createTextAttributesKey;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.REGEX_QUOTE_OPEN;
 
-public class PerlSyntaxHighlighter extends SyntaxHighlighterBase implements PerlElementTypes, MooseElementTypes {
+public class PerlSyntaxHighlighter extends SyntaxHighlighterBase {
   public static final TextAttributesKey EMBED_MARKER_KEY =
     createTextAttributesKey("PERL_EMBED_MARKER", DefaultLanguageHighlighterColors.TEMPLATE_LANGUAGE_COLOR);
   public static final TextAttributesKey[] EMBED_MARKER_KEYS = new TextAttributesKey[]{EMBED_MARKER_KEY};

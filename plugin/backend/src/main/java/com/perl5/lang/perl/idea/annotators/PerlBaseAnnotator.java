@@ -27,12 +27,11 @@ import com.intellij.openapi.editor.colors.EditorColorsScheme;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 
-public abstract class PerlBaseAnnotator implements Annotator, PerlElementTypes {
+public abstract class PerlBaseAnnotator implements Annotator {
   final EditorColorsScheme currentScheme = EditorColorsManager.getInstance().getGlobalScheme();
 
   public TextAttributes adjustTextAttributes(TextAttributes textAttributes, boolean isDeprecated) {

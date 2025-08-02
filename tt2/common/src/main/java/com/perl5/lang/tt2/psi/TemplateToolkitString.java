@@ -17,8 +17,7 @@
 package com.perl5.lang.tt2.psi;
 
 import com.intellij.psi.PsiElement;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 
 
-public interface TemplateToolkitString extends PsiElement, TemplateToolkitElementTypes {
+public interface TemplateToolkitString extends PsiElement {
 }

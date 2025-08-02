@@ -27,7 +27,6 @@ import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.HTMLMasonElementPatterns;
 import com.perl5.lang.htmlmason.HTMLMasonFileViewProvider;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.NotNull;
 
@@ -37,8 +36,7 @@ import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.*;
 import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
 
 
-public class HTMLMasonTypedHandler extends TypedHandlerDelegate
-  implements PerlElementTypes {
+public class HTMLMasonTypedHandler extends TypedHandlerDelegate {
   private static final Logger LOG = Logger.getInstance(HTMLMasonTypedHandler.class);
 
   @Override

@@ -19,11 +19,12 @@ package com.perl5.lang.mojolicious.idea.highlighter;
 import com.intellij.codeInsight.highlighting.TemplateLanguageErrorFilter;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.mojolicious.MojoliciousElementTypes;
 import com.perl5.lang.mojolicious.psi.MojoliciousFileViewProvider;
 
+import static com.perl5.lang.mojolicious.MojoliciousElementTypes.*;
 
-public class MojoliciousTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter implements MojoliciousElementTypes {
+
+public class MojoliciousTemplateLanguageErrorFilter extends TemplateLanguageErrorFilter {
   private static final TokenSet START_TOKENS = TokenSet.create(
     MOJO_BLOCK_OPENER,
     MOJO_BLOCK_EXPR_OPENER,

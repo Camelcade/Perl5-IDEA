@@ -30,7 +30,6 @@ import com.intellij.psi.templateLanguages.OuterLanguageElementImpl;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import com.intellij.psi.util.PsiUtilCore;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
 import com.perl5.lang.perl.psi.impl.PerlNoStatementElement;
@@ -46,9 +45,10 @@ import java.util.List;
 
 import static com.perl5.lang.perl.lexer.PerlTokenSets.BLOCK_LIKE_CONTAINERS;
 import static com.perl5.lang.perl.lexer.PerlTokenSets.HEREDOC_BODIES_TOKENSET;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import static com.perl5.lang.perl.psi.stubs.PerlStubElementTypes.USE_STATEMENT;
 
-public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements PerlElementTypes, DumbAware {
+public class PerlFoldingBuilder extends PerlFoldingBuilderBase implements DumbAware {
   public static final String PH_CODE_BLOCK = "{code block}";
 
   protected static final TokenSet COMMENT_EXCLUDED_TOKENS = TokenSet.EMPTY;

@@ -19,11 +19,10 @@ import com.intellij.lang.ASTNode
 import com.intellij.psi.PsiElement
 import com.intellij.psi.tree.IElementType
 import com.perl5.lang.perl.PerlLanguage
-import com.perl5.lang.perl.lexer.PerlElementTypes
 import com.perl5.lang.perl.parser.elementTypes.PsiElementProvider
 import com.perl5.lang.perl.psi.impl.PsiPerlVariableDeclarationElementImpl
 
 class PerlVariableStubElementType(debugName: String) : IElementType(debugName, PerlLanguage.INSTANCE),
-                                                       PerlElementTypes, PsiElementProvider {
+                                                       PsiElementProvider {
   override fun getPsiElement(node: ASTNode): PsiElement = PsiPerlVariableDeclarationElementImpl(node)
 }

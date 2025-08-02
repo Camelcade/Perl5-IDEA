@@ -24,7 +24,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.templateLanguages.OuterLanguageElementImpl;
 import com.perl5.lang.perl.idea.folding.PerlFoldingBuilderBase;
-import com.perl5.lang.pod.lexer.PodElementTypes;
 import com.perl5.lang.pod.parser.psi.PodRecursiveVisitor;
 import com.perl5.lang.pod.parser.psi.PodTitledSection;
 import com.perl5.lang.pod.psi.*;
@@ -34,7 +33,7 @@ import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PodFoldingBuilder extends PerlFoldingBuilderBase implements PodElementTypes, DumbAware {
+public class PodFoldingBuilder extends PerlFoldingBuilderBase implements DumbAware {
   @Override
   public FoldingDescriptor @NotNull [] buildFoldRegions(@NotNull PsiElement root, @NotNull Document document, boolean quick) {
     // @todo handle this

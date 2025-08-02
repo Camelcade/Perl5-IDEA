@@ -24,12 +24,14 @@ import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.idea.intellilang.PerlStringLiteralEscaper;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.lexer.PerlTokenSets;
 import com.perl5.lang.perl.psi.PsiPerlStringSq;
 import com.perl5.lang.perl.psi.PsiPerlStringXq;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.COMMA_SEQUENCE_EXPR;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.HASH_INDEX;
 
 
 public abstract class PerlStringMixin extends PerlStringBareMixin implements PsiLanguageInjectionHost {
@@ -51,13 +53,13 @@ public abstract class PerlStringMixin extends PerlStringBareMixin implements Psi
   public boolean isValidHost() {
     PsiElement parent = getParent();
     IElementType parentType = PsiUtilCore.getElementType(parent);
-    if (parentType == PerlElementTypes.HASH_INDEX) {
+    if (parentType == HASH_INDEX) {
       return false;
     }
 
-    if (parentType == PerlElementTypes.COMMA_SEQUENCE_EXPR) {
+    if (parentType == COMMA_SEQUENCE_EXPR) {
       IElementType grandParentType = PsiUtilCore.getElementType(parent.getParent());
-      return grandParentType != PerlElementTypes.HASH_INDEX;
+      return grandParentType != HASH_INDEX;
     }
 
     return true;

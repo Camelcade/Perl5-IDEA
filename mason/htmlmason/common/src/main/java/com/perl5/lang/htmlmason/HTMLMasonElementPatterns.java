@@ -21,15 +21,15 @@ import com.intellij.psi.PsiElement;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonFlagsStatement;
 import com.perl5.lang.htmlmason.parser.psi.impl.HTMLMasonFileImpl;
 import com.perl5.lang.perl.idea.PerlElementPatterns;
-import com.perl5.lang.perl.lexer.PerlElementTypes;
 import com.perl5.lang.perl.psi.*;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 import static com.intellij.patterns.PlatformPatterns.psiFile;
 import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
-public final class HTMLMasonElementPatterns implements PerlElementTypes {
+public final class HTMLMasonElementPatterns {
   private HTMLMasonElementPatterns() {
   }
 

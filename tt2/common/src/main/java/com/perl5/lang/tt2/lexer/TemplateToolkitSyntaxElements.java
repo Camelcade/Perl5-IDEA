@@ -18,13 +18,14 @@ package com.perl5.lang.tt2.lexer;
 
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 
-public class TemplateToolkitSyntaxElements implements TemplateToolkitElementTypes {
+
+public class TemplateToolkitSyntaxElements {
   public static final TokenSet OPEN_TAGS = TokenSet.create(
     TT2_OPEN_TAG,
     TT2_OUTLINE_TAG

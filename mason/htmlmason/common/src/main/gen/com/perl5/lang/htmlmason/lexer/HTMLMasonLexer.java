@@ -5,7 +5,7 @@ package com.perl5.lang.htmlmason.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
-import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;
+import static com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes.*;import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
 public class HTMLMasonLexer extends HTMLMasonBaseLexer {

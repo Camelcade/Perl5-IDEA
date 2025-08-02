@@ -16,9 +16,5 @@
 
 package com.perl5.lang.perl.parser;
 
-import com.perl5.lang.mason2.elementType.Mason2ElementTypes;
-import com.perl5.lang.perl.parser.moose.MooseElementTypes;
-
-
-public interface MasonParser extends Mason2ElementTypes, MooseElementTypes {
+public interface MasonParser {
 }
