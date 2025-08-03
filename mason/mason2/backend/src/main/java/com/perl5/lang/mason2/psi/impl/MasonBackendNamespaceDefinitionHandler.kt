@@ -40,18 +40,17 @@ class MasonBackendNamespaceDefinitionHandler : PerlDefaultBackendNamespaceDefini
     val parentsPaths: MutableList<String?> = namespace.getParentNamespacesNames()
 
     val containingFile = MasonCoreUtil.getContainingVirtualFile(namespace.containingFile)
-    val parentsNamespaces: MutableList<PerlNamespaceDefinitionElement>
-
-    if (!parentsPaths.isEmpty() && containingFile != null) {
-      parentsNamespaces = Mason2Util.collectComponentNamespacesByPaths(namespace.getProject(), parentsPaths, containingFile.parent)
+    val parentsNamespaces: MutableList<PerlNamespaceDefinitionElement> =
+      if (!parentsPaths.isEmpty() && containingFile != null) {
+        Mason2Util.collectComponentNamespacesByPaths(namespace.getProject(), parentsPaths, containingFile.parent)
     }
     else {
       val autobaseParent: String? = namespace.getParentNamespaceFromAutobase()
       if (autobaseParent != null) {
-        parentsNamespaces = Mason2Util.getMasonNamespacesByAbsolutePath(namespace.getProject(), autobaseParent)
+        Mason2Util.getMasonNamespacesByAbsolutePath(namespace.getProject(), autobaseParent)
       }
       else {
-        parentsNamespaces = mutableListOf()
+        mutableListOf()
       }
     }
 
