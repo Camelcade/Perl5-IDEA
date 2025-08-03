@@ -257,8 +257,8 @@ public final class HTMLMasonUtil {
 
   public static void collectMethodDefinitionByNameInChildComponents(@NotNull HTMLMasonFileImpl masonFile,
                                                                     String name,
-                                                                    List<HTMLMasonMethodDefinition> result,
-                                                                    Set<HTMLMasonFileImpl> recursionSet) {
+                                                                    List<? super HTMLMasonMethodDefinition> result,
+                                                                    Set<? super HTMLMasonFileImpl> recursionSet) {
     for (HTMLMasonFileImpl childComponent : getChildComponents(masonFile)) {
       if (!recursionSet.contains(childComponent)) {
         recursionSet.add(childComponent);
@@ -285,8 +285,8 @@ public final class HTMLMasonUtil {
   }
 
   public static boolean processMethodDefinitionsInThisOrParents(@NotNull HTMLMasonFileImpl masonFile,
-                                                                Processor<HTMLMasonMethodDefinition> processor,
-                                                                Set<HTMLMasonFileImpl> recursionSet) {
+                                                                Processor<? super HTMLMasonMethodDefinition> processor,
+                                                                Set<? super HTMLMasonFileImpl> recursionSet) {
     if (recursionSet.contains(masonFile)) {
       return false;
     }
@@ -303,8 +303,8 @@ public final class HTMLMasonUtil {
 
   @SuppressWarnings("UnusedReturnValue")
   public static boolean processMethodDefinitionsInThisOrParents(@NotNull HTMLMasonFileImpl masonFile,
-                                                                Processor<HTMLMasonMethodDefinition> processor) {
-    return processMethodDefinitionsInThisOrParents(masonFile, processor, new HashSet<HTMLMasonFileImpl>());
+                                                                Processor<? super HTMLMasonMethodDefinition> processor) {
+    return processMethodDefinitionsInThisOrParents(masonFile, processor, new HashSet<>());
   }
 
   /**
