@@ -52,6 +52,7 @@ abstract class PerlCallValueBackendHelper<Val : PerlCallValue> : PerlParametrize
    * Processes all possible call targets: subs declarations, definitions and typeglobs with `processor`
    * @param contextElement invocation point. Context element, necessary to compute additional imports
    */
+  @Suppress("UnusedReturnValue")
   fun processCallTargets(
     callValue: Val,
     contextElement: PsiElement,

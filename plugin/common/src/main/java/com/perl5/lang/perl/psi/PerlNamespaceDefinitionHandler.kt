@@ -28,6 +28,7 @@ private val EP = ClassExtension<PerlNamespaceDefinitionHandler<*>>("com.perl5.na
  */
 interface PerlNamespaceDefinitionHandler<Ns : PerlNamespaceDefinitionElement> {
 
+  @Suppress("UnusedReturnValue")
   fun processExportDescriptors(namespace: Ns, processor: PerlNamespaceEntityProcessor<in PerlExportDescriptor>): Boolean
 
   fun getParentNamespaceDefinitions(namespace: Ns): List<PerlNamespaceDefinitionElement>
