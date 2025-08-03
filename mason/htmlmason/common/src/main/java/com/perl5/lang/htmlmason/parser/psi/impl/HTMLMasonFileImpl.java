@@ -174,7 +174,7 @@ public class HTMLMasonFileImpl extends PerlFileImpl implements HTMLMasonFile {
       }
     }
 
-    return false;
+    return true;
   }
 
   @SuppressWarnings("Duplicates")
