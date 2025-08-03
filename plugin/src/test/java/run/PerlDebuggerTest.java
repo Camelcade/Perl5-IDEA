@@ -277,7 +277,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
   }
 
   private @NotNull XDebugSession debugScript(@NotNull String directoryName,
-                                             @NotNull String scriptName,
+                                             @SuppressWarnings("SameParameterValue") @NotNull String scriptName,
                                              @Nullable Consumer<? super GenericPerlRunConfiguration> configurator) {
     copyDirToModule(directoryName);
     GenericPerlRunConfiguration runConfiguration = createOnlyRunConfiguration(scriptName);
@@ -317,7 +317,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     setBreakPoint(getCurrentVirtualFile(debugSession), line);
   }
 
-  private void setBreakPoint(@NotNull String scriptPath, int line) {
+  private void setBreakPoint(@NotNull String scriptPath, @SuppressWarnings("SameParameterValue") int line) {
     VirtualFile scriptVirtualFile = refreshAndFindFile(new File(scriptPath));
     assertNotNull(scriptVirtualFile);
     setBreakPoint(scriptVirtualFile, line);
@@ -376,6 +376,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     if (sessionData == null) {
       return "No session data";
     }
+    //noinspection deprecation
     return String.join(
       "\n",
       "Session data:",
