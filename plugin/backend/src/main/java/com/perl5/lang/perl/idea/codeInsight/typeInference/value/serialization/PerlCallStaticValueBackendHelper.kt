@@ -59,7 +59,7 @@ class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStat
     }
 
     val containingNamespace = PerlPackageUtilCore.getContainingNamespace(contextElement.originalElement)
-    val namespaceName = if (containingNamespace == null) null else containingNamespace.getNamespaceName()
+    val namespaceName = containingNamespace?.getNamespaceName()
     if (!StringUtil.isEmpty(namespaceName)) {
       processExportDescriptors(
         project, searchScope, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace)
@@ -87,7 +87,7 @@ class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStat
 
     if (!callValue.hasExplicitNamespace() && contextElement != null) {
       val containingNamespace = PerlPackageUtilCore.getContainingNamespace(contextElement.originalElement)
-      val namespaceName = if (containingNamespace == null) null else containingNamespace.getNamespaceName()
+      val namespaceName = containingNamespace?.getNamespaceName()
       if (!StringUtil.isEmpty(namespaceName)) {
         processExportDescriptorsItems(
           project, searchScope, subNames, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace)
