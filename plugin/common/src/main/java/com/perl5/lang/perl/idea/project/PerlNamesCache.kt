@@ -28,6 +28,8 @@ interface PerlNamesCache : Disposable {
 
   fun forceCacheUpdate()
 
+  fun isDisposed(): Boolean
+
   @TestOnly
   fun cleanCache()
 
