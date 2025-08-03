@@ -56,205 +56,54 @@ public class PerlElementTypeFactory {
       case "NAMESPACE_DEFINITION" -> PerlStubElementTypes.PERL_NAMESPACE;
       case "VARIABLE_DECLARATION_ELEMENT" -> PerlStubElementTypes.PERL_VARIABLE_DECLARATION_ELEMENT;
       case "DO_EXPR" -> PerlStubElementTypes.PERL_DO_EXPR;
-      case "DO_BLOCK_EXPR" -> new PerlElementType(name);
+      case "ADD_EXPR", "AFTER_MODIFIER", "AND_EXPR", "ANNOTATION_ABSTRACT", "ANNOTATION_DEPRECATED", "ANNOTATION_INJECT",
+           "ANNOTATION_METHOD", "ANNOTATION_NOINSPECTION", "ANNOTATION_NO_INJECT", "ANNOTATION_OVERRIDE", "ANNOTATION_RETURNS",
+           "ANNOTATION_TYPE", "ANNOTATION_VARIABLE", "AROUND_MODIFIER", "AROUND_SIGNATURE_INVOCANTS", "ARRAYREF_TYPE", "ARRAY_ELEMENT",
+           "ARRAY_INDEX_VARIABLE", "ARRAY_POP_EXPR", "ARRAY_PUSH_EXPR", "ARRAY_SHIFT_EXPR", "ARRAY_SLICE", "ARRAY_UNSHIFT_EXPR",
+           "ARRAY_VARIABLE", "ASSIGN_EXPR", "ATTRIBUTE", "ATTRIBUTES", "AUGMENT_MODIFIER", "BEFORE_MODIFIER", "BITWISE_AND_EXPR",
+           "BITWISE_OR_XOR_EXPR", "BLESS_EXPR", "BLOCK_ARRAY", "BLOCK_BRACELESS", "BLOCK_CODE", "BLOCK_COMPOUND", "BLOCK_GLOB",
+           "BLOCK_HASH", "BLOCK_SCALAR", "CALL_ARGUMENTS", "CASE_COMPOUND", "CASE_CONDITION", "CASE_DEFAULT", "CATCH_CONDITION",
+           "CATCH_EXPR", "CODE_VARIABLE", "COMMA_SEQUENCE_EXPR", "COMPARE_EXPR", "COMPOSITE_ATOM_EXPR", "CONDITIONAL_BLOCK",
+           "CONTINUATION_EXPR", "CONTINUE_BLOCK", "CONTINUE_EXPR", "CUSTOM_ATOM_EXPR", "DEFAULT_COMPOUND", "DEFINED_EXPR", "DELETE_EXPR",
+           "DEREF_EXPR", "DO_BLOCK_EXPR", "EACH_EXPR", "EQUAL_EXPR", "ESC_CHAR", "EVAL_EXPR", "EXCEPT_EXPR", "EXIT_EXPR", "EXPR",
+           "FILE_GLOB_EXPR", "FILE_READ_EXPR", "FINALLY_EXPR", "FLIPFLOP_EXPR", "FOREACH_COMPOUND", "FOREACH_ITERATOR", "FORMAT_DEFINITION",
+           "FOR_COMPOUND", "FOR_CONDITION", "FOR_INIT", "FOR_MUTATOR", "FOR_OR_FOREACH", "FOR_STATEMENT_MODIFIER", "FUN_EXPR",
+           "GIVEN_COMPOUND", "GLOB_SLOT", "GOTO_EXPR", "GREP_EXPR", "HASHREF_TYPE", "HASH_ARRAY_SLICE", "HASH_ELEMENT", "HASH_HASH_SLICE",
+           "HASH_SLICE", "HASH_VARIABLE", "HEREDOC_OPENER", "HEX_CHAR", "IF_COMPOUND", "IF_STATEMENT_MODIFIER", "ISA_EXPR", "KEYS_EXPR",
+           "LABEL_DECLARATION", "LABEL_EXPR", "LAST_EXPR", "LP_AND_EXPR", "LP_NOT_EXPR", "LP_OR_XOR_EXPR", "MAP_EXPR", "METHOD",
+           "METHOD_EXPR", "METHOD_SIGNATURE_INVOCANT", "MUL_EXPR", "NAMED_BLOCK", "NAMESPACE_CONTENT", "NEXT_EXPR", "NUMBER_CONSTANT",
+           "NYI_STATEMENT", "OCT_CHAR", "OR_EXPR", "OTHERWISE_EXPR", "PACKAGE_EXPR", "PERL_HANDLE_EXPR", "PERL_REGEX",
+           "PERL_REGEX_MODIFIERS", "POST_DEREF_ARRAY_SLICE_EXPR", "POST_DEREF_EXPR", "POST_DEREF_GLOB_EXPR", "POST_DEREF_HASH_SLICE_EXPR",
+           "POW_EXPR", "PREFIX_UNARY_EXPR", "PREF_PP_EXPR", "PRINT_EXPR", "REDO_EXPR", "REF_EXPR", "REGEX_EXPR", "REGEX_REPLACEMENT",
+           "RETURN_EXPR", "SCALAR_CALL", "SCALAR_EXPR", "SCALAR_VARIABLE", "SHIFT_EXPR", "SIGNATURE_CONTENT", "SIGNATURE_ELEMENT",
+           "SORT_EXPR", "SPLICE_EXPR", "STATEMENT", "STATEMENT_MODIFIER", "STRING_BARE", "SUB_EXPR", "SUB_SIGNATURE_ELEMENT_IGNORE",
+           "SUFF_PP_EXPR", "SWITCH_COMPOUND", "SWITCH_CONDITION", "TAG_SCALAR", "TERNARY_EXPR", "TRYCATCH_COMPOUND", "TRYCATCH_EXPR",
+           "TRY_EXPR", "TR_MODIFIERS", "TR_REPLACEMENTLIST", "TR_SEARCHLIST", "TYPE_CONSTRAINTS", "TYPE_SPECIFIER", "UNCONDITIONAL_BLOCK",
+           "UNDEF_EXPR", "UNICODE_CHAR", "UNLESS_COMPOUND", "UNLESS_STATEMENT_MODIFIER", "UNTIL_COMPOUND", "UNTIL_STATEMENT_MODIFIER",
+           "VALUES_EXPR", "VARIABLE_DECLARATION_GLOBAL", "VARIABLE_DECLARATION_LEXICAL", "VARIABLE_DECLARATION_LOCAL",
+           "VARIABLE_DECLARATION_WRAPPER", "WANTARRAY_EXPR", "WHEN_COMPOUND", "WHEN_STATEMENT_MODIFIER", "WHILE_COMPOUND",
+           "WHILE_STATEMENT_MODIFIER" -> new PerlElementType(name);
       case "REQUIRE_EXPR" -> PerlStubElementTypes.PERL_REQUIRE_EXPR;
-      case "AFTER_MODIFIER" -> new PerlElementType(name);
-      case "BEFORE_MODIFIER" -> new PerlElementType(name);
-      case "AROUND_MODIFIER" -> new PerlElementType(name);
-      case "AROUND_SIGNATURE_INVOCANTS" -> new PerlElementType(name);
-      case "AUGMENT_MODIFIER" -> new PerlElementType(name);
-      case "ADD_EXPR" -> new PerlElementType(name);
-      case "AND_EXPR" -> new PerlElementType(name);
-      case "ANON_ARRAY" -> new PerlAnonArrayElementType(name);
-      case "UNICODE_CHAR" -> new PerlElementType(name);
-      case "HEX_CHAR" -> new PerlElementType(name);
-      case "OCT_CHAR" -> new PerlElementType(name);
-      case "ESC_CHAR" -> new PerlElementType(name);
+      case "ANON_ARRAY", "ARRAY_INDEX" -> new PerlAnonArrayElementType(name);
       case "ANON_HASH" -> new PerlAnonHashElementType();
-      case "ARRAY_SLICE" -> new PerlElementType(name);
-      case "HASH_ARRAY_SLICE" -> new PerlElementType(name);
       case "ARRAY_CAST_EXPR" -> new PerlDereferenceElementType.Array(name);
-      case "HASH_SLICE" -> new PerlElementType(name);
-      case "HASH_HASH_SLICE" -> new PerlElementType(name);
-      case "ARRAY_INDEX" -> new PerlAnonArrayElementType(name);
-      case "ARRAY_INDEX_VARIABLE" -> new PerlElementType(name);
-      case "ARRAY_VARIABLE" -> new PerlElementType(name);
-      case "ASSIGN_EXPR" -> new PerlElementType(name);
-      case "ATTRIBUTE" -> new PerlElementType(name);
-      case "ISA_EXPR" -> new PerlElementType(name);
-      case "BITWISE_AND_EXPR" -> new PerlElementType(name);
-      case "BITWISE_OR_XOR_EXPR" -> new PerlElementType(name);
       case "BLOCK" -> new PerlCodeBlockElementType();
-      case "BLOCK_BRACELESS" -> new PerlElementType(name);
-      case "BLOCK_SCALAR" -> new PerlElementType(name);
-      case "BLOCK_ARRAY" -> new PerlElementType(name);
-      case "BLOCK_HASH" -> new PerlElementType(name);
-      case "BLOCK_GLOB" -> new PerlElementType(name);
-      case "BLOCK_CODE" -> new PerlElementType(name);
-      case "BLOCK_COMPOUND" -> new PerlElementType(name);
-      case "CALL_ARGUMENTS" -> new PerlElementType(name);
       case "CODE_CAST_EXPR" -> new PerlDereferenceElementType.Code(name);
-      case "CODE_VARIABLE" -> new PerlElementType(name);
-      case "COMMA_SEQUENCE_EXPR" -> new PerlElementType(name);
-      case "COMPARE_EXPR" -> new PerlElementType(name);
       case "COMPILE_REGEX" -> new PerlCompileRegexpElementType(name);
-      case "CONDITIONAL_BLOCK" -> new PerlElementType(name);
-      case "UNCONDITIONAL_BLOCK" -> new PerlElementType(name);
-      case "CONDITION_EXPR" -> new PerlParenthesizedElementType(name);
-      case "CONTINUE_BLOCK" -> new PerlElementType(name);
-      case "DEFAULT_COMPOUND" -> new PerlElementType(name);
-      case "DEREF_EXPR" -> new PerlElementType(name);
-      case "EQUAL_EXPR" -> new PerlElementType(name);
-      case "EVAL_EXPR" -> new PerlElementType(name);
-      case "EXPR" -> new PerlElementType(name);
-      case "FILE_READ_EXPR" -> new PerlElementType(name);
-      case "FILE_GLOB_EXPR" -> new PerlElementType(name);
-      case "FLIPFLOP_EXPR" -> new PerlElementType(name);
-      case "FORMAT_DEFINITION" -> new PerlElementType(name);
-      case "FOR_COMPOUND" -> new PerlElementType(name);
-      case "FOREACH_COMPOUND" -> new PerlElementType(name);
-      case "FOR_OR_FOREACH" -> new PerlElementType(name);
-      case "FOR_INIT" -> new PerlElementType(name);
-      case "FOR_CONDITION" -> new PerlElementType(name);
-      case "FOR_MUTATOR" -> new PerlElementType(name);
-      case "FOR_STATEMENT_MODIFIER" -> new PerlElementType(name);
-      case "GIVEN_COMPOUND" -> new PerlElementType(name);
+      case "CONDITION_EXPR", "PARENTHESISED_EXPR" -> new PerlParenthesizedElementType(name);
       case "GLOB_CAST_EXPR" -> new PerlDereferenceElementType.Glob(name);
-      case "GLOB_SLOT" -> new PerlElementType(name);
-      case "GOTO_EXPR" -> new PerlElementType(name);
-      case "GREP_EXPR" -> new PerlElementType(name);
       case "HASH_CAST_EXPR" -> new PerlDereferenceElementType.Hash(name);
       case "HASH_INDEX" -> new PerlHashIndexElementType(name);
-      case "HASH_VARIABLE" -> new PerlElementType(name);
-      case "HEREDOC_OPENER" -> new PerlElementType(name);
-      case "IF_COMPOUND" -> new PerlElementType(name);
-      case "IF_STATEMENT_MODIFIER" -> new PerlElementType(name);
-      case "LAST_EXPR" -> new PerlElementType(name);
-      case "LP_AND_EXPR" -> new PerlElementType(name);
-      case "LP_NOT_EXPR" -> new PerlElementType(name);
-      case "LP_OR_XOR_EXPR" -> new PerlElementType(name);
-      case "MAP_EXPR" -> new PerlElementType(name);
       case "MATCH_REGEX" -> new PerlMatchRegexpElementType(name);
-      case "METHOD" -> new PerlElementType(name);
-      case "METHOD_SIGNATURE_INVOCANT" -> new PerlElementType(name);
-      case "MUL_EXPR" -> new PerlElementType(name);
-      case "NAMED_BLOCK" -> new PerlElementType(name);
-      case "NAMESPACE_CONTENT" -> new PerlElementType(name);
-      case "NEXT_EXPR" -> new PerlElementType(name);
-      case "NUMBER_CONSTANT" -> new PerlElementType(name);
-      case "NYI_STATEMENT" -> new PerlElementType(name);
-      case "OR_EXPR" -> new PerlElementType(name);
-      case "PARENTHESISED_EXPR" -> new PerlParenthesizedElementType(name);
-      case "PERL_HANDLE_EXPR" -> new PerlElementType(name);
-      case "PERL_REGEX" -> new PerlElementType(name);
-      case "PERL_REGEX_MODIFIERS" -> new PerlElementType(name);
-      case "REGEX_REPLACEMENT" -> new PerlElementType(name);
-      case "POW_EXPR" -> new PerlElementType(name);
-      case "PREFIX_UNARY_EXPR" -> new PerlElementType(name);
-      case "PREF_PP_EXPR" -> new PerlElementType(name);
-      case "PRINT_EXPR" -> new PerlElementType(name);
-      case "REDO_EXPR" -> new PerlElementType(name);
-      case "REF_EXPR" -> new PerlElementType(name);
-      case "REGEX_EXPR" -> new PerlElementType(name);
-      case "REPLACEMENT_REGEX" -> new PerlRegexReplacementElementType(name);
-      case "RETURN_EXPR" -> new PerlElementType(name);
-      case "ARRAY_SHIFT_EXPR" -> new PerlElementType(name);
-      case "ARRAY_UNSHIFT_EXPR" -> new PerlElementType(name);
-      case "ARRAY_PUSH_EXPR" -> new PerlElementType(name);
-      case "ARRAY_POP_EXPR" -> new PerlElementType(name);
-      case "SCALAR_EXPR" -> new PerlElementType(name);
-      case "DELETE_EXPR" -> new PerlElementType(name);
-      case "SPLICE_EXPR" -> new PerlElementType(name);
-      case "BLESS_EXPR" -> new PerlElementType(name);
-      case "KEYS_EXPR" -> new PerlElementType(name);
-      case "DEFINED_EXPR" -> new PerlElementType(name);
-      case "WANTARRAY_EXPR" -> new PerlElementType(name);
-      case "VALUES_EXPR" -> new PerlElementType(name);
-      case "EACH_EXPR" -> new PerlElementType(name);
-      case "EXIT_EXPR" -> new PerlElementType(name);
-      case "ARRAY_ELEMENT" -> new PerlElementType(name);
-      case "SCALAR_CALL" -> new PerlElementType(name);
+      case "REPLACEMENT_REGEX", "TR_REGEX" -> new PerlRegexReplacementElementType(name);
       case "SCALAR_CAST_EXPR" -> new PerlDereferenceElementType.Scalar(name);
-      case "HASH_ELEMENT" -> new PerlElementType(name);
       case "SCALAR_INDEX_CAST_EXPR" -> new PerlDereferenceElementType.ScalarIndex(name);
-      case "SCALAR_VARIABLE" -> new PerlElementType(name);
-      case "SHIFT_EXPR" -> new PerlElementType(name);
-      case "SORT_EXPR" -> new PerlElementType(name);
-      case "STATEMENT" -> new PerlElementType(name);
-      case "STATEMENT_MODIFIER" -> new PerlElementType(name);
-      case "STRING_BARE" -> new PerlElementType(name);
       case "STRING_DQ" -> new PerlQQStringElementType(name);
       case "STRING_LIST" -> new PerlStringListElementType(name);
       case "STRING_SQ" -> new PerlQStringElementType(name);
       case "STRING_XQ" -> new PerlQXStringElementType(name);
       case "SUB_CALL" -> new PerlSubCallElementType(name);
-      case "SUB_EXPR" -> new PerlElementType(name);
-      case "FUN_EXPR" -> new PerlElementType(name);
-      case "METHOD_EXPR" -> new PerlElementType(name);
-      case "CONTINUE_EXPR" -> new PerlElementType(name);
-      case "SIGNATURE_CONTENT" -> new PerlElementType(name);
-      case "SIGNATURE_ELEMENT" -> new PerlElementType(name);
-      case "SUB_SIGNATURE_ELEMENT_IGNORE" -> new PerlElementType(name);
-      case "SUFF_PP_EXPR" -> new PerlElementType(name);
-      case "TAG_SCALAR" -> new PerlElementType(name);
-      case "TERNARY_EXPR" -> new PerlElementType(name);
-      case "TR_MODIFIERS" -> new PerlElementType(name);
-      case "TR_REGEX" -> new PerlRegexReplacementElementType(name);
-      case "TR_REPLACEMENTLIST" -> new PerlElementType(name);
-      case "TR_SEARCHLIST" -> new PerlElementType(name);
-      case "UNDEF_EXPR" -> new PerlElementType(name);
-      case "UNLESS_COMPOUND" -> new PerlElementType(name);
-      case "UNLESS_STATEMENT_MODIFIER" -> new PerlElementType(name);
-      case "UNTIL_COMPOUND" -> new PerlElementType(name);
-      case "UNTIL_STATEMENT_MODIFIER" -> new PerlElementType(name);
-      case "VARIABLE_DECLARATION_GLOBAL" -> new PerlElementType(name);
-      case "VARIABLE_DECLARATION_LEXICAL" -> new PerlElementType(name);
-      case "VARIABLE_DECLARATION_LOCAL" -> new PerlElementType(name);
-      case "VARIABLE_DECLARATION_WRAPPER" -> new PerlElementType(name);
-      case "WHEN_COMPOUND" -> new PerlElementType(name);
-      case "WHEN_STATEMENT_MODIFIER" -> new PerlElementType(name);
-      case "WHILE_COMPOUND" -> new PerlElementType(name);
-      case "WHILE_STATEMENT_MODIFIER" -> new PerlElementType(name);
-      case "TRYCATCH_EXPR" -> new PerlElementType(name);
-      case "TRYCATCH_COMPOUND" -> new PerlElementType(name);
-      case "TRY_EXPR" -> new PerlElementType(name);
-      case "CATCH_EXPR" -> new PerlElementType(name);
-      case "CATCH_CONDITION" -> new PerlElementType(name);
-      case "TYPE_CONSTRAINTS" -> new PerlElementType(name);
-      case "TYPE_SPECIFIER" -> new PerlElementType(name);
-      case "FINALLY_EXPR" -> new PerlElementType(name);
-      case "EXCEPT_EXPR" -> new PerlElementType(name);
-      case "OTHERWISE_EXPR" -> new PerlElementType(name);
-      case "CONTINUATION_EXPR" -> new PerlElementType(name);
-      case "POST_DEREF_EXPR" -> new PerlElementType(name);
-      case "POST_DEREF_GLOB_EXPR" -> new PerlElementType(name);
-      case "POST_DEREF_ARRAY_SLICE_EXPR" -> new PerlElementType(name);
-      case "POST_DEREF_HASH_SLICE_EXPR" -> new PerlElementType(name);
-      case "LABEL_DECLARATION" -> new PerlElementType(name);
-      case "LABEL_EXPR" -> new PerlElementType(name);
-      case "ANNOTATION_ABSTRACT" -> new PerlElementType(name);
-      case "ANNOTATION_DEPRECATED" -> new PerlElementType(name);
-      case "ANNOTATION_METHOD" -> new PerlElementType(name);
-      case "ANNOTATION_OVERRIDE" -> new PerlElementType(name);
-      case "ANNOTATION_RETURNS" -> new PerlElementType(name);
-      case "ANNOTATION_TYPE" -> new PerlElementType(name);
-      case "ANNOTATION_INJECT" -> new PerlElementType(name);
-      case "ANNOTATION_NO_INJECT" -> new PerlElementType(name);
-      case "ANNOTATION_NOINSPECTION" -> new PerlElementType(name);
       case "PARENTHESISED_CALL_ARGUMENTS" -> new PerlParenthesizedCallArgumentsElementType(name);
-      case "PACKAGE_EXPR" -> new PerlElementType(name);
-      case "ARRAYREF_TYPE" -> new PerlElementType(name);
-      case "HASHREF_TYPE" -> new PerlElementType(name);
-      case "FOREACH_ITERATOR" -> new PerlElementType(name);
-      case "ATTRIBUTES" -> new PerlElementType(name);
-      case "SWITCH_COMPOUND" -> new PerlElementType(name);
-      case "SWITCH_CONDITION" -> new PerlElementType(name);
-      case "CASE_COMPOUND" -> new PerlElementType(name);
-      case "CASE_DEFAULT" -> new PerlElementType(name);
-      case "CASE_CONDITION" -> new PerlElementType(name);
-      case "CUSTOM_ATOM_EXPR" -> new PerlElementType(name);
-      case "COMPOSITE_ATOM_EXPR" -> new PerlElementType(name);
-      case "ANNOTATION_VARIABLE" -> new PerlElementType(name);
       default -> {
         LOG.error("Unknown token:" + name);
         throw new RuntimeException("Unknown token:" + name);
