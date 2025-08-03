@@ -30,13 +30,6 @@ interface PodSectionRenderer<Section : PodSection> {
     PodRenderUtil.renderPsiRangeAsHTML(podSection.firstChild, null, builder, context)
   }
 
-  /**
-   * Appends text representation of the section to the `builder`
-   */
-  fun renderElementAsText(podSection: Section, builder: StringBuilder, context: PodRenderingContext) {
-    PodRenderUtil.renderPsiRangeAsText(podSection.firstChild, null, builder, context)
-  }
-
   companion object {
     @Suppress("UNCHECKED_CAST")
     fun <Section : PodSection> instance(clazz: Class<Section>): PodSectionRenderer<Section> =
