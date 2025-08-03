@@ -105,7 +105,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
   protected void chooseFileInteractively(@NlsContexts.DialogTitle @NotNull String dialogTitle,
                                          @Nullable File defaultPath,
                                          @NotNull Predicate<? super String> nameValidator,
-                                         @NotNull Function<? super String, String> pathValidator,
+                                         @NotNull Function<? super String, @Nullable String> pathValidator,
                                          @NotNull Consumer<? super String> selectionConsumer) {
     Ref<String> pathRef = Ref.create();
     ApplicationManager.getApplication().invokeAndWait(
@@ -139,7 +139,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
                                          @Nullable File defaultPath,
                                          boolean useDefaultIfExists,
                                          @NotNull Predicate<? super String> nameValidator,
-                                         @NotNull Function<? super String, String> pathValidator,
+                                         @NotNull Function<? super String, @Nullable String> pathValidator,
                                          @NotNull Consumer<? super String> selectionConsumer,
                                          @NotNull VirtualFileSystem fileSystem) {
     VirtualFile defaultFile = defaultPath == null ? null : fileSystem.findFileByPath(defaultPath.getPath());
@@ -165,7 +165,7 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
 
   private @NotNull FileChooserDescriptor createDescriptor(@NlsContexts.DialogTitle @NotNull String dialogTitle,
                                                           @NotNull Predicate<? super String> nameValidator,
-                                                          @NotNull Function<? super String, String> pathValidator) {
+                                                          @NotNull Function<? super String, @Nullable String> pathValidator) {
     final FileChooserDescriptor descriptor = new FileChooserDescriptor(true, isChooseFolders(), false, false, false, false) {
       @SuppressWarnings("deprecation")
       @Override
