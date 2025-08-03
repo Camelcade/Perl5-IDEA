@@ -18,6 +18,8 @@ package com.perl5.lang.perl.idea.actions;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.Presentation;
+import com.intellij.openapi.application.ModalityState;
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.module.ModuleUtilCore;
 import com.intellij.openapi.project.Project;
@@ -25,8 +27,10 @@ import com.intellij.openapi.project.ProjectBundle;
 import com.intellij.openapi.projectRoots.impl.PerlModuleExtension;
 import com.intellij.openapi.roots.ui.configuration.ModuleSourceRootEditHandler;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.util.concurrency.AppExecutorUtil;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
+import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -66,13 +70,21 @@ public abstract class PerlMarkSourceRootAction extends PerlSourceRootAction {
   }
 
   public final void markRoot(@NotNull Project project, @Nullable VirtualFile virtualFile) {
-    if (virtualFile == null || !virtualFile.isValid()) {
+    if (virtualFile == null) {
       return;
     }
-    Module module = ModuleUtilCore.findModuleForFile(virtualFile, project);
-    if (module != null) {
-      markRoot(module, virtualFile);
-    }
+    ReadAction.nonBlocking(() -> {
+        if (!virtualFile.isValid()) {
+          return null;
+        }
+        return ModuleUtilCore.findModuleForFile(virtualFile, project);
+      }).finishOnUiThread(ModalityState.current(), (module) -> {
+        if (module != null && PerlPluginUtil.isUnloaded(module.getProject())) {
+          markRoot(module, virtualFile);
+        }
+      }).expireWith(PerlPluginUtil.getUnloadAwareDisposable(project))
+      .coalesceBy(project, virtualFile)
+      .submit(AppExecutorUtil.getAppExecutorService());
   }
 
   public final void markRoot(@NotNull Module module, @NotNull VirtualFile... files) {

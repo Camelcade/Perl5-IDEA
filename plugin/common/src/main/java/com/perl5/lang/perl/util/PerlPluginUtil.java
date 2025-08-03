@@ -24,7 +24,7 @@ import com.intellij.openapi.extensions.PluginId;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.io.FileUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeService;
-import com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService;
+import com.perl5.lang.perl.idea.project.PerlNamesCache;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
@@ -52,8 +52,19 @@ public class PerlPluginUtil {
    * @return project-level disposable for a plugin. It's eol happens on project service unloading what may
    * happen when project is closed or plugin unloaded.
    */
-  public static @NotNull Disposable getUnloadAwareDisposable(@NotNull Project project) {
-    return PerlBuiltInVariablesService.getInstance(project);
+  public static @NotNull PerlNamesCache getUnloadAwareDisposable(@NotNull Project project) {
+    return PerlNamesCache.getInstance(project);
+  }
+
+  /**
+   * @return true iff plugin is no longer available in the context of {@code project}
+   */
+  public static boolean isUnloaded(@NotNull Project project) {
+    if (project.isDisposed()) {
+      return true;
+    }
+    var service = project.getServiceIfCreated(PerlNamesCache.class);
+    return service == null || service.isDisposed();
   }
 
   public static @NotNull String getPluginVersion() {

@@ -40,6 +40,7 @@ import com.perl5.lang.perl.idea.actions.PerlMarkLibrarySourceRootAction;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
+import com.perl5.lang.perl.util.PerlPluginUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -75,7 +76,7 @@ public class MojoProjectManager implements Disposable {
       @Override
       public void applicationCreated(@NotNull MojoApp mojoApp) {
         ApplicationManager.getApplication().invokeLater(() -> {
-          if (myProject.isDisposed() || !mojoApp.isValid()) {
+          if (PerlPluginUtil.isUnloaded(myProject) || !mojoApp.isValid()) {
             return;
           }
           VirtualFile appRoot = mojoApp.getRoot();

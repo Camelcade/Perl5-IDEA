@@ -172,7 +172,12 @@ public class PerlNamesBackendCache implements PerlNamesCache {
 
       logger.debug("Names cache updated");
       return null;
-    }).inSmartMode(myProject).expireWhen(myIsDisposed::get).executeSynchronously();
+    }).inSmartMode(myProject).expireWith(this).executeSynchronously();
+  }
+
+  @Override
+  public boolean isDisposed() {
+    return myIsDisposed.get();
   }
 
   @Override
