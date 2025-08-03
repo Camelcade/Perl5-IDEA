@@ -38,8 +38,6 @@ public class PerlElementTypeFactory {
       case "POD" -> new PerlPodReparseableTokenType(name);
       case "subname", "list", "unary", "unary_custom", "argumentless" -> new PerlSubNameTokenType(name);
       case "package::name", "package::name::", __PACKAGE__ -> new PerlNamespaceNameTokenType(name);
-      case "HEREDOC_END", "HEREDOC_END_INDENTABLE" -> new PerlTokenType(name);
-      case "VERSION_ELEMENT" -> new PerlTokenType(name);
       case "COMMENT_LINE" -> new PerlReparseableCommentTokenType(name);
       default -> new PerlTokenType(name);
     };
