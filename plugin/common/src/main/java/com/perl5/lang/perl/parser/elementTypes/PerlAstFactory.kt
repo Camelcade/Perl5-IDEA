@@ -59,7 +59,6 @@ class PerlAstFactory : ASTFactory() {
     STRING_CONTENT_XQ to ::PerlStringContentElementImpl,
     SUB_NAME to ::PerlSubNameElementImpl,
     TAG_PACKAGE to ::PerlNamespaceElementImpl,
-    VERSION_ELEMENT to ::PerlHeredocTerminatorElementImpl,
     VERSION_ELEMENT to ::PerlVersionElementImpl,
   )
 
