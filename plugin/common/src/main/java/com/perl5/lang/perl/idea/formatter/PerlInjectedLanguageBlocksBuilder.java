@@ -180,7 +180,7 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
     }
 
     @Override
-    public String toString() {
+    public @NotNull String toString() {
       return myInjectedRange + " => " + myHostRange;
     }
   }
