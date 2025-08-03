@@ -312,7 +312,7 @@ tasks {
     dependsOn(jacocoRootReport)
   }
 
-  register("generateLexers") { }
+  register("generateLexers")
 
   runIde {
     project.properties.forEach { (key, value) ->
