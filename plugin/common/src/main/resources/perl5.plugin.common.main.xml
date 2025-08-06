@@ -1,4 +1,7 @@
 <idea-plugin>
+  <dependencies>
+    <module name="intellij.spellchecker"/>
+  </dependencies>
   <resource-bundle>messages.PerlBundle</resource-bundle>
   <extensionPoints>
     <extensionPoint qualifiedName="com.perl5.subCallHandler" beanClass="com.intellij.util.KeyedLazyInstanceEP" dynamic="true">

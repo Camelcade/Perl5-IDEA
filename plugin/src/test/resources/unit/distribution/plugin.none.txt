@@ -17,6 +17,8 @@ Content modules:
   - Dependencies:
     - Module(name=perl5.plugin.backend.main)
  - perl5.plugin.common.main (REQUIRED); lib/modules/perl5.plugin.common.main.jar
+  - Dependencies:
+    - Module(name=intellij.spellchecker)
  - perl5.plugin.copyright.main (OPTIONAL); lib/modules/perl5.plugin.copyright.main.jar
   - Dependencies:
     - Plugin(id=com.intellij.copyright)
