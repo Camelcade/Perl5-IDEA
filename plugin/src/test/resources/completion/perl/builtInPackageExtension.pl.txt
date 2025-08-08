@@ -103,6 +103,9 @@ Text: INIT; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon
 Text: UNITCHECK; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: UNITCHECK
 	PsiElement: Implicit sub: UNITCHECK()
+Text: __CLASS__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: __CLASS__
+	PsiElement: Implicit sub: __CLASS__()
 Text: __DATA__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: __DATA__
 	PsiElement: Implicit sub: __DATA__()

@@ -109,6 +109,12 @@ Text: v5.37; Tail: null; Type: bitwise __SUB__ evalbytes fc isa module_true post
 Text: v5.38; Tail: null; Type: bitwise __SUB__ evalbytes fc isa module_true postderef_qq say signatures state unieval unicode; Icon: null; Type Icon: null
 	Lookups: v5.38
 	PerlVersion
+Text: v5.40; Tail: null; Type: feature_apos_as_name_sep bitwise __SUB__ evalbytes fc isa module_true postderef_qq say signatures feature_smartmatch state try unieval unicode; Icon: null; Type Icon: null
+	Lookups: v5.40
+	PerlVersion
+Text: v5.42; Tail: null; Type: bitwise __SUB__ evalbytes fc isa module_true postderef_qq say signatures state try unieval unicode; Icon: null; Type Icon: null
+	Lookups: v5.42
+	PerlVersion
 Text: v5.9.5; Tail: null; Type: bareword_filehandles indirect multidimensional say state switch; Icon: null; Type Icon: null
 	Lookups: v5.9.5
 	PerlVersion
