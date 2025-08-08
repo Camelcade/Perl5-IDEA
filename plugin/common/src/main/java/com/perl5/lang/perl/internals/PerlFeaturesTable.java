@@ -27,52 +27,60 @@ import java.util.*;
  */
 public final class PerlFeaturesTable implements Cloneable {
 
-  private static final String FEATURE_FC = "fc";
-  private static final String FEATURE_ISA = "isa";
-  private static final String FEATURE_SAY = "say";
-  private static final String FEATURE_TRY = "try";
+  private static final String FEATURE_APOSTROPHE_AS_PACKAGE_SEPARATOR = "feature_apos_as_name_sep";
+  private static final String FEATURE_BAREWORD_FILEHANDLES = "bareword_filehandles";
+  private static final String FEATURE_BITWISE = "bitwise";
   private static final String FEATURE_CLASS = "class";
+  private static final String FEATURE_CURRENT_SUB = "__SUB__";
+  private static final String FEATURE_DECLARED_REFS = "myref";
   private static final String FEATURE_DEFER = "defer";
+  private static final String FEATURE_EVALBYTES = "evalbytes";
+  private static final String FEATURE_EXTRA_PAIRED_DELIMITERS = "more_delims";
+  private static final String FEATURE_FC = "fc";
+  private static final String FEATURE_INDIRECT = "indirect";
+  private static final String FEATURE_ISA = "isa";
+  private static final String FEATURE_KEYWORD_ALL = "feature_keyword_all";
+  private static final String FEATURE_KEYWORD_ANY = "feature_keyword_any";
+  private static final String FEATURE_MODULE_TRUE = "module_true";
+  private static final String FEATURE_MULTIDIMENSIONAL = "multidimensional";
+  private static final String FEATURE_POSTDEREF_QQ = "postderef_qq";
+  private static final String FEATURE_REFALIASING = "refaliasing";
+  private static final String FEATURE_SAY = "say";
+  private static final String FEATURE_SIGNATURES = "signatures";
+  private static final String FEATURE_SMARTMATCH = "feature_smartmatch";
   private static final String FEATURE_STATE = "state";
   private static final String FEATURE_SWITCH = "switch";
-  private static final String FEATURE_BITWISE = "bitwise";
-  private static final String FEATURE_INDIRECT = "indirect";
-  private static final String FEATURE_EVALBYTES = "evalbytes";
-  private static final String FEATURE_SIGNATURES = "signatures";
-  private static final String FEATURE_CURRENT_SUB = "__SUB__";
-  private static final String FEATURE_MODULE_TRUE = "module_true";
-  private static final String FEATURE_REFALIASING = "refaliasing";
-  private static final String FEATURE_POSTDEREF_QQ = "postderef_qq";
+  private static final String FEATURE_TRY = "try";
   private static final String FEATURE_UNICODE_EVAL = "unieval";
-  private static final String FEATURE_DECLARED_REFS = "myref";
   private static final String FEATURE_UNICODE_STRINGS = "unicode";
-  private static final String FEATURE_MULTIDIMENSIONAL = "multidimensional";
-  private static final String FEATURE_BAREWORD_FILEHANDLES = "bareword_filehandles";
-  private static final String FEATURE_EXTRA_PAIRED_DELIMITERS = "more_delims";
 
   public static final Map<String, @Nls String> AVAILABLE_FEATURES = Maps.of(
-    FEATURE_FC, PerlBundle.message("perl.feature.fc.description"),
-    FEATURE_ISA, PerlBundle.message("perl.feature.isa.description"),
-    FEATURE_SAY, PerlBundle.message("perl.feature.say.description"),
-    FEATURE_TRY, PerlBundle.message("perl.feature.try.description"),
+    FEATURE_APOSTROPHE_AS_PACKAGE_SEPARATOR, PerlBundle.message("feature.apostrophe"),
+    FEATURE_BAREWORD_FILEHANDLES, PerlBundle.message("perl.feature.bareword.filehandle.description"),
+    FEATURE_BITWISE, PerlBundle.message("perl.feature.bitwise.description"),
     FEATURE_CLASS, PerlBundle.message("perl.feature.class"),
+    FEATURE_CURRENT_SUB, PerlBundle.message("perl.feature.current.sub.description"),
+    FEATURE_DECLARED_REFS, PerlBundle.message("perl.feature.declared.refs.description"),
     FEATURE_DEFER, PerlBundle.message("perl.feature.defer.description"),
+    FEATURE_EVALBYTES, PerlBundle.message("perl.feature.evalbytes.description"),
+    FEATURE_EXTRA_PAIRED_DELIMITERS, PerlBundle.message("perl.feature.extra.delimiters.description"),
+    FEATURE_FC, PerlBundle.message("perl.feature.fc.description"),
+    FEATURE_INDIRECT, PerlBundle.message("perl.feature.indirect.description"),
+    FEATURE_ISA, PerlBundle.message("perl.feature.isa.description"),
+    FEATURE_KEYWORD_ALL, PerlBundle.message("feature.all.keyword"),
+    FEATURE_KEYWORD_ANY, PerlBundle.message("feature.any.keyword"),
+    FEATURE_MODULE_TRUE, PerlBundle.message("perl.feature.module.true"),
+    FEATURE_MULTIDIMENSIONAL, PerlBundle.message("perl.feature.multidimensional.description"),
+    FEATURE_POSTDEREF_QQ, PerlBundle.message("perl.feature.postderef.qq.description"),
+    FEATURE_REFALIASING, PerlBundle.message("perl.feature.refaliasing.description"),
+    FEATURE_SAY, PerlBundle.message("perl.feature.say.description"),
+    FEATURE_SIGNATURES, PerlBundle.message("perl.feature.signatures.description"),
+    FEATURE_SMARTMATCH, PerlBundle.message("feature.enabled.smartmatch.operator"),
     FEATURE_STATE, PerlBundle.message("perl.feature.state.description"),
     FEATURE_SWITCH, PerlBundle.message("perl.feature.switch.description"),
-    FEATURE_BITWISE, PerlBundle.message("perl.feature.bitwise.description"),
-    FEATURE_INDIRECT, PerlBundle.message("perl.feature.indirect.description"),
-    FEATURE_EVALBYTES, PerlBundle.message("perl.feature.evalbytes.description"),
-    FEATURE_SIGNATURES, PerlBundle.message("perl.feature.signatures.description"),
-    FEATURE_CURRENT_SUB, PerlBundle.message("perl.feature.current.sub.description"),
-    FEATURE_MODULE_TRUE, PerlBundle.message("perl.feature.module.true"),
-    FEATURE_REFALIASING, PerlBundle.message("perl.feature.refaliasing.description"),
-    FEATURE_POSTDEREF_QQ, PerlBundle.message("perl.feature.postderef.qq.description"),
+    FEATURE_TRY, PerlBundle.message("perl.feature.try.description"),
     FEATURE_UNICODE_EVAL, PerlBundle.message("perl.feature.unicode.eval.description"),
-    FEATURE_DECLARED_REFS, PerlBundle.message("perl.feature.declared.refs.description"),
-    FEATURE_UNICODE_STRINGS, PerlBundle.message("perl.feature.unicode.strings.description"),
-    FEATURE_MULTIDIMENSIONAL, PerlBundle.message("perl.feature.multidimensional.description"),
-    FEATURE_BAREWORD_FILEHANDLES, PerlBundle.message("perl.feature.bareword.filehandle.description"),
-    FEATURE_EXTRA_PAIRED_DELIMITERS, PerlBundle.message("perl.feature.extra.delimiters.description")
+    FEATURE_UNICODE_STRINGS, PerlBundle.message("perl.feature.unicode.strings.description")
   );
 
   private static final List<String> FEATURES_5_10 = List.of(
@@ -96,10 +104,19 @@ public final class PerlFeaturesTable implements Cloneable {
   private static final List<String> FEATURES_5_37 = List.of(
     FEATURE_BITWISE, FEATURE_CURRENT_SUB, FEATURE_EVALBYTES, FEATURE_FC, FEATURE_ISA, FEATURE_MODULE_TRUE, FEATURE_POSTDEREF_QQ,
     FEATURE_SAY, FEATURE_SIGNATURES, FEATURE_STATE, FEATURE_UNICODE_EVAL, FEATURE_UNICODE_STRINGS);
+  private static final List<String> FEATURES_5_39 =
+    List.of(FEATURE_APOSTROPHE_AS_PACKAGE_SEPARATOR, FEATURE_BITWISE, FEATURE_CURRENT_SUB, FEATURE_EVALBYTES, FEATURE_FC, FEATURE_ISA,
+            FEATURE_MODULE_TRUE, FEATURE_POSTDEREF_QQ, FEATURE_SAY, FEATURE_SIGNATURES, FEATURE_SMARTMATCH, FEATURE_STATE, FEATURE_TRY,
+            FEATURE_UNICODE_EVAL, FEATURE_UNICODE_STRINGS);
+  private static final List<String> FEATURES_5_41 =
+    List.of(FEATURE_BITWISE, FEATURE_CURRENT_SUB, FEATURE_EVALBYTES, FEATURE_FC, FEATURE_ISA, FEATURE_MODULE_TRUE, FEATURE_POSTDEREF_QQ,
+            FEATURE_SAY, FEATURE_SIGNATURES, FEATURE_STATE, FEATURE_TRY, FEATURE_UNICODE_EVAL, FEATURE_UNICODE_STRINGS);
 
   public static final Map<String, List<String>> AVAILABLE_FEATURES_BUNDLES = Maps.of(
     "all", new ArrayList<>(AVAILABLE_FEATURES.keySet()),
-    "default", Arrays.asList(FEATURE_BAREWORD_FILEHANDLES, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL),
+    "default",
+    Arrays.asList(FEATURE_APOSTROPHE_AS_PACKAGE_SEPARATOR, FEATURE_BAREWORD_FILEHANDLES, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL,
+                  FEATURE_SMARTMATCH),
 
     "5.9.5", FEATURES_5_10,
     "5.10", FEATURES_5_10,
@@ -136,7 +153,10 @@ public final class PerlFeaturesTable implements Cloneable {
     "5.36", FEATURES_5_35,
 
     "5.37", FEATURES_5_37,
-    "5.38", FEATURES_5_37
+    "5.38", FEATURES_5_37,
+
+    "5.40", FEATURES_5_39,
+    "5.42", FEATURES_5_41
   );
 
   private Map<String, Boolean> featuresMap;

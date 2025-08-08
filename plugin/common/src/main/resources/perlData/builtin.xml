@@ -13,19 +13,19 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<!--http://perldoc.perl.org/perlfunc.html-->
+<!-- https://perldoc.perl.org/builtin -->
 
 <xml>
   <package name="builtin">
-    <sub name="true">
-    </sub>
-    <sub name="false">
-    </sub>
+    <sub name="true"/>
+    <sub name="false"/>
     <sub name="is_bool">
       <arguments>
         <argument name="value" type="$"/>
       </arguments>
     </sub>
+    <sub name="inf"/>
+    <sub name="nan"/>
     <sub name="weaken">
       <arguments>
         <argument name="ref" type="$"/>
@@ -66,6 +66,11 @@
         <argument name="value" type="$"/>
       </arguments>
     </sub>
+    <sub name="stringify">
+      <arguments>
+        <argument name="value" type="$"/>
+      </arguments>
+    </sub>
     <sub name="ceil">
       <arguments>
         <argument name="number" type="$"/>
@@ -94,6 +99,11 @@
     <sub name="export_lexically">
       <arguments>
         <argument name="names_to_refs" type="%"/>
+      </arguments>
+    </sub>
+    <sub name="load_module">
+      <arguments>
+        <argument name="module_name" type="$"/>
       </arguments>
     </sub>
   </package>

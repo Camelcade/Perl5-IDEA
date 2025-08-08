@@ -13,7 +13,7 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
   -->
-<!--http://perldoc.perl.org/perlfunc.html-->
+<!-- http://perldoc.perl.org/perlfunc.html -->
 
 <xml>
   <package name="CORE">
@@ -216,6 +216,7 @@
     <sub name="__DATA__"/>
     <sub name="__END__"/>
     <sub name="__FILE__"/>
+    <sub name="__CLASS__"/>
     <sub name="__LINE__"/>
     <sub name="__PACKAGE__"/>
     <sub name="__SUB__"/>

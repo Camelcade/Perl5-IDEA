@@ -85,13 +85,19 @@ Text: :5.37; Tail: null; Type: bitwise __SUB__ evalbytes fc isa module_true post
 Text: :5.38; Tail: null; Type: bitwise __SUB__ evalbytes fc isa module_true postderef_qq say signatures state unieval unicode; Icon: /options.png; Type Icon: null
 	Lookups: :5.38
 	String: :5.38
+Text: :5.40; Tail: null; Type: feature_apos_as_name_sep bitwise __SUB__ evalbytes fc isa module_true postderef_qq say signatures feature_smartmatch state try unieval unicode; Icon: /options.png; Type Icon: null
+	Lookups: :5.40
+	String: :5.40
+Text: :5.42; Tail: null; Type: bitwise __SUB__ evalbytes fc isa module_true postderef_qq say signatures state try unieval unicode; Icon: /options.png; Type Icon: null
+	Lookups: :5.42
+	String: :5.42
 Text: :5.9.5; Tail: null; Type: bareword_filehandles indirect multidimensional say state switch; Icon: /options.png; Type Icon: null
 	Lookups: :5.9.5
 	String: :5.9.5
-Text: :all; Tail: null; Type: fc isa say try class defer state switch bitwise indirect evalbytes signatures __SUB__ module_true refaliasing postderef_qq unieval myref unicode multidimensional bareword_filehandles more_delims; Icon: /options.png; Type Icon: null
+Text: :all; Tail: null; Type: feature_apos_as_name_sep bareword_filehandles bitwise class __SUB__ myref defer evalbytes more_delims fc indirect isa feature_keyword_all feature_keyword_any module_true multidimensional postderef_qq refaliasing say signatures feature_smartmatch state switch try unieval unicode; Icon: /options.png; Type Icon: null
 	Lookups: :all
 	String: :all
-Text: :default; Tail: null; Type: bareword_filehandles indirect multidimensional; Icon: /options.png; Type Icon: null
+Text: :default; Tail: null; Type: feature_apos_as_name_sep bareword_filehandles indirect multidimensional feature_smartmatch; Icon: /options.png; Type Icon: null
 	Lookups: :default
 	String: :default
 Text: __SUB__; Tail: null; Type: v5.16, provides the __SUB__ token that returns a reference to the current subroutine or undef outside of a subroutine; Icon: /option.png; Type Icon: null
@@ -115,6 +121,18 @@ Text: evalbytes; Tail: null; Type: v5.16, force eval to treat string argument as
 Text: fc; Tail: null; Type: v5.16, enables the fc function, which implements Unicode casefolding; Icon: /option.png; Type Icon: null
 	Lookups: fc
 	String: fc
+Text: feature_apos_as_name_sep; Tail: null; Type: v5.42, enables use apostrophe as an alternative to using :: as a separate in package and other global names.; Icon: /option.png; Type Icon: null
+	Lookups: feature_apos_as_name_sep
+	String: feature_apos_as_name_sep
+Text: feature_keyword_all; Tail: null; Type: v5.42, Enables experimental 'all' keyword; Icon: /option.png; Type Icon: null
+	Lookups: feature_keyword_all
+	String: feature_keyword_all
+Text: feature_keyword_any; Tail: null; Type: v5.42,  Enables experimental 'any' keyword; Icon: /option.png; Type Icon: null
+	Lookups: feature_keyword_any
+	String: feature_keyword_any
+Text: feature_smartmatch; Tail: null; Type: v5.42, enabled '~~' smartmatch operator; Icon: /option.png; Type Icon: null
+	Lookups: feature_smartmatch
+	String: feature_smartmatch
 Text: indirect; Tail: null; Type: v5.32, allows the use of indirect object syntax for method calls, e.g. new Foo 1, 2;; Icon: /option.png; Type Icon: null
 	Lookups: indirect
 	String: indirect

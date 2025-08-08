@@ -55,11 +55,13 @@ public final class PerlVersion implements Comparable<PerlVersion> {
   public static final PerlVersion V5_34 = new PerlVersion(5.034);
   public static final PerlVersion V5_36 = new PerlVersion(5.036);
   public static final PerlVersion V5_38 = new PerlVersion(5.038);
+  public static final PerlVersion V5_40 = new PerlVersion(5.036);
+  public static final PerlVersion V5_42 = new PerlVersion(5.038);
   public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V520 = version -> !version.lesserThan(V5_20);
   public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V522 = version -> !version.lesserThan(V5_22);
   public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V532 = version -> !version.lesserThan(V5_32);
   public static final List<PerlVersion> ALL_VERSIONS = List.of(
-    V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26, V5_28, V5_30, V5_32, V5_34, V5_36, V5_38
+    V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26, V5_28, V5_30, V5_32, V5_34, V5_36, V5_38, V5_40, V5_42
   );
 
   public static final Map<PerlVersion, @Nls String> PERL_VERSION_DESCRIPTIONS = Maps.of(

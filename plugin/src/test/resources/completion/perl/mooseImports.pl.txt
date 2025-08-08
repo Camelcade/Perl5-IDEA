@@ -694,6 +694,9 @@ Text: _; Tail: null; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: nu
 Text: _; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $_, _
 	PsiElement: Built-in: $_
+Text: __CLASS__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: __CLASS__
+	PsiElement: Implicit sub: __CLASS__()
 Text: __DATA__; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: __DATA__
 	PsiElement: Implicit sub: __DATA__()
