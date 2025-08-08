@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.debugger.values;
 
+import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -278,6 +279,6 @@ public class PerlXNamedValue extends XNamedValue implements PerlLoadableXValueCo
 
   @Override
   public @NotNull ThreeState computeInlineDebuggerData(@NotNull XInlineDebuggerDataCallback callback) {
-    return computeMySourcePosition(null, callback) ? ThreeState.YES : ThreeState.NO;
+    return ReadAction.compute(() -> computeMySourcePosition(null, callback) ? ThreeState.YES : ThreeState.NO);
   }
 }
