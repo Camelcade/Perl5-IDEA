@@ -22,6 +22,9 @@ Text: floor; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type
 Text: indexed; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: indexed
 	String: indexed
+Text: inf; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: inf
+	String: inf
 Text: is_bool; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: is_bool
 	String: is_bool
@@ -31,12 +34,21 @@ Text: is_tainted; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png;
 Text: is_weak; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: is_weak
 	String: is_weak
+Text: load_module; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: load_module
+	String: load_module
+Text: nan; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: nan
+	String: nan
 Text: refaddr; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: refaddr
 	String: refaddr
 Text: reftype; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: reftype
 	String: reftype
+Text: stringify; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: stringify
+	String: stringify
 Text: trim; Tail: null; Type: optional; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: trim
 	String: trim

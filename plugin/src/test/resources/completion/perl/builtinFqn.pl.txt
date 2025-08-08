@@ -22,6 +22,9 @@ Text: floor; Tail: ($number); Type: builtin; Icon: /subroutine_gutter_icon.png; 
 Text: indexed; Tail: (@list); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: indexed
 	PsiElement: Implicit sub: indexed(@list)(@list)
+Text: inf; Tail: null; Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: inf
+	PsiElement: Implicit sub: inf()
 Text: is_bool; Tail: ($value); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: is_bool
 	PsiElement: Implicit sub: is_bool($value)($value)
@@ -31,12 +34,21 @@ Text: is_tainted; Tail: ($var); Type: builtin; Icon: /subroutine_gutter_icon.png
 Text: is_weak; Tail: ($ref); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: is_weak
 	PsiElement: Implicit sub: is_weak($ref)($ref)
+Text: load_module; Tail: ($module_name); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: load_module
+	PsiElement: Implicit sub: load_module($module_name)($module_name)
+Text: nan; Tail: null; Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: nan
+	PsiElement: Implicit sub: nan()
 Text: refaddr; Tail: ($ref); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: refaddr
 	PsiElement: Implicit sub: refaddr($ref)($ref)
 Text: reftype; Tail: ($ref); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: reftype
 	PsiElement: Implicit sub: reftype($ref)($ref)
+Text: stringify; Tail: ($value); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
+	Lookups: stringify
+	PsiElement: Implicit sub: stringify($value)($value)
 Text: trim; Tail: ($string); Type: builtin; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: trim
 	PsiElement: Implicit sub: trim($string)($string)
