@@ -72,10 +72,9 @@ dependencies {
 
 tasks {
   withType<PrepareSandboxTask> {
-    inputs.dir("scripts")
-
-    intoChild(intellijPlatform.projectName.map { projectName -> "$projectName/perl" })
-      .from(file("scripts"))
+    from(file("scripts")) {
+      into(intellijPlatform.projectName.map { projectName -> "$projectName/perl" })
+    }
   }
 
   test {
