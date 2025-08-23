@@ -98,7 +98,7 @@ public class PerlAnnotator extends PerlBaseAnnotator {
     }
     else if (element instanceof PerlCharSubstitution charSubstitution) {
       int codePoint = charSubstitution.getCodePoint();
-      if (codePoint >= 0) {
+      if (codePoint >= 0 && Character.isValidCodePoint(codePoint)) {
         @NlsSafe StringBuilder sb = new StringBuilder("<ul>");
         @NonNls String chars = charSubstitution.getNonIgnorableChars();
         if (StringUtil.isEmptyOrSpaces(chars)) {
