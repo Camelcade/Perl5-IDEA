@@ -57,7 +57,7 @@ jobs:
 
       - name: Upload Coveralls Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
-        run: ./gradlew :coveralls --console plain
+        run: ./gradlew :coverallsJacoco --console plain
 
       - name: Perform SonarCube Analysis
         if: ${{ env.COVERALLS_REPO_TOKEN && env.SONAR_TOKEN }}
