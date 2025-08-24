@@ -8,7 +8,6 @@ import org.jetbrains.intellij.platform.gradle.TestFrameworkType
 import org.jetbrains.intellij.platform.gradle.tasks.InstrumentCodeTask
 import org.jetbrains.intellij.platform.gradle.tasks.aware.IntelliJPlatformVersionAware
 import org.jetbrains.intellij.platform.gradle.tasks.aware.SplitModeAware.SplitModeTarget
-import org.kt3k.gradle.plugin.coveralls.CoverallsTask
 import kotlin.io.path.exists
 import kotlin.io.path.readText
 import kotlin.io.path.writeText
@@ -46,7 +45,7 @@ plugins {
   id("jacoco")
   id("org.jetbrains.intellij.platform") version "2.7.2"
   id("org.jetbrains.grammarkit") version "2022.3.2.2"
-  id("com.github.kt3k.coveralls") version "2.12.2"
+  id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
   id("org.sonarqube") version "6.2.0.5505"
   id("org.jetbrains.qodana") version "0.1.13"
   id("org.jetbrains.kotlin.jvm") version "2.2.10"
@@ -77,7 +76,6 @@ allprojects {
 
   apply(plugin = "org.jetbrains.grammarkit")
   apply(plugin = if (isPlugin) "org.jetbrains.intellij.platform" else "org.jetbrains.intellij.platform.module")
-  apply(plugin = "com.github.kt3k.coveralls")
   apply(plugin = "jacoco")
   apply(plugin = "java")
   apply(plugin = "org.jetbrains.kotlin.jvm")
@@ -306,7 +304,7 @@ tasks {
     }
   }
 
-  withType<CoverallsTask> {
+  project.tasks.named("coverallsJacoco") {
     group = "verification"
     description = "Uploads the aggregated coverage report to Coveralls"
     dependsOn(jacocoRootReport)
@@ -359,10 +357,10 @@ sonar {
   }
 }
 
-coveralls {
-  jacocoReportPath = coverageReportFile
+coverallsJacoco {
+  reportPath = coverageReportFile.get().asFile.absolutePath
   allprojects.map { project ->
-    sourceDirs.addAll(project.sourceSets.main.get().allSource.sourceDirectories.map { it.absolutePath })
+    reportSourceSets += project.sourceSets.main.get().allSource.sourceDirectories
   }
 }
 
