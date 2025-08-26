@@ -46,7 +46,7 @@ plugins {
   id("org.jetbrains.intellij.platform") version "2.7.2"
   id("org.jetbrains.grammarkit") version "2022.3.2.2"
   id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
-  id("org.sonarqube") version "6.2.0.5505"
+  id("org.sonarqube") version "6.3.0.5676"
   id("org.jetbrains.qodana") version "0.1.13"
   id("org.jetbrains.kotlin.jvm") version "2.2.10"
 }
