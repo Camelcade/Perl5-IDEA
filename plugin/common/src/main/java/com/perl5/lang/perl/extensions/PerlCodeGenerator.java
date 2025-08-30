@@ -35,6 +35,7 @@ public interface PerlCodeGenerator {
    * @param subBase sub to override
    * @return generated code
    */
+  @SuppressWarnings("unused")
   @Nullable
   String getOverrideCodeText(PsiElement subBase);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,7 +35,8 @@ abstract class PerlChooseByNameContributor implements ChooseByNameContributor {
     return ArrayUtilRt.toStringArray(getNamesCollection(project, includeNonProjectItems));
   }
 
-  protected abstract @NotNull Collection<String> getNamesCollection(Project project, boolean includeNonProjectItems);
+  protected abstract @NotNull Collection<String> getNamesCollection(Project project,
+                                                                    @SuppressWarnings("unused") boolean includeNonProjectItems);
 
   @Override
   public final NavigationItem @NotNull [] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {

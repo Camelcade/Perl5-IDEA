@@ -86,6 +86,7 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
     @Attribute("expression")
     String renderExpression;
 
+    @SuppressWarnings("unused")
     public Item() {
     }
 
@@ -157,6 +158,7 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
   }
 
   private static class RendererColumnInfo extends ColumnInfo<Item, String> {
+    @SuppressWarnings("DialogTitleCapitalization")
     public RendererColumnInfo() {
       super(PerlDebuggerBundle.message("perl.debugger.settings.renderer.column.title"));
     }

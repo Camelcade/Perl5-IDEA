@@ -44,7 +44,6 @@ public final class PerlConfig {
   private static final PerlConfig EMPTY_CONFIG = new PerlConfig(Collections.emptyMap());
 
   private static final String ARCHNAME = "archname";
-  private static final String API_VERSIONSTRING = "api_versionstring";
   private static final String VERSION = "version";
 
   @Tag("configMap")
@@ -66,10 +65,6 @@ public final class PerlConfig {
 
   public @Nullable String getArchname() {
     return get(ARCHNAME);
-  }
-
-  public @Nullable String getApiVersionString() {
-    return get(API_VERSIONSTRING);
   }
 
   public @Nullable String getVersion() {

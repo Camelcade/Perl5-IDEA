@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,6 +103,7 @@ public class PerlCommandLine extends GeneralCommandLine {
   /**
    * @see #isWithMissingPackageListener()
    */
+  @SuppressWarnings("UnusedReturnValue")
   public @NotNull PerlCommandLine withMissingPackageListener(boolean withMissingPackageListener) {
     myWithMissingPackageListener = withMissingPackageListener;
     return this;
@@ -126,10 +127,6 @@ public class PerlCommandLine extends GeneralCommandLine {
   @Override
   public @NotNull PerlCommandLine withParameters(String @NotNull ... parameters) {
     return (PerlCommandLine)super.withParameters(parameters);
-  }
-
-  public @NotNull PerlCommandLine withParameters(@NotNull Set<String> parameters) {
-    return withParameters(new ArrayList<>(parameters));
   }
 
   @Override
@@ -239,11 +236,6 @@ public class PerlCommandLine extends GeneralCommandLine {
 
   public @Nullable Module getModule() {
     return myModule;
-  }
-
-  public @NotNull PerlCommandLine withModule(@Nullable Module module) {
-    myModule = module;
-    return this;
   }
 
   public @Nullable Icon getConsoleIcon() {

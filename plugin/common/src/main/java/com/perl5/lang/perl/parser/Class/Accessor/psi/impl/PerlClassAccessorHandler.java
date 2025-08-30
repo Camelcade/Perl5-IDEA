@@ -102,7 +102,7 @@ public abstract class PerlClassAccessorHandler extends PerlSubCallHandler<PerlCl
     return getNamesComputationsImpl(psiElement);
   }
 
-  protected abstract @NotNull List<Function<String, String>> getNamesComputationsImpl(@NotNull PerlSubCallElement psiElement);
+  protected abstract @NotNull List<Function<String, String>> getNamesComputationsImpl(@SuppressWarnings("unused") @NotNull PerlSubCallElement psiElement);
 
   @Override
   public @NotNull PerlClassAccessorCallData computeCallData(@NotNull PerlSubCallElement subCallElement) {

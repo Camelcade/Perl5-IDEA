@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,7 +50,7 @@ public abstract class PerlCachingReference<T extends PsiElement> extends PsiPoly
     return EMPTY_ARRAY;
   }
 
-  protected abstract @NotNull ResolveResult[] resolveInner(boolean incompleteCode);
+  protected abstract @NotNull ResolveResult[] resolveInner(@SuppressWarnings("unused") boolean incompleteCode);
 
   @Override
   public final ResolveResult @NotNull [] multiResolve(boolean incompleteCode) {
