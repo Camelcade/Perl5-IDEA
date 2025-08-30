@@ -75,10 +75,7 @@ abstract class PerlMethodDefinitionMixin : PerlSubDefinitionBase, PerlMethodDefi
   }
 
   companion object {
-    // fixme see #717
     @JvmStatic
-    val defaultInvocantName: String
-      get() =
-        PerlScalarUtilCore.DEFAULT_SELF_SCALAR_NAME
+    val defaultInvocantName: String = PerlScalarUtilCore.DEFAULT_SELF_SCALAR_NAME
   }
 }
