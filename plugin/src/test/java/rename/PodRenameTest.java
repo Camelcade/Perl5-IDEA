@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,7 +63,7 @@ public class PodRenameTest extends PodLightTestCase {
 
   private void doTest() { doTest("new >> C<name> << here", true); }
 
-  private void doTest(boolean checkReference) {doTest("NewName", checkReference);}
+  private void doTest(@SuppressWarnings("SameParameterValue") boolean checkReference) { doTest("NewName", checkReference); }
 
   private void doTest(@NotNull String newName, boolean checkReference) {
     doTestRename(newName);

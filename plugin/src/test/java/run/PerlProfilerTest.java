@@ -203,7 +203,7 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
 
 
   private Pair<Pair<ExecutionEnvironment, RunContentDescriptor>, Pair<Executor, PerlProfilerConfigurationState>> runScriptWithProfilingAndWait(
-    @NotNull String directory,
+    @SuppressWarnings("SameParameterValue") @NotNull String directory,
     @NotNull String script) {
     copyDirToModule(directory);
     return runConfigurationWithProfilingAndWait(createOnlyRunConfiguration(script));

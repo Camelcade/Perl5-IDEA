@@ -944,6 +944,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     List<UsageInfo> usages = new ArrayList<>(myFixture.findUsages(targetElement));
     usages.sort(Comparator.<UsageInfo, String>comparing(it -> {
       PsiElement element = it.getElement();
+      //noinspection ReturnOfNull
       return element == null ? null : it.getElement().getContainingFile().getName();
     }).thenComparingInt(UsageInfo::getNavigationOffset));
     sb.append("Total usages: ").append(usages.size()).append("\n");
@@ -2982,7 +2983,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     doTestInjection(true);
   }
 
-  protected void doTestInjection(boolean checkErrors) {
+  protected void doTestInjection(@SuppressWarnings("SameParameterValue") boolean checkErrors) {
     if (checkErrors) {
       initWithFileSmartWithoutErrors();
     }

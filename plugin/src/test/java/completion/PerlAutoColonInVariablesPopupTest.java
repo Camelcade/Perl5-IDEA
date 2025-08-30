@@ -66,10 +66,10 @@ public class PerlAutoColonInVariablesPopupTest extends PerlCompletionPopupTestCa
 
   protected void doTest(@NotNull String sample, boolean expected) {
     if (isAutoColonEnabled()) {
-      doTestWithAutoColon(wrapToContext(sample), ":", expected);
+      doTestWithAutoColon(wrapToContext(sample), expected);
     }
     else {
-      doTestWithoutAutoColon(wrapToContext(sample), ":", expected);
+      doTestWithoutAutoColon(wrapToContext(sample), expected);
     }
   }
 

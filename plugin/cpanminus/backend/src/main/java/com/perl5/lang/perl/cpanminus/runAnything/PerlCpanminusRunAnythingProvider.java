@@ -43,6 +43,7 @@ import java.util.*;
 
 public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<List<PerlCpanminusRunAnythingProvider.CommandElement>> {
   private static final Logger LOG = Logger.getInstance(PerlCpanminusRunAnythingProvider.class);
+  private static final String PATH_TO_CONFIG = "runAnything/cli/cpanm.xml";
   private static final String GENERAL_KEY = "general";
   private static final String COMPLETION_GROUP_NAME_KEY = "completionGroupName";
   private static final String HELP_GROUP_NAME_KEY = "helpGroupName";
@@ -70,17 +71,13 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
   private final boolean myIsOptionsFirst;
 
   public PerlCpanminusRunAnythingProvider() {
-    this("runAnything/cli/cpanm.xml");
-  }
-
-  protected PerlCpanminusRunAnythingProvider(@NotNull String pathToConfig) {
-    LOG.debug("Loading cli options from " + pathToConfig);
+    LOG.debug("Loading cli options from " + PATH_TO_CONFIG);
     ClassLoader classLoader = getClass().getClassLoader();
     final Element xmlElement;
     try {
-      xmlElement = JDOMUtil.load(classLoader.getResourceAsStream(pathToConfig));
+      xmlElement = JDOMUtil.load(classLoader.getResourceAsStream(PATH_TO_CONFIG));
       if (xmlElement == null) {
-        throw new RuntimeException("Error loading resources from " + classLoader + " " + pathToConfig);
+        throw new RuntimeException("Error loading resources from " + classLoader + " " + PATH_TO_CONFIG);
       }
     }
     catch (Exception e) {
@@ -89,21 +86,21 @@ public class PerlCpanminusRunAnythingProvider extends RunAnythingProviderBase<Li
 
     Element generalElement = xmlElement.getChild(GENERAL_KEY);
     if (generalElement == null) {
-      throw new RuntimeException("Missing general element in " + pathToConfig);
+      throw new RuntimeException("Missing general element in " + PATH_TO_CONFIG);
     }
 
     myCompletionGroupName = generalElement.getAttributeValue(COMPLETION_GROUP_NAME_KEY);
     if (myCompletionGroupName == null) {
-      throw new RuntimeException("No completion group name: " + pathToConfig);
+      throw new RuntimeException("No completion group name: " + PATH_TO_CONFIG);
     }
 
     myHelpGroupName = generalElement.getAttributeValue(HELP_GROUP_NAME_KEY);
     myCommand = generalElement.getAttributeValue(COMMAND_KEY);
     if (myCommand == null) {
-      throw new RuntimeException("No command in " + pathToConfig);
+      throw new RuntimeException("No command in " + PATH_TO_CONFIG);
     }
     myIsOptionsFirst = Boolean.parseBoolean(generalElement.getAttributeValue(OPTIONS_FIRST_KEY));
-    LOG.debug("Loading options for " + myCommand + " from " + pathToConfig);
+    LOG.debug("Loading options for " + myCommand + " from " + PATH_TO_CONFIG);
 
     Map<String, OptionDescriptor> allOptionsMap = new HashMap<>();
 

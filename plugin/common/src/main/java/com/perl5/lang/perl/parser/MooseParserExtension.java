@@ -146,7 +146,10 @@ public class MooseParserExtension extends PerlParserExtension {
     return PerlParserUtil.parseCustomMethod(b, l, FALLBACK_METHOD_PARSER);
   }
 
-  private static boolean parseAnnotatedSimpleStatement(PerlBuilder b, int l, IElementType keywordToken, IElementType statementToken) {
+  private static boolean parseAnnotatedSimpleStatement(PerlBuilder b,
+                                                       int l,
+                                                       @SuppressWarnings("SameParameterValue") IElementType keywordToken,
+                                                       @SuppressWarnings("SameParameterValue") IElementType statementToken) {
     PsiBuilder.Marker m = b.mark();
 
     if (GeneratedParserUtilBase.consumeToken(b, keywordToken)) {

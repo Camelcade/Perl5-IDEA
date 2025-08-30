@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -76,7 +76,7 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
     doCompletionOnTypingTest(toType, false);
   }
 
-  protected void doTestNegative(@NotNull String toType) {
+  protected void doTestNegative(@SuppressWarnings("SameParameterValue") @NotNull String toType) {
     initWithFileSmart();
     doCompletionOnTypingTest(toType, false);
   }
@@ -104,23 +104,23 @@ public abstract class PerlCompletionPopupTestCase extends PerlLightTestCaseBase 
     assertNotNull(LookupManager.getActiveLookup(getEditor()));
   }
 
-  protected void doTestWithAutoColon(@NotNull String original, @NotNull String toType, boolean expected) {
+  protected void doTestWithAutoColon(@NotNull String original, boolean expected) {
     Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = true;
     if (expected) {
-      doTest(original, toType);
+      doTest(original, ":");
     }
     else {
-      doTestNegative(original, toType);
+      doTestNegative(original, ":");
     }
   }
 
-  protected void doTestWithoutAutoColon(@NotNull String original, @NotNull String toType, boolean expected) {
+  protected void doTestWithoutAutoColon(@NotNull String original, boolean expected) {
     Perl5CodeInsightSettings.getInstance().AUTO_INSERT_COLON = false;
     if (expected) {
-      doTest(original, toType);
+      doTest(original, ":");
     }
     else {
-      doTestNegative(original, toType);
+      doTestNegative(original, ":");
     }
   }
 }

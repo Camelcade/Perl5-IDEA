@@ -60,7 +60,9 @@ public class PerlSubTypesHierarchyTreeStructure extends HierarchyTreeStructure {
                              .getChildNamespaceDefinitions(((PerlNamespaceDefinitionElement)element)));
   }
 
-  protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor<?> parentDescriptor, PsiElement element, boolean isBase) {
+  protected PerlHierarchyNodeDescriptor createDescriptor(NodeDescriptor<?> parentDescriptor,
+                                                         PsiElement element,
+                                                         @SuppressWarnings("SameParameterValue") boolean isBase) {
     return new PerlHierarchyNodeDescriptor(parentDescriptor, element, isBase);
   }
 }

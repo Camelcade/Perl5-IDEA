@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -136,7 +136,7 @@ public class PerlQuickDocStringSpecialsTest extends PerlQuickDocTestCase {
     doTestText("s/match/" + stringContentWithCaret + "/;");
   }
 
-  private void doTestSq(@NotNull String stringContentWithCaret) {
+  private void doTestSq(@SuppressWarnings("SameParameterValue") @NotNull String stringContentWithCaret) {
     doTestText("say '" + stringContentWithCaret + "'");
   }
 
