@@ -117,7 +117,7 @@ public class PerlInjectedStringTypingTest extends PerlLightTestCase {
     doTestInjectedTypingWithoutInit(textToType);
   }
 
-  private void doTest(@NotNull String textToType, @NotNull String fileName) {
+  private void doTest(@NotNull String textToType, @SuppressWarnings("SameParameterValue") @NotNull String fileName) {
     initWithFileSmart(fileName);
     doTestInjectedTypingWithoutInit(textToType);
   }

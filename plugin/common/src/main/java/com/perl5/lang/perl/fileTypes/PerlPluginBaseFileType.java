@@ -30,7 +30,7 @@ public abstract class PerlPluginBaseFileType extends LanguageFileType {
     super(language);
   }
 
-  protected static boolean isMyFile(@Nullable PsiElement element, @NotNull FileType fileType) {
+  protected static boolean isMyFile(@Nullable PsiElement element, @SuppressWarnings("SameParameterValue") @NotNull FileType fileType) {
     return element != null &&
            element.getContainingFile().getViewProvider().getVirtualFile().getFileType() == fileType;
   }

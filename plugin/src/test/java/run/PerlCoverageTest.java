@@ -166,7 +166,8 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
     }
   }
 
-  private void runScriptWithCoverageAndWait(@NotNull String directory, @NotNull String script) {
+  private void runScriptWithCoverageAndWait(@SuppressWarnings("SameParameterValue") @NotNull String directory,
+                                            @SuppressWarnings("SameParameterValue") @NotNull String script) {
     copyDirToModule(directory);
     runConfigurationWithCoverageAndWait(createOnlyRunConfiguration(script));
   }

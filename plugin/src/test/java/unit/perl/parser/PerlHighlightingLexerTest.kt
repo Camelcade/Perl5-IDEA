@@ -37,7 +37,10 @@ class PerlHighlightingLexerTest : PerlLightTestCase() {
   @Test
   fun testHeredocInRegexpSublexed(): Unit = doTestLexer("heredocInRegexp", true)
 
-  private fun doTestLexer(sourceName: String? = null, forceSubLexing: Boolean = false) {
+  private fun doTestLexer(
+    @Suppress("SameParameterValue") sourceName: String? = null,
+    @Suppress("SameParameterValue") forceSubLexing: Boolean = false
+  ) {
     val testFileText = loadFileContent("${sourceName ?: getTestName(true)}${realDataFileExtension}")
     val lexer = PerlMergingLexerAdapter(PerlLexingContext.create(project).withEnforcedSublexing(forceSubLexing))
     lexer.start(testFileText)

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,17 +54,17 @@ public class PerlCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   @Test
   public void testAutoColonUseEnabled() {
-    doTestWithAutoColon("use Mojolicious<caret>", ":", true);
+    doTestWithAutoColon("use Mojolicious<caret>", true);
   }
 
   @Test
   public void testAutoColonUseDisabled() {
-    doTestWithoutAutoColon("use Mojolicious<caret>", ":", false);
+    doTestWithoutAutoColon("use Mojolicious<caret>", false);
   }
 
   @Test
   public void testAutoColonUseDisabledCompletion() {
-    doTestWithoutAutoColon("use Mojolicious:<caret>", ":", true);
+    doTestWithoutAutoColon("use Mojolicious:<caret>", true);
   }
 
   @Test
@@ -122,23 +122,23 @@ public class PerlCompletionPopupTest extends PerlCompletionPopupTestCase {
 
   @Test
   public void testStaticMethod() {
-    doTestWithAutoColon("CORE:<caret>", ":", true);
+    doTestWithAutoColon("CORE:<caret>", true);
   }
 
   @Test
-  public void testScalarColons() {doTestWithAutoColon("$<caret>", ":", true);}
+  public void testScalarColons() { doTestWithAutoColon("$<caret>", true); }
 
   @Test
-  public void testArrayColons() {doTestWithAutoColon("@<caret>", ":", true);}
+  public void testArrayColons() { doTestWithAutoColon("@<caret>", true); }
 
   @Test
-  public void testArraySizeColons() {doTestWithAutoColon("$#<caret>", ":", true);}
+  public void testArraySizeColons() { doTestWithAutoColon("$#<caret>", true); }
 
   @Test
-  public void testHashColons() {doTestWithAutoColon("%<caret>", ":", true);}
+  public void testHashColons() { doTestWithAutoColon("%<caret>", true); }
 
   @Test
-  public void testGlobColons() {doTestWithAutoColon("*<caret>", ":", true);}
+  public void testGlobColons() { doTestWithAutoColon("*<caret>", true); }
 
   @Test
   public void testScalarName() {
