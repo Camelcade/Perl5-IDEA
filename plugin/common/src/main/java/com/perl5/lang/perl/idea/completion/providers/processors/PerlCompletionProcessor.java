@@ -18,10 +18,8 @@ package com.perl5.lang.perl.idea.completion.providers.processors;
 
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
-import com.intellij.codeInsight.completion.PrefixMatcher;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.Contract;
@@ -45,10 +43,6 @@ public interface PerlCompletionProcessor {
 
   default @NotNull PsiFile getOriginalFile() {
     return getContainingFile().getOriginalFile();
-  }
-
-  default @NotNull VirtualFile getVirtualFile() {
-    return getOriginalFile().getVirtualFile();
   }
 
   default @NotNull Project getProject() {
@@ -83,14 +77,6 @@ public interface PerlCompletionProcessor {
   boolean result();
 
   void addElement(@NotNull LookupElementBuilder lookupElement);
-
-  default @NotNull PrefixMatcher getPrefixMatcher() {
-    return getResultSet().getPrefixMatcher();
-  }
-
-  default @NotNull String getPrefix() {
-    return getPrefixMatcher().getPrefix();
-  }
 
   /**
    * @return true iff {@code elementId} was not registered with this processor before. E.g. variable fqn

@@ -74,6 +74,7 @@ public final class PerlContextUtil {
     return PerlContextType.SCALAR;
   }
 
+  @SuppressWarnings("unused")
   public static boolean isVoid(@Nullable PsiElement element) {
     return contextFrom(element) == PerlContextType.VOID;
   }

@@ -188,8 +188,8 @@ public class PerlDebugThread extends Thread {
       }
       print("perl.debug.connected");
 
-      myOutputStream = mySocket.getOutputStream();
-      myInputStream = mySocket.getInputStream();
+      myOutputStream = getSocket().getOutputStream();
+      myInputStream = getSocket().getInputStream();
 
       ByteArrayList response = new ByteArrayList();
 
@@ -292,7 +292,7 @@ public class PerlDebugThread extends Thread {
   }
 
   public void sendString(String string) {
-    if (mySocket == null) {
+    if (getSocket() == null) {
       return;
     }
 
@@ -321,7 +321,7 @@ public class PerlDebugThread extends Thread {
   }
 
   public void sendCommandAndGetResponse(String command, Object data, PerlDebuggingTransactionHandler transactionHandler) {
-    if (mySocket == null) {
+    if (getSocket() == null) {
       return;
     }
 
@@ -429,7 +429,7 @@ public class PerlDebugThread extends Thread {
       }
     };
 
-    if (mySocket != null) {
+    if (getSocket() != null) {
       sendCommandAndGetResponse("get_source", new PerlSourceRequestDescriptor(filePath), perlDebuggingTransactionHandler);
       responseSemaphore.waitFor(2000);
     }

@@ -24,7 +24,6 @@ import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.text.StringUtil;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.execution.PerlCommandLine;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import com.perl5.lang.perl.idea.sdk.host.PerlHostData;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.Contract;
@@ -119,11 +118,6 @@ public class AsdfAdapter extends PerlVersionManagerAdapter {
   @Override
   protected @NlsContexts.DialogTitle @NotNull String getErrorNotificationTitle() {
     return PerlBundle.message("perl.vm.asdf.notification.title");
-  }
-
-  @Contract("null->null")
-  public static @Nullable AsdfAdapter create(@Nullable Project project) {
-    return create(PerlProjectManager.getSdk(project));
   }
 
   @Contract("null->null")

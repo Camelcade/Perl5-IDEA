@@ -72,6 +72,7 @@ public class PerlBuiltInVariablesService implements Disposable {
     return myHashes.get(name);
   }
 
+  @SuppressWarnings("unused")
   public @Nullable PerlBuiltInVariable getGlob(@Nullable String name) {
     return myHashes.get(name);
   }
