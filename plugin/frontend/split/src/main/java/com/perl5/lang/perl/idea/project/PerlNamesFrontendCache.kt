@@ -19,7 +19,7 @@ package com.perl5.lang.perl.idea.project
 import java.util.concurrent.atomic.AtomicBoolean
 
 class PerlNamesFrontendCache : PerlNamesCache {
-  val isDisposed: AtomicBoolean = AtomicBoolean(false)
+  private val isDisposed: AtomicBoolean = AtomicBoolean(false)
   override fun getSubsNamesSet(): Set<String> = emptySet()
   override fun getNamespacesNamesSet(): Set<String> = emptySet()
   override fun dispose(): Unit = isDisposed.set(true)
