@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,10 +52,12 @@ public interface MojoProjectListener {
   /**
    * @apiNote invoked before deleting from the model
    */
-  default void applicationDeleted(@NotNull MojoApp mojoApp) {}
+  @SuppressWarnings("EmptyMethod")
+  default void applicationDeleted(@SuppressWarnings("unused") @NotNull MojoApp mojoApp) { }
 
   /**
    * @apiNote invoked before deleting from the model
    */
-  default void pluginDeleted(@NotNull MojoPlugin mojoPlugin) {}
+  @SuppressWarnings("EmptyMethod")
+  default void pluginDeleted(@SuppressWarnings("unused") @NotNull MojoPlugin mojoPlugin) { }
 }
