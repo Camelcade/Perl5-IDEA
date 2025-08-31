@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PodGoToDeclarationHandler implements GotoDeclarationHandler {
   @Override
-  public @Nullable PsiElement[] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
+  public @Nullable PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
     if (sourceElement == null || !sourceElement.getLanguage().isKindOf(PodLanguage.INSTANCE)) {
       return null;
     }

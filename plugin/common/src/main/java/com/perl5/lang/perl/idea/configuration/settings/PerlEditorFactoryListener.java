@@ -86,6 +86,7 @@ public class PerlEditorFactoryListener implements EditorFactoryListener {
                 }
                 catch (JDOMException ignore) {
                 }
+                //noinspection ReturnOfNull
                 return null;
               }
             );

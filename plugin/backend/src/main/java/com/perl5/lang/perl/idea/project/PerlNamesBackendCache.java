@@ -171,6 +171,7 @@ public class PerlNamesBackendCache implements PerlNamesCache {
       myKnownNamespaces = Collections.unmodifiableSet(namespacesSet);
 
       logger.debug("Names cache updated");
+      //noinspection ReturnOfNull
       return null;
     }).inSmartMode(myProject).expireWith(this).executeSynchronously();
   }

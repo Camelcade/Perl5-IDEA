@@ -39,7 +39,7 @@ import java.util.Objects;
 
 public class PerlGotoDeclarationHandler implements GotoDeclarationHandler {
   @Override
-  public @Nullable PsiElement[] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
+  public @Nullable PsiElement @Nullable [] getGotoDeclarationTargets(@Nullable PsiElement sourceElement, int offset, Editor editor) {
     if (sourceElement == null || !sourceElement.getLanguage().isKindOf(PerlLanguage.INSTANCE)) {
       return null;
     }

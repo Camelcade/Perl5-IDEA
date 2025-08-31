@@ -290,7 +290,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected @NotNull List<ConfigurationFromContext> getRunConfigurationsFromFileContext(@NotNull String relativePath) {
     VirtualFile virtualFile = getModuleFile(relativePath);
     PsiElement psiElement = getPsiElement(virtualFile);
-    ConfigurationContext configurationContext = ConfigurationContext.getFromContext(createDataContext(
+    @SuppressWarnings("ReturnOfNull") ConfigurationContext configurationContext = ConfigurationContext.getFromContext(createDataContext(
       it -> LangDataKeys.PSI_ELEMENT_ARRAY.is(it) ? new PsiElement[]{psiElement} : null), ActionPlaces.UNKNOWN);
     List<ConfigurationFromContext> configurationsFromContext = configurationContext.getConfigurationsFromContext();
     assertNotNull(configurationsFromContext);
