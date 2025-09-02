@@ -9,7 +9,6 @@ com.intellij.platform.images
 com.jetbrains.plugins.webDeployment
 com.perl5
 intellij.grid.plugin
-org.intellij.intelliLang
 org.intellij.plugins.markdown
 org.jetbrains.plugins.remote-run
 org.jetbrains.plugins.terminal
