@@ -27,9 +27,11 @@ dependencies {
     create(IntelliJPlatformType.IntellijIdeaUltimate, platformVersionProvider.get()){
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
+    bundledModules(
+      providers.gradleProperty("intelliLangModule").get(),
+    )
     bundledPlugins(
       "com.intellij.copyright",
-      providers.gradleProperty("intelliLangPlugin").get(),
       providers.gradleProperty("remoteRunPlugin").get(),
       providers.gradleProperty("coveragePlugin").get(),
       "XPathView",

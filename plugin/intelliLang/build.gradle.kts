@@ -32,7 +32,7 @@ dependencies {
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
 
-    bundledPlugins(providers.gradleProperty("intelliLangPlugin").get())
+    bundledModules(providers.gradleProperty("intelliLangModule").get())
   }
 }
 
