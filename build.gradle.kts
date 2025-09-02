@@ -366,7 +366,8 @@ coverallsJacoco {
 
 intellijPlatform {
   val pluginList = mutableListOf<String>()
-  val bundledPluginList = mutableListOf(providers.gradleProperty("intelliLangPlugin").get())
+  val bundledModuleList = mutableListOf(providers.gradleProperty("intelliLangModule").get())
+  val bundledPluginList = mutableListOf<String>()
 
   if (!isCI.get()) {
     pluginList.add("PsiViewer:${providers.gradleProperty("psiViewerVersion").get()}")
@@ -408,6 +409,7 @@ intellijPlatform {
         project(":lang.mason.mason2"),
       ).forEach { localPlugin(it) }
       plugins(pluginList)
+      bundledModules(bundledModuleList)
       bundledPlugins(bundledPluginList)
     }
   }

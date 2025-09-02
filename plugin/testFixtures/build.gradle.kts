@@ -32,8 +32,10 @@ dependencies {
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
 
+    bundledModules(
+      providers.gradleProperty("intelliLangModule").get(),
+    )
     bundledPlugins(
-      providers.gradleProperty("intelliLangPlugin").get(),
       "org.jetbrains.plugins.terminal",
     )
   }
