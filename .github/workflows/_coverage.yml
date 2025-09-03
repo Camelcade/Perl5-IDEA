@@ -23,8 +23,8 @@ jobs:
         if: ${{ env.COVERALLS_REPO_TOKEN }}
         uses: actions/setup-java@v5
         with:
-          distribution: 'corretto'
-          java-version: 21
+          distribution: 'jetbrains'
+          java-version: '21.0.8'
 
       - uses: actions/download-artifact@v4
         if: ${{ env.COVERALLS_REPO_TOKEN }}
