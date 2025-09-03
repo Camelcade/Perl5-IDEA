@@ -5,9 +5,9 @@ name: Project Validation
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "dev/jbr-25" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "dev/jbr-25" ]
   workflow_dispatch:
 
 env:
