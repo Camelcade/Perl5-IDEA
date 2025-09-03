@@ -210,6 +210,12 @@ allprojects {
       }
     }
 
+    project.tasks.named<Test>("test").configure {
+      javaLauncher = project.javaToolchains.launcherFor {
+        languageVersion = JavaLanguageVersion.of(25)
+      }
+    }
+
     if (isRoot) {
       listOf(
         "buildPlugin",
