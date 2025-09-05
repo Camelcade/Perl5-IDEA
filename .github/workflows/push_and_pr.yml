@@ -10,6 +10,11 @@ on:
     branches: [ "master" ]
   workflow_dispatch:
 
+env:
+  ORG_GRADLE_PROJECT_downloadIdeaSources: false
+  CI: GitHub
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
