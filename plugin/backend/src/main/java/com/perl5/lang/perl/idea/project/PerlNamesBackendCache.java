@@ -29,6 +29,7 @@ import com.intellij.openapi.roots.ModuleRootListener;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiTreeChangeAdapter;
 import com.intellij.psi.PsiTreeChangeEvent;
+import com.intellij.psi.impl.source.resolve.ResolveCache;
 import com.intellij.util.messages.MessageBusConnection;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
@@ -154,7 +155,11 @@ public class PerlNamesBackendCache implements PerlNamesCache {
       subsSet.addAll(lightDefinitionsNames);
       logger.debug("Got light definitions names: ", lightDefinitionsNames.size());
       ProgressManager.checkCanceled();
-      myKnownSubs = Collections.unmodifiableSet(subsSet);
+      var newSubSet = Collections.unmodifiableSet(subsSet);
+      if (!newSubSet.equals(myKnownSubs)) {
+        myKnownSubs = newSubSet;
+        ResolveCache.getInstance(myProject).clearCache(true);
+      }
 
       Set<String> namespacesSet = new HashSet<>(PerlPackageUtilCore.CORE_PACKAGES_ALL);
 
@@ -168,7 +173,11 @@ public class PerlNamesBackendCache implements PerlNamesCache {
       Collection<String> lightNamespacesNames = lightNamespaceIndex.getAllNames(myProject);
       namespacesSet.addAll(lightNamespacesNames);
       logger.debug("Got light namespaces names: ", lightNamespacesNames.size());
-      myKnownNamespaces = Collections.unmodifiableSet(namespacesSet);
+      var newNamespaceSet = Collections.unmodifiableSet(namespacesSet);
+      if (!newNamespaceSet.equals(myKnownNamespaces)) {
+        myKnownNamespaces = newNamespaceSet;
+        ResolveCache.getInstance(myProject).clearCache(true);
+      }
 
       logger.debug("Names cache updated");
       //noinspection ReturnOfNull
