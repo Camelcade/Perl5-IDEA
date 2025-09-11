@@ -48,7 +48,7 @@ plugins {
   id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
   id("org.sonarqube") version "6.3.1.5724"
   id("org.jetbrains.qodana") version "0.1.13"
-  id("org.jetbrains.kotlin.jvm") version "2.2.10"
+  id("org.jetbrains.kotlin.jvm") version "2.2.20"
 }
 
 repositories {
