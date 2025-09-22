@@ -13,31 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.idea.configuration.settings.sdk
 
-package com.perl5.lang.perl.idea.configuration.settings.sdk;
+import com.intellij.openapi.application.ReadAction
+import com.intellij.openapi.project.Project
+import com.intellij.openapi.roots.AdditionalLibraryRootsProvider
+import com.intellij.openapi.roots.SyntheticLibrary
+import com.intellij.openapi.vfs.VirtualFile
+import com.perl5.lang.perl.idea.project.PerlProjectManager
+import com.perl5.lang.perl.util.PerlRunUtil
 
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.roots.AdditionalLibraryRootsProvider;
-import com.intellij.openapi.roots.SyntheticLibrary;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.perl5.lang.perl.idea.project.PerlProjectManager;
-import com.perl5.lang.perl.util.PerlRunUtil;
-import org.jetbrains.annotations.NotNull;
+class PerlLibraryProvider : AdditionalLibraryRootsProvider() {
+  override fun getAdditionalProjectLibraries(project: Project): MutableCollection<SyntheticLibrary?> =
+    PerlProjectManager.getInstance(project).projectLibraries
 
-import java.util.ArrayList;
-import java.util.Collection;
-
-public class PerlLibraryProvider extends AdditionalLibraryRootsProvider {
-
-  @Override
-  public @NotNull Collection<SyntheticLibrary> getAdditionalProjectLibraries(@NotNull Project project) {
-    return PerlProjectManager.getInstance(project).getProjectLibraries();
-  }
-
-  @Override
-  public @NotNull Collection<VirtualFile> getRootsToWatch(@NotNull Project project) {
-    ArrayList<VirtualFile> libraryAndBinaryRoots = new ArrayList<>(PerlProjectManager.getInstance(project).getAllLibraryRoots());
-    PerlRunUtil.getBinDirectories(project).forEach(libraryAndBinaryRoots::add);
-    return libraryAndBinaryRoots;
-  }
+  override fun getRootsToWatch(project: Project): List<VirtualFile> =
+    PerlProjectManager.getInstance(project).allLibraryRoots + ReadAction.compute<List<VirtualFile>, Throwable> { PerlRunUtil.getBinDirectories(project).toList() }
 }
