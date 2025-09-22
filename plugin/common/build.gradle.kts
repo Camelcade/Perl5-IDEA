@@ -36,7 +36,7 @@ val genRoot = project.file("src/main/gen").also { genRoot ->
 dependencies {
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-        create(IntelliJPlatformType.IntellijIdeaCommunity, platformVersionProvider.get()){
+        create(IntelliJPlatformType.IntellijIdeaUltimate, platformVersionProvider.get()){
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
 
