@@ -19,9 +19,11 @@ package base
 import com.intellij.ide.plugins.PluginMainDescriptor
 import com.intellij.ide.plugins.PluginManager
 import com.intellij.openapi.extensions.PluginId
+import com.intellij.openapi.util.IntellijInternalApi
 import com.intellij.openapi.util.io.FileUtil
 import java.nio.file.Path
 
+@OptIn(IntellijInternalApi::class)
 open class PerlDistributionTestCase : PerlLightTestCaseBase() {
   override fun getFileExtension(): String? = "none"
 
@@ -41,7 +43,7 @@ open class PerlDistributionTestCase : PerlLightTestCaseBase() {
     result.append("Content modules:\n")
     pluginDescriptor.contentModules.forEach { moduleDescriptor ->
       result.append(
-        " - ${moduleDescriptor.moduleName} (${moduleDescriptor.moduleLoadingRule}); ${
+        " - ${moduleDescriptor.moduleId} (${moduleDescriptor.moduleLoadingRule}); ${
           moduleDescriptor.jarFiles!!.joinToString { file -> relativizer(file) }
         }\n"
       )
