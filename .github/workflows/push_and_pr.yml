@@ -10,6 +10,11 @@ on:
     branches: [ "master" ]
   workflow_dispatch:
 
+env:
+  ORG_GRADLE_PROJECT_downloadIdeaSources: false
+  CI: GitHub
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
   cancel-in-progress: true
@@ -34,7 +39,7 @@ jobs:
           java-version: '21.0.8'
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
+        uses: gradle/actions/setup-gradle@v5
         with:
           cache-read-only: false
 
