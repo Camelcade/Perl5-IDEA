@@ -19,6 +19,7 @@ package com.jetbrains.rdclient.editorActions.cwm
 import com.intellij.openapi.actionSystem.DataContext
 import com.intellij.openapi.editor.Caret
 import com.intellij.openapi.editor.Editor
+import com.intellij.openapi.fileTypes.FileType
 import com.jetbrains.rd.ide.model.ActionCallStrategyKind
 import com.perl5.lang.perl.util.PerlFrontendUtil
 
@@ -31,7 +32,8 @@ class PerlFrontendEditorActionHandlerStrategyCustomizer : FrontendEditorActionHa
     actionId: String,
     editor: Editor,
     caret: Caret?,
-    dataContext: DataContext
+    dataContext: DataContext,
+    fileType: FileType?
   ): ActionCallStrategyKind? =
     if ((actionId !in uncustomizableActions) && PerlFrontendUtil.isPluginDocument(editor.document))
       ActionCallStrategyKind.FrontendOnly

@@ -8,16 +8,16 @@ Jar files:
 Content modules:
  - perl5.lang.embedded.common.main (REQUIRED); lib/modules/perl5.lang.embedded.common.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.common.main)
+    - perl5.plugin.common.main
  - perl5.lang.embedded.backend.main (OPTIONAL); lib/modules/perl5.lang.embedded.backend.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.backend.main)
-    - Module(name=perl5.lang.embedded.common.main)
+    - perl5.plugin.backend.main
+    - perl5.lang.embedded.common.main
  - perl5.lang.embedded.frontend.main (OPTIONAL); lib/modules/perl5.lang.embedded.frontend.main.jar
   - Dependencies:
-    - Module(name=intellij.platform.frontend)
-    - Module(name=perl5.lang.embedded.common.main)
+    - intellij.platform.frontend
+    - perl5.lang.embedded.common.main
  - perl5.lang.embedded.frontend.split.main (OPTIONAL); lib/modules/perl5.lang.embedded.frontend.split.main.jar
   - Dependencies:
-    - Module(name=intellij.platform.frontend.split)
-    - Module(name=perl5.lang.embedded.frontend.main)
+    - intellij.platform.frontend.split
+    - perl5.lang.embedded.frontend.main
