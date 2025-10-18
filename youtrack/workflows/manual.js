@@ -22,6 +22,7 @@ exports.rule = entities.Issue.onChange({
             issue.description.includes('PerlXNamedValue.computeInlineDebuggerData');
       }, 'CAMELCADE-24513'],
       ['psiElement is not instance of requiredClass', 'CAMELCADE-13188'],
+      ['unable to get stub builder for file with file =', 'CAMELCADE-2086'],
     ];
 
     let issue = ctx.issue;
