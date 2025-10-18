@@ -23,6 +23,7 @@ exports.rule = entities.Issue.onChange({
       }, 'CAMELCADE-24513'],
       ['psiElement is not instance of requiredClass', 'CAMELCADE-13188'],
       ['unable to get stub builder for file with file =', 'CAMELCADE-2086'],
+      ['VfsData$FileAlreadyCreatedException: fileId', 'CAMELCADE-19432'],
     ];
 
     let issue = ctx.issue;
