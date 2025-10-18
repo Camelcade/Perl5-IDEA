@@ -28,12 +28,15 @@ dependencies {
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
-        create(IntelliJPlatformType.IntellijIdeaCommunity, platformVersionProvider.get()){
+        create(IntelliJPlatformType.IntellijIdeaUltimate, platformVersionProvider.get()){
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
 
+    bundledModules(
+      providers.gradleProperty("intelliLangModule").get(),
+      providers.gradleProperty("intelliLangBackendModule").get(),
+    )
     bundledPlugins(
-      providers.gradleProperty("intelliLangPlugin").get(),
       "org.jetbrains.plugins.terminal",
     )
   }

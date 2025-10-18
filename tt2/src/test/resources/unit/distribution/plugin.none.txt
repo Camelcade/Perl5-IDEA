@@ -8,16 +8,16 @@ Jar files:
 Content modules:
  - perl5.lang.tt2.common.main (REQUIRED); lib/modules/perl5.lang.tt2.common.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.common.main)
+    - perl5.plugin.common.main
  - perl5.lang.tt2.backend.main (OPTIONAL); lib/modules/perl5.lang.tt2.backend.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.backend.main)
-    - Module(name=perl5.lang.tt2.common.main)
+    - perl5.plugin.backend.main
+    - perl5.lang.tt2.common.main
  - perl5.lang.tt2.frontend.main (OPTIONAL); lib/modules/perl5.lang.tt2.frontend.main.jar
   - Dependencies:
-    - Module(name=intellij.platform.frontend)
-    - Module(name=perl5.lang.tt2.common.main)
+    - intellij.platform.frontend
+    - perl5.lang.tt2.common.main
  - perl5.lang.tt2.frontend.split.main (OPTIONAL); lib/modules/perl5.lang.tt2.frontend.split.main.jar
   - Dependencies:
-    - Module(name=intellij.platform.frontend.split)
-    - Module(name=perl5.lang.tt2.frontend.main)
+    - intellij.platform.frontend.split
+    - perl5.lang.tt2.frontend.main
