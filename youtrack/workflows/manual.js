@@ -5,7 +5,7 @@ exports.rule = entities.Issue.onChange({
   title: "Stub Index Points To A File",
   guard: function (ctx) {
     const issue = ctx.issue;
-    return issue.is(ctx.State, ctx.State.Submitted);
+    return issue.is(ctx.State, ctx.State.Submitted) || issue.is(ctx.State, ctx.State.Open);
   },
   action: function (ctx) {
     const patterns = [
@@ -21,6 +21,7 @@ exports.rule = entities.Issue.onChange({
         return issue.description.includes('Read access is allowed from inside read-action only') &&
             issue.description.includes('PerlXNamedValue.computeInlineDebuggerData');
       }, 'CAMELCADE-24513'],
+      ['psiElement is not instance of requiredClass', 'CAMELCADE-13188'],
     ];
 
     let issue = ctx.issue;
@@ -46,6 +47,7 @@ exports.rule = entities.Issue.onChange({
       name: "State",
       type: entities.State.fieldType,
       Submitted: {name: "Submitted"},
+      Open: {name: "Open"},
       Duplicate: {name: "Duplicate"}
     }
   }
