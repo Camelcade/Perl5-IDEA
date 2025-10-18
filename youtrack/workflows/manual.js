@@ -24,6 +24,10 @@ exports.rule = entities.Issue.onChange({
       ['psiElement is not instance of requiredClass', 'CAMELCADE-13188'],
       ['unable to get stub builder for file with file =', 'CAMELCADE-2086'],
       ['VfsData$FileAlreadyCreatedException: fileId', 'CAMELCADE-19432'],
+      [function (issue) {
+        return issue.description.includes('java.lang.StringIndexOutOfBoundsException') &&
+            issue.description.includes('JSEmbeddedContentElementType.parseContents');
+      }, 'CAMELCADE-21684'],
     ];
 
     let issue = ctx.issue;
