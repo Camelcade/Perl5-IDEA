@@ -33,7 +33,7 @@ jobs:
           ./gradlew buildPlugin --console plain
 
       - name: Upload Plugins
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: plugins
           path: |
