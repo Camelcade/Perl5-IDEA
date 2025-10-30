@@ -8,16 +8,16 @@ Jar files:
 Content modules:
  - perl5.lang.mojo.common.main (REQUIRED); lib/modules/perl5.lang.mojo.common.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.common.main)
+    - perl5.plugin.common.main
  - perl5.lang.mojo.backend.main (OPTIONAL); lib/modules/perl5.lang.mojo.backend.main.jar
   - Dependencies:
-    - Module(name=perl5.plugin.backend.main)
-    - Module(name=perl5.lang.mojo.common.main)
+    - perl5.plugin.backend.main
+    - perl5.lang.mojo.common.main
  - perl5.lang.mojo.frontend.main (OPTIONAL); lib/modules/perl5.lang.mojo.frontend.main.jar
   - Dependencies:
-    - Module(name=intellij.platform.frontend)
-    - Module(name=perl5.lang.mojo.common.main)
+    - intellij.platform.frontend
+    - perl5.lang.mojo.common.main
  - perl5.lang.mojo.frontend.split.main (OPTIONAL); lib/modules/perl5.lang.mojo.frontend.split.main.jar
   - Dependencies:
-    - Module(name=intellij.platform.frontend.split)
-    - Module(name=perl5.lang.mojo.frontend.main)
+    - intellij.platform.frontend.split
+    - perl5.lang.mojo.frontend.main

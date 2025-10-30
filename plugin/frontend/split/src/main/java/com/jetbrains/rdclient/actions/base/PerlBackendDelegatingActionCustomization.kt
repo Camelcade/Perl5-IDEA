@@ -18,12 +18,15 @@ package com.jetbrains.rdclient.actions.base
 
 import com.intellij.openapi.actionSystem.CommonDataKeys.EDITOR
 import com.intellij.openapi.actionSystem.DataContext
+import com.intellij.openapi.fileTypes.FileType
 import com.intellij.openapi.util.registry.Registry
 import com.jetbrains.rdclient.actions.ActionCallStrategy
 import com.perl5.lang.perl.util.PerlFrontendUtil
 
 class PerlBackendDelegatingActionCustomization : BackendDelegatingActionCustomization() {
-  override fun isAvailable(dataContext: DataContext): Boolean = Registry.`is`("perl5.frontend.speculative.actions.enabled") &&
+  override fun isAvailable(dataContext: DataContext, fileType: FileType?): Boolean = isAvailable(dataContext)
+
+  private fun isAvailable(dataContext: DataContext): Boolean = Registry.`is`("perl5.frontend.speculative.actions.enabled") &&
     PerlFrontendUtil.isPluginDocument(EDITOR.getData(dataContext)?.document)
 
   override fun getActionCallStrategy(dataContext: DataContext, frontendActionId: String): ActionCallStrategy? =
