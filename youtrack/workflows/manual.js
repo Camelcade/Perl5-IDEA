@@ -41,7 +41,7 @@ exports.rule = entities.Issue.onChange({
           break;
         }
         issue.links.duplicates.add(targetIssue);
-        issue.fields.State.value = ctx.State.Duplicate;
+        issue.fields.State = ctx.State.Duplicate;
         console.log(`Linking ${issue.id} to ${targetIssue.id}`);
         break;
       }
