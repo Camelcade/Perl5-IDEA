@@ -1,2 +1,1 @@
 kill(<caret>);
-No element

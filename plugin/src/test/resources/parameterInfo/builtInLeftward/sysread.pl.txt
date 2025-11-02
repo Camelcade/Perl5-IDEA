@@ -1,2 +1,1 @@
 sysread(<caret>);
-No element

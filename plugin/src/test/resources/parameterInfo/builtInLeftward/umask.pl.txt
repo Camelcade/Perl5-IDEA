@@ -1,2 +1,1 @@
 umask(<caret>);
-No element

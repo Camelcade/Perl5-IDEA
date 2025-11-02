@@ -1,2 +1,1 @@
 getnetbyaddr(<caret>);
-No element

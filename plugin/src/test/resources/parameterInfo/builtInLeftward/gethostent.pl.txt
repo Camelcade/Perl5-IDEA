@@ -1,2 +1,1 @@
 gethostent(<caret>);
-No element

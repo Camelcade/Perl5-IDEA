@@ -1,2 +1,1 @@
 sprintf <caret> 
-No element

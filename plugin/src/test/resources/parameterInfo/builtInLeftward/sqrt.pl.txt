@@ -1,2 +1,1 @@
 sqrt(<caret>);
-No element

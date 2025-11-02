@@ -1,2 +1,1 @@
 printf <caret> 
-No element

@@ -1,2 +1,1 @@
 endprotoent <caret> 
-No element

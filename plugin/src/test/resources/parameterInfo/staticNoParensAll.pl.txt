@@ -1,11 +1,11 @@
 <caret>Foo::Bar::list_and_shifts one => two => 42;
-No element
+
 ----------
 Fo<caret>o::Bar::list_and_shifts one => two => 42;
-No element
+
 ----------
 Foo::Bar:<caret>:list_and_shifts one => two => 42;
-No element
+
 ----------
 Foo::Bar::list_and_shifts<caret> one => two => 42;
 <$var>, undef, $othervar
@@ -41,4 +41,3 @@ Foo::Bar::list_and_shifts one => two => 42<caret>;
 $var, undef, <$othervar>
 ----------
 Foo::Bar::list_and_shifts one => two => 42;<caret>
-No element
