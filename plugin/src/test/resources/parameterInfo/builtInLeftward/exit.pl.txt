@@ -1,2 +1,1 @@
 exit(<caret>);
-No element

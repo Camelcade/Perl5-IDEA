@@ -1,2 +1,1 @@
 setnetent(<caret>);
-No element

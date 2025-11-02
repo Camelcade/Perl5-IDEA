@@ -1,2 +1,1 @@
 cos(<caret>);
-No element

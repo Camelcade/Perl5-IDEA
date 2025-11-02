@@ -1,2 +1,1 @@
 scalar(<caret>);
-No element

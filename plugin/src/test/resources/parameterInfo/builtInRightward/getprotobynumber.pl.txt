@@ -1,2 +1,1 @@
 getprotobynumber <caret> 
-No element

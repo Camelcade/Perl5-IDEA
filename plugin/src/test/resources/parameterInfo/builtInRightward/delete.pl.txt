@@ -1,2 +1,1 @@
 delete <caret> 
-No element

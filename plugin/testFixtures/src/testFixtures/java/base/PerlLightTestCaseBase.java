@@ -2553,7 +2553,6 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         MockCreateParameterInfoContext context = new MockCreateParameterInfoContext(editor, file);
         Object element = handler.findElementForParameterInfo(context);
         if (element == null) {
-          sb.append("No element");
           continue;
         }
         Object[] itemsToShow = context.getItemsToShow();

@@ -1,2 +1,1 @@
 readline(<caret>);
-No element

@@ -1,2 +1,1 @@
 getservent(<caret>);
-No element

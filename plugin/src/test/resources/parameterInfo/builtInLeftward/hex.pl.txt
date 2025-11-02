@@ -1,2 +1,1 @@
 hex(<caret>);
-No element
