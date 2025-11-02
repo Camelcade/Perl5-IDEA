@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package annotator;
 
 
 import base.PerlLightTestCase;
-import com.intellij.spellchecker.inspections.SpellCheckingInspection;
+import com.intellij.grazie.spellcheck.GrazieSpellCheckingInspection;
 import com.intellij.testFramework.ExpectedHighlightingData;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.idea.inspections.*;
@@ -135,7 +135,7 @@ public class PerlAnnotatorTest extends PerlLightTestCase {
   @Test
   public void testSpellChecker() {
     //noinspection deprecation
-    ExpectedHighlightingData.expectedDuplicatedHighlighting(() -> doInspectionTest(SpellCheckingInspection.class));
+    ExpectedHighlightingData.expectedDuplicatedHighlighting(() -> doInspectionTest(GrazieSpellCheckingInspection.class));
   }
 
   @Test

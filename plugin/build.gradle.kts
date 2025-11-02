@@ -34,6 +34,7 @@ dependencies {
       "com.intellij.copyright",
       providers.gradleProperty("remoteRunPlugin").get(),
       providers.gradleProperty("coveragePlugin").get(),
+      "tanvd.grazi",
       "XPathView",
       "org.jetbrains.plugins.terminal",
     )

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ package annotator;
 
 
 import base.PodLightTestCase;
-import com.intellij.spellchecker.inspections.SpellCheckingInspection;
+import com.intellij.grazie.spellcheck.GrazieSpellCheckingInspection;
 import com.perl5.lang.pod.idea.inspections.PodLegacySectionLinkInspection;
 import com.perl5.lang.pod.idea.inspections.PodOverlessItemInspection;
 import com.perl5.lang.pod.idea.inspections.PodUnresolvableLinkInspection;
@@ -30,7 +30,7 @@ public class PodAnnotatorTest extends PodLightTestCase {
   }
 
   @Test
-  public void testSpellChecker() {doInspectionTest(SpellCheckingInspection.class);}
+  public void testSpellChecker() { doInspectionTest(GrazieSpellCheckingInspection.class); }
 
   @Test
   public void testLegacyLink() {doInspectionTest(PodLegacySectionLinkInspection.class);}
