@@ -29,7 +29,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VfsUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileManager;
-import com.intellij.util.indexing.BuildableRootsChangeRescanningInfo;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jdom.Element;
 import org.jetbrains.annotations.ApiStatus;
@@ -84,12 +83,8 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     LOG.assertTrue(myOriginal != null, "Attempt to commit non-modifiable model");
     if (isChanged()) {
       synchronized (myOriginal) {
-        WriteAction.run(
-          () -> ProjectRootManagerEx.getInstanceEx(myModule.getProject()).makeRootsChange(() -> {
-            myOriginal.myRoots = new LinkedHashMap<>(myRoots);
-            myOriginal.myModificationTracker++;
-          }, false, true)
-        );
+        myOriginal.myRoots = new LinkedHashMap<>(myRoots);
+        myOriginal.myModificationTracker++;
       }
     }
   }
@@ -215,7 +210,10 @@ public class PerlModuleExtension extends ModuleExtension implements PersistentSt
     }
     finally {
       if( moduleExtensionModifiableModel.isChanged()){
-        WriteAction.run(modifiableModel::commit);
+        //noinspection deprecation
+        WriteAction.run(
+          () -> ProjectRootManagerEx.getInstanceEx(module.getProject()).makeRootsChange(modifiableModel::commit, false, true)
+        );
       }
       else {
         modifiableModel.dispose();
