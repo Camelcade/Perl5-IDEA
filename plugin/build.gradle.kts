@@ -81,6 +81,13 @@ tasks {
   }
 
   test {
+    val jsvg = provider {
+      intellijPlatform.platformPath.resolve("lib/module-intellij.libraries.jsvg.jar").toFile()
+    }
+
+    dependencies {
+      testApi(files(jsvg))
+    }
     dependencies {
       intellijPlatform {
         listOf(
