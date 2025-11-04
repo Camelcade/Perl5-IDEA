@@ -407,7 +407,7 @@ intellijPlatform {
 }
 
 configurations.all {
-  resolutionStrategy.cacheDynamicVersionsFor(7, "days")
+  resolutionStrategy.cacheDynamicVersionsFor(providers.gradleProperty("dynamic.version.cache.days").get().toInt(), "days")
 }
 
 fun archiveBasePrefix(projectName: String) = "${rootProject.name}.${projectName}"
