@@ -11,6 +11,7 @@ import org.jetbrains.intellij.platform.gradle.tasks.aware.SplitModeAware.SplitMo
 import kotlin.io.path.exists
 import kotlin.io.path.readText
 import kotlin.io.path.writeText
+import org.jetbrains.intellij.platform.gradle.models.Coordinates
 
 /*
  * Copyright 2015-2021 Alexandr Evstigneev
@@ -107,6 +108,8 @@ allprojects {
         javaCompiler(platformToolsVersion)
         testFramework(TestFrameworkType.Platform, version = platformToolsVersion)
       }
+//      testFramework(TestFrameworkType.Plugin.Debugger)
+      platformDependency(Coordinates("com.jetbrains.intellij.platform", "debugger-test-framework"))
       testFramework(TestFrameworkType.Bundled)
       jetbrainsRuntime()
     }
