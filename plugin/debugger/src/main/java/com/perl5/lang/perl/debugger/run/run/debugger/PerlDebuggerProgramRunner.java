@@ -28,6 +28,7 @@ import com.intellij.xdebugger.XDebugProcess;
 import com.intellij.xdebugger.XDebugProcessStarter;
 import com.intellij.xdebugger.XDebugSession;
 import com.intellij.xdebugger.XDebuggerManager;
+import com.intellij.xdebugger.impl.XDebugSessionImpl;
 import com.perl5.lang.perl.debugger.PerlDebugProcess;
 import com.perl5.lang.perl.debugger.PerlDebuggerBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlProgramRunner;
@@ -82,7 +83,7 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
             return new PerlDebugProcess(session, perlDebugProfileStateBase, executionResult);
           }
         });
-        result.setResult(xDebugSession.getRunContentDescriptor());
+        result.setResult(((XDebugSessionImpl)xDebugSession).getMockRunContentDescriptor());
       }
       catch (ExecutionException e) {
         LOG.error(e);
