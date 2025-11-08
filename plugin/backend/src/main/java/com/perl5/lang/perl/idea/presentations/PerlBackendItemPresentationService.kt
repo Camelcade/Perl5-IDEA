@@ -45,7 +45,8 @@ class PerlBackendItemPresentationService : PerlItemPresentationService {
     val innerMostSourceRoot =
       ProjectRootManagerEx.getInstanceEx(containingFile.project).fileIndex.getContentRootForFile(virtualFile)
     return if (innerMostSourceRoot != null) {
-      VfsUtilCore.getRelativePath(virtualFile, innerMostSourceRoot)!!
+      VfsUtilCore.getRelativePath(virtualFile, innerMostSourceRoot)
+        ?: throw NullPointerException("Unable to find relative path for $virtualFile in $innerMostSourceRoot")
     }
     else {
       virtualFile.path
