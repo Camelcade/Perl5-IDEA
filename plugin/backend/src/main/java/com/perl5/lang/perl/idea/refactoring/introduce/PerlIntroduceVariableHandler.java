@@ -198,6 +198,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
 
   private void performDialogRename(@NotNull Project project, @NotNull PerlVariableDeclarationElement variableDeclaration) {
     DataManager.getInstance().getDataContextFromFocusAsync().onProcessed(renamingContext -> {
+      LOG.assertTrue(renamingContext != null);
       Application application = ApplicationManager.getApplication();
       if (application.isUnitTestMode()) {
         DataContext originalContext = renamingContext;
