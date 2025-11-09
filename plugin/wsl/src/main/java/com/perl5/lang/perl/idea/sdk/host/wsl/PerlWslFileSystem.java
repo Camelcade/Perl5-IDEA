@@ -51,7 +51,7 @@ class PerlWslFileSystem extends PerlPluggableVirtualFileSystem {
   @Override
   public @Nullable VirtualFile findFileByPath(@NotNull String path) {
     String windowsPath = computeSafeOnWsl(() -> myDistribution.getWindowsPath(path));
-    VirtualFile realFile = VfsUtil.findFileByIoFile(new File(windowsPath), false);
+    VirtualFile realFile = windowsPath == null ? null : VfsUtil.findFileByIoFile(new File(windowsPath), false);
     return realFile == null ? null : new WslVirtualFile(realFile, path);
   }
 
