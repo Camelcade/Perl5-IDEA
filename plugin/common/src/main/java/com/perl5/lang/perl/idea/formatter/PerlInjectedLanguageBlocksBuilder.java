@@ -106,8 +106,8 @@ public class PerlInjectedLanguageBlocksBuilder implements PsiLanguageInjectionHo
   }
 
   private @Nullable Block getInjectedLanguageRoot() {
-    if (myInjectedPsiFile == null ||
-        StringUtil.isEmptyOrSpaces(getInjectedTreeRange().subSequence(myInjectedPsiFile.getNode().getChars()))) {
+    var injectedFileNode = myInjectedPsiFile == null ? null : myInjectedPsiFile.getNode();
+    if (injectedFileNode == null || StringUtil.isEmptyOrSpaces(getInjectedTreeRange().subSequence(injectedFileNode.getChars()))) {
       return null;
     }
 
