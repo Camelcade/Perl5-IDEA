@@ -17,6 +17,7 @@
 package com.perl5.lang.htmlmason.parser.psi.impl;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.htmlmason.parser.psi.HTMLMasonArgsBlock;
@@ -60,11 +61,14 @@ public class HTMLMasonArgsBlockImpl extends HTMLMasonStubBasedElement<HTMLMasonA
       if (run instanceof PerlVariableDeclarationElement variableDeclarationElement) {
         PerlVariable variable = variableDeclarationElement.getVariable();
         PsiElement nextSibling = PerlPsiUtil.getNextSignificantSibling(run);
-        result.add(PerlSubArgument.create(
-          variable.getActualType(),
-          variable.getName(),
-          nextSibling != null && nextSibling.getNode().getElementType() == FAT_COMMA
-        ));
+        var variableName = variable.getName();
+        if (StringUtil.isNotEmpty(variableName)) {
+          result.add(PerlSubArgument.create(
+            variable.getActualType(),
+            variableName,
+            nextSibling != null && nextSibling.getNode().getElementType() == FAT_COMMA
+          ));
+        }
       }
       run = run.getNextSibling();
     }
