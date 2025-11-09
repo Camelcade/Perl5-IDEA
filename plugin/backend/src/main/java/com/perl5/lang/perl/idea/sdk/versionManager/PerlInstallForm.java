@@ -36,11 +36,11 @@ import java.util.List;
 public class PerlInstallForm {
   private final @NotNull InstallFormHelper myHelper;
 
-  private JComboBox<String> myDistributionsComboBox;
-  private JPanel myRootPanel;
-  private JPanel myOptionsPanel;
-  private JCheckBox myAddInstalledPerl5ToCheckBox;
-  private JCheckBox mySetInstalledPerl5ForCheckBox;
+  private @NotNull JComboBox<String> myDistributionsComboBox;
+  private @NotNull JPanel myRootPanel;
+  private @NotNull JPanel myOptionsPanel;
+  private @NotNull JCheckBox myAddInstalledPerl5ToCheckBox;
+  private @NotNull JCheckBox mySetInstalledPerl5ForCheckBox;
 
   public PerlInstallForm(@Nullable PerlInstallFormOptions optionsForm,
                          @NotNull InstallFormHelper helper,
@@ -99,7 +99,7 @@ public class PerlInstallForm {
     return myHelper.cleanDistributionItem(ObjectUtils.notNull((String)myDistributionsComboBox.getSelectedItem(), ""));
   }
 
-  public JPanel getRootPanel() {
+  public @NotNull JPanel getRootPanel() {
     return myRootPanel;
   }
 
