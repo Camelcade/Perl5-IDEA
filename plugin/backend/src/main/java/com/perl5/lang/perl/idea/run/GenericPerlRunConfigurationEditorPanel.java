@@ -68,8 +68,8 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   private LabeledComponent<RawCommandLineEditor> myLabeledPerlArgumentsPanel;
   private RawCommandLineEditor myPerlArgumentsPanel;
 
-  private JBCheckBox myAlternativeSdkCheckbox;
-  private Perl5SdkConfigurable mySdkConfigurable;
+  private @NotNull JBCheckBox myAlternativeSdkCheckbox;
+  private @NotNull Perl5SdkConfigurable mySdkConfigurable;
 
   private LabeledComponent<ExpandableTextField> myRequiredModulesLabeledField;
 
