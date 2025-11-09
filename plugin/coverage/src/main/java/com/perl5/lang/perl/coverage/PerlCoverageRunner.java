@@ -50,6 +50,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 
 public class PerlCoverageRunner extends CoverageRunner {
@@ -62,7 +63,9 @@ public class PerlCoverageRunner extends CoverageRunner {
                                                             @Nullable CoverageSuite baseCoverageSuite,
                                                             @NotNull CoverageLoadErrorReporter reporter) {
     if (!(baseCoverageSuite instanceof PerlCoverageSuite perlCoverageSuite)) {
-      return new FailedCoverageLoadingResult("Wrong type of coverage suite: " + baseCoverageSuite.getClass().getCanonicalName());
+      return new FailedCoverageLoadingResult(
+        "Wrong type of coverage suite: " +
+        (baseCoverageSuite == null ? "null" : baseCoverageSuite.getClass().getCanonicalName()));
     }
     final Ref<ProjectData> projectDataRef = new Ref<>();
     if (ApplicationManager.getApplication().isDispatchThread()) {
@@ -75,7 +78,7 @@ public class PerlCoverageRunner extends CoverageRunner {
     else {
       projectDataRef.set(doLoadCoverageData(sessionDataFile, perlCoverageSuite));
     }
-    return new SuccessCoverageLoadingResult(projectDataRef.get());
+    return new SuccessCoverageLoadingResult(Objects.requireNonNull(projectDataRef.get()));
   }
 
   private static @Nullable ProjectData doLoadCoverageData(@NotNull File sessionDataFile, @NotNull PerlCoverageSuite perlCoverageSuite) {
