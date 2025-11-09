@@ -21,6 +21,7 @@ import com.intellij.ide.HelpTooltip;
 import com.intellij.openapi.actionSystem.*;
 import com.intellij.openapi.actionSystem.impl.ActionToolbarImpl;
 import com.intellij.openapi.actionSystem.toolbarLayout.ToolbarLayoutStrategy;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.ListPopup;
@@ -35,6 +36,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Perl5SdkPanel {
+  private static final Logger LOG = Logger.getInstance(Perl5SdkPanel.class);
   private @NotNull ComboBox<Perl5SdkWrapper> mySdkComboBox;
   private @NotNull JPanel myMainPanel;
   private final @NotNull DefaultActionGroup myActionGroup = new DefaultActionGroup();
@@ -80,7 +82,13 @@ public class Perl5SdkPanel {
         ListPopup actionGroupPopup = JBPopupFactory.getInstance().
           createActionGroupPopup(null, myActionGroup, e.getDataContext(), true, null, Integer.MAX_VALUE);
 
-        HelpTooltip.setMasterPopup(e.getInputEvent().getComponent(), actionGroupPopup);
+        var inputEvent = e.getInputEvent();
+        if (inputEvent == null) {
+          LOG.debug("No input event in action event");
+        }
+        else {
+          HelpTooltip.setMasterPopup(inputEvent.getComponent(), actionGroupPopup);
+        }
         actionGroupPopup.show(new RelativePoint(toolbar, getPopupPoint()));
       }
 
