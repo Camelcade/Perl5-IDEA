@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,6 @@ import com.intellij.openapi.roots.ProjectFileIndex;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.SmartHashSet;
 import com.perl5.lang.perl.buildSystem.PerlBuildSystemHandler;
-import com.perl5.lang.perl.fileTypes.PerlFileTypeTest;
-import com.perl5.lang.perl.idea.run.GenericPerlRunConfigurationProducer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collections;
@@ -43,7 +41,7 @@ public class PerlTestRunConfigurationProducer extends PerlAbstractTestRunConfigu
     var processedModules = new SmartHashSet<Module>();
     for (VirtualFile targetFile : targetFiles) {
       var fileModule = projectFileIndex.getModuleForFile(targetFile);
-      if( processedModules.add(fileModule) && PerlBuildSystemHandler.getTestsHandler(fileModule) != null ){
+      if (fileModule != null && processedModules.add(fileModule) && PerlBuildSystemHandler.getTestsHandler(fileModule) != null) {
         return Collections.emptyList();
       }
     }
