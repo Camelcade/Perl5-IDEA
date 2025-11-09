@@ -87,12 +87,11 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
     }
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(perlSdk);
     var remoteScriptPath = hostData.getRemotePath(localScriptPath);
-    if (remoteScriptPath == null) {
-      LOG.warn("No remote path for " + localScriptPath + " in " + perlSdk);
+    VirtualFile targetDirectory = getTargetDirectory(e);
+    if (targetDirectory == null) {
+      LOG.debug("No virtual file in action event");
       return;
     }
-
-    VirtualFile targetDirectory = getTargetDirectory(e);
     var targetDirectoryPath = targetDirectory.getPath();
     var callbackTestSemaphore = myCallbackTestSemaphore;
 
@@ -121,7 +120,9 @@ public abstract class MojoGenerateAction extends MojoScriptAction {
       .withWorkDirectory(targetDirectoryPath)
       .withProcessListener(processListener);
 
-    PerlRunUtil.updatePerl5Opt(perlCommandLine.getEnvironment(), PerlRunUtil.getPerlRunIncludeArguments(hostData, project));
+    if (project != null) {
+      PerlRunUtil.updatePerl5Opt(perlCommandLine.getEnvironment(), PerlRunUtil.getPerlRunIncludeArguments(hostData, project));
+    }
 
     PerlRunUtil.runInConsole(perlCommandLine);
   }
