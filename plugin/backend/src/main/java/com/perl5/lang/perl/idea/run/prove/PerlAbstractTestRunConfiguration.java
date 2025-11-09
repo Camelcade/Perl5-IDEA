@@ -24,6 +24,7 @@ import com.intellij.execution.testframework.sm.SMTestRunnerConnectionUtil;
 import com.intellij.execution.testframework.sm.runner.ui.SMTRunnerConsoleView;
 import com.intellij.execution.ui.ConsoleView;
 import com.intellij.openapi.application.ApplicationManager;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.SettingsEditor;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
@@ -50,6 +51,7 @@ import static com.perl5.lang.perl.util.PerlRunUtil.PERL5OPT;
 import static com.perl5.lang.perl.util.PerlRunUtil.getPerlRunIncludeArguments;
 
 public abstract class PerlAbstractTestRunConfiguration extends GenericPerlRunConfiguration {
+  private static final Logger LOG = Logger.getInstance(PerlAbstractTestRunConfiguration.class);
   static final int DEFAULT_JOBS_NUMBER = 1;
   @Tag("JOBS_NUMBER")
   private int myJobsNumber = DEFAULT_JOBS_NUMBER;
@@ -214,7 +216,12 @@ public abstract class PerlAbstractTestRunConfiguration extends GenericPerlRunCon
       else {
         effectivePath = perlHostData.getRemotePath(virtualFilePath);
       }
-      addTestPathArguments(testsPaths, effectivePath, testVirtualFile);
+      if (effectivePath != null) {
+        addTestPathArguments(testsPaths, effectivePath, testVirtualFile);
+      }
+      else {
+        LOG.warn("Unable to compute the effective path");
+      }
     }
     return testsPaths;
   }
