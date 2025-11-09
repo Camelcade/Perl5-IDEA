@@ -228,8 +228,6 @@
 
     <virtualFileSystem key="perlhost" implementationClass="com.perl5.lang.perl.idea.sdk.host.PerlHostVirtualFileSystem"/>
 
-    <editorFactoryListener implementation="com.perl5.lang.perl.idea.configuration.settings.PerlEditorFactoryListener"/>
-
     <projectService serviceImplementation="com.perl5.lang.perl.idea.completion.PerlStringCompletionCache"/>
     <projectService serviceImplementation="com.perl5.lang.perl.xsubs.PerlXSubsState"/>
     <projectService serviceImplementation="com.perl5.lang.perl.idea.project.PerlProjectManager"/>
