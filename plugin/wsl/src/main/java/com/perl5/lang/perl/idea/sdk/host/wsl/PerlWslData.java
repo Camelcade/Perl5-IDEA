@@ -186,7 +186,7 @@ class PerlWslData extends PerlHostData<PerlWslData, PerlWslHandler> {
       if (!errorRef.isNull()) {
         throw errorRef.get();
       }
-      return resultFuture.get();
+      return Objects.requireNonNull(resultFuture.get());
     }
     catch (InterruptedException e) {
       Thread.currentThread().interrupt();
