@@ -23,6 +23,7 @@ import com.intellij.lang.injection.MultiHostRegistrar;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.NotNullLazyValue;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiLanguageInjectionHost;
 import com.intellij.psi.tree.IElementType;
@@ -155,7 +156,7 @@ public abstract class PerlLiteralLanguageInjector implements MultiHostInjector {
    */
   private @NotNull String buildReplacement(@NotNull PsiElement elementToReplace) {
     if (elementToReplace instanceof PerlVariable perlVariable) {
-      return perlVariable.getName();
+      return StringUtil.notNullize(perlVariable.getName());
     }
     else if (PerlTokenSets.STRING_CHAR_UNRENDERABLE_ALIASES.contains(PsiUtilCore.getElementType(elementToReplace))) {
       return " ";
