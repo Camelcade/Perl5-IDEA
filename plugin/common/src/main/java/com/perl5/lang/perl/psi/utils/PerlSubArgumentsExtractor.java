@@ -16,6 +16,7 @@
 
 package com.perl5.lang.perl.psi.utils;
 
+import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.Processor;
@@ -127,7 +128,7 @@ public class PerlSubArgumentsExtractor implements Processor<PsiPerlStatement> {
       PerlVariable variable = variableDeclarationElement.getVariable();
       return PerlSubArgument.mandatory(
         variable.getActualType(),
-        variable.getName(),
+        StringUtil.notNullize(variable.getName()),
         variableClass
       );
     }
