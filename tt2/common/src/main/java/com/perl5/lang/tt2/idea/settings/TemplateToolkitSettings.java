@@ -71,7 +71,7 @@ public class TemplateToolkitSettings implements PersistentStateComponent<Templat
   }
 
   public void settingsUpdated() {
-    myProject.getMessageBus().syncPublisher(TT2_SETTINGS_TOPIC).settingsUpdated();
+    getProject().getMessageBus().syncPublisher(TT2_SETTINGS_TOPIC).settingsUpdated();
     ApplicationManager.getApplication().invokeLater(() -> WriteAction.run(
       () -> ProjectRootManagerEx.getInstanceEx(getProject()).makeRootsChange(
         EmptyRunnable.getInstance(), RootsChangeRescanningInfo.TOTAL_RESCAN)));
