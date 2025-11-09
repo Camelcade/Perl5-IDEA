@@ -269,7 +269,7 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
                                                                      @NotNull PsiElement anchor,
                                                                      @NotNull List<? super SmartPsiElementPointer<PsiElement>> psiOccurrences) {
     Project project = declarationBlock.first.getProject();
-    return WriteCommandAction.writeCommandAction(project).compute(() -> {
+    var elementPointer = WriteCommandAction.writeCommandAction(project).compute(() -> {
       final RefactoringEventData afterData = new RefactoringEventData();
       afterData.addElement(declarationBlock.first);
       project.getMessageBus().syncPublisher(RefactoringEventListener.REFACTORING_EVENT_TOPIC)
@@ -329,7 +329,8 @@ public class PerlIntroduceVariableHandler implements RefactoringActionHandler {
       );
 
       return SmartPointerManager.createPointer(declarationElement);
-    }).getElement();
+    });
+    return elementPointer == null ? null : elementPointer.getElement();
   }
 
   protected void showErrorMessage(@NotNull Project project, Editor editor, @DialogMessage @NotNull String message) {
