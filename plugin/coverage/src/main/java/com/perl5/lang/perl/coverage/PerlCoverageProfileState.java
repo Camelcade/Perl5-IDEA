@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2025 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,11 +47,14 @@ public class PerlCoverageProfileState extends PerlRunProfileState {
     String coverageBasePath =
       CoverageEnabledConfiguration.getOrCreate((GenericPerlRunConfiguration)getEnvironment().getRunProfile()).getCoverageFilePath();
 
-    if (coverageBasePath != null) {
-      File coverageDir = new File(coverageBasePath);
-      coverageDir.mkdirs();
-      LOG.debug("Coverage directory created: ", coverageDir);
+    if (coverageBasePath == null) {
+      throw new ExecutionException(
+        PerlCoverageBundle.message("dialog.message.unable.to.create.coverage.directory.for", perlRunConfiguration));
     }
+
+    File coverageDir = new File(coverageBasePath);
+    coverageDir.mkdirs();
+    LOG.debug("Coverage directory created: ", coverageDir);
 
     Sdk effectiveSdk = perlRunConfiguration.getEffectiveSdk();
     PerlHostData<?, ?> hostData = PerlHostData.notNullFrom(effectiveSdk);
