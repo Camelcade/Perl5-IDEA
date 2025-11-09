@@ -35,17 +35,17 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Perl5SdkPanel {
-  private ComboBox<Perl5SdkWrapper> mySdkComboBox;
-  private JPanel myMainPanel;
-  private final DefaultActionGroup myActionGroup = new DefaultActionGroup();
-  private JPanel myToolBar;
-  private JLabel myLabel;
+  private @NotNull ComboBox<Perl5SdkWrapper> mySdkComboBox;
+  private @NotNull JPanel myMainPanel;
+  private final @NotNull DefaultActionGroup myActionGroup = new DefaultActionGroup();
+  private @NotNull JPanel myToolBar;
+  private @NotNull JLabel myLabel;
 
-  public ComboBox<Perl5SdkWrapper> getSdkComboBox() {
+  public @NotNull ComboBox<Perl5SdkWrapper> getSdkComboBox() {
     return mySdkComboBox;
   }
 
-  public JPanel getMainPanel() {
+  public @NotNull JPanel getMainPanel() {
     return myMainPanel;
   }
 
