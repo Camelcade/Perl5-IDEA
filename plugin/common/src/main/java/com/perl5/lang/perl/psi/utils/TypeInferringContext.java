@@ -84,7 +84,7 @@ class TypeInferringContext {
     }
     myStopElement = stopElement;
 
-    myVariableName = variable.getName();
+    myVariableName = Objects.requireNonNull(variable.getName());
     myNamespaceName = variable.getExplicitNamespaceName();
     myActualType = variable.getActualType();
     myValueBuilder = PerlOneOfValue.builder();
