@@ -162,7 +162,9 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     XDebugSession debugSession = debugTestScript();
     runToLine(debugSession, 8, false);
     assertStoppedAtLine(debugSession, 8);
-    List<XExecutionStack> stacks = Arrays.asList(debugSession.getSuspendContext().getExecutionStacks());
+    var suspendContext = debugSession.getSuspendContext();
+    assertNotNull(suspendContext);
+    List<XExecutionStack> stacks = Arrays.asList(suspendContext.getExecutionStacks());
     assertEquals("Expected 1 stack, got: " + stacks, 1, stacks.size());
     XExecutionStack mainStack = stacks.getFirst();
     List<XStackFrame> frames = new ArrayList<>();
@@ -414,7 +416,8 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
                                                 @NotNull String prefix) {
     result.append(prefix).append(node);
     if (node instanceof XValueNodeImpl xValueNode) {
-      result.append("-").append(XValuePresentationUtil.computeValueText(xValueNode.getValuePresentation()));
+      var presentation = xValueNode.getValuePresentation();
+      result.append("-").append(presentation == null ? "null" : XValuePresentationUtil.computeValueText(presentation));
       var valueContainer = xValueNode.getValueContainer();
       if (valueContainer.canNavigateToSource()) {
         result.append("; navigates to source");
