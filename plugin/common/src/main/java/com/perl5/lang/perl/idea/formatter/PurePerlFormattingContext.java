@@ -317,7 +317,7 @@ public class PurePerlFormattingContext extends PerlBaseFormattingContext {
                Spacing.createSpacing(0, 0, 0, true, 1);
       }
 
-      if ((child1Type == OPERATOR_DEREFERENCE || child2Type == OPERATOR_DEREFERENCE) &&
+      if ((child1Type == OPERATOR_DEREFERENCE || child2Type == OPERATOR_DEREFERENCE) && parentNode != null &&
           parentNode.getPsi().getParent() instanceof PerlInterpolationContainer) {
         return Spacing.createSpacing(0, 0, 0, getSettings().KEEP_LINE_BREAKS, getSettings().KEEP_BLANK_LINES_IN_CODE);
       }
