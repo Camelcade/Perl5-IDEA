@@ -569,7 +569,7 @@ public final class PerlRunUtil {
             if (!project.isDisposed()) {
               ProjectRootManagerEx.getInstanceEx(project)
                 .makeRootsChange(EmptyRunnable.getInstance(), RootsChangeRescanningInfo.TOTAL_RESCAN);
-              DaemonCodeAnalyzer.getInstance(project).restart();
+              DaemonCodeAnalyzer.getInstance(project).restart("Perl interpreter set up: " + sdk);
             }
           });
         }
