@@ -165,10 +165,7 @@ public final class PerlRunUtil {
     commandLine.addParameters(perlParameters);
 
     if (StringUtil.isNotEmpty(localScriptPath)) {
-      String remoteScriptPath = hostData.getRemotePath(localScriptPath);
-      if (remoteScriptPath != null) {
-        commandLine.addParameter(remoteScriptPath);
-      }
+      commandLine.addParameter(hostData.getRemotePath(localScriptPath));
     }
 
     commandLine.addParameters(scriptParameters);

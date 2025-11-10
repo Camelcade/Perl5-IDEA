@@ -50,10 +50,8 @@ public class PerlSmartKeyOptions extends BeanConfigurable<Perl5CodeInsightSettin
   @Override
   public @NotNull JComponent createComponent() {
     JComponent panel = super.createComponent();
-    if (panel != null) {
-      panel.setBorder(
-        IdeBorderFactory.PlainSmallWithIndent.createTitledBorder(null, PerlBundle.message("border.title.perl5"), 0, 0, null, null));
-    }
+    panel.setBorder(
+      IdeBorderFactory.PlainSmallWithIndent.createTitledBorder(null, PerlBundle.message("border.title.perl5"), 0, 0, null, null));
 
     return panel;
   }

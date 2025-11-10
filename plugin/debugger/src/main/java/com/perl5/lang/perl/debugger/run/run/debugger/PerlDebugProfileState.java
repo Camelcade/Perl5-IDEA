@@ -115,8 +115,7 @@ public class PerlDebugProfileState extends PerlDebugProfileStateBase {
 
   @Override
   public String mapPathToRemote(@NotNull String localPath) {
-    String remotePath = getHostData().getRemotePath(localPath);
-    return remotePath == null ? localPath : remotePath;
+    return getHostData().getRemotePath(localPath);
   }
 
   @Override

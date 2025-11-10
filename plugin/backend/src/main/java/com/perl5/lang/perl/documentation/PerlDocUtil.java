@@ -158,7 +158,7 @@ public final class PerlDocUtil {
     PerlVariableType actualType = variable.getActualType();
     String variableName = variable.getName();
 
-    if (actualType != null && StringUtil.isNotEmpty(variableName)) {
+    if (StringUtil.isNotEmpty(variableName)) {
       String text = actualType.getSigil() + PerlVariable.braceName(variableName);
 
       if (VARIABLES_LINKS.containsKey(text)) {
