@@ -208,8 +208,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
   }
 
   public @Nullable Perl5SdkWrapper getSelectedSdkWrapper() {
-    ComboBox<Perl5SdkWrapper> sdkComboBox = myPanel.getSdkComboBox();
-    return sdkComboBox == null ? null : (Perl5SdkWrapper)sdkComboBox.getSelectedItem();
+    return (Perl5SdkWrapper)myPanel.getSdkComboBox().getSelectedItem();
   }
 
   private void removeSdk() {

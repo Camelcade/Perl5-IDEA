@@ -80,11 +80,6 @@ public class PerlProfilerDumpFileParser implements ProfilerDumpFileParser {
 
     var localPath = file.getAbsolutePath();
     var remotePath = hostData.getRemotePath(localPath);
-    if (remotePath == null) {
-      var reason = PerlProfilerBundle.message("unable.to.map.local.path.to.remote.0.with.perl.1", localPath, perlSdk.getName());
-      LOG.warn(reason);
-      return new Failure(reason);
-    }
 
     perlCommandLine.withParameters(remotePath);
 
