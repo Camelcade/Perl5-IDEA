@@ -2,3 +2,15 @@ version: "1.0"
 linter: jetbrains/qodana-jvm
 profile:
   path: .idea/inspectionProfiles/project_quality.yaml
+exclude:
+  - name: All
+    paths:
+      - youtrack/
+      - testData/
+      - embedded/src/test/resources
+      - mason/framework/src/test/resources
+      - mason/htmlmason/src/test/resources
+      - mason/mason2/src/test/resources
+      - mojo/src/test/resources
+      - plugin/src/test/resources
+      - tt2/src/test/resources
