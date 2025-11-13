@@ -3,6 +3,7 @@ package com.perl5.lang.tt2.psi;
 
 import java.util.List;
 import org.jetbrains.annotations.*;
+import com.intellij.psi.PsiElement;
 
 public interface PsiMulExpr extends PsiExpr {
 
