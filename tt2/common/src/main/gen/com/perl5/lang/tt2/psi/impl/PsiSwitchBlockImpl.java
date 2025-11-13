@@ -2,10 +2,12 @@
 package com.perl5.lang.tt2.psi.impl;
 
 import java.util.List;
-import com.perl5.lang.tt2.psi.*;import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 import com.perl5.lang.tt2.psi.*;
 
 public class PsiSwitchBlockImpl extends TemplateToolkitCompositeElementImpl implements PsiSwitchBlock {
