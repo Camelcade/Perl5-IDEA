@@ -6,7 +6,8 @@ package com.perl5.lang.tt2.lexer;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlProtoLexer;
-import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
+import com.perl5.lang.tt2.elementTypes.TemplateToolkitElementTypes;
+import static com.perl5.lang.tt2.parser.TemplateToolkitElementTypesGenerated.*;
 
 
 public abstract class TemplateToolkitLexerGenerated extends PerlProtoLexer {

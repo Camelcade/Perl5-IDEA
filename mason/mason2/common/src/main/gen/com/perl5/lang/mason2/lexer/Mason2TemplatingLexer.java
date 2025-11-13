@@ -4,7 +4,9 @@
 package com.perl5.lang.mason2.lexer;
 
 import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.IElementType;import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.*;import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
+import com.intellij.psi.tree.IElementType;
+import static com.perl5.lang.mason2.elementType.Mason2ElementTypes.*;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class Mason2TemplatingLexer extends Mason2TemplatingLexerBase {
 

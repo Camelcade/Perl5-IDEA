@@ -19,12 +19,12 @@ import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.lexer.PerlProtoLexer;
 import org.jetbrains.annotations.NotNull;
+import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
 
 %%
 
 %class PodLexerGenerated
 %extends PerlProtoLexer
-%implements PodElementTypes
 %abstract
 %unicode
 %public
