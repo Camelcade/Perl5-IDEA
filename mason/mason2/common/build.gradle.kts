@@ -17,7 +17,6 @@ import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 
-
 project.file("src/main/gen").let { genRoot ->
   sourceSets {
     main {

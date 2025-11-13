@@ -17,6 +17,8 @@ package com.perl5.lang.perl.lexer;
 
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
+import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
+import static com.perl5.lang.perl.parser.moose.MooseElementTypes.*;
 
 %%
 
