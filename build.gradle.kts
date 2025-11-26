@@ -44,7 +44,7 @@ plugins {
   id("idea")
   id("jacoco")
   id("org.jetbrains.intellij.platform") version "2.10.5"
-  id("org.jetbrains.grammarkit") version "2023.3"
+  id("org.jetbrains.grammarkit") version "2023.3.0.1"
   id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
   id("org.sonarqube") version "7.1.0.6387"
   id("org.jetbrains.qodana") version "0.1.13"
