@@ -68,7 +68,7 @@ foreach my $globname (sort @{get_typeglobs_snapshot()})
 foreach my $package (sort keys %sub_map)
 {
 
-    print "package $package {\n";
+    print "package\n$package {\n";
     foreach my $sub_name (sort @{$sub_map{$package}})
     {
         print "sub $sub_name\n";
