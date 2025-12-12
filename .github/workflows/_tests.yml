@@ -34,7 +34,7 @@ jobs:
           java-version: '21.0.8'
 
       - name: Cache plenv
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         env:
           cache-name: cache-plenv
           cache-version: 0
@@ -98,7 +98,7 @@ jobs:
           java-version: '21.0.8'
 
       - name: Cache asdf
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.asdf
           key: asdf-${{ runner.os }}
@@ -157,7 +157,7 @@ jobs:
           java-version: '21.0.8'
 
       - name: Cache perlbrew
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/perl5
@@ -219,7 +219,7 @@ jobs:
           java-version: '21.0.8'
 
       - name: Cache perlbrew
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: |
             ~/perl5
