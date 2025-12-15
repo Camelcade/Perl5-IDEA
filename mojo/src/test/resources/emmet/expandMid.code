@@ -1,0 +1,12 @@
+<%
+use strict;
+use warnings FATAL => 'all';
+%>
+
+Some text
+ul>li.item$*3<caret>
+
+<% say 42; %>
+
+
+</html>

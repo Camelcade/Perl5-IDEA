@@ -1,0 +1,17 @@
+<ul>
+    <li><caret></li>
+    <li></li>
+    <li></li>
+</ul>
+
+<%
+use strict;
+use warnings FATAL => 'all';
+%>
+
+Some text
+
+<% say 42; %>
+
+
+</html>
