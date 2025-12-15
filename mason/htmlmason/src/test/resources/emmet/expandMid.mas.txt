@@ -1,0 +1,16 @@
+<?
+use strict;
+use warnings FATAL => 'all';
+?>
+
+Some text
+<ul>
+    <li class="item1"><caret></li>
+    <li class="item2"></li>
+    <li class="item3"></li>
+</ul>
+
+<? say 42; ?>
+
+
+</html>

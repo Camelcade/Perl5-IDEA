@@ -157,6 +157,7 @@ import com.intellij.usages.rules.UsageGroupingRuleProvider;
 import com.intellij.util.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
+import com.intellij.util.ui.UIUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
@@ -488,6 +489,17 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected @NotNull String loadFileContent(@NotNull String sourceFileNameWithExtension) {
     return loadFile(new File(getTestDataPath(), sourceFileNameWithExtension));
+  }
+
+  protected void doTestEmmet(){
+    enableLiveTemplatesTesting();
+    initWithFileSmart();
+    myFixture.performEditorAction(IdeActions.ACTION_EXPAND_LIVE_TEMPLATE_BY_TAB);
+
+    NonBlockingReadActionImpl.waitForAsyncTaskCompletion();
+    PlatformTestUtil.dispatchAllInvocationEventsInIdeEventQueue();
+
+    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }
 
   public static @NotNull String loadFile(@NotNull File fileToLoad) {
