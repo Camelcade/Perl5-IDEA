@@ -1,4 +1,4 @@
-<idea-plugin>
+<idea-plugin visibility="public">
   <dependencies>
     <module name="intellij.platform.frontend.split.main"/>
     <module name="perl5.plugin.frontend.split.main"/>
