@@ -23,6 +23,7 @@ class PodFileStubSerializer : StubSerializer<PsiFileStub<*>> {
 
   override fun serialize(stub: PsiFileStub<*>, dataStream: StubOutputStream): Unit = Unit
 
+  @Suppress("unused")
   override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): PsiFileStub<*> = PsiFileStubImpl(null)
 
   override fun indexStub(stub: PsiFileStub<*>, sink: IndexSink): Unit = Unit
