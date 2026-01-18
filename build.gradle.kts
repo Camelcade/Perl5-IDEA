@@ -350,7 +350,7 @@ sonar {
 
 coverallsJacoco {
   reportPath = coverageReportFile.get().asFile.absolutePath
-  allprojects.map { project ->
+  allprojects.forEach { project ->
     reportSourceSets += project.sourceSets.main.get().allSource.sourceDirectories
   }
 }
