@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,17 +37,17 @@ import com.perl5.lang.perl.util.PerlNamespaceUtil
 
 class MasonBackendNamespaceDefinitionHandler : PerlDefaultBackendNamespaceDefinitionHandler<MasonNamespaceDefinitionImpl>() {
   override fun getParentNamespaceDefinitions(namespace: MasonNamespaceDefinitionImpl): List<PerlNamespaceDefinitionElement> {
-    val parentsPaths: MutableList<String?> = namespace.getParentNamespacesNames()
+    val parentsPaths: MutableList<String?> = namespace.parentNamespacesNames
 
     val containingFile = MasonCoreUtil.getContainingVirtualFile(namespace.containingFile)
     val parentsNamespaces: MutableList<PerlNamespaceDefinitionElement> =
       if (!parentsPaths.isEmpty() && containingFile != null) {
-        Mason2Util.collectComponentNamespacesByPaths(namespace.getProject(), parentsPaths, containingFile.parent)
+        Mason2Util.collectComponentNamespacesByPaths(namespace.project, parentsPaths, containingFile.parent)
     }
     else {
       val autobaseParent: String? = namespace.getParentNamespaceFromAutobase()
       if (autobaseParent != null) {
-        Mason2Util.getMasonNamespacesByAbsolutePath(namespace.getProject(), autobaseParent)
+        Mason2Util.getMasonNamespacesByAbsolutePath(namespace.project, autobaseParent)
       }
       else {
         mutableListOf()
@@ -57,7 +57,7 @@ class MasonBackendNamespaceDefinitionHandler : PerlDefaultBackendNamespaceDefini
     if (parentsNamespaces.isEmpty()) {
       parentsNamespaces.addAll(
         PerlNamespaceUtil.getNamespaceDefinitions(
-          namespace.getProject(),
+          namespace.project,
           namespace.resolveScope,
           Mason2Constants.MASON_DEFAULT_COMPONENT_PARENT
         )
@@ -68,7 +68,7 @@ class MasonBackendNamespaceDefinitionHandler : PerlDefaultBackendNamespaceDefini
   }
 
   override fun getChildNamespaceDefinitions(namespace: MasonNamespaceDefinitionImpl): List<PerlNamespaceDefinitionElement> {
-    val project = namespace.getProject()
+    val project = namespace.project
     val masonSettings = MasonSettings.getInstance(project)
     val childNamespaces: MutableList<PerlNamespaceDefinitionElement> = mutableListOf()
 

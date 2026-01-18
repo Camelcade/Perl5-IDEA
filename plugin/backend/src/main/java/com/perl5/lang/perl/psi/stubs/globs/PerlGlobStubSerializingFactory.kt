@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ class PerlGlobStubSerializingFactory(elementType: IElementType) :
   override fun createPsi(stub: PerlGlobStub): PsiPerlGlobVariable = PsiPerlGlobVariableImpl(stub, elementType)
 
   override fun createStub(psi: PsiPerlGlobVariable, parentStub: StubElement<out PsiElement>?): PerlGlobStub =
-    PerlGlobStub(parentStub, psi.getNamespaceName()!!, psi.name, psi.isLeftSideOfAssignment())
+    PerlGlobStub(parentStub, psi.namespaceName!!, psi.name, psi.isLeftSideOfAssignment)
 
   override fun serialize(stub: PerlGlobStub, dataStream: StubOutputStream) {
     dataStream.writeName(stub.namespaceName)
@@ -54,7 +54,7 @@ class PerlGlobStubSerializingFactory(elementType: IElementType) :
     )
 
   override fun indexStub(stub: PerlGlobStub, sink: IndexSink) {
-    val canonicalName = stub.getCanonicalName()
+    val canonicalName = stub.canonicalName
     if (StringUtil.isNotEmpty(canonicalName)) {
       sink.occurrence(KEY_GLOB, canonicalName!!)
     }
@@ -69,5 +69,5 @@ class PerlGlobStubSerializingFactory(elementType: IElementType) :
   }
 
   override fun shouldCreateStub(node: ASTNode): Boolean =
-    (node.psi as? PerlGlobVariableElement)?.let { it.isValid && StringUtil.isNotEmpty(it.getCanonicalName()) } == true
+    (node.psi as? PerlGlobVariableElement)?.let { it.isValid && StringUtil.isNotEmpty(it.canonicalName) } == true
 }

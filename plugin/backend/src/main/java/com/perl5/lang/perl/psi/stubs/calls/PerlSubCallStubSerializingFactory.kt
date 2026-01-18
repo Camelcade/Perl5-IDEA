@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ class PerlSubCallStubSerializingFactory(elementType: IElementType) :
     parentStub: StubElement<*>?,
     lightElementsStubs: MutableList<StubElement<*>>
   ): PerlSubCallElementStub =
-    PerlSubCallElementStub(parentStub, elementType, lightElementsStubs, psi.getSubName()!!, psi.getCallData())
+    PerlSubCallElementStub(parentStub, elementType, lightElementsStubs, psi.subName!!, psi.callData)
 
   override fun deserialize(
     dataStream: StubInputStream,

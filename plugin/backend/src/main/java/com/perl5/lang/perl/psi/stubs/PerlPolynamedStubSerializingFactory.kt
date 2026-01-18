@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ abstract class PerlPolynamedStubSerializingFactory<Stub : PerlPolyNamedElementSt
         (getStubSerializer(lightElementType) as StubElementFactory<StubElement<PsiElement>, PsiElement>).createStub(lightPsi, result)
 
       if (lightStubElement is PerlLightElementStub && lightPsi.isImplicit) {
-        lightStubElement.setImplicit(true)
+        lightStubElement.isImplicit = true
       }
       lightNamedElements.add(lightStubElement)
     }
@@ -90,7 +90,7 @@ abstract class PerlPolynamedStubSerializingFactory<Stub : PerlPolyNamedElementSt
 
   @Suppress("UNCHECKED_CAST")
   final override fun serialize(stub: Stub, dataStream: StubOutputStream) {
-    val childrenStubs = stub.lightNamedElementsStubs.filter { it !is PerlLightElementStub || !it.isImplicit() }
+    val childrenStubs = stub.lightNamedElementsStubs.filter { it !is PerlLightElementStub || !it.isImplicit }
     dataStream.writeVarInt(childrenStubs.size)
     serializeStub(stub, dataStream)
 

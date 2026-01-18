@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,18 +29,18 @@ open class PerlDefaultBackendNamespaceDefinitionHandler<T : PerlNamespaceDefinit
     namespace: T,
     processor: PerlNamespaceEntityProcessor<in PerlExportDescriptor>
   ): Boolean {
-    val namespaceName: String = namespace.getNamespaceName() ?: return true
+    val namespaceName: String = namespace.namespaceName ?: return true
     if (StringUtil.isEmpty(namespaceName)) {
       return true
     }
     return PerlNamespaceUtil.processExportDescriptors(
-      namespace.getProject(), GlobalSearchScope.fileScope(namespace.containingFile.originalFile), namespaceName, processor
+      namespace.project, GlobalSearchScope.fileScope(namespace.containingFile.originalFile), namespaceName, processor
     )
   }
 
   override fun getParentNamespaceDefinitions(namespace: T): List<PerlNamespaceDefinitionElement> =
-    PerlNamespaceUtil.collectNamespaceDefinitions(namespace.getProject(), namespace.getParentNamespacesNames())
+    PerlNamespaceUtil.collectNamespaceDefinitions(namespace.project, namespace.parentNamespacesNames)
 
   override fun getChildNamespaceDefinitions(namespace: T): List<PerlNamespaceDefinitionElement> =
-    PerlPackageUtil.getChildNamespaces(namespace.getProject(), namespace.getNamespaceName())
+    PerlPackageUtil.getChildNamespaces(namespace.project, namespace.namespaceName)
 }

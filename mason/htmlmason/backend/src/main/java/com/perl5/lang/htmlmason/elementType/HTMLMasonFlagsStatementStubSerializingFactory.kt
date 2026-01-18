@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,10 +37,10 @@ class HTMLMasonFlagsStatementStubSerializingFactory(elementType: IElementType) :
   override fun createPsi(stub: HTMLMasonFlagsStatementStub): HTMLMasonFlagsStatement = HTMLMasonFlagsStatementImpl(stub, elementType)
 
   override fun createStub(psi: HTMLMasonFlagsStatement, parentStub: StubElement<out PsiElement>?): HTMLMasonFlagsStatementStub =
-    HTMLMasonFlagsStatementStubImpl(parentStub, elementType, psi.getParentComponentPath())
+    HTMLMasonFlagsStatementStubImpl(parentStub, elementType, psi.parentComponentPath)
 
   override fun serialize(stub: HTMLMasonFlagsStatementStub, dataStream: StubOutputStream) {
-    val parentComponentPath = stub.getParentComponentPath()
+    val parentComponentPath = stub.parentComponentPath
 
     if (UNDEF_RESULT == parentComponentPath) {
       dataStream.writeBoolean(false)
@@ -62,7 +62,7 @@ class HTMLMasonFlagsStatementStubSerializingFactory(elementType: IElementType) :
   }
 
   override fun indexStub(stub: HTMLMasonFlagsStatementStub, sink: IndexSink) {
-    val parentComponentPath = stub.getParentComponentPath()
+    val parentComponentPath = stub.parentComponentPath
 
     if (parentComponentPath != null && UNDEF_RESULT != parentComponentPath) {
       sink.occurrence(HTMLMasonFlagsStubIndex.KEY, parentComponentPath)

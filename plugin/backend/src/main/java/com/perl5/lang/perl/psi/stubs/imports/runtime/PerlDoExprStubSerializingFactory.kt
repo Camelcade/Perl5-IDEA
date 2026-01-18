@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,9 +34,9 @@ open class PerlDoExprStubSerializingFactory(elementType: IElementType) :
   override fun createPsi(stub: PerlRuntimeImportStub): PerlDoExpr = PsiPerlDoExprImpl(stub, elementType)
 
   override fun createStub(psi: PerlDoExpr, parentStub: StubElement<out PsiElement>?): PerlRuntimeImportStub =
-    PerlRuntimeImportStubImpl(parentStub, elementType, psi.getImportPath())
+    PerlRuntimeImportStubImpl(parentStub, elementType, psi.importPath)
 
-  override fun serialize(stub: PerlRuntimeImportStub, dataStream: StubOutputStream): Unit = dataStream.writeName(stub.getImportPath() ?: "")
+  override fun serialize(stub: PerlRuntimeImportStub, dataStream: StubOutputStream): Unit = dataStream.writeName(stub.importPath ?: "")
 
   override fun deserialize(
     dataStream: StubInputStream,

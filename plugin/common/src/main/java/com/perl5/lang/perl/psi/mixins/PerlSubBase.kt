@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ abstract class PerlSubBase<Stub : PerlSubStub<*>> : PerlStubBasedPsiElementBase<
       return stub.namespaceName
     }
 
-    var namespace = getExplicitNamespaceName()
+    var namespace = explicitNamespaceName
     if (namespace == null) {
       namespace = PerlPackageUtilCore.getContextNamespaceName(this)
     }
@@ -59,7 +59,7 @@ abstract class PerlSubBase<Stub : PerlSubStub<*>> : PerlStubBasedPsiElementBase<
   @Throws(IncorrectOperationException::class)
   override fun setName(name: String): PsiElement? = PerlPsiUtil.renameNamedElement(this, name)
 
-  override fun getName(): String? = getSubName()
+  override fun getName(): String? = subName
 
   override fun getSubName(): String? {
     val stub = greenStub
@@ -73,7 +73,7 @@ abstract class PerlSubBase<Stub : PerlSubStub<*>> : PerlStubBasedPsiElementBase<
   protected open val subNameHeavy: String?
     get() = nameIdentifier?.text
 
-  override fun getExplicitNamespaceName(): String? = namespaceElement?.getCanonicalName()
+  override fun getExplicitNamespaceName(): String? = namespaceElement?.canonicalName
 
   override fun getNameIdentifier(): PsiElement? = findChildByType(PerlElementTypesGenerated.SUB_NAME)
 
@@ -87,9 +87,9 @@ abstract class PerlSubBase<Stub : PerlSubStub<*>> : PerlStubBasedPsiElementBase<
     return PerlSubAnnotations.createFromAnnotationsList(PerlAnnotations.collectAnnotations(this))
   }
 
-  override fun getIcon(flags: Int): Icon = if (isMethod()) PerlIcons.METHOD_GUTTER_ICON else PerlIcons.SUB_GUTTER_ICON
+  override fun getIcon(flags: Int): Icon = if (isMethod) PerlIcons.METHOD_GUTTER_ICON else PerlIcons.SUB_GUTTER_ICON
 
   override fun getTextOffset(): Int = this.nameIdentifier?.textOffset ?: super.getTextOffset()
 
-  override fun toString(): String = super.toString() + "@" + (if (isValid) getCanonicalName() else "!INVALID!")
+  override fun toString(): String = super.toString() + "@" + (if (isValid) canonicalName else "!INVALID!")
 }

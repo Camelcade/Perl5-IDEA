@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,10 +30,10 @@ class PodSectionItemStubSerializingFactory(elementType: IElementType) :
   override fun createPsi(stub: PodSectionStub): PodSectionItem = PsiItemSectionImpl(stub, elementType)
 
   override fun createStub(psi: PodSectionItem, parentStub: StubElement<out PsiElement>?): PodSectionStub {
-    val prefix = if (psi.isTargetable()) '+' else '-'
-    return PodSectionStub(parentStub, elementType, prefix + psi.getPresentableText()!!)
+    val prefix = if (psi.isTargetable) '+' else '-'
+    return PodSectionStub(parentStub, elementType, prefix + psi.presentableText!!)
   }
 
-  override fun shouldCreateStub(psi: PodSectionItem): Boolean = psi.isIndexed() && StringUtil.isNotEmpty(psi.getPresentableText()) ||
-    psi.isTargetable() && super.shouldCreateStub(psi)
+  override fun shouldCreateStub(psi: PodSectionItem): Boolean = psi.isIndexed && StringUtil.isNotEmpty(psi.presentableText) ||
+    psi.isTargetable && super.shouldCreateStub(psi)
 }

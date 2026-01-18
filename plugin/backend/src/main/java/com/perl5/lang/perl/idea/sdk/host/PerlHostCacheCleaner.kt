@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,7 +54,7 @@ class PerlHostCacheCleaner : ProjectActivity {
     }
     val existingCaches = cacheDirs.toMutableSet()
     PerlSdkTable.getInstance().interpreters.forEach { sdk ->
-      val sdkCacheRoot = PerlHostData.notNullFrom(sdk).getLocalCacheRoot()
+      val sdkCacheRoot = PerlHostData.notNullFrom(sdk).localCacheRoot
       if (StringUtil.isEmpty(sdkCacheRoot)) {
         return
       }

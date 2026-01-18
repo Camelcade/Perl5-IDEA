@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,7 +44,7 @@ abstract class PerlMethodDefinitionMixin : PerlSubDefinitionBase, PerlMethodDefi
     if (signatureElement is PsiPerlMethodSignatureInvocant) {
       val variable = PsiTreeUtil.findChildOfType(signatureElement, PerlVariable::class.java)
       if (variable != null) {
-        arguments.add(PerlSubArgument.mandatory(variable.getActualType(), variable.getName()!!))
+        arguments.add(PerlSubArgument.mandatory(variable.actualType, variable.name!!))
       }
     }
     else if (signatureElement is PerlVariableDeclarationElement) {
@@ -63,7 +63,7 @@ abstract class PerlMethodDefinitionMixin : PerlSubDefinitionBase, PerlMethodDefi
    * @return check result
    */
   private fun hasExplicitInvocant(): Boolean {
-    val signatureContainer: PsiElement? = getSignatureContent()
+    val signatureContainer: PsiElement? = signatureContent
     return signatureContainer != null && signatureContainer.firstChild is PsiPerlMethodSignatureInvocant
   }
 

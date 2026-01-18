@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,7 +64,7 @@ class PerlValueBackendResolveService : PerlValueResolveService {
           Processor { it: PsiNamedElement? ->
             hasTargets[0] = true
             if (it is PerlSubElement) {
-              builder.addVariant(PerlSubValueResolver(it, argumentsValue).resolve(it.getReturnValue()))
+              builder.addVariant(PerlSubValueResolver(it, argumentsValue).resolve(it.returnValue))
             }
             true
           })
@@ -95,7 +95,7 @@ class PerlValueBackendResolveService : PerlValueResolveService {
     val baseSubName = usedCallableNames.removeFirst()
     val baseNamespaces = HashSet<String?>()
     PerlPackageUtil.processCallablesNamespaceNames(resolver, baseSubName, Processor { it: PerlCallableElement? ->
-      baseNamespaces.add(it!!.getNamespaceName())
+      baseNamespaces.add(it!!.namespaceName)
       true
     })
 
@@ -135,7 +135,7 @@ class PerlValueBackendResolveService : PerlValueResolveService {
     val resolveScope = resolver.resolveScope
     val notFinished =
       PerlMroUtil.processCallables(project, resolveScope, namespaceName, callableNames, false, Processor { it: PerlCallableElement? ->
-        callablesLeft.remove(it!!.getCallableName())
+        callablesLeft.remove(it!!.callableName)
         !callablesLeft.isEmpty()
       }, false)
 
@@ -147,7 +147,7 @@ class PerlValueBackendResolveService : PerlValueResolveService {
     val callablesToFind = Collections.unmodifiableSet(callablesLeft)
     for (childNamespace in PerlPackageUtil.getChildNamespaces(project, namespaceName, resolveScope)) {
       processNamespacesWithAllCallables(
-        childNamespace.getNamespaceName()!!, callablesToFind, resolver, recursionControlSet, namespaceNameConsumer
+        childNamespace.namespaceName!!, callablesToFind, resolver, recursionControlSet, namespaceNameConsumer
       )
     }
   }

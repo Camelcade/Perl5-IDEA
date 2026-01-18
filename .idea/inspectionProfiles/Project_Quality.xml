@@ -654,11 +654,6 @@
     <inspection_tool class="ReplaceNegatedIsEmptyWithIsNotEmpty" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="ReplacePrintlnWithLogging" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="ReplaceStringFormatWithLiteral" enabled="false" level="INFORMATION" enabled_by_default="false" />
-    <inspection_tool class="ReplaceSubstringWithDropLast" enabled="true" level="INFORMATION" enabled_by_default="true" />
-    <inspection_tool class="ReplaceSubstringWithIndexingOperation" enabled="true" level="INFORMATION" enabled_by_default="true" />
-    <inspection_tool class="ReplaceSubstringWithSubstringAfter" enabled="true" level="INFORMATION" enabled_by_default="true" />
-    <inspection_tool class="ReplaceSubstringWithSubstringBefore" enabled="true" level="INFORMATION" enabled_by_default="true" />
-    <inspection_tool class="ReplaceSubstringWithTake" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="ReplaceToStringWithStringTemplate" enabled="false" level="INFORMATION" enabled_by_default="false" />
     <inspection_tool class="ReplaceUntilWithRangeUntil" enabled="false" level="INFORMATION" enabled_by_default="false" />
     <inspection_tool class="ReplaceWithEnumMap" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -851,6 +846,9 @@
     <inspection_tool class="UseJBColor" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="UsePluginIdEquals" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="UsePrimitiveTypes" enabled="false" level="WARNING" enabled_by_default="false" />
+    <inspection_tool class="UsePropertyAccessSyntax" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="reportNonTrivialAccessors" value="true" />
+    </inspection_tool>
     <inspection_tool class="UseStrict" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="UseVars" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="UseVirtualFileEquals" enabled="false" level="WARNING" enabled_by_default="false" />

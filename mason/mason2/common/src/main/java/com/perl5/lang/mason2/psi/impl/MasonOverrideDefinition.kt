@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ class MasonOverrideDefinition : PerlMooseOverrideStatement, PerlImplicitVariable
   override fun getNameIdentifier(): PsiElement? = PsiTreeUtil.getChildOfType(this, PerlSubNameElement::class.java)
 
   override val subNameHeavy: String?
-    get() = getNameIdentifier()?.node?.text
+    get() = nameIdentifier?.node?.text
 
   @Throws(IncorrectOperationException::class)
   override fun setName(name: String): PsiElement {

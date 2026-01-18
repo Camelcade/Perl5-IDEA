@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ class MojoBaseProcessor : BaseStrictWarningsProvidingProcessor(), PerlUtfProvide
     val loadedPackages: MutableList<String> = mutableListOf(IO_HANDLE)
     val allOptions = useStatement.importParameters ?: return loadedPackages
 
-    allOptions -= getOptions().keys
+    allOptions -= options.keys
 
     if (allOptions.isNotEmpty() && MOJO_BASE != allOptions.first()) {
       loadedPackages += allOptions.first()
@@ -56,7 +56,7 @@ class MojoBaseProcessor : BaseStrictWarningsProvidingProcessor(), PerlUtfProvide
       currentList += MOJO_BASE
     }
     else {
-      allOptions -= getOptions().keys
+      allOptions -= options.keys
       if (!allOptions.isEmpty()) {
         currentList += allOptions.first()
       }
