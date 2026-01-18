@@ -18,7 +18,7 @@ import org.jetbrains.grammarkit.tasks.GenerateParserTask
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 
-val genRoot = project.file("src/main/gen").also { genRoot ->
+val genRoot: File = project.file("src/main/gen").also { genRoot ->
   sourceSets {
     main {
       java.srcDirs(genRoot)
