@@ -26,6 +26,7 @@ import java.util.function.BooleanSupplier
  * Copy-paste of org.jetbrains.plugins.terminal.classic.fixture.ClassicTerminalTestShellSessioni
  * See: https://youtrack.jetbrains.com/issue/IJPL-107274/
  */
+@Suppress("removal")
 class TestShellSession(shellCommand: List<String>?, val widget: ShellTerminalWidget) {
 
   constructor(project: Project, parentDisposable: Disposable) : this(
