@@ -28,7 +28,7 @@ class PerlFileStubserializer(val fileType: PerlFileElementType) : StubSerializer
 
   override fun serialize(stub: PerlFileStub, dataStream: StubOutputStream): Unit = dataStream.serializeNamespaceData(stub.data)
 
-  override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): PerlFileStub =
+  override fun deserialize(dataStream: StubInputStream, @Suppress("unused") parentStub: StubElement<*>?): PerlFileStub =
     PerlFileStub(dataStream.deserializeNamespaceData(), fileType)
 
   override fun indexStub(stub: PerlFileStub, sink: IndexSink) {
