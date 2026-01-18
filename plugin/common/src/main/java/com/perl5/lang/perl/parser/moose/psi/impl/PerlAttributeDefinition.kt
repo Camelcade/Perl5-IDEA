@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -48,7 +48,7 @@ class PerlAttributeDefinition : PerlLightMethodDefinitionElement<PerlSubCallElem
   override fun getNameComputation(): Function<String, String> = DEFAULT_NAME_COMPUTATION
 
   override fun getRangeInIdentifier(): TextRange {
-    val nameIdentifier = getNameIdentifier() ?: return TextRange.EMPTY_RANGE
+    val nameIdentifier = nameIdentifier ?: return TextRange.EMPTY_RANGE
     val manipulator = ElementManipulators.getNotNullManipulator<PsiElement?>(nameIdentifier)
     val defaultRange = manipulator.getRangeInElement(nameIdentifier)
     return if (StringUtil.startsWith(defaultRange.subSequence(nameIdentifier.node.chars), "+"))

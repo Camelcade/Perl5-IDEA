@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ class HTMLMasonSubcomponentStubSerializingFactory(elementType: IElementType) :
   ): HTMLMasonSubcomponentDefinitionStub = HTMLMasonSubcomponentDefinitionStubImpl(parentStub, elementType, psi.name)
 
   override fun serialize(stub: HTMLMasonSubcomponentDefinitionStub, dataStream: StubOutputStream): Unit =
-    dataStream.writeName(stub.getName())
+    dataStream.writeName(stub.name)
 
   override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): HTMLMasonSubcomponentDefinitionStub =
     HTMLMasonSubcomponentDefinitionStubImpl(parentStub, elementType, PerlStubSerializationUtil.readString(dataStream))

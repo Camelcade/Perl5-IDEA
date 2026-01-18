@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ open class PerlMooseOverrideStatement : PerlSubDefinitionBase, PerlMooseStatemen
 
   override val subNameHeavy: String?
     get() {
-      val nameContainer = getNameIdentifier()
+      val nameContainer = nameIdentifier
 
       if (nameContainer != null) {
         return ElementManipulators.getValueText(nameContainer)

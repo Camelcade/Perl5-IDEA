@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,7 +26,7 @@ import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub
 abstract class PodStubBasedTitledSectionSerializingFactory<Psi : PodStubBasedTitledSection>(elementType: IElementType) :
   PodStubBasedSectionSerializingFactory<Psi>(elementType) {
   override fun createStub(psi: Psi, parentStub: StubElement<out PsiElement>?): PodSectionStub =
-    PodSectionStub(parentStub, elementType, psi.getTitleText()!!)
+    PodSectionStub(parentStub, elementType, psi.titleText!!)
 
-  override fun shouldCreateStub(psi: Psi): Boolean = StringUtil.isNotEmpty(psi.getTitleText())
+  override fun shouldCreateStub(psi: Psi): Boolean = StringUtil.isNotEmpty(psi.titleText)
 }

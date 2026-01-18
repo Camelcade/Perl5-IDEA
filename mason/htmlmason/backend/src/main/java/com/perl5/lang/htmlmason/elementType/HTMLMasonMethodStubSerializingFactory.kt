@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,7 +46,7 @@ class HTMLMasonMethodStubSerializingFactory(elementType: IElementType) :
   override fun serialize(
     stub: HTMLMasonMethodDefinitionStub,
     dataStream: StubOutputStream
-  ): Unit = dataStream.writeName(stub.getName())
+  ): Unit = dataStream.writeName(stub.name)
 
   override fun deserialize(
     dataStream: StubInputStream,

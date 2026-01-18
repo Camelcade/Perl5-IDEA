@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,7 @@ interface PerlNamespaceDefinitionHandler<Ns : PerlNamespaceDefinitionElement> {
   fun getChildNamespaceDefinitions(namespace: Ns): List<PerlNamespaceDefinitionElement>
 
   fun collectLinearISA(namespace: Ns, recursionMap: MutableSet<String>, result: MutableList<String>): Unit = namespace.mro.getLinearISA(
-    namespace.getProject(), getParentNamespaceDefinitions(namespace), recursionMap, result
+    namespace.project, getParentNamespaceDefinitions(namespace), recursionMap, result
   )
 
   companion object {

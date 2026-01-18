@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,9 +35,9 @@ open class PerlMooseAugmentStatementSerializingFactory(elementType: IElementType
   override fun createPsi(stub: PerlMooseAugmentStatementStub): PerlMooseAugmentStatement = PerlMooseAugmentStatementImpl(stub, elementType)
 
   override fun createStub(psi: PerlMooseAugmentStatement, parentStub: StubElement<out PsiElement>?): PerlMooseAugmentStatementStub =
-    PerlMooseAugmentStatementStubImpl(parentStub, elementType, psi.getSubName())
+    PerlMooseAugmentStatementStubImpl(parentStub, elementType, psi.subName)
 
-  override fun serialize(stub: PerlMooseAugmentStatementStub, dataStream: StubOutputStream): Unit = dataStream.writeName(stub.getSubName())
+  override fun serialize(stub: PerlMooseAugmentStatementStub, dataStream: StubOutputStream): Unit = dataStream.writeName(stub.subName)
 
   override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): PerlMooseAugmentStatementStub =
     PerlMooseAugmentStatementStubImpl(parentStub, elementType, PerlStubSerializationUtil.readString(dataStream))
@@ -48,6 +48,6 @@ open class PerlMooseAugmentStatementSerializingFactory(elementType: IElementType
     val element = node.psi
     return element is PerlMooseAugmentStatement &&
       element.isValid &&
-      StringUtil.isNotEmpty(element.getSubName())
+      StringUtil.isNotEmpty(element.subName)
   }
 }

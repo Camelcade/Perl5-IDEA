@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,10 +36,10 @@ class HTMLMasonArgsBlockStubSerializingFactory(elementType: IElementType) :
   override fun createPsi(stub: HTMLMasonArgsBlockStub): HTMLMasonArgsBlock = HTMLMasonArgsBlockImpl(stub, elementType)
 
   override fun createStub(psi: HTMLMasonArgsBlock, parentStub: StubElement<out PsiElement>?): HTMLMasonArgsBlockStub =
-    HTMLMasonArgsBlockStubImpl(parentStub, elementType, psi.getArgumentsList())
+    HTMLMasonArgsBlockStubImpl(parentStub, elementType, psi.argumentsList)
 
   override fun serialize(stub: HTMLMasonArgsBlockStub, dataStream: StubOutputStream): Unit =
-    dataStream.serializeArguments(stub.getArgumentsList())
+    dataStream.serializeArguments(stub.argumentsList)
 
   override fun deserialize(dataStream: StubInputStream, parentStub: StubElement<*>?): HTMLMasonArgsBlockStub =
     HTMLMasonArgsBlockStubImpl(parentStub, elementType, dataStream.deserializeArguments())

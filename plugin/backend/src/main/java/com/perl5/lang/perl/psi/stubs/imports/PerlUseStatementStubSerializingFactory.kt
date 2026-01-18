@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,7 +63,7 @@ open class PerlUseStatementStubSerializingFactory(elementType: IElementType) :
   override fun shouldCreateStub(node: ASTNode): Boolean {
     val element = node.psi
     return element is PerlUseStatementElement &&
-      element.isValid() &&
+      element.isValid &&
       StringUtil.isNotEmpty(element.packageName)
   }
 

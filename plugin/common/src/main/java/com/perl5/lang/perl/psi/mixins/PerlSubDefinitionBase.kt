@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,7 @@ abstract class PerlSubDefinitionBase : PerlSubBase<PerlSubDefinitionStub>, PerlS
       return returnValue
     }
     val greenStub = greenStub
-    return greenStub?.getReturnValueFromCode() ?: myReturnValueFromCode.value
+    return greenStub?.returnValueFromCode ?: myReturnValueFromCode.value
   }
 
   override fun getPresentation(): ItemPresentation = PerlItemPresentationSimpleDynamicLocation(this, presentableName)
@@ -79,7 +79,7 @@ abstract class PerlSubDefinitionBase : PerlSubBase<PerlSubDefinitionStub>, PerlS
   private val perlSubArgumentsFromSignature: List<PerlSubArgument>?
     get() {
       var arguments: MutableList<PerlSubArgument>? = null
-      val signatureContainer: PsiElement? = getSignatureContent()
+      val signatureContainer: PsiElement? = signatureContent
 
       if (signatureContainer != null) {
         arguments = ArrayList()
@@ -88,7 +88,7 @@ abstract class PerlSubDefinitionBase : PerlSubBase<PerlSubDefinitionStub>, PerlS
 
         while (signatureElement != null) {
           if (signatureElement is PerlSignatureElement) {
-            processSignatureElement(signatureElement.getDeclarationElement(), arguments)
+            processSignatureElement(signatureElement.declarationElement, arguments)
           }
           else {
             processSignatureElement(signatureElement, arguments)
@@ -102,8 +102,8 @@ abstract class PerlSubDefinitionBase : PerlSubBase<PerlSubDefinitionStub>, PerlS
 
   protected open fun processSignatureElement(signatureElement: PsiElement?, arguments: MutableList<PerlSubArgument>): Boolean {
     if (signatureElement is PerlVariableDeclarationElement) {
-      val variable = signatureElement.getVariable()
-      val newArgument = PerlSubArgument.mandatory(variable.getActualType(), variable.getName()!!)
+      val variable = signatureElement.variable
+      val newArgument = PerlSubArgument.mandatory(variable.actualType, variable.name!!)
       newArgument.isOptional = signatureElement.nextSibling != null
       arguments.add(newArgument)
       return true

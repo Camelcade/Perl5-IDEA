@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,10 +54,10 @@ class PerlBackendPackageService : PerlPackageService {
     val scope = GlobalSearchScope.allScope(useStatement.project)
     for (namespaceDefinition in PerlNamespaceUtil
       .getNamespaceDefinitions(useStatement.project, scope, packageName)) {
-      val defaultExports = namespaceDefinition.getEXPORT()
+      val defaultExports = namespaceDefinition.export
       export.addAll(defaultExports)
       exportOk.addAll(defaultExports)
-      exportOk.addAll(namespaceDefinition.getEXPORT_OK())
+      exportOk.addAll(namespaceDefinition.exporT_OK)
     }
   }
 
@@ -69,5 +69,5 @@ class PerlBackendPackageService : PerlPackageService {
         packageCanonicalName,
         project,
         searchScope,
-        Processor { it: PerlNamespaceDefinitionElement? -> !it!!.isDeprecated() })
+        Processor { it: PerlNamespaceDefinitionElement? -> !it!!.isDeprecated })
 }

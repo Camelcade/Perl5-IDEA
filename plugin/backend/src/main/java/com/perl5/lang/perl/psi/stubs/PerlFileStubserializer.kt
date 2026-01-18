@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,9 +32,9 @@ class PerlFileStubserializer(val fileType: PerlFileElementType) : StubSerializer
     PerlFileStub(dataStream.deserializeNamespaceData(), fileType)
 
   override fun indexStub(stub: PerlFileStub, sink: IndexSink) {
-    if (stub.isEmpty && stub.getNamespaceName() == PerlPackageUtilCore.MAIN_NAMESPACE_NAME) {
+    if (stub.isEmpty && stub.namespaceName == PerlPackageUtilCore.MAIN_NAMESPACE_NAME) {
       return
     }
-    sink.occurrence(NAMESPACE_KEY, stub.getNamespaceName())
+    sink.occurrence(NAMESPACE_KEY, stub.namespaceName)
   }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStat
     }
 
     val containingNamespace = PerlPackageUtilCore.getContainingNamespace(contextElement.originalElement)
-    val namespaceName = containingNamespace?.getNamespaceName()
+    val namespaceName = containingNamespace?.namespaceName
     if (!StringUtil.isEmpty(namespaceName)) {
       processExportDescriptors(
         project, searchScope, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace)
@@ -87,7 +87,7 @@ class PerlCallStaticValueBackendHelper : PerlCallValueBackendHelper<PerlCallStat
 
     if (!callValue.hasExplicitNamespace() && contextElement != null) {
       val containingNamespace = PerlPackageUtilCore.getContainingNamespace(contextElement.originalElement)
-      val namespaceName = containingNamespace?.getNamespaceName()
+      val namespaceName = containingNamespace?.namespaceName
       if (!StringUtil.isEmpty(namespaceName)) {
         processExportDescriptorsItems(
           project, searchScope, subNames, processor, PerlImportsProvider.getAllExportDescriptors(containingNamespace)

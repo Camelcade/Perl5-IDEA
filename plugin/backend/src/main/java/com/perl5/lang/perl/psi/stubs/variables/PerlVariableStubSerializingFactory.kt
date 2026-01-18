@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,11 +46,11 @@ class PerlVariableStubSerializingFactory(elementType: IElementType) :
     PerlVariableDeclarationStub(
       parentStub,
       elementType,
-      psi.getNamespaceName()!!,
+      psi.namespaceName!!,
       psi.name!!,
-      psi.getDeclaredValue(),
-      psi.getActualType(),
-      psi.getLocalVariableAnnotations()
+      psi.declaredValue,
+      psi.actualType,
+      psi.localVariableAnnotations
     )
 
   override fun serialize(stub: PerlVariableDeclarationStub, dataStream: StubOutputStream) {
@@ -95,9 +95,9 @@ class PerlVariableStubSerializingFactory(elementType: IElementType) :
     val psi = node.psi
     return psi is PerlVariableDeclarationElement &&
       psi.isValid &&
-      psi.isGlobalDeclaration() &&
+      psi.isGlobalDeclaration &&
       StringUtil.isNotEmpty(psi.name) &&
-      StringUtil.isNotEmpty(psi.getNamespaceName())
+      StringUtil.isNotEmpty(psi.namespaceName)
   }
 }
 

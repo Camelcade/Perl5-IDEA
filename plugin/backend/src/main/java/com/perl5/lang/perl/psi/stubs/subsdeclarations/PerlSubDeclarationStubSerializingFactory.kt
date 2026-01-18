@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,9 +42,9 @@ class PerlSubDeclarationStubSerializingFactory(elementType: IElementType) :
   override fun createStub(psi: PerlSubDeclarationElement, parentStub: StubElement<out PsiElement>?): PerlSubDeclarationStub =
     PerlSubDeclarationStub(
       parentStub,
-      psi.getNamespaceName(),
-      psi.getSubName(),
-      psi.getAnnotations(),
+      psi.namespaceName,
+      psi.subName,
+      psi.annotations,
       elementType
     )
 
@@ -78,8 +78,8 @@ class PerlSubDeclarationStubSerializingFactory(elementType: IElementType) :
   override fun shouldCreateStub(node: ASTNode): Boolean {
     val psi = node.psi
     return psi is PerlSubDeclarationElement &&
-      StringUtil.isNotEmpty(psi.getNamespaceName()) &&
-      StringUtil.isNotEmpty(psi.getSubName())
+      StringUtil.isNotEmpty(psi.namespaceName) &&
+      StringUtil.isNotEmpty(psi.subName)
   }
 
   override fun indexStub(
