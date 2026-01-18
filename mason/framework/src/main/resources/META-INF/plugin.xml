@@ -28,7 +28,7 @@
     <plugin id="com.perl5"/>
   </dependencies>
 
-  <content>
+  <content namespace="hurricup">
     <module name="perl5.lang.mason.framework.backend.main"/>
     <module name="perl5.lang.mason.framework.common.main" loading="required"/>
     <module name="perl5.lang.mason.framework.frontend.main"/>

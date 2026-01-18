@@ -26,7 +26,7 @@
     <plugin id="com.intellij.modules.lang"/>
   </dependencies>
 
-  <content>
+  <content namespace="hurricup">
     <module name="perl5.plugin.asdf.main"/>
     <module name="perl5.plugin.berrybrew.main"/>
     <module name="perl5.plugin.carton.main"/>
