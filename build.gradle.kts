@@ -29,7 +29,7 @@ import kotlin.io.path.writeText
  */
 
 
-fun environment(key: String) = providers.environmentVariable(key)
+fun environment(key: String): Provider<String> = providers.environmentVariable(key)
 
 plugins {
   id("com.hurricup.gradle.fixcompress")
@@ -46,9 +46,10 @@ repositories {
   mavenCentral()
 }
 
-val isCI = environment("CI").map { it.toBoolean() }.orElse(false)
-val withCoverage = environment("COVERALLS_REPO_TOKEN").orElse(providers.gradleProperty("with_coverage")).map { !it.isEmpty() }.orElse(false)
-val platformVersionProvider by extra(project.provider {
+val isCI: Provider<Boolean> = environment("CI").map { it.toBoolean() }.orElse(false)
+val withCoverage: Provider<Boolean> =
+  environment("COVERALLS_REPO_TOKEN").orElse(providers.gradleProperty("with_coverage")).map { !it.isEmpty() }.orElse(false)
+val platformVersionProvider: Provider<String> by extra(project.provider {
   providers.gradleProperty("platformVersion").get() + providers.gradleProperty("platformBranch").get() + providers.gradleProperty("platformBuild").get()
 })
 
@@ -338,7 +339,7 @@ val runInSplitMode by intellijPlatformTesting.runIde.registering {
   }
 }
 
-val coverageReportFile = project.layout.buildDirectory.file("reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
+val coverageReportFile: Provider<RegularFile> = project.layout.buildDirectory.file("reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
 sonar {
   properties {
     property("sonar.projectKey", "Camelcade_Perl5-IDEA")
