@@ -209,7 +209,7 @@ allprojects {
         "classes",
         "compileJava",
         "compileKotlin",
-//        "composedJar", // disabling these tasks fails the build, because preparesandbox wants jar anyways
+//        "composedJar", // disabling these tasks fails the build, because preparesandbox wants jar anyway
 //        "generateManifest",
         "instrumentCode",
 //        "instrumentedJar",
@@ -290,7 +290,7 @@ tasks {
     classDirectories.from(classDirs)
 
     reports {
-      html.required.set(true) // human readable
+      html.required.set(true) // human-readable
       xml.required.set(true) // required by coveralls
       csv.required.set(false)
     }

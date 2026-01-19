@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Package works like a switcher and exports different implementation depending on target os.
- * We could handle this, but not sure we should at. Hardcoding to the unix one should be enough.
+ * We could handle this, but not sure that we should. Hardcoding to the unix one should be enough.
  */
 public class FileSpecFunctionsProcessor extends PerlPackageProcessorBase {
   private static final String UNIX_IMPLEMENTATION_PACKAGE = "File::Spec::Unix";
