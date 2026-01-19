@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.perl5.lang.perl.psi.PerlVariableDeclarationElement
 import com.perl5.lang.perl.psi.impl.PerlImplicitVariableDeclaration
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
 
-private const val YIELD_VARIABLE_NAME: String = "\$yield"
+private const val YIELD_VARIABLE_NAME: String = $$"$yield"
 
 class MasonFilterDefinition : MasonMethodDefinition {
   constructor(node: ASTNode?) : super(node)

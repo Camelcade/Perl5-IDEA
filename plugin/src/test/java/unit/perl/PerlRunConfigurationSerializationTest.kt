@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,31 +27,31 @@ import org.junit.Test
 class PerlRunConfigurationSerializationTest : PerlLightTestCase() {
   @Test
   fun testPerlRunConfigurationSerialization() {
-    val configFile = """<configuration nameIsGenerated="true" show_console_on_std_err="false" show_console_on_std_out="false">
+    val configFile = $$"""<configuration nameIsGenerated="true" show_console_on_std_err="false" show_console_on_std_out="false">
   <option name="allowRunningInParallel" value="false" />
   <option name="alternativeSdkName" />
   <option name="compileTimeBreakpointsEnabled" value="false" />
   <option name="consoleCharset" value="UTF-8" />
   <option name="envs">
     <map>
-      <entry key="ENV_PATH" value="${'$'}PROJECT_DIR$/blib/envpath" />
+      <entry key="ENV_PATH" value="$PROJECT_DIR$/blib/envpath" />
     </map>
   </option>
   <option name="initCode" value="" />
   <option name="nonInteractiveModeEnabled" value="false" />
   <option name="passParentEnvs" value="true" />
-  <option name="perlArguments" value="${'$'}PROJECT_DIR$/wrong" />
-  <option name="programParameters" value="${'$'}PROJECT_DIR$/blib1" />
+  <option name="perlArguments" value="$PROJECT_DIR$/wrong" />
+  <option name="programParameters" value="$PROJECT_DIR$/blib1" />
   <option name="projectPathOnTarget" />
   <option name="requiredModules" value="" />
   <option name="scriptCharset" value="utf8" />
-  <option name="scriptPath" value="${'$'}PROJECT_DIR$/test.pl" />
+  <option name="scriptPath" value="$PROJECT_DIR$/test.pl" />
   <option name="selectedOptions">
     <list />
   </option>
   <option name="startMode" value="RUN" />
   <option name="useAlternativeSdk" value="false" />
-  <option name="workingDirectory" value="${'$'}PROJECT_DIR$/blib" />
+  <option name="workingDirectory" value="$PROJECT_DIR$/blib" />
 </configuration>""".trimIndent()
     val configuration = PerlRunConfiguration(project, PerlRunConfigurationType.getInstance().scriptConfigurationFactory, "test")
     configuration.readExternal(JDOMUtil.load(configFile))
