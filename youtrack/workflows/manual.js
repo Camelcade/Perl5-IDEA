@@ -24,6 +24,13 @@ exports.rule = entities.Issue.onChange({
       ['psiElement is not instance of requiredClass', 'CAMELCADE-13188'],
       ['unable to get stub builder for file with file =', 'CAMELCADE-2086'],
       ['VfsData$FileAlreadyCreatedException: fileId', 'CAMELCADE-19432'],
+      ['Exception: Outdated stub in index: file:', 'CAMELCADE-22803'],
+      ['AssertionError: No ID found for serializer ', 'CAMELCADE-7959'],
+      ['Throwable: Stub ids not found for key in index = ', 'CAMELCADE-2978'],
+      [function (issue) {
+        return issue.description.includes('IOException: new record') &&
+            issue.description.includes('has non-empty fields:');
+      }, 'CAMELCADE-20492'],
       [function (issue) {
         return issue.description.includes('java.lang.StringIndexOutOfBoundsException') &&
             issue.description.includes('JSEmbeddedContentElementType.parseContents');
