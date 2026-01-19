@@ -323,8 +323,12 @@ abstract class FixClientExecutable : DefaultTask(), IntelliJPlatformVersionAware
     val client = platformPath.resolve("bin/linux/amd64/jetbrains_client.sh").takeIf { it.exists() } ?: return
     val content = client.readText()
 
-    client.writeText(content.replace("IDE_HOME=\$(dirname \"\${IDE_BIN_HOME}\")",
-                                     "IDE_HOME=\$(dirname \$(dirname \$(dirname \"\${IDE_BIN_HOME}\")))"))
+    client.writeText(
+      content.replace(
+        $$"IDE_HOME=$(dirname \"${IDE_BIN_HOME}\")",
+        $$"IDE_HOME=$(dirname $(dirname $(dirname \"${IDE_BIN_HOME}\")))"
+      )
+    )
   }
 }
 
