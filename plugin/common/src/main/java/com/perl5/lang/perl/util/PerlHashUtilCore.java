@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,8 +55,8 @@ public final class PerlHashUtilCore {
     PerlElementTypesGenerated.STRING_LIST
   );
   /**
-   * Elements that may contain some number of key => val pairs, like arrays, arraycasts, hashes, etc
-   * e.g $list_ref => { key => val, key1 => val, @key_vals, %key_vals2, key2 => val}
+   * Elements that may contain some number of {@code key => val} pairs, like arrays, arraycasts, hashes, etc.
+   * e.g {@code $list_ref => { key => val, key1 => val, @key_vals, %key_vals2, key2 => val}}
    */
   private static final TokenSet COLLAPSED_LISTS = TokenSet.create(
     PerlElementTypesGenerated.ARRAY_VARIABLE, PerlElementTypesGenerated.HASH_VARIABLE, PerlElementTypesGenerated.ARRAY_CAST_EXPR,

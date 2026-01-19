@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -106,7 +106,7 @@ class PerlWslHandler extends PerlHostWithFileSystemHandler<PerlWslData, PerlWslH
 
   /**
    * @apiNote Method is intended to avoid the issue with random WSL executions. Some computations require listing of wsl distributions
-   * or initialising a mount point. And both involve execution of the external tool in the random context: EDT, ReadAction, Actions update pass.
+   * or initializing a mount point. And both involve execution of the external tool in the random context: EDT, ReadAction, Actions update pass.
    * If everything is ok, this should work smoothly. If not - the worse thing that can happen - IDE will lag for up to 5 seconds. Probably
    * we should reduce the {@link #COMPUTATION_TIMEOUT}, but let's hope for the best. We could show notification here about possible WSL issues
    * and make WSL subsystem unavailable for the current session.
