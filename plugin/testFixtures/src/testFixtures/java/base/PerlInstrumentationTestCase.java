@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,12 @@ public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
   @Test
   public void testProperClassSource() {
     var className = myClass.getName();
-    var classPath = myClass.getResource("/" + className.replace('.', '/') + ".class").getPath();
+    var classFilePath = "/" + className.replace('.', '/') + ".class";
+    var classResource = myClass.getResource(classFilePath);
+    if (classResource == null) {
+      fail("Classfile resource for a  " + className + " is not found in classpath by " + classFilePath);
+    }
+    var classPath = classResource.getPath();
     if (!myClassPathPattern.matcher(classPath).find()) {
       fail("Classpath for the " + className + " is expected to match " + myClassPathPattern + ", but was " + classPath);
     }
