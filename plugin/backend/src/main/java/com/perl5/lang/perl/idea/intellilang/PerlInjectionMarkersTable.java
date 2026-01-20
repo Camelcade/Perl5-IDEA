@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -157,10 +157,6 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
     @NotNull
     String languageId;
 
-    public Item(@NotNull Map.Entry<String, String> entry) {
-      this(entry.getKey(), entry.getValue());
-    }
-
     public Item(@NotNull String marker, @NotNull String languageId) {
       this.marker = marker;
       this.languageId = languageId;
@@ -245,7 +241,7 @@ final class PerlInjectionMarkersTable extends JBTable implements Configurable {
     }
 
     @Override
-    public @Nullable String valueOf(Item item) {
+    public @NotNull String valueOf(Item item) {
       Language language = Language.findLanguageByID(item.languageId);
       return language == null ?
              PerlBundle.message("perl.settings.markers.language.unsupported", item.languageId) :
