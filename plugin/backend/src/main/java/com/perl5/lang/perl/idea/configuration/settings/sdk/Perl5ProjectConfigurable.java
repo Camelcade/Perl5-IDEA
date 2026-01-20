@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -104,7 +104,7 @@ public class Perl5ProjectConfigurable implements Configurable, Perl5SdkManipulat
     builder.addComponent(myPerl5SdkConfigurable.createComponent());
     builder.addComponent(mySdkProjectSettingsPanel);
 
-    ComboBoxModel<PerlVersion> versionModel = new CollectionComboBoxModel<>(PerlVersion.ALL_VERSIONS);
+    ComboBoxModel<PerlVersion> versionModel = new CollectionComboBoxModel<>(new ArrayList<>(PerlVersion.ALL_VERSIONS));
     myTargetPerlVersionComboBox = new ComboBox<>(versionModel);
     myTargetPerlVersionComboBox.setRenderer(new ColoredListCellRenderer<>() {
       @Override
