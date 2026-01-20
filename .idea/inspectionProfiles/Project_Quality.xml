@@ -589,7 +589,9 @@
     <inspection_tool class="PreviewFeature" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PrimitiveArrayArgumentToVariableArgMethod" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="PsiElementConcatenation" enabled="false" level="WARNING" enabled_by_default="false" />
-    <inspection_tool class="PublicApiImplicitType" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="PublicApiImplicitType" enabled="true" level="WEAK WARNING" enabled_by_default="false">
+      <scope name="Production" level="WEAK WARNING" enabled="true" />
+    </inspection_tool>
     <inspection_tool class="PublicField" enabled="false" level="INFORMATION" enabled_by_default="false">
       <option name="ignoreEnums" value="false" />
       <option name="ignorableAnnotations">
