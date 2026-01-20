@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package editor
 
-import base.Mason2LightTestCase
 import base.Mason2TopLevelComponentTestCase
 import org.jetbrains.annotations.NonNls
 import org.junit.Test
