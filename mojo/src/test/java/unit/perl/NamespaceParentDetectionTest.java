@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,7 +60,7 @@ public class NamespaceParentDetectionTest extends PerlLightTestCase {
     assertEquals(Arrays.asList(parents), namespaceDefinition.getParentNamespacesNames());
   }
 
-  private void doFileTest(String... parentsList) {
+  private void doFileTest(@SuppressWarnings("SameParameterValue") String... parentsList) {
     initWithFileSmartWithoutErrors();
     PsiFile file = getFile();
     assert file instanceof PerlFile;
