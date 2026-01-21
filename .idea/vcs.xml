@@ -6,6 +6,7 @@
         <option value="master" />
       </list>
     </option>
+    <option name="synchronizeBranchProtectionRules" value="false" />
   </component>
   <component name="IssueNavigationConfiguration">
     <option name="links">
