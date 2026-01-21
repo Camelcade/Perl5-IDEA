@@ -31,6 +31,7 @@ import com.intellij.platform.debugger.impl.shared.proxy.XDebugManagerProxy;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.util.concurrency.Semaphore;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.xdebugger.*;
 import com.intellij.xdebugger.breakpoints.XBreakpointManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
@@ -38,6 +39,7 @@ import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.impl.XDebugSessionImpl;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
+import com.intellij.xdebugger.impl.XWatch;
 import com.intellij.xdebugger.impl.frame.XWatchesView;
 import com.intellij.xdebugger.impl.frame.XWatchesViewImpl;
 import com.intellij.xdebugger.impl.ui.XDebugSessionData;
@@ -379,12 +381,15 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     if (sessionData == null) {
       return "No session data";
     }
+
+    var watchesManager = XDebugManagerProxy.getInstance().getWatchesManager(getProject());
     //noinspection deprecation
     return String.join(
       "\n",
       "Session data:",
       "Configuration name: " + sessionData.getConfigurationName(),
-      "Watch expressions: " + serializeExpressions(sessionData.getWatchExpressions())
+      "Watch expressions: " + serializeExpressions(
+        ContainerUtil.map(watchesManager.getWatchEntries(sessionData.getConfigurationName()), XWatch::getExpression))
     );
   }
 
