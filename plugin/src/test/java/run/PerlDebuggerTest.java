@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Trinity;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.platform.debugger.impl.shared.proxy.XDebugManagerProxy;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.util.concurrency.Semaphore;
@@ -37,7 +38,6 @@ import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.impl.XDebugSessionImpl;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
-import com.intellij.xdebugger.impl.frame.XDebugManagerProxy;
 import com.intellij.xdebugger.impl.frame.XWatchesView;
 import com.intellij.xdebugger.impl.frame.XWatchesViewImpl;
 import com.intellij.xdebugger.impl.ui.XDebugSessionData;
@@ -367,7 +367,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     assertNotNull("Session proxy not found", sessionProxy);
     sb.append(serializeSessionData(debugSession.getSessionData()))
       .append(SEPARATOR_NEWLINES)
-      .append(serializeSessionTab(sessionProxy.getSessionTab()));
+      .append(serializeSessionTab(((XDebugSessionTab)sessionProxy.getSessionTab())));
 
     return sb.toString()
       .replaceAll("(REF|IO|CODE|FORMAT)\\([^)]+\\)", "$1(...)")
