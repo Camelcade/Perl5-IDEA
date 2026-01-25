@@ -35,7 +35,7 @@ plugins {
   id("com.hurricup.gradle.fixcompress")
   id("idea")
   id("jacoco")
-  id("org.jetbrains.intellij.platform") version "2.10.5"
+  id("org.jetbrains.intellij.platform") version "2.10.6-SNAPSHOT"
   id("org.jetbrains.grammarkit") version "2023.3.0.1"
   id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
   id("org.sonarqube") version "7.2.2.6593"
@@ -99,6 +99,7 @@ allprojects {
         javaCompiler(platformToolsVersion)
         testFramework(TestFrameworkType.Platform, version = platformToolsVersion)
       }
+      testFramework(TestFrameworkType.Plugin.Debugger)
       testFramework(TestFrameworkType.Bundled)
       jetbrainsRuntime()
     }
@@ -412,7 +413,7 @@ intellijPlatform {
 }
 
 configurations.all {
-  resolutionStrategy.cacheDynamicVersionsFor(7, "days")
+  resolutionStrategy.cacheDynamicVersionsFor(providers.gradleProperty("dynamic.version.cache.days").get().toInt(), "days")
 }
 
 fun archiveBasePrefix(projectName: String) = "${rootProject.name}.${projectName}"
