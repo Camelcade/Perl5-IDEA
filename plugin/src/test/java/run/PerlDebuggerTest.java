@@ -30,6 +30,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.platform.debugger.impl.shared.proxy.XDebugManagerProxy;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.util.TimeoutUtil;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.xdebugger.*;
@@ -334,6 +335,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     waitWithEventsDispatching(
       "Timeout waiting for debugger", () -> debugSession.isPaused() || debugSession.isSuspended() || debugSession.isStopped()
     );
+    TimeoutUtil.sleep(500);
   }
 
   private @NotNull Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> getLineBreakpoints() {
