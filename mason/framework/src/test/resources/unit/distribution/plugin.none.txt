@@ -15,11 +15,11 @@ Content modules:
     - perl5.plugin.common.main
  - perl5.lang.mason.framework.frontend.main (OPTIONAL); lib/modules/perl5.lang.mason.framework.frontend.main.jar
   - Dependencies:
-    - intellij.platform.frontend.main
+    - intellij.platform.frontend
     - perl5.plugin.frontend.main
     - perl5.lang.mason.framework.common.main
  - perl5.lang.mason.framework.frontend.split.main (OPTIONAL); lib/modules/perl5.lang.mason.framework.frontend.split.main.jar
   - Dependencies:
-    - intellij.platform.frontend.split.main
+    - intellij.platform.frontend.split
     - perl5.plugin.frontend.split.main
     - perl5.lang.mason.framework.frontend.main

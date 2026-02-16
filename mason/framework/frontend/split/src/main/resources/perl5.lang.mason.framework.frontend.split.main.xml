@@ -1,6 +1,6 @@
 <idea-plugin visibility="public">
   <dependencies>
-    <module name="intellij.platform.frontend.split.main"/>
+    <module name="intellij.platform.frontend.split"/>
     <module name="perl5.plugin.frontend.split.main"/>
     <module name="perl5.lang.mason.framework.frontend.main"/>
   </dependencies>
