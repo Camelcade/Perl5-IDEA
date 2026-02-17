@@ -18,6 +18,7 @@ package completion;
 
 
 import base.PodLightTestCase;
+import com.intellij.openapi.util.registry.Registry;
 import org.junit.Test;
 public class PodCompletionSectionsTest extends PodLightTestCase {
   @Override
@@ -269,7 +270,18 @@ public class PodCompletionSectionsTest extends PodLightTestCase {
   public void testPerldeprecation() {doTest();}
 
   @Test
-  public void testPerldiag() {doTest();}
+  public void testPerldiag() {
+    var value = Registry.get("ide.completion.batch.add.items");
+    var oldValue = value.asBoolean();
+    try{
+      value.setValue(false);
+      doTest();
+    }
+    finally {
+      value.setValue(oldValue);
+    }
+
+  }
 
   @Test
   public void testPerldoc() {doTest();}
