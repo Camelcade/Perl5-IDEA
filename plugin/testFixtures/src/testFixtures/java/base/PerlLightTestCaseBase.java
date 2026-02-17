@@ -1308,7 +1308,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     final String cleanContent = expectedContent.replaceAll(START_FOLD, "").replaceAll(END_FOLD, "");
 
     myFixture.configureByText(fileType, cleanContent);
-    final String actual = ((CodeInsightTestFixtureImpl)myFixture).getFoldingDescription(doCheckCollapseStatus);
+    final String actual = ((CodeInsightTestFixtureImpl)myFixture).getFoldingDescription(doCheckCollapseStatus, false);
 
     Assert.assertEquals(expectedContent, actual);
   }
