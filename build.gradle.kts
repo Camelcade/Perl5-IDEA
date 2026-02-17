@@ -99,6 +99,7 @@ allprojects {
         javaCompiler(platformToolsVersion)
         testFramework(TestFrameworkType.Platform, version = platformToolsVersion)
       }
+      testFramework(TestFrameworkType.Plugin.Debugger)
       testFramework(TestFrameworkType.Bundled)
       jetbrainsRuntime()
     }
@@ -412,7 +413,7 @@ intellijPlatform {
 }
 
 configurations.all {
-  resolutionStrategy.cacheDynamicVersionsFor(7, "days")
+  resolutionStrategy.cacheDynamicVersionsFor(providers.gradleProperty("dynamic.version.cache.days").get().toInt(), "days")
 }
 
 fun archiveBasePrefix(projectName: String) = "${rootProject.name}.${projectName}"

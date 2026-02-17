@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,8 +27,12 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Trinity;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.platform.debugger.impl.shared.proxy.XDebugManagerProxy;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.testFramework.UsefulTestCase;
+import com.intellij.util.TimeoutUtil;
+import com.intellij.util.concurrency.Semaphore;
+import com.intellij.util.containers.ContainerUtil;
 import com.intellij.xdebugger.*;
 import com.intellij.xdebugger.breakpoints.XBreakpointManager;
 import com.intellij.xdebugger.breakpoints.XLineBreakpoint;
@@ -36,15 +40,13 @@ import com.intellij.xdebugger.frame.XExecutionStack;
 import com.intellij.xdebugger.frame.XStackFrame;
 import com.intellij.xdebugger.impl.XDebugSessionImpl;
 import com.intellij.xdebugger.impl.XSourcePositionImpl;
+import com.intellij.xdebugger.impl.XWatch;
 import com.intellij.xdebugger.impl.frame.XWatchesView;
 import com.intellij.xdebugger.impl.frame.XWatchesViewImpl;
 import com.intellij.xdebugger.impl.ui.XDebugSessionData;
 import com.intellij.xdebugger.impl.ui.XDebugSessionTab;
 import com.intellij.xdebugger.impl.ui.tree.XDebuggerTree;
-import com.intellij.xdebugger.impl.ui.tree.nodes.XDebuggerTreeNode;
-import com.intellij.xdebugger.impl.ui.tree.nodes.XValueGroupNodeImpl;
-import com.intellij.xdebugger.impl.ui.tree.nodes.XValueNodeImpl;
-import com.intellij.xdebugger.impl.ui.tree.nodes.XValuePresentationUtil;
+import com.intellij.xdebugger.impl.ui.tree.nodes.*;
 import com.perl5.lang.perl.debugger.PerlStackFrame;
 import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointProperties;
 import com.perl5.lang.perl.debugger.breakpoints.PerlLineBreakpointType;
@@ -333,6 +335,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     waitWithEventsDispatching(
       "Timeout waiting for debugger", () -> debugSession.isPaused() || debugSession.isSuspended() || debugSession.isStopped()
     );
+    TimeoutUtil.sleep(500);
   }
 
   private @NotNull Collection<? extends XLineBreakpoint<PerlLineBreakpointProperties>> getLineBreakpoints() {
@@ -364,9 +367,11 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     assertNotNull(currentFrame);
     sb.append(serializeFrame(currentFrame)).append(SEPARATOR_NEWLINES);
 
+    var sessionProxy = XDebugManagerProxy.getInstance().findSessionProxy(debugSession.getProject(), debugSession.getId());
+    assertNotNull("Session proxy not found", sessionProxy);
     sb.append(serializeSessionData(debugSession.getSessionData()))
       .append(SEPARATOR_NEWLINES)
-      .append(serializeSessionTab(debugSession.getSessionTab()));
+      .append(serializeSessionTab(((XDebugSessionTab)sessionProxy.getSessionTab())));
 
     return sb.toString()
       .replaceAll("(REF|IO|CODE|FORMAT)\\([^)]+\\)", "$1(...)")
@@ -378,12 +383,15 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     if (sessionData == null) {
       return "No session data";
     }
+
+    var watchesManager = XDebugManagerProxy.getInstance().getWatchesManager(getProject());
     //noinspection deprecation
     return String.join(
       "\n",
       "Session data:",
       "Configuration name: " + sessionData.getConfigurationName(),
-      "Watch expressions: " + serializeExpressions(sessionData.getWatchExpressions())
+      "Watch expressions: " + serializeExpressions(
+        ContainerUtil.map(watchesManager.getWatchEntries(sessionData.getConfigurationName()), XWatch::getExpression))
     );
   }
 
@@ -425,6 +433,9 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
       if (valueContainer.canNavigateToTypeSource()) {
         result.append("; navigates to type source");
       }
+
+      var sem = new Semaphore();
+      sem.down();
       valueContainer.computeSourcePosition(sourcePosition -> {
         if (sourcePosition != null) {
           result.append("; source position: ")
@@ -432,7 +443,9 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
             .append(":").append(sourcePosition.getLine())
             .append(":").append(sourcePosition.getOffset());
         }
+        sem.up();
       });
+      waitWithEventsDispatching("Timeout waiting for source position", () -> sem.waitFor(1000));
     }
     result.append("; icon: ").append(PerlLightTestCaseBase.getIconText(node.getIcon()));
     result.append("\n");
@@ -456,22 +469,18 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
     return node instanceof XValueGroupNodeImpl && StringUtil.contains(node.toString(), "%main");
   }
 
-  /**
-   * @implNote this method is lame. We should check last kid of the children for ...
-   */
   private void loadAllChildren(@NotNull XDebuggerTreeNode node) {
     if (node.isLeaf()) {
       return;
     }
-    node.getChildren();
-    PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
-    try {
-      Thread.sleep(100);
-    }
-    catch (InterruptedException e) {
-      fail(e.getMessage());
-    }
-    PlatformTestUtil.dispatchAllEventsInIdeEventQueue();
+    waitWithEventsDispatching("Failed to load children", () -> {
+      List<? extends TreeNode> children = node.getChildren();
+      if (children.size() != 1) {
+        return true;
+      }
+      return !(children.getFirst() instanceof MessageTreeNode messageTreeNode) ||
+             !messageTreeNode.getText().toString().contains("Collecting data");
+    });
   }
 
   private @NotNull String serializeFrame(@Nullable XStackFrame stackFrame) {

@@ -76,13 +76,14 @@ public class PerlDebuggerProgramRunner extends GenericPerlProgramRunner {
     var executionResult = perlDebugProfileStateBase.execute(env.getExecutor(), this);
     ApplicationManager.getApplication().invokeLater(() -> {
       try {
-        XDebugSession xDebugSession = XDebuggerManager.getInstance(env.getProject()).startSession(env, new XDebugProcessStarter() {
+        var sessionStartedResult = XDebuggerManager.getInstance(env.getProject()).newSessionBuilder(new XDebugProcessStarter() {
           @Override
           public @NotNull XDebugProcess start(@NotNull XDebugSession session) {
             return new PerlDebugProcess(session, perlDebugProfileStateBase, executionResult);
           }
-        });
-        result.setResult(xDebugSession.getRunContentDescriptor());
+        }).environment(env).startSession();
+
+        result.setResult(sessionStartedResult.getRunContentDescriptor());
       }
       catch (ExecutionException e) {
         LOG.error(e);

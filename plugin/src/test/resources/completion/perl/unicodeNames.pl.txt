@@ -4,9 +4,6 @@ Text: ALARM CLOCK; Tail: null; Type: ⏰; Icon: null; Type Icon: null
 Text: ANTICLOCKWISE CLOSED CIRCLE ARROW; Tail: null; Type: ⥀; Icon: null; Type Icon: null
 	Lookups: ANTICLOCKWISE CLOSED CIRCLE ARROW
 	String: ANTICLOCKWISE CLOSED CIRCLE ARROW
-Text: ANTICLOCKWISE CONTOUR INTEGRAL; Tail: null; Type: ∳; Icon: null; Type Icon: null
-	Lookups: ANTICLOCKWISE CONTOUR INTEGRAL
-	String: ANTICLOCKWISE CONTOUR INTEGRAL
 Text: ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS; Tail: null; Type: 🔄; Icon: null; Type Icon: null
 	Lookups: ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS
 	String: ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS
@@ -31,12 +28,555 @@ Text: ANTICLOCKWISE TRIANGLE-HEADED LEFT U-SHAPED ARROW; Tail: null; Type: ⮎; 
 Text: ANTICLOCKWISE TRIANGLE-HEADED OPEN CIRCLE ARROW; Tail: null; Type: ⭯; Icon: null; Type Icon: null
 	Lookups: ANTICLOCKWISE TRIANGLE-HEADED OPEN CIRCLE ARROW
 	String: ANTICLOCKWISE TRIANGLE-HEADED OPEN CIRCLE ARROW
-Text: ANTICLOCKWISE TRIANGLE-HEADED RIGHT U-SHAPED ARROW; Tail: null; Type: ⮌; Icon: null; Type Icon: null
-	Lookups: ANTICLOCKWISE TRIANGLE-HEADED RIGHT U-SHAPED ARROW
-	String: ANTICLOCKWISE TRIANGLE-HEADED RIGHT U-SHAPED ARROW
 Text: ANTICLOCKWISE TRIANGLE-HEADED TOP U-SHAPED ARROW; Tail: null; Type: ⮏; Icon: null; Type Icon: null
 	Lookups: ANTICLOCKWISE TRIANGLE-HEADED TOP U-SHAPED ARROW
 	String: ANTICLOCKWISE TRIANGLE-HEADED TOP U-SHAPED ARROW
+Text: BLOCK OCTANT-1234567; Tail: null; Type: 𜵰; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1234567
+	String: BLOCK OCTANT-1234567
+Text: BLOCK OCTANT-1234568; Tail: null; Type: 𜶫; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1234568
+	String: BLOCK OCTANT-1234568
+Text: BLOCK OCTANT-1234578; Tail: null; Type: 𜷊; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1234578
+	String: BLOCK OCTANT-1234578
+Text: BLOCK OCTANT-1234678; Tail: null; Type: 𜷚; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1234678
+	String: BLOCK OCTANT-1234678
+Text: BLOCK OCTANT-1235678; Tail: null; Type: 𜷠; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1235678
+	String: BLOCK OCTANT-1235678
+Text: BLOCK OCTANT-1235; Tail: null; Type: 𜴏; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1235
+	String: BLOCK OCTANT-1235
+Text: BLOCK OCTANT-1236; Tail: null; Type: 𜴟; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1236
+	String: BLOCK OCTANT-1236
+Text: BLOCK OCTANT-1237; Tail: null; Type: 𜴼; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1237
+	String: BLOCK OCTANT-1237
+Text: BLOCK OCTANT-1238; Tail: null; Type: 𜵷; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1238
+	String: BLOCK OCTANT-1238
+Text: BLOCK OCTANT-123; Tail: null; Type: 𜴂; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-123
+	String: BLOCK OCTANT-123
+Text: BLOCK OCTANT-1245678; Tail: null; Type: 𜷣; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1245678
+	String: BLOCK OCTANT-1245678
+Text: BLOCK OCTANT-1245; Tail: null; Type: 𜴓; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1245
+	String: BLOCK OCTANT-1245
+Text: BLOCK OCTANT-12468; Tail: null; Type: 𜶘; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-12468
+	String: BLOCK OCTANT-12468
+Text: BLOCK OCTANT-1246; Tail: null; Type: 𜴢; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1246
+	String: BLOCK OCTANT-1246
+Text: BLOCK OCTANT-12478; Tail: null; Type: 𜶶; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-12478
+	String: BLOCK OCTANT-12478
+Text: BLOCK OCTANT-1247; Tail: null; Type: 𜵀; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1247
+	String: BLOCK OCTANT-1247
+Text: BLOCK OCTANT-1248; Tail: null; Type: 𜵻; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1248
+	String: BLOCK OCTANT-1248
+Text: BLOCK OCTANT-124; Tail: null; Type: 𜴅; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-124
+	String: BLOCK OCTANT-124
+Text: BLOCK OCTANT-1256; Tail: null; Type: 𜴪; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1256
+	String: BLOCK OCTANT-1256
+Text: BLOCK OCTANT-1257; Tail: null; Type: 𜵇; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1257
+	String: BLOCK OCTANT-1257
+Text: BLOCK OCTANT-1258; Tail: null; Type: 𜶃; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1258
+	String: BLOCK OCTANT-1258
+Text: BLOCK OCTANT-125; Tail: null; Type: 𜴌; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-125
+	String: BLOCK OCTANT-125
+Text: BLOCK OCTANT-1267; Tail: null; Type: 𜵔; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1267
+	String: BLOCK OCTANT-1267
+Text: BLOCK OCTANT-1268; Tail: null; Type: 𜶒; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1268
+	String: BLOCK OCTANT-1268
+Text: BLOCK OCTANT-126; Tail: null; Type: 𜴛; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-126
+	String: BLOCK OCTANT-126
+Text: BLOCK OCTANT-1278; Tail: null; Type: 𜶮; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1278
+	String: BLOCK OCTANT-1278
+Text: BLOCK OCTANT-127; Tail: null; Type: 𜴸; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-127
+	String: BLOCK OCTANT-127
+Text: BLOCK OCTANT-128; Tail: null; Type: 𜵳; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-128
+	String: BLOCK OCTANT-128
+Text: BLOCK OCTANT-1345678; Tail: null; Type: 𜷤; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1345678
+	String: BLOCK OCTANT-1345678
+Text: BLOCK OCTANT-134567; Tail: null; Type: 𜵮; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-134567
+	String: BLOCK OCTANT-134567
+Text: BLOCK OCTANT-134568; Tail: null; Type: 𜶩; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-134568
+	String: BLOCK OCTANT-134568
+Text: BLOCK OCTANT-134578; Tail: null; Type: 𜷈; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-134578
+	String: BLOCK OCTANT-134578
+Text: BLOCK OCTANT-1345; Tail: null; Type: 𜴕; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1345
+	String: BLOCK OCTANT-1345
+Text: BLOCK OCTANT-134678; Tail: null; Type: 𜷘; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-134678
+	String: BLOCK OCTANT-134678
+Text: BLOCK OCTANT-1346; Tail: null; Type: 𜴤; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1346
+	String: BLOCK OCTANT-1346
+Text: BLOCK OCTANT-1347; Tail: null; Type: 𜵂; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1347
+	String: BLOCK OCTANT-1347
+Text: BLOCK OCTANT-1348; Tail: null; Type: 𜵽; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1348
+	String: BLOCK OCTANT-1348
+Text: BLOCK OCTANT-134; Tail: null; Type: 𜴇; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-134
+	String: BLOCK OCTANT-134
+Text: BLOCK OCTANT-1356; Tail: null; Type: 𜴬; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1356
+	String: BLOCK OCTANT-1356
+Text: BLOCK OCTANT-1358; Tail: null; Type: 𜶅; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1358
+	String: BLOCK OCTANT-1358
+Text: BLOCK OCTANT-135; Tail: null; Type: 𜴍; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-135
+	String: BLOCK OCTANT-135
+Text: BLOCK OCTANT-1367; Tail: null; Type: 𜵖; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1367
+	String: BLOCK OCTANT-1367
+Text: BLOCK OCTANT-136; Tail: null; Type: 𜴝; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-136
+	String: BLOCK OCTANT-136
+Text: BLOCK OCTANT-1378; Tail: null; Type: 𜶰; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1378
+	String: BLOCK OCTANT-1378
+Text: BLOCK OCTANT-137; Tail: null; Type: 𜴺; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-137
+	String: BLOCK OCTANT-137
+Text: BLOCK OCTANT-138; Tail: null; Type: 𜵵; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-138
+	String: BLOCK OCTANT-138
+Text: BLOCK OCTANT-145678; Tail: null; Type: 𜷢; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-145678
+	String: BLOCK OCTANT-145678
+Text: BLOCK OCTANT-1456; Tail: null; Type: 𜴰; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1456
+	String: BLOCK OCTANT-1456
+Text: BLOCK OCTANT-1457; Tail: null; Type: 𜵌; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1457
+	String: BLOCK OCTANT-1457
+Text: BLOCK OCTANT-1458; Tail: null; Type: 𜶉; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1458
+	String: BLOCK OCTANT-1458
+Text: BLOCK OCTANT-145; Tail: null; Type: 𜴑; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-145
+	String: BLOCK OCTANT-145
+Text: BLOCK OCTANT-1467; Tail: null; Type: 𜵚; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1467
+	String: BLOCK OCTANT-1467
+Text: BLOCK OCTANT-1468; Tail: null; Type: 𜶗; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1468
+	String: BLOCK OCTANT-1468
+Text: BLOCK OCTANT-146; Tail: null; Type: 𜴠; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-146
+	String: BLOCK OCTANT-146
+Text: BLOCK OCTANT-1478; Tail: null; Type: 𜶴; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1478
+	String: BLOCK OCTANT-1478
+Text: BLOCK OCTANT-147; Tail: null; Type: 𜴾; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-147
+	String: BLOCK OCTANT-147
+Text: BLOCK OCTANT-148; Tail: null; Type: 𜵹; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-148
+	String: BLOCK OCTANT-148
+Text: BLOCK OCTANT-14; Tail: null; Type: 𜴄; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-14
+	String: BLOCK OCTANT-14
+Text: BLOCK OCTANT-15678; Tail: null; Type: 𜷛; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-15678
+	String: BLOCK OCTANT-15678
+Text: BLOCK OCTANT-1567; Tail: null; Type: 𜵢; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1567
+	String: BLOCK OCTANT-1567
+Text: BLOCK OCTANT-1568; Tail: null; Type: 𜶝; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1568
+	String: BLOCK OCTANT-1568
+Text: BLOCK OCTANT-156; Tail: null; Type: 𜴨; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-156
+	String: BLOCK OCTANT-156
+Text: BLOCK OCTANT-1578; Tail: null; Type: 𜶼; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1578
+	String: BLOCK OCTANT-1578
+Text: BLOCK OCTANT-157; Tail: null; Type: 𜵅; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-157
+	String: BLOCK OCTANT-157
+Text: BLOCK OCTANT-158; Tail: null; Type: 𜶁; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-158
+	String: BLOCK OCTANT-158
+Text: BLOCK OCTANT-15; Tail: null; Type: 𜴊; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-15
+	String: BLOCK OCTANT-15
+Text: BLOCK OCTANT-1678; Tail: null; Type: 𜷌; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-1678
+	String: BLOCK OCTANT-1678
+Text: BLOCK OCTANT-167; Tail: null; Type: 𜵒; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-167
+	String: BLOCK OCTANT-167
+Text: BLOCK OCTANT-168; Tail: null; Type: 𜶐; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-168
+	String: BLOCK OCTANT-168
+Text: BLOCK OCTANT-16; Tail: null; Type: 𜴙; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-16
+	String: BLOCK OCTANT-16
+Text: BLOCK OCTANT-178; Tail: null; Type: 𜶬; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-178
+	String: BLOCK OCTANT-178
+Text: BLOCK OCTANT-17; Tail: null; Type: 𜴶; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-17
+	String: BLOCK OCTANT-17
+Text: BLOCK OCTANT-18; Tail: null; Type: 𜵱; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-18
+	String: BLOCK OCTANT-18
+Text: BLOCK OCTANT-234567; Tail: null; Type: 𜵯; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-234567
+	String: BLOCK OCTANT-234567
+Text: BLOCK OCTANT-234568; Tail: null; Type: 𜶪; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-234568
+	String: BLOCK OCTANT-234568
+Text: BLOCK OCTANT-23456; Tail: null; Type: 𜴵; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-23456
+	String: BLOCK OCTANT-23456
+Text: BLOCK OCTANT-234578; Tail: null; Type: 𜷉; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-234578
+	String: BLOCK OCTANT-234578
+Text: BLOCK OCTANT-23457; Tail: null; Type: 𜵐; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-23457
+	String: BLOCK OCTANT-23457
+Text: BLOCK OCTANT-23458; Tail: null; Type: 𜶎; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-23458
+	String: BLOCK OCTANT-23458
+Text: BLOCK OCTANT-2345; Tail: null; Type: 𜴖; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2345
+	String: BLOCK OCTANT-2345
+Text: BLOCK OCTANT-234678; Tail: null; Type: 𜷙; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-234678
+	String: BLOCK OCTANT-234678
+Text: BLOCK OCTANT-23467; Tail: null; Type: 𜵟; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-23467
+	String: BLOCK OCTANT-23467
+Text: BLOCK OCTANT-23468; Tail: null; Type: 𜶛; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-23468
+	String: BLOCK OCTANT-23468
+Text: BLOCK OCTANT-2346; Tail: null; Type: 𜴥; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2346
+	String: BLOCK OCTANT-2346
+Text: BLOCK OCTANT-23478; Tail: null; Type: 𜶹; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-23478
+	String: BLOCK OCTANT-23478
+Text: BLOCK OCTANT-2347; Tail: null; Type: 𜵃; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2347
+	String: BLOCK OCTANT-2347
+Text: BLOCK OCTANT-2348; Tail: null; Type: 𜵾; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2348
+	String: BLOCK OCTANT-2348
+Text: BLOCK OCTANT-234; Tail: null; Type: 𜴈; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-234
+	String: BLOCK OCTANT-234
+Text: BLOCK OCTANT-235678; Tail: null; Type: 𜷟; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-235678
+	String: BLOCK OCTANT-235678
+Text: BLOCK OCTANT-23567; Tail: null; Type: 𜵧; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-23567
+	String: BLOCK OCTANT-23567
+Text: BLOCK OCTANT-23568; Tail: null; Type: 𜶢; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-23568
+	String: BLOCK OCTANT-23568
+Text: BLOCK OCTANT-2356; Tail: null; Type: 𜴭; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2356
+	String: BLOCK OCTANT-2356
+Text: BLOCK OCTANT-23578; Tail: null; Type: 𜷁; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-23578
+	String: BLOCK OCTANT-23578
+Text: BLOCK OCTANT-2357; Tail: null; Type: 𜵉; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2357
+	String: BLOCK OCTANT-2357
+Text: BLOCK OCTANT-2358; Tail: null; Type: 𜶆; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2358
+	String: BLOCK OCTANT-2358
+Text: BLOCK OCTANT-235; Tail: null; Type: 𜴎; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-235
+	String: BLOCK OCTANT-235
+Text: BLOCK OCTANT-23678; Tail: null; Type: 𜷑; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-23678
+	String: BLOCK OCTANT-23678
+Text: BLOCK OCTANT-2367; Tail: null; Type: 𜵗; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2367
+	String: BLOCK OCTANT-2367
+Text: BLOCK OCTANT-2368; Tail: null; Type: 𜶔; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2368
+	String: BLOCK OCTANT-2368
+Text: BLOCK OCTANT-236; Tail: null; Type: 𜴞; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-236
+	String: BLOCK OCTANT-236
+Text: BLOCK OCTANT-2378; Tail: null; Type: 𜶱; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2378
+	String: BLOCK OCTANT-2378
+Text: BLOCK OCTANT-237; Tail: null; Type: 𜴻; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-237
+	String: BLOCK OCTANT-237
+Text: BLOCK OCTANT-238; Tail: null; Type: 𜵶; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-238
+	String: BLOCK OCTANT-238
+Text: BLOCK OCTANT-23; Tail: null; Type: 𜴁; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-23
+	String: BLOCK OCTANT-23
+Text: BLOCK OCTANT-24567; Tail: null; Type: 𜵫; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-24567
+	String: BLOCK OCTANT-24567
+Text: BLOCK OCTANT-24568; Tail: null; Type: 𜶦; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-24568
+	String: BLOCK OCTANT-24568
+Text: BLOCK OCTANT-2456; Tail: null; Type: 𜴱; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2456
+	String: BLOCK OCTANT-2456
+Text: BLOCK OCTANT-24578; Tail: null; Type: 𜷅; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-24578
+	String: BLOCK OCTANT-24578
+Text: BLOCK OCTANT-2458; Tail: null; Type: 𜶊; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2458
+	String: BLOCK OCTANT-2458
+Text: BLOCK OCTANT-245; Tail: null; Type: 𜴒; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-245
+	String: BLOCK OCTANT-245
+Text: BLOCK OCTANT-24678; Tail: null; Type: 𜷕; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-24678
+	String: BLOCK OCTANT-24678
+Text: BLOCK OCTANT-2467; Tail: null; Type: 𜵛; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2467
+	String: BLOCK OCTANT-2467
+Text: BLOCK OCTANT-246; Tail: null; Type: 𜴡; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-246
+	String: BLOCK OCTANT-246
+Text: BLOCK OCTANT-2478; Tail: null; Type: 𜶵; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2478
+	String: BLOCK OCTANT-2478
+Text: BLOCK OCTANT-247; Tail: null; Type: 𜴿; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-247
+	String: BLOCK OCTANT-247
+Text: BLOCK OCTANT-248; Tail: null; Type: 𜵺; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-248
+	String: BLOCK OCTANT-248
+Text: BLOCK OCTANT-25678; Tail: null; Type: 𜷜; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-25678
+	String: BLOCK OCTANT-25678
+Text: BLOCK OCTANT-2567; Tail: null; Type: 𜵣; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2567
+	String: BLOCK OCTANT-2567
+Text: BLOCK OCTANT-2568; Tail: null; Type: 𜶞; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2568
+	String: BLOCK OCTANT-2568
+Text: BLOCK OCTANT-256; Tail: null; Type: 𜴩; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-256
+	String: BLOCK OCTANT-256
+Text: BLOCK OCTANT-2578; Tail: null; Type: 𜶽; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2578
+	String: BLOCK OCTANT-2578
+Text: BLOCK OCTANT-257; Tail: null; Type: 𜵆; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-257
+	String: BLOCK OCTANT-257
+Text: BLOCK OCTANT-258; Tail: null; Type: 𜶂; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-258
+	String: BLOCK OCTANT-258
+Text: BLOCK OCTANT-25; Tail: null; Type: 𜴋; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-25
+	String: BLOCK OCTANT-25
+Text: BLOCK OCTANT-2678; Tail: null; Type: 𜷍; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-2678
+	String: BLOCK OCTANT-2678
+Text: BLOCK OCTANT-267; Tail: null; Type: 𜵓; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-267
+	String: BLOCK OCTANT-267
+Text: BLOCK OCTANT-268; Tail: null; Type: 𜶑; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-268
+	String: BLOCK OCTANT-268
+Text: BLOCK OCTANT-26; Tail: null; Type: 𜴚; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-26
+	String: BLOCK OCTANT-26
+Text: BLOCK OCTANT-278; Tail: null; Type: 𜶭; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-278
+	String: BLOCK OCTANT-278
+Text: BLOCK OCTANT-27; Tail: null; Type: 𜴷; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-27
+	String: BLOCK OCTANT-27
+Text: BLOCK OCTANT-28; Tail: null; Type: 𜵲; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-28
+	String: BLOCK OCTANT-28
+Text: BLOCK OCTANT-34567; Tail: null; Type: 𜵭; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-34567
+	String: BLOCK OCTANT-34567
+Text: BLOCK OCTANT-34568; Tail: null; Type: 𜶨; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-34568
+	String: BLOCK OCTANT-34568
+Text: BLOCK OCTANT-3456; Tail: null; Type: 𜴳; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-3456
+	String: BLOCK OCTANT-3456
+Text: BLOCK OCTANT-34578; Tail: null; Type: 𜷇; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-34578
+	String: BLOCK OCTANT-34578
+Text: BLOCK OCTANT-3457; Tail: null; Type: 𜵎; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-3457
+	String: BLOCK OCTANT-3457
+Text: BLOCK OCTANT-3458; Tail: null; Type: 𜶌; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-3458
+	String: BLOCK OCTANT-3458
+Text: BLOCK OCTANT-345; Tail: null; Type: 𜴔; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-345
+	String: BLOCK OCTANT-345
+Text: BLOCK OCTANT-34678; Tail: null; Type: 𜷗; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-34678
+	String: BLOCK OCTANT-34678
+Text: BLOCK OCTANT-3467; Tail: null; Type: 𜵝; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-3467
+	String: BLOCK OCTANT-3467
+Text: BLOCK OCTANT-3468; Tail: null; Type: 𜶙; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-3468
+	String: BLOCK OCTANT-3468
+Text: BLOCK OCTANT-346; Tail: null; Type: 𜴣; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-346
+	String: BLOCK OCTANT-346
+Text: BLOCK OCTANT-3478; Tail: null; Type: 𜶷; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-3478
+	String: BLOCK OCTANT-3478
+Text: BLOCK OCTANT-347; Tail: null; Type: 𜵁; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-347
+	String: BLOCK OCTANT-347
+Text: BLOCK OCTANT-348; Tail: null; Type: 𜵼; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-348
+	String: BLOCK OCTANT-348
+Text: BLOCK OCTANT-34; Tail: null; Type: 𜴆; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-34
+	String: BLOCK OCTANT-34
+Text: BLOCK OCTANT-35678; Tail: null; Type: 𜷞; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-35678
+	String: BLOCK OCTANT-35678
+Text: BLOCK OCTANT-3567; Tail: null; Type: 𜵥; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-3567
+	String: BLOCK OCTANT-3567
+Text: BLOCK OCTANT-3568; Tail: null; Type: 𜶠; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-3568
+	String: BLOCK OCTANT-3568
+Text: BLOCK OCTANT-356; Tail: null; Type: 𜴫; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-356
+	String: BLOCK OCTANT-356
+Text: BLOCK OCTANT-3578; Tail: null; Type: 𜶿; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-3578
+	String: BLOCK OCTANT-3578
+Text: BLOCK OCTANT-357; Tail: null; Type: 𜵈; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-357
+	String: BLOCK OCTANT-357
+Text: BLOCK OCTANT-358; Tail: null; Type: 𜶄; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-358
+	String: BLOCK OCTANT-358
+Text: BLOCK OCTANT-3678; Tail: null; Type: 𜷏; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-3678
+	String: BLOCK OCTANT-3678
+Text: BLOCK OCTANT-367; Tail: null; Type: 𜵕; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-367
+	String: BLOCK OCTANT-367
+Text: BLOCK OCTANT-368; Tail: null; Type: 𜶓; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-368
+	String: BLOCK OCTANT-368
+Text: BLOCK OCTANT-36; Tail: null; Type: 𜴜; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-36
+	String: BLOCK OCTANT-36
+Text: BLOCK OCTANT-378; Tail: null; Type: 𜶯; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-378
+	String: BLOCK OCTANT-378
+Text: BLOCK OCTANT-37; Tail: null; Type: 𜴹; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-37
+	String: BLOCK OCTANT-37
+Text: BLOCK OCTANT-38; Tail: null; Type: 𜵴; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-38
+	String: BLOCK OCTANT-38
+Text: BLOCK OCTANT-3; Tail: null; Type: 𜴀; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-3
+	String: BLOCK OCTANT-3
+Text: BLOCK OCTANT-45678; Tail: null; Type: 𜷡; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-45678
+	String: BLOCK OCTANT-45678
+Text: BLOCK OCTANT-456; Tail: null; Type: 𜴯; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-456
+	String: BLOCK OCTANT-456
+Text: BLOCK OCTANT-457; Tail: null; Type: 𜵋; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-457
+	String: BLOCK OCTANT-457
+Text: BLOCK OCTANT-458; Tail: null; Type: 𜶈; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-458
+	String: BLOCK OCTANT-458
+Text: BLOCK OCTANT-45; Tail: null; Type: 𜴐; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-45
+	String: BLOCK OCTANT-45
+Text: BLOCK OCTANT-4678; Tail: null; Type: 𜷓; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-4678
+	String: BLOCK OCTANT-4678
+Text: BLOCK OCTANT-467; Tail: null; Type: 𜵙; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-467
+	String: BLOCK OCTANT-467
+Text: BLOCK OCTANT-468; Tail: null; Type: 𜶖; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-468
+	String: BLOCK OCTANT-468
+Text: BLOCK OCTANT-478; Tail: null; Type: 𜶳; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-478
+	String: BLOCK OCTANT-478
+Text: BLOCK OCTANT-47; Tail: null; Type: 𜴽; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-47
+	String: BLOCK OCTANT-47
+Text: BLOCK OCTANT-48; Tail: null; Type: 𜵸; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-48
+	String: BLOCK OCTANT-48
+Text: BLOCK OCTANT-4; Tail: null; Type: 𜴃; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-4
+	String: BLOCK OCTANT-4
+Text: BLOCK OCTANT-567; Tail: null; Type: 𜵡; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-567
+	String: BLOCK OCTANT-567
+Text: BLOCK OCTANT-568; Tail: null; Type: 𜶜; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-568
+	String: BLOCK OCTANT-568
+Text: BLOCK OCTANT-56; Tail: null; Type: 𜴧; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-56
+	String: BLOCK OCTANT-56
+Text: BLOCK OCTANT-578; Tail: null; Type: 𜶻; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-578
+	String: BLOCK OCTANT-578
+Text: BLOCK OCTANT-58; Tail: null; Type: 𜶀; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-58
+	String: BLOCK OCTANT-58
+Text: BLOCK OCTANT-5; Tail: null; Type: 𜴉; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-5
+	String: BLOCK OCTANT-5
+Text: BLOCK OCTANT-678; Tail: null; Type: 𜷋; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-678
+	String: BLOCK OCTANT-678
+Text: BLOCK OCTANT-67; Tail: null; Type: 𜵑; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-67
+	String: BLOCK OCTANT-67
+Text: BLOCK OCTANT-6; Tail: null; Type: 𜴘; Icon: null; Type Icon: null
+	Lookups: BLOCK OCTANT-6
+	String: BLOCK OCTANT-6
 Text: BLOCK SEXTANT-12345; Tail: null; Type: 🬝; Icon: null; Type Icon: null
 	Lookups: BLOCK SEXTANT-12345
 	String: BLOCK SEXTANT-12345
@@ -229,18 +769,12 @@ Text: CIRCLED ANTICLOCKWISE-ROTATED DIVISION SIGN; Tail: null; Type: ⦼; Icon: 
 Text: CLOCK FACE EIGHT OCLOCK; Tail: null; Type: 🕗; Icon: null; Type Icon: null
 	Lookups: CLOCK FACE EIGHT OCLOCK
 	String: CLOCK FACE EIGHT OCLOCK
-Text: CLOCK FACE EIGHT-THIRTY; Tail: null; Type: 🕣; Icon: null; Type Icon: null
-	Lookups: CLOCK FACE EIGHT-THIRTY
-	String: CLOCK FACE EIGHT-THIRTY
 Text: CLOCK FACE ELEVEN OCLOCK; Tail: null; Type: 🕚; Icon: null; Type Icon: null
 	Lookups: CLOCK FACE ELEVEN OCLOCK
 	String: CLOCK FACE ELEVEN OCLOCK
 Text: CLOCK FACE ELEVEN-THIRTY; Tail: null; Type: 🕦; Icon: null; Type Icon: null
 	Lookups: CLOCK FACE ELEVEN-THIRTY
 	String: CLOCK FACE ELEVEN-THIRTY
-Text: CLOCK FACE FIVE OCLOCK; Tail: null; Type: 🕔; Icon: null; Type Icon: null
-	Lookups: CLOCK FACE FIVE OCLOCK
-	String: CLOCK FACE FIVE OCLOCK
 Text: CLOCK FACE FIVE-THIRTY; Tail: null; Type: 🕠; Icon: null; Type Icon: null
 	Lookups: CLOCK FACE FIVE-THIRTY
 	String: CLOCK FACE FIVE-THIRTY
@@ -253,9 +787,6 @@ Text: CLOCK FACE FOUR-THIRTY; Tail: null; Type: 🕟; Icon: null; Type Icon: nul
 Text: CLOCK FACE NINE OCLOCK; Tail: null; Type: 🕘; Icon: null; Type Icon: null
 	Lookups: CLOCK FACE NINE OCLOCK
 	String: CLOCK FACE NINE OCLOCK
-Text: CLOCK FACE NINE-THIRTY; Tail: null; Type: 🕤; Icon: null; Type Icon: null
-	Lookups: CLOCK FACE NINE-THIRTY
-	String: CLOCK FACE NINE-THIRTY
 Text: CLOCK FACE ONE OCLOCK; Tail: null; Type: 🕐; Icon: null; Type Icon: null
 	Lookups: CLOCK FACE ONE OCLOCK
 	String: CLOCK FACE ONE OCLOCK
@@ -277,9 +808,6 @@ Text: CLOCK FACE SIX-THIRTY; Tail: null; Type: 🕡; Icon: null; Type Icon: null
 Text: CLOCK FACE TEN OCLOCK; Tail: null; Type: 🕙; Icon: null; Type Icon: null
 	Lookups: CLOCK FACE TEN OCLOCK
 	String: CLOCK FACE TEN OCLOCK
-Text: CLOCK FACE TEN-THIRTY; Tail: null; Type: 🕥; Icon: null; Type Icon: null
-	Lookups: CLOCK FACE TEN-THIRTY
-	String: CLOCK FACE TEN-THIRTY
 Text: CLOCK FACE THREE OCLOCK; Tail: null; Type: 🕒; Icon: null; Type Icon: null
 	Lookups: CLOCK FACE THREE OCLOCK
 	String: CLOCK FACE THREE OCLOCK
@@ -313,9 +841,6 @@ Text: CLOCKWISE GAPPED CIRCLE ARROW; Tail: null; Type: ⟳; Icon: null; Type Ico
 Text: CLOCKWISE INTEGRAL; Tail: null; Type: ∱; Icon: null; Type Icon: null
 	Lookups: CLOCKWISE INTEGRAL
 	String: CLOCKWISE INTEGRAL
-Text: CLOCKWISE OPEN CIRCLE ARROW; Tail: null; Type: ↻; Icon: null; Type Icon: null
-	Lookups: CLOCKWISE OPEN CIRCLE ARROW
-	String: CLOCKWISE OPEN CIRCLE ARROW
 Text: CLOCKWISE RIGHT AND LEFT SEMICIRCLE ARROWS; Tail: null; Type: 🗘; Icon: null; Type Icon: null
 	Lookups: CLOCKWISE RIGHT AND LEFT SEMICIRCLE ARROWS
 	String: CLOCKWISE RIGHT AND LEFT SEMICIRCLE ARROWS
@@ -340,15 +865,9 @@ Text: COMBINING ANTICLOCKWISE ARROW ABOVE; Tail: null; Type: ⃔; Icon: null; Ty
 Text: COMBINING ANTICLOCKWISE RING OVERLAY; Tail: null; Type: ⃚; Icon: null; Type Icon: null
 	Lookups: COMBINING ANTICLOCKWISE RING OVERLAY
 	String: COMBINING ANTICLOCKWISE RING OVERLAY
-Text: COMBINING CLOCKWISE ARROW ABOVE; Tail: null; Type: ⃕; Icon: null; Type Icon: null
-	Lookups: COMBINING CLOCKWISE ARROW ABOVE
-	String: COMBINING CLOCKWISE ARROW ABOVE
 Text: COMBINING CLOCKWISE RING OVERLAY; Tail: null; Type: ⃙; Icon: null; Type Icon: null
 	Lookups: COMBINING CLOCKWISE RING OVERLAY
 	String: COMBINING CLOCKWISE RING OVERLAY
-Text: DOWNWARDS ARROW AND RIGHT ONE EIGHTH BLOCK; Tail: null; Type: 🮷; Icon: null; Type Icon: null
-	Lookups: DOWNWARDS ARROW AND RIGHT ONE EIGHTH BLOCK
-	String: DOWNWARDS ARROW AND RIGHT ONE EIGHTH BLOCK
 Text: END OF TRANSMISSION BLOCK; Tail: null; Type: ; Icon: null; Type Icon: null
 	Lookups: END OF TRANSMISSION BLOCK
 	String: END OF TRANSMISSION BLOCK
@@ -361,24 +880,6 @@ Text: FULL BLOCK; Tail: null; Type: █; Icon: null; Type Icon: null
 Text: HORIZONTAL ONE EIGHTH BLOCK-1358; Tail: null; Type: 🮁; Icon: null; Type Icon: null
 	Lookups: HORIZONTAL ONE EIGHTH BLOCK-1358
 	String: HORIZONTAL ONE EIGHTH BLOCK-1358
-Text: HORIZONTAL ONE EIGHTH BLOCK-2; Tail: null; Type: 🭶; Icon: null; Type Icon: null
-	Lookups: HORIZONTAL ONE EIGHTH BLOCK-2
-	String: HORIZONTAL ONE EIGHTH BLOCK-2
-Text: HORIZONTAL ONE EIGHTH BLOCK-3; Tail: null; Type: 🭷; Icon: null; Type Icon: null
-	Lookups: HORIZONTAL ONE EIGHTH BLOCK-3
-	String: HORIZONTAL ONE EIGHTH BLOCK-3
-Text: HORIZONTAL ONE EIGHTH BLOCK-4; Tail: null; Type: 🭸; Icon: null; Type Icon: null
-	Lookups: HORIZONTAL ONE EIGHTH BLOCK-4
-	String: HORIZONTAL ONE EIGHTH BLOCK-4
-Text: HORIZONTAL ONE EIGHTH BLOCK-5; Tail: null; Type: 🭹; Icon: null; Type Icon: null
-	Lookups: HORIZONTAL ONE EIGHTH BLOCK-5
-	String: HORIZONTAL ONE EIGHTH BLOCK-5
-Text: HORIZONTAL ONE EIGHTH BLOCK-6; Tail: null; Type: 🭺; Icon: null; Type Icon: null
-	Lookups: HORIZONTAL ONE EIGHTH BLOCK-6
-	String: HORIZONTAL ONE EIGHTH BLOCK-6
-Text: HORIZONTAL ONE EIGHTH BLOCK-7; Tail: null; Type: 🭻; Icon: null; Type Icon: null
-	Lookups: HORIZONTAL ONE EIGHTH BLOCK-7
-	String: HORIZONTAL ONE EIGHTH BLOCK-7
 Text: INTERLOCKED FEMALE AND MALE SIGN; Tail: null; Type: ⚤; Icon: null; Type Icon: null
 	Lookups: INTERLOCKED FEMALE AND MALE SIGN
 	String: INTERLOCKED FEMALE AND MALE SIGN
@@ -394,6 +895,9 @@ Text: LEFT AND RIGHT TRIANGULAR HALF BLOCK; Tail: null; Type: 🮛; Icon: null; 
 Text: LEFT AND UPPER AND RIGHT TRIANGULAR THREE QUARTERS BLOCK; Tail: null; Type: 🭫; Icon: null; Type Icon: null
 	Lookups: LEFT AND UPPER AND RIGHT TRIANGULAR THREE QUARTERS BLOCK
 	String: LEFT AND UPPER AND RIGHT TRIANGULAR THREE QUARTERS BLOCK
+Text: LEFT AND UPPER ONE EIGHTH BLOCK CONTAINING BLACK SMALL SQUARE; Tail: null; Type: 𜲎; Icon: null; Type Icon: null
+	Lookups: LEFT AND UPPER ONE EIGHTH BLOCK CONTAINING BLACK SMALL SQUARE
+	String: LEFT AND UPPER ONE EIGHTH BLOCK CONTAINING BLACK SMALL SQUARE
 Text: LEFT AND UPPER ONE EIGHTH BLOCK; Tail: null; Type: 🭽; Icon: null; Type Icon: null
 	Lookups: LEFT AND UPPER ONE EIGHTH BLOCK
 	String: LEFT AND UPPER ONE EIGHTH BLOCK
@@ -406,12 +910,21 @@ Text: LEFT HALF BLOCK; Tail: null; Type: ▌; Icon: null; Type Icon: null
 Text: LEFT HALF INVERSE MEDIUM SHADE AND RIGHT HALF BLOCK; Tail: null; Type: 🮔; Icon: null; Type Icon: null
 	Lookups: LEFT HALF INVERSE MEDIUM SHADE AND RIGHT HALF BLOCK
 	String: LEFT HALF INVERSE MEDIUM SHADE AND RIGHT HALF BLOCK
+Text: LEFT HALF LOWER ONE QUARTER BLOCK; Tail: null; Type: 𜺣; Icon: null; Type Icon: null
+	Lookups: LEFT HALF LOWER ONE QUARTER BLOCK
+	String: LEFT HALF LOWER ONE QUARTER BLOCK
+Text: LEFT HALF UPPER ONE QUARTER BLOCK; Tail: null; Type: 𜺨; Icon: null; Type Icon: null
+	Lookups: LEFT HALF UPPER ONE QUARTER BLOCK
+	String: LEFT HALF UPPER ONE QUARTER BLOCK
 Text: LEFT ONE EIGHTH BLOCK; Tail: null; Type: ▏; Icon: null; Type Icon: null
 	Lookups: LEFT ONE EIGHTH BLOCK
 	String: LEFT ONE EIGHTH BLOCK
 Text: LEFT ONE QUARTER BLOCK; Tail: null; Type: ▎; Icon: null; Type Icon: null
 	Lookups: LEFT ONE QUARTER BLOCK
 	String: LEFT ONE QUARTER BLOCK
+Text: LEFT ONE THIRD BLOCK; Tail: null; Type: 🯏; Icon: null; Type Icon: null
+	Lookups: LEFT ONE THIRD BLOCK
+	String: LEFT ONE THIRD BLOCK
 Text: LEFT SEVEN EIGHTHS BLOCK; Tail: null; Type: ▉; Icon: null; Type Icon: null
 	Lookups: LEFT SEVEN EIGHTHS BLOCK
 	String: LEFT SEVEN EIGHTHS BLOCK
@@ -421,12 +934,15 @@ Text: LEFT THREE EIGHTHS BLOCK; Tail: null; Type: ▍; Icon: null; Type Icon: nu
 Text: LEFT THREE QUARTERS BLOCK; Tail: null; Type: ▊; Icon: null; Type Icon: null
 	Lookups: LEFT THREE QUARTERS BLOCK
 	String: LEFT THREE QUARTERS BLOCK
+Text: LEFT THREE QUARTERS LOWER ONE QUARTER BLOCK; Tail: null; Type: 𜺢; Icon: null; Type Icon: null
+	Lookups: LEFT THREE QUARTERS LOWER ONE QUARTER BLOCK
+	String: LEFT THREE QUARTERS LOWER ONE QUARTER BLOCK
+Text: LEFT THREE QUARTERS UPPER ONE QUARTER BLOCK; Tail: null; Type: 𜺩; Icon: null; Type Icon: null
+	Lookups: LEFT THREE QUARTERS UPPER ONE QUARTER BLOCK
+	String: LEFT THREE QUARTERS UPPER ONE QUARTER BLOCK
 Text: LEFT TRIANGULAR ONE QUARTER BLOCK; Tail: null; Type: 🭬; Icon: null; Type Icon: null
 	Lookups: LEFT TRIANGULAR ONE QUARTER BLOCK
 	String: LEFT TRIANGULAR ONE QUARTER BLOCK
-Text: LEFT-SIDE ARC ANTICLOCKWISE ARROW; Tail: null; Type: ⤹; Icon: null; Type Icon: null
-	Lookups: LEFT-SIDE ARC ANTICLOCKWISE ARROW
-	String: LEFT-SIDE ARC ANTICLOCKWISE ARROW
 Text: LEFTWARDS ARROW AND UPPER AND LOWER ONE EIGHTH BLOCK; Tail: null; Type: 🮵; Icon: null; Type Icon: null
 	Lookups: LEFTWARDS ARROW AND UPPER AND LOWER ONE EIGHTH BLOCK
 	String: LEFTWARDS ARROW AND UPPER AND LOWER ONE EIGHTH BLOCK
@@ -436,12 +952,24 @@ Text: LOCK WITH INK PEN; Tail: null; Type: 🔏; Icon: null; Type Icon: null
 Text: LOCK; Tail: null; Type: 🔒; Icon: null; Type Icon: null
 	Lookups: LOCK
 	String: LOCK
+Text: LOWER CENTRE LEFT ONE SIXTEENTH BLOCK; Tail: null; Type: 𜺝; Icon: null; Type Icon: null
+	Lookups: LOWER CENTRE LEFT ONE SIXTEENTH BLOCK
+	String: LOWER CENTRE LEFT ONE SIXTEENTH BLOCK
+Text: LOWER CENTRE ONE QUARTER BLOCK; Tail: null; Type: 🯥; Icon: null; Type Icon: null
+	Lookups: LOWER CENTRE ONE QUARTER BLOCK
+	String: LOWER CENTRE ONE QUARTER BLOCK
+Text: LOWER CENTRE RIGHT ONE SIXTEENTH BLOCK; Tail: null; Type: 𜺞; Icon: null; Type Icon: null
+	Lookups: LOWER CENTRE RIGHT ONE SIXTEENTH BLOCK
+	String: LOWER CENTRE RIGHT ONE SIXTEENTH BLOCK
 Text: LOWER FIVE EIGHTHS BLOCK; Tail: null; Type: ▅; Icon: null; Type Icon: null
 	Lookups: LOWER FIVE EIGHTHS BLOCK
 	String: LOWER FIVE EIGHTHS BLOCK
-Text: LOWER HALF BLOCK; Tail: null; Type: ▄; Icon: null; Type Icon: null
-	Lookups: LOWER HALF BLOCK
-	String: LOWER HALF BLOCK
+Text: LOWER HALF LEFT ONE QUARTER BLOCK; Tail: null; Type: 𜺤; Icon: null; Type Icon: null
+	Lookups: LOWER HALF LEFT ONE QUARTER BLOCK
+	String: LOWER HALF LEFT ONE QUARTER BLOCK
+Text: LOWER HALF RIGHT ONE QUARTER BLOCK; Tail: null; Type: 𜺯; Icon: null; Type Icon: null
+	Lookups: LOWER HALF RIGHT ONE QUARTER BLOCK
+	String: LOWER HALF RIGHT ONE QUARTER BLOCK
 Text: LOWER LEFT BLOCK DIAGONAL LOWER MIDDLE LEFT TO LOWER CENTRE; Tail: null; Type: 🬼; Icon: null; Type Icon: null
 	Lookups: LOWER LEFT BLOCK DIAGONAL LOWER MIDDLE LEFT TO LOWER CENTRE
 	String: LOWER LEFT BLOCK DIAGONAL LOWER MIDDLE LEFT TO LOWER CENTRE
@@ -463,9 +991,6 @@ Text: LOWER LEFT BLOCK DIAGONAL UPPER LEFT TO LOWER CENTRE; Tail: null; Type: �
 Text: LOWER LEFT BLOCK DIAGONAL UPPER LEFT TO LOWER MIDDLE RIGHT; Tail: null; Type: 🭏; Icon: null; Type Icon: null
 	Lookups: LOWER LEFT BLOCK DIAGONAL UPPER LEFT TO LOWER MIDDLE RIGHT
 	String: LOWER LEFT BLOCK DIAGONAL UPPER LEFT TO LOWER MIDDLE RIGHT
-Text: LOWER LEFT BLOCK DIAGONAL UPPER LEFT TO UPPER MIDDLE RIGHT; Tail: null; Type: 🭍; Icon: null; Type Icon: null
-	Lookups: LOWER LEFT BLOCK DIAGONAL UPPER LEFT TO UPPER MIDDLE RIGHT
-	String: LOWER LEFT BLOCK DIAGONAL UPPER LEFT TO UPPER MIDDLE RIGHT
 Text: LOWER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO LOWER CENTRE; Tail: null; Type: 🬾; Icon: null; Type Icon: null
 	Lookups: LOWER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO LOWER CENTRE
 	String: LOWER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO LOWER CENTRE
@@ -475,15 +1000,27 @@ Text: LOWER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO LOWER MIDDLE RIGHT; Tail: n
 Text: LOWER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO LOWER RIGHT; Tail: null; Type: 🬿; Icon: null; Type Icon: null
 	Lookups: LOWER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO LOWER RIGHT
 	String: LOWER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO LOWER RIGHT
+Text: LOWER LEFT ONE SIXTEENTH BLOCK; Tail: null; Type: 𜺜; Icon: null; Type Icon: null
+	Lookups: LOWER LEFT ONE SIXTEENTH BLOCK
+	String: LOWER LEFT ONE SIXTEENTH BLOCK
+Text: LOWER LEFT QUADRANT CHESS KING; Tail: null; Type: 𜲼; Icon: null; Type Icon: null
+	Lookups: LOWER LEFT QUADRANT CHESS KING
+	String: LOWER LEFT QUADRANT CHESS KING
+Text: LOWER LEFT QUADRANT CHESS KNIGHT; Tail: null; Type: 𜳌; Icon: null; Type Icon: null
+	Lookups: LOWER LEFT QUADRANT CHESS KNIGHT
+	String: LOWER LEFT QUADRANT CHESS KNIGHT
 Text: LOWER LEFT SEMICIRCULAR ANTICLOCKWISE ARROW; Tail: null; Type: ⤿; Icon: null; Type Icon: null
 	Lookups: LOWER LEFT SEMICIRCULAR ANTICLOCKWISE ARROW
 	String: LOWER LEFT SEMICIRCULAR ANTICLOCKWISE ARROW
+Text: LOWER MIDDLE CENTRE RIGHT ONE SIXTEENTH BLOCK; Tail: null; Type: 𜺚; Icon: null; Type Icon: null
+	Lookups: LOWER MIDDLE CENTRE RIGHT ONE SIXTEENTH BLOCK
+	String: LOWER MIDDLE CENTRE RIGHT ONE SIXTEENTH BLOCK
+Text: LOWER MIDDLE RIGHT ONE SIXTEENTH BLOCK; Tail: null; Type: 𜺛; Icon: null; Type Icon: null
+	Lookups: LOWER MIDDLE RIGHT ONE SIXTEENTH BLOCK
+	String: LOWER MIDDLE RIGHT ONE SIXTEENTH BLOCK
 Text: LOWER ONE EIGHTH BLOCK; Tail: null; Type: ▁; Icon: null; Type Icon: null
 	Lookups: LOWER ONE EIGHTH BLOCK
 	String: LOWER ONE EIGHTH BLOCK
-Text: LOWER ONE QUARTER BLOCK; Tail: null; Type: ▂; Icon: null; Type Icon: null
-	Lookups: LOWER ONE QUARTER BLOCK
-	String: LOWER ONE QUARTER BLOCK
 Text: LOWER RIGHT BLOCK DIAGONAL LOWER CENTRE TO LOWER MIDDLE RIGHT; Tail: null; Type: 🭇; Icon: null; Type Icon: null
 	Lookups: LOWER RIGHT BLOCK DIAGONAL LOWER CENTRE TO LOWER MIDDLE RIGHT
 	String: LOWER RIGHT BLOCK DIAGONAL LOWER CENTRE TO LOWER MIDDLE RIGHT
@@ -505,9 +1042,6 @@ Text: LOWER RIGHT BLOCK DIAGONAL LOWER LEFT TO UPPER MIDDLE RIGHT; Tail: null; T
 Text: LOWER RIGHT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER CENTRE; Tail: null; Type: 🭃; Icon: null; Type Icon: null
 	Lookups: LOWER RIGHT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER CENTRE
 	String: LOWER RIGHT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER CENTRE
-Text: LOWER RIGHT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER MIDDLE RIGHT; Tail: null; Type: 🭆; Icon: null; Type Icon: null
-	Lookups: LOWER RIGHT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER MIDDLE RIGHT
-	String: LOWER RIGHT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER MIDDLE RIGHT
 Text: LOWER RIGHT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER RIGHT; Tail: null; Type: 🭄; Icon: null; Type Icon: null
 	Lookups: LOWER RIGHT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER RIGHT
 	String: LOWER RIGHT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER RIGHT
@@ -517,6 +1051,9 @@ Text: LOWER RIGHT BLOCK DIAGONAL UPPER MIDDLE LEFT TO UPPER CENTRE; Tail: null; 
 Text: LOWER RIGHT BLOCK DIAGONAL UPPER MIDDLE LEFT TO UPPER RIGHT; Tail: null; Type: 🭂; Icon: null; Type Icon: null
 	Lookups: LOWER RIGHT BLOCK DIAGONAL UPPER MIDDLE LEFT TO UPPER RIGHT
 	String: LOWER RIGHT BLOCK DIAGONAL UPPER MIDDLE LEFT TO UPPER RIGHT
+Text: LOWER RIGHT QUADRANT CHESS KING; Tail: null; Type: 𜲽; Icon: null; Type Icon: null
+	Lookups: LOWER RIGHT QUADRANT CHESS KING
+	String: LOWER RIGHT QUADRANT CHESS KING
 Text: LOWER RIGHT SEMICIRCULAR CLOCKWISE ARROW; Tail: null; Type: ⤾; Icon: null; Type Icon: null
 	Lookups: LOWER RIGHT SEMICIRCULAR CLOCKWISE ARROW
 	String: LOWER RIGHT SEMICIRCULAR CLOCKWISE ARROW
@@ -529,27 +1066,36 @@ Text: LOWER THREE EIGHTHS BLOCK; Tail: null; Type: ▃; Icon: null; Type Icon: n
 Text: LOWER THREE QUARTERS BLOCK; Tail: null; Type: ▆; Icon: null; Type Icon: null
 	Lookups: LOWER THREE QUARTERS BLOCK
 	String: LOWER THREE QUARTERS BLOCK
+Text: LOWER THREE QUARTERS LEFT ONE QUARTER BLOCK; Tail: null; Type: 𜺥; Icon: null; Type Icon: null
+	Lookups: LOWER THREE QUARTERS LEFT ONE QUARTER BLOCK
+	String: LOWER THREE QUARTERS LEFT ONE QUARTER BLOCK
 Text: LOWER TRIANGULAR ONE QUARTER BLOCK; Tail: null; Type: 🭯; Icon: null; Type Icon: null
 	Lookups: LOWER TRIANGULAR ONE QUARTER BLOCK
 	String: LOWER TRIANGULAR ONE QUARTER BLOCK
 Text: MANTELPIECE CLOCK; Tail: null; Type: 🕰; Icon: null; Type Icon: null
 	Lookups: MANTELPIECE CLOCK
 	String: MANTELPIECE CLOCK
+Text: MIDDLE LEFT ONE QUARTER BLOCK; Tail: null; Type: 🯦; Icon: null; Type Icon: null
+	Lookups: MIDDLE LEFT ONE QUARTER BLOCK
+	String: MIDDLE LEFT ONE QUARTER BLOCK
+Text: MIDDLE RIGHT ONE QUARTER BLOCK; Tail: null; Type: 🯧; Icon: null; Type Icon: null
+	Lookups: MIDDLE RIGHT ONE QUARTER BLOCK
+	String: MIDDLE RIGHT ONE QUARTER BLOCK
 Text: OPEN LOCK; Tail: null; Type: 🔓; Icon: null; Type Icon: null
 	Lookups: OPEN LOCK
 	String: OPEN LOCK
-Text: RIGHT AND LOWER ONE EIGHTH BLOCK; Tail: null; Type: 🭿; Icon: null; Type Icon: null
-	Lookups: RIGHT AND LOWER ONE EIGHTH BLOCK
-	String: RIGHT AND LOWER ONE EIGHTH BLOCK
-Text: RIGHT AND UPPER ONE EIGHTH BLOCK; Tail: null; Type: 🭾; Icon: null; Type Icon: null
-	Lookups: RIGHT AND UPPER ONE EIGHTH BLOCK
-	String: RIGHT AND UPPER ONE EIGHTH BLOCK
 Text: RIGHT FIVE EIGHTHS BLOCK; Tail: null; Type: 🮉; Icon: null; Type Icon: null
 	Lookups: RIGHT FIVE EIGHTHS BLOCK
 	String: RIGHT FIVE EIGHTHS BLOCK
 Text: RIGHT HALF BLOCK; Tail: null; Type: ▐; Icon: null; Type Icon: null
 	Lookups: RIGHT HALF BLOCK
 	String: RIGHT HALF BLOCK
+Text: RIGHT HALF LOWER ONE QUARTER BLOCK; Tail: null; Type: 𜺠; Icon: null; Type Icon: null
+	Lookups: RIGHT HALF LOWER ONE QUARTER BLOCK
+	String: RIGHT HALF LOWER ONE QUARTER BLOCK
+Text: RIGHT HALF UPPER ONE QUARTER BLOCK; Tail: null; Type: 𜺫; Icon: null; Type Icon: null
+	Lookups: RIGHT HALF UPPER ONE QUARTER BLOCK
+	String: RIGHT HALF UPPER ONE QUARTER BLOCK
 Text: RIGHT ONE EIGHTH BLOCK; Tail: null; Type: ▕; Icon: null; Type Icon: null
 	Lookups: RIGHT ONE EIGHTH BLOCK
 	String: RIGHT ONE EIGHTH BLOCK
@@ -559,12 +1105,12 @@ Text: RIGHT ONE QUARTER BLOCK; Tail: null; Type: 🮇; Icon: null; Type Icon: nu
 Text: RIGHT SEVEN EIGHTHS BLOCK; Tail: null; Type: 🮋; Icon: null; Type Icon: null
 	Lookups: RIGHT SEVEN EIGHTHS BLOCK
 	String: RIGHT SEVEN EIGHTHS BLOCK
-Text: RIGHT THREE EIGHTHS BLOCK; Tail: null; Type: 🮈; Icon: null; Type Icon: null
-	Lookups: RIGHT THREE EIGHTHS BLOCK
-	String: RIGHT THREE EIGHTHS BLOCK
-Text: RIGHT THREE QUARTERS BLOCK; Tail: null; Type: 🮊; Icon: null; Type Icon: null
-	Lookups: RIGHT THREE QUARTERS BLOCK
-	String: RIGHT THREE QUARTERS BLOCK
+Text: RIGHT THREE QUARTERS LOWER ONE QUARTER BLOCK; Tail: null; Type: 𜺡; Icon: null; Type Icon: null
+	Lookups: RIGHT THREE QUARTERS LOWER ONE QUARTER BLOCK
+	String: RIGHT THREE QUARTERS LOWER ONE QUARTER BLOCK
+Text: RIGHT THREE QUARTERS UPPER ONE QUARTER BLOCK; Tail: null; Type: 𜺪; Icon: null; Type Icon: null
+	Lookups: RIGHT THREE QUARTERS UPPER ONE QUARTER BLOCK
+	String: RIGHT THREE QUARTERS UPPER ONE QUARTER BLOCK
 Text: RIGHT TRIANGULAR ONE QUARTER BLOCK; Tail: null; Type: 🭮; Icon: null; Type Icon: null
 	Lookups: RIGHT TRIANGULAR ONE QUARTER BLOCK
 	String: RIGHT TRIANGULAR ONE QUARTER BLOCK
@@ -574,6 +1120,240 @@ Text: RIGHT-SIDE ARC CLOCKWISE ARROW; Tail: null; Type: ⤸; Icon: null; Type Ic
 Text: RIGHTWARDS ARROW AND UPPER AND LOWER ONE EIGHTH BLOCK; Tail: null; Type: 🮶; Icon: null; Type Icon: null
 	Lookups: RIGHTWARDS ARROW AND UPPER AND LOWER ONE EIGHTH BLOCK
 	String: RIGHTWARDS ARROW AND UPPER AND LOWER ONE EIGHTH BLOCK
+Text: SEPARATED BLOCK QUADRANT-1234; Tail: null; Type: 𜰯; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-1234
+	String: SEPARATED BLOCK QUADRANT-1234
+Text: SEPARATED BLOCK QUADRANT-123; Tail: null; Type: 𜰧; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-123
+	String: SEPARATED BLOCK QUADRANT-123
+Text: SEPARATED BLOCK QUADRANT-124; Tail: null; Type: 𜰫; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-124
+	String: SEPARATED BLOCK QUADRANT-124
+Text: SEPARATED BLOCK QUADRANT-12; Tail: null; Type: 𜰣; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-12
+	String: SEPARATED BLOCK QUADRANT-12
+Text: SEPARATED BLOCK QUADRANT-134; Tail: null; Type: 𜰭; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-134
+	String: SEPARATED BLOCK QUADRANT-134
+Text: SEPARATED BLOCK QUADRANT-13; Tail: null; Type: 𜰥; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-13
+	String: SEPARATED BLOCK QUADRANT-13
+Text: SEPARATED BLOCK QUADRANT-14; Tail: null; Type: 𜰩; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-14
+	String: SEPARATED BLOCK QUADRANT-14
+Text: SEPARATED BLOCK QUADRANT-1; Tail: null; Type: 𜰡; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-1
+	String: SEPARATED BLOCK QUADRANT-1
+Text: SEPARATED BLOCK QUADRANT-234; Tail: null; Type: 𜰮; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-234
+	String: SEPARATED BLOCK QUADRANT-234
+Text: SEPARATED BLOCK QUADRANT-23; Tail: null; Type: 𜰦; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-23
+	String: SEPARATED BLOCK QUADRANT-23
+Text: SEPARATED BLOCK QUADRANT-24; Tail: null; Type: 𜰪; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-24
+	String: SEPARATED BLOCK QUADRANT-24
+Text: SEPARATED BLOCK QUADRANT-2; Tail: null; Type: 𜰢; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-2
+	String: SEPARATED BLOCK QUADRANT-2
+Text: SEPARATED BLOCK QUADRANT-34; Tail: null; Type: 𜰬; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-34
+	String: SEPARATED BLOCK QUADRANT-34
+Text: SEPARATED BLOCK QUADRANT-3; Tail: null; Type: 𜰤; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-3
+	String: SEPARATED BLOCK QUADRANT-3
+Text: SEPARATED BLOCK QUADRANT-4; Tail: null; Type: 𜰨; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK QUADRANT-4
+	String: SEPARATED BLOCK QUADRANT-4
+Text: SEPARATED BLOCK SEXTANT-123456; Tail: null; Type: 𜺏; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-123456
+	String: SEPARATED BLOCK SEXTANT-123456
+Text: SEPARATED BLOCK SEXTANT-12345; Tail: null; Type: 𜹯; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-12345
+	String: SEPARATED BLOCK SEXTANT-12345
+Text: SEPARATED BLOCK SEXTANT-12346; Tail: null; Type: 𜹿; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-12346
+	String: SEPARATED BLOCK SEXTANT-12346
+Text: SEPARATED BLOCK SEXTANT-1234; Tail: null; Type: 𜹟; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-1234
+	String: SEPARATED BLOCK SEXTANT-1234
+Text: SEPARATED BLOCK SEXTANT-12356; Tail: null; Type: 𜺇; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-12356
+	String: SEPARATED BLOCK SEXTANT-12356
+Text: SEPARATED BLOCK SEXTANT-1235; Tail: null; Type: 𜹧; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-1235
+	String: SEPARATED BLOCK SEXTANT-1235
+Text: SEPARATED BLOCK SEXTANT-1236; Tail: null; Type: 𜹷; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-1236
+	String: SEPARATED BLOCK SEXTANT-1236
+Text: SEPARATED BLOCK SEXTANT-123; Tail: null; Type: 𜹗; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-123
+	String: SEPARATED BLOCK SEXTANT-123
+Text: SEPARATED BLOCK SEXTANT-12456; Tail: null; Type: 𜺋; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-12456
+	String: SEPARATED BLOCK SEXTANT-12456
+Text: SEPARATED BLOCK SEXTANT-1245; Tail: null; Type: 𜹫; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-1245
+	String: SEPARATED BLOCK SEXTANT-1245
+Text: SEPARATED BLOCK SEXTANT-1246; Tail: null; Type: 𜹻; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-1246
+	String: SEPARATED BLOCK SEXTANT-1246
+Text: SEPARATED BLOCK SEXTANT-124; Tail: null; Type: 𜹛; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-124
+	String: SEPARATED BLOCK SEXTANT-124
+Text: SEPARATED BLOCK SEXTANT-1256; Tail: null; Type: 𜺃; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-1256
+	String: SEPARATED BLOCK SEXTANT-1256
+Text: SEPARATED BLOCK SEXTANT-125; Tail: null; Type: 𜹣; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-125
+	String: SEPARATED BLOCK SEXTANT-125
+Text: SEPARATED BLOCK SEXTANT-126; Tail: null; Type: 𜹳; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-126
+	String: SEPARATED BLOCK SEXTANT-126
+Text: SEPARATED BLOCK SEXTANT-12; Tail: null; Type: 𜹓; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-12
+	String: SEPARATED BLOCK SEXTANT-12
+Text: SEPARATED BLOCK SEXTANT-13456; Tail: null; Type: 𜺍; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-13456
+	String: SEPARATED BLOCK SEXTANT-13456
+Text: SEPARATED BLOCK SEXTANT-1345; Tail: null; Type: 𜹭; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-1345
+	String: SEPARATED BLOCK SEXTANT-1345
+Text: SEPARATED BLOCK SEXTANT-1346; Tail: null; Type: 𜹽; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-1346
+	String: SEPARATED BLOCK SEXTANT-1346
+Text: SEPARATED BLOCK SEXTANT-134; Tail: null; Type: 𜹝; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-134
+	String: SEPARATED BLOCK SEXTANT-134
+Text: SEPARATED BLOCK SEXTANT-1356; Tail: null; Type: 𜺅; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-1356
+	String: SEPARATED BLOCK SEXTANT-1356
+Text: SEPARATED BLOCK SEXTANT-135; Tail: null; Type: 𜹥; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-135
+	String: SEPARATED BLOCK SEXTANT-135
+Text: SEPARATED BLOCK SEXTANT-136; Tail: null; Type: 𜹵; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-136
+	String: SEPARATED BLOCK SEXTANT-136
+Text: SEPARATED BLOCK SEXTANT-13; Tail: null; Type: 𜹕; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-13
+	String: SEPARATED BLOCK SEXTANT-13
+Text: SEPARATED BLOCK SEXTANT-1456; Tail: null; Type: 𜺉; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-1456
+	String: SEPARATED BLOCK SEXTANT-1456
+Text: SEPARATED BLOCK SEXTANT-145; Tail: null; Type: 𜹩; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-145
+	String: SEPARATED BLOCK SEXTANT-145
+Text: SEPARATED BLOCK SEXTANT-146; Tail: null; Type: 𜹹; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-146
+	String: SEPARATED BLOCK SEXTANT-146
+Text: SEPARATED BLOCK SEXTANT-14; Tail: null; Type: 𜹙; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-14
+	String: SEPARATED BLOCK SEXTANT-14
+Text: SEPARATED BLOCK SEXTANT-156; Tail: null; Type: 𜺁; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-156
+	String: SEPARATED BLOCK SEXTANT-156
+Text: SEPARATED BLOCK SEXTANT-15; Tail: null; Type: 𜹡; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-15
+	String: SEPARATED BLOCK SEXTANT-15
+Text: SEPARATED BLOCK SEXTANT-16; Tail: null; Type: 𜹱; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-16
+	String: SEPARATED BLOCK SEXTANT-16
+Text: SEPARATED BLOCK SEXTANT-1; Tail: null; Type: 𜹑; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-1
+	String: SEPARATED BLOCK SEXTANT-1
+Text: SEPARATED BLOCK SEXTANT-23456; Tail: null; Type: 𜺎; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-23456
+	String: SEPARATED BLOCK SEXTANT-23456
+Text: SEPARATED BLOCK SEXTANT-2345; Tail: null; Type: 𜹮; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-2345
+	String: SEPARATED BLOCK SEXTANT-2345
+Text: SEPARATED BLOCK SEXTANT-2346; Tail: null; Type: 𜹾; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-2346
+	String: SEPARATED BLOCK SEXTANT-2346
+Text: SEPARATED BLOCK SEXTANT-234; Tail: null; Type: 𜹞; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-234
+	String: SEPARATED BLOCK SEXTANT-234
+Text: SEPARATED BLOCK SEXTANT-2356; Tail: null; Type: 𜺆; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-2356
+	String: SEPARATED BLOCK SEXTANT-2356
+Text: SEPARATED BLOCK SEXTANT-235; Tail: null; Type: 𜹦; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-235
+	String: SEPARATED BLOCK SEXTANT-235
+Text: SEPARATED BLOCK SEXTANT-236; Tail: null; Type: 𜹶; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-236
+	String: SEPARATED BLOCK SEXTANT-236
+Text: SEPARATED BLOCK SEXTANT-23; Tail: null; Type: 𜹖; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-23
+	String: SEPARATED BLOCK SEXTANT-23
+Text: SEPARATED BLOCK SEXTANT-2456; Tail: null; Type: 𜺊; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-2456
+	String: SEPARATED BLOCK SEXTANT-2456
+Text: SEPARATED BLOCK SEXTANT-245; Tail: null; Type: 𜹪; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-245
+	String: SEPARATED BLOCK SEXTANT-245
+Text: SEPARATED BLOCK SEXTANT-246; Tail: null; Type: 𜹺; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-246
+	String: SEPARATED BLOCK SEXTANT-246
+Text: SEPARATED BLOCK SEXTANT-24; Tail: null; Type: 𜹚; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-24
+	String: SEPARATED BLOCK SEXTANT-24
+Text: SEPARATED BLOCK SEXTANT-256; Tail: null; Type: 𜺂; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-256
+	String: SEPARATED BLOCK SEXTANT-256
+Text: SEPARATED BLOCK SEXTANT-25; Tail: null; Type: 𜹢; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-25
+	String: SEPARATED BLOCK SEXTANT-25
+Text: SEPARATED BLOCK SEXTANT-26; Tail: null; Type: 𜹲; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-26
+	String: SEPARATED BLOCK SEXTANT-26
+Text: SEPARATED BLOCK SEXTANT-2; Tail: null; Type: 𜹒; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-2
+	String: SEPARATED BLOCK SEXTANT-2
+Text: SEPARATED BLOCK SEXTANT-3456; Tail: null; Type: 𜺌; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-3456
+	String: SEPARATED BLOCK SEXTANT-3456
+Text: SEPARATED BLOCK SEXTANT-345; Tail: null; Type: 𜹬; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-345
+	String: SEPARATED BLOCK SEXTANT-345
+Text: SEPARATED BLOCK SEXTANT-346; Tail: null; Type: 𜹼; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-346
+	String: SEPARATED BLOCK SEXTANT-346
+Text: SEPARATED BLOCK SEXTANT-34; Tail: null; Type: 𜹜; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-34
+	String: SEPARATED BLOCK SEXTANT-34
+Text: SEPARATED BLOCK SEXTANT-356; Tail: null; Type: 𜺄; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-356
+	String: SEPARATED BLOCK SEXTANT-356
+Text: SEPARATED BLOCK SEXTANT-35; Tail: null; Type: 𜹤; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-35
+	String: SEPARATED BLOCK SEXTANT-35
+Text: SEPARATED BLOCK SEXTANT-36; Tail: null; Type: 𜹴; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-36
+	String: SEPARATED BLOCK SEXTANT-36
+Text: SEPARATED BLOCK SEXTANT-3; Tail: null; Type: 𜹔; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-3
+	String: SEPARATED BLOCK SEXTANT-3
+Text: SEPARATED BLOCK SEXTANT-456; Tail: null; Type: 𜺈; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-456
+	String: SEPARATED BLOCK SEXTANT-456
+Text: SEPARATED BLOCK SEXTANT-45; Tail: null; Type: 𜹨; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-45
+	String: SEPARATED BLOCK SEXTANT-45
+Text: SEPARATED BLOCK SEXTANT-46; Tail: null; Type: 𜹸; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-46
+	String: SEPARATED BLOCK SEXTANT-46
+Text: SEPARATED BLOCK SEXTANT-4; Tail: null; Type: 𜹘; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-4
+	String: SEPARATED BLOCK SEXTANT-4
+Text: SEPARATED BLOCK SEXTANT-56; Tail: null; Type: 𜺀; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-56
+	String: SEPARATED BLOCK SEXTANT-56
+Text: SEPARATED BLOCK SEXTANT-5; Tail: null; Type: 𜹠; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-5
+	String: SEPARATED BLOCK SEXTANT-5
+Text: SEPARATED BLOCK SEXTANT-6; Tail: null; Type: 𜹰; Icon: null; Type Icon: null
+	Lookups: SEPARATED BLOCK SEXTANT-6
+	String: SEPARATED BLOCK SEXTANT-6
 Text: SYMBOL FOR END OF TRANSMISSION BLOCK; Tail: null; Type: ␗; Icon: null; Type Icon: null
 	Lookups: SYMBOL FOR END OF TRANSMISSION BLOCK
 	String: SYMBOL FOR END OF TRANSMISSION BLOCK
@@ -598,9 +1378,12 @@ Text: UPPER AND LOWER ONE EIGHTH BLOCK; Tail: null; Type: 🮀; Icon: null; Type
 Text: UPPER AND LOWER TRIANGULAR HALF BLOCK; Tail: null; Type: 🮚; Icon: null; Type Icon: null
 	Lookups: UPPER AND LOWER TRIANGULAR HALF BLOCK
 	String: UPPER AND LOWER TRIANGULAR HALF BLOCK
-Text: UPPER AND RIGHT AND LOWER TRIANGULAR THREE QUARTERS BLOCK; Tail: null; Type: 🭨; Icon: null; Type Icon: null
-	Lookups: UPPER AND RIGHT AND LOWER TRIANGULAR THREE QUARTERS BLOCK
-	String: UPPER AND RIGHT AND LOWER TRIANGULAR THREE QUARTERS BLOCK
+Text: UPPER CENTRE LEFT ONE SIXTEENTH BLOCK; Tail: null; Type: 𜺑; Icon: null; Type Icon: null
+	Lookups: UPPER CENTRE LEFT ONE SIXTEENTH BLOCK
+	String: UPPER CENTRE LEFT ONE SIXTEENTH BLOCK
+Text: UPPER CENTRE ONE QUARTER BLOCK; Tail: null; Type: 🯤; Icon: null; Type Icon: null
+	Lookups: UPPER CENTRE ONE QUARTER BLOCK
+	String: UPPER CENTRE ONE QUARTER BLOCK
 Text: UPPER FIVE EIGHTHS BLOCK; Tail: null; Type: 🮄; Icon: null; Type Icon: null
 	Lookups: UPPER FIVE EIGHTHS BLOCK
 	String: UPPER FIVE EIGHTHS BLOCK
@@ -613,12 +1396,15 @@ Text: UPPER HALF BLOCK; Tail: null; Type: ▀; Icon: null; Type Icon: null
 Text: UPPER HALF INVERSE MEDIUM SHADE AND LOWER HALF BLOCK; Tail: null; Type: 🮒; Icon: null; Type Icon: null
 	Lookups: UPPER HALF INVERSE MEDIUM SHADE AND LOWER HALF BLOCK
 	String: UPPER HALF INVERSE MEDIUM SHADE AND LOWER HALF BLOCK
+Text: UPPER HALF LEFT ONE QUARTER BLOCK; Tail: null; Type: 𜺧; Icon: null; Type Icon: null
+	Lookups: UPPER HALF LEFT ONE QUARTER BLOCK
+	String: UPPER HALF LEFT ONE QUARTER BLOCK
+Text: UPPER HALF RIGHT ONE QUARTER BLOCK; Tail: null; Type: 𜺬; Icon: null; Type Icon: null
+	Lookups: UPPER HALF RIGHT ONE QUARTER BLOCK
+	String: UPPER HALF RIGHT ONE QUARTER BLOCK
 Text: UPPER LEFT BLOCK DIAGONAL LOWER CENTRE TO LOWER MIDDLE RIGHT; Tail: null; Type: 🭝; Icon: null; Type Icon: null
 	Lookups: UPPER LEFT BLOCK DIAGONAL LOWER CENTRE TO LOWER MIDDLE RIGHT
 	String: UPPER LEFT BLOCK DIAGONAL LOWER CENTRE TO LOWER MIDDLE RIGHT
-Text: UPPER LEFT BLOCK DIAGONAL LOWER CENTRE TO UPPER MIDDLE RIGHT; Tail: null; Type: 🭟; Icon: null; Type Icon: null
-	Lookups: UPPER LEFT BLOCK DIAGONAL LOWER CENTRE TO UPPER MIDDLE RIGHT
-	String: UPPER LEFT BLOCK DIAGONAL LOWER CENTRE TO UPPER MIDDLE RIGHT
 Text: UPPER LEFT BLOCK DIAGONAL LOWER CENTRE TO UPPER RIGHT; Tail: null; Type: 🭡; Icon: null; Type Icon: null
 	Lookups: UPPER LEFT BLOCK DIAGONAL LOWER CENTRE TO UPPER RIGHT
 	String: UPPER LEFT BLOCK DIAGONAL LOWER CENTRE TO UPPER RIGHT
@@ -637,15 +1423,21 @@ Text: UPPER LEFT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER CENTRE; Tail: null; T
 Text: UPPER LEFT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER MIDDLE RIGHT; Tail: null; Type: 🭜; Icon: null; Type Icon: null
 	Lookups: UPPER LEFT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER MIDDLE RIGHT
 	String: UPPER LEFT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER MIDDLE RIGHT
-Text: UPPER LEFT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER RIGHT; Tail: null; Type: 🭚; Icon: null; Type Icon: null
-	Lookups: UPPER LEFT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER RIGHT
-	String: UPPER LEFT BLOCK DIAGONAL LOWER MIDDLE LEFT TO UPPER RIGHT
 Text: UPPER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO UPPER CENTRE; Tail: null; Type: 🭗; Icon: null; Type Icon: null
 	Lookups: UPPER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO UPPER CENTRE
 	String: UPPER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO UPPER CENTRE
 Text: UPPER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO UPPER RIGHT; Tail: null; Type: 🭘; Icon: null; Type Icon: null
 	Lookups: UPPER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO UPPER RIGHT
 	String: UPPER LEFT BLOCK DIAGONAL UPPER MIDDLE LEFT TO UPPER RIGHT
+Text: UPPER MIDDLE CENTRE LEFT ONE SIXTEENTH BLOCK; Tail: null; Type: 𜺕; Icon: null; Type Icon: null
+	Lookups: UPPER MIDDLE CENTRE LEFT ONE SIXTEENTH BLOCK
+	String: UPPER MIDDLE CENTRE LEFT ONE SIXTEENTH BLOCK
+Text: UPPER MIDDLE CENTRE RIGHT ONE SIXTEENTH BLOCK; Tail: null; Type: 𜺖; Icon: null; Type Icon: null
+	Lookups: UPPER MIDDLE CENTRE RIGHT ONE SIXTEENTH BLOCK
+	String: UPPER MIDDLE CENTRE RIGHT ONE SIXTEENTH BLOCK
+Text: UPPER MIDDLE RIGHT ONE SIXTEENTH BLOCK; Tail: null; Type: 𜺗; Icon: null; Type Icon: null
+	Lookups: UPPER MIDDLE RIGHT ONE SIXTEENTH BLOCK
+	String: UPPER MIDDLE RIGHT ONE SIXTEENTH BLOCK
 Text: UPPER ONE EIGHTH BLOCK; Tail: null; Type: ▔; Icon: null; Type Icon: null
 	Lookups: UPPER ONE EIGHTH BLOCK
 	String: UPPER ONE EIGHTH BLOCK
@@ -667,9 +1459,6 @@ Text: UPPER RIGHT BLOCK DIAGONAL UPPER CENTRE TO LOWER RIGHT; Tail: null; Type: 
 Text: UPPER RIGHT BLOCK DIAGONAL UPPER CENTRE TO UPPER MIDDLE RIGHT; Tail: null; Type: 🭢; Icon: null; Type Icon: null
 	Lookups: UPPER RIGHT BLOCK DIAGONAL UPPER CENTRE TO UPPER MIDDLE RIGHT
 	String: UPPER RIGHT BLOCK DIAGONAL UPPER CENTRE TO UPPER MIDDLE RIGHT
-Text: UPPER RIGHT BLOCK DIAGONAL UPPER LEFT TO LOWER CENTRE; Tail: null; Type: 🭖; Icon: null; Type Icon: null
-	Lookups: UPPER RIGHT BLOCK DIAGONAL UPPER LEFT TO LOWER CENTRE
-	String: UPPER RIGHT BLOCK DIAGONAL UPPER LEFT TO LOWER CENTRE
 Text: UPPER RIGHT BLOCK DIAGONAL UPPER LEFT TO LOWER MIDDLE RIGHT; Tail: null; Type: 🭥; Icon: null; Type Icon: null
 	Lookups: UPPER RIGHT BLOCK DIAGONAL UPPER LEFT TO LOWER MIDDLE RIGHT
 	String: UPPER RIGHT BLOCK DIAGONAL UPPER LEFT TO LOWER MIDDLE RIGHT
@@ -685,6 +1474,9 @@ Text: UPPER RIGHT BLOCK DIAGONAL UPPER MIDDLE LEFT TO LOWER MIDDLE RIGHT; Tail: 
 Text: UPPER RIGHT BLOCK DIAGONAL UPPER MIDDLE LEFT TO LOWER RIGHT; Tail: null; Type: 🭕; Icon: null; Type Icon: null
 	Lookups: UPPER RIGHT BLOCK DIAGONAL UPPER MIDDLE LEFT TO LOWER RIGHT
 	String: UPPER RIGHT BLOCK DIAGONAL UPPER MIDDLE LEFT TO LOWER RIGHT
+Text: UPPER RIGHT ONE SIXTEENTH BLOCK; Tail: null; Type: 𜺓; Icon: null; Type Icon: null
+	Lookups: UPPER RIGHT ONE SIXTEENTH BLOCK
+	String: UPPER RIGHT ONE SIXTEENTH BLOCK
 Text: UPPER SEVEN EIGHTHS BLOCK; Tail: null; Type: 🮆; Icon: null; Type Icon: null
 	Lookups: UPPER SEVEN EIGHTHS BLOCK
 	String: UPPER SEVEN EIGHTHS BLOCK
@@ -694,27 +1486,15 @@ Text: UPPER THREE EIGHTHS BLOCK; Tail: null; Type: 🮃; Icon: null; Type Icon: 
 Text: UPPER THREE QUARTERS BLOCK; Tail: null; Type: 🮅; Icon: null; Type Icon: null
 	Lookups: UPPER THREE QUARTERS BLOCK
 	String: UPPER THREE QUARTERS BLOCK
+Text: UPPER THREE QUARTERS LEFT ONE QUARTER BLOCK; Tail: null; Type: 𜺦; Icon: null; Type Icon: null
+	Lookups: UPPER THREE QUARTERS LEFT ONE QUARTER BLOCK
+	String: UPPER THREE QUARTERS LEFT ONE QUARTER BLOCK
+Text: UPPER THREE QUARTERS RIGHT ONE QUARTER BLOCK; Tail: null; Type: 𜺭; Icon: null; Type Icon: null
+	Lookups: UPPER THREE QUARTERS RIGHT ONE QUARTER BLOCK
+	String: UPPER THREE QUARTERS RIGHT ONE QUARTER BLOCK
 Text: UPPER TRIANGULAR ONE QUARTER BLOCK; Tail: null; Type: 🭭; Icon: null; Type Icon: null
 	Lookups: UPPER TRIANGULAR ONE QUARTER BLOCK
 	String: UPPER TRIANGULAR ONE QUARTER BLOCK
 Text: UPWARDS ARROW AND RIGHT ONE EIGHTH BLOCK; Tail: null; Type: 🮸; Icon: null; Type Icon: null
 	Lookups: UPWARDS ARROW AND RIGHT ONE EIGHTH BLOCK
 	String: UPWARDS ARROW AND RIGHT ONE EIGHTH BLOCK
-Text: VERTICAL ONE EIGHTH BLOCK-2; Tail: null; Type: 🭰; Icon: null; Type Icon: null
-	Lookups: VERTICAL ONE EIGHTH BLOCK-2
-	String: VERTICAL ONE EIGHTH BLOCK-2
-Text: VERTICAL ONE EIGHTH BLOCK-3; Tail: null; Type: 🭱; Icon: null; Type Icon: null
-	Lookups: VERTICAL ONE EIGHTH BLOCK-3
-	String: VERTICAL ONE EIGHTH BLOCK-3
-Text: VERTICAL ONE EIGHTH BLOCK-4; Tail: null; Type: 🭲; Icon: null; Type Icon: null
-	Lookups: VERTICAL ONE EIGHTH BLOCK-4
-	String: VERTICAL ONE EIGHTH BLOCK-4
-Text: VERTICAL ONE EIGHTH BLOCK-5; Tail: null; Type: 🭳; Icon: null; Type Icon: null
-	Lookups: VERTICAL ONE EIGHTH BLOCK-5
-	String: VERTICAL ONE EIGHTH BLOCK-5
-Text: VERTICAL ONE EIGHTH BLOCK-6; Tail: null; Type: 🭴; Icon: null; Type Icon: null
-	Lookups: VERTICAL ONE EIGHTH BLOCK-6
-	String: VERTICAL ONE EIGHTH BLOCK-6
-Text: VERTICAL ONE EIGHTH BLOCK-7; Tail: null; Type: 🭵; Icon: null; Type Icon: null
-	Lookups: VERTICAL ONE EIGHTH BLOCK-7
-	String: VERTICAL ONE EIGHTH BLOCK-7
