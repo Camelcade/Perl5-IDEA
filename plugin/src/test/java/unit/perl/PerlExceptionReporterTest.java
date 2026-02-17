@@ -74,7 +74,7 @@ public class PerlExceptionReporterTest extends PerlLightTestCase {
     catch (Exception e) {
       var loggingEvents = new IdeaLoggingEvent[]{new IdeaLoggingEvent("Test message", e)};
       var additionalInfo = "No info";
-      doTest(loggingEvents, additionalInfo, 1);
+      doTest(loggingEvents, additionalInfo, 2);
     }
   }
 
