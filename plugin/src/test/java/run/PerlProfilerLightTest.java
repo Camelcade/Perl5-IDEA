@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -133,6 +133,6 @@ public class PerlProfilerLightTest extends PerlLightTestCase {
       assertInstanceOf(selectedEditor, EditorImpl.class);
       sb.append(getEditorTextWithCaretsAndSelections(selectedEditor)).append(SEPARATOR_NEWLINES);
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 }

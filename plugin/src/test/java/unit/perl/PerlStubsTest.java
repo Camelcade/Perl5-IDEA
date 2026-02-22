@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -136,7 +136,7 @@ public class PerlStubsTest extends PerlLightTestCase {
     assertNotNull(leafElement);
     PerlSubDefinitionElement subDefinitionElement = PsiTreeUtil.getParentOfType(leafElement, PerlSubDefinitionElement.class);
     assertNotNull(subDefinitionElement);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), Objects.requireNonNull(subDefinitionElement.getPresentableName()));
+    compareWithFile(getTestResultsFilePath(), Objects.requireNonNull(subDefinitionElement.getPresentableName()));
   }
 
   @Override

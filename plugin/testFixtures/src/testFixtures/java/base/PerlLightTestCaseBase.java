@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -121,6 +121,7 @@ import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileFilter;
+import com.intellij.platform.testFramework.core.FileComparisonFailedError;
 import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.impl.BlockSupportImpl;
@@ -499,7 +500,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     NonBlockingReadActionImpl.waitForAsyncTaskCompletion();
     PlatformTestUtil.dispatchAllInvocationEventsInIdeEventQueue();
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+    compareWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }
 
   public static @NotNull String loadFile(@NotNull File fileToLoad) {
@@ -566,7 +567,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     });
 
     String resultFilePath = getTestDataPath() + "/" + resultFileName + resultSuffix + ".txt";
-    UsefulTestCase.assertSameLinesWithFile(resultFilePath, myFixture.getFile().getText());
+    compareWithFile(resultFilePath, myFixture.getFile().getText());
     assertNoErrorElements();
   }
 
@@ -666,7 +667,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     myFixture.complete(CompletionType.BASIC, getCompletionInvocationCount());
     LookupElement[] elements = myFixture.getLookupElements();
     removeVirtualFileFilter();
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(answerSuffix), renderLookupElementsToString(elements, predicate));
+    compareWithFile(getTestResultsFilePath(answerSuffix), renderLookupElementsToString(elements, predicate));
   }
 
   protected @NotNull String renderLookupElementsToString(@Nullable LookupElement[] elements,
@@ -854,7 +855,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     for (PsiReference psiReference : references) {
       sb.append(serializeReference(psiReference)).append("\n");
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(appendix), sb.toString());
+    compareWithFile(getTestResultsFilePath(appendix), sb.toString());
   }
 
   protected boolean withInjections() {
@@ -947,7 +948,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     int flags = TargetElementUtil.ELEMENT_NAME_ACCEPTED | TargetElementUtil.REFERENCED_ELEMENT_ACCEPTED;
     PsiElement targetElement = TargetElementUtil.findTargetElement(getEditor(), flags);
     assertNotNull("Cannot find referenced element", targetElement);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), checkAndSerializeFindUsages(targetElement));
+    compareWithFile(getTestResultsFilePath(), checkAndSerializeFindUsages(targetElement));
   }
 
   private String checkAndSerializeFindUsages(@NotNull PsiElement targetElement) {
@@ -1019,7 +1020,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         document.setText(originalText);
       });
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   /**
@@ -1043,7 +1044,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       addCaretInfo(currentCaret, macroses);
       currentCaret.removeSelection();
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(getTopLevelEditor(), macroses));
+    compareWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(getTopLevelEditor(), macroses));
   }
 
   private DataContext getEditorDataContext() {
@@ -1108,7 +1109,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   }
 
   protected final void checkEditorWithFile() {
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
+    compareWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections());
   }
 
   protected void doTestTypingWithoutFiles(@NotNull String initialText, @NotNull String toType, @NotNull String expected) {
@@ -1201,7 +1202,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
     });
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected void doTestBraceMatcher() {
@@ -1236,7 +1237,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
       highlighterIterator.advance();
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(editor, markers));
+    compareWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(editor, markers));
   }
 
   protected void doTestUsagesHighlighting() {
@@ -1284,7 +1285,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
     }
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result);
+    compareWithFile(getTestResultsFilePath(), result);
   }
 
   protected void testFoldingRegions(@NotNull String verificationFileName, LanguageFileType fileType) {
@@ -1394,7 +1395,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         previewBuilder.append(PREVIEW_SEPARATOR).append(getIntentionPreview(action));
         myFixture.launchAction(action);
       });
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections() + previewBuilder);
+    compareWithFile(getTestResultsFilePath(), getEditorTextWithCaretsAndSelections() + previewBuilder);
   }
 
   protected void doTestAnnotationQuickFix(@NotNull String fileName,
@@ -1468,7 +1469,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     }
 
     var editorText = getEditorTextWithCaretsAndSelections();
-    UsefulTestCase.assertSameLinesWithFile(
+    compareWithFile(
       getTestResultsFilePath(), editorText + PREVIEW_SEPARATOR + previewText);
   }
 
@@ -1495,7 +1496,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     StructureViewModel structureViewModel = structureView.getTreeModel();
     StringBuilder sb = new StringBuilder();
     serializeTree(structureViewModel.getRoot(), structureViewModel, sb, null, "", new HashSet<>());
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   private void serializeTree(@NotNull StructureViewTreeElement currentElement,
@@ -1662,7 +1663,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     catch (Exception e) {
       throw new RuntimeException(e);
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   private @Nullable String serializeTreeStructure(@NotNull HierarchyTreeStructure treeStructure,
@@ -1738,7 +1739,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     appendDescriptors("Hashes", sb, namespace.getImportedHashDescriptors());
     appendDescriptors("Subs", sb, namespace.getImportedSubsDescriptors());
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   private void appendDescriptors(@NotNull String sectionLabel,
@@ -1783,7 +1784,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
           .append("\n");
       }
     );
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), actualDump.toString());
+    compareWithFile(getTestResultsFilePath(), actualDump.toString());
   }
 
   protected final void doTestControlFlow() {
@@ -1817,7 +1818,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
     }
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), stringifiedControlFlow);
+    compareWithFile(getTestResultsFilePath(), stringifiedControlFlow);
   }
 
   private @NotNull String getSvgDataPath() {
@@ -1979,7 +1980,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
     }
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected void doBreadCrumbsTest() {
@@ -1994,7 +1995,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
                              StringUtil.join(ContainerUtil.map(myFixture.getBreadcrumbsAtCaret(), this::serializeCrumb), ": ") +
                              ">"));
     });
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(getTopLevelEditor(), macros));
+    compareWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(getTopLevelEditor(), macros));
   }
 
   private String serializeCrumb(@Nullable Crumb crumb) {
@@ -2043,7 +2044,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
       sb.append("\n");
     });
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   private @NotNull String getUsageGroups(@NotNull Usage usage, @NotNull UsageGroupingRule groupingRule) {
@@ -2106,7 +2107,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       assertNoErrorElements();
     }
     String afterRename = getEditorTextWithCaretsAndSelections();
-    UsefulTestCase.assertSameLinesWithFile(
+    compareWithFile(
       getTestResultsFilePath(), beforeRename + "\n================ AFTER RENAME =================\n" + afterRename);
   }
 
@@ -2127,7 +2128,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       .append("    '").append(it.render()).append("'")
       .append("\n"));
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected void doTestIntroduceVariableOccurrences() {
@@ -2140,7 +2141,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       macros.add(Pair.create(occurrenceRange.getStartOffset(), "<occurrence>"));
       macros.add(Pair.create(occurrenceRange.getEndOffset(), "</occurrence>"));
     });
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(getTopLevelEditor(), macros));
+    compareWithFile(getTestResultsFilePath(), getEditorTextWithMacroses(getTopLevelEditor(), macros));
   }
 
   protected void doTestSuggesterOnRename(@NotNull VariableInplaceRenameHandler handler) {
@@ -2156,7 +2157,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     TemplateState state = TemplateManagerImpl.getTemplateState(editor);
     assertNotNull(state);
     state.gotoEnd(false);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), StringUtil.join(names, "\n"));
+    compareWithFile(getTestResultsFilePath(), StringUtil.join(names, "\n"));
   }
 
   protected void doTestIntroduceVariableNamesSuggester() {
@@ -2183,7 +2184,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     String selectedItem = currentVariableRange.substring(getEditorText());
 
     state.gotoEnd(false);
-    UsefulTestCase.assertSameLinesWithFile(
+    compareWithFile(
       getTestResultsFilePath(resultsFileSuffix),
       StringUtil.join(ContainerUtil.map(names, it -> Objects.equals(it, selectedItem) ? "> " + it : it), "\n"));
   }
@@ -2243,7 +2244,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     String generatedDoc =
       documentationElement == null ? "" : StringUtil.notNullize(documentationProvider.generateDoc(documentationElement, elementAtCaret));
     assertNotNull("No document generated for " + documentationElement, generatedDoc);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), generatedDoc);
+    compareWithFile(getTestResultsFilePath(), generatedDoc);
   }
 
   private @Nullable LookupElement getMostRelevantLookupElement(@NotNull String pattern, @NotNull LookupElement[] lookupElements) {
@@ -2279,7 +2280,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       Pair<PsiElement, String> targetAndDocumentation = getContextAndDocumentationAtCaret();
       sb.append(targetAndDocumentation.second).append("\n");
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected void doTestScalarVariableValue() {
@@ -2316,7 +2317,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
     sb.append(SEPARATOR_NEWLINES).append("Resolved").append(SEPARATOR_NEWLINES).append(elementValue.resolve(element).getPresentableText());
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected void doTestReturnValue() {
@@ -2335,7 +2336,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       .append(SEPARATOR_NEWLINES)
       .append(returnValue);
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected FilteringGotoByModel<?> getGoToClassModel() {
@@ -2382,7 +2383,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       sb.append(StringUtil.join(itemsResult, "\n"));
     }
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected void doTestHighlighter(boolean checkErrors) {
@@ -2422,7 +2423,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
       highlighterIterator.advance();
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected void doTestHighlighterRestart() {
@@ -2511,7 +2512,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
     }
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
+    compareWithFile(getTestResultsFilePath(), result.toString());
   }
 
   protected @NotNull String protectSpaces(@NotNull CharSequence charSequence) {
@@ -2585,7 +2586,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         sb.append(StringUtil.join(hintElements, ", "));
       }
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected void withTestMore() {
@@ -2671,7 +2672,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         sb.append(DebugUtil.stubTreeToString(stub));
       }
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected void doTestGoToDeclarationTargets() {
@@ -2688,7 +2689,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         sb.append("\t\t").append(serializePresentation(navigationItem.getPresentation())).append("\n");
       }
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   /**
@@ -2731,7 +2732,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       sb.append(StringUtil.stripHtml(link.second, false)).append(": ").append(link.first).append("\n");
       sb.append("\t").append(serializePsiElement(link.third)).append("\n");
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
 
@@ -2772,13 +2773,13 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected void doTestRename(@NotNull String newName) {
     initWithFileSmart();
     doRenameAtCaret(newName);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
+    compareWithFile(getTestResultsFilePath(), getFile().getText());
   }
 
   protected void doTestRenameInplace(@NotNull String newName) {
     initWithFileSmartWithoutErrors();
     doInplaceRenameAtCaret(newName);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), getFile().getText());
+    compareWithFile(getTestResultsFilePath(), getFile().getText());
   }
 
   protected void doRenameAtCaret(@NotNull String newName) {
@@ -2825,7 +2826,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       sb.append(ReadAction.compute((@NotNull ThrowableComputable<String, RuntimeException>)this::getEditorTextWithCaretsAndSelections));
     }
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected <V, T extends RunAnythingProvider<V>> void doTestRunAnythingHelpGroup(@NotNull RunAnythingHelpGroup<T> helpGroup) {
@@ -2835,7 +2836,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     sb.append("Help items:\n");
     helpItems.sort(Comparator.comparing(RunAnythingItem::getCommand));
     helpItems.forEach(it -> sb.append("\t").append(serializeRunAnythingItem(it)).append("\n"));
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected <V, T extends RunAnythingProvider<V>> void doTestRunAnythingProvider(@NotNull String pattern,
@@ -2850,7 +2851,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     sb.append("Completion items:\n");
     completionItems.sort(Comparator.comparing(RunAnythingItem::getCommand));
     completionItems.forEach(it -> sb.append("\t").append(serializeRunAnythingItem(it)).append("\n"));
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), sb.toString());
+    compareWithFile(getTestResultsFilePath(), sb.toString());
   }
 
   protected @NotNull String serializeRunAnythingItem(@Nullable RunAnythingItem runAnythingItem) {
@@ -2983,7 +2984,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     String psiString = DebugUtil.psiToString(psiFile, true, false);
     result.append(psiString);
 
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
+    compareWithFile(getTestResultsFilePath(), result.toString());
     if (!psiString.contains("PsiErrorElement")) {
       var finalPsiFile = psiFile;
       WriteAction.run(() -> ParsingTestCase.ensureCorrectReparse(finalPsiFile));
@@ -3048,7 +3049,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         super.visitElement(element);
       }
     });
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
+    compareWithFile(getTestResultsFilePath(), result.toString());
   }
 
   protected void doTestInjectedTypingWithoutInit(@NotNull String textToType) {
@@ -3198,7 +3199,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       }
       b.append("\n");
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), b.toString());
+    compareWithFile(getTestResultsFilePath(), b.toString());
   }
 
   protected final <T extends PersistentStateComponent<S>, S> void loadSettings(@NotNull String fileName,
@@ -3220,7 +3221,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected final <T> void compareSerializedStateWithFile(@NotNull T settings) {
     var serializedResult = XmlSerializer.serialize(settings);
     assertNotNull(serializedResult);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), JDOMUtil.write(serializedResult));
+    compareWithFile(getTestResultsFilePath(), JDOMUtil.write(serializedResult));
   }
 
   protected void doTestWordScanner(@NotNull VersionedWordsScanner wordsScanner) {
@@ -3285,7 +3286,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
     var textWithMacros = getEditorTextWithMacroses(getEditor(), macros);
     var result = String.join("================================\n", statText, tokenTypesMappings, tokensList, textWithMacros);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result);
+    compareWithFile(getTestResultsFilePath(), result);
   }
 
   /**
@@ -3306,5 +3307,21 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
       {"sub", "sub somesub"},
       {"subExpr", "sub"}
     });
+  }
+
+  public static void compareWithFile(String expectedFilePath, String actualContent) {
+    try {
+      UsefulTestCase.assertSameLinesWithFile(expectedFilePath, actualContent);
+    }
+    catch (FileComparisonFailedError e) {
+      if (System.getenv().containsKey("CI")) {
+        LOG.error("Comparision error dump:\nExpected:\n" +
+                  e.getExpectedStringPresentation() +
+                  "\n\nActual:\n" +
+                  e.getActualStringPresentation()
+        );
+      }
+      throw e;
+    }
   }
 }

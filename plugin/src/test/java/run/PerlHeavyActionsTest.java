@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.testFramework.LightVirtualFile;
-import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.testFramework.fixtures.CodeInsightTestUtil;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.EnvironmentUtil;
@@ -52,6 +51,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import static base.PerlLightTestCaseBase.compareWithFile;
+
 public class PerlHeavyActionsTest extends PerlPlatformTestCase {
   @Override
   protected String getBaseDataPath() {
@@ -71,7 +72,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
     assertNotNull(deparsedFile);
     var deparsedDocument = FileDocumentManager.getInstance().getDocument(deparsedFile);
     assertNotNull(deparsedDocument);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), deparsedDocument.getText());
+    compareWithFile(getTestResultsFilePath(""), deparsedDocument.getText());
   }
 
   @Test
@@ -114,7 +115,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
     var openedDocument = FileDocumentManager.getInstance().getDocument(openedVirtualFile);
     assertNotNull(openedDocument);
     runActionWithTestEvent(new PerlFormatWithPerlTidyAction());
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), openedDocument.getText());
+    compareWithFile(getTestResultsFilePath(""), openedDocument.getText());
   }
 
   @Test
@@ -141,7 +142,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
                  annotation.getSeverity() + " " +
                  annotation.getMessage());
     }
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), String.join("\n", result));
+    compareWithFile(getTestResultsFilePath(""), String.join("\n", result));
   }
 
   @Test

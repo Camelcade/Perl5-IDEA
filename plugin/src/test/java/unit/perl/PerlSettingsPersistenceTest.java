@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,7 +79,7 @@ public class PerlSettingsPersistenceTest extends PerlLightTestCase {
     assertFalse(perlConfig.isEmpty());
     var sdkData = new Element("sdkData");
     perlConfig.save(sdkData);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), JDOMUtil.write(sdkData));
+    compareWithFile(getTestResultsFilePath(), JDOMUtil.write(sdkData));
   }
 
   @Test
@@ -96,7 +96,7 @@ public class PerlSettingsPersistenceTest extends PerlLightTestCase {
     assertTrue(perlConfig.isEmpty());
     var sdkData = new Element("sdkData");
     perlConfig.save(sdkData);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), JDOMUtil.write(sdkData));
+    compareWithFile(getTestResultsFilePath(), JDOMUtil.write(sdkData));
   }
 
   @Test

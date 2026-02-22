@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,6 @@ import com.intellij.profiler.api.*;
 import com.intellij.profiler.api.configurations.ProfilerConfigurationState;
 import com.intellij.profiler.api.configurations.ProfilerRunConfigurationsManager;
 import com.intellij.testFramework.PlatformTestUtil;
-import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.util.TimeoutUtil;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
@@ -55,6 +54,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
+
+import static base.PerlLightTestCaseBase.compareWithFile;
 
 public class PerlProfilerTest extends PerlPlatformTestCase {
   private Element myConfigurations;
@@ -235,7 +236,7 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
       serializedFrames.add(String.join("; ", serializedStack));
     }
     Collections.sort(serializedFrames);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(dataSuffix), String.join("\n", serializedFrames));
+    compareWithFile(getTestResultsFilePath(dataSuffix), String.join("\n", serializedFrames));
   }
 
   private @NotNull CallTreeBuilder<BaseCallStackElement> getCallTreeBuilder(@NotNull ProfilerState profilerState) {

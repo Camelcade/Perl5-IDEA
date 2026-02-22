@@ -65,6 +65,7 @@ import java.util.*;
 import java.util.function.Consumer;
 
 import static base.PerlLightTestCaseBase.SEPARATOR_NEWLINES;
+import static base.PerlLightTestCaseBase.compareWithFile;
 
 public class PerlDebuggerTest extends PerlPlatformTestCase {
   @Override
@@ -357,7 +358,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
   }
 
   private void compareSessionWithFile(XDebugSessionImpl debugSession) {
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(""), serializeSession(debugSession));
+    compareWithFile(getTestResultsFilePath(""), serializeSession(debugSession));
   }
 
   private String serializeSession(@NotNull XDebugSessionImpl debugSession) {
