@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,7 +47,7 @@ public class PerlStackFrameRenderingTest extends PerlLightTestCase {
     var result = new StringBuilder();
     PerlStackFrame.doCustomizePresentation(myFrameDescriptor, (fragment, attributes) ->
       result.append(protectSpaces(fragment)).append(" - ").append(serialize(attributes)).append("\n"));
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), result.toString());
+    compareWithFile(getTestResultsFilePath(), result.toString());
   }
 
   protected static @NotNull String serialize(@NotNull SimpleTextAttributes attributes) {

@@ -25,6 +25,7 @@ dependencies {
     testFixturesCompileOnly(project(it))
   }
   testFixturesCompileOnly("junit:junit:4.13.2")
+  testFixturesCompileOnly("org.opentest4j:opentest4j:1.3.0")
 
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra

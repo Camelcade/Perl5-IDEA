@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -78,6 +78,6 @@ public class PerlVersionManagerParsersTest extends PerlLightTestCase {
     String outputText = loadFile(new File(getTestDataPath(), getTestName(true) + ".code"));
     List<String> output = StringUtil.split(outputText, "\n");
     List<String> parsedOutput = parser.apply(output);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), StringUtil.join(parsedOutput, "\n"));
+    compareWithFile(getTestResultsFilePath(), StringUtil.join(parsedOutput, "\n"));
   }
 }

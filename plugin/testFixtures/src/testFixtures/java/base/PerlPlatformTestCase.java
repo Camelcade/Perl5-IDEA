@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -54,8 +54,11 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.testFramework.*;
+import com.intellij.testFramework.HeavyPlatformTestCase;
+import com.intellij.testFramework.Parameterized;
 import com.intellij.testFramework.Parameterized.Parameters;
+import com.intellij.testFramework.PlatformTestUtil;
+import com.intellij.testFramework.TestActionEvent;
 import com.intellij.testFramework.common.ThreadLeakTracker;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.intellij.util.ObjectUtils;
@@ -94,6 +97,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BiFunction;
 import java.util.function.BooleanSupplier;
 import java.util.function.Function;
+
+import static base.PerlLightTestCaseBase.compareWithFile;
 
 @Category(Integration.class)
 @RunWith(Parameterized.class)
@@ -444,7 +449,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     assertNotNull(testTreeView);
     Promise<?> promise = TreeUtil.promiseExpandAll(testTreeView);
     waitWithEventsDispatching("Failed to expand tests tree", promise::isSucceeded);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(".tests"), serializeTestNode(resultsViewer.getTestsRootNode(), ""));
+    compareWithFile(getTestResultsFilePath(".tests"), serializeTestNode(resultsViewer.getTestsRootNode(), ""));
   }
 
   protected @NotNull PerlTestRunConfiguration createTestRunConfiguration(@NotNull String file) {

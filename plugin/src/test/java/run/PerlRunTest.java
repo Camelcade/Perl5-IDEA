@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,6 @@ import com.intellij.openapi.util.registry.Registry;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiUtilCore;
-import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.PerlBundle;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import com.perl5.lang.perl.idea.sdk.PerlConfig;
@@ -38,6 +37,8 @@ import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 import java.util.function.BiFunction;
+
+import static base.PerlLightTestCaseBase.compareWithFile;
 
 public class PerlRunTest extends PerlPlatformTestCase {
   @Override
@@ -163,6 +164,6 @@ public class PerlRunTest extends PerlPlatformTestCase {
         .replaceAll(" +\\r", "\r")
         .replaceAll("\u001B]0;[^\u0007]+\u0007\u001B\\[\\?25h", "");
     }
-    UsefulTestCase.assertSameLinesWithFile(filePath, ptyProcessOutput);
+    compareWithFile(filePath, ptyProcessOutput);
   }
 }

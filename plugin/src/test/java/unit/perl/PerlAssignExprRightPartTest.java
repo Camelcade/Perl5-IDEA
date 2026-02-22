@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -144,7 +144,7 @@ public class PerlAssignExprRightPartTest extends PerlLightTestCase {
     PerlAssignExpression assignExpression = PerlAssignExpression.getAssignmentExpression(elementAtCaret);
     assertNotNull(assignExpression);
     PerlAssignExpression.PerlAssignValueDescriptor perlAssignValueDescriptor = assignExpression.getRightPartOfAssignment(elementAtCaret);
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(), serializeValueDescriptor(perlAssignValueDescriptor));
+    compareWithFile(getTestResultsFilePath(), serializeValueDescriptor(perlAssignValueDescriptor));
   }
 
   private String serializeValueDescriptor(@Nullable PerlAssignExpression.PerlAssignValueDescriptor descriptor) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,7 +38,6 @@ import com.intellij.rt.coverage.data.ClassData;
 import com.intellij.rt.coverage.data.LineData;
 import com.intellij.rt.coverage.data.ProjectData;
 import com.intellij.testFramework.PlatformTestUtil;
-import com.intellij.testFramework.UsefulTestCase;
 import com.perl5.lang.perl.coverage.PerlCoverageSuite;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
@@ -49,6 +48,8 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+
+import static base.PerlLightTestCaseBase.compareWithFile;
 
 public class PerlCoverageTest extends PerlPlatformTestCase {
   @Override
@@ -108,7 +109,7 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
   }
 
   private void checkCoverageResultsWithFile() {
-    UsefulTestCase.assertSameLinesWithFile(getTestResultsFilePath(".coverage"), serializeProjectData(getProjectCoverageData()));
+    compareWithFile(getTestResultsFilePath(".coverage"), serializeProjectData(getProjectCoverageData()));
   }
 
   private @NotNull ProjectData getProjectCoverageData() {
