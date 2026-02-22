@@ -121,7 +121,7 @@ allprojects {
     }
 
     test {
-      maxHeapSize = "2048m"
+      maxHeapSize = "4g"
       outputs.upToDateWhen { false }
 
       ignoreFailures = false
