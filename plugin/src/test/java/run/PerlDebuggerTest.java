@@ -29,7 +29,6 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.platform.debugger.impl.shared.proxy.XDebugManagerProxy;
 import com.intellij.testFramework.PlatformTestUtil;
-import com.intellij.testFramework.UsefulTestCase;
 import com.intellij.util.TimeoutUtil;
 import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ContainerUtil;
@@ -425,6 +424,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
                                                 @NotNull String prefix) {
     result.append(prefix).append(node);
     if (node instanceof XValueNodeImpl xValueNode) {
+      waitWithEventsDispatching("Could not load the value presentation", () -> xValueNode.getValuePresentation() != null);
       var presentation = xValueNode.getValuePresentation();
       result.append("-").append(presentation == null ? "null" : XValuePresentationUtil.computeValueText(presentation));
       var valueContainer = xValueNode.getValueContainer();
