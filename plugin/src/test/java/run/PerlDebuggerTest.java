@@ -475,12 +475,14 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
       return;
     }
     waitWithEventsDispatching("Failed to load children", () -> {
-      List<? extends TreeNode> children = node.getChildren();
-      if (children.size() != 1) {
-        return true;
+      for (var child : node.getChildren()) {
+        if (child instanceof MessageTreeNode messageTreeNode &&
+            messageTreeNode.getText().toString().contains("Collecting data")
+        ) {
+          return false;
+        }
       }
-      return !(children.getFirst() instanceof MessageTreeNode messageTreeNode) ||
-             !messageTreeNode.getText().toString().contains("Collecting data");
+      return true;
     });
   }
 
