@@ -26,7 +26,7 @@ jobs:
           distribution: 'jetbrains'
           java-version: '21.0.8'
 
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         if: ${{ env.COVERALLS_REPO_TOKEN }}
         name: Tests Coverage
         with:
