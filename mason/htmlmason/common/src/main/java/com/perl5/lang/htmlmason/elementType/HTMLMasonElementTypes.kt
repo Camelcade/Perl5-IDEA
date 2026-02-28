@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@ import com.perl5.lang.htmlmason.parser.psi.impl.*
 import com.perl5.lang.perl.psi.stubs.PerlFileElementType
 import com.perl5.lang.pod.elementTypes.PodTemplatingElementType
 
+@Suppress("KotlinObjectRegisteredAsExtension")
 object HTMLMasonElementTypes {
   @JvmField
   val HTML_MASON_TEMPLATE_BLOCK_HTML: IElementType = HTMLMasonTemplateTokenType()
