@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -80,7 +80,7 @@ public class PerlFormatWithPerlTidyAction extends PurePerlActionBase {
   private @Nullable PerlCommandLine getPerlTidyCommandLine(@NotNull Project project) {
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
     VirtualFile perlTidyScript =
-      ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PERL_TIDY_PACKAGE_NAME));
+      ReadAction.computeBlocking(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PERL_TIDY_PACKAGE_NAME));
     if (perlTidyScript == null) {
       return null;
     }

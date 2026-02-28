@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,5 +28,9 @@ class PerlLibraryProvider : AdditionalLibraryRootsProvider() {
     PerlProjectManager.getInstance(project).projectLibraries
 
   override fun getRootsToWatch(project: Project): List<VirtualFile> =
-    PerlProjectManager.getInstance(project).allLibraryRoots + ReadAction.compute<List<VirtualFile>, Throwable> { PerlRunUtil.getBinDirectories(project).toList() }
+    PerlProjectManager.getInstance(project).allLibraryRoots + ReadAction.computeBlocking<List<VirtualFile>, Throwable> {
+      PerlRunUtil.getBinDirectories(
+        project
+      ).toList()
+    }
 }

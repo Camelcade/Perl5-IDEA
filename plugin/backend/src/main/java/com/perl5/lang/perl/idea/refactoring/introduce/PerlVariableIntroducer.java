@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ public class PerlVariableIntroducer extends InplaceVariableIntroducer<PsiElement
     LinkedHashSet<String> nameSuggestions = new LinkedHashSet<>();
     assert myElementToRename instanceof PerlVariableDeclaration;
     PerlNameSuggestionProvider.suggestNames((PerlVariableDeclarationElement)myElementToRename, nameSuggestions);
-    boolean result = ReadAction.compute(()-> super.performInplaceRefactoring(nameSuggestions));
+    boolean result = ReadAction.computeBlocking(() -> super.performInplaceRefactoring(nameSuggestions));
     if (!result) {
       finish(false);
     }

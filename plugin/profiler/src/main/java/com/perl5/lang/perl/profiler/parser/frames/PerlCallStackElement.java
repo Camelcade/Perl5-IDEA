@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ public abstract class PerlCallStackElement extends BaseCallStackElement {
 
   @Override
   public final @NotNull NavigatablePsiElement[] calcNavigatables(@NotNull Project project) {
-    return ReadAction.compute(() -> {
+    return ReadAction.computeBlocking(() -> {
       if (project.isDisposed()) {
         return NavigatablePsiElement.EMPTY_NAVIGATABLE_ELEMENT_ARRAY;
       }
