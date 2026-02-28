@@ -35,6 +35,10 @@ exports.rule = entities.Issue.onChange({
         return issue.description.includes('java.lang.StringIndexOutOfBoundsException') &&
             issue.description.includes('JSEmbeddedContentElementType.parseContents');
       }, 'CAMELCADE-21684'],
+      [function (issue) {
+        return issue.description.includes('Unable to find control flow scope for') &&
+            issue.description.includes('.tt2');
+      }, 'CAMELCADE-2683'],
     ];
 
     let issue = ctx.issue;
