@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,7 +65,7 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
     var project = fileToLint.getProject();
     PerlSharedSettings sharedSettings = PerlSharedSettings.getInstance(project);
     VirtualFile perlCriticScript =
-      ReadAction.compute(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PACKAGE_NAME));
+      ReadAction.computeBlocking(() -> PerlRunUtil.findLibraryScriptWithNotification(project, SCRIPT_NAME, PACKAGE_NAME));
     if (perlCriticScript == null) {
       return null;
     }
@@ -96,18 +96,18 @@ public class PerlCriticAnnotator extends ExternalAnnotator<PerlFile, List<PerlCr
       return null;
     }
 
-    VirtualFile virtualFile = ReadAction.compute(() -> PsiUtilCore.getVirtualFile(sourcePsiFile));
+    VirtualFile virtualFile = ReadAction.computeBlocking(() -> PsiUtilCore.getVirtualFile(sourcePsiFile));
     if (virtualFile == null) {
       return null;
     }
 
-    byte[] sourceBytes = ReadAction.compute(sourcePsiFile::getPerlContentInBytes);
+    byte[] sourceBytes = ReadAction.computeBlocking(sourcePsiFile::getPerlContentInBytes);
     if (sourceBytes == null) {
       return null;
     }
 
     try {
-      PerlCommandLine criticCommandLine = ReadAction.compute(()-> getPerlCriticCommandLine(sourcePsiFile));
+      PerlCommandLine criticCommandLine = ReadAction.computeBlocking(() -> getPerlCriticCommandLine(sourcePsiFile));
       if (criticCommandLine == null) {
         PerlSharedSettings.getInstance(sourcePsiFile.getProject()).PERL_CRITIC_ENABLED = false;
         return null;

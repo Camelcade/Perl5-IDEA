@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ public class PerlFileTypeService implements Disposable {
     NotNullLazyValue.createValue(() -> new LightDirectoryIndex<>(
       this,
       virtualFile -> null,
-      directoryIndex -> ReadAction.run(() -> {
+      directoryIndex -> ReadAction.runBlocking(() -> {
         for (Project project : ProjectManager.getInstance().getOpenProjects()) {
           if (project.isDisposed()) {
             continue;

@@ -158,7 +158,6 @@ import com.intellij.usages.rules.UsageGroupingRuleProvider;
 import com.intellij.util.*;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
-import com.intellij.util.ui.UIUtil;
 import com.intellij.util.xmlb.XmlSerializerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.extensions.PerlImplicitVariablesProvider;
@@ -629,7 +628,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     fail("Unable to find lookup string: " +
          lookupString +
          " in " +
-         ReadAction.compute(() -> renderLookupElementsToString(lookupElements, null)));
+         ReadAction.computeBlocking(() -> renderLookupElementsToString(lookupElements, null)));
   }
 
   public final void doTestCompletion() {
@@ -2792,7 +2791,8 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   protected void doTestSurrounders(Predicate<? super String> namePredicate, boolean shouldHaveSurrounders) {
     initWithFileSmartWithoutErrors();
-    List<AnAction> actions = ReadAction.compute(() -> SurroundWithHandler.buildSurroundActions(getProject(), getEditor(), getFile()));
+    List<AnAction> actions =
+      ReadAction.computeBlocking(() -> SurroundWithHandler.buildSurroundActions(getProject(), getEditor(), getFile()));
     if (actions == null) {
       if (shouldHaveSurrounders) {
         fail("No surounders found");
@@ -2817,13 +2817,14 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
         sb.append(SEPARATOR_NEWLINES);
       }
       sb.append(actionName).append(SEPARATOR_NEWLINES);
-      List<AnAction> actionsList = ReadAction.compute(
+      List<AnAction> actionsList = ReadAction.computeBlocking(
         () -> SurroundWithHandler.buildSurroundActions(getProject(), getEditor(), getFile()));
       assertNotNull(actionsList);
       AnAction anAction = ContainerUtil.find(actionsList, it -> it.toString().equals(actionName));
       assertNotNull("No action: " + actionName, anAction);
       ApplicationManager.getApplication().invokeAndWait(() -> myFixture.testAction(anAction));
-      sb.append(ReadAction.compute((@NotNull ThrowableComputable<String, RuntimeException>)this::getEditorTextWithCaretsAndSelections));
+      sb.append(
+        ReadAction.computeBlocking((@NotNull ThrowableComputable<String, RuntimeException>)this::getEditorTextWithCaretsAndSelections));
     }
 
     compareWithFile(getTestResultsFilePath(), sb.toString());

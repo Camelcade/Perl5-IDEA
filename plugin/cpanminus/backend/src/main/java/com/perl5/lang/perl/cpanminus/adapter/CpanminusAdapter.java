@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -86,7 +86,7 @@ public class CpanminusAdapter extends PackageManagerAdapter {
   public static final class Factory implements PackageManagerAdapterFactory<CpanminusAdapter> {
     @Override
     public @Nullable CpanminusAdapter createAdapter(@NotNull Sdk sdk, @Nullable Project project) {
-      return ReadAction.compute(() -> isAvailable(project) ? new CpanminusAdapter(sdk, project) : null);
+      return ReadAction.computeBlocking(() -> isAvailable(project) ? new CpanminusAdapter(sdk, project) : null);
     }
 
     @VisibleForTesting

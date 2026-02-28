@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -104,7 +104,7 @@ public class PerlCoverageRunner extends CoverageRunner {
       LOG.warn("Error fixing permissions for " + sessionDataFile);
     }
 
-    PerlCommandLine perlCommandLine = ReadAction.compute(() -> {
+    PerlCommandLine perlCommandLine = ReadAction.computeBlocking(() -> {
       if (project.isDisposed()) {
         LOG.debug("Project disposed");
         return null;
@@ -225,7 +225,7 @@ public class PerlCoverageRunner extends CoverageRunner {
   }
 
   private static void showError(@NotNull Project project, @NlsSafe @NotNull String message) {
-    ReadAction.run(() -> {
+    ReadAction.runBlocking(() -> {
       if (!project.isDisposed()) {
         LOG.warn("Error loading coverage: " + message);
         Notifications.Bus.notify(

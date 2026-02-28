@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -279,6 +279,6 @@ public class PerlXNamedValue extends XNamedValue implements PerlLoadableXValueCo
 
   @Override
   public @NotNull ThreeState computeInlineDebuggerData(@NotNull XInlineDebuggerDataCallback callback) {
-    return ReadAction.compute(() -> computeMySourcePosition(null, callback) ? ThreeState.YES : ThreeState.NO);
+    return ReadAction.computeBlocking(() -> computeMySourcePosition(null, callback) ? ThreeState.YES : ThreeState.NO);
   }
 }
