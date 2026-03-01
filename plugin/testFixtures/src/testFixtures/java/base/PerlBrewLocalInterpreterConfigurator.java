@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,7 @@
 
 package base;
 
-import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.io.OSAgnosticPathUtil;
 import com.perl5.lang.perl.idea.sdk.versionManager.PerlRealVersionManagerHandler;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
 import org.jetbrains.annotations.NotNull;
@@ -33,7 +33,7 @@ class PerlBrewLocalInterpreterConfigurator extends PerlVersionManagerBasedConfig
 
   @Override
   protected @NotNull String getPathToVersionManager() {
-    return FileUtil.expandUserHome(PERLBREW_HOME);
+    return OSAgnosticPathUtil.expandUserHome(PERLBREW_HOME);
   }
 
   @Override
