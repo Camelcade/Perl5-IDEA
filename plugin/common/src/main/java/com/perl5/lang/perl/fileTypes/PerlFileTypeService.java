@@ -21,6 +21,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.fileTypes.PlainTextFileType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.project.ProjectManager;
 import com.intellij.openapi.util.NotNullLazyValue;
@@ -38,7 +39,7 @@ public class PerlFileTypeService implements Disposable {
   private final NotNullLazyValue<LightDirectoryIndex<Function<VirtualFile, FileType>>> myDirectoryIndexProvider =
     NotNullLazyValue.createValue(() -> new LightDirectoryIndex<>(
       this,
-      virtualFile -> null,
+      virtualFile -> PlainTextFileType.INSTANCE,
       directoryIndex -> ReadAction.runBlocking(() -> {
         for (Project project : ProjectManager.getInstance().getOpenProjects()) {
           if (project.isDisposed()) {
@@ -81,6 +82,7 @@ public class PerlFileTypeService implements Disposable {
 
   public static @Nullable FileType getFileType(@Nullable VirtualFile virtualFile) {
     VirtualFile fileForAncestryCheck = virtualFile instanceof FakeVirtualFile ? virtualFile.getParent() : virtualFile;
-    return getInstance().myDirectoryIndexProvider.get().getInfoForFile(fileForAncestryCheck).apply(virtualFile);
+    var fileTypeFromIndex = getInstance().myDirectoryIndexProvider.get().getInfoForFile(fileForAncestryCheck).apply(virtualFile);
+    return fileTypeFromIndex == PlainTextFileType.INSTANCE ? null : fileTypeFromIndex;
   }
 }
