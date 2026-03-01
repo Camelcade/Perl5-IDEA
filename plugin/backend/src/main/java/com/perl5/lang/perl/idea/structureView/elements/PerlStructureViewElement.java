@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,7 +36,6 @@ import com.perl5.lang.perl.extensions.packageprocessor.PerlExportDescriptor;
 import com.perl5.lang.perl.idea.highlighter.PerlSyntaxHighlighter;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationBase;
 import com.perl5.lang.perl.idea.presentations.PerlItemPresentationSimple;
-import com.perl5.lang.perl.parser.constant.psi.light.PerlLightConstantDefinitionElement;
 import com.perl5.lang.perl.psi.*;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.util.*;
@@ -166,7 +165,8 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
       }
 
       if (targetLanguage != null) {
-        viewProvider.getPsi(targetLanguage).accept(new PerlRecursiveVisitor() {
+        var languagePsi = Objects.requireNonNull(viewProvider.getPsi(targetLanguage));
+        languagePsi.accept(new PerlRecursiveVisitor() {
           @Override
           public void visitNamespaceDefinitionElement(@NotNull PerlNamespaceDefinitionElement o) {
             result.add(new PerlNamespaceStructureViewElement(o));
@@ -238,8 +238,6 @@ public abstract class PerlStructureViewElement extends PsiTreeElementBase<PsiEle
         for (PsiElement element : PerlMroUtil.getVariants(psiElement, packageName, true)) {
           if (element instanceof PerlIdentifierOwner identifierOwner && !implementedMethods.contains((identifierOwner).getName())) {
             switch (element) {
-              case PerlLightConstantDefinitionElement perlLightConstantDefinitionElement ->
-                inheritedResult.add(new PerlSubStructureViewElement(perlLightConstantDefinitionElement).setInherited());
               case PerlSubDefinitionElement subDefinitionElement ->
                 inheritedResult.add(new PerlSubStructureViewElement(subDefinitionElement).setInherited());
               case PerlSubDeclarationElement subDeclarationElement ->
