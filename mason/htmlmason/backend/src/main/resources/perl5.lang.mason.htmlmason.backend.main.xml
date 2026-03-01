@@ -32,6 +32,7 @@
         implementation="com.perl5.lang.htmlmason.idea.livetemplates.HTMLMasonTemplatePreprocessor"/>
     <defaultLiveTemplates file="liveTemplates/Perl5HTMLMason.xml"/>
 
+    <!--suppress KotlinObjectExtensionRegistration -->
     <stubElementTypeHolder class="com.perl5.lang.htmlmason.elementType.HTMLMasonElementTypes"/>
     <stubIndex implementation="com.perl5.lang.htmlmason.parser.stubs.HTMLMasonFlagsStubIndex"/>
     <stubElementRegistryExtension implementation="com.perl5.lang.htmlmason.parser.stubs.HTMLMasonStubRegistryExtension"/>
