@@ -13,75 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.perl5.lang.perl.idea.regexp
 
-package com.perl5.lang.perl.idea.regexp;
+import org.intellij.lang.regexp.DefaultRegExpPropertiesProvider.getInstance
+import org.intellij.lang.regexp.RegExpLanguageHost
+import org.intellij.lang.regexp.psi.RegExpChar
+import org.intellij.lang.regexp.psi.RegExpElement
+import org.intellij.lang.regexp.psi.RegExpGroup
+import org.intellij.lang.regexp.psi.RegExpNamedGroupRef
 
-import org.intellij.lang.regexp.DefaultRegExpPropertiesProvider;
-import org.intellij.lang.regexp.RegExpLanguageHost;
-import org.intellij.lang.regexp.psi.RegExpChar;
-import org.intellij.lang.regexp.psi.RegExpElement;
-import org.intellij.lang.regexp.psi.RegExpGroup;
-import org.intellij.lang.regexp.psi.RegExpNamedGroupRef;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+class Perl5RegexpHost : RegExpLanguageHost {
+  override fun characterNeedsEscaping(c: Char, isInClass: Boolean): Boolean = false
 
+  override fun supportsPerl5EmbeddedComments(): Boolean = false
 
-public class Perl5RegexpHost implements RegExpLanguageHost {
-  private static final DefaultRegExpPropertiesProvider PROPERTIES_PROVIDER = DefaultRegExpPropertiesProvider.getInstance();
+  override fun supportsPossessiveQuantifiers(context: RegExpElement?): Boolean = false
 
-  @Override
-  public boolean characterNeedsEscaping(char c, boolean isInClass) {
-    return false;
-  }
+  override fun supportsPythonConditionalRefs(): Boolean = false
 
-  @Override
-  public boolean supportsPerl5EmbeddedComments() {
-    return false;
-  }
+  override fun supportsNamedGroupSyntax(group: RegExpGroup?): Boolean = false
 
-  @Override
-  public boolean supportsPossessiveQuantifiers(RegExpElement context) {
-    return false;
-  }
+  override fun supportsNamedGroupRefSyntax(ref: RegExpNamedGroupRef?): Boolean = false
 
-  @Override
-  public boolean supportsPythonConditionalRefs() {
-    return false;
-  }
+  override fun supportsExtendedHexCharacter(regExpChar: RegExpChar?): Boolean = false
 
-  @Override
-  public boolean supportsNamedGroupSyntax(RegExpGroup group) {
-    return false;
-  }
+  override fun isValidCategory(category: String): Boolean = getInstance().isValidCategory(category)
 
-  @Override
-  public boolean supportsNamedGroupRefSyntax(RegExpNamedGroupRef ref) {
-    return false;
-  }
+  // todo: http://perldoc.perl.org/perluniprops.html and /Perl5/lib/unicore/
+  override fun getAllKnownProperties(): Array<Array<String>> = getInstance().allKnownProperties
 
-  @Override
-  public boolean supportsExtendedHexCharacter(RegExpChar regExpChar) {
-    return false;
-  }
+  override fun getPropertyDescription(name: String?): String? = getInstance().getPropertyDescription(name)
 
-  @Override
-  public boolean isValidCategory(@NotNull String category) {
-    return PROPERTIES_PROVIDER.isValidCategory(category);
-  }
-
-  @Override
-  public @NotNull String[][] getAllKnownProperties() {
-    // todo: http://perldoc.perl.org/perluniprops.html and /Perl5/lib/unicore/
-    return PROPERTIES_PROVIDER.getAllKnownProperties();
-  }
-
-  @Override
-  public @Nullable String getPropertyDescription(@Nullable String name) {
-    return PROPERTIES_PROVIDER.getPropertyDescription(name);
-  }
-
-  @Override
-  public @NotNull String[][] getKnownCharacterClasses() {
-    return PROPERTIES_PROVIDER.getKnownCharacterClasses();
-  }
+  override fun getKnownCharacterClasses(): Array<Array<String>> = getInstance().knownCharacterClasses
 }
