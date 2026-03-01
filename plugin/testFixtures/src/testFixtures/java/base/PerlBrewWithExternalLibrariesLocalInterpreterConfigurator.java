@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 package base;
 
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.util.io.OSAgnosticPathUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
@@ -38,7 +38,7 @@ class PerlBrewWithExternalLibrariesLocalInterpreterConfigurator extends PerlBrew
   @Override
   void setUpPerlInterpreter(@NotNull Project project) {
     super.setUpPerlInterpreter(project);
-    var libraryVirtualFile = LocalFileSystem.getInstance().findFileByPath(FileUtil.expandUserHome(LIB_PATH));
+    var libraryVirtualFile = LocalFileSystem.getInstance().findFileByPath(OSAgnosticPathUtil.expandUserHome(LIB_PATH));
     assertNotNull("Unable to find library path " + LIB_PATH, libraryVirtualFile);
     PerlProjectManager.getInstance(project).addExternalLibraries(Collections.singletonList(libraryVirtualFile));
   }
