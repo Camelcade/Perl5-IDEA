@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -357,7 +357,7 @@ public class PerlSyntaxInspection extends PerlInspection {
           @Override
           public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
             PerlSharedSettings.getInstance(project).setTargetPerlVersion(it);
-            DaemonCodeAnalyzer.getInstance(project).restart();
+            DaemonCodeAnalyzer.getInstance(project).restart("Perl version changed to " + it.getStrictDottedVersion());
           }
         }));
 
