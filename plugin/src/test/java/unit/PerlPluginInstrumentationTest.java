@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,6 @@ import com.perl5.lang.perl.idea.sdk.versionManager.asdf.AsdfTestUtil;
 import com.perl5.lang.perl.idea.sdk.versionManager.berrybrew.BerryBrewTestUtil;
 import com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewTestUtil;
 import com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvTestUtil;
-import com.perl5.lang.perl.idea.terminal.PerlLocalTerminalCustomizer;
 import com.perl5.lang.perl.intellilang.PerlInjectionSupport;
 import com.perl5.lang.perl.makeMaker.PerlMakeMakerDirectoryConfigurationProvider;
 import com.perl5.lang.perl.moduleBuild.PerlModuleBuildDirectoryConfigurationProvider;
@@ -73,7 +72,6 @@ public class PerlPluginInstrumentationTest extends PerlInstrumentationTestCase {
       buildData("perlbrew", PerlBrewTestUtil.getInstrumentationTestClass()),
       buildData("plenv", PlenvTestUtil.getInstrumentationTestClass()),
       buildData("profiler", PerlProfilerProcess.class),
-      buildData("terminal", PerlLocalTerminalCustomizer.class),
       buildData("wsl", PerlWslInputFilterProvider.class));
   }
 }

@@ -20,6 +20,6 @@
     <plugin id="org.jetbrains.plugins.terminal"/>
   </dependencies>
   <extensions defaultExtensionNs="org.jetbrains.plugins.terminal">
-    <localTerminalCustomizer implementation="com.perl5.lang.perl.idea.terminal.PerlLocalTerminalCustomizer"/>
+    <shellExecOptionsCustomizer implementation="com.perl5.lang.perl.idea.terminal.PerlShellExecOptionsCustomizer"/>
   </extensions>
 </idea-plugin>
