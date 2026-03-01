@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -110,7 +110,7 @@ public final class PerlSharedSettings implements PersistentStateComponent<PerlSh
   public void settingsUpdated() {
     SELF_NAMES_SET = null;
     PsiManager.getInstance(myProject).dropResolveCaches();
-    DaemonCodeAnalyzer.getInstance(myProject).restart();
+    DaemonCodeAnalyzer.getInstance(myProject).restart("Perl shared settings update");
   }
 
   public boolean isSelfName(String name) {
