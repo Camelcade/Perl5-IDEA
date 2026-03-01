@@ -15,45 +15,47 @@
  */
 package com.perl5.lang.perl.idea.editor.smartkeys.options
 
-import com.intellij.openapi.options.BeanConfigurable
-import com.intellij.openapi.options.UnnamedConfigurable
-import com.intellij.openapi.util.Setter
-import com.intellij.ui.IdeBorderFactory
+import com.intellij.openapi.options.UiDslUnnamedConfigurable
+import com.intellij.ui.dsl.builder.Panel
+import com.intellij.ui.dsl.builder.bindSelected
 import com.perl5.PerlBundle.message
 import com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings
-import javax.swing.JComponent
 
-class PerlSmartKeyOptions : BeanConfigurable<Perl5CodeInsightSettings>(Perl5CodeInsightSettings.getInstance()), UnnamedConfigurable {
-  init {
+class PerlSmartKeyOptions : UiDslUnnamedConfigurable.Simple() {
+
+  override fun Panel.createContent() {
     val settings = Perl5CodeInsightSettings.getInstance()
-    checkBox(
-      message("perl.options.auto.heredoc"),
-      { settings.HEREDOC_AUTO_INSERTION },
-      Setter { value: Boolean? -> settings.HEREDOC_AUTO_INSERTION = value!! })
-    checkBox(
-      message("perl.options.auto.colon"),
-      { settings.AUTO_INSERT_COLON },
-      Setter { value: Boolean? -> settings.AUTO_INSERT_COLON = value!! })
-    checkBox(
-      message("perl.options.auto.brace.substitution.hex"),
-      { settings.AUTO_BRACE_HEX_SUBSTITUTION },
-      Setter { value: Boolean? -> settings.AUTO_BRACE_HEX_SUBSTITUTION = value!! })
-    checkBox(
-      message("perl.options.auto.brace.substitution.oct"),
-      { settings.AUTO_BRACE_OCT_SUBSTITUTION },
-      Setter { value: Boolean? -> settings.AUTO_BRACE_OCT_SUBSTITUTION = value!! })
-    checkBox(
-      message("perl.options.smart.comma.sequence"),
-      { settings.SMART_COMMA_SEQUENCE_TYPING },
-      Setter { value: Boolean? -> settings.SMART_COMMA_SEQUENCE_TYPING = value!! })
-  }
-
-  override fun createComponent(): JComponent {
-    val panel = super.createComponent()
-    panel.setBorder(
-      IdeBorderFactory.PlainSmallWithIndent.createTitledBorder(null, message("border.title.perl5"), 0, 0, null, null)
-    )
-
-    return panel
+    group(message("border.title.perl5")) {
+      row {
+        checkBox(message("perl.options.auto.heredoc"))
+          .bindSelected(
+            { settings.HEREDOC_AUTO_INSERTION },
+            { value: Boolean? -> settings.HEREDOC_AUTO_INSERTION = value!! })
+      }
+      row {
+        checkBox(message("perl.options.auto.colon"))
+          .bindSelected(
+            { settings.AUTO_INSERT_COLON },
+            { value: Boolean? -> settings.AUTO_INSERT_COLON = value!! })
+      }
+      row {
+        checkBox(message("perl.options.auto.brace.substitution.hex"))
+          .bindSelected(
+            { settings.AUTO_BRACE_HEX_SUBSTITUTION },
+            { value: Boolean? -> settings.AUTO_BRACE_HEX_SUBSTITUTION = value!! })
+      }
+      row {
+        checkBox(message("perl.options.auto.brace.substitution.oct"))
+          .bindSelected(
+            { settings.AUTO_BRACE_OCT_SUBSTITUTION },
+            { value: Boolean? -> settings.AUTO_BRACE_OCT_SUBSTITUTION = value!! })
+      }
+      row {
+        checkBox(message("perl.options.smart.comma.sequence"))
+          .bindSelected(
+            { settings.SMART_COMMA_SEQUENCE_TYPING },
+            { value: Boolean? -> settings.SMART_COMMA_SEQUENCE_TYPING = value!! })
+      }
+    }
   }
 }
