@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,5 @@ public interface PerlOsHandlers {
   PerlOsHandler MACOS = new PerlMacOsHandler("MacOs", PerlIcons.MAC_ICON);
   PerlOsHandler FREEBSD = new PerlBsdHandler("FreeBsd", PerlIcons.FREEBSD_ICON);
   PerlOsHandler LINUX = new PerlLinuxHandler("Linux", PerlIcons.LINUX_ICON);
-  PerlOsHandler SOLARIS = new PerlUnixHandler("Solaris", PerlIcons.SOLARIS_ICON);
   PerlOsHandler UNIX = new PerlUnixHandler("UNIX", PerlIcons.UNIX_ICON);
 }
