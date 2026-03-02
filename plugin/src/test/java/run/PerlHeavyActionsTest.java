@@ -54,6 +54,8 @@ import java.util.regex.Pattern;
 import static base.PerlLightTestCaseBase.compareWithFile;
 
 public class PerlHeavyActionsTest extends PerlPlatformTestCase {
+  private static final String SHELL_VARIABLE_NAME = "SHELL";
+
   @Override
   protected String getBaseDataPath() {
     return "run/actions";
@@ -201,7 +203,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
     assertNotNull("Terminal project options provider is null!", terminalProjectOptionsProvider);
     var currentShellPath = terminalProjectOptionsProvider.getShellPath();
     try {
-      var shellName = StringUtil.notNullize(EnvironmentUtil.getValue(EnvironmentUtil.SHELL_VARIABLE_NAME), currentShellPath);
+      var shellName = StringUtil.notNullize(EnvironmentUtil.getValue(SHELL_VARIABLE_NAME), currentShellPath);
       LOG.debug("Using shell: " + shellName);
       terminalProjectOptionsProvider.setShellPath(shellName + " -l");
 
