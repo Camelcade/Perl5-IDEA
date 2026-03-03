@@ -1,5 +1,6 @@
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 /*
  * Copyright 2015-2021 Alexandr Evstigneev
@@ -57,13 +58,11 @@ tasks {
   rootProject.tasks.findByName("generateLexers")?.dependsOn(
     generateLexerTask
   )
-/*
   withType<JavaCompile> {
     dependsOn(generateLexerTask)
   }
   withType<KotlinCompile>{
     dependsOn(generateLexerTask)
   }
-*/
 }
 

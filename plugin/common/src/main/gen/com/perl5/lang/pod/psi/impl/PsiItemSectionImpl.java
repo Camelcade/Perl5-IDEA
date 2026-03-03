@@ -2,7 +2,7 @@
 package com.perl5.lang.pod.psi.impl;
 
 import java.util.List;
-import com.intellij.psi.tree.IElementType;import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
 import com.perl5.lang.pod.parser.psi.mixin.PodSectionItem;
 import com.perl5.lang.pod.psi.*;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.pod.parser.psi.stubs.PodSectionStub;
 
 public class PsiItemSectionImpl extends PodSectionItem implements PsiItemSection {

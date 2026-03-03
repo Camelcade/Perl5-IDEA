@@ -2,7 +2,7 @@
 package com.perl5.lang.perl.psi.impl;
 
 import java.util.List;
-import com.intellij.psi.tree.IElementType;import org.jetbrains.annotations.*;
+import org.jetbrains.annotations.*;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 import com.perl5.lang.perl.psi.mixins.PerlRequireExprMixin;
 import com.perl5.lang.perl.psi.*;
-import com.intellij.psi.stubs.IStubElementType;
+import com.intellij.psi.tree.IElementType;
 import com.perl5.lang.perl.psi.stubs.imports.runtime.PerlRuntimeImportStub;
 
 public class PsiPerlRequireExprImpl extends PerlRequireExprMixin implements PsiPerlRequireExpr {
