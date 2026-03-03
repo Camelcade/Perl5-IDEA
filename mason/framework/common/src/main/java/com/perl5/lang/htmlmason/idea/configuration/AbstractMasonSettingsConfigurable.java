@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,8 +71,9 @@ public abstract class AbstractMasonSettingsConfigurable implements Configurable 
     );
     myGlobalsTable = new JBTable(myGlobalsModel);
 
-    builder.addLabeledComponent(new JLabel("Components global variables (allow_globals option):"), ToolbarDecorator
-      .createDecorator(myGlobalsTable)
+    builder.addLabeledComponent(
+      new JLabel(MasonFrameworkBundle.message("components.global.variables.allow.globals.option")),
+      ToolbarDecorator.createDecorator(myGlobalsTable)
       .setAddAction(anActionButton -> {
         final TableCellEditor cellEditor = myGlobalsTable.getCellEditor();
         if (cellEditor != null) {
