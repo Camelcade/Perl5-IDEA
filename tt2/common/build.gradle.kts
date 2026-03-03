@@ -16,6 +16,7 @@
 import org.jetbrains.grammarkit.tasks.GenerateLexerTask
 import org.jetbrains.grammarkit.tasks.GenerateParserTask
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 val genRoot: File = project.file("src/main/gen").also { genRoot ->
@@ -69,12 +70,10 @@ tasks {
     generateLexerTask
   )
 
-  /*
-    withType<JavaCompile> {
-      dependsOn(generateLexerTask)
-    }
-    withType<KotlinCompile>{
-      dependsOn(generateLexerTask)
-    }
-  */
+  withType<JavaCompile> {
+    dependsOn(generateLexerTask)
+  }
+  withType<KotlinCompile> {
+    dependsOn(generateLexerTask)
+  }
 }

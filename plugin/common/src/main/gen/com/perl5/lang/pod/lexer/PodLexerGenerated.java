@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
 
 
-public abstract class PodLexerGenerated extends PerlProtoLexer  {
+public abstract class PodLexerGenerated extends PerlProtoLexer {
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
