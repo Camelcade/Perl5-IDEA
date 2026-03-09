@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -103,7 +103,8 @@ public class MasonSettingsConfigurable extends AbstractMasonSettingsConfigurable
     myAutobaseModel = new CollectionListModel<>();
     myAutobaseList = new JBList<>(myAutobaseModel);
     builder.addLabeledComponent(
-      new JLabel("Autobase names (autobase_names option. Order is important, later components may be inherited from early):"),
+      new JLabel(
+        Mason2Bundle.message("autobase.names.autobase.names.option.order.is.important.later.components.may.be.inherited.from.early")),
       ToolbarDecorator
         .createDecorator(myAutobaseList)
         .setAddAction(anActionButton -> {
