@@ -101,17 +101,17 @@ fun StubInputStream.deserializeNamespaceData(): PerlNamespaceDefinitionData {
   val packageName = PerlStubSerializationUtil.readString(this)!!
   val mroType = PerlMroType.valueOf(PerlStubSerializationUtil.readString(this)!!)
   val parentNamespaces = PerlStubSerializationUtil.readStringsList(this)!!
-  val EXPORT = PerlStubSerializationUtil.readStringsList(this)!!
-  val EXPORT_OK = PerlStubSerializationUtil.readStringsList(this)!!
-  val EXPORT_TAGS = PerlStubSerializationUtil.readStringListMap(this)!!
+  val export = PerlStubSerializationUtil.readStringsList(this)!!
+  val exportOk = PerlStubSerializationUtil.readStringsList(this)!!
+  val exportTags = PerlStubSerializationUtil.readStringListMap(this)!!
 
   return PerlNamespaceDefinitionData(
     packageName,
     mroType,
     parentNamespaces,
-    EXPORT,
-    EXPORT_OK,
-    EXPORT_TAGS,
+    export,
+    exportOk,
+    exportTags,
     if (readBoolean()) deserializeAnnotations() else null
   )
 }
