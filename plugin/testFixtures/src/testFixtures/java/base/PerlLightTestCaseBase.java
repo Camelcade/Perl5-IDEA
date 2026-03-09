@@ -954,11 +954,9 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     StringBuilder sb = new StringBuilder();
     sb.append("Target: ").append(serializePsiElement(targetElement)).append("\n");
     List<UsageInfo> usages = new ArrayList<>(myFixture.findUsages(targetElement));
-    usages.sort(Comparator.<UsageInfo, String>comparing(it -> {
-      PsiElement element = it.getElement();
-      //noinspection ReturnOfNull
-      return element == null ? null : it.getElement().getContainingFile().getName();
-    }).thenComparingInt(UsageInfo::getNavigationOffset));
+    usages.sort(Comparator.<UsageInfo, String>comparing(
+      it -> Objects.requireNonNull(it.getElement()).getContainingFile().getName()
+    ).thenComparingInt(UsageInfo::getNavigationOffset));
     sb.append("Total usages: ").append(usages.size()).append("\n");
     for (UsageInfo usage : usages) {
       sb.append("\t").append(serializePsiElement(usage.getElement()));
