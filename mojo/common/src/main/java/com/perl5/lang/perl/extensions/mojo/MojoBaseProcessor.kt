@@ -25,7 +25,7 @@ private const val IO_HANDLE: String = "IO::Handle"
 class MojoBaseProcessor : BaseStrictWarningsProvidingProcessor(), PerlUtfProvider, PerlFeaturesProvider, PerlPackageOptionsProvider,
                           PerlPackageParentsProvider, PerlPackageLoader {
 
-  private val OPTIONS: Map<String, String> by lazy {
+  private val myOptions: Map<String, String> by lazy {
     mapOf(
       "-strict" to "strict,warnings,utf8,v5.10,IO::Handle",
       "-base" to "strict,warnings,utf8,v5.10,IO::Handle,acts as parent"
@@ -45,7 +45,7 @@ class MojoBaseProcessor : BaseStrictWarningsProvidingProcessor(), PerlUtfProvide
     return loadedPackages
   }
 
-  override fun getOptions(): Map<String, String> = OPTIONS
+  override fun getOptions(): Map<String, String> = myOptions
 
   override fun getOptionsBundles(): Map<String, String> = emptyMap()
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,14 @@ import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
 import kotlinx.collections.immutable.toImmutableList
 
 class ListMoreUtilsProcessor : PerlPackageProcessorBase() {
-  private val EXPORT_OK_DESCRIPTORS: Map<String, PerlExportDescriptor> by lazy {
+  private val exportOkDescriptors: Map<String, PerlExportDescriptor> by lazy {
     ListMoreUtilsExports.EXPORT_OK.associateWith { PerlExportDescriptor.create("List::MoreUtils::PP", it) }
   }
 
   override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> =
     useStatement.importParameters
       ?.distinct()
-      ?.mapNotNull { parameter -> EXPORT_OK_DESCRIPTORS[parameter] }
+      ?.mapNotNull { parameter -> exportOkDescriptors[parameter] }
       ?.toImmutableList()
       ?: emptyList()
 

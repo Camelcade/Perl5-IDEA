@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import com.perl5.lang.perl.util.PerlPackageUtilCore
 import kotlinx.collections.immutable.toImmutableList
 
 class MooseUtilTypeConstraintsProcessor : BaseStrictWarningsProvidingProcessor() {
-  private val EXPORTS: List<PerlExportDescriptor> by lazy {
+  private val exports: List<PerlExportDescriptor> by lazy {
     listOf(
       "as", "class_type", "coerce", "duck_type", "enum", "find_type_constraint", "from", "inline_as", "match_on_type", "maybe_type",
       "message", "register_type_constraint", "role_type", "subtype", "type", "union", "via", "where"
@@ -30,5 +30,5 @@ class MooseUtilTypeConstraintsProcessor : BaseStrictWarningsProvidingProcessor()
       .toImmutableList()
   }
 
-  override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> = EXPORTS
+  override fun getImports(useStatement: PerlUseStatementElement): List<PerlExportDescriptor> = exports
 }
