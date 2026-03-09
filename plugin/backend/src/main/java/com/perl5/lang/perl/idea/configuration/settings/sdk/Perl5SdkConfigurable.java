@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -36,6 +36,7 @@ import com.intellij.openapi.ui.ComboBox;
 import com.intellij.openapi.ui.InputValidator;
 import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.util.Disposer;
+import com.intellij.openapi.util.NlsContexts;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.ui.CollectionComboBoxModel;
 import com.intellij.ui.ColoredListCellRenderer;
@@ -317,7 +318,7 @@ public class Perl5SdkConfigurable implements UnnamedConfigurable, ProjectJdkTabl
     myPanel.setEnabled(isEnabled);
   }
 
-  public void setLabelText(@NotNull String text) {
+  public void setLabelText(@NotNull @NlsContexts.Label String text) {
     myPanel.setLabelText(text);
   }
 }
