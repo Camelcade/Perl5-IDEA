@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,14 +23,14 @@ import com.perl5.lang.perl.psi.impl.PerlUseStatementElement
 import kotlinx.collections.immutable.toImmutableMap
 
 class WarningsProcessor : PerlPragmaProcessorBase(), PerlPackageOptionsProvider {
-  private val OPTIONS: Map<String, String> by lazy {
+  private val myOptions: Map<String, String> by lazy {
     (mapOf("FATAL" to "FATALITY!") +
       PerlWarningTree.LEAF_OPTIONS.entries.associate { entry ->
         entry.key to entry.value.minVersion.strictDottedVersion
       }
       ).toImmutableMap()
   }
-  private val OPTIONS_BUNDLES: Map<String, String> by lazy {
+  private val myOptionsBundles: Map<String, String> by lazy {
     PerlWarningTree.NODE_OPTIONS.entries.associate { entry ->
       val joinedOptions = entry.value.collectChildLeafs()
         .joinToString(" ") { leaf -> leaf.stringIdentifier + "(" + leaf.minVersion.strictDottedVersion + ")" }
@@ -40,9 +40,9 @@ class WarningsProcessor : PerlPragmaProcessorBase(), PerlPackageOptionsProvider 
 
   }
 
-  override fun getOptions(): Map<String, String> = OPTIONS
+  override fun getOptions(): Map<String, String> = myOptions
 
-  override fun getOptionsBundles(): Map<String, String> = OPTIONS_BUNDLES
+  override fun getOptionsBundles(): Map<String, String> = myOptionsBundles
 
   override fun isWarningsEnabled(useStatement: PerlUseStatementElement): Boolean = true
 }
