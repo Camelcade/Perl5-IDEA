@@ -10,6 +10,7 @@ exports.rule = entities.Issue.onChange({
   action: function (ctx) {
     const patterns = [
       ['java.lang.Throwable: Stub index points to a file (file =', 'CAMELCADE-833'],
+      ['Stub index points to a file without PSI:', 'CAMELCADE-840'],
       ['com.intellij.diagnostic.PluginException: Non-idempotent computation: it returns', 'CAMELCADE-2253'],
       ['com.intellij.diagnostic.PluginException: Cannot load class com.perl5.lang.pod.idea.editor.PodSpellCheckingStrategy',
         'CAMELCADE-24430'],
