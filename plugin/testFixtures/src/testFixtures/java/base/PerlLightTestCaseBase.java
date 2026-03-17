@@ -156,6 +156,7 @@ import com.intellij.usages.impl.UsageViewImpl;
 import com.intellij.usages.rules.UsageGroupingRule;
 import com.intellij.usages.rules.UsageGroupingRuleProvider;
 import com.intellij.util.*;
+import com.intellij.util.concurrency.Semaphore;
 import com.intellij.util.containers.ContainerUtil;
 import com.intellij.util.containers.MultiMap;
 import com.intellij.util.xmlb.XmlSerializerUtil;
@@ -204,6 +205,7 @@ import com.perl5.lang.perl.psi.utils.PerlSubArgument;
 import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.pod.PodLanguage;
 import junit.framework.AssertionFailedError;
+import kotlin.Unit;
 import kotlin.collections.CollectionsKt;
 import org.intellij.lang.annotations.MagicConstant;
 import org.intellij.plugins.intelliLang.inject.InjectLanguageAction;
@@ -225,7 +227,6 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.*;
-import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
@@ -431,14 +432,12 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   protected final void updateNamesCacheSynchronously() {
     var app = ApplicationManager.getApplication();
     app.invokeAndWait(() -> CodeInsightTestFixtureImpl.ensureIndexesUpToDate(getProject()));
-    if (app.isDispatchThread()) {
-      Future<?> namesUpdate =
-        app.executeOnPooledThread(() -> PerlNamesCache.getInstance(getProject()).forceCacheUpdate());
-      PlatformTestUtil.waitWithEventsDispatching("Unable to update names in 5 seconds", namesUpdate::isDone, 5);
-    }
-    else {
-      PerlNamesCache.getInstance(getProject()).forceCacheUpdate();
-    }
+    var semaphore = new Semaphore(1);
+    PerlNamesCache.getInstance(getProject()).forceCacheUpdate(() -> {
+      semaphore.up();
+      return Unit.INSTANCE;
+    });
+    app.invokeAndWait(() -> PlatformTestUtil.waitWithEventsDispatching("Unable to update names in 5 seconds", semaphore::isUp, 5));
   }
 
   protected @NotNull String getTestLibPath() {
