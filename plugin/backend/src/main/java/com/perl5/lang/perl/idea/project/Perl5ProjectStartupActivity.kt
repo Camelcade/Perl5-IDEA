@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -66,7 +66,9 @@ class Perl5ProjectStartupActivity : ProjectActivity {
     if (project.isDisposed) {
       return
     }
-    PerlNamesCache.getInstance(project).forceCacheUpdate()
-    ApplicationManager.getApplication().invokeLater(FileContentUtil::reparseOpenedFiles)
+    PerlNamesCache.getInstance(project).forceCacheUpdate {
+      ApplicationManager.getApplication().invokeLater(FileContentUtil::reparseOpenedFiles)
+    }
+
   }
 }

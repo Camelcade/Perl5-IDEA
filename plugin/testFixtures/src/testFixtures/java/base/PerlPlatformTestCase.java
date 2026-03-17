@@ -135,6 +135,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
+    ((PerlNamesBackendCache)PerlNamesCache.getInstance(getProject())).setTestDisposable(myPerlTestCaseDisposable);
     myInterpreterConfigurator.setUpPerlInterpreter(myProject);
     PerlRunUtil.setUpForTests(myPerlTestCaseDisposable);
     LOG.info("Ensuring SDK is indexed");
@@ -175,9 +176,6 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
       });
 
       Disposer.dispose(myPerlTestCaseDisposable);
-      var namesCache = (PerlNamesBackendCache)PerlNamesCache.getInstance(getProject());
-      namesCache.stopQueue();
-      PlatformTestUtil.waitWithEventsDispatching("Unable to finish names update in 10 secs", () -> !namesCache.isUpdating(), 10);
     }
     finally {
       super.tearDown();

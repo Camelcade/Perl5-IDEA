@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package com.perl5.lang.perl.idea.project;
 
 import com.intellij.ide.lightEdit.LightEdit;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.application.ReadAction;
 import com.intellij.openapi.application.WriteAction;
@@ -30,6 +31,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.PsiTreeChangeAdapter;
 import com.intellij.psi.PsiTreeChangeEvent;
 import com.intellij.psi.impl.source.resolve.ResolveCache;
+import com.intellij.util.concurrency.AppExecutorUtil;
 import com.intellij.util.messages.MessageBusConnection;
 import com.intellij.util.ui.update.MergingUpdateQueue;
 import com.intellij.util.ui.update.Update;
@@ -40,13 +42,15 @@ import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlLightSubDefinitionsInde
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionsIndex;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import com.perl5.lang.perl.util.PerlTimeLogger;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function0;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
+import org.jspecify.annotations.NonNull;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -54,10 +58,11 @@ public class PerlNamesBackendCache implements PerlNamesCache {
   private static final Logger LOG = Logger.getInstance(PerlNamesBackendCache.class);
   private final MergingUpdateQueue myQueue = new MergingUpdateQueue("Perl names cache updater", 1000, true, null, this, null, false);
   private final Project myProject;
-  private final AtomicBoolean myIsUpdating = new AtomicBoolean(false);
   private volatile Set<String> myKnownSubs = Collections.emptySet();
   private volatile Set<String> myKnownNamespaces = Collections.emptySet();
   private final AtomicBoolean myIsDisposed = new AtomicBoolean(false);
+  private @Nullable Disposable myTestDisposable = null;
+  private final Queue<Function0<Unit>> myPendingCallbacks = new ConcurrentLinkedQueue<>();
 
   public PerlNamesBackendCache(Project project) {
     myProject = project;
@@ -112,29 +117,16 @@ public class PerlNamesBackendCache implements PerlNamesCache {
 
   private void queueUpdate() {
     if (!myProject.isDefault()) {
-      myQueue.queue(Update.create(this, this::doUpdateSingleThread));
+      myQueue.queue(Update.create(this, () -> doUpdateCache(() -> Unit.INSTANCE)));
     }
   }
 
-  private void doUpdateSingleThread() {
-    if (!DumbService.isDumb(myProject) && myIsUpdating.compareAndSet(false, true)) {
-      try {
-        doUpdateCache();
-      }
-      finally {
-        myIsUpdating.set(false);
-      }
-    }
-    else {
-      queueUpdate();
-    }
-  }
-
-  private void doUpdateCache() {
-    if (LightEdit.owns(myProject)) {
+  private void doUpdateCache(kotlin.jvm.functions.@NonNull Function0<kotlin.Unit> callback) {
+    if (myProject.isDefault() || LightEdit.owns(myProject)) {
       return;
     }
-    ReadAction.nonBlocking(() -> {
+    myPendingCallbacks.add(callback);
+    var updateNbra = ReadAction.nonBlocking(() -> {
       PerlTimeLogger logger = PerlTimeLogger.create(LOG);
       logger.debug("Starting to update names cache at");
 
@@ -180,9 +172,22 @@ public class PerlNamesBackendCache implements PerlNamesCache {
       }
 
       logger.debug("Names cache updated");
+
+        Function0<kotlin.Unit> pending;
+        while ((pending = myPendingCallbacks.poll()) != null) {
+          pending.invoke();
+        }
       //noinspection ReturnOfNull
       return null;
-    }).inSmartMode(myProject).expireWith(this).executeSynchronously();
+      }).inSmartMode(myProject)
+      .expireWith(this)
+      .coalesceBy(this);
+
+    if (myTestDisposable != null) {
+      updateNbra = updateNbra.expireWith(myTestDisposable);
+    }
+
+    updateNbra.submit(AppExecutorUtil.getAppExecutorService());
   }
 
   @Override
@@ -191,10 +196,14 @@ public class PerlNamesBackendCache implements PerlNamesCache {
   }
 
   @Override
-  public void forceCacheUpdate() {
+  public void forceCacheUpdate(kotlin.jvm.functions.@NonNull Function0<kotlin.Unit> callback) {
     var application = ApplicationManager.getApplication();
-    application.assertIsNonDispatchThread();
-    doUpdateCache();
+    if (application.isDispatchThread()) {
+      application.executeOnPooledThread(() -> doUpdateCache(callback));
+    }
+    else {
+      doUpdateCache(callback);
+    }
   }
 
   @Override
@@ -220,10 +229,7 @@ public class PerlNamesBackendCache implements PerlNamesCache {
   }
 
   @TestOnly
-  public void stopQueue() {
-    myQueue.dispose();
+  public void setTestDisposable(@NotNull Disposable disposable) {
+    myTestDisposable = disposable;
   }
-
-  @TestOnly
-  public boolean isUpdating() { return myIsUpdating.get(); }
 }

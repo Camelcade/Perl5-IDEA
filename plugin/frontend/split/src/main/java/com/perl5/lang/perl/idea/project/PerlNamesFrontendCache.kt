@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ class PerlNamesFrontendCache : PerlNamesCache {
   override fun getSubsNamesSet(): Set<String> = emptySet()
   override fun getNamespacesNamesSet(): Set<String> = emptySet()
   override fun dispose(): Unit = isDisposed.set(true)
-  override fun forceCacheUpdate(): Unit = Unit
+  override fun forceCacheUpdate(callback: () -> Unit): Unit = callback()
   override fun cleanCache(): Unit = Unit
   override fun isDisposed(): Boolean = isDisposed.get()
 }
