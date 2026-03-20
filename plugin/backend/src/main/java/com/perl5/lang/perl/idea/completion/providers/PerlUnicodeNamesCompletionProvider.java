@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import com.intellij.util.ProcessingContext;
 import com.perl5.lang.perl.idea.completion.providers.processors.PerlSimpleCompletionProcessor;
 import com.perl5.lang.perl.util.PerlTimeLogger;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.TestOnly;
 
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class PerlUnicodeNamesCompletionProvider extends PerlCompletionProvider {
   private int myCodePoint = 0;
   private int myDataSize = 0;
 
-  private SoftReference<Map<String, String>> myNamesCacheRef = new SoftReference<>(new HashMap<>());
+  private static SoftReference<Map<String, String>> myNamesCacheRef = new SoftReference<>(new HashMap<>());
 
   @Override
   protected void addCompletions(@NotNull CompletionParameters parameters,
@@ -98,5 +99,10 @@ public class PerlUnicodeNamesCompletionProvider extends PerlCompletionProvider {
         return;
       }
     }
+  }
+
+  @TestOnly
+  public static void dropCache() {
+    myNamesCacheRef.clear();
   }
 }
