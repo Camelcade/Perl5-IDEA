@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,7 @@ import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
 import com.perl5.PerlBundle;
+import com.perl5.lang.perl.idea.completion.providers.PerlUnicodeNamesCompletionProvider;
 import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
@@ -180,7 +181,10 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   public void testMooGenerated() { doTestWithTypeText(); }
 
   @Test
-  public void testUnicodeNames() { doTest(); }
+  public void testUnicodeNames() {
+    PerlUnicodeNamesCompletionProvider.dropCache();
+    doTest();
+  }
 
   @Test
   public void testHandleInOpen() {doTest();}
