@@ -16,6 +16,8 @@ env:
   YOUTRACK_TOKEN: ${{ secrets.YOUTRACK_TOKEN }}
   PERL_TEST_VERSION: 5.38.0
   TEST_PERL_MODULES: Mojolicious HURRICUP/Devel-Camelcadedb-v2023.1.tar.gz Devel::Cover JSON App::Prove::Plugin::PassEnv TAP::Formatter::Camelcade Devel::NYTProf Perl::Tidy Perl::Critic B::Debug Types::Serialiser
+  SPACE_USER: ${{ secrets.SPACE_NIGHTLY_USERNAME }}
+  SPACE_KEY: ${{ secrets.SPACE_NIGHTLY_KEY }}
 
 jobs:
   integration-plenv:

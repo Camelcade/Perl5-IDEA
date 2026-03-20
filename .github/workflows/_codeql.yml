@@ -4,12 +4,15 @@ name: "CodeQL"
 on:
   workflow_call:
 
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+  SPACE_USER: ${{ secrets.SPACE_NIGHTLY_USERNAME }}
+  SPACE_KEY: ${{ secrets.SPACE_NIGHTLY_KEY }}
+
 jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
     permissions:
       actions: read
       contents: read
