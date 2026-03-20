@@ -5,16 +5,20 @@ on:
   workflow_call:
 
 
+env:
+  ORG_GRADLE_PROJECT_downloadIdeaSources: false
+  CI: GitHub
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+  SPACE_USER: ${{ secrets.SPACE_NIGHTLY_USERNAME }}
+  SPACE_KEY: ${{ secrets.SPACE_NIGHTLY_KEY }}
+  SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+
+
 jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
-    env:
-      ORG_GRADLE_PROJECT_downloadIdeaSources: false
-      CI: GitHub
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
     steps:
       - uses: actions/checkout@v6
         if: ${{ env.COVERALLS_REPO_TOKEN }}
