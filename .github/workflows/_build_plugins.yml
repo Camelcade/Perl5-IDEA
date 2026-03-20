@@ -6,14 +6,17 @@ name: Plugins
 on:
   workflow_call:
 
+env:
+  ORG_GRADLE_PROJECT_downloadIdeaSources: false
+  CI: GitHub
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+  SPACE_USER: ${{ secrets.SPACE_NIGHTLY_USERNAME }}
+  SPACE_KEY: ${{ secrets.SPACE_NIGHTLY_KEY }}
+
 jobs:
   build-plugins:
     name: Build
     runs-on: ubuntu-latest
-    env:
-      ORG_GRADLE_PROJECT_downloadIdeaSources: false
-      CI: GitHub
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
     steps:
       - uses: actions/checkout@v6
 
