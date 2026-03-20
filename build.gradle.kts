@@ -29,6 +29,8 @@ import kotlin.io.path.writeText
 
 
 fun environment(key: String): Provider<String> = providers.environmentVariable(key)
+fun spaceUser(): String = providers.gradleProperty("spaceUsername").orElse(environment("SPACE_USER")).orElse("").get()
+fun spacePass(): String = providers.gradleProperty("spacePassword").orElse(environment("SPACE_KEY")).orElse("").get()
 
 plugins {
   id("com.hurricup.gradle.fixcompress")
@@ -80,6 +82,17 @@ allprojects {
     intellijPlatform {
       defaultRepositories()
       jetbrainsRuntime()
+      if(spacePass().isNotBlank()){
+        repositories {
+          maven {
+            url = uri("https://packages.jetbrains.team/maven/p/ij/intellij-sdk-nightly")
+            credentials {
+              username = spaceUser()
+              password = spacePass()
+            }
+          }
+        }
+      }
       val platformBranch = providers.gradleProperty("platformBranch").get()
       if (platformBranch.contains("-SNAPSHOT") && !platformBranch.contains("-EAP-SNAPSHOT")) {
         nightly()
