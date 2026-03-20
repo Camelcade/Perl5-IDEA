@@ -4,13 +4,18 @@ name: Qodana
 on:
   workflow_call:
 
+env:
+  ORG_GRADLE_PROJECT_downloadIdeaSources: false
+  CI: GitHub
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+  SPACE_USER: ${{ secrets.SPACE_NIGHTLY_USERNAME }}
+  SPACE_KEY: ${{ secrets.SPACE_NIGHTLY_KEY }}
+  QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
+
 jobs:
   analyze:
     name: Analyze
     runs-on: ubuntu-latest
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-      QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -22,7 +27,7 @@ jobs:
           QODANA_LINTER: ${{ env.QODANA_TOKEN == '' && 'jetbrains/qodana-jvm-community' || 'jetbrains/qodana-jvm' }}
         with:
           use-caches: false
-          args: --baseline,.qodana/qodana.sarif.json,--linter,${{ env.QODANA_LINTER }},--property,idea.kotlin.plugin.use.k2=false
+          args: --baseline,.qodana/qodana.sarif.json,--linter,${{ env.QODANA_LINTER }},--property,idea.kotlin.plugin.use.k2=false,--env,SPACE_USER=${{ env.SPACE_USER }},--env,SPACE_KEY=${{ env.SPACE_KEY }},--env,GITHUB_TOKEN=${{ env.GITHUB_TOKEN }}
 
       - name: Remove results with undefined physicalLocation
         run: |
