@@ -74,6 +74,7 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
   private LabeledComponent<ExpandableTextField> myRequiredModulesLabeledField;
 
   public GenericPerlRunConfigurationEditorPanel(@NotNull Project project) {
+    super(project);
     myProject = project;
     mySdkConfigurable.setProject(project);
   }
