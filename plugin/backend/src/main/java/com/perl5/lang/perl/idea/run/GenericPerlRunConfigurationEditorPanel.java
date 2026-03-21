@@ -18,12 +18,15 @@ package com.perl5.lang.perl.idea.run;
 
 import com.intellij.execution.CommonProgramRunConfigurationParameters;
 import com.intellij.execution.ui.CommonProgramParametersPanel;
+import com.intellij.ide.HelpTooltipKt;
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
 import com.intellij.openapi.ui.*;
 import com.intellij.openapi.util.NlsContexts;
+import com.intellij.openapi.util.NotNullLazyValue;
+import com.intellij.openapi.util.text.HtmlChunk;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -110,8 +113,8 @@ public abstract class GenericPerlRunConfigurationEditorPanel<Configuration exten
                                                                                               @Nullable @NlsContexts.Tooltip String tooltip) {
     var labeledComponent = LabeledComponent.create(component, label, BorderLayout.WEST);
     if (tooltip != null) {
-      labeledComponent.setToolTipText(tooltip);
-      component.setToolTipText(tooltip);
+      HelpTooltipKt.setToolTipText(labeledComponent, HtmlChunk.text(tooltip));
+      HelpTooltipKt.setToolTipText(component, HtmlChunk.text(tooltip));
     }
     return labeledComponent;
   }
