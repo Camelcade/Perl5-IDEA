@@ -39,7 +39,7 @@ jobs:
           java-version: '21.0.8'
 
       - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v5
+        uses: gradle/actions/setup-gradle@v6
         with:
           cache-read-only: false
 
