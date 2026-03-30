@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -38,10 +38,6 @@ public class PerlTimeLogger {
   private final Logger myLogger;
   long myLastTime = System.currentTimeMillis();
   private Map<String, Counter> myCounters;
-
-  public PerlTimeLogger(@NotNull Class<?> clazz) {
-    myLogger = Logger.getInstance(clazz);
-  }
 
   public PerlTimeLogger(@NotNull String id) {
     myLogger = Logger.getInstance(id);
