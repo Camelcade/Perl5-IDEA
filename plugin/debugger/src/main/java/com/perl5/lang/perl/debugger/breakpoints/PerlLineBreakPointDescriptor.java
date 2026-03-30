@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,29 +27,13 @@ import org.jetbrains.annotations.Nullable;
 
 
 public class PerlLineBreakPointDescriptor {
-  private String path;
-  private int line;
-  private boolean enabled;
-  private String condition;
+  @SuppressWarnings("unused") private String path;
+  @SuppressWarnings("unused") private int line;
+  @SuppressWarnings("unused") private boolean enabled;
+  @SuppressWarnings("unused") private String condition;
   @SuppressWarnings("unused") private boolean remove;
   @SuppressWarnings("unused") private String action;
   @SuppressWarnings("unused") private boolean suspend;
-
-  public String getPath() {
-    return path;
-  }
-
-  public int getLine() {
-    return line;
-  }
-
-  public boolean isEnabled() {
-    return enabled;
-  }
-
-  public String getCondition() {
-    return condition;
-  }
 
   public static @Nullable PerlLineBreakPointDescriptor createFromBreakpoint(XLineBreakpoint<PerlLineBreakpointProperties> breakpoint,
                                                                             PerlDebugThread debugThread) {
