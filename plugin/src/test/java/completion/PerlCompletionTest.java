@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,6 +17,7 @@
 package completion;
 
 
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
@@ -26,6 +27,8 @@ import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+
+import java.util.Objects;
 
 public class PerlCompletionTest extends PerlCompletionTestCase {
 
@@ -180,7 +183,14 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   public void testMooGenerated() { doTestWithTypeText(); }
 
   @Test
-  public void testUnicodeNames() { doTest(); }
+  public void testUnicodeNames() {
+    Logger.getInstance(PerlCompletionTest.class).warn("JVM for unicode test: " +
+                                                      System.getProperty("java.vendor") + " " +
+                                                      System.getProperty("java.runtime.version") +
+                                                      " (Java " + System.getProperty("java.version") + ")");
+    doTestCompletion((element, presentation) ->
+                       Objects.requireNonNull(presentation.getItemText()).contains("ANTICLOCKWISE"));
+  }
 
   @Test
   public void testHandleInOpen() {doTest();}
