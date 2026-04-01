@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.completion.providers;
 import com.intellij.codeInsight.completion.CompletionParameters;
 import com.intellij.codeInsight.completion.CompletionResultSet;
 import com.intellij.codeInsight.lookup.LookupElementBuilder;
+import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.progress.ProgressManager;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.ProcessingContext;
@@ -78,7 +79,9 @@ public class PerlUnicodeNamesCompletionProvider extends PerlCompletionProvider {
       return;
     }
     for (; myCodePoint <= Character.MAX_CODE_POINT; myCodePoint++) {
-      ProgressManager.checkCanceled();
+      if (!ApplicationManager.getApplication().isUnitTestMode()) {
+        ProgressManager.checkCanceled();
+      }
       if (!Character.isValidCodePoint(myCodePoint)) {
         continue;
       }
