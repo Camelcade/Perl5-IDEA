@@ -79,21 +79,37 @@ public class PerlUnicodeNamesCompletionProvider extends PerlCompletionProvider {
       return;
     }
     for (; myCodePoint <= Character.MAX_CODE_POINT; myCodePoint++) {
+      var debug = (myCodePoint == 8755);
+      if (debug) {
+        LOG.warn("Processing code point: " + myCodePoint);
+      }
       if (!ApplicationManager.getApplication().isUnitTestMode()) {
         ProgressManager.checkCanceled();
       }
       if (!Character.isValidCodePoint(myCodePoint)) {
+        if (debug) {
+          LOG.warn("Invalid code point: " + myCodePoint);
+        }
         continue;
       }
       String characterName = Character.getName(myCodePoint);
       if (!StringUtil.isNotEmpty(characterName)) {
+        if (debug) {
+          LOG.warn("No character name: " + myCodePoint);
+        }
         continue;
       }
       String charValue = Character.toString(myCodePoint);
       cache.put(characterName, charValue);
       myDataSize += characterName.length() + charValue.length();
       if (!completionProcessor.matches(characterName)) {
+        if (debug) {
+          LOG.warn("Name does not match the processor: " + myCodePoint + " " + characterName);
+        }
         continue;
+      }
+      if (debug) {
+        LOG.warn("It is fine: " + myCodePoint + " " + characterName);
       }
       if (!completionProcessor.process(
         LookupElementBuilder.create(characterName).withTypeText(charValue, false))) {
