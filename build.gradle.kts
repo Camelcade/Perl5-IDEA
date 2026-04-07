@@ -236,7 +236,7 @@ allprojects {
         if (project.hasProperty("eap")) {
           channels.set(listOf("EAP"))
         }
-        token.set(providers.gradleProperty("jbToken").orElse(""))
+        token.set(providers.gradleProperty("jbPersonalToken").orElse(""))
       }
 
       patchPluginXml {
