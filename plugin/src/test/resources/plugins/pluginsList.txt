@@ -3,7 +3,9 @@ XPathView
 com.intellij
 com.intellij.copyright
 com.intellij.css
+com.intellij.database
 com.intellij.java
+com.intellij.modules.json
 com.intellij.modules.ultimate
 com.intellij.platform.images
 com.jetbrains.plugins.webDeployment

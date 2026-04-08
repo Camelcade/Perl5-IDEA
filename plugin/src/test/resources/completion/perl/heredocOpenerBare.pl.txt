@@ -1,9 +1,57 @@
+Text: AZURE; Tail: null; Type: inject with Azure SQL Database; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: AZURE
+	String: AZURE
+Text: BIGQUERY; Tail: null; Type: inject with Google BigQuery; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: BIGQUERY
+	String: BIGQUERY
+Text: CASSANDRA; Tail: null; Type: inject with Apache Cassandra; Icon: /cassandraFileType.svg; Type Icon: null
+	Lookups: CASSANDRA
+	String: CASSANDRA
+Text: CLICKHOUSE; Tail: null; Type: inject with ClickHouse; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: CLICKHOUSE
+	String: CLICKHOUSE
+Text: COCKROACH; Tail: null; Type: inject with CockroachDB; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: COCKROACH
+	String: COCKROACH
+Text: COUCHBASE; Tail: null; Type: inject with Couchbase Server; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: COUCHBASE
+	String: COUCHBASE
 Text: CSS; Tail: null; Type: inject with CSS; Icon: /css.svg; Type Icon: null
 	Lookups: CSS
 	String: CSS
+Text: DB2; Tail: null; Type: inject with IBM Db2 LUW; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: DB2
+	String: DB2
+Text: DB2IS; Tail: null; Type: inject with IBM Db2 iSeries; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: DB2IS
+	String: DB2IS
+Text: DB2ZOS; Tail: null; Type: inject with IBM Db2 z/OS; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: DB2ZOS
+	String: DB2ZOS
+Text: DERBY; Tail: null; Type: inject with Apache Derby; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: DERBY
+	String: DERBY
 Text: DTD; Tail: null; Type: inject with DTD; Icon: /dtd.svg; Type Icon: null
 	Lookups: DTD
 	String: DTD
+Text: EXASOL; Tail: null; Type: inject with Exasol; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: EXASOL
+	String: EXASOL
+Text: GREENPLUM; Tail: null; Type: inject with Greenplum; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: GREENPLUM
+	String: GREENPLUM
+Text: GSQL; Tail: null; Type: inject with Generic SQL; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: GSQL
+	String: GSQL
+Text: H2; Tail: null; Type: inject with H2; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: H2
+	String: H2
+Text: HIVEQL; Tail: null; Type: inject with Apache Hive; Icon: /hiveFileType.svg; Type Icon: null
+	Lookups: HIVEQL
+	String: HIVEQL
+Text: HSQLDB; Tail: null; Type: inject with HSQLDB; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: HSQLDB
+	String: HSQLDB
 Text: HTML; Tail: null; Type: inject with HTML; Icon: /html.svg; Type Icon: null
 	Lookups: HTML
 	String: HTML
@@ -16,33 +64,87 @@ Text: JAVA; Tail: null; Type: inject with Java; Icon: /java.svg; Type Icon: null
 Text: JSHELL; Tail: null; Type: inject with JShell Snippet; Icon: /java.svg; Type Icon: null
 	Lookups: JSHELL
 	String: JSHELL
+Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null
+	Lookups: JSON
+	String: JSON
 Text: MANIFEST; Tail: null; Type: inject with Manifest; Icon: /manifest.svg; Type Icon: null
 	Lookups: MANIFEST
 	String: MANIFEST
+Text: MARIA; Tail: null; Type: inject with MariaDB; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: MARIA
+	String: MARIA
 Text: MARKDOWN; Tail: null; Type: inject with Markdown; Icon: /MarkdownPlugin.svg; Type Icon: null
 	Lookups: MARKDOWN
 	String: MARKDOWN
+Text: MONGO; Tail: null; Type: inject with MongoDB; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: MONGO
+	String: MONGO
+Text: MONGOJS; Tail: null; Type: inject with MongoJS; Icon: /mongoDB.svg; Type Icon: null
+	Lookups: MONGOJS
+	String: MONGOJS
+Text: MYSQL; Tail: null; Type: inject with MySQL; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: MYSQL
+	String: MYSQL
 Text: MYSUPERMARKER; Tail: null; Type: null; Icon: null; Type Icon: null
 	Lookups: MYSUPERMARKER
 	PsiElement: PsiPerlHeredocOpenerImpl(Perl5: HEREDOC_OPENER) at 0 in heredocOpenerBare.pl
+Text: OSQL; Tail: null; Type: inject with Oracle; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: OSQL
+	String: OSQL
+Text: OSQLP; Tail: null; Type: inject with Oracle SQL*Plus; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: OSQLP
+	String: OSQLP
 Text: PERL5; Tail: null; Type: inject with Perl5; Icon: /perl5classic.png; Type Icon: null
 	Lookups: PERL5
 	String: PERL5
+Text: PGSQL; Tail: null; Type: inject with PostgreSQL; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: PGSQL
+	String: PGSQL
+Text: REDIS; Tail: null; Type: inject with Redis; Icon: /redisFileType.svg; Type Icon: null
+	Lookups: REDIS
+	String: REDIS
+Text: REDSHIFT; Tail: null; Type: inject with Amazon Redshift; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: REDSHIFT
+	String: REDSHIFT
 Text: REGEXP; Tail: null; Type: inject with RegExp; Icon: /regexp.svg; Type Icon: null
 	Lookups: REGEXP
 	String: REGEXP
 Text: RELAXNG; Tail: null; Type: inject with RELAX-NG; Icon: /text.svg; Type Icon: null
 	Lookups: RELAXNG
 	String: RELAXNG
+Text: SNOWFLAKE; Tail: null; Type: inject with Snowflake; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: SNOWFLAKE
+	String: SNOWFLAKE
+Text: SPARKSQL; Tail: null; Type: inject with Apache Spark; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: SPARKSQL
+	String: SPARKSQL
 Text: SPI; Tail: null; Type: inject with SPI; Icon: /text.svg; Type Icon: null
 	Lookups: SPI
 	String: SPI
+Text: SQL92; Tail: null; Type: inject with SQL2016; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: SQL92
+	String: SQL92
+Text: SQL; Tail: null; Type: inject with SQL; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: SQL
+	String: SQL
+Text: SQLITE; Tail: null; Type: inject with SQLite; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: SQLITE
+	String: SQLITE
 Text: SVG; Tail: null; Type: inject with SVG; Icon: /image.svg; Type Icon: null
 	Lookups: SVG
 	String: SVG
+Text: SYBASE; Tail: null; Type: inject with Sybase ASE; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: SYBASE
+	String: SYBASE
 Text: TEXT; Tail: null; Type: inject with Plain text; Icon: TextFileType; Type Icon: null
 	Lookups: TEXT
 	String: TEXT
+Text: TSQL; Tail: null; Type: inject with Microsoft SQL Server; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: TSQL
+	String: TSQL
+Text: VERTICA; Tail: null; Type: inject with Vertica; Icon: /sqlScript.svg; Type Icon: null
+	Lookups: VERTICA
+	String: VERTICA
 Text: XHTML; Tail: null; Type: inject with XHTML; Icon: /xhtml.svg; Type Icon: null
 	Lookups: XHTML
 	String: XHTML
