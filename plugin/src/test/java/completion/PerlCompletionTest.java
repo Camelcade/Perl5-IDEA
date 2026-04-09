@@ -28,6 +28,8 @@ import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
+import java.util.Objects;
+
 public class PerlCompletionTest extends PerlCompletionTestCase {
 
   private static final String BUILT_IN = PerlBundle.message("built.in.type.text");
@@ -183,7 +185,8 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   @Test
   public void testUnicodeNames() {
     PerlUnicodeNamesCompletionProvider.dropCache();
-    doTest();
+    doTestCompletion((element, presentation) ->
+                       Objects.requireNonNull(presentation.getItemText()).contains("ANTICLOCKWISE"));
   }
 
   @Test
