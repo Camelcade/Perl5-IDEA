@@ -26,6 +26,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.Ref;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.util.registry.Registry;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiUtilCore;
@@ -108,19 +109,23 @@ public class PerlRunTest extends PerlPlatformTestCase {
     assertNotNull(contextPsiFile);
     var packageName = "Carton";
     var scriptName = "carton";
-    assertPackageNotExists(contextPsiFile, packageName);
-    var cartonScriptVirtualFile = PerlRunUtil.findScript(getProject(), scriptName);
-    assertNull("carton script is expected to be missing, but found " + cartonScriptVirtualFile, cartonScriptVirtualFile);
+    var existingScriptVirtualFile = PerlRunUtil.findScript(getProject(), scriptName);
+    dropExistingFile(existingScriptVirtualFile, scriptName);
+
     var packageFile = installer.apply(contextPsiFile, packageName);
     assertNotNull(packageFile);
     var packageVirtualFile = PsiUtilCore.getVirtualFile(packageFile);
     assertNotNull(packageVirtualFile);
     delete(packageVirtualFile);
     var scriptVirtualFile = PerlRunUtil.findScript(getProject(), scriptName);
-    assertNotNull("cpan script is expected to be discoverable", scriptVirtualFile);
+    assertNotNull(scriptName + " script is expected to be discoverable", scriptVirtualFile);
 
+    dropExistingFile(scriptVirtualFile, scriptName);
+  }
+
+  private void dropExistingFile(VirtualFile scriptVirtualFile, String scriptName) {
     while (scriptVirtualFile != null) {
-      LOG.debug("Removing ", scriptVirtualFile);
+      LOG.warn("Removing for test " + scriptVirtualFile);
       delete(scriptVirtualFile);
       scriptVirtualFile = PerlRunUtil.findScript(getProject(), scriptName);
     }

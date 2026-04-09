@@ -479,6 +479,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return packagePsiFile;
   }
 
+  @SuppressWarnings("unused")
   protected void assertPackageNotExists(@NotNull PsiFile contextPsiFile, @NotNull String packageName) {
     var packagePsiFile = PerlPackageUtil.resolvePackageNameToPsi(contextPsiFile, packageName);
     var packageVirtualFile = PsiUtilCore.getVirtualFile(packagePsiFile);
