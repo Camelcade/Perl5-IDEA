@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,11 @@
 package com.perl5.lang.perl.psi.utils;
 
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.*;
+import com.intellij.psi.stubs.StubBuildCachedValuesManager.StubBuildCachedValueProvider;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.PsiModificationTracker;
+import com.intellij.psi.util.PsiTreeUtil;
+import com.intellij.psi.util.PsiUtilCore;
 import com.intellij.util.Processor;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
@@ -28,6 +32,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
+import static com.intellij.psi.stubs.StubBuildCachedValuesManager.getCachedValueStubBuildOptimized;
 import static com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues.UNKNOWN_VALUE;
 
 public class PerlVariableAnnotations {
@@ -108,26 +113,32 @@ public class PerlVariableAnnotations {
     return annotations.isEmpty() ? EMPTY : annotations;
   }
 
+  private static final StubBuildCachedValueProvider<List<PerlAnnotation>, PerlVariableDeclarationElement> ANNOTATIONS_PROVIDER =
+    new StubBuildCachedValueProvider<>(
+      "perl.variable.annotations",
+      variableDeclarationElement -> {
+        List<PerlAnnotation> perlAnnotations = PerlAnnotations.collectAnnotations(variableDeclarationElement);
+        var declarationExpression = variableDeclarationElement.getDeclarationExpression();
+        if (perlAnnotations.isEmpty() && declarationExpression != null) {
+          perlAnnotations = PerlAnnotations.collectAnnotations(declarationExpression);
+        }
+        if (perlAnnotations.isEmpty() && declarationExpression != null &&
+            PsiUtilCore.getElementType(declarationExpression.getParent()) == PerlElementTypesGenerated.FOREACH_ITERATOR) {
+          perlAnnotations =
+            PerlAnnotations.collectAnnotations(PsiTreeUtil.getParentOfType(variableDeclarationElement, PerlForeachCompound.class));
+        }
+        if (perlAnnotations.isEmpty() &&
+            PsiUtilCore.getElementType(variableDeclarationElement.getParent()) == PerlElementTypesGenerated.SIGNATURE_ELEMENT) {
+          perlAnnotations = ContainerUtil.filter(
+            PerlAnnotations.collectAnnotations(PsiTreeUtil.getParentOfType(variableDeclarationElement, PerlSubElement.class)),
+            it -> !(it instanceof PsiPerlAnnotationDeprecated));
+        }
+        return CachedValueProvider.Result.create(perlAnnotations, PsiModificationTracker.MODIFICATION_COUNT);
+      }
+    );
+
   private static @NotNull List<PerlAnnotation> collectAnnotationsInScope(@NotNull PerlVariableDeclarationElement variableDeclarationElement) {
-    return CachedValuesManager.getCachedValue(variableDeclarationElement, () -> {
-      List<PerlAnnotation> perlAnnotations = PerlAnnotations.collectAnnotations(variableDeclarationElement);
-      var declarationExpression = variableDeclarationElement.getDeclarationExpression();
-      if (perlAnnotations.isEmpty() && declarationExpression != null) {
-        perlAnnotations = PerlAnnotations.collectAnnotations(declarationExpression);
-      }
-      if (perlAnnotations.isEmpty() && declarationExpression != null &&
-          PsiUtilCore.getElementType(declarationExpression.getParent()) == PerlElementTypesGenerated.FOREACH_ITERATOR) {
-        perlAnnotations =
-          PerlAnnotations.collectAnnotations(PsiTreeUtil.getParentOfType(variableDeclarationElement, PerlForeachCompound.class));
-      }
-      if (perlAnnotations.isEmpty() &&
-          PsiUtilCore.getElementType(variableDeclarationElement.getParent()) == PerlElementTypesGenerated.SIGNATURE_ELEMENT) {
-        perlAnnotations = ContainerUtil.filter(
-          PerlAnnotations.collectAnnotations(PsiTreeUtil.getParentOfType(variableDeclarationElement, PerlSubElement.class)),
-          it -> !(it instanceof PsiPerlAnnotationDeprecated));
-      }
-      return CachedValueProvider.Result.create(perlAnnotations, PsiModificationTracker.MODIFICATION_COUNT);
-    });
+    return getCachedValueStubBuildOptimized(variableDeclarationElement, ANNOTATIONS_PROVIDER);
   }
 
   public static boolean processAnnotations(@NotNull PerlVariableDeclarationElement variableDeclarationElement,
