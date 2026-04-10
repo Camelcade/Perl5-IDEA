@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.ResolveState;
 import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.scope.PsiScopeProcessor;
+import com.intellij.psi.stubs.StubBuildCachedValuesManager.StubBuildCachedValueProvider;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.parser.elementTypes.PerlReparseableElementType;
 import com.perl5.lang.perl.psi.PerlStubBasedPsiElementBase;
@@ -38,10 +38,17 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
+import static com.intellij.psi.stubs.StubBuildCachedValuesManager.getCachedValueStubBuildOptimized;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub<?>> extends PerlStubBasedPsiElementBase<Stub>
   implements StubBasedPsiElement<Stub> {
+  private static final StubBuildCachedValueProvider<List<? extends PerlDelegatingLightNamedElement<?>>, PerlPolyNamedElement<?>> PROVIDER =
+    new StubBuildCachedValueProvider<>(
+      "perl.light.elements",
+      polyNamedElement -> CachedValueProvider.Result.create(polyNamedElement.computeLightElements(), polyNamedElement)
+    );
+
   public PerlPolyNamedElement(@NotNull Stub stub, @NotNull IElementType nodeType) {
     super(stub, nodeType);
   }
@@ -51,8 +58,7 @@ public abstract class PerlPolyNamedElement<Stub extends PerlPolyNamedElementStub
   }
 
   public final @NotNull List<? extends PerlDelegatingLightNamedElement<?>> getLightElements() {
-    return CachedValuesManager.getCachedValue(this, () -> CachedValueProvider.Result.create(computeLightElements(), this)
-    );
+    return getCachedValueStubBuildOptimized(this, PROVIDER);
   }
 
   /**
