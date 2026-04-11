@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2021 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,6 @@ public class PerlGoToSubDefinitionContributor extends PerlChooseByNameContributo
 
   @Override
   protected @NotNull Collection<? extends NavigationItem> getItemsCollectionByName(String name,
-                                                                                   String pattern,
                                                                                    Project project,
                                                                                    boolean includeNonProjectItems) {
     var searchScope = includeNonProjectItems ? GlobalSearchScope.allScope(project) : GlobalSearchScope.projectScope(project);
