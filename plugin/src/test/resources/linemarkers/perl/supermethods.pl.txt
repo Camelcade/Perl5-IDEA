@@ -20,15 +20,15 @@ Targets: 1
 
 216 - 231: 'CONSTANT_METHOD': Overridden methods
 Targets: 1
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Child::Package::CONSTANT_METHOD; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 797 in supermethods.pl
+	PerlLightSubDefinitionElement{myName='CONSTANT_METHOD', myNamespaceName='Some::Child::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 797 in supermethods.pl
 
 258 - 280: 'OTHER_CONSTANT_METHOD1': Overridden methods
 Targets: 1
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Child::Package::OTHER_CONSTANT_METHOD1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 839 in supermethods.pl
+	PerlLightSubDefinitionElement{myName='OTHER_CONSTANT_METHOD1', myNamespaceName='Some::Child::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 839 in supermethods.pl
 
 291 - 313: 'OTHER_CONSTANT_METHOD2': Overridden methods
 Targets: 1
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Child::Package::OTHER_CONSTANT_METHOD2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 872 in supermethods.pl
+	PerlLightSubDefinitionElement{myName='OTHER_CONSTANT_METHOD2', myNamespaceName='Some::Child::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=12}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 872 in supermethods.pl
 
 328 - 353: 'somemethod_with_lpe_block': Overridden methods
 Targets: 1
@@ -56,15 +56,15 @@ Targets: 1
 
 797 - 812: 'CONSTANT_METHOD': Overriding method
 Targets: 1
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Parent::Package::CONSTANT_METHOD; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 216 in supermethods.pl
+	PerlLightSubDefinitionElement{myName='CONSTANT_METHOD', myNamespaceName='Some::Parent::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 216 in supermethods.pl
 
 839 - 861: 'OTHER_CONSTANT_METHOD1': Overriding method
 Targets: 1
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Parent::Package::OTHER_CONSTANT_METHOD1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 258 in supermethods.pl
+	PerlLightSubDefinitionElement{myName='OTHER_CONSTANT_METHOD1', myNamespaceName='Some::Parent::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 258 in supermethods.pl
 
 872 - 894: 'OTHER_CONSTANT_METHOD2': Overriding method
 Targets: 1
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Some::Parent::Package::OTHER_CONSTANT_METHOD2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 291 in supermethods.pl
+	PerlLightSubDefinitionElement{myName='OTHER_CONSTANT_METHOD2', myNamespaceName='Some::Parent::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=12}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 291 in supermethods.pl
 
 909 - 934: 'somemethod_with_lpe_block': Overriding method
 Targets: 1

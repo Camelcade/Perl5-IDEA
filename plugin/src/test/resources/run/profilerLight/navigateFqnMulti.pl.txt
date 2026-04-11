@@ -35,7 +35,7 @@ sub Foo::Bar::<caret>something {
     say 'hi';
 }
 ----------
-PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::something; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 31 in Bar.pm
+PerlLightSubDefinitionElement{myName='something', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=42}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 31 in Bar.pm
 something in Foo::Baz::Bar; /constant_gutter_icon.png; null
 ----------
 package Foo::Bar;

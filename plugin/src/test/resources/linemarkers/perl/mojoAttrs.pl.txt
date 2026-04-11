@@ -4,83 +4,83 @@ Targets: 1
 
 22 - 23: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 501 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 501 in mojoAttrs.pl
 
 35 - 36: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 514 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name1', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 514 in mojoAttrs.pl
 
 48 - 49: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name2($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 527 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name2', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 527 in mojoAttrs.pl
 
 61 - 62: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name3($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 540 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name3', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 540 in mojoAttrs.pl
 
 77 - 82: 'name4': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name4($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 556 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name4', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 556 in mojoAttrs.pl
 
 91 - 96: 'name5': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name5($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 570 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name5', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 570 in mojoAttrs.pl
 
 105 - 106: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name11($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 584 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name11', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 584 in mojoAttrs.pl
 
 119 - 120: '"': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name21($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 598 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name21', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 598 in mojoAttrs.pl
 
 145 - 146: 'q': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name12($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 624 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name12', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 624 in mojoAttrs.pl
 
 160 - 162: 'qq': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name22($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 639 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name22', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 639 in mojoAttrs.pl
 
 190 - 191: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name13($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 669 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name13', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 669 in mojoAttrs.pl
 
 234 - 235: 'q': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name14($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 713 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name14', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar::Child}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 713 in mojoAttrs.pl
 
 283 - 289: 'name51': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name51($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 762 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name51', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 762 in mojoAttrs.pl
 
 304 - 309: 'name6': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name6($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 783 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name6', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 783 in mojoAttrs.pl
 
 329 - 330: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name17($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 808 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name17', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 808 in mojoAttrs.pl
 
 347 - 348: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name27($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 826 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name27', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 826 in mojoAttrs.pl
 
 365 - 366: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name37($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 844 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name37', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 844 in mojoAttrs.pl
 
 390 - 391: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name18($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 869 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name18', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 869 in mojoAttrs.pl
 
 408 - 409: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name28($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 887 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name28', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 887 in mojoAttrs.pl
 
 426 - 427: ''': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::Child::name38($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 905 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name38', myNamespaceName='Foo::Bar::Child', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 905 in mojoAttrs.pl
 
 459 - 474: 'Foo::Bar::Child': Parent classes
 Targets: 1
@@ -88,80 +88,80 @@ Targets: 1
 
 501 - 502: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 22 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 22 in mojoAttrs.pl
 
 514 - 515: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 35 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name1', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 35 in mojoAttrs.pl
 
 527 - 528: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name2($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 48 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name2', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 48 in mojoAttrs.pl
 
 540 - 541: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name3($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 61 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name3', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 61 in mojoAttrs.pl
 
 556 - 561: 'name4': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name4($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 77 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name4', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 77 in mojoAttrs.pl
 
 570 - 575: 'name5': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name5($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 91 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name5', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 91 in mojoAttrs.pl
 
 584 - 585: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name11($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 105 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name11', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 105 in mojoAttrs.pl
 
 598 - 599: '"': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name21($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 119 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name21', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 119 in mojoAttrs.pl
 
 624 - 625: 'q': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name12($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 145 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name12', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 145 in mojoAttrs.pl
 
 639 - 641: 'qq': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name22($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 160 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name22', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 160 in mojoAttrs.pl
 
 669 - 670: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name13($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 190 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name13', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 190 in mojoAttrs.pl
 
 713 - 714: 'q': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name14($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 234 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name14', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Foo::Bar}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 234 in mojoAttrs.pl
 
 762 - 768: 'name51': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name51($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 283 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name51', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 283 in mojoAttrs.pl
 
 783 - 788: 'name6': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name6($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 304 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name6', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 304 in mojoAttrs.pl
 
 808 - 809: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name17($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 329 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name17', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 329 in mojoAttrs.pl
 
 826 - 827: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name27($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 347 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name27', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 347 in mojoAttrs.pl
 
 844 - 845: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name37($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 365 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name37', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 365 in mojoAttrs.pl
 
 869 - 870: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name18($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 390 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name18', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 390 in mojoAttrs.pl
 
 887 - 888: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name28($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 408 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name28', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 408 in mojoAttrs.pl
 
 905 - 906: ''': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Foo::Bar::name38($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 426 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name38', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 426 in mojoAttrs.pl

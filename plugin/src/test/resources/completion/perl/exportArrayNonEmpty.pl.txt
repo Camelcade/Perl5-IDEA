@@ -1,12 +1,12 @@
 Text: MULTICONST2; Tail: null; Type: null; Icon: null; Type Icon: null
 	Lookups: MULTICONST2
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::MULTICONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 199 in exportArrayNonEmpty.pl
+	PsiElement: PerlLightSubDefinitionElement{myName='MULTICONST2', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=2}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 199 in exportArrayNonEmpty.pl
 Text: multiconst; Tail: null; Type: null; Icon: null; Type Icon: null
 	Lookups: multiconst
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::multiconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 178 in exportArrayNonEmpty.pl
+	PsiElement: PerlLightSubDefinitionElement{myName='multiconst', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 178 in exportArrayNonEmpty.pl
 Text: singleconst; Tail: null; Type: null; Icon: null; Type Icon: null
 	Lookups: singleconst
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::singleconst; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 139 in exportArrayNonEmpty.pl
+	PsiElement: PerlLightSubDefinitionElement{myName='singleconst', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=42}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 139 in exportArrayNonEmpty.pl
 Text: something; Tail: null; Type: null; Icon: null; Type Icon: null
 	Lookups: something
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Foo::Bar::something at 83 in exportArrayNonEmpty.pl

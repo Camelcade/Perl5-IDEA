@@ -1,5 +1,5 @@
-Target: PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor1($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 104 in mkAccessorWoFbp.pl
+Target: PerlLightSubDefinitionElement{myName='set_accessor1', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, $new_value], myReturnValueFromCode=UNKNOWN_VALUE}($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 104 in mkAccessorWoFbp.pl
 Total usages: 1
 	PerlSubNameElementImpl(Perl5: subname) at 172 in mkAccessorWoFbp.pl, via: PerlSubReference at (172,185); text in range: 'set_accessor1' => 1 results:
-	PerlClassAccessorMethod(CLASS_ACCESSOR_METHOD)@Foo::Bar::set_accessor1($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 104 in mkAccessorWoFbp.pl
+	PerlLightSubDefinitionElement{myName='set_accessor1', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[$self, $new_value], myReturnValueFromCode=UNKNOWN_VALUE}($self, $new_value); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 104 in mkAccessorWoFbp.pl
 

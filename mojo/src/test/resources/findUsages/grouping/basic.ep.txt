@@ -75,7 +75,7 @@ Usage: "var"; (125,128); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     DirectoryGroup: ; /sourceRoot.svg
 
  - Rule: PerlUsageGroupingRule
-    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 100 in basic.ep
+    PsiElement: PerlLightSubDefinitionElement{myName='somehelper', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=UNKNOWN_VALUE}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 100 in basic.ep
 
 
 Usage: "var"; (143,146); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 143 in basic.ep
@@ -95,7 +95,7 @@ Usage: "var"; (143,146); reading; PerlVariableNameElementImpl(Perl5: SCALAR_NAME
     DirectoryGroup: ; /sourceRoot.svg
 
  - Rule: PerlUsageGroupingRule
-    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 100 in basic.ep
+    PsiElement: PerlLightSubDefinitionElement{myName='somehelper', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=UNKNOWN_VALUE}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 100 in basic.ep
 
 
 Usage: "var"; (154,157); reading; writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 154 in basic.ep
@@ -115,7 +115,7 @@ Usage: "var"; (154,157); reading; writing; PerlVariableNameElementImpl(Perl5: SC
     DirectoryGroup: ; /sourceRoot.svg
 
  - Rule: PerlUsageGroupingRule
-    PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::somehelper; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 100 in basic.ep
+    PsiElement: PerlLightSubDefinitionElement{myName='somehelper', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=UNKNOWN_VALUE}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 100 in basic.ep
 
 
 Usage: "var"; (185,188); writing; PerlVariableNameElementImpl(Perl5: SCALAR_NAME) at 185 in basic.ep

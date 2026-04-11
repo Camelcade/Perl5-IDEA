@@ -6,7 +6,7 @@ Text: SUPER::; Tail: ...; Type: null; Icon: /package_gutter_icon.png; Type Icon:
 	String: SUPER::
 Text: app; Tail: ([$new_value]); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 	Lookups: app
-	PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::app($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 241 in Controller.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='app', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Mojolicious::Controller}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 241 in Controller.pm
 Text: continue; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 	Lookups: continue
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::continue($self) at 972 in Controller.pm
@@ -30,7 +30,7 @@ Text: helpers; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_i
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::helpers($self) at 3483 in Controller.pm
 Text: match; Tail: ([$new_value]); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 	Lookups: match
-	PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::match($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 255 in Controller.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='match', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Mojolicious::Routes::Match()->new(root, ArrayItem: SUB_ARGUMENTS[0]->app()->routes())}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 255 in Controller.pm
 Text: on; Tail: ($name, $cb); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 	Lookups: on
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::on($self, $name, $cb) at 3546 in Controller.pm
@@ -69,7 +69,7 @@ Text: signed_cookie; Tail: ($name, $value, $options); Type: Mojolicious::Control
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::signed_cookie($self, $name, $value, $options) at 7582 in Controller.pm
 Text: tx; Tail: ([$new_value]); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 	Lookups: tx
-	PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::tx($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 245 in Controller.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='tx', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Mojolicious::Controller}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 245 in Controller.pm
 Text: url_for; Tail: null; Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 	Lookups: url_for
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::url_for($self) at 7949 in Controller.pm

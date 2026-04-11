@@ -10,35 +10,35 @@ PerlNamespaceReference at (232,240); text in range: 'Foo::Bla' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bla at 0 in constant.pl
 
 PerlSubReference at (242,253); text in range: 'ALONECONST1' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::ALONECONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 32 in constant.pl
+	PerlLightSubDefinitionElement{myName='ALONECONST1', myNamespaceName='Foo::Bla', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=123}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 32 in constant.pl
 
 PerlNamespaceReference at (255,263); text in range: 'Foo::Bla' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bla at 0 in constant.pl
 
 PerlSubReference at (265,276); text in range: 'ALONECONST2' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::ALONECONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 65 in constant.pl
+	PerlLightSubDefinitionElement{myName='ALONECONST2', myNamespaceName='Foo::Bla', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=123}; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 65 in constant.pl
 
 PerlNamespaceReference at (278,286); text in range: 'Foo::Bla' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bla at 0 in constant.pl
 
 PerlSubReference at (288,299); text in range: 'ALONECONST3' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::ALONECONST3; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 100 in constant.pl
+	PerlLightSubDefinitionElement{myName='ALONECONST3', myNamespaceName='Foo::Bla', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=123}; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 100 in constant.pl
 
 PerlNamespaceReference at (301,309); text in range: 'Foo::Bla' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bla at 0 in constant.pl
 
 PerlSubReference at (311,323); text in range: 'MULTI_CONST1' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::MULTI_CONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 141 in constant.pl
+	PerlLightSubDefinitionElement{myName='MULTI_CONST1', myNamespaceName='Foo::Bla', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=123}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 141 in constant.pl
 
 PerlNamespaceReference at (325,333); text in range: 'Foo::Bla' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bla at 0 in constant.pl
 
 PerlSubReference at (335,347); text in range: 'MULTI_CONST2' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::MULTI_CONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 166 in constant.pl
+	PerlLightSubDefinitionElement{myName='MULTI_CONST2', myNamespaceName='Foo::Bla', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=69}; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 166 in constant.pl
 
 PerlNamespaceReference at (349,357); text in range: 'Foo::Bla' => 1 results:
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Foo::Bla at 0 in constant.pl
 
 PerlSubReference at (359,371); text in range: 'MULTI_CONST3' => 1 results:
-	PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bla::MULTI_CONST3; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 192 in constant.pl
+	PerlLightSubDefinitionElement{myName='MULTI_CONST3', myNamespaceName='Foo::Bla', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=0}; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 192 in constant.pl
 

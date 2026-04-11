@@ -6,7 +6,7 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
   SortKey: Import
   Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    multiconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::multiconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 307 in Package.pm
+    multiconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightSubDefinitionElement{myName='multiconst1', myNamespaceName='MyTest::Some::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 307 in Package.pm
     SortKey: multiconst1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
@@ -14,7 +14,7 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     SortKey: somesub1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
-    someconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::someconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in Package.pm
+    someconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightSubDefinitionElement{myName='someconst1', myNamespaceName='MyTest::Some::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in Package.pm
     SortKey: someconst1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
@@ -26,11 +26,11 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     SortKey: somesub1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
-    someconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::someconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in Package.pm
+    someconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightSubDefinitionElement{myName='someconst1', myNamespaceName='MyTest::Some::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in Package.pm
     SortKey: someconst1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
-    multiconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::multiconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 307 in Package.pm
+    multiconst1 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightSubDefinitionElement{myName='multiconst1', myNamespaceName='MyTest::Some::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 307 in Package.pm
     SortKey: multiconst1
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
@@ -38,11 +38,10 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     SortKey: somesub2
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
-    SOMECONST2 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::SOMECONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 274 in Package.pm
+    SOMECONST2 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightSubDefinitionElement{myName='SOMECONST2', myNamespaceName='MyTest::Some::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 274 in Package.pm
     SortKey: SOMECONST2
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
 
-    MULTICONST2 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::MULTICONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 326 in Package.pm
+    MULTICONST2 in MyTest::Some::Package; /constant_gutter_icon.png; NOT_USED_ELEMENT_ATTRIBUTES -> PerlLightSubDefinitionElement{myName='MULTICONST2', myNamespaceName='MyTest::Some::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=2}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 326 in Package.pm
     SortKey: MULTICONST2
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED
-
