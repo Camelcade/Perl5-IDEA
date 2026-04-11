@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
   protected @NotNull String myName;
   private @Nullable PsiElement myNameIdentifier;
 
-  private boolean myIsImplicit = false;
+  private final boolean myIsImplicit = false;
 
   private @NotNull Function<String, String> myNameComputation = DEFAULT_NAME_COMPUTATION;
 
@@ -123,10 +123,6 @@ public class PerlDelegatingLightNamedElement<Delegate extends PerlPolyNamedEleme
 
   public boolean isImplicit() {
     return myIsImplicit;
-  }
-
-  public void setImplicit(boolean implicit) {
-    myIsImplicit = implicit;
   }
 
   @Override
