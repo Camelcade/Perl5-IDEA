@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +25,9 @@ import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.lang.perl.fileTypes.PerlFileTypePackage;
 import com.perl5.lang.perl.psi.*;
-import com.perl5.lang.perl.psi.impl.*;
-import com.perl5.lang.perl.psi.mixins.PerlNamespaceDefinitionMixin;
+import com.perl5.lang.perl.psi.impl.PerlFileImpl;
+import com.perl5.lang.perl.psi.impl.PerlHeredocElementImpl;
+import com.perl5.lang.perl.psi.impl.PerlUseStatementElement;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -69,14 +70,6 @@ public final class PerlElementFactory {
     PerlFileImpl perlFile = createFile(project, statementText + ";");
     PsiElement[] children = perlFile.getChildren();
     return children.length == 0 ? null : children[0];
-  }
-
-  // fixme probably we don't need package name and sub. just identifier
-  public static PerlNamespaceElementImpl createPackageName(Project project, String name) {
-    PerlFileImpl file = createFile(project, "package " + name + ";");
-    PerlNamespaceDefinitionMixin def = PsiTreeUtil.findChildOfType(file, PerlNamespaceDefinitionMixin.class);
-    assert def != null;
-    return (PerlNamespaceElementImpl)def.getNamespaceElement();
   }
 
   /**
@@ -139,13 +132,6 @@ public final class PerlElementFactory {
     PsiElement tailingNewLine = headingNewLine.getNextSibling().getNextSibling().getNextSibling();
 
     return List.of(heredocOpener, headingNewLine, tailingNewLine);
-  }
-
-  public static PerlStringContentElementImpl createStringContent(Project project, String name) {
-    PerlFileImpl file = createFile(project, "'" + name + "';");
-    PsiPerlStringSq string = PsiTreeUtil.findChildOfType(file, PsiPerlStringSq.class);
-    assert string != null;
-    return (PerlStringContentElementImpl)string.getFirstChild().getNextSibling();
   }
 
   public static PerlString createBareString(Project project, String content) {

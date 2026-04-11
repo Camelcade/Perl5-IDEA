@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,7 @@ import java.util.*;
 /**
  * Represents internal {@code %^H}, built from {@code feature.pm}
  */
+@SuppressWarnings("unused")
 public final class PerlFeaturesTable implements Cloneable {
 
   private static final String FEATURE_APOSTROPHE_AS_PACKAGE_SEPARATOR = "feature_apos_as_name_sep";

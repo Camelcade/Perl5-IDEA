@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,9 +61,6 @@ class PerlDockerAdapter {
   private static final String WITH_AUTOREMOVE = "--rm";
   private static final String WITH_ENTRYPOINT = "--entrypoint";
   private static final String AS_DAEMON = "-d";
-  private static final String CONTAINER = "container";
-  private static final String REMOVE = "rm";
-  private static final String CREATE = "create";
   private static final String WITH_CONTAINER_NAME = "--name";
   private static final String COPY = "cp";
   private static final String AS_ARCHIVE = "--archive";
@@ -87,15 +84,6 @@ class PerlDockerAdapter {
 
   public PerlDockerAdapter(@NotNull PerlDockerData data) {
     myData = data;
-  }
-
-  /**
-   * @return new container name, generated from {@code containerNameSeed}
-   */
-  public @NotNull String createContainer(@NotNull String containerNameSeed) throws ExecutionException {
-    String containerName = createContainerName(containerNameSeed);
-    runCommand(CONTAINER, CREATE, WITH_CONTAINER_NAME, containerName, myData.getImageName());
-    return containerName;
   }
 
   /**
@@ -131,19 +119,11 @@ class PerlDockerAdapter {
     runCommand(ArrayUtil.mergeArrays(new String[]{KILL}, containers));
   }
 
-  private void dropContainer(@NotNull String containerName) throws ExecutionException {
-    runCommand(CONTAINER, REMOVE, containerName);
-  }
-
   private @NotNull ProcessOutput checkOutput(@NotNull ProcessOutput output) throws ExecutionException {
     if (output.getExitCode() != 0) {
       throw new PerlExecutionException(output);
     }
     return output;
-  }
-
-  public @NotNull PerlDockerData getData() {
-    return myData;
   }
 
   /**
