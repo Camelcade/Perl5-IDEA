@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -40,12 +40,11 @@ abstract class PerlChooseByNameContributor implements ChooseByNameContributor {
 
   @Override
   public final NavigationItem @NotNull [] getItemsByName(String name, String pattern, Project project, boolean includeNonProjectItems) {
-    return ContainerUtil.filter(getItemsCollectionByName(name, pattern, project, includeNonProjectItems), FILTER)
+    return ContainerUtil.filter(getItemsCollectionByName(name, project, includeNonProjectItems), FILTER)
       .toArray(NavigationItem.EMPTY_NAVIGATION_ITEM_ARRAY);
   }
 
   protected abstract @NotNull Collection<? extends NavigationItem> getItemsCollectionByName(String name,
-                                                                                            String pattern,
                                                                                             Project project,
                                                                                             boolean includeNonProjectItems);
 }
