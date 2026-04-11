@@ -30,7 +30,7 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     SortKey: hash
     Passed by filters: SHOW_POD, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    CONST in plainPerl.pl; /constant_gutter_icon.png; null -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Foo::Bar::CONST; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 42 in plainPerl.pl
+    CONST in plainPerl.pl; /constant_gutter_icon.png; null -> PerlLightSubDefinitionElement{myName='CONST', myNamespaceName='Foo::Bar', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=42}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 42 in plainPerl.pl
     SortKey: CONST
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
@@ -78,7 +78,7 @@ Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_ME
     SortKey: hash_deprecated
     Passed by filters: SHOW_POD, SHOW_GLOBS, SHOW_CONSTANTS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 
-    MULTICONST in plainPerl.pl; /constant_gutter_icon.png; DEPRECATED_ATTRIBUTES -> PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@Deprecated::Bar::MULTICONST; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 290 in plainPerl.pl
+    MULTICONST in plainPerl.pl; /constant_gutter_icon.png; DEPRECATED_ATTRIBUTES -> PerlLightSubDefinitionElement{myName='MULTICONST', myNamespaceName='Deprecated::Bar', myAnnotations=deprecated; returns: UNKNOWN_VALUE, mySubArguments=[], myReturnValueFromCode=42}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 290 in plainPerl.pl
     SortKey: MULTICONST
     Passed by filters: SHOW_POD, SHOW_VARIABLES, SHOW_GLOBS, SHOW_METHODS, SHOW_DECLARATIONS, SHOW_INHERITED, SHOW_IMPORTED
 

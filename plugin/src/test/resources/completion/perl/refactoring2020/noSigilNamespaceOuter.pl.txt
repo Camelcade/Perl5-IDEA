@@ -63,22 +63,22 @@ Text: ISA; Tail: null; Type: MyTest::Some::Package; Icon: /array_gutter_icon.png
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 473 in Package.pm
 Text: MULTICONST2; Tail: null; Type: MyTest::Some::Package; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: MULTICONST2
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::MULTICONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 326 in Package.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='MULTICONST2', myNamespaceName='MyTest::Some::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=2}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 326 in Package.pm
 Text: SCALAR_VAR; Tail: null; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $MyTest::Some::Package::SCALAR_VAR, MyTest::Some::Package::SCALAR_VAR
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 154 in Package.pm
 Text: SOMECONST2; Tail: null; Type: MyTest::Some::Package; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: SOMECONST2
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::SOMECONST2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 274 in Package.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='SOMECONST2', myNamespaceName='MyTest::Some::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 274 in Package.pm
 Text: VERSION; Tail: null; Type: MyTest::Some::Package; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $MyTest::Some::Package::VERSION, MyTest::Some::Package::VERSION
 	PsiElement: PsiPerlVariableDeclarationElementImpl(VARIABLE_DECLARATION_ELEMENT) at 439 in Package.pm
 Text: multiconst1; Tail: null; Type: MyTest::Some::Package; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: multiconst1
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::multiconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 307 in Package.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='multiconst1', myNamespaceName='MyTest::Some::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 307 in Package.pm
 Text: someconst1; Tail: null; Type: MyTest::Some::Package; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: someconst1
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::someconst1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in Package.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='someconst1', myNamespaceName='MyTest::Some::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in Package.pm
 Text: somesub1; Tail: null; Type: MyTest::Some::Package; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: somesub1
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyTest::Some::Package::somesub1 at 199 in Package.pm
@@ -87,7 +87,7 @@ Text: somesub2; Tail: null; Type: MyTest::Some::Package; Icon: /subroutine_gutte
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyTest::Some::Package::somesub2 at 215 in Package.pm
 Text: unimportedconstant; Tail: null; Type: MyTest::Some::Package; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: unimportedconstant
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@MyTest::Some::Package::unimportedconstant; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 383 in Package.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='unimportedconstant', myNamespaceName='MyTest::Some::Package', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=1}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 383 in Package.pm
 Text: unimportedsub; Tail: null; Type: MyTest::Some::Package; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: unimportedsub
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@MyTest::Some::Package::unimportedsub at 348 in Package.pm

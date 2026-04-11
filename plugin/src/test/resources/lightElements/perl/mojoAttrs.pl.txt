@@ -1,39 +1,39 @@
 Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 0 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 4 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 4 in mojoAttrs.pl
 
 Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 12 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 17 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name2($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 26 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name3($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 35 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name4($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 47 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name5($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 53 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name1', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 17 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name2', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 26 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name3', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 35 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name4', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 47 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name5', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 53 in mojoAttrs.pl
 
 Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 62 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 67 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name2($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 76 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name1', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 67 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name2', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 76 in mojoAttrs.pl
 
 Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 95 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 100 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name2($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 110 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name1', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 100 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name2', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 110 in mojoAttrs.pl
 
 Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 133 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 138 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name1', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 138 in mojoAttrs.pl
 
 Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 174 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 179 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name1', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: main}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 179 in mojoAttrs.pl
 
 Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 221 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 225 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 225 in mojoAttrs.pl
 
 Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 240 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 244 in mojoAttrs.pl
 
 Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 263 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 268 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name2($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 277 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name3($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 286 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name1', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 268 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name2', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 277 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name3', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: foo}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 286 in mojoAttrs.pl
 
 Poly-named provider: PsiPerlSubCallImpl(SUB_CALL) at 305 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name1($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 310 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name2($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 319 in mojoAttrs.pl
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@main::name3($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 328 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name1', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 310 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name2', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 319 in mojoAttrs.pl
+	PerlLightSubDefinitionElement{myName='name3', myNamespaceName='main', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 328 in mojoAttrs.pl

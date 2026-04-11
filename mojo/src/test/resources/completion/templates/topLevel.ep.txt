@@ -474,16 +474,16 @@ Text: LIST_SEPARATOR; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png;
 	PsiElement: Built-in: $LIST_SEPARATOR
 Text: Library::Exception2; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: Library::Exception2
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='Library::Exception2', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
 Text: Library::Exception; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: Library::Exception
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='Library::Exception', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
 Text: LibraryException3; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: LibraryException3
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='LibraryException3', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
 Text: LibraryException; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: LibraryException
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='LibraryException', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
 Text: MATCH; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $MATCH, MATCH
 	PsiElement: Built-in: $MATCH
@@ -735,13 +735,13 @@ Text: accept; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Ic
 	PsiElement: Implicit sub: accept()
 Text: accepts; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: accepts
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::accepts; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 632 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='accepts', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=ArrayItem: SUB_ARGUMENTS[0]->app()->renderer()->accepts(SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 632 in DefaultHelpers.pm
 Text: alarm; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: alarm
 	PsiElement: Implicit sub: alarm()
 Text: app; Tail: ([$new_value]); Type: Mojolicious::Controller; Icon: /method_gutter_icon.png; Type Icon: null
 	Lookups: app
-	PsiElement: PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::app($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 241 in Controller.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='app', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=Smart getter: Mojolicious::Controller}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 241 in Controller.pm
 Text: atan2; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: atan2
 	PsiElement: Implicit sub: atan2()
@@ -750,7 +750,7 @@ Text: b; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: n
 	PsiElement: Built-in: $b
 Text: b; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: b
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::b($self); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 702 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='b', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[$self], myReturnValueFromCode=Mojo::ByteStream()->new(Sublist (1;0) SUB_ARGUMENTS)}($self); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 702 in DefaultHelpers.pm
 Text: bind; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: bind
 	PsiElement: Implicit sub: bind()
@@ -765,10 +765,10 @@ Text: break; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Ico
 	PsiElement: Implicit sub: break()
 Text: button_to; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: button_to
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::button_to; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 731 in TagHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='button_to', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::TagHelpers::_button_to(0, SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 731 in TagHelpers.pm
 Text: c; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: c
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::c($self); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 771 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='c', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[$self], myReturnValueFromCode=Mojo::Collection()->new(Sublist (1;0) SUB_ARGUMENTS)}($self); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 771 in DefaultHelpers.pm
 Text: c; Tail: null; Type: null; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $c, c
 	PsiElement: Implicit variable: $Mojo::Template::Sandbox::c@Mojolicious::Controller
@@ -783,7 +783,7 @@ Text: chdir; Tail: ([$name_or_handle]); Type: CORE; Icon: /subroutine_gutter_ico
 	PsiElement: Implicit sub: chdir([$name_or_handle])([$name_or_handle])
 Text: check_box; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: check_box
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::check_box; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 787 in TagHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='check_box', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::TagHelpers::_input(SUB_ARGUMENTS, type, checkbox)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 787 in TagHelpers.pm
 Text: chmod; Tail: ($oct_permissions, @file_names); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: chmod
 	PsiElement: Implicit sub: chmod($oct_permissions, @file_names)($oct_permissions, @file_names)
@@ -813,19 +813,19 @@ Text: color_field; Tail: ($c, $name); Type: Mojolicious::Plugin::TagHelpers; Ico
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Plugin::TagHelpers::_input($c, $name) at 2375 in TagHelpers.pm
 Text: config; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: config
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::config; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 840 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='config', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=ArrayItem: SUB_ARGUMENTS[0]->app()->config(Sublist (1;0) SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 840 in DefaultHelpers.pm
 Text: connect; Tail: ($socket, $name); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: connect
 	PsiElement: Implicit sub: connect($socket, $name)($socket, $name)
 Text: content; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: content
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::content; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 900 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='content', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::DefaultHelpers::_content(0, 0, SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 900 in DefaultHelpers.pm
 Text: content_for; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: content_for
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::content_for; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 960 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='content_for', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::DefaultHelpers::_content(1, 0, SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 960 in DefaultHelpers.pm
 Text: content_with; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: content_with
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::content_with; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1020 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='content_with', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::DefaultHelpers::_content(0, 1, SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1020 in DefaultHelpers.pm
 Text: continue; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: continue
 	PsiElement: Implicit sub: continue()
@@ -837,7 +837,7 @@ Text: crypt; Tail: ($text, $salt); Type: CORE; Icon: /subroutine_gutter_icon.png
 	PsiElement: Implicit sub: crypt($text, $salt)($text, $salt)
 Text: csrf_button_to; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: csrf_button_to
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::csrf_button_to; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 856 in TagHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='csrf_button_to', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::TagHelpers::_button_to(1, SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 856 in TagHelpers.pm
 Text: csrf_field; Tail: ($c); Type: Mojolicious::Plugin::TagHelpers; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: csrf_field
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Plugin::TagHelpers::_csrf_field($c) at 1543 in TagHelpers.pm
@@ -852,7 +852,7 @@ Text: date_field; Tail: ($c, $name); Type: Mojolicious::Plugin::TagHelpers; Icon
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Plugin::TagHelpers::_input($c, $name) at 2375 in TagHelpers.pm
 Text: datetime_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: datetime_field
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::datetime_field; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 424 in TagHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='datetime_field', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::TagHelpers::_input(SUB_ARGUMENTS, type, datetime-local)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 424 in TagHelpers.pm
 Text: dbmclose; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: dbmclose
 	PsiElement: Implicit sub: dbmclose()
@@ -882,7 +882,7 @@ Text: dump; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon
 	PsiElement: Implicit sub: dump()
 Text: dumper; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: dumper
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::dumper($self); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1203 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='dumper', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[$self], myReturnValueFromCode=Mojolicious::Plugin::DefaultHelpers::dumper(Sublist (1;0) SUB_ARGUMENTS)}($self); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1203 in DefaultHelpers.pm
 Text: each; Tail: (@hash_or_array); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: each
 	PsiElement: Implicit sub: each(@hash_or_array)(@hash_or_array)
@@ -939,7 +939,7 @@ Text: fcntl; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Ico
 	PsiElement: Implicit sub: fcntl()
 Text: file_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: file_field
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::file_field; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 917 in TagHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='file_field', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::TagHelpers::_empty_field(file, SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 917 in TagHelpers.pm
 Text: fileno; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: fileno
 	PsiElement: Implicit sub: fileno()
@@ -1059,7 +1059,7 @@ Text: hidden_field; Tail: ($c, $name, $value); Type: Mojolicious::Plugin::TagHel
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Plugin::TagHelpers::_hidden_field($c, $name, $value) at 2224 in TagHelpers.pm
 Text: image; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: image
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::image; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 981 in TagHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='image', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::TagHelpers::_tag(img, src, ArrayItem: SUB_ARGUMENTS[0]->url_for(ArrayItem: Sublist (1;0) SUB_ARGUMENTS[0]), Sublist (2;0) SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 981 in TagHelpers.pm
 Text: import; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: import
 	PsiElement: Implicit sub: import()
@@ -1068,13 +1068,13 @@ Text: inactivity_timeout; Tail: ($c, $timeout); Type: Mojolicious::Plugin::Defau
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Plugin::DefaultHelpers::_inactivity_timeout($c, $timeout) at 3984 in DefaultHelpers.pm
 Text: include; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: include
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::include; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1255 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='include', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=ArrayItem: SUB_ARGUMENTS[0]->render_to_string(Sublist (1;0) SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1255 in DefaultHelpers.pm
 Text: index; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: index
 	PsiElement: Implicit sub: index()
 Text: input_tag; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: input_tag
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::input_tag; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1061 in TagHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='input_tag', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::TagHelpers::_input(SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1061 in TagHelpers.pm
 Text: int; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: int
 	PsiElement: Implicit sub: int()
@@ -1197,7 +1197,7 @@ Text: param; Tail: ($name); Type: Mojolicious::Controller; Icon: /method_gutter_
 	PsiElement: PsiPerlSubDefinitionImpl(SUB_DEFINITION)@Mojolicious::Controller::param($self, $name) at 3778 in Controller.pm
 Text: password_field; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: password_field
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::password_field; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1115 in TagHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='password_field', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::TagHelpers::_empty_field(password, SUB_ARGUMENTS)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1115 in TagHelpers.pm
 Text: pipe; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: pipe
 	PsiElement: Implicit sub: pipe()
@@ -1224,7 +1224,7 @@ Text: quotemeta; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type
 	PsiElement: Implicit sub: quotemeta()
 Text: radio_button; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: radio_button
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::radio_button; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1187 in TagHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='radio_button', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::TagHelpers::_input(SUB_ARGUMENTS, type, radio)}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1187 in TagHelpers.pm
 Text: rand; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: rand
 	PsiElement: Implicit sub: rand()
@@ -1260,10 +1260,10 @@ Text: rename; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Ic
 	PsiElement: Implicit sub: rename()
 Text: reply.exception; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: reply.exception
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::reply.exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1391 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='reply.exception', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::DefaultHelpers::_development(exception, SUB_ARGUMENTS)}; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1391 in DefaultHelpers.pm
 Text: reply.not_found; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: reply.not_found
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::reply.not_found; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1467 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='reply.not_found', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=Mojolicious::Plugin::DefaultHelpers::_development(not_found, SUB_ARGUMENTS)}; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 1467 in DefaultHelpers.pm
 Text: require; Tail: ([$filename]); Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: require
 	PsiElement: Implicit sub: require([$filename])([$filename])
@@ -1488,7 +1488,7 @@ Text: truncate; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type 
 	PsiElement: Implicit sub: truncate()
 Text: ua; Tail: null; Type: Mojolicious::Controller; Icon: /mojolicious.png; Type Icon: null
 	Lookups: ua
-	PsiElement: MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::ua; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1544 in DefaultHelpers.pm
+	PsiElement: PerlLightSubDefinitionElement{myName='ua', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=ArrayItem: SUB_ARGUMENTS[0]->app()->ua()}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 1544 in DefaultHelpers.pm
 Text: uc; Tail: null; Type: CORE; Icon: /subroutine_gutter_icon.png; Type Icon: null
 	Lookups: uc
 	PsiElement: Implicit sub: uc()

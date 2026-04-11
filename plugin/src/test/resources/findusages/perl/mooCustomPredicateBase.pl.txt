@@ -1,5 +1,5 @@
-Target: PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooCustomPredicateBase.pl
+Target: PerlLightSubDefinitionElement{myName='test', myNamespaceName='MySomePackage', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooCustomPredicateBase.pl
 Total usages: 1
 	PerlSubNameElementImpl(Perl5: subname) at 128 in mooCustomPredicateBase.pl, via: PerlSubReference at (128,132); text in range: 'test' => 1 results:
-	PerlAttributeDefinition(LIGHT_ATTRIBUTE)@MySomePackage::test($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooCustomPredicateBase.pl
+	PerlLightSubDefinitionElement{myName='test', myNamespaceName='MySomePackage', myAnnotations=null, mySubArguments=[$self, [$new_value]], myReturnValueFromCode=UNKNOWN_VALUE}($self, [$new_value]); navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 28 in mooCustomPredicateBase.pl
 

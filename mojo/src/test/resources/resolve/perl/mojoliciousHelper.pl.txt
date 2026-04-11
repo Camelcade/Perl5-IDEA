@@ -6,5 +6,4 @@ PerlNamespaceReference at (64,87); text in range: 'Mojolicious::Controller' => 1
 	PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm
 
 PerlSubReference at (91,99); text in range: 'myhelper' => 1 results:
-	MojoHelperDefinition(LIGHT_METHOD_DEFINITION)@Mojolicious::Controller::myhelper; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 14 in mojoliciousHelper.pl
-
+	PerlLightSubDefinitionElement{myName='myhelper', myNamespaceName='Mojolicious::Controller', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=I am your helper!}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 14 in mojoliciousHelper.pl

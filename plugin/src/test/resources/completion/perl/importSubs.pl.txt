@@ -480,16 +480,16 @@ Text: LIST_SEPARATOR; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png;
 	PsiElement: Built-in: $LIST_SEPARATOR
 Text: Library::Exception2; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: Library::Exception2
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='Library::Exception2', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
 Text: Library::Exception; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: Library::Exception
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='Library::Exception', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
 Text: LibraryException3; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: LibraryException3
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='LibraryException3', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
 Text: LibraryException; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: LibraryException
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='LibraryException', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
 Text: MATCH; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $MATCH, MATCH
 	PsiElement: Built-in: $MATCH

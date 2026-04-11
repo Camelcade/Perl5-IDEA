@@ -1,63 +1,63 @@
 25 - 26: ''': Subclasses
 Targets: 1
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Seption2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 41 in exceptionClasses.pl
+	PerlLightNamespaceDefinitionElement{myName='Seption2', myMroType=DFS, myParentNamespacesNames=[Seption1], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 41 in exceptionClasses.pl
 
 41 - 49: 'Seption2': Parent classes
 Targets: 1
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Seption1; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 25 in exceptionClasses.pl
+	PerlLightNamespaceDefinitionElement{myName='Seption1', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 25 in exceptionClasses.pl
 
 41 - 49: 'Seption2': Subclasses
 Targets: 1
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Seption3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 93 in exceptionClasses.pl
+	PerlLightNamespaceDefinitionElement{myName='Seption3', myMroType=DFS, myParentNamespacesNames=[Seption2], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 93 in exceptionClasses.pl
 
 93 - 101: 'Seption3': Parent classes
 Targets: 1
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Seption2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 41 in exceptionClasses.pl
+	PerlLightNamespaceDefinitionElement{myName='Seption2', myMroType=DFS, myParentNamespacesNames=[Seption1], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 41 in exceptionClasses.pl
 
 93 - 101: 'Seption3': Subclasses
 Targets: 1
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Seption4; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 187 in exceptionClasses.pl
+	PerlLightNamespaceDefinitionElement{myName='Seption4', myMroType=DFS, myParentNamespacesNames=[Seption3], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 187 in exceptionClasses.pl
 
 187 - 195: 'Seption4': Parent classes
 Targets: 1
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Seption3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 93 in exceptionClasses.pl
+	PerlLightNamespaceDefinitionElement{myName='Seption3', myMroType=DFS, myParentNamespacesNames=[Seption2], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 93 in exceptionClasses.pl
 
 187 - 195: 'Seption4': Subclasses
 Targets: 1
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Seption5; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 280 in exceptionClasses.pl
+	PerlLightNamespaceDefinitionElement{myName='Seption5', myMroType=DFS, myParentNamespacesNames=[Seption4], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 280 in exceptionClasses.pl
 
 209 - 215: 'fields': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption5::Fields; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 363 in exceptionClasses.pl
+	PerlLightSubDefinitionElement{myName='Fields', myNamespaceName='Seption5', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=UNKNOWN_VALUE}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 363 in exceptionClasses.pl
 
 280 - 288: 'Seption5': Parent classes
 Targets: 1
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Seption4; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 187 in exceptionClasses.pl
+	PerlLightNamespaceDefinitionElement{myName='Seption4', myMroType=DFS, myParentNamespacesNames=[Seption3], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 187 in exceptionClasses.pl
 
 280 - 288: 'Seption5': Subclasses
 Targets: 1
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Seption6; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 428 in exceptionClasses.pl
+	PerlLightNamespaceDefinitionElement{myName='Seption6', myMroType=DFS, myParentNamespacesNames=[Seption5], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 428 in exceptionClasses.pl
 
 363 - 369: 'fields': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption4::Fields; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 209 in exceptionClasses.pl
+	PerlLightSubDefinitionElement{myName='Fields', myNamespaceName='Seption4', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=UNKNOWN_VALUE}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 209 in exceptionClasses.pl
 
 363 - 369: 'fields': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption6::Fields; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 555 in exceptionClasses.pl
+	PerlLightSubDefinitionElement{myName='Fields', myNamespaceName='Seption6', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=UNKNOWN_VALUE}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 555 in exceptionClasses.pl
 
 400 - 405: 'test2': Overridden methods
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption6::test2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 578 in exceptionClasses.pl
+	PerlLightSubDefinitionElement{myName='test2', myNamespaceName='Seption6', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=UNKNOWN_VALUE}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 578 in exceptionClasses.pl
 
 428 - 436: 'Seption6': Parent classes
 Targets: 1
-	PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Seption5; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 280 in exceptionClasses.pl
+	PerlLightNamespaceDefinitionElement{myName='Seption5', myMroType=DFS, myParentNamespacesNames=[Seption4], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 280 in exceptionClasses.pl
 
 555 - 561: 'fields': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption5::Fields; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 363 in exceptionClasses.pl
+	PerlLightSubDefinitionElement{myName='Fields', myNamespaceName='Seption5', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=UNKNOWN_VALUE}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 363 in exceptionClasses.pl
 
 578 - 583: 'test2': Overriding method
 Targets: 1
-	PerlLightMethodDefinitionElement(LIGHT_METHOD_DEFINITION)@Seption5::test2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 400 in exceptionClasses.pl
+	PerlLightSubDefinitionElement{myName='test2', myNamespaceName='Seption5', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=UNKNOWN_VALUE}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 400 in exceptionClasses.pl

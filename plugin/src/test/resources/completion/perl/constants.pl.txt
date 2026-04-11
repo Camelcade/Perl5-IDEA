@@ -255,13 +255,13 @@ Text: ACCUMULATOR; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Ty
 	PsiElement: Built-in: $ACCUMULATOR
 Text: ALONECONST1; Tail: null; Type: main; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: ALONECONST1
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::ALONECONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 13 in constants.pl
+	PsiElement: PerlLightSubDefinitionElement{myName='ALONECONST1', myNamespaceName='main', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=123}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 13 in constants.pl
 Text: ALONECONST2; Tail: null; Type: main; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: ALONECONST2
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::ALONECONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 46 in constants.pl
+	PsiElement: PerlLightSubDefinitionElement{myName='ALONECONST2', myNamespaceName='main', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=123}; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 46 in constants.pl
 Text: ALONECONST3; Tail: null; Type: main; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: ALONECONST3
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::ALONECONST3; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 81 in constants.pl
+	PsiElement: PerlLightSubDefinitionElement{myName='ALONECONST3', myNamespaceName='main', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=123}; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 81 in constants.pl
 Text: ARG; Tail: []; Type: Built-in; Icon: /array_gutter_icon.png; Type Icon: null
 	Lookups: @ARG, ARG
 	PsiElement: Built-in: @ARG
@@ -483,28 +483,28 @@ Text: LIST_SEPARATOR; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png;
 	PsiElement: Built-in: $LIST_SEPARATOR
 Text: Library::Exception2; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: Library::Exception2
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception2; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='Library::Exception2', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 111 in Exceptions.pm
 Text: Library::Exception; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: Library::Exception
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@Library::Exception; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='Library::Exception', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 54 in Exceptions.pm
 Text: LibraryException3; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: LibraryException3
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException3; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='LibraryException3', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 131 in Exceptions.pm
 Text: LibraryException; Tail: null; Type: null; Icon: /exceptionClass.svg; Type Icon: null
 	Lookups: LibraryException
-	PsiElement: PerlLightExceptionClassDefinition(LIGHT_NAMESPACE_DEFINITION)@LibraryException; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
+	PsiElement: PerlLightNamespaceDefinitionElement{myName='LibraryException', myMroType=DFS, myParentNamespacesNames=[Exception::Class::Base], myAnnotations=null, myExport=[], myExportOk=[], myExportTags={}}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 80 in Exceptions.pm
 Text: MATCH; Tail: null; Type: Built-in; Icon: /scalar_gutter_icon.png; Type Icon: null
 	Lookups: $MATCH, MATCH
 	PsiElement: Built-in: $MATCH
 Text: MULTI_CONST1; Tail: null; Type: main; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: MULTI_CONST1
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::MULTI_CONST1; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 122 in constants.pl
+	PsiElement: PerlLightSubDefinitionElement{myName='MULTI_CONST1', myNamespaceName='main', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=123}; navigated to: PsiPerlStringBareImpl(Perl5: STRING_BARE) at 122 in constants.pl
 Text: MULTI_CONST2; Tail: null; Type: main; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: MULTI_CONST2
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::MULTI_CONST2; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 147 in constants.pl
+	PsiElement: PerlLightSubDefinitionElement{myName='MULTI_CONST2', myNamespaceName='main', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=69}; navigated to: PsiPerlStringSqImpl(Perl5: STRING_SQ) at 147 in constants.pl
 Text: MULTI_CONST3; Tail: null; Type: main; Icon: /constant_gutter_icon.png; Type Icon: null
 	Lookups: MULTI_CONST3
-	PsiElement: PerlLightConstantDefinitionElement(LIGHT_SUB_DEFINITION)@main::MULTI_CONST3; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 173 in constants.pl
+	PsiElement: PerlLightSubDefinitionElement{myName='MULTI_CONST3', myNamespaceName='main', myAnnotations=null, mySubArguments=[], myReturnValueFromCode=0}; navigated to: PsiPerlStringDqImpl(Perl5: STRING_DQ) at 173 in constants.pl
 Text: Mojolicious::Controller; Tail: null; Type: null; Icon: /package_gutter_icon.png; Type Icon: null
 	Lookups: Mojolicious::Controller
 	PsiElement: PsiPerlNamespaceDefinitionImpl(NAMESPACE)@Mojolicious::Controller at 0 in Controller.pm
