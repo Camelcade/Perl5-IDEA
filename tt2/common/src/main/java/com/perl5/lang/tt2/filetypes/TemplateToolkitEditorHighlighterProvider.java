@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@ package com.perl5.lang.tt2.filetypes;
 import com.intellij.openapi.editor.ex.util.LayerDescriptor;
 import com.intellij.openapi.editor.ex.util.LayeredLexerEditorHighlighter;
 import com.intellij.openapi.editor.highlighter.EditorHighlighter;
-import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
@@ -38,7 +37,6 @@ public class TemplateToolkitEditorHighlighterProvider extends PerlEditorHighligh
   @Override
   protected @NotNull EditorHighlighter registerAdditionalLayers(@NotNull LayeredLexerEditorHighlighter highlighter,
                                                                 @Nullable Project project,
-                                                                @NotNull FileType fileType,
                                                                 @Nullable VirtualFile virtualFile) {
     highlighter.registerLayer(TT2_HTML, new LayerDescriptor(
       SyntaxHighlighterFactory.getSyntaxHighlighter(
