@@ -131,6 +131,8 @@ allprojects {
         systemProperty("idea.tests.overwrite.data", "true")
       }
 
+      systemProperty("idea.disable.idempotence.checker", "true")
+
       if (project.hasProperty("youtrack.token")) {
         systemProperty("youtrack.token", providers.gradleProperty("youtrack.token").get())
       }
