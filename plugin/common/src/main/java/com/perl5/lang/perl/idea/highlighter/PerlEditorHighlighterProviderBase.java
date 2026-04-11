@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,12 +45,11 @@ public abstract class PerlEditorHighlighterProviderBase implements EditorHighlig
       Objects.requireNonNull(SyntaxHighlighterFactory.getSyntaxHighlighter(PodFileType.INSTANCE, project, virtualFile)),
       ""
     ));
-    return registerAdditionalLayers(highlighter, project, fileType, virtualFile);
+    return registerAdditionalLayers(highlighter, project, virtualFile);
   }
 
   protected @NotNull EditorHighlighter registerAdditionalLayers(@NotNull LayeredLexerEditorHighlighter highlighter,
                                                                 @Nullable Project project,
-                                                                @NotNull FileType fileType,
                                                                 @Nullable VirtualFile virtualFile) {
     return highlighter;
   }
