@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,10 +26,9 @@ import java.util.List;
  */
 public interface PerlPackageLoader {
   /**
-   * Returns list of canonical names of loaded packages
-   *
-   * @return list of canonical package names
+   * @return list of canonical names of loaded packages
    */
+  @SuppressWarnings("unused")
   @NotNull
   List<String> getLoadedPackageNames(PerlUseStatementElement useStatement);
 }
