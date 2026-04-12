@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -158,10 +158,6 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
   public static final class Builder {
     private final @NotNull Set<PerlValue> myVariants = new HashSet<>();
 
-    public void clear() {
-      myVariants.clear();
-    }
-
     private Builder(@NotNull PsiElement... elements) {
       addVariants(elements);
     }
@@ -198,10 +194,6 @@ public final class PerlOneOfValue extends PerlValue implements Iterable<PerlValu
         myVariants.add(variant);
       }
       return this;
-    }
-
-    public boolean isEmpty(){
-      return myVariants.isEmpty();
     }
 
     public @NotNull PerlValue build() {
