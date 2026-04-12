@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.codeInsight.typeInference.value;
 
-import com.intellij.openapi.util.AtomicNotNullLazyValue;
 import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -98,10 +97,6 @@ public final class PerlScalarValue extends PerlValue {
     return result;
   }
 
-
-  public static @NotNull AtomicNotNullLazyValue<PerlValue> createLazy(@Nullable String value) {
-    return PerlValuesManager.lazy(create(value));
-  }
 
   public static @NotNull PerlValue create(@Nullable String value) {
     return value == null ? UNKNOWN_VALUE : PerlValuesManager.intern(new PerlScalarValue(value));
