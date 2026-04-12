@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,13 +41,6 @@ public abstract class PerlIntroduceTargetOccurrencesCollector {
 
   protected final @NotNull List<PerlIntroduceTarget> getOccurrences() {
     return myOccurrences == null ? Collections.singletonList(myTarget) : Collections.unmodifiableList(myOccurrences);
-  }
-
-  /**
-   * @return true iff we've not yet collected occurrences or found nothing
-   */
-  public final boolean isEmpty() {
-    return myOccurrences == null || myOccurrences.isEmpty();
   }
 
   final void addOccurrence(@Nullable PerlIntroduceTarget occurrence) {
