@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public class PerlPreFormatProcessor implements PreFormatProcessor {
       return range;
     }
 
-    if (!canProcess(psiElement, range)) {
+    if (!canProcess(psiElement)) {
       return range;
     }
 
@@ -48,7 +48,7 @@ public class PerlPreFormatProcessor implements PreFormatProcessor {
     return new PerlPreFormatter(project).process(psiElement, range);
   }
 
-  protected boolean canProcess(PsiElement element, TextRange range) {
+  protected boolean canProcess(PsiElement element) {
     return element.getLanguage().is(PerlLanguage.INSTANCE);
   }
 }
