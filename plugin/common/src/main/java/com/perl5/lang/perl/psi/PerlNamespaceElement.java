@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,21 +56,7 @@ public interface PerlNamespaceElement extends PsiElement, PerlDeprecatable {
    *
    * @return check result
    */
-  boolean isMain();
-
-  /**
-   * Checks if namespace is SUPER::
-   *
-   * @return check result
-   */
   boolean isCORE();
-
-  /**
-   * Checks if namespace is UNIVERSAL::
-   *
-   * @return check result
-   */
-  boolean isUNIVERSAL();
 
   /**
    * Checks if this is a __PACKAGE__
