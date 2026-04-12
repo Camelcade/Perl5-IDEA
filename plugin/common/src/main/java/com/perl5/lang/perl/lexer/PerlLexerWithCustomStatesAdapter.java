@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.lexer;
 
-import com.intellij.lexer.FlexLexer;
 import com.intellij.lexer.LexerBase;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
@@ -34,10 +33,6 @@ public class PerlLexerWithCustomStatesAdapter extends LexerBase {
 
   public PerlLexerWithCustomStatesAdapter(PerlLexerWithCustomStates lexer) {
     myFlex = lexer;
-  }
-
-  public FlexLexer getFlex() {
-    return myFlex;
   }
 
   @Override
