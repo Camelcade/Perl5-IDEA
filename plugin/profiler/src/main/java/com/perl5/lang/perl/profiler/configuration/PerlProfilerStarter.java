@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,16 +24,6 @@ import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 class PerlProfilerStarter implements ProfilerStarter {
-  private final @NotNull PerlProfilerConfigurationState myProfilerConfigurationState;
-
-  PerlProfilerStarter(@NotNull PerlProfilerConfigurationState profilerConfigurationState) {
-    myProfilerConfigurationState = profilerConfigurationState;
-  }
-
-  public @NotNull PerlProfilerConfigurationState getProfilerConfigurationState() {
-    return myProfilerConfigurationState;
-  }
-
   @Override
   public boolean canRun(@NotNull RunProfile profile) {
     return profile instanceof GenericPerlRunConfiguration;
