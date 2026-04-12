@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -65,10 +65,6 @@ public class PerlFormattingBlock extends AbstractBlock implements PerlAstBlock {
   @Override
   public void setIndent(@Nullable Indent indent) {
     myIndent = indent;
-  }
-
-  protected final @NotNull PurePerlFormattingContext getContext() {
-    return myContext;
   }
 
   @Override
