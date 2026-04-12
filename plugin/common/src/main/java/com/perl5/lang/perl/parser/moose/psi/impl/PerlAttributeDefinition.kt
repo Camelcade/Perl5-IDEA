@@ -24,12 +24,11 @@ import com.intellij.util.Function
 import com.perl5.lang.perl.parser.PerlIdentifierRangeProvider
 import com.perl5.lang.perl.psi.impl.PerlSubCallElement
 import com.perl5.lang.perl.psi.light.PerlLightMethodDefinitionElement
-import com.perl5.lang.perl.psi.properties.PerlPodAwareElement
 import com.perl5.lang.perl.psi.stubs.subsdefinitions.PerlSubDefinitionStub
 import com.perl5.lang.perl.psi.utils.PerlSubAnnotations
 import com.perl5.lang.perl.psi.utils.PerlSubArgument
 
-class PerlAttributeDefinition : PerlLightMethodDefinitionElement<PerlSubCallElement>, PerlIdentifierRangeProvider, PerlPodAwareElement {
+class PerlAttributeDefinition : PerlLightMethodDefinitionElement<PerlSubCallElement>, PerlIdentifierRangeProvider {
   constructor(
     wrapper: PerlSubCallElement,
     name: String,
@@ -56,8 +55,6 @@ class PerlAttributeDefinition : PerlLightMethodDefinitionElement<PerlSubCallElem
     else
       defaultRange
   }
-
-  override fun getPodAnchor(): PsiElement = delegate
 
   companion object {
     @JvmField
