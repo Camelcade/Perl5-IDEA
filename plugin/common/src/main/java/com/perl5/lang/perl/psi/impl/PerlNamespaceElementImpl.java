@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -71,18 +71,8 @@ public class PerlNamespaceElementImpl extends PerlLeafPsiElementWithReferences i
   }
 
   @Override
-  public boolean isMain() {
-    return PerlPackageUtilCore.isMain(getCanonicalName());
-  }
-
-  @Override
   public boolean isCORE() {
     return PerlPackageUtilCore.isCORE(getCanonicalName());
-  }
-
-  @Override
-  public boolean isUNIVERSAL() {
-    return PerlPackageUtilCore.isUNIVERSAL(getCanonicalName());
   }
 
   @Override
