@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,16 +21,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public interface PerlSignatureElement extends PerlLexicalVariableDeclarationMarker {
-  default @Nullable PsiElement getTypeConstraintElement() {
-    PsiElement[] children = getChildren();
-    if (children.length == 3) {
-      return children[0];
-    }
-    if (children.length < 2) {
-      return null;
-    }
-    return isDeclarationElement(children[1]) ? children[0] : null;
-  }
 
   default @Nullable PsiElement getDeclarationElement() {
     PsiElement[] children = getChildren();
