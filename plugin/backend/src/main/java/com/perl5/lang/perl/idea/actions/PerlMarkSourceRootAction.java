@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,10 +49,6 @@ public abstract class PerlMarkSourceRootAction extends PerlSourceRootAction {
     presentation.setDescription(ProjectBundle.message("module.toggle.sources.action.description",
                                                       editHandler.getFullRootTypeName().toLowerCase(Locale.getDefault())));
     presentation.setIcon(editHandler.getRootIcon());
-  }
-
-  public @NotNull PerlSourceRootType getType() {
-    return myType;
   }
 
 
