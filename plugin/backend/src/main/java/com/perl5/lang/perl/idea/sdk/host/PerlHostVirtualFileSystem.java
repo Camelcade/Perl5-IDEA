@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -69,12 +69,6 @@ public class PerlHostVirtualFileSystem extends DeprecatedVirtualFileSystem {
   @Override
   public @Nullable Path getNioPath(@NotNull VirtualFile file) {
     return myDelegate != null ? myDelegate.getNioPath(file) : super.getNioPath(file);
-  }
-
-  public void resetDelegate(@NotNull PerlPluggableVirtualFileSystem delegate) {
-    if (myDelegate == delegate) {
-      myDelegate = null;
-    }
   }
 
   public static @NotNull PerlHostVirtualFileSystem getInstance() {
