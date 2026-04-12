@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -246,10 +246,6 @@ public abstract class PerlHostHandler<Data extends PerlHostData<Data, Handler>, 
 
   public static @NotNull List<? extends PerlHostHandler<?, ?>> all() {
     return EP.getExtensionsList();
-  }
-
-  public static void forEach(@NotNull Consumer<? super PerlHostHandler<?, ?>> action) {
-    all().forEach(action);
   }
 
   public static @NotNull Stream<? extends PerlHostHandler<?, ?>> stream() {
