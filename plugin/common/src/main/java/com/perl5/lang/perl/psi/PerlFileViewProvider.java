@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,14 +26,11 @@ import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.source.PsiFileImpl;
 import com.intellij.psi.templateLanguages.TemplateLanguageFileViewProvider;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.pod.PodLanguage;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import static com.perl5.lang.perl.lexer.PerlElementTypes.POD_BLOCK;
@@ -45,7 +42,6 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
     PerlLanguage.INSTANCE,
     PodLanguage.INSTANCE
   );
-  private boolean myActAsSingleFile = false;
 
   public PerlFileViewProvider(PsiManager manager, VirtualFile virtualFile, boolean eventSystemEnabled) {
     super(manager, virtualFile, eventSystemEnabled);
@@ -74,12 +70,7 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
 
   @Override
   public @NotNull Set<Language> getLanguages() {
-    if (myActAsSingleFile) {
-      return Collections.singleton(getBaseLanguage());
-    }
-    else {
-      return myLanguages;
-    }
+    return myLanguages;
   }
 
   @Override
@@ -100,19 +91,5 @@ public class PerlFileViewProvider extends MultiplePsiFilesPerDocumentFileViewPro
   @Override
   public @NotNull Language getTemplateDataLanguage() {
     return PodLanguage.INSTANCE;
-  }
-
-  public void setActAsSingleFile(boolean myActAsSingleFile) {
-    this.myActAsSingleFile = myActAsSingleFile;
-  }
-
-  @Override
-  public @NotNull List<PsiFile> getAllFiles() {
-    if (myActAsSingleFile) {
-      return ContainerUtil.createMaybeSingletonList(getPsi(getBaseLanguage()));
-    }
-    else {
-      return super.getAllFiles();
-    }
   }
 }
