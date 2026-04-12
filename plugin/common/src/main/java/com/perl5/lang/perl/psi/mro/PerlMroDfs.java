@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi.mro;
 
 import com.intellij.openapi.progress.ProgressManager;
-import com.intellij.openapi.project.Project;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionElement;
 import com.perl5.lang.perl.psi.PerlNamespaceDefinitionHandler;
 import org.jetbrains.annotations.NotNull;
@@ -35,14 +34,12 @@ public class PerlMroDfs extends PerlMro {
   /**
    * Builds list of inheritance path for DFS mro (Perl5 default): http://perldoc.perl.org/mro.html
    *
-   * @param project              project
    * @param namespaceDefinitions List of package names to add
    * @param recursionMap         recursion protection map
    * @param result               list to populate
    */
   @Override
-  public void getLinearISA(@NotNull Project project,
-                           @NotNull List<? extends PerlNamespaceDefinitionElement> namespaceDefinitions,
+  public void getLinearISA(@NotNull List<? extends PerlNamespaceDefinitionElement> namespaceDefinitions,
                            @NotNull Set<String> recursionMap,
                            @NotNull List<String> result) {
     ProgressManager.checkCanceled();
