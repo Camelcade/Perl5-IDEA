@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,11 +24,8 @@ import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.scope.PsiScopeProcessor;
 import com.intellij.psi.stubs.StubElement;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.perl5.lang.perl.psi.utils.PerlResolveUtilCore;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.List;
 
 
 public class PerlStubBasedPsiElementBase<T extends StubElement<?>> extends StubBasedPsiElementBase<T> implements StubBasedPsiElement<T> {
@@ -58,9 +55,5 @@ public class PerlStubBasedPsiElementBase<T extends StubElement<?>> extends StubB
 
     return PerlResolveUtilCore.processChildren(this, processor, state, lastParent, place) &&
            processor.execute(this, state);
-  }
-
-  public @NotNull List<PsiPerlExpr> getExprList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PsiPerlExpr.class);
   }
 }
