@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="EntryPointsManager">
+    <pattern value="com.perl5.lang.perl.idea.copyright.PerlFileInfo" method="getPackageName" />
+    <pattern value="com.perl5.lang.perl.intellilang.PerlInjectionPatterns" method="perlString" />
+  </component>
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$" />
