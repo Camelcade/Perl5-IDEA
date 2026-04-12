@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -63,7 +63,7 @@ public interface PerlPackageProcessor extends PerlLightElementProvider<PerlUseSt
   /**
    * @return text that should be shown in folded block of use arguments
    */
-  default @Nullable String getArgumentsFoldingText(@NotNull PerlUseStatementElementBase useStatementElement) {
+  default @Nullable String getArgumentsFoldingText(@SuppressWarnings("unused") @NotNull PerlUseStatementElementBase useStatementElement) {
     return PerlBundle.message("perl.fold.ph.text.default");
   }
 
