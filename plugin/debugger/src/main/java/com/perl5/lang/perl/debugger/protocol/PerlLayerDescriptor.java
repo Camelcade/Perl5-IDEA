@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,10 +59,12 @@ public class PerlLayerDescriptor {
     return name == null ? "UNKNOWN" : name;
   }
 
+  @SuppressWarnings("unused")
   public @Nullable String getParam() {
     return param;
   }
 
+  @SuppressWarnings("unused")
   public @Nullable String getFlags() {
     return flags;
   }
