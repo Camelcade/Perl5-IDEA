@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,25 +17,17 @@
 package com.perl5.lang.perl.psi;
 
 import com.intellij.navigation.NavigationItem;
-import com.intellij.psi.PsiElement;
 import com.intellij.psi.StubBasedPsiElement;
 import com.intellij.psi.util.PsiTreeUtil;
-import com.intellij.psi.util.PsiUtilCore;
 import com.perl5.PerlIcons;
-import com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings;
 import com.perl5.lang.perl.psi.properties.PerlIdentifierOwner;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
-import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
 import com.perl5.lang.perl.psi.utils.PerlVariableType;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.COLON;
-import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.SIGNATURE_ELEMENT;
 
 
 public interface PerlVariableDeclarationElement extends StubBasedPsiElement<PerlVariableDeclarationStub>,
@@ -90,28 +82,8 @@ public interface PerlVariableDeclarationElement extends StubBasedPsiElement<Perl
    */
   boolean isInvocantDeclaration();
 
-  /**
-   * Checks if variable is configured $self
-   *
-   * @return true of false
-   */
-  default boolean isSelf() {
-    return getActualType() == PerlVariableType.SCALAR && PerlSharedSettings.getInstance(getProject()).isSelfName(getName());
-  }
-
   @NotNull
   PerlVariableAnnotations getLocalVariableAnnotations();
-
-  /**
-   * @return true iff {@code psiElement} is variable declaration element preceding by colon. See {@code Function::Parameters} named
-   * parameters syntax.
-   */
-  @Contract("null -> false")
-  static boolean isNamedParameter(@Nullable PsiElement psiElement) {
-    return psiElement instanceof PerlVariableDeclarationElement &&
-           PsiUtilCore.getElementType(psiElement.getParent()) == SIGNATURE_ELEMENT &&
-           PsiUtilCore.getElementType(PerlPsiUtil.getPrevSignificantSibling(psiElement)) == COLON;
-  }
 
   /**
    * @return enclosing declaration expression if any
