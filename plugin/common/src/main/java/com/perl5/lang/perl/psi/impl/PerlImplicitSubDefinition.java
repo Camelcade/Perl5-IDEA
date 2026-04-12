@@ -174,11 +174,6 @@ public class PerlImplicitSubDefinition extends PerlImplicitElement implements Pe
   }
 
   @Override
-  public @Nullable PsiElement getControlFlowElement() {
-    return null;
-  }
-
-  @Override
   public @Nullable PsiPerlSignatureContent getSignatureContent() {
     return null;
   }

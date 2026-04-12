@@ -202,11 +202,6 @@ public class PerlLightSubDefinitionElement<Delegate extends PerlPolyNamedElement
   }
 
   @Override
-  public @Nullable PsiElement getControlFlowElement() {
-    return getSubDefinitionBody();
-  }
-
-  @Override
   public @Nullable PsiPerlSignatureContent getSignatureContent() {
     return null;
   }

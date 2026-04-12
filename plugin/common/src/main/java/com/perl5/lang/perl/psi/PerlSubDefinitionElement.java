@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,12 +67,5 @@ public interface PerlSubDefinitionElement extends PerlSubDefinition, PerlSubElem
     }
 
     return extractor.getArguments();
-  }
-
-  /**
-   * @return a psi element for the control flow building if available
-   */
-  default @Nullable PsiElement getControlFlowElement() {
-    return this;
   }
 }
