@@ -100,13 +100,6 @@ public class PerlIntroduceTarget extends PsiIntroduceTarget<PsiElement> {
     return new PerlIntroduceTarget(element, TextRange.create(0, element.getTextLength()));
   }
 
-  public static @NotNull PerlIntroduceTarget create(@NotNull PsiElement element, @NotNull PsiElement lastChildToInclude) {
-    if (!element.equals(lastChildToInclude.getParent())) {
-      throw new RuntimeException("Last child is not a child of an element");
-    }
-    return new PerlIntroduceTarget(element, TextRange.create(0, lastChildToInclude.getTextRangeInParent().getEndOffset()));
-  }
-
   public static @NotNull PerlIntroduceTarget create(@NotNull PsiElement element, @NotNull TextRange textRangeInElement) {
     if (textRangeInElement.getStartOffset() < 0 || textRangeInElement.getEndOffset() > element.getTextLength()) {
       throw new RuntimeException("Incorrect element range: " +
