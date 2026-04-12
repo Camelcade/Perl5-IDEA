@@ -70,7 +70,7 @@ public interface PerlPackageProcessor extends PerlLightElementProvider<PerlUseSt
   /**
    * @return true iff arguments of this use statement should be collapsed by default, e.g. group of constants definitions
    */
-  default boolean isFoldedByDefault(@NotNull PerlUseStatementElementBase useStatementElement) {
+  default boolean isFoldedByDefault(@SuppressWarnings("unused") @NotNull PerlUseStatementElementBase useStatementElement) {
     return false;
   }
 
