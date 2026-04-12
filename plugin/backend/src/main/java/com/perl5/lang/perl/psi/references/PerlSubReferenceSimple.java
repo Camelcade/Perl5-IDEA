@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -100,6 +100,7 @@ public class PerlSubReferenceSimple extends PerlCachingReference<PsiElement> {
     return (FLAGS & FLAG_CONSTANT) > 0;
   }
 
+  @SuppressWarnings("unused")
   public boolean isImported() {
     return (FLAGS & FLAG_IMPORTED) > 0;
   }
