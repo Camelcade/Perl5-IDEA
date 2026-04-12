@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -445,7 +445,7 @@ public class PerlVariableCompletionUtil {
     PsiElement perlVariable = variableCompletionProcessor.getLeafParentElement();
 
     if (perlVariable instanceof PsiPerlScalarVariable) {
-      processor = (namespaceName, descriptor) -> {
+      processor = (descriptor) -> {
         LookupElementBuilder lookupElement = null;
         String entityName = descriptor.getImportedName();
         if (!variableCompletionProcessor.matches(entityName)) {
@@ -468,7 +468,7 @@ public class PerlVariableCompletionUtil {
       };
     }
     else if (perlVariable instanceof PsiPerlArrayVariable || perlVariable instanceof PsiPerlArrayIndexVariable) {
-      processor = (namespaceName, descriptor) -> {
+      processor = (descriptor) -> {
         LookupElementBuilder lookupElement = null;
         String entityName = descriptor.getImportedName();
         if (!variableCompletionProcessor.matches(entityName)) {
@@ -488,7 +488,7 @@ public class PerlVariableCompletionUtil {
       };
     }
     else if (perlVariable instanceof PsiPerlHashVariable) {
-      processor = (namespaceName, descriptor) -> {
+      processor = (descriptor) -> {
         LookupElementBuilder lookupElement = null;
         if (descriptor.isHash()) {
           String entityName = descriptor.getImportedName();

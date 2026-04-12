@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -49,7 +49,7 @@ public final class PerlNamespaceUtil {
                                                                         @NotNull String namespaceName) {
     Set<PerlExportDescriptor> result = new HashSet<>();
     processExportDescriptors(
-      project, searchScope, namespaceName, (__, it) -> {
+      project, searchScope, namespaceName, (it) -> {
         result.add(it);
         return true;
       });
@@ -85,7 +85,7 @@ public final class PerlNamespaceUtil {
       }
       for (PerlExportDescriptor entry : it.getPackageProcessor().getImports(it)) {
         exportsCounter.inc();
-        if (!processor.process(packageName, entry)) {
+        if (!processor.process(entry)) {
           return false;
         }
       }

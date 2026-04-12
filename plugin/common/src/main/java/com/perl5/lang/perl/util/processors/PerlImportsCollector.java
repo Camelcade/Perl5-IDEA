@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,7 @@ public abstract class PerlImportsCollector implements PerlNamespaceEntityProcess
   protected abstract boolean meetsCondition(@NotNull PerlExportDescriptor descriptor);
 
   @Override
-  public boolean process(String namespaceName, PerlExportDescriptor entity) {
+  public boolean process(PerlExportDescriptor entity) {
     if (entity != null && meetsCondition(entity) && !myResult.contains(entity)) {
       myResult.add(entity);
     }
