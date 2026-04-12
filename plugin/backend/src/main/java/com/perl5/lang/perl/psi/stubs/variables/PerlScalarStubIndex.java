@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.perl5.lang.perl.psi.stubs.variables;
 
 import com.intellij.openapi.util.Pair;
-import com.intellij.psi.stubs.StubIndexExtension;
 import com.intellij.psi.stubs.StubIndexKey;
 import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
 import org.jetbrains.annotations.NotNull;
@@ -33,9 +32,5 @@ public class PerlScalarStubIndex extends PerlVariableStubIndex {
   @Override
   public @NotNull StubIndexKey<String, PerlVariableDeclarationElement> getKey() {
     return KEY_SCALAR;
-  }
-
-  public static @NotNull PerlScalarStubIndex getInstance() {
-    return StubIndexExtension.EP_NAME.findExtensionOrFail(PerlScalarStubIndex.class);
   }
 }
