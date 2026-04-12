@@ -52,7 +52,7 @@ public interface PerlNamespaceElement extends PsiElement, PerlDeprecatable {
   boolean isSUPER();
 
   /**
-   * Checks if namespace is SUPER::
+   * Checks if namespace is CORE::
    *
    * @return check result
    */
