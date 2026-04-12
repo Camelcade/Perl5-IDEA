@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,10 +55,6 @@ public class PerlLexingContext {
 
   public @NotNull PerlLexingContext withEnforcedSublexing(boolean enforceSubLexing) {
     return new PerlLexingContext(myProject, enforceSubLexing, myWithTryCatch, myOpenChar);
-  }
-
-  public @NotNull PerlLexingContext withTryCatchSyntax(boolean withTryCatch) {
-    return new PerlLexingContext(myProject, myEnforceSubLexing, withTryCatch, myOpenChar);
   }
 
   public @NotNull PerlLexingContext withOpenChar(char openChar) {
