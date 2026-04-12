@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2023 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@ public abstract class PerlOsHandler {
   /**
    * @return operation system presentable name
    */
+  @SuppressWarnings("unused")
   public final @NotNull String getPresentableName() {
     return myName;
   }
