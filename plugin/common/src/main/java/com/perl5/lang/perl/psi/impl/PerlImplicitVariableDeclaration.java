@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,10 @@ import com.intellij.util.IncorrectOperationException;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlScalarValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValue;
 import com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValues;
-import com.perl5.lang.perl.psi.*;
+import com.perl5.lang.perl.psi.PerlVariable;
+import com.perl5.lang.perl.psi.PerlVariableDeclarationElement;
+import com.perl5.lang.perl.psi.PerlVariableNameElement;
+import com.perl5.lang.perl.psi.PerlVisitor;
 import com.perl5.lang.perl.psi.mixins.PerlMethodDefinitionMixin;
 import com.perl5.lang.perl.psi.stubs.variables.PerlVariableDeclarationStub;
 import com.perl5.lang.perl.psi.utils.PerlVariableAnnotations;
@@ -34,8 +37,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -365,10 +366,6 @@ public class PerlImplicitVariableDeclaration extends PerlImplicitElement
   ) {
     return new PerlImplicitVariableDeclaration(
       psiManager, variableNameWithSigil, packageName, PerlScalarValue.create(variableClass), isLexical, isLocal, isInvocant, parent);
-  }
-
-  public @NotNull List<PsiPerlExpr> getExprList() {
-    return Collections.emptyList();
   }
 }
 
