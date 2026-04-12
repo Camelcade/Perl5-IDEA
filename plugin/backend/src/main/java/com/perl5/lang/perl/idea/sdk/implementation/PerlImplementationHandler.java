@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 
 package com.perl5.lang.perl.idea.sdk.implementation;
 
-import com.intellij.openapi.projectRoots.Sdk;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlHandler;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerBean;
 import com.perl5.lang.perl.idea.sdk.PerlHandlerCollector;
@@ -27,10 +26,7 @@ import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.List;
 import java.util.Objects;
-import java.util.function.Consumer;
-import java.util.stream.Stream;
 
 public abstract class PerlImplementationHandler<Data extends PerlImplementationData<Data, Handler>, Handler extends PerlImplementationHandler<Data, Handler>>
   extends AbstractPerlHandler<Data, Handler> {
@@ -61,24 +57,6 @@ public abstract class PerlImplementationHandler<Data extends PerlImplementationD
   @Override
   protected final @NotNull String getTagName() {
     return TAG_NAME;
-  }
-
-  public static @NotNull List<? extends PerlImplementationHandler<?, ?>> all() {
-    return EP.getExtensionsList();
-  }
-
-  public static void forEach(@NotNull Consumer<? super PerlImplementationHandler<?, ?>> action) {
-    all().forEach(action);
-  }
-
-  @Contract("null->null")
-  static @Nullable PerlImplementationHandler<?, ?> from(@Nullable Sdk sdk) {
-    PerlImplementationData<?, ?> perlImplementationData = PerlImplementationData.from(sdk);
-    return perlImplementationData == null ? null : perlImplementationData.getHandler();
-  }
-
-  public static @NotNull Stream<? extends PerlImplementationHandler<?, ?>> stream() {
-    return all().stream();
   }
 
   /**
