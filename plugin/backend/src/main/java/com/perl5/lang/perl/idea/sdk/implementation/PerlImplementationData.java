@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,8 @@
 
 package com.perl5.lang.perl.idea.sdk.implementation;
 
-import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.util.ObjectUtils;
 import com.perl5.lang.perl.idea.sdk.AbstractPerlData;
-import com.perl5.lang.perl.idea.sdk.PerlSdkAdditionalData;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Data related to specific perl implementation, like perl, cperl and so on
@@ -31,10 +26,5 @@ public abstract class PerlImplementationData<Data extends PerlImplementationData
   extends AbstractPerlData<Data, Handler> {
   public PerlImplementationData(@NotNull Handler handler) {
     super(handler);
-  }
-
-  @Contract("null->null")
-  static @Nullable PerlImplementationData<?, ?> from(@Nullable Sdk sdk) {
-    return ObjectUtils.doIfNotNull(PerlSdkAdditionalData.from(sdk), PerlSdkAdditionalData::getImplementationData);
   }
 }
