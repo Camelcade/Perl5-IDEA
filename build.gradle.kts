@@ -75,6 +75,12 @@ allprojects {
   apply(plugin = "java")
   apply(plugin = "org.jetbrains.kotlin.jvm")
 
+  java {
+    toolchain {
+      languageVersion.set(JavaLanguageVersion.of(providers.gradleProperty("javaToolchain").get()))
+    }
+  }
+
   repositories {
     mavenCentral()
     intellijPlatform {
