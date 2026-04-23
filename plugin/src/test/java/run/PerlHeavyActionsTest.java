@@ -42,7 +42,7 @@ import com.perl5.lang.perl.xsubs.PerlXSubsState;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.plugins.terminal.TerminalProjectOptionsProvider;
-import org.jetbrains.plugins.terminal.fixture.TestShellSession;
+import org.jetbrains.plugins.terminal.testFramework.classic.ClassicTerminalTestShellSession;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -207,7 +207,7 @@ public class PerlHeavyActionsTest extends PerlPlatformTestCase {
       LOG.debug("Using shell: " + shellName);
       terminalProjectOptionsProvider.setShellPath(shellName + " -l");
 
-      var session = new TestShellSession(getProject(), getTestRootDisposable());
+      var session = new ClassicTerminalTestShellSession(getProject(), getTestRootDisposable());
       session.executeCommand("perl -V");
       var controlLine = getSdkAdditionalData().getVersionManagerHandler().getControlOutputForPerlVersion(PERL_TEST_VERSION);
       assertNotNull(controlLine);
