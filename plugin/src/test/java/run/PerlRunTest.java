@@ -45,7 +45,7 @@ public class PerlRunTest extends PerlPlatformTestCase {
   @Override
   protected void setUp() throws Exception {
     super.setUp();
-    Registry.get("terminal.use.conpty.on.windows").setValue(false);
+    Registry.get("terminal.use.conpty.on.windows").setValue(false, myPerlTestCaseDisposable);
   }
 
   @Override
