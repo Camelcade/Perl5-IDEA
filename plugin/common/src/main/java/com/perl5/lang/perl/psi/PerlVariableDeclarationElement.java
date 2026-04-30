@@ -76,10 +76,9 @@ public interface PerlVariableDeclarationElement extends StubBasedPsiElement<Perl
   boolean isGlobalDeclaration();
 
   /**
-   * Checks if this is method's invocant declaration. IMPORTANT: builds PSI
-   *
-   * @return checking result
+   * @return true iff this is method's invocant declaration. IMPORTANT: builds PSI
    */
+  @SuppressWarnings("unused")
   boolean isInvocantDeclaration();
 
   @NotNull
