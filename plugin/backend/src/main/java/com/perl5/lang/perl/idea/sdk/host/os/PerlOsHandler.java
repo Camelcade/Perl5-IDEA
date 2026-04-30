@@ -28,10 +28,6 @@ public abstract class PerlOsHandler {
 
   private final @Nullable Icon myIcon;
 
-  public PerlOsHandler(@NotNull String name) {
-    this(name, null);
-  }
-
   public PerlOsHandler(@NotNull String name, @Nullable Icon icon) {
     myName = name;
     myIcon = icon;
