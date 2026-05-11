@@ -38,6 +38,16 @@ dependencies {
       "XPathView",
       "org.jetbrains.plugins.terminal",
     )
+    testBundledPlugins(
+      "com.intellij.css",
+      "com.intellij.database",
+      "com.intellij.java",
+      "org.intellij.plugins.markdown",
+    )
+    testBundledModules(
+      "intellij.platform.coverage.agent",
+      "intellij.profiler.common",
+    )
 
     listOf(
       ":plugin.asdf",
@@ -80,20 +90,4 @@ tasks {
     }
   }
 
-  test {
-    dependencies {
-      intellijPlatform {
-        listOf(
-          "com.intellij.css",
-          "com.intellij.database",
-          "com.intellij.java",
-          "org.intellij.plugins.markdown",
-        ).forEach { bundledPlugin(it) }
-        listOf(
-          "intellij.platform.coverage.agent",
-          "intellij.profiler.common",
-        ).forEach { bundledModule(it) }
-      }
-    }
-  }
 }
