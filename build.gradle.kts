@@ -42,6 +42,10 @@ plugins {
   id("org.jetbrains.kotlin.jvm") version "2.3.21"
 }
 
+dependencyLocking {
+  lockAllConfigurations()
+}
+
 repositories {
   mavenCentral()
 }
