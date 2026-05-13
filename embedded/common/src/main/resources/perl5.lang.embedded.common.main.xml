@@ -1,6 +1,6 @@
 <idea-plugin>
   <dependencies>
-    <module name="perl5.plugin.common.main"/>
+    <module name="perl5.plugin.common.main" namespace="hurricup"/>
   </dependencies>
   <extensions defaultExtensionNs="com.intellij">
     <errorHandler implementation="com.perl5.lang.embedded.EmbeddedPerlYoutrackErrorHandler"/>
