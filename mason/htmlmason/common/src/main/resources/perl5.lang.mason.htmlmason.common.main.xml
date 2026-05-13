@@ -1,7 +1,7 @@
 <idea-plugin>
   <dependencies>
-    <module name="perl5.lang.mason.framework.common.main"/>
-    <module name="perl5.plugin.common.main"/>
+    <module name="perl5.lang.mason.framework.common.main" namespace="hurricup"/>
+    <module name="perl5.plugin.common.main" namespace="hurricup"/>
   </dependencies>
 
   <resource-bundle>messages.HtmlMasonBundle</resource-bundle>
