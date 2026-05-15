@@ -38,13 +38,13 @@ open class PerlDistributionTestCase : PerlLightTestCaseBase() {
     val relativizer = fun(path: Path): String = FileUtil.toSystemIndependentName(pluginPath.relativize(path).toString())
 
     result.append("Jar files:\n")
-    pluginDescriptor.jarFiles!!.forEach { result.append("- ${relativizer(it)}\n") }
+    pluginDescriptor.ownClassPath!!.forEach { result.append("- ${relativizer(it)}\n") }
 
     result.append("Content modules:\n")
     pluginDescriptor.contentModules.forEach { moduleDescriptor ->
       result.append(
         " - ${moduleDescriptor.moduleId} (${moduleDescriptor.moduleLoadingRule}); ${
-          moduleDescriptor.jarFiles!!.joinToString { file -> relativizer(file) }
+          moduleDescriptor.ownClassPath!!.joinToString { file -> relativizer(file) }
         }\n"
       )
       val dependencies = moduleDescriptor.moduleDependencies.plugins.map { "    - $it\n" } +
