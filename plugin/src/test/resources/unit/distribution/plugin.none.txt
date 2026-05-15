@@ -6,92 +6,92 @@ Jar files:
 - lib/opentest4j-1.3.0.jar
 - lib/hamcrest-core-1.3.jar
 Content modules:
- - perl5.plugin.asdf.main (OPTIONAL); lib/modules/perl5.plugin.asdf.main.jar
+ - perl5.plugin.asdf.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.asdf.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
-    - perl5.plugin.perlInstall.main
- - perl5.plugin.berrybrew.main (OPTIONAL); lib/modules/perl5.plugin.berrybrew.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+    - perl5.plugin.perlInstall.main (namespace=hurricup)
+ - perl5.plugin.berrybrew.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.berrybrew.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
- - perl5.plugin.carton.main (OPTIONAL); lib/modules/perl5.plugin.carton.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.carton.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.carton.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
- - perl5.plugin.common.main (REQUIRED); lib/modules/perl5.plugin.common.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.common.main (namespace=hurricup) (REQUIRED); lib/modules/perl5.plugin.common.main.jar
   - Dependencies:
     - intellij.spellchecker
- - perl5.plugin.copyright.main (OPTIONAL); lib/modules/perl5.plugin.copyright.main.jar
+ - perl5.plugin.copyright.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.copyright.main.jar
   - Dependencies:
     - com.intellij.copyright
-    - perl5.plugin.backend.main
- - perl5.plugin.backend.main (OPTIONAL); lib/modules/perl5.plugin.backend.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.backend.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.backend.main.jar
   - Dependencies:
-    - perl5.plugin.common.main
+    - perl5.plugin.common.main (namespace=hurricup)
     - intellij.platform.backend
- - perl5.plugin.coverage.main (OPTIONAL); lib/modules/perl5.plugin.coverage.main.jar
+ - perl5.plugin.coverage.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.coverage.main.jar
   - Dependencies:
     - com.intellij.modules.coverage
-    - perl5.plugin.backend.main
- - perl5.plugin.cpan.main (OPTIONAL); lib/modules/perl5.plugin.cpan.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.cpan.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.cpan.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
- - perl5.plugin.cpanminus.backend.main (OPTIONAL); lib/modules/perl5.plugin.cpanminus.backend.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.cpanminus.backend.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.cpanminus.backend.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
-    - perl5.plugin.cpanminus.common.main
- - perl5.plugin.cpanminus.common.main (OPTIONAL); lib/modules/perl5.plugin.cpanminus.common.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+    - perl5.plugin.cpanminus.common.main (namespace=hurricup)
+ - perl5.plugin.cpanminus.common.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.cpanminus.common.main.jar
   - Dependencies:
-    - perl5.plugin.common.main
- - perl5.plugin.debugger.main (OPTIONAL); lib/modules/perl5.plugin.debugger.main.jar
+    - perl5.plugin.common.main (namespace=hurricup)
+ - perl5.plugin.debugger.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.debugger.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
- - perl5.plugin.docker.main (OPTIONAL); lib/modules/perl5.plugin.docker.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.docker.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.docker.main.jar
   - Dependencies:
     - org.jetbrains.plugins.remote-run
     - com.intellij.modules.ultimate
-    - perl5.plugin.backend.main
- - perl5.plugin.frontend.main (OPTIONAL); lib/modules/perl5.plugin.frontend.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.frontend.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.frontend.main.jar
   - Dependencies:
     - intellij.platform.frontend
-    - perl5.plugin.common.main
- - perl5.plugin.frontend.split.main (OPTIONAL); lib/modules/perl5.plugin.frontend.split.main.jar
+    - perl5.plugin.common.main (namespace=hurricup)
+ - perl5.plugin.frontend.split.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.frontend.split.main.jar
   - Dependencies:
     - intellij.platform.frontend.split
-    - perl5.plugin.frontend.main
- - perl5.plugin.idea.main (OPTIONAL); lib/modules/perl5.plugin.idea.main.jar
+    - perl5.plugin.frontend.main (namespace=hurricup)
+ - perl5.plugin.idea.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.idea.main.jar
   - Dependencies:
     - com.intellij.modules.java
-    - perl5.plugin.backend.main
- - perl5.plugin.intelliLang.main (OPTIONAL); lib/modules/perl5.plugin.intelliLang.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.intelliLang.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.intelliLang.main.jar
   - Dependencies:
     - org.intellij.intelliLang
-    - perl5.plugin.backend.main
+    - perl5.plugin.backend.main (namespace=hurricup)
     - intellij.platform.langInjection
- - perl5.plugin.makeMaker.main (OPTIONAL); lib/modules/perl5.plugin.makeMaker.main.jar
+ - perl5.plugin.makeMaker.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.makeMaker.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
- - perl5.plugin.moduleBuild.main (OPTIONAL); lib/modules/perl5.plugin.moduleBuild.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.moduleBuild.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.moduleBuild.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
- - perl5.plugin.perlInstall.main (OPTIONAL); lib/modules/perl5.plugin.perlInstall.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.perlInstall.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.perlInstall.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
- - perl5.plugin.perlbrew.main (OPTIONAL); lib/modules/perl5.plugin.perlbrew.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.perlbrew.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.perlbrew.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
- - perl5.plugin.plenv.main (OPTIONAL); lib/modules/perl5.plugin.plenv.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.plenv.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.plenv.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
-    - perl5.plugin.perlInstall.main
- - perl5.plugin.profiler.main (OPTIONAL); lib/modules/perl5.plugin.profiler.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+    - perl5.plugin.perlInstall.main (namespace=hurricup)
+ - perl5.plugin.profiler.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.profiler.main.jar
   - Dependencies:
     - com.intellij.modules.ultimate
-    - perl5.plugin.backend.main
+    - perl5.plugin.backend.main (namespace=hurricup)
     - intellij.profiler.common
- - perl5.plugin.terminal.main (OPTIONAL); lib/modules/perl5.plugin.terminal.main.jar
+ - perl5.plugin.terminal.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.terminal.main.jar
   - Dependencies:
     - org.jetbrains.plugins.terminal
-    - perl5.plugin.backend.main
- - perl5.plugin.wsl.main (OPTIONAL); lib/modules/perl5.plugin.wsl.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+ - perl5.plugin.wsl.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.wsl.main.jar
   - Dependencies:
     - com.intellij.modules.ultimate
-    - perl5.plugin.backend.main
+    - perl5.plugin.backend.main (namespace=hurricup)

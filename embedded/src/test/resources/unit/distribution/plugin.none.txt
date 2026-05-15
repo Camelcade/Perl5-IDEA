@@ -6,18 +6,18 @@ Jar files:
 - lib/opentest4j-1.3.0.jar
 - lib/hamcrest-core-1.3.jar
 Content modules:
- - perl5.lang.embedded.common.main (REQUIRED); lib/modules/perl5.lang.embedded.common.main.jar
+ - perl5.lang.embedded.common.main (namespace=com.perl5.lang.embedded_$implicit) (REQUIRED); lib/modules/perl5.lang.embedded.common.main.jar
   - Dependencies:
-    - perl5.plugin.common.main
- - perl5.lang.embedded.backend.main (OPTIONAL); lib/modules/perl5.lang.embedded.backend.main.jar
+    - perl5.plugin.common.main (namespace=hurricup)
+ - perl5.lang.embedded.backend.main (namespace=com.perl5.lang.embedded_$implicit) (OPTIONAL); lib/modules/perl5.lang.embedded.backend.main.jar
   - Dependencies:
-    - perl5.plugin.backend.main
-    - perl5.lang.embedded.common.main
- - perl5.lang.embedded.frontend.main (OPTIONAL); lib/modules/perl5.lang.embedded.frontend.main.jar
+    - perl5.plugin.backend.main (namespace=hurricup)
+    - perl5.lang.embedded.common.main (namespace=com.perl5.lang.embedded_$implicit)
+ - perl5.lang.embedded.frontend.main (namespace=com.perl5.lang.embedded_$implicit) (OPTIONAL); lib/modules/perl5.lang.embedded.frontend.main.jar
   - Dependencies:
     - intellij.platform.frontend
-    - perl5.lang.embedded.common.main
- - perl5.lang.embedded.frontend.split.main (OPTIONAL); lib/modules/perl5.lang.embedded.frontend.split.main.jar
+    - perl5.lang.embedded.common.main (namespace=com.perl5.lang.embedded_$implicit)
+ - perl5.lang.embedded.frontend.split.main (namespace=com.perl5.lang.embedded_$implicit) (OPTIONAL); lib/modules/perl5.lang.embedded.frontend.split.main.jar
   - Dependencies:
     - intellij.platform.frontend.split
-    - perl5.lang.embedded.frontend.main
+    - perl5.lang.embedded.frontend.main (namespace=com.perl5.lang.embedded_$implicit)
