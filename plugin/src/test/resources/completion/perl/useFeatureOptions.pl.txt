@@ -94,7 +94,7 @@ Text: :5.42; Tail: null; Type: bitwise __SUB__ evalbytes fc isa module_true post
 Text: :5.9.5; Tail: null; Type: bareword_filehandles indirect multidimensional say state switch; Icon: /options.png; Type Icon: null
 	Lookups: :5.9.5
 	String: :5.9.5
-Text: :all; Tail: null; Type: feature_apos_as_name_sep bareword_filehandles bitwise class __SUB__ myref defer evalbytes more_delims fc indirect isa feature_keyword_all feature_keyword_any module_true multidimensional postderef_qq refaliasing say signatures feature_smartmatch state switch try unieval unicode; Icon: /options.png; Type Icon: null
+Text: :all; Tail: null; Type: __SUB__ bareword_filehandles bitwise class defer evalbytes fc feature_apos_as_name_sep feature_keyword_all feature_keyword_any feature_smartmatch indirect isa module_true more_delims multidimensional myref postderef_qq refaliasing say signatures state switch try unicode unieval; Icon: /options.png; Type Icon: null
 	Lookups: :all
 	String: :all
 Text: :default; Tail: null; Type: feature_apos_as_name_sep bareword_filehandles indirect multidimensional feature_smartmatch; Icon: /options.png; Type Icon: null
