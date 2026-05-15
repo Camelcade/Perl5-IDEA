@@ -24,7 +24,7 @@ import kotlinx.collections.immutable.toImmutableMap
 
 class FeatureProcessor : PerlPragmaProcessorBase(), PerlPackageOptionsProvider, PerlFeaturesProvider {
   private val myOptions: Map<String, String> by lazy {
-    PerlFeaturesTable.AVAILABLE_FEATURES.toImmutableMap()
+    PerlFeaturesTable.AVAILABLE_FEATURES
   }
   private val myOptionsBundles: Map<String, String> by lazy {
     PerlFeaturesTable.AVAILABLE_FEATURES_BUNDLES.entries
