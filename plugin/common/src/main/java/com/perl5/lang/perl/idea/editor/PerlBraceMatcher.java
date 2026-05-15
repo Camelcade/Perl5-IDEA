@@ -28,11 +28,11 @@ import com.perl5.lang.perl.psi.PsiPerlBlock;
 import com.perl5.lang.perl.psi.PsiPerlConditionalBlock;
 import com.perl5.lang.perl.psi.PsiPerlForCompound;
 import com.perl5.lang.perl.psi.impl.PsiPerlIfCompoundImpl;
-import org.apache.groovy.util.Maps;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
@@ -50,7 +50,8 @@ public class PerlBraceMatcher implements PairedBraceMatcher {
     LEFT_BRACE_GLOB, RIGHT_BRACE_GLOB
   );
 
-  public static final Map<IElementType, IElementType> PERL_BRACES_MAP_REVERSED = Maps.inverse(PERL_BRACES_MAP);
+  public static final Map<IElementType, IElementType> PERL_BRACES_MAP_REVERSED = PERL_BRACES_MAP.entrySet().stream()
+    .collect(Collectors.toUnmodifiableMap(Map.Entry::getValue, Map.Entry::getKey));
 
   private static final BracePair[] PAIRS = new BracePair[]{
     new BracePair(REGEX_QUOTE_OPEN, REGEX_QUOTE_CLOSE, false),
