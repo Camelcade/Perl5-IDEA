@@ -43,6 +43,10 @@ dependencies {
       "com.intellij.database",
       "com.intellij.java",
       "org.intellij.plugins.markdown",
+      "com.intellij.moduleSet.structureView",
+      "com.intellij.moduleSet.todoView",
+      "com.intellij.moduleSet.structuralSearch",
+      "com.intellij.moduleSet.servicesView",
     )
     testBundledModules(
       "intellij.platform.coverage.agent",

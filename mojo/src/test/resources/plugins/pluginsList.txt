@@ -1,4 +1,7 @@
 com.intellij
+com.intellij.moduleSet.structuralSearch
+com.intellij.moduleSet.structureView
+com.intellij.moduleSet.todoView
 com.intellij.modules.ultimate
 com.jetbrains.plugins.webDeployment
 com.perl5
