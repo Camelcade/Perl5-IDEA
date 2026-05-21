@@ -1,4 +1,7 @@
 com.intellij
+com.intellij.moduleSet.structuralSearch
+com.intellij.moduleSet.structureView
+com.intellij.moduleSet.todoView
 com.perl5
 com.perl5.lang.mason.framework
 com.perl5.lang.mason.mason2

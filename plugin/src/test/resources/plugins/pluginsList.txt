@@ -4,6 +4,10 @@ com.intellij
 com.intellij.copyright
 com.intellij.css
 com.intellij.java
+com.intellij.moduleSet.servicesView
+com.intellij.moduleSet.structuralSearch
+com.intellij.moduleSet.structureView
+com.intellij.moduleSet.todoView
 com.intellij.modules.json
 com.intellij.modules.ultimate
 com.intellij.platform.images

@@ -40,6 +40,12 @@ dependencies {
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
 
+    testBundledPlugins(
+      "com.intellij.moduleSet.structureView",
+      "com.intellij.moduleSet.todoView",
+      "com.intellij.moduleSet.structuralSearch",
+    )
+
     // packaging, which modules to include into this one
     listOf(
       ":lang.embedded.common",

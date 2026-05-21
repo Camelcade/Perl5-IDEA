@@ -39,6 +39,7 @@ dependencies {
     )
     bundledPlugins(
       "org.jetbrains.plugins.terminal",
+      "com.intellij.moduleSet.structureView",
     )
   }
 }
