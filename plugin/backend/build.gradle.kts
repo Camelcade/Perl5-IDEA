@@ -31,7 +31,9 @@ dependencies {
         create(IntelliJPlatformType.IntellijIdeaUltimate, platformVersionProvider.get()){
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
-
+    bundledPlugins(
+      "com.intellij.moduleSet.structureView",
+    )
   }
 }
 
