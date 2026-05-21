@@ -22,7 +22,7 @@ Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null
 Text: MANIFEST; Tail: null; Type: inject with Manifest; Icon: /manifest.svg; Type Icon: null
 	Lookups: MANIFEST
 	String: MANIFEST
-Text: MARKDOWN; Tail: null; Type: inject with Markdown; Icon: /MarkdownPlugin.svg; Type Icon: null
+Text: MARKDOWN; Tail: null; Type: inject with Markdown; Icon: /markdown.svg; Type Icon: null
 	Lookups: MARKDOWN
 	String: MARKDOWN
 Text: MYSUPERMARKER; Tail: null; Type: null; Icon: null; Type Icon: null
