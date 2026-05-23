@@ -34,6 +34,7 @@
     <module name="perl5.lang.mojo.backend.main"/>
     <module name="perl5.lang.mojo.frontend.main"/>
     <module name="perl5.lang.mojo.frontend.split.main"/>
+    <module name="perl5.lang.mojo.structureView.main"/>
   </content>
 
 </idea-plugin>
