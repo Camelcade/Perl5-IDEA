@@ -49,6 +49,7 @@
     <module name="perl5.plugin.perlbrew.main"/>
     <module name="perl5.plugin.plenv.main"/>
     <module name="perl5.plugin.profiler.main"/>
+    <module name="perl5.plugin.structureView.main"/>
     <module name="perl5.plugin.terminal.main"/>
     <module name="perl5.plugin.wsl.main"/>
   </content>
