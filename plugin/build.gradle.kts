@@ -76,6 +76,7 @@ dependencies {
       ":plugin.perlbrew",
       ":plugin.plenv",
       ":plugin.profiler",
+      ":plugin.structureView",
       ":plugin.terminal",
       ":plugin.wsl",
     ).forEach {
