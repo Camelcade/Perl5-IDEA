@@ -1,0 +1,11 @@
+<idea-plugin visibility="private">
+  <dependencies>
+    <module name="perl5.lang.mason.mason2.backend.main"/>
+    <module name="perl5.plugin.structureView.main" namespace="hurricup"/>
+  </dependencies>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <lang.psiStructureViewFactory language="Mason2"
+                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+  </extensions>
+</idea-plugin>
