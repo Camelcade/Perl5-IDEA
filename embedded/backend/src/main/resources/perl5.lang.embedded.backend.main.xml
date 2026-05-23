@@ -20,9 +20,6 @@
     <!--<lang.formatter language="Embedded Perl"-->
     <!--implementationClass="com.perl5.lang.perl.idea.formatter.PerlFormattingModelBuilder"/>-->
 
-    <lang.psiStructureViewFactory language="Embedded Perl"
-                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-
     <lang.refactoringSupport language="Embedded Perl"
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
   </extensions>
