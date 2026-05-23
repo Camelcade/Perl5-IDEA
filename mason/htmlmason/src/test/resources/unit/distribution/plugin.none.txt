@@ -25,3 +25,7 @@ Content modules:
     - intellij.platform.frontend.split
     - perl5.lang.mason.htmlmason.frontend.main (namespace=com.perl5.lang.mason.htmlmason_$implicit)
     - perl5.lang.mason.framework.frontend.split.main
+ - perl5.lang.mason.htmlmason.structureView.main (namespace=com.perl5.lang.mason.htmlmason_$implicit) (OPTIONAL); lib/modules/perl5.lang.mason.htmlmason.structureView.main.jar
+  - Dependencies:
+    - perl5.lang.mason.htmlmason.backend.main (namespace=com.perl5.lang.mason.htmlmason_$implicit)
+    - perl5.plugin.structureView.main (namespace=hurricup)

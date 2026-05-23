@@ -35,5 +35,6 @@
     <module name="perl5.lang.mason.htmlmason.backend.main"/>
     <module name="perl5.lang.mason.htmlmason.frontend.main"/>
     <module name="perl5.lang.mason.htmlmason.frontend.split.main"/>
+    <module name="perl5.lang.mason.htmlmason.structureView.main"/>
   </content>
 </idea-plugin>
