@@ -21,3 +21,7 @@ Content modules:
   - Dependencies:
     - intellij.platform.frontend.split
     - perl5.lang.mojo.frontend.main (namespace=com.perl5.lang.mojo_$implicit)
+ - perl5.lang.mojo.structureView.main (namespace=com.perl5.lang.mojo_$implicit) (OPTIONAL); lib/modules/perl5.lang.mojo.structureView.main.jar
+  - Dependencies:
+    - perl5.lang.mojo.backend.main (namespace=com.perl5.lang.mojo_$implicit)
+    - perl5.plugin.structureView.main (namespace=hurricup)
