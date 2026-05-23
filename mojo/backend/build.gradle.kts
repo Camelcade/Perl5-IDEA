@@ -16,9 +16,6 @@ import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
  * limitations under the License.
  */
 
-
-
-
 dependencies {
   listOf(
     ":plugin.common",
