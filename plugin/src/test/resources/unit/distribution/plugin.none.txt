@@ -27,7 +27,6 @@ Content modules:
   - Dependencies:
     - perl5.plugin.common.main (namespace=hurricup)
     - intellij.platform.backend
-    - intellij.platform.structureView.impl
  - perl5.plugin.coverage.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.coverage.main.jar
   - Dependencies:
     - com.intellij.modules.coverage
@@ -88,6 +87,11 @@ Content modules:
     - com.intellij.modules.ultimate
     - perl5.plugin.backend.main (namespace=hurricup)
     - intellij.profiler.common
+ - perl5.plugin.structureView.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.structureView.main.jar
+  - Dependencies:
+    - perl5.plugin.common.main (namespace=hurricup)
+    - perl5.plugin.backend.main (namespace=hurricup)
+    - intellij.platform.structureView.impl
  - perl5.plugin.terminal.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.terminal.main.jar
   - Dependencies:
     - org.jetbrains.plugins.terminal
