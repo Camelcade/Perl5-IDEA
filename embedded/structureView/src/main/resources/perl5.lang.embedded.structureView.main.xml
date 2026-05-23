@@ -1,0 +1,11 @@
+<idea-plugin visibility="private">
+  <dependencies>
+    <module name="perl5.lang.embedded.backend.main"/>
+    <module name="perl5.plugin.structureView.main" namespace="hurricup"/>
+  </dependencies>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <lang.psiStructureViewFactory language="Embedded Perl"
+                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
+  </extensions>
+</idea-plugin>

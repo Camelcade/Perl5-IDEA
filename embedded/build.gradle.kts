@@ -52,6 +52,7 @@ dependencies {
       ":lang.embedded.backend",
       ":lang.embedded.frontend",
       ":lang.embedded.frontend.split",
+      ":lang.embedded.structureView",
     ).forEach {
       pluginModule(project(it))
     }

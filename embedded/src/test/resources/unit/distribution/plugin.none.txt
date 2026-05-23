@@ -21,3 +21,7 @@ Content modules:
   - Dependencies:
     - intellij.platform.frontend.split
     - perl5.lang.embedded.frontend.main (namespace=com.perl5.lang.embedded_$implicit)
+ - perl5.lang.embedded.structureView.main (namespace=com.perl5.lang.embedded_$implicit) (OPTIONAL); lib/modules/perl5.lang.embedded.structureView.main.jar
+  - Dependencies:
+    - perl5.lang.embedded.backend.main (namespace=com.perl5.lang.embedded_$implicit)
+    - perl5.plugin.structureView.main (namespace=hurricup)

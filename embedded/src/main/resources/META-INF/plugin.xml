@@ -34,5 +34,6 @@
     <module name="perl5.lang.embedded.backend.main"/>
     <module name="perl5.lang.embedded.frontend.main"/>
     <module name="perl5.lang.embedded.frontend.split.main"/>
+    <module name="perl5.lang.embedded.structureView.main"/>
   </content>
 </idea-plugin>
