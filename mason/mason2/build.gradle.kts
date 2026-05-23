@@ -50,6 +50,7 @@ dependencies {
       ":lang.mason.mason2.backend",
       ":lang.mason.mason2.frontend",
       ":lang.mason.mason2.frontend.split",
+      ":lang.mason.mason2.structureView",
     ).forEach {
       pluginModule(project(it))
     }
