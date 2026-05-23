@@ -27,9 +27,6 @@
     <lang.refactoringSupport language="Mojolicious Perl"
                              implementationClass="com.perl5.lang.perl.idea.refactoring.PerlRefactoringSupportProvider"/>
 
-    <lang.psiStructureViewFactory language="Mojolicious Perl"
-                                  implementationClass="com.perl5.lang.perl.idea.structureView.PerlStructureViewFactory"/>
-
     <liveTemplateOptionalProcessor
         implementation="com.perl5.lang.mojolicious.idea.liveTemplates.MojoliciousLiveTemplateProcessor"/>
     <projectStructure.sourceRootEditHandler

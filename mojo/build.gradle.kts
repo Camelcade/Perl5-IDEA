@@ -42,6 +42,7 @@ dependencies {
     listOf(
       ":lang.mojo.common",
       ":lang.mojo.backend",
+      ":lang.mojo.structureView",
       ":lang.mojo.frontend",
       ":lang.mojo.frontend.split",
     ).forEach {
