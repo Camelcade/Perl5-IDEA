@@ -51,7 +51,7 @@ dependencies {
 tasks {
   val generateLexerTask = register<GenerateLexerTask>("generateMason2Lexer") {
     sourceFile.set(file("grammar/Mason2.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/mason2/lexer/"))
+    targetRootOutputDir.set(file("src/main/gen/"))
     skeleton.set(rootProject.file(providers.gradleProperty("templating_lexer_skeleton").get()))
     purgeOldFiles.set(true)
   }

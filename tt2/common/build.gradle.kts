@@ -50,16 +50,15 @@ dependencies {
 
 tasks {
   val generateParserTask = register<GenerateParserTask>("generateTT2Parser") {
+    description = "Generates TemplateToolkit parser"
     sourceFile.set(file("grammar/TemplateToolkit.bnf"))
-    pathToParser.set("/com/perl5/lang/tt2/parser/TemplateToolkitParserGenerated.java")
-    pathToPsiRoot.set("/com/perl5/lang/tt2/psi")
     targetRootOutputDir.set(genRoot)
     purgeOldFiles.set(true)
   }
 
   val generateLexerTask = register<GenerateLexerTask>("generateTT2Lexer") {
     sourceFile.set(file("grammar/TemplateToolkit.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/tt2/lexer/"))
+    targetRootOutputDir.set(genRoot)
     skeleton.set(rootProject.file(providers.gradleProperty("lexer_skeleton").get()))
     purgeOldFiles.set(true)
 

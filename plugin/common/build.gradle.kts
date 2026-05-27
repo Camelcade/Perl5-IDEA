@@ -16,6 +16,7 @@
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.tasks.GenerateLexerTask
 import org.jetbrains.intellij.platform.gradle.tasks.GenerateParserTask
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 
 val genRoot: File = project.file("src/main/gen").also { genRoot ->
@@ -31,7 +32,6 @@ val genRoot: File = project.file("src/main/gen").also { genRoot ->
     }
   }
 }
-
 dependencies {
   intellijPlatform {
     val platformVersionProvider: Provider<String> by rootProject.extra
@@ -48,26 +48,32 @@ dependencies {
 
 tasks {
   val generatePerlParserTask = register<GenerateParserTask>("generatePerl5Parser") {
+    description = "Generates perl5 parser"
     sourceFile.set(file("grammar/Perl5.bnf"))
-    pathToParser.set("/com/perl5/lang/perl/parser/PerlParserGenerated.java")
-    pathToPsiRoot.set("/com/perl5/lang/perl/psi")
+    targetRootOutputDir.set(genRoot)
+    pathToParser.set("com/perl5/lang/perl/parser/PerlParserGenerated.java")
+    pathToPsiRoot.set("com/perl5/lang/perl/psi")
   }
 
   val generatePodParserTask = register<GenerateParserTask>("generatePodParser") {
+    description = "Generates perl pod parser"
     sourceFile.set(file("grammar/Pod.bnf"))
-    pathToParser.set("/com/perl5/lang/pod/parser/PodParserGenerated.java")
-    pathToPsiRoot.set("/com/perl5/lang/pod/psi")
+    targetRootOutputDir.set(genRoot)
+    pathToParser.set("com/perl5/lang/pod/parser/PodParserGenerated.java")
+    pathToPsiRoot.set("com/perl5/lang/pod/psi")
   }
 
   val generatePerlLexerTask = register<GenerateLexerTask>("generatePerlLexer") {
+    description = "Generates perl5 lexer"
     sourceFile.set(file("grammar/Perl.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/perl/lexer/"))
+    targetRootOutputDir.set(genRoot)
 
     dependsOn(generatePerlParserTask)
   }
   val generatePodLexerTask = register<GenerateLexerTask>("generatePodLexer") {
+    description = "Generates perl pod lexer"
     sourceFile.set(file("grammar/Pod.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/pod/lexer/"))
+    targetRootOutputDir.set(genRoot)
 
     dependsOn(generatePodParserTask)
   }
@@ -78,7 +84,7 @@ tasks {
 
   withType<GenerateLexerTask> {
     skeleton.set(rootProject.file(providers.gradleProperty("lexer_skeleton").get()))
-    purgeOldFiles.set(true)
+    purgeOldFiles.set(false)
   }
 
   withType<GenerateParserTask> {
@@ -86,18 +92,16 @@ tasks {
     purgeOldFiles.set(true)
   }
 
-  /*
-    withType<JavaCompile> {
-      dependsOn(
-        generatePerlLexerTask,
-        generatePodLexerTask
-      )
-    }
-    withType<KotlinCompile> {
-      dependsOn(
-        generatePerlLexerTask,
-        generatePodLexerTask
-      )
-    }
-  */
+  withType<JavaCompile> {
+    dependsOn(
+      generatePerlLexerTask,
+      generatePodLexerTask
+    )
+  }
+  withType<KotlinCompile> {
+    dependsOn(
+      generatePerlLexerTask,
+      generatePodLexerTask
+    )
+  }
 }

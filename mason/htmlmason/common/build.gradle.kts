@@ -52,7 +52,7 @@ dependencies {
 tasks {
   val generateLexerTask = register<GenerateLexerTask>("generateHTMLMasonLexer") {
     sourceFile.set(file("grammar/HTMLMason.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/htmlmason/lexer/"))
+    targetRootOutputDir.set(file("src/main/gen/"))
     skeleton.set(rootProject.file(providers.gradleProperty("templating_lexer_skeleton").get()))
     purgeOldFiles.set(true)
   }

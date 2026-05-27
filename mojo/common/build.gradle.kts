@@ -52,7 +52,7 @@ dependencies {
 tasks {
   val generateLexerTask = register<GenerateLexerTask>("generateMojoliciousLexer") {
     sourceFile.set(file("grammar/Mojolicious.flex"))
-    targetOutputDir.set(file("src/main/gen/com/perl5/lang/mojolicious/lexer/"))
+    targetRootOutputDir.set(file("src/main/gen/"))
     skeleton.set(rootProject.file(providers.gradleProperty("templating_lexer_skeleton").get()))
     purgeOldFiles.set(true)
   }
