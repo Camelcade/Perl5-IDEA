@@ -2,6 +2,7 @@
   <resource-bundle>messages.PerlBundle</resource-bundle>
   <dependencies>
     <module name="perl5.plugin.common.main"/>
+    <module name="intellij.platform.smRunner"/>
     <module name="intellij.platform.backend"/>
   </dependencies>
   <extensionPoints>
