@@ -4,3 +4,4 @@ com.intellij.moduleSet.structureView
 com.intellij.moduleSet.todoView
 com.perl5
 com.perl5.lang.tt2
+intellij.libraries.misc.plugin

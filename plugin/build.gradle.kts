@@ -47,6 +47,7 @@ dependencies {
       "com.intellij.moduleSet.todoView",
       "com.intellij.moduleSet.structuralSearch",
       "com.intellij.moduleSet.servicesView",
+      "intellij.libraries.misc.plugin",
     )
     testBundledModules(
       "intellij.platform.coverage.agent",
