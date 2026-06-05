@@ -26,6 +26,7 @@ Content modules:
  - perl5.plugin.backend.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.backend.main.jar
   - Dependencies:
     - perl5.plugin.common.main (namespace=hurricup)
+    - intellij.platform.smRunner
     - intellij.platform.backend
  - perl5.plugin.coverage.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.coverage.main.jar
   - Dependencies:
