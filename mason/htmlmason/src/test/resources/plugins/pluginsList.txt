@@ -5,3 +5,4 @@ com.intellij.moduleSet.todoView
 com.perl5
 com.perl5.lang.mason.framework
 com.perl5.lang.mason.htmlmason
+intellij.libraries.misc.plugin

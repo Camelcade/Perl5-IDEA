@@ -44,6 +44,11 @@ dependencies {
       "com.intellij.moduleSet.structureView",
       "com.intellij.moduleSet.todoView",
       "com.intellij.moduleSet.structuralSearch",
+      "intellij.libraries.misc.plugin",
+    )
+
+    testBundledModules(
+      "intellij.spellchecker"
     )
 
     // packaging, which modules to include into this one
