@@ -1,6 +1,7 @@
 <idea-plugin visibility="public">
   <dependencies>
     <module name="intellij.platform.frontend.split"/>
+    <module name="intellij.rd.client"/>
     <module name="perl5.plugin.frontend.main"/>
   </dependencies>
 

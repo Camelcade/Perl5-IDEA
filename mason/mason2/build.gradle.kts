@@ -39,10 +39,11 @@ dependencies {
     }
 
     testBundledPlugins(
-      "com.intellij.moduleSet.structureView",
-      "com.intellij.moduleSet.todoView",
-      "com.intellij.moduleSet.structuralSearch",
       "intellij.libraries.misc.plugin",
+      "intellij.structuralSearch.plugin",
+      "intellij.structureView.plugin",
+      "intellij.testRunner.plugin",
+      "intellij.todo.plugin",
     )
 
     testBundledModules(

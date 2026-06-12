@@ -57,6 +57,7 @@ Content modules:
  - perl5.plugin.frontend.split.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.frontend.split.main.jar
   - Dependencies:
     - intellij.platform.frontend.split
+    - intellij.rd.client
     - perl5.plugin.frontend.main (namespace=hurricup)
  - perl5.plugin.idea.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.idea.main.jar
   - Dependencies:

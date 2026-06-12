@@ -15,7 +15,7 @@ dependencies {
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
     bundledPlugins(
-      "com.intellij.moduleSet.structureView",
+      "intellij.structureView.plugin",
     )
   }
 }

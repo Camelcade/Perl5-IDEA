@@ -39,7 +39,8 @@ dependencies {
     )
     bundledPlugins(
       "org.jetbrains.plugins.terminal",
-      "com.intellij.moduleSet.structureView",
+      "intellij.structureView.plugin",
+      "intellij.testRunner.plugin",
     )
   }
 }

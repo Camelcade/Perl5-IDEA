@@ -29,7 +29,7 @@ dependencies {
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
 
-    bundledLibrary("plugins/cwm-plugin/lib/frontend-split/rd-client.jar")
+    bundledLibrary("lib/intellij.rd.client.jar")
     bundledModules("intellij.rd.ide.model.generated")
   }
 }
