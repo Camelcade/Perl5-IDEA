@@ -16,13 +16,16 @@
 
 package base
 
+import categories.Smoke
 import com.intellij.ide.plugins.PluginMainDescriptor
 import com.intellij.ide.plugins.PluginManager
 import com.intellij.openapi.extensions.PluginId
 import com.intellij.openapi.util.IntellijInternalApi
 import com.intellij.openapi.util.io.FileUtil
+import org.junit.experimental.categories.Category
 import java.nio.file.Path
 
+@Category(Smoke::class)
 @OptIn(IntellijInternalApi::class)
 open class PerlDistributionTestCase : PerlLightTestCaseBase() {
   override fun getFileExtension(): String? = "none"

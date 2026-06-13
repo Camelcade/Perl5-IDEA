@@ -17,7 +17,9 @@
 package highlighting;
 
 import base.MojoLightTestCase;
+import categories.Smoke;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 public class MojoSyntaxHighlightingTest extends MojoLightTestCase {
   @Override
@@ -33,6 +35,7 @@ public class MojoSyntaxHighlightingTest extends MojoLightTestCase {
 
 
   @Test
+  @Category(Smoke.class)
   public void testMixed() {
     doTest();
   }

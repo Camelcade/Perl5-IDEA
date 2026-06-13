@@ -17,6 +17,7 @@
 package completion;
 
 
+import categories.Smoke;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.testFramework.fixtures.impl.CodeInsightTestFixtureImpl;
@@ -27,6 +28,7 @@ import com.perl5.lang.perl.internals.PerlVersion;
 import com.perl5.lang.perl.util.PerlPackageUtilCore;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.util.Objects;
 
@@ -830,26 +832,31 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   }
 
   @Test
+  @Category(Smoke.class)
   public void testHeredocOpenerBare() {
     doTestHeredoc();
   }
 
   @Test
+  @Category(Smoke.class)
   public void testHeredocOpenerBackref() {
     doTestHeredoc();
   }
 
   @Test
+  @Category(Smoke.class)
   public void testHeredocOpenerQQ() {
     doTestHeredoc();
   }
 
   @Test
+  @Category(Smoke.class)
   public void testHeredocOpenerSQ() {
     doTestHeredoc();
   }
 
   @Test
+  @Category(Smoke.class)
   public void testHeredocOpenerXQ() {
     doTestHeredoc();
   }
@@ -889,10 +896,10 @@ public class PerlCompletionTest extends PerlCompletionTestCase {
   }
 
   @Test
+  @Category(Smoke.class)
   public void testInjectMarkers() {
     doTest();
   }
-
 
   @Test
   public void testNextLabels() {
