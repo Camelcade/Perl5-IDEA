@@ -18,17 +18,20 @@ package intellilang;
 
 
 import base.PerlLightTestCase;
+import categories.Smoke;
 import com.intellij.lang.html.HTMLLanguage;
 import com.intellij.util.FileContentUtil;
 import com.perl5.lang.perl.PerlLanguage;
 import com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService;
 import org.intellij.lang.xpath.xslt.psi.impl.XsltLanguage;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.util.Collections;
 import java.util.Map;
 
 import static com.perl5.lang.perl.idea.intellilang.PerlDefaultInjectionMarkers.PERL5_MARKER;
+@Category(Smoke.class)
 public class PerlInjectionMarkersTest extends PerlLightTestCase {
   private static final String TEST_MARKER = "_MYHTML";
 

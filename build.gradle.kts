@@ -154,6 +154,15 @@ allprojects {
         }
 
         val excludeCategories = mutableListOf<String>()
+        val includeCategories = mutableListOf<String>()
+
+        if( project.hasProperty("smokeTests") ) {
+          includeCategories += listOf("categories.Smoke")
+        }
+        else if( project.hasProperty("noSmokeTests") ) {
+          excludeCategories += listOf("categories.Smoke")
+        }
+        
         if (project.hasProperty("integrationTests")) {
           excludeCategories += listOf("categories.Light", "categories.Heavy")
         }
@@ -170,6 +179,10 @@ allprojects {
         if (excludeCategories.isNotEmpty()) {
           excludeCategories(*excludeCategories.toTypedArray())
           systemProperty("junit.exclude.categories", excludeCategories.joinToString(","))
+        }
+        if (includeCategories.isNotEmpty()) {
+          includeCategories(*includeCategories.toTypedArray())
+          systemProperty("junit.include.categories", includeCategories.joinToString(","))
         }
       }
 
