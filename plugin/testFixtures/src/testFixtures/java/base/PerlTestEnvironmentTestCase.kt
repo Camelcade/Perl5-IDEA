@@ -16,10 +16,13 @@
 
 package base
 
+import categories.Smoke
 import com.intellij.ide.plugins.PluginManager
 import org.jetbrains.annotations.NonNls
 import org.junit.Test
+import org.junit.experimental.categories.Category
 
+@Category(Smoke::class)
 abstract class PerlTestEnvironmentTestCase : PerlLightTestCaseBase() {
   override fun getFileExtension(): String? = "none"
 

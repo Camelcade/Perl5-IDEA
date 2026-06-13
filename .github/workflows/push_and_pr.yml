@@ -49,6 +49,10 @@ jobs:
         run: |
           ./gradlew jar instrumentTest --console plain
 
+      - name: Smoke tests
+        run: |
+          ./gradlew test -PsmokeTests=1
+
   codeql:
     needs: build
     name: CodeQL

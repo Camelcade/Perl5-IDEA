@@ -64,7 +64,7 @@ jobs:
       - name: Run tests
         run: |
           bash ./watcher.sh 1200 &
-          ./gradlew test -PintegrationTests=1 --console plain
+          ./gradlew test -PintegrationTests=1 -PnoSmokeTests=1 --console plain
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
@@ -123,7 +123,7 @@ jobs:
       - name: Run tests
         run: |
           bash ./watcher.sh 1200 &
-          ./gradlew test -PintegrationTests=1 --console plain
+          ./gradlew test -PintegrationTests=1 -PnoSmokeTests=1 --console plain
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
@@ -185,7 +185,7 @@ jobs:
       - name: Run tests
         run: |
           bash ./watcher.sh 1200 &
-          ./gradlew test -PintegrationTests=1 --console plain
+          ./gradlew test -PintegrationTests=1 -PnoSmokeTests=1 --console plain
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
@@ -247,7 +247,7 @@ jobs:
       - name: Run tests
         run: |
           bash ./watcher.sh 1200 &
-          ./gradlew test -PintegrationTests=1 --console plain
+          ./gradlew test -PintegrationTests=1 -PnoSmokeTests=1 --console plain
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
@@ -305,7 +305,7 @@ jobs:
       - name: Run tests
         run: |
           bash ./watcher.sh 2400 &
-          ./gradlew test -PintegrationTests=1 --console plain
+          ./gradlew test -PintegrationTests=1 -PnoSmokeTests=1 --console plain
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
@@ -348,7 +348,7 @@ jobs:
       - name: Run tests
         run: |
           bash ./watcher.sh 1200 &
-          ./gradlew test -PintegrationTests=1 --console plain
+          ./gradlew test -PintegrationTests=1 -PnoSmokeTests=1 --console plain
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
@@ -388,7 +388,7 @@ jobs:
       - name: Run tests
         run: |
           bash ./watcher.sh 3600 &
-          ./gradlew test -PlightTests=1 --console plain
+          ./gradlew test -PlightTests=1 -PnoSmokeTests=1 --console plain
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
@@ -428,7 +428,7 @@ jobs:
       - name: Run tests
         run: |
           bash ./watcher.sh 3600 &
-          ./gradlew test -PheavyTests=1 --console plain "-Pyoutrack.token=${{ env.YOUTRACK_TOKEN && env.YOUTRACK_TOKEN || 'skip' }}"
+          ./gradlew test -PheavyTests=1 -PnoSmokeTests=1 --console plain "-Pyoutrack.token=${{ env.YOUTRACK_TOKEN && env.YOUTRACK_TOKEN || 'skip' }}"
 
       - name: Upload Coverage Data
         if: ${{ env.COVERALLS_REPO_TOKEN }}
