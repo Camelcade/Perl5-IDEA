@@ -1,18 +1,9 @@
-Text: ACTIONSCRIPT; Tail: null; Type: inject with ActionScript; Icon: /javaScript.svg; Type Icon: null
-	Lookups: ACTIONSCRIPT
-	String: ACTIONSCRIPT
 Text: CSS; Tail: null; Type: inject with CSS; Icon: /css.svg; Type Icon: null
 	Lookups: CSS
 	String: CSS
 Text: DTD; Tail: null; Type: inject with DTD; Icon: /dtd.svg; Type Icon: null
 	Lookups: DTD
 	String: DTD
-Text: ECMA6; Tail: null; Type: inject with ECMAScript 6; Icon: /javaScript.svg; Type Icon: null
-	Lookups: ECMA6
-	String: ECMA6
-Text: FLOWJS; Tail: null; Type: inject with Flow JS; Icon: /javaScript.svg; Type Icon: null
-	Lookups: FLOWJS
-	String: FLOWJS
 Text: HTML; Tail: null; Type: inject with HTML; Icon: /html.svg; Type Icon: null
 	Lookups: HTML
 	String: HTML
@@ -22,12 +13,6 @@ Text: IGNORE; Tail: null; Type: inject with .ignore (IgnoreLang); Icon: /ignore_
 Text: JAVA; Tail: null; Type: inject with Java; Icon: /java.svg; Type Icon: null
 	Lookups: JAVA
 	String: JAVA
-Text: JQUERYCSS; Tail: null; Type: inject with JQuery-CSS; Icon: /css.svg; Type Icon: null
-	Lookups: JQUERYCSS
-	String: JQUERYCSS
-Text: JS; Tail: null; Type: inject with JavaScript; Icon: /javaScript.svg; Type Icon: null
-	Lookups: JS
-	String: JS
 Text: JSHELL; Tail: null; Type: inject with JShell Snippet; Icon: /java.svg; Type Icon: null
 	Lookups: JSHELL
 	String: JSHELL
@@ -61,12 +46,6 @@ Text: SVG; Tail: null; Type: inject with SVG; Icon: /image.svg; Type Icon: null
 Text: TEXT; Tail: null; Type: inject with Plain text; Icon: TextFileType; Type Icon: null
 	Lookups: TEXT
 	String: TEXT
-Text: TS; Tail: null; Type: inject with TypeScript; Icon: /TypeScriptFile.svg; Type Icon: null
-	Lookups: TS
-	String: TS
-Text: TSJSX; Tail: null; Type: inject with TypeScript JSX; Icon: /TSX.svg; Type Icon: null
-	Lookups: TSJSX
-	String: TSJSX
 Text: XHTML; Tail: null; Type: inject with XHTML; Icon: /xhtml.svg; Type Icon: null
 	Lookups: XHTML
 	String: XHTML

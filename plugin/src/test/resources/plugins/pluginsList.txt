@@ -1,10 +1,10 @@
 Coverage
-JavaScript
 XPathView
 com.intellij
 com.intellij.copyright
 com.intellij.css
 com.intellij.java
+com.intellij.modules.jcef
 com.intellij.modules.json
 com.intellij.modules.ultimate
 com.intellij.platform.images
@@ -13,6 +13,7 @@ com.perl5
 intellij.grid.plugin
 intellij.java.aetherDependencyResolver.plugin
 intellij.libraries.misc.plugin
+intellij.ssh.plugin
 intellij.structuralSearch.plugin
 intellij.structureView.plugin
 intellij.testRunner.plugin

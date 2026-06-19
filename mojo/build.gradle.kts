@@ -41,7 +41,7 @@ dependencies {
     )
 
     testBundledModules(
-      "intellij.spellchecker"
+      "intellij.spellchecker",
     )
 
     // packaging, which modules to include into this one
@@ -57,6 +57,7 @@ dependencies {
 
     localPlugin(project(":plugin"))
     bundledPlugins(providers.gradleProperty("remoteRunPlugin").get())
+    testBundledPlugins(providers.gradleProperty("sshPlugin").get())
   }
 
   testImplementation(testFixtures(project(":plugin.testFixtures")))
