@@ -31,12 +31,12 @@ dependencies {
       providers.gradleProperty("intelliLangModule").get(),
     )
     bundledPlugins(
-      "com.intellij.copyright",
-      providers.gradleProperty("remoteRunPlugin").get(),
-      providers.gradleProperty("coveragePlugin").get(),
-      "tanvd.grazi",
       "XPathView",
+      "com.intellij.copyright",
       "org.jetbrains.plugins.terminal",
+      "tanvd.grazi",
+      providers.gradleProperty("coveragePlugin").get(),
+      providers.gradleProperty("remoteRunPlugin").get(),
     )
     testBundledPlugins(
       "com.intellij.css",
@@ -48,6 +48,7 @@ dependencies {
       "intellij.testRunner.plugin",
       "intellij.todo.plugin",
       "org.intellij.plugins.markdown",
+      providers.gradleProperty("sshPlugin").get(),
     )
     testBundledModules(
       "intellij.platform.coverage.agent",
