@@ -1,11 +1,10 @@
-JavaScript
 com.intellij
-com.intellij.modules.json
 com.intellij.modules.ultimate
 com.jetbrains.plugins.webDeployment
 com.perl5
 com.perl5.lang.mojo
 intellij.libraries.misc.plugin
+intellij.ssh.plugin
 intellij.structuralSearch.plugin
 intellij.structureView.plugin
 intellij.testRunner.plugin
