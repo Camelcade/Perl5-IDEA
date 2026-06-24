@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 
 public class PerlCompletionContributor extends CompletionContributor {
-  private static final Logger LOG = Logger.getInstance(PerlCompletionContributor.class);
+  private static final Logger LOG = Logger.getInstance("PerlCompletionContributor");
 
   public PerlCompletionContributor() {
     extend(
