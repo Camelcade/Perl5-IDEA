@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 import static com.perl5.lang.pod.parser.PodElementTypesGenerated.*;
 
 public class PodElementDescriptionProvider extends PerlElementDescriptionProviderBase {
-  private static final Logger LOG = Logger.getInstance(PodElementDescriptionProvider.class);
+  private static final Logger LOG = Logger.getInstance("PodElementDescriptionProvider");
 
   public PodElementDescriptionProvider() {
     super(PodLanguage.INSTANCE);
