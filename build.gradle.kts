@@ -11,7 +11,6 @@ import org.jetbrains.intellij.platform.gradle.tasks.aware.SplitModeAware.SplitMo
 import kotlin.io.path.exists
 import kotlin.io.path.readText
 import kotlin.io.path.writeText
-
 /*
  * Copyright 2015-2021 Alexandr Evstigneev
  *
@@ -35,8 +34,8 @@ plugins {
   id("com.hurricup.gradle.fixcompress")
   id("idea")
   id("jacoco")
-  id("org.jetbrains.intellij.platform") version "2.16.0"
-  id("org.jetbrains.intellij.platform.grammarkit") version "2.16.0"
+  id("org.jetbrains.intellij.platform") version "2.17.0"
+  id("org.jetbrains.intellij.platform.grammarkit") version "2.17.0"
   id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
   id("org.sonarqube") version "7.3.1.8318"
   id("org.jetbrains.kotlin.jvm") version "2.3.21"
