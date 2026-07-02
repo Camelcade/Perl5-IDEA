@@ -17,10 +17,11 @@
 package com.perl5.lang.perl.internals;
 
 import com.perl5.PerlBundle;
-import org.apache.groovy.util.Maps;
 import org.jetbrains.annotations.Nls;
 
 import java.util.*;
+
+import static java.util.Map.entry;
 
 /**
  * Represents internal {@code %^H}, built from {@code feature.pm}
@@ -55,33 +56,33 @@ public final class PerlFeaturesTable implements Cloneable {
   private static final String FEATURE_UNICODE_EVAL = "unieval";
   private static final String FEATURE_UNICODE_STRINGS = "unicode";
 
-  public static final Map<String, @Nls String> AVAILABLE_FEATURES = Maps.of(
-    FEATURE_APOSTROPHE_AS_PACKAGE_SEPARATOR, PerlBundle.message("feature.apostrophe"),
-    FEATURE_BAREWORD_FILEHANDLES, PerlBundle.message("perl.feature.bareword.filehandle.description"),
-    FEATURE_BITWISE, PerlBundle.message("perl.feature.bitwise.description"),
-    FEATURE_CLASS, PerlBundle.message("perl.feature.class"),
-    FEATURE_CURRENT_SUB, PerlBundle.message("perl.feature.current.sub.description"),
-    FEATURE_DECLARED_REFS, PerlBundle.message("perl.feature.declared.refs.description"),
-    FEATURE_DEFER, PerlBundle.message("perl.feature.defer.description"),
-    FEATURE_EVALBYTES, PerlBundle.message("perl.feature.evalbytes.description"),
-    FEATURE_EXTRA_PAIRED_DELIMITERS, PerlBundle.message("perl.feature.extra.delimiters.description"),
-    FEATURE_FC, PerlBundle.message("perl.feature.fc.description"),
-    FEATURE_INDIRECT, PerlBundle.message("perl.feature.indirect.description"),
-    FEATURE_ISA, PerlBundle.message("perl.feature.isa.description"),
-    FEATURE_KEYWORD_ALL, PerlBundle.message("feature.all.keyword"),
-    FEATURE_KEYWORD_ANY, PerlBundle.message("feature.any.keyword"),
-    FEATURE_MODULE_TRUE, PerlBundle.message("perl.feature.module.true"),
-    FEATURE_MULTIDIMENSIONAL, PerlBundle.message("perl.feature.multidimensional.description"),
-    FEATURE_POSTDEREF_QQ, PerlBundle.message("perl.feature.postderef.qq.description"),
-    FEATURE_REFALIASING, PerlBundle.message("perl.feature.refaliasing.description"),
-    FEATURE_SAY, PerlBundle.message("perl.feature.say.description"),
-    FEATURE_SIGNATURES, PerlBundle.message("perl.feature.signatures.description"),
-    FEATURE_SMARTMATCH, PerlBundle.message("feature.enabled.smartmatch.operator"),
-    FEATURE_STATE, PerlBundle.message("perl.feature.state.description"),
-    FEATURE_SWITCH, PerlBundle.message("perl.feature.switch.description"),
-    FEATURE_TRY, PerlBundle.message("perl.feature.try.description"),
-    FEATURE_UNICODE_EVAL, PerlBundle.message("perl.feature.unicode.eval.description"),
-    FEATURE_UNICODE_STRINGS, PerlBundle.message("perl.feature.unicode.strings.description")
+  public static final Map<String, @Nls String> AVAILABLE_FEATURES = Map.ofEntries(
+    entry(FEATURE_APOSTROPHE_AS_PACKAGE_SEPARATOR, PerlBundle.message("feature.apostrophe")),
+    entry(FEATURE_BAREWORD_FILEHANDLES, PerlBundle.message("perl.feature.bareword.filehandle.description")),
+    entry(FEATURE_BITWISE, PerlBundle.message("perl.feature.bitwise.description")),
+    entry(FEATURE_CLASS, PerlBundle.message("perl.feature.class")),
+    entry(FEATURE_CURRENT_SUB, PerlBundle.message("perl.feature.current.sub.description")),
+    entry(FEATURE_DECLARED_REFS, PerlBundle.message("perl.feature.declared.refs.description")),
+    entry(FEATURE_DEFER, PerlBundle.message("perl.feature.defer.description")),
+    entry(FEATURE_EVALBYTES, PerlBundle.message("perl.feature.evalbytes.description")),
+    entry(FEATURE_EXTRA_PAIRED_DELIMITERS, PerlBundle.message("perl.feature.extra.delimiters.description")),
+    entry(FEATURE_FC, PerlBundle.message("perl.feature.fc.description")),
+    entry(FEATURE_INDIRECT, PerlBundle.message("perl.feature.indirect.description")),
+    entry(FEATURE_ISA, PerlBundle.message("perl.feature.isa.description")),
+    entry(FEATURE_KEYWORD_ALL, PerlBundle.message("feature.all.keyword")),
+    entry(FEATURE_KEYWORD_ANY, PerlBundle.message("feature.any.keyword")),
+    entry(FEATURE_MODULE_TRUE, PerlBundle.message("perl.feature.module.true")),
+    entry(FEATURE_MULTIDIMENSIONAL, PerlBundle.message("perl.feature.multidimensional.description")),
+    entry(FEATURE_POSTDEREF_QQ, PerlBundle.message("perl.feature.postderef.qq.description")),
+    entry(FEATURE_REFALIASING, PerlBundle.message("perl.feature.refaliasing.description")),
+    entry(FEATURE_SAY, PerlBundle.message("perl.feature.say.description")),
+    entry(FEATURE_SIGNATURES, PerlBundle.message("perl.feature.signatures.description")),
+    entry(FEATURE_SMARTMATCH, PerlBundle.message("feature.enabled.smartmatch.operator")),
+    entry(FEATURE_STATE, PerlBundle.message("perl.feature.state.description")),
+    entry(FEATURE_SWITCH, PerlBundle.message("perl.feature.switch.description")),
+    entry(FEATURE_TRY, PerlBundle.message("perl.feature.try.description")),
+    entry(FEATURE_UNICODE_EVAL, PerlBundle.message("perl.feature.unicode.eval.description")),
+    entry(FEATURE_UNICODE_STRINGS, PerlBundle.message("perl.feature.unicode.strings.description"))
   );
 
   private static final List<String> FEATURES_5_10 = List.of(
@@ -113,51 +114,51 @@ public final class PerlFeaturesTable implements Cloneable {
     List.of(FEATURE_BITWISE, FEATURE_CURRENT_SUB, FEATURE_EVALBYTES, FEATURE_FC, FEATURE_ISA, FEATURE_MODULE_TRUE, FEATURE_POSTDEREF_QQ,
             FEATURE_SAY, FEATURE_SIGNATURES, FEATURE_STATE, FEATURE_TRY, FEATURE_UNICODE_EVAL, FEATURE_UNICODE_STRINGS);
 
-  public static final Map<String, List<String>> AVAILABLE_FEATURES_BUNDLES = Maps.of(
-    "all", new ArrayList<>(AVAILABLE_FEATURES.keySet()),
-    "default",
-    Arrays.asList(FEATURE_APOSTROPHE_AS_PACKAGE_SEPARATOR, FEATURE_BAREWORD_FILEHANDLES, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL,
-                  FEATURE_SMARTMATCH),
+  public static final Map<String, List<String>> AVAILABLE_FEATURES_BUNDLES = Map.ofEntries(
+    entry("all", new ArrayList<>(AVAILABLE_FEATURES.keySet())),
+    entry("default",
+          Arrays.asList(FEATURE_APOSTROPHE_AS_PACKAGE_SEPARATOR, FEATURE_BAREWORD_FILEHANDLES, FEATURE_INDIRECT, FEATURE_MULTIDIMENSIONAL,
+                        FEATURE_SMARTMATCH)),
 
-    "5.9.5", FEATURES_5_10,
-    "5.10", FEATURES_5_10,
+    entry("5.9.5", FEATURES_5_10),
+    entry("5.10", FEATURES_5_10),
 
-    "5.11", FEATURES_5_11,
-    "5.12", FEATURES_5_11,
-    "5.13", FEATURES_5_11,
-    "5.14", FEATURES_5_11,
+    entry("5.11", FEATURES_5_11),
+    entry("5.12", FEATURES_5_11),
+    entry("5.13", FEATURES_5_11),
+    entry("5.14", FEATURES_5_11),
 
-    "5.15", FEATURES_5_15,
-    "5.16", FEATURES_5_15,
-    "5.17", FEATURES_5_15,
-    "5.18", FEATURES_5_15,
-    "5.19", FEATURES_5_15,
-    "5.20", FEATURES_5_15,
-    "5.21", FEATURES_5_15,
-    "5.22", FEATURES_5_15,
+    entry("5.15", FEATURES_5_15),
+    entry("5.16", FEATURES_5_15),
+    entry("5.17", FEATURES_5_15),
+    entry("5.18", FEATURES_5_15),
+    entry("5.19", FEATURES_5_15),
+    entry("5.20", FEATURES_5_15),
+    entry("5.21", FEATURES_5_15),
+    entry("5.22", FEATURES_5_15),
 
-    "5.23", FEATURES_5_23,
-    "5.24", FEATURES_5_23,
-    "5.25", FEATURES_5_23,
-    "5.26", FEATURES_5_23,
+    entry("5.23", FEATURES_5_23),
+    entry("5.24", FEATURES_5_23),
+    entry("5.25", FEATURES_5_23),
+    entry("5.26", FEATURES_5_23),
 
-    "5.27", FEATURES_5_27,
-    "5.28", FEATURES_5_27,
-    "5.29", FEATURES_5_27,
-    "5.30", FEATURES_5_27,
-    "5.31", FEATURES_5_27,
-    "5.32", FEATURES_5_27,
-    "5.33", FEATURES_5_27,
-    "5.34", FEATURES_5_27,
+    entry("5.27", FEATURES_5_27),
+    entry("5.28", FEATURES_5_27),
+    entry("5.29", FEATURES_5_27),
+    entry("5.30", FEATURES_5_27),
+    entry("5.31", FEATURES_5_27),
+    entry("5.32", FEATURES_5_27),
+    entry("5.33", FEATURES_5_27),
+    entry("5.34", FEATURES_5_27),
 
-    "5.35", FEATURES_5_35,
-    "5.36", FEATURES_5_35,
+    entry("5.35", FEATURES_5_35),
+    entry("5.36", FEATURES_5_35),
 
-    "5.37", FEATURES_5_37,
-    "5.38", FEATURES_5_37,
+    entry("5.37", FEATURES_5_37),
+    entry("5.38", FEATURES_5_37),
 
-    "5.40", FEATURES_5_39,
-    "5.42", FEATURES_5_41
+    entry("5.40", FEATURES_5_39),
+    entry("5.42", FEATURES_5_41)
   );
 
   private Map<String, Boolean> featuresMap;
