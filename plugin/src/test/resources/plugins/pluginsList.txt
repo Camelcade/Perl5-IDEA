@@ -4,7 +4,6 @@ com.intellij
 com.intellij.copyright
 com.intellij.css
 com.intellij.java
-com.intellij.modules.jcef
 com.intellij.modules.json
 com.intellij.modules.ultimate
 com.intellij.platform.images
