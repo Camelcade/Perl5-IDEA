@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,14 @@
 package highlighting;
 
 import base.HTMLMasonLightTestCase;
+import categories.Smoke;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTag;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonCustomTagRole;
 import com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+@Category(Smoke.class)
 public class HTMLMasonSyntaxHighlightingTest extends HTMLMasonLightTestCase {
 
   @Override

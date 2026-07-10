@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,9 @@
 package unit.parser;
 
 
+import categories.Smoke;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import unit.perl.parser.PerlParserTestBase;
 
 public class TemplateToolkitParserTest extends PerlParserTestBase {
@@ -281,11 +283,13 @@ public class TemplateToolkitParserTest extends PerlParserTestBase {
     doTest();
   }
 
+  @Category(Smoke.class)
   @Test
   public void testIssue1262() {
     doTest();
   }
 
+  @Category(Smoke.class)
   @Test
   public void testIssue1262v2() {
     doTest();

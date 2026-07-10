@@ -23,6 +23,7 @@ head
     HTML_TAG => DEFAULT_TAG => TEXT
 http://template-toolkit.org/docs/manual/Variables.html
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
@@ -370,6 +371,7 @@ print
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 \n";
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT

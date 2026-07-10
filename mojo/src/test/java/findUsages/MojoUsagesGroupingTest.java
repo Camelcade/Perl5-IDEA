@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,9 @@ package findUsages;
 
 
 import base.MojoLightTestCase;
+import categories.Smoke;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 public class MojoUsagesGroupingTest extends MojoLightTestCase {
   @Override
@@ -26,6 +28,7 @@ public class MojoUsagesGroupingTest extends MojoLightTestCase {
     return "findUsages/grouping/";
   }
 
+  @Category(Smoke.class)
   @Test
   public void testBasic() {doTest();}
 
