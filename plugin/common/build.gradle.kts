@@ -40,7 +40,10 @@ dependencies {
     }
 
     bundledModules(
-      "intellij.spellchecker"
+      "intellij.spellchecker",
+      "intellij.regexp",
+      "intellij.xml.parser",
+      "intellij.xml.ui.common",
     )
     bundledLibrary("plugins/cwm-plugin/lib/split.jar")
   }
