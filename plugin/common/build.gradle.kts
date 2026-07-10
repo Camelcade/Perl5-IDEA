@@ -39,6 +39,12 @@ dependencies {
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
 
+    bundledModules(
+      "intellij.spellchecker",
+      "intellij.regexp",
+      "intellij.xml.parser",
+      "intellij.xml.ui.common",
+    )
     bundledLibrary("plugins/cwm-plugin/lib/split.jar")
   }
 }
