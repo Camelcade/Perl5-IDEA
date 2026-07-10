@@ -302,7 +302,10 @@ public class PerlProjectManager implements Disposable {
         }
 
         ProjectRootManagerEx.getInstanceEx(myProject).makeRootsChange(
-          () -> myPerlSettings.setExternalLibrariesPaths(paths), RootsChangeRescanningInfo.RESCAN_DEPENDENCIES_IF_NEEDED);
+          () -> {
+            myPerlSettings.setExternalLibrariesPaths(paths);
+            resetProjectCaches();
+          }, RootsChangeRescanningInfo.RESCAN_DEPENDENCIES_IF_NEEDED);
       }
     );
   }
