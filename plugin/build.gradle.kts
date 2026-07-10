@@ -38,20 +38,8 @@ dependencies {
       providers.gradleProperty("coveragePlugin").get(),
       providers.gradleProperty("remoteRunPlugin").get(),
     )
-    testBundledPlugins(
-      "com.intellij.css",
-      "com.intellij.database",
-      "com.intellij.java",
-      "intellij.libraries.misc.plugin",
-      "intellij.structuralSearch.plugin",
-      "intellij.structureView.plugin",
-      "intellij.testRunner.plugin",
-      "intellij.todo.plugin",
-      "org.intellij.plugins.markdown",
-      providers.gradleProperty("sshPlugin").get(),
-    )
+
     testBundledModules(
-      "intellij.platform.coverage.agent",
       "intellij.profiler.common",
     )
 
