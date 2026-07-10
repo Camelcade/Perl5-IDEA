@@ -23,6 +23,7 @@ head
     HTML_TAG => DEFAULT_TAG => TEXT
 http://template-toolkit.org/docs/manual/Variables.html
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
@@ -59,10 +60,12 @@ body
     HTML_CODE => TEXT
 test
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 text
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -75,10 +78,12 @@ text
     HTML_CODE => TEXT
 test
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 text
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -91,10 +96,12 @@ text
     HTML_CODE => TEXT
 test
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 text
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -107,10 +114,12 @@ text
     HTML_CODE => TEXT
 test
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 text
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -118,10 +127,12 @@ text
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 test
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 text
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -129,10 +140,12 @@ text
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 test
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 text
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -140,10 +153,12 @@ text
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 test
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 text
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -151,10 +166,12 @@ text
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 test
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 text
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
 

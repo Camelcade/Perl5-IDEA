@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,10 @@
 package highlighting;
 
 import base.Mason2TopLevelComponentTestCase;
+import categories.Smoke;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
@@ -44,6 +46,7 @@ public class Mason2TemplatingSyntaxHighlightingTest extends Mason2TopLevelCompon
     doTest();
   }
 
+  @Category(Smoke.class)
   @Test
   public void testTestComponent() {
     doTest();
@@ -54,6 +57,7 @@ public class Mason2TemplatingSyntaxHighlightingTest extends Mason2TopLevelCompon
     doTest();
   }
 
+  @Category(Smoke.class)
   @Test
   public void testIssue1077() {
     doTest();

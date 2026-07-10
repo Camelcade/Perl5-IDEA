@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,10 @@
 package liveTemplates;
 
 
+import categories.Smoke;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+
 public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
 
   @Test
@@ -80,6 +83,7 @@ public class PerlLiveTemplatesTest extends PerlLiveTemplatesTestCase {
   @Test
   public void testSort() {doTest("so");}
 
+  @Category(Smoke.class)
   @Test
   public void testSql() {doTest("sql");}
 

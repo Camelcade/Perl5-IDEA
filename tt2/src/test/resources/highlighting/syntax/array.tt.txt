@@ -23,6 +23,7 @@ head
     HTML_TAG => DEFAULT_TAG => TEXT
 http://template-toolkit.org/docs/manual/Variables.html
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
@@ -65,38 +66,47 @@ body
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 n
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 is
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 1,
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 2,
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 3,
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 4
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 ]
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
 

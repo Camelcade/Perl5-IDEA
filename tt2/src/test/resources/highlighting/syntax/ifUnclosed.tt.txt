@@ -23,6 +23,7 @@ head
     HTML_TAG => DEFAULT_TAG => TEXT
 http://template-toolkit.org/docs/manual/Variables.html
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
@@ -61,6 +62,7 @@ body
     HTML_CODE => TEXT
 Hello
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -69,43 +71,53 @@ Hello
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 ,
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 does
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 your
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 mother
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 know
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 you're
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
 using
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 her
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 AOL
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 account?
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -120,35 +132,43 @@ account?
     HTML_CODE => TEXT
 Sorry,
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 you're
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 not
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 old
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 enough
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 to
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 enter
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
 Hello
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -157,59 +177,73 @@ Hello
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 ,
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 does
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 your
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 mother
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 know
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 you're
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
 (and
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 too
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 dumb
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 to
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 lie
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 about
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 your
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 age)
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -222,6 +256,7 @@ age)
     HTML_CODE => TEXT
 Welcome
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -230,15 +265,18 @@ Welcome
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 .
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
 test
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 words
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
 
@@ -254,6 +292,7 @@ words
     HTML_CODE => TEXT
 Hello
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -262,43 +301,53 @@ Hello
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 ,
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 does
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 your
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 mother
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 know
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 you're
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
 using
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 her
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 AOL
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 account?
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
 
@@ -314,6 +363,7 @@ account?
     HTML_CODE => TEXT
 Hello
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -322,43 +372,53 @@ Hello
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 ,
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 does
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 your
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 mother
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 know
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 you're
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
 using
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 her
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 AOL
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 account?
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
 

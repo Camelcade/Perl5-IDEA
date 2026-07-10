@@ -119,10 +119,12 @@ body
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 2.5
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -144,10 +146,12 @@ body
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 2
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -169,10 +173,12 @@ body
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 3
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT

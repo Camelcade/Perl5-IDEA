@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,19 +18,24 @@ package markers;
 
 
 import base.PerlLightTestCase;
+import categories.Smoke;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
+
 public class PerlLineMarkersTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "linemarkers/perl";
   }
 
+  @Category(Smoke.class)
   @Test
   public void testMooseAttrs() {doTest();}
 
   @Test
   public void testMojoAttrs() {doTest();}
 
+  @Category(Smoke.class)
   @Test
   public void testClassAccessor() {doTest();}
 

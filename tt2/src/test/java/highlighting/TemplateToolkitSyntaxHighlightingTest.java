@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,11 @@
 package highlighting;
 
 import base.TemplateToolkitLightTestCase;
+import categories.Smoke;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
+@Category(Smoke.class)
 public class TemplateToolkitSyntaxHighlightingTest extends TemplateToolkitLightTestCase {
   @Override
   protected String getBaseDataPath() {

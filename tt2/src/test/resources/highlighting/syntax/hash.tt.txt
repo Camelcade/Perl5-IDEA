@@ -23,6 +23,7 @@ head
     HTML_TAG => DEFAULT_TAG => TEXT
 http://template-toolkit.org/docs/manual/Variables.html
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
@@ -51,18 +52,22 @@ body
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 minimal
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 TT
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 style
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -78,14 +83,17 @@ style
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 perl
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 style
     HTML_CODE => TEXT
+    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
