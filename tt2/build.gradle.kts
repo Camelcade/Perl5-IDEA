@@ -38,6 +38,7 @@ dependencies {
       "intellij.structureView.plugin",
       "intellij.testRunner.plugin",
       "intellij.todo.plugin",
+      "intellij.vcs.plugin",
     )
 
     testBundledModules(
