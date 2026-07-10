@@ -32,7 +32,9 @@ dependencies {
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
     bundledModules(
-      "intellij.spellchecker"
+      "intellij.spellchecker",
+      "intellij.xml.parser",
+      "intellij.xml.ui.common",
     )
     bundledPlugins(
       "intellij.testRunner.plugin",
