@@ -109,12 +109,6 @@ Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null
 Text: JSONPATH; Tail: null; Type: inject with JSONPath; Icon: /json.svg; Type Icon: null
 	Lookups: JSONPATH
 	String: JSONPATH
-Text: JSP; Tail: null; Type: inject with JSP; Icon: JspFileType; Type Icon: null
-	Lookups: JSP
-	String: JSP
-Text: JSPX; Tail: null; Type: inject with JSPX; Icon: /jspx.svg; Type Icon: null
-	Lookups: JSPX
-	String: JSPX
 Text: LESS; Tail: null; Type: inject with Less; Icon: /less.svg; Type Icon: null
 	Lookups: LESS
 	String: LESS
@@ -244,9 +238,6 @@ Text: VERTICA; Tail: null; Type: inject with Vertica; Icon: /sqlScript.svg; Type
 Text: VJS; Tail: null; Type: inject with VueJS; Icon: /javaScript.svg; Type Icon: null
 	Lookups: VJS
 	String: VJS
-Text: VTL; Tail: null; Type: inject with VTL; Icon: /velocity.svg; Type Icon: null
-	Lookups: VTL
-	String: VTL
 Text: VTS; Tail: null; Type: inject with VueTS; Icon: /javaScript.svg; Type Icon: null
 	Lookups: VTS
 	String: VTS
