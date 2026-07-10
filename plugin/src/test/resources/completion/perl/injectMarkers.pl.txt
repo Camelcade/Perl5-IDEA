@@ -58,9 +58,6 @@ Text: EXASOL; Tail: null; Type: inject with Exasol; Icon: /sqlScript.svg; Type I
 Text: FLOWJS; Tail: null; Type: inject with Flow JS; Icon: /javaScript.svg; Type Icon: null
 	Lookups: FLOWJS
 	String: FLOWJS
-Text: FREEMARKER; Tail: null; Type: inject with FreeMarker; Icon: /freemarker-icon.svg; Type Icon: null
-	Lookups: FREEMARKER
-	String: FREEMARKER
 Text: GREENPLUM; Tail: null; Type: inject with Greenplum; Icon: /sqlScript.svg; Type Icon: null
 	Lookups: GREENPLUM
 	String: GREENPLUM
@@ -109,12 +106,6 @@ Text: JSON; Tail: null; Type: inject with JSON; Icon: /json.svg; Type Icon: null
 Text: JSONPATH; Tail: null; Type: inject with JSONPath; Icon: /json.svg; Type Icon: null
 	Lookups: JSONPATH
 	String: JSONPATH
-Text: JSP; Tail: null; Type: inject with JSP; Icon: JspFileType; Type Icon: null
-	Lookups: JSP
-	String: JSP
-Text: JSPX; Tail: null; Type: inject with JSPX; Icon: /jspx.svg; Type Icon: null
-	Lookups: JSPX
-	String: JSPX
 Text: LESS; Tail: null; Type: inject with Less; Icon: /less.svg; Type Icon: null
 	Lookups: LESS
 	String: LESS
@@ -163,9 +154,6 @@ Text: POSTCSS; Tail: null; Type: inject with PostCSS; Icon: /postcss.svg; Type I
 Text: PROPERTIES; Tail: null; Type: inject with Properties; Icon: PropertiesFileType; Type Icon: null
 	Lookups: PROPERTIES
 	String: PROPERTIES
-Text: PROTOBUF; Tail: null; Type: inject with protobuf; Icon: /protoFile.png; Type Icon: null
-	Lookups: PROTOBUF
-	String: PROTOBUF
 Text: QUTE; Tail: null; Type: inject with Qute; Icon: /quarkus.svg; Type Icon: null
 	Lookups: QUTE
 	String: QUTE
@@ -238,9 +226,6 @@ Text: TSQL; Tail: null; Type: inject with Microsoft SQL Server; Icon: /sqlScript
 Text: VERTICA; Tail: null; Type: inject with Vertica; Icon: /sqlScript.svg; Type Icon: null
 	Lookups: VERTICA
 	String: VERTICA
-Text: VTL; Tail: null; Type: inject with VTL; Icon: /velocity.svg; Type Icon: null
-	Lookups: VTL
-	String: VTL
 Text: XHTML; Tail: null; Type: inject with XHTML; Icon: /xhtml.svg; Type Icon: null
 	Lookups: XHTML
 	String: XHTML
