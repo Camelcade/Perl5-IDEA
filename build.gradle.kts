@@ -183,13 +183,13 @@ allprojects {
         }
         
         if (project.hasProperty("integrationTests")) {
-          excludeCategories += listOf("categories.Light", "categories.Heavy")
+          excludeCategories += listOf("categories.Light", "categories.Heavy", "categories.Smoke")
         }
         else if (project.hasProperty("heavyTests")) {
-          excludeCategories += listOf("categories.Light", "categories.Integration")
+          excludeCategories += listOf("categories.Light", "categories.Integration", "categories.Smoke")
         }
         else if (project.hasProperty("lightTests")) {
-          excludeCategories += listOf("categories.Heavy", "categories.Integration")
+          excludeCategories += listOf("categories.Heavy", "categories.Integration", "categories.Smoke")
         }
         else if (!project.hasProperty("allTests")) {
           excludeCategories += listOf("categories.Integration")
