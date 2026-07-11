@@ -57,6 +57,7 @@ import com.perl5.lang.perl.idea.run.prove.PerlTestRunConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.junit.Test;
+import org.junit.rules.Timeout;
 
 import javax.swing.tree.TreeNode;
 import java.io.File;
@@ -65,6 +66,7 @@ import java.util.function.Consumer;
 
 import static base.PerlLightTestCaseBase.SEPARATOR_NEWLINES;
 import static base.PerlLightTestCaseBase.compareWithFile;
+import static com.intellij.testFramework.PlatformTestUtil.dispatchAllEventsInIdeEventQueue;
 
 public class PerlDebuggerTest extends PerlPlatformTestCase {
   @Override
@@ -305,9 +307,15 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
       XDebugSession debugSession = XDebuggerManager.getInstance(getProject()).getDebugSession(pair.second.getExecutionConsole());
       assertNotNull(debugSession);
       disposeOnPerlTearDown(() -> {
-        if (!debugSession.isStopped()) {
+        for (int i = 0; i < 10; i++) {
+          if (debugSession.isStopped()) {
+            return;
+          }
           debugSession.stop();
+          dispatchAllEventsInIdeEventQueue();
+          TimeoutUtil.sleep(500);
         }
+        fail("Debugging process failed to finish in 5 seconds after test");
       });
       return Trinity.create(pair.first, pair.second, debugSession);
     }
