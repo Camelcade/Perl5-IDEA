@@ -1,0 +1,7 @@
+<<HTML;
+<html>
+<div>
+    <caret>
+</div>
+</html>
+HTML
