@@ -33,4 +33,13 @@ public class PerlFormatterInjectedHeredocEnterTest extends PerlFormatterTestCase
 
   @Test
   public void testIndentableNested() {doTestEnter();}
+
+  @Test
+  public void testSqlAfterWhere() {doTestEnter();}
+
+  @Test
+  public void testSqlBetweenAnds() {doTestEnter();}
+
+  @Test
+  public void testSqlReformat() {doFormatTest();}
 }
