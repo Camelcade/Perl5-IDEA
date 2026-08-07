@@ -1,0 +1,7 @@
+$r = SqlQuery(<<SQL);
+SELECT *
+FROM tblPackage
+WHERE a = 1<caret>
+  AND b = 2
+  AND c = 3
+SQL

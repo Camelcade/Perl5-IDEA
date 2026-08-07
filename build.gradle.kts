@@ -425,6 +425,7 @@ intellijPlatform {
       bundledPluginList.add("Docker")
       bundledPluginList.add(providers.gradleProperty("coveragePlugin").get())
       bundledPluginList.add(providers.gradleProperty("remoteRunPlugin").get())
+      bundledPluginList.add("com.intellij.database")
       IntelliJPlatformType.IntellijIdeaUltimate to platformVersionProvider.get()
     }
   }
