@@ -92,7 +92,26 @@ public class PerlInjectedLanguageBlockWrapper implements Block {
 
   @Override
   public @NotNull ChildAttributes getChildAttributes(int newChildIndex) {
-    return myOriginal.getChildAttributes(newChildIndex);
+    ChildAttributes originalAttributes = myOriginal.getChildAttributes(newChildIndex);
+    if (originalAttributes.getAlignment() != null) {
+      return originalAttributes;
+    }
+    Indent originalIndent = originalAttributes.getChildIndent();
+    if (originalIndent != null && originalIndent.getType() == Indent.Type.SPACES) {
+      return originalAttributes;
+    }
+    // The injected formatter answered with a generic indent and no alignment. A generic indent is resolved
+    // against the host file indent options and drifts away from the fragment's own layout. If the sibling
+    // this line is being inserted before is positioned with an explicit space indent (sql clause elements,
+    // for example), reuse it, so the new line lands where reformatting would put that sibling.
+    List<Block> children = getSubBlocks();
+    if (newChildIndex >= 0 && newChildIndex < children.size()) {
+      Indent siblingIndent = children.get(newChildIndex).getIndent();
+      if (siblingIndent != null && siblingIndent.getType() == Indent.Type.SPACES) {
+        return new ChildAttributes(siblingIndent, null);
+      }
+    }
+    return originalAttributes;
   }
 
   @Override
