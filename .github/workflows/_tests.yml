@@ -288,7 +288,7 @@ jobs:
 
       - name: Install Strawberry Perl
         if: ${{ inputs.os == 'windows-latest' }}
-        uses: shogo82148/actions-setup-perl@v1.43.0
+        uses: shogo82148/actions-setup-perl@v1.43.1
         with:
           distribution: strawberry
           perl-version: ${{ env.PERL_TEST_VERSION }}
