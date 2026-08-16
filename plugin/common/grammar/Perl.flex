@@ -40,6 +40,7 @@ import static com.perl5.lang.perl.parser.moose.MooseElementTypes.*;
 */
 WHITE_SPACE = [ \t\f]
 ANY_SPACE = [ \t\f\n\r]
+NOT_ANY_SPACE_OR_SLASH = [^\\ \t\f\n\r]
 LINE_COMMENT = "#" .*
 LINE_COMMENT_ANNOTATION = "#@"[\w] .*
 LINE_COMMENT_WITH_NEW_LINE = {LINE_COMMENT} \R
@@ -277,12 +278,12 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 /////////////////////////////////// quote like openers /////////////////////////////////////////////////////////////////
 
 <QUOTE_LIKE_OPENER_Q, QUOTE_LIKE_OPENER_QQ, QUOTE_LIKE_OPENER_QX, QUOTE_LIKE_OPENER_QW, TRANS_OPENER, REGEX_OPENER>{
-        \s              {setNoSharpState(); return captureSpaces();}
+        {ANY_SPACE}              {setNoSharpState(); return captureSpaces();}
 }
 
 <QUOTE_LIKE_OPENER_Q_NOSHARP,QUOTE_LIKE_OPENER_QQ_NOSHARP,QUOTE_LIKE_OPENER_QX_NOSHARP,QUOTE_LIKE_OPENER_QW_NOSHARP,TRANS_OPENER_NO_SHARP,REGEX_OPENER_NO_SHARP>
 {
-        \s              {return captureSpaces();}
+        {ANY_SPACE}              {return captureSpaces();}
 	"#"     	{return captureComment();}
 }
 
@@ -450,7 +451,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <MATCH_REGEX_X,MATCH_REGEX_XX,MATCH_REGEX_X_SQ,MATCH_REGEX_XX_SQ>
 {
 	{ESCAPED_SPACE_OR_COMMENT}	{return REGEX_TOKEN;}
-        \s                              {return captureSpaces();}
+        {ANY_SPACE}                              {return captureSpaces();}
 	"#"     	                {return captureComment();}
         "["                             {pushStateAndBegin(REGEX_CHARCLASS_X);return REGEX_TOKEN;}
         "\\Q"                           {pushStateAndBegin(REGEX_QUOTED_X);return REGEX_TOKEN;}
@@ -459,7 +460,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
             "(?" / "{"       { pushStateAndBegin(BLOCK_IN_MATCH_REGEX);return REGEX_TOKEN; }
             {REGEX_COMMENT}  {return COMMENT_LINE;}
             "@" / [\]%\\]    {return REGEX_TOKEN;}
-            "$" / \s+ "]"    {return REGEX_TOKEN;}
+            "$" / {ANY_SPACE}+ "]"    {return REGEX_TOKEN;}
             "\\".            {return REGEX_TOKEN;}
 	}
 }
@@ -499,7 +500,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
   AFTER_EXCEPT, AFTER_CONTINUATION,  AFTER_OTHERWISE, AFTER_OTHERWISE_BLOCK,
   AFTER_TRY_TRYCATCH_BLOCK, AFTER_CATCH_TRYCATCH
   >{
-  \s                {return captureSpaces();}
+  {ANY_SPACE}                {return captureSpaces();}
   "#"     	    {return captureComment();}
 }
 
@@ -691,8 +692,8 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 
 <STRING_LIST>
 {
-  \s                     {return captureSpaces();}
-  [^\\\s]+               {return STRING_CONTENT;}
+  {ANY_SPACE}                      {return captureSpaces();}
+  {NOT_ANY_SPACE_OR_SLASH}+        {return STRING_CONTENT;}
   "\\"                   {
     IElementType tokenType = getSQBackSlashTokenType();
     if( tokenType == STRING_SPECIAL_ESCAPE_CHAR){
@@ -734,7 +735,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <YYINITIAL> "="                 	{return capturePod(false);}
-\s                                      {return captureSpaces();}
+{ANY_SPACE}                                      {return captureSpaces();}
 {END_BLOCK}				{yybegin(END_BLOCK);yypushback(yylength()-7);return TAG_END;}
 {DATA_BLOCK}				{yybegin(END_BLOCK);yypushback(yylength()-8);return TAG_DATA;}
 {LINE_COMMENT_ANNOTATION}	        {return COMMENT_ANNOTATION;}
@@ -757,7 +758,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 <SUB_DECLARATION,METHOD_DECLARATION, BLOCK_DECLARATION,
   SUB_ATTRIBUTES, SUB_ATTRIBUTE,
   SUB_DECLARATION_CONTENT, METHOD_DECLARATION_CONTENT>{
-  \s                {return captureSpaces();}
+  {ANY_SPACE}                {return captureSpaces();}
   "#"     	    {return captureComment();}
 }
 
@@ -968,7 +969,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <AFTER_RIGHT_BRACE> {
-  \s                {return captureSpaces();}
+  {ANY_SPACE}                {return captureSpaces();}
   [^]   {yypushback(1);yybegin(YYINITIAL);}
 }
 
@@ -1301,7 +1302,7 @@ POSIX_CHARGROUP_ANY = {POSIX_CHARGROUP}|{POSIX_CHARGROUP_DOUBLE}
 }
 
 <FORCE_PACKAGE_TOKEN>{
-  \s                                    {return captureSpaces();}
+  {ANY_SPACE}                                    {return captureSpaces();}
   {LINE_COMMENT_ANNOTATION}	        {return COMMENT_ANNOTATION;}
   "#"     	                        {return captureComment();}
 
