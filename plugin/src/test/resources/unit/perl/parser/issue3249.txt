@@ -1,0 +1,16 @@
+Subtree: Perl5 (Perl5)
+Perl5
+  PsiErrorElement:Unexpected token
+    PsiElement(BAD_CHARACTER)(' ')
+  PsiElement(Perl5: ;)(';')
+  PsiErrorElement:Unexpected token
+    PsiElement(BAD_CHARACTER)(' ')
+  PsiElement(Perl5: ;)(';')
+  PsiElement(Perl5: ;)(';')
+  PsiErrorElement:Unexpected token
+    PsiElement(BAD_CHARACTER)(' ')
+--------------------------------------------------------------------------------
+Subtree: Perl5 POD (Perl5 POD)
+POD file
+  PsiElement(Perl5 POD: POD_OUTER)(' \n;\n \n ;\n;\n\n ')
+--------------------------------------------------------------------------------
