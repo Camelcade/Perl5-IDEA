@@ -27,6 +27,9 @@ public abstract class PerlParserLikeTest extends PerlParserTestBase {
   }
 
   @Test
+  public void testPerl38Defaults() { doTest(); }
+
+  @Test
   public void testIssue3249() { doTest(false); }
 
   @Test

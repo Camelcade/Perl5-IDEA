@@ -1,0 +1,23 @@
+# need this to make ExtUtils::MakeMaker configurator to work4
+use warnings FATAL => 'all';
+use strict;
+
+use v5.10;
+
+sub something1($some, $otherthing = 123) {
+}
+
+sub something2($some, $otherthing ||= 123) {
+}
+
+sub something3($some, $otherthing //= 123) {
+}
+
+sub($some, $otherthing = 123) {
+};
+
+sub($some, $otherthing ||= 123) {
+};
+
+sub($some, $otherthing //= 123) {
+};
