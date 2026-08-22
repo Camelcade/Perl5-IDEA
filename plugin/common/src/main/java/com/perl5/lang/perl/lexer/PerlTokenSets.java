@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -412,4 +412,6 @@ public final class PerlTokenSets {
   );
 
   public static final TokenSet PACKAGE_LIKE_TOKENS = TokenSet.create(PACKAGE, QUALIFYING_PACKAGE);
+
+  public static final TokenSet FALLBACK_ASSING_OPERATORS = TokenSet.create(OPERATOR_OR_ASSIGN, OPERATOR_OR_DEFINED_ASSIGN);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +30,16 @@ public class PerlSyntaxInspectionTest extends PerlLightTestCase {
   @Override
   protected String getBaseDataPath() {
     return "annotator/perl/syntax";
+  }
+
+  @Test
+  public void testPerl38Defaults36() {
+    doTest(V5_36);
+  }
+
+  @Test
+  public void testPerl38Defaults38() {
+    doTest(V5_38);
   }
 
   @Test
