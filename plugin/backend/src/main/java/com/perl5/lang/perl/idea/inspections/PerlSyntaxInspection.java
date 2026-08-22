@@ -24,6 +24,7 @@ import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.codeInspection.ProblemHighlightType;
 import com.intellij.codeInspection.ProblemsHolder;
+import com.intellij.lang.ASTNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -43,14 +44,14 @@ import com.perl5.lang.perl.psi.utils.PerlPsiUtil;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 import static com.perl5.lang.perl.internals.PerlVersion.*;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.BITWISE_ASSIGN_OPERATORS_TOKENSET;
-import static com.perl5.lang.perl.lexer.PerlTokenSets.BITWISE_OPERATORS_TOKENSET;
+import static com.perl5.lang.perl.lexer.PerlTokenSets.*;
 import static com.perl5.lang.perl.parser.PerlElementTypesGenerated.*;
 
 public class PerlSyntaxInspection extends PerlInspection {
@@ -230,10 +231,24 @@ public class PerlSyntaxInspection extends PerlInspection {
       }
 
       @Override
+      public void visitSignatureElement(@NotNull PsiPerlSignatureElement o) {
+        if (selectedVersion.lesserThan(V5_38) && isSubSignatureElement(o)) {
+          var operatorNode = o.getNode().findChildByType(FALLBACK_ASSING_OPERATORS);
+          if (operatorNode != null) {
+            registerProblem(
+              holder, operatorNode.getPsi(),
+              PerlBundle.message(
+                "inspection.message.defined.or.logical.or.assignment.default.expressions.in.signatures.are.only.supported.since"),
+              buildChangePerlVersionQuickFixes(PerlVersion.GREATER_OR_EQUAL_V538)
+            );
+          }
+        }
+        super.visitSignatureElement(o);
+      }
+
+      @Override
       public void visitSignatureContent(@NotNull PsiPerlSignatureContent o) {
-        PsiElement signatureOwner = o.getParent();
-        if (!(signatureOwner instanceof PsiPerlSubDefinitionImpl) &&
-            !(signatureOwner instanceof PsiPerlSubExprImpl)) {
+        if (!isSubSignature(o)) {
           return;
         }
 
@@ -280,6 +295,15 @@ public class PerlSyntaxInspection extends PerlInspection {
             run = run.getNextSibling();
           }
         }
+      }
+
+      private static boolean isSubSignature(@NonNull PsiPerlSignatureContent signatureContent) {
+        PsiElement signatureOwner = signatureContent.getParent();
+        return signatureOwner instanceof PsiPerlSubDefinitionImpl || signatureOwner instanceof PsiPerlSubExprImpl;
+      }
+
+      private static boolean isSubSignatureElement(@NonNull PsiPerlSignatureElement o) {
+        return o.getParent() instanceof PsiPerlSignatureContent content && isSubSignature(content);
       }
 
       private @NotNull LocalQuickFix getFlipElementsQuickFix(@NotNull PsiElement attributes) {

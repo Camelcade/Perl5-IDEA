@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,6 +61,7 @@ public final class PerlVersion implements Comparable<PerlVersion> {
   public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V520 = version -> !version.lesserThan(V5_20);
   public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V522 = version -> !version.lesserThan(V5_22);
   public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V532 = version -> !version.lesserThan(V5_32);
+  public static final Predicate<PerlVersion> GREATER_OR_EQUAL_V538 = version -> !version.lesserThan(V5_38);
   public static final List<PerlVersion> ALL_VERSIONS = List.of(
     V5_10, V5_12, V5_14, V5_16, V5_18, V5_20, V5_22, V5_24, V5_26, V5_28, V5_30, V5_32, V5_34, V5_36, V5_38, V5_40, V5_42
   );
