@@ -3816,7 +3816,18 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // signature_left_side ['=' [parse_scalar_expr]]
+  // '=' | '//=' | '||='
+  static boolean parse_sub_signature_assignment(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "parse_sub_signature_assignment")) return false;
+    boolean result_;
+    result_ = consumeToken(builder_, OPERATOR_ASSIGN);
+    if (!result_) result_ = consumeToken(builder_, OPERATOR_OR_DEFINED_ASSIGN);
+    if (!result_) result_ = consumeToken(builder_, OPERATOR_OR_ASSIGN);
+    return result_;
+  }
+
+  /* ********************************************************** */
+  // signature_left_side [parse_sub_signature_assignment [parse_scalar_expr]]
   static boolean parse_sub_signature_element(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "parse_sub_signature_element")) return false;
     boolean result_;
@@ -3827,19 +3838,19 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     return result_;
   }
 
-  // ['=' [parse_scalar_expr]]
+  // [parse_sub_signature_assignment [parse_scalar_expr]]
   private static boolean parse_sub_signature_element_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "parse_sub_signature_element_1")) return false;
     parse_sub_signature_element_1_0(builder_, level_ + 1);
     return true;
   }
 
-  // '=' [parse_scalar_expr]
+  // parse_sub_signature_assignment [parse_scalar_expr]
   private static boolean parse_sub_signature_element_1_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "parse_sub_signature_element_1_0")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_);
-    result_ = consumeToken(builder_, OPERATOR_ASSIGN);
+    result_ = parse_sub_signature_assignment(builder_, level_ + 1);
     result_ = result_ && parse_sub_signature_element_1_0_1(builder_, level_ + 1);
     exit_section_(builder_, marker_, null, result_);
     return result_;
