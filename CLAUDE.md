@@ -77,6 +77,8 @@ Each language module follows this structure:
 
 ## Testing
 
+Prefer functional tests over unit tests unless a unit test is absolutely necessary and requested. Functional tests cover behavior instead of a particular implementation and may cover additional stuff on the way.
+
 Tests are categorized using JUnit `@Category` annotations:
 
 - `@Category(Light.class)` - Fast tests, suitable for local development
@@ -103,7 +105,14 @@ Current targets:
 ## Contribution Guidelines
 
 - One PR = one feature or bugfix
-- Commit messages should reference issues: `hurricup/Perl5-IDEA#xxx`
 - No partial implementations - complete solutions or decompose into separate issues
 - PRs must not break existing tests
 - Contact maintainer (hurricup) before major architectural changes
+
+### Commit policy
+
+- Prefer atomic changes, not a single commit mess. Commit incrementally as you work, one logical change per commit (e.g. "add key", "add field type", "handle new case in consumers", "add tests" are each their own commit). Don't bundle a whole feature into one commit. Each commit must still build/compile on its own. Use nice messages (IntelliJ format).
+- Reference issues in commit messages with a bare `#xxx` (no `user/project` prefix needed for local issues). Always include the issue id in the subject of every commit that belongs to an issue — including test-only, refactor, cleanup, docs, and follow-up commits. Keep a descriptive label if useful, but prefix it with the id, e.g. "#xxx tests: …". Only genuinely issue-less changes (incidental typo, unrelated drive-by) may omit an id.
+- Addressing review comments / fixing an existing change: if the code being fixed lives on a not-yet-merged feature branch, make `git commit --fixup=<sha>` commits targeting the original commit that introduced it (the maintainer runs the autosquash rebase). Only if the original change is already in master, make a normal separate commit. Grouping: one fix per commit by default, but several comments about the same problem or a really related issue may share a commit.
+- To reword a non-HEAD commit, create a `git commit --fixup=reword:<sha>` commit (or `--fixup=amend:<sha>` to change content+message too) — do NOT reset/cherry-pick or rewrite history by hand. For the current HEAD commit, plain `git commit --amend` is fine.
+- Put the why in the commit message, not in inline code comments.
