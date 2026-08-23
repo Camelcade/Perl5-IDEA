@@ -2,7 +2,7 @@ $r = SqlQuery(<<SQL);
 SELECT *
 FROM tblPackage
 WHERE a = 1
-  <caret>
+    <caret>
   AND b = 2
   AND c = 3
 SQL
