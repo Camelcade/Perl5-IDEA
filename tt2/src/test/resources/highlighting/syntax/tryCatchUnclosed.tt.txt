@@ -23,7 +23,6 @@ head
     HTML_TAG => DEFAULT_TAG => TEXT
 http://template-toolkit.org/docs/manual/Variables.html
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
@@ -60,7 +59,6 @@ body
     HTML_CODE => TEXT
 ...blah...blah...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
@@ -73,7 +71,6 @@ body
     HTML_CODE => TEXT
 ...etc...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
@@ -86,17 +83,14 @@ body
     HTML_CODE => TEXT
 ...and
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 so
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 on...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -109,17 +103,14 @@ on...
     HTML_CODE => TEXT
 An
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 error
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 occurred!
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
 
