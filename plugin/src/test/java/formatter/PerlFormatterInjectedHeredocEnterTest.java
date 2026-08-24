@@ -17,6 +17,8 @@
 package formatter;
 
 
+import com.intellij.lang.Language;
+import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
 public class PerlFormatterInjectedHeredocEnterTest extends PerlFormatterTestCase {
@@ -26,20 +28,31 @@ public class PerlFormatterInjectedHeredocEnterTest extends PerlFormatterTestCase
   }
 
   @Test
-  public void testUnindentableNested() {doTestEnter();}
+  public void testUnindentableNested() {
+    assertHasHtml();
+    doTestEnter();}
 
   @Test
-  public void testUnindentableTopLevel() {doTestEnter();}
+  public void testUnindentableTopLevel() {    assertHasHtml();
+    doTestEnter();}
 
   @Test
-  public void testIndentableNested() {doTestEnter();}
+  public void testIndentableNested() {    assertHasHtml();
+    doTestEnter();}
 
   @Test
-  public void testSqlAfterWhere() {doTestEnter();}
+  public void testSqlAfterWhere() {
+    assertHasSql();
+    doTestEnter();}
 
   @Test
-  public void testSqlBetweenAnds() {doTestEnter();}
+  public void testSqlBetweenAnds() {
+    assertHasSql();
+    doTestEnter();}
 
   @Test
-  public void testSqlReformat() {doFormatTest();}
+  public void testSqlReformat() {
+    assertHasSql();
+    doFormatTest();
+  }
 }
