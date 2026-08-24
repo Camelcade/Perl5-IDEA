@@ -34,6 +34,18 @@ dependencies {
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
 
+    testBundledPlugins(
+      "intellij.libraries.misc.plugin",
+      "intellij.structuralSearch.plugin",
+      "intellij.structureView.plugin",
+      "intellij.testRunner.plugin",
+      "intellij.todo.plugin",
+    )
+
+    testBundledModules(
+      "intellij.spellchecker"
+    )
+
     // packaging, which modules to include into this one
     listOf(
       ":lang.mason.htmlmason.common",
