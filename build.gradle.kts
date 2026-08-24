@@ -36,8 +36,8 @@ plugins {
   id("com.hurricup.gradle.fixcompress")
   id("idea")
   id("jacoco")
-  id("org.jetbrains.intellij.platform") version "2.18.1"
-  id("org.jetbrains.intellij.platform.grammarkit") version "2.18.1"
+  id("org.jetbrains.intellij.platform") version "2.19.0-SNAPSHOT"
+  id("org.jetbrains.intellij.platform.grammarkit") version "2.19.0-SNAPSHOT"
   id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
   id("org.sonarqube") version "7.4.0.8496"
   id("org.jetbrains.kotlin.jvm") version "2.4.10"
