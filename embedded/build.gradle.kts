@@ -40,6 +40,14 @@ dependencies {
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
 
+    testBundledPlugins(
+      "intellij.libraries.misc.plugin",
+      "intellij.structuralSearch.plugin",
+      "intellij.structureView.plugin",
+      "intellij.testRunner.plugin",
+      "intellij.todo.plugin",
+    )
+
     testBundledModules(
       "intellij.spellchecker"
     )
