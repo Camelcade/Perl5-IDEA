@@ -192,7 +192,7 @@ private fun MasonNamespaceDefinition.getParentComponentFile(
 ): VirtualFile? {
   // check in current dir
   var autobaseNames: MutableList<String?> =
-    java.util.ArrayList<String?>(MasonSettings.getInstance(project).autobaseNames)
+    java.util.ArrayList(MasonSettings.getInstance(project).autobaseNames)
 
   if (childFile.parent == currentDirectory && autobaseNames.contains(childFile.name)) {// avoid cyclic inheritance
     autobaseNames = autobaseNames.subList(0, autobaseNames.lastIndexOf(childFile.name))
