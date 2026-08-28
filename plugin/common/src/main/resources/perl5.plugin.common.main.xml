@@ -191,6 +191,7 @@
     <iconProvider implementation="com.perl5.lang.pod.idea.ui.PodIconProvider"/>
     <elementDescriptionProvider implementation="com.perl5.lang.pod.parser.psi.PodElementDescriptionProvider"/>
     <lang.namesValidator language="Perl5 POD" implementationClass="com.perl5.lang.pod.idea.refactoring.PodNamesValidator"/>
+    <lang.ast.factory language="Perl5 POD" implementationClass="com.perl5.lang.pod.PodAstFactory"/>
     <!--  END OF POD -->
   </extensions>
 </idea-plugin>
