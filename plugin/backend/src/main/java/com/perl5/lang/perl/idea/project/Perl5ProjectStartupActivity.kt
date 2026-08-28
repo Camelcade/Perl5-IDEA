@@ -20,13 +20,16 @@ import com.intellij.notification.BrowseNotificationAction
 import com.intellij.notification.Notification
 import com.intellij.notification.NotificationType
 import com.intellij.notification.Notifications
-import com.intellij.openapi.application.ApplicationManager
+import com.intellij.openapi.application.ApplicationManager.getApplication
+import com.intellij.openapi.application.EDT
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.startup.ProjectActivity
 import com.intellij.util.FileContentUtil
 import com.perl5.PerlBundle
 import com.perl5.lang.perl.idea.configuration.settings.PerlApplicationSettings
 import com.perl5.lang.perl.util.PerlPluginUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class Perl5ProjectStartupActivity : ProjectActivity {
   override suspend fun execute(project: Project) {
@@ -52,23 +55,10 @@ class Perl5ProjectStartupActivity : ProjectActivity {
 
       Notifications.Bus.notify(notification)
     }
-    if (!ApplicationManager.getApplication().isUnitTestMode) {
-      scheduleNamesUpdateWithReparse(project)
+    if (!getApplication().isUnitTestMode) {
+      withContext(Dispatchers.EDT) {
+        FileContentUtil::reparseOpenedFiles
+      }
     }
-  }
-
-  private fun scheduleNamesUpdateWithReparse(project: Project) {
-    ApplicationManager.getApplication().executeOnPooledThread { initNamesWithReparse(project) }
-  }
-
-
-  private fun initNamesWithReparse(project: Project) {
-    if (project.isDisposed) {
-      return
-    }
-    PerlNamesCache.getInstance(project).forceCacheUpdate {
-      ApplicationManager.getApplication().invokeLater(FileContentUtil::reparseOpenedFiles)
-    }
-
   }
 }
