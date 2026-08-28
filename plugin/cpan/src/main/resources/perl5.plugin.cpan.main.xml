@@ -22,9 +22,6 @@
     <packageManagerAdapterFactory implementation="com.perl5.lang.perl.cpan.adapter.CpanAdapter$Factory" order="last"/>
   </extensions>
 
-  <extensions defaultExtensionNs="com.intellij">
-  </extensions>
-
   <actions>
     <action id="perl5.install.with.cpan" class="com.perl5.lang.perl.cpan.action.PerlInstallPackagesWithCpanAction">
       <add-to-group group-id="perl5.install"/>

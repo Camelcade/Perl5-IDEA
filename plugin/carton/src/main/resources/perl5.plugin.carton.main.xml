@@ -21,6 +21,4 @@
   <extensions defaultExtensionNs="com.perl5">
     <directoryConfigurationProvider implementation="com.perl5.lang.perl.carton.PerlCartonDirectoryConfigurationProvider"/>
   </extensions>
-  <extensions defaultExtensionNs="com.intellij">
-  </extensions>
 </idea-plugin>

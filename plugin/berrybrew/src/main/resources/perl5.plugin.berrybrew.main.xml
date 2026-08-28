@@ -22,6 +22,4 @@
     <versionManagerHandler key="berrybrew"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.berrybrew.BerryBrewHandler"/>
   </extensions>
-  <extensions defaultExtensionNs="com.intellij">
-  </extensions>
 </idea-plugin>

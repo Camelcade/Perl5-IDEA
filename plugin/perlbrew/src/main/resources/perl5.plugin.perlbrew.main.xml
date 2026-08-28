@@ -22,8 +22,6 @@
     <versionManagerHandler key="perlbrew"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewHandler"/>
   </extensions>
-  <extensions defaultExtensionNs="com.intellij">
-  </extensions>
 
   <actions>
     <action id="perl5.perlbrew.createlib" class="com.perl5.lang.perl.idea.sdk.versionManager.perlbrew.PerlBrewCreateLibraryAction"
