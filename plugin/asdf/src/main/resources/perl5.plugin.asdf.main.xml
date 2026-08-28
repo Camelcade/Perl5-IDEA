@@ -23,6 +23,4 @@
     <versionManagerHandler key="asdf"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.asdf.AsdfHandler"/>
   </extensions>
-  <extensions defaultExtensionNs="com.intellij">
-  </extensions>
 </idea-plugin>

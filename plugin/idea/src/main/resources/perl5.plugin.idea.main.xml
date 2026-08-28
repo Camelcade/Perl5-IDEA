@@ -25,6 +25,4 @@
             implementation="com.perl5.lang.perl.idea.configuration.module.idea.PerlModuleConfigurationEditorProvider"
             order="first"/>
     </extensions>
-    <actions>
-    </actions>
 </idea-plugin>
