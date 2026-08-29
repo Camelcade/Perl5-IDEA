@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -125,7 +125,7 @@ public class PerlCoverageEngine extends CoverageEngine {
   }
 
   @Override
-  public @Nullable String getQualifiedName(@NotNull File outputFile, @NotNull PsiFile sourceFile) {
+  protected @Nullable String getQualifiedName(@NotNull Path outputFile, @NotNull PsiFile sourceFile) {
     return buildQualifiedName(sourceFile);
   }
 

@@ -47,7 +47,7 @@ import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
+import java.nio.file.Path;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
@@ -59,7 +59,7 @@ public class PerlCoverageRunner extends CoverageRunner {
   private static final Logger LOG = Logger.getInstance(PerlCoverageRunner.class);
 
   @Override
-  protected @NotNull CoverageLoadingResult loadCoverageData(@NotNull File sessionDataFile,
+  protected @NotNull CoverageLoadingResult loadCoverageData(@NotNull Path sessionDataFile,
                                                             @Nullable CoverageSuite baseCoverageSuite,
                                                             @NotNull CoverageLoadErrorReporter reporter) {
     if (!(baseCoverageSuite instanceof PerlCoverageSuite perlCoverageSuite)) {
@@ -81,7 +81,7 @@ public class PerlCoverageRunner extends CoverageRunner {
     return new SuccessCoverageLoadingResult(Objects.requireNonNull(projectDataRef.get()));
   }
 
-  private static @Nullable ProjectData doLoadCoverageData(@NotNull File sessionDataFile, @NotNull PerlCoverageSuite perlCoverageSuite) {
+  private static @Nullable ProjectData doLoadCoverageData(@NotNull Path sessionDataFile, @NotNull PerlCoverageSuite perlCoverageSuite) {
     Project project = perlCoverageSuite.getProject();
     Sdk effectiveSdk;
     try {
@@ -98,7 +98,7 @@ public class PerlCoverageRunner extends CoverageRunner {
       return null;
     }
     try {
-      hostData.fixPermissionsRecursively(sessionDataFile.getAbsolutePath(), project);
+      hostData.fixPermissionsRecursively(sessionDataFile.toFile().getAbsolutePath(), project);
     }
     catch (ExecutionException e) {
       LOG.warn("Error fixing permissions for " + sessionDataFile);
@@ -129,9 +129,9 @@ public class PerlCoverageRunner extends CoverageRunner {
         return null;
       }
 
-      String remotePath = hostData.getRemotePath(sessionDataFile.getAbsolutePath());
+      String remotePath = hostData.getRemotePath(sessionDataFile.toFile().getAbsolutePath());
       if (StringUtil.isEmpty(remotePath)) {
-        LOG.warn("Unable to map remote path for: " + sessionDataFile.getAbsolutePath() + " in " + hostData);
+        LOG.warn("Unable to map remote path for: " + sessionDataFile.toAbsolutePath() + " in " + hostData);
         return null;
       }
 
