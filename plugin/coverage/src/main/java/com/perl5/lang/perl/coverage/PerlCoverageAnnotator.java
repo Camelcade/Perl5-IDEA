@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.File;
+import java.nio.file.Path;
 
 public class PerlCoverageAnnotator extends SimpleCoverageAnnotator {
   public PerlCoverageAnnotator(Project project) {
@@ -33,7 +33,7 @@ public class PerlCoverageAnnotator extends SimpleCoverageAnnotator {
   }
 
   @Override
-  protected @Nullable FileCoverageInfo fillInfoForUncoveredFile(@NotNull File file) {
+  protected @Nullable FileCoverageInfo fillInfoForUncoveredFile(@NotNull Path file) {
     return new FileCoverageInfo();
   }
 
