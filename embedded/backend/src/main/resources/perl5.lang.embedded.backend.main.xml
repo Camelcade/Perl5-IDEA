@@ -6,9 +6,6 @@
 
   <resource-bundle>messages.EmbeddedPerlBundle</resource-bundle>
 
-  <extensions defaultExtensionNs="com.perl5">
-  </extensions>
-
   <extensions defaultExtensionNs="com.intellij">
     <stubElementRegistryExtension implementation="com.perl5.lang.embedded.stubs.EmbeddedPerlStubRegistryExtension"/>
     <languageStubDefinition language="Embedded Perl" implementationClass="com.perl5.lang.perl.psi.stubs.PerlTemplatingStubDefinition"/>

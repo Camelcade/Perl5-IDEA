@@ -180,6 +180,9 @@ public class YoutrackErrorHandler extends ErrorReportSubmitter {
 
     ContentType contentType = ContentType.create("text/plain", Consts.UTF_8);
     for (Attachment it : attachments) {
+      if( it == null){
+        continue;
+      }
       entityBuilder.addBinaryBody("attachments[]", it.getBytes(), contentType, it.getName());
     }
 

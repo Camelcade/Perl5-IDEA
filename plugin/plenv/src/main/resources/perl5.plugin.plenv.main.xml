@@ -23,6 +23,4 @@
     <versionManagerHandler key="plenv"
                            implementationClass="com.perl5.lang.perl.idea.sdk.versionManager.plenv.PlenvHandler"/>
   </extensions>
-  <extensions defaultExtensionNs="com.intellij">
-  </extensions>
 </idea-plugin>

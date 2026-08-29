@@ -18,8 +18,6 @@
   <dependencies>
     <module name="perl5.plugin.backend.main"/>
   </dependencies>
-  <extensions defaultExtensionNs="com.perl5">
-  </extensions>
   <extensions defaultExtensionNs="com.intellij">
     <virtualFileSystem key="perl5_remote" implementationClass="com.perl5.lang.perl.debugger.PerlRemoteFileSystem"/>
     <programRunner implementation="com.perl5.lang.perl.debugger.run.run.debugger.PerlDebuggerProgramRunner"/>

@@ -17,8 +17,6 @@ Content modules:
   - Dependencies:
     - perl5.plugin.backend.main (namespace=hurricup)
  - perl5.plugin.common.main (namespace=hurricup) (REQUIRED); lib/modules/perl5.plugin.common.main.jar
-  - Dependencies:
-    - intellij.spellchecker
  - perl5.plugin.copyright.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.copyright.main.jar
   - Dependencies:
     - com.intellij.copyright
@@ -28,6 +26,7 @@ Content modules:
     - perl5.plugin.common.main (namespace=hurricup)
     - intellij.platform.smRunner
     - intellij.platform.backend
+    - intellij.spellchecker
  - perl5.plugin.coverage.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.plugin.coverage.main.jar
   - Dependencies:
     - com.intellij.modules.coverage
