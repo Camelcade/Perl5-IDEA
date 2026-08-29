@@ -16,7 +16,7 @@
 
 package base;
 
-import categories.Light;
+import categories.Smoke;
 import com.intellij.testFramework.fixtures.BasePlatformTestCase;
 import com.intellij.util.lang.PathClassLoader;
 import com.perl5.lang.perl.PerlParserDefinition;
@@ -30,7 +30,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 @SuppressWarnings("JUnitMixedFramework")
-@Category(Light.class)
+@Category(Smoke.class)
 @RunWith(Parameterized.class)
 public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
 
@@ -59,7 +59,7 @@ public abstract class PerlInstrumentationTestCase extends BasePlatformTestCase {
     assertInstanceOf(classLoader, PathClassLoader.class);
     var pathClassLoader = (PathClassLoader)classLoader;
     assertTrue(
-      "Class " + myClass + " does not look instrumented, classpaths: " + pathClassLoader.getClassPath().getBaseUrls(),
+      "Class " + myClass + " does not look instrumented, classpaths: " + pathClassLoader.getClassPath().getFiles(),
       Stream.of(myClass.getDeclaredMethods()).anyMatch(m -> m.getName().startsWith("$$$reportNull$$$")));
   }
 
