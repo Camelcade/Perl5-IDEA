@@ -141,9 +141,11 @@ public abstract class PerlVersionManagerAdapter {
   protected @Nullable List<String> getOutput(@NotNull PerlCommandLine commandLine) {
     ProcessOutput processOutput = getProcessOutput(commandLine.withHostData(getHostData()));
     if (processOutput == null) {
+      LOG.debug("Process output for " + commandLine + " is null");
       return null;
     }
     if (processOutput.getExitCode() == 0) {
+      LOG.debug("Process output for " + commandLine + " is\n" + processOutput);
       return processOutput.getStdoutLines(true);
     }
     LOG.warn("Process exited with non-zero code. Command line: " + commandLine +
