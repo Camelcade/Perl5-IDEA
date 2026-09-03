@@ -20,7 +20,6 @@ com.deadlock.scsyntax
 com.intellij
 com.intellij.LineProfiler
 com.intellij.aidevtools
-com.intellij.air
 com.intellij.aop
 com.intellij.beanValidation
 com.intellij.cdi
@@ -37,7 +36,6 @@ com.intellij.dfa.analysis
 com.intellij.diagram
 com.intellij.findusages.ml
 com.intellij.flyway
-com.intellij.freemarker
 com.intellij.gradle
 com.intellij.groovy.scripting
 com.intellij.hibernate

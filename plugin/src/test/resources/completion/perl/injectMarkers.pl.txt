@@ -58,9 +58,6 @@ Text: EXASOL; Tail: null; Type: inject with Exasol; Icon: /sqlScript.svg; Type I
 Text: FLOWJS; Tail: null; Type: inject with Flow JS; Icon: /javaScript.svg; Type Icon: null
 	Lookups: FLOWJS
 	String: FLOWJS
-Text: FREEMARKER; Tail: null; Type: inject with FreeMarker; Icon: /freemarker-icon.svg; Type Icon: null
-	Lookups: FREEMARKER
-	String: FREEMARKER
 Text: GREENPLUM; Tail: null; Type: inject with Greenplum; Icon: /sqlScript.svg; Type Icon: null
 	Lookups: GREENPLUM
 	String: GREENPLUM
