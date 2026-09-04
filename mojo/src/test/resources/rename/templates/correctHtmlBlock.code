@@ -1,0 +1,13 @@
+<html>
+<body>
+
+
+% layout 'test';
+
+<%
+my $v<caret>ar = 10;
+%>
+
+</body>
+</html>
+
