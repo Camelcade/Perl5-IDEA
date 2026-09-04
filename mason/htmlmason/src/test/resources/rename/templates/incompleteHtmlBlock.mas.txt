@@ -1,0 +1,5 @@
+% my $flag = 1;
+
+<%perl>
+my $newName = 10;
+</%perl>
