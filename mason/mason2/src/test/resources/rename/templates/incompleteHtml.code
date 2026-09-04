@@ -1,0 +1,4 @@
+% for my $v<caret>ar  (1..3) {
+    some html3
+% }
+some html4
