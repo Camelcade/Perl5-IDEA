@@ -18,6 +18,7 @@ package com.perl5.lang.perl.idea.livetemplates;
 
 import com.intellij.codeInsight.template.Template;
 import com.intellij.codeInsight.template.impl.TemplateContext;
+import com.intellij.codeInsight.template.impl.TemplateImpl;
 import com.intellij.codeInsight.template.impl.TemplateOptionalProcessor;
 import com.intellij.lang.Language;
 import com.intellij.openapi.editor.Document;
@@ -82,6 +83,10 @@ public abstract class AbstractOutlineLiveTemplateProcessor implements TemplateOp
 
   @Override
   public void processText(Project project, Template template, Document document, RangeMarker templateRange, Editor editor) {
+    if (template instanceof TemplateImpl templateImpl && templateImpl.isInline()) {
+      return;
+    }
+
     PsiFile file = PsiUtilBase.getPsiFileInEditor(editor, project);
     if (!isMyFile(file)) {
       return;
