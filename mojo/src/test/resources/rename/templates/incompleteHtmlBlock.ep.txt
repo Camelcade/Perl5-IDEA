@@ -1,0 +1,6 @@
+
+% layout 'test';
+
+<%
+my $newName = 10;
+%>

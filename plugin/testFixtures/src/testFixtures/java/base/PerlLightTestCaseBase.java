@@ -2766,6 +2766,10 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     doTestRename("NewName");
   }
 
+  protected void doTestRenameVar() {
+    doTestRename("newName");
+  }
+
   protected void doTestRename(@NotNull String newName) {
     initWithFileSmart();
     doRenameAtCaret(newName);

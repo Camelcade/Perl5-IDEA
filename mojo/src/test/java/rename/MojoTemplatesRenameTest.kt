@@ -16,15 +16,21 @@
 package rename
 
 import base.MojoLightTestCase
-import com.perl5.lang.perl.fileTypes.PerlFileTypeScript
 import org.junit.Test
 
 
-open class MojoPerlRenameTest : MojoLightTestCase() {
-  override fun getBaseDataPath(): String = "rename/perl"
-
-  override fun getFileExtension(): String = PerlFileTypeScript.EXTENSION_PL
+open class MojoTemplatesRenameTest : MojoLightTestCase() {
+  override fun getBaseDataPath(): String = "rename/templates"
 
   @Test
-  fun testMojoHelper() = doTestRenameVar()
+  fun testCorrectHtml() = doTestRenameVar()
+
+  @Test
+  fun testIncompleteHtml() = doTestRenameVar()
+
+  @Test
+  fun testCorrectHtmlBlock() = doTestRenameVar()
+
+  @Test
+  fun testIncompleteHtmlBlock() = doTestRenameVar()
 }

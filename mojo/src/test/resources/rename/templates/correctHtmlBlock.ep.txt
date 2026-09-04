@@ -1,0 +1,13 @@
+<html>
+<body>
+
+
+% layout 'test';
+
+<%
+my $newName = 10;
+%>
+
+</body>
+</html>
+

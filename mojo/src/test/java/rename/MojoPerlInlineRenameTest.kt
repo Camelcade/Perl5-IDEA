@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,14 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package rename
 
-package rename;
-
-import org.jetbrains.annotations.NotNull;
-
-public class MojoInlinePerlRenameTest extends MojoPerlRenameTest {
-  @Override
-  protected void doRenameAtCaret(@NotNull String newName) {
-    doInplaceRenameAtCaret(newName);
-  }
+class MojoPerlInlineRenameTest : MojoPerlRenameTest() {
+  override fun doRenameAtCaret(newName: String) = doInplaceRenameAtCaret(newName)
 }

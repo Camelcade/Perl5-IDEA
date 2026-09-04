@@ -13,18 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package rename
 
-import base.MojoLightTestCase
-import com.perl5.lang.perl.fileTypes.PerlFileTypeScript
-import org.junit.Test
-
-
-open class MojoPerlRenameTest : MojoLightTestCase() {
-  override fun getBaseDataPath(): String = "rename/perl"
-
-  override fun getFileExtension(): String = PerlFileTypeScript.EXTENSION_PL
-
-  @Test
-  fun testMojoHelper() = doTestRenameVar()
+class MojoTemplatesInlineRenameTest : MojoTemplatesRenameTest() {
+  override fun doRenameAtCaret(newName: String) = doInplaceRenameAtCaret(newName)
 }

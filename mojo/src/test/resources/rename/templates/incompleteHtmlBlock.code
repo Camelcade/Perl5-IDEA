@@ -1,0 +1,6 @@
+
+% layout 'test';
+
+<%
+my $v<caret>ar = 10;
+%>
