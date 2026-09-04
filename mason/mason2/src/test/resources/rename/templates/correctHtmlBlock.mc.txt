@@ -1,0 +1,12 @@
+<html>
+<body>
+
+
+% my $flag = 1;
+
+<%perl>
+my $newName = 10;
+</%perl>
+
+</body>
+</html>

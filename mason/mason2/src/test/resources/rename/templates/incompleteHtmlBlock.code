@@ -1,0 +1,5 @@
+% my $flag = 1;
+
+<%perl>
+my $v<caret>ar = 10;
+</%perl>
