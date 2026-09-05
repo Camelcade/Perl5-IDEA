@@ -49,9 +49,12 @@ text/javascript
 
      
     HTML_CODE => TEXT
-//javacript comment
+//javacript
     HTML_CODE => TEXT
-    JS.LINE_COMMENT => DEFAULT_LINE_COMMENT
+ 
+    HTML_CODE => TEXT
+comment
+    HTML_CODE => TEXT
 
     
     HTML_CODE => TEXT
@@ -65,22 +68,10 @@ text/javascript
     HTML_CODE => TEXT
 function
     HTML_CODE => TEXT
-    JS.KEYWORD => DEFAULT_KEYWORD
  
     HTML_CODE => TEXT
-calculate
+calculate(a){
     HTML_CODE => TEXT
-(
-    HTML_CODE => TEXT
-    JS.PARENTHS => DEFAULT_PARENTHS
-a
-    HTML_CODE => TEXT
-)
-    HTML_CODE => TEXT
-    JS.PARENTHS => DEFAULT_PARENTHS
-{
-    HTML_CODE => TEXT
-    JS.BRACES => DEFAULT_BRACES
 
     
     HTML_CODE => TEXT
@@ -91,12 +82,8 @@ a
 
         
     HTML_CODE => TEXT
-if
+if(
     HTML_CODE => TEXT
-    JS.KEYWORD => DEFAULT_KEYWORD
-(
-    HTML_CODE => TEXT
-    JS.PARENTHS => DEFAULT_PARENTHS
  
     HTML_CODE => TEXT
 a
@@ -105,55 +92,29 @@ a
     HTML_CODE => TEXT
 <
     HTML_CODE => TEXT
-    JS.OPERATION_SIGN => DEFAULT_OPERATION_SIGN
  
     HTML_CODE => TEXT
-0
+0){
     HTML_CODE => TEXT
-    JS.NUMBER => DEFAULT_NUMBER
-)
-    HTML_CODE => TEXT
-    JS.PARENTHS => DEFAULT_PARENTHS
-{
-    HTML_CODE => TEXT
-    JS.BRACES => DEFAULT_BRACES
 
             
     HTML_CODE => TEXT
-alert
+alert('Negative');
     HTML_CODE => TEXT
-(
-    HTML_CODE => TEXT
-    JS.PARENTHS => DEFAULT_PARENTHS
-'Negative'
-    HTML_CODE => TEXT
-    JS.STRING => DEFAULT_STRING
-)
-    HTML_CODE => TEXT
-    JS.PARENTHS => DEFAULT_PARENTHS
-;
-    HTML_CODE => TEXT
-    JS.SEMICOLON => DEFAULT_SEMICOLON
 
             
     HTML_CODE => TEXT
 return
     HTML_CODE => TEXT
-    JS.KEYWORD => DEFAULT_KEYWORD
  
     HTML_CODE => TEXT
-false
+false;
     HTML_CODE => TEXT
-    JS.KEYWORD => DEFAULT_KEYWORD
-;
-    HTML_CODE => TEXT
-    JS.SEMICOLON => DEFAULT_SEMICOLON
 
         
     HTML_CODE => TEXT
 }
     HTML_CODE => TEXT
-    JS.BRACES => DEFAULT_BRACES
 
     
     HTML_CODE => TEXT
@@ -166,26 +127,15 @@ false
     HTML_CODE => TEXT
 return
     HTML_CODE => TEXT
-    JS.KEYWORD => DEFAULT_KEYWORD
  
     HTML_CODE => TEXT
-a
+a+10;
     HTML_CODE => TEXT
-+
-    HTML_CODE => TEXT
-    JS.OPERATION_SIGN => DEFAULT_OPERATION_SIGN
-10
-    HTML_CODE => TEXT
-    JS.NUMBER => DEFAULT_NUMBER
-;
-    HTML_CODE => TEXT
-    JS.SEMICOLON => DEFAULT_SEMICOLON
 
     
     HTML_CODE => TEXT
 }
     HTML_CODE => TEXT
-    JS.BRACES => DEFAULT_BRACES
 
 
 

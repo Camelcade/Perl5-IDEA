@@ -23,7 +23,6 @@ head
     HTML_TAG => DEFAULT_TAG => TEXT
 http://template-toolkit.org/docs/manual/Variables.html
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
@@ -60,7 +59,6 @@ body
     HTML_CODE => TEXT
 ...blah...blah...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
@@ -73,7 +71,6 @@ body
     HTML_CODE => TEXT
 ...etc...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
@@ -86,17 +83,14 @@ body
     HTML_CODE => TEXT
 ...and
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 so
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 on...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -109,17 +103,14 @@ on...
     HTML_CODE => TEXT
 An
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 error
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 occurred!
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -144,12 +135,10 @@ occurred!
     HTML_CODE => TEXT
 ERROR!
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 Type:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -161,7 +150,6 @@ Type:
     HTML_CODE => TEXT
 Info:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -197,12 +185,10 @@ Info:
     HTML_CODE => TEXT
 File
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 Error!
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -238,7 +224,6 @@ Error!
     HTML_CODE => TEXT
 ...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
@@ -267,7 +252,6 @@ Error!
     HTML_CODE => TEXT
 ...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -292,7 +276,6 @@ Error!
     HTML_CODE => TEXT
 ...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -305,7 +288,6 @@ Error!
     HTML_CODE => TEXT
 ...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -318,7 +300,6 @@ Error!
     HTML_CODE => TEXT
 ...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -331,12 +312,10 @@ Error!
     HTML_CODE => TEXT
 All
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 done!
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -353,17 +332,14 @@ done!
     HTML_CODE => TEXT
 This
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 gets
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 printed
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
    
     HTML_CODE => TEXT
@@ -376,12 +352,10 @@ printed
     HTML_CODE => TEXT
 This
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 doesn't
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -398,12 +372,10 @@ doesn't
     HTML_CODE => TEXT
 culinary
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 delights:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -423,7 +395,6 @@ delights:
     HTML_CODE => TEXT
 ...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -446,7 +417,6 @@ delights:
     HTML_CODE => TEXT
 in
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -455,7 +425,6 @@ in
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 :
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
       
     HTML_CODE => TEXT
@@ -465,7 +434,6 @@ in
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 .
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT

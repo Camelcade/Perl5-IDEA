@@ -536,6 +536,18 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     }
   }
 
+  protected void assertHasHtml() {
+    assertHasLanguage("HTML");
+  }
+
+  protected void assertHasSql() {
+    assertHasLanguage("SQL");
+  }
+
+  protected void assertHasLanguage(@NotNull String languageId) {
+    assertNotNull("No such language registered " + languageId, Language.findLanguageByID(languageId));
+  }
+
   protected void doFormatTest() {
     doFormatTest("");
   }

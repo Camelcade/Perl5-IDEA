@@ -23,7 +23,6 @@ head
     HTML_TAG => DEFAULT_TAG => TEXT
 http://template-toolkit.org/docs/manual/Variables.html
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
@@ -66,22 +65,18 @@ body
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 literal
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 value
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 'Foo'
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -93,27 +88,22 @@ value
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 value
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 of
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 variable
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 'foo'
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -125,22 +115,18 @@ variable
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 literal
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 value
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 '$100'
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -152,22 +138,18 @@ value
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 value
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 "Foo:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 $100.00"
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT

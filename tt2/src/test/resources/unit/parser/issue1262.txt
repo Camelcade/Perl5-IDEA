@@ -14,70 +14,16 @@ HtmlFile:issue1262.tt
           XmlToken:XML_ATTRIBUTE_VALUE_TOKEN('text/javascript')
           XmlToken:XML_ATTRIBUTE_VALUE_END_DELIMITER('"')
       XmlToken:XML_TAG_END('>')
-      JSEmbeddedContent
-        JSExpressionStatement
-          JSOuterLanguageElementExpression
-            PsiElement(TT2: TT2_OUTER)('[% comments = 1 %]\n    [% IF comments # some comment here %]')
-        PsiComment(JS:END_OF_LINE_COMMENT)('//javacript comment')
-        JSExpressionStatement
-          JSOuterLanguageElementExpression
-            PsiElement(TT2: TT2_OUTER)('[% END %]')
-        JSFunction
-          JSAttributeList
-            <empty list>
-          PsiElement(JS:FUNCTION_KEYWORD)('function')
-          PsiElement(JS:IDENTIFIER)('calculate')
-          JSParameterList
-            PsiElement(JS:LPAR)('(')
-            JSParameter
-              PsiElement(JS:IDENTIFIER)('a')
-            PsiElement(JS:RPAR)(')')
-          JSBlockStatement
-            PsiElement(JS:LBRACE)('{')
-            JSExpressionStatement
-              JSOuterLanguageElementExpression
-                PsiElement(TT2: TT2_OUTER)('[% IF negative %]')
-            JSIfStatement
-              PsiElement(JS:IF_KEYWORD)('if')
-              PsiElement(JS:LPAR)('(')
-              JSBinaryExpression
-                JSReferenceExpression
-                  PsiElement(JS:IDENTIFIER)('a')
-                PsiElement(JS:LT)('<')
-                JSLiteralExpression
-                  PsiElement(JS:NUMERIC_LITERAL)('0')
-              PsiElement(JS:RPAR)(')')
-              JSBlockStatement
-                PsiElement(JS:LBRACE)('{')
-                JSExpressionStatement
-                  JSCallExpression
-                    JSReferenceExpression
-                      PsiElement(JS:IDENTIFIER)('alert')
-                    JSArgumentList
-                      PsiElement(JS:LPAR)('(')
-                      JSLiteralExpression
-                        PsiElement(JS:STRING_LITERAL)(''Negative'')
-                      PsiElement(JS:RPAR)(')')
-                  PsiElement(JS:SEMICOLON)(';')
-                JSReturnStatement
-                  PsiElement(JS:RETURN_KEYWORD)('return')
-                  JSLiteralExpression
-                    PsiElement(JS:FALSE_KEYWORD)('false')
-                  PsiElement(JS:SEMICOLON)(';')
-                PsiElement(JS:RBRACE)('}')
-            JSExpressionStatement
-              JSOuterLanguageElementExpression
-                PsiElement(TT2: TT2_OUTER)('[% END %]')
-            JSReturnStatement
-              PsiElement(JS:RETURN_KEYWORD)('return')
-              JSBinaryExpression
-                JSReferenceExpression
-                  PsiElement(JS:IDENTIFIER)('a')
-                PsiElement(JS:PLUS)('+')
-                JSLiteralExpression
-                  PsiElement(JS:NUMERIC_LITERAL)('10')
-              PsiElement(JS:SEMICOLON)(';')
-            PsiElement(JS:RBRACE)('}')
+      XmlText
+        XmlToken:XML_DATA_CHARACTERS('\n    ')
+        PsiElement(TT2: TT2_OUTER)('[% comments = 1 %]\n    [% IF comments # some comment here %]')
+        XmlToken:XML_DATA_CHARACTERS('\n     //javacript comment\n    ')
+        PsiElement(TT2: TT2_OUTER)('[% END %]')
+        XmlToken:XML_DATA_CHARACTERS('\n\n    function calculate(a){\n    ')
+        PsiElement(TT2: TT2_OUTER)('[% IF negative %]')
+        XmlToken:XML_DATA_CHARACTERS('\n        if( a < 0){\n            alert('Negative');\n            return false;\n        }\n    ')
+        PsiElement(TT2: TT2_OUTER)('[% END %]')
+        XmlToken:XML_DATA_CHARACTERS('\n        return a+10;\n    }\n\n')
       XmlToken:XML_END_TAG_START('</')
       XmlToken:XML_NAME('script')
       XmlToken:XML_TAG_END('>')

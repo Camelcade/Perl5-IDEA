@@ -23,7 +23,6 @@ head
     HTML_TAG => DEFAULT_TAG => TEXT
 http://template-toolkit.org/docs/manual/Variables.html
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
@@ -61,7 +60,6 @@ body
     HTML_CODE => TEXT
 Things:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -74,7 +72,6 @@ Things:
     HTML_CODE => TEXT
 *
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -91,7 +88,6 @@ Things:
     HTML_CODE => TEXT
 Items:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -104,7 +100,6 @@ Items:
     HTML_CODE => TEXT
 *
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -121,7 +116,6 @@ Items:
     HTML_CODE => TEXT
 Stuff:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -138,7 +132,6 @@ Stuff:
     HTML_CODE => TEXT
 *
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -206,7 +199,6 @@ Stuff:
     HTML_CODE => TEXT
 *
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -217,7 +209,6 @@ Stuff:
     HTML_CODE => TEXT
 :
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -237,7 +228,6 @@ Stuff:
     HTML_CODE => TEXT
 Name:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -248,7 +238,6 @@ Name:
     HTML_CODE => TEXT
 Email:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -271,7 +260,6 @@ Email:
     HTML_CODE => TEXT
 :
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -305,14 +293,12 @@ li
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 /
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 [%
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 %]
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 :
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -336,12 +322,10 @@ li
     HTML_CODE => TEXT
 user
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 [%
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 %]
@@ -350,13 +334,11 @@ user
     HTML_CODE => TEXT
 in
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
          
     HTML_CODE => TEXT
 group
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -367,13 +349,11 @@ group
     HTML_CODE => TEXT
 is
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
          
     HTML_CODE => TEXT
 named
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -417,7 +397,6 @@ head
     HTML_TAG => DEFAULT_TAG => TEXT
 http://template-toolkit.org/docs/manual/Variables.html
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
@@ -455,7 +434,6 @@ body
     HTML_CODE => TEXT
 Things:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -468,7 +446,6 @@ Things:
     HTML_CODE => TEXT
 *
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -485,7 +462,6 @@ Things:
     HTML_CODE => TEXT
 Items:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -498,7 +474,6 @@ Items:
     HTML_CODE => TEXT
 *
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -515,7 +490,6 @@ Items:
     HTML_CODE => TEXT
 Stuff:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -532,7 +506,6 @@ Stuff:
     HTML_CODE => TEXT
 *
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -600,7 +573,6 @@ Stuff:
     HTML_CODE => TEXT
 *
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -611,7 +583,6 @@ Stuff:
     HTML_CODE => TEXT
 :
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -631,7 +602,6 @@ Stuff:
     HTML_CODE => TEXT
 Name:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -642,7 +612,6 @@ Name:
     HTML_CODE => TEXT
 Email:
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -665,7 +634,6 @@ Email:
     HTML_CODE => TEXT
 :
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -699,14 +667,12 @@ li
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 /
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 [%
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 %]
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 :
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -730,12 +696,10 @@ li
     HTML_CODE => TEXT
 user
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 [%
     PERL_TT2_MARKER => PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 %]
@@ -744,13 +708,11 @@ user
     HTML_CODE => TEXT
 in
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
          
     HTML_CODE => TEXT
 group
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%
@@ -761,13 +723,11 @@ group
     HTML_CODE => TEXT
 is
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
          
     HTML_CODE => TEXT
 named
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 [%

@@ -14,22 +14,18 @@ html
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 relative
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 component
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 paths
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 <&
     PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 topimage
@@ -44,22 +40,18 @@ tools/searchbox
     PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 absolute
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 component
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 path
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 <&
     PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 /shared/masthead
@@ -80,62 +72,50 @@ salmon
     PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 this
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 component
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 path
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 MUST
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 have
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 quotes
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 because
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 it
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 contains
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 a
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 comma
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 <&
     PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 "
@@ -156,22 +136,18 @@ mix
     PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 variable
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 component
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 path
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 <&
     PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 $
@@ -182,27 +158,22 @@ comp
     PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 variable
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 component
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 and
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 arguments
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 <&
     PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 $
@@ -219,128 +190,103 @@ args
     PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 you
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 can
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 use
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 arbitrary
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 expression
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 for
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 component
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 path,
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 but
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 it
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 cannot
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 begin
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 with
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 a
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 letter
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 or
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 number;
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 delimit
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 with
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 ()
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 to
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 remedy
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 this
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 <&
     PERL_EMBED_MARKER => DEFAULT_TEMPLATE_LANGUAGE_COLOR => TEXT
 (

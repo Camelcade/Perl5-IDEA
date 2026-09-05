@@ -23,7 +23,6 @@ head
     HTML_TAG => DEFAULT_TAG => TEXT
 http://template-toolkit.org/docs/manual/Variables.html
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
@@ -63,17 +62,14 @@ body
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 =>
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 Template::Plugin::CGI
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -85,17 +81,14 @@ Template::Plugin::CGI
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 =>
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 Template::Plugin::CGI
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -107,17 +100,14 @@ Template::Plugin::CGI
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 =>
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 Template::Plugin::CGI
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -129,32 +119,26 @@ Template::Plugin::CGI
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 look
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 for
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 'Foo'
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 then
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 'foo'
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -166,17 +150,14 @@ then
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
   
     HTML_CODE => TEXT
 =>
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 Template::Plugin::MyPlugin
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -188,17 +169,14 @@ Template::Plugin::MyPlugin
     HTML_CODE => TEXT
 #
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
   
     HTML_CODE => TEXT
 =>
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
  
     HTML_CODE => TEXT
 Template::Plugin::Foo::Bar
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -347,7 +325,6 @@ tr
     HTML_CODE => TEXT
 ...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 
 
     HTML_CODE => TEXT
@@ -415,7 +392,6 @@ href
     HTML_TAG => DEFAULT_TAG => TEXT
 ...
     HTML_CODE => TEXT
-    XML_TAG_DATA => TEXT
 </
     HTML_CODE => TEXT
     HTML_TAG => DEFAULT_TAG => TEXT
