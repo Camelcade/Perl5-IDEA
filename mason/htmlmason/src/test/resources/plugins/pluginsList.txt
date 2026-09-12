@@ -154,7 +154,6 @@ org.jetbrains.plugins.remote-run
 org.jetbrains.plugins.sass
 org.jetbrains.plugins.terminal
 org.jetbrains.plugins.textmate
-org.jetbrains.plugins.vue
 org.jetbrains.plugins.yaml
 org.jetbrains.security.package-checker
 org.toml.lang
