@@ -40,7 +40,7 @@ plugins {
   id("org.jetbrains.intellij.platform.grammarkit") version "2.19.0"
   id("com.github.nbaztec.coveralls-jacoco") version "1.2.20"
   id("org.sonarqube") version "7.5.0.8588"
-  id("org.jetbrains.kotlin.jvm") version "2.4.10"
+  id("org.jetbrains.kotlin.jvm") version "2.4.20"
 }
 
 dependencyLocking {
