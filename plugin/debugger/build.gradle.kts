@@ -30,6 +30,10 @@ dependencies {
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
 
+    bundledModules(
+      "intellij.platform.debugger",
+      "intellij.platform.debugger.impl",
+    )
   }
 }
 
