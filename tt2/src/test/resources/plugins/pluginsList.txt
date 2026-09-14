@@ -19,7 +19,7 @@ com.android.tools.gradle.dcl
 com.deadlock.scsyntax
 com.intellij
 com.intellij.LineProfiler
-com.intellij.aidevtools
+com.intellij.aiagentextensions
 com.intellij.aop
 com.intellij.beanValidation
 com.intellij.cdi
@@ -39,6 +39,7 @@ com.intellij.flyway
 com.intellij.gradle
 com.intellij.groovy.scripting
 com.intellij.hibernate
+com.intellij.idea.customization
 com.intellij.java
 com.intellij.java-i18n
 com.intellij.java.ide
@@ -79,7 +80,6 @@ com.intellij.spring.boot
 com.intellij.spring.boot.initializr
 com.intellij.spring.cloud
 com.intellij.spring.data
-com.intellij.spring.integration
 com.intellij.spring.messaging
 com.intellij.spring.modulith
 com.intellij.spring.mvc
@@ -99,7 +99,6 @@ com.jetbrains.sh
 com.jetbrains.station
 com.perl5
 com.perl5.lang.tt2
-idea.plugin.protoeditor
 intellij.bookmarks.plugin
 intellij.coverageMcp
 intellij.debuggerMcp
@@ -111,7 +110,6 @@ intellij.indexing.shared.core
 intellij.java.aetherDependencyResolver.plugin
 intellij.javascript.eslint
 intellij.ktor
-intellij.libraries.misc.plugin
 intellij.navbar.plugin
 intellij.nextjs
 intellij.platform.tasks.plugin
