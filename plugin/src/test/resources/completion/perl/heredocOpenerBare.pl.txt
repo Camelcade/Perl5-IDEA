@@ -157,9 +157,6 @@ Text: POSTCSS; Tail: null; Type: inject with PostCSS; Icon: /postcss.svg; Type I
 Text: PROPERTIES; Tail: null; Type: inject with Properties; Icon: PropertiesFileType; Type Icon: null
 	Lookups: PROPERTIES
 	String: PROPERTIES
-Text: PROTOBUF; Tail: null; Type: inject with protobuf; Icon: /protoFile.png; Type Icon: null
-	Lookups: PROTOBUF
-	String: PROTOBUF
 Text: QUTE; Tail: null; Type: inject with Qute; Icon: /quarkus.svg; Type Icon: null
 	Lookups: QUTE
 	String: QUTE
