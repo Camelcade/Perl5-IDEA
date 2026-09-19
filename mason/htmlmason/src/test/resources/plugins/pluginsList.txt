@@ -55,6 +55,7 @@ com.intellij.jpa.jpb.model
 com.intellij.jsonpath
 com.intellij.kubernetes
 com.intellij.liquibase
+com.intellij.lsp.ui
 com.intellij.mcpServer
 com.intellij.mermaid
 com.intellij.micronaut
@@ -126,6 +127,7 @@ intellij.vcs.plugin
 intellij.vitejs
 intellij.webp
 intellij.webpack
+intellij.xml.plugin
 jshint
 org.editorconfig.editorconfigjetbrains
 org.intellij.groovy
