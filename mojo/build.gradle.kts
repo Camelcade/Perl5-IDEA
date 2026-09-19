@@ -33,7 +33,7 @@ dependencies {
     }
 
     testBundledPlugins(
-      "intellij.libraries.misc.plugin",
+      "com.intellij.modules.ultimate",
       "intellij.structuralSearch.plugin",
       "intellij.structureView.plugin",
       "intellij.testRunner.plugin",

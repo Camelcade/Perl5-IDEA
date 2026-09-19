@@ -42,7 +42,7 @@ dependencies {
       "com.intellij.css",
       "com.intellij.database",
       "com.intellij.java",
-      "intellij.libraries.misc.plugin",
+      "com.intellij.modules.ultimate",
       "intellij.structuralSearch.plugin",
       "intellij.structureView.plugin",
       "intellij.testRunner.plugin",
