@@ -20,6 +20,7 @@ com.deadlock.scsyntax
 com.intellij
 com.intellij.LineProfiler
 com.intellij.aiagentextensions
+com.intellij.air
 com.intellij.aop
 com.intellij.beanValidation
 com.intellij.cdi
@@ -42,6 +43,7 @@ com.intellij.hibernate
 com.intellij.idea.customization
 com.intellij.java
 com.intellij.java-i18n
+com.intellij.java.debugger.agent
 com.intellij.java.ide
 com.intellij.javaee
 com.intellij.javaee.app.servers.integration
@@ -51,7 +53,6 @@ com.intellij.javaee.jakarta.data
 com.intellij.javaee.jpa
 com.intellij.javaee.reverseEngineering
 com.intellij.javaee.web
-com.intellij.jpa.jpb.model
 com.intellij.jsonpath
 com.intellij.kubernetes
 com.intellij.liquibase
