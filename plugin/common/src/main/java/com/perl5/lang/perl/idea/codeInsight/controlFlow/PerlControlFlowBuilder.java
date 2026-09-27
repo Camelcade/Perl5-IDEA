@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,7 +117,7 @@ public class PerlControlFlowBuilder extends ControlFlowBuilder {
   private final Map<String, Instruction> myLabelsDeclarations = new HashMap<>();
   private final List<Instruction> myGotos = new ArrayList<>();
 
-  public ControlFlow build(PsiElement element) {
+  public ControlFlow build(@NotNull PsiElement element) {
     addEntryPointNode(element);
 
     startNodeSmart(element);
