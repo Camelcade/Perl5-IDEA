@@ -21,7 +21,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.newvfs.impl.FakeVirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.testFramework.LightVirtualFile;
-import com.intellij.util.indexing.IndexingDataKeys;
 import com.perl5.lang.htmlmason.idea.configuration.AbstractMasonSettings;
 import com.perl5.lang.perl.idea.project.PerlProjectManager;
 import org.jetbrains.annotations.NotNull;
@@ -57,8 +56,8 @@ public final class MasonCoreUtil {
     VirtualFile originalFile = psiFile.getViewProvider().getVirtualFile();
 
     if (originalFile instanceof LightVirtualFile lightVirtualFile) {
-      if (psiFile.getUserData(IndexingDataKeys.VIRTUAL_FILE) != null) {
-        originalFile = psiFile.getUserData(IndexingDataKeys.VIRTUAL_FILE);
+      if (psiFile.getVirtualFile() != null) {
+        originalFile = psiFile.getVirtualFile();
       }
       else if (lightVirtualFile.getOriginalFile() != null) {
         originalFile = lightVirtualFile.getOriginalFile();
