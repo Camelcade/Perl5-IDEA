@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -287,7 +287,7 @@ public final class PerlPackageUtilCore {
    * @param packageName canonical package name
    * @return package path
    */
-  public static String getPackagePathByName(String packageName) {
+  public static @NotNull String getPackagePathByName(@NotNull String packageName) {
     return StringUtil.join(packageName.split(":+"), "/") + "." + PerlFileTypePackage.EXTENSION;
   }
 
