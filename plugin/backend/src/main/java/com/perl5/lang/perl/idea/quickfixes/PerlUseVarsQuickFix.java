@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package com.perl5.lang.perl.idea.quickfixes;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemDescriptor;
 import com.intellij.codeInspection.util.IntentionName;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.PsiElement;
@@ -37,6 +38,8 @@ import java.util.Collection;
 import java.util.Collections;
 
 public class PerlUseVarsQuickFix implements LocalQuickFix {
+  private static final Logger LOG = Logger.getInstance(PerlUseVarsQuickFix.class);
+
   private final boolean myIsRemoval;
 
   public PerlUseVarsQuickFix(@Nullable PsiElement psiElement) {
@@ -59,6 +62,10 @@ public class PerlUseVarsQuickFix implements LocalQuickFix {
   @Override
   public void applyFix(@NotNull Project project, @NotNull ProblemDescriptor descriptor) {
     var startElement = descriptor.getPsiElement();
+    if (startElement == null) {
+      LOG.error("Start element is null");
+      return;
+    }
     var declarations = computeVariables(startElement);
     if (declarations.isEmpty()) {
       startElement.delete();
