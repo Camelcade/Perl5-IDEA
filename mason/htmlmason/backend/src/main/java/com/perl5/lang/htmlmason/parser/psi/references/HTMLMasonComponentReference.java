@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -57,18 +57,17 @@ public class HTMLMasonComponentReference extends HTMLMasonStringReference {
     return myElement;
   }
 
-  private PsiElement handleFilePathChange(HTMLMasonFileImpl target, String currentContent, String newFileName) {
-    VirtualFile componentFileDir = HTMLMasonUtil.getComponentVirtualFile(target).getParent();
+  private PsiElement handleFilePathChange(@NotNull HTMLMasonFileImpl target, @NotNull String currentContent, @NotNull String newFileName) {
+    var targetVirtualFile = HTMLMasonUtil.getComponentVirtualFile(target);
+    VirtualFile componentFileDir = targetVirtualFile == null ? null : targetVirtualFile.getParent();
     VirtualFile componentRoot = null;
     String absPrefix = "";
 
-    if (StringUtil.startsWith(currentContent, "/")) // abs path
-    {
+    if (StringUtil.startsWith(currentContent, "/")) { // abs path
       absPrefix = "/";
       componentRoot = HTMLMasonUtil.getComponentRoot(target);
     }
-    else // relative path
-    {
+    else { // relative path
       PsiFile psiFile = myElement.getContainingFile();
 
       if (psiFile instanceof HTMLMasonFileImpl htmlMasonFile) {
