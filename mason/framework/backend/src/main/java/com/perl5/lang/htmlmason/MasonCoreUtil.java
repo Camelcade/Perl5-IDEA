@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -53,7 +53,7 @@ public final class MasonCoreUtil {
    *
    * @return virtual file or null
    */
-  public static @Nullable VirtualFile getContainingVirtualFile(PsiFile psiFile) {
+  public static @Nullable VirtualFile getContainingVirtualFile(@NotNull PsiFile psiFile) {
     VirtualFile originalFile = psiFile.getViewProvider().getVirtualFile();
 
     if (originalFile instanceof LightVirtualFile lightVirtualFile) {
