@@ -283,6 +283,9 @@ public final class PerlValuesManager {
     String explicitNamespaceName = perlMethod.getExplicitNamespaceName();
     boolean hasExplicitNamespace = StringUtil.isNotEmpty(explicitNamespaceName);
     PsiElement parentElement = perlMethod.getParent();
+    if (parentElement == null) {
+      return UNKNOWN_VALUE;
+    }
     boolean isNestedCall = PerlSubCallElement.isNestedCall(parentElement);
 
     List<PerlValue> callArguments;
@@ -291,7 +294,7 @@ public final class PerlValuesManager {
     }
     else {
       // these are sort and code variable
-      LOG.debug("Non-method container container: " + (parentElement == null ? "null" : parentElement.getClass().getSimpleName()));
+      LOG.debug("Non-method container container: " + parentElement.getClass().getSimpleName());
       callArguments = Collections.emptyList();
     }
 
