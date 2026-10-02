@@ -17,7 +17,11 @@
 package intellilang;
 
 import base.PerlLightTestCase;
+import com.intellij.openapi.actionSystem.IdeActions;
+import com.intellij.openapi.editor.actionSystem.EditorActionHandlerBean;
+import com.intellij.openapi.extensions.ExtensionPointName;
 import org.jetbrains.annotations.NotNull;
+import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +35,16 @@ import java.util.function.Function;
 @SuppressWarnings("Junit4RunWithInspection")
 @RunWith(Parameterized.class)
 public class PerlInjectedStringTypingTest extends PerlLightTestCase {
+  private static final ExtensionPointName<EditorActionHandlerBean> EDITOR_ACTION_HANDLER_EP =
+    ExtensionPointName.create("com.intellij.editorActionHandler");
+
+  /**
+   * AI Next Edit handler from the {@code intellij.ml.llm.nextEdits.frontend} module. It keeps {@code EditorEscape} enabled in every editor
+   * it is installed to, so {@link com.intellij.testFramework.fixtures.EditorTestFixture#type(char)} performs the action instead of
+   * typing the escape char.
+   */
+  private static final String NEXT_EDIT_ESCAPE_HANDLER = "com.intellij.ml.llm.nextEdits.frontend.actions.NextEditEscapeHandler";
+
   @Parameter public @NotNull String myName;
   @Parameter(1) public @NotNull Function<String, String> myContentModifier;
 
@@ -77,7 +91,12 @@ public class PerlInjectedStringTypingTest extends PerlLightTestCase {
   public void testSimpleAlarm() {doTestSimpleText("" + (char)11);}
 
   @Test
-  public void testSimpleEscape() {doTestSimpleText("" + (char)27);}
+  public void testSimpleEscape() {
+    Assume.assumeFalse("Escape char is consumed by the " + IdeActions.ACTION_EDITOR_ESCAPE + " action with " + NEXT_EDIT_ESCAPE_HANDLER,
+                       EDITOR_ACTION_HANDLER_EP.getExtensionList().stream().anyMatch(
+                         it -> IdeActions.ACTION_EDITOR_ESCAPE.equals(it.action) && NEXT_EDIT_ESCAPE_HANDLER.equals(it.implementationClass)));
+    doTestSimpleText("" + (char)27);
+  }
 
   @Test
   public void testSimpleSmile() {doTestSimpleText("😇");}
