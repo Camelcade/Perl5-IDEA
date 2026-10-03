@@ -123,11 +123,9 @@ allprojects {
       testFramework(TestFrameworkType.Plugin.Debugger)
       testFramework(TestFrameworkType.Bundled)
       jetbrainsRuntime()
-      // TEMP: testing custom Grammar-Kit build
-      // grammarKit(providers.gradleProperty("grammarKitVersion"))
+      grammarKit(providers.gradleProperty("grammarKitVersion"))
       jflex(providers.gradleProperty("jflexVersion"))
     }
-    intellijPlatformGrammarKit(files(rootProject.file("grammar-kit-2025.2.0.jar")))
     testImplementation("junit:junit:4.13.2")
     testImplementation("org.opentest4j:opentest4j:1.3.0")
   }
