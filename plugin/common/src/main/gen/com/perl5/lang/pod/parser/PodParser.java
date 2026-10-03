@@ -36,15 +36,15 @@ public class PodParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // pod_section
-  // 	| over_section
-  // 	| pod_format_indexes
-  // 	| for_section
-  // 	| encoding_section
-  // 	| unknown_section
-  // 	| cut_section
-  // 	| pod_paragraph
-  // 	| pod_verbatim_paragraph
+  // pod_section
+  // 	| over_section
+  // 	| pod_format_indexes
+  // 	| for_section
+  // 	| encoding_section
+  // 	| unknown_section
+  // 	| cut_section
+  // 	| pod_paragraph
+  // 	| pod_verbatim_paragraph
   // 	| 'NL'+
   static boolean any_level_item(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "any_level_item")) return false;
@@ -511,9 +511,9 @@ public class PodParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '=item' {
-  //         parse_item_section_title [item_section_content] |
-  //         'NL' + [item_section_content]
+  // '=item' {
+  //         parse_item_section_title [item_section_content] |
+  //         'NL' + [item_section_content]
   //         }
   public static boolean item_section(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "item_section")) return false;
@@ -527,7 +527,7 @@ public class PodParser implements PsiParser, LightPsiParser {
     return result_ || pinned_;
   }
 
-  // parse_item_section_title [item_section_content] |
+  // parse_item_section_title [item_section_content] |
   //         'NL' + [item_section_content]
   private static boolean item_section_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "item_section_1")) return false;
@@ -623,12 +623,12 @@ public class PodParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // {
-  //      link_url |
-  //      link_name [parse_link_section] |
-  //      parse_link_section |
-  //      parse_quoted_section |
-  //      parse_unquoted_section
+  // {
+  //      link_url |
+  //      link_name [parse_link_section] |
+  //      parse_link_section |
+  //      parse_quoted_section |
+  //      parse_unquoted_section
   //    } & '>'
   static boolean link_after_title(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "link_after_title")) return false;
@@ -640,10 +640,10 @@ public class PodParser implements PsiParser, LightPsiParser {
     return result_;
   }
 
-  // link_url |
-  //      link_name [parse_link_section] |
-  //      parse_link_section |
-  //      parse_quoted_section |
+  // link_url |
+  //      link_name [parse_link_section] |
+  //      parse_link_section |
+  //      parse_quoted_section |
   //      parse_unquoted_section
   private static boolean link_after_title_0(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "link_after_title_0")) return false;
@@ -1041,7 +1041,7 @@ public class PodParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // item_section
+  // item_section
   // 	| any_level_item
   static boolean over_section_item(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "over_section_item")) return false;
@@ -1095,7 +1095,7 @@ public class PodParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // &':' pod_section_format for_section_content
+  // &':' pod_section_format for_section_content
   // 	 | pod_section_format <<parsePodSectionContent 'POD_NEWLINE, FOR_SECTION_CONTENT, "Unclosed for section"'>>
   static boolean parse_for_section_content(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "parse_for_section_content")) return false;
@@ -1319,14 +1319,14 @@ public class PodParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // !<<eof>>
-  // {
-  // 	head1_section
-  // 	| head2_section
-  // 	| head3_section
-  // 	| head4_section
-  // 	| any_level_item
-  // 	| item_section
+  // !<<eof>>
+  // {
+  // 	head1_section
+  // 	| head2_section
+  // 	| head3_section
+  // 	| head4_section
+  // 	| any_level_item
+  // 	| item_section
   // }
   static boolean pod_file_item(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "pod_file_item")) return false;
@@ -1348,11 +1348,11 @@ public class PodParser implements PsiParser, LightPsiParser {
     return result_;
   }
 
-  // head1_section
-  // 	| head2_section
-  // 	| head3_section
-  // 	| head4_section
-  // 	| any_level_item
+  // head1_section
+  // 	| head2_section
+  // 	| head3_section
+  // 	| head4_section
+  // 	| any_level_item
   // 	| item_section
   private static boolean pod_file_item_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "pod_file_item_1")) return false;
@@ -1367,14 +1367,14 @@ public class PodParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // pod_format_italic
-  //  	| pod_format_bold
-  //  	| pod_format_code
-  //  	| pod_format_link
-  //  	| pod_format_escape
-  //  	| pod_format_file
-  //  	| pod_format_nbsp
-  //  	| pod_format_index
+  // pod_format_italic
+  //  	| pod_format_bold
+  //  	| pod_format_code
+  //  	| pod_format_link
+  //  	| pod_format_escape
+  //  	| pod_format_file
+  //  	| pod_format_nbsp
+  //  	| pod_format_index
   //  	| pod_format_null
   static boolean pod_format(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "pod_format")) return false;
@@ -1662,9 +1662,9 @@ public class PodParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '/' | '\' | '*' | '|' | ':'
-  //                       | '"' | "'" | '`'
-  //                       | '(' | ')' | '[' | ']' | '{' | '}' | '<' | '>'
+  // '/' | '\' | '*' | '|' | ':'
+  //                       | '"' | "'" | '`'
+  //                       | '(' | ')' | '[' | ']' | '{' | '}' | '<' | '>'
   //                       | 'identifier' | 'number' | 'symbol'
   static boolean pod_token(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "pod_token")) return false;

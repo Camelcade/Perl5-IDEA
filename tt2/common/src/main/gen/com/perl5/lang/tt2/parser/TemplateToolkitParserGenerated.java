@@ -116,21 +116,21 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // filter_directive |
-  // 	wrapper_directive |
-  // 	debug_directive |
-  // 	next_directive |
-  // 	last_directive |
-  // 	return_directive |
-  // 	stop_directive |
-  // 	clear_directive |
-  // 	default_directive |
-  // 	insert_directive |
-  // 	include_directive |
-  // 	process_directive |
-  // 	call_directive |
-  // 	throw_directive |
-  // 	set_directive |
+  // filter_directive |
+  // 	wrapper_directive |
+  // 	debug_directive |
+  // 	next_directive |
+  // 	last_directive |
+  // 	return_directive |
+  // 	stop_directive |
+  // 	clear_directive |
+  // 	default_directive |
+  // 	insert_directive |
+  // 	include_directive |
+  // 	process_directive |
+  // 	call_directive |
+  // 	throw_directive |
+  // 	set_directive |
   // 	get_directive
   static boolean atom_dirictive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "atom_dirictive")) return false;
@@ -169,13 +169,13 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // if_directive |
-  // 	unless_directive |
-  // 	foreach_directive |
-  // 	while_directive |
-  // 	perl_directive |
-  // 	rawperl_directive |
-  // 	anon_block_directive |
+  // if_directive |
+  // 	unless_directive |
+  // 	foreach_directive |
+  // 	while_directive |
+  // 	perl_directive |
+  // 	rawperl_directive |
+  // 	anon_block_directive |
   // 	try_directive
   static boolean block_directives(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "block_directives")) return false;
@@ -476,10 +476,10 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // call_expr |
-  // 	variable_expr |
-  // 	TT2_NUMBER_SIMPLE |
-  // 	keyword_or_identifier_term |
+  // call_expr |
+  // 	variable_expr |
+  // 	TT2_NUMBER_SIMPLE |
+  // 	keyword_or_identifier_term |
   // 	<<parseKeywordFallback>>
   static boolean deref_part(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "deref_part")) return false;
@@ -495,15 +495,16 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // block_directive |
-  // 	switch_directive |
-  // 	use_directive |
-  // 	macro_directive |
-  // 	tags_directive |
-  // 	meta_directive |
-  // 	block_directives |
-  // 	reply_directives |
-  // 	atom_dirictive |
+  // block_directive |
+  // 	switch_directive |
+  // 	use_directive |
+  // 	macro_directive |
+  // 	tags_directive |
+  // 	meta_directive |
+  // 
+  // 	block_directives |
+  // 	reply_directives |
+  // 	atom_dirictive |
   // 	empty_directive
   static boolean directive(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "directive")) return false;
@@ -522,11 +523,11 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // if_directive |
-  // 	unless_directive |
-  // 	filters_directives |
-  // 	foreach_directive |
-  // 	while_directive |
+  // if_directive |
+  // 	unless_directive |
+  // 	filters_directives |
+  // 	foreach_directive |
+  // 	while_directive |
   // 	wrapper_directive
   public static boolean directive_postfix(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "directive_postfix")) return false;
@@ -843,9 +844,9 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // variable_expr |
-  // 	identifier_expr |
-  // 	dq_string_expr |
+  // variable_expr |
+  // 	identifier_expr |
+  // 	dq_string_expr |
   // 	sq_string_expr
   static boolean format_elements(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "format_elements")) return false;
@@ -1669,11 +1670,11 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
   }
 
   /* ********************************************************** */
-  // end_directive |
-  // 	elsif_directive |
-  // 	case_directive |
-  // 	else_directive |
-  // 	catch_directive |
+  // end_directive |
+  // 	elsif_directive |
+  // 	case_directive |
+  // 	else_directive |
+  // 	catch_directive |
   // 	final_directive
   static boolean reply_directives(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "reply_directives")) return false;
@@ -2401,17 +2402,17 @@ public class TemplateToolkitParserGenerated implements PsiParser, LightPsiParser
     return result_;
   }
 
-  // parenthesised_expr |
-  // 	hash_expr |
-  // 	array_expr |
-  // 	variable_expr |
-  // 	call_expr |
-  // 	identifier_expr |
-  // 	sq_string_expr |
-  // 	dq_string_expr |
-  // 	TT2_SYMBOL |
-  // 	[<<parseUnaryMinus>>] TT2_NUMBER |
-  // 	[<<parseUnaryMinus>>] TT2_NUMBER_SIMPLE |
+  // parenthesised_expr |
+  // 	hash_expr |
+  // 	array_expr |
+  // 	variable_expr |
+  // 	call_expr |
+  // 	identifier_expr |
+  // 	sq_string_expr |
+  // 	dq_string_expr |
+  // 	TT2_SYMBOL |
+  // 	[<<parseUnaryMinus>>] TT2_NUMBER |
+  // 	[<<parseUnaryMinus>>] TT2_NUMBER_SIMPLE |
   // 	keyword_or_identifier_term
   public static boolean term_expr(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "term_expr")) return false;

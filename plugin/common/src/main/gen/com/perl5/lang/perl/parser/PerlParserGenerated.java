@@ -143,15 +143,15 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // annotation_abstract
-  // 	| annotation_deprecated
-  // 	| annotation_method
-  // 	| annotation_override
-  // 	| annotation_returns
-  // 	| annotation_type
-  // 	| annotation_inject
-  // 	| annotation_no_inject
-  // 	| annotation_noinspection
+  // annotation_abstract
+  // 	| annotation_deprecated
+  // 	| annotation_method
+  // 	| annotation_override
+  // 	| annotation_returns
+  // 	| annotation_type
+  // 	| annotation_inject
+  // 	| annotation_no_inject
+  // 	| annotation_noinspection
   // 	| '#@unknown'
   static boolean annotation(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "annotation")) return false;
@@ -296,9 +296,9 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '*' |
-  //   arrayref_type |
-  //   hashref_type |
+  // '*' |
+  //   arrayref_type |
+  //   hashref_type |
   //   any_package
   static boolean annotation_type_param(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "annotation_type_param")) return false;
@@ -338,9 +338,9 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // array_or_slice  |
-  //   hash_or_slice  |
-  //   // tried to optimize this, but technically not possible. E.g. if first line contains some comma sequence, see heredocWrappingTest
+  // array_or_slice  |
+  //   hash_or_slice  |
+  //   // tried to optimize this, but technically not possible. E.g. if first line contains some comma sequence, see heredocWrappingTest
   //   parse_scalar_expr {comma parse_scalar_expr} +
   static boolean anon_hash_lookahead_body(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "anon_hash_lookahead_body")) return false;
@@ -1249,16 +1249,16 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // if_compound
-  //     | unless_compound
-  //     | given_compound
-  //     | while_compound
-  //     | until_compound
-  //     | for_or_foreach
-  //     | when_compound
-  //     | default_compound
-  //     | trycatch_compound
-  //     | switch_compound
+  // if_compound
+  //     | unless_compound
+  //     | given_compound
+  //     | while_compound
+  //     | until_compound
+  //     | for_or_foreach
+  //     | when_compound
+  //     | default_compound
+  //     | trycatch_compound
+  //     | switch_compound
   //     | cases_sequence
   static boolean compound_statement(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "compound_statement")) return false;
@@ -1503,11 +1503,11 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // !<<eof>>
-  // {
-  // 	namespace_definition |
-  // 	label_declaration [statement_item]
-  //     | statement_item
+  // !<<eof>>
+  // {
+  // 	namespace_definition |
+  // 	label_declaration [statement_item]
+  //     | statement_item
   // }
   static boolean file_item(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "file_item")) return false;
@@ -1529,8 +1529,8 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     return result_;
   }
 
-  // namespace_definition |
-  // 	label_declaration [statement_item]
+  // namespace_definition |
+  // 	label_declaration [statement_item]
   //     | statement_item
   private static boolean file_item_1(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "file_item_1")) return false;
@@ -2112,8 +2112,8 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // grep_map_sort_with_block |
-  //     parse_scalar_expr comma grep_map_sort_tail |
+  // grep_map_sort_with_block |
+  //     parse_scalar_expr comma grep_map_sort_tail |
   //     expr
   static boolean grep_map_arguments_variants(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "grep_map_arguments_variants")) return false;
@@ -2829,12 +2829,12 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'list' | 'unary' | 'unary_custom'| 'argumentless' |
-  //   'package::name::' 'subname' |
-  //   'subname' ['package::name'] |
-  //   'method' | 'func' | 'default' | 'fun' |
-  //   'finally' | 'try' | 'catch' |
-  //   'switch' | 'case' |
+  // 'list' | 'unary' | 'unary_custom'| 'argumentless' |
+  //   'package::name::' 'subname' |
+  //   'subname' ['package::name'] |
+  //   'method' | 'func' | 'default' | 'fun' |
+  //   'finally' | 'try' | 'catch' |
+  //   'switch' | 'case' |
   //   'fp_override' | 'fp_after' | 'fp_before' | 'fp_around' | 'fp_augment' | 'class' | 'field'
   static boolean method_tokens(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "method_tokens")) return false;
@@ -2898,13 +2898,13 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // sub_definition
-  //     | named_block
-  //     | method_definition
-  //     | func_definition
-  //     | before_modifier
-  //     | after_modifier
-  //     | around_modifier
+  // sub_definition
+  //     | named_block
+  //     | method_definition
+  //     | func_definition
+  //     | before_modifier
+  //     | after_modifier
+  //     | around_modifier
   //     | augment_modifier
   static boolean named_definition(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "named_definition")) return false;
@@ -3018,14 +3018,14 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // hash_index
-  //     | array_index
-  //     | regular_nested_call
-  //     | parenthesised_call_arguments
-  //     | scalar_call
-  //     | post_deref_expr
-  //     | post_deref_glob_expr
-  //     | post_deref_array_slice_expr
+  // hash_index
+  //     | array_index
+  //     | regular_nested_call
+  //     | parenthesised_call_arguments
+  //     | scalar_call
+  //     | post_deref_expr
+  //     | post_deref_glob_expr
+  //     | post_deref_array_slice_expr
   //     | post_deref_hash_slice_expr
   static boolean nested_element_variation(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "nested_element_variation")) return false;
@@ -3434,8 +3434,8 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // &('+'|anon_hash_lookahead) parse_list_expr
-  //     | arguments_list_with_codeblock
+  // &('+'|anon_hash_lookahead) parse_list_expr
+  //     | arguments_list_with_codeblock
   //     | parse_list_expr
   static boolean parse_call_arguments(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "parse_call_arguments")) return false;
@@ -3755,9 +3755,9 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // leftward_call |
-  //  	named_unary_call |
-  //  	argumentless_call |
+  // leftward_call |
+  //  	named_unary_call |
+  //  	argumentless_call |
   //  	rightward_call
   static boolean parse_sub_call(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "parse_sub_call")) return false;
@@ -3984,8 +3984,8 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // 'regex' |
-  //         block_compound |
+  // 'regex' |
+  //         block_compound |
   // 	interpolated_constructs
   static boolean perl_regex_item(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "perl_regex_item")) return false;
@@ -4905,8 +4905,8 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // grep_map_sort_with_block |
-  //     sorter grep_map_sort_tail |
+  // grep_map_sort_with_block |
+  //     sorter grep_map_sort_tail |
   //     grep_map_sort_tail
   static boolean sort_arguments_variants(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "sort_arguments_variants")) return false;
@@ -4941,9 +4941,9 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'| '\1' |
-  //                                '\\"'|
-  //                                '\L'|'\U'|'\F'|'\Q'|'\E'|
+  // '\t'|'\n'|'\r'|'\f'|'\b'|'\a'|'\e'|'\l'|'\\u'| '\1' |
+  //                                '\\"'|
+  //                                '\L'|'\U'|'\F'|'\Q'|'\E'|
   //                                unicode_char | hex_char | oct_char | esc_char
   static boolean special_constructs(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "special_constructs")) return false;
@@ -5034,19 +5034,19 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // <<parseSemicolon>> +
-  //         | nyi_statement
-  //         | <<parseParserExtensionStatement>>
-  //         | named_definition
-  //         | compound_statement
-  //         | format_definition
-  //         | <<parseUse>>
-  //         | <<parseNo>>
-  //         | block_compound
-  //         | statement
-  //         | annotation
-  //         | pod_section
-  //         | end_or_data
+  // <<parseSemicolon>> +
+  //         | nyi_statement
+  //         | <<parseParserExtensionStatement>>
+  //         | named_definition
+  //         | compound_statement
+  //         | format_definition
+  //         | <<parseUse>>
+  //         | <<parseNo>>
+  //         | block_compound
+  //         | statement
+  //         | annotation
+  //         | pod_section
+  //         | end_or_data
   //         | <<parseBadCharacters>>
   static boolean statement_item(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "statement_item")) return false;
@@ -5117,11 +5117,11 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // if_statement_modifier
-  //     | unless_statement_modifier
-  //     | while_statement_modifier
-  //     | until_statement_modifier
-  //     | for_statement_modifier
+  // if_statement_modifier
+  //     | unless_statement_modifier
+  //     | while_statement_modifier
+  //     | until_statement_modifier
+  //     | for_statement_modifier
   //     | when_statement_modifier
   static boolean statement_modifier_variant(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "statement_modifier_variant")) return false;
@@ -5274,7 +5274,7 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // sub_attributes [sub_signature_in_parens] |
+  // sub_attributes [sub_signature_in_parens] |
   //   [sub_prototype_or_signature] [sub_attributes]
   static boolean sub_definition_parameters(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "sub_definition_parameters")) return false;
@@ -6104,8 +6104,8 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // variable_declaration_global
-  //     | variable_declaration_lexical
+  // variable_declaration_global
+  //     | variable_declaration_lexical
   //     | variable_declaration_local
   static boolean variable_declaration(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "variable_declaration")) return false;
@@ -6921,11 +6921,11 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     return result_;
   }
 
-  // scalar_or_element
-  //     | parenthesised_expr [array_element]
-  //     | array_or_slice
-  //     | hash_or_slice
-  //     | glob_or_element
+  // scalar_or_element
+  //     | parenthesised_expr [array_element]
+  //     | array_or_slice
+  //     | hash_or_slice
+  //     | glob_or_element
   //     | code_primitive
   public static boolean composite_atom_expr(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "composite_atom_expr")) return false;
@@ -7502,10 +7502,10 @@ public class PerlParserGenerated implements PsiParser, LightPsiParser {
     return true;
   }
 
-  // 's'
-  //     regex_match
-  //     regex_replace
-  //     'r}'
+  // 's'
+  //     regex_match
+  //     regex_replace
+  //     'r}'
   //     [perl_regex_modifiers]
   public static boolean replacement_regex(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "replacement_regex")) return false;
