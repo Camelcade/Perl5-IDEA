@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,6 +34,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class InstallPerlHandler {
@@ -68,7 +69,7 @@ public abstract class InstallPerlHandler {
     }
     ApplicationManager.getApplication().invokeLater(() -> {
       PerlInstallFormOptions optionsForm = createOptionsForm();
-      MyDialog dialog = new MyDialog(project, optionsForm, distributionsList);
+      MyDialog dialog = new MyDialog(project, optionsForm, new ArrayList<>(distributionsList));
       if (dialog.showAndGet()) {
         PerlInstallForm installForm = dialog.getForm();
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,12 @@ import com.intellij.openapi.util.KeyedExtensionCollector;
 import com.intellij.util.KeyedLazyInstance;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.List;
 
 public class PerlHandlerCollector<Handler extends AbstractPerlHandler<?, ?>> extends KeyedExtensionCollector<Handler, String> {
-  private final AtomicNotNullLazyValue<List<Handler>> myHandlers = AtomicNotNullLazyValue.createValue(
+  private final AtomicNotNullLazyValue<@Unmodifiable List<Handler>> myHandlers = AtomicNotNullLazyValue.createValue(
     () -> ContainerUtil.map(super.getExtensions(), KeyedLazyInstance::getInstance));
 
   public PerlHandlerCollector(@NotNull String epName) {

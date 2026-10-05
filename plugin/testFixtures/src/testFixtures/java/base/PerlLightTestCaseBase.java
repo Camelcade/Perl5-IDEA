@@ -214,6 +214,7 @@ import org.jdom.JDOMException;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 import org.junit.Assert;
 import org.junit.Assume;
 import org.junit.experimental.categories.Category;
@@ -1034,7 +1035,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
   /**
    * @return all carets offsets. Secondary carets removed
    */
-  protected List<Integer> getAndRemoveCarets() {
+  protected @Unmodifiable @NotNull List<Integer> getAndRemoveCarets() {
     CaretModel caretModel = getTopLevelEditor().getCaretModel();
     List<Integer> caretsOffsets = ContainerUtil.map(caretModel.getAllCarets(), Caret::getOffset);
     caretModel.removeSecondaryCarets();

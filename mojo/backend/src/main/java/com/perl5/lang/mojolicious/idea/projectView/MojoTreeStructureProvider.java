@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2024 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.mojolicious.model.MojoProject;
 import com.perl5.lang.mojolicious.model.MojoProjectManager;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.Collection;
 
@@ -38,9 +39,9 @@ public class MojoTreeStructureProvider implements TreeStructureProvider {
   }
 
   @Override
-  public @NotNull Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent,
-                                                         @NotNull Collection<AbstractTreeNode<?>> children,
-                                                         ViewSettings settings) {
+  public @Unmodifiable @NotNull Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent,
+                                                                       @NotNull Collection<AbstractTreeNode<?>> children,
+                                                                       ViewSettings settings) {
     if (!myMojoProjectManager.isMojoAvailable()) {
       return children;
     }

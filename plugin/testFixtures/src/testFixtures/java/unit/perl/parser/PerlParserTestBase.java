@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import com.intellij.testFramework.EditorTestUtil;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.fileTypes.PerlFileTypeScript;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.Arrays;
 import java.util.List;
@@ -40,13 +41,13 @@ import static java.util.Objects.requireNonNull;
 public abstract class PerlParserTestBase extends PerlLightTestCaseBase {
   private boolean mySkipSpaces = true;
 
-  private static final List<String> REPLACES = Arrays.asList(
+  private static final @NotNull List<String> REPLACES = Arrays.asList(
     EditorTestUtil.SELECTION_START_TAG,
     EditorTestUtil.SELECTION_END_TAG,
     EditorTestUtil.BLOCK_SELECTION_START_TAG,
     EditorTestUtil.BLOCK_SELECTION_END_TAG
   );
-  private static final List<String> REPLACEMENTS = ContainerUtil.map(REPLACES, it -> it.replace(it.charAt(1), '_'));
+  private static final @Unmodifiable @NotNull List<String> REPLACEMENTS = ContainerUtil.map(REPLACES, it -> it.replace(it.charAt(1), '_'));
 
   @Override
   protected void tearDown() throws Exception {

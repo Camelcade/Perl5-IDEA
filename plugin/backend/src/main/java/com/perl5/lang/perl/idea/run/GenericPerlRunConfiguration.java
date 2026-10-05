@@ -56,6 +56,7 @@ import org.jdom.Element;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.io.File;
 import java.nio.charset.Charset;
@@ -469,7 +470,7 @@ public abstract class GenericPerlRunConfiguration extends LocatableConfiguration
   /**
    * @return paths of {@code virtualFiles} joined with pipe, reverse of {@link #computeVirtualFilesFromPaths(String)}
    */
-  public static @NotNull String computePathsFromVirtualFiles(@NotNull List<? extends VirtualFile> virtualFiles) {
+  public static @Unmodifiable @NotNull String computePathsFromVirtualFiles(@NotNull List<? extends VirtualFile> virtualFiles) {
     return FILES_JOINER.fun(ContainerUtil.map(virtualFiles, VirtualFile::getPath));
   }
 

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ import com.perl5.lang.perl.idea.sdk.versionManager.PerlVersionManagerAdapter;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 
 import javax.swing.*;
 import java.util.*;
@@ -142,7 +143,7 @@ public class PerlBrewAdapter extends PerlVersionManagerAdapter {
    */
   @VisibleForTesting
   @Contract("null->null; !null->!null")
-  public static @Nullable List<String> parseInstalledDistributionsList(@Nullable List<String> output) {
+  public static @Unmodifiable @Nullable List<String> parseInstalledDistributionsList(@Nullable List<String> output) {
     return output == null ? null : ContainerUtil.map(output, it -> it.replaceAll("\\(.+?\\)", "").replaceAll("^\\s*\\**\\s*", "").trim());
   }
 

@@ -81,6 +81,7 @@ import com.perl5.lang.perl.util.PerlPackageUtil;
 import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 import org.jetbrains.concurrency.Promise;
 import org.junit.Assume;
 import org.junit.experimental.categories.Category;
@@ -127,7 +128,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   }
 
   @Parameters(name = "{0}")
-  public static Iterable<Object[]> realData(@SuppressWarnings("unused") Class<?> clazz) {
+  public static @Unmodifiable Iterable<Object[]> realData(@SuppressWarnings("unused") Class<?> clazz) {
     return !CategoriesFilter.shouldRun(clazz) ? Collections.emptyList() :
       ContainerUtil.map(PerlConfigurators.getConfigurators(), it -> new Object[]{it.getConfigurator()});
   }
