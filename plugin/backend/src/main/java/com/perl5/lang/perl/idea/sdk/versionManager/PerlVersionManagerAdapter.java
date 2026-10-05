@@ -37,6 +37,7 @@ import com.perl5.lang.perl.util.PerlRunUtil;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.jetbrains.annotations.TestOnly;
+import org.jetbrains.annotations.Unmodifiable;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -120,12 +121,12 @@ public abstract class PerlVersionManagerAdapter {
    * @return list of installed perl distributions
    * @apiNote returned items format is version-manager specific, for perlbrew it may be a {@code version@library}
    */
-  protected abstract @Nullable List<String> getInstalledDistributionsList();
+  protected abstract @Unmodifiable @Nullable List<String> getInstalledDistributionsList();
 
   /**
    * @return list of perls available for installation
    */
-  protected abstract @Nullable List<String> getInstallableDistributionsList();
+  protected abstract @Unmodifiable @Nullable List<String> getInstallableDistributionsList();
 
   protected @Nullable List<String> getOutput(@NotNull List<String> parameters) {
     return getOutput(it -> it.withParameters(parameters));
@@ -201,7 +202,7 @@ public abstract class PerlVersionManagerAdapter {
   }
 
   @TestOnly
-  public final @Nullable List<String> getInstallableDistributionsListInTests() {
+  public final @Unmodifiable @Nullable List<String> getInstallableDistributionsListInTests() {
     return getInstallableDistributionsList();
   }
 }

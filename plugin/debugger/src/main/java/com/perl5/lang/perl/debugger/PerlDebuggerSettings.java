@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,7 +61,7 @@ public class PerlDebuggerSettings extends XDebuggerSettings<PerlDebuggerSettings
     return this;
   }
 
-  public List<Item> getDataRenderers() {
+  public @NotNull List<Item> getDataRenderers() {
     return new ArrayList<>(ContainerUtil.map(myDataRenderers, Item::new));
   }
 

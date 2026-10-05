@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,6 +29,7 @@ import com.perl5.lang.perl.util.PerlContextUtil;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -217,7 +218,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
    *
    * @return Flattered list of assignment participants
    */
-  static @NotNull List<PsiElement> flattenAssignmentPart(@NotNull PsiElement element) {
+  static @Unmodifiable @NotNull List<PsiElement> flattenAssignmentPart(@NotNull PsiElement element) {
     List<PsiElement> result = new SmartList<>();
     for (PsiElement listElement : PerlArrayUtilCore.collectListElements(element)) {
       if (listElement instanceof PerlVariableDeclarationExpr) {
@@ -254,7 +255,7 @@ public interface PerlAssignExpression extends PsiPerlExpr {
       myStartIndex = startIndex;
     }
 
-    private List<PsiElement> unflattenElements(@NotNull List<? extends PsiElement> sourceElements) {
+    private @Unmodifiable @NotNull List<PsiElement> unflattenElements(@NotNull List<? extends PsiElement> sourceElements) {
       if (sourceElements.isEmpty()) {
         return Collections.emptyList();
       }

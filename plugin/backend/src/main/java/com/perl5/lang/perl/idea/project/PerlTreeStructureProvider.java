@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.util.containers.ContainerUtil;
 import com.perl5.lang.perl.idea.modules.PerlSourceRootType;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.Collection;
 import java.util.Map;
@@ -39,9 +40,9 @@ public class PerlTreeStructureProvider implements TreeStructureProvider {
   }
 
   @Override
-  public @NotNull Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent,
-                                                         @NotNull Collection<AbstractTreeNode<?>> children,
-                                                         ViewSettings settings) {
+  public @Unmodifiable @NotNull Collection<AbstractTreeNode<?>> modify(@NotNull AbstractTreeNode<?> parent,
+                                                                       @NotNull Collection<AbstractTreeNode<?>> children,
+                                                                       ViewSettings settings) {
     if (!myProjectManager.isPerlEnabled()) {
       return children;
     }

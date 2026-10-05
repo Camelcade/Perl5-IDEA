@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ package base;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.util.containers.ContainerUtil;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.List;
 import java.util.Objects;
@@ -45,7 +46,7 @@ public enum PerlConfigurators {
     return myConfigurator;
   }
 
-  public static @NotNull List<PerlConfigurators> getConfigurators() {
+  public static @Unmodifiable @NotNull List<PerlConfigurators> getConfigurators() {
     var explicitConfigurators = System.getenv(ENV_VARIABLE_NAME);
     if (StringUtil.isEmpty(explicitConfigurators)) {
       fail("Pass the list of configurators via " + ENV_VARIABLE_NAME + " env variable, separated by comma");

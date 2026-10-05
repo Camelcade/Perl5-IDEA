@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2025 Alexandr Evstigneev
+ * Copyright 2015-2026 Alexandr Evstigneev
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import com.perl5.lang.perl.psi.utils.PerlContextType;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.Unmodifiable;
 
 import java.util.List;
 
@@ -51,8 +52,8 @@ public abstract class PerlCallValue extends PerlParametrizedOperationValue {
   /**
    * @return a list of arguments that passed to the call, resolved in the context of {@code contextElement}
    */
-  public @NotNull List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue,
-                                                              @NotNull PerlValueResolver valueResolver) {
+  public @Unmodifiable @NotNull List<PerlValue> computeResolvedArguments(@NotNull PerlValue resolvedNamespaceValue,
+                                                                         @NotNull PerlValueResolver valueResolver) {
     return ContainerUtil.map(myArguments, valueResolver::resolve);
   }
 
