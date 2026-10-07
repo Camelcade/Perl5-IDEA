@@ -28,6 +28,7 @@ import com.intellij.openapi.util.Trinity;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.platform.debugger.impl.shared.proxy.XDebugManagerProxy;
+import com.intellij.testFramework.ExecutionTestUtil;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.util.TimeoutUtil;
 import com.intellij.util.concurrency.Semaphore;
@@ -303,7 +304,7 @@ public class PerlDebuggerTest extends PerlPlatformTestCase {
   private @NotNull Trinity<ExecutionEnvironment, RunContentDescriptor, XDebugSession> runConfigurationWithDebugger(@NotNull RunConfiguration runConfiguration) {
     try {
       Pair<ExecutionEnvironment, RunContentDescriptor>
-        pair = PlatformTestUtil.executeConfiguration(runConfiguration, DefaultDebugExecutor.EXECUTOR_ID, null);
+        pair = ExecutionTestUtil.executeConfiguration(runConfiguration, DefaultDebugExecutor.EXECUTOR_ID, null);
       XDebugSession debugSession = XDebuggerManager.getInstance(getProject()).getDebugSession(pair.second.getExecutionConsole());
       assertNotNull(debugSession);
       disposeOnPerlTearDown(() -> {

@@ -24,6 +24,7 @@ com.intellij.aop
 com.intellij.beanValidation
 com.intellij.bookmarks
 com.intellij.cdi
+com.intellij.chromeConnect
 com.intellij.compose
 com.intellij.configurationScript
 com.intellij.copyright
@@ -34,6 +35,7 @@ com.intellij.debugger.collections.visualizer
 com.intellij.dev
 com.intellij.dfa.analysis
 com.intellij.diagram
+com.intellij.findusages.ml
 com.intellij.flyway
 com.intellij.gradle
 com.intellij.grid
@@ -87,6 +89,7 @@ com.intellij.properties
 com.intellij.quarkus
 com.intellij.react
 com.intellij.recentFiles
+com.intellij.scratch
 com.intellij.searcheverywhere.ml
 com.intellij.settingsSync
 com.intellij.spring
@@ -98,6 +101,7 @@ com.intellij.spring.messaging
 com.intellij.spring.modulith
 com.intellij.spring.mvc
 com.intellij.spring.security
+com.intellij.srmi.ijs
 com.intellij.structuralSearch
 com.intellij.structureView
 com.intellij.stylelint
