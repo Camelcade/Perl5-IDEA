@@ -41,6 +41,7 @@ dependencies {
       "org.jetbrains.plugins.terminal",
       "intellij.structureView.plugin",
       "intellij.testRunner.plugin",
+      "com.intellij.java",
     )
   }
 }
