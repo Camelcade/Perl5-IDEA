@@ -29,7 +29,10 @@ dependencies {
         create(IntelliJPlatformType.IntellijIdeaUltimate, platformVersionProvider.get()){
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
-
+    bundledModules(
+      "intellij.platform.execution",
+      "intellij.platform.execution.impl",
+    )
   }
 }
 

@@ -33,6 +33,7 @@ import com.intellij.profiler.*;
 import com.intellij.profiler.api.*;
 import com.intellij.profiler.api.configurations.ProfilerConfigurationState;
 import com.intellij.profiler.api.configurations.ProfilerRunConfigurationsManager;
+import com.intellij.testFramework.ExecutionTestUtil;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.intellij.util.TimeoutUtil;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
@@ -254,7 +255,7 @@ public class PerlProfilerTest extends PerlPlatformTestCase {
     var executorAndSettings = getExecutorAndSettings();
     Pair<ExecutionEnvironment, RunContentDescriptor> pair;
     try {
-      pair = PlatformTestUtil.executeConfiguration(runConfiguration, executorAndSettings.first, null);
+      pair = ExecutionTestUtil.executeConfiguration(runConfiguration, executorAndSettings.first, null);
     }
     catch (InterruptedException e) {
       throw new RuntimeException(e);

@@ -122,6 +122,7 @@ allprojects {
         testFramework(TestFrameworkType.Platform, version = platformToolsVersion)
       }
       testFramework(TestFrameworkType.Plugin.Debugger)
+      testFramework(TestFrameworkType.Plugin.Execution)
       testFramework(TestFrameworkType.Bundled)
       jetbrainsRuntime()
       grammarKit(providers.gradleProperty("grammarKitVersion"))
