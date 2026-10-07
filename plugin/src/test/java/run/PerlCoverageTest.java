@@ -37,6 +37,7 @@ import com.intellij.psi.PsiManager;
 import com.intellij.rt.coverage.data.ClassData;
 import com.intellij.rt.coverage.data.LineData;
 import com.intellij.rt.coverage.data.ProjectData;
+import com.intellij.testFramework.ExecutionTestUtil;
 import com.intellij.testFramework.PlatformTestUtil;
 import com.perl5.lang.perl.coverage.PerlCoverageSuite;
 import com.perl5.lang.perl.idea.run.GenericPerlRunConfiguration;
@@ -176,7 +177,7 @@ public class PerlCoverageTest extends PerlPlatformTestCase {
   private @NotNull Pair<ExecutionEnvironment, RunContentDescriptor> runConfigurationWithCoverageAndWait(GenericPerlRunConfiguration runConfiguration) {
     Pair<ExecutionEnvironment, RunContentDescriptor> pair;
     try {
-      pair = PlatformTestUtil.executeConfiguration(runConfiguration, CoverageExecutor.EXECUTOR_ID, null);
+      pair = ExecutionTestUtil.executeConfiguration(runConfiguration, CoverageExecutor.EXECUTOR_ID, null);
     }
     catch (InterruptedException e) {
       throw new RuntimeException(e);

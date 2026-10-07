@@ -55,6 +55,7 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.util.PsiUtilCore;
+import com.intellij.testFramework.ExecutionTestUtil;
 import com.intellij.testFramework.HeavyPlatformTestCase;
 import com.intellij.testFramework.Parameterized;
 import com.intellij.testFramework.Parameterized.Parameters;
@@ -325,7 +326,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
     CapturingProcessAdapter capturingAdapter = new CapturingProcessAdapter();
     try {
-      execResult = PlatformTestUtil.executeConfiguration(runConfiguration, DefaultRunExecutor.EXECUTOR_ID, descriptor -> {
+      execResult = ExecutionTestUtil.executeConfiguration(runConfiguration, DefaultRunExecutor.EXECUTOR_ID, descriptor -> {
         var processHandler = descriptor.getProcessHandler();
         assertNotNull(processHandler);
         processHandler.addProcessListener(capturingAdapter);
@@ -429,7 +430,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
                                                                          @SuppressWarnings("SameParameterValue") String executorId) {
     Pair<ExecutionEnvironment, RunContentDescriptor> execResult;
     try {
-      execResult = PlatformTestUtil.executeConfiguration(runConfiguration, executorId, null);
+      execResult = ExecutionTestUtil.executeConfiguration(runConfiguration, executorId, null);
     }
     catch (InterruptedException e) {
       throw new RuntimeException(e);
