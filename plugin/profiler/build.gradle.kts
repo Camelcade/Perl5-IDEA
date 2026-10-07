@@ -30,7 +30,11 @@ dependencies {
     create(IntelliJPlatformType.IntellijIdeaUltimate, platformVersionProvider.get()){
       useInstaller = providers.gradleProperty("useInstaller").get().toBoolean()
     }
-    bundledModule("intellij.profiler.common")
+    bundledModules(
+      "intellij.profiler.common",
+      "intellij.platform.execution",
+      "intellij.platform.execution.impl",
+    )
   }
 }
 
