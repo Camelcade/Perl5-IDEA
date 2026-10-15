@@ -19,7 +19,6 @@ com.android.tools.gradle.dcl
 com.deadlock.scsyntax
 com.intellij
 com.intellij.LineProfiler
-com.intellij.aiagentextensions
 com.intellij.air
 com.intellij.aop
 com.intellij.beanValidation
@@ -65,11 +64,11 @@ com.intellij.micronaut
 com.intellij.microservices.jvm
 com.intellij.microservices.ui
 com.intellij.modules.asyncProfiler
+com.intellij.modules.compose
 com.intellij.modules.jcef
 com.intellij.modules.jna
 com.intellij.modules.json
 com.intellij.modules.pty4j
-com.intellij.modules.skiko
 com.intellij.modules.ultimate
 com.intellij.navbar
 com.intellij.persistence
