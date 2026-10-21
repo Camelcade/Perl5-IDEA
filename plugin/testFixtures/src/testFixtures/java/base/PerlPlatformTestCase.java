@@ -39,6 +39,7 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileEditor.FileEditor;
 import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.fileEditor.FileEditorOpenRequest;
 import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.projectRoots.impl.PerlSdkTable;
@@ -261,8 +262,10 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
     return result;
   }
 
-  protected FileEditor @NotNull [] openModuleFileInEditor(@NotNull String relativePath) {
-    return FileEditorManager.getInstance(getProject()).openFile(getFileInModule(relativePath), true, true);
+  protected @NotNull List<FileEditor> openModuleFileInEditor(@NotNull String relativePath) {
+    var openRequest = FileEditorOpenRequest.withFocus(true).withReuseOpen(true);
+    var openFuture = FileEditorManager.getInstance(getProject()).requestOpenFile(getFileInModule(relativePath), openRequest);
+    return PlatformTestUtil.waitForFuture(openFuture).getAllEditors();
   }
 
   /**
@@ -546,7 +549,7 @@ public abstract class PerlPlatformTestCase extends HeavyPlatformTestCase {
   protected @NotNull VirtualFile openAndGetModuleFileInEditor(@NotNull String path) {
     var editors = openModuleFileInEditor(path);
     assertSize(1, editors);
-    var openedVirtualFile = editors[0].getFile();
+    var openedVirtualFile = editors.getFirst().getFile();
     assertNotNull(openedVirtualFile);
     return openedVirtualFile;
   }
