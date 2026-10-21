@@ -189,12 +189,6 @@ public class PerlSdkType extends SdkType {
   }
 
 
-  @SuppressWarnings("deprecation")
-  @Override
-  public @Nullable String suggestHomePath() {
-    throw new RuntimeException("unsupported");
-  }
-
   @Override
   public @Nullable AdditionalDataConfigurable createAdditionalDataConfigurable(@NotNull SdkModel sdkModel,
                                                                                @NotNull SdkModificator sdkModificator) {
