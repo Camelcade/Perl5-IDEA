@@ -117,7 +117,6 @@ import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.util.io.FileUtilRt;
 import com.intellij.openapi.util.registry.Registry;
 import com.intellij.openapi.util.text.StringUtil;
-import com.intellij.openapi.vfs.CharsetToolkit;
 import com.intellij.openapi.vfs.LocalFileSystem;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.openapi.vfs.VirtualFileFilter;
@@ -227,6 +226,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiPredicate;
@@ -504,7 +504,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
 
   public static @NotNull String loadFile(@NotNull File fileToLoad) {
     try {
-      return FileUtilRt.loadFile(fileToLoad, CharsetToolkit.UTF8, true);
+      return FileUtilRt.loadFile(fileToLoad, StandardCharsets.UTF_8.name(), true);
     }
     catch (IOException e) {
       fail("Error loading file: " + fileToLoad + ", " + e.getMessage());
@@ -1307,7 +1307,7 @@ public abstract class PerlLightTestCaseBase extends BasePlatformTestCase {
     String expectedContent;
     try {
       expectedContent = FileUtilRt.loadFile(
-        new File(getTestDataPath() + "/" + verificationFileName + getRealDataFileExtension()), CharsetToolkit.UTF8, true);
+        new File(getTestDataPath() + "/" + verificationFileName + getRealDataFileExtension()), StandardCharsets.UTF_8.name(), true);
     }
     catch (IOException e) {
       throw new RuntimeException(e);
