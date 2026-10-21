@@ -36,8 +36,7 @@ import static com.perl5.lang.perl.idea.intellilang.PerlDefaultInjectionMarkers.D
 
 @State(
   name = "InjectionMarkers",
-  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE),
-  perClient = true
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE)
 )
 public class PerlInjectionMarkersService implements PersistentStateComponent<PerlInjectionMarkersService> {
   @Tag("MARKERS_MAP")

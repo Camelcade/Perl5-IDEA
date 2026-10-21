@@ -22,5 +22,5 @@ import com.intellij.ide.settings.RemoteSettingInfoProvider
 
 class TemplateToolkitSettingsRemoteInfoProvider : RemoteSettingInfoProvider {
   override fun getRemoteSettingsInfo(): Map<String, RemoteSettingInfo> =
-    mapOf("TemplateToolkitSettings" to RemoteSettingInfo(Direction.OnlyFromBackend, true))
+    mapOf("TemplateToolkitSettings" to RemoteSettingInfo(Direction.OnlyFromBackend))
 }

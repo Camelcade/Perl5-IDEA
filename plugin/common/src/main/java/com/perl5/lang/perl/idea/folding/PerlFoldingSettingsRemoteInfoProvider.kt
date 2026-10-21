@@ -22,5 +22,5 @@ import com.intellij.ide.settings.RemoteSettingInfoProvider
 
 class PerlFoldingSettingsRemoteInfoProvider: RemoteSettingInfoProvider {
   override fun getRemoteSettingsInfo(): Map<String, RemoteSettingInfo> =
-    mapOf("PerlCodeFoldingSettings" to RemoteSettingInfo(Direction.OnlyFromFrontend, true))
+    mapOf("PerlCodeFoldingSettings" to RemoteSettingInfo(Direction.OnlyFromFrontend))
 }

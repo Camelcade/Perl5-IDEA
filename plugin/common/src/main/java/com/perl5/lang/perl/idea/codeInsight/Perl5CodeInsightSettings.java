@@ -29,8 +29,7 @@ import org.jetbrains.annotations.TestOnly;
 
 @State(
   name = "Perl5CodeInsightSettings",
-  storages = @Storage(PerlPathMacros.APP_OTHER_SETTINGS_FILE),
-  perClient = true
+  storages = @Storage(PerlPathMacros.APP_OTHER_SETTINGS_FILE)
 )
 
 public class Perl5CodeInsightSettings implements PersistentStateComponent<Perl5CodeInsightSettings>, Cloneable {

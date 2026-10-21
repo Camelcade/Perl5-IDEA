@@ -22,5 +22,5 @@ import com.intellij.ide.settings.RemoteSettingInfoProvider
 
 class PerlInjectionMarkersRemoteInfoProvider: RemoteSettingInfoProvider {
   override fun getRemoteSettingsInfo(): Map<String, RemoteSettingInfo> =
-    mapOf("InjectionMarkers" to RemoteSettingInfo(Direction.OnlyFromBackend, true))
+    mapOf("InjectionMarkers" to RemoteSettingInfo(Direction.OnlyFromBackend))
 }

@@ -35,8 +35,7 @@ import static com.perl5.lang.perl.util.PerlUtil.mutableList;
 
 @State(
   name = "Perl5MasonSettings",
-  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE),
-  perClient = true
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE)
 )
 
 public class MasonSettings extends AbstractMasonSettings implements PersistentStateComponent<MasonSettings>, Disposable {

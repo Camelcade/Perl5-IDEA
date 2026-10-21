@@ -69,7 +69,7 @@
               name="Perl5 Package" extensions="pm" language="Perl5"/>
     <fileType implementationClass="com.perl5.lang.perl.fileTypes.PerlFileTypeTest" fieldName="INSTANCE"
               name="Perl5 Test" language="Perl5" extensions="t"/>
-    <applicationService client="all" serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
+    <applicationService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
     <applicationSettings service="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettings"/>
     <rdct.remoteSettingProvider implementation="com.perl5.lang.perl.idea.codeInsight.Perl5CodeInsightSettingsRemoteInfoProvider"/>
     <typedHandler implementation="com.perl5.lang.perl.idea.editor.smartkeys.PerlTypedHandler"
@@ -131,21 +131,21 @@
     <readWriteAccessDetector implementation="com.perl5.lang.perl.idea.findusages.PerlReadWriteAccessDetector"/>
 
     <projectService serviceImplementation="com.perl5.lang.perl.idea.codeInsight.typeInference.value.PerlValuesCacheService"/>
-    <projectService client="all" serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService"/>
     <projectSettings service="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersService"/>
     <rdct.remoteSettingProvider implementation="com.perl5.lang.perl.idea.intellilang.PerlInjectionMarkersRemoteInfoProvider"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInVariablesService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlImplicitDeclarationsService"/>
     <projectService serviceImplementation="com.perl5.lang.perl.psi.references.PerlBuiltInNamespacesService"/>
-    <projectService client="all" serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <projectSettings service="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettings"/>
     <rdct.remoteSettingProvider implementation="com.perl5.lang.perl.idea.configuration.settings.PerlLocalSettingsRemoteInfoProvider"/>
-    <projectService client="all" serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings"/>
+    <projectService serviceImplementation="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings"/>
     <projectSettings service="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettings"/>
     <rdct.remoteSettingProvider implementation="com.perl5.lang.perl.idea.configuration.settings.PerlSharedSettingsRemoteInfoProvider"/>
     <applicationService serviceImplementation="com.perl5.lang.perl.fileTypes.PerlFileTypeService"/>
 
-    <applicationService client="all" serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
+    <applicationService serviceImplementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
     <applicationSettings service="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsImpl"/>
     <rdct.remoteSettingProvider implementation="com.perl5.lang.perl.idea.folding.PerlFoldingSettingsRemoteInfoProvider"/>
 
