@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Nls
 
 private val LOG = logger<PerlStartMarker>()
 
+@Suppress("JetBrainsInternalApiUsage")
 internal class PerlStartMarker(delegate: PsiBuilder.Marker, perlDebugBuilder: PerlDebugBuilder) :
   PsiBuilderImpl.StartMarker((delegate as PsiBuilderImpl.ProductionMarker).markerId, perlDebugBuilder), PsiBuilder.Marker {
 

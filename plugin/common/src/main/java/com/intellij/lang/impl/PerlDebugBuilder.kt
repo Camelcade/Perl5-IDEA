@@ -48,6 +48,7 @@ internal class PerlDebugBuilder(project: Project,
     return perlMarker
   }
 
+  @Suppress("JetBrainsInternalApiUsage")
   override fun getLatestDoneMarker(): StartMarker? {
     val realMarker = super.getLatestDoneMarker() ?: return null
     return markersMap[realMarker]!!
