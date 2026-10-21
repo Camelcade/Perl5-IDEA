@@ -14,7 +14,7 @@
     <lang.fileViewProviderFactory language="Template Toolkit 2"
                                   implementationClass="com.perl5.lang.tt2.TemplateToolkitFileViewProviderFactory"/>
     <lang.ast.factory language="Template Toolkit 2" implementationClass="com.perl5.lang.tt2.TemplateToolkitAstFactory"/>
-    <projectService client="all" serviceImplementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
+    <projectService serviceImplementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
     <projectSettings service="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettings"/>
     <rdct.remoteSettingProvider implementation="com.perl5.lang.tt2.idea.settings.TemplateToolkitSettingsRemoteInfoProvider"/>
     <lang.syntaxHighlighterFactory language="Template Toolkit 2"

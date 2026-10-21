@@ -39,8 +39,7 @@ import java.util.Objects;
 
 @State(
   name = "TemplateToolkitSettings",
-  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE),
-  perClient = true
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE)
 )
 public class TemplateToolkitSettings implements PersistentStateComponent<TemplateToolkitSettings> {
   public static final Topic<SettingsListener> TT2_SETTINGS_TOPIC =

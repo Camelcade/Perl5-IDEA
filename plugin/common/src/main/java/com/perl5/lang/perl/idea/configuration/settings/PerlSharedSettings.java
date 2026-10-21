@@ -45,8 +45,7 @@ import static com.perl5.lang.perl.util.PerlScalarUtilCore.DEFAULT_SELF_NAME;
 
 @State(
   name = "Perl5Settings",
-  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE),
-  perClient = true
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE)
 )
 public final class PerlSharedSettings implements PersistentStateComponent<PerlSharedSettings> {
   public List<String> selfNames = PerlUtil.mutableList(DEFAULT_SELF_NAME, "this", "class", "proto");

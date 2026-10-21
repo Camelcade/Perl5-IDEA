@@ -22,5 +22,5 @@ import com.intellij.ide.settings.RemoteSettingInfoProvider
 
 class MasonSettingsRemoteInfoProvider : RemoteSettingInfoProvider {
   override fun getRemoteSettingsInfo(): Map<String, RemoteSettingInfo> =
-    mapOf("Perl5MasonSettings" to RemoteSettingInfo(Direction.OnlyFromBackend, true))
+    mapOf("Perl5MasonSettings" to RemoteSettingInfo(Direction.OnlyFromBackend))
 }

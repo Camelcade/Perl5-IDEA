@@ -22,5 +22,5 @@ import com.intellij.ide.settings.RemoteSettingInfoProvider
 
 class HTMLMasonSettingsRemoteInfoProvider : RemoteSettingInfoProvider {
   override fun getRemoteSettingsInfo(): Map<String, RemoteSettingInfo> =
-    mapOf("HTMLMasonSettings" to RemoteSettingInfo(Direction.OnlyFromBackend, true))
+    mapOf("HTMLMasonSettings" to RemoteSettingInfo(Direction.OnlyFromBackend))
 }

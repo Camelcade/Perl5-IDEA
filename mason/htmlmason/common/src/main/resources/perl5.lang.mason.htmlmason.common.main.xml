@@ -32,7 +32,7 @@
                          implementationClass="com.perl5.lang.htmlmason.idea.refactoring.HTMLMasonNamesValidator"/>
     <projectStructure.sourceRootEditHandler
         implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSourceRootEditHandler"/>
-    <projectService client="all" serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
+    <projectService serviceImplementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
     <projectSettings service="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettings"/>
     <rdct.remoteSettingProvider implementation="com.perl5.lang.htmlmason.idea.configuration.HTMLMasonSettingsRemoteInfoProvider"/>
     <highlightErrorFilter

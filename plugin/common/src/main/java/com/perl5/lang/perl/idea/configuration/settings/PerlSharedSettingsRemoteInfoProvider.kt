@@ -22,5 +22,5 @@ import com.intellij.ide.settings.RemoteSettingInfoProvider
 
 class PerlSharedSettingsRemoteInfoProvider : RemoteSettingInfoProvider {
   override fun getRemoteSettingsInfo(): Map<String, RemoteSettingInfo> =
-    mapOf("PerlSharedSettings" to RemoteSettingInfo(Direction.OnlyFromBackend, true))
+    mapOf("PerlSharedSettings" to RemoteSettingInfo(Direction.OnlyFromBackend))
 }

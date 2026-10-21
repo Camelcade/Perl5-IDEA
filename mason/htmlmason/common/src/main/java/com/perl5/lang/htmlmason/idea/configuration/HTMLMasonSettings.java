@@ -40,8 +40,7 @@ import static com.perl5.lang.htmlmason.HTMLMasonSyntaxElements.*;
 
 @State(
   name = "HTMLMasonSettings",
-  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE),
-  perClient = true
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SHARED_SETTINGS_FILE)
 )
 
 public class HTMLMasonSettings extends AbstractMasonSettings implements PersistentStateComponent<HTMLMasonSettings> {

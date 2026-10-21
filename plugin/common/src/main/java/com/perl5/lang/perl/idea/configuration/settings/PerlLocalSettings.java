@@ -31,8 +31,7 @@ import java.util.List;
 
 @State(
   name = "Perl5LocalSettings",
-  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE),
-  perClient = true
+  storages = @Storage(PerlPathMacros.PERL5_PROJECT_SETTINGS_FILE)
 )
 public class PerlLocalSettings implements PersistentStateComponent<PerlLocalSettings> {
   public boolean DISABLE_NO_INTERPRETER_WARNING = false;
