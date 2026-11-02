@@ -24,7 +24,6 @@ com.intellij.aop
 com.intellij.beanValidation
 com.intellij.bookmarks
 com.intellij.cdi
-com.intellij.code.provenance
 com.intellij.compose
 com.intellij.configurationScript
 com.intellij.copyright
@@ -35,7 +34,6 @@ com.intellij.debugger.collections.visualizer
 com.intellij.dev
 com.intellij.dfa.analysis
 com.intellij.diagram
-com.intellij.findusages.ml
 com.intellij.flyway
 com.intellij.gradle
 com.intellij.grid
