@@ -39,7 +39,6 @@ dependencies {
     }
 
     testBundledPlugins(
-      "com.intellij.modules.ultimate",
       "intellij.structuralSearch.plugin",
       "intellij.structureView.plugin",
       "intellij.testRunner.plugin",
