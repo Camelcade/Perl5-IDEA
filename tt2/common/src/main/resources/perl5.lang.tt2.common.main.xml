@@ -1,6 +1,9 @@
 <idea-plugin>
   <dependencies>
     <module name="perl5.plugin.common.main" namespace="hurricup"/>
+    <module name="intellij.xml.parser"/>
+    <module name="intellij.xml.ui.common"/>
+    <module name="intellij.xml.psi.impl"/>
   </dependencies>
 
   <resource-bundle>messages.TemplateToolkitBundle</resource-bundle>

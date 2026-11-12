@@ -2,6 +2,7 @@
   <dependencies>
     <module name="perl5.plugin.backend.main" namespace="hurricup"/>
     <module name="perl5.lang.embedded.common.main"/>
+    <module name="perl5.plugin.common.main" namespace="hurricup"/>
   </dependencies>
 
   <resource-bundle>messages.EmbeddedPerlBundle</resource-bundle>

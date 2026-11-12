@@ -18,6 +18,7 @@
   <dependencies>
     <module name="perl5.plugin.backend.main"/>
     <module name="perl5.plugin.cpanminus.common.main"/>
+    <module name="perl5.plugin.common.main"/>
   </dependencies>
   <resource-bundle>messages.PerlCpanminusBundle</resource-bundle>
 

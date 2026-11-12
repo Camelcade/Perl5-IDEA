@@ -18,6 +18,7 @@
   <dependencies>
     <plugin id="com.intellij.modules.ultimate"/>
     <module name="perl5.plugin.backend.main"/>
+    <module name="perl5.plugin.common.main"/>
   </dependencies>
 
   <!-- please  see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products

@@ -19,6 +19,7 @@
     <module name="perl5.plugin.backend.main"/>
     <plugin id="org.intellij.intelliLang"/>
     <module name="intellij.platform.langInjection"/>
+    <module name="perl5.plugin.common.main"/>
   </dependencies>
 
   <resource-bundle>messages.PerlIntelliLangBundle</resource-bundle>
