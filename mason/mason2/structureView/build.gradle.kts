@@ -3,7 +3,7 @@ import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 dependencies {
   listOf(
     ":plugin.structureView",
-    ":lang.mojo.backend",
+    ":lang.mason.mason2.backend",
   ).forEach {
     compileOnly(project(it))
     testCompileOnly(project(it))
