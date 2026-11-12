@@ -1,6 +1,7 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.gradle.jvm.tasks.Jar
+import org.jetbrains.intellij.platform.gradle.Constants.Configurations
 import org.jetbrains.intellij.platform.gradle.Constants.Tasks.INSTRUMENT_CODE
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 import org.jetbrains.intellij.platform.gradle.ProductMode
@@ -382,6 +383,71 @@ val runInSplitMode by intellijPlatformTesting.runIde.registering {
   }
 }
 
+/**
+ * Writes the declared compile-time dependencies of every content module, with the module and plugin descriptor paths.
+ *
+ * Consumed by `unit.PerlContentModuleDependenciesTest` of the `:plugin` project, which gets [outputFile] via the
+ * `perl5.content.module.dependencies.file` system property, set by `contentModuleDependenciesFileProperty` below.
+ * The file is a UTF-8 properties file with keys:
+ * - `descriptor.<module>`: the path of the content module descriptor;
+ * - `dependencies.<module>`: the comma-separated names of modules the content module compiles against;
+ * - `plugin.<project>`: the path of the plugin descriptor declaring content modules.
+ */
+abstract class ExportContentModuleDependencies : DefaultTask() {
+  /** Holds the descriptor paths by content module name. */
+  @get:Input
+  abstract val moduleDescriptors: MapProperty<String, String>
+
+  /** Holds the names of modules each content module compiles against, by content module name. */
+  @get:Input
+  abstract val moduleDependencies: MapProperty<String, List<String>>
+
+  /** Holds the plugin descriptor paths by plugin project name. */
+  @get:Input
+  abstract val pluginDescriptors: MapProperty<String, String>
+
+  @get:OutputFile
+  abstract val outputFile: RegularFileProperty
+
+  @TaskAction
+  fun export() {
+    val properties = moduleDescriptors.get().mapKeys { "descriptor.${it.key}" } +
+      moduleDependencies.get().map { (module, dependencies) -> "dependencies.$module" to dependencies.joinToString(",") } +
+      pluginDescriptors.get().mapKeys { "plugin.${it.key}" }
+    outputFile.get().asFile.writeText(properties.toSortedMap().entries.joinToString("") { "${it.key}=${it.value}\n" }, Charsets.UTF_8)
+  }
+}
+
+val contentModuleDependenciesFileProperty = "perl5.content.module.dependencies.file"
+val contentModuleDependenciesFile: Provider<RegularFile> = layout.buildDirectory.file("contentModules/dependencies.properties")
+
+val pluginProjects: List<Project> = pluginProjectsNames.map { project(":$it") }
+
+val contentModuleProjects: Provider<List<Project>> = provider {
+  pluginProjects
+    .flatMap { it.configurations[Configurations.INTELLIJ_PLATFORM_PLUGIN_MODULE].dependencies.withType<ProjectDependency>() }
+    .map { project(it.path) }
+    .distinct()
+}
+
+val exportContentModuleDependencies by tasks.registering(ExportContentModuleDependencies::class) {
+  group = "verification"
+  description = "Exports the declared compile-time dependencies of content modules for PerlContentModuleDependenciesTest"
+  moduleDescriptors.set(contentModuleProjects.map { projects ->
+    projects.associate { contentModuleName(it) to it.mainResourcePath("${contentModuleName(it)}.xml") }
+  })
+  moduleDependencies.set(contentModuleProjects.map { projects ->
+    projects.associate { contentModuleName(it) to it.declaredModuleDependencies() }
+  })
+  pluginDescriptors.set(provider { pluginProjects.associate { it.name to it.mainResourcePath("META-INF/plugin.xml") } })
+  outputFile.set(contentModuleDependenciesFile)
+}
+
+project(":plugin").tasks.named<Test>("test") {
+  inputs.files(exportContentModuleDependencies).withPropertyName("contentModuleDependencies")
+  systemProperty(contentModuleDependenciesFileProperty, contentModuleDependenciesFile.get().asFile.absolutePath)
+}
+
 val coverageReportFile: Provider<RegularFile> = project.layout.buildDirectory.file("reports/jacoco/jacocoRootReport/jacocoRootReport.xml")
 sonar {
   properties {
@@ -457,3 +523,30 @@ configurations.all {
 
 fun archiveBasePrefix(projectName: String) = "${rootProject.name}.${projectName}"
 fun archiveBaseName(projectName: String) = "${archiveBasePrefix(projectName)}.main"
+
+/**
+ * Returns the name of the content module built from [project]; the module jar and descriptor are named after it.
+ */
+fun contentModuleName(project: Project): String = archiveBaseName(project.name)
+
+/**
+ * Returns the path of [relativePath] in the first main resources directory containing it, or in the first one if none does.
+ */
+fun Project.mainResourcePath(relativePath: String): String {
+  val candidates = sourceSets.main.get().resources.srcDirs.map { it.resolve(relativePath) }
+  return (candidates.firstOrNull { it.exists() } ?: candidates.first()).invariantSeparatorsPath
+}
+
+/**
+ * Returns the names of modules this project declares to compile against: content modules of the project dependencies
+ * and bundled modules of the IntelliJ Platform.
+ */
+fun Project.declaredModuleDependencies(): List<String> {
+  val contentModules = configurations[JavaPlugin.COMPILE_CLASSPATH_CONFIGURATION_NAME].hierarchy
+    .flatMap { it.dependencies.withType<ProjectDependency>() }
+    .map { contentModuleName(project(it.path)) }
+  val bundledModules = configurations[Configurations.INTELLIJ_PLATFORM_BUNDLED_MODULES].dependencies
+    .filter { it.group == Configurations.Dependencies.BUNDLED_MODULE_GROUP }
+    .map { it.name }
+  return (contentModules + bundledModules).distinct()
+}
