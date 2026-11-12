@@ -17,6 +17,9 @@
 <idea-plugin>
   <dependencies>
     <module name="perl5.plugin.backend.main"/>
+    <module name="perl5.plugin.common.main"/>
+    <module name="intellij.platform.debugger"/>
+    <module name="intellij.platform.debugger.impl"/>
   </dependencies>
   <extensions defaultExtensionNs="com.intellij">
     <virtualFileSystem key="perl5_remote" implementationClass="com.perl5.lang.perl.debugger.PerlRemoteFileSystem"/>

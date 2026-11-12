@@ -18,6 +18,8 @@
   <dependencies>
     <plugin id="com.intellij.modules.coverage"/>
     <module name="perl5.plugin.backend.main"/>
+    <module name="perl5.plugin.common.main"/>
+    <module name="intellij.platform.coverage.agent"/>
   </dependencies>
 
   <extensions defaultExtensionNs="com.intellij">

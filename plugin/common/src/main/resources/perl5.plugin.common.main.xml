@@ -2,6 +2,9 @@
   <resource-bundle>messages.PerlBundle</resource-bundle>
   <dependencies>
     <module name="intellij.regexp"/>
+    <module name="intellij.spellchecker"/>
+    <module name="intellij.xml.parser"/>
+    <module name="intellij.xml.ui.common"/>
   </dependencies>
   <extensionPoints>
     <extensionPoint qualifiedName="com.perl5.subCallHandler" beanClass="com.intellij.util.KeyedLazyInstanceEP" dynamic="true">

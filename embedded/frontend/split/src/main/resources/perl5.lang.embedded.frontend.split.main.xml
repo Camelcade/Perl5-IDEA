@@ -2,5 +2,8 @@
   <dependencies>
     <module name="intellij.platform.frontend.split"/>
     <module name="perl5.lang.embedded.frontend.main"/>
+    <module name="perl5.plugin.common.main" namespace="hurricup"/>
+    <module name="perl5.plugin.frontend.main" namespace="hurricup"/>
+    <module name="perl5.lang.embedded.common.main"/>
   </dependencies>
 </idea-plugin>

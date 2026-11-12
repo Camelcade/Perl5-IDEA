@@ -3,6 +3,11 @@
     <module name="intellij.platform.frontend.split"/>
     <module name="perl5.lang.mason.htmlmason.frontend.main"/>
     <module name="perl5.lang.mason.framework.frontend.split.main"/>
+    <module name="perl5.plugin.common.main" namespace="hurricup"/>
+    <module name="perl5.plugin.frontend.main" namespace="hurricup"/>
+    <module name="perl5.lang.mason.htmlmason.common.main"/>
+    <module name="perl5.lang.mason.framework.common.main" namespace="hurricup"/>
+    <module name="perl5.lang.mason.framework.frontend.main" namespace="hurricup"/>
   </dependencies>
 
 </idea-plugin>

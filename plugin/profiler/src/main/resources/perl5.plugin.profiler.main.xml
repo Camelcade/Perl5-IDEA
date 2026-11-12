@@ -19,6 +19,7 @@
     <module name="perl5.plugin.backend.main"/>
     <module name="intellij.profiler.common"/>
     <plugin id="com.intellij.modules.ultimate"/>
+    <module name="perl5.plugin.common.main"/>
   </dependencies>
 
   <extensions defaultExtensionNs="com.intellij">

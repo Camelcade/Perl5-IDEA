@@ -2,5 +2,9 @@
   <dependencies>
     <module name="perl5.plugin.backend.main" namespace="hurricup"/>
     <module name="perl5.lang.mason.framework.common.main"/>
+    <module name="perl5.plugin.common.main" namespace="hurricup"/>
+    <module name="intellij.xml.parser"/>
+    <module name="intellij.xml.ui.common"/>
+    <module name="intellij.xml.psi.impl"/>
   </dependencies>
 </idea-plugin>

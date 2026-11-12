@@ -18,6 +18,7 @@
   <dependencies>
     <module name="perl5.plugin.backend.main"/>
     <plugin id="org.jetbrains.plugins.terminal"/>
+    <module name="perl5.plugin.common.main"/>
   </dependencies>
   <extensions defaultExtensionNs="org.jetbrains.plugins.terminal">
     <shellExecOptionsCustomizer implementation="com.perl5.lang.perl.idea.terminal.PerlShellExecOptionsCustomizer"/>
