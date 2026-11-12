@@ -10,6 +10,10 @@ Content modules:
   - Dependencies:
     - perl5.plugin.backend.main (namespace=hurricup)
     - perl5.lang.mason.framework.common.main (namespace=hurricup)
+    - perl5.plugin.common.main (namespace=hurricup)
+    - intellij.xml.parser
+    - intellij.xml.ui.common
+    - intellij.xml.psi.impl
  - perl5.lang.mason.framework.common.main (namespace=hurricup) (REQUIRED); lib/modules/perl5.lang.mason.framework.common.main.jar
   - Dependencies:
     - perl5.plugin.common.main (namespace=hurricup)
@@ -18,8 +22,12 @@ Content modules:
     - intellij.platform.frontend
     - perl5.plugin.frontend.main (namespace=hurricup)
     - perl5.lang.mason.framework.common.main (namespace=hurricup)
+    - perl5.plugin.common.main (namespace=hurricup)
  - perl5.lang.mason.framework.frontend.split.main (namespace=hurricup) (OPTIONAL); lib/modules/perl5.lang.mason.framework.frontend.split.main.jar
   - Dependencies:
     - intellij.platform.frontend.split
     - perl5.plugin.frontend.split.main
     - perl5.lang.mason.framework.frontend.main (namespace=hurricup)
+    - perl5.plugin.common.main (namespace=hurricup)
+    - perl5.plugin.frontend.main (namespace=hurricup)
+    - perl5.lang.mason.framework.common.main (namespace=hurricup)

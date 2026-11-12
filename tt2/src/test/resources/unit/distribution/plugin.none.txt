@@ -9,15 +9,23 @@ Content modules:
  - perl5.lang.tt2.common.main (namespace=com.perl5.lang.tt2_$implicit) (REQUIRED); lib/modules/perl5.lang.tt2.common.main.jar
   - Dependencies:
     - perl5.plugin.common.main (namespace=hurricup)
+    - intellij.xml.parser
+    - intellij.xml.ui.common
+    - intellij.xml.psi.impl
  - perl5.lang.tt2.backend.main (namespace=com.perl5.lang.tt2_$implicit) (OPTIONAL); lib/modules/perl5.lang.tt2.backend.main.jar
   - Dependencies:
     - perl5.plugin.backend.main (namespace=hurricup)
     - perl5.lang.tt2.common.main (namespace=com.perl5.lang.tt2_$implicit)
+    - perl5.plugin.common.main (namespace=hurricup)
  - perl5.lang.tt2.frontend.main (namespace=com.perl5.lang.tt2_$implicit) (OPTIONAL); lib/modules/perl5.lang.tt2.frontend.main.jar
   - Dependencies:
     - intellij.platform.frontend
     - perl5.lang.tt2.common.main (namespace=com.perl5.lang.tt2_$implicit)
+    - perl5.plugin.common.main (namespace=hurricup)
  - perl5.lang.tt2.frontend.split.main (namespace=com.perl5.lang.tt2_$implicit) (OPTIONAL); lib/modules/perl5.lang.tt2.frontend.split.main.jar
   - Dependencies:
     - intellij.platform.frontend.split
     - perl5.lang.tt2.frontend.main (namespace=com.perl5.lang.tt2_$implicit)
+    - perl5.plugin.common.main (namespace=hurricup)
+    - perl5.plugin.frontend.main (namespace=hurricup)
+    - perl5.lang.tt2.common.main (namespace=com.perl5.lang.tt2_$implicit)
