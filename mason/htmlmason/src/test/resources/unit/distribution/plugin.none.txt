@@ -10,21 +10,33 @@ Content modules:
   - Dependencies:
     - perl5.lang.mason.framework.common.main (namespace=hurricup)
     - perl5.plugin.common.main (namespace=hurricup)
+    - intellij.xml.parser
+    - intellij.xml.ui.common
+    - intellij.xml.psi.impl
  - perl5.lang.mason.htmlmason.backend.main (namespace=com.perl5.lang.mason.htmlmason_$implicit) (OPTIONAL); lib/modules/perl5.lang.mason.htmlmason.backend.main.jar
   - Dependencies:
     - perl5.plugin.backend.main (namespace=hurricup)
     - perl5.lang.mason.framework.backend.main (namespace=hurricup)
     - perl5.lang.mason.htmlmason.common.main (namespace=com.perl5.lang.mason.htmlmason_$implicit)
+    - perl5.plugin.common.main (namespace=hurricup)
+    - perl5.lang.mason.framework.common.main (namespace=hurricup)
  - perl5.lang.mason.htmlmason.frontend.main (namespace=com.perl5.lang.mason.htmlmason_$implicit) (OPTIONAL); lib/modules/perl5.lang.mason.htmlmason.frontend.main.jar
   - Dependencies:
     - intellij.platform.frontend
     - perl5.lang.mason.framework.frontend.main (namespace=hurricup)
     - perl5.lang.mason.htmlmason.common.main (namespace=com.perl5.lang.mason.htmlmason_$implicit)
+    - perl5.plugin.common.main (namespace=hurricup)
+    - perl5.lang.mason.framework.common.main (namespace=hurricup)
  - perl5.lang.mason.htmlmason.frontend.split.main (namespace=com.perl5.lang.mason.htmlmason_$implicit) (OPTIONAL); lib/modules/perl5.lang.mason.htmlmason.frontend.split.main.jar
   - Dependencies:
     - intellij.platform.frontend.split
     - perl5.lang.mason.htmlmason.frontend.main (namespace=com.perl5.lang.mason.htmlmason_$implicit)
     - perl5.lang.mason.framework.frontend.split.main
+    - perl5.plugin.common.main (namespace=hurricup)
+    - perl5.plugin.frontend.main (namespace=hurricup)
+    - perl5.lang.mason.htmlmason.common.main (namespace=com.perl5.lang.mason.htmlmason_$implicit)
+    - perl5.lang.mason.framework.common.main (namespace=hurricup)
+    - perl5.lang.mason.framework.frontend.main (namespace=hurricup)
  - perl5.lang.mason.htmlmason.structureView.main (namespace=com.perl5.lang.mason.htmlmason_$implicit) (OPTIONAL); lib/modules/perl5.lang.mason.htmlmason.structureView.main.jar
   - Dependencies:
     - perl5.lang.mason.htmlmason.backend.main (namespace=com.perl5.lang.mason.htmlmason_$implicit)

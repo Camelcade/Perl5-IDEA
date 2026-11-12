@@ -9,18 +9,26 @@ Content modules:
  - perl5.lang.mojo.common.main (namespace=com.perl5.lang.mojo_$implicit) (REQUIRED); lib/modules/perl5.lang.mojo.common.main.jar
   - Dependencies:
     - perl5.plugin.common.main (namespace=hurricup)
+    - intellij.xml.parser
+    - intellij.xml.ui.common
+    - intellij.xml.psi.impl
  - perl5.lang.mojo.backend.main (namespace=com.perl5.lang.mojo_$implicit) (OPTIONAL); lib/modules/perl5.lang.mojo.backend.main.jar
   - Dependencies:
     - perl5.plugin.backend.main (namespace=hurricup)
     - perl5.lang.mojo.common.main (namespace=com.perl5.lang.mojo_$implicit)
+    - perl5.plugin.common.main (namespace=hurricup)
  - perl5.lang.mojo.frontend.main (namespace=com.perl5.lang.mojo_$implicit) (OPTIONAL); lib/modules/perl5.lang.mojo.frontend.main.jar
   - Dependencies:
     - intellij.platform.frontend
     - perl5.lang.mojo.common.main (namespace=com.perl5.lang.mojo_$implicit)
+    - perl5.plugin.common.main (namespace=hurricup)
  - perl5.lang.mojo.frontend.split.main (namespace=com.perl5.lang.mojo_$implicit) (OPTIONAL); lib/modules/perl5.lang.mojo.frontend.split.main.jar
   - Dependencies:
     - intellij.platform.frontend.split
     - perl5.lang.mojo.frontend.main (namespace=com.perl5.lang.mojo_$implicit)
+    - perl5.plugin.common.main (namespace=hurricup)
+    - perl5.plugin.frontend.main (namespace=hurricup)
+    - perl5.lang.mojo.common.main (namespace=com.perl5.lang.mojo_$implicit)
  - perl5.lang.mojo.structureView.main (namespace=com.perl5.lang.mojo_$implicit) (OPTIONAL); lib/modules/perl5.lang.mojo.structureView.main.jar
   - Dependencies:
     - perl5.lang.mojo.backend.main (namespace=com.perl5.lang.mojo_$implicit)
